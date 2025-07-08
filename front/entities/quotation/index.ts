@@ -12,12 +12,11 @@ export {
   useSaveQuotationMutation,
   saveQuotationMutationFn,
 } from './api/useSaveQuotationMutation'
-export { useGetQuotationCategoriesQuery } from './api/useGetQuotationCategoriesQuery'
-export { useDeleteFileMutation } from './api/useDeleteFileMutation'
+export { useGetQuotationCategoryListQuery } from './api/useGetQuotationCategoryListQuery'
 
 // cacheUpdaters
-export { deleteFromQuotationsCache } from './cache-updater/deleteFromQuotationsCache'
-export { deleteQuotationsCache } from './cache-updater/deleteQuotationsCache'
+export { deleteFromQuotationListCache } from './cache-updater/deleteFromQuotationListCache'
+export { deleteQuotationListCache } from './cache-updater/deleteQuotationListCache'
 
 // slice
 export { quotationSlice } from './redux/quotationSlice'

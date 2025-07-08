@@ -4,7 +4,7 @@ import { MdDeleteOutline } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
 import {
   useDeleteQuotationMutation,
-  deleteFromQuotationsCache,
+  deleteFromQuotationListCache,
 } from '@entities/quotation'
 import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import { toast } from 'sonner'
@@ -20,7 +20,7 @@ export const DeleteQuotationButton = ({ id }: Payload): React.ReactNode => {
 
   useUpdateEffect(() => {
     if (isSuccess === true) {
-      deleteFromQuotationsCache({ id })
+      deleteFromQuotationListCache({ id })
     }
   }, [isSuccess])
 
@@ -28,7 +28,7 @@ export const DeleteQuotationButton = ({ id }: Payload): React.ReactNode => {
     if (isError === true) {
       toast.error(error.response?.data.message)
 
-      deleteFromQuotationsCache({ id })
+      deleteFromQuotationListCache({ id })
     }
   }, [isError])
 

@@ -7,9 +7,9 @@ type Props = {
   id: string
 }
 
-export const deleteFromQuotationsCache = ({ id }: Props): void => {
+export const deleteFromQuotationListCache = ({ id }: Props): void => {
   instance.queryClient.setQueriesData<ResBody>(
-    { queryKey: [queryKey.getQuotations] },
+    { queryKey: [queryKey.getQuotationList] },
     (cacheData) => {
       const updatedCacheData = produce(cacheData, (draft) => {
         if (draft?.quotations === undefined) {

@@ -7,9 +7,9 @@ export { useGetBookmarkCategoryListQuery } from './api/useGetBookmarkCategoryLis
 export { useGetBookmarkMutation } from './api/useGetBookmarkMutation'
 
 // cache updaters
-export { deleteFromBookmarksCache } from './cache-updater/deleteFromBookmarksCache'
-export { deleteBookmarksCache } from './cache-updater/deleteBookmarksCache'
+export { deleteFromBookmarkListCache } from './cache-updater/deleteFromBookmarkListCache'
+export { deleteBookmarkListCache } from './cache-updater/deleteBookmarkListCache'
 
 // types
 export type { Item } from '@entities/quotation' // ! this is against FSD
-export type { BookmarkFormValues } from './form'
+export type { BookmarkFormValues } from './form/types'

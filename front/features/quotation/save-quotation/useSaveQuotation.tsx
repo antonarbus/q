@@ -5,7 +5,7 @@ import { useUpdateEffect } from 'react-use'
 import {
   type Quotation,
   quotationSlice,
-  useGetQuotationCategoriesQuery,
+  useGetQuotationCategoryListQuery,
   useGetQuotationListQuery,
   useSaveQuotationMutation,
   type SaveQuotationFormValues,
@@ -53,7 +53,7 @@ export const useSaveQuotation = ({
     reset,
   } = useSaveQuotationMutation()
 
-  const { refetch: updateCategories } = useGetQuotationCategoriesQuery()
+  const { refetch: updateCategories } = useGetQuotationCategoryListQuery()
   const { refetch: fetchQuotations } = useGetQuotationListQuery()
 
   useUpdateEffect(() => {

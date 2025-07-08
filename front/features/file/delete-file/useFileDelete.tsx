@@ -1,9 +1,9 @@
-import { useDeleteFileMutation } from '@entities/quotation'
 import { instance } from '@shared/instance'
 import { queryKey } from '@shared/const/queryKey'
 import { useCallback } from 'react'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
+import { useDeleteFileMutation } from '@entities/file'
 
 type Props = {
   fileId: string
@@ -26,7 +26,7 @@ export const useFileDelete = ({ fileId }: Props): Res => {
   useUpdateEffect(() => {
     if (isSuccess === true) {
       void instance.queryClient.invalidateQueries({
-        queryKey: [queryKey.getFilesStats],
+        queryKey: [queryKey.getFileListStats],
       })
     }
   }, [isSuccess])

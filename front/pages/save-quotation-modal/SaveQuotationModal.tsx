@@ -11,7 +11,7 @@ import { NameField } from '@shared/component/input-field/NameField'
 import { CategoryField } from '@shared/component/input-field/CategoryField'
 import { DescriptionField } from '@shared/component/input-field/DescriptionField'
 import { InfoField } from '@shared/component/input-field/InfoField'
-import { useGetQuotationCategoriesQuery } from '@entities/quotation'
+import { useGetQuotationCategoryListQuery } from '@entities/quotation'
 import { router } from '@shared/lib/react-router-dom'
 import { useSlide } from '@shared/util/useSlide'
 import { useLocation } from 'react-router-dom'
@@ -33,7 +33,7 @@ export const SaveQuotationModal = (): React.JSX.Element => {
     void router.navigate('..')
   }
 
-  const { data } = useGetQuotationCategoriesQuery()
+  const { data } = useGetQuotationCategoryListQuery()
 
   const options = (data?.categories ?? [])
     .filter((cat) => cat !== undefined)

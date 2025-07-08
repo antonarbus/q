@@ -1,9 +1,9 @@
 import { dispatch } from '@shared/lib/redux'
 import { useNavigate } from 'react-router-dom'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
-import { deleteBookmarksCache } from '@entities/bookmark'
-import { deleteQuotationsCache } from '@entities/quotation'
-import { useLogOutMutation, userSlice } from '@entities/user'
+import { deleteBookmarkListCache } from '@entities/bookmark'
+import { deleteQuotationListCache } from '@entities/quotation'
+import { useLogOutUserMutation, userSlice } from '@entities/user'
 import { navItemId } from '@shared/const/navItemId'
 import { navSlice } from '@shared/nav'
 import { toast } from 'sonner'
@@ -11,7 +11,13 @@ import { appSlice } from '@shared/appSlice'
 
 export const Logout = (): React.ReactNode => {
   const navigate = useNavigate()
-  const { mutate: logOut, isPending, isSuccess, isError } = useLogOutMutation()
+
+  const {
+    mutate: logOut,
+    isPending,
+    isSuccess,
+    isError,
+  } = useLogOutUserMutation()
 
   useEffectOnce(logOut)
 
@@ -28,8 +34,8 @@ export const Logout = (): React.ReactNode => {
 
   useUpdateEffect(() => {
     if (isSuccess === true) {
-      deleteQuotationsCache()
-      deleteBookmarksCache()
+      deleteQuotationListCache()
+      deleteBookmarkListCache()
 
       dispatch(userSlice.actions.setAccessToken({ accessToken: null }))
       dispatch(userSlice.actions.forgetLoggedUser())

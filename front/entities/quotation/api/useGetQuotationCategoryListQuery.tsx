@@ -1,4 +1,4 @@
-import type { ResBody } from '@back/api/user/getUserListHandler'
+import type { ResBody } from '@back/api/quotation/getQuotationCategories'
 import { api } from '@back/api'
 import { type UseQueryResult, useQuery } from '@tanstack/react-query'
 import type { AxiosError, AxiosResponse } from 'axios'
@@ -7,20 +7,18 @@ import { axiosWithAuth } from '@shared/lib/axios'
 
 type Res = UseQueryResult<ResBody, AxiosError<ResBody>>
 
-export const useGetUsersQuery = (): Res => {
+export const useGetQuotationCategoryListQuery = (): Res => {
   const query = useQuery<ResBody, AxiosError<ResBody>>({
-    queryKey: [queryKey.getUsers],
+    queryKey: [queryKey.getQuotationCategoryList],
     refetchOnMount: false,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
     staleTime: 0,
     retry: 0,
-    // enabled: false,
-    queryFn: async ({ signal }) => {
+    queryFn: async () => {
       const { data } = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
-        url: api.getUserList.url,
-        method: api.getUserList.method,
-        signal,
+        url: api.getUniqueQuotationCategoryList.url,
+        method: api.getUniqueQuotationCategoryList.method,
       })
 
       return data

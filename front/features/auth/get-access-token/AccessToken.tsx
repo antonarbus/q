@@ -2,7 +2,7 @@ import type { JwtPayloadExtended } from '@back/shared/lib/json-webtoken'
 import { dispatch, getState } from '@shared/lib/redux'
 import { jwtDecode } from 'jwt-decode'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
-import { useGetAccessTokenQuery, userRole, userSlice } from '@entities/user'
+import { useGetUserAccessTokenQuery, userRole, userSlice } from '@entities/user'
 import { navItemId } from '@shared/const/navItemId'
 import { createLoadingMenuIconMachine, navSlice } from '@shared/nav'
 import { agGridSlice } from '@shared/lib/ag-grid/agGridSlice'
@@ -36,7 +36,7 @@ export const AccessToken = (): React.ReactNode => {
     isFetching,
     isError,
     isSuccess,
-  } = useGetAccessTokenQuery()
+  } = useGetUserAccessTokenQuery()
 
   // get initial access token on app load
   useEffectOnce(() => {

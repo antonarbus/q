@@ -1,2 +1,2 @@
 export { useCountUniqueDailyVisitorsMutation } from './api/useCountUniqueDailyVisitorsMutation'
-export { useGetUniqueDailyVisitorQuery } from './api/useGetUniqueDailyVisitorQuery'
+export { useGetUniqueDailyVisitorCountQuery } from './api/useGetUniqueDailyVisitorCountQuery'

@@ -1,4 +1,4 @@
-import type { ResBody } from '@back/api/quotation/getQuotationCategories'
+import type { ResBody } from '@back/api/file/getFileListHandler'
 import { api } from '@back/api'
 import { type UseQueryResult, useQuery } from '@tanstack/react-query'
 import type { AxiosError, AxiosResponse } from 'axios'
@@ -7,18 +7,20 @@ import { axiosWithAuth } from '@shared/lib/axios'
 
 type Res = UseQueryResult<ResBody, AxiosError<ResBody>>
 
-export const useGetQuotationCategoriesQuery = (): Res => {
+export const useGetFileListStatsQuery = (): Res => {
   const query = useQuery<ResBody, AxiosError<ResBody>>({
-    queryKey: [queryKey.getQuotationCategories],
-    refetchOnMount: false,
+    queryKey: [queryKey.getFileListStats],
+    refetchOnMount: true,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
     staleTime: 0,
     retry: 0,
+    enabled: true,
     queryFn: async () => {
       const { data } = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
-        url: api.getUniqueQuotationCategoryList.url,
-        method: api.getUniqueQuotationCategoryList.method,
+        url: api.getFileList.url,
+        method: api.getFileList.method,
+        withCredentials: true,
       })
 
       return data

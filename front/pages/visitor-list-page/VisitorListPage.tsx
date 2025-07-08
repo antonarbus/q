@@ -4,7 +4,7 @@ import { Box } from '@mui/material'
 import { DatePicker } from '@mui/x-date-pickers'
 import { format, subDays } from 'date-fns'
 import { useInstantiateChart } from './useInstantiateChart'
-import { useGetUniqueDailyVisitorQuery } from '@entities/visitor'
+import { useGetUniqueDailyVisitorCountQuery } from '@entities/visitor'
 import { useUpdateChart } from './useUpdateChart'
 
 const today = new Date()
@@ -16,7 +16,7 @@ export const VisitorListPage = (): React.JSX.Element => {
   const [startDate, setStartDate] = useState(thirtyDaysAgo)
   const [endDate, setEndDate] = useState(today)
 
-  const { data, isLoading } = useGetUniqueDailyVisitorQuery({
+  const { data, isLoading } = useGetUniqueDailyVisitorCountQuery({
     startDate: format(startDate, 'yyyy-MM-dd'),
     endDate: format(endDate, 'yyyy-MM-dd'),
   })

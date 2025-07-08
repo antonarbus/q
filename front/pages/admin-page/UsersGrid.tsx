@@ -5,7 +5,7 @@ import {
 } from 'ag-grid-community'
 import { AgGridReact } from 'ag-grid-react'
 import { useRef } from 'react'
-import { useGetUsersQuery } from '@entities/user'
+import { useGetUserListQuery } from '@entities/user'
 import { LoadingTableOverlay } from '@shared/component/LoadingTableOverlay'
 import { DisplayedRowsCount } from '@shared/lib/ag-grid/components/DisplayedRowsCount'
 import { NoRowsTableOverlay } from '@shared/lib/ag-grid/components/NoRowsTableOverlay'
@@ -26,7 +26,10 @@ ModuleRegistry.registerModules([AllCommunityModule])
 
 export const UsersGrid = (): React.JSX.Element => {
   const gridContainerRef = useRef<React.ComponentRef<'div'> | null>(null)
-  const { data, isLoading, isFetching, isFetched, refetch } = useGetUsersQuery()
+
+  const { data, isLoading, isFetching, isFetched, refetch } =
+    useGetUserListQuery()
+
   useDisableLoadingOverlayWhenItemsAreFetched({ isFetched })
   useRefetchDataOnEmailChange({ refetch })
   useShowLoadingJumpingDots({ isLoading })

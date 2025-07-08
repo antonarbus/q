@@ -9,7 +9,7 @@ type Res = UseQueryResult<ResBody, AxiosError<ResBody>>
 
 export const useGetQuotationListQuery = (): Res => {
   const query = useQuery<ResBody, AxiosError<ResBody>>({
-    queryKey: [queryKey.getQuotations],
+    queryKey: [queryKey.getQuotationList],
     refetchOnMount: false,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,

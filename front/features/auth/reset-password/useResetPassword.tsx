@@ -3,7 +3,11 @@ import type { Signal } from '@preact/signals-react'
 import type { UseMutationResult } from '@tanstack/react-query'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
-import { useResetPasswordMutation, userRole, userSlice } from '@entities/user'
+import {
+  useResetUserPasswordMutation,
+  userRole,
+  userSlice,
+} from '@entities/user'
 import { navItemId } from '@shared/const/navItemId'
 import { navSlice } from '@shared/nav'
 import { toast } from 'sonner'
@@ -34,7 +38,7 @@ export const useResetPassword = ({ passwordSignal, slideOut }: Props): Res => {
     isSuccess,
     isError,
     error,
-  } = useResetPasswordMutation()
+  } = useResetUserPasswordMutation()
 
   useUpdateEffect(() => {
     if (isSuccess === true) {

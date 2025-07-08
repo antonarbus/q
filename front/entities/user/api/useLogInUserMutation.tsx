@@ -7,7 +7,7 @@ import { axiosWithAuth } from '@shared/lib/axios'
 
 type Res = UseMutationResult<ResBody, AxiosError<ResBody>, Payload>
 
-export const useLogInMutation = (): Res => {
+export const useLogInUserMutation = (): Res => {
   const query = useMutation<ResBody, AxiosError<ResBody>, Payload>({
     mutationKey: [queryKey.logIn],
     mutationFn: async ({ email, password }: Payload) => {

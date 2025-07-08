@@ -20,7 +20,7 @@ export const DeleteUserButton = ({ email }: Payload): React.ReactNode => {
   useUpdateEffect(() => {
     if (isSuccess === true) {
       void instance.queryClient.invalidateQueries({
-        queryKey: [queryKey.getUsers],
+        queryKey: [queryKey.getUserList],
       })
     }
   }, [isSuccess])
@@ -30,7 +30,7 @@ export const DeleteUserButton = ({ email }: Payload): React.ReactNode => {
       toast.error(error.response?.data.message)
 
       void instance.queryClient.invalidateQueries({
-        queryKey: [queryKey.getUsers],
+        queryKey: [queryKey.getUserList],
       })
     }
   }, [isError])

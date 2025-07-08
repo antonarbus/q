@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useGetBookmarkListQuery } from '@entities/bookmark'
 import { useGetQuotationListQuery } from '@entities/quotation'
-import { useLogInMutation, userRole, userSlice } from '@entities/user'
+import { useLogInUserMutation, userRole, userSlice } from '@entities/user'
 import { navItemId } from '@shared/const/navItemId'
 import { route } from '@shared/const/route'
 import { navSlice } from '@shared/nav'
@@ -40,7 +40,7 @@ export const useLogIn = ({
     isSuccess,
     isError,
     error,
-  } = useLogInMutation()
+  } = useLogInUserMutation()
 
   const location = useLocation()
   const { refetch: refetchQuotations } = useGetQuotationListQuery()

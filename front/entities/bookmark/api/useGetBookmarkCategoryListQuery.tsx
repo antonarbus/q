@@ -9,7 +9,7 @@ type Res = UseQueryResult<ResBody, AxiosError<ResBody>>
 
 export const useGetBookmarkCategoryListQuery = (): Res => {
   const query = useQuery<ResBody, AxiosError<ResBody>>({
-    queryKey: [queryKey.getBookmarkCategories],
+    queryKey: [queryKey.getBookmarkCategoryList],
     refetchOnMount: false,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,

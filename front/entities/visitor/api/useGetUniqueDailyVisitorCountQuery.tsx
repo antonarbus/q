@@ -10,7 +10,7 @@ import { axiosWithAuth } from '@shared/lib/axios'
 
 type Res = UseQueryResult<ResBody, AxiosError<ResBody>>
 
-export const useGetUniqueDailyVisitorQuery = ({
+export const useGetUniqueDailyVisitorCountQuery = ({
   startDate,
   endDate,
 }: SearchQuery): Res => {

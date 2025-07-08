@@ -7,9 +7,9 @@ type Props = {
   id: string
 }
 
-export const deleteFromBookmarksCache = ({ id }: Props): void => {
+export const deleteFromBookmarkListCache = ({ id }: Props): void => {
   instance.queryClient.setQueriesData<ResBody>(
-    { queryKey: [queryKey.getBookmarks] },
+    { queryKey: [queryKey.getBookmarkList] },
     (cacheData) => {
       const updatedCacheData = produce(cacheData, (draft) => {
         if (draft?.bookmarks === undefined) {

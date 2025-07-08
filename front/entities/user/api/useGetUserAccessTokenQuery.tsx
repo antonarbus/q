@@ -6,7 +6,7 @@ import { queryKey } from '@shared/const/queryKey'
 
 type Res = UseQueryResult<ResBody, AxiosError<ResBody>>
 
-export const useGetAccessTokenQuery = (): Res => {
+export const useGetUserAccessTokenQuery = (): Res => {
   const query = useQuery<ResBody, AxiosError<ResBody>>({
     queryKey: [queryKey.getAccessToken],
     refetchOnMount: false,

@@ -1,4 +1,4 @@
-import type { ResBody } from '@back/api/file/getFileListHandler'
+import type { ResBody } from '@back/api/user/getUserListHandler'
 import { api } from '@back/api'
 import { type UseQueryResult, useQuery } from '@tanstack/react-query'
 import type { AxiosError, AxiosResponse } from 'axios'
@@ -7,20 +7,20 @@ import { axiosWithAuth } from '@shared/lib/axios'
 
 type Res = UseQueryResult<ResBody, AxiosError<ResBody>>
 
-export const useGetFilesStatsQuery = (): Res => {
+export const useGetUserListQuery = (): Res => {
   const query = useQuery<ResBody, AxiosError<ResBody>>({
-    queryKey: [queryKey.getFilesStats],
-    refetchOnMount: true,
+    queryKey: [queryKey.getUserList],
+    refetchOnMount: false,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
     staleTime: 0,
     retry: 0,
-    enabled: true,
-    queryFn: async () => {
+    // enabled: false,
+    queryFn: async ({ signal }) => {
       const { data } = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
-        url: api.getFileList.url,
-        method: api.getFileList.method,
-        withCredentials: true,
+        url: api.getUserList.url,
+        method: api.getUserList.method,
+        signal,
       })
 
       return data

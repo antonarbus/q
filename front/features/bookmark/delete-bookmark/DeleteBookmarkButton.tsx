@@ -4,7 +4,7 @@ import { MdDeleteOutline } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
 import {
   useDeleteBookmarkMutation,
-  deleteFromBookmarksCache,
+  deleteFromBookmarkListCache,
 } from '@entities/bookmark'
 import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import { toast } from 'sonner'
@@ -20,7 +20,7 @@ export const DeleteBookmarkButton = ({ id }: ReqBody): React.JSX.Element => {
 
   useUpdateEffect(() => {
     if (isSuccess === true) {
-      deleteFromBookmarksCache({ id })
+      deleteFromBookmarkListCache({ id })
     }
   }, [isSuccess])
 
@@ -28,7 +28,7 @@ export const DeleteBookmarkButton = ({ id }: ReqBody): React.JSX.Element => {
     if (isError === true) {
       toast.error(error.response?.data.message)
 
-      deleteFromBookmarksCache({ id })
+      deleteFromBookmarkListCache({ id })
     }
   }, [isError])
 

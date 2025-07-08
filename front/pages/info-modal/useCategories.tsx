@@ -1,5 +1,5 @@
 import { useGetBookmarkCategoryListQuery } from '@entities/bookmark'
-import { useGetQuotationCategoriesQuery } from '@entities/quotation'
+import { useGetQuotationCategoryListQuery } from '@entities/quotation'
 import { useParams } from 'react-router-dom'
 
 type Res = {
@@ -9,7 +9,7 @@ type Res = {
 export const useCategories = (): Res => {
   const { bookmarkId } = useParams()
 
-  const { data: quotationCategoriesData } = useGetQuotationCategoriesQuery()
+  const { data: quotationCategoriesData } = useGetQuotationCategoryListQuery()
   const { data: bookmarkCategoriesData } = useGetBookmarkCategoryListQuery()
 
   const quotationCategories = (

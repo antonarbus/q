@@ -6,7 +6,7 @@ import { queryKey } from '@shared/const/queryKey'
 
 type Res = UseMutationResult<ResBody, AxiosError<ResBody>, void>
 
-export const useLogOutMutation = (): Res => {
+export const useLogOutUserMutation = (): Res => {
   const query = useMutation<ResBody, AxiosError<ResBody>>({
     mutationKey: [queryKey.logOut],
     mutationFn: async () => {

@@ -8,26 +8,26 @@ export const queryKey = {
   resetPassword: 'resetPassword',
   getAccessToken: 'getAccessToken',
   // users
-  getUsers: 'getUsers',
   deleteUser: 'deleteUser',
+  getUserList: 'getUserList',
   // quotation
   getQuotation: 'getQuotation',
-  getQuotations: 'getQuotations',
-  getQuotationCategories: 'getQuotationCategories',
   saveQuotation: 'saveQuotation',
   deleteQuotation: 'deleteQuotation',
+  getQuotationList: 'getQuotationList',
+  getQuotationCategoryList: 'getQuotationCategoryList',
+  // file
   deleteFile: 'deleteFile',
+  getFileListStats: 'getFileListStats',
   // bookmark
   getBookmark: 'getBookmark',
-  getBookmarks: 'getBookmarks',
-  getBookmarkCategories: 'getBookmarkCategories',
-  deleteBookmark: 'deleteBookmark',
   saveBookmark: 'saveBookmark',
+  deleteBookmark: 'deleteBookmark',
+  getBookmarkList: 'getBookmarkList',
+  getBookmarkCategoryList: 'getBookmarkCategoryList',
   // visitors
   countUniqueDailyVisitors: 'countUniqueDailyVisitors',
   getUniqueDailyVisitors: 'getUniqueDailyVisitors',
-  // settings
-  getFilesStats: 'getFilesStats',
   // dev
   healthCheck: 'healthCheck',
 } as const

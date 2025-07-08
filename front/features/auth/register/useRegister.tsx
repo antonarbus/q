@@ -2,7 +2,7 @@ import type { Signal } from '@preact/signals-react'
 import type { UseMutationResult } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
-import { useRegisterMutation, userSlice } from '@entities/user'
+import { useRegisterUserMutation, userSlice } from '@entities/user'
 import { toast } from 'sonner'
 import { asyncDelay } from '@shared/util/delay'
 import { trackSignUpEventAtGoogleTagManager } from '@shared/lib/google-tag-manager/trackSignUpEventAtGoogleTagManager'
@@ -38,7 +38,7 @@ export const useRegister = ({
     isSuccess,
     isError,
     error,
-  } = useRegisterMutation()
+  } = useRegisterUserMutation()
 
   useUpdateEffect(() => {
     if (isSuccess === true) {

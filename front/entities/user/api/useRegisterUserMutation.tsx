@@ -1,7 +1,7 @@
 import type {
   ResBody,
   ReqBody as Payload,
-} from '@back/api/auth/activateHandler'
+} from '@back/api/auth/registerHandler'
 import { api } from '@back/api'
 import { useMutation, type UseMutationResult } from '@tanstack/react-query'
 import axios, { type AxiosError } from 'axios'
@@ -9,14 +9,14 @@ import { queryKey } from '@shared/const/queryKey'
 
 type Res = UseMutationResult<ResBody, AxiosError<ResBody>, Payload>
 
-export const useActivateMutation = (): Res => {
+export const useRegisterUserMutation = (): Res => {
   const query = useMutation<ResBody, AxiosError<ResBody>, Payload>({
-    mutationKey: [queryKey.activate],
-    mutationFn: async ({ activationKey }: Payload) => {
+    mutationKey: [queryKey.register],
+    mutationFn: async ({ email, password }: Payload) => {
       const { data } = await axios<ResBody>({
-        url: api.activate.url,
-        method: api.activate.method,
-        data: { activationKey },
+        url: api.register.url,
+        method: api.register.method,
+        data: { email, password },
       })
 
       return data

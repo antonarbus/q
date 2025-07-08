@@ -4,7 +4,7 @@ import { MdLogin } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
 import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import { toast } from 'sonner'
-import { useLogInMutation, userRole, userSlice } from '@entities/user'
+import { useLogInUserMutation, userRole, userSlice } from '@entities/user'
 import { useGetQuotationListQuery } from '@entities/quotation'
 import { useGetBookmarkListQuery } from '@entities/bookmark'
 import { useLocation } from 'react-router-dom'
@@ -21,7 +21,7 @@ export const LogInAsUserButton = ({ email }: Payload): React.ReactNode => {
     isSuccess,
     isError,
     error,
-  } = useLogInMutation()
+  } = useLogInUserMutation()
 
   const location = useLocation()
   const { refetch: refetchQuotations } = useGetQuotationListQuery()

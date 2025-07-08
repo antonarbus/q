@@ -6,19 +6,19 @@ import { format } from 'bytes'
 import { Fragment, useMemo, useRef, useState } from 'react'
 import { GrStorage } from 'react-icons/gr'
 import { useNavigate } from 'react-router-dom'
-import { useGetFilesStatsQuery } from '@entities/user'
 import { BackdropWithSlidableModal } from '@shared/component/BackdropWithSlidableModal'
 import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import { CardCustom } from '@shared/component/CardCustom'
 import { MdExpandLess, MdExpandMore } from 'react-icons/md'
 import { FiFileText } from 'react-icons/fi'
 import { DeleteFileIcon } from '@features/file/delete-file'
+import { useGetFileListStatsQuery } from '@entities/file'
 
 export const SettingsModal = (): React.JSX.Element => {
   const cardRef = useRef<HTMLDivElement>(null)
   const navigate = useNavigate()
   const [collapseOpen, setCollapseOpen] = useState(false)
-  const { data, isSuccess, isPending } = useGetFilesStatsQuery()
+  const { data, isSuccess, isPending } = useGetFileListStatsQuery()
 
   const totalSize = useMemo(() => {
     const size = (data?.fileList ?? []).reduce((accumulator, item) => {
