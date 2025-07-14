@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from 'express'
 import type { User } from '@entities/user'
 import { httpStatus } from '@back/shared/const/httpStatus'
-import { sendEmail } from '@back/shared/lib/sendgrid'
+import { sendEmail } from '@back/shared/lib/mailersend'
 import { config } from '@back/config'
 import { UserModel } from '@back/entities/user'
 import { generateId } from '@back/shared/lib/nanoid'
@@ -82,7 +82,8 @@ export const requestPasswordResetHandler: RouterHandler = async (
       `,
   })
 
-  if (emailRes?.[0].statusCode === 202) {
+  // https://developers.mailersend.com/general.html#api-response
+  if (emailRes.statusCode === 202) {
     res.status(httpStatus.created_201).json({ message: 'reset link sent' })
 
     return

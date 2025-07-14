@@ -129,7 +129,7 @@ and a hash based on a secret keys, which are kept on a server in env variable.
 
 # Email
 
-For emails sending Sendgrid is used.
+For emails sending MailerSend is used.
 
 # Item
 

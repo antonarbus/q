@@ -2,7 +2,7 @@ import type { Request, Response, NextFunction } from 'express'
 import bcrypt from 'bcryptjs'
 import type { User } from '@entities/user'
 import { httpStatus } from '@back/shared/const/httpStatus'
-import { sendEmail } from '@back/shared/lib/sendgrid'
+import { sendEmail } from '@back/shared/lib/mailersend'
 import { config } from '@back/config'
 import {
   generateAccessToken,
@@ -137,7 +137,8 @@ export const logInHandler: RouterHandler = async (req, res, next) => {
         `,
     })
 
-    if (emailRes?.[0].statusCode === 202) {
+    // https://developers.mailersend.com/general.html#api-response
+    if (emailRes.statusCode === 202) {
       res
         .status(httpStatus.forbidden_403)
         .json({ message: 'activation link sent again' })
