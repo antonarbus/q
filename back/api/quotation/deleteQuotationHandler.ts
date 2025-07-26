@@ -13,22 +13,21 @@ export type ReqBody = {
 
 export type ResBody = {
   document?: HydratedDocument<Quotation>
-  message:
-    | ErrorMessageCommon
-    | 'not found'
-    | 'deleted'
-    | 'internal error'
-    | 'not deleted'
+  message: 'deleted'
+}
+
+export type ErrorResBody = {
+  message: ErrorMessageCommon | 'not found' | 'internal error' | 'not deleted'
 }
 
 type RouterHandler = (
   req: Request<unknown, unknown, ReqBody>,
-  res: Response<ResBody>,
+  res: Response<ResBody | ErrorResBody>,
   next: NextFunction,
 ) => Promise<void>
 
 export const deleteQuotationHandler: RouterHandler = async (req, res, next) => {
-  const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
+  const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req, res })
   const { id: quotationId } = req.body
 
   const deleteFromDbResult = await QuotationModel.deleteOne({

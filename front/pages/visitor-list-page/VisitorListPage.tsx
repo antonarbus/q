@@ -16,12 +16,15 @@ export const VisitorListPage = (): React.JSX.Element => {
   const [startDate, setStartDate] = useState(thirtyDaysAgo)
   const [endDate, setEndDate] = useState(today)
 
-  const { data, isLoading } = useGetUniqueDailyVisitorCountQuery({
+  const getUniqueDailyVisitorCountQuery = useGetUniqueDailyVisitorCountQuery({
     startDate: format(startDate, 'yyyy-MM-dd'),
     endDate: format(endDate, 'yyyy-MM-dd'),
   })
 
-  useUpdateChart({ chartInstanceRef, visitors: data?.visitorsCount ?? [] })
+  useUpdateChart({
+    chartInstanceRef,
+    visitors: getUniqueDailyVisitorCountQuery.data?.visitorsCount ?? [],
+  })
 
   return (
     <Box
@@ -36,7 +39,9 @@ export const VisitorListPage = (): React.JSX.Element => {
         <canvas ref={canvasRef} />
       </Box>
       <Box sx={{ height: '20px' }}>
-        {isLoading === true ? 'Loading...' : null}
+        {getUniqueDailyVisitorCountQuery.isLoading === true
+          ? 'Loading...'
+          : null}
       </Box>
       <Box
         sx={{

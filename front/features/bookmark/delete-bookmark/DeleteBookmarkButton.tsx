@@ -10,27 +10,20 @@ import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import { toast } from 'sonner'
 
 export const DeleteBookmarkButton = ({ id }: ReqBody): React.JSX.Element => {
-  const {
-    mutate: deleteItem,
-    isPending,
-    isSuccess,
-    isError,
-    error,
-  } = useDeleteBookmarkMutation()
+  const deleteBookmarkMutation = useDeleteBookmarkMutation()
 
   useUpdateEffect(() => {
-    if (isSuccess === true) {
+    if (deleteBookmarkMutation.isSuccess === true) {
       deleteFromBookmarkListCache({ id })
     }
-  }, [isSuccess])
+  }, [deleteBookmarkMutation.isSuccess])
 
   useUpdateEffect(() => {
-    if (isError === true) {
-      toast.error(error.response?.data.message)
-
+    if (deleteBookmarkMutation.isError === true) {
+      toast.error(deleteBookmarkMutation.error.response?.data.message)
       deleteFromBookmarkListCache({ id })
     }
-  }, [isError])
+  }, [deleteBookmarkMutation.isError])
 
   return (
     <Tooltip
@@ -51,11 +44,15 @@ export const DeleteBookmarkButton = ({ id }: ReqBody): React.JSX.Element => {
             return
           }
 
-          deleteItem({ id })
+          deleteBookmarkMutation.mutate({ id })
         }}
         size='small'
       >
-        {isPending === true ? <RotatingLoaderIcon /> : <MdDeleteOutline />}
+        {deleteBookmarkMutation.isPending === true ? (
+          <RotatingLoaderIcon />
+        ) : (
+          <MdDeleteOutline />
+        )}
       </IconButton>
     </Tooltip>
   )

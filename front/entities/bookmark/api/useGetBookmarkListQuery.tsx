@@ -1,14 +1,17 @@
-import type { ResBody } from '@back/api/bookmark/getBookmarkListHandler'
+import type {
+  ResBody,
+  ErrorResBody,
+} from '@back/api/bookmark/getBookmarkListHandler'
 import { api } from '@back/api'
 import { type UseQueryResult, useQuery } from '@tanstack/react-query'
 import type { AxiosError, AxiosResponse } from 'axios'
 import { queryKey } from '@shared/const/queryKey'
 import { axiosWithAuth } from '@shared/lib/axios'
 
-type Res = UseQueryResult<ResBody, AxiosError<ResBody>>
+type Res = UseQueryResult<ResBody, AxiosError<ErrorResBody>>
 
 export const useGetBookmarkListQuery = (): Res => {
-  const query = useQuery<ResBody, AxiosError<ResBody>>({
+  const query = useQuery<ResBody, AxiosError<ErrorResBody>>({
     queryKey: [queryKey.getBookmarkList],
     refetchOnMount: false,
     refetchOnWindowFocus: false,

@@ -15,8 +15,7 @@ export const useLoadSaveQuotationModalWithDirectLink = ({
   saveQuotationFormValues,
 }: Props): void => {
   const { quotationId } = useParams()
-
-  const { mutate: loadQuotation, isSuccess, data } = useGetQuotationMutation()
+  const getQuotationMutation = useGetQuotationMutation()
 
   useEffectOnce(() => {
     if (quotationId !== undefined) {
@@ -26,16 +25,16 @@ export const useLoadSaveQuotationModalWithDirectLink = ({
         return
       }
 
-      loadQuotation({ id: quotationId })
+      getQuotationMutation.mutate({ id: quotationId })
     }
   })
 
   useUpdateEffect(() => {
-    if (data?.quotation === undefined) {
+    if (getQuotationMutation.data?.quotation === undefined) {
       return
     }
 
-    const { quotation } = data
+    const { quotation } = getQuotationMutation.data
 
     dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
 
@@ -43,5 +42,5 @@ export const useLoadSaveQuotationModalWithDirectLink = ({
     saveQuotationFormValues.categorySignal.value = quotation.category ?? ''
     saveQuotationFormValues.descSignal.value = quotation.desc ?? ''
     saveQuotationFormValues.infoSignal.value = quotation.info ?? ''
-  }, [isSuccess])
+  }, [getQuotationMutation.isSuccess])
 }

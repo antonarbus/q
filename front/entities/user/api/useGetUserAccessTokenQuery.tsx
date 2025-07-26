@@ -1,13 +1,16 @@
-import type { ResBody } from '@back/api/auth/getAccessTokenHandler'
+import type {
+  ResBody,
+  ErrorResBody,
+} from '@back/api/auth/getAccessTokenHandler'
 import { api } from '@back/api'
 import { type UseQueryResult, useQuery } from '@tanstack/react-query'
 import axios, { type AxiosError, type AxiosResponse } from 'axios'
 import { queryKey } from '@shared/const/queryKey'
 
-type Res = UseQueryResult<ResBody, AxiosError<ResBody>>
+type Res = UseQueryResult<ResBody, AxiosError<ErrorResBody>>
 
 export const useGetUserAccessTokenQuery = (): Res => {
-  const query = useQuery<ResBody, AxiosError<ResBody>>({
+  const query = useQuery<ResBody, AxiosError<ErrorResBody>>({
     queryKey: [queryKey.getAccessToken],
     refetchOnMount: false,
     refetchOnWindowFocus: false,

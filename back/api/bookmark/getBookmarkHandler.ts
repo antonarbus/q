@@ -5,25 +5,30 @@ import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import { jsonParseSafe } from '@back/shared/util/jsonParseSafe'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { BookmarkModel } from '@back/entities/bookmark'
+import type { ErrorMessageCommon } from '@shared/const/errorMessageCommon'
 
 export type ReqBody = {
   id: Item['id']
 }
 
 export type ResBody = {
-  message: 'not logged in' | 'not found' | 'found'
   item?: Item
+  message: 'found'
+}
+
+export type ErrorResBody = {
+  message: ErrorMessageCommon | 'not found'
 }
 
 type RouterHandler = (
   req: Request<unknown, unknown, ReqBody>,
-  res: Response<ResBody>,
+  res: Response<ResBody | ErrorResBody>,
   next: NextFunction,
 ) => Promise<void>
 
 export const getBookmarkHandler: RouterHandler = async (req, res, next) => {
   const bookmarkId = req.body.id
-  const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
+  const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req, res })
   const document = await BookmarkModel.findOne({ email, id: bookmarkId })
 
   if (document === null) {

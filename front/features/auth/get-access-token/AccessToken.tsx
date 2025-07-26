@@ -30,26 +30,20 @@ const loadingMenuIconMachine = createLoadingMenuIconMachine({
 const loadingIconActor = createActor(loadingMenuIconMachine).start()
 
 export const AccessToken = (): React.ReactNode => {
-  const {
-    data,
-    refetch: getAccessToken,
-    isFetching,
-    isError,
-    isSuccess,
-  } = useGetUserAccessTokenQuery()
+  const getUserAccessTokenQuery = useGetUserAccessTokenQuery()
 
   // get initial access token on app load
   useEffectOnce(() => {
     const { accessToken } = getState().user
 
     if (accessToken === null) {
-      void getAccessToken()
+      void getUserAccessTokenQuery.refetch()
     }
   })
 
   // show jumping dots at table
   useUpdateEffect(() => {
-    if (isFetching === true) {
+    if (getUserAccessTokenQuery.isFetching === true) {
       loadingIconActor.send({ type: 'show loading icon' })
 
       dispatch(
@@ -59,21 +53,23 @@ export const AccessToken = (): React.ReactNode => {
         }),
       )
     }
-  }, [isFetching])
+  }, [getUserAccessTokenQuery.isFetching])
 
   useUpdateEffect(() => {
-    if (isSuccess === true) {
-      if (data.accessJwtToken === undefined) {
+    if (getUserAccessTokenQuery.isSuccess === true) {
+      if (getUserAccessTokenQuery.data.accessJwtToken === undefined) {
         return
       }
 
-      const jwtPayload = jwtDecode<JwtPayloadExtended>(data.accessJwtToken)
+      const jwtPayload = jwtDecode<JwtPayloadExtended>(
+        getUserAccessTokenQuery.data.accessJwtToken,
+      )
 
       const { email, roles } = jwtPayload
 
       dispatch(
         userSlice.actions.setAccessToken({
-          accessToken: data.accessJwtToken,
+          accessToken: getUserAccessTokenQuery.data.accessJwtToken,
         }),
       )
 
@@ -87,7 +83,7 @@ export const AccessToken = (): React.ReactNode => {
       dispatch(
         userSlice.actions.rememberLoggedUser({
           email,
-          roles: data.roles ?? [userRole.user],
+          roles: getUserAccessTokenQuery.data.roles ?? [userRole.user],
         }),
       )
 
@@ -118,10 +114,10 @@ export const AccessToken = (): React.ReactNode => {
       loadingIconActor.send({ type: 'show success icon' })
       resolveInitAccessTokenFetching('fetched')
     }
-  }, [isSuccess])
+  }, [getUserAccessTokenQuery.isSuccess])
 
   useUpdateEffect(() => {
-    if (isError === true) {
+    if (getUserAccessTokenQuery.isError === true) {
       dispatch(
         agGridSlice.actions.showLoadingOverlay({
           showLoader: false,
@@ -148,7 +144,7 @@ export const AccessToken = (): React.ReactNode => {
       // loadingIconActor.send({ type: 'show error icon' })
       resolveInitAccessTokenFetching('failed')
     }
-  }, [isError])
+  }, [getUserAccessTokenQuery.isError])
 
   return null
 }

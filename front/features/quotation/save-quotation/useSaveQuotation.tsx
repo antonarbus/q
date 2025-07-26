@@ -42,87 +42,78 @@ export const useSaveQuotation = ({
 }: Props): Res => {
   const navigate = useNavigate()
   const isQuotationsPage = useLocation().pathname.includes(route.quotationList)
-
-  const {
-    mutate: saveQuotation,
-    data,
-    isSuccess,
-    isPending,
-    isError,
-    error,
-    reset,
-  } = useSaveQuotationMutation()
-
-  const { refetch: updateCategories } = useGetQuotationCategoryListQuery()
-  const { refetch: fetchQuotations } = useGetQuotationListQuery()
+  const saveQuotationMutation = useSaveQuotationMutation()
+  const getQuotationCategoryListQuery = useGetQuotationCategoryListQuery()
+  const getQuotationListQuery = useGetQuotationListQuery()
 
   useUpdateEffect(() => {
-    if (isPending === true) {
+    if (saveQuotationMutation.isPending === true) {
       loadingIconActor.send({ type: 'show loading icon' })
     }
-  }, [isPending])
+  }, [saveQuotationMutation.isPending])
 
   useUpdateEffect(() => {
-    if (data?.quotation === undefined) {
+    if (saveQuotationMutation.data?.quotation === undefined) {
       return
     }
 
-    if (isSuccess === true) {
-      if (data.message === 'saved') {
-        toast.success(`Saved under id ${data.quotation.id}`)
+    if (saveQuotationMutation.isSuccess === true) {
+      if (saveQuotationMutation.data.message === 'saved') {
+        toast.success(
+          `Saved under id ${saveQuotationMutation.data.quotation.id}`,
+        )
       }
 
       // ths should not be a use case in main page, but we still may open /id/save route directly
       // this may be a use case in quotations page
-      if (data.message === 'updated') {
+      if (saveQuotationMutation.data.message === 'updated') {
         toast.info('Updated')
       }
 
       // this should not be a use case in main page, but we still may open /id/save route directly
       // this may be a use case in quotations page
-      if (data.message === 'copied and saved') {
+      if (saveQuotationMutation.data.message === 'copied and saved') {
         toast.success(
-          `Shared quotation was copied and saved under id ${data.quotation.id}`,
+          `Shared quotation was copied and saved under id ${saveQuotationMutation.data.quotation.id}`,
           {
             duration: 5000,
           },
         )
 
-        void navigate(`/${data.quotation.id}`)
+        void navigate(`/${saveQuotationMutation.data.quotation.id}`)
       }
 
-      void updateCategories()
-      void fetchQuotations()
+      void getQuotationCategoryListQuery.refetch()
+      void getQuotationListQuery.refetch()
 
       loadingIconActor.send({ type: 'show success icon' })
       dispatch(navSlice.actions.removeUnderlineFromTopNav())
 
       dispatch(
         quotationSlice.actions.loadQuotationReducer({
-          quotation: data.quotation,
+          quotation: saveQuotationMutation.data.quotation,
         }),
       )
 
       const slideOutAndChangeUrl = async (): Promise<void> => {
         await asyncDelay(1000)
         await slideOut()
-        const id = data.quotation?.id
+        const id = saveQuotationMutation.data.quotation?.id
         const navigateTo = isQuotationsPage === true ? '..' : `/${id}`
         void navigate(navigateTo, { replace: true })
       }
 
       void slideOutAndChangeUrl()
     }
-  }, [isSuccess])
+  }, [saveQuotationMutation.isSuccess])
 
   useUpdateEffect(() => {
-    if (isError === true) {
-      toast.error(error.response?.data.message)
+    if (saveQuotationMutation.isError === true) {
+      toast.error(saveQuotationMutation.error.response?.data.message)
       loadingIconActor.send({ type: 'show error icon' })
-
-      reset()
+      saveQuotationMutation.reset()
     }
-  }, [isError])
+  }, [saveQuotationMutation.isError])
 
   const onSubmit = (event: React.FormEvent): void => {
     event.preventDefault()
@@ -142,8 +133,13 @@ export const useSaveQuotation = ({
       blocks: getState().quotation.blocks,
     }
 
-    saveQuotation({ quotation })
+    saveQuotationMutation.mutate({ quotation })
   }
 
-  return { onSubmit, isPending, isSuccess, isError }
+  return {
+    onSubmit,
+    isPending: saveQuotationMutation.isPending,
+    isSuccess: saveQuotationMutation.isSuccess,
+    isError: saveQuotationMutation.isError,
+  }
 }

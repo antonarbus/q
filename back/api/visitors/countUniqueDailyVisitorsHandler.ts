@@ -13,12 +13,16 @@ export type ReqBody = {
 }
 
 export type ResBody = {
-  message: ErrorMessageCommon | 'visitor counted'
+  message: 'visitor counted'
+}
+
+export type ErrorResBody = {
+  message: ErrorMessageCommon
 }
 
 type RouterHandler = (
   req: Request<unknown, unknown, ReqBody>,
-  res: Response<ResBody>,
+  res: Response<ResBody | ErrorResBody>,
   next: NextFunction,
 ) => Promise<void>
 

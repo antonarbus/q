@@ -18,13 +18,7 @@ export const useLoadBookmarkModalOpenedWithDirectLink = ({
   const { bookmarkId } = useParams()
   const navigate = useNavigate()
 
-  const {
-    mutate: loadBookmark,
-    isSuccess,
-    isError,
-    error,
-    data,
-  } = useGetBookmarkMutation()
+  const getBookmarkMutation = useGetBookmarkMutation()
 
   useEffectOnce(() => {
     const firstBlock = getState().quotation.blocks.at(BOOKMARK_POS_AT_BLOCKS)
@@ -38,18 +32,18 @@ export const useLoadBookmarkModalOpenedWithDirectLink = ({
       return
     }
 
-    loadBookmark({ id: bookmarkId })
+    getBookmarkMutation.mutate({ id: bookmarkId })
   })
 
   useUpdateEffect(() => {
-    if (data?.item === undefined) {
+    if (getBookmarkMutation.data?.item === undefined) {
       return
     }
 
-    if (isSuccess === true) {
+    if (getBookmarkMutation.isSuccess === true) {
       dispatch(
         quotationSlice.actions.loadBlockAtPosThousandReducer({
-          block: data.item,
+          block: getBookmarkMutation.data.item,
         }),
       )
 
@@ -62,14 +56,14 @@ export const useLoadBookmarkModalOpenedWithDirectLink = ({
         bookmarkFromValues.infoSignal.value = block.info ?? ''
       }
     }
-  }, [isSuccess])
+  }, [getBookmarkMutation.isSuccess])
 
   useUpdateEffect(() => {
-    if (isError === true) {
-      if (error.response?.data.message === 'not found') {
+    if (getBookmarkMutation.isError === true) {
+      if (getBookmarkMutation.error.response?.data.message === 'not found') {
         toast.warning('Bookmark not found')
         void navigate('..')
       }
     }
-  }, [isError])
+  }, [getBookmarkMutation.isError])
 }

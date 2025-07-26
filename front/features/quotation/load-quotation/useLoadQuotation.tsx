@@ -22,13 +22,7 @@ export const useLoadQuotation = (): void => {
     (state) => state.app.shouldLoadQuotation,
   )
 
-  const {
-    mutate: getQuotation,
-    data,
-    isSuccess,
-    isError,
-    error,
-  } = useGetQuotationMutation()
+  const getQuotationMutation = useGetQuotationMutation()
 
   const getFromWhereToLoadQuotation = (): 'server' | 'template' | 'memory' => {
     if (shouldLoadQuotation.from === 'memory') {
@@ -188,7 +182,7 @@ export const useLoadQuotation = (): void => {
           )
 
           if (quotationId !== undefined) {
-            getQuotation({ id: quotationId })
+            getQuotationMutation.mutate({ id: quotationId })
           }
 
           dispatch(
@@ -229,8 +223,8 @@ export const useLoadQuotation = (): void => {
 
   // above we triggered quotation loading, now we handle the response
   useUpdateEffect(() => {
-    if (isSuccess === true) {
-      const { quotation } = data
+    if (getQuotationMutation.isSuccess === true) {
+      const { quotation } = getQuotationMutation.data
 
       dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
 
@@ -250,14 +244,16 @@ export const useLoadQuotation = (): void => {
         dispatch(appSlice.actions.hideLoadingOverlay())
       }, 1250)
     }
-  }, [isSuccess])
+  }, [getQuotationMutation.isSuccess])
 
   useUpdateEffect(() => {
-    if (isError === true) {
-      if (error.response?.status === httpStatus.forbidden_403) {
+    if (getQuotationMutation.isError === true) {
+      if (
+        getQuotationMutation.error.response?.status === httpStatus.forbidden_403
+      ) {
         dispatch(
           quotationSlice.actions.loadQuotationReducer({
-            quotation: error.response.data.quotation,
+            quotation: getQuotationMutation.error.response.data.quotation,
           }),
         )
 
@@ -266,7 +262,9 @@ export const useLoadQuotation = (): void => {
             message: `Forbidden to view quotation ${quotationId}`,
           }),
         )
-      } else if (error.response?.status === httpStatus.notFound_404) {
+      } else if (
+        getQuotationMutation.error.response?.status === httpStatus.notFound_404
+      ) {
         dispatch(
           appSlice.actions.setBackgroundMessage({
             message: `Quotation ${quotationId} is not found`,
@@ -284,5 +282,5 @@ export const useLoadQuotation = (): void => {
         dispatch(appSlice.actions.hideLoadingOverlay())
       }, 1250)
     }
-  }, [isError])
+  }, [getQuotationMutation.isError])
 }

@@ -27,19 +27,20 @@ ModuleRegistry.registerModules([AllCommunityModule])
 
 export const QuotationListGrid = (): React.JSX.Element => {
   const gridContainerRef = useRef<React.ComponentRef<'div'> | null>(null)
+  const getQuotationListQuery = useGetQuotationListQuery()
 
-  const { data, isLoading, isFetching, isFetched, refetch } =
-    useGetQuotationListQuery()
+  useDisableLoadingOverlayWhenItemsAreFetched({
+    isFetched: getQuotationListQuery.isFetched,
+  })
 
-  useDisableLoadingOverlayWhenItemsAreFetched({ isFetched })
-  useRefetchDataOnEmailChange({ refetch })
-  useShowLoadingJumpingDots({ isLoading })
+  useRefetchDataOnEmailChange({ refetch: getQuotationListQuery.refetch })
+  useShowLoadingJumpingDots({ isLoading: getQuotationListQuery.isLoading })
 
   return (
     <GridLayout gridContainerRef={gridContainerRef}>
       <AgGridStyles />
       <DisplayedRowsCount />
-      <ProgressGridBar isShown={isFetching} />
+      <ProgressGridBar isShown={getQuotationListQuery.isFetching} />
       <AgGridReact<QuotationPick>
         columnDefs={columnDefs}
         defaultColDef={defaultColDef}
@@ -59,7 +60,7 @@ export const QuotationListGrid = (): React.JSX.Element => {
           dispatch(agGridSlice.actions.setCount({ count }))
         }}
         ref={quotationListAgGridRef}
-        rowData={data?.quotations}
+        rowData={getQuotationListQuery.data?.quotations}
         suppressCellFocus
         suppressColumnVirtualisation
         theme={themeQuartz}

@@ -6,22 +6,26 @@ import type { File } from '@entities/file'
 import { FileModel } from '@back/entities/file'
 
 export type ResBody = {
-  message: ErrorMessageCommon | 'file stats' | 'no item in bucket' | 'deleted'
   fileList: {
     id: File['id']
     name: File['name']
     size: File['size']
   }[]
+  message: 'file stats'
+}
+
+export type ErrorResBody = {
+  message: ErrorMessageCommon
 }
 
 type RouterHandler = (
   req: Request,
-  res: Response<ResBody>,
+  res: Response<ResBody | ErrorResBody>,
   next: NextFunction,
 ) => Promise<void>
 
 export const getFileListHandler: RouterHandler = async (req, res, next) => {
-  const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
+  const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req, res })
 
   const fileList = await FileModel.find({ email })
     .select({ _id: 0, id: 1, name: 1, size: 1 })

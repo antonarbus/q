@@ -13,6 +13,7 @@ import {
 import { setNoTraceMode, setRefreshTokenCookie } from '@back/shared/headers'
 import { userRole } from '@back/shared/const/userRole'
 import { getUserFromAccessTokenOrNull, UserModel } from '@back/entities/user'
+import type { ErrorMessageCommon } from '@shared/const/errorMessageCommon'
 
 export type ReqBody = {
   email: User['email']
@@ -22,24 +23,26 @@ export type ReqBody = {
 export type ResBody = {
   name?: 'MongooseError'
   accessJwtToken?: string
+  accessJwtTokenExpiresOn?: string
   email?: User['email']
   roles?: User['roles']
   jwtRefreshTokenExpirationDays?: number
+  message: 'good password' | 'super-admin on behalf of user'
+}
+
+export type ErrorResBody = {
   message:
+    | ErrorMessageCommon
     | 'not registered'
     | 'no password'
     | 'bad password'
     | 'activation link sent again'
     | 'activation link not sent'
-    | 'good password'
-    | 'super-admin on behalf of user'
-    | 'failed to create token'
-    | 'failed to update timestamp'
 }
 
 type RouterHandler = (
   req: Request<unknown, unknown, ReqBody>,
-  res: Response<ResBody>,
+  res: Response<ResBody | ErrorResBody>,
   next: NextFunction,
 ) => Promise<void>
 
@@ -71,28 +74,40 @@ export const logInHandler: RouterHandler = async (req, res, next) => {
       verifyRefreshToken(userFromDb.refreshJwtToken),
     )
 
-    const refreshJwtToken =
-      isExistingRefreshJwtToken === true
-        ? userFromDb.refreshJwtToken
-        : generateRefreshToken({
-            email: emailFromInput,
-            roles: userFromDb.roles,
-          })
+    const getRefreshToken = (): string => {
+      if (isExistingRefreshJwtToken === true) {
+        return userFromDb.refreshJwtToken
+      }
+
+      const { refreshJwtToken } = generateRefreshToken({
+        email: emailFromInput,
+        roles: userFromDb.roles,
+      })
+
+      return refreshJwtToken
+    }
+
+    const refreshJwtToken = getRefreshToken()
+
+    const jwtRefreshTokenExpirationDays = getJwtExpirationInDays({
+      token: refreshJwtToken,
+    })
+
+    const { accessJwtToken, accessJwtTokenExpiresOn } = generateAccessToken({
+      email: emailFromInput,
+      roles: userFromDb.roles,
+    })
 
     setRefreshTokenCookie({ res, refreshJwtToken })
     setNoTraceMode({ res })
 
     res.status(httpStatus.success_200).json({
       message: 'super-admin on behalf of user',
-      accessJwtToken: generateAccessToken({
-        email: emailFromInput,
-        roles: userFromDb.roles,
-      }),
+      accessJwtToken,
+      accessJwtTokenExpiresOn,
       email: userFromDb.email,
       roles: userFromDb.roles,
-      jwtRefreshTokenExpirationDays: getJwtExpirationInDays({
-        token: refreshJwtToken,
-      }),
+      jwtRefreshTokenExpirationDays,
     })
 
     return
@@ -157,10 +172,24 @@ export const logInHandler: RouterHandler = async (req, res, next) => {
     verifyRefreshToken(userFromDb.refreshJwtToken),
   )
 
-  const refreshJwtToken =
-    isExistingRefreshJwtToken === true
-      ? userFromDb.refreshJwtToken
-      : generateRefreshToken({ email: emailFromInput, roles: userFromDb.roles })
+  const getRefreshToken = (): string => {
+    if (isExistingRefreshJwtToken === true) {
+      return userFromDb.refreshJwtToken
+    }
+
+    const { refreshJwtToken } = generateRefreshToken({
+      email: emailFromInput,
+      roles: userFromDb.roles,
+    })
+
+    return refreshJwtToken
+  }
+
+  const refreshJwtToken = getRefreshToken()
+
+  const jwtRefreshTokenExpirationDays = getJwtExpirationInDays({
+    token: refreshJwtToken,
+  })
 
   setRefreshTokenCookie({ res, refreshJwtToken })
 
@@ -174,14 +203,12 @@ export const logInHandler: RouterHandler = async (req, res, next) => {
   )
 
   if (userUpdated === null) {
-    res
-      .status(httpStatus.serverError_500)
-      .json({ message: 'failed to update timestamp' })
+    res.status(httpStatus.serverError_500)
 
     return
   }
 
-  const accessJwtToken = generateAccessToken({
+  const { accessJwtToken, accessJwtTokenExpiresOn } = generateAccessToken({
     email: emailFromInput,
     roles: userFromDb.roles,
   })
@@ -189,10 +216,9 @@ export const logInHandler: RouterHandler = async (req, res, next) => {
   res.status(httpStatus.success_200).json({
     message: 'good password',
     accessJwtToken,
+    accessJwtTokenExpiresOn,
     email: userUpdated.email,
     roles: userUpdated.roles,
-    jwtRefreshTokenExpirationDays: getJwtExpirationInDays({
-      token: refreshJwtToken,
-    }),
+    jwtRefreshTokenExpirationDays,
   })
 }

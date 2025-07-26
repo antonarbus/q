@@ -19,22 +19,12 @@ type RouterHandler = (
 
 export const errorHandlerMiddleware: RouterHandler = (
   error,
-  req,
+  _req,
   res,
-  next,
+  _next,
 ) => {
   console.error(error)
   const { message, name, stack } = error
-
-  // todo: make some logger to db or text file or maybe there are proven solutions for it
-
-  if (message === errorMessageCommon.notLoggedIn) {
-    res
-      .status(httpStatus.unauthorized_401)
-      .json({ message: errorMessageCommon.notLoggedIn })
-
-    return
-  }
 
   res.status(httpStatus.serverError_500).json({
     message: errorMessageCommon.internalError,

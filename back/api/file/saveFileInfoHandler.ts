@@ -15,21 +15,21 @@ export type ResBody = {
   fileName?: string
   fileSize?: number
   uploadedAt?: Date
-  message:
-    | ErrorMessageCommon
-    | 'invalid file id'
-    | 'saved file info'
-    | 'failed to make file public'
+  message: 'saved file info'
+}
+
+export type ErrorResBody = {
+  message: ErrorMessageCommon | 'invalid file id' | 'failed to make file public'
 }
 
 type RouterHandler = (
   req: Request<unknown, unknown, ReqBody>,
-  res: Response<ResBody>,
+  res: Response<ResBody | ErrorResBody>,
   next: NextFunction,
 ) => Promise<void>
 
 export const saveFileInfoHandler: RouterHandler = async (req, res, next) => {
-  const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
+  const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req, res })
   const { id: fileId, name: fileName, size: fileSize } = req.body
 
   try {

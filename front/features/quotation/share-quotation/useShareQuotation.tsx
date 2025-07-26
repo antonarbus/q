@@ -41,50 +41,40 @@ export const useShareQuotation = ({
 }: Props): Res => {
   const navigate = useNavigate()
   const isQuotationsPage = useLocation().pathname.includes(route.quotationList)
-
-  const {
-    mutate: saveQuotation,
-    data,
-    isSuccess,
-    isPending,
-    isError,
-    error,
-    reset,
-  } = useSaveQuotationMutation()
-
-  const { refetch: fetchQuotations } = useGetQuotationListQuery()
+  const saveQuotationMutation = useSaveQuotationMutation()
+  const getQuotationListQuery = useGetQuotationListQuery()
 
   useUpdateEffect(() => {
-    if (isPending === true) {
+    if (saveQuotationMutation.isPending === true) {
       loadingIconActor.send({ type: 'show loading icon' })
     }
-  }, [isPending])
+  }, [saveQuotationMutation.isPending])
 
   useUpdateEffect(() => {
-    const quotation = data?.quotation
+    const quotation = saveQuotationMutation.data?.quotation
 
     if (quotation === undefined) {
       return
     }
 
-    if (isSuccess === true) {
+    if (saveQuotationMutation.isSuccess === true) {
       // may save new quotation by sharing the link, strange, but maybe nice
-      if (data.message === 'saved') {
+      if (saveQuotationMutation.data.message === 'saved') {
         toast.success(`Saved under id ${quotation.id}`)
       }
 
       // usual case
-      if (data.message === 'updated') {
+      if (saveQuotationMutation.data.message === 'updated') {
         toast.info('Updated')
       }
 
-      if (data.message === 'copied and saved') {
+      if (saveQuotationMutation.data.message === 'copied and saved') {
         toast.success('Shared quotation was copied, saved and shared', {
           duration: 5000,
         })
       }
 
-      void fetchQuotations()
+      void getQuotationListQuery.refetch()
       dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
       loadingIconActor.send({ type: 'show success icon' })
       dispatch(navSlice.actions.removeUnderlineFromTopNav())
@@ -92,22 +82,22 @@ export const useShareQuotation = ({
       const slideOutAndChangeUrl = async (): Promise<void> => {
         await asyncDelay(1000)
         await slideOut()
-        const id = data.quotation?.id
+        const id = saveQuotationMutation.data.quotation?.id
         const navigateTo = isQuotationsPage === true ? '..' : `/${id}`
         void navigate(navigateTo, { replace: true })
       }
 
       void slideOutAndChangeUrl()
     }
-  }, [isSuccess])
+  }, [saveQuotationMutation.isSuccess])
 
   useUpdateEffect(() => {
-    if (isError === true) {
-      toast.error(error.response?.data.message)
+    if (saveQuotationMutation.isError === true) {
+      toast.error(saveQuotationMutation.error.response?.data.message)
       loadingIconActor.send({ type: 'show error icon' })
-      reset()
+      saveQuotationMutation.reset()
     }
-  }, [isError])
+  }, [saveQuotationMutation.isError])
 
   const onSubmit = (event: React.FormEvent): void => {
     event.preventDefault()
@@ -135,9 +125,14 @@ export const useShareQuotation = ({
       access: accessFormValuesSignal.value,
     }
 
-    saveQuotation({ quotation })
+    saveQuotationMutation.mutate({ quotation })
     dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
   }
 
-  return { onSubmit, isPending, isSuccess, isError }
+  return {
+    onSubmit,
+    isPending: saveQuotationMutation.isPending,
+    isSuccess: saveQuotationMutation.isSuccess,
+    isError: saveQuotationMutation.isError,
+  }
 }

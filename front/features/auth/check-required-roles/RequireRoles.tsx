@@ -10,7 +10,7 @@ export const RequireRoles = ({
   requiredRoles,
   children,
 }: Props): React.ReactNode => {
-  const { isLoading } = useGetUserAccessTokenQuery()
+  const getUserAccessTokenQuery = useGetUserAccessTokenQuery()
 
   const userRoles = useSelector((state) => state.user.roles)
 
@@ -18,7 +18,7 @@ export const RequireRoles = ({
     userRoles.includes(role),
   )
 
-  if (isLoading === true) {
+  if (getUserAccessTokenQuery.isLoading === true) {
     return (
       <div
         style={{

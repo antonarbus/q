@@ -32,30 +32,20 @@ export const useSaveBookmark = ({
   slideOut,
 }: Props): Res => {
   const navigate = useNavigate()
-
-  const {
-    mutate: saveItem,
-    data,
-    isSuccess,
-    isPending,
-    isError,
-    error,
-    reset,
-  } = useSaveBookmarkMutation()
-
-  const { refetch: updateItemCategories } = useGetBookmarkCategoryListQuery()
-  const { refetch: updateBookmarks } = useGetBookmarkListQuery()
+  const saveBookmarkMutation = useSaveBookmarkMutation()
+  const getBookmarkCategoryListQuery = useGetBookmarkCategoryListQuery()
+  const getBookmarkListQuery = useGetBookmarkListQuery()
 
   useUpdateEffect(() => {
-    if (isSuccess === true) {
-      if (data.message === 'saved') {
+    if (saveBookmarkMutation.isSuccess === true) {
+      if (saveBookmarkMutation.data.message === 'saved') {
         toast.success('Saved')
-      } else if (data.message === 'updated') {
+      } else if (saveBookmarkMutation.data.message === 'updated') {
         toast.info('Updated')
       }
 
-      void updateItemCategories()
-      void updateBookmarks()
+      void getBookmarkCategoryListQuery.refetch()
+      void getBookmarkListQuery.refetch()
 
       const slideOutAndChangeUrl = async (): Promise<void> => {
         await asyncDelay(1000)
@@ -65,15 +55,14 @@ export const useSaveBookmark = ({
 
       void slideOutAndChangeUrl()
     }
-  }, [isSuccess])
+  }, [saveBookmarkMutation.isSuccess])
 
   useUpdateEffect(() => {
-    if (isError === true) {
-      toast.error(error.response?.data.message)
-
-      reset()
+    if (saveBookmarkMutation.isError === true) {
+      toast.error(saveBookmarkMutation.error.response?.data.message)
+      saveBookmarkMutation.reset()
     }
-  }, [isError])
+  }, [saveBookmarkMutation.isError])
 
   const onSubmit = useCallback((event: React.FormEvent) => {
     event.preventDefault()
@@ -130,8 +119,13 @@ export const useSaveBookmark = ({
       info: bookmarkFromValues.infoSignal.value,
     }
 
-    saveItem({ item })
+    saveBookmarkMutation.mutate({ item })
   }, [])
 
-  return { onSubmit, isPending, isSuccess, isError }
+  return {
+    onSubmit,
+    isPending: saveBookmarkMutation.isPending,
+    isSuccess: saveBookmarkMutation.isSuccess,
+    isError: saveBookmarkMutation.isError,
+  }
 }

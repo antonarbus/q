@@ -5,16 +5,20 @@ import { sendEmail } from '@back/shared/lib/mailersend'
 import { config } from '@back/config'
 import { UserModel } from '@back/entities/user'
 import { generateId } from '@back/shared/lib/nanoid'
+import type { ErrorMessageCommon } from '@shared/const/errorMessageCommon'
 
 export type ReqBody = {
   email: User['email']
 }
 
 export type ResBody = {
+  message: 'reset link sent'
+}
+
+export type ErrorResBody = {
   message:
-    | 'validation error'
+    | ErrorMessageCommon
     | 'does not exists'
-    | 'reset link sent'
     | 'account not activated'
     | 'reset key not issued'
     | 'reset link not sent'
@@ -22,7 +26,7 @@ export type ResBody = {
 
 type RouterHandler = (
   req: Request<unknown, unknown, ReqBody>,
-  res: Response<ResBody>,
+  res: Response<ResBody | ErrorResBody>,
   next: NextFunction,
 ) => Promise<void>
 

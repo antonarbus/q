@@ -13,15 +13,19 @@ export type ResBody = {
   signedUrl: string | null
   url: string | null
   fileId: string
-  message:
-    | ErrorMessageCommon
-    | 'failed to generate signed url'
-    | 'signed url generated'
+  message: 'signed url generated'
+}
+
+export type ErrorResBody = {
+  signedUrl: string | null
+  url: string | null
+  fileId: string
+  message: ErrorMessageCommon | 'failed to generate signed url'
 }
 
 type RouterHandler = (
   req: Request<unknown, unknown, unknown, SearchQuery>,
-  res: Response<ResBody>,
+  res: Response<ResBody | ErrorResBody>,
   next: NextFunction,
 ) => Promise<void>
 
@@ -30,7 +34,7 @@ export const fileUploadSignedUrlHandler: RouterHandler = async (
   res,
   next,
 ) => {
-  getUserFromAccessTokenOrThrowUnauthorized({ req })
+  getUserFromAccessTokenOrThrowUnauthorized({ req, res })
 
   const fileId = generateId()
   const { path, url } = getFileInfo({ id: fileId })

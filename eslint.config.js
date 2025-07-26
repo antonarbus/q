@@ -63,7 +63,7 @@ export default [
       complexity: 'off', // max complexity is 20, if else if else (complexity = 3)
       radix: ['error', 'as-needed'], // disallows providing the 10 radix --> parseInt(var, 10) no need to put 10
       'no-restricted-syntax': [
-        'error',
+        'warn',
         {
           selector: 'IfStatement > CallExpression.test',
           message:
@@ -144,6 +144,7 @@ export default [
       '@typescript-eslint/no-unnecessary-boolean-literal-compare': 'off', // forces to omit boolean comparison in if statements // i like to compare explicitly
       '@typescript-eslint/explicit-function-return-type': 'error', // feel that sometimes return type is so complex that it does not make much sense to type it manually, for ex in useQuery hooks, maybe good to use "warn" instead of "error"
       '@typescript-eslint/explicit-module-boundary-types': 'error', // same as above, but for exported functions
+      '@typescript-eslint/no-unnecessary-condition': 'warn', // same it is good to have explicit unnecessary condition
 
       // adjust React rules,
       'react/react-in-jsx-scope': 'off', // suppress error 'React' must be in scope when using JSX

@@ -18,19 +18,22 @@ export const SettingsModal = (): React.JSX.Element => {
   const cardRef = useRef<HTMLDivElement>(null)
   const navigate = useNavigate()
   const [collapseOpen, setCollapseOpen] = useState(false)
-  const { data, isSuccess, isPending } = useGetFileListStatsQuery()
+  const getFileListStatsQuery = useGetFileListStatsQuery()
 
   const totalSize = useMemo(() => {
-    const size = (data?.fileList ?? []).reduce((accumulator, item) => {
-      const incrementedSum = accumulator + item.size
+    const size = (getFileListStatsQuery.data?.fileList ?? []).reduce(
+      (accumulator, item) => {
+        const incrementedSum = accumulator + item.size
 
-      return incrementedSum
-    }, 0)
+        return incrementedSum
+      },
+      0,
+    )
 
     return size
-  }, [data])
+  }, [getFileListStatsQuery.data])
 
-  const totalCount = data?.fileList.length ?? 0
+  const totalCount = getFileListStatsQuery.data?.fileList.length ?? 0
 
   return (
     <BackdropWithSlidableModal
@@ -62,7 +65,7 @@ export const SettingsModal = (): React.JSX.Element => {
             gap: '20px',
           }}
         >
-          {isPending === true ? (
+          {getFileListStatsQuery.isPending === true ? (
             <RotatingLoaderIcon
               style={{
                 height: '20px',
@@ -70,7 +73,7 @@ export const SettingsModal = (): React.JSX.Element => {
               }}
             />
           ) : null}
-          {isSuccess === true ? (
+          {getFileListStatsQuery.isSuccess === true ? (
             <>
               <Box
                 onClick={() => {
@@ -109,7 +112,7 @@ export const SettingsModal = (): React.JSX.Element => {
                 timeout='auto'
                 unmountOnExit
               >
-                {data.fileList.map((item) => {
+                {getFileListStatsQuery.data.fileList.map((item) => {
                   return (
                     <Box
                       key={item.id}

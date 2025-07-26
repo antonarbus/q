@@ -31,38 +31,31 @@ export const useResetPassword = ({ passwordSignal, slideOut }: Props): Res => {
   const navigate = useNavigate()
   const { email, resetPasswordKey } = useParams()
 
-  const {
-    mutate: resetPassword,
-    isPending,
-    data,
-    isSuccess,
-    isError,
-    error,
-  } = useResetUserPasswordMutation()
+  const resetUserPasswordMutation = useResetUserPasswordMutation()
 
   useUpdateEffect(() => {
-    if (isSuccess === true) {
-      if (data.message === 'password was reset') {
+    if (resetUserPasswordMutation.isSuccess === true) {
+      if (resetUserPasswordMutation.data.message === 'password was reset') {
         toast('Password was reset')
 
-        if (data.accessJwtToken === undefined) {
+        if (resetUserPasswordMutation.data.accessJwtToken === undefined) {
           return
         }
 
-        if (data.email === undefined) {
+        if (resetUserPasswordMutation.data.email === undefined) {
           return
         }
 
         dispatch(
           userSlice.actions.setAccessToken({
-            accessToken: data.accessJwtToken,
+            accessToken: resetUserPasswordMutation.data.accessJwtToken,
           }),
         )
 
         dispatch(
           userSlice.actions.rememberLoggedUser({
-            email: data.email,
-            roles: data.roles ?? [userRole.user],
+            email: resetUserPasswordMutation.data.email,
+            roles: resetUserPasswordMutation.data.roles ?? [userRole.user],
           }),
         )
 
@@ -85,23 +78,23 @@ export const useResetPassword = ({ passwordSignal, slideOut }: Props): Res => {
         void slideOutAndChangeUrl()
       }
     }
-  }, [isSuccess])
+  }, [resetUserPasswordMutation.isSuccess])
 
   useUpdateEffect(() => {
-    if (isError === true) {
-      if (error.response?.data.message === 'incorrect reset key') {
+    if (resetUserPasswordMutation.isError === true) {
+      if (
+        resetUserPasswordMutation.error.response?.data.message ===
+        'incorrect reset key'
+      ) {
         toast.warning('Incorrect reset key')
 
         return
       }
 
-      if (error.response?.data.message === 'validation error') {
-        toast.warning('Validation error')
-
-        return
-      }
-
-      if (error.response?.data.message === 'not activated') {
+      if (
+        resetUserPasswordMutation.error.response?.data.message ===
+        'not activated'
+      ) {
         toast.warning('Account not activated')
 
         return
@@ -109,17 +102,22 @@ export const useResetPassword = ({ passwordSignal, slideOut }: Props): Res => {
 
       toast.error('Internal error')
     }
-  }, [isError])
+  }, [resetUserPasswordMutation.isError])
 
   const onSubmit = (event: React.FormEvent): void => {
     event.preventDefault()
 
-    resetPassword({
+    resetUserPasswordMutation.mutate({
       password: passwordSignal.value,
       email: email ?? 'email is missing',
       resetPasswordKey: resetPasswordKey ?? 'resetPasswordKey is missing',
     })
   }
 
-  return { onSubmit, isPending, isSuccess, isError }
+  return {
+    onSubmit,
+    isPending: resetUserPasswordMutation.isPending,
+    isSuccess: resetUserPasswordMutation.isSuccess,
+    isError: resetUserPasswordMutation.isError,
+  }
 }

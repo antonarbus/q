@@ -16,13 +16,18 @@ export type ReqBody = {
 }
 
 export type ResBody = {
-  message: ErrorMessageCommon | 'not allowed' | 'user not found' | 'deleted'
   statistics: string[]
+  message: 'deleted'
+}
+
+export type ErrorResBody = {
+  statistics: string[]
+  message: ErrorMessageCommon | 'not allowed' | 'user not found'
 }
 
 type RouterHandler = (
   req: Request<unknown, unknown, ReqBody>,
-  res: Response<ResBody>,
+  res: Response<ResBody | ErrorResBody>,
   next: NextFunction,
 ) => Promise<void>
 
@@ -30,7 +35,7 @@ export const deleteUserHandler: RouterHandler = async (req, res, next) => {
   const userEmailToBeDeleted = req.body.email
 
   const { email: emailFromToken, roles } =
-    getUserFromAccessTokenOrThrowUnauthorized({ req })
+    getUserFromAccessTokenOrThrowUnauthorized({ req, res })
 
   const isOwner = emailFromToken === userEmailToBeDeleted
   const isSuperAdmin = roles.includes(userRole.superAdmin)

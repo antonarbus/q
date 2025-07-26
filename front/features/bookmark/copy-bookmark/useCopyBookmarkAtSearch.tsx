@@ -7,13 +7,14 @@ import type { UseMutateAsyncFunction } from '@tanstack/react-query'
 import type {
   ReqBody as Payload,
   ResBody,
+  ErrorResBody,
 } from '@back/api/bookmark/getBookmarkHandler'
 import type { AxiosError } from 'axios'
 import { textSlice } from '@shared/lib/froala/textSlice'
 
 export type LoadBookmark = UseMutateAsyncFunction<
   ResBody,
-  AxiosError<ResBody>,
+  AxiosError<ErrorResBody>,
   Payload
 >
 
@@ -24,41 +25,30 @@ type Res = {
 }
 
 export const useCopyBookmarkAtSearch = (): Res => {
-  const {
-    mutateAsync: loadBookmark,
-    isPending: isPendingBookmark,
-    isSuccess,
-    isError,
-    error,
-    data: bookmarkData,
-    variables,
-  } = useGetBookmarkMutation()
+  const getBookmarkMutation = useGetBookmarkMutation()
 
   useUpdateEffect(() => {
-    if (isSuccess === true) {
-      const { item } = bookmarkData
+    if (getBookmarkMutation.isSuccess === true) {
+      const { item } = getBookmarkMutation.data
 
-      if (item === undefined) {
-        return
+      if (item !== undefined) {
+        dispatch(textSlice.actions.setNotEditable())
+        dispatch(copySlice.actions.addItem({ item }))
+        dispatch(copySlice.actions.allowToPaste())
+        dispatch(copySlice.actions.showCopyModal())
       }
-
-      dispatch(textSlice.actions.setNotEditable())
-
-      dispatch(copySlice.actions.addItem({ item }))
-      dispatch(copySlice.actions.allowToPaste())
-      dispatch(copySlice.actions.showCopyModal())
     }
-  }, [isSuccess])
+  }, [getBookmarkMutation.isSuccess])
 
   useUpdateEffect(() => {
-    if (isError === true) {
-      toast.error(error.response?.data.message)
+    if (getBookmarkMutation.isError === true) {
+      toast.error(getBookmarkMutation.error.response?.data.message)
     }
-  }, [isError])
+  }, [getBookmarkMutation.isError])
 
   return {
-    loadBookmark,
-    isPendingBookmark,
-    pendingBookmarkId: variables?.id ?? 'missing id',
+    loadBookmark: getBookmarkMutation.mutateAsync,
+    isPendingBookmark: getBookmarkMutation.isPending,
+    pendingBookmarkId: getBookmarkMutation.variables?.id ?? 'missing id',
   }
 }

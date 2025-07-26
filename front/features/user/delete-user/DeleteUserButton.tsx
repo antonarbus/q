@@ -9,31 +9,25 @@ import { instance } from '@shared/instance'
 import { queryKey } from '@shared/const/queryKey'
 
 export const DeleteUserButton = ({ email }: Payload): React.ReactNode => {
-  const {
-    mutate: deleteUser,
-    isPending,
-    isSuccess,
-    isError,
-    error,
-  } = useDeleteUserMutation()
+  const deleteUserMutation = useDeleteUserMutation()
 
   useUpdateEffect(() => {
-    if (isSuccess === true) {
+    if (deleteUserMutation.isSuccess === true) {
       void instance.queryClient.invalidateQueries({
         queryKey: [queryKey.getUserList],
       })
     }
-  }, [isSuccess])
+  }, [deleteUserMutation.isSuccess])
 
   useUpdateEffect(() => {
-    if (isError === true) {
-      toast.error(error.response?.data.message)
+    if (deleteUserMutation.isError === true) {
+      toast.error(deleteUserMutation.error.response?.data.message)
 
       void instance.queryClient.invalidateQueries({
         queryKey: [queryKey.getUserList],
       })
     }
-  }, [isError])
+  }, [deleteUserMutation.isError])
 
   return (
     <Tooltip
@@ -75,11 +69,15 @@ export const DeleteUserButton = ({ email }: Payload): React.ReactNode => {
             return
           }
 
-          deleteUser({ email })
+          deleteUserMutation.mutate({ email })
         }}
         size='small'
       >
-        {isPending === true ? <RotatingLoaderIcon /> : <MdDeleteOutline />}
+        {deleteUserMutation.isPending === true ? (
+          <RotatingLoaderIcon />
+        ) : (
+          <MdDeleteOutline />
+        )}
       </IconButton>
     </Tooltip>
   )

@@ -1,6 +1,7 @@
 import type {
   ResBody,
   ReqBody as Payload,
+  ErrorResBody,
 } from '@back/api/quotation/saveQuotationHandler'
 import { api } from '@back/api'
 import { useMutation, type UseMutationResult } from '@tanstack/react-query'
@@ -24,10 +25,10 @@ export const saveQuotationMutationFn = async ({
   return data
 }
 
-type Res = UseMutationResult<ResBody, AxiosError<ResBody>, Payload>
+type Res = UseMutationResult<ResBody, AxiosError<ErrorResBody>, Payload>
 
 export const useSaveQuotationMutation = (): Res => {
-  const query = useMutation<ResBody, AxiosError<ResBody>, Payload>({
+  const query = useMutation<ResBody, AxiosError<ErrorResBody>, Payload>({
     mutationKey: [queryKey.saveQuotation],
     mutationFn: saveQuotationMutationFn,
   })

@@ -4,14 +4,19 @@ import {
   removeNoTraceMode,
   removeRefreshTokenCookie,
 } from '@back/shared/headers'
+import type { ErrorMessageCommon } from '@shared/const/errorMessageCommon'
 
 export type ResBody = {
   message: 'logged out'
 }
 
+export type ErrorResBody = {
+  message: ErrorMessageCommon
+}
+
 type RouterHandler = (
   req: Request,
-  res: Response<ResBody>,
+  res: Response<ResBody | ErrorResBody>,
   next: NextFunction,
 ) => void
 

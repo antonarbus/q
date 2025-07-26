@@ -16,26 +16,21 @@ type Res = {
 }
 
 export const useFileDelete = ({ fileId }: Props): Res => {
-  const {
-    mutate: deleteFile,
-    isPending,
-    isSuccess,
-    isError,
-  } = useDeleteFileMutation()
+  const deleteFileMutation = useDeleteFileMutation()
 
   useUpdateEffect(() => {
-    if (isSuccess === true) {
+    if (deleteFileMutation.isSuccess === true) {
       void instance.queryClient.invalidateQueries({
         queryKey: [queryKey.getFileListStats],
       })
     }
-  }, [isSuccess])
+  }, [deleteFileMutation.isSuccess])
 
   useUpdateEffect(() => {
-    if (isError === true) {
+    if (deleteFileMutation.isError === true) {
       toast.error('Problem during deletion')
     }
-  }, [isError])
+  }, [deleteFileMutation.isError])
 
   const onDeleteClick = useCallback((event: React.MouseEvent): void => {
     event.preventDefault()
@@ -47,12 +42,12 @@ export const useFileDelete = ({ fileId }: Props): Res => {
       return
     }
 
-    deleteFile({ fileId })
+    deleteFileMutation.mutate({ fileId })
   }, [])
 
   return {
     onDeleteClick,
-    isPending,
-    isSuccess,
+    isPending: deleteFileMutation.isPending,
+    isSuccess: deleteFileMutation.isSuccess,
   }
 }

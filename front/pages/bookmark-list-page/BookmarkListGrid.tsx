@@ -27,19 +27,20 @@ ModuleRegistry.registerModules([AllCommunityModule])
 
 export const BookmarkListGrid = (): React.JSX.Element => {
   const gridContainerRef = useRef<React.ComponentRef<'div'> | null>(null)
+  const getBookmarkListQuery = useGetBookmarkListQuery()
 
-  const { data, isLoading, isFetching, isFetched, refetch } =
-    useGetBookmarkListQuery()
+  useDisableLoadingOverlayWhenItemsAreFetched({
+    isFetched: getBookmarkListQuery.isFetched,
+  })
 
-  useDisableLoadingOverlayWhenItemsAreFetched({ isFetched })
-  useRefetchDataOnEmailChange({ refetch })
-  useShowLoadingJumpingDots({ isLoading })
+  useRefetchDataOnEmailChange({ refetch: getBookmarkListQuery.refetch })
+  useShowLoadingJumpingDots({ isLoading: getBookmarkListQuery.isLoading })
 
   return (
     <GridLayout gridContainerRef={gridContainerRef}>
       <AgGridStyles />
       <DisplayedRowsCount />
-      <ProgressGridBar isShown={isFetching} />
+      <ProgressGridBar isShown={getBookmarkListQuery.isFetching} />
       <AgGridReact<ItemPick>
         columnDefs={columnDefs}
         defaultColDef={defaultColDef}
@@ -59,7 +60,7 @@ export const BookmarkListGrid = (): React.JSX.Element => {
           dispatch(agGridSlice.actions.setCount({ count }))
         }}
         ref={bookmarkListAgGridRef}
-        rowData={data?.bookmarks}
+        rowData={getBookmarkListQuery.data?.bookmarks}
         suppressCellFocus
         suppressColumnVirtualisation
         theme={themeQuartz}

@@ -22,13 +22,18 @@ export type QuotationPick = Pick<
 >
 
 export type ResBody = Pretty<{
-  message: ErrorMessageCommon | 'Found' | 'No content' | 'Unhandled case'
   quotations: FlattenMaps<QuotationPick>[]
+  message: 'Found' | 'No content'
 }>
+
+export type ErrorResBody = {
+  quotations: FlattenMaps<QuotationPick>[]
+  message: ErrorMessageCommon | 'Unhandled case'
+}
 
 type RouterHandler = (
   req: Request,
-  res: Response<ResBody>,
+  res: Response<ResBody | ErrorResBody>,
   next: NextFunction,
 ) => Promise<void>
 
@@ -37,7 +42,7 @@ export const getQuotationListHandler: RouterHandler = async (
   res,
   next,
 ) => {
-  const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
+  const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req, res })
 
   const documents = await QuotationModel.find(
     { email },

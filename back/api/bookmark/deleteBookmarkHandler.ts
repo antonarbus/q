@@ -10,17 +10,21 @@ export type ReqBody = {
 }
 
 export type ResBody = {
-  message: ErrorMessageCommon | 'did not find' | 'no item in bucket' | 'deleted'
+  message: 'deleted'
+}
+
+export type ErrorResBody = {
+  message: ErrorMessageCommon | 'did not find' | 'no item in bucket'
 }
 
 type RouterHandler = (
   req: Request<unknown, unknown, ReqBody>,
-  res: Response<ResBody>,
+  res: Response<ResBody | ErrorResBody>,
   next: NextFunction,
 ) => Promise<void>
 
 export const deleteBookmarkHandler: RouterHandler = async (req, res, next) => {
-  const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
+  const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req, res })
   const bookmarkId = req.body.id
 
   const deleteFromDbResult = await BookmarkModel.deleteOne({

@@ -11,13 +11,9 @@ import { useCopyBookmarkAtSearch } from '@features/bookmark/copy-bookmark'
 import { useIsCopyModalVisible } from '@entities/copy'
 
 export const Search = (): React.JSX.Element => {
-  const {
-    data: bookmarksData,
-    isPending: isPendingBookmarks,
-    refetch: fetchBookmarks,
-  } = useGetBookmarkListQuery()
+  const getBookmarkListQuery = useGetBookmarkListQuery()
 
-  const options = bookmarksData?.bookmarks ?? []
+  const options = getBookmarkListQuery.data?.bookmarks ?? []
 
   const { loadBookmark, isPendingBookmark, pendingBookmarkId } =
     useCopyBookmarkAtSearch()
@@ -28,7 +24,7 @@ export const Search = (): React.JSX.Element => {
 
   useEffect(() => {
     if (email !== null) {
-      void fetchBookmarks()
+      void getBookmarkListQuery.refetch()
     }
   }, [email])
 
@@ -54,7 +50,7 @@ export const Search = (): React.JSX.Element => {
         )
       }}
       inputValue={inputValueSignal.value}
-      loading={isPendingBookmarks}
+      loading={getBookmarkListQuery.isPending}
       loadingText={email === null ? 'Not logged in :(' : 'Loading...'}
       noOptionsText='No saved bookmarks'
       onClose={() => (isAutocompleteOpen.value = false)}

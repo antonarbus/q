@@ -11,27 +11,20 @@ import { toast } from 'sonner'
 import { textSlice } from '@shared/lib/froala/textSlice'
 import { appSlice } from '@shared/appSlice'
 
-export const OpenSaveQuotationModalButton = ({
-  id,
-}: ReqBody): React.JSX.Element => {
+export const OpenSaveQuotationModalButton = (
+  props: ReqBody,
+): React.JSX.Element => {
   const navigate = useNavigate()
 
-  const {
-    mutate: loadQuotation,
-    isPending,
-    isSuccess,
-    isError,
-    error,
-    data,
-  } = useGetQuotationMutation()
+  const quotationMutation = useGetQuotationMutation()
 
   useUpdateEffect(() => {
-    if (isSuccess === true) {
+    if (quotationMutation.isSuccess === true) {
       dispatch(textSlice.actions.setNotEditable())
 
       dispatch(
         quotationSlice.actions.loadQuotationReducer({
-          quotation: data.quotation,
+          quotation: quotationMutation.data.quotation,
         }),
       )
 
@@ -42,15 +35,15 @@ export const OpenSaveQuotationModalButton = ({
         }),
       )
 
-      void navigate(`./${id}`)
+      void navigate(`./${props.id}`)
     }
-  }, [isSuccess])
+  }, [quotationMutation.isSuccess])
 
   useUpdateEffect(() => {
-    if (isError === true) {
-      toast.error(error.response?.data.message)
+    if (quotationMutation.isError === true) {
+      toast.error(quotationMutation.error.response?.data.message)
     }
-  }, [isError])
+  }, [quotationMutation.isError])
 
   return (
     <Tooltip
@@ -62,9 +55,9 @@ export const OpenSaveQuotationModalButton = ({
       <Link
         onClick={(event) => {
           event.preventDefault()
-          loadQuotation({ id })
+          quotationMutation.mutate({ id: props.id })
         }}
-        to={`./${id}`}
+        to={`./${props.id}`}
       >
         <IconButton
           size='small'
@@ -72,7 +65,11 @@ export const OpenSaveQuotationModalButton = ({
             translate: '0px 1px',
           }}
         >
-          {isPending === true ? <RotatingLoaderIcon /> : <AiTwotoneEdit />}
+          {quotationMutation.isPending === true ? (
+            <RotatingLoaderIcon />
+          ) : (
+            <AiTwotoneEdit />
+          )}
         </IconButton>
       </Link>
     </Tooltip>

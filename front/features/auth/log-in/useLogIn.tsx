@@ -33,24 +33,18 @@ export const useLogIn = ({
 }: Props): Res => {
   const navigate = useNavigate()
 
-  const {
-    mutate: logIn,
-    isPending,
-    data,
-    isSuccess,
-    isError,
-    error,
-  } = useLogInUserMutation()
+  const logInUserMutation = useLogInUserMutation()
 
   const location = useLocation()
-  const { refetch: refetchQuotations } = useGetQuotationListQuery()
-  const { refetch: refetchBookmarks } = useGetBookmarkListQuery()
+  const getQuotationListQuery = useGetQuotationListQuery()
+  const getBookmarkListQuery = useGetBookmarkListQuery()
 
   useUpdateEffect(() => {
-    if (isSuccess === true) {
-      const { accessJwtToken, email, roles, message } = data
+    if (logInUserMutation.isSuccess === true) {
+      const { accessJwtToken, email, roles, message, name } =
+        logInUserMutation.data
 
-      if (data.name === 'MongooseError') {
+      if (name === 'MongooseError') {
         toast.warning('Database error')
 
         return
@@ -102,13 +96,13 @@ export const useLogIn = ({
       )
 
       if (isQuotationListPage === true) {
-        void refetchQuotations()
+        void getQuotationListQuery.refetch()
       }
 
       const isBookmarkListPage = location.pathname.includes(route.bookmarkList)
 
       if (isBookmarkListPage === true) {
-        void refetchBookmarks()
+        void getBookmarkListQuery.refetch()
       }
 
       if (getState().quotation.permissionLevel === 'Forbidden') {
@@ -138,25 +132,28 @@ export const useLogIn = ({
 
       void slideOutAndChangeUrl()
     }
-  }, [isSuccess])
+  }, [logInUserMutation.isSuccess])
 
   useUpdateEffect(() => {
-    if (isError === true) {
+    if (logInUserMutation.isError === true) {
       dispatch(userSlice.actions.setAccessToken({ accessToken: null }))
 
-      if (error.response?.data.message === 'not registered') {
+      if (logInUserMutation.error.response?.data.message === 'not registered') {
         toast.info('Not registered')
 
         return
       }
 
-      if (error.response?.data.message === 'bad password') {
+      if (logInUserMutation.error.response?.data.message === 'bad password') {
         toast.warning('Invalid credentials')
 
         return
       }
 
-      if (error.response?.data.message === 'activation link sent again') {
+      if (
+        logInUserMutation.error.response?.data.message ===
+        'activation link sent again'
+      ) {
         toast.info(
           'Account registered but not activated. Check mailbox or spam.',
         )
@@ -166,16 +163,21 @@ export const useLogIn = ({
 
       toast.error('Internal error')
     }
-  }, [isError])
+  }, [logInUserMutation.isError])
 
   const onSubmit = (event: React.FormEvent): void => {
     event.preventDefault()
 
-    logIn({
+    logInUserMutation.mutate({
       email: emailSignal.value,
       password: passwordSignal.value,
     })
   }
 
-  return { onSubmit, isPending, isSuccess, isError }
+  return {
+    onSubmit,
+    isPending: logInUserMutation.isPending,
+    isSuccess: logInUserMutation.isSuccess,
+    isError: logInUserMutation.isError,
+  }
 }

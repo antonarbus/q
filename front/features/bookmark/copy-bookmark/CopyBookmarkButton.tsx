@@ -10,36 +10,26 @@ import { toast } from 'sonner'
 import { textSlice } from '@shared/lib/froala/textSlice'
 
 export const CopyBookmarkButton = ({ id }: ReqBody): React.JSX.Element => {
-  const {
-    mutate: loadItem,
-    isPending,
-    isSuccess,
-    isError,
-    error,
-    data,
-  } = useGetBookmarkMutation()
+  const getBookmarkMutation = useGetBookmarkMutation()
 
   useUpdateEffect(() => {
-    if (isSuccess === true) {
-      const { item } = data
+    if (getBookmarkMutation.isSuccess === true) {
+      const { item } = getBookmarkMutation.data
 
-      if (item === undefined) {
-        return
+      if (item !== undefined) {
+        dispatch(textSlice.actions.setNotEditable())
+        dispatch(copySlice.actions.addItem({ item }))
+        dispatch(copySlice.actions.allowToPaste())
+        dispatch(copySlice.actions.showCopyModal())
       }
-
-      dispatch(textSlice.actions.setNotEditable())
-
-      dispatch(copySlice.actions.addItem({ item }))
-      dispatch(copySlice.actions.allowToPaste())
-      dispatch(copySlice.actions.showCopyModal())
     }
-  }, [isSuccess])
+  }, [getBookmarkMutation.isSuccess])
 
   useUpdateEffect(() => {
-    if (isError === true) {
-      toast.error(error.response?.data.message)
+    if (getBookmarkMutation.isError === true) {
+      toast.error(getBookmarkMutation.error.response?.data.message)
     }
-  }, [isError])
+  }, [getBookmarkMutation.isError])
 
   return (
     <Tooltip
@@ -50,14 +40,18 @@ export const CopyBookmarkButton = ({ id }: ReqBody): React.JSX.Element => {
     >
       <IconButton
         onClick={() => {
-          loadItem({ id })
+          getBookmarkMutation.mutate({ id })
         }}
         size='small'
         sx={{
           translate: '0px 1px',
         }}
       >
-        {isPending === true ? <RotatingLoaderIcon /> : <MdCopyAll />}
+        {getBookmarkMutation.isPending === true ? (
+          <RotatingLoaderIcon />
+        ) : (
+          <MdCopyAll />
+        )}
       </IconButton>
     </Tooltip>
   )

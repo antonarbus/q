@@ -24,18 +24,11 @@ export const useRequestPasswordReset = ({
 }: Props): Res => {
   const navigate = useNavigate()
 
-  const {
-    mutate: requestPasswordReset,
-    isPending,
-    data,
-    isSuccess,
-    isError,
-    error,
-  } = useRequestUserPasswordResetMutation()
+  const requestUserPasswordResetMutation = useRequestUserPasswordResetMutation()
 
   useUpdateEffect(() => {
-    if (isSuccess === true) {
-      if (data.message === 'reset link sent') {
+    if (requestUserPasswordResetMutation.isSuccess === true) {
+      if (requestUserPasswordResetMutation.data.message === 'reset link sent') {
         toast.info('Check your inbox or spam')
 
         const slideOutAndChangeUrl = async (): Promise<void> => {
@@ -47,35 +40,41 @@ export const useRequestPasswordReset = ({
         void slideOutAndChangeUrl()
       }
     }
-  }, [isSuccess])
+  }, [requestUserPasswordResetMutation.isSuccess])
 
   useUpdateEffect(() => {
-    if (isError === true) {
-      if (error.response?.data.message === 'does not exists') {
+    if (requestUserPasswordResetMutation.isError === true) {
+      if (
+        requestUserPasswordResetMutation.error.response?.data.message ===
+        'does not exists'
+      ) {
         toast.info('User not found')
 
         return
       }
 
-      if (error.response?.data.message === 'validation error') {
-        toast.warning('Email pattern is not good')
-
-        return
-      }
-
-      if (error.response?.data.message === 'account not activated') {
+      if (
+        requestUserPasswordResetMutation.error.response?.data.message ===
+        'account not activated'
+      ) {
         toast.warning('Account not activated')
 
         return
       }
 
-      if (error.response?.data.message === 'reset link not sent') {
+      if (
+        requestUserPasswordResetMutation.error.response?.data.message ===
+        'reset link not sent'
+      ) {
         toast.warning('Something happened, failed to send the mail')
 
         return
       }
 
-      if (error.response?.data.message === 'reset key not issued') {
+      if (
+        requestUserPasswordResetMutation.error.response?.data.message ===
+        'reset key not issued'
+      ) {
         toast.warning('Something happened, failed to generate reset link')
 
         return
@@ -83,13 +82,18 @@ export const useRequestPasswordReset = ({
 
       toast.error('Internal error')
     }
-  }, [isError])
+  }, [requestUserPasswordResetMutation.isError])
 
   const onSubmit = (event: React.FormEvent): void => {
     event.preventDefault()
 
-    requestPasswordReset({ email: emailSignal.value })
+    requestUserPasswordResetMutation.mutate({ email: emailSignal.value })
   }
 
-  return { onSubmit, isPending, isSuccess, isError }
+  return {
+    onSubmit,
+    isPending: requestUserPasswordResetMutation.isPending,
+    isSuccess: requestUserPasswordResetMutation.isSuccess,
+    isError: requestUserPasswordResetMutation.isError,
+  }
 }

@@ -15,27 +15,23 @@ export const useLoadShareQuotationModalWithDirectLink = ({
   accessFormValuesSignal,
 }: Props): void => {
   const { quotationId } = useParams()
-  const { mutate: loadQuotation, isSuccess, data } = useGetQuotationMutation()
+  const getQuotationMutation = useGetQuotationMutation()
 
   useEffectOnce(() => {
     if (quotationId !== undefined) {
       const quotationIsAlreadyLoaded = getState().quotation.id === quotationId
 
-      if (quotationIsAlreadyLoaded === true) {
-        return
+      if (quotationIsAlreadyLoaded === false) {
+        getQuotationMutation.mutate({ id: quotationId })
       }
-
-      loadQuotation({ id: quotationId })
     }
   })
 
   useUpdateEffect(() => {
-    if (data?.quotation === undefined) {
-      return
+    if (getQuotationMutation.data?.quotation !== undefined) {
+      const { quotation } = getQuotationMutation.data
+      dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
+      accessFormValuesSignal.value = quotation.access
     }
-
-    const { quotation } = data
-    dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
-    accessFormValuesSignal.value = quotation.access
-  }, [isSuccess])
+  }, [getQuotationMutation.isSuccess])
 }

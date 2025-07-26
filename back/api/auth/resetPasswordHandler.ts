@@ -8,6 +8,7 @@ import {
 } from '@back/shared/lib/json-webtoken'
 import { setRefreshTokenCookie } from '@back/shared/headers'
 import { UserModel } from '@back/entities/user'
+import type { ErrorMessageCommon } from '@shared/const/errorMessageCommon'
 
 export type ReqBody = {
   email: User['email']
@@ -17,18 +18,19 @@ export type ReqBody = {
 
 export type ResBody = {
   accessJwtToken?: string
+  accessJwtTokenExpiresOn?: string
   email?: User['email']
   roles?: User['roles']
-  message:
-    | 'validation error'
-    | 'incorrect reset key'
-    | 'not activated'
-    | 'password was reset'
+  message: 'password was reset'
+}
+
+export type ErrorResBody = {
+  message: ErrorMessageCommon | 'incorrect reset key' | 'not activated'
 }
 
 type RouterHandler = (
   req: Request<unknown, unknown, ReqBody>,
-  res: Response<ResBody>,
+  res: Response<ResBody | ErrorResBody>,
   next: NextFunction,
 ) => Promise<void>
 
@@ -59,12 +61,12 @@ export const resetPasswordHandler: RouterHandler = async (req, res, next) => {
   const saltRounds = 10
   const passwordEncrypted = await bcrypt.hash(passwordFromInput, saltRounds)
 
-  const accessJwtToken = generateAccessToken({
+  const { accessJwtToken, accessJwtTokenExpiresOn } = generateAccessToken({
     email: emailFromInput,
     roles: user.roles,
   })
 
-  const refreshJwtToken = generateRefreshToken({
+  const { refreshJwtToken } = generateRefreshToken({
     email: emailFromInput,
     roles: user.roles,
   })
@@ -85,6 +87,7 @@ export const resetPasswordHandler: RouterHandler = async (req, res, next) => {
   res.status(httpStatus.created_201).json({
     message: 'password was reset',
     accessJwtToken,
+    accessJwtTokenExpiresOn,
     email: updatedUser?.email,
     roles: updatedUser?.roles,
   })

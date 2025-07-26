@@ -14,39 +14,31 @@ import { navItemId } from '@shared/const/navItemId'
 import { route } from '@shared/const/route'
 
 export const LogInAsUserButton = ({ email }: Payload): React.ReactNode => {
-  const {
-    mutate: logIn,
-    isPending,
-    data,
-    isSuccess,
-    isError,
-    error,
-  } = useLogInUserMutation()
-
+  const logInUserMutation = useLogInUserMutation()
   const location = useLocation()
-  const { refetch: refetchQuotations } = useGetQuotationListQuery()
-  const { refetch: refetchBookmarks } = useGetBookmarkListQuery()
+  const getQuotationListQuery = useGetQuotationListQuery()
+  const getBookmarkListQuery = useGetBookmarkListQuery()
 
   useUpdateEffect(() => {
-    if (isSuccess === true) {
-      if (data.accessJwtToken === undefined) {
+    if (logInUserMutation.isSuccess === true) {
+      if (logInUserMutation.data.accessJwtToken === undefined) {
         return
       }
 
-      if (data.email === undefined) {
+      if (logInUserMutation.data.email === undefined) {
         return
       }
 
       dispatch(
         userSlice.actions.setAccessToken({
-          accessToken: data.accessJwtToken,
+          accessToken: logInUserMutation.data.accessJwtToken,
         }),
       )
 
       dispatch(
         userSlice.actions.rememberLoggedUser({
-          email: data.email,
-          roles: data.roles ?? [userRole.user],
+          email: logInUserMutation.data.email,
+          roles: logInUserMutation.data.roles ?? [userRole.user],
         }),
       )
 
@@ -58,7 +50,8 @@ export const LogInAsUserButton = ({ email }: Payload): React.ReactNode => {
         }),
       )
 
-      const isSuperAdmin = data.roles?.includes(userRole.superAdmin) === true
+      const isSuperAdmin =
+        logInUserMutation.data.roles?.includes(userRole.superAdmin) === true
 
       if (isSuperAdmin === true) {
         dispatch(navSlice.actions.showNavItems({ navItemIds: ['admin'] }))
@@ -71,26 +64,26 @@ export const LogInAsUserButton = ({ email }: Payload): React.ReactNode => {
       )
 
       if (isQuotationListPage === true) {
-        void refetchQuotations()
+        void getQuotationListQuery.refetch()
       }
 
       const isBookmarkListPage = location.pathname.includes(route.bookmarkList)
 
       if (isBookmarkListPage === true) {
-        void refetchBookmarks()
+        void getBookmarkListQuery.refetch()
       }
 
-      if (data.message === 'super-admin on behalf of user') {
-        toast.success(`Logged as ${data.email}`)
+      if (logInUserMutation.data.message === 'super-admin on behalf of user') {
+        toast.success(`Logged as ${logInUserMutation.data.email}`)
       }
     }
-  }, [isSuccess])
+  }, [logInUserMutation.isSuccess])
 
   useUpdateEffect(() => {
-    if (isError === true) {
-      toast.error(error.response?.data.message)
+    if (logInUserMutation.isError === true) {
+      toast.error(logInUserMutation.error.response?.data.message)
     }
-  }, [isError])
+  }, [logInUserMutation.isError])
 
   return (
     <Tooltip
@@ -101,14 +94,18 @@ export const LogInAsUserButton = ({ email }: Payload): React.ReactNode => {
     >
       <IconButton
         onClick={() => {
-          logIn({
+          logInUserMutation.mutate({
             email,
             password: 'no password',
           })
         }}
         size='small'
       >
-        {isPending === true ? <RotatingLoaderIcon /> : <MdLogin />}
+        {logInUserMutation.isPending === true ? (
+          <RotatingLoaderIcon />
+        ) : (
+          <MdLogin />
+        )}
       </IconButton>
     </Tooltip>
   )

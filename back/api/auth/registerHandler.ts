@@ -12,6 +12,7 @@ import {
 } from '@back/shared/lib/json-webtoken'
 import { userRole } from '@back/shared/const/userRole'
 import { setRefreshTokenCookie } from '@back/shared/headers'
+import type { ErrorMessageCommon } from '@shared/const/errorMessageCommon'
 
 export type ReqBody = {
   email: User['email']
@@ -20,19 +21,26 @@ export type ReqBody = {
 
 export type ResBody = {
   accessJwtToken: string
+  accessJwtTokenExpiresOn: string
+  email: User['email']
+  roles: User['roles']
+  message: 'activation link sent'
+}
+
+export type ErrorResBody = {
+  accessJwtToken: string
   email: User['email']
   roles: User['roles']
   message:
-    | 'validation error'
+    | ErrorMessageCommon
     | 'already exists'
-    | 'activation link sent'
     | 'activation link not sent'
     | 'activation key not issued'
 }
 
 type RouterHandler = (
   req: Request<unknown, unknown, ReqBody>,
-  res: Response<ResBody>,
+  res: Response<ResBody | ErrorResBody>,
   next: NextFunction,
 ) => Promise<void>
 
@@ -60,7 +68,7 @@ export const registerHandler: RouterHandler = async (req, res, next) => {
   const passwordEncrypted = await bcrypt.hash(passwordFromInput, saltRounds)
   const activationKey = generateId()
 
-  const refreshJwtToken = generateRefreshToken({
+  const { refreshJwtToken } = generateRefreshToken({
     email: emailFromInput,
     roles: [userRole.user],
   })
@@ -109,16 +117,19 @@ export const registerHandler: RouterHandler = async (req, res, next) => {
       `,
   })
 
+  const { accessJwtToken, accessJwtTokenExpiresOn } = generateAccessToken({
+    email: emailFromInput,
+    roles: [userRole.user],
+  })
+
   // https://developers.mailersend.com/general.html#api-response
   if (emailRes.statusCode === 202) {
     res.status(httpStatus.created_201).json({
       message: 'activation link sent',
-      accessJwtToken: generateAccessToken({
-        email: emailFromInput,
-        roles: [userRole.user],
-      }),
       email: emailFromInput,
       roles: [userRole.user],
+      accessJwtToken,
+      accessJwtTokenExpiresOn,
     })
 
     return

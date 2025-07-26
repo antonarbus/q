@@ -31,22 +31,15 @@ export const useRegister = ({
 }: Props): Res => {
   const navigate = useNavigate()
 
-  const {
-    mutate: registerUser,
-    isPending,
-    data,
-    isSuccess,
-    isError,
-    error,
-  } = useRegisterUserMutation()
+  const registerUserMutation = useRegisterUserMutation()
 
   useUpdateEffect(() => {
-    if (isSuccess === true) {
-      if (data.message === 'activation link sent') {
+    if (registerUserMutation.isSuccess === true) {
+      if (registerUserMutation.data.message === 'activation link sent') {
         toast.info('Check your inbox or spam')
       }
 
-      const { accessJwtToken, email, roles } = data
+      const { accessJwtToken, email, roles } = registerUserMutation.data
 
       dispatch(
         userSlice.actions.setAccessToken({
@@ -80,29 +73,31 @@ export const useRegister = ({
 
       void slideOutAndChangeUrl()
     }
-  }, [isSuccess])
+  }, [registerUserMutation.isSuccess])
 
   useUpdateEffect(() => {
-    if (isError === true) {
-      if (error.response?.data.message === 'already exists') {
+    if (registerUserMutation.isError === true) {
+      if (
+        registerUserMutation.error.response?.data.message === 'already exists'
+      ) {
         toast.info('Already registered')
 
         return
       }
 
-      if (error.response?.data.message === 'validation error') {
-        toast.warning('Validation error')
-
-        return
-      }
-
-      if (error.response?.data.message === 'activation key not issued') {
+      if (
+        registerUserMutation.error.response?.data.message ===
+        'activation key not issued'
+      ) {
         toast.warning('Something went wrong, activation key was not issued')
 
         return
       }
 
-      if (error.response?.data.message === 'activation link not sent') {
+      if (
+        registerUserMutation.error.response?.data.message ===
+        'activation link not sent'
+      ) {
         toast.warning('Something went wrong, activation key was not sent')
 
         return
@@ -110,12 +105,12 @@ export const useRegister = ({
 
       toast.error('Internal error')
     }
-  }, [isError])
+  }, [registerUserMutation.isError])
 
   const onSubmit = (event: React.FormEvent): void => {
     event.preventDefault()
 
-    registerUser({
+    registerUserMutation.mutate({
       email: emailSignal.value,
       password: passwordSignal.value,
     })
@@ -123,5 +118,10 @@ export const useRegister = ({
     trackSignUpEventAtGoogleTagManager()
   }
 
-  return { onSubmit, isPending, isSuccess, isError }
+  return {
+    onSubmit,
+    isPending: registerUserMutation.isPending,
+    isSuccess: registerUserMutation.isSuccess,
+    isError: registerUserMutation.isError,
+  }
 }

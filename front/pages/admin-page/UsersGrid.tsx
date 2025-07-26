@@ -26,19 +26,20 @@ ModuleRegistry.registerModules([AllCommunityModule])
 
 export const UsersGrid = (): React.JSX.Element => {
   const gridContainerRef = useRef<React.ComponentRef<'div'> | null>(null)
+  const getUserListQuery = useGetUserListQuery()
 
-  const { data, isLoading, isFetching, isFetched, refetch } =
-    useGetUserListQuery()
+  useDisableLoadingOverlayWhenItemsAreFetched({
+    isFetched: getUserListQuery.isFetched,
+  })
 
-  useDisableLoadingOverlayWhenItemsAreFetched({ isFetched })
-  useRefetchDataOnEmailChange({ refetch })
-  useShowLoadingJumpingDots({ isLoading })
+  useRefetchDataOnEmailChange({ refetch: getUserListQuery.refetch })
+  useShowLoadingJumpingDots({ isLoading: getUserListQuery.isLoading })
 
   return (
     <GridLayout gridContainerRef={gridContainerRef}>
       <AgGridStyles />
       <DisplayedRowsCount />
-      <ProgressGridBar isShown={isFetching} />
+      <ProgressGridBar isShown={getUserListQuery.isFetching} />
       <AgGridReact<UserPicked>
         columnDefs={columnDefs}
         defaultColDef={defaultColDef}
@@ -54,7 +55,7 @@ export const UsersGrid = (): React.JSX.Element => {
           dispatch(agGridSlice.actions.setCount({ count }))
         }}
         ref={usersAgGridRef}
-        rowData={data?.users}
+        rowData={getUserListQuery.data?.users}
         suppressCellFocus
         suppressColumnVirtualisation
         theme={themeQuartz}

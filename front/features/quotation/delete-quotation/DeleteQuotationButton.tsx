@@ -10,27 +10,20 @@ import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import { toast } from 'sonner'
 
 export const DeleteQuotationButton = ({ id }: Payload): React.ReactNode => {
-  const {
-    mutate: deleteQuotation,
-    isPending,
-    isSuccess,
-    isError,
-    error,
-  } = useDeleteQuotationMutation()
+  const deleteQuotationMutation = useDeleteQuotationMutation()
 
   useUpdateEffect(() => {
-    if (isSuccess === true) {
+    if (deleteQuotationMutation.isSuccess === true) {
       deleteFromQuotationListCache({ id })
     }
-  }, [isSuccess])
+  }, [deleteQuotationMutation.isSuccess])
 
   useUpdateEffect(() => {
-    if (isError === true) {
-      toast.error(error.response?.data.message)
-
+    if (deleteQuotationMutation.isError === true) {
+      toast.error(deleteQuotationMutation.error.response?.data.message)
       deleteFromQuotationListCache({ id })
     }
-  }, [isError])
+  }, [deleteQuotationMutation.isError])
 
   return (
     <Tooltip
@@ -51,11 +44,15 @@ export const DeleteQuotationButton = ({ id }: Payload): React.ReactNode => {
             return
           }
 
-          deleteQuotation({ id })
+          deleteQuotationMutation.mutate({ id })
         }}
         size='small'
       >
-        {isPending === true ? <RotatingLoaderIcon /> : <MdDeleteOutline />}
+        {deleteQuotationMutation.isPending === true ? (
+          <RotatingLoaderIcon />
+        ) : (
+          <MdDeleteOutline />
+        )}
       </IconButton>
     </Tooltip>
   )

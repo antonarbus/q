@@ -8,19 +8,24 @@ import {
   type VisitorsCount,
 } from '@back/entities/visitors-count'
 
-export type ResBody = {
-  visitorsCount: VisitorsCount[]
-  message: ErrorMessageCommon | 'forbidden' | 'ok'
-}
-
 export type SearchQuery = {
   startDate: string
   endDate: string
 }
 
+export type ResBody = {
+  visitorsCount: VisitorsCount[]
+  message: 'ok'
+}
+
+export type ErrorResBody = {
+  visitorsCount: VisitorsCount[]
+  message: ErrorMessageCommon | 'forbidden'
+}
+
 type RouterHandler = (
   req: Request<unknown, unknown, unknown, SearchQuery>,
-  res: Response<ResBody>,
+  res: Response<ResBody | ErrorResBody>,
   next: NextFunction,
 ) => Promise<void>
 

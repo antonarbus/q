@@ -17,22 +17,26 @@ export type UserPicked = Pick<
 
 export type ResBody = Pretty<{
   users: FlattenMaps<UserPicked>[]
+  message: 'users data'
+}>
+
+export type ErrorResBody = {
+  users: FlattenMaps<UserPicked>[]
   message:
     | ErrorMessageCommon
     | 'no permission to view'
     | 'No content'
-    | 'users data'
     | 'Unhandled case'
-}>
+}
 
 type RouterHandler = (
   req: Request,
-  res: Response<ResBody>,
+  res: Response<ResBody | ErrorResBody>,
   next: NextFunction,
 ) => Promise<void>
 
 export const getUserListHandler: RouterHandler = async (req, res, next) => {
-  const { roles } = getUserFromAccessTokenOrThrowUnauthorized({ req })
+  const { roles } = getUserFromAccessTokenOrThrowUnauthorized({ req, res })
 
   if (roles.includes(userRole.superAdmin) === false) {
     res

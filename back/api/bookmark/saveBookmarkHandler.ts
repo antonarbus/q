@@ -12,25 +12,26 @@ export type ReqBody = {
 }
 
 export type ResBody = {
+  item?: FlattenMaps<Item>
+  message: 'saved' | 'updated'
+}
+
+export type ErrorResBody = {
   message:
     | ErrorMessageCommon
-    | 'not saved'
-    | 'saved'
-    | 'updated'
     | 'name is not provided'
     | 'category is not provided'
     | 'id is not provided'
-  item?: FlattenMaps<Item>
 }
 
 type RouterHandler = (
   req: Request<unknown, unknown, ReqBody>,
-  res: Response<ResBody>,
+  res: Response<ResBody | ErrorResBody>,
   next: NextFunction,
 ) => Promise<void>
 
 export const saveBookmarkHandler: RouterHandler = async (req, res, next) => {
-  const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
+  const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req, res })
   const { item: bookmarkItem } = req.body
 
   if (bookmarkItem.id === '') {

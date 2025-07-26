@@ -12,39 +12,29 @@ import { textSlice } from '@shared/lib/froala/textSlice'
 
 export const OpenBookmarkModalButton = ({ id }: ReqBody): React.JSX.Element => {
   const navigate = useNavigate()
-
-  const {
-    mutate: loadItem,
-    isPending,
-    isSuccess,
-    isError,
-    error,
-    data,
-  } = useGetBookmarkMutation()
+  const getBookmarkMutation = useGetBookmarkMutation()
 
   useUpdateEffect(() => {
-    if (isSuccess === true) {
-      const { item } = data
+    if (getBookmarkMutation.isSuccess === true) {
+      const { item: block } = getBookmarkMutation.data
 
-      const block = item
+      if (block !== undefined) {
+        dispatch(textSlice.actions.setNotEditable())
 
-      if (block === undefined) {
-        return
+        dispatch(
+          quotationSlice.actions.loadBlockAtPosThousandReducer({ block }),
+        )
+
+        void navigate(`./${id}`)
       }
-
-      dispatch(textSlice.actions.setNotEditable())
-
-      dispatch(quotationSlice.actions.loadBlockAtPosThousandReducer({ block }))
-
-      void navigate(`./${id}`)
     }
-  }, [isSuccess])
+  }, [getBookmarkMutation.isSuccess])
 
   useUpdateEffect(() => {
-    if (isError === true) {
-      toast.error(error.response?.data.message)
+    if (getBookmarkMutation.isError === true) {
+      toast.error(getBookmarkMutation.error.response?.data.message)
     }
-  }, [isError])
+  }, [getBookmarkMutation.isError])
 
   return (
     <Tooltip
@@ -55,14 +45,18 @@ export const OpenBookmarkModalButton = ({ id }: ReqBody): React.JSX.Element => {
     >
       <IconButton
         onClick={() => {
-          loadItem({ id })
+          getBookmarkMutation.mutate({ id })
         }}
         size='small'
         sx={{
           translate: '0px 1px',
         }}
       >
-        {isPending === true ? <RotatingLoaderIcon /> : <AiTwotoneEdit />}
+        {getBookmarkMutation.isPending === true ? (
+          <RotatingLoaderIcon />
+        ) : (
+          <AiTwotoneEdit />
+        )}
       </IconButton>
     </Tooltip>
   )

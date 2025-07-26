@@ -16,27 +16,18 @@ type Res = {
 export const useActivate = (): Res => {
   const { activationKey } = useParams()
 
-  const {
-    mutate: activate,
-    isPending,
-    data,
-    isSuccess,
-    isError,
-    error,
-  } = useActivateUserMutation()
+  const activateUserMutation = useActivateUserMutation()
 
   useEffectOnce(() => {
-    if (activationKey === undefined) {
-      return
+    if (activationKey !== undefined) {
+      activateUserMutation.mutate({ activationKey })
     }
-
-    activate({ activationKey })
   })
 
   useUpdateEffect(() => {
-    if (isSuccess === true) {
-      if (data.message === 'activated') {
-        const { accessJwtToken, email, roles } = data
+    if (activateUserMutation.isSuccess === true) {
+      if (activateUserMutation.data.message === 'activated') {
+        const { accessJwtToken, email, roles } = activateUserMutation.data
 
         if (accessJwtToken === undefined) {
           return
@@ -67,25 +58,30 @@ export const useActivate = (): Res => {
         )
       }
 
-      if (data.message === 'already activated') {
+      if (activateUserMutation.data.message === 'already activated') {
         toast.info('Already activated')
       }
     }
-  }, [isSuccess])
+  }, [activateUserMutation.isSuccess])
 
   useUpdateEffect(() => {
-    if (isError === false) {
-      return
+    if (activateUserMutation.isError === true) {
+      if (
+        activateUserMutation.error.response?.data.message ===
+        'activation key not found'
+      ) {
+        toast.warning('Activation key not found')
+
+        return
+      }
+
+      toast.error('Internal error')
     }
+  }, [activateUserMutation.isError])
 
-    if (error.response?.data.message === 'activation key not found') {
-      toast.warning('Activation key not found')
-
-      return
-    }
-
-    toast.error('Internal error')
-  }, [isError])
-
-  return { isPending, isSuccess, isError }
+  return {
+    isPending: activateUserMutation.isPending,
+    isSuccess: activateUserMutation.isSuccess,
+    isError: activateUserMutation.isError,
+  }
 }

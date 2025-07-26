@@ -33,9 +33,9 @@ export const SaveQuotationModal = (): React.JSX.Element => {
     void router.navigate('..')
   }
 
-  const { data } = useGetQuotationCategoryListQuery()
+  const getQuotationCategoryListQuery = useGetQuotationCategoryListQuery()
 
-  const options = (data?.categories ?? [])
+  const options = (getQuotationCategoryListQuery.data?.categories ?? [])
     .filter((cat) => cat !== undefined)
     .filter((cat) => cat !== '')
 

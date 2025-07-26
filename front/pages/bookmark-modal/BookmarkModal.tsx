@@ -35,8 +35,11 @@ export const BookmarkModal = (): React.JSX.Element => {
     void router.navigate('..')
   }
 
-  const { data } = useGetBookmarkCategoryListQuery()
-  const categories = (data?.categories ?? []).filter((cat) => cat !== undefined)
+  const getBookmarkCategoryListQuery = useGetBookmarkCategoryListQuery()
+
+  const categories = (
+    getBookmarkCategoryListQuery.data?.categories ?? []
+  ).filter((cat) => cat !== undefined)
 
   return (
     <FormModal

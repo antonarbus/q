@@ -15,18 +15,19 @@ export type ReqBody = {
 
 export type ResBody = {
   accessJwtToken?: string
+  accessJwtTokenExpiresOn?: string
   email?: User['email']
   roles?: User['roles']
-  message:
-    | ErrorMessageCommon
-    | 'activation key not found'
-    | 'already activated'
-    | 'activated'
+  message: 'already activated' | 'activated'
+}
+
+export type ErrorResBody = {
+  message: ErrorMessageCommon | 'activation key not found'
 }
 
 type RouterHandler = (
   req: Request<unknown, unknown, ReqBody>,
-  res: Response<ResBody>,
+  res: Response<ResBody | ErrorResBody>,
   next: NextFunction,
 ) => Promise<void>
 
@@ -53,7 +54,7 @@ export const activateHandler: RouterHandler = async (req, res, next) => {
     return
   }
 
-  const refreshJwtToken = generateRefreshToken({ email, roles })
+  const { refreshJwtToken } = generateRefreshToken({ email, roles })
   setRefreshTokenCookie({ res, refreshJwtToken })
 
   const userDocument = await UserModel.findOneAndUpdate(
@@ -62,9 +63,15 @@ export const activateHandler: RouterHandler = async (req, res, next) => {
     { new: true },
   ).lean()
 
+  const { accessJwtToken, accessJwtTokenExpiresOn } = generateAccessToken({
+    email,
+    roles,
+  })
+
   res.status(httpStatus.success_200).json({
     message: 'activated',
-    accessJwtToken: generateAccessToken({ email, roles }),
+    accessJwtToken,
+    accessJwtTokenExpiresOn,
     email: userDocument?.email,
     roles: userDocument?.roles,
   })

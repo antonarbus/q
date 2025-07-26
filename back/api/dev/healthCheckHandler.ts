@@ -1,14 +1,19 @@
 import type { Request, Response, NextFunction } from 'express'
 import { httpStatus } from '@back/shared/const/httpStatus'
 import mongoose from 'mongoose'
+import type { ErrorMessageCommon } from '@shared/const/errorMessageCommon'
 
 export type ResBody = {
-  message: 'connected' | 'disconnected'
+  message: 'connected'
+}
+
+export type ErrorResBody = {
+  message: ErrorMessageCommon | 'disconnected'
 }
 
 type RouterHandler = (
   req: Request,
-  res: Response<ResBody>,
+  res: Response<ResBody | ErrorResBody>,
   next: NextFunction,
 ) => void
 

@@ -3,8 +3,7 @@ import { format } from 'date-fns'
 import { useEffectOnce } from 'react-use'
 
 export const useCountUniqueDailyVisitor = (): void => {
-  const { mutateAsync: countUniqueDailyVisitor } =
-    useCountUniqueDailyVisitorsMutation()
+  const countUniqueDailyVisitorsMutation = useCountUniqueDailyVisitorsMutation()
 
   useEffectOnce(() => {
     const countVisitor = async (): Promise<void> => {
@@ -17,7 +16,7 @@ export const useCountUniqueDailyVisitor = (): void => {
         return
       }
 
-      const res = await countUniqueDailyVisitor({
+      const res = await countUniqueDailyVisitorsMutation.mutateAsync({
         date: today,
         isNew: lastVisitDate === null,
       })

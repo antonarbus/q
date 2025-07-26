@@ -7,6 +7,7 @@ import { getShouldNotTrace } from '@back/shared/headers'
 import { userRole } from '@back/shared/const/userRole'
 import { getUserFromAccessTokenOrNull } from '@back/entities/user'
 import { QuotationModel } from '@back/entities/quotation'
+import type { ErrorMessageCommon } from '@shared/const/errorMessageCommon'
 
 export type ReqBody = {
   id: Quotation['id']
@@ -14,12 +15,17 @@ export type ReqBody = {
 
 export type ResBody = {
   quotation: Quotation
-  message: 'found' | 'not found'
+  message: 'found'
+}
+
+export type ErrorResBody = {
+  quotation: Quotation
+  message: ErrorMessageCommon | 'not found'
 }
 
 type RouterHandler = (
   req: Request<unknown, unknown, ReqBody>,
-  res: Response<ResBody>,
+  res: Response<ResBody | ErrorResBody>,
   next: NextFunction,
 ) => Promise<void>
 

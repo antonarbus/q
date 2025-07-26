@@ -12,17 +12,12 @@ import { appSlice } from '@shared/appSlice'
 export const Logout = (): React.ReactNode => {
   const navigate = useNavigate()
 
-  const {
-    mutate: logOut,
-    isPending,
-    isSuccess,
-    isError,
-  } = useLogOutUserMutation()
+  const logOutUserMutation = useLogOutUserMutation()
 
-  useEffectOnce(logOut)
+  useEffectOnce(logOutUserMutation.mutate)
 
   useUpdateEffect(() => {
-    if (isPending === true) {
+    if (logOutUserMutation.isPending === true) {
       dispatch(
         appSlice.actions.showLoadingOverlay({
           shouldShowLoader: true,
@@ -30,10 +25,10 @@ export const Logout = (): React.ReactNode => {
         }),
       )
     }
-  }, [isPending])
+  }, [logOutUserMutation.isPending])
 
   useUpdateEffect(() => {
-    if (isSuccess === true) {
+    if (logOutUserMutation.isSuccess === true) {
       deleteQuotationListCache()
       deleteBookmarkListCache()
 
@@ -55,10 +50,10 @@ export const Logout = (): React.ReactNode => {
         void navigate('..')
       }, 1000)
     }
-  }, [isSuccess])
+  }, [logOutUserMutation.isSuccess])
 
   useUpdateEffect(() => {
-    if (isError === true) {
+    if (logOutUserMutation.isError === true) {
       toast.error('Problems with logging out')
 
       setTimeout(() => {
@@ -66,7 +61,7 @@ export const Logout = (): React.ReactNode => {
         void navigate('..')
       }, 1000)
     }
-  }, [isError])
+  }, [logOutUserMutation.isError])
 
   return null
 }

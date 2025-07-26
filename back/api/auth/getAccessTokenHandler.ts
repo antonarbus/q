@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from 'express'
 import type { User } from '@entities/user'
 import { httpStatus } from '@back/shared/const/httpStatus'
-import { errorMessageCommon } from '@shared/const/errorMessageCommon'
+import type { ErrorMessageCommon } from '@shared/const/errorMessageCommon'
 import { generateAccessToken } from '@back/shared/lib/json-webtoken'
 import {
   getShouldNotTrace,
@@ -13,13 +13,18 @@ export type ResBody = {
   message: 'issued access token'
   email?: User['email']
   accessJwtToken?: string
+  accessJwtTokenExpiresOn?: string
   roles?: User['roles']
   jwtRefreshTokenExpirationDays: number
 }
 
+export type ErrorResBody = {
+  message: ErrorMessageCommon | 'Not logged in'
+}
+
 type RouterHandler = (
   req: Request,
-  res: Response<ResBody>,
+  res: Response<ResBody | ErrorResBody>,
   next: NextFunction,
 ) => Promise<void>
 
@@ -27,7 +32,9 @@ export const getAccessTokenHandler: RouterHandler = async (req, res, next) => {
   const userDataPerviouslyLoggedIn = getUserFromRefreshTokenOrNull({ req })
 
   if (userDataPerviouslyLoggedIn === null) {
-    throw new Error(errorMessageCommon.notLoggedIn)
+    res.status(httpStatus.unauthorized_401).json({ message: 'Not logged in' })
+
+    return
   }
 
   const { email, roles, refreshJwtToken, jwtRefreshTokenExpirationDays } =
@@ -46,15 +53,20 @@ export const getAccessTokenHandler: RouterHandler = async (req, res, next) => {
 
   if (user === null) {
     removeRefreshTokenCookie({ res })
+    res.status(httpStatus.unauthorized_401).json({ message: 'Not logged in' })
 
-    throw new Error(errorMessageCommon.notLoggedIn)
+    return
   }
 
-  const accessJwtToken = generateAccessToken({ email, roles })
+  const { accessJwtToken, accessJwtTokenExpiresOn } = generateAccessToken({
+    email,
+    roles,
+  })
 
   res.status(httpStatus.success_200).json({
     message: 'issued access token',
     accessJwtToken,
+    accessJwtTokenExpiresOn,
     roles,
     email,
     jwtRefreshTokenExpirationDays,

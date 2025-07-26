@@ -1,5 +1,4 @@
 export const errorMessageCommon = {
-  notLoggedIn: 'Not logged in',
   internalError: 'Internal error',
 } as const
 

@@ -8,17 +8,16 @@ type Res = {
 
 export const useCategories = (): Res => {
   const { bookmarkId } = useParams()
-
-  const { data: quotationCategoriesData } = useGetQuotationCategoryListQuery()
-  const { data: bookmarkCategoriesData } = useGetBookmarkCategoryListQuery()
+  const getQuotationCategoryListQuery = useGetQuotationCategoryListQuery()
+  const getBookmarkCategoryListQuery = useGetBookmarkCategoryListQuery()
 
   const quotationCategories = (
-    quotationCategoriesData?.categories ?? []
+    getQuotationCategoryListQuery.data?.categories ?? []
   ).filter((cat) => cat !== undefined)
 
-  const bookmarkCategories = (bookmarkCategoriesData?.categories ?? []).filter(
-    (cat) => cat !== undefined,
-  )
+  const bookmarkCategories = (
+    getBookmarkCategoryListQuery.data?.categories ?? []
+  ).filter((cat) => cat !== undefined)
 
   const categories =
     bookmarkId === undefined ? quotationCategories : bookmarkCategories

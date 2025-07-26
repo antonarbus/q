@@ -10,7 +10,7 @@ import { createLoadingMenuIconMachine, navSlice } from '@shared/nav'
 import { toast } from 'sonner'
 import { createActor } from 'xstate'
 import type { AxiosError } from 'axios'
-import type { ResBody } from '@back/api/quotation/saveQuotationHandler'
+import type { ErrorResBody } from '@back/api/quotation/saveQuotationHandler'
 import { router } from '@shared/lib/react-router-dom'
 import { route } from '@shared/const/route'
 
@@ -75,7 +75,7 @@ export const saveExistingQuotation = async (): Promise<void> => {
       dispatch(navSlice.actions.removeUnderlineFromTopNav())
     }
   } catch (error) {
-    toast.error((error as AxiosError<ResBody>).response?.data.message)
+    toast.error((error as AxiosError<ErrorResBody>).response?.data.message)
     loadingIconActor.send({ type: 'show error icon' })
   }
 }

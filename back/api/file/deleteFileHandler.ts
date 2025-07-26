@@ -10,9 +10,12 @@ export type ReqBody = {
 }
 
 export type ResBody = {
+  message: 'deleted'
+}
+
+export type ErrorResBody = {
   message:
     | ErrorMessageCommon
-    | 'deleted'
     | 'failed to delete'
     | 'you did not upload this file'
     | 'not found'
@@ -20,12 +23,12 @@ export type ResBody = {
 
 type RouterHandler = (
   req: Request<unknown, unknown, ReqBody>,
-  res: Response<ResBody>,
+  res: Response<ResBody | ErrorResBody>,
   next: NextFunction,
 ) => Promise<void>
 
 export const deleteFileHandler: RouterHandler = async (req, res, next) => {
-  const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
+  const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req, res })
   const { fileId } = req.body
 
   type FileOwnerShip = 'file not found' | 'owner' | 'not owner'
@@ -60,7 +63,6 @@ export const deleteFileHandler: RouterHandler = async (req, res, next) => {
     return
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (fileOwnerShip === 'owner') {
     const { path } = getFileInfo({ id: fileId })
 

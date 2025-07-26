@@ -22,16 +22,18 @@ export type SearchQuery = {
 export type ResBody = {
   bookmarkList: ItemPick[]
   bookmarkListTotalCount: number
-  message:
-    | ErrorMessageCommon
-    | 'no permission to view'
-    | 'Found'
-    | 'Unhandled error'
+  message: 'Found'
+}
+
+export type ErrorResBody = {
+  bookmarkList: ItemPick[]
+  bookmarkListTotalCount: number
+  message: ErrorMessageCommon | 'no permission to view' | 'Unhandled error'
 }
 
 type RouterHandler = (
   req: Request<unknown, unknown, unknown, SearchQuery>,
-  res: Response<ResBody>,
+  res: Response<ResBody | ErrorResBody>,
   next: NextFunction,
 ) => Promise<void>
 
@@ -40,7 +42,7 @@ export const getBookmarkListAllHandler: RouterHandler = async (
   res,
   next,
 ) => {
-  const { roles } = getUserFromAccessTokenOrThrowUnauthorized({ req })
+  const { roles } = getUserFromAccessTokenOrThrowUnauthorized({ req, res })
 
   if (roles.includes(userRole.superAdmin) === false) {
     res.status(httpStatus.forbidden_403).json({

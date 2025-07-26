@@ -11,18 +11,23 @@ export type ItemPick = Pick<
 >
 
 export type ResBody = {
-  message: ErrorMessageCommon | 'Found' | 'No content' | 'Unhandled error'
   bookmarks: ItemPick[]
+  message: 'Found' | 'No content'
+}
+
+export type ErrorResBody = {
+  bookmarks: ItemPick[]
+  message: ErrorMessageCommon | 'Unhandled error'
 }
 
 type RouterHandler = (
   req: Request,
-  res: Response<ResBody>,
+  res: Response<ResBody | ErrorResBody>,
   next: NextFunction,
 ) => Promise<void>
 
 export const getBookmarkListHandler: RouterHandler = async (req, res, next) => {
-  const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
+  const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req, res })
 
   const bookmarks = await BookmarkModel.find(
     { email },

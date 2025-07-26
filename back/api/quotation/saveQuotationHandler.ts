@@ -12,27 +12,24 @@ export type ReqBody = {
   quotation: Quotation
 }
 
-type Message =
-  | ErrorMessageCommon
-  | 'not saved'
-  | 'saved'
-  | 'updated'
-  | 'copied and saved'
-  | 'id is not provided'
-
 export type ResBody = {
-  message: Message
   quotation?: FlattenMaps<Quotation>
+  message: 'saved' | 'updated' | 'copied and saved'
+}
+
+export type ErrorResBody = {
+  quotation?: FlattenMaps<Quotation>
+  message: ErrorMessageCommon | 'not saved' | 'id is not provided'
 }
 
 type RouterHandler = (
   req: Request<unknown, unknown, ReqBody>,
-  res: Response<ResBody>,
+  res: Response<ResBody | ErrorResBody>,
   next: NextFunction,
 ) => Promise<void>
 
 export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
-  const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
+  const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req, res })
   const { quotation } = req.body
 
   if (quotation.id === '') {
@@ -135,7 +132,6 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
     return
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (quotationOwnership === 'foreign existing') {
     const newQuotationId = generateId()
 

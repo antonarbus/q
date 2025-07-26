@@ -6,13 +6,17 @@ import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { QuotationModel } from '@back/entities/quotation'
 
 export type ResBody = {
-  message: ErrorMessageCommon | 'Found' | 'Unhandled error'
   categories: Quotation['category'][]
+  message: 'Found'
+}
+
+export type ErrorResBody = {
+  message: ErrorMessageCommon
 }
 
 type RouterHandler = (
   req: Request,
-  res: Response<ResBody>,
+  res: Response<ResBody | ErrorResBody>,
   next: NextFunction,
 ) => Promise<void>
 
@@ -21,7 +25,7 @@ export const getQuotationCategoriesHandler: RouterHandler = async (
   res,
   next,
 ) => {
-  const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
+  const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req, res })
   const categories = await QuotationModel.find({ email }).distinct('category')
   res.status(httpStatus.success_200).json({ message: 'Found', categories })
 }

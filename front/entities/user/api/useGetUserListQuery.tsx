@@ -1,14 +1,14 @@
-import type { ResBody } from '@back/api/user/getUserListHandler'
+import type { ResBody, ErrorResBody } from '@back/api/user/getUserListHandler'
 import { api } from '@back/api'
 import { type UseQueryResult, useQuery } from '@tanstack/react-query'
 import type { AxiosError, AxiosResponse } from 'axios'
 import { queryKey } from '@shared/const/queryKey'
 import { axiosWithAuth } from '@shared/lib/axios'
 
-type Res = UseQueryResult<ResBody, AxiosError<ResBody>>
+type Res = UseQueryResult<ResBody, AxiosError<ErrorResBody>>
 
 export const useGetUserListQuery = (): Res => {
-  const query = useQuery<ResBody, AxiosError<ResBody>>({
+  const query = useQuery<ResBody, AxiosError<ErrorResBody>>({
     queryKey: [queryKey.getUserList],
     refetchOnMount: false,
     refetchOnWindowFocus: false,
