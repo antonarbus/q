@@ -9,16 +9,14 @@ import { test, expect } from '@playwright/test'
 test.describe.configure({ mode: 'serial' })
 
 test.describe('#authTokenRefresh', () => {
-  // test.beforeAll(async () => {
-  //   await connectToDb()
-  // })
-
   test.use({ baseURL: config.back.baseUrl })
 
   const email = 'test-user@sendmequotation.today'
   const password = 'xxx'
 
-  test('get access token based on refresh token', async ({ request }) => {
+  test('get access token based on refresh token stored at cookie', async ({
+    request,
+  }) => {
     // Log in to get access and refresh tokens
     const loginResponse = await request[api.logIn.method](api.logIn.url, {
       data: { email, password },
