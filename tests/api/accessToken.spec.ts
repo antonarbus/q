@@ -9,6 +9,14 @@ import { test, expect } from '@playwright/test'
 test.describe.configure({ mode: 'serial' })
 
 test.describe('#authTokenRefresh', () => {
+  test.beforeAll(async () => {
+    await connectToDb()
+  })
+
+  test.afterAll(async ({ request }) => {
+    // console.log('do after test, for ex clean db')
+  })
+
   test.use({ baseURL: config.back.baseUrl })
 
   const email = 'test-user@sendmequotation.today'
