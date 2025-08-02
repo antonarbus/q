@@ -4,9 +4,7 @@ import { DateCellRenderer } from '@shared/lib/ag-grid/renderers/DateCellRenderer
 import { dateFilterComparator } from '@shared/lib/ag-grid/comparators/dateFilterComparator'
 import { dateValueGetter } from '@shared/lib/ag-grid/value_getter/dateValueGetter'
 import type { Item } from '@back/api/file/getFileListAllHandler'
-import { IdCellRenderer } from './renderer/IdCellRenderer'
-import { NameCellRenderer } from './renderer/NameCellRenderer'
-import { EmailCellRenderer } from './renderer/EmailCellRenderer'
+import { getTextColDef } from '@shared/lib/ag-grid/colDef/getTextColDef'
 
 export const defaultColDef: ColDef<Item> = {
   headerClass: ['center'],
@@ -37,25 +35,18 @@ export const columnDefs: ColDef<Item>[] = [
     suppressColumnsToolPanel: true,
     suppressNavigable: true,
   },
-  {
+  getTextColDef({
     field: 'id',
-    headerName: 'id',
-    cellRenderer: IdCellRenderer,
-  },
-  {
+  }),
+  getTextColDef({
     field: 'name',
-    headerName: 'name',
-    cellRenderer: NameCellRenderer,
-  },
+  }),
   {
     field: 'size',
-    headerName: 'size',
   },
-  {
+  getTextColDef({
     field: 'email',
-    headerName: 'email',
-    cellRenderer: EmailCellRenderer,
-  },
+  }),
   {
     field: 'usedByIdList',
     headerName: 'usedByIdList',

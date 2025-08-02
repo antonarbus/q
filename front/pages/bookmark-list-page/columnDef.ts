@@ -4,11 +4,7 @@ import { DateCellRenderer } from '@shared/lib/ag-grid/renderers/DateCellRenderer
 import { dateFilterComparator } from '@shared/lib/ag-grid/comparators/dateFilterComparator'
 import { dateValueGetter } from '@shared/lib/ag-grid/value_getter/dateValueGetter'
 import type { ItemPick } from '@back/api/bookmark/getBookmarkListHandler'
-import { IdCellRenderer } from './renderer/IdCellRenderer'
-import { NameCellRenderer } from './renderer/NameCellRenderer'
-import { CategoryCellRenderer } from './renderer/CategoryCellRenderer'
-import { DescriptionCellRenderer } from './renderer/DescriptionCellRenderer'
-import { TypeCellRenderer } from './renderer/TypeCellRenderer'
+import { getTextColDef } from '@shared/lib/ag-grid/colDef/getTextColDef'
 
 export const defaultColDef: ColDef<ItemPick> = {
   headerClass: ['center'],
@@ -39,32 +35,26 @@ export const columnDefs: ColDef<ItemPick>[] = [
     suppressColumnsToolPanel: true,
     suppressNavigable: true,
   },
-  {
+  getTextColDef({
     field: 'id',
     headerName: 'id',
-    cellRenderer: IdCellRenderer,
-  },
-  {
+  }),
+  getTextColDef({
     field: 'name',
     headerName: 'name',
-    cellRenderer: NameCellRenderer,
-  },
-  {
+  }),
+  getTextColDef({
     field: 'category',
     headerName: 'category',
-    cellRenderer: CategoryCellRenderer,
-  },
-  {
+  }),
+  getTextColDef({
     field: 'desc',
     headerName: 'description',
-    cellRenderer: DescriptionCellRenderer,
-  },
-
-  {
+  }),
+  getTextColDef({
     field: 'type',
     headerName: 'type',
-    cellRenderer: TypeCellRenderer,
-  },
+  }),
   {
     field: 'createdAt',
     headerName: 'created',
