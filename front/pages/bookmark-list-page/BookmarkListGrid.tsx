@@ -10,7 +10,7 @@ import { useGetBookmarkListQuery } from '@entities/bookmark'
 import { LoadingTableOverlay } from '@shared/component/LoadingTableOverlay'
 import { DisplayedRowsCount } from '@shared/lib/ag-grid/components/DisplayedRowsCount'
 import { NoRowsTableOverlay } from '@shared/lib/ag-grid/components/NoRowsTableOverlay'
-import { columnDefs, defaultColDef } from './columnDef'
+import { columnDefs } from './columnDef'
 import { bookmarkListAgGridRef } from './ref/bookmarkListAgGridRef'
 import { addPlaceholderToFloatingFilters } from '@shared/lib/ag-grid/utils/addPlaceholderToFloatingFilters'
 import { GridLayout } from '@shared/lib/ag-grid/GridLayout'
@@ -22,6 +22,7 @@ import { useDisableLoadingOverlayWhenItemsAreFetched } from '@shared/component/l
 import type { ItemPick } from '@back/api/bookmark/getBookmarkListHandler'
 import { dispatch } from '@shared/lib/redux'
 import { agGridSlice } from '@shared/lib/ag-grid/agGridSlice'
+import { getDefaultColDef } from '@shared/lib/ag-grid/colDef/getDefaultColDef'
 
 ModuleRegistry.registerModules([AllCommunityModule])
 
@@ -43,7 +44,7 @@ export const BookmarkListGrid = (): React.JSX.Element => {
       <ProgressGridBar isShown={getBookmarkListQuery.isFetching} />
       <AgGridReact<ItemPick>
         columnDefs={columnDefs}
-        defaultColDef={defaultColDef}
+        defaultColDef={getDefaultColDef()}
         enableCellTextSelection
         getRowId={(params) => params.data.id}
         loadingOverlayComponent={LoadingTableOverlay}

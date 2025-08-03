@@ -9,7 +9,7 @@ import { useRef } from 'react'
 import { useGetQuotationListQuery } from '@entities/quotation'
 import { LoadingTableOverlay } from '@shared/component/LoadingTableOverlay'
 import { NoRowsTableOverlay } from '@shared/lib/ag-grid/components/NoRowsTableOverlay'
-import { columnDefs, defaultColDef } from './columnDef'
+import { columnDefs } from './columnDef'
 import { quotationListAgGridRef } from './ref/quotationListAgGridRef'
 import { addPlaceholderToFloatingFilters } from '@shared/lib/ag-grid/utils/addPlaceholderToFloatingFilters'
 import { GridLayout } from '@shared/lib/ag-grid/GridLayout'
@@ -22,6 +22,7 @@ import type { QuotationPick } from '@back/api/quotation/getQuotationListHandler'
 import { dispatch } from '@shared/lib/redux'
 import { agGridSlice } from '@shared/lib/ag-grid/agGridSlice'
 import { DisplayedRowsCount } from '@shared/lib/ag-grid/components/DisplayedRowsCount'
+import { getDefaultColDef } from '@shared/lib/ag-grid/colDef/getDefaultColDef'
 
 ModuleRegistry.registerModules([AllCommunityModule])
 
@@ -43,7 +44,7 @@ export const QuotationListGrid = (): React.JSX.Element => {
       <ProgressGridBar isShown={getQuotationListQuery.isFetching} />
       <AgGridReact<QuotationPick>
         columnDefs={columnDefs}
-        defaultColDef={defaultColDef}
+        defaultColDef={getDefaultColDef()}
         enableCellTextSelection
         getRowId={(params) => params.data.id}
         loadingOverlayComponent={LoadingTableOverlay}

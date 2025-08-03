@@ -5,20 +5,6 @@ import { getTextColDef } from '@shared/lib/ag-grid/colDef/getTextColDef'
 import { getDateColDef } from '@shared/lib/ag-grid/colDef/getDateColDef'
 import { getBooleanColDef } from '@shared/lib/ag-grid/colDef/getBooleanColDef'
 
-export const defaultColDef: ColDef<UserPicked> = {
-  headerClass: ['center'],
-  width: 170,
-  minWidth: 170,
-  editable: false,
-  filter: 'agTextColumnFilter',
-  floatingFilter: true,
-  resizable: true,
-  sortable: true,
-  unSortIcon: true,
-  suppressHeaderMenuButton: true,
-  flex: 1,
-}
-
 export const columnDefs: ColDef<UserPicked>[] = [
   {
     cellRenderer: ActionButtonsCellRenderer,

@@ -10,7 +10,7 @@ export const getDefaultColDef = <
   TData extends Record<string, unknown>,
   TValue extends string,
 >(
-  props: Props<TData, TValue>,
+  props: Props<TData, TValue> = {},
 ): ColDef<TData, TValue> => {
   return {
     headerClass: ['center'],

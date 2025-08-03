@@ -10,7 +10,7 @@ import { useFileListAllDatasource } from '@entities/file'
 import { LoadingTableOverlay } from '@shared/component/LoadingTableOverlay'
 import { DisplayedRowsCount } from '@shared/lib/ag-grid/components/DisplayedRowsCount'
 import { NoRowsTableOverlay } from '@shared/lib/ag-grid/components/NoRowsTableOverlay'
-import { columnDefs, defaultColDef } from './columnDef'
+import { columnDefs } from './columnDef'
 import { fileListAllAgGridRef } from './ref/fileListAllAgGridRef'
 import { addPlaceholderToFloatingFilters } from '@shared/lib/ag-grid/utils/addPlaceholderToFloatingFilters'
 import { GridLayout } from '@shared/lib/ag-grid/GridLayout'
@@ -21,6 +21,7 @@ import { AgGridStyles } from '@shared/lib/ag-grid/styles/AgGridStyles'
 import type { Item } from '@back/api/file/getFileListAllHandler'
 import { dispatch } from '@shared/lib/redux'
 import { agGridSlice } from '@shared/lib/ag-grid/agGridSlice'
+import { getDefaultColDef } from '@shared/lib/ag-grid/colDef/getDefaultColDef'
 
 ModuleRegistry.registerModules([AllCommunityModule])
 
@@ -41,7 +42,7 @@ export const FileListAllGrid = (): React.JSX.Element => {
       <AgGridReact<Item>
         columnDefs={columnDefs}
         datasource={datasource}
-        defaultColDef={defaultColDef}
+        defaultColDef={getDefaultColDef()}
         enableCellTextSelection
         getRowId={(params) => params.data.id}
         loadingOverlayComponent={LoadingTableOverlay}

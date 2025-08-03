@@ -4,20 +4,6 @@ import type { Item } from '@back/api/file/getFileListAllHandler'
 import { getTextColDef } from '@shared/lib/ag-grid/colDef/getTextColDef'
 import { getDateColDef } from '@shared/lib/ag-grid/colDef/getDateColDef'
 
-export const defaultColDef: ColDef<Item> = {
-  headerClass: ['center'],
-  width: 170,
-  minWidth: 170,
-  editable: false,
-  filter: 'agTextColumnFilter',
-  floatingFilter: true,
-  resizable: true,
-  sortable: true,
-  unSortIcon: true,
-  suppressHeaderMenuButton: true,
-  flex: 1,
-}
-
 export const columnDefs: ColDef<Item>[] = [
   {
     cellRenderer: ActionButtonsCellRenderer,

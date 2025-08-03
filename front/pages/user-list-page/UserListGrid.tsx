@@ -9,7 +9,7 @@ import { useGetUserListQuery } from '@entities/user'
 import { LoadingTableOverlay } from '@shared/component/LoadingTableOverlay'
 import { DisplayedRowsCount } from '@shared/lib/ag-grid/components/DisplayedRowsCount'
 import { NoRowsTableOverlay } from '@shared/lib/ag-grid/components/NoRowsTableOverlay'
-import { columnDefs, defaultColDef } from './columnDefs'
+import { columnDefs } from './columnDefs'
 import { usersAgGridRef } from './ref/usersAgGridRef'
 import { addPlaceholderToFloatingFilters } from '@shared/lib/ag-grid/utils/addPlaceholderToFloatingFilters'
 import { GridLayout } from '@shared/lib/ag-grid/GridLayout'
@@ -21,6 +21,7 @@ import type { UserPicked } from '@back/api/user/getUserListHandler'
 import { useRefetchDataOnEmailChange } from '@shared/lib/ag-grid/hooks/useRefetchDataOnEmailChange'
 import { dispatch } from '@shared/lib/redux'
 import { agGridSlice } from '@shared/lib/ag-grid/agGridSlice'
+import { getDefaultColDef } from '@shared/lib/ag-grid/colDef/getDefaultColDef'
 
 ModuleRegistry.registerModules([AllCommunityModule])
 
@@ -42,7 +43,7 @@ export const UserListGrid = (): React.JSX.Element => {
       <ProgressGridBar isShown={getUserListQuery.isFetching} />
       <AgGridReact<UserPicked>
         columnDefs={columnDefs}
-        defaultColDef={defaultColDef}
+        defaultColDef={getDefaultColDef()}
         enableCellTextSelection
         getRowId={(params) => params.data.email}
         loadingOverlayComponent={LoadingTableOverlay}

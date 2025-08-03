@@ -5,20 +5,6 @@ import type { QuotationPick } from '@back/api/quotation/getQuotationListHandler'
 import { getTextColDef } from '@shared/lib/ag-grid/colDef/getTextColDef'
 import { getDateColDef } from '@shared/lib/ag-grid/colDef/getDateColDef'
 
-export const defaultColDef: ColDef<QuotationPick> = {
-  headerClass: ['center'],
-  width: 170,
-  minWidth: 170,
-  editable: false,
-  filter: 'agTextColumnFilter',
-  floatingFilter: true,
-  resizable: true,
-  sortable: true,
-  unSortIcon: true,
-  suppressHeaderMenuButton: true,
-  flex: 1,
-}
-
 export const columnDefs: ColDef<QuotationPick>[] = [
   {
     cellRenderer: ActionButtonsCellRenderer,
