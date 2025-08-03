@@ -12,9 +12,7 @@ type Props<
   field: ColDefField<TData, TValue>
 }
 
-/**
- * Column for text.
- */
+/** Column for text. */
 export const getTextColDef = <
   TData extends Record<string, unknown>,
   TValue extends string,

@@ -1,11 +1,9 @@
 import type { ColDef, ValueGetterParams } from 'ag-grid-community'
 import { ActionButtonsCellRenderer } from './renderer/ActionButtonsCellRenderer'
 import { SharedWithCellRenderer } from './renderer/SharedWithCellRenderer'
-import { DateCellRenderer } from '@shared/lib/ag-grid/renderers/DateCellRenderer'
-import { dateFilterComparator } from '@shared/lib/ag-grid/comparators/dateFilterComparator'
-import { dateValueGetter } from '@shared/lib/ag-grid/value_getter/dateValueGetter'
 import type { QuotationPick } from '@back/api/quotation/getQuotationListHandler'
 import { getTextColDef } from '@shared/lib/ag-grid/colDef/getTextColDef'
+import { getDateColDef } from '@shared/lib/ag-grid/colDef/getDateColDef'
 
 export const defaultColDef: ColDef<QuotationPick> = {
   headerClass: ['center'],
@@ -52,51 +50,23 @@ export const columnDefs: ColDef<QuotationPick>[] = [
     field: 'desc',
     headerName: 'description',
   }),
-  {
+  getDateColDef({
     field: 'openedAt',
     headerName: 'opened',
-    filter: 'agDateColumnFilter',
     sort: 'desc',
-    minWidth: 200,
-    valueGetter: dateValueGetter({ columnDef: 'openedAt' }),
-    cellRenderer: DateCellRenderer,
-    filterParams: {
-      comparator: dateFilterComparator,
-    },
-  },
-  {
+  }),
+  getDateColDef({
     field: 'createdAt',
     headerName: 'created',
-    filter: 'agDateColumnFilter',
-    minWidth: 200,
-    valueGetter: dateValueGetter({ columnDef: 'createdAt' }),
-    cellRenderer: DateCellRenderer,
-    filterParams: {
-      comparator: dateFilterComparator,
-    },
-  },
-  {
+  }),
+  getDateColDef({
     field: 'updatedAt',
     headerName: 'updated',
-    filter: 'agDateColumnFilter',
-    minWidth: 200,
-    valueGetter: dateValueGetter({ columnDef: 'updatedAt' }),
-    cellRenderer: DateCellRenderer,
-    filterParams: {
-      comparator: dateFilterComparator,
-    },
-  },
-  {
+  }),
+  getDateColDef({
     field: 'viewedAt',
     headerName: 'viewed',
-    filter: 'agDateColumnFilter',
-    minWidth: 200,
-    valueGetter: dateValueGetter({ columnDef: 'viewedAt' }),
-    cellRenderer: DateCellRenderer,
-    filterParams: {
-      comparator: dateFilterComparator,
-    },
-  },
+  }),
   {
     field: 'access',
     headerName: 'shared with',

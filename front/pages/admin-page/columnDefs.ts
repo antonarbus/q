@@ -1,9 +1,8 @@
 import type { ColDef } from 'ag-grid-community'
-import { DateCellRenderer } from '@shared/lib/ag-grid/renderers/DateCellRenderer'
-import { dateFilterComparator } from '@shared/lib/ag-grid/comparators/dateFilterComparator'
-import { dateValueGetter } from '@shared/lib/ag-grid/value_getter/dateValueGetter'
 import type { UserPicked } from '@back/api/user/getUserListHandler'
 import { ActionButtonsCellRenderer } from './renderer/ActionButtonsCellRenderer'
+import { getTextColDef } from '@shared/lib/ag-grid/colDef/getTextColDef'
+import { getDateColDef } from '@shared/lib/ag-grid/colDef/getDateColDef'
 
 export const defaultColDef: ColDef<UserPicked> = {
   headerClass: ['center'],
@@ -34,33 +33,19 @@ export const columnDefs: ColDef<UserPicked>[] = [
     suppressColumnsToolPanel: true,
     suppressNavigable: true,
   },
-  {
+  getTextColDef({
     field: 'email',
     headerName: 'email',
-  },
-  {
+  }),
+  getDateColDef({
     field: 'loggedAt',
-    headerName: 'loggedAt',
-    filter: 'agDateColumnFilter',
     sort: 'desc',
-    minWidth: 200,
-    valueGetter: dateValueGetter({ columnDef: 'loggedAt' }),
-    cellRenderer: DateCellRenderer,
-    filterParams: {
-      comparator: dateFilterComparator,
-    },
-  },
-  {
+    headerName: 'loggedAt',
+  }),
+  getDateColDef({
     field: 'registeredAt',
     headerName: 'registeredAt',
-    filter: 'agDateColumnFilter',
-    minWidth: 200,
-    valueGetter: dateValueGetter({ columnDef: 'registeredAt' }),
-    cellRenderer: DateCellRenderer,
-    filterParams: {
-      comparator: dateFilterComparator,
-    },
-  },
+  }),
   {
     field: 'isActivated',
     headerName: 'isActivated',

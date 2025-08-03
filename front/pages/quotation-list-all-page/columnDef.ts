@@ -1,10 +1,8 @@
 import type { ColDef } from 'ag-grid-community'
 import { ActionButtonsCellRenderer } from './renderer/ActionButtonsCellRenderer'
-import { DateCellRenderer } from '@shared/lib/ag-grid/renderers/DateCellRenderer'
-import { dateFilterComparator } from '@shared/lib/ag-grid/comparators/dateFilterComparator'
-import { dateValueGetter } from '@shared/lib/ag-grid/value_getter/dateValueGetter'
 import type { ItemPick } from '@back/api/quotation/getQuotationListAllHandler'
 import { getTextColDef } from '@shared/lib/ag-grid/colDef/getTextColDef'
+import { getDateColDef } from '@shared/lib/ag-grid/colDef/getDateColDef'
 
 export const defaultColDef: ColDef<ItemPick> = {
   headerClass: ['center'],
@@ -47,27 +45,13 @@ export const columnDefs: ColDef<ItemPick>[] = [
   getTextColDef({
     field: 'type',
   }),
-  {
+  getDateColDef({
     field: 'createdAt',
     headerName: 'created',
-    filter: 'agDateColumnFilter',
-    minWidth: 200,
-    valueGetter: dateValueGetter({ columnDef: 'createdAt' }),
-    cellRenderer: DateCellRenderer,
-    filterParams: {
-      comparator: dateFilterComparator,
-    },
-  },
-  {
+  }),
+  getDateColDef({
     field: 'updatedAt',
     headerName: 'updated',
-    filter: 'agDateColumnFilter',
     sort: 'desc',
-    minWidth: 200,
-    valueGetter: dateValueGetter({ columnDef: 'updatedAt' }),
-    cellRenderer: DateCellRenderer,
-    filterParams: {
-      comparator: dateFilterComparator,
-    },
-  },
+  }),
 ]
