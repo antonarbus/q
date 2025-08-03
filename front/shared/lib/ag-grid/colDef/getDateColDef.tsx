@@ -8,7 +8,7 @@ import type {
 
 type Props<
   TData extends Record<string, unknown>,
-  TValue extends Date | null,
+  TValue extends string,
 > = ColDef<TData, TValue> & {
   field: ColDefField<TData, TValue>
 }
@@ -16,7 +16,7 @@ type Props<
 /** Column for date. */
 export const getDateColDef = <
   TData extends Record<string, unknown>,
-  TValue extends Date | null,
+  TValue extends string,
 >(
   props: Props<TData, TValue>,
 ): ColDef<TData, TValue> => {
@@ -25,38 +25,23 @@ export const getDateColDef = <
     cellDataType: 'dateString',
     filter: 'agDateColumnFilter',
     minWidth: 200,
-    valueGetter: (params): Date | null => {
-      const dateIsoString = params.data?.[props.field]
-
-      if (typeof dateIsoString !== 'string') {
-        return null
-      }
-
-      const dateObj = new Date(dateIsoString)
-
-      if (isValid(new Date(dateObj)) === false) {
-        return null
-      }
-
-      return dateObj
-    },
     filterParams: {
       comparator: (
         filterLocalDateAtMidnight: Date,
-        cellValue: Date,
+        cellValue: string,
       ): number => {
-        const filterDateString = filterLocalDateAtMidnight.toDateString()
-        const cellDateString = cellValue.toDateString()
+        const filterLocalDateAtMidnightString =
+          filterLocalDateAtMidnight.toISOString()
 
-        if (filterDateString === cellDateString) {
+        if (filterLocalDateAtMidnightString === cellValue) {
           return 0
         }
 
-        if (cellValue < filterLocalDateAtMidnight) {
+        if (cellValue < filterLocalDateAtMidnightString) {
           return -1
         }
 
-        if (cellValue > filterLocalDateAtMidnight) {
+        if (cellValue > filterLocalDateAtMidnightString) {
           return 1
         }
 
@@ -66,12 +51,18 @@ export const getDateColDef = <
     cellRenderer: (
       params: ICellRendererParams<TData, TValue>,
     ): React.ReactNode => {
-      if (params.value instanceof Date === false) {
+      if (typeof params.value !== 'string') {
         return null
       }
 
-      const date = format(params.value, 'dd.MM.yyyy')
-      const time = format(params.value, 'HH:mm')
+      const dateObj = new Date(params.value)
+
+      if (isValid(new Date(dateObj)) === false) {
+        return null
+      }
+
+      const date = format(dateObj, 'dd.MM.yyyy')
+      const time = format(dateObj, 'HH:mm')
 
       return (
         <Box
