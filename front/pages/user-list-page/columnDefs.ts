@@ -3,6 +3,7 @@ import type { UserPicked } from '@back/api/user/getUserListHandler'
 import { ActionButtonsCellRenderer } from './renderer/ActionButtonsCellRenderer'
 import { getTextColDef } from '@shared/lib/ag-grid/colDef/getTextColDef'
 import { getDateColDef } from '@shared/lib/ag-grid/colDef/getDateColDef'
+import { getBooleanColDef } from '@shared/lib/ag-grid/colDef/getBooleanColDef'
 
 export const defaultColDef: ColDef<UserPicked> = {
   headerClass: ['center'],
@@ -46,8 +47,7 @@ export const columnDefs: ColDef<UserPicked>[] = [
     field: 'registeredAt',
     headerName: 'registeredAt',
   }),
-  {
+  getBooleanColDef({
     field: 'isActivated',
-    headerName: 'isActivated',
-  },
+  }),
 ]

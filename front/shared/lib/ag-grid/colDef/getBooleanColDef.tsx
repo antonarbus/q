@@ -1,15 +1,21 @@
 import type { ColDef, ColDefField } from 'ag-grid-community'
 
-type Props<Item extends Record<string, unknown>> = ColDef<Item> & {
-  field: ColDefField<Item>
+type Props<
+  TData extends Record<string, unknown>,
+  TValue extends string,
+> = ColDef<TData, TValue> & {
+  field: ColDefField<TData, TValue>
 }
 
 /**
  * Column for boolean value.
  */
-export const getBooleanColDef = <Item extends Record<string, unknown>>(
-  props: Props<Item>,
-): ColDef<Item> => {
+export const getBooleanColDef = <
+  TData extends Record<string, unknown>,
+  TValue extends string,
+>(
+  props: Props<TData, TValue>,
+): ColDef<TData, TValue> => {
   return {
     colId: props.field,
     cellDataType: 'boolean',

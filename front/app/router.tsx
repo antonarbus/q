@@ -57,8 +57,8 @@ const BookmarkListAllPageLazy = lazy(async () => {
   return module
 })
 
-const AdminPageLazy = lazy(async () => {
-  const module = await import('@pages/admin-page')
+const UserListPageLazy = lazy(async () => {
+  const module = await import('@pages/user-list-page')
 
   return module
 })
@@ -230,7 +230,7 @@ const router = createBrowserRouter([
             }
           >
             <RequireRoles requiredRoles={[userRole.superAdmin]}>
-              <AdminPageLazy />
+              <UserListPageLazy />
             </RequireRoles>
           </Suspense>
         ),

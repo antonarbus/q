@@ -24,7 +24,7 @@ import { agGridSlice } from '@shared/lib/ag-grid/agGridSlice'
 
 ModuleRegistry.registerModules([AllCommunityModule])
 
-export const UsersGrid = (): React.JSX.Element => {
+export const UserListGrid = (): React.JSX.Element => {
   const gridContainerRef = useRef<React.ComponentRef<'div'> | null>(null)
   const getUserListQuery = useGetUserListQuery()
 

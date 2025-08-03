@@ -1,10 +1,10 @@
-import { UsersGrid } from './UsersGrid'
+import { UserListGrid } from './UserListGrid'
 import { GridPageLayout } from '@shared/layout/GridPageLayout'
 
-export const AdminPage = (): React.JSX.Element => {
+export const UserListPage = (): React.JSX.Element => {
   return (
     <GridPageLayout>
-      <UsersGrid />
+      <UserListGrid />
     </GridPageLayout>
   )
 }

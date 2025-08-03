@@ -1,19 +1,25 @@
 import { Box } from '@mui/material'
+import { format, isValid } from 'date-fns'
 import type {
   ColDef,
   ColDefField,
   ICellRendererParams,
 } from 'ag-grid-community'
-import { format, isValid } from 'date-fns'
 
-type Props<TData extends Record<string, unknown>> = ColDef<TData> & {
+type Props<
+  TData extends Record<string, unknown>,
+  TValue extends Date | null,
+> = ColDef<TData, TValue> & {
   field: ColDefField<TData>
   withTime?: boolean
 }
 
 /** Column for date. */
-export const getDateColDef = <TData extends Record<string, unknown>>(
-  props: Props<TData>,
+export const getDateColDef = <
+  TData extends Record<string, unknown>,
+  TValue extends Date | null,
+>(
+  props: Props<TData, TValue>,
 ): ColDef<TData> => {
   return {
     colId: props.field,
@@ -35,8 +41,33 @@ export const getDateColDef = <TData extends Record<string, unknown>>(
 
       return dateObj
     },
-    cellRenderer: (params: ICellRendererParams<TData>): React.ReactNode => {
-      if (typeof params.value !== 'string') {
+    filterParams: {
+      comparator: (
+        filterLocalDateAtMidnight: Date,
+        cellValue: Date,
+      ): number => {
+        const filterDateString = filterLocalDateAtMidnight.toDateString()
+        const cellDateString = cellValue.toDateString()
+
+        if (filterDateString === cellDateString) {
+          return 0
+        }
+
+        if (cellValue < filterLocalDateAtMidnight) {
+          return -1
+        }
+
+        if (cellValue > filterLocalDateAtMidnight) {
+          return 1
+        }
+
+        return 0
+      },
+    },
+    cellRenderer: (
+      params: ICellRendererParams<TData, TValue>,
+    ): React.ReactNode => {
+      if (params.value instanceof Date === false) {
         return null
       }
 
@@ -72,29 +103,6 @@ export const getDateColDef = <TData extends Record<string, unknown>>(
           </Box>
         </Box>
       )
-    },
-    filterParams: {
-      comparator: (
-        filterLocalDateAtMidnight: Date,
-        cellValue: Date,
-      ): number => {
-        const filterDateString = filterLocalDateAtMidnight.toDateString()
-        const cellDateString = cellValue.toDateString()
-
-        if (filterDateString === cellDateString) {
-          return 0
-        }
-
-        if (cellValue < filterLocalDateAtMidnight) {
-          return -1
-        }
-
-        if (cellValue > filterLocalDateAtMidnight) {
-          return 1
-        }
-
-        return 0
-      },
     },
     ...props,
   }
