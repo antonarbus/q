@@ -10,8 +10,7 @@ type Props<
   TData extends Record<string, unknown>,
   TValue extends Date | null,
 > = ColDef<TData, TValue> & {
-  field: ColDefField<TData>
-  withTime?: boolean
+  field: ColDefField<TData, TValue>
 }
 
 /** Column for date. */
@@ -20,7 +19,7 @@ export const getDateColDef = <
   TValue extends Date | null,
 >(
   props: Props<TData, TValue>,
-): ColDef<TData> => {
+): ColDef<TData, TValue> => {
   return {
     colId: props.field,
     cellDataType: 'dateString',
