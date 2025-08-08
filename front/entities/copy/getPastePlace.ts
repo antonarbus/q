@@ -17,12 +17,21 @@ export const getPastePlace = ({
   const distToBottom = height - yWithinElement
 
   if (distToTop < distanceToEdge) {
-    return { pastePos: 'top', id: hoveredElement.id }
+    return { 
+      pastePos: 'top', 
+      id: hoveredElement.id 
+    }
   }
 
   if (distToBottom < distanceToEdge) {
-    return { pastePos: 'bottom', id: hoveredElement.id }
+    return { 
+      pastePos: 'bottom', 
+      id: hoveredElement.id 
+    }
   }
 
-  return { pastePos: 'middle', id: hoveredElement.id }
+  return { 
+    pastePos: 'middle', 
+    id: hoveredElement.id 
+  }
 }
