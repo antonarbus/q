@@ -12,26 +12,22 @@ type Props = {
   html: string
 }
 
-export const sendEmail = async ({
-  to,
-  subject,
-  html,
-}: Props): Promise<APIResponse> => {
+export const sendEmail = async (props: Props): Promise<APIResponse> => {
   try {
     const sentFrom = new Sender('info@sendmequotation.today')
 
     const emailParams = new EmailParams()
       .setFrom(sentFrom)
-      .setTo([new Recipient(to)])
+      .setTo([new Recipient(props.to)])
       .setReplyTo(sentFrom)
-      .setSubject(subject)
-      .setHtml(html)
+      .setSubject(props.subject)
+      .setHtml(props.html)
 
     const sendEmailRes = await mailerSend.email.send(emailParams)
 
     return sendEmailRes
   } catch (error) {
-    console.error('error 😬', error)
+    console.error('error at mail send 😬', error)
 
     throw error
   }
