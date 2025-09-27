@@ -1,1 +1,1 @@
-export { Quotation as default } from './Quotation'
+export { QuotationPage as default } from './QuotationPage'

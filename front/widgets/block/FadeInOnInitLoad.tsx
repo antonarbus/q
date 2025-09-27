@@ -21,7 +21,7 @@ export const FadeInOnInitLoad = ({ children }: Props): React.JSX.Element => {
         justifyContent: 'center',
         alignItems: 'center',
         maxWidth: '100%',
-        padding: '20px 10px',
+        padding: '25px 10px',
       }}
       transition={{
         delay: 0.7, // to show "Q" logo on init load to avoid some jumps

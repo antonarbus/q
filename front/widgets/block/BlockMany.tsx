@@ -1,8 +1,10 @@
+/* eslint-disable react/jsx-max-depth */
 import { AnimatePresence } from 'motion/react'
 import { BOOKMARK_POS_AT_BLOCKS, type Item } from '@entities/quotation'
 import { FadeInOnInitLoad } from './FadeInOnInitLoad'
 import { Block } from './Block'
 import { BlocksSortableContext } from './BlocksSortableContext'
+import { OpenInsertMenuButton } from '@features/blocks/open-insert-menu'
 
 type Props = {
   blocks: (Item | null)[]
@@ -31,6 +33,7 @@ export const BlockMany = ({ blocks }: Props): React.ReactNode => {
                 key={block.id}
               />
             ))}
+          <OpenInsertMenuButton />
         </AnimatePresence>
       </BlocksSortableContext>
     </FadeInOnInitLoad>

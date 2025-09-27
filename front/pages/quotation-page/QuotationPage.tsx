@@ -7,7 +7,7 @@ import { BackgroundMessage } from '@entities/quotation'
 import { InfoAndSearchLayout } from './InfoAndSearchLayout'
 import { arrayShapesEqualityFn } from '@shared/util/arrayShapesEqualityFn'
 
-export const Quotation = (): React.JSX.Element => {
+export const QuotationPage = (): React.JSX.Element => {
   const blocks = useSelector(
     (state) => state.quotation.blocks,
     arrayShapesEqualityFn,
