@@ -16,7 +16,6 @@ import {
 } from 'react-icons/io5'
 import { PiFolderSimpleStarDuotone } from 'react-icons/pi'
 import { RiMenuAddFill, RiAdminLine, RiFileExcel2Line } from 'react-icons/ri'
-import { TbRectangleVertical } from 'react-icons/tb'
 import { VscNewFile } from 'react-icons/vsc'
 import {
   insertBoqBlock,
@@ -137,44 +136,37 @@ export const navStructure: NavItem[] = [
         disabled: true,
         navItems: [
           {
-            id: navItemId.block,
-            name: 'Block',
-            icon: <TbRectangleVertical />,
-            isHidden: false,
-            navItems: [
-              {
-                id: navItemId.textItem,
-                name: 'Text',
-                icon: <IoText />,
-                isHidden: false,
-                shortcut: ['control', 'shift', 't'],
-                func: insertTextBlock,
-              },
-              {
-                id: navItemId.boqItem,
-                name: 'Items',
-                icon: <FaRegRectangleList />,
-                isHidden: false,
-                shortcut: ['control', 'shift', 'i'],
-                func: insertBoqBlock,
-              },
-              {
-                id: navItemId.priceItem,
-                name: 'Price',
-                icon: <FiDollarSign />,
-                isHidden: false,
-                shortcut: ['control', 'shift', 'p'],
-                func: insertPriceBlock,
-              },
-            ],
-          },
-          {
             id: navItemId.boqRow,
             name: 'Row',
             icon: <FaGripLines />,
             isHidden: false,
             shortcut: ['control', 'shift', 'r'],
             func: insertBoqRow,
+          },
+
+          {
+            id: navItemId.textItem,
+            name: 'Text',
+            icon: <IoText />,
+            isHidden: false,
+            shortcut: ['control', 'shift', 't'],
+            func: insertTextBlock,
+          },
+          {
+            id: navItemId.boqItem,
+            name: 'Items',
+            icon: <FaRegRectangleList />,
+            isHidden: false,
+            shortcut: ['control', 'shift', 'i'],
+            func: insertBoqBlock,
+          },
+          {
+            id: navItemId.priceItem,
+            name: 'Price',
+            icon: <FiDollarSign />,
+            isHidden: false,
+            shortcut: ['control', 'shift', 'p'],
+            func: insertPriceBlock,
           },
         ],
         tooltip: 'Insert block or row',
