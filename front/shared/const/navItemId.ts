@@ -17,7 +17,6 @@ export const navItemId = {
   profile: 'profile',
   settings: 'settings',
   logout: 'logout',
-  block: 'block',
   textItem: 'textItem',
   boqItem: 'boqItem',
   priceItem: 'priceItem',
