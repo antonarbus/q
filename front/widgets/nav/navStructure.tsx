@@ -136,6 +136,14 @@ export const navStructure: NavItem[] = [
         disabled: true,
         navItems: [
           {
+            id: navItemId.boqItem,
+            name: 'Items',
+            icon: <FaRegRectangleList />,
+            isHidden: false,
+            shortcut: ['control', 'shift', 'i'],
+            func: insertBoqBlock,
+          },
+          {
             id: navItemId.boqRow,
             name: 'Row',
             icon: <FaGripLines />,
@@ -143,7 +151,6 @@ export const navStructure: NavItem[] = [
             shortcut: ['control', 'shift', 'r'],
             func: insertBoqRow,
           },
-
           {
             id: navItemId.textItem,
             name: 'Text',
@@ -151,14 +158,6 @@ export const navStructure: NavItem[] = [
             isHidden: false,
             shortcut: ['control', 'shift', 't'],
             func: insertTextBlock,
-          },
-          {
-            id: navItemId.boqItem,
-            name: 'Items',
-            icon: <FaRegRectangleList />,
-            isHidden: false,
-            shortcut: ['control', 'shift', 'i'],
-            func: insertBoqBlock,
           },
           {
             id: navItemId.priceItem,
