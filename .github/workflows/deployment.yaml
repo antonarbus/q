@@ -1,12 +1,12 @@
 name: CI and CD Pipeline to Cloud Run
 
 env:
-  PROJECT_ID: 'quotationapp-8014c'
-  REGION: 'us-central1'
-  ARTIFACTS_REGISTRY_NAME: 'cloud-run'
-  DOCKER_IMAGE_NAME: 'docker-image'
-  INSTALLATION: 'local'
-  CI: 'true'
+  PROJECT_ID: "quotationapp-8014c"
+  REGION: "us-central1"
+  ARTIFACTS_REGISTRY_NAME: "cloud-run"
+  DOCKER_IMAGE_NAME: "docker-image"
+  INSTALLATION: "local"
+  CI: "true"
 
 on:
   push:
@@ -24,8 +24,8 @@ on:
 jobs:
   build-and-deploy:
     permissions:
-      contents: 'read'
-      id-token: 'write'
+      contents: "read"
+      id-token: "write"
 
     runs-on: ubuntu-latest
 
@@ -34,19 +34,22 @@ jobs:
         id: checkout
         uses: actions/checkout@v4
 
-      - name: 'Authenticate to Google Cloud'
-        uses: 'google-github-actions/auth@v2'
+      - name: "Authenticate to Google Cloud"
+        uses: "google-github-actions/auth@v2"
         with:
-          credentials_json: '${{secrets.GCP_SA_KEY}}'
+          credentials_json: "${{secrets.GCP_SA_KEY}}"
 
-      - name: 'Docker Auth'
+      - name: "Docker Auth"
         run: |-
           gcloud auth configure-docker '${{env.REGION}}-docker.pkg.dev'
 
       - name: Install NodeJS
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: "22"
+
+      - name: Print Node version
+        run: echo "Node.js version:$(node --version)"
 
       - name: Disable npm installation checks
         run: npm config set legacy-peer-deps true
