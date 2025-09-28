@@ -46,7 +46,7 @@ jobs:
       - name: Install NodeJS
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
 
       - name: Disable npm installation checks
         run: npm config set legacy-peer-deps true
