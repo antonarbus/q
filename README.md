@@ -314,3 +314,21 @@ https://console.cloud.google.com/artifacts?inv=1&invt=AblO7A&project=quotationap
 - secrets.GCP_SA_KEY goes to workflows/deployment.yml
 
 https://console.cloud.google.com/iam-admin/serviceaccounts?inv=1&invt=AblPCg&project=quotationapp-8014c&supportedpurview=project
+
+# TO-DO
+
+- [ ] vitejs/plugin-react lib, check if it works ok and then upgrade, some TS declaration issue is in ^5.0.4
+- [ ] add delete account button
+- [ ] do not re-upload the same file
+- [ ] remove file from DB on delete
+- [ ] instead of preview render same component but scale it down, should save space in bucket
+- [ ] app description on Q logo
+- [ ] make info field to use froala
+- [ ] if item is bookmarked make the star yellow
+- [ ] add price, valid to, status into quotation model and show in table
+- [ ] do not just save shared quotation, but copy it from the owners folder to let files be independent and if own decide to delete files it will not affect saved quotation, there might be a need for regexp to modify urls
+- [ ] check free tier sql db at PlanetScale for myVocab.org
+- [ ] investigate Google Cloud Run deployment via template.yaml (possible to construct it with js)
+- [ ] dev table for all files / quotations / bookmarks
+- [ ] add cloudflarehttps://chatgpt.com/c/67f1a2a0-48b8-8004-837a-63191208d218https://dash.cloudflare.com/cb73a8d89456064769c244e7f474368d/sendmequotation.today/add-record-methods
+- [ ] if save quotation being unregistered you are prompted to register and quotation is saved as expected. What happened is i got confirmation email and when i activated the profile i found myself being not logged in. Check it + check again how activation works.
