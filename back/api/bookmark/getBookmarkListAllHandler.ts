@@ -5,7 +5,7 @@ import { httpStatus } from '@back/shared/const/httpStatus'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { BookmarkModel } from '@back/entities/bookmark'
 import { userRole } from '@back/shared/const/userRole'
-import { z } from 'zod'
+import { z } from 'zod/v4'
 
 export type ItemPick = Pick<
   Item,
