@@ -168,14 +168,18 @@ export default {
 
           // Split jsPDF into its own chunk to enable dynamic imports without bundling issues
           // This allows lazy loading of the PDF library only when needed
+
+          // Web Workers run in a different context and can't access Vite's
+          // module resolution system, so they can't find the transformed/renamed files
+          // By explicitly telling Vite to create separate chunks for these lib,
+          // we give it predictable, stable path that can be resolved even in worker contexts
           if (isJsPdf === true) {
             return 'jspdf'
           }
 
           const isExcelJs = id.includes('exceljs')
 
-          // Split ExcelJS into its own chunk for consistency with jsPDF approach
-          // Ensures reliable dynamic imports and lazy loading
+          // Same here
           if (isExcelJs === true) {
             return 'exceljs'
           }
