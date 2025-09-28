@@ -9,6 +9,7 @@ export const renderInput = (
   params: AutocompleteRenderInputParams,
 ): React.JSX.Element => {
   const { InputProps, ...otherParams } = params
+
   return (
     <TextField
       {...otherParams}
