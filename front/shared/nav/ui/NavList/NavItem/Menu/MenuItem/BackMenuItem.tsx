@@ -1,6 +1,6 @@
 import { dispatch, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
-import type { MouseEvent } from 'react'
+import type { MouseEvent, JSX } from 'react'
 import { FaChevronLeft } from 'react-icons/fa'
 import { navSlice } from '../../../../../navSlice'
 import { Icon } from '../../Icon'
@@ -8,7 +8,7 @@ import { navigateInMenu } from '../functions/useMenuAnimation'
 import { MenuItemLayout } from './MenuItemStyled'
 import { TextInMenu } from './TextInMenu'
 
-export const BackMenuItem = (): React.JSX.Element => {
+export const BackMenuItem = (): JSX.Element => {
   const isHovered = useSelector((state) => state.nav.hoverIndex === 0)
 
   const color = theme.colors.topMenuItem

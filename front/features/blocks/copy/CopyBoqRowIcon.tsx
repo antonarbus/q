@@ -1,5 +1,5 @@
 import { dispatch, getState, useSelector } from '@shared/lib/redux'
-import type { MouseEvent } from 'react'
+import type { MouseEvent, JSX } from 'react'
 import { MdCopyAll } from 'react-icons/md'
 import { copySlice } from '@entities/copy'
 import {
@@ -13,7 +13,7 @@ import { Tooltip } from '@mui/material'
 import { getClosestRowHtml } from '@shared/util/html-getter/getClosestRowHtml'
 import { textSlice } from '@shared/lib/froala/textSlice'
 
-export const CopyBoqRowIcon = (): React.JSX.Element => {
+export const CopyBoqRowIcon = (): JSX.Element => {
   const { blockIndex } = useBlock()
   const { rowIndex } = useRow()
   const isCopyable = useSelector((state) => state.copy.isCopyable)

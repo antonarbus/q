@@ -13,8 +13,9 @@ import { route } from '@shared/const/route'
 import { toast } from 'sonner'
 import { Tooltip } from '@mui/material'
 import { useIsCopyModalVisible } from '@entities/copy'
+import type { ReactNode,MouseEvent } from 'react'
 
-export const BookmarkBoqRowIcon = (): React.ReactNode => {
+export const BookmarkBoqRowIcon = (): ReactNode => {
   const navigate = useNavigate()
   const { blockIndex } = useBlock()
   const { rowIndex } = useRow()
@@ -31,7 +32,7 @@ export const BookmarkBoqRowIcon = (): React.ReactNode => {
       <span className={cls.actionIconContainer}>
         <MdOutlineStarOutline
           className={cls.actionIcon}
-          onClick={(event: React.MouseEvent): void => {
+          onClick={(event: MouseEvent): void => {
             if (disabled === true) {
               return
             }

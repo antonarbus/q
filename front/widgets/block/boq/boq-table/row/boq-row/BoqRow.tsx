@@ -1,4 +1,4 @@
-import type { FocusEvent } from 'react'
+import type { FocusEvent, JSX } from 'react'
 import { CopyBoqRowIcon } from '@features/blocks/copy'
 import { CutBoqRowIcon } from '@features/blocks/cut'
 import { DeleteBoqRowIcon } from '@features/blocks/delete'
@@ -17,7 +17,7 @@ type Props = {
   onBlur: (e: FocusEvent<HTMLDivElement>) => void
 }
 
-export const BoqRow = ({ onBlur }: Props): React.JSX.Element => {
+export const BoqRow = ({ onBlur }: Props): JSX.Element => {
   return (
     <BoqRowLayout onBlur={onBlur}>
       <BoqRowActionButtonsLayout style={{ left: '-33px' }}>

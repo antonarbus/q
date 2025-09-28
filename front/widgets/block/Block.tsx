@@ -4,13 +4,14 @@ import { PasteItem } from './paste/PasteItem'
 import { PriceBlock } from './price/PriceBlock'
 import { TextBlock } from './text/TextBlock'
 import { RowBlock } from './row/RowBlock'
+import type { ReactNode } from 'react'
 
 type Props = {
   block: Item
   blockIndex: number
 }
 
-export const Block = ({ block, blockIndex }: Props): React.ReactNode => {
+export const Block = ({ block, blockIndex }: Props): ReactNode => {
   return (
     <BlockProvider
       block={block}

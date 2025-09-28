@@ -1,4 +1,5 @@
 import { useState, type CSSProperties } from 'react'
+import type { JSX } from 'react'
 import { useEffectOnce } from 'react-use'
 import { StaticHtml } from './StaticHtml'
 
@@ -7,7 +8,7 @@ import { StaticHtml } from './StaticHtml'
 // * when EditableHtml blinks we do not see the real blink as we look at this static replica
 // * after froala initiated make "visibility: hidden", otherwise you will see static text when delete dynamic text in Froala
 
-export const StaticHtmlBackgroundToFixBlinkIssue = (): React.JSX.Element => {
+export const StaticHtmlBackgroundToFixBlinkIssue = (): JSX.Element => {
   const [visibility, setVisibility] =
     useState<CSSProperties['visibility']>('visible')
 

@@ -1,6 +1,7 @@
 import { type TextFieldProps, InputAdornment, TextField } from '@mui/material'
 import type { Signal } from '@preact/signals-react'
 import { BsFileEarmarkText } from 'react-icons/bs'
+import type { JSX } from 'react'
 
 type Props = {
   descSignal: Signal<string | undefined>
@@ -9,7 +10,7 @@ type Props = {
 export const DescriptionField = ({
   descSignal,
   ...props
-}: Props): React.JSX.Element => {
+}: Props): JSX.Element => {
   return (
     <div style={{ position: 'relative' }}>
       <TextField

@@ -2,14 +2,15 @@
 import { Box } from '@mui/material'
 import { AnimatePresence } from 'motion/react'
 import { OutlinedDivWithLabel } from '@shared/component/OutlinedDivWithLabel'
+import type { JSX,ReactNode } from 'react'
 
 type Props = {
-  sharedWithRadioButtons: React.ReactNode
-  sharedWithEmailInputField: React.ReactNode
-  sharedWithEmailList: React.ReactNode
+  sharedWithRadioButtons: ReactNode
+  sharedWithEmailInputField: ReactNode
+  sharedWithEmailList: ReactNode
 }
 
-export const Layout = (props: Props): React.JSX.Element => {
+export const Layout = (props: Props): JSX.Element => {
   return (
     <OutlinedDivWithLabel label='Share'>
       <Box

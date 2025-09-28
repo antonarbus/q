@@ -1,10 +1,11 @@
 import { cls } from '@shared/const/cls'
+import type { JSX,ReactNode } from 'react'
 
 type Props = {
-  children: React.ReactNode
+  children: ReactNode
 }
 
-export const BoqRowsLayout = ({ children }: Props): React.JSX.Element => {
+export const BoqRowsLayout = ({ children }: Props): JSX.Element => {
   return (
     <div
       className={cls.boqRows}

@@ -2,6 +2,7 @@ import { FiLogIn } from 'react-icons/fi'
 import { Box } from '@mui/material'
 import { useSignal } from '@preact/signals-react'
 import { useRef } from 'react'
+import type { JSX } from 'react'
 import { useLogIn } from '@features/auth/log-in'
 import { OpenRegisterModalLink } from '@features/open-close/open-register-modal'
 import { OpenResetModalLink } from '@features/open-close/open-reset-modal'
@@ -11,7 +12,7 @@ import { PasswordField } from '@shared/component/input-field/PasswordField'
 import { router } from '@shared/lib/react-router-dom'
 import { useSlide } from '@shared/util/useSlide'
 
-export const LoginModal = (): React.JSX.Element => {
+export const LoginModal = (): JSX.Element => {
   const { ref: modalRef, slideOut } = useSlide()
   const inputRef = useRef<HTMLDivElement>(null)
   const emailSignal = useSignal('')

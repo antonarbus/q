@@ -18,8 +18,9 @@ import { router } from '@shared/lib/react-router-dom'
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { enGB } from 'date-fns/locale'
+import type { JSX } from 'react'
 
-export const App = (): React.JSX.Element => {
+export const App = (): JSX.Element => {
   return (
     <Provider store={store}>
       <QueryClientProvider client={instance.queryClient}>

@@ -1,10 +1,11 @@
 import { useRef } from 'react'
+import type { JSX,ReactNode } from 'react'
 import { useEffectOnce } from 'react-use'
 import { useSlide } from '../util/useSlide'
 import { getState } from '@shared/lib/redux'
 
 type Props = {
-  children: React.ReactNode
+  children: ReactNode
   onMount?: () => void
   onUnmount?: () => void
   shouldUnmountOnClickAway: boolean
@@ -17,7 +18,7 @@ export const BackdropWithSlidableModal = ({
   onUnmount,
   shouldUnmountOnClickAway,
   shouldUnmountOnEsc,
-}: Props): React.JSX.Element => {
+}: Props): JSX.Element => {
   const { ref: contentRef, slideIn, slideOut } = useSlide()
 
   const scrollTopPositionBeforeModalOpen = useRef(

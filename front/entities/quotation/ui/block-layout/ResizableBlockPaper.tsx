@@ -7,9 +7,10 @@ import type {
   OnBlockResizeStop,
 } from '@shared/type/resizablePaper'
 import { useBlock } from '../../provider/BlockProvider'
+import type { JSX,ReactNode } from 'react'
 
 type Props = {
-  children: React.ReactNode
+  children: ReactNode
   disableResize?: boolean
   autoWidth?: boolean
   minWidth?: ResizableProps['minWidth']
@@ -26,7 +27,7 @@ export const ResizableBlockPaper = ({
   onItemResize,
   onItemResizeStop,
   minWidth,
-}: Props): React.JSX.Element => {
+}: Props): JSX.Element => {
   const { blockIndex } = useBlock()
 
   const width = useSelector(

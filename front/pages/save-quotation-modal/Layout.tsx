@@ -4,12 +4,13 @@ import { OutlinedDivWithLabel } from '@shared/component/OutlinedDivWithLabel'
 import { dispatch, useSelector } from '@shared/lib/redux'
 import { cls } from '@shared/const/cls'
 import { textSlice } from '@shared/lib/froala/textSlice'
+import type { JSX,ReactNode } from 'react'
 
 type Props = {
-  children: React.ReactNode
+  children: ReactNode
 }
 
-export const Layout = ({ children }: Props): React.JSX.Element => {
+export const Layout = ({ children }: Props): JSX.Element => {
   useEffectOnce(() => {
     dispatch(textSlice.actions.setEditable())
   })

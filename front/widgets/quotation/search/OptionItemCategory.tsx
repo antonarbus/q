@@ -2,13 +2,14 @@ import { BsTags } from 'react-icons/bs'
 import { Box } from '@mui/material'
 import { getTextWithBoldSubStringAsJsx } from '@shared/util/getTextWithBoldSubStringAsJsx'
 import type { ItemPick } from '@back/api/bookmark/getBookmarkListHandler'
+import type { JSX } from 'react'
 
 type Props = {
   inputValueSignal: { value: string }
   option: ItemPick
 }
 
-export const OptionItemCategory = (props: Props): React.JSX.Element => {
+export const OptionItemCategory = (props: Props): JSX.Element => {
   return (
     <Box
       sx={{

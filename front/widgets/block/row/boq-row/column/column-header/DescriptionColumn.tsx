@@ -5,8 +5,9 @@ import {
 } from '@entities/quotation'
 import { ResizableColumn } from '../ResizableColumn'
 import { Box } from '@mui/material'
+import type { ReactNode } from 'react'
 
-export const DescriptionColumn = (): React.ReactNode => {
+export const DescriptionColumn = (): ReactNode => {
   return (
     <ResizableColumn
       boqColumnKey={boqColumnKey.description}

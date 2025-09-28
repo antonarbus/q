@@ -1,8 +1,9 @@
 import { theme } from '@shared/theme'
 import { motion } from 'motion/react'
 import { useBlock } from '@entities/quotation'
+import type { JSX } from 'react'
 
-export const PasteItem = (): React.JSX.Element => {
+export const PasteItem = (): JSX.Element => {
   const { block } = useBlock()
 
   return (

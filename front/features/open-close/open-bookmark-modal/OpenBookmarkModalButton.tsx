@@ -9,8 +9,9 @@ import { quotationSlice } from '@entities/quotation'
 import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import { toast } from 'sonner'
 import { textSlice } from '@shared/lib/froala/textSlice'
+import type { JSX } from 'react'
 
-export const OpenBookmarkModalButton = ({ id }: ReqBody): React.JSX.Element => {
+export const OpenBookmarkModalButton = ({ id }: ReqBody): JSX.Element => {
   const navigate = useNavigate()
   const getBookmarkMutation = useGetBookmarkMutation()
 

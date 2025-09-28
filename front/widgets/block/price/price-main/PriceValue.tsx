@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import type { JSX } from 'react'
 import {
   updatePriceValueCell,
   useUpdateTotalPriceIfPricesAboveWereChanged,
@@ -11,7 +12,7 @@ import {
 } from '@entities/quotation'
 import type { FroalaEditor } from '@shared/type/froala'
 
-export const PriceValue = (): React.JSX.Element => {
+export const PriceValue = (): JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)
   const { blockIndex } = useBlock()
 

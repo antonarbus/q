@@ -8,10 +8,11 @@ import {
 import { updateRowBlockCellAtStore } from '@entities/quotation/redux/updater/updateRowBlockCellAtStore'
 import { getState } from '@shared/lib/redux'
 import { updateRowBlockCellWithValue } from '@entities/quotation/util/updateRowBlockCellWithValue'
+import type { RefObject } from 'react'
 
 type Props = {
-  itemPriceCellEditorRef: React.RefObject<FroalaEditor | null>
-  priceCellEditorRef: React.RefObject<FroalaEditor | null>
+  itemPriceCellEditorRef: RefObject<FroalaEditor | null>
+  priceCellEditorRef: RefObject<FroalaEditor | null>
 }
 
 export const updateItemPriceCell = ({

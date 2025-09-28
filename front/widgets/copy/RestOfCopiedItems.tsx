@@ -2,6 +2,7 @@ import { getState, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import { type Variants, AnimatePresence, motion } from 'motion/react'
 import { useRef } from 'react'
+import type { JSX } from 'react'
 import { containerPadding, containerWidth, itemMarginBottom } from './const'
 import { ScaledCopyItem } from './ScaledCopyItem'
 
@@ -53,7 +54,7 @@ const variants: Variants = {
   },
 }
 
-export const RestOfCopiedItems = (): React.JSX.Element | null => {
+export const RestOfCopiedItems = (): JSX.Element | null => {
   const items = useSelector((state) => state.copy.items)
   const isCopying = useSelector((state) => state.copy.isCopying)
   const prevFirstItemHeightRef = useRef(0)

@@ -5,8 +5,9 @@ import { route } from '@shared/const/route'
 import { PiGlobeX, PiGlobe } from 'react-icons/pi'
 import { BsPersonFillLock } from 'react-icons/bs'
 import { useSelector } from '@shared/lib/redux'
+import type { JSX } from 'react'
 
-export const OpenShareQuotationIcon = (): React.JSX.Element => {
+export const OpenShareQuotationIcon = (): JSX.Element => {
   const disabled = useIsCopyModalVisible()
   const access = useSelector((state) => state.quotation.access)
 

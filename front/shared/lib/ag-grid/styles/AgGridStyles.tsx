@@ -1,8 +1,9 @@
 // import 'ag-grid-community/styles/ag-grid.css'
 // import 'ag-grid-community/styles/ag-theme-alpine.css'
 import { Global, css } from '@emotion/react'
+import type { JSX } from 'react'
 
-export const AgGridStyles = (): React.JSX.Element => {
+export const AgGridStyles = (): JSX.Element => {
   return (
     <Global
       styles={css`

@@ -4,6 +4,7 @@ import { IoSettingsOutline } from 'react-icons/io5'
 import { Avatar, Box, Collapse } from '@mui/material'
 import { format } from 'bytes'
 import { Fragment, useMemo, useRef, useState } from 'react'
+import type { JSX } from 'react'
 import { GrStorage } from 'react-icons/gr'
 import { useNavigate } from 'react-router-dom'
 import { BackdropWithSlidableModal } from '@shared/component/BackdropWithSlidableModal'
@@ -14,7 +15,7 @@ import { FiFileText } from 'react-icons/fi'
 import { DeleteFileIcon } from '@features/file/delete-file'
 import { useGetFileListStatsQuery } from '@entities/file'
 
-export const SettingsModal = (): React.JSX.Element => {
+export const SettingsModal = (): JSX.Element => {
   const cardRef = useRef<HTMLDivElement>(null)
   const navigate = useNavigate()
   const [collapseOpen, setCollapseOpen] = useState(false)

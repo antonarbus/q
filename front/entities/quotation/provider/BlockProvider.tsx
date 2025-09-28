@@ -1,4 +1,5 @@
-import { createContext, useContext, useMemo } from 'react'
+import { createContext, useContext, useMemo, type ReactNode } from 'react'
+import type { JSX } from 'react'
 import type { Item } from '../type'
 
 type Context = {
@@ -7,7 +8,7 @@ type Context = {
 }
 
 type Props = Context & {
-  children: React.ReactNode
+  children: ReactNode
 }
 
 const BlockContext = createContext<Context | null>(null)
@@ -16,7 +17,7 @@ export const BlockProvider = ({
   children,
   blockIndex,
   block,
-}: Props): React.JSX.Element => {
+}: Props): JSX.Element => {
   const blockContextData = useMemo(() => {
     const contextData = {
       blockIndex,

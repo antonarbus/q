@@ -2,8 +2,9 @@ import { getState } from '@shared/lib/redux'
 import { hideBoqRowPinsOnRowBlur } from '@features/blocks/cell/pin'
 import { BOOKMARK_POS_AT_BLOCKS, RowProvider } from '@entities/quotation'
 import { BoqRow } from './boq-row/BoqRow'
+import type { ReactNode } from 'react'
 
-export const BoqRows = (): React.ReactNode => {
+export const BoqRows = (): ReactNode => {
   const block = getState().quotation.blocks[BOOKMARK_POS_AT_BLOCKS]
 
   if (block?.type !== 'row') {

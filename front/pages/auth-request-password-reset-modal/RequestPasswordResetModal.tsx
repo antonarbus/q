@@ -2,6 +2,7 @@ import { PiPassword } from 'react-icons/pi'
 import { Box } from '@mui/material'
 import { useSignal } from '@preact/signals-react'
 import { useRef } from 'react'
+import type { JSX } from 'react'
 import { useRequestPasswordReset } from '@features/auth/request-password-reset'
 import { OpenLoginModalLink } from '@features/open-close/open-login-modal'
 import { EmailField } from '@shared/component/input-field/EmailField'
@@ -9,7 +10,7 @@ import { FormModal } from '@shared/component/FormModal'
 import { router } from '@shared/lib/react-router-dom'
 import { useSlide } from '@shared/util/useSlide'
 
-export const RequestPasswordResetModal = (): React.JSX.Element => {
+export const RequestPasswordResetModal = (): JSX.Element => {
   const { ref: modalRef, slideOut } = useSlide()
   const inputRef = useRef<HTMLDivElement>(null)
   const emailSignal = useSignal('')

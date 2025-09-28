@@ -1,6 +1,7 @@
 import { Box } from '@mui/material'
 import { useSignal, useSignalEffect } from '@preact/signals-react'
 import { useRef } from 'react'
+import type { ReactNode } from 'react'
 import { MdPassword } from 'react-icons/md'
 import { useParams } from 'react-router-dom'
 import { useResetPassword } from '@features/auth/reset-password'
@@ -13,7 +14,7 @@ import { PasswordField } from '@shared/component/input-field/PasswordField'
 import { router } from '@shared/lib/react-router-dom'
 import { useSlide } from '@shared/util/useSlide'
 
-export const ResetPasswordModal = (): React.ReactNode => {
+export const ResetPasswordModal = (): ReactNode => {
   const { ref: modalRef, slideOut } = useSlide()
   const { email } = useParams()
   const inputRef = useRef<HTMLDivElement>(null)

@@ -3,6 +3,7 @@ import { VscEye, VscEyeClosed } from 'react-icons/vsc'
 import { MdOutlineLock } from 'react-icons/md'
 import { IconButton, InputAdornment, TextField } from '@mui/material'
 import { useSignal, type Signal } from '@preact/signals-react'
+import type { JSX } from 'react'
 
 type Props = {
   passwordSignal: Signal<string>
@@ -18,7 +19,7 @@ export const PasswordField = ({
   label,
   isLabelRed,
   autoFocus,
-}: Props): React.JSX.Element => {
+}: Props): JSX.Element => {
   const showPassword = useSignal(false)
 
   return (

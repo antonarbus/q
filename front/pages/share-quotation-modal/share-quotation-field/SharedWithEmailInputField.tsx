@@ -2,6 +2,7 @@ import type { AccessFormValuesSignal } from '@entities/quotation'
 import { Button, InputAdornment, TextField } from '@mui/material'
 import type { Signal } from '@preact/signals-react'
 import uniq from 'lodash.uniq'
+import type { ReactNode } from 'react'
 
 type Props = {
   accessFormValuesSignal: AccessFormValuesSignal
@@ -9,7 +10,7 @@ type Props = {
   isButtonDisabledSignal: Signal<boolean>
 }
 
-export const SharedWithEmailInputField = (props: Props): React.ReactNode => {
+export const SharedWithEmailInputField = (props: Props): ReactNode => {
   if (props.accessFormValuesSignal.value.level !== 'custom') {
     return null
   }

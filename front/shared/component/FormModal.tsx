@@ -4,6 +4,7 @@ import { IoClose } from 'react-icons/io5'
 import { AnimatePresence, motion } from 'motion/react'
 import type { AnimationScope } from 'motion-dom'
 import { Children } from 'react'
+import type { JSX,ReactNode,ComponentRef,RefObject,CSSProperties,MouseEvent,FormEvent } from 'react'
 import { BackdropWithSlidableModal } from './BackdropWithSlidableModal'
 import { ButtonCustom } from './ButtonCustom'
 import { cls } from '@shared/const/cls'
@@ -16,21 +17,21 @@ import {
 } from '@mui/material'
 
 type Props = {
-  width?: React.CSSProperties['width']
-  paddingContent?: React.CSSProperties['width']
+  width?: CSSProperties['width']
+  paddingContent?: CSSProperties['width']
   sx?: SxProps
-  headerIcon: React.ReactNode
+  headerIcon: ReactNode
   headerText: string
-  children: React.ReactNode
+  children: ReactNode
   onUnmount?: () => void
-  onSubmit?: (e: React.FormEvent) => void
-  onCloseClick?: (e: React.MouseEvent) => void
+  onSubmit?: (e: FormEvent) => void
+  onCloseClick?: (e: MouseEvent) => void
   buttonText?: string
   isButtonDisabled?: boolean
   isButtonLoading?: boolean
   isButtonSuccess?: boolean
   isButtonError?: boolean
-  modalRef: React.RefObject<React.ComponentRef<'div'> | null> | AnimationScope
+  modalRef: RefObject<ComponentRef<'div'> | null> | AnimationScope
   shouldUnmountOnClickAway: boolean
   shouldUnmountOnEsc: boolean
 }
@@ -53,7 +54,7 @@ export const FormModal = ({
   paddingContent,
   shouldUnmountOnClickAway,
   shouldUnmountOnEsc,
-}: Props): React.JSX.Element => {
+}: Props): JSX.Element => {
   return (
     <BackdropWithSlidableModal
       onUnmount={onUnmount}
@@ -62,7 +63,7 @@ export const FormModal = ({
     >
       <Box
         className={cls.formModal}
-        onMouseDown={(event: React.MouseEvent): void => {
+        onMouseDown={(event: MouseEvent): void => {
           event.stopPropagation()
         }}
         ref={modalRef}

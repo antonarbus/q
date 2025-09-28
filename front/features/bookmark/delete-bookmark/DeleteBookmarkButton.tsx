@@ -8,8 +8,9 @@ import {
 } from '@entities/bookmark'
 import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import { toast } from 'sonner'
+import type { JSX } from 'react'
 
-export const DeleteBookmarkButton = ({ id }: ReqBody): React.JSX.Element => {
+export const DeleteBookmarkButton = ({ id }: ReqBody): JSX.Element => {
   const deleteBookmarkMutation = useDeleteBookmarkMutation()
 
   useUpdateEffect(() => {

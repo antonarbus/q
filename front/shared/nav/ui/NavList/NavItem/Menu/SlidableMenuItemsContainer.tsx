@@ -1,9 +1,10 @@
 import { MenuItem } from './MenuItem'
 import type { NavItemId } from '@shared/const/navItemId'
 import { getNavItem } from './functions/getNavItem'
+import type { ReactNode,ComponentRef,RefObject } from 'react'
 
 type Props = {
-  reference: React.RefObject<React.ComponentRef<'div'> | null>
+  reference: RefObject<ComponentRef<'div'> | null>
   className: string
   menuNavItemId: NavItemId | null
 }
@@ -12,7 +13,7 @@ export const SlidableMenuItemsContainer = ({
   reference,
   className,
   menuNavItemId,
-}: Props): React.ReactNode => {
+}: Props): ReactNode => {
   if (menuNavItemId === null) {
     return null
   }

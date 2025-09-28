@@ -1,6 +1,6 @@
 import { Button, type ButtonProps } from '@mui/material'
 import { useSignal } from '@preact/signals-react'
-import { useEffect } from 'react'
+import { useEffect, type JSX } from 'react'
 import { FaCircleCheck } from 'react-icons/fa6'
 import { PiSmileySadBold } from 'react-icons/pi'
 import { RotatingLoaderIcon } from './RotatingLoaderIcon'
@@ -20,7 +20,7 @@ export const ButtonCustom = ({
   isButtonSuccess,
   isButtonError,
   ...restProps
-}: Props): React.JSX.Element => {
+}: Props): JSX.Element => {
   const showSuccessIcon = useSignal(false)
   const showErrorIcon = useSignal(false)
 

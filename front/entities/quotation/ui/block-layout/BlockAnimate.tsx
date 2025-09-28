@@ -9,13 +9,14 @@ import type {
   OnBlockResizeStop,
 } from '@shared/type/resizablePaper'
 import { ResizableBlockPaper } from './ResizableBlockPaper'
+import type { JSX,ReactNode } from 'react'
 
 type Props = {
-  children: React.ReactNode
+  children: ReactNode
   blockHeight: number
   id: string
-  leftItemActionButtons?: React.ReactNode
-  rightItemActionButtons?: React.ReactNode
+  leftItemActionButtons?: ReactNode
+  rightItemActionButtons?: ReactNode
   disableResize?: boolean
   autoWidth?: boolean
   minWidth?: ResizableProps['minWidth']
@@ -38,7 +39,7 @@ export const BlockAnimate = ({
   onItemResize,
   onItemResizeStop,
   className,
-}: Props): React.JSX.Element => {
+}: Props): JSX.Element => {
   return (
     <motion.div
       animate={{

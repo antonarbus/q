@@ -2,12 +2,13 @@ import type { AccessFormValuesSignal } from '@entities/quotation'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 import { Box, Chip } from '@mui/material'
 import { motion } from 'motion/react'
+import type { ReactNode } from 'react'
 
 type Props = {
   accessFormValuesSignal: AccessFormValuesSignal
 }
 
-export const SharedWithEmailList = (props: Props): React.ReactNode => {
+export const SharedWithEmailList = (props: Props): ReactNode => {
   const [chipsParent] = useAutoAnimate()
 
   if (props.accessFormValuesSignal.value.level !== 'custom') {

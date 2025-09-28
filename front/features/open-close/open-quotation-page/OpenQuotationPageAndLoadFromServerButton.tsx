@@ -2,6 +2,7 @@
 import { IconButton, Tooltip } from '@mui/material'
 import { AiOutlineFolderOpen } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
+import type { ReactNode } from 'react'
 
 type Props = {
   id: string
@@ -9,7 +10,7 @@ type Props = {
 
 export const OpenQuotationPageAndLoadFromServerButton = ({
   id,
-}: Props): React.ReactNode => {
+}: Props): ReactNode => {
   return (
     <Tooltip
       enterDelay={500}

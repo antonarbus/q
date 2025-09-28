@@ -2,12 +2,13 @@ import { useFroala } from '@entities/quotation/provider/FroalaProvider'
 import { Box } from '@mui/material'
 import { cls } from '@shared/const/cls'
 import { theme } from '@shared/theme'
+import type { JSX,ComponentRef,RefObject } from 'react'
 
 type Props = {
-  dropFilesTextRef: React.RefObject<React.ComponentRef<'div'> | null>
+  dropFilesTextRef: RefObject<ComponentRef<'div'> | null>
 }
 
-export const DropFilesOrImagesText = (props: Props): React.JSX.Element => {
+export const DropFilesOrImagesText = (props: Props): JSX.Element => {
   const { editorRef } = useFroala()
 
   return (

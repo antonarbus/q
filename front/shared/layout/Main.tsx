@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom'
+import type { JSX } from 'react'
 
-export const Main = (): React.JSX.Element => {
+export const Main = (): JSX.Element => {
   return (
     <main
       style={{

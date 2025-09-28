@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import type { JSX } from 'react'
 import { updateTitleCell } from '@features/blocks/cell/update-cell'
 import {
   getBoqHeaderHtmlFromStore,
@@ -11,7 +12,7 @@ import type { FroalaEditor } from '@shared/type/froala'
 
 const boqHeaderKey: HeaderKey = 'title'
 
-export const Title = (): React.JSX.Element => {
+export const Title = (): JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)
   const { blockIndex } = useBlock()
 

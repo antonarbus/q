@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import type { JSX } from 'react'
 import { updateTextBlock } from '@features/blocks/cell/update-cell'
 import { CopyBlockIcon } from '@features/blocks/copy'
 import { CutBlockIcon } from '@features/blocks/cut'
@@ -22,7 +23,7 @@ import { cls } from '@shared/const/cls'
 import { ItemActionButtonsLayout } from '@shared/layout/ItemActionButtonsLayout'
 import type { FroalaEditor } from '@shared/type/froala'
 
-export const TextBlock = (): React.JSX.Element => {
+export const TextBlock = (): JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)
   const { blockIndex } = useBlock()
 

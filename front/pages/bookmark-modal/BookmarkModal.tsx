@@ -16,8 +16,9 @@ import { DescriptionField } from '@shared/component/input-field/DescriptionField
 import { InfoField } from '@shared/component/input-field/InfoField'
 import { useGetBookmarkCategoryListQuery } from '@entities/bookmark'
 import { useSlide } from '@shared/util/useSlide'
+import type { JSX } from 'react'
 
-export const BookmarkModal = (): React.JSX.Element => {
+export const BookmarkModal = (): JSX.Element => {
   const { ref: modalRef, slideOut } = useSlide()
   const { bookmarkFromValues } = useLoadInitValuesIntoBookmarkModal()
   useLoadBookmarkModalOpenedWithDirectLink({ bookmarkFromValues })

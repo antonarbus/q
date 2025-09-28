@@ -1,5 +1,6 @@
 import { Box } from '@mui/material'
 import {
+import type { JSX } from 'react'
   boqColumnKey,
   getNumberOfBoqBlocksAbove,
   useBlock,
@@ -8,7 +9,7 @@ import {
   columnMinWidth,
 } from '@entities/quotation'
 
-export const NumberCell = (): React.JSX.Element => {
+export const NumberCell = (): JSX.Element => {
   const { blockIndex } = useBlock()
   const { rowIndex } = useRow()
 

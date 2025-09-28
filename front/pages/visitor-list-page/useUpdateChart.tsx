@@ -1,11 +1,12 @@
 import { useEffect } from 'react'
+import type { RefObject } from 'react'
 import type { Chart } from 'chart.js'
 import type { ResBody } from '@back/api/visitors/getUniqueDailyVisitorsHandler'
 import { format, parseISO } from 'date-fns'
 
 type Props = {
   visitors: ResBody['visitorsCount']
-  chartInstanceRef: React.RefObject<Chart | null>
+  chartInstanceRef: RefObject<Chart | null>
 }
 
 export const useUpdateChart = ({ visitors, chartInstanceRef }: Props): void => {

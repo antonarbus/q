@@ -1,5 +1,7 @@
+import type { ComponentRef,RefObject } from 'react'
+
 type Props = {
-  dropFilesTextRef: React.RefObject<React.ComponentRef<'div'> | null>
+  dropFilesTextRef: RefObject<ComponentRef<'div'> | null>
 }
 
 export const showDropFilesTextOnMouseEnter = ({

@@ -10,6 +10,7 @@ import { dispatch, getState } from '@shared/lib/redux'
 import { navSlice } from '@shared/nav'
 import { navItemId } from '@shared/const/navItemId'
 import { appSlice } from '@shared/appSlice'
+import type { FormEvent } from 'react'
 
 type Props = {
   emailSignal: Signal<string>
@@ -18,7 +19,7 @@ type Props = {
 }
 
 type Res = {
-  onSubmit: (e: React.FormEvent) => void
+  onSubmit: (e: FormEvent) => void
   isPending: UseMutationResult['isPending']
   isSuccess: UseMutationResult['isSuccess']
   isError: UseMutationResult['isError']
@@ -107,7 +108,7 @@ export const useRegister = ({
     }
   }, [registerUserMutation.isError])
 
-  const onSubmit = (event: React.FormEvent): void => {
+  const onSubmit = (event: FormEvent): void => {
     event.preventDefault()
 
     registerUserMutation.mutate({

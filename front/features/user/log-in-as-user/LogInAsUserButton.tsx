@@ -12,8 +12,9 @@ import { dispatch } from '@shared/lib/redux'
 import { navSlice } from '@shared/nav'
 import { navItemId } from '@shared/const/navItemId'
 import { route } from '@shared/const/route'
+import type { ReactNode } from 'react'
 
-export const LogInAsUserButton = ({ email }: Payload): React.ReactNode => {
+export const LogInAsUserButton = ({ email }: Payload): ReactNode => {
   const logInUserMutation = useLogInUserMutation()
   const location = useLocation()
   const getQuotationListQuery = useGetQuotationListQuery()

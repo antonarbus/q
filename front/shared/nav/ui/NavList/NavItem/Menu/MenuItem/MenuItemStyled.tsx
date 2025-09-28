@@ -1,9 +1,10 @@
 import { theme } from '@shared/theme'
 import { type LinkProps, Link } from 'react-router-dom'
 import { css } from '@emotion/react'
+import type { JSX,ReactNode } from 'react'
 
 type Props = {
-  children: React.ReactNode
+  children: ReactNode
   to: string
   isHovered: boolean
 } & LinkProps
@@ -13,7 +14,7 @@ export const MenuItemLayout = ({
   isHovered,
   children,
   ...restProps
-}: Props): React.JSX.Element => {
+}: Props): JSX.Element => {
   return (
     <Link
       css={css`

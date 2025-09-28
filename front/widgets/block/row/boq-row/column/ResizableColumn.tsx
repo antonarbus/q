@@ -7,9 +7,10 @@ import {
 } from '@features/blocks/resize'
 import { selectColumnWidth } from '@entities/quotation'
 import type { BoqColumnKey } from '@entities/quotation/const/boqColumnKey'
+import type { JSX,ReactNode } from 'react'
 
 type Props = {
-  children: React.ReactNode
+  children: ReactNode
   className: string
   boqColumnKey: BoqColumnKey
   minWidth: number
@@ -20,7 +21,7 @@ export const ResizableColumn = ({
   className,
   boqColumnKey,
   minWidth,
-}: Props): React.JSX.Element => {
+}: Props): JSX.Element => {
   const colWidth = useSelector(
     selectColumnWidth({ blockIndex: 0, boqColumnKey }),
   )

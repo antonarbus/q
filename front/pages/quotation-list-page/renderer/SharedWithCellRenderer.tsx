@@ -4,6 +4,7 @@ import type { QuotationPick } from '@back/api/quotation/getQuotationListHandler'
 import { Link } from 'react-router-dom'
 import { route } from '@shared/const/route'
 import { getTextWithBoldSubStringAsJsx } from '@shared/util/getTextWithBoldSubStringAsJsx'
+import type { ReactNode } from 'react'
 
 type FilterModel = {
   access?: {
@@ -15,7 +16,7 @@ type FilterModel = {
 
 export const SharedWithCellRenderer = (
   params: ICellRendererParams<QuotationPick, string>,
-): React.ReactNode => {
+): ReactNode => {
   const quotationId = params.data?.id
   const accessLevel = params.data?.access.level
   const userList = params.data?.access.userList ?? []

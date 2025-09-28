@@ -4,10 +4,11 @@ import {
   TextField,
 } from '@mui/material'
 import { GoSearch } from 'react-icons/go'
+import type { JSX } from 'react'
 
 export const renderInput = (
   params: AutocompleteRenderInputParams,
-): React.JSX.Element => {
+): JSX.Element => {
   const { InputProps, ...otherParams } = params
 
   return (

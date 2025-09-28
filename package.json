@@ -73,7 +73,7 @@
     "@types/mongoose": "^5.11.97",
     "@types/morgan": "^1.9.10",
     "@types/node": "^22.15.29",
-    "@types/react": "^19.1.6",
+    "@types/react": "^19.1.15",
     "@types/react-dom": "^19.1.9",
     "@types/react-transition-group": "^4.4.12",
     "@types/styled-components": "^5.1.34",

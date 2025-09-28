@@ -1,9 +1,10 @@
-import { createContext, useContext, useMemo } from 'react'
+import { createContext, useContext, useMemo, type ReactNode } from 'react'
+import type { JSX } from 'react'
 import type { FroalaEditorRef } from '@shared/type/froala'
 import type { RowEditorRefs } from '../type'
 
 type Props = {
-  children: React.ReactNode
+  children: ReactNode
 }
 
 type BoqContextType = {
@@ -13,7 +14,7 @@ type BoqContextType = {
 
 const BoqContext = createContext<BoqContextType | null>(null)
 
-export const BoqProvider = ({ children }: Props): React.JSX.Element => {
+export const BoqProvider = ({ children }: Props): JSX.Element => {
   const blockContextData = useMemo(() => {
     const contextData = {
       subTotalPriceEditorRef: { current: null },

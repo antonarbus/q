@@ -8,8 +8,9 @@ import { copySlice } from '@entities/copy'
 import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import { toast } from 'sonner'
 import { textSlice } from '@shared/lib/froala/textSlice'
+import type { JSX } from 'react'
 
-export const CopyBookmarkButton = ({ id }: ReqBody): React.JSX.Element => {
+export const CopyBookmarkButton = ({ id }: ReqBody): JSX.Element => {
   const getBookmarkMutation = useGetBookmarkMutation()
 
   useUpdateEffect(() => {

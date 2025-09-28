@@ -1,5 +1,6 @@
 import 'chart.js/auto'
 import { useState } from 'react'
+import type { JSX } from 'react'
 import { Box } from '@mui/material'
 import { DatePicker } from '@mui/x-date-pickers'
 import { format, subDays } from 'date-fns'
@@ -10,7 +11,7 @@ import { useUpdateChart } from './useUpdateChart'
 const today = new Date()
 const thirtyDaysAgo = subDays(today, 30)
 
-export const VisitorListPage = (): React.JSX.Element => {
+export const VisitorListPage = (): JSX.Element => {
   const { canvasRef, chartInstanceRef } = useInstantiateChart()
 
   const [startDate, setStartDate] = useState(thirtyDaysAgo)

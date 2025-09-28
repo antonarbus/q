@@ -1,4 +1,6 @@
-export const subTotalPriceCellStyle: React.CSSProperties = {
+import type { CSSProperties } from 'react'
+
+export const subTotalPriceCellStyle: CSSProperties = {
   width: '100%',
   minWidth: '100px',
   whiteSpace: 'nowrap',

@@ -1,12 +1,13 @@
 import { Tooltip } from '@mui/material'
 import { HiDownload } from 'react-icons/hi'
 import { format } from 'bytes'
+import type { JSX } from 'react'
 
 type Props = {
   fileSize: number
 }
 
-export const DownloadFileIcon = ({ fileSize }: Props): React.JSX.Element => {
+export const DownloadFileIcon = ({ fileSize }: Props): JSX.Element => {
   const fileSizeFormatted = format(fileSize, {
     unit: fileSize < 1_048_576 ? 'kb' : 'mb',
     thousandsSeparator: ' ',

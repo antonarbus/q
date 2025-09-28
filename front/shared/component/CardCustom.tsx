@@ -1,11 +1,12 @@
 import { type SxProps, Typography, Box } from '@mui/material'
+import type { JSX,ReactNode,ComponentRef,RefObject,MouseEvent } from 'react'
 
 type Props = {
-  children?: React.ReactNode
+  children?: ReactNode
   sx?: SxProps
-  reference?: React.RefObject<React.ComponentRef<'div'> | null>
-  title?: React.ReactNode
-  logo?: React.ReactNode
+  reference?: RefObject<ComponentRef<'div'> | null>
+  title?: ReactNode
+  logo?: ReactNode
 }
 
 export const CardCustom = ({
@@ -14,9 +15,9 @@ export const CardCustom = ({
   reference,
   title,
   logo,
-}: Props): React.JSX.Element => (
+}: Props): JSX.Element => (
   <Box
-    onMouseDown={(event: React.MouseEvent): void => {
+    onMouseDown={(event: MouseEvent): void => {
       event.stopPropagation()
     }}
     ref={reference}

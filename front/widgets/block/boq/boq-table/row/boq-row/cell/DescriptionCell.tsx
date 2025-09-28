@@ -1,6 +1,7 @@
 import { tabFromDescriptionCell } from '@features/blocks/cell/tab-away-from-cell'
 import { updateDescriptionCell } from '@features/blocks/cell/update-cell'
 import { beforeUpload } from '@features/file/upload-file'
+import type { JSX,KeyboardEvent } from 'react'
 import {
   getBoqCellHtmlFromStore,
   useRow,
@@ -13,7 +14,7 @@ import {
   columnMinWidth,
 } from '@entities/quotation'
 
-export const DescriptionCell = (): React.JSX.Element => {
+export const DescriptionCell = (): JSX.Element => {
   const { blockIndex } = useBlock()
   const { rowIndex, itemPriceCellEditorRef, descriptionEditorRef } = useRow()
 
@@ -44,7 +45,7 @@ export const DescriptionCell = (): React.JSX.Element => {
           rowIndex,
         })
       }}
-      onKeydown={(event: React.KeyboardEvent) => {
+      onKeydown={(event: KeyboardEvent) => {
         tabFromDescriptionCell({
           event,
           itemPriceCellEditorRef,

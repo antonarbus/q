@@ -4,13 +4,14 @@ import { VscPinned } from 'react-icons/vsc'
 import { selectBoqCellPin, useBlock, useRow } from '@entities/quotation'
 import { cls } from '@shared/const/cls'
 import type { BoqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
+import type { ReactNode,MouseEvent } from 'react'
 
 type Props = {
   boqRowCellKey: BoqRowCellKey
-  onClick: (e: React.MouseEvent) => void
+  onClick: (e: MouseEvent) => void
 }
 
-export const Pin = ({ boqRowCellKey, onClick }: Props): React.ReactNode => {
+export const Pin = ({ boqRowCellKey, onClick }: Props): ReactNode => {
   const { blockIndex } = useBlock()
   const { rowIndex } = useRow()
 

@@ -13,8 +13,9 @@ import {
 } from '@entities/quotation'
 import { updatePriceCell } from '@features/blocks/cell/update-cell/row-block-cells/price/updatePriceCell'
 import { formatPriceCell } from '@features/blocks/cell/update-cell/row-block-cells/price/formatPriceCell'
+import type { JSX } from 'react'
 
-export const PriceCell = (): React.JSX.Element => {
+export const PriceCell = (): JSX.Element => {
   const { priceCellEditorRef, itemPriceCellEditorRef } = useRow()
 
   const { stylesForResizableCell } = useStylesForResizableCell({

@@ -1,6 +1,7 @@
 import { theme } from '@shared/theme'
+import type { JSX } from 'react'
 
-export const FourZeroFour = (): React.JSX.Element => (
+export const FourZeroFour = (): JSX.Element => (
   <div
     style={{
       height: '100vh',

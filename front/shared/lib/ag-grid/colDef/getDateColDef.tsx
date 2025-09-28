@@ -1,5 +1,6 @@
 import { Box } from '@mui/material'
 import { format, isValid } from 'date-fns'
+import type { ReactNode } from 'react'
 import type {
   ColDef,
   ColDefField,
@@ -50,7 +51,7 @@ export const getDateColDef = <
     },
     cellRenderer: (
       params: ICellRendererParams<TData, TValue>,
-    ): React.ReactNode => {
+    ): ReactNode => {
       if (typeof params.value !== 'string') {
         return null
       }

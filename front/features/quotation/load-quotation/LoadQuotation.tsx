@@ -1,7 +1,8 @@
 import { useLoadQuotation } from './useLoadQuotation'
 import { useResetQuotationOnNavigationButtonClick } from './useResetQuotationOnNavigationButtonClick'
+import type { ReactNode } from 'react'
 
-export const LoadQuotation = (): React.ReactNode => {
+export const LoadQuotation = (): ReactNode => {
   useLoadQuotation()
   useResetQuotationOnNavigationButtonClick()
 

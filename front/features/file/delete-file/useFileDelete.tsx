@@ -1,6 +1,7 @@
 import { instance } from '@shared/instance'
 import { queryKey } from '@shared/const/queryKey'
 import { useCallback } from 'react'
+import type { MouseEvent } from 'react'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
 import { useDeleteFileMutation } from '@entities/file'
@@ -10,7 +11,7 @@ type Props = {
 }
 
 type Res = {
-  onDeleteClick: (e: React.MouseEvent) => void
+  onDeleteClick: (e: MouseEvent) => void
   isSuccess: boolean
   isPending: boolean
 }
@@ -32,7 +33,7 @@ export const useFileDelete = ({ fileId }: Props): Res => {
     }
   }, [deleteFileMutation.isError])
 
-  const onDeleteClick = useCallback((event: React.MouseEvent): void => {
+  const onDeleteClick = useCallback((event: MouseEvent): void => {
     event.preventDefault()
     event.stopPropagation()
 

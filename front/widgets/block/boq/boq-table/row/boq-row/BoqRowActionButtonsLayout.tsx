@@ -1,12 +1,13 @@
 import { Box } from '@mui/material'
 import { cls } from '@shared/const/cls'
+import type { JSX,ReactNode,CSSProperties } from 'react'
 
 type Props = {
-  children: React.ReactNode
-  style?: React.CSSProperties
+  children: ReactNode
+  style?: CSSProperties
 }
 
-export const BoqRowActionButtonsLayout = (props: Props): React.JSX.Element => {
+export const BoqRowActionButtonsLayout = (props: Props): JSX.Element => {
   return (
     <Box
       className={cls.actionsContainer}

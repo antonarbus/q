@@ -1,7 +1,8 @@
 import { theme } from '@shared/theme'
 import { motion } from 'motion/react'
+import type { JSX } from 'react'
 
-export const BoqPasteRowTextOverlay = (): React.JSX.Element => (
+export const BoqPasteRowTextOverlay = (): JSX.Element => (
   <motion.div
     animate={{
       height: 40,

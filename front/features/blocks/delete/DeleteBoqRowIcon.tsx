@@ -11,8 +11,9 @@ import {
 } from '@entities/quotation'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/const/cls'
+import type { JSX } from 'react'
 
-export const DeleteBoqRowIcon = (): React.JSX.Element => {
+export const DeleteBoqRowIcon = (): JSX.Element => {
   const { blockIndex } = useBlock()
   const { rowIndex } = useRow()
 

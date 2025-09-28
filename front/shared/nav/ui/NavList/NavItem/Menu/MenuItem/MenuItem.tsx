@@ -1,5 +1,5 @@
 import { dispatch, useSelector } from '@shared/lib/redux'
-import type { MouseEvent } from 'react'
+import type { MouseEvent, JSX } from 'react'
 import { FaChevronRight } from 'react-icons/fa'
 import { useLocation } from 'react-router-dom'
 import { navSlice } from '../../../../../navSlice'
@@ -19,7 +19,7 @@ type Props = {
   hoverIndex: number
 }
 
-export const MenuItem = ({ navItem, hoverIndex }: Props): React.JSX.Element => {
+export const MenuItem = ({ navItem, hoverIndex }: Props): JSX.Element => {
   const location = useLocation()
 
   const isHovered = useSelector((state) => state.nav.hoverIndex === hoverIndex)

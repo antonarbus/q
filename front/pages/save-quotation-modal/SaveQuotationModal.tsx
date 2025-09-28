@@ -16,8 +16,9 @@ import { router } from '@shared/lib/react-router-dom'
 import { useSlide } from '@shared/util/useSlide'
 import { useLocation } from 'react-router-dom'
 import { route } from '@shared/const/route'
+import type { JSX } from 'react'
 
-export const SaveQuotationModal = (): React.JSX.Element => {
+export const SaveQuotationModal = (): JSX.Element => {
   const isQuotationsPage = useLocation().pathname.includes(route.quotationList)
   const { ref: modalRef, slideOut } = useSlide()
   const { saveQuotationFormValues } = useQuotationSaveFormValues()

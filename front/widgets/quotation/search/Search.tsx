@@ -4,13 +4,14 @@ import { PaperComponent } from './PaperComponent'
 import { renderInput } from './renderInput'
 import { renderOption } from './renderOption'
 import { useEffect } from 'react'
+import type { JSX } from 'react'
 import { useSelector } from '@shared/lib/redux'
 import { useGetBookmarkListQuery } from '@entities/bookmark'
 import { useSignal } from '@preact/signals-react'
 import { useCopyBookmarkAtSearch } from '@features/bookmark/copy-bookmark'
 import { useIsCopyModalVisible } from '@entities/copy'
 
-export const Search = (): React.JSX.Element => {
+export const Search = (): JSX.Element => {
   const getBookmarkListQuery = useGetBookmarkListQuery()
 
   const options = getBookmarkListQuery.data?.bookmarks ?? []

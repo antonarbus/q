@@ -1,4 +1,5 @@
 import { Suspense, lazy, useState } from 'react'
+import type { JSX } from 'react'
 import { useEffectOnce } from 'react-use'
 
 const QueryDevtoolsProduction = lazy(async () => {
@@ -13,7 +14,7 @@ const QueryDevtoolsProduction = lazy(async () => {
 
 // press R+Q for several seconds to activate ReactQuery dev tools in production
 // works only within 1st min after the load
-export const QueryDevtoolsProductionHidden = (): React.JSX.Element | null => {
+export const QueryDevtoolsProductionHidden = (): JSX.Element | null => {
   const controller = new AbortController()
 
   const [showDevtools, setShowDevtools] = useState(false)

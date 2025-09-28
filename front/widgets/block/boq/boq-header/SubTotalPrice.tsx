@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import type { JSX,MouseEvent } from 'react'
 import { showHideBoqPricePins } from '@features/blocks/cell/pin'
 import {
   formatSubtotalPriceCell,
@@ -17,7 +18,7 @@ import {
 
 const boqHeaderKey: HeaderKey = 'subTotalPrice'
 
-export const SubTotalPrice = (): React.JSX.Element => {
+export const SubTotalPrice = (): JSX.Element => {
   const { subTotalPriceEditorRef, boqRowEditorRefs } = useBoq()
   const { blockIndex } = useBlock()
 
@@ -42,7 +43,7 @@ export const SubTotalPrice = (): React.JSX.Element => {
           subTotalPriceEditorRef,
         })
       }}
-      onClick={(event: React.MouseEvent) => {
+      onClick={(event: MouseEvent) => {
         showHideBoqPricePins({
           blockIndex,
           event: event.nativeEvent,

@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import type { JSX } from 'react'
 import { updateBoqColumnCell } from '@features/blocks/cell/update-cell'
 import {
   Froala,
@@ -11,7 +12,7 @@ import {
 import type { FroalaEditor } from '@shared/type/froala'
 import { ResizableColumn } from '../ResizableColumn'
 
-export const QtyColumn = (): React.JSX.Element => {
+export const QtyColumn = (): JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)
   const { blockIndex } = useBlock()
 

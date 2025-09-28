@@ -1,6 +1,8 @@
+import type { JSX,ReactNode,CSSProperties } from 'react'
+
 type Props = {
-  children: React.ReactNode
-  css?: React.CSSProperties
+  children: ReactNode
+  css?: CSSProperties
   className?: string
   disabled?: boolean
 }
@@ -10,7 +12,7 @@ export const RoundSpanForIcon = ({
   css,
   className,
   disabled,
-}: Props): React.JSX.Element => {
+}: Props): JSX.Element => {
   return (
     <span
       className={className}

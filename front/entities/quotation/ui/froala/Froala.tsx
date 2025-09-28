@@ -1,6 +1,7 @@
 import { useSelector } from '@shared/lib/redux'
 import { Box } from '@mui/material'
 import { useRef } from 'react'
+import type { JSX,ComponentRef,MouseEvent } from 'react'
 import { FroalaProvider } from '../../provider/FroalaProvider'
 import { useBlock } from '../../provider/BlockProvider'
 import { EditableHtml } from './EditableHtml'
@@ -17,9 +18,9 @@ import { DropFilesOrImagesText } from './DropFilesOrImagesText'
 import { cls } from '@shared/const/cls'
 import { DropHereText } from './DropHereText'
 
-export const Froala = (props: FroalaProps): React.JSX.Element => {
-  const dropFilesTextRef = useRef<React.ComponentRef<'div'> | null>(null)
-  const froalaElementRef = useRef<React.ComponentRef<'div'> | null>(null)
+export const Froala = (props: FroalaProps): JSX.Element => {
+  const dropFilesTextRef = useRef<ComponentRef<'div'> | null>(null)
+  const froalaElementRef = useRef<ComponentRef<'div'> | null>(null)
   const { blockIndex } = useBlock()
   const { froalaHeightRef } = useFixedHeightForAnimation({ froalaElementRef })
 
@@ -50,7 +51,7 @@ export const Froala = (props: FroalaProps): React.JSX.Element => {
     >
       <Box
         className={`froala-wrapper ${props.className ?? ''}`}
-        onClick={(event: React.MouseEvent) => {
+        onClick={(event: MouseEvent) => {
           placeCaretAtTheEndIfToolbarIsNotShown({
             event,
             editorRef: props.editorRef,

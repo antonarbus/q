@@ -6,6 +6,7 @@ import {
   updateBoqRowQtyCell,
 } from '@features/blocks/cell/update-cell'
 import {
+import type { JSX,MouseEvent } from 'react'
   getBoqCellHtmlFromStore,
   useBlock,
   useRow,
@@ -19,7 +20,7 @@ import {
   columnMinWidth,
 } from '@entities/quotation'
 
-export const QtyCell = (): React.JSX.Element => {
+export const QtyCell = (): JSX.Element => {
   const { blockIndex } = useBlock()
   const { subTotalPriceEditorRef } = useBoq()
   const { rowIndex, qtyCellEditorRef, priceCellEditorRef } = useRow()
@@ -64,7 +65,7 @@ export const QtyCell = (): React.JSX.Element => {
       />
       <Pin
         boqRowCellKey={boqRowCellKey.qty}
-        onClick={(event: React.MouseEvent) => {
+        onClick={(event: MouseEvent) => {
           event.preventDefault() // otherwise form is submitted (no idea why)
           pinBoqRowQtyCell({ blockIndex, rowIndex })
         }}

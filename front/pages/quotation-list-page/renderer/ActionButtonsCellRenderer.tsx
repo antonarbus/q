@@ -4,10 +4,11 @@ import { OpenQuotationPageAndLoadFromServerButton } from '@features/open-close/o
 import { DeleteQuotationButton } from '@features/quotation/delete-quotation'
 import { OpenSaveQuotationModalButton } from '@features/open-close/open-save-quotation-modal'
 import type { QuotationPick } from '@back/api/quotation/getQuotationListHandler'
+import type { ReactNode } from 'react'
 
 type Params = ICellRendererParams<QuotationPick>
 
-export const ActionButtonsCellRenderer = (params: Params): React.ReactNode => {
+export const ActionButtonsCellRenderer = (params: Params): ReactNode => {
   if (params.data?.id === undefined) {
     return null
   }

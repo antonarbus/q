@@ -3,10 +3,11 @@ import type { ICellRendererParams } from 'ag-grid-community'
 import type { UserPicked } from '@back/api/user/getUserListHandler'
 import { DeleteUserButton } from '@features/user/delete-user'
 import { LogInAsUserButton } from '@features/user/log-in-as-user'
+import type { ReactNode } from 'react'
 
 type Params = ICellRendererParams<UserPicked>
 
-export const ActionButtonsCellRenderer = (params: Params): React.ReactNode => {
+export const ActionButtonsCellRenderer = (params: Params): ReactNode => {
   if (params.data?.email === undefined) {
     return null
   }

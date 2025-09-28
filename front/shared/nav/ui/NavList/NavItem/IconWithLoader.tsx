@@ -4,12 +4,13 @@ import { SuccessIcon } from './SuccessIcon'
 import { ErrorIcon } from './ErrorIcon'
 import { Icon } from './Icon'
 import { navMediaQuery } from '../../navMediaQuery'
+import type { ReactNode } from 'react'
 
 type Props = {
   navItem?: NavItem
 }
 
-export const IconWithLoader = (props: Props): React.ReactNode => {
+export const IconWithLoader = (props: Props): ReactNode => {
   const isMobile = window.innerWidth < navMediaQuery.widthWhenNothingFits
 
   if (props.navItem === undefined) {

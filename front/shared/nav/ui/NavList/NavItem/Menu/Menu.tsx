@@ -1,6 +1,7 @@
 import { dispatch, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import { useRef } from 'react'
+import type { JSX,ComponentRef } from 'react'
 import { navSlice } from '../../../../navSlice'
 import { useCloseMenuOnClickOutside } from './functions/useCloseMenuOnClickOutside'
 import { useIsMenuOutsideWindow } from './functions/useIsMenuOutsideWindow'
@@ -12,11 +13,11 @@ import { EmailAtBottomOfMenu } from './EmailAtBottomOfMenu'
 import { css } from '@emotion/react'
 import { navItemId } from '@shared/const/navItemId'
 
-export const Menu = (): React.JSX.Element => {
-  const menuContainerRef = useRef<React.ComponentRef<'div'> | null>(null)
-  const currentMenuRef = useRef<React.ComponentRef<'div'> | null>(null)
-  const nextMenuRef = useRef<React.ComponentRef<'div'> | null>(null)
-  const fakeMenuRef = useRef<React.ComponentRef<'div'> | null>(null)
+export const Menu = (): JSX.Element => {
+  const menuContainerRef = useRef<ComponentRef<'div'> | null>(null)
+  const currentMenuRef = useRef<ComponentRef<'div'> | null>(null)
+  const nextMenuRef = useRef<ComponentRef<'div'> | null>(null)
+  const fakeMenuRef = useRef<ComponentRef<'div'> | null>(null)
 
   const currentMenuNavItemId = useSelector(
     (state) => state.nav.currentMenuNavItemId,

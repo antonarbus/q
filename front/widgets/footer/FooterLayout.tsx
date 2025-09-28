@@ -1,10 +1,11 @@
 import { theme } from '@shared/theme'
+import type { JSX,ReactNode } from 'react'
 
 type Props = {
-  children: React.ReactNode
+  children: ReactNode
 }
 
-export const FooterLayout = (props: Props): React.JSX.Element => {
+export const FooterLayout = (props: Props): JSX.Element => {
   return (
     <footer
       style={{

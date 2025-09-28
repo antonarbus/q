@@ -1,10 +1,11 @@
 import { Box } from '@mui/material'
+import type { JSX } from 'react'
 
 type Props = {
-  main: React.JSX.Element
+  main: JSX.Element
 }
 
-export const PriceMainLayout = ({ main }: Props): React.JSX.Element => {
+export const PriceMainLayout = ({ main }: Props): JSX.Element => {
   return (
     <Box
       className='layout price-value'

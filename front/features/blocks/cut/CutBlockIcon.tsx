@@ -1,6 +1,6 @@
 import { dispatch, getState, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
-import type { MouseEvent } from 'react'
+import type { MouseEvent, JSX } from 'react'
 import { TbCut } from 'react-icons/tb'
 import { copySlice } from '@entities/copy'
 import {
@@ -16,7 +16,7 @@ import { Tooltip } from '@mui/material'
 import { getClosestPaperElementHtml } from '@shared/util/html-getter/getClosestPaperElementHtml'
 import { textSlice } from '@shared/lib/froala/textSlice'
 
-export const CutBlockIcon = (): React.JSX.Element => {
+export const CutBlockIcon = (): JSX.Element => {
   const { blockIndex } = useBlock()
   const isBlockAlone = useSelector(selectIsLastBlock)
   const isCuttable = useSelector((state) => state.copy.isCuttable)

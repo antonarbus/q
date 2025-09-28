@@ -5,12 +5,13 @@ import { FadeInOnInitLoad } from './FadeInOnInitLoad'
 import { Block } from './Block'
 import { BlocksSortableContext } from './BlocksSortableContext'
 import { OpenInsertMenuButton } from '@features/blocks/open-insert-menu'
+import type { ReactNode } from 'react'
 
 type Props = {
   blocks: (Item | null)[]
 }
 
-export const BlockMany = ({ blocks }: Props): React.ReactNode => {
+export const BlockMany = ({ blocks }: Props): ReactNode => {
   if (blocks.length === 0) {
     return null
   }

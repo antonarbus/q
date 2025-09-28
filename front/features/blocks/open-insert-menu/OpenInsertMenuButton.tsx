@@ -4,8 +4,9 @@ import { navItemId } from '@shared/const/navItemId'
 import { dispatch } from '@shared/lib/redux'
 import { navSlice } from '@shared/nav'
 import { FaPlus } from 'react-icons/fa6'
+import type { ReactNode } from 'react'
 
-export const OpenInsertMenuButton = (): React.ReactNode => {
+export const OpenInsertMenuButton = (): ReactNode => {
   return (
     <IconButton
       className={cls.openInsertMenuButton}

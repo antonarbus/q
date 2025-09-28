@@ -1,4 +1,4 @@
-import type { FocusEvent } from 'react'
+import type { FocusEvent, JSX } from 'react'
 import { BoqRowLayout } from './BoqRowLayout'
 import { DescriptionCell } from './cell/DescriptionCell'
 import { ItemPriceCell } from './cell/ItemPriceCell'
@@ -10,7 +10,7 @@ type Props = {
   onBlur: (e: FocusEvent<HTMLDivElement>) => void
 }
 
-export const BoqRow = ({ onBlur }: Props): React.JSX.Element => {
+export const BoqRow = ({ onBlur }: Props): JSX.Element => {
   return (
     <BoqRowLayout onBlur={onBlur}>
       <NumberCell />

@@ -1,7 +1,8 @@
 import type { RowEditorRefs } from '@entities/quotation'
+import type { KeyboardEvent } from 'react'
 
 type Props = {
-  event: React.KeyboardEvent
+  event: KeyboardEvent
   boqRowEditorRefs: RowEditorRefs
   rowIndex: number
 }

@@ -12,6 +12,7 @@ import { navSlice } from '@shared/nav'
 import { toast } from 'sonner'
 import { asyncDelay } from '@shared/util/delay'
 import { appSlice } from '@shared/appSlice'
+import type { FormEvent } from 'react'
 
 type Props = {
   emailSignal: Signal<string>
@@ -20,7 +21,7 @@ type Props = {
 }
 
 type Res = {
-  onSubmit: (e: React.FormEvent) => void
+  onSubmit: (e: FormEvent) => void
   isPending: UseMutationResult['isPending']
   isSuccess: UseMutationResult['isSuccess']
   isError: UseMutationResult['isError']
@@ -165,7 +166,7 @@ export const useLogIn = ({
     }
   }, [logInUserMutation.isError])
 
-  const onSubmit = (event: React.FormEvent): void => {
+  const onSubmit = (event: FormEvent): void => {
     event.preventDefault()
 
     logInUserMutation.mutate({

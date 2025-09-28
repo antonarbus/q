@@ -8,8 +8,9 @@ import {
 } from '@entities/quotation'
 import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import { toast } from 'sonner'
+import type { ReactNode } from 'react'
 
-export const DeleteQuotationButton = ({ id }: Payload): React.ReactNode => {
+export const DeleteQuotationButton = ({ id }: Payload): ReactNode => {
   const deleteQuotationMutation = useDeleteQuotationMutation()
 
   useUpdateEffect(() => {

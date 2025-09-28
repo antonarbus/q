@@ -1,5 +1,6 @@
 import type { NumberSize } from 're-resizable'
 import type { Direction } from 're-resizable/lib/resizer'
+import type { MouseEvent,TouchEvent } from 'react'
 
 export type OnBlockResizeStop = (params: {
   event: MouseEvent | TouchEvent
@@ -18,7 +19,7 @@ export type OnBlockResize = (params: {
 }) => void
 
 export type OnBlockResizeStart = (params: {
-  event: React.MouseEvent<HTMLElement> | React.TouchEvent<HTMLElement>
+  event: MouseEvent<HTMLElement> | TouchEvent<HTMLElement>
   dir: Direction
   elementRef: HTMLElement
   blockIndex: number

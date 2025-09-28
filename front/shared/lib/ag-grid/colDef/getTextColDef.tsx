@@ -1,4 +1,5 @@
 import { getTextWithBoldSubStringAsJsx } from '@shared/util/getTextWithBoldSubStringAsJsx'
+import type { ReactNode } from 'react'
 import type {
   ColDef,
   ColDefField,
@@ -25,7 +26,7 @@ export const getTextColDef = <
     filter: 'agTextColumnFilter',
     cellRenderer: (
       params: ICellRendererParams<TData, TValue>,
-    ): React.ReactNode => {
+    ): ReactNode => {
       type FilterModel = Partial<
         Record<
           ColDefField<TData, TValue>,

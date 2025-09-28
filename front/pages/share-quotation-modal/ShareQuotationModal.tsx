@@ -7,12 +7,13 @@ import { useSlide } from '@shared/util/useSlide'
 import { ImLink } from 'react-icons/im'
 import { useShareQuotation } from '@features/quotation/share-quotation'
 import { getState } from '@shared/lib/redux'
+import type { JSX } from 'react'
 import {
   useLoadInitValuesIntoShareQuotationModal,
   useLoadShareQuotationModalWithDirectLink,
 } from '@features/open-close/open-share-quotation-modal'
 
-export const ShareQuotationModal = (): React.JSX.Element => {
+export const ShareQuotationModal = (): JSX.Element => {
   const { ref: modalRef, slideOut } = useSlide()
   const { accessFormValuesSignal } = useShareQuotationFormValues()
   useLoadInitValuesIntoShareQuotationModal({ accessFormValuesSignal })

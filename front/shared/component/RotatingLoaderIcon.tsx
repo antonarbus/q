@@ -1,12 +1,12 @@
 import { css } from '@emotion/react'
-import type { CSSProperties } from 'react'
+import type { CSSProperties, JSX } from 'react'
 import { FiLoader } from 'react-icons/fi'
 
 type Props = {
   style?: CSSProperties
 }
 
-export const RotatingLoaderIcon = ({ style }: Props): React.JSX.Element => {
+export const RotatingLoaderIcon = ({ style }: Props): JSX.Element => {
   return (
     <FiLoader
       css={css`

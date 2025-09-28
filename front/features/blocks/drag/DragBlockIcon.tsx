@@ -4,10 +4,11 @@ import { useIsLastBlock, useBlock } from '@entities/quotation'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/const/cls'
 import { useRef, useState } from 'react'
+import type { JSX } from 'react'
 import { useIsCopyModalVisible } from '@entities/copy'
 import { useSignal } from '@preact/signals-react'
 
-export const DragBlockIcon = (): React.JSX.Element => {
+export const DragBlockIcon = (): JSX.Element => {
   const isLastBlock = useIsLastBlock()
   const isCopyModalVisible = useIsCopyModalVisible()
   const disabled = isLastBlock || isCopyModalVisible

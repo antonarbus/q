@@ -1,19 +1,20 @@
 import { createContext, useContext, useMemo } from 'react'
+import type { JSX,ReactNode,RefObject } from 'react'
 import type { FroalaProps } from '../ui/froala/types'
 // import type { FroalaProps } from '../ui/froala/Froala'
 
 type Context = FroalaProps & {
-  froalaElementRef: React.RefObject<HTMLDivElement | null>
-  froalaHeightRef: React.RefObject<number>
+  froalaElementRef: RefObject<HTMLDivElement | null>
+  froalaHeightRef: RefObject<number>
 }
 
 type Props = Context & {
-  children: React.ReactNode
+  children: ReactNode
 }
 
 const FroalaContext = createContext<Context | null>(null)
 
-export const FroalaProvider = (props: Props): React.JSX.Element => {
+export const FroalaProvider = (props: Props): JSX.Element => {
   const froalaContextValue = useMemo(() => {
     return {
       editorRef: props.editorRef,

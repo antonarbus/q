@@ -1,12 +1,13 @@
 import { useRef } from 'react'
+import type { ReactNode,ComponentRef } from 'react'
 import { useEffectOnce } from 'react-use'
 
 type Props = {
   name?: string
 }
 
-export const NavName = ({ name }: Props): React.ReactNode => {
-  const ref = useRef<React.ComponentRef<'span'>>(null)
+export const NavName = ({ name }: Props): ReactNode => {
+  const ref = useRef<ComponentRef<'span'>>(null)
 
   // set text container width to initial width + 30px to avoid text overflow
   // when "Save" is changing to "Saving..."

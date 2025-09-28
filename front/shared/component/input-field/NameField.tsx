@@ -1,6 +1,7 @@
 import { type TextFieldProps, InputAdornment, TextField } from '@mui/material'
 import type { Signal } from '@preact/signals-react'
 import { PiBooks } from 'react-icons/pi'
+import type { JSX } from 'react'
 
 type Props = {
   nameSignal: Signal<string | undefined>
@@ -9,7 +10,7 @@ type Props = {
 export const NameField = ({
   nameSignal,
   ...props
-}: Props): React.JSX.Element => {
+}: Props): JSX.Element => {
   return (
     <div style={{ position: 'relative' }}>
       <TextField

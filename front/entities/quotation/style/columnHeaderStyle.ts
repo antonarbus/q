@@ -1,4 +1,6 @@
-export const columnHeaderStyle: React.CSSProperties = {
+import type { CSSProperties } from 'react'
+
+export const columnHeaderStyle: CSSProperties = {
   flexGrow: 1,
   textAlign: 'center',
   minHeight: '24px',

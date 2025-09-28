@@ -1,7 +1,8 @@
 import type { FroalaEditorRef } from '@shared/type/froala'
+import type { KeyboardEvent } from 'react'
 
 type Props = {
-  event: React.KeyboardEvent
+  event: KeyboardEvent
   qtyCellEditorRef: FroalaEditorRef
   rowIndex: number
 }

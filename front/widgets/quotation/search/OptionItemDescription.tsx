@@ -3,14 +3,15 @@ import { Box } from '@mui/material'
 import { getTextWithBoldSubStringAsJsx } from '@shared/util/getTextWithBoldSubStringAsJsx'
 import type { ItemPick } from '@back/api/bookmark/getBookmarkListHandler'
 import { useCallback } from 'react'
+import type { JSX,ReactNode } from 'react'
 
 type Props = {
   inputValueSignal: { value: string }
   option: ItemPick
 }
 
-export const OptionItemDescription = (props: Props): React.JSX.Element => {
-  const getHighlightedDescription = useCallback((): React.ReactNode => {
+export const OptionItemDescription = (props: Props): JSX.Element => {
+  const getHighlightedDescription = useCallback((): ReactNode => {
     if (props.inputValueSignal.value !== '') {
       const boldSubString = getTextWithBoldSubStringAsJsx({
         text: props.option.desc ?? '',

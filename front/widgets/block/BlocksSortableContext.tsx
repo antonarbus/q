@@ -11,9 +11,10 @@ import {
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { getState } from '@shared/lib/redux'
 import { onBlockDragEnd, onBlockDragStart } from '@features/blocks/drag'
+import type { JSX,ReactNode } from 'react'
 
 type Props = {
-  children: React.ReactNode
+  children: ReactNode
 }
 
 // example
@@ -21,7 +22,7 @@ type Props = {
 
 export const BlocksSortableContext = ({
   children,
-}: Props): React.JSX.Element => {
+}: Props): JSX.Element => {
   const blockIds = getState().quotation.blocks.map((block) => block.id)
   const sensors = useSensors(useSensor(PointerSensor))
 

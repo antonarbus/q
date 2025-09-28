@@ -1,6 +1,6 @@
 import { dispatch, getState, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
-import type { MouseEvent } from 'react'
+import type { MouseEvent, JSX } from 'react'
 import { TbCut } from 'react-icons/tb'
 import { copySlice } from '@entities/copy'
 import {
@@ -15,7 +15,7 @@ import { Tooltip } from '@mui/material'
 import { getClosestRowHtml } from '@shared/util/html-getter/getClosestRowHtml'
 import { textSlice } from '@shared/lib/froala/textSlice'
 
-export const CutBoqRowIcon = (): React.JSX.Element => {
+export const CutBoqRowIcon = (): JSX.Element => {
   const { blockIndex } = useBlock()
   const { rowIndex } = useRow()
   const isCopyable = useSelector((state) => state.copy.isCopyable)

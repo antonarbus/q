@@ -1,7 +1,8 @@
 import { Box } from '@mui/material'
 import { useSelector } from '@shared/lib/redux'
+import type { ReactNode } from 'react'
 
-export const InfoLeft = (): React.ReactNode => {
+export const InfoLeft = (): ReactNode => {
   const permissionLevel = useSelector(
     (state) => state.quotation.permissionLevel,
   )

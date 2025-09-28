@@ -5,6 +5,7 @@ import { useUpdateEffect } from 'react-use'
 import { useRequestUserPasswordResetMutation } from '@entities/user'
 import { toast } from 'sonner'
 import { asyncDelay } from '@shared/util/delay'
+import type { FormEvent } from 'react'
 
 type Props = {
   emailSignal: Signal<string>
@@ -12,7 +13,7 @@ type Props = {
 }
 
 type Res = {
-  onSubmit: (e: React.FormEvent) => void
+  onSubmit: (e: FormEvent) => void
   isPending: UseMutationResult['isPending']
   isSuccess: UseMutationResult['isSuccess']
   isError: UseMutationResult['isError']
@@ -84,7 +85,7 @@ export const useRequestPasswordReset = ({
     }
   }, [requestUserPasswordResetMutation.isError])
 
-  const onSubmit = (event: React.FormEvent): void => {
+  const onSubmit = (event: FormEvent): void => {
     event.preventDefault()
 
     requestUserPasswordResetMutation.mutate({ email: emailSignal.value })

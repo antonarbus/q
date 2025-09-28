@@ -1,6 +1,7 @@
 import { dispatch } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import { useEffect, useRef, useState } from 'react'
+import type { ComponentRef,RefObject } from 'react'
 import { useFirstMountState } from 'react-use'
 import { elementHeight } from '@shared/util/elementHeight'
 import { navSlice } from '@shared/nav/navSlice'
@@ -27,10 +28,10 @@ export const navigateInMenu: PropsForNavigateInMenu = {
 }
 
 type Props = {
-  currentMenuRef: React.RefObject<React.ComponentRef<'div'> | null>
-  nextMenuRef: React.RefObject<React.ComponentRef<'div'> | null>
-  menuContainerRef: React.RefObject<React.ComponentRef<'div'> | null>
-  fakeMenuRef: React.RefObject<React.ComponentRef<'div'> | null>
+  currentMenuRef: RefObject<ComponentRef<'div'> | null>
+  nextMenuRef: RefObject<ComponentRef<'div'> | null>
+  menuContainerRef: RefObject<ComponentRef<'div'> | null>
+  fakeMenuRef: RefObject<ComponentRef<'div'> | null>
 }
 
 export const useMenuAnimation = ({

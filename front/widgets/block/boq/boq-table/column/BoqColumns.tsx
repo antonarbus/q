@@ -4,8 +4,9 @@ import { ItemPriceColumn } from './column-header/ItemPriceColumn'
 import { NumberColumn } from './column-header/NumberColumn'
 import { PriceColumn } from './column-header/PriceColumn'
 import { QtyColumn } from './column-header/QtyColumn'
+import type { JSX } from 'react'
 
-export const BoqColumns = (): React.JSX.Element => {
+export const BoqColumns = (): JSX.Element => {
   return (
     <BoqColumnsLayout>
       <NumberColumn />

@@ -1,21 +1,22 @@
 import type { SxProps } from '@mui/material'
 import type { FroalaEditor, FroalaEditorRef } from '@shared/type/froala'
+import type { CSSProperties,MouseEvent,KeyboardEvent } from 'react'
 
 export type FroalaProps = {
   htmlGetter: () => string
   editorRef: FroalaEditorRef
   placeholder?: string
-  style?: React.CSSProperties
+  style?: CSSProperties
   sx?: SxProps
   onContentChange: () => void
   onFocus?: () => void
-  onClick?: (e: React.MouseEvent) => void
-  onBlur?: (e: React.MouseEvent) => void
-  onKeydown?: (e: React.KeyboardEvent) => void
+  onClick?: (e: MouseEvent) => void
+  onBlur?: (e: MouseEvent) => void
+  onKeydown?: (e: KeyboardEvent) => void
   onInitialized?: () => void
   className?: string
   droppable?: boolean
-  wrapperStyles?: React.CSSProperties
+  wrapperStyles?: CSSProperties
   beforeUpload?: ({
     editor,
     files,

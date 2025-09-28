@@ -1,5 +1,6 @@
 import { capitalizeKey } from './function/capitalizeKey'
 import { css } from '@emotion/react'
+import type { JSX } from 'react'
 
 type Props = {
   shortcut: string[]
@@ -9,7 +10,7 @@ type Props = {
 export const Shortcut = ({
   shortcut,
   $isHovered,
-}: Props): React.JSX.Element => {
+}: Props): JSX.Element => {
   const keys = shortcut.join('+')
 
   return (

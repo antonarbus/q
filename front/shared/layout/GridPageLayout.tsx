@@ -1,11 +1,12 @@
 import { theme } from '@shared/theme'
 import { Box } from '@mui/material'
+import type { JSX,ReactNode } from 'react'
 
 type Props = {
-  children: React.ReactNode
+  children: ReactNode
 }
 
-export const GridPageLayout = ({ children }: Props): React.JSX.Element => {
+export const GridPageLayout = ({ children }: Props): JSX.Element => {
   return (
     <Box
       sx={{

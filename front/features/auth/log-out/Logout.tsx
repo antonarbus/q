@@ -8,8 +8,9 @@ import { navItemId } from '@shared/const/navItemId'
 import { navSlice } from '@shared/nav'
 import { toast } from 'sonner'
 import { appSlice } from '@shared/appSlice'
+import type { ReactNode } from 'react'
 
-export const Logout = (): React.ReactNode => {
+export const Logout = (): ReactNode => {
   const navigate = useNavigate()
 
   const logOutUserMutation = useLogOutUserMutation()

@@ -10,8 +10,9 @@ import { cls } from '@shared/const/cls'
 import { ItemActionButtonsLayout } from '@shared/layout/ItemActionButtonsLayout'
 import { PriceHeader } from './price-header/PriceHeader'
 import { PriceMain } from './price-main/PriceMain'
+import type { JSX } from 'react'
 
-export const PriceBlock = (): React.JSX.Element => {
+export const PriceBlock = (): JSX.Element => {
   return (
     <BlockComp
       className={cls.priceBlock}

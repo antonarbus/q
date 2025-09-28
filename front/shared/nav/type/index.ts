@@ -1,10 +1,10 @@
-import type { MouseEvent } from 'react'
+import type { MouseEvent, ReactNode } from 'react'
 import type { NavItemId } from '../../const/navItemId'
 
 export type NavItem = {
   id: NavItemId
   name: string
-  icon?: React.ReactNode | string
+  icon?: ReactNode | string
   link?: string
   func?: (e?: MouseEvent) => Promise<void> | void
   shortcut?: string[]

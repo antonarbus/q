@@ -1,12 +1,13 @@
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import { useRow } from '@entities/quotation'
+import type { JSX,ReactNode } from 'react'
 
 type Props = {
-  children: React.ReactNode
+  children: ReactNode
 }
 
-export const BoqRowSortable = ({ children }: Props): React.JSX.Element => {
+export const BoqRowSortable = ({ children }: Props): JSX.Element => {
   const { row } = useRow()
 
   const { setNodeRef, transform, transition, isDragging } = useSortable({

@@ -7,6 +7,7 @@ import { navItemId } from '@shared/const/navItemId'
 import { createLoadingMenuIconMachine, navSlice } from '@shared/nav'
 import { agGridSlice } from '@shared/lib/ag-grid/agGridSlice'
 import { createActor } from 'xstate'
+import type { ReactNode } from 'react'
 
 if (typeof Promise.withResolvers !== 'function') {
   const element = document.querySelector('.wait-for-init-files-to-load')
@@ -29,7 +30,7 @@ const loadingMenuIconMachine = createLoadingMenuIconMachine({
 
 const loadingIconActor = createActor(loadingMenuIconMachine).start()
 
-export const AccessToken = (): React.ReactNode => {
+export const AccessToken = (): ReactNode => {
   const getUserAccessTokenQuery = useGetUserAccessTokenQuery()
 
   // get initial access token on app load

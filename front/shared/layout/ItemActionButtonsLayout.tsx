@@ -1,13 +1,14 @@
 import { Box } from '@mui/material'
 import { cls } from '../const/cls'
+import type { JSX,ReactNode } from 'react'
 
 type Props = {
-  children?: React.ReactNode
+  children?: ReactNode
 }
 
 export const ItemActionButtonsLayout = ({
   children,
-}: Props): React.JSX.Element => (
+}: Props): JSX.Element => (
   <Box
     className={cls.actionsContainer}
     style={{

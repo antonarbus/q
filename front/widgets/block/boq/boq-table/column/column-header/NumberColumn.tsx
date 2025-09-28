@@ -5,8 +5,9 @@ import {
   columnMinWidth,
 } from '@entities/quotation'
 import { ResizableColumn } from '../ResizableColumn'
+import type { JSX } from 'react'
 
-export const NumberColumn = (): React.JSX.Element => {
+export const NumberColumn = (): JSX.Element => {
   return (
     <ResizableColumn
       boqColumnKey={boqColumnKey.number}

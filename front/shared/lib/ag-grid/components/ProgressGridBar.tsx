@@ -1,10 +1,11 @@
 import { LinearProgress } from '@mui/material'
+import type { ReactNode } from 'react'
 
 type Props = {
   isShown: boolean
 }
 
-export const ProgressGridBar = ({ isShown }: Props): React.ReactNode => {
+export const ProgressGridBar = ({ isShown }: Props): ReactNode => {
   if (isShown === false) {
     return null
   }

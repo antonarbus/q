@@ -11,8 +11,9 @@ import {
   columnMinWidth,
 } from '@entities/quotation'
 import { updateDescriptionCell } from '@features/blocks/cell/update-cell/row-block-cells/description/updateDescriptionCell'
+import type { JSX } from 'react'
 
-export const DescriptionCell = (): React.JSX.Element => {
+export const DescriptionCell = (): JSX.Element => {
   const { descriptionEditorRef } = useRow()
 
   const { stylesForResizableCell } = useStylesForResizableCell({

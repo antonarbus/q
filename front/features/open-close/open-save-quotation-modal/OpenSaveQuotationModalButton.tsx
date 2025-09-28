@@ -10,10 +10,11 @@ import { route } from '@shared/const/route'
 import { toast } from 'sonner'
 import { textSlice } from '@shared/lib/froala/textSlice'
 import { appSlice } from '@shared/appSlice'
+import type { JSX } from 'react'
 
 export const OpenSaveQuotationModalButton = (
   props: ReqBody,
-): React.JSX.Element => {
+): JSX.Element => {
   const navigate = useNavigate()
 
   const quotationMutation = useGetQuotationMutation()

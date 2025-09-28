@@ -12,8 +12,9 @@ import {
   useBlock,
 } from '@entities/quotation'
 import { useIsCopyModalVisible } from '@entities/copy'
+import type { ReactNode,MouseEvent } from 'react'
 
-export const BookmarkBlockIcon = (): React.ReactNode => {
+export const BookmarkBlockIcon = (): ReactNode => {
   const navigate = useNavigate()
   const { blockIndex } = useBlock()
   const isCopyModalVisible = useIsCopyModalVisible()
@@ -29,7 +30,7 @@ export const BookmarkBlockIcon = (): React.ReactNode => {
       <span className={cls.actionIconContainer}>
         <MdOutlineStarOutline
           className={cls.actionIcon}
-          onClick={(event: React.MouseEvent): void => {
+          onClick={(event: MouseEvent): void => {
             if (disabled === true) {
               return
             }

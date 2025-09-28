@@ -1,6 +1,8 @@
+import type { JSX,ReactNode } from 'react'
+
 type Props = {
   reserveSpaceForIcon?: boolean
-  name: React.ReactNode | string
+  name: ReactNode | string
   disabled?: boolean
 }
 
@@ -14,7 +16,7 @@ export const TextInMenu = ({
   reserveSpaceForIcon,
   name,
   disabled,
-}: Props): React.JSX.Element => {
+}: Props): JSX.Element => {
   return (
     <span
       style={{

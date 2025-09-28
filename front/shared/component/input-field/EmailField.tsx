@@ -4,11 +4,12 @@ import { InputAdornment, TextField } from '@mui/material'
 import { useSignal, type Signal, useSignalEffect } from '@preact/signals-react'
 import mailcheck from 'mailcheck'
 import { isEmailPatternOk } from '../../util/isEmailPatternOk'
+import type { JSX,ComponentRef,RefObject } from 'react'
 
 type Props = {
   emailSignal: Signal<string>
   isEmailOkSignal: Signal<boolean>
-  inputRef?: React.RefObject<React.ComponentRef<'div'> | null>
+  inputRef?: RefObject<ComponentRef<'div'> | null>
   disabled?: boolean
   onClickAway?: () => void
   label?: string
@@ -29,7 +30,7 @@ export const EmailField = ({
   onClickAway,
   label,
   autoFocus,
-}: Props): React.JSX.Element => {
+}: Props): JSX.Element => {
   const emailSuggestionSignal = useSignal('')
   const initEmailLabel = label ?? 'Email'
   const emailLabelSignal = useSignal(initEmailLabel)

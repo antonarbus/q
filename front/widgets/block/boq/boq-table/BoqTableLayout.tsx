@@ -1,10 +1,11 @@
 import { Box } from '@mui/material'
+import type { JSX,ReactNode } from 'react'
 
 type Props = {
-  children: React.ReactNode
+  children: ReactNode
 }
 
-export const BoqTableLayout = ({ children }: Props): React.JSX.Element => {
+export const BoqTableLayout = ({ children }: Props): JSX.Element => {
   return (
     <Box
       className='boq-table-container-with-paddings'

@@ -1,15 +1,16 @@
 import { Box } from '@mui/material'
 import { cls } from '@shared/const/cls'
+import type { JSX,ReactNode,FocusEvent } from 'react'
 
 type Props = {
-  children: React.ReactNode
-  onBlur: (e: React.FocusEvent<HTMLDivElement>) => void
+  children: ReactNode
+  onBlur: (e: FocusEvent<HTMLDivElement>) => void
 }
 
 export const BoqRowLayout = ({
   children,
   onBlur,
-}: Props): React.JSX.Element => {
+}: Props): JSX.Element => {
   return (
     <Box
       className={cls.boqRow}

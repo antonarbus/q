@@ -1,4 +1,5 @@
 import { createContext, useContext, useMemo } from 'react'
+import type { JSX,ReactNode } from 'react'
 import type { FroalaEditorRef } from '@shared/type/froala'
 import { useBoq } from './BoqBlockProvider'
 import type { Row } from '../type'
@@ -6,7 +7,7 @@ import type { Row } from '../type'
 type Props = {
   rowIndex: number
   row: Row
-  children: React.ReactNode
+  children: ReactNode
 }
 
 type Context = Omit<Props, 'children'> & {
@@ -22,7 +23,7 @@ export const RowProvider = ({
   children,
   rowIndex,
   row,
-}: Props): React.JSX.Element => {
+}: Props): JSX.Element => {
   const { boqRowEditorRefs } = useBoq()
 
   const rowCellEditorRef = useMemo(() => {

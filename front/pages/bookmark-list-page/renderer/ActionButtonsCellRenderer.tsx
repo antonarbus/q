@@ -4,10 +4,11 @@ import { CopyBookmarkButton } from '@features/bookmark/copy-bookmark'
 import { DeleteBookmarkButton } from '@features/bookmark/delete-bookmark'
 import { OpenBookmarkModalButton } from '@features/open-close/open-bookmark-modal'
 import type { Quotation } from '@entities/quotation'
+import type { ReactNode } from 'react'
 
 type Params = ICellRendererParams<Partial<Quotation>>
 
-export const ActionButtonsCellRenderer = (params: Params): React.ReactNode => {
+export const ActionButtonsCellRenderer = (params: Params): ReactNode => {
   if (params.data?.id === undefined) {
     return null
   }

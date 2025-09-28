@@ -7,8 +7,9 @@ import { toast } from 'sonner'
 import { useDeleteUserMutation } from '@entities/user'
 import { instance } from '@shared/instance'
 import { queryKey } from '@shared/const/queryKey'
+import type { ReactNode } from 'react'
 
-export const DeleteUserButton = ({ email }: Payload): React.ReactNode => {
+export const DeleteUserButton = ({ email }: Payload): ReactNode => {
   const deleteUserMutation = useDeleteUserMutation()
 
   useUpdateEffect(() => {

@@ -9,17 +9,18 @@ import type {
 import { useBlock } from '../provider/BlockProvider'
 import { BlockAnimate } from './block-layout'
 import { PasteBlockTextOverlay } from './paste-block-overlay-text'
+import type { JSX,ReactNode } from 'react'
 
 type Props = {
-  children: React.ReactNode
+  children: ReactNode
   disableResize?: boolean
   onBlockResizeStart?: OnBlockResizeStart
   onBlockResize?: OnBlockResize
   onBlockResizeStop?: OnBlockResizeStop
   autoWidth?: boolean
   minWidth?: ResizableProps['minWidth']
-  leftBlockActionButtons?: React.ReactNode
-  rightBlockActionButtons?: React.ReactNode
+  leftBlockActionButtons?: ReactNode
+  rightBlockActionButtons?: ReactNode
   className?: string
 }
 
@@ -34,7 +35,7 @@ export const BlockComp = ({
   leftBlockActionButtons,
   rightBlockActionButtons,
   className,
-}: Props): React.JSX.Element => {
+}: Props): JSX.Element => {
   const { block } = useBlock()
 
   const { setNodeRef, transform, transition, isDragging } = useSortable({

@@ -6,6 +6,7 @@ import {
 } from 'ag-grid-community'
 import { AgGridReact } from 'ag-grid-react'
 import { useRef } from 'react'
+import type { JSX,ComponentRef } from 'react'
 import { useFileListAllDatasource } from '@entities/file'
 import { LoadingTableOverlay } from '@shared/component/LoadingTableOverlay'
 import { DisplayedRowsCount } from '@shared/lib/ag-grid/components/DisplayedRowsCount'
@@ -25,8 +26,8 @@ import { getDefaultColDef } from '@shared/lib/ag-grid/colDef/getDefaultColDef'
 
 ModuleRegistry.registerModules([AllCommunityModule])
 
-export const FileListAllGrid = (): React.JSX.Element => {
-  const gridContainerRef = useRef<React.ComponentRef<'div'> | null>(null)
+export const FileListAllGrid = (): JSX.Element => {
+  const gridContainerRef = useRef<ComponentRef<'div'> | null>(null)
 
   const { datasource, isLoading, isFetching, isFetched } =
     useFileListAllDatasource()

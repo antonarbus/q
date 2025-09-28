@@ -3,12 +3,13 @@ import { MdDeleteOutline } from 'react-icons/md'
 import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import { theme } from '@shared/theme'
 import { useFileDelete } from './useFileDelete'
+import type { JSX } from 'react'
 
 type Props = {
   fileId: string
 }
 
-export const DeleteFileIcon = ({ fileId }: Props): React.JSX.Element => {
+export const DeleteFileIcon = ({ fileId }: Props): JSX.Element => {
   const { isPending, onDeleteClick } = useFileDelete({ fileId })
 
   if (isPending === true) {

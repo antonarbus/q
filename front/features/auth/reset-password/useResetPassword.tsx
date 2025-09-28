@@ -13,15 +13,16 @@ import { navSlice } from '@shared/nav'
 import { toast } from 'sonner'
 import type { AnimationScope } from 'motion-dom'
 import { asyncDelay } from '@shared/util/delay'
+import type { RefObject,FormEvent } from 'react'
 
 type Props = {
   passwordSignal: Signal<string>
-  modalRef: React.RefObject<HTMLElement> | AnimationScope
+  modalRef: RefObject<HTMLElement> | AnimationScope
   slideOut: () => Promise<void>
 }
 
 type Res = {
-  onSubmit: (e: React.FormEvent) => void
+  onSubmit: (e: FormEvent) => void
   isPending: UseMutationResult['isPending']
   isSuccess: UseMutationResult['isSuccess']
   isError: UseMutationResult['isError']
@@ -104,7 +105,7 @@ export const useResetPassword = ({ passwordSignal, slideOut }: Props): Res => {
     }
   }, [resetUserPasswordMutation.isError])
 
-  const onSubmit = (event: React.FormEvent): void => {
+  const onSubmit = (event: FormEvent): void => {
     event.preventDefault()
 
     resetUserPasswordMutation.mutate({

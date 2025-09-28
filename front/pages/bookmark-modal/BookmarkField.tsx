@@ -5,8 +5,9 @@ import { Block } from '@widgets/block/Block'
 import { BOOKMARK_POS_AT_BLOCKS } from '@entities/quotation'
 import { BookmarkFieldLayout } from './BookmarkFieldLayout'
 import { textSlice } from '@shared/lib/froala/textSlice'
+import type { ReactNode } from 'react'
 
-export const BookmarkField = (): React.ReactNode => {
+export const BookmarkField = (): ReactNode => {
   const blocks = useSelector((state) => state.quotation.blocks)
 
   useEffectOnce(() => {

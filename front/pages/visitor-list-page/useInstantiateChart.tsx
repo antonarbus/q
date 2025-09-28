@@ -1,10 +1,11 @@
 import { chartConfigurationForVisitorList } from '@shared/lib/chart-js'
 import { Chart } from 'chart.js'
 import { useEffect, useRef } from 'react'
+import type { RefObject } from 'react'
 
 type Res = {
-  canvasRef: React.RefObject<HTMLCanvasElement | null>
-  chartInstanceRef: React.RefObject<Chart | null>
+  canvasRef: RefObject<HTMLCanvasElement | null>
+  chartInstanceRef: RefObject<Chart | null>
 }
 
 export const useInstantiateChart = (): Res => {

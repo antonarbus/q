@@ -1,6 +1,7 @@
 import { theme } from '@shared/theme'
 import { Avatar, Box } from '@mui/material'
 import { useRef } from 'react'
+import type { JSX } from 'react'
 import { GrValidate } from 'react-icons/gr'
 import { PiSmileySadBold, PiSmileyBold } from 'react-icons/pi'
 import { useNavigate } from 'react-router-dom'
@@ -9,7 +10,7 @@ import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import { BackdropWithSlidableModal } from '@shared/component/BackdropWithSlidableModal'
 import { CardCustom } from '@shared/component/CardCustom'
 
-export const ActivationModal = (): React.JSX.Element => {
+export const ActivationModal = (): JSX.Element => {
   const cardRef = useRef<HTMLDivElement>(null)
   const navigate = useNavigate()
   const { isSuccess, isPending, isError } = useActivate()

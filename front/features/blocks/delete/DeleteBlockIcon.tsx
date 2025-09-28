@@ -1,6 +1,6 @@
 import { dispatch, getState, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
-import type { MouseEvent } from 'react'
+import type { MouseEvent, JSX } from 'react'
 import { GoTrash } from 'react-icons/go'
 import { copySlice } from '@entities/copy'
 import {
@@ -13,7 +13,7 @@ import { fixElementDimensionStyle } from '@shared/util/fixElementDimensionStyle'
 import { Tooltip } from '@mui/material'
 import { textSlice } from '@shared/lib/froala/textSlice'
 
-export const DeleteBlockIcon = (): React.JSX.Element => {
+export const DeleteBlockIcon = (): JSX.Element => {
   const { blockIndex } = useBlock()
 
   const isBlockAlone = useSelector(selectIsLastBlock)

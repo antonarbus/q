@@ -2,16 +2,17 @@ import { Box } from '@mui/material'
 import { useRow } from '@entities/quotation'
 import { cls } from '@shared/const/cls'
 import { PasteBoqRowTextOverlay } from './paste-here-row'
+import type { JSX,ReactNode,FocusEvent } from 'react'
 
 type Props = {
-  children: React.ReactNode
-  onBlur: (e: React.FocusEvent<HTMLDivElement>) => void
+  children: ReactNode
+  onBlur: (e: FocusEvent<HTMLDivElement>) => void
 }
 
 export const BoqRowLayout = ({
   children,
   onBlur,
-}: Props): React.JSX.Element => {
+}: Props): JSX.Element => {
   const { row } = useRow()
 
   return (

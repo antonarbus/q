@@ -4,8 +4,9 @@ import { useHideInitHtmlElements } from '@features/init-load/useHideInitHtmlElem
 import { useRemoveThirdPartyCookies } from '@features/init-load/useRemoveThirdPartyCookies'
 import { useShowDragAndDropArea } from '@features/file/upload-file'
 import { useConnectionToBackendCheck } from '@features/init-load/useConnectionToBackend'
+import type { ReactNode } from 'react'
 
-export const OnInitLoad = (): React.ReactNode => {
+export const OnInitLoad = (): ReactNode => {
   useLogoutIfAccessTokenExpired()
   useHideInitHtmlElements()
   useShowDragAndDropArea()

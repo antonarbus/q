@@ -5,8 +5,9 @@ import { route } from '@shared/const/route'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/const/cls'
 import { useIsCopyModalVisible } from '@entities/copy'
+import type { ReactNode,MouseEvent } from 'react'
 
-export const OpenInfoBlockModalIcon = (): React.ReactNode => {
+export const OpenInfoBlockModalIcon = (): ReactNode => {
   const navigate = useNavigate()
   const { blockIndex } = useBlock()
   const isCopyModalVisible = useIsCopyModalVisible()
@@ -23,7 +24,7 @@ export const OpenInfoBlockModalIcon = (): React.ReactNode => {
         <HiOutlineInformationCircle
           aria-hidden={false} // otherwise error in dev tools
           className={cls.actionIcon}
-          onClick={(event: React.MouseEvent): void => {
+          onClick={(event: MouseEvent): void => {
             if (disabled === true) {
               return
             }

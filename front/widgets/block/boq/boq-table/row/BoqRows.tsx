@@ -15,8 +15,9 @@ import { BoqRow } from './boq-row/BoqRow'
 import { BoqRowAnimate } from './boq-row/BoqRowAnimate'
 import { BoqRowSortable } from './boq-row/BoqRowSortable'
 import { arrayShapesEqualityFn } from '@shared/util/arrayShapesEqualityFn'
+import type { JSX } from 'react'
 
-export const BoqRows = (): React.JSX.Element => {
+export const BoqRows = (): JSX.Element => {
   const { blockIndex } = useBlock()
 
   const boqRows = useSelector(

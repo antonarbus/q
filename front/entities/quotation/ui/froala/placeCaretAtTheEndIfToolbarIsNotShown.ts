@@ -1,8 +1,9 @@
 import type { FroalaEditorRef } from '@shared/type/froala'
+import type { ComponentRef,RefObject,MouseEvent } from 'react'
 
 type Props = {
-  event: React.MouseEvent
-  froalaElementRef: React.RefObject<React.ComponentRef<'div'> | null>
+  event: MouseEvent
+  froalaElementRef: RefObject<ComponentRef<'div'> | null>
   editorRef: FroalaEditorRef
 }
 

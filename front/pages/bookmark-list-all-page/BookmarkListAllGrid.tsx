@@ -6,6 +6,7 @@ import {
 } from 'ag-grid-community'
 import { AgGridReact } from 'ag-grid-react'
 import { useRef } from 'react'
+import type { JSX,ComponentRef } from 'react'
 import { useBookmarkListAllDatasource } from '@entities/bookmark'
 import { LoadingTableOverlay } from '@shared/component/LoadingTableOverlay'
 import { DisplayedRowsCount } from '@shared/lib/ag-grid/components/DisplayedRowsCount'
@@ -25,8 +26,8 @@ import { getDefaultColDef } from '@shared/lib/ag-grid/colDef/getDefaultColDef'
 
 ModuleRegistry.registerModules([AllCommunityModule])
 
-export const BookmarkListAllGrid = (): React.JSX.Element => {
-  const gridContainerRef = useRef<React.ComponentRef<'div'> | null>(null)
+export const BookmarkListAllGrid = (): JSX.Element => {
+  const gridContainerRef = useRef<ComponentRef<'div'> | null>(null)
 
   const { datasource, isLoading, isFetching, isFetched } =
     useBookmarkListAllDatasource()

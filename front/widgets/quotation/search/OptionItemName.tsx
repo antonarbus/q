@@ -2,13 +2,14 @@ import { Box } from '@mui/material'
 import { PiBooks } from 'react-icons/pi'
 import { getTextWithBoldSubStringAsJsx } from '@shared/util/getTextWithBoldSubStringAsJsx'
 import type { ItemPick } from '@back/api/bookmark/getBookmarkListHandler'
+import type { JSX } from 'react'
 
 type Props = {
   inputValueSignal: { value: string }
   option: ItemPick
 }
 
-export const OptionItemName = (props: Props): React.JSX.Element => {
+export const OptionItemName = (props: Props): JSX.Element => {
   return (
     <Box
       sx={{

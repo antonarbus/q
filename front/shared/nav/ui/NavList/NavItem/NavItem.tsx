@@ -1,5 +1,6 @@
 import { useSelector } from '@shared/lib/redux'
 import { useRef } from 'react'
+import type { JSX,ComponentRef,MouseEvent } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { clickOnNavItem } from './clickOnNavItem'
 import { Menu } from './Menu'
@@ -13,10 +14,10 @@ type Props = {
   navItem: NavItemType
 }
 
-export const NavItem = ({ navItem }: Props): React.JSX.Element => {
+export const NavItem = ({ navItem }: Props): JSX.Element => {
   const location = useLocation()
   // required to avoid Menu to go over the narrow window
-  const navItemRef = useRef<React.ComponentRef<'li'> | null>(null)
+  const navItemRef = useRef<ComponentRef<'li'> | null>(null)
 
   // needs to open only menu under clicked navItem, otherwise multiple menus are opened under all navItems
   const isMenuOpen = useSelector(
@@ -46,7 +47,7 @@ export const NavItem = ({ navItem }: Props): React.JSX.Element => {
         css={{
           position: 'relative',
         }}
-        onClick={(event: React.MouseEvent): void => {
+        onClick={(event: MouseEvent): void => {
           if (isFunc === true) {
             event.preventDefault()
           }

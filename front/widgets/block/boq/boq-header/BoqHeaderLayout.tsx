@@ -1,11 +1,12 @@
 /* eslint-disable react/jsx-max-depth */
 import { theme } from '@shared/theme'
 import { Box } from '@mui/material'
+import type { JSX,ReactNode } from 'react'
 
 type Props = {
-  title: React.JSX.Element
-  subtotalText: React.ReactNode
-  subTotalPrice: React.JSX.Element
+  title: JSX.Element
+  subtotalText: ReactNode
+  subTotalPrice: JSX.Element
   hideContentForDevPurposes?: boolean
   outlinedForDevPurposes?: boolean
 }
@@ -16,7 +17,7 @@ export const BoqHeaderLayout = ({
   subTotalPrice,
   hideContentForDevPurposes = false,
   outlinedForDevPurposes = false,
-}: Props): React.JSX.Element => {
+}: Props): JSX.Element => {
   return (
     <Box
       sx={{

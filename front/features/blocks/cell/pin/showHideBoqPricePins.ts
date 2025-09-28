@@ -1,12 +1,13 @@
 import { dispatch } from '@shared/lib/redux'
 import { quotationSlice } from '@entities/quotation'
 import { cls } from '@shared/const/cls'
+import type { RefObject } from 'react'
 
 type Props = {
   event: MouseEvent
   blockIndex: number
-  hidePinsClickHandlerRef: React.RefObject<(e: MouseEvent) => void>
-  isInitClickRef: React.RefObject<boolean>
+  hidePinsClickHandlerRef: RefObject<(e: MouseEvent) => void>
+  isInitClickRef: RefObject<boolean>
 }
 
 export const showHideBoqPricePins = ({

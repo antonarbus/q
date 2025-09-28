@@ -1,11 +1,12 @@
 /* eslint-disable react/no-multi-comp */
 import { type SxProps, TextField } from '@mui/material'
+import type { JSX,ReactNode,RefObject } from 'react'
 
 type InputComponentProps = Record<string, unknown> & {
-  ref: React.RefObject<HTMLDivElement>
+  ref: RefObject<HTMLDivElement>
 }
 
-const InputComponent = (props: InputComponentProps): React.JSX.Element => {
+const InputComponent = (props: InputComponentProps): JSX.Element => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { ownerState, ref, ...other } = props
 
@@ -23,12 +24,12 @@ const InputComponent = (props: InputComponentProps): React.JSX.Element => {
 }
 
 type Props = {
-  children: React.ReactNode
+  children: ReactNode
   label: string
   sx?: SxProps
 }
 
-export const OutlinedDivWithLabel = (props: Props): React.JSX.Element => {
+export const OutlinedDivWithLabel = (props: Props): JSX.Element => {
   return (
     <TextField
       disabled={false}

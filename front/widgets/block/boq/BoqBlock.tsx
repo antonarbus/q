@@ -14,8 +14,9 @@ import { ItemActionButtonsLayout } from '@shared/layout/ItemActionButtonsLayout'
 import { BoqHeader } from './boq-header'
 import { BoqTable } from './boq-table'
 import { cls } from '@shared/const/cls'
+import type { JSX } from 'react'
 
-export const BoqBlock = (): React.JSX.Element => {
+export const BoqBlock = (): JSX.Element => {
   return (
     <BoqProvider>
       <BlockComp

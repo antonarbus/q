@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom'
 import { route } from '@shared/const/route'
 import { PiInfoBold } from 'react-icons/pi'
 import { useIsCopyModalVisible } from '@entities/copy'
+import type { JSX } from 'react'
 
-export const OpenInfoQuotationIcon = (): React.JSX.Element => {
+export const OpenInfoQuotationIcon = (): JSX.Element => {
   const disabled = useIsCopyModalVisible()
 
   return (

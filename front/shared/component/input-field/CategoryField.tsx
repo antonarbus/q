@@ -6,6 +6,7 @@ import {
 } from '@mui/material'
 import type { Signal } from '@preact/signals-react'
 import { BsTags } from 'react-icons/bs'
+import type { JSX } from 'react'
 
 type Props = {
   categorySignal: Signal<string | undefined>
@@ -16,7 +17,7 @@ export const CategoryField = ({
   categorySignal,
   options,
   ...rest
-}: Props): React.JSX.Element => {
+}: Props): JSX.Element => {
   return (
     <div style={{ position: 'relative' }}>
       <Autocomplete

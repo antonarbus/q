@@ -16,6 +16,7 @@ import { toast } from 'sonner'
 import { route } from '@shared/const/route'
 import { asyncDelay } from '@shared/util/delay'
 import { createActor } from 'xstate'
+import type { FormEvent } from 'react'
 
 type Props = {
   saveQuotationFormValues: SaveQuotationFormValues
@@ -23,7 +24,7 @@ type Props = {
 }
 
 type Res = {
-  onSubmit: (e: React.FormEvent) => void
+  onSubmit: (e: FormEvent) => void
   isPending: UseMutationResult['isPending']
   isSuccess: UseMutationResult['isSuccess']
   isError: UseMutationResult['isError']
@@ -115,7 +116,7 @@ export const useSaveQuotation = ({
     }
   }, [saveQuotationMutation.isError])
 
-  const onSubmit = (event: React.FormEvent): void => {
+  const onSubmit = (event: FormEvent): void => {
     event.preventDefault()
 
     if (getState().user.email === null) {

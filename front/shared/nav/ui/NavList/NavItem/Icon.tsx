@@ -1,8 +1,9 @@
 import { RoundSpanForIcon } from './RoundSpanForIcon'
 import { Tooltip } from '@mui/material'
+import type { JSX,ReactNode } from 'react'
 
 type Props = {
-  icon: React.ReactNode | string
+  icon: ReactNode | string
   disabled?: boolean
   tooltipText?: string
 }
@@ -18,7 +19,7 @@ export const Icon = ({
   icon,
   disabled,
   tooltipText,
-}: Props): React.JSX.Element => {
+}: Props): JSX.Element => {
   return (
     <Tooltip
       enterDelay={500}

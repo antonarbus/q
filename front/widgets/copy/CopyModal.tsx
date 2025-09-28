@@ -9,8 +9,9 @@ import { FirstCopiedItem } from './FirstCopiedItem'
 import { RestOfCopiedItems } from './RestOfCopiedItems'
 import { useCopyModalAnimation } from './useCopyModalAnimation'
 import { useDisableNavItemsOnCopyModal } from './useDisableNavItemsOnCopyModal'
+import type { JSX } from 'react'
 
-export const CopyModal = (): React.JSX.Element => {
+export const CopyModal = (): JSX.Element => {
   useMovePasteText()
   usePasteClick()
   useDisableNavItemsOnCopyModal()

@@ -6,6 +6,7 @@ import {
 } from 'ag-grid-community'
 import { AgGridReact } from 'ag-grid-react'
 import { useRef } from 'react'
+import type { JSX,ComponentRef } from 'react'
 import { useGetQuotationListQuery } from '@entities/quotation'
 import { LoadingTableOverlay } from '@shared/component/LoadingTableOverlay'
 import { NoRowsTableOverlay } from '@shared/lib/ag-grid/components/NoRowsTableOverlay'
@@ -26,8 +27,8 @@ import { getDefaultColDef } from '@shared/lib/ag-grid/colDef/getDefaultColDef'
 
 ModuleRegistry.registerModules([AllCommunityModule])
 
-export const QuotationListGrid = (): React.JSX.Element => {
-  const gridContainerRef = useRef<React.ComponentRef<'div'> | null>(null)
+export const QuotationListGrid = (): JSX.Element => {
+  const gridContainerRef = useRef<ComponentRef<'div'> | null>(null)
   const getQuotationListQuery = useGetQuotationListQuery()
 
   useDisableLoadingOverlayWhenItemsAreFetched({

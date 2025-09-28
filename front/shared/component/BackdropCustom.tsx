@@ -1,7 +1,9 @@
+import type { JSX,ReactNode } from 'react'
+
 type Props = {
   onMouseDown: () => void
-  children?: React.ReactNode
-  content?: React.ReactNode
+  children?: ReactNode
+  content?: ReactNode
   color?: string
 }
 
@@ -19,7 +21,7 @@ export const BackdropCustom = ({
   children,
   content,
   color,
-}: Props): React.JSX.Element => (
+}: Props): JSX.Element => (
   <div
     onMouseDown={onMouseDown}
     style={{

@@ -2,10 +2,11 @@ import { dispatch, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import { Fade as BurgerIcon } from 'hamburger-react'
 import { navSlice } from '../../../navSlice'
+import type { JSX } from 'react'
 
 // https://hamburger-react.netlify.app/
 
-export const Burger = (): React.JSX.Element => {
+export const Burger = (): JSX.Element => {
   const isOpen = useSelector((state) => state.nav.burger.isOpen)
 
   return (

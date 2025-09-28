@@ -13,8 +13,9 @@ import {
 } from '@entities/quotation'
 import { updateQtyCell } from '@features/blocks/cell/update-cell/row-block-cells/qty/updateQtyCell'
 import { formatQtyCell } from '@features/blocks/cell/update-cell/row-block-cells/qty/formatQtyCell'
+import type { JSX } from 'react'
 
-export const QtyCell = (): React.JSX.Element => {
+export const QtyCell = (): JSX.Element => {
   const { qtyCellEditorRef, priceCellEditorRef } = useRow()
 
   const { stylesForResizableCell } = useStylesForResizableCell({

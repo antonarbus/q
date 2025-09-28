@@ -3,8 +3,9 @@ import { MdDragIndicator } from 'react-icons/md'
 import { useIsBoqRowSortDisabled, useRow } from '@entities/quotation'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/const/cls'
+import type { JSX } from 'react'
 
-export const DragBoqRowIcon = (): React.JSX.Element => {
+export const DragBoqRowIcon = (): JSX.Element => {
   const disabled = useIsBoqRowSortDisabled()
   const { row } = useRow()
 

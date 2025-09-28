@@ -1,7 +1,8 @@
 import { BiErrorCircle } from 'react-icons/bi'
 import { Icon } from './Icon'
+import type { JSX } from 'react'
 
-export const ErrorIcon = (): React.JSX.Element => {
+export const ErrorIcon = (): JSX.Element => {
   return (
     <Icon
       icon={

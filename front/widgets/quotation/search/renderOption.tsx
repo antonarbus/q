@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import type { HTMLAttributes } from 'react'
+import type { HTMLAttributes, JSX } from 'react'
 import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import type { Signal } from '@preact/signals-react'
 import type { LoadBookmark } from '@features/bookmark/copy-bookmark'
@@ -35,7 +35,7 @@ export const renderOption = ({
       index: number
       inputValue: string
     },
-  ): React.JSX.Element {
+  ): JSX.Element {
     return (
       <li
         css={{

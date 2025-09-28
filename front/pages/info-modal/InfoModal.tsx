@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import type { ReactNode } from 'react'
 import { BsInfo } from 'react-icons/bs'
 import { useParams } from 'react-router-dom'
 import { FormModal } from '@shared/component/FormModal'
@@ -12,7 +13,7 @@ import { DescriptionField } from '@shared/component/input-field/DescriptionField
 import { InfoField } from '@shared/component/input-field/InfoField'
 import { useCategories } from './useCategories'
 
-export const InfoModal = (): React.ReactNode => {
+export const InfoModal = (): ReactNode => {
   const { quotationId, bookmarkId } = useParams()
   const modalRef = useRef<HTMLDivElement>(null)
   const { infoFormValues } = useLoadInitValuesIntoInfoModal()

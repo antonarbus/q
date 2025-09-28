@@ -3,6 +3,7 @@ import { theme } from '@shared/theme'
 import { type Variants, AnimatePresence, motion } from 'motion/react'
 import { containerPadding, containerWidth, itemMarginBottom } from './const'
 import { ScaledCopyItem } from './ScaledCopyItem'
+import type { JSX } from 'react'
 
 type Props = {
   isCopying: boolean
@@ -52,7 +53,7 @@ const variants: Variants = {
   },
 }
 
-export const FirstCopiedItem = (): React.JSX.Element | null => {
+export const FirstCopiedItem = (): JSX.Element | null => {
   const items = useSelector((state) => state.copy.items)
   const isCopying = useSelector((state) => state.copy.isCopying)
 

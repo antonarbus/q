@@ -1,4 +1,6 @@
-export const subTotalTextCellStyle: React.CSSProperties = {
+import type { CSSProperties } from 'react'
+
+export const subTotalTextCellStyle: CSSProperties = {
   height: '100%',
   width: '100%',
   whiteSpace: 'nowrap',

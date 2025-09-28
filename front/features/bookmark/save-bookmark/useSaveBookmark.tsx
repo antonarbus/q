@@ -1,6 +1,7 @@
 import { dispatch, getState } from '@shared/lib/redux'
 import type { UseMutationResult } from '@tanstack/react-query'
 import { useCallback } from 'react'
+import type { FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import {
@@ -21,7 +22,7 @@ type Props = {
 }
 
 type Res = {
-  onSubmit: (e: React.FormEvent) => void
+  onSubmit: (e: FormEvent) => void
   isPending: UseMutationResult['isPending']
   isSuccess: UseMutationResult['isSuccess']
   isError: UseMutationResult['isError']
@@ -64,7 +65,7 @@ export const useSaveBookmark = ({
     }
   }, [saveBookmarkMutation.isError])
 
-  const onSubmit = useCallback((event: React.FormEvent) => {
+  const onSubmit = useCallback((event: FormEvent) => {
     event.preventDefault()
 
     const { email } = getState().user
