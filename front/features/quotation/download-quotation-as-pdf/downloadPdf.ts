@@ -67,6 +67,12 @@ export const downloadPdf = async (): Promise<void> => {
 
       blocksElement.style.display = 'inline-flex'
 
+      const openInsertMenuButtonElement = blocksElement.querySelector(
+        `.${cls.openInsertMenuButton}`,
+      )
+
+      openInsertMenuButtonElement?.remove()
+
       const actionElements = blocksElement.querySelectorAll(
         `.${cls.actionsContainer}`,
       )
