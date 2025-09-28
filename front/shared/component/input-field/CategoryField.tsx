@@ -27,16 +27,18 @@ export const CategoryField = ({
         }}
         options={options}
         renderInput={(params) => {
+          const { InputProps, ...otherParams } = params
+
           return (
             <TextField
-              {...params}
+              {...otherParams}
               label='Category'
               name='category'
               placeholder='Category'
               {...rest}
               slotProps={{
                 input: {
-                  ...params.InputProps,
+                  ...InputProps,
                   startAdornment: (
                     <InputAdornment position='start'>
                       <BsTags

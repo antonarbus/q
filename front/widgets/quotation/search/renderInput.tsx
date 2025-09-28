@@ -8,14 +8,15 @@ import { GoSearch } from 'react-icons/go'
 export const renderInput = (
   params: AutocompleteRenderInputParams,
 ): React.JSX.Element => {
+  const { InputProps, ...otherParams } = params
   return (
     <TextField
-      {...params}
+      {...otherParams}
       name='category'
       placeholder='Search in bookmarks'
       slotProps={{
         input: {
-          ...params.InputProps,
+          ...InputProps,
           startAdornment: (
             <InputAdornment position='start'>
               <GoSearch />
