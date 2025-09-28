@@ -15,13 +15,12 @@ export const CopyModal = (): React.JSX.Element => {
   usePasteClick()
   useDisableNavItemsOnCopyModal()
   useEnableFroalasOnCloseCopyModal()
-  const copyModalAnimationControls = useCopyModalAnimation()
+  const copyModalRef = useCopyModalAnimation()
   const { x, y } = cursorPosSignal.value
   // const { x, y } = { x: 300, y: 0 }
 
   return (
     <motion.div
-      animate={copyModalAnimationControls}
       css={{
         borderRadius: 6,
         position: 'fixed',
@@ -38,6 +37,7 @@ export const CopyModal = (): React.JSX.Element => {
           opacity: '1 !important',
         },
       }}
+      ref={copyModalRef}
     >
       <div
         style={{

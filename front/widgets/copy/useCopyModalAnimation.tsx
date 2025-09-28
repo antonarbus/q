@@ -1,13 +1,13 @@
 import { dispatch, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
-import { useAnimation, type AnimationControls } from 'motion/react'
+import { type AnimationScope, useAnimate } from 'motion/react'
 import { useEffect } from 'react'
 import { useFirstMountState } from 'react-use'
 import { copySlice } from '@entities/copy'
 import { containerPadding, containerWidth } from './const'
 
-export const useCopyModalAnimation = (): AnimationControls => {
-  const copyModalAnimationControls = useAnimation()
+export const useCopyModalAnimation = (): AnimationScope => {
+  const [scope, animate] = useAnimate()
   const isFirstMount = useFirstMountState()
   const items = useSelector((state) => state.copy.items)
 
@@ -27,24 +27,30 @@ export const useCopyModalAnimation = (): AnimationControls => {
     }, 70)
 
     if (isFirstMount === true) {
-      void copyModalAnimationControls.start({
-        width: 'auto',
-        transition: {
+      void animate(
+        scope.current,
+        {
+          width: 'auto',
+        },
+        {
           delay: 0,
           duration: theme.copy.animationDuration,
           ease: 'linear',
         },
-      })
+      )
     }
 
-    void copyModalAnimationControls.start({
-      height: newHeight,
-      transition: {
+    void animate(
+      scope.current,
+      {
+        height: newHeight,
+      },
+      {
         delay: 0,
         duration: theme.copy.animationDuration,
         ease: 'linear',
       },
-    })
+    )
 
     dispatch(copySlice.actions.forbidAllActions())
 
@@ -53,5 +59,5 @@ export const useCopyModalAnimation = (): AnimationControls => {
     }, 1000 * theme.block.animationDuration)
   }, [items.length])
 
-  return copyModalAnimationControls
+  return scope
 }
