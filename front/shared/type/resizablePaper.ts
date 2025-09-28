@@ -1,9 +1,10 @@
 import type { NumberSize } from 're-resizable'
 import type { Direction } from 're-resizable/lib/resizer'
-import type { MouseEvent, TouchEvent } from 'react'
 
-// Note: re-resizable library passes React synthetic events with Element generic type
-// to all resize callbacks, despite inconsistent type definitions in the library
+// Note: re-resizable library has inconsistent type definitions
+// ResizeCallback expects DOM events (MouseEvent | TouchEvent)
+// ResizeStartCallback expects React events (React.MouseEvent<HTMLElement> | React.TouchEvent<HTMLElement>)
+// We align with what the library actually provides at runtime
 
 export type OnBlockResizeStop = (params: {
   event: MouseEvent | TouchEvent
@@ -22,7 +23,7 @@ export type OnBlockResize = (params: {
 }) => void
 
 export type OnBlockResizeStart = (params: {
-  event: MouseEvent | TouchEvent
+  event: React.MouseEvent<HTMLElement> | React.TouchEvent<HTMLElement>
   dir: Direction
   elementRef: HTMLElement
   blockIndex: number
