@@ -7,10 +7,7 @@ type Props = {
   children: ReactNode
 }
 
-export const RequireRoles = ({
-  requiredRoles,
-  children,
-}: Props): ReactNode => {
+export const RequireRoles = ({ requiredRoles, children }: Props): ReactNode => {
   const getUserAccessTokenQuery = useGetUserAccessTokenQuery()
 
   const userRoles = useSelector((state) => state.user.roles)

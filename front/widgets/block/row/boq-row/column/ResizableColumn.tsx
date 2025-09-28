@@ -7,7 +7,7 @@ import {
 } from '@features/blocks/resize'
 import { selectColumnWidth } from '@entities/quotation'
 import type { BoqColumnKey } from '@entities/quotation/const/boqColumnKey'
-import type { JSX,ReactNode } from 'react'
+import type { JSX, ReactNode } from 'react'
 
 type Props = {
   children: ReactNode

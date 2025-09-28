@@ -1,4 +1,4 @@
-import type { JSX,ReactNode,CSSProperties } from 'react'
+import type { JSX, ReactNode, CSSProperties } from 'react'
 
 type Props = {
   children: ReactNode

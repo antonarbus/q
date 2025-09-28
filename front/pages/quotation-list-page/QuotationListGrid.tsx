@@ -6,7 +6,7 @@ import {
 } from 'ag-grid-community'
 import { AgGridReact } from 'ag-grid-react'
 import { useRef } from 'react'
-import type { JSX,ComponentRef } from 'react'
+import type { JSX, ComponentRef } from 'react'
 import { useGetQuotationListQuery } from '@entities/quotation'
 import { LoadingTableOverlay } from '@shared/component/LoadingTableOverlay'
 import { NoRowsTableOverlay } from '@shared/lib/ag-grid/components/NoRowsTableOverlay'

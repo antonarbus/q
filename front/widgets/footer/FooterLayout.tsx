@@ -1,5 +1,5 @@
 import { theme } from '@shared/theme'
-import type { JSX,ReactNode } from 'react'
+import type { JSX, ReactNode } from 'react'
 
 type Props = {
   children: ReactNode

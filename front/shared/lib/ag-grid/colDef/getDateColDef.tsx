@@ -49,9 +49,7 @@ export const getDateColDef = <
         return 0
       },
     },
-    cellRenderer: (
-      params: ICellRendererParams<TData, TValue>,
-    ): ReactNode => {
+    cellRenderer: (params: ICellRendererParams<TData, TValue>): ReactNode => {
       if (typeof params.value !== 'string') {
         return null
       }

@@ -1,6 +1,6 @@
 import { dispatch } from '@shared/lib/redux'
 import { useEffect } from 'react'
-import type { ComponentRef,RefObject } from 'react'
+import type { ComponentRef, RefObject } from 'react'
 import { didClickInsideThisElement } from '../../../../../../util/isClickInsideThisElement'
 import { navSlice } from '../../../../../navSlice'
 

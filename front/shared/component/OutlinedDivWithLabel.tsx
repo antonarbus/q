@@ -1,6 +1,6 @@
 /* eslint-disable react/no-multi-comp */
 import { type SxProps, TextField } from '@mui/material'
-import type { JSX,ReactNode,RefObject } from 'react'
+import type { JSX, ReactNode, RefObject } from 'react'
 
 type InputComponentProps = Record<string, unknown> & {
   ref: RefObject<HTMLDivElement>

@@ -5,7 +5,7 @@ import { route } from '@shared/const/route'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/const/cls'
 import { useIsCopyModalVisible } from '@entities/copy'
-import type { ReactNode,MouseEvent } from 'react'
+import type { ReactNode, MouseEvent } from 'react'
 
 export const OpenInfoBlockModalIcon = (): ReactNode => {
   const navigate = useNavigate()

@@ -3,7 +3,7 @@ import { Box } from '@mui/material'
 import { getTextWithBoldSubStringAsJsx } from '@shared/util/getTextWithBoldSubStringAsJsx'
 import type { ItemPick } from '@back/api/bookmark/getBookmarkListHandler'
 import { useCallback } from 'react'
-import type { JSX,ReactNode } from 'react'
+import type { JSX, ReactNode } from 'react'
 
 type Props = {
   inputValueSignal: { value: string }

@@ -2,7 +2,7 @@ import { useFroala } from '@entities/quotation/provider/FroalaProvider'
 import { Box } from '@mui/material'
 import { cls } from '@shared/const/cls'
 import { theme } from '@shared/theme'
-import type { JSX,ComponentRef,RefObject } from 'react'
+import type { JSX, ComponentRef, RefObject } from 'react'
 
 type Props = {
   dropFilesTextRef: RefObject<ComponentRef<'div'> | null>

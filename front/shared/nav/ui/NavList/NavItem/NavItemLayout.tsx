@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import { theme } from '@shared/theme'
-import type { JSX,ReactNode,ComponentRef,RefObject } from 'react'
+import type { JSX, ReactNode, ComponentRef, RefObject } from 'react'
 
 type Props = {
   children: ReactNode

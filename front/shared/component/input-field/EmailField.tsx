@@ -4,7 +4,7 @@ import { InputAdornment, TextField } from '@mui/material'
 import { useSignal, type Signal, useSignalEffect } from '@preact/signals-react'
 import mailcheck from 'mailcheck'
 import { isEmailPatternOk } from '../../util/isEmailPatternOk'
-import type { JSX,ComponentRef,RefObject } from 'react'
+import type { JSX, ComponentRef, RefObject } from 'react'
 
 type Props = {
   emailSignal: Signal<string>

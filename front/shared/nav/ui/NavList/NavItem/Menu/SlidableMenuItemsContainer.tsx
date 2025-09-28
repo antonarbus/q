@@ -1,7 +1,7 @@
 import { MenuItem } from './MenuItem'
 import type { NavItemId } from '@shared/const/navItemId'
 import { getNavItem } from './functions/getNavItem'
-import type { ReactNode,ComponentRef,RefObject } from 'react'
+import type { ReactNode, ComponentRef, RefObject } from 'react'
 
 type Props = {
   reference: RefObject<ComponentRef<'div'> | null>

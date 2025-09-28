@@ -12,9 +12,7 @@ import { textSlice } from '@shared/lib/froala/textSlice'
 import { appSlice } from '@shared/appSlice'
 import type { JSX } from 'react'
 
-export const OpenSaveQuotationModalButton = (
-  props: ReqBody,
-): JSX.Element => {
+export const OpenSaveQuotationModalButton = (props: ReqBody): JSX.Element => {
   const navigate = useNavigate()
 
   const quotationMutation = useGetQuotationMutation()

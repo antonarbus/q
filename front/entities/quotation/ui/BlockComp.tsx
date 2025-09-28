@@ -9,7 +9,7 @@ import type {
 import { useBlock } from '../provider/BlockProvider'
 import { BlockAnimate } from './block-layout'
 import { PasteBlockTextOverlay } from './paste-block-overlay-text'
-import type { JSX,ReactNode } from 'react'
+import type { JSX, ReactNode } from 'react'
 
 type Props = {
   children: ReactNode

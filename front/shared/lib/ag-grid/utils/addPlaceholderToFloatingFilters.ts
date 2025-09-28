@@ -1,4 +1,4 @@
-import type { ComponentRef,RefObject } from 'react'
+import type { ComponentRef, RefObject } from 'react'
 
 type Props = {
   gridContainerRef: RefObject<ComponentRef<'div'> | null>

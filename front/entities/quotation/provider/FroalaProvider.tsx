@@ -1,5 +1,5 @@
 import { createContext, useContext, useMemo } from 'react'
-import type { JSX,ReactNode,RefObject } from 'react'
+import type { JSX, ReactNode, RefObject } from 'react'
 import type { FroalaProps } from '../ui/froala/types'
 // import type { FroalaProps } from '../ui/froala/Froala'
 

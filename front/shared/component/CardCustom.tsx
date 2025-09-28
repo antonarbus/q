@@ -1,5 +1,5 @@
 import { type SxProps, Typography, Box } from '@mui/material'
-import type { JSX,ReactNode,ComponentRef,RefObject,MouseEvent } from 'react'
+import type { JSX, ReactNode, ComponentRef, RefObject, MouseEvent } from 'react'
 
 type Props = {
   children?: ReactNode

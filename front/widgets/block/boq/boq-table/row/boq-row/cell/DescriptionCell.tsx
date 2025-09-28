@@ -1,7 +1,7 @@
 import { tabFromDescriptionCell } from '@features/blocks/cell/tab-away-from-cell'
 import { updateDescriptionCell } from '@features/blocks/cell/update-cell'
 import { beforeUpload } from '@features/file/upload-file'
-import type { JSX,KeyboardEvent } from 'react'
+import type { JSX, KeyboardEvent } from 'react'
 import {
   getBoqCellHtmlFromStore,
   useRow,

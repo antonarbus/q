@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-max-depth */
 import { theme } from '@shared/theme'
 import { Box } from '@mui/material'
-import type { JSX,ReactNode } from 'react'
+import type { JSX, ReactNode } from 'react'
 
 type Props = {
   title: JSX.Element

@@ -2,7 +2,7 @@
 import { Box } from '@mui/material'
 import { AnimatePresence } from 'motion/react'
 import { OutlinedDivWithLabel } from '@shared/component/OutlinedDivWithLabel'
-import type { JSX,ReactNode } from 'react'
+import type { JSX, ReactNode } from 'react'
 
 type Props = {
   sharedWithRadioButtons: ReactNode

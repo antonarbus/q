@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import type { JSX,ReactNode } from 'react'
+import type { JSX, ReactNode } from 'react'
 import { useEffectOnce } from 'react-use'
 import { useSlide } from '../util/useSlide'
 import { getState } from '@shared/lib/redux'

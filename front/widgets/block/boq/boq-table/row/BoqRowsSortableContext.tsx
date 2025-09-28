@@ -10,15 +10,13 @@ import { useSelector } from '@shared/lib/redux'
 import { onBoqRowDragEnd, onBoqRowDragStart } from '@features/blocks/drag'
 import { selectBoqRows, useBlock } from '@entities/quotation'
 import { arrayShapesEqualityFn } from '@shared/util/arrayShapesEqualityFn'
-import type { JSX,ReactNode } from 'react'
+import type { JSX, ReactNode } from 'react'
 
 type Props = {
   children: ReactNode
 }
 
-export const BoqRowsSortableContext = ({
-  children,
-}: Props): JSX.Element => {
+export const BoqRowsSortableContext = ({ children }: Props): JSX.Element => {
   const { blockIndex } = useBlock()
 
   const boqRows = useSelector(

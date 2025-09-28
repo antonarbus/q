@@ -7,7 +7,7 @@ import type {
   OnBlockResizeStop,
 } from '@shared/type/resizablePaper'
 import { useBlock } from '../../provider/BlockProvider'
-import type { JSX,ReactNode } from 'react'
+import type { JSX, ReactNode } from 'react'
 
 type Props = {
   children: ReactNode

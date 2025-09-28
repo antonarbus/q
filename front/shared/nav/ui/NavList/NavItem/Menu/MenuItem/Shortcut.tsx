@@ -7,10 +7,7 @@ type Props = {
   $isHovered: boolean
 }
 
-export const Shortcut = ({
-  shortcut,
-  $isHovered,
-}: Props): JSX.Element => {
+export const Shortcut = ({ shortcut, $isHovered }: Props): JSX.Element => {
   const keys = shortcut.join('+')
 
   return (

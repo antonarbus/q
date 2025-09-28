@@ -4,7 +4,15 @@ import { IoClose } from 'react-icons/io5'
 import { AnimatePresence, motion } from 'motion/react'
 import type { AnimationScope } from 'motion-dom'
 import { Children } from 'react'
-import type { JSX,ReactNode,ComponentRef,RefObject,CSSProperties,MouseEvent,FormEvent } from 'react'
+import type {
+  JSX,
+  ReactNode,
+  ComponentRef,
+  RefObject,
+  CSSProperties,
+  MouseEvent,
+  FormEvent,
+} from 'react'
 import { BackdropWithSlidableModal } from './BackdropWithSlidableModal'
 import { ButtonCustom } from './ButtonCustom'
 import { cls } from '@shared/const/cls'

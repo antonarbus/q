@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 import { asyncDelay } from '@shared/util/delay'
 import { useRef } from 'react'
-import type { JSX,ComponentRef } from 'react'
+import type { JSX, ComponentRef } from 'react'
 
 const MIN_SPINNER_TIME = 400
 const SPINNER_DELAY = 200

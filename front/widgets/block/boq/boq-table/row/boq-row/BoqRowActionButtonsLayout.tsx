@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import { cls } from '@shared/const/cls'
-import type { JSX,ReactNode,CSSProperties } from 'react'
+import type { JSX, ReactNode, CSSProperties } from 'react'
 
 type Props = {
   children: ReactNode

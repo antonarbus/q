@@ -4,7 +4,7 @@ import { VscPinned } from 'react-icons/vsc'
 import { selectBoqCellPin, useBlock, useRow } from '@entities/quotation'
 import { cls } from '@shared/const/cls'
 import type { BoqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
-import type { ReactNode,MouseEvent } from 'react'
+import type { ReactNode, MouseEvent } from 'react'
 
 type Props = {
   boqRowCellKey: BoqRowCellKey

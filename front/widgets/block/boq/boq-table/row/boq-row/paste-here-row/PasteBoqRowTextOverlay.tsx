@@ -1,14 +1,12 @@
 import { theme } from '@shared/theme'
 import { useIsPasteHere } from './useIsPasteHere'
-import type { JSX,ReactNode } from 'react'
+import type { JSX, ReactNode } from 'react'
 
 type Props = {
   children: ReactNode
 }
 
-export const PasteBoqRowTextOverlay = ({
-  children,
-}: Props): JSX.Element => {
+export const PasteBoqRowTextOverlay = ({ children }: Props): JSX.Element => {
   const isPasteHere = useIsPasteHere()
 
   return (

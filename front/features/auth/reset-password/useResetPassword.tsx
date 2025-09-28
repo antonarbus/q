@@ -13,7 +13,7 @@ import { navSlice } from '@shared/nav'
 import { toast } from 'sonner'
 import type { AnimationScope } from 'motion-dom'
 import { asyncDelay } from '@shared/util/delay'
-import type { RefObject,FormEvent } from 'react'
+import type { RefObject, FormEvent } from 'react'
 
 type Props = {
   passwordSignal: Signal<string>

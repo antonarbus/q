@@ -1,5 +1,5 @@
 import { createContext, useContext, useMemo } from 'react'
-import type { JSX,ReactNode } from 'react'
+import type { JSX, ReactNode } from 'react'
 import type { FroalaEditorRef } from '@shared/type/froala'
 import { useBoq } from './BoqBlockProvider'
 import type { Row } from '../type'

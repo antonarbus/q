@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import type { JSX,ReactNode,ComponentRef,RefObject } from 'react'
+import type { JSX, ReactNode, ComponentRef, RefObject } from 'react'
 
 type Props = {
   children: ReactNode

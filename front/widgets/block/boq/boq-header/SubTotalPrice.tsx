@@ -21,9 +21,11 @@ export const SubTotalPrice = (): JSX.Element => {
   const { subTotalPriceEditorRef, boqRowEditorRefs } = useBoq()
   const { blockIndex } = useBlock()
 
-  const hidePinsClickHandlerRef = useRef<(e: MouseEvent) => void>((event) => {
-    console.warn('hidePinsClickHandlerRef')
-  })
+  const hidePinsClickHandlerRef = useRef<(e: MouseEvent<Element>) => void>(
+    (event) => {
+      console.warn('hidePinsClickHandlerRef')
+    },
+  )
 
   const isInitClickRef = useRef(true)
 
