@@ -164,6 +164,22 @@ export default {
             return '@remix'
           }
 
+          const isJsPdf = id.includes('jspdf')
+
+          // Split jsPDF into its own chunk to enable dynamic imports without bundling issues
+          // This allows lazy loading of the PDF library only when needed
+          if (isJsPdf === true) {
+            return 'jspdf'
+          }
+
+          const isExcelJs = id.includes('exceljs')
+
+          // Split ExcelJS into its own chunk for consistency with jsPDF approach
+          // Ensures reliable dynamic imports and lazy loading
+          if (isExcelJs === true) {
+            return 'exceljs'
+          }
+
           return undefined
         },
       },
