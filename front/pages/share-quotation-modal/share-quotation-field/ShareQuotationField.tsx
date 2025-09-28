@@ -1,6 +1,5 @@
 import { useSignal } from '@preact/signals-react'
-import { useEffect } from 'react'
-import type { JSX } from 'react'
+import { useEffect, type JSX } from 'react'
 import type { AccessFormValuesSignal } from '@entities/quotation'
 import { isEmailPatternOk } from '@shared/util/isEmailPatternOk'
 import { SharedWithRadioButtons } from './SharedWithRadioButtons'

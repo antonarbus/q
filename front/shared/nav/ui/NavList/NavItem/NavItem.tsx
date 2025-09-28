@@ -1,6 +1,5 @@
 import { useSelector } from '@shared/lib/redux'
-import { useRef } from 'react'
-import type { JSX, ComponentRef, MouseEvent } from 'react'
+import { useRef, type JSX, type ComponentRef, type MouseEvent } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { clickOnNavItem } from './clickOnNavItem'
 import { Menu } from './Menu'

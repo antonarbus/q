@@ -1,5 +1,4 @@
-import { useRef } from 'react'
-import type { JSX } from 'react'
+import { useRef, type JSX } from 'react'
 import { updateTextBlock } from '@features/blocks/cell/update-cell'
 import { CopyBlockIcon } from '@features/blocks/copy'
 import { CutBlockIcon } from '@features/blocks/cut'

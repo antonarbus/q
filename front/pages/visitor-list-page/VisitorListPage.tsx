@@ -1,6 +1,5 @@
 import 'chart.js/auto'
-import { useState } from 'react'
-import type { JSX } from 'react'
+import { useState, type JSX } from 'react'
 import { Box } from '@mui/material'
 import { DatePicker } from '@mui/x-date-pickers'
 import { format, subDays } from 'date-fns'

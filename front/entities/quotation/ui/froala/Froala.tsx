@@ -1,7 +1,6 @@
 import { useSelector } from '@shared/lib/redux'
 import { Box } from '@mui/material'
-import { useRef } from 'react'
-import type { JSX, ComponentRef, MouseEvent } from 'react'
+import { useRef, type JSX, type ComponentRef, type MouseEvent } from 'react'
 import { FroalaProvider } from '../../provider/FroalaProvider'
 import { useBlock } from '../../provider/BlockProvider'
 import { EditableHtml } from './EditableHtml'

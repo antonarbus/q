@@ -1,5 +1,4 @@
-import { useLayoutEffect, useRef } from 'react'
-import type { JSX } from 'react'
+import { useLayoutEffect, useRef, type JSX } from 'react'
 
 type Props = {
   width: number

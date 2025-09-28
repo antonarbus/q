@@ -5,8 +5,7 @@ import {
   type FilterChangedEvent,
 } from 'ag-grid-community'
 import { AgGridReact } from 'ag-grid-react'
-import { useRef } from 'react'
-import type { JSX, ComponentRef } from 'react'
+import { useRef, type JSX, type ComponentRef } from 'react'
 import { useBookmarkListAllDatasource } from '@entities/bookmark'
 import { LoadingTableOverlay } from '@shared/component/LoadingTableOverlay'
 import { DisplayedRowsCount } from '@shared/lib/ag-grid/components/DisplayedRowsCount'

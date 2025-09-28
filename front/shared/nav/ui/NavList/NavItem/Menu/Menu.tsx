@@ -1,7 +1,6 @@
 import { dispatch, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
-import { useRef } from 'react'
-import type { JSX, ComponentRef } from 'react'
+import { useRef, type JSX, type ComponentRef } from 'react'
 import { navSlice } from '../../../../navSlice'
 import { useCloseMenuOnClickOutside } from './functions/useCloseMenuOnClickOutside'
 import { useIsMenuOutsideWindow } from './functions/useIsMenuOutsideWindow'

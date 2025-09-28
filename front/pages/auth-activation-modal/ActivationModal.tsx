@@ -1,7 +1,6 @@
 import { theme } from '@shared/theme'
 import { Avatar, Box } from '@mui/material'
-import { useRef } from 'react'
-import type { JSX } from 'react'
+import { useRef, type JSX } from 'react'
 import { GrValidate } from 'react-icons/gr'
 import { PiSmileySadBold, PiSmileyBold } from 'react-icons/pi'
 import { useNavigate } from 'react-router-dom'

@@ -1,5 +1,4 @@
-import { useRef } from 'react'
-import type { ReactNode } from 'react'
+import { useRef, type ReactNode } from 'react'
 import { BsInfo } from 'react-icons/bs'
 import { useParams } from 'react-router-dom'
 import { FormModal } from '@shared/component/FormModal'

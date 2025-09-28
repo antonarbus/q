@@ -1,5 +1,4 @@
-import { useEffect } from 'react'
-import type { RefObject } from 'react'
+import { useEffect, type RefObject } from 'react'
 import type { Chart } from 'chart.js'
 import type { ResBody } from '@back/api/visitors/getUniqueDailyVisitorsHandler'
 import { format, parseISO } from 'date-fns'

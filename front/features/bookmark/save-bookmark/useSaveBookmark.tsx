@@ -1,7 +1,6 @@
 import { dispatch, getState } from '@shared/lib/redux'
 import type { UseMutationResult } from '@tanstack/react-query'
-import { useCallback } from 'react'
-import type { FormEvent } from 'react'
+import { useCallback, type FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import {

@@ -1,8 +1,7 @@
 import { getState, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import { type Variants, AnimatePresence, motion } from 'motion/react'
-import { useRef } from 'react'
-import type { JSX } from 'react'
+import { useRef, type JSX } from 'react'
 import { containerPadding, containerWidth, itemMarginBottom } from './const'
 import { ScaledCopyItem } from './ScaledCopyItem'
 

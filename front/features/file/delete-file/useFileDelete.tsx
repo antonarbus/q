@@ -1,7 +1,6 @@
 import { instance } from '@shared/instance'
 import { queryKey } from '@shared/const/queryKey'
-import { useCallback } from 'react'
-import type { MouseEvent } from 'react'
+import { useCallback, type MouseEvent } from 'react'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
 import { useDeleteFileMutation } from '@entities/file'

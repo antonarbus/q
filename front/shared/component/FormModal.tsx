@@ -3,15 +3,15 @@ import { theme } from '@shared/theme'
 import { IoClose } from 'react-icons/io5'
 import { AnimatePresence, motion } from 'motion/react'
 import type { AnimationScope } from 'motion-dom'
-import { Children } from 'react'
-import type {
-  JSX,
-  ReactNode,
-  ComponentRef,
-  RefObject,
-  CSSProperties,
-  MouseEvent,
-  FormEvent,
+import {
+  Children,
+  type JSX,
+  type ReactNode,
+  type ComponentRef,
+  type RefObject,
+  type CSSProperties,
+  type MouseEvent,
+  type FormEvent,
 } from 'react'
 import { BackdropWithSlidableModal } from './BackdropWithSlidableModal'
 import { ButtonCustom } from './ButtonCustom'

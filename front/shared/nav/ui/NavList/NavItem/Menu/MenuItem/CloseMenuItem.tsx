@@ -1,7 +1,6 @@
 import { dispatch, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
-import { createElement, type MouseEvent } from 'react'
-import type { JSX } from 'react'
+import { createElement, type MouseEvent, type JSX } from 'react'
 import { CgClose as CloseIcon } from 'react-icons/cg'
 import { navSlice } from '../../../../../navSlice'
 import { Icon } from '../../Icon'

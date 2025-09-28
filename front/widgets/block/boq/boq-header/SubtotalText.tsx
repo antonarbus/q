@@ -1,5 +1,4 @@
-import { useRef } from 'react'
-import type { JSX } from 'react'
+import { useRef, type JSX } from 'react'
 import { updateSubtotalTextCell } from '@features/blocks/cell/update-cell'
 import {
   getBoqHeaderHtmlFromStore,

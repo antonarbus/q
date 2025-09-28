@@ -1,5 +1,4 @@
-import { useRef } from 'react'
-import type { ReactNode, ComponentRef } from 'react'
+import { useRef, type ReactNode, type ComponentRef } from 'react'
 import { useEffectOnce } from 'react-use'
 
 type Props = {

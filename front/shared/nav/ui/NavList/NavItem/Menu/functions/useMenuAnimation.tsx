@@ -1,7 +1,12 @@
 import { dispatch } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
-import { useEffect, useRef, useState } from 'react'
-import type { ComponentRef, RefObject } from 'react'
+import {
+  useEffect,
+  useRef,
+  useState,
+  type ComponentRef,
+  type RefObject,
+} from 'react'
 import { useFirstMountState } from 'react-use'
 import { elementHeight } from '@shared/util/elementHeight'
 import { navSlice } from '@shared/nav/navSlice'
