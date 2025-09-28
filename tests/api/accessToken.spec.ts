@@ -16,7 +16,9 @@ test.describe('#authTokenRefresh', () => {
   let refreshCookies: string[]
 
   test.describe('Step 1: Login and get tokens', () => {
-    test('should login successfully and return access token', async ({ request }) => {
+    test('should login successfully and return access token', async ({
+      request,
+    }) => {
       const loginResponse = await request[api.logIn.method](api.logIn.url, {
         data: { email, password },
       })
@@ -31,7 +33,9 @@ test.describe('#authTokenRefresh', () => {
   })
 
   test.describe('Step 2: Test valid access token', () => {
-    test('should make successful protected request with valid token', async ({ request }) => {
+    test('should make successful protected request with valid token', async ({
+      request,
+    }) => {
       const res = await request[api.getQuotationList.method](
         api.getQuotationList.url,
         {
@@ -47,18 +51,23 @@ test.describe('#authTokenRefresh', () => {
 
   test.describe('Step 3: Test invalid access token', () => {
     test('should return 401 with invalid token', async ({ request }) => {
-      const res = await request[api.getQuotationList.method](api.getQuotationList.url, {
-        headers: {
-          'access-jwt-token': 'invalid token value',
+      const res = await request[api.getQuotationList.method](
+        api.getQuotationList.url,
+        {
+          headers: {
+            'access-jwt-token': 'invalid token value',
+          },
         },
-      })
+      )
 
       expect(res.status()).toBe(401)
     })
   })
 
   test.describe('Step 4: Refresh token endpoint', () => {
-    test('should get new access token using refresh token from cookie', async ({ request }) => {
+    test('should get new access token using refresh token from cookie', async ({
+      request,
+    }) => {
       const accessTokenResponse = await request[api.getAccessToken.method](
         api.getAccessToken.url,
       )
@@ -72,12 +81,17 @@ test.describe('#authTokenRefresh', () => {
   })
 
   test.describe('Step 5: Test refreshed access token', () => {
-    test('should make successful protected request with refreshed token', async ({ request }) => {
-      const res = await request[api.getQuotationList.method](api.getQuotationList.url, {
-        headers: {
-          'access-jwt-token': accessToken,
+    test('should make successful protected request with refreshed token', async ({
+      request,
+    }) => {
+      const res = await request[api.getQuotationList.method](
+        api.getQuotationList.url,
+        {
+          headers: {
+            'access-jwt-token': accessToken,
+          },
         },
-      })
+      )
 
       expect(res.ok()).toBeTruthy()
     })
