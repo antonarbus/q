@@ -1,5 +1,4 @@
-import { useRef } from 'react'
-import type { JSX,MouseEvent } from 'react'
+import { type JSX, type MouseEvent, useRef } from 'react'
 import { showHideBoqPricePins } from '@features/blocks/cell/pin'
 import {
   formatSubtotalPriceCell,
