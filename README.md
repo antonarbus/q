@@ -332,3 +332,17 @@ https://console.cloud.google.com/iam-admin/serviceaccounts?inv=1&invt=AblPCg&pro
 - [ ] dev table for all files / quotations / bookmarks
 - [ ] add cloudflarehttps://chatgpt.com/c/67f1a2a0-48b8-8004-837a-63191208d218https://dash.cloudflare.com/cb73a8d89456064769c244e7f474368d/sendmequotation.today/add-record-methods
 - [ ] if save quotation being unregistered you are prompted to register and quotation is saved as expected. What happened is i got confirmation email and when i activated the profile i found myself being not logged in. Check it + check again how activation works.
+- [ ] > wow, re-resize library is strange, i thought it is the flagship library for this use case, but seems it
+      > is not good maintained
+
+⏺ You're absolutely right! The re-resizable library does seem to have some maintenance issues. The
+inconsistent type definitions we just encountered are a red flag:
+
+This is pretty surprising for what should be a mature library for such a common use case. You might want
+to consider:
+
+Alternatives to explore:
+
+- react-resizable - The original, more established library
+- react-rnd - Combines resizable and draggable functionality
+- @dnd-kit/sortable with custom resize handles - More modern, better maintained
