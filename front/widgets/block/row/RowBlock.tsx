@@ -1,8 +1,8 @@
 import { BlockComp } from '@entities/quotation'
 import { cls } from '@shared/const/cls'
 import { OneRow } from './boq-row/OneRow'
-import {
 import type { JSX } from 'react'
+import {
   onBoqBlockResize,
   onBoqBlockResizeStart,
   onBoqBlockResizeStop,

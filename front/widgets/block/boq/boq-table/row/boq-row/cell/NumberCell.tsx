@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
-import {
 import type { JSX } from 'react'
+import {
   boqColumnKey,
   getNumberOfBoqBlocksAbove,
   useBlock,

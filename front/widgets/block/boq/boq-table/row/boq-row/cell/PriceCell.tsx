@@ -10,8 +10,8 @@ import {
   updateBoqRowPriceCell,
   validateBoqRowPrice,
 } from '@features/blocks/cell/update-cell'
+import type { JSX, MouseEvent } from 'react'
 import {
-import type { JSX,MouseEvent } from 'react'
   getBoqCellHtmlFromStore,
   useBoq,
   useBlock,
