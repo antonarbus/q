@@ -8,21 +8,25 @@ import { errorHandlerMiddleware } from './middleware/errorHandlerMiddleware'
 import { config } from './config'
 import { asyncHandler } from './shared/lib/express'
 
-const app = express()
-void connectToDb()
-app.use(morgan('dev')) // http logs in terminal
-app.use(express.json({ limit: '50mb' })) // parses the JSON payload and adds it into'body' prop
-app.use(cookieParser()) // parses Cookie header and adds to req.cookies
+const startServer = async (): Promise<void> => {
+  const app = express()
+  await connectToDb()
+  app.use(morgan('dev')) // http logs in terminal
+  app.use(express.json({ limit: '50mb' })) // parses the JSON payload and adds it into'body' prop
+  app.use(cookieParser()) // parses Cookie header and adds to req.cookies
 
-Object.entries(api).forEach(([key, apiData]) => {
-  const { method, url, handler } = apiData
-  app[method](url, asyncHandler(handler)) // register express route
-})
+  Object.entries(api).forEach(([_key, apiData]) => {
+    const { method, url, handler } = apiData
+    app[method](url, asyncHandler(handler)) // register express route
+  })
 
-app.use(errorHandlerMiddleware)
+  app.use(errorHandlerMiddleware)
 
-app.listen(config.back.port, () => {
-  console.info(
-    `🚀 ${config.installation} backend server started at ${config.back.baseUrl} based on ${config.installation} installation`,
-  )
-})
+  app.listen(config.back.port, () => {
+    console.info(
+      `🚀 ${config.installation} backend server started at ${config.back.baseUrl} based on ${config.installation} installation`,
+    )
+  })
+}
+
+void startServer()
