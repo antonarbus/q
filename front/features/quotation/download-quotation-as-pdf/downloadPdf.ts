@@ -39,7 +39,8 @@ export const downloadPdf = async (): Promise<void> => {
     return
   }
 
-  const paperElements = document.querySelectorAll(`.${cls.paper}`)
+  // get max item block width to set the width of generated pdf a bit wider to fit quotation nicely
+  const paperElements = blocksContainerElement.querySelectorAll(`.${cls.paper}`)
 
   const maxPaperWidth =
     Array.from(paperElements).reduce((maxWidth, paperElement) => {
@@ -54,9 +55,46 @@ export const downloadPdf = async (): Promise<void> => {
 
   const { domToJpeg } = await import('modern-screenshot')
 
+  // Calculate height after button removal by temporarily cloning and measuring
+  const tempClone = blocksContainerElement.cloneNode(true)
+
+  if (tempClone instanceof HTMLElement === false) {
+    return
+  }
+
+  tempClone.style.position = 'absolute'
+  tempClone.style.left = '-9999px'
+  tempClone.style.visibility = 'hidden'
+  tempClone.style.width = `${blocksContainerElement.clientWidth}px`
+  document.body.appendChild(tempClone)
+
+  // Remove button from temp clone to get correct height
+  const tempOpenInsertMenuButton = tempClone.querySelector(
+    `.${cls.openInsertMenuButton}`,
+  )
+
+  if (tempOpenInsertMenuButton !== null) {
+    tempOpenInsertMenuButton.remove()
+  }
+
+  // Also remove action buttons from temp clone
+  const tempActionElements = tempClone.querySelectorAll(
+    `.${cls.actionsContainer}`,
+  )
+
+  tempActionElements.forEach((element) => {
+    element.remove()
+  })
+
+  tempClone.style.display = 'inline-flex'
+
+  const correctedHeight = tempClone.clientHeight
+
+  document.body.removeChild(tempClone)
+
   const quotationScreenshot = await domToJpeg(blocksContainerElement, {
     width: maxPaperWidth,
-    height: blocksContainerElement.clientHeight,
+    height: correctedHeight,
     backgroundColor: 'grey',
     quality: 1,
     scale: 1.5,
@@ -67,12 +105,16 @@ export const downloadPdf = async (): Promise<void> => {
 
       blocksElement.style.display = 'inline-flex'
 
+      // remove '+' button at the bottom
       const openInsertMenuButtonElement = blocksElement.querySelector(
         `.${cls.openInsertMenuButton}`,
       )
 
-      openInsertMenuButtonElement?.remove()
+      if (openInsertMenuButtonElement !== null) {
+        openInsertMenuButtonElement.remove()
+      }
 
+      // remove buttons to the right and to the left from item block and row
       const actionElements = blocksElement.querySelectorAll(
         `.${cls.actionsContainer}`,
       )
@@ -107,7 +149,7 @@ export const downloadPdf = async (): Promise<void> => {
   const workerRequestMessage: WorkerRequestMessage = {
     imageData: quotationScreenshot,
     width: maxPaperWidth,
-    height: blocksContainerElement.clientHeight,
+    height: correctedHeight,
     links,
   }
 
