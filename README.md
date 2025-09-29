@@ -326,6 +326,7 @@ https://console.cloud.google.com/iam-admin/serviceaccounts?inv=1&invt=AblPCg&pro
 - [ ] make info field to use froala
 - [ ] if item is bookmarked make the star yellow
 - [ ] add price, valid to, status into quotation model and show in table
+- [ ] check "pdfkit": "^0.17.2" lib, Juha used it to create real text invoice pdf at https://github.com/heeros/qa-utils
 - [ ] do not just save shared quotation, but copy it from the owners folder to let files be independent and if own decide to delete files it will not affect saved quotation, there might be a need for regexp to modify urls
 - [ ] check free tier sql db at PlanetScale for myVocab.org
 - [ ] investigate Google Cloud Run deployment via template.yaml (possible to construct it with js)
