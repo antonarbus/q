@@ -27,19 +27,19 @@ import { ShareQuotationModal } from '@pages/share-quotation-modal'
 import { LoadQuotation } from '@features/quotation/load-quotation'
 import { TestPage } from '@pages/test-page'
 
-const Quotation = lazy(async () => {
+const QuotationPageLazy = lazy(async () => {
   const module = await import('@pages/quotation-page')
 
   return module
 })
 
-const QuotationsPageLazy = lazy(async () => {
+const QuotationListPageLazy = lazy(async () => {
   const module = await import('@pages/quotation-list-page')
 
   return module
 })
 
-const BookmarksPageLazy = lazy(async () => {
+const BookmarkListPageLazy = lazy(async () => {
   const module = await import('@pages/bookmark-list-page')
 
   return module
@@ -63,7 +63,7 @@ const UserListPageLazy = lazy(async () => {
   return module
 })
 
-const VisitorsPageLazy = lazy(async () => {
+const VisitorListPageLazy = lazy(async () => {
   const module = await import('@pages/visitor-list-page')
 
   return module
@@ -142,7 +142,7 @@ const router = createBrowserRouter([
             }
           >
             <LoadQuotation />
-            <Quotation />
+            <QuotationPageLazy />
           </Suspense>
         ),
         caseSensitive: true,
@@ -181,7 +181,7 @@ const router = createBrowserRouter([
               />
             }
           >
-            <QuotationsPageLazy />
+            <QuotationListPageLazy />
           </Suspense>
         ),
         children: [
@@ -207,7 +207,7 @@ const router = createBrowserRouter([
               />
             }
           >
-            <BookmarksPageLazy />
+            <BookmarkListPageLazy />
           </Suspense>
         ),
         children: [
@@ -247,7 +247,7 @@ const router = createBrowserRouter([
             }
           >
             <RequireRoles requiredRoles={[userRole.superAdmin]}>
-              <VisitorsPageLazy />
+              <VisitorListPageLazy />
             </RequireRoles>
           </Suspense>
         ),
