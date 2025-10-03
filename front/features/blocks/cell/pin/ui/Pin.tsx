@@ -31,7 +31,10 @@ export const Pin = ({ boqRowCellKey, onClick }: Props): ReactNode => {
     <Box
       className={cls.pin}
       component='button' // to make it focusable to understand if we click within same row on pins and not hide them at BoqRow onBlur callback // https://stackoverflow.com/a/42764495/7239778
-      onClick={onClick}
+      // use onMouseDown instead of click because in Safari it does not work for some reason
+      onMouseDown={(event): void => {
+        onClick(event)
+      }}
       sx={{
         all: 'unset',
         position: 'absolute',
@@ -40,6 +43,7 @@ export const Pin = ({ boqRowCellKey, onClick }: Props): ReactNode => {
         right: 0,
         zIndex: 1,
       }}
+      type='button'
     >
       <VscPinned
         className={`${cls.pin} svg`}
@@ -47,6 +51,7 @@ export const Pin = ({ boqRowCellKey, onClick }: Props): ReactNode => {
           rotate: '35deg',
           fill: pin.isPinned ? 'black' : '#b8b8b8',
           strokeWidth: pin.isPinned ? '0.2px' : '0px',
+          pointerEvents: 'none',
         }}
       />
     </Box>
