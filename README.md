@@ -1,3 +1,51 @@
+# Quotation Management App
+
+Full-stack quotation management application built with React (frontend) and Express (backend).
+
+## Development Commands
+
+### Start Development
+```bash
+npm start                 # Start both frontend (port 3000) and backend (port 4000)
+npm run start_front       # Start frontend only
+npm run start_back        # Start backend only
+npm stop                  # Kill ports 3000 and 4000
+```
+
+### Build
+```bash
+npm run build_all         # Build both frontend and backend
+npm run build_front       # Build frontend only (Vite)
+npm run build_back        # Build backend only (Rollup)
+```
+
+### Testing
+```bash
+npm test                  # Run Vitest unit tests
+npm run test:ui           # Run Vitest with UI
+npm run coverage          # Run tests with coverage report
+npm run playwright        # Run Playwright e2e tests
+npm run playwright_ui     # Run Playwright with UI
+npm run playwright_debug  # Debug Playwright tests
+```
+
+### Code Quality
+```bash
+npm run check             # Run all checks: tsc, lint, prettier, test, playwright
+npm run tsc               # TypeScript type checking (no emit)
+npm run lint              # ESLint with all errors/warnings
+npm run lint:fix          # Auto-fix ESLint issues
+npm run prettier          # Check code formatting
+npm run prettier_fix      # Auto-format code
+```
+
+### Architecture Analysis
+```bash
+npm run fsd               # Verify Feature-Sliced Design structure with Steiger
+npm run find_unused_files # Find unused files with Knip
+npm run circular_deps     # Detect circular dependencies with Madge
+```
+
 # Feature-Sliced Design (FSD) for front-end applications
 
 https://feature-sliced.design/docs/get-started/overview
