@@ -5,6 +5,7 @@ Full-stack quotation management application built with React (frontend) and Expr
 ## Development Commands
 
 ### Start Development
+
 ```bash
 npm start                 # Start both frontend (port 3000) and backend (port 4000)
 npm run start_front       # Start frontend only
@@ -13,6 +14,7 @@ npm stop                  # Kill ports 3000 and 4000
 ```
 
 ### Build
+
 ```bash
 npm run build_all         # Build both frontend and backend
 npm run build_front       # Build frontend only (Vite)
@@ -20,6 +22,7 @@ npm run build_back        # Build backend only (Rollup)
 ```
 
 ### Testing
+
 ```bash
 npm test                  # Run Vitest unit tests
 npm run test:ui           # Run Vitest with UI
@@ -30,6 +33,7 @@ npm run playwright_debug  # Debug Playwright tests
 ```
 
 ### Code Quality
+
 ```bash
 npm run check             # Run all checks: tsc, lint, prettier, test, playwright
 npm run tsc               # TypeScript type checking (no emit)
@@ -40,6 +44,7 @@ npm run prettier_fix      # Auto-format code
 ```
 
 ### Architecture Analysis
+
 ```bash
 npm run fsd               # Verify Feature-Sliced Design structure with Steiger
 npm run find_unused_files # Find unused files with Knip
