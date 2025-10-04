@@ -116,18 +116,18 @@ A _slice_ consists of _segments_ to separate code by its technical nature, commo
 
 # Auth
 
-Authorization - checking for password correctness
+Authentication - verifying user identity (checking password correctness)
 
-Authentication - checking if a user is the same as authorized initially
+Authorization - verifying user permissions (checking user roles/access rights)
 
 (A) At registration we store at db email + hashed salted password +
-`refresh` jwt token with 30d validity which contains email & role payload.
+`refresh` jwt token with 90d validity which contains email & role payload.
 
-(B) Client is authorized by comparing email & password's hash
+(B) Client is authenticated by comparing email & password's hash
 against stored email and hashed password at the login stage.
 
-(C) On successful authorization the server issues 15 min `access` jwt token and
-rarely issues new `refresh` jwt token if pervious one is expired (ones per 90d).
+(C) On successful authentication the server issues 15 min `access` jwt token and
+rarely issues new `refresh` jwt token if previous one is expired (once per 90d).
 
 (D) `refresh` jwt token is needed to issue `access` token for a user without
 asking for credentials.
@@ -157,10 +157,10 @@ got first `401` error and after getting new refreshed `access` token it
 repeats remembered initial http request.
 
 (L) If `refresh` token is invalid or old, then `access` token is not
-issued, client is considered to be unauthorized and new login action
+issued, client is considered to be unauthenticated and new login action
 is required.
 
-(M) If a user is deleted from the database, the user is still authorized for
+(M) If a user is deleted from the database, the user is still authenticated for
 current browser session until `access` token is expired (15 min).
 We should consider the duration of access token depending on
 sensitivity of our data.
@@ -169,11 +169,12 @@ sensitivity of our data.
 the initial app load in `<AccessToken />` to avoid prompting a user
 for credentials on every page refresh.
 
-(O) We use JWT token which contains encrypted not hashed
-payload with user email & role data, validation time
-and a hash based on a secret keys, which are kept on a server in env variable.
+(O) We use JWT token which contains **base64-encoded** (not encrypted)
+payload with user email & role data, validation time,
+and a signature based on secret keys kept on the server in env variables.
+**Note:** JWT payload is readable by anyone; never store sensitive data in it.
 
-(P) Server can validate the token only if it knows the secrete key.
+(P) Server can validate the token only if it knows the secret key.
 
 # Email
 
@@ -365,33 +366,19 @@ https://console.cloud.google.com/iam-admin/serviceaccounts?inv=1&invt=AblPCg&pro
 
 # TO-DO
 
-- [ ] vitejs/plugin-react lib, check if it works ok and then upgrade, some TS declaration issue is in ^5.0.4
-- [ ] add delete account button
-- [ ] do not re-upload the same file
-- [ ] remove file from DB on delete
-- [ ] instead of preview render same component but scale it down, should save space in bucket
-- [ ] app description on Q logo
-- [ ] make info field to use froala
-- [ ] if item is bookmarked make the star yellow
-- [ ] add price, valid to, status into quotation model and show in table
-- [ ] check "pdfkit": "^0.17.2" lib, Juha used it to create real text invoice pdf at https://github.com/heeros/qa-utils
-- [ ] do not just save shared quotation, but copy it from the owners folder to let files be independent and if own decide to delete files it will not affect saved quotation, there might be a need for regexp to modify urls
-- [ ] check free tier sql db at PlanetScale for myVocab.org
-- [ ] investigate Google Cloud Run deployment via template.yaml (possible to construct it with js)
-- [ ] dev table for all files / quotations / bookmarks
-- [ ] add cloudflarehttps://chatgpt.com/c/67f1a2a0-48b8-8004-837a-63191208d218https://dash.cloudflare.com/cb73a8d89456064769c244e7f474368d/sendmequotation.today/add-record-methods
-- [ ] if save quotation being unregistered you are prompted to register and quotation is saved as expected. What happened is i got confirmation email and when i activated the profile i found myself being not logged in. Check it + check again how activation works.
-- [ ] > wow, re-resize library is strange, i thought it is the flagship library for this use case, but seems it
-      > is not good maintained
-
-⏺ You're absolutely right! The re-resizable library does seem to have some maintenance issues. The
-inconsistent type definitions we just encountered are a red flag:
-
-This is pretty surprising for what should be a mature library for such a common use case. You might want
-to consider:
-
-Alternatives to explore:
-
-- react-resizable - The original, more established library
-- react-rnd - Combines resizable and draggable functionality
-- @dnd-kit/sortable with custom resize handles - More modern, better maintained
+- [ ] Upgrade vitejs/plugin-react (currently blocked by TS declaration issue in ^5.0.4)
+- [ ] Add delete account button
+- [ ] Prevent re-uploading the same file
+- [ ] Remove file from DB on delete
+- [ ] Instead of preview, render same component but scale it down (save bucket space)
+- [ ] Add app description on Q logo
+- [ ] Make info field use Froala editor
+- [ ] Visual indicator when item is bookmarked (yellow star)
+- [ ] Add price, valid to, status fields to quotation model and table
+- [ ] Evaluate pdfkit library for text-based PDF generation
+- [ ] Copy shared quotations to prevent file deletion issues (need URL rewriting)
+- [ ] Investigate Google Cloud Run deployment via template.yaml
+- [ ] Add dev admin tables for all files/quotations/bookmarks
+- [ ] Add Cloudflare integration
+- [ ] Fix activation flow for unregistered users saving quotations
+- [ ] Replace re-resizable library (maintenance issues) with react-rnd or @dnd-kit/sortable
