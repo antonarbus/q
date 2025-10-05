@@ -29,7 +29,7 @@ test('has main elements & texts on index page', async ({ page }) => {
 
   const body = page.locator('body')
 
-  await expect(body).toHaveText(/Cover letter/u)
+  await expect(body).toHaveText(/Commercial quotation/u)
   await expect(body).toHaveText(/Title/u)
   await expect(body).toHaveText(/Subtotal/u)
   await expect(body).toHaveText(/Description/u)
