@@ -1,0 +1,283 @@
+/* Blog Styling - Shared across all blog posts */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f5f5f5;
+  padding: 20px;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: white;
+  padding: 40px 40px 25px 40px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+/* Navigation */
+nav {
+  margin-bottom: 30px;
+}
+
+nav a {
+  color: #0083bf;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+nav a .back-arrow {
+  color: #666;
+}
+
+nav a .back-brand {
+  color: #0083bf;
+  font-weight: 600;
+}
+
+/* Article Header */
+article h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #1a1a1a;
+  line-height: 1.2;
+}
+
+.meta {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+/* Typography */
+article h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-top: 40px;
+  margin-bottom: 15px;
+  color: #2e2e2e;
+}
+
+article h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-top: 30px;
+  margin-bottom: 12px;
+  color: #3c3c3c;
+}
+
+article p {
+  margin-bottom: 20px;
+  font-size: 1.05rem;
+}
+
+article strong {
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+/* Lists */
+article ul,
+article ol {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding-left: 30px;
+}
+
+article li {
+  margin-bottom: 10px;
+  font-size: 1.05rem;
+  border-bottom: 2px solid #c4c4c4;
+}
+
+article ul {
+  list-style-type: disc;
+}
+
+article ol {
+  list-style-type: decimal;
+}
+
+/* Call to Action */
+.cta {
+  display: inline-block;
+  background: #0083bf;
+  color: white !important;
+  padding: 15px 35px;
+  text-decoration: none !important;
+  margin: 30px 0;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: background 0.3s ease;
+}
+
+.cta:hover {
+  background: #006ba3;
+}
+
+/* Blockquote */
+blockquote {
+  border-left: 4px solid #0083bf;
+  padding-left: 20px;
+  margin: 25px 0;
+  font-style: italic;
+  color: #555;
+  background: #f9f9f9;
+  padding: 15px 20px;
+}
+
+/* Code blocks */
+code {
+  background: #f4f4f4;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+}
+
+pre {
+  background: #f4f4f4;
+  padding: 15px;
+  border-radius: 5px;
+  overflow-x: auto;
+  margin: 20px 0;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+}
+
+/* Footer */
+footer {
+  margin-top: 60px;
+  padding-top: 30px;
+  text-align: center;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+footer a {
+  color: #0083bf;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* Blog Index Page Specific Styles */
+.blog-list {
+  list-style: none;
+  padding: 0;
+}
+
+.blog-list li {
+  margin-bottom: 40px;
+  padding: 25px;
+  border-radius: 8px;
+  border: 1px solid #e5e5e5;
+  transition: all 0.2s ease;
+  position: relative;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.blog-list li:hover {
+  background-color: #f9f9f9;
+  border-color: #d0d0d0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.blog-list h2 {
+  font-size: 1.75rem;
+  margin-bottom: 12px;
+  margin-top: 0;
+  font-weight: 700;
+}
+
+.blog-list h2 a {
+  color: #2e2e2e;
+  text-decoration: none;
+}
+
+.blog-list h2 a::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 8px;
+  z-index: 1;
+}
+
+.blog-list .excerpt {
+  color: #666;
+  margin-bottom: 15px;
+  line-height: 1.7;
+}
+
+.blog-list .meta {
+  margin-bottom: 0;
+}
+
+.blog-list .read-more {
+  color: #0083bf;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.blog-list .read-more::after {
+  content: '...';
+  display: inline-block;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.blog-list .read-more:hover {
+  color: #006ba3;
+}
+
+.blog-list li:hover .read-more::after {
+  opacity: 1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+
+  .container {
+    padding: 20px;
+  }
+
+  article h1 {
+    font-size: 2rem;
+  }
+
+  article h2 {
+    font-size: 1.5rem;
+  }
+
+  article h3 {
+    font-size: 1.2rem;
+  }
+}

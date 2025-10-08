@@ -25,6 +25,10 @@ export const navItemId = {
   admin: 'admin',
   userList: 'user-list',
   visitors: 'visitors',
+  blog: 'blog',
+  blogHowToCreate: 'blog-how-to-create',
+  blogFreeTemplate: 'blog-free-template',
+  blogTermsAndConditions: 'blog-terms-and-conditions',
 } as const
 
 export type NavItemId = (typeof navItemId)[keyof typeof navItemId]

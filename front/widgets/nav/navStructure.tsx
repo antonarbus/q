@@ -17,6 +17,7 @@ import {
 import { PiFolderSimpleStarDuotone } from 'react-icons/pi'
 import { RiMenuAddFill, RiAdminLine, RiFileExcel2Line } from 'react-icons/ri'
 import { VscNewFile } from 'react-icons/vsc'
+import { HiOutlineBookOpen } from 'react-icons/hi2'
 import {
   insertBoqBlock,
   insertBoqRow,
@@ -187,6 +188,36 @@ export const navStructure: NavItem[] = [
         link: route.quotationList,
         func: openQuotationsPage,
         tooltip: 'Your quotations',
+      },
+      {
+        id: navItemId.blog,
+        icon: <HiOutlineBookOpen data-testid='blog icon' />,
+        isHidden: false,
+        name: 'Blog',
+        tooltip: 'Guides and resources',
+        navItems: [
+          {
+            id: navItemId.blogHowToCreate,
+            name: 'How to Create Quotations',
+            isHidden: false,
+            externalLink: '/blog/how-to-create-quotation.html',
+            tooltip: 'Step-by-step guide',
+          },
+          {
+            id: navItemId.blogFreeTemplate,
+            name: 'Free Templates',
+            isHidden: false,
+            externalLink: '/blog/free-quotation-template.html',
+            tooltip: 'Ready-to-use templates',
+          },
+          {
+            id: navItemId.blogTermsAndConditions,
+            name: 'Terms & Conditions',
+            isHidden: false,
+            externalLink: '/blog/quotation-terms-and-conditions.html',
+            tooltip: 'Essential legal terms',
+          },
+        ],
       },
       {
         id: navItemId.login,

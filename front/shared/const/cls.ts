@@ -1,6 +1,5 @@
 export const cls = {
   droppable: 'droppable',
-  seo: 'seo',
   waitForInitFilesToLoad: 'wait-for-init-files-to-load',
   blocks: 'blocks',
   block: 'block',

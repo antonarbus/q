@@ -69,7 +69,6 @@ export default {
     host: config.front.hostname,
     port: config.front.port,
     open: config.front.baseUrl,
-    // https: true, //* type "thisisunsafe" if chrome says that connection is not private
     proxy: {
       '/api': config.back.baseUrl,
       '/uploads': config.back.baseUrl,

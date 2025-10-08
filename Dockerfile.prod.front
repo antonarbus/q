@@ -1,11 +1,21 @@
 FROM node:22-slim AS builder
 RUN npm config set legacy-peer-deps true
+
+# Install root dependencies (cached unless package files change)
+WORKDIR /
+COPY package*.json ./
+RUN npm ci
+
+# Install front dependencies (cached unless package files change)
+WORKDIR /front
+COPY front/package*.json ./
+RUN npm ci
+
+# Copy rest of the code (this invalidates cache only when code changes)
 WORKDIR /
 COPY . .
-RUN npm ci
-WORKDIR /front
-RUN npm ci
-WORKDIR /
+
+# Build
 RUN npm run build_front
 
 FROM nginx:alpine-slim

@@ -125,6 +125,15 @@ export const useKeysForMenuNavigation = (): void => {
 
       const { navItem } = getNavItem({ navItemId })
 
+      const externalLink = navItem?.externalLink
+
+      if (externalLink !== undefined) {
+        window.open(externalLink, '_blank', 'noopener,noreferrer')
+        dispatch(navSlice.actions.closeMenu())
+
+        return
+      }
+
       const link = navItem?.link
 
       if (link !== undefined) {

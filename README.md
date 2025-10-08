@@ -7,11 +7,17 @@ Full-stack quotation management application built with React (frontend) and Expr
 ### Start Development
 
 ```bash
-npm start                 # Start both frontend (port 3000) and backend (port 4000)
+npm start                 # Start frontend (3000) and backend (4000)
 npm run start_front       # Start frontend only
 npm run start_back        # Start backend only
 npm stop                  # Kill ports 3000 and 4000
 ```
+
+**Testing Blog Locally:**
+
+- Visit app at `https://localhost:3000` → Click "Blog" in navigation
+- Or directly: `https://localhost:3000/blog/`
+- Blog files are served by Vite from `front/public/blog/`
 
 ### Build
 
@@ -371,6 +377,7 @@ https://console.cloud.google.com/iam-admin/serviceaccounts?inv=1&invt=AblPCg&pro
 
 # TO-DO
 
+- [ ] use https://biomejs.dev instead of eslint + prettier (https://www.youtube.com/watch?v=x5kwmIaPty8)
 - [ ] Upgrade vitejs/plugin-react (currently blocked by TS declaration issue in ^5.0.4)
 - [ ] Add delete account button
 - [ ] Prevent re-uploading the same file
@@ -383,7 +390,6 @@ https://console.cloud.google.com/iam-admin/serviceaccounts?inv=1&invt=AblPCg&pro
 - [ ] Evaluate pdfkit library for text-based PDF generation
 - [ ] Copy shared quotations to prevent file deletion issues (need URL rewriting)
 - [ ] Investigate Google Cloud Run deployment via template.yaml
-- [ ] Add dev admin tables for all files/quotations/bookmarks
 - [ ] Add Cloudflare integration
 - [ ] Fix activation flow for unregistered users saving quotations
 - [ ] Replace re-resizable library (maintenance issues) with react-rnd or @dnd-kit/sortable

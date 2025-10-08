@@ -13,21 +13,17 @@ type Props = {
   navItem: NavItemType
 }
 
-export const NavItem = ({ navItem }: Props): JSX.Element => {
+export const NavItem = (props: Props): JSX.Element => {
   const location = useLocation()
   // required to avoid Menu to go over the narrow window
   const navItemRef = useRef<ComponentRef<'li'> | null>(null)
 
   // needs to open only menu under clicked navItem, otherwise multiple menus are opened under all navItems
   const isMenuOpen = useSelector(
-    (state) => state.nav.idsToCurrentMenuItems.at(1) === navItem.id,
+    (state) => state.nav.idsToCurrentMenuItems.at(1) === props.navItem.id,
   )
 
-  const { name, isLoading, isSuccess, isError } = navItem
-  const link = navItem.link ?? ''
-  const isFunc = Boolean(navItem.func)
-  const disabled = Boolean(navItem.disabled)
-  const isActive = Boolean(navItem.isActive)
+  const link = props.navItem.link ?? ''
 
   const fixedLink = `${location.pathname}/${link}`
     .replace('.', '')
@@ -36,10 +32,51 @@ export const NavItem = ({ navItem }: Props): JSX.Element => {
 
   const to = link.includes('.') ? fixedLink : link
 
+  // If externalLink is provided, render regular <a> tag for full page navigation
+  if (props.navItem.externalLink !== undefined) {
+    return (
+      <NavItemLayout
+        disabled={props.navItem.disabled === true}
+        isActive={props.navItem.isActive === true}
+        navItemRef={navItemRef}
+      >
+        <a
+          href={props.navItem.externalLink}
+          onClick={(event: MouseEvent): void => {
+            if (document.activeElement instanceof HTMLElement) {
+              document.activeElement.blur()
+            }
+
+            const disableClick =
+              props.navItem.isLoading ??
+              props.navItem.isSuccess ??
+              props.navItem.isError ??
+              props.navItem.disabled === true
+
+            if (disableClick === true) {
+              event.preventDefault()
+            }
+          }}
+          rel='noopener noreferrer'
+          style={{
+            position: 'relative',
+          }}
+          target='_blank'
+        >
+          <IconWithLoader navItem={props.navItem} />
+          <NavName name={props.navItem.name} />
+          <ArrowForNestedMenu navItem={props.navItem} />
+        </a>
+        {isMenuOpen === true ? <Menu /> : null}
+      </NavItemLayout>
+    )
+  }
+
+  // Default: use React Router Link for SPA navigation
   return (
     <NavItemLayout
-      disabled={disabled}
-      isActive={isActive}
+      disabled={props.navItem.disabled === true}
+      isActive={props.navItem.isActive === true}
       navItemRef={navItemRef}
     >
       <Link
@@ -47,11 +84,15 @@ export const NavItem = ({ navItem }: Props): JSX.Element => {
           position: 'relative',
         }}
         onClick={(event: MouseEvent): void => {
-          if (isFunc === true) {
+          if (Boolean(props.navItem.func) === true) {
             event.preventDefault()
           }
 
-          const disableClick = isLoading ?? isSuccess ?? isError ?? disabled
+          const disableClick =
+            props.navItem.isLoading ??
+            props.navItem.isSuccess ??
+            props.navItem.isError ??
+            props.navItem.disabled === true
 
           if (disableClick === true) {
             event.preventDefault()
@@ -59,13 +100,18 @@ export const NavItem = ({ navItem }: Props): JSX.Element => {
             return
           }
 
-          clickOnNavItem({ event, navItem, navItemRef, disabled })
+          clickOnNavItem({
+            event,
+            navItem: props.navItem,
+            navItemRef,
+            disabled: props.navItem.disabled === true,
+          })
         }}
         to={to}
       >
-        <IconWithLoader navItem={navItem} />
-        <NavName name={name} />
-        <ArrowForNestedMenu navItem={navItem} />
+        <IconWithLoader navItem={props.navItem} />
+        <NavName name={props.navItem.name} />
+        <ArrowForNestedMenu navItem={props.navItem} />
       </Link>
       {isMenuOpen === true ? <Menu /> : null}
     </NavItemLayout>

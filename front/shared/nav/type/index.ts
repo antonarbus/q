@@ -6,6 +6,7 @@ export type NavItem = {
   name: string
   icon?: ReactNode | string
   link?: string
+  externalLink?: string
   func?: (e?: MouseEvent) => Promise<void> | void
   shortcut?: string[]
   navItems?: NavItem[]
