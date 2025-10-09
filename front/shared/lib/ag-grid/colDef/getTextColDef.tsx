@@ -35,7 +35,6 @@ export const getTextColDef = <
           }
         >
       >
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
       const filterModel = params.api.getFilterModel() as FilterModel
 
       const filterValue = filterModel[props.field]?.filter ?? ''

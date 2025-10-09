@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-max-depth */
 import { IconButton, Tooltip } from '@mui/material'
 import type { ReactNode } from 'react'
 import { AiOutlineFolderOpen } from 'react-icons/ai'

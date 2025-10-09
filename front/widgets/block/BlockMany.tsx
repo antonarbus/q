@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-max-depth */
-
 import { BOOKMARK_POS_AT_BLOCKS, type Item } from '@entities/quotation'
 import { OpenInsertMenuButton } from '@features/blocks/open-insert-menu'
 import { AnimatePresence } from 'motion/react'

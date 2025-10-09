@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
 import { api } from '@back/api'
 import type { ResBody } from '@back/api/auth/getAccessTokenHandler'
 import { headerName } from '@back/shared/headers'

@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-max-depth */
 import './redux'
 import './queryClient'
 import './router'

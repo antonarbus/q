@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
-
 import type { NavItemId } from '@shared/const/navItemId'
 import { dispatch } from '@shared/lib/redux'
 import { navSlice } from '@shared/nav'
@@ -14,7 +12,6 @@ type Props = {
 export const createLoadingMenuIconMachine = ({
   navItemId,
   navItemNameWhileLoading,
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type, @typescript-eslint/explicit-module-boundary-types
 }: Props) =>
   setup({
     types: {

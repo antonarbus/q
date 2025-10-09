@@ -1,6 +1,5 @@
 import { BOOKMARK_POS_AT_BLOCKS } from '@entities/quotation'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type EqualityFn = (a: any, b: any) => boolean
 
 type Obj = {

@@ -61,7 +61,6 @@ export const renderOption = ({
           }),
         }}
         key={option.id}
-        // eslint-disable-next-line @typescript-eslint/no-misused-promises
         onClick={async () => {
           await loadBookmark({ id: option.id })
           isAutocompleteOpen.value = false

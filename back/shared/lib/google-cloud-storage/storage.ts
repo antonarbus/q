@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import { getEnvVarOrThrow } from '@back/shared/lib/dot-env'
 import { Storage } from '@google-cloud/storage'
 

@@ -35,7 +35,6 @@ export const BoqRows = (): JSX.Element => {
                 <RowProvider key={boqRow.id} row={boqRow} rowIndex={rowIndex}>
                   <BoqRowAnimate>
                     <BoqRowSortable>
-                      {/* eslint-disable-next-line react/jsx-max-depth */}
                       <BoqRow
                         onBlur={(event) => {
                           hideBoqRowPinsOnRowBlur({

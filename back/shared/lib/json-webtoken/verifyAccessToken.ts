@@ -26,7 +26,6 @@ export const verifyAccessToken = (
       )
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
     return jwtPayload as JwtPayloadExtended
   } catch {
     return undefined // if token is expired it will result in error

@@ -136,10 +136,8 @@ export const pasteItemReducer = (
       // todo: fix it
       boqRowsWithoutPasteText.splice(
         // @ts-expect-error: some error
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         spliceSettings.insertAtIndex,
         // @ts-expect-error: some error
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         spliceSettings.deleteCount,
         itemToPaste,
       )

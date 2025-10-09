@@ -66,14 +66,11 @@ jobs:
       - name: Run unit tests
         run: npm run test
 
-      - name: Formatting check
-        run: npm run prettier
-
       - name: Run TypeScript checks
         run: npm run tsc
 
-      - name: Run ESlint
-        run: npm run lint:quite
+      - name: Run Biome (formatting + linting)
+        run: npm run biome
 
       - name: Run Playwright tests
         run: npm run playwright

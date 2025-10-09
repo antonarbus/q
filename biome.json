@@ -19,7 +19,7 @@
     "indentStyle": "space"
   },
   "linter": {
-    "enabled": false
+    "enabled": true
   },
   "assist": {
     "enabled": true,

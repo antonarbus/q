@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/consistent-type-definitions */
-
 declare global {
   interface Window {
     dataLayer: Record<string, unknown>[]

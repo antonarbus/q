@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { activateHandler } from '@back/api/auth/activateHandler'
 import { getAccessTokenHandler } from '@back/api/auth/getAccessTokenHandler'
 import { logInHandler } from '@back/api/auth/logInHandler'

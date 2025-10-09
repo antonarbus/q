@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/member-ordering */
 import type { QueryClientType } from '@app/queryClient'
 import type { NavItem } from './nav'
 

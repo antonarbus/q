@@ -66,7 +66,6 @@ quotationSchema.set('toObject', {
   versionKey: false,
 
   transform: (_doc, ret) => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { _id, ...cleanRet } = ret
 
     return cleanRet

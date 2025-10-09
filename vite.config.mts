@@ -36,22 +36,19 @@ const stripHandlerFromApiRoutes = (): unknown => {
         configFile: false,
         filename: id,
         plugins: [
-          // eslint-disable-next-line func-names, @typescript-eslint/explicit-function-return-type
-          function () {
-            return {
-              visitor: {
-                ObjectProperty(path: NodePath<ObjectProperty>): void {
-                  const isHandlerIdentifier =
-                    path.node.key.type === 'Identifier' &&
-                    path.node.key.name === 'handler'
+          () => ({
+            visitor: {
+              ObjectProperty(path: NodePath<ObjectProperty>): void {
+                const isHandlerIdentifier =
+                  path.node.key.type === 'Identifier' &&
+                  path.node.key.name === 'handler'
 
-                  if (isHandlerIdentifier === true) {
-                    path.remove()
-                  }
-                },
+                if (isHandlerIdentifier === true) {
+                  path.remove()
+                }
               },
-            }
-          },
+            },
+          }),
         ],
         presets: ['@babel/preset-typescript'],
       })

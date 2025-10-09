@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-max-depth */
 import { Box } from '@mui/material'
 import { OutlinedDivWithLabel } from '@shared/component/OutlinedDivWithLabel'
 import { AnimatePresence } from 'motion/react'

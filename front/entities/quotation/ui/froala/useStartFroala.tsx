@@ -1,4 +1,3 @@
-/* eslint-disable */
 import './froalaPkg'
 import './froalaPkg.css'
 import { removeLoadingBar } from '@shared/lib/froala/removeLoadingBar'

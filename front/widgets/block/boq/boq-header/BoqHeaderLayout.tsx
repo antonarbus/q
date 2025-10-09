@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-max-depth */
-
 import { Box } from '@mui/material'
 import { theme } from '@shared/theme'
 import type { JSX, ReactNode } from 'react'

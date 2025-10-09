@@ -1,4 +1,3 @@
-/* eslint-disable */
 // @ts-nocheck
 
 import fsd from '@feature-sliced/steiger-plugin'

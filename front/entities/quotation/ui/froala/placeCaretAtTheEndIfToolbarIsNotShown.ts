@@ -20,7 +20,6 @@ export const placeCaretAtTheEndIfToolbarIsNotShown = ({
     return
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
   const toolbarElement = editorRef.current.$tb['0']
 
   if (toolbarElement instanceof HTMLElement === false) {
@@ -45,7 +44,6 @@ export const placeCaretAtTheEndIfToolbarIsNotShown = ({
   const insideFroala = isFrBox || isFroalaWrapper
 
   if (insideFroala === true) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     const contentEditableElement = editorRef.current.$el.get(0)
 
     if (contentEditableElement instanceof HTMLElement === false) {

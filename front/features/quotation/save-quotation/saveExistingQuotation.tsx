@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
-
 import type { ErrorResBody } from '@back/api/quotation/saveQuotationHandler'
 import {
   type Quotation,

@@ -42,7 +42,6 @@ export const useLoadQuotation = (): void => {
 
     if (shouldAutoDetectFromWhereToLoadQuotation === true) {
       return 'template'
-      // eslint-disable-next-line no-else-return
     } else {
       return 'server'
     }
@@ -213,7 +212,6 @@ export const useLoadQuotation = (): void => {
           )
         }
 
-        // eslint-disable-next-line require-atomic-updates
         backToQuotationRef.current = null
       }
     }

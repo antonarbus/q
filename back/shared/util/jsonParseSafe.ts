@@ -4,7 +4,6 @@ export const jsonParseSafe = <T>(str: unknown): T | undefined => {
       return undefined
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
     const parsedJson: T = JSON.parse(str) as T
 
     return parsedJson
