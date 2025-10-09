@@ -31,6 +31,7 @@
     "lint:fix": "eslint . --fix",
     "tsc": "tsc --noEmit",
     "biome": "biome check",
+    "biome:fix": "biome check --fix",
     "prettier": "prettier .",
     "prettier_fix": "prettier --write .",
     "check": "npm run tsc && npm run lint:quite && npm run prettier && npm run test && npm run playwright",
