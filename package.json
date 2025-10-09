@@ -29,7 +29,7 @@
     "biome": "biome check",
     "biome:silent": "biome check --diagnostic-level=error",
     "biome:fix": "biome check --fix",
-    "check": "npm run tsc && npm run biome && npm run test && npm run playwright",
+    "check": "npm run tsc && npm run biome:silent && npm run test && npm run playwright",
     "fsd": "npx steiger ./front",
     "find_unused_files": "knip",
     "circular_deps": "npx madge --circular front/src/",
