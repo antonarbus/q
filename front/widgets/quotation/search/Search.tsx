@@ -53,11 +53,15 @@ export const Search = (): JSX.Element => {
       loading={getBookmarkListQuery.isPending}
       loadingText={email === null ? 'Not logged in :(' : 'Loading...'}
       noOptionsText='No saved bookmarks'
-      onClose={() => (isAutocompleteOpen.value = false)}
-      onInputChange={(event, newInputValue) => {
+      onClose={() => {
+        isAutocompleteOpen.value = false
+      }}
+      onInputChange={(_event, newInputValue) => {
         inputValueSignal.value = newInputValue
       }}
-      onOpen={() => (isAutocompleteOpen.value = true)}
+      onOpen={() => {
+        isAutocompleteOpen.value = true
+      }}
       open={isAutocompleteOpen.value}
       options={options}
       popupIcon={null}

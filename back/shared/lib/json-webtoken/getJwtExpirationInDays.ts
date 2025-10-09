@@ -42,7 +42,7 @@ export const getJwtExpirationInDays = ({
 
   // Create a new Date object from the expiration time in milliseconds
   const expirationDate = new Date(expirationInMs).getTime()
-  const currentDate = new Date().getTime()
+  const currentDate = Date.now()
   const timeDifference = expirationDate - currentDate
   const daysUntilExpiration = Math.floor(timeDifference / (1000 * 60 * 60 * 24))
 

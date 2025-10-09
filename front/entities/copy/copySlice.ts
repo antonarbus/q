@@ -40,7 +40,7 @@ export const copySlice = createSlice({
     showCopyModal: (state) => {
       state.isVisible = true
     },
-    hideCopyModal: (state) => initialState,
+    hideCopyModal: () => initialState,
     addItem: (
       state,
       action: PayloadAction<{

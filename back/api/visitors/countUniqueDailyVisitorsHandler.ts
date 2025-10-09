@@ -29,7 +29,7 @@ type RouterHandler = (
 export const countUniqueDailyVisitorsHandler: RouterHandler = async (
   req,
   res,
-  next,
+  _next,
 ) => {
   const { isNew, date: today } = req.body
 

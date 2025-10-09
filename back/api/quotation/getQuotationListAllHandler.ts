@@ -49,7 +49,7 @@ type RouterHandler = (
 export const getQuotationListAllHandler: RouterHandler = async (
   req,
   res,
-  next,
+  _next,
 ) => {
   const { roles } = getUserFromAccessTokenOrThrowUnauthorized({ req, res })
 
@@ -78,7 +78,7 @@ export const getQuotationListAllHandler: RouterHandler = async (
   }, {})
 
   const filter = Object.entries(filterModel).reduce<
-    Record<string, { ['$regex']: string; ['$options']: 'i' }>
+    Record<string, { $regex: string; $options: 'i' }>
   >((accumulator, item) => {
     const [field, filterDef] = item
     accumulator[field] = { $regex: filterDef.filter, $options: 'i' }

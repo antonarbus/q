@@ -50,7 +50,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const getFileListAllHandler: RouterHandler = async (req, res, next) => {
+export const getFileListAllHandler: RouterHandler = async (req, res, _next) => {
   const { roles } = getUserFromAccessTokenOrThrowUnauthorized({ req, res })
 
   if (roles.includes(userRole.superAdmin) === false) {
@@ -78,7 +78,7 @@ export const getFileListAllHandler: RouterHandler = async (req, res, next) => {
   }, {})
 
   const filter = Object.entries(filterModel).reduce<
-    Record<string, { ['$regex']: string; ['$options']: 'i' }>
+    Record<string, { $regex: string; $options: 'i' }>
   >((accumulator, item) => {
     const [field, filterDef] = item
     accumulator[field] = { $regex: filterDef.filter, $options: 'i' }

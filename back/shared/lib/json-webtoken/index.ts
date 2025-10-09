@@ -1,6 +1,6 @@
 export { generateAccessToken } from './generateAccessToken'
 export { generateRefreshToken } from './generateRefreshToken'
 export { getJwtExpirationInDays } from './getJwtExpirationInDays'
-export { type JwtPayloadExtended } from './types'
+export type { JwtPayloadExtended } from './types'
 export { verifyAccessToken } from './verifyAccessToken'
 export { verifyRefreshToken } from './verifyRefreshToken'

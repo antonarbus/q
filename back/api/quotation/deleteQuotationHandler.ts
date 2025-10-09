@@ -26,7 +26,11 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const deleteQuotationHandler: RouterHandler = async (req, res, next) => {
+export const deleteQuotationHandler: RouterHandler = async (
+  req,
+  res,
+  _next,
+) => {
   const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req, res })
   const { id: quotationId } = req.body
 

@@ -8,7 +8,7 @@ type Props = {
 
 export const selectBoqRows =
   ({ blockIndex }: Props) =>
-  (state: RootState): Row[] => {
+  (_state: RootState): Row[] => {
     const boqRows = getBoqRowsFromStore({ blockIndex })
 
     if (boqRows === undefined) {

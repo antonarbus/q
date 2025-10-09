@@ -16,7 +16,7 @@ export const generateAccessToken = (payload: JwtPayloadExtended): Res => {
   })
 
   const accessJwtTokenExpiresOn = new Date(
-    new Date().getTime() + FIFTEEN_MIN_IN_SEC * 1000,
+    Date.now() + FIFTEEN_MIN_IN_SEC * 1000,
   ).toISOString()
 
   return {

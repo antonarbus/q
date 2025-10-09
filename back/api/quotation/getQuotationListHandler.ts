@@ -40,7 +40,7 @@ type RouterHandler = (
 export const getQuotationListHandler: RouterHandler = async (
   req,
   res,
-  next,
+  _next,
 ) => {
   const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req, res })
 

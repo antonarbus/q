@@ -31,7 +31,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const activateHandler: RouterHandler = async (req, res, next) => {
+export const activateHandler: RouterHandler = async (req, res, _next) => {
   const activationKeyFromInput = req.body.activationKey
 
   const user = await UserModel.findOne({

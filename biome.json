@@ -6,7 +6,8 @@
       "!front/build",
       "!back/build",
       "!**/froalaPkg.js",
-      "!**/froalaPkg.css"
+      "!**/froalaPkg.css",
+      "!**/fontAwesome.css"
     ]
   },
   "vcs": {
@@ -19,7 +20,17 @@
     "indentStyle": "space"
   },
   "linter": {
-    "enabled": true
+    "enabled": true,
+    "rules": {
+      "a11y": {
+        "useKeyWithClickEvents": "warn",
+        "noStaticElementInteractions": "warn",
+        "useValidAnchor": "warn"
+      },
+      "correctness": {
+        "useExhaustiveDependencies": "warn"
+      }
+    }
   },
   "assist": {
     "enabled": true,

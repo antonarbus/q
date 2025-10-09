@@ -29,7 +29,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const getQuotationHandler: RouterHandler = async (req, res, next) => {
+export const getQuotationHandler: RouterHandler = async (req, res, _next) => {
   const { id: quotationId } = req.body
   const userFromAccessToken = getUserFromAccessTokenOrNull({ req })
 

@@ -141,7 +141,6 @@ meter {
 .wait-for-init-files-to-load {
   position: fixed;
   text-align: center;
-  color: grey;
   font-weight: 600;
   width: 100%;
   top: 30%;

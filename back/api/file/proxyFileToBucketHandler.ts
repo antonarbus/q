@@ -23,7 +23,7 @@ const CLIENT_CACHE_MAX_AGE = SIGNED_URL_TTL_MS / 1000 // 5 min in seconds
 export const proxyFileToBucketHandler: RouterHandler = async (
   req,
   res,
-  next,
+  _next,
 ) => {
   // const user = getUserFromAccessTokenOrNull({ req })
   const { fileId } = req.params

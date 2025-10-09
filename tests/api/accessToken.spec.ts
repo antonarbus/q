@@ -12,7 +12,7 @@ test.describe('#authTokenRefresh', () => {
   const email = 'test-user@sendmequotation.today'
   const password = 'xxx'
   let accessToken: string
-  let refreshCookies: string[]
+  let refreshedAccessToken: string
 
   test.describe('Step 1: Login and get tokens', () => {
     test('should login successfully and return access token', async ({
@@ -27,7 +27,10 @@ test.describe('#authTokenRefresh', () => {
       expect(loginData.accessJwtToken).toBeTruthy()
 
       accessToken = loginData.accessJwtToken
-      refreshCookies = loginResponse.headers()['set-cookie'] || []
+
+      // Verify refresh token cookie is set
+      const cookies = loginResponse.headers()['set-cookie'] || ''
+      expect(cookies).toContain('refreshJwtToken')
     })
   })
 
@@ -75,7 +78,13 @@ test.describe('#authTokenRefresh', () => {
       const accessTokenData = await accessTokenResponse.json()
       expect(accessTokenData.accessJwtToken).toBeTruthy()
 
-      accessToken = accessTokenData.accessJwtToken
+      refreshedAccessToken = accessTokenData.accessJwtToken
+
+      // Verify the new token is different from the original
+      expect(refreshedAccessToken).not.toBe(accessToken)
+
+      // Update for next test
+      accessToken = refreshedAccessToken
     })
   })
 

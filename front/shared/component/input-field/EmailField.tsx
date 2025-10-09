@@ -67,7 +67,6 @@ export const EmailField = ({
         autoFocus={autoFocus}
         disabled={disabled}
         fullWidth
-        id='email'
         inputRef={inputRef}
         label={emailLabelSignal.value}
         name='email'

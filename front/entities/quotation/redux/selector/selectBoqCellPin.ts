@@ -11,7 +11,7 @@ type Props = {
 
 export const selectBoqCellPin =
   ({ blockIndex, rowIndex, boqRowCellKey }: Props) =>
-  (state: RootState): RowCellPin | undefined => {
+  (_state: RootState): RowCellPin | undefined => {
     const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
 
     if (boqRow === undefined) {

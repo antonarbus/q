@@ -34,7 +34,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const resetPasswordHandler: RouterHandler = async (req, res, next) => {
+export const resetPasswordHandler: RouterHandler = async (req, res, _next) => {
   const emailFromInput = req.body.email.toLowerCase()
   const passwordFromInput = req.body.password
   const resetPasswordKeyFromInput = req.body.resetPasswordKey

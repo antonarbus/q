@@ -24,17 +24,17 @@ export const renderOption = ({
   isAutocompleteOpen,
 }: Props) =>
   function render(
-    props: HTMLAttributes<HTMLLIElement>,
+    _props: HTMLAttributes<HTMLLIElement>,
     option: ItemPick,
-    {
-      selected,
-      index,
-      inputValue,
-    }: {
-      selected: boolean
-      index: number
-      inputValue: string
-    },
+    // {
+    //   selected,
+    //   index,
+    //   inputValue,
+    // }: {
+    //   selected: boolean
+    //   index: number
+    //   inputValue: string
+    // },
   ): JSX.Element {
     return (
       <li

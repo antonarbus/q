@@ -28,7 +28,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const getAccessTokenHandler: RouterHandler = async (req, res, next) => {
+export const getAccessTokenHandler: RouterHandler = async (req, res, _next) => {
   const userDataPerviouslyLoggedIn = getUserFromRefreshTokenOrNull({ req })
 
   if (userDataPerviouslyLoggedIn === null) {

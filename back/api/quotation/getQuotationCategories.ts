@@ -23,7 +23,7 @@ type RouterHandler = (
 export const getQuotationCategoriesHandler: RouterHandler = async (
   req,
   res,
-  next,
+  _next,
 ) => {
   const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req, res })
   const categories = await QuotationModel.find({ email }).distinct('category')

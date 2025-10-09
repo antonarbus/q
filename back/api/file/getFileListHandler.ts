@@ -24,7 +24,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const getFileListHandler: RouterHandler = async (req, res, next) => {
+export const getFileListHandler: RouterHandler = async (req, res, _next) => {
   const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req, res })
 
   const fileList = await FileModel.find({ email })

@@ -32,7 +32,7 @@ type RouterHandler = (
 export const fileUploadSignedUrlHandler: RouterHandler = async (
   req,
   res,
-  next,
+  _next,
 ) => {
   getUserFromAccessTokenOrThrowUnauthorized({ req, res })
 

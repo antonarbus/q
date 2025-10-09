@@ -23,7 +23,7 @@ type RouterHandler = (
 export const getBookmarkCategoriesHandler: RouterHandler = async (
   req,
   res,
-  next,
+  _next,
 ) => {
   const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req, res })
   const categories = await BookmarkModel.find({ email }).distinct('category')

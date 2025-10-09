@@ -33,7 +33,7 @@ type RouterHandler = (
 export const requestPasswordResetHandler: RouterHandler = async (
   req,
   res,
-  next,
+  _next,
 ) => {
   const emailFromInput = req.body.email.toLowerCase()
 

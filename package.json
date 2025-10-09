@@ -27,6 +27,7 @@
     "playwright_record": "INSTALLATION=local playwright codegen https://localhost:3000 --ignore-https-errors",
     "tsc": "tsc --noEmit",
     "biome": "biome check",
+    "biome:silent": "biome check --diagnostic-level=error",
     "biome:fix": "biome check --fix",
     "check": "npm run tsc && npm run biome && npm run test && npm run playwright",
     "fsd": "npx steiger ./front",

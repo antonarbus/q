@@ -23,7 +23,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const deleteBookmarkHandler: RouterHandler = async (req, res, next) => {
+export const deleteBookmarkHandler: RouterHandler = async (req, res, _next) => {
   const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req, res })
   const bookmarkId = req.body.id
 

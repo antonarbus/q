@@ -62,6 +62,8 @@ export const FormModal = ({
   shouldUnmountOnClickAway,
   shouldUnmountOnEsc,
 }: Props): JSX.Element => {
+  const FORM_ID = 'form-id'
+
   return (
     <BackdropWithSlidableModal
       onUnmount={onUnmount}
@@ -149,7 +151,7 @@ export const FormModal = ({
               },
             },
           }}
-          id='form'
+          id={FORM_ID}
           onSubmit={onSubmit}
         >
           <AnimatePresence initial={false}>
@@ -196,7 +198,7 @@ export const FormModal = ({
             }}
           >
             <ButtonCustom
-              form='form'
+              form={FORM_ID}
               isButtonDisabled={
                 Boolean(isButtonDisabled) || Boolean(isButtonLoading)
               }

@@ -18,7 +18,7 @@ export const generateRefreshToken = (payload: JwtPayloadExtended): Res => {
   })
 
   const refreshJwtTokenExpiresOn = new Date(
-    new Date().getTime() + THREE_MONTHS_IN_SEC * 1000,
+    Date.now() + THREE_MONTHS_IN_SEC * 1000,
   ).toISOString()
 
   const jwtExpirationInDays = getJwtExpirationInDays({ token: refreshJwtToken })

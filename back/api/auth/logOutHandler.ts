@@ -20,7 +20,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => void
 
-export const logOutHandler: RouterHandler = (req, res, next) => {
+export const logOutHandler: RouterHandler = (_req, res, _next) => {
   removeNoTraceMode({ res })
   removeRefreshTokenCookie({ res })
   res.status(httpStatus.success_200).json({ message: 'logged out' })

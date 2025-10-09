@@ -28,7 +28,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const saveFileInfoHandler: RouterHandler = async (req, res, next) => {
+export const saveFileInfoHandler: RouterHandler = async (req, res, _next) => {
   const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req, res })
   const { id: fileId, name: fileName, size: fileSize } = req.body
 

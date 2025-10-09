@@ -6,6 +6,6 @@ export type ResBody = {
 
 type RouterHandler = (req: Request, res: Response, next: NextFunction) => void
 
-export const rootApiHandler: RouterHandler = (req, res, next) => {
+export const rootApiHandler: RouterHandler = (_req, res, _next) => {
   res.json({ message: 'I am api root and I do nothing' })
 }

@@ -44,7 +44,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const registerHandler: RouterHandler = async (req, res, next) => {
+export const registerHandler: RouterHandler = async (req, res, _next) => {
   const emailFromInput = req.body.email.toLowerCase()
   const passwordFromInput = req.body.password
 

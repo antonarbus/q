@@ -9,7 +9,7 @@ type Props = {
 
 export const selectColumnWidth =
   ({ blockIndex, boqColumnKey }: Props) =>
-  (state: RootState): number => {
+  (_state: RootState): number => {
     const boqBlock = getBoqBlockFromStore({ blockIndex })
 
     if (boqBlock === undefined) {

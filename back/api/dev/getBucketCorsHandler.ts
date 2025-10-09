@@ -12,7 +12,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const getBucketCorsHandler: RouterHandler = async (req, res, next) => {
+export const getBucketCorsHandler: RouterHandler = async (req, res, _next) => {
   const { roles } = getUserFromRefreshTokenOrJohn({ req })
 
   if (roles.includes(userRole.superAdmin) === false) {

@@ -132,7 +132,6 @@ article ol {
 /* Blockquote */
 blockquote {
   border-left: 4px solid #0083bf;
-  padding-left: 20px;
   margin: 25px 0;
   font-style: italic;
   color: #555;

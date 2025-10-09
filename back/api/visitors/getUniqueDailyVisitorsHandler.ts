@@ -32,7 +32,7 @@ type RouterHandler = (
 export const getUniqueDailyVisitorsHandler: RouterHandler = async (
   req,
   res,
-  next,
+  _next,
 ) => {
   const { startDate, endDate } = req.query
 
