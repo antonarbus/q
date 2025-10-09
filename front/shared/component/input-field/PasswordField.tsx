@@ -1,9 +1,9 @@
-import { theme } from '@shared/theme'
-import { VscEye, VscEyeClosed } from 'react-icons/vsc'
-import { MdOutlineLock } from 'react-icons/md'
 import { IconButton, InputAdornment, TextField } from '@mui/material'
-import { useSignal, type Signal } from '@preact/signals-react'
+import { type Signal, useSignal } from '@preact/signals-react'
+import { theme } from '@shared/theme'
 import type { JSX } from 'react'
+import { MdOutlineLock } from 'react-icons/md'
+import { VscEye, VscEyeClosed } from 'react-icons/vsc'
 
 type Props = {
   passwordSignal: Signal<string>

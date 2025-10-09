@@ -1,7 +1,7 @@
-import { theme } from '@shared/theme'
-import { MdAlternateEmail } from 'react-icons/md'
 import { Tooltip } from '@mui/material'
+import { theme } from '@shared/theme'
 import type { JSX } from 'react'
+import { MdAlternateEmail } from 'react-icons/md'
 
 export const EmailIcon = (): JSX.Element => {
   return (

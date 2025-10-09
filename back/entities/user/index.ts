@@ -1,5 +1,5 @@
+export { getUserFromAccessTokenOrNull } from './getUserFromAccessTokenOrNull'
+export { getUserFromAccessTokenOrThrowUnauthorized } from './getUserFromAccessTokenOrThrowUnauthorized'
 export { getUserFromRefreshTokenOrJohn } from './getUserFromRefreshTokenOrJohn'
 export { getUserFromRefreshTokenOrNull } from './getUserFromRefreshTokenOrNull'
-export { getUserFromAccessTokenOrThrowUnauthorized } from './getUserFromAccessTokenOrThrowUnauthorized'
-export { getUserFromAccessTokenOrNull } from './getUserFromAccessTokenOrNull'
 export { UserModel } from './userModel'

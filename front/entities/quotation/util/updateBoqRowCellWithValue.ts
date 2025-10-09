@@ -1,11 +1,11 @@
 import { updateNumberAtHtmlIncrementally } from '@shared/lib/froala/updateNumberAtHtmlIncrementally'
 import type { FroalaEditor } from '@shared/type/froala'
 import { getNumberFromString } from '@shared/util/getNumberFromString'
-import { getTextContentFromHtml } from '@shared/util/getTextContentFromHtml'
 import { getStringWithNewFormattedNumber } from '@shared/util/getStringWithNewFormattedNumber'
+import { getTextContentFromHtml } from '@shared/util/getTextContentFromHtml'
+import type { BoqRowCellKey } from '../const/boqRowCellKey'
 import { getBoqRowFromStore } from '../redux/getter/getBoqRowFromStore'
 import { updateBoqRowCellAtStore } from '../redux/updater/updateBoqRowCellAtStore'
-import type { BoqRowCellKey } from '../const/boqRowCellKey'
 
 type Props = {
   blockIndex: number

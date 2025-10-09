@@ -1,7 +1,7 @@
-import { useRef, type JSX, type ReactNode } from 'react'
+import { getState } from '@shared/lib/redux'
+import { type JSX, type ReactNode, useRef } from 'react'
 import { useEffectOnce } from 'react-use'
 import { useSlide } from '../util/useSlide'
-import { getState } from '@shared/lib/redux'
 
 type Props = {
   children: ReactNode

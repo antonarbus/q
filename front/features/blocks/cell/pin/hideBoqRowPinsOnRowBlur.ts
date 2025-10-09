@@ -1,11 +1,11 @@
-import { dispatch } from '@shared/lib/redux'
-import type { FocusEvent } from 'react'
 import {
   boqRowCellKey,
   getBoqRowFromStore,
   quotationSlice,
 } from '@entities/quotation'
 import { cls } from '@shared/const/cls'
+import { dispatch } from '@shared/lib/redux'
+import type { FocusEvent } from 'react'
 
 type Props = {
   event: FocusEvent<HTMLDivElement>

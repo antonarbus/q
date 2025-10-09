@@ -1,6 +1,3 @@
-import { dispatch, getState, useSelector } from '@shared/lib/redux'
-import type { MouseEvent, JSX } from 'react'
-import { MdCopyAll } from 'react-icons/md'
 import { copySlice } from '@entities/copy'
 import {
   getBoqRowFromStore,
@@ -8,10 +5,13 @@ import {
   useBlock,
   useRow,
 } from '@entities/quotation'
-import { cls } from '@shared/const/cls'
 import { Tooltip } from '@mui/material'
-import { getClosestRowHtml } from '@shared/util/html-getter/getClosestRowHtml'
+import { cls } from '@shared/const/cls'
 import { textSlice } from '@shared/lib/froala/textSlice'
+import { dispatch, getState, useSelector } from '@shared/lib/redux'
+import { getClosestRowHtml } from '@shared/util/html-getter/getClosestRowHtml'
+import type { JSX, MouseEvent } from 'react'
+import { MdCopyAll } from 'react-icons/md'
 
 export const CopyBoqRowIcon = (): JSX.Element => {
   const { blockIndex } = useBlock()

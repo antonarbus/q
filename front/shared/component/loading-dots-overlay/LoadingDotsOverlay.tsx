@@ -1,6 +1,6 @@
 import { useSelector } from '@shared/lib/redux'
-import { LoadingDots } from './LoadingDots'
 import type { JSX } from 'react'
+import { LoadingDots } from './LoadingDots'
 
 type Props = {
   shouldShowLoader: boolean

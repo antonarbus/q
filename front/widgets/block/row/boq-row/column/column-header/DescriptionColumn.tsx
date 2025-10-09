@@ -1,11 +1,11 @@
 import {
-  columnHeaderStyle,
   boqColumnKey,
+  columnHeaderStyle,
   columnMinWidth,
 } from '@entities/quotation'
-import { ResizableColumn } from '../ResizableColumn'
 import { Box } from '@mui/material'
 import type { ReactNode } from 'react'
+import { ResizableColumn } from '../ResizableColumn'
 
 export const DescriptionColumn = (): ReactNode => {
   return (

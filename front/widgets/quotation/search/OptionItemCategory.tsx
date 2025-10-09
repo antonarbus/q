@@ -1,8 +1,8 @@
-import { BsTags } from 'react-icons/bs'
+import type { ItemPick } from '@back/api/bookmark/getBookmarkListHandler'
 import { Box } from '@mui/material'
 import { getTextWithBoldSubStringAsJsx } from '@shared/util/getTextWithBoldSubStringAsJsx'
-import type { ItemPick } from '@back/api/bookmark/getBookmarkListHandler'
 import type { JSX } from 'react'
+import { BsTags } from 'react-icons/bs'
 
 type Props = {
   inputValueSignal: { value: string }

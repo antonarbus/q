@@ -1,5 +1,5 @@
-import { theme } from '@shared/theme'
 import type { SxProps } from '@mui/material'
+import { theme } from '@shared/theme'
 import type { CSSProperties } from 'react'
 
 export const boqRowCellStyle: CSSProperties = {

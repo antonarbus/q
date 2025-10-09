@@ -1,6 +1,6 @@
-import { dispatch } from '@shared/lib/redux'
+import { type InfoFormValues, quotationSlice } from '@entities/quotation'
 import { useSignalEffect } from '@preact/signals-react'
-import { quotationSlice, type InfoFormValues } from '@entities/quotation'
+import { dispatch } from '@shared/lib/redux'
 
 type Props = {
   id: string

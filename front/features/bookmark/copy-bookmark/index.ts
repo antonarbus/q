@@ -1,5 +1,5 @@
 export { CopyBookmarkButton } from './CopyBookmarkButton'
 export {
-  useCopyBookmarkAtSearch,
   type LoadBookmark,
+  useCopyBookmarkAtSearch,
 } from './useCopyBookmarkAtSearch'

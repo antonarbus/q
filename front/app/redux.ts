@@ -1,13 +1,13 @@
-import { configureStore } from '@reduxjs/toolkit'
-import type { TypedUseSelectorHook } from 'react-redux'
 import { copyReducer } from '@entities/copy/copySlice'
 import { quotationReducer } from '@entities/quotation/redux/quotationSlice'
 import { userReducer } from '@entities/user/redux/userSlice'
-import { navReducer } from '@shared/nav/navSlice'
-import { instantiateStore } from '@shared/lib/redux/redux'
+import { configureStore } from '@reduxjs/toolkit'
+import { appReducer } from '@shared/appSlice'
 import { agGridReducer } from '@shared/lib/ag-grid/agGridSlice'
 import { textReducer } from '@shared/lib/froala/textSlice'
-import { appReducer } from '@shared/appSlice'
+import { instantiateStore } from '@shared/lib/redux/redux'
+import { navReducer } from '@shared/nav/navSlice'
+import type { TypedUseSelectorHook } from 'react-redux'
 
 const store = configureStore({
   reducer: {

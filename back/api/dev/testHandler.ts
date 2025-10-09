@@ -1,7 +1,7 @@
-import type { Request, Response, NextFunction } from 'express'
+import { getUserFromRefreshTokenOrJohn, UserModel } from '@back/entities/user'
 import { httpStatus } from '@back/shared/const/httpStatus'
 import { userRole } from '@back/shared/const/userRole'
-import { getUserFromRefreshTokenOrJohn, UserModel } from '@back/entities/user'
+import type { NextFunction, Request, Response } from 'express'
 
 type RouterHandler = (
   req: Request,

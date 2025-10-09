@@ -1,6 +1,6 @@
 import { theme } from '@shared/theme'
-import { useIsPasteHere } from './useIsPasteHere'
 import type { JSX, ReactNode } from 'react'
+import { useIsPasteHere } from './useIsPasteHere'
 
 type Props = {
   children: ReactNode

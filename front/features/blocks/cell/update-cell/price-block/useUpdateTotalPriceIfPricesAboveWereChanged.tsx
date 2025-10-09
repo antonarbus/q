@@ -1,13 +1,13 @@
-import { dispatch, getState, useSelector } from '@shared/lib/redux'
-import { useUpdateEffect } from 'react-use'
 import {
   getTotalPriceAbove,
   itemType,
   quotationSlice,
 } from '@entities/quotation'
 import { updateNumberAtHtmlIncrementally } from '@shared/lib/froala/updateNumberAtHtmlIncrementally'
+import { dispatch, getState, useSelector } from '@shared/lib/redux'
 import type { FroalaEditorRef } from '@shared/type/froala'
 import { getStringWithNewFormattedNumber } from '@shared/util/getStringWithNewFormattedNumber'
+import { useUpdateEffect } from 'react-use'
 
 type Props = {
   editorRef: FroalaEditorRef

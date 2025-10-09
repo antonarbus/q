@@ -1,8 +1,8 @@
+import { BOOKMARK_POS_AT_BLOCKS } from '@entities/quotation/const/bookmarkPosAtBlocks'
+import type { BoqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { itemType } from '../../const/itemType'
 import type { Quotation } from '../../type'
-import { BOOKMARK_POS_AT_BLOCKS } from '@entities/quotation/const/bookmarkPosAtBlocks'
-import type { BoqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
 
 export const updateRowBlockCellReducer = (
   state: Quotation,

@@ -1,10 +1,10 @@
-import { theme } from '@shared/theme'
-import { RiUser3Line } from 'react-icons/ri'
 import { InputAdornment, TextField } from '@mui/material'
-import { useSignal, type Signal, useSignalEffect } from '@preact/signals-react'
+import { type Signal, useSignal, useSignalEffect } from '@preact/signals-react'
+import { theme } from '@shared/theme'
 import mailcheck from 'mailcheck'
+import type { ComponentRef, JSX, RefObject } from 'react'
+import { RiUser3Line } from 'react-icons/ri'
 import { isEmailPatternOk } from '../../util/isEmailPatternOk'
-import type { JSX, ComponentRef, RefObject } from 'react'
 
 type Props = {
   emailSignal: Signal<string>

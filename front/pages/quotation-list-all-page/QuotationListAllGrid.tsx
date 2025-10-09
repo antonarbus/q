@@ -1,27 +1,27 @@
-import {
-  AllCommunityModule,
-  ModuleRegistry,
-  themeQuartz,
-  type FilterChangedEvent,
-} from 'ag-grid-community'
-import { AgGridReact } from 'ag-grid-react'
-import { useRef, type JSX, type ComponentRef } from 'react'
+import type { ItemPick } from '@back/api/quotation/getQuotationListAllHandler'
 import { useQuotationListAllDatasource } from '@entities/quotation'
 import { LoadingTableOverlay } from '@shared/component/LoadingTableOverlay'
-import { DisplayedRowsCount } from '@shared/lib/ag-grid/components/DisplayedRowsCount'
-import { NoRowsTableOverlay } from '@shared/lib/ag-grid/components/NoRowsTableOverlay'
-import { columnDefs } from './columnDef'
-import { quotationListAllAgGridRef } from './ref/quotationListAllAgGridRef'
-import { addPlaceholderToFloatingFilters } from '@shared/lib/ag-grid/utils/addPlaceholderToFloatingFilters'
-import { GridLayout } from '@shared/lib/ag-grid/GridLayout'
-import { ProgressGridBar } from '@shared/lib/ag-grid/components/ProgressGridBar'
-import { useShowLoadingJumpingDots } from '@shared/lib/ag-grid/hooks/useShowLoadingJumpingDots'
 import { useDisableLoadingOverlayWhenItemsAreFetched } from '@shared/component/loading-dots-overlay'
-import { AgGridStyles } from '@shared/lib/ag-grid/styles/AgGridStyles'
-import type { ItemPick } from '@back/api/quotation/getQuotationListAllHandler'
-import { dispatch } from '@shared/lib/redux'
 import { agGridSlice } from '@shared/lib/ag-grid/agGridSlice'
 import { getDefaultColDef } from '@shared/lib/ag-grid/colDef/getDefaultColDef'
+import { DisplayedRowsCount } from '@shared/lib/ag-grid/components/DisplayedRowsCount'
+import { NoRowsTableOverlay } from '@shared/lib/ag-grid/components/NoRowsTableOverlay'
+import { ProgressGridBar } from '@shared/lib/ag-grid/components/ProgressGridBar'
+import { GridLayout } from '@shared/lib/ag-grid/GridLayout'
+import { useShowLoadingJumpingDots } from '@shared/lib/ag-grid/hooks/useShowLoadingJumpingDots'
+import { AgGridStyles } from '@shared/lib/ag-grid/styles/AgGridStyles'
+import { addPlaceholderToFloatingFilters } from '@shared/lib/ag-grid/utils/addPlaceholderToFloatingFilters'
+import { dispatch } from '@shared/lib/redux'
+import {
+  AllCommunityModule,
+  type FilterChangedEvent,
+  ModuleRegistry,
+  themeQuartz,
+} from 'ag-grid-community'
+import { AgGridReact } from 'ag-grid-react'
+import { type ComponentRef, type JSX, useRef } from 'react'
+import { columnDefs } from './columnDef'
+import { quotationListAllAgGridRef } from './ref/quotationListAllAgGridRef'
 
 ModuleRegistry.registerModules([AllCommunityModule])
 

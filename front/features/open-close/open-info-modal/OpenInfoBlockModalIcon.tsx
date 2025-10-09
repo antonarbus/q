@@ -1,11 +1,11 @@
-import { HiOutlineInformationCircle } from 'react-icons/hi2'
-import { useNavigate } from 'react-router-dom'
+import { useIsCopyModalVisible } from '@entities/copy'
 import { getBlockFromStore, itemType, useBlock } from '@entities/quotation'
-import { route } from '@shared/const/route'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/const/cls'
-import { useIsCopyModalVisible } from '@entities/copy'
-import type { ReactNode, MouseEvent } from 'react'
+import { route } from '@shared/const/route'
+import type { MouseEvent, ReactNode } from 'react'
+import { HiOutlineInformationCircle } from 'react-icons/hi2'
+import { useNavigate } from 'react-router-dom'
 
 export const OpenInfoBlockModalIcon = (): ReactNode => {
   const navigate = useNavigate()

@@ -1,7 +1,7 @@
+import { appSlice } from '@shared/appSlice'
+import { route } from '@shared/const/route'
 import { router } from '@shared/lib/react-router-dom'
 import { dispatch, getState } from '@shared/lib/redux'
-import { route } from '@shared/const/route'
-import { appSlice } from '@shared/appSlice'
 
 export const openShareQuotationModal = (): void => {
   if (getState().user.email === null) {

@@ -1,9 +1,9 @@
-import type { ColDef } from 'ag-grid-community'
 import type { UserPicked } from '@back/api/user/getUserListHandler'
-import { ActionButtonsCellRenderer } from './renderer/ActionButtonsCellRenderer'
-import { getTextColDef } from '@shared/lib/ag-grid/colDef/getTextColDef'
-import { getDateColDef } from '@shared/lib/ag-grid/colDef/getDateColDef'
 import { getBooleanColDef } from '@shared/lib/ag-grid/colDef/getBooleanColDef'
+import { getDateColDef } from '@shared/lib/ag-grid/colDef/getDateColDef'
+import { getTextColDef } from '@shared/lib/ag-grid/colDef/getTextColDef'
+import type { ColDef } from 'ag-grid-community'
+import { ActionButtonsCellRenderer } from './renderer/ActionButtonsCellRenderer'
 
 export const columnDefs: ColDef<UserPicked>[] = [
   {

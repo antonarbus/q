@@ -1,9 +1,9 @@
-import { Logo, NavList } from '@shared/nav'
-import { navStructure } from './navStructure'
-import { usePressNavShortcut } from '@features/nav/press-shortcut'
-import { NavLayout } from './NavLayout'
 import { useLoadNavStructure } from '@features/nav/load-nav-structure'
+import { usePressNavShortcut } from '@features/nav/press-shortcut'
+import { Logo, NavList } from '@shared/nav'
 import type { JSX } from 'react'
+import { NavLayout } from './NavLayout'
+import { navStructure } from './navStructure'
 
 export const Nav = (): JSX.Element => {
   useLoadNavStructure({ navStructure })

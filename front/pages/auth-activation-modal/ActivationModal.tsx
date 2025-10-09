@@ -1,13 +1,13 @@
-import { theme } from '@shared/theme'
-import { Avatar, Box } from '@mui/material'
-import { useRef, type JSX } from 'react'
-import { GrValidate } from 'react-icons/gr'
-import { PiSmileySadBold, PiSmileyBold } from 'react-icons/pi'
-import { useNavigate } from 'react-router-dom'
 import { useActivate } from '@features/auth/activate'
-import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
+import { Avatar, Box } from '@mui/material'
 import { BackdropWithSlidableModal } from '@shared/component/BackdropWithSlidableModal'
 import { CardCustom } from '@shared/component/CardCustom'
+import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
+import { theme } from '@shared/theme'
+import { type JSX, useRef } from 'react'
+import { GrValidate } from 'react-icons/gr'
+import { PiSmileyBold, PiSmileySadBold } from 'react-icons/pi'
+import { useNavigate } from 'react-router-dom'
 
 export const ActivationModal = (): JSX.Element => {
   const cardRef = useRef<HTMLDivElement>(null)

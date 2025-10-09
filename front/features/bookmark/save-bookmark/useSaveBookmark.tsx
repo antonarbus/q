@@ -1,8 +1,3 @@
-import { dispatch, getState } from '@shared/lib/redux'
-import type { UseMutationResult } from '@tanstack/react-query'
-import { useCallback, type FormEvent } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useUpdateEffect } from 'react-use'
 import {
   type BookmarkFormValues,
   useGetBookmarkCategoryListQuery,
@@ -10,10 +5,15 @@ import {
   useSaveBookmarkMutation,
 } from '@entities/bookmark'
 import { BOOKMARK_POS_AT_BLOCKS, quotationSlice } from '@entities/quotation'
-import { toast } from 'sonner'
 import { cls } from '@shared/const/cls'
-import { getPaperElementHtmlAtModal } from '@shared/util/html-getter/getPaperElementHtmlAtModal'
+import { dispatch, getState } from '@shared/lib/redux'
 import { asyncDelay } from '@shared/util/delay'
+import { getPaperElementHtmlAtModal } from '@shared/util/html-getter/getPaperElementHtmlAtModal'
+import type { UseMutationResult } from '@tanstack/react-query'
+import { type FormEvent, useCallback } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useUpdateEffect } from 'react-use'
+import { toast } from 'sonner'
 
 type Props = {
   bookmarkFromValues: BookmarkFormValues

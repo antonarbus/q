@@ -1,15 +1,15 @@
-import { motion } from 'motion/react'
-import { usePasteClick, useMovePasteText } from '@features/blocks/paste'
+import { useMovePasteText, usePasteClick } from '@features/blocks/paste'
 import {
   PressEscIcon,
   useEnableFroalasOnCloseCopyModal,
 } from '@features/open-close/close-copy-modal'
 import { cursorPosSignal } from '@shared/util/cursorPosSignal'
+import { motion } from 'motion/react'
+import type { JSX } from 'react'
 import { FirstCopiedItem } from './FirstCopiedItem'
 import { RestOfCopiedItems } from './RestOfCopiedItems'
 import { useCopyModalAnimation } from './useCopyModalAnimation'
 import { useDisableNavItemsOnCopyModal } from './useDisableNavItemsOnCopyModal'
-import type { JSX } from 'react'
 
 export const CopyModal = (): JSX.Element => {
   useMovePasteText()

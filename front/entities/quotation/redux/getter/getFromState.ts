@@ -1,4 +1,4 @@
-import type { Quotation, Item } from '../../type'
+import type { Item, Quotation } from '../../type'
 
 type Props = {
   id: string

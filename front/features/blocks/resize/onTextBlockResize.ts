@@ -1,5 +1,5 @@
-import { dispatch, getState } from '@shared/lib/redux'
 import { quotationSlice } from '@entities/quotation'
+import { dispatch, getState } from '@shared/lib/redux'
 import type {
   OnBlockResize,
   OnBlockResizeStart,

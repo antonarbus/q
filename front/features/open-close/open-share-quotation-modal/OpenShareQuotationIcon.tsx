@@ -1,11 +1,11 @@
 import { useIsCopyModalVisible } from '@entities/copy'
 import { Tooltip } from '@mui/material'
-import { Link } from 'react-router-dom'
 import { route } from '@shared/const/route'
-import { PiGlobeX, PiGlobe } from 'react-icons/pi'
-import { BsPersonFillLock } from 'react-icons/bs'
 import { useSelector } from '@shared/lib/redux'
 import type { JSX } from 'react'
+import { BsPersonFillLock } from 'react-icons/bs'
+import { PiGlobe, PiGlobeX } from 'react-icons/pi'
+import { Link } from 'react-router-dom'
 
 export const OpenShareQuotationIcon = (): JSX.Element => {
   const disabled = useIsCopyModalVisible()

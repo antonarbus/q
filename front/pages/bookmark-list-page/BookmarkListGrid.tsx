@@ -1,28 +1,28 @@
-import {
-  AllCommunityModule,
-  ModuleRegistry,
-  themeQuartz,
-  type FilterChangedEvent,
-} from 'ag-grid-community'
-import { AgGridReact } from 'ag-grid-react'
-import { useRef, type JSX, type ComponentRef } from 'react'
+import type { ItemPick } from '@back/api/bookmark/getBookmarkListHandler'
 import { useGetBookmarkListQuery } from '@entities/bookmark'
 import { LoadingTableOverlay } from '@shared/component/LoadingTableOverlay'
+import { useDisableLoadingOverlayWhenItemsAreFetched } from '@shared/component/loading-dots-overlay'
+import { agGridSlice } from '@shared/lib/ag-grid/agGridSlice'
+import { getDefaultColDef } from '@shared/lib/ag-grid/colDef/getDefaultColDef'
 import { DisplayedRowsCount } from '@shared/lib/ag-grid/components/DisplayedRowsCount'
 import { NoRowsTableOverlay } from '@shared/lib/ag-grid/components/NoRowsTableOverlay'
-import { columnDefs } from './columnDef'
-import { bookmarkListAgGridRef } from './ref/bookmarkListAgGridRef'
-import { addPlaceholderToFloatingFilters } from '@shared/lib/ag-grid/utils/addPlaceholderToFloatingFilters'
-import { GridLayout } from '@shared/lib/ag-grid/GridLayout'
 import { ProgressGridBar } from '@shared/lib/ag-grid/components/ProgressGridBar'
+import { GridLayout } from '@shared/lib/ag-grid/GridLayout'
 import { useRefetchDataOnEmailChange } from '@shared/lib/ag-grid/hooks/useRefetchDataOnEmailChange'
 import { useShowLoadingJumpingDots } from '@shared/lib/ag-grid/hooks/useShowLoadingJumpingDots'
 import { AgGridStyles } from '@shared/lib/ag-grid/styles/AgGridStyles'
-import { useDisableLoadingOverlayWhenItemsAreFetched } from '@shared/component/loading-dots-overlay'
-import type { ItemPick } from '@back/api/bookmark/getBookmarkListHandler'
+import { addPlaceholderToFloatingFilters } from '@shared/lib/ag-grid/utils/addPlaceholderToFloatingFilters'
 import { dispatch } from '@shared/lib/redux'
-import { agGridSlice } from '@shared/lib/ag-grid/agGridSlice'
-import { getDefaultColDef } from '@shared/lib/ag-grid/colDef/getDefaultColDef'
+import {
+  AllCommunityModule,
+  type FilterChangedEvent,
+  ModuleRegistry,
+  themeQuartz,
+} from 'ag-grid-community'
+import { AgGridReact } from 'ag-grid-react'
+import { type ComponentRef, type JSX, useRef } from 'react'
+import { columnDefs } from './columnDef'
+import { bookmarkListAgGridRef } from './ref/bookmarkListAgGridRef'
 
 ModuleRegistry.registerModules([AllCommunityModule])
 

@@ -1,18 +1,18 @@
-import { dispatch, getState } from '@shared/lib/redux'
-import { MdOutlineStarOutline } from 'react-icons/md'
-import { useNavigate } from 'react-router-dom'
-import { cls } from '@shared/const/cls'
-import { route } from '@shared/const/route'
-import { toast } from 'sonner'
-import { Tooltip } from '@mui/material'
+import { useIsCopyModalVisible } from '@entities/copy'
 import {
   getBlockFromStore,
   itemType,
   quotationSlice,
   useBlock,
 } from '@entities/quotation'
-import { useIsCopyModalVisible } from '@entities/copy'
-import type { ReactNode, MouseEvent } from 'react'
+import { Tooltip } from '@mui/material'
+import { cls } from '@shared/const/cls'
+import { route } from '@shared/const/route'
+import { dispatch, getState } from '@shared/lib/redux'
+import type { MouseEvent, ReactNode } from 'react'
+import { MdOutlineStarOutline } from 'react-icons/md'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'sonner'
 
 export const BookmarkBlockIcon = (): ReactNode => {
   const navigate = useNavigate()

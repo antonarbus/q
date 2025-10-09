@@ -1,9 +1,9 @@
-import { instance } from '@shared/instance'
+import { useDeleteFileMutation } from '@entities/file'
 import { queryKey } from '@shared/const/queryKey'
-import { useCallback, type MouseEvent } from 'react'
+import { instance } from '@shared/instance'
+import { type MouseEvent, useCallback } from 'react'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
-import { useDeleteFileMutation } from '@entities/file'
 
 type Props = {
   fileId: string

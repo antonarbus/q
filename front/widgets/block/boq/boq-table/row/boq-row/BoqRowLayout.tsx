@@ -1,8 +1,8 @@
-import { Box } from '@mui/material'
 import { useRow } from '@entities/quotation'
+import { Box } from '@mui/material'
 import { cls } from '@shared/const/cls'
+import type { FocusEvent, JSX, ReactNode } from 'react'
 import { PasteBoqRowTextOverlay } from './paste-here-row'
-import type { JSX, ReactNode, FocusEvent } from 'react'
 
 type Props = {
   children: ReactNode

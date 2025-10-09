@@ -1,12 +1,12 @@
 import {
-  type TextFieldProps,
   Autocomplete,
   InputAdornment,
   TextField,
+  type TextFieldProps,
 } from '@mui/material'
 import type { Signal } from '@preact/signals-react'
-import { BsTags } from 'react-icons/bs'
 import type { JSX } from 'react'
+import { BsTags } from 'react-icons/bs'
 
 type Props = {
   categorySignal: Signal<string | undefined>

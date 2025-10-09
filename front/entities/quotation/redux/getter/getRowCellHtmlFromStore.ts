@@ -1,7 +1,7 @@
-import { getState } from '@shared/lib/redux'
-import { itemType } from '../../const/itemType'
 import { BOOKMARK_POS_AT_BLOCKS } from '@entities/quotation/const/bookmarkPosAtBlocks'
 import type { BoqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
+import { getState } from '@shared/lib/redux'
+import { itemType } from '../../const/itemType'
 
 type Props = {
   boqRowCellKey: BoqRowCellKey

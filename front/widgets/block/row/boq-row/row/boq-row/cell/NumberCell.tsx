@@ -1,10 +1,10 @@
-import { Box } from '@mui/material'
-import type { JSX } from 'react'
 import {
   boqColumnKey,
   columnMinWidth,
   useStylesForResizableCell,
 } from '@entities/quotation'
+import { Box } from '@mui/material'
+import type { JSX } from 'react'
 
 export const NumberCell = (): JSX.Element => {
   const { stylesForResizableCell } = useStylesForResizableCell({

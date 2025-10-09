@@ -1,7 +1,7 @@
-import { useEffect, type RefObject } from 'react'
-import type { Chart } from 'chart.js'
 import type { ResBody } from '@back/api/visitors/getUniqueDailyVisitorsHandler'
+import type { Chart } from 'chart.js'
 import { format, parseISO } from 'date-fns'
+import { type RefObject, useEffect } from 'react'
 
 type Props = {
   visitors: ResBody['visitorsCount']

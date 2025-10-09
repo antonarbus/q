@@ -1,6 +1,6 @@
 import type { FroalaEditor } from '@shared/type/froala'
-import { getBoqCellFromStore } from '../redux/getter/getBoqCellFromStore'
 import type { BoqRowCellKey } from '../const/boqRowCellKey'
+import { getBoqCellFromStore } from '../redux/getter/getBoqCellFromStore'
 
 type Props = {
   editor: FroalaEditor

@@ -1,24 +1,24 @@
-import { Box } from '@mui/material'
+import {
+  boqColumnKey,
+  boqRowCellKey,
+  boqRowCellStyle,
+  boqRowCellSx,
+  columnMinWidth,
+  Froala,
+  getBoqCellHtmlFromStore,
+  useBlock,
+  useBoq,
+  useRow,
+  useStylesForResizableCell,
+} from '@entities/quotation'
 import { Pin, pinBoqRowItemPriceCell } from '@features/blocks/cell/pin'
 import { tabFromItemPriceCell } from '@features/blocks/cell/tab-away-from-cell'
 import {
   formatBoqRowItemPriceCell,
   updateBoqRowItemPriceCell,
 } from '@features/blocks/cell/update-cell'
+import { Box } from '@mui/material'
 import type { JSX, MouseEvent } from 'react'
-import {
-  getBoqCellHtmlFromStore,
-  useBlock,
-  useRow,
-  useBoq,
-  Froala,
-  boqRowCellStyle,
-  useStylesForResizableCell,
-  boqRowCellKey,
-  boqColumnKey,
-  boqRowCellSx,
-  columnMinWidth,
-} from '@entities/quotation'
 
 export const ItemPriceCell = (): JSX.Element => {
   const { blockIndex } = useBlock()

@@ -1,6 +1,6 @@
 import { useSelector } from '@shared/lib/redux'
-import { LoadingDots } from './loading-dots-overlay/LoadingDots'
 import type { JSX } from 'react'
+import { LoadingDots } from './loading-dots-overlay/LoadingDots'
 
 export const LoadingTableOverlay = (): JSX.Element | null => {
   const loadingOverlay = useSelector((state) => state.agGrid.loadingOverlay)

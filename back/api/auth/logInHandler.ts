@@ -1,19 +1,19 @@
-import type { Request, Response, NextFunction } from 'express'
-import bcrypt from 'bcryptjs'
-import type { User } from '@entities/user'
-import { httpStatus } from '@back/shared/const/httpStatus'
-import { sendEmail } from '@back/shared/lib/mailersend'
 import { config } from '@back/config'
+import { getUserFromAccessTokenOrNull, UserModel } from '@back/entities/user'
+import { httpStatus } from '@back/shared/const/httpStatus'
+import { userRole } from '@back/shared/const/userRole'
+import { setNoTraceMode, setRefreshTokenCookie } from '@back/shared/headers'
 import {
   generateAccessToken,
   generateRefreshToken,
   getJwtExpirationInDays,
   verifyRefreshToken,
 } from '@back/shared/lib/json-webtoken'
-import { setNoTraceMode, setRefreshTokenCookie } from '@back/shared/headers'
-import { userRole } from '@back/shared/const/userRole'
-import { getUserFromAccessTokenOrNull, UserModel } from '@back/entities/user'
+import { sendEmail } from '@back/shared/lib/mailersend'
+import type { User } from '@entities/user'
 import type { ErrorMessageCommon } from '@shared/const/errorMessageCommon'
+import bcrypt from 'bcryptjs'
+import type { NextFunction, Request, Response } from 'express'
 
 export type ReqBody = {
   email: User['email']

@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
-import { dispatch } from '@shared/lib/redux'
-import { setup } from 'xstate'
+
 import type { NavItemId } from '@shared/const/navItemId'
+import { dispatch } from '@shared/lib/redux'
 import { navSlice } from '@shared/nav'
+import { setup } from 'xstate'
 
 type Props = {
   navItemId: NavItemId

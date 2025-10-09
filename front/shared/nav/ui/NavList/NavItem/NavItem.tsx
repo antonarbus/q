@@ -1,13 +1,13 @@
 import { useSelector } from '@shared/lib/redux'
-import { useRef, type JSX, type ComponentRef, type MouseEvent } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import { clickOnNavItem } from './clickOnNavItem'
-import { Menu } from './Menu'
-import { NavName } from './NavName'
-import { NavItemLayout } from './NavItemLayout'
-import { ArrowForNestedMenu } from './ArrowForNestedMenu'
-import { IconWithLoader } from './IconWithLoader'
 import type { NavItem as NavItemType } from '@shared/nav/type'
+import { type ComponentRef, type JSX, type MouseEvent, useRef } from 'react'
+import { Link, useLocation } from 'react-router-dom'
+import { ArrowForNestedMenu } from './ArrowForNestedMenu'
+import { clickOnNavItem } from './clickOnNavItem'
+import { IconWithLoader } from './IconWithLoader'
+import { Menu } from './Menu'
+import { NavItemLayout } from './NavItemLayout'
+import { NavName } from './NavName'
 
 type Props = {
   navItem: NavItemType

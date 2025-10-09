@@ -1,5 +1,5 @@
-import type { NavItem, NavItemId } from './type'
 import { instance } from '@shared/instance'
+import type { NavItem, NavItemId } from './type'
 
 // https://www.typescriptlang.org/docs/handbook/2/generics.html
 // https://stackoverflow.com/a/49286056/7239778

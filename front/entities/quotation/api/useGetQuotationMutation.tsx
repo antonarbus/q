@@ -1,13 +1,13 @@
+import { api } from '@back/api'
 import type {
+  ErrorResBody,
   ReqBody as Payload,
   ResBody,
-  ErrorResBody,
 } from '@back/api/quotation/getQuotationHandler'
-import { api } from '@back/api'
-import { type UseMutationResult, useMutation } from '@tanstack/react-query'
-import type { AxiosResponse, AxiosError } from 'axios'
 import { queryKey } from '@shared/const/queryKey'
 import { axiosWithAuth } from '@shared/lib/axios'
+import { type UseMutationResult, useMutation } from '@tanstack/react-query'
+import type { AxiosError, AxiosResponse } from 'axios'
 
 type Res = UseMutationResult<ResBody, AxiosError<ErrorResBody>, Payload>
 

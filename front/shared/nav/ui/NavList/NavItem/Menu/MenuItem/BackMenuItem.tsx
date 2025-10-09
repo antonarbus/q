@@ -1,6 +1,6 @@
 import { dispatch, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
-import type { MouseEvent, JSX } from 'react'
+import type { JSX, MouseEvent } from 'react'
 import { FaChevronLeft } from 'react-icons/fa'
 import { navSlice } from '../../../../../navSlice'
 import { Icon } from '../../Icon'

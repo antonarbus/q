@@ -1,12 +1,12 @@
-import { useSelector } from '@shared/lib/redux'
-import { Resizable } from 're-resizable'
+import { selectColumnWidth } from '@entities/quotation'
+import type { BoqColumnKey } from '@entities/quotation/const/boqColumnKey'
 import {
   onColumnResize,
   onColumnResizeStart,
   onColumnResizeStop,
 } from '@features/blocks/resize'
-import { selectColumnWidth } from '@entities/quotation'
-import type { BoqColumnKey } from '@entities/quotation/const/boqColumnKey'
+import { useSelector } from '@shared/lib/redux'
+import { Resizable } from 're-resizable'
 import type { JSX, ReactNode } from 'react'
 
 type Props = {

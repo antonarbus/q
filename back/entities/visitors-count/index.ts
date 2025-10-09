@@ -1,1 +1,1 @@
-export { VisitorsCountModel, type VisitorsCount } from './visitorsCountModel'
+export { type VisitorsCount, VisitorsCountModel } from './visitorsCountModel'

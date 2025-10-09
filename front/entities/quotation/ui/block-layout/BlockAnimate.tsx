@@ -1,15 +1,15 @@
-import { theme } from '@shared/theme'
 import { Box } from '@mui/material'
-import { motion } from 'motion/react'
-import type { ResizableProps } from 're-resizable'
 import { cls } from '@shared/const/cls'
+import { theme } from '@shared/theme'
 import type {
   OnBlockResize,
   OnBlockResizeStart,
   OnBlockResizeStop,
 } from '@shared/type/resizablePaper'
-import { ResizableBlockPaper } from './ResizableBlockPaper'
+import { motion } from 'motion/react'
+import type { ResizableProps } from 're-resizable'
 import type { JSX, ReactNode } from 'react'
+import { ResizableBlockPaper } from './ResizableBlockPaper'
 
 type Props = {
   children: ReactNode

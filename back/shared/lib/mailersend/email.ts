@@ -1,7 +1,7 @@
 import 'dotenv/config'
-import { MailerSend, EmailParams, Sender, Recipient } from 'mailersend'
-import { getEnvVarOrThrow } from '../dot-env'
+import { EmailParams, MailerSend, Recipient, Sender } from 'mailersend'
 import type { APIResponse } from 'mailersend/lib/services/request.service'
+import { getEnvVarOrThrow } from '../dot-env'
 
 const apiKey = getEnvVarOrThrow('MAILERSEND_API_KEY')
 const mailerSend = new MailerSend({ apiKey })

@@ -1,13 +1,13 @@
-import { useSelector } from '@shared/lib/redux'
-import { useUpdateEffect } from 'react-use'
-import { roundTo } from 'round-to'
 import {
-  useBoq,
-  useBlock,
   getBoqRowsFromStore,
   type Row,
   updateSubTotalPriceWithValue,
+  useBlock,
+  useBoq,
 } from '@entities/quotation'
+import { useSelector } from '@shared/lib/redux'
+import { useUpdateEffect } from 'react-use'
+import { roundTo } from 'round-to'
 
 export const useUpdateSubtotalPrice = (): void => {
   const { blockIndex } = useBlock()

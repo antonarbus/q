@@ -1,5 +1,5 @@
 import { dispatch } from '@shared/lib/redux'
-import { navSlice, type NavItem } from '@shared/nav'
+import { type NavItem, navSlice } from '@shared/nav'
 import { useEffectOnce } from 'react-use'
 
 type Props = {

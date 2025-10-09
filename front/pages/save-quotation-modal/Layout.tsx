@@ -1,10 +1,10 @@
 import { Box } from '@mui/material'
-import { useEffectOnce } from 'react-use'
 import { OutlinedDivWithLabel } from '@shared/component/OutlinedDivWithLabel'
-import { dispatch, useSelector } from '@shared/lib/redux'
 import { cls } from '@shared/const/cls'
 import { textSlice } from '@shared/lib/froala/textSlice'
+import { dispatch, useSelector } from '@shared/lib/redux'
 import type { JSX, ReactNode } from 'react'
+import { useEffectOnce } from 'react-use'
 
 type Props = {
   children: ReactNode

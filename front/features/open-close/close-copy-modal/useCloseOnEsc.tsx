@@ -1,8 +1,8 @@
-import { dispatch } from '@shared/lib/redux'
-import { useEffectOnce } from 'react-use'
 import { copySlice } from '@entities/copy'
 import { quotationSlice } from '@entities/quotation'
 import { textSlice } from '@shared/lib/froala/textSlice'
+import { dispatch } from '@shared/lib/redux'
+import { useEffectOnce } from 'react-use'
 
 export const useExitCopyOnEsc = (): void => {
   const closeOnEsc = (event: KeyboardEvent): void => {

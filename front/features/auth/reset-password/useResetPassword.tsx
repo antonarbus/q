@@ -1,19 +1,19 @@
-import { dispatch } from '@shared/lib/redux'
-import type { Signal } from '@preact/signals-react'
-import type { UseMutationResult } from '@tanstack/react-query'
-import { useNavigate, useParams } from 'react-router-dom'
-import { useUpdateEffect } from 'react-use'
 import {
   useResetUserPasswordMutation,
   userRole,
   userSlice,
 } from '@entities/user'
+import type { Signal } from '@preact/signals-react'
 import { navItemId } from '@shared/const/navItemId'
+import { dispatch } from '@shared/lib/redux'
 import { navSlice } from '@shared/nav'
-import { toast } from 'sonner'
-import type { AnimationScope } from 'motion-dom'
 import { asyncDelay } from '@shared/util/delay'
-import type { RefObject, FormEvent } from 'react'
+import type { UseMutationResult } from '@tanstack/react-query'
+import type { AnimationScope } from 'motion-dom'
+import type { FormEvent, RefObject } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useUpdateEffect } from 'react-use'
+import { toast } from 'sonner'
 
 type Props = {
   passwordSignal: Signal<string>

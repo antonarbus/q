@@ -1,6 +1,6 @@
 import { chartConfigurationForVisitorList } from '@shared/lib/chart-js'
 import { Chart } from 'chart.js'
-import { useEffect, useRef, type RefObject } from 'react'
+import { type RefObject, useEffect, useRef } from 'react'
 
 type Res = {
   canvasRef: RefObject<HTMLCanvasElement | null>

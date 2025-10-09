@@ -1,10 +1,10 @@
+import { useActivateUserMutation, userSlice } from '@entities/user'
+import { navItemId } from '@shared/const/navItemId'
 import { dispatch } from '@shared/lib/redux'
+import { navSlice } from '@shared/nav'
 import type { UseMutationResult } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
-import { useActivateUserMutation, userSlice } from '@entities/user'
-import { navItemId } from '@shared/const/navItemId'
-import { navSlice } from '@shared/nav'
 import { toast } from 'sonner'
 
 type Res = {

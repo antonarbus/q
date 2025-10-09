@@ -1,9 +1,9 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { config } from '@back/config'
 import { api } from '@back/api'
-import { test, expect } from '@playwright/test'
+import { config } from '@back/config'
+import { expect, test } from '@playwright/test'
 
 test.describe.configure({ mode: 'serial' })
 

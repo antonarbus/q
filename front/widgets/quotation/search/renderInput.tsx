@@ -3,8 +3,8 @@ import {
   InputAdornment,
   TextField,
 } from '@mui/material'
-import { GoSearch } from 'react-icons/go'
 import type { JSX } from 'react'
+import { GoSearch } from 'react-icons/go'
 
 export const renderInput = (
   params: AutocompleteRenderInputParams,

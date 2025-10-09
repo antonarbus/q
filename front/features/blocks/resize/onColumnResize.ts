@@ -1,7 +1,7 @@
-import { dispatch } from '@shared/lib/redux'
-import { cls } from '@shared/const/cls'
-import { quotationSlice, getBoqColumnFromStore } from '@entities/quotation'
+import { getBoqColumnFromStore, quotationSlice } from '@entities/quotation'
 import type { BoqColumnKey } from '@entities/quotation/const/boqColumnKey'
+import { cls } from '@shared/const/cls'
+import { dispatch } from '@shared/lib/redux'
 
 type Props = {
   headerColumnElement: HTMLElement

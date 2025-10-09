@@ -1,11 +1,11 @@
-import { dispatch, getState } from '@shared/lib/redux'
 import {
-  quotationSlice,
-  getBoqColumnFromStore,
   boqColumnKey,
-  itemType,
   columnMinWidth,
+  getBoqColumnFromStore,
+  itemType,
+  quotationSlice,
 } from '@entities/quotation'
+import { dispatch, getState } from '@shared/lib/redux'
 import type {
   OnBlockResize,
   OnBlockResizeStart,

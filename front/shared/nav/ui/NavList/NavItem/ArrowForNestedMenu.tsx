@@ -1,8 +1,8 @@
-import { TiArrowSortedDown } from 'react-icons/ti'
 import { css } from '@emotion/react'
 import type { NavItem } from '@shared/nav/type'
-import { navMediaQuery } from '../../navMediaQuery'
 import type { ReactNode } from 'react'
+import { TiArrowSortedDown } from 'react-icons/ti'
+import { navMediaQuery } from '../../navMediaQuery'
 
 type Props = {
   navItem: NavItem | undefined

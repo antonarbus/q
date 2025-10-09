@@ -1,15 +1,15 @@
 import type { ReqBody } from '@back/api/bookmark/getBookmarkHandler'
-import { dispatch } from '@shared/lib/redux'
+import { useGetBookmarkMutation } from '@entities/bookmark'
+import { quotationSlice } from '@entities/quotation'
 import { IconButton, Tooltip } from '@mui/material'
+import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
+import { textSlice } from '@shared/lib/froala/textSlice'
+import { dispatch } from '@shared/lib/redux'
+import type { JSX } from 'react'
 import { AiTwotoneEdit } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
-import { useGetBookmarkMutation } from '@entities/bookmark'
-import { quotationSlice } from '@entities/quotation'
-import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import { toast } from 'sonner'
-import { textSlice } from '@shared/lib/froala/textSlice'
-import type { JSX } from 'react'
 
 export const OpenBookmarkModalButton = ({ id }: ReqBody): JSX.Element => {
   const navigate = useNavigate()

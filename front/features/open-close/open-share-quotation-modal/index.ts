@@ -1,4 +1,4 @@
+export { OpenShareQuotationIcon } from './OpenShareQuotationIcon'
+export { openShareQuotationModal } from './openShareQuotationModal'
 export { useLoadInitValuesIntoShareQuotationModal } from './useLoadInitValuesIntoShareQuotationModal'
 export { useLoadShareQuotationModalWithDirectLink } from './useLoadShareQuotationModalWithDirectLink'
-export { openShareQuotationModal } from './openShareQuotationModal'
-export { OpenShareQuotationIcon } from './OpenShareQuotationIcon'

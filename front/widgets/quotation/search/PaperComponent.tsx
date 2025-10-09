@@ -1,7 +1,7 @@
 import { Box, IconButton, Paper } from '@mui/material'
+import { cls } from '@shared/const/cls'
 import type { HTMLAttributes, JSX } from 'react'
 import { IoClose } from 'react-icons/io5'
-import { cls } from '@shared/const/cls'
 
 export const PaperComponent = (
   props: HTMLAttributes<HTMLElement>,

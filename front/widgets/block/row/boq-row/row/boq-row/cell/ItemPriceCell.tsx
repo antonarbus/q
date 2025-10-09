@@ -1,18 +1,18 @@
-import { Box } from '@mui/material'
 import {
-  useRow,
-  Froala,
-  boqRowCellStyle,
-  useStylesForResizableCell,
-  boqRowCellKey,
-  boqColumnKey,
-  boqRowCellSx,
-  getRowCellHtmlFromStore,
   BOOKMARK_POS_AT_BLOCKS,
+  boqColumnKey,
+  boqRowCellKey,
+  boqRowCellStyle,
+  boqRowCellSx,
   columnMinWidth,
+  Froala,
+  getRowCellHtmlFromStore,
+  useRow,
+  useStylesForResizableCell,
 } from '@entities/quotation'
-import { updateItemPriceCell } from '@features/blocks/cell/update-cell/row-block-cells/item-price/updateItemPriceCell'
 import { formatItemPriceCell } from '@features/blocks/cell/update-cell/row-block-cells/item-price/formatItemPriceCell'
+import { updateItemPriceCell } from '@features/blocks/cell/update-cell/row-block-cells/item-price/updateItemPriceCell'
+import { Box } from '@mui/material'
 import type { JSX } from 'react'
 
 export const ItemPriceCell = (): JSX.Element => {

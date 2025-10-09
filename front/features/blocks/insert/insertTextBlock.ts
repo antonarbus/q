@@ -1,9 +1,9 @@
+import { copySlice } from '@entities/copy'
+import { itemType, type Text } from '@entities/quotation'
+import { textSlice } from '@shared/lib/froala/textSlice'
+import { generateId } from '@shared/lib/nanoid'
 import { dispatch, getState } from '@shared/lib/redux'
 import type { MouseEvent } from 'react'
-import { copySlice } from '@entities/copy'
-import { type Text, itemType } from '@entities/quotation'
-import { generateId } from '@shared/lib/nanoid'
-import { textSlice } from '@shared/lib/froala/textSlice'
 
 export const insertTextBlock = (event?: MouseEvent): void => {
   const block: Text = {

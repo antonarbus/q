@@ -1,9 +1,9 @@
-import { dispatch, getState } from '@shared/lib/redux'
-import type { MouseEvent } from 'react'
 import { copySlice } from '@entities/copy'
 import { type Boq, boqRowKey, itemType } from '@entities/quotation'
-import { generateId } from '@shared/lib/nanoid'
 import { textSlice } from '@shared/lib/froala/textSlice'
+import { generateId } from '@shared/lib/nanoid'
+import { dispatch, getState } from '@shared/lib/redux'
+import type { MouseEvent } from 'react'
 
 export const insertBoqBlock = (event?: MouseEvent): void => {
   const boqBlock: Boq = {

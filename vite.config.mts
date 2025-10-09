@@ -1,12 +1,12 @@
-import { dirname, join, resolve } from 'path'
-import basicSsl from '@vitejs/plugin-basic-ssl'
-import react from '@vitejs/plugin-react'
-import tsconfigPaths from 'vite-tsconfig-paths'
-import { config } from './back/config'
-import { fileURLToPath } from 'url'
 import { type BabelFileResult, transformAsync } from '@babel/core'
 import type { NodePath } from '@babel/traverse'
 import type { ObjectProperty } from '@babel/types'
+import basicSsl from '@vitejs/plugin-basic-ssl'
+import react from '@vitejs/plugin-react'
+import { dirname, join, resolve } from 'path'
+import { fileURLToPath } from 'url'
+import tsconfigPaths from 'vite-tsconfig-paths'
+import { config } from './back/config'
 
 const thisFilePath = fileURLToPath(import.meta.url)
 const thisDirPath = dirname(thisFilePath)

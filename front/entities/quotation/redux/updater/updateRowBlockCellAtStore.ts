@@ -1,10 +1,10 @@
+import { BOOKMARK_POS_AT_BLOCKS } from '@entities/quotation/const/bookmarkPosAtBlocks'
+import type { BoqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
+import { itemType } from '@entities/quotation/const/itemType'
 import { dispatch, getState } from '@shared/lib/redux'
 import { getNumberFromString } from '@shared/util/getNumberFromString'
 import { getTextContentFromHtml } from '@shared/util/getTextContentFromHtml'
 import { quotationSlice } from '../quotationSlice'
-import { itemType } from '@entities/quotation/const/itemType'
-import { BOOKMARK_POS_AT_BLOCKS } from '@entities/quotation/const/bookmarkPosAtBlocks'
-import type { BoqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
 
 type Props = {
   html: string

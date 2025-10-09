@@ -1,6 +1,6 @@
-import { useEffect } from 'react'
-import { dispatch } from '@shared/lib/redux'
 import { appSlice } from '@shared/appSlice'
+import { dispatch } from '@shared/lib/redux'
+import { useEffect } from 'react'
 
 type Props = {
   isFetched: boolean

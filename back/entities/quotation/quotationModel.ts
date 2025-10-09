@@ -1,5 +1,5 @@
-import { model, Schema } from 'mongoose'
 import type { Quotation } from '@entities/quotation'
+import { model, Schema } from 'mongoose'
 
 const quotationSchema = new Schema<Quotation>({
   id: {

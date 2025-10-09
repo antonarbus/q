@@ -1,14 +1,14 @@
-import type { FroalaEditor } from '@shared/type/froala'
-import { roundTo } from 'round-to'
 import {
   BOOKMARK_POS_AT_BLOCKS,
   boqRowCellKey,
   itemType,
 } from '@entities/quotation'
 import { updateRowBlockCellAtStore } from '@entities/quotation/redux/updater/updateRowBlockCellAtStore'
-import { getState } from '@shared/lib/redux'
 import { updateRowBlockCellWithValue } from '@entities/quotation/util/updateRowBlockCellWithValue'
+import { getState } from '@shared/lib/redux'
+import type { FroalaEditor } from '@shared/type/froala'
 import type { RefObject } from 'react'
+import { roundTo } from 'round-to'
 
 type Props = {
   itemPriceCellEditorRef: RefObject<FroalaEditor | null>

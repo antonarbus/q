@@ -1,15 +1,15 @@
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import type { ResizableProps } from 're-resizable'
 import type {
   OnBlockResize,
-  OnBlockResizeStop,
   OnBlockResizeStart,
+  OnBlockResizeStop,
 } from '@shared/type/resizablePaper'
+import type { ResizableProps } from 're-resizable'
+import type { JSX, ReactNode } from 'react'
 import { useBlock } from '../provider/BlockProvider'
 import { BlockAnimate } from './block-layout'
 import { PasteBlockTextOverlay } from './paste-block-overlay-text'
-import type { JSX, ReactNode } from 'react'
 
 type Props = {
   children: ReactNode

@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test'
+import { expect, test } from '@playwright/test'
 import { route } from '@shared/const/route'
 import { userFilePath } from './setup/userFilePath'
 

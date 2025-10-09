@@ -1,8 +1,8 @@
-import type { User } from '@entities/user'
-import { headerName } from '@back/shared/headers'
-import type { Request, Response } from 'express'
-import { verifyAccessToken } from '@back/shared/lib/json-webtoken'
 import { httpStatus } from '@back/shared/const/httpStatus'
+import { headerName } from '@back/shared/headers'
+import { verifyAccessToken } from '@back/shared/lib/json-webtoken'
+import type { User } from '@entities/user'
+import type { Request, Response } from 'express'
 
 type Props = {
   req: Request<unknown, unknown, unknown, unknown>

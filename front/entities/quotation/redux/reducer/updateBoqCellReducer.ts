@@ -1,7 +1,7 @@
+import type { BoqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { itemType } from '../../const/itemType'
 import type { Quotation } from '../../type'
-import type { BoqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
 
 export const updateBoqCellReducer = (
   state: Quotation,

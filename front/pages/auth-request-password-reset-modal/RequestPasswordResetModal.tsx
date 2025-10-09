@@ -1,13 +1,13 @@
-import { PiPassword } from 'react-icons/pi'
-import { Box } from '@mui/material'
-import { useSignal } from '@preact/signals-react'
-import { useRef, type JSX } from 'react'
 import { useRequestPasswordReset } from '@features/auth/request-password-reset'
 import { OpenLoginModalLink } from '@features/open-close/open-login-modal'
-import { EmailField } from '@shared/component/input-field/EmailField'
+import { Box } from '@mui/material'
+import { useSignal } from '@preact/signals-react'
 import { FormModal } from '@shared/component/FormModal'
+import { EmailField } from '@shared/component/input-field/EmailField'
 import { router } from '@shared/lib/react-router-dom'
 import { useSlide } from '@shared/util/useSlide'
+import { type JSX, useRef } from 'react'
+import { PiPassword } from 'react-icons/pi'
 
 export const RequestPasswordResetModal = (): JSX.Element => {
   const { ref: modalRef, slideOut } = useSlide()

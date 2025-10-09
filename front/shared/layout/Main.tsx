@@ -1,5 +1,5 @@
-import { Outlet } from 'react-router-dom'
 import type { JSX } from 'react'
+import { Outlet } from 'react-router-dom'
 
 export const Main = (): JSX.Element => {
   return (

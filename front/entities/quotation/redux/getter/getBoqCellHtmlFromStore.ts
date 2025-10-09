@@ -1,6 +1,6 @@
+import type { BoqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
 import { getState } from '@shared/lib/redux'
 import { itemType } from '../../const/itemType'
-import type { BoqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
 
 type Props = {
   blockIndex: number

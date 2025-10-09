@@ -1,2 +1,2 @@
-export { usePasteClick } from './usePasteClick'
 export { useMovePasteText } from './useMovePasteText'
+export { usePasteClick } from './usePasteClick'

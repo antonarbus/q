@@ -1,9 +1,9 @@
 import type { FroalaEditor } from '@shared/type/froala'
+import { getDecimalPlaces } from '@shared/util/getDecimalPlaces'
 import { roundTo } from 'round-to'
 import { getNumberFromString } from '../../util/getNumberFromString'
 import { getStringWithNewFormattedNumber } from '../../util/getStringWithNewFormattedNumber'
 import { getTextContentFromHtml } from '../../util/getTextContentFromHtml'
-import { getDecimalPlaces } from '@shared/util/getDecimalPlaces'
 
 type Props = {
   oldNumber: number

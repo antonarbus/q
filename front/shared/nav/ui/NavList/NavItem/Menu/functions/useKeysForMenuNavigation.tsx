@@ -2,8 +2,8 @@ import { dispatch, getState } from '@shared/lib/redux'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { navSlice } from '../../../../../navSlice'
-import { navigateInMenu } from './useMenuAnimation'
 import { getNavItem } from './getNavItem'
+import { navigateInMenu } from './useMenuAnimation'
 
 export const useKeysForMenuNavigation = (): void => {
   const navigate = useNavigate()

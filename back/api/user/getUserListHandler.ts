@@ -1,14 +1,14 @@
-import type { Request, Response, NextFunction } from 'express'
-import type { FlattenMaps } from 'mongoose'
-import type { ErrorMessageCommon } from '@shared/const/errorMessageCommon'
-import type { Pretty } from '@shared/type/Pretty'
-import { httpStatus } from '@back/shared/const/httpStatus'
-import type { User } from '@entities/user'
-import { userRole } from '@back/shared/const/userRole'
 import {
   getUserFromAccessTokenOrThrowUnauthorized,
   UserModel,
 } from '@back/entities/user'
+import { httpStatus } from '@back/shared/const/httpStatus'
+import { userRole } from '@back/shared/const/userRole'
+import type { User } from '@entities/user'
+import type { ErrorMessageCommon } from '@shared/const/errorMessageCommon'
+import type { Pretty } from '@shared/type/Pretty'
+import type { NextFunction, Request, Response } from 'express'
+import type { FlattenMaps } from 'mongoose'
 
 export type UserPicked = Pick<
   User,

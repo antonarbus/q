@@ -1,6 +1,6 @@
 import { dispatch, getState } from '@shared/lib/redux'
-import { backToQuotationRef } from '../ref/backToQuotationRef'
 import { navSlice } from '@shared/nav'
+import { backToQuotationRef } from '../ref/backToQuotationRef'
 
 export const setBackToQuotation = (): void => {
   const currentQuotation = getState().quotation

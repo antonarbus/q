@@ -1,16 +1,16 @@
 import type { ReqBody } from '@back/api/bookmark/deleteBookmarkHandler'
-import { dispatch } from '@shared/lib/redux'
+import { quotationSlice, useGetQuotationMutation } from '@entities/quotation'
 import { IconButton, Tooltip } from '@mui/material'
+import { appSlice } from '@shared/appSlice'
+import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
+import { route } from '@shared/const/route'
+import { textSlice } from '@shared/lib/froala/textSlice'
+import { dispatch } from '@shared/lib/redux'
+import type { JSX } from 'react'
 import { AiTwotoneEdit } from 'react-icons/ai'
 import { Link, useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
-import { quotationSlice, useGetQuotationMutation } from '@entities/quotation'
-import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
-import { route } from '@shared/const/route'
 import { toast } from 'sonner'
-import { textSlice } from '@shared/lib/froala/textSlice'
-import { appSlice } from '@shared/appSlice'
-import type { JSX } from 'react'
 
 export const OpenSaveQuotationModalButton = (props: ReqBody): JSX.Element => {
   const navigate = useNavigate()

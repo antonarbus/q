@@ -1,2 +1,2 @@
-export { DeleteBoqRowIcon } from './DeleteBoqRowIcon'
 export { DeleteBlockIcon } from './DeleteBlockIcon'
+export { DeleteBoqRowIcon } from './DeleteBoqRowIcon'

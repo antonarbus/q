@@ -1,9 +1,9 @@
+import type { NavItemId } from '@shared/const/navItemId'
 import { dispatch, getState } from '@shared/lib/redux'
 import type { MouseEvent } from 'react'
 import { navSlice } from '../../../../../../navSlice'
-import { navigateInMenu } from '../../functions/useMenuAnimation'
-import type { NavItemId } from '@shared/const/navItemId'
 import { getNavItem } from '../../functions/getNavItem'
+import { navigateInMenu } from '../../functions/useMenuAnimation'
 
 export const clickOnMenuItem = (
   event: MouseEvent,

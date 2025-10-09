@@ -1,27 +1,27 @@
+import type { UserPicked } from '@back/api/user/getUserListHandler'
+import { useGetUserListQuery } from '@entities/user'
+import { LoadingTableOverlay } from '@shared/component/LoadingTableOverlay'
+import { useDisableLoadingOverlayWhenItemsAreFetched } from '@shared/component/loading-dots-overlay'
+import { agGridSlice } from '@shared/lib/ag-grid/agGridSlice'
+import { getDefaultColDef } from '@shared/lib/ag-grid/colDef/getDefaultColDef'
+import { DisplayedRowsCount } from '@shared/lib/ag-grid/components/DisplayedRowsCount'
+import { NoRowsTableOverlay } from '@shared/lib/ag-grid/components/NoRowsTableOverlay'
+import { ProgressGridBar } from '@shared/lib/ag-grid/components/ProgressGridBar'
+import { GridLayout } from '@shared/lib/ag-grid/GridLayout'
+import { useRefetchDataOnEmailChange } from '@shared/lib/ag-grid/hooks/useRefetchDataOnEmailChange'
+import { useShowLoadingJumpingDots } from '@shared/lib/ag-grid/hooks/useShowLoadingJumpingDots'
+import { AgGridStyles } from '@shared/lib/ag-grid/styles/AgGridStyles'
+import { addPlaceholderToFloatingFilters } from '@shared/lib/ag-grid/utils/addPlaceholderToFloatingFilters'
+import { dispatch } from '@shared/lib/redux'
 import {
   AllCommunityModule,
   ModuleRegistry,
   themeQuartz,
 } from 'ag-grid-community'
 import { AgGridReact } from 'ag-grid-react'
-import { useRef, type JSX, type ComponentRef } from 'react'
-import { useGetUserListQuery } from '@entities/user'
-import { LoadingTableOverlay } from '@shared/component/LoadingTableOverlay'
-import { DisplayedRowsCount } from '@shared/lib/ag-grid/components/DisplayedRowsCount'
-import { NoRowsTableOverlay } from '@shared/lib/ag-grid/components/NoRowsTableOverlay'
+import { type ComponentRef, type JSX, useRef } from 'react'
 import { columnDefs } from './columnDefs'
 import { usersAgGridRef } from './ref/usersAgGridRef'
-import { addPlaceholderToFloatingFilters } from '@shared/lib/ag-grid/utils/addPlaceholderToFloatingFilters'
-import { GridLayout } from '@shared/lib/ag-grid/GridLayout'
-import { ProgressGridBar } from '@shared/lib/ag-grid/components/ProgressGridBar'
-import { useShowLoadingJumpingDots } from '@shared/lib/ag-grid/hooks/useShowLoadingJumpingDots'
-import { AgGridStyles } from '@shared/lib/ag-grid/styles/AgGridStyles'
-import { useDisableLoadingOverlayWhenItemsAreFetched } from '@shared/component/loading-dots-overlay'
-import type { UserPicked } from '@back/api/user/getUserListHandler'
-import { useRefetchDataOnEmailChange } from '@shared/lib/ag-grid/hooks/useRefetchDataOnEmailChange'
-import { dispatch } from '@shared/lib/redux'
-import { agGridSlice } from '@shared/lib/ag-grid/agGridSlice'
-import { getDefaultColDef } from '@shared/lib/ag-grid/colDef/getDefaultColDef'
 
 ModuleRegistry.registerModules([AllCommunityModule])
 

@@ -1,16 +1,16 @@
+import { css } from '@emotion/react'
+import { navItemId } from '@shared/const/navItemId'
 import { dispatch, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
-import { useRef, type JSX, type ComponentRef } from 'react'
+import { type ComponentRef, type JSX, useRef } from 'react'
 import { navSlice } from '../../../../navSlice'
+import { EmailAtBottomOfMenu } from './EmailAtBottomOfMenu'
 import { useCloseMenuOnClickOutside } from './functions/useCloseMenuOnClickOutside'
 import { useIsMenuOutsideWindow } from './functions/useIsMenuOutsideWindow'
 import { useKeysForMenuNavigation } from './functions/useKeysForMenuNavigation'
 import { useMenuAnimation } from './functions/useMenuAnimation'
 import { SlidableMenuItemsContainer } from './SlidableMenuItemsContainer'
 import { TopMenuItemsContainer } from './TopMenuItemsContainer'
-import { EmailAtBottomOfMenu } from './EmailAtBottomOfMenu'
-import { css } from '@emotion/react'
-import { navItemId } from '@shared/const/navItemId'
 
 export const Menu = (): JSX.Element => {
   const menuContainerRef = useRef<ComponentRef<'div'> | null>(null)

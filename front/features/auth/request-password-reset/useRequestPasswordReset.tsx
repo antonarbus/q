@@ -1,11 +1,11 @@
+import { useRequestUserPasswordResetMutation } from '@entities/user'
 import type { Signal } from '@preact/signals-react'
+import { asyncDelay } from '@shared/util/delay'
 import type { UseMutationResult } from '@tanstack/react-query'
+import type { FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
-import { useRequestUserPasswordResetMutation } from '@entities/user'
 import { toast } from 'sonner'
-import { asyncDelay } from '@shared/util/delay'
-import type { FormEvent } from 'react'
 
 type Props = {
   emailSignal: Signal<string>

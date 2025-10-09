@@ -3,10 +3,10 @@ import 'dotenv/config'
 import cookieParser from 'cookie-parser'
 import morgan from 'morgan'
 import { api } from './api'
-import { connectToDb } from './shared/lib/mongoose/connectToDb'
-import { errorHandlerMiddleware } from './middleware/errorHandlerMiddleware'
 import { config } from './config'
+import { errorHandlerMiddleware } from './middleware/errorHandlerMiddleware'
 import { asyncHandler } from './shared/lib/express'
+import { connectToDb } from './shared/lib/mongoose/connectToDb'
 
 const startServer = async (): Promise<void> => {
   const app = express()

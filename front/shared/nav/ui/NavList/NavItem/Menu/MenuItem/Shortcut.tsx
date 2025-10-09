@@ -1,6 +1,6 @@
-import { capitalizeKey } from './function/capitalizeKey'
 import { css } from '@emotion/react'
 import type { JSX } from 'react'
+import { capitalizeKey } from './function/capitalizeKey'
 
 type Props = {
   shortcut: string[]

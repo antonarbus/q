@@ -1,12 +1,12 @@
-import type { Request, Response, NextFunction } from 'express'
-import { httpStatus } from '@back/shared/const/httpStatus'
-import type { ErrorMessageCommon } from '@shared/const/errorMessageCommon'
-import { userRole } from '@back/shared/const/userRole'
 import { getUserFromAccessTokenOrNull } from '@back/entities/user'
 import {
-  VisitorsCountModel,
   type VisitorsCount,
+  VisitorsCountModel,
 } from '@back/entities/visitors-count'
+import { httpStatus } from '@back/shared/const/httpStatus'
+import { userRole } from '@back/shared/const/userRole'
+import type { ErrorMessageCommon } from '@shared/const/errorMessageCommon'
+import type { NextFunction, Request, Response } from 'express'
 
 export type SearchQuery = {
   startDate: string

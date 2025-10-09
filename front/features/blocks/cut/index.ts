@@ -1,2 +1,2 @@
-export { CutBoqRowIcon } from './CutBoqRowIcon'
 export { CutBlockIcon } from './CutBlockIcon'
+export { CutBoqRowIcon } from './CutBoqRowIcon'

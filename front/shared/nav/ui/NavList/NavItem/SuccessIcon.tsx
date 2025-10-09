@@ -1,6 +1,6 @@
+import type { JSX } from 'react'
 import { GrStatusGood } from 'react-icons/gr'
 import { Icon } from './Icon'
-import type { JSX } from 'react'
 
 export const SuccessIcon = (): JSX.Element => {
   return (

@@ -1,12 +1,12 @@
-import type {
-  ResBody,
-  ReqBody as Payload,
-  ErrorResBody,
-} from '@back/api/visitors/countUniqueDailyVisitorsHandler'
-import { useMutation, type UseMutationResult } from '@tanstack/react-query'
-import axios, { type AxiosError } from 'axios'
-import { queryKey } from '@shared/const/queryKey'
 import { api } from '@back/api'
+import type {
+  ErrorResBody,
+  ReqBody as Payload,
+  ResBody,
+} from '@back/api/visitors/countUniqueDailyVisitorsHandler'
+import { queryKey } from '@shared/const/queryKey'
+import { type UseMutationResult, useMutation } from '@tanstack/react-query'
+import axios, { type AxiosError } from 'axios'
 
 type Res = UseMutationResult<ResBody, AxiosError<ErrorResBody>, Payload>
 

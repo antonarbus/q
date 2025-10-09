@@ -1,8 +1,8 @@
-import type { ResBody, ErrorResBody } from '@back/api/auth/logOutHandler'
 import { api } from '@back/api'
-import { useMutation, type UseMutationResult } from '@tanstack/react-query'
-import axios, { type AxiosError } from 'axios'
+import type { ErrorResBody, ResBody } from '@back/api/auth/logOutHandler'
 import { queryKey } from '@shared/const/queryKey'
+import { type UseMutationResult, useMutation } from '@tanstack/react-query'
+import axios, { type AxiosError } from 'axios'
 
 type Res = UseMutationResult<ResBody, AxiosError<ErrorResBody>, void>
 

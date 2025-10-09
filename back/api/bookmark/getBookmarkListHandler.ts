@@ -1,9 +1,9 @@
-import type { Request, Response, NextFunction } from 'express'
+import { BookmarkModel } from '@back/entities/bookmark'
+import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
+import { httpStatus } from '@back/shared/const/httpStatus'
 import type { Item } from '@entities/bookmark'
 import type { ErrorMessageCommon } from '@shared/const/errorMessageCommon'
-import { httpStatus } from '@back/shared/const/httpStatus'
-import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
-import { BookmarkModel } from '@back/entities/bookmark'
+import type { NextFunction, Request, Response } from 'express'
 
 export type ItemPick = Pick<
   Item,

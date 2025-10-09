@@ -1,18 +1,18 @@
+import {
+  boqColumnKey,
+  boqRowCellKey,
+  boqRowCellStyle,
+  columnMinWidth,
+  Froala,
+  getBoqCellHtmlFromStore,
+  useBlock,
+  useRow,
+  useStylesForResizableCell,
+} from '@entities/quotation'
 import { tabFromDescriptionCell } from '@features/blocks/cell/tab-away-from-cell'
 import { updateDescriptionCell } from '@features/blocks/cell/update-cell'
 import { beforeUpload } from '@features/file/upload-file'
 import type { JSX, KeyboardEvent } from 'react'
-import {
-  getBoqCellHtmlFromStore,
-  useRow,
-  useBlock,
-  Froala,
-  useStylesForResizableCell,
-  boqRowCellStyle,
-  boqRowCellKey,
-  boqColumnKey,
-  columnMinWidth,
-} from '@entities/quotation'
 
 export const DescriptionCell = (): JSX.Element => {
   const { blockIndex } = useBlock()

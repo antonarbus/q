@@ -1,7 +1,7 @@
-import type { Request, Response, NextFunction } from 'express'
 import { httpStatus } from '@back/shared/const/httpStatus'
-import mongoose from 'mongoose'
 import type { ErrorMessageCommon } from '@shared/const/errorMessageCommon'
+import type { NextFunction, Request, Response } from 'express'
+import mongoose from 'mongoose'
 
 export type ResBody = {
   message: 'connected'

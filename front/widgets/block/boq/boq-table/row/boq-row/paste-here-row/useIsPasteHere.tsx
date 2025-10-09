@@ -1,5 +1,5 @@
-import { useSelector } from '@shared/lib/redux'
 import { useRow } from '@entities/quotation'
+import { useSelector } from '@shared/lib/redux'
 
 export const useIsPasteHere = (): boolean => {
   const { row } = useRow()

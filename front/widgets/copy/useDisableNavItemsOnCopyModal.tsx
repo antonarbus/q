@@ -1,8 +1,8 @@
-import { dispatch } from '@shared/lib/redux'
-import { useEffectOnce, useUnmount } from 'react-use'
 import { navItemId } from '@shared/const/navItemId'
-import { navSlice } from '@shared/nav'
 import { route } from '@shared/const/route'
+import { dispatch } from '@shared/lib/redux'
+import { navSlice } from '@shared/nav'
+import { useEffectOnce, useUnmount } from 'react-use'
 
 export const useDisableNavItemsOnCopyModal = (): void => {
   useEffectOnce(() => {

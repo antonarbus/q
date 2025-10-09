@@ -1,13 +1,13 @@
-import type {
-  SearchQuery,
-  ResBody,
-  ErrorResBody,
-} from '@back/api/visitors/getUniqueDailyVisitorsHandler'
 import { api } from '@back/api'
-import { type UseQueryResult, useQuery } from '@tanstack/react-query'
-import type { AxiosError } from 'axios'
+import type {
+  ErrorResBody,
+  ResBody,
+  SearchQuery,
+} from '@back/api/visitors/getUniqueDailyVisitorsHandler'
 import { queryKey } from '@shared/const/queryKey'
 import { axiosWithAuth } from '@shared/lib/axios'
+import { type UseQueryResult, useQuery } from '@tanstack/react-query'
+import type { AxiosError } from 'axios'
 
 type Res = UseQueryResult<ResBody, AxiosError<ErrorResBody>>
 

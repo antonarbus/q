@@ -1,9 +1,9 @@
 import { useSortable } from '@dnd-kit/sortable'
-import { MdDragIndicator } from 'react-icons/md'
 import { useIsBoqRowSortDisabled, useRow } from '@entities/quotation'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/const/cls'
 import type { JSX } from 'react'
+import { MdDragIndicator } from 'react-icons/md'
 
 export const DragBoqRowIcon = (): JSX.Element => {
   const disabled = useIsBoqRowSortDisabled()

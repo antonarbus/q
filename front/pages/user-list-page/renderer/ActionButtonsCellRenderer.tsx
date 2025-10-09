@@ -1,8 +1,8 @@
-import { Box } from '@mui/material'
-import type { ICellRendererParams } from 'ag-grid-community'
 import type { UserPicked } from '@back/api/user/getUserListHandler'
 import { DeleteUserButton } from '@features/user/delete-user'
 import { LogInAsUserButton } from '@features/user/log-in-as-user'
+import { Box } from '@mui/material'
+import type { ICellRendererParams } from 'ag-grid-community'
 import type { ReactNode } from 'react'
 
 type Params = ICellRendererParams<UserPicked>

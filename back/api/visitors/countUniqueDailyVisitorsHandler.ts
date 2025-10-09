@@ -1,11 +1,11 @@
-import type { Request, Response, NextFunction } from 'express'
-import type { ErrorMessageCommon } from '@shared/const/errorMessageCommon'
-import { httpStatus } from '@back/shared/const/httpStatus'
 import {
-  VisitorsCountModel,
   type VisitorsCount,
+  VisitorsCountModel,
 } from '@back/entities/visitors-count'
+import { httpStatus } from '@back/shared/const/httpStatus'
 import { headerName } from '@back/shared/headers'
+import type { ErrorMessageCommon } from '@shared/const/errorMessageCommon'
+import type { NextFunction, Request, Response } from 'express'
 
 export type ReqBody = {
   date: VisitorsCount['date']

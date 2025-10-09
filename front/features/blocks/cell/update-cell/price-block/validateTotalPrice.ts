@@ -1,10 +1,10 @@
-import { dispatch, getState } from '@shared/lib/redux'
 import {
+  getTotalPriceAbove,
   itemType,
   quotationSlice,
-  getTotalPriceAbove,
 } from '@entities/quotation'
 import { updateNumberAtHtmlIncrementally } from '@shared/lib/froala/updateNumberAtHtmlIncrementally'
+import { dispatch, getState } from '@shared/lib/redux'
 import type { FroalaEditorRef } from '@shared/type/froala'
 import { getNumberFromString } from '@shared/util/getNumberFromString'
 import { getStringWithNewFormattedNumber } from '@shared/util/getStringWithNewFormattedNumber'

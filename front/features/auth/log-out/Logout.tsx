@@ -1,14 +1,14 @@
-import { dispatch } from '@shared/lib/redux'
-import { useNavigate } from 'react-router-dom'
-import { useEffectOnce, useUpdateEffect } from 'react-use'
 import { deleteBookmarkListCache } from '@entities/bookmark'
 import { deleteQuotationListCache } from '@entities/quotation'
 import { useLogOutUserMutation, userSlice } from '@entities/user'
-import { navItemId } from '@shared/const/navItemId'
-import { navSlice } from '@shared/nav'
-import { toast } from 'sonner'
 import { appSlice } from '@shared/appSlice'
+import { navItemId } from '@shared/const/navItemId'
+import { dispatch } from '@shared/lib/redux'
+import { navSlice } from '@shared/nav'
 import type { ReactNode } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useEffectOnce, useUpdateEffect } from 'react-use'
+import { toast } from 'sonner'
 
 export const Logout = (): ReactNode => {
   const navigate = useNavigate()

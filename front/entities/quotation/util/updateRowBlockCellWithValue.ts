@@ -1,13 +1,13 @@
 import { updateNumberAtHtmlIncrementally } from '@shared/lib/froala/updateNumberAtHtmlIncrementally'
+import { getState } from '@shared/lib/redux'
 import type { FroalaEditor } from '@shared/type/froala'
 import { getNumberFromString } from '@shared/util/getNumberFromString'
-import { getTextContentFromHtml } from '@shared/util/getTextContentFromHtml'
 import { getStringWithNewFormattedNumber } from '@shared/util/getStringWithNewFormattedNumber'
-import { getState } from '@shared/lib/redux'
-import { itemType } from '../const/itemType'
-import { updateRowBlockCellAtStore } from '../redux/updater/updateRowBlockCellAtStore'
+import { getTextContentFromHtml } from '@shared/util/getTextContentFromHtml'
 import { BOOKMARK_POS_AT_BLOCKS } from '../const/bookmarkPosAtBlocks'
 import type { BoqRowCellKey } from '../const/boqRowCellKey'
+import { itemType } from '../const/itemType'
+import { updateRowBlockCellAtStore } from '../redux/updater/updateRowBlockCellAtStore'
 
 type Props = {
   editor: FroalaEditor | null

@@ -1,9 +1,9 @@
-import { Tooltip } from '@mui/material'
-import { Link } from 'react-router-dom'
-import { route } from '@shared/const/route'
-import { PiInfoBold } from 'react-icons/pi'
 import { useIsCopyModalVisible } from '@entities/copy'
+import { Tooltip } from '@mui/material'
+import { route } from '@shared/const/route'
 import type { JSX } from 'react'
+import { PiInfoBold } from 'react-icons/pi'
+import { Link } from 'react-router-dom'
 
 export const OpenInfoQuotationIcon = (): JSX.Element => {
   const disabled = useIsCopyModalVisible()

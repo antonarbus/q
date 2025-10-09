@@ -1,7 +1,7 @@
-import type { Request, Response, NextFunction } from 'express'
+import { FileModel } from '@back/entities/file'
 import { httpStatus } from '@back/shared/const/httpStatus'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
-import { FileModel } from '@back/entities/file'
+import type { NextFunction, Request, Response } from 'express'
 
 type Params = {
   fileId: string

@@ -1,2 +1,2 @@
-export { useDisableLoadingOverlayWhenItemsAreFetched } from './useDisableLoadingOverlayWhenItemsAreFetched'
 export { LoadingDotsOverlay } from './LoadingDotsOverlay'
+export { useDisableLoadingOverlayWhenItemsAreFetched } from './useDisableLoadingOverlayWhenItemsAreFetched'

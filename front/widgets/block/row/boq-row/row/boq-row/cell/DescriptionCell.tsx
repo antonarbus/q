@@ -1,16 +1,16 @@
-import { beforeUpload } from '@features/file/upload-file'
 import {
-  useRow,
-  Froala,
-  useStylesForResizableCell,
-  boqRowCellStyle,
-  boqRowCellKey,
-  boqColumnKey,
-  getRowCellHtmlFromStore,
   BOOKMARK_POS_AT_BLOCKS,
+  boqColumnKey,
+  boqRowCellKey,
+  boqRowCellStyle,
   columnMinWidth,
+  Froala,
+  getRowCellHtmlFromStore,
+  useRow,
+  useStylesForResizableCell,
 } from '@entities/quotation'
 import { updateDescriptionCell } from '@features/blocks/cell/update-cell/row-block-cells/description/updateDescriptionCell'
+import { beforeUpload } from '@features/file/upload-file'
 import type { JSX } from 'react'
 
 export const DescriptionCell = (): JSX.Element => {

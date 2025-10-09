@@ -1,9 +1,9 @@
-import { dispatch } from '@shared/lib/redux'
 import {
   boqRowCellKey,
   getBoqCellFromStore,
   quotationSlice,
 } from '@entities/quotation'
+import { dispatch } from '@shared/lib/redux'
 
 type Props = {
   blockIndex: number

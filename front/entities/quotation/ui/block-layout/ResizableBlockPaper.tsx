@@ -1,13 +1,13 @@
-import { useSelector } from '@shared/lib/redux'
-import { Resizable, type ResizableProps } from 're-resizable'
 import { cls } from '@shared/const/cls'
+import { useSelector } from '@shared/lib/redux'
 import type {
   OnBlockResize,
   OnBlockResizeStart,
   OnBlockResizeStop,
 } from '@shared/type/resizablePaper'
-import { useBlock } from '../../provider/BlockProvider'
+import { Resizable, type ResizableProps } from 're-resizable'
 import type { JSX, ReactNode } from 'react'
+import { useBlock } from '../../provider/BlockProvider'
 
 type Props = {
   children: ReactNode

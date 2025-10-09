@@ -1,15 +1,15 @@
-import { FiLogIn } from 'react-icons/fi'
-import { Box } from '@mui/material'
-import { useSignal } from '@preact/signals-react'
-import { useRef, type JSX } from 'react'
 import { useLogIn } from '@features/auth/log-in'
 import { OpenRegisterModalLink } from '@features/open-close/open-register-modal'
 import { OpenResetModalLink } from '@features/open-close/open-reset-modal'
-import { EmailField } from '@shared/component/input-field/EmailField'
+import { Box } from '@mui/material'
+import { useSignal } from '@preact/signals-react'
 import { FormModal } from '@shared/component/FormModal'
+import { EmailField } from '@shared/component/input-field/EmailField'
 import { PasswordField } from '@shared/component/input-field/PasswordField'
 import { router } from '@shared/lib/react-router-dom'
 import { useSlide } from '@shared/util/useSlide'
+import { type JSX, useRef } from 'react'
+import { FiLogIn } from 'react-icons/fi'
 
 export const LoginModal = (): JSX.Element => {
   const { ref: modalRef, slideOut } = useSlide()

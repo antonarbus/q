@@ -1,6 +1,4 @@
-import { dispatch, getState } from '@shared/lib/redux'
-import { MdOutlineStarOutline } from 'react-icons/md'
-import { useNavigate } from 'react-router-dom'
+import { useIsCopyModalVisible } from '@entities/copy'
 import {
   boqRowKey,
   getBoqRowFromStore,
@@ -8,12 +6,14 @@ import {
   useBlock,
   useRow,
 } from '@entities/quotation'
+import { Tooltip } from '@mui/material'
 import { cls } from '@shared/const/cls'
 import { route } from '@shared/const/route'
+import { dispatch, getState } from '@shared/lib/redux'
+import type { MouseEvent, ReactNode } from 'react'
+import { MdOutlineStarOutline } from 'react-icons/md'
+import { useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
-import { Tooltip } from '@mui/material'
-import { useIsCopyModalVisible } from '@entities/copy'
-import type { ReactNode, MouseEvent } from 'react'
 
 export const BookmarkBoqRowIcon = (): ReactNode => {
   const navigate = useNavigate()

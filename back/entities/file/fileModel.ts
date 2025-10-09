@@ -1,5 +1,5 @@
-import { model, Schema } from 'mongoose'
 import type { File } from '@entities/file'
+import { model, Schema } from 'mongoose'
 
 const fileSchema = new Schema<File>({
   id: {

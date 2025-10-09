@@ -1,9 +1,9 @@
-import { Box } from '@mui/material'
-import type { ICellRendererParams } from 'ag-grid-community'
+import type { Quotation } from '@entities/quotation'
 import { CopyBookmarkButton } from '@features/bookmark/copy-bookmark'
 import { DeleteBookmarkButton } from '@features/bookmark/delete-bookmark'
 import { OpenBookmarkModalButton } from '@features/open-close/open-bookmark-modal'
-import type { Quotation } from '@entities/quotation'
+import { Box } from '@mui/material'
+import type { ICellRendererParams } from 'ag-grid-community'
 import type { ReactNode } from 'react'
 
 type Params = ICellRendererParams<Partial<Quotation>>

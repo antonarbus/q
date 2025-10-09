@@ -1,16 +1,16 @@
-import { dispatch } from '@shared/lib/redux'
-import { useUpdateEffect } from 'react-use'
-import { useGetBookmarkMutation } from '@entities/bookmark'
-import { copySlice } from '@entities/copy'
-import { toast } from 'sonner'
-import type { UseMutateAsyncFunction } from '@tanstack/react-query'
 import type {
+  ErrorResBody,
   ReqBody as Payload,
   ResBody,
-  ErrorResBody,
 } from '@back/api/bookmark/getBookmarkHandler'
-import type { AxiosError } from 'axios'
+import { useGetBookmarkMutation } from '@entities/bookmark'
+import { copySlice } from '@entities/copy'
 import { textSlice } from '@shared/lib/froala/textSlice'
+import { dispatch } from '@shared/lib/redux'
+import type { UseMutateAsyncFunction } from '@tanstack/react-query'
+import type { AxiosError } from 'axios'
+import { useUpdateEffect } from 'react-use'
+import { toast } from 'sonner'
 
 export type LoadBookmark = UseMutateAsyncFunction<
   ResBody,

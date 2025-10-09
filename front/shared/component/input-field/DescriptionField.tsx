@@ -1,7 +1,7 @@
-import { type TextFieldProps, InputAdornment, TextField } from '@mui/material'
+import { InputAdornment, TextField, type TextFieldProps } from '@mui/material'
 import type { Signal } from '@preact/signals-react'
-import { BsFileEarmarkText } from 'react-icons/bs'
 import type { JSX } from 'react'
+import { BsFileEarmarkText } from 'react-icons/bs'
 
 type Props = {
   descSignal: Signal<string | undefined>

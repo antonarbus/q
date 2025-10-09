@@ -1,11 +1,11 @@
 import { dispatch, getState } from '@shared/lib/redux'
-import { roundTo } from 'round-to'
 import type { FroalaEditorRef } from '@shared/type/froala'
 import { getStringWithNewFormattedNumber } from '@shared/util/getStringWithNewFormattedNumber'
-import { quotationSlice } from '../redux/quotationSlice'
-import { itemType } from '../const/itemType'
+import { roundTo } from 'round-to'
 import { BOOKMARK_POS_AT_BLOCKS } from '../const/bookmarkPosAtBlocks'
 import type { BoqRowCellKey } from '../const/boqRowCellKey'
+import { itemType } from '../const/itemType'
+import { quotationSlice } from '../redux/quotationSlice'
 
 type Props = {
   boqRowCellKey: BoqRowCellKey

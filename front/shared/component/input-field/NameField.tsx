@@ -1,7 +1,7 @@
-import { type TextFieldProps, InputAdornment, TextField } from '@mui/material'
+import { InputAdornment, TextField, type TextFieldProps } from '@mui/material'
 import type { Signal } from '@preact/signals-react'
-import { PiBooks } from 'react-icons/pi'
 import type { JSX } from 'react'
+import { PiBooks } from 'react-icons/pi'
 
 type Props = {
   nameSignal: Signal<string | undefined>

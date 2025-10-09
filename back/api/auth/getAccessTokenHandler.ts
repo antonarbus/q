@@ -1,13 +1,13 @@
-import type { Request, Response, NextFunction } from 'express'
-import type { User } from '@entities/user'
+import { getUserFromRefreshTokenOrNull, UserModel } from '@back/entities/user'
 import { httpStatus } from '@back/shared/const/httpStatus'
-import type { ErrorMessageCommon } from '@shared/const/errorMessageCommon'
-import { generateAccessToken } from '@back/shared/lib/json-webtoken'
 import {
   getShouldNotTrace,
   removeRefreshTokenCookie,
 } from '@back/shared/headers'
-import { getUserFromRefreshTokenOrNull, UserModel } from '@back/entities/user'
+import { generateAccessToken } from '@back/shared/lib/json-webtoken'
+import type { User } from '@entities/user'
+import type { ErrorMessageCommon } from '@shared/const/errorMessageCommon'
+import type { NextFunction, Request, Response } from 'express'
 
 export type ResBody = {
   message: 'issued access token'

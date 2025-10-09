@@ -1,5 +1,5 @@
+import { type User, useGetUserAccessTokenQuery } from '@entities/user'
 import { useSelector } from '@shared/lib/redux'
-import { useGetUserAccessTokenQuery, type User } from '@entities/user'
 import type { ReactNode } from 'react'
 
 type Props = {

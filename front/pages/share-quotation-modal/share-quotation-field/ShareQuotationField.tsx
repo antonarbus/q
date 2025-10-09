@@ -1,11 +1,11 @@
-import { useSignal } from '@preact/signals-react'
-import { useEffect, type JSX } from 'react'
 import type { AccessFormValuesSignal } from '@entities/quotation'
+import { useSignal } from '@preact/signals-react'
 import { isEmailPatternOk } from '@shared/util/isEmailPatternOk'
-import { SharedWithRadioButtons } from './SharedWithRadioButtons'
-import { SharedWithEmailInputField } from './SharedWithEmailInputField'
+import { type JSX, useEffect } from 'react'
 import { Layout } from './Layout'
+import { SharedWithEmailInputField } from './SharedWithEmailInputField'
 import { SharedWithEmailList } from './SharedWithEmailList'
+import { SharedWithRadioButtons } from './SharedWithRadioButtons'
 
 type Props = {
   accessFormValuesSignal: AccessFormValuesSignal

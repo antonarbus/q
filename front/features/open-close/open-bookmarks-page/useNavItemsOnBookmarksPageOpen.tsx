@@ -1,7 +1,7 @@
-import { dispatch } from '@shared/lib/redux'
-import { useEffectOnce, useUnmount } from 'react-use'
 import { navItemId } from '@shared/const/navItemId'
+import { dispatch } from '@shared/lib/redux'
 import { navSlice } from '@shared/nav'
+import { useEffectOnce, useUnmount } from 'react-use'
 
 export const useNavItemsOnBookmarksPageOpen = (): void => {
   useEffectOnce(() => {

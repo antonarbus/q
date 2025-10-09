@@ -1,15 +1,15 @@
 /* eslint-disable */
 import './froalaPkg'
 import './froalaPkg.css'
-import type { MouseEvent, KeyboardEvent } from 'react'
-import { useEffectOnce } from 'react-use'
+import { removeLoadingBar } from '@shared/lib/froala/removeLoadingBar'
 import { generateId } from '@shared/lib/nanoid'
+import { getState } from '@shared/lib/redux'
 import type { FroalaEditorRef } from '@shared/type/froala'
+import type { KeyboardEvent, MouseEvent } from 'react'
+import { useEffectOnce } from 'react-use'
+import { toast } from 'sonner'
 import { useFroala } from '../../provider/FroalaProvider'
 import { froalaDefaultOptions } from './froalaDefaultOptions'
-import { removeLoadingBar } from '@shared/lib/froala/removeLoadingBar'
-import { toast } from 'sonner'
-import { getState } from '@shared/lib/redux'
 
 declare const window: Window &
   typeof globalThis & {

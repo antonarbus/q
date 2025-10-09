@@ -1,12 +1,12 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
-import { setMenuItemPropValue } from './setMenuItemPropValue'
-import type { NavItem, NavItemId } from './type'
-import { getMenuItemPropValue } from './getMenuItemPropValue'
 import { navItemId as navItemIdKey } from '@shared/const/navItemId'
-import { getNavItem } from './ui/NavList/NavItem/Menu/functions/getNavItem'
+import { instance } from '@shared/instance'
 import { RiAdminLine } from 'react-icons/ri'
 import { RxPerson } from 'react-icons/rx'
-import { instance } from '@shared/instance'
+import { getMenuItemPropValue } from './getMenuItemPropValue'
+import { setMenuItemPropValue } from './setMenuItemPropValue'
+import type { NavItem, NavItemId } from './type'
+import { getNavItem } from './ui/NavList/NavItem/Menu/functions/getNavItem'
 
 const initialState = {
   navStructure: [] as NavItem[],

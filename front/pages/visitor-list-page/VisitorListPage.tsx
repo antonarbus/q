@@ -1,10 +1,10 @@
 import 'chart.js/auto'
-import { useState, type JSX } from 'react'
+import { useGetUniqueDailyVisitorCountQuery } from '@entities/visitor'
 import { Box } from '@mui/material'
 import { DatePicker } from '@mui/x-date-pickers'
 import { format, subDays } from 'date-fns'
+import { type JSX, useState } from 'react'
 import { useInstantiateChart } from './useInstantiateChart'
-import { useGetUniqueDailyVisitorCountQuery } from '@entities/visitor'
 import { useUpdateChart } from './useUpdateChart'
 
 const today = new Date()

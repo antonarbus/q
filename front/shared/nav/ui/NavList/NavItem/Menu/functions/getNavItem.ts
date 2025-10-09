@@ -1,5 +1,5 @@
 import type { NavItemId } from '@shared/const/navItemId'
-import { type RootState, getState } from '@shared/lib/redux'
+import { getState, type RootState } from '@shared/lib/redux'
 import type { NavItem } from '@shared/nav/type'
 
 type Props = {

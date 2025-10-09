@@ -1,6 +1,6 @@
+import { useRef } from 'react'
 import { useEffectOnce } from 'react-use'
 import { hideDraggableArea, showDraggableArea } from './showDraggableArea'
-import { useRef } from 'react'
 
 export const useShowDragAndDropArea = (): void => {
   const dragCounter = useRef(0)

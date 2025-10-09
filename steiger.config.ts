@@ -1,7 +1,8 @@
 /* eslint-disable */
 // @ts-nocheck
-import { defineConfig } from 'steiger'
+
 import fsd from '@feature-sliced/steiger-plugin'
+import { defineConfig } from 'steiger'
 
 export default defineConfig([
   // https://github.com/feature-sliced/steiger/tree/master?tab=readme-ov-file#rules

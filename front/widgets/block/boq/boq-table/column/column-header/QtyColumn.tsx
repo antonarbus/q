@@ -1,14 +1,14 @@
-import { useRef, type JSX } from 'react'
-import { updateBoqColumnCell } from '@features/blocks/cell/update-cell'
 import {
+  boqColumnKey,
+  columnHeaderStyle,
+  columnMinWidth,
   Froala,
   getBoqColumnHtmlFromStore,
   useBlock,
-  columnHeaderStyle,
-  boqColumnKey,
-  columnMinWidth,
 } from '@entities/quotation'
+import { updateBoqColumnCell } from '@features/blocks/cell/update-cell'
 import type { FroalaEditor } from '@shared/type/froala'
+import { type JSX, useRef } from 'react'
 import { ResizableColumn } from '../ResizableColumn'
 
 export const QtyColumn = (): JSX.Element => {

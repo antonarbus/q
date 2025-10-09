@@ -1,4 +1,4 @@
-import { test as setup, request } from '@playwright/test'
+import { request, test as setup } from '@playwright/test'
 import { userFilePath } from './userFilePath'
 
 setup('authenticate', async () => {

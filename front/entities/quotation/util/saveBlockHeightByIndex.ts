@@ -1,5 +1,5 @@
-import { dispatch } from '@shared/lib/redux'
 import { cls } from '@shared/const/cls'
+import { dispatch } from '@shared/lib/redux'
 import { quotationSlice } from '../redux/quotationSlice'
 
 type Props = {

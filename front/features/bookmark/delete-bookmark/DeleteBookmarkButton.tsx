@@ -1,14 +1,14 @@
 import type { ReqBody } from '@back/api/bookmark/deleteBookmarkHandler'
+import {
+  deleteFromBookmarkListCache,
+  useDeleteBookmarkMutation,
+} from '@entities/bookmark'
 import { IconButton, Tooltip } from '@mui/material'
+import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
+import type { JSX } from 'react'
 import { MdDeleteOutline } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
-import {
-  useDeleteBookmarkMutation,
-  deleteFromBookmarkListCache,
-} from '@entities/bookmark'
-import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import { toast } from 'sonner'
-import type { JSX } from 'react'
 
 export const DeleteBookmarkButton = ({ id }: ReqBody): JSX.Element => {
   const deleteBookmarkMutation = useDeleteBookmarkMutation()

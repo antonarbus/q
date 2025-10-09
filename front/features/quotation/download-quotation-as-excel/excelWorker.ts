@@ -1,6 +1,6 @@
 import { stripHtmlWithBreaksPreserve } from '@shared/util/stripHtmlWithBreaksPreserve'
-import type { WorkerRequestMessage } from './downloadExcel'
 import striptags from 'striptags'
+import type { WorkerRequestMessage } from './downloadExcel'
 
 export type WorkerResponseMessage = {
   excelBlob: Blob

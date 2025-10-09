@@ -1,12 +1,12 @@
-import { dispatch, getState, useSelector } from '@shared/lib/redux'
-import type { MouseEvent, JSX } from 'react'
-import { MdCopyAll } from 'react-icons/md'
 import { copySlice } from '@entities/copy'
 import { itemType, saveBlockHeightByIndex, useBlock } from '@entities/quotation'
-import { cls } from '@shared/const/cls'
 import { Tooltip } from '@mui/material'
-import { getClosestPaperElementHtml } from '@shared/util/html-getter/getClosestPaperElementHtml'
+import { cls } from '@shared/const/cls'
 import { textSlice } from '@shared/lib/froala/textSlice'
+import { dispatch, getState, useSelector } from '@shared/lib/redux'
+import { getClosestPaperElementHtml } from '@shared/util/html-getter/getClosestPaperElementHtml'
+import type { JSX, MouseEvent } from 'react'
+import { MdCopyAll } from 'react-icons/md'
 
 export const CopyBlockIcon = (): JSX.Element => {
   const { blockIndex } = useBlock()

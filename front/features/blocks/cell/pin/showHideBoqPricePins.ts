@@ -1,6 +1,6 @@
-import { dispatch } from '@shared/lib/redux'
 import { quotationSlice } from '@entities/quotation'
 import { cls } from '@shared/const/cls'
+import { dispatch } from '@shared/lib/redux'
 import type { RefObject } from 'react'
 
 type Props = {

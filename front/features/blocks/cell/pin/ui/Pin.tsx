@@ -1,10 +1,10 @@
-import { useSelector } from '@shared/lib/redux'
-import { Box } from '@mui/material'
-import { VscPinned } from 'react-icons/vsc'
 import { selectBoqCellPin, useBlock, useRow } from '@entities/quotation'
-import { cls } from '@shared/const/cls'
 import type { BoqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
-import type { ReactNode, MouseEvent } from 'react'
+import { Box } from '@mui/material'
+import { cls } from '@shared/const/cls'
+import { useSelector } from '@shared/lib/redux'
+import type { MouseEvent, ReactNode } from 'react'
+import { VscPinned } from 'react-icons/vsc'
 
 type Props = {
   boqRowCellKey: BoqRowCellKey

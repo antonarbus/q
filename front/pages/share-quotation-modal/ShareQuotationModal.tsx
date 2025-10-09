@@ -1,17 +1,17 @@
-import { FormModal } from '@shared/component/FormModal'
-import { ShareQuotationField } from './share-quotation-field/ShareQuotationField'
-import { useShareQuotationFormValues } from './useShareQuotationFormValues'
-import { useIsButtonDisabled } from './useIsButtonDisabled'
-import { router } from '@shared/lib/react-router-dom'
-import { useSlide } from '@shared/util/useSlide'
-import { ImLink } from 'react-icons/im'
-import { useShareQuotation } from '@features/quotation/share-quotation'
-import { getState } from '@shared/lib/redux'
-import type { JSX } from 'react'
 import {
   useLoadInitValuesIntoShareQuotationModal,
   useLoadShareQuotationModalWithDirectLink,
 } from '@features/open-close/open-share-quotation-modal'
+import { useShareQuotation } from '@features/quotation/share-quotation'
+import { FormModal } from '@shared/component/FormModal'
+import { router } from '@shared/lib/react-router-dom'
+import { getState } from '@shared/lib/redux'
+import { useSlide } from '@shared/util/useSlide'
+import type { JSX } from 'react'
+import { ImLink } from 'react-icons/im'
+import { ShareQuotationField } from './share-quotation-field/ShareQuotationField'
+import { useIsButtonDisabled } from './useIsButtonDisabled'
+import { useShareQuotationFormValues } from './useShareQuotationFormValues'
 
 export const ShareQuotationModal = (): JSX.Element => {
   const { ref: modalRef, slideOut } = useSlide()

@@ -1,14 +1,14 @@
-import type { Request, Response, NextFunction } from 'express'
-import bcrypt from 'bcryptjs'
-import type { User } from '@entities/user'
+import { UserModel } from '@back/entities/user'
 import { httpStatus } from '@back/shared/const/httpStatus'
+import { setRefreshTokenCookie } from '@back/shared/headers'
 import {
   generateAccessToken,
   generateRefreshToken,
 } from '@back/shared/lib/json-webtoken'
-import { setRefreshTokenCookie } from '@back/shared/headers'
-import { UserModel } from '@back/entities/user'
+import type { User } from '@entities/user'
 import type { ErrorMessageCommon } from '@shared/const/errorMessageCommon'
+import bcrypt from 'bcryptjs'
+import type { NextFunction, Request, Response } from 'express'
 
 export type ReqBody = {
   email: User['email']

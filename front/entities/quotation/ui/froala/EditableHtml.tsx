@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
+import type { JSX } from 'react'
 import { useFroala } from '../../provider/FroalaProvider'
 import { useStartFroala } from './useStartFroala'
-import type { JSX } from 'react'
 
 export const EditableHtml = (): JSX.Element => {
   const { style, froalaElementRef, froalaHeightRef, sx } = useFroala()

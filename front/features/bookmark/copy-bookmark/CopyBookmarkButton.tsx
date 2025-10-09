@@ -1,14 +1,14 @@
 import type { ReqBody } from '@back/api/bookmark/getBookmarkHandler'
-import { dispatch } from '@shared/lib/redux'
-import { IconButton, Tooltip } from '@mui/material'
-import { MdCopyAll } from 'react-icons/md'
-import { useUpdateEffect } from 'react-use'
 import { useGetBookmarkMutation } from '@entities/bookmark'
 import { copySlice } from '@entities/copy'
+import { IconButton, Tooltip } from '@mui/material'
 import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
-import { toast } from 'sonner'
 import { textSlice } from '@shared/lib/froala/textSlice'
+import { dispatch } from '@shared/lib/redux'
 import type { JSX } from 'react'
+import { MdCopyAll } from 'react-icons/md'
+import { useUpdateEffect } from 'react-use'
+import { toast } from 'sonner'
 
 export const CopyBookmarkButton = ({ id }: ReqBody): JSX.Element => {
   const getBookmarkMutation = useGetBookmarkMutation()

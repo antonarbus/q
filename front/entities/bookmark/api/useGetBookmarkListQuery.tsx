@@ -1,12 +1,12 @@
-import type {
-  ResBody,
-  ErrorResBody,
-} from '@back/api/bookmark/getBookmarkListHandler'
 import { api } from '@back/api'
-import { type UseQueryResult, useQuery } from '@tanstack/react-query'
-import type { AxiosError, AxiosResponse } from 'axios'
+import type {
+  ErrorResBody,
+  ResBody,
+} from '@back/api/bookmark/getBookmarkListHandler'
 import { queryKey } from '@shared/const/queryKey'
 import { axiosWithAuth } from '@shared/lib/axios'
+import { type UseQueryResult, useQuery } from '@tanstack/react-query'
+import type { AxiosError, AxiosResponse } from 'axios'
 
 type Res = UseQueryResult<ResBody, AxiosError<ErrorResBody>>
 

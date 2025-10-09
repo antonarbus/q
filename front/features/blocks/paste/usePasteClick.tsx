@@ -1,13 +1,13 @@
-import { dispatch, getState } from '@shared/lib/redux'
-import { theme } from '@shared/theme'
-import { useEffectOnce, useUnmount } from 'react-use'
 import { copySlice } from '@entities/copy'
 import { quotationSlice } from '@entities/quotation'
 import { cls } from '@shared/const/cls'
-import { generateId } from '@shared/lib/nanoid'
-import { fixElementDimensionStyle } from '@shared/util/fixElementDimensionStyle'
 import { route } from '@shared/const/route'
 import { textSlice } from '@shared/lib/froala/textSlice'
+import { generateId } from '@shared/lib/nanoid'
+import { dispatch, getState } from '@shared/lib/redux'
+import { theme } from '@shared/theme'
+import { fixElementDimensionStyle } from '@shared/util/fixElementDimensionStyle'
+import { useEffectOnce, useUnmount } from 'react-use'
 
 const pasteItemOnClick = (): void => {
   const isBookmarkListPage = window.location.pathname.includes(

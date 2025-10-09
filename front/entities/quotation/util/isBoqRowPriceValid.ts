@@ -1,6 +1,6 @@
-import { roundTo } from 'round-to'
 import { getNumberFromString } from '@shared/util/getNumberFromString'
 import { getTextContentFromHtml } from '@shared/util/getTextContentFromHtml'
+import { roundTo } from 'round-to'
 import { getBoqRowFromStore } from '../redux/getter/getBoqRowFromStore'
 
 type Props = {

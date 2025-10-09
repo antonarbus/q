@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken'
 import { getEnvVarOrThrow } from '../dot-env/getEnvVar'
-import type { JwtPayloadExtended } from './types'
 import { THREE_MONTHS_IN_SEC } from './const'
 import { getJwtExpirationInDays } from './getJwtExpirationInDays'
+import type { JwtPayloadExtended } from './types'
 
 type Res = {
   refreshJwtToken: string

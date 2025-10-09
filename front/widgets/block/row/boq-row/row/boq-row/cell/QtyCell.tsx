@@ -1,18 +1,18 @@
-import { Box } from '@mui/material'
 import {
-  useRow,
-  Froala,
-  boqRowCellStyle,
-  useStylesForResizableCell,
+  BOOKMARK_POS_AT_BLOCKS,
   boqColumnKey,
   boqRowCellKey,
+  boqRowCellStyle,
   boqRowCellSx,
-  getRowCellHtmlFromStore,
-  BOOKMARK_POS_AT_BLOCKS,
   columnMinWidth,
+  Froala,
+  getRowCellHtmlFromStore,
+  useRow,
+  useStylesForResizableCell,
 } from '@entities/quotation'
-import { updateQtyCell } from '@features/blocks/cell/update-cell/row-block-cells/qty/updateQtyCell'
 import { formatQtyCell } from '@features/blocks/cell/update-cell/row-block-cells/qty/formatQtyCell'
+import { updateQtyCell } from '@features/blocks/cell/update-cell/row-block-cells/qty/updateQtyCell'
+import { Box } from '@mui/material'
 import type { JSX } from 'react'
 
 export const QtyCell = (): JSX.Element => {

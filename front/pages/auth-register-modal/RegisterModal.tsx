@@ -1,15 +1,15 @@
-import { MdLockOutline } from 'react-icons/md'
-import { Box } from '@mui/material'
-import { useSignal, useSignalEffect } from '@preact/signals-react'
-import { useRef, type JSX } from 'react'
 import { useRegister } from '@features/auth/register'
 import { OpenLoginModalLink } from '@features/open-close/open-login-modal'
+import { Box } from '@mui/material'
+import { useSignal, useSignalEffect } from '@preact/signals-react'
 import { ConfirmPasswordField } from '@shared/component/ConfirmPasswordField'
-import { EmailField } from '@shared/component/input-field/EmailField'
 import { FormModal } from '@shared/component/FormModal'
+import { EmailField } from '@shared/component/input-field/EmailField'
 import { PasswordField } from '@shared/component/input-field/PasswordField'
 import { router } from '@shared/lib/react-router-dom'
 import { useSlide } from '@shared/util/useSlide'
+import { type JSX, useRef } from 'react'
+import { MdLockOutline } from 'react-icons/md'
 
 export const RegisterModal = (): JSX.Element => {
   const { ref: modalRef, slideOut } = useSlide()

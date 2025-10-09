@@ -1,4 +1,10 @@
-import { useRef, type JSX } from 'react'
+import {
+  BlockComp,
+  Froala,
+  getTextBlockHtmlFromStore,
+  textItemCellStyle,
+  useBlock,
+} from '@entities/quotation'
 import { updateTextBlock } from '@features/blocks/cell/update-cell'
 import { CopyBlockIcon } from '@features/blocks/copy'
 import { CutBlockIcon } from '@features/blocks/cut'
@@ -8,19 +14,13 @@ import {
   onTextBlockResizeStart,
   onTextBlockResizeStop,
 } from '@features/blocks/resize'
+import { beforeUpload } from '@features/file/upload-file'
 import { BookmarkBlockIcon } from '@features/open-close/open-bookmark-modal'
 import { OpenInfoBlockModalIcon } from '@features/open-close/open-info-modal'
-import { beforeUpload } from '@features/file/upload-file'
-import {
-  Froala,
-  BlockComp,
-  getTextBlockHtmlFromStore,
-  textItemCellStyle,
-  useBlock,
-} from '@entities/quotation'
 import { cls } from '@shared/const/cls'
 import { ItemActionButtonsLayout } from '@shared/layout/ItemActionButtonsLayout'
 import type { FroalaEditor } from '@shared/type/froala'
+import { type JSX, useRef } from 'react'
 
 export const TextBlock = (): JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)

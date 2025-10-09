@@ -1,3 +1,4 @@
+import { BlockComp, BoqProvider } from '@entities/quotation'
 import { CopyBlockIcon } from '@features/blocks/copy'
 import { CutBlockIcon } from '@features/blocks/cut'
 import { DeleteBlockIcon } from '@features/blocks/delete'
@@ -9,12 +10,11 @@ import {
 } from '@features/blocks/resize'
 import { BookmarkBlockIcon } from '@features/open-close/open-bookmark-modal'
 import { OpenInfoBlockModalIcon } from '@features/open-close/open-info-modal'
-import { BoqProvider, BlockComp } from '@entities/quotation'
+import { cls } from '@shared/const/cls'
 import { ItemActionButtonsLayout } from '@shared/layout/ItemActionButtonsLayout'
+import type { JSX } from 'react'
 import { BoqHeader } from './boq-header'
 import { BoqTable } from './boq-table'
-import { cls } from '@shared/const/cls'
-import type { JSX } from 'react'
 
 export const BoqBlock = (): JSX.Element => {
   return (

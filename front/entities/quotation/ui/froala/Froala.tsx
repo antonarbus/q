@@ -1,21 +1,21 @@
-import { useSelector } from '@shared/lib/redux'
-import { Box } from '@mui/material'
-import { useRef, type JSX, type ComponentRef, type MouseEvent } from 'react'
-import { FroalaProvider } from '../../provider/FroalaProvider'
-import { useBlock } from '../../provider/BlockProvider'
-import { EditableHtml } from './EditableHtml'
-import { placeCaretAtTheEndIfToolbarIsNotShown } from './placeCaretAtTheEndIfToolbarIsNotShown'
-import { StaticHtml } from './StaticHtml'
-import { StaticHtmlBackgroundToFixBlinkIssue } from './StaticHtmlBackgroundToFixBlinkIssue'
-import { useFixedHeightForAnimation } from './useFixedHeightForAnimation'
 import {
   showDropFilesTextOnMouseEnter,
   showDropFilesTextOnMouseLeave,
 } from '@features/file/upload-file/showDropFilesTextOnHover'
-import type { FroalaProps } from './types'
-import { DropFilesOrImagesText } from './DropFilesOrImagesText'
+import { Box } from '@mui/material'
 import { cls } from '@shared/const/cls'
+import { useSelector } from '@shared/lib/redux'
+import { type ComponentRef, type JSX, type MouseEvent, useRef } from 'react'
+import { useBlock } from '../../provider/BlockProvider'
+import { FroalaProvider } from '../../provider/FroalaProvider'
+import { DropFilesOrImagesText } from './DropFilesOrImagesText'
 import { DropHereText } from './DropHereText'
+import { EditableHtml } from './EditableHtml'
+import { placeCaretAtTheEndIfToolbarIsNotShown } from './placeCaretAtTheEndIfToolbarIsNotShown'
+import { StaticHtml } from './StaticHtml'
+import { StaticHtmlBackgroundToFixBlinkIssue } from './StaticHtmlBackgroundToFixBlinkIssue'
+import type { FroalaProps } from './types'
+import { useFixedHeightForAnimation } from './useFixedHeightForAnimation'
 
 export const Froala = (props: FroalaProps): JSX.Element => {
   const dropFilesTextRef = useRef<ComponentRef<'div'> | null>(null)

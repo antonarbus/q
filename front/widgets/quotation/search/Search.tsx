@@ -1,14 +1,14 @@
+import { useGetBookmarkListQuery } from '@entities/bookmark'
+import { useIsCopyModalVisible } from '@entities/copy'
+import { useCopyBookmarkAtSearch } from '@features/bookmark/copy-bookmark'
 import { Autocomplete } from '@mui/material'
+import { useSignal } from '@preact/signals-react'
 import { cls } from '@shared/const/cls'
+import { useSelector } from '@shared/lib/redux'
+import { type JSX, useEffect } from 'react'
 import { PaperComponent } from './PaperComponent'
 import { renderInput } from './renderInput'
 import { renderOption } from './renderOption'
-import { useEffect, type JSX } from 'react'
-import { useSelector } from '@shared/lib/redux'
-import { useGetBookmarkListQuery } from '@entities/bookmark'
-import { useSignal } from '@preact/signals-react'
-import { useCopyBookmarkAtSearch } from '@features/bookmark/copy-bookmark'
-import { useIsCopyModalVisible } from '@entities/copy'
 
 export const Search = (): JSX.Element => {
   const getBookmarkListQuery = useGetBookmarkListQuery()

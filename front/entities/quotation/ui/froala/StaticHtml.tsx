@@ -1,10 +1,10 @@
 import { Box } from '@mui/material'
 import {
+  type ComponentRef,
   type CSSProperties,
+  type JSX,
   useEffect,
   useRef,
-  type JSX,
-  type ComponentRef,
 } from 'react'
 import { useEffectOnce } from 'react-use'
 import { useFroala } from '../../provider/FroalaProvider'

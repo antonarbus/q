@@ -1,18 +1,18 @@
+import type { NavItemId } from '@shared/const/navItemId'
+import { generateId } from '@shared/lib/nanoid'
 import { dispatch } from '@shared/lib/redux'
+import { navSlice } from '@shared/nav/navSlice'
 import { theme } from '@shared/theme'
+import { elementHeight } from '@shared/util/elementHeight'
+import { animate } from 'motion'
 import {
+  type ComponentRef,
+  type RefObject,
   useEffect,
   useRef,
   useState,
-  type ComponentRef,
-  type RefObject,
 } from 'react'
 import { useFirstMountState } from 'react-use'
-import { elementHeight } from '@shared/util/elementHeight'
-import { navSlice } from '@shared/nav/navSlice'
-import { animate } from 'motion'
-import type { NavItemId } from '@shared/const/navItemId'
-import { generateId } from '@shared/lib/nanoid'
 
 type PropsForNavigateInMenu = {
   up: () => Promise<void> | void

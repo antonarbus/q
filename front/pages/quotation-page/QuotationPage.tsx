@@ -1,12 +1,12 @@
+import { BackgroundMessage } from '@entities/quotation'
 import { useSelector } from '@shared/lib/redux'
-import { Outlet } from 'react-router-dom'
+import { arrayShapesEqualityFn } from '@shared/util/arrayShapesEqualityFn'
 import { BlockMany } from '@widgets/block'
 import { InfoLeft, InfoRight } from '@widgets/quotation/info'
 import { Search } from '@widgets/quotation/search'
-import { BackgroundMessage } from '@entities/quotation'
-import { InfoAndSearchLayout } from './InfoAndSearchLayout'
-import { arrayShapesEqualityFn } from '@shared/util/arrayShapesEqualityFn'
 import type { JSX } from 'react'
+import { Outlet } from 'react-router-dom'
+import { InfoAndSearchLayout } from './InfoAndSearchLayout'
 
 export const QuotationPage = (): JSX.Element => {
   const blocks = useSelector(

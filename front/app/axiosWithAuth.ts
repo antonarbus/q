@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
 import { api } from '@back/api'
-import { headerName } from '@back/shared/headers'
-import axios, { AxiosError, type AxiosRequestConfig } from 'axios'
 import type { ResBody } from '@back/api/auth/getAccessTokenHandler'
+import { headerName } from '@back/shared/headers'
 import { userSlice } from '@entities/user'
 import { initAccessTokenFetchingPromise } from '@features/auth/get-access-token/AccessToken'
 import { instantiateAxiosWithAuth } from '@shared/lib/axios/axiosWithAuth'
 import { dispatch, getState } from '@shared/lib/redux'
+import axios, { AxiosError, type AxiosRequestConfig } from 'axios'
 
 const axiosWithAuth = axios.create({ withCredentials: true })
 

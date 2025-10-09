@@ -1,4 +1,4 @@
-import { Suspense, lazy, useState, type JSX } from 'react'
+import { type JSX, lazy, Suspense, useState } from 'react'
 import { useEffectOnce } from 'react-use'
 
 const QueryDevtoolsProduction = lazy(async () => {

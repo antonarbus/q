@@ -1,2 +1,2 @@
-export { openLoginModal } from './openLoginModal'
 export { OpenLoginModalLink } from './OpenLoginModalLink'
+export { openLoginModal } from './openLoginModal'

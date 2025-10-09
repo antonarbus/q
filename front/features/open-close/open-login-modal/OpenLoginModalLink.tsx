@@ -1,8 +1,8 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { appSlice } from '@shared/appSlice'
 import { route } from '@shared/const/route'
 import { dispatch } from '@shared/lib/redux'
-import { appSlice } from '@shared/appSlice'
 import type { JSX, MouseEvent } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 
 type Props = {
   slideOut: () => Promise<void>

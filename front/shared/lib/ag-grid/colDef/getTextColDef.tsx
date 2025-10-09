@@ -1,10 +1,10 @@
 import { getTextWithBoldSubStringAsJsx } from '@shared/util/getTextWithBoldSubStringAsJsx'
-import type { ReactNode } from 'react'
 import type {
   ColDef,
   ColDefField,
   ICellRendererParams,
 } from 'ag-grid-community'
+import type { ReactNode } from 'react'
 
 type Props<
   TData extends Record<string, unknown>,

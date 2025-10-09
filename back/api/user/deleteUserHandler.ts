@@ -1,15 +1,15 @@
-import type { Request, Response, NextFunction } from 'express'
-import type { ErrorMessageCommon } from '@shared/const/errorMessageCommon'
-import { httpStatus } from '@back/shared/const/httpStatus'
-// import { bucket, getFolderPath } from '@back/shared/services/storage'
-import type { User } from '@entities/user'
-import { userRole } from '@back/shared/const/userRole'
+import { BookmarkModel } from '@back/entities/bookmark'
+import { QuotationModel } from '@back/entities/quotation'
 import {
   getUserFromAccessTokenOrThrowUnauthorized,
   UserModel,
 } from '@back/entities/user'
-import { QuotationModel } from '@back/entities/quotation'
-import { BookmarkModel } from '@back/entities/bookmark'
+import { httpStatus } from '@back/shared/const/httpStatus'
+import { userRole } from '@back/shared/const/userRole'
+// import { bucket, getFolderPath } from '@back/shared/services/storage'
+import type { User } from '@entities/user'
+import type { ErrorMessageCommon } from '@shared/const/errorMessageCommon'
+import type { NextFunction, Request, Response } from 'express'
 
 export type ReqBody = {
   email: User['email']

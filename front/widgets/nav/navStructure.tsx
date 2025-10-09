@@ -1,23 +1,3 @@
-import { RxPerson } from 'react-icons/rx'
-import { CiViewTable } from 'react-icons/ci'
-import { ImLink } from 'react-icons/im'
-import {
-  FaRegRectangleList,
-  FaGripLines,
-  FaUsersGear,
-  FaRegShareFromSquare,
-} from 'react-icons/fa6'
-import { FiLogOut, FiLogIn, FiDollarSign, FiSave } from 'react-icons/fi'
-import {
-  IoText,
-  IoChevronBackOutline,
-  IoStatsChartOutline,
-  IoSettingsOutline,
-} from 'react-icons/io5'
-import { PiFolderSimpleStarDuotone } from 'react-icons/pi'
-import { RiMenuAddFill, RiAdminLine, RiFileExcel2Line } from 'react-icons/ri'
-import { VscNewFile } from 'react-icons/vsc'
-import { HiOutlineBookOpen } from 'react-icons/hi2'
 import {
   insertBoqBlock,
   insertBoqRow,
@@ -33,17 +13,37 @@ import {
 import { openQuotationsPage } from '@features/open-close/open-quotations-page'
 import { openSaveQuotationModal } from '@features/open-close/open-save-quotation-modal'
 import { openSettingsModal } from '@features/open-close/open-settings-modal'
+import { openShareQuotationModal } from '@features/open-close/open-share-quotation-modal'
+import { downloadExcel } from '@features/quotation/download-quotation-as-excel'
+import { downloadPdf } from '@features/quotation/download-quotation-as-pdf'
+import { saveExistingQuotation } from '@features/quotation/save-quotation'
 import { navItemId } from '@shared/const/navItemId'
 import { route } from '@shared/const/route'
-import type { NavItem } from '@shared/nav'
-import { downloadPdf } from '@features/quotation/download-quotation-as-pdf'
-import { downloadExcel } from '@features/quotation/download-quotation-as-excel'
-import { FaRegFilePdf, FaRegFileImage } from 'react-icons/fa'
-import { openShareQuotationModal } from '@features/open-close/open-share-quotation-modal'
-import { getState } from '@shared/lib/redux'
-import { saveExistingQuotation } from '@features/quotation/save-quotation'
-import { Burger } from '@shared/nav/ui/NavList/NavItem/Burger'
 import { instance } from '@shared/instance'
+import { getState } from '@shared/lib/redux'
+import type { NavItem } from '@shared/nav'
+import { Burger } from '@shared/nav/ui/NavList/NavItem/Burger'
+import { CiViewTable } from 'react-icons/ci'
+import { FaRegFileImage, FaRegFilePdf } from 'react-icons/fa'
+import {
+  FaGripLines,
+  FaRegRectangleList,
+  FaRegShareFromSquare,
+  FaUsersGear,
+} from 'react-icons/fa6'
+import { FiDollarSign, FiLogIn, FiLogOut, FiSave } from 'react-icons/fi'
+import { HiOutlineBookOpen } from 'react-icons/hi2'
+import { ImLink } from 'react-icons/im'
+import {
+  IoChevronBackOutline,
+  IoSettingsOutline,
+  IoStatsChartOutline,
+  IoText,
+} from 'react-icons/io5'
+import { PiFolderSimpleStarDuotone } from 'react-icons/pi'
+import { RiAdminLine, RiFileExcel2Line, RiMenuAddFill } from 'react-icons/ri'
+import { RxPerson } from 'react-icons/rx'
+import { VscNewFile } from 'react-icons/vsc'
 
 export const navStructure: NavItem[] = [
   {

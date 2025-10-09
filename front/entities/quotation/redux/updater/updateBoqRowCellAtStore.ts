@@ -1,9 +1,9 @@
+import type { BoqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
 import { dispatch } from '@shared/lib/redux'
 import { getNumberFromString } from '@shared/util/getNumberFromString'
 import { getTextContentFromHtml } from '@shared/util/getTextContentFromHtml'
 import { getBoqRowFromStore } from '../getter/getBoqRowFromStore'
 import { quotationSlice } from '../quotationSlice'
-import type { BoqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
 
 type Props = {
   html: string

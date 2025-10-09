@@ -1,14 +1,14 @@
 import type { ReqBody as Payload } from '@back/api/quotation/deleteQuotationHandler'
+import {
+  deleteFromQuotationListCache,
+  useDeleteQuotationMutation,
+} from '@entities/quotation'
 import { IconButton, Tooltip } from '@mui/material'
+import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
+import type { ReactNode } from 'react'
 import { MdDeleteOutline } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
-import {
-  useDeleteQuotationMutation,
-  deleteFromQuotationListCache,
-} from '@entities/quotation'
-import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import { toast } from 'sonner'
-import type { ReactNode } from 'react'
 
 export const DeleteQuotationButton = ({ id }: Payload): ReactNode => {
   const deleteQuotationMutation = useDeleteQuotationMutation()

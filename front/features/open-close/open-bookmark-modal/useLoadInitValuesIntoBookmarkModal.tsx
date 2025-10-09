@@ -1,8 +1,8 @@
+import type { BookmarkFormValues } from '@entities/bookmark'
+import { BOOKMARK_POS_AT_BLOCKS } from '@entities/quotation'
+import { useSignal } from '@preact/signals-react'
 import { getState } from '@shared/lib/redux'
 import { useEffectOnce } from 'react-use'
-import { useSignal } from '@preact/signals-react'
-import { BOOKMARK_POS_AT_BLOCKS } from '@entities/quotation'
-import type { BookmarkFormValues } from '@entities/bookmark'
 
 type Res = {
   bookmarkFromValues: BookmarkFormValues

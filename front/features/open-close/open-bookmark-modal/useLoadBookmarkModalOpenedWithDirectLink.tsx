@@ -4,9 +4,9 @@ import {
 } from '@entities/bookmark'
 import { BOOKMARK_POS_AT_BLOCKS, quotationSlice } from '@entities/quotation'
 import { dispatch, getState } from '@shared/lib/redux'
-import { toast } from 'sonner'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
+import { toast } from 'sonner'
 
 type Props = {
   bookmarkFromValues: BookmarkFormValues

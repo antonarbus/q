@@ -1,10 +1,10 @@
-import { useSelector, dispatch, getState } from '@shared/lib/redux'
-import isEqual from 'lodash.isequal'
-import { useEffect } from 'react'
 import { type CopyPlace, copySlice, getPastePlace } from '@entities/copy'
 import { boqRowKey, itemType, quotationSlice } from '@entities/quotation'
 import { cls } from '@shared/const/cls'
 import { route } from '@shared/const/route'
+import { dispatch, getState, useSelector } from '@shared/lib/redux'
+import isEqual from 'lodash.isequal'
+import { useEffect } from 'react'
 
 const movePasteTextItem = (event: MouseEvent): void => {
   if (event.target instanceof Element === false) {

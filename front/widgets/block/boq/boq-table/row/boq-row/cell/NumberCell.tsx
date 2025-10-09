@@ -1,13 +1,13 @@
-import { Box } from '@mui/material'
-import type { JSX } from 'react'
 import {
   boqColumnKey,
+  columnMinWidth,
   getNumberOfBoqBlocksAbove,
   useBlock,
   useRow,
   useStylesForResizableCell,
-  columnMinWidth,
 } from '@entities/quotation'
+import { Box } from '@mui/material'
+import type { JSX } from 'react'
 
 export const NumberCell = (): JSX.Element => {
   const { blockIndex } = useBlock()

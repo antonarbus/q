@@ -1,15 +1,15 @@
-import { roundTo } from 'round-to'
 import {
+  boqRowCellKey,
   didBoqCellContentChange,
   getBoqRowFromStore,
   getBoqRowsFromStore,
+  type Row,
   updateBoqRowCellAtStore,
   updateBoqRowCellWithValue,
   updateSubTotalPriceWithValue,
-  type Row,
-  boqRowCellKey,
 } from '@entities/quotation'
 import type { FroalaEditorRef } from '@shared/type/froala'
+import { roundTo } from 'round-to'
 
 type Props = {
   qtyCellEditorRef: FroalaEditorRef

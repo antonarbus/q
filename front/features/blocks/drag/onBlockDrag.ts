@@ -1,8 +1,8 @@
 import type { DragEndEvent, DragStartEvent } from '@dnd-kit/core'
-import { dispatch, getState } from '@shared/lib/redux'
-import { arrayMoveImmutable } from 'array-move'
 import { quotationSlice } from '@entities/quotation'
 import { textSlice } from '@shared/lib/froala/textSlice'
+import { dispatch, getState } from '@shared/lib/redux'
+import { arrayMoveImmutable } from 'array-move'
 
 export const onBlockDragStart = (event: DragStartEvent): void => {
   document.body.style.cursor = 'move'

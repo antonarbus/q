@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom'
 import { route } from '@shared/const/route'
-import { openRegisterModal } from './openRegisterModal'
 import type { JSX, MouseEvent } from 'react'
+import { Link } from 'react-router-dom'
+import { openRegisterModal } from './openRegisterModal'
 
 type Props = {
   slideOut: () => Promise<void>

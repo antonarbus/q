@@ -1,6 +1,6 @@
+import { getEnvVarOrThrow } from '@back/shared/lib/dot-env'
 import mongoose from 'mongoose'
 import { checkDbConnection } from './checkDbConnection'
-import { getEnvVarOrThrow } from '@back/shared/lib/dot-env'
 
 export const connectToDb = async (): Promise<void> => {
   const mongoDbUrl = getEnvVarOrThrow('MONGO_DB_CONNECTION_STRING')

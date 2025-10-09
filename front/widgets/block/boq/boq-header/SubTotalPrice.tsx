@@ -1,4 +1,11 @@
-import { type JSX, type MouseEvent, useRef } from 'react'
+import {
+  Froala,
+  getBoqHeaderHtmlFromStore,
+  type HeaderKey,
+  subTotalPriceCellStyle,
+  useBlock,
+  useBoq,
+} from '@entities/quotation'
 import { showHideBoqPricePins } from '@features/blocks/cell/pin'
 import {
   formatSubtotalPriceCell,
@@ -6,14 +13,7 @@ import {
   useUpdateSubtotalPrice,
   validateBoqRowPrices,
 } from '@features/blocks/cell/update-cell'
-import {
-  getBoqHeaderHtmlFromStore,
-  useBoq,
-  useBlock,
-  Froala,
-  subTotalPriceCellStyle,
-  type HeaderKey,
-} from '@entities/quotation'
+import { type JSX, type MouseEvent, useRef } from 'react'
 
 const boqHeaderKey: HeaderKey = 'subTotalPrice'
 

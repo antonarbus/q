@@ -1,7 +1,7 @@
 import type { DragEndEvent, DragStartEvent } from '@dnd-kit/core'
+import { getBoqRowsFromStore, quotationSlice } from '@entities/quotation'
 import { dispatch } from '@shared/lib/redux'
 import { arrayMoveImmutable } from 'array-move'
-import { getBoqRowsFromStore, quotationSlice } from '@entities/quotation'
 
 export const onBoqRowDragStart =
   ({ blockIndex }: { blockIndex: number }) =>

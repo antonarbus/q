@@ -1,8 +1,8 @@
-import { getState } from '@shared/lib/redux'
-import { useRef, type JSX } from 'react'
+import { Froala, itemType, useBlock } from '@entities/quotation'
 import { updatePriceTitleCell } from '@features/blocks/cell/update-cell'
-import { useBlock, Froala, itemType } from '@entities/quotation'
+import { getState } from '@shared/lib/redux'
 import type { FroalaEditor } from '@shared/type/froala'
+import { type JSX, useRef } from 'react'
 
 export const PriceTitle = (): JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)

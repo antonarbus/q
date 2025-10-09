@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
-import type { JwtPayloadExtended } from './types'
 import { getEnvVarOrThrow } from '../dot-env/getEnvVar'
 import { FIFTEEN_MIN_IN_SEC } from './const'
+import type { JwtPayloadExtended } from './types'
 
 type Res = {
   accessJwtToken: string

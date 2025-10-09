@@ -1,12 +1,12 @@
 import { BlockComp } from '@entities/quotation'
-import { cls } from '@shared/const/cls'
-import { OneRow } from './boq-row/OneRow'
-import type { JSX } from 'react'
 import {
   onBoqBlockResize,
   onBoqBlockResizeStart,
   onBoqBlockResizeStop,
 } from '@features/blocks/resize'
+import { cls } from '@shared/const/cls'
+import type { JSX } from 'react'
+import { OneRow } from './boq-row/OneRow'
 
 export const RowBlock = (): JSX.Element => {
   return (
