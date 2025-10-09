@@ -1,11 +1,11 @@
 import { useSortable } from '@dnd-kit/sortable'
-import { MdDragIndicator } from 'react-icons/md'
-import { useIsLastBlock, useBlock } from '@entities/quotation'
-import { Tooltip } from '@mui/material'
-import { cls } from '@shared/const/cls'
-import { useRef, useState, type JSX } from 'react'
 import { useIsCopyModalVisible } from '@entities/copy'
+import { useBlock, useIsLastBlock } from '@entities/quotation'
+import { Tooltip } from '@mui/material'
 import { useSignal } from '@preact/signals-react'
+import { cls } from '@shared/const/cls'
+import { type JSX, useRef, useState } from 'react'
+import { MdDragIndicator } from 'react-icons/md'
 
 export const DragBlockIcon = (): JSX.Element => {
   const isLastBlock = useIsLastBlock()
@@ -24,10 +24,7 @@ export const DragBlockIcon = (): JSX.Element => {
   const isOverDragIcon = useRef(false)
 
   return (
-    <span
-      className={cls.actionIconContainer}
-      style={{ position: 'relative' }}
-    >
+    <span className={cls.actionIconContainer} style={{ position: 'relative' }}>
       {/* if we wrap icon with tooltip dragging works strange, scroll is reset for no reason */}
       <Tooltip
         enterDelay={500}

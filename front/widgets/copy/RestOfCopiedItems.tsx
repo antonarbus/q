@@ -1,7 +1,7 @@
 import { getState, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
-import { type Variants, AnimatePresence, motion } from 'motion/react'
-import { useRef, type JSX } from 'react'
+import { AnimatePresence, motion, type Variants } from 'motion/react'
+import { type JSX, useRef } from 'react'
 import { containerPadding, containerWidth, itemMarginBottom } from './const'
 import { ScaledCopyItem } from './ScaledCopyItem'
 
@@ -83,10 +83,7 @@ export const RestOfCopiedItems = (): JSX.Element | null => {
   prevFirstItemHeightRef.current = firstItemHeight
 
   return (
-    <AnimatePresence
-      custom={animationProps}
-      mode='wait'
-    >
+    <AnimatePresence custom={animationProps} mode='wait'>
       <motion.div
         animate='animate'
         custom={animationProps}

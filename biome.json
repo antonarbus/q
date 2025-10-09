@@ -1,0 +1,59 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.0.5/schema.json",
+  "files": {
+    "includes": [
+      "**",
+      "!front/build",
+      "!back/build",
+      "!**/froalaPkg.js",
+      "!**/froalaPkg.css"
+    ]
+  },
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space"
+  },
+  "linter": {
+    "enabled": false
+  },
+  "assist": {
+    "enabled": false,
+    "actions": {
+      "source": {
+        "organizeImports": "on",
+        "useSortedKeys": "off",
+        "useSortedAttributes": "off",
+        "useSortedProperties": "off"
+      }
+    }
+  },
+  "json": {
+    "formatter": {
+      "enabled": true
+    }
+  },
+  "html": {
+    "formatter": {
+      "enabled": true
+    }
+  },
+  "css": {
+    "formatter": {
+      "enabled": true
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "enabled": true,
+      "quoteStyle": "single",
+      "semicolons": "asNeeded",
+      "quoteProperties": "asNeeded",
+      "jsxQuoteStyle": "single"
+    }
+  }
+}

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable no-console */
 import { asyncDelay } from '@shared/util/delay'
-import { useRef, type JSX, type ComponentRef } from 'react'
+import { type ComponentRef, type JSX, useRef } from 'react'
 
 const MIN_SPINNER_TIME = 400
 const SPINNER_DELAY = 200
@@ -53,10 +53,7 @@ export const TestPage = (): JSX.Element => {
 
   return (
     <div ref={ref}>
-      <button
-        onClick={onClick}
-        type='button'
-      >
+      <button onClick={onClick} type='button'>
         Click me
       </button>
     </div>

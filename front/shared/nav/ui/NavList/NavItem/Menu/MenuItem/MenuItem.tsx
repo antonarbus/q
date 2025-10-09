@@ -1,5 +1,5 @@
 import { dispatch, useSelector } from '@shared/lib/redux'
-import type { MouseEvent, JSX } from 'react'
+import type { JSX, MouseEvent } from 'react'
 import { FaChevronRight } from 'react-icons/fa'
 import { useLocation } from 'react-router-dom'
 import { navSlice } from '../../../../../navSlice'
@@ -74,10 +74,7 @@ export const MenuItem = (props: Props): JSX.Element => {
         </RoundSpanForIcon>
       ) : null}
       {props.navItem.shortcut !== undefined && (
-        <Shortcut
-          $isHovered={isHovered}
-          shortcut={props.navItem.shortcut}
-        />
+        <Shortcut $isHovered={isHovered} shortcut={props.navItem.shortcut} />
       )}
     </>
   )

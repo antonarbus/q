@@ -1,18 +1,18 @@
+import { useGetFileListStatsQuery } from '@entities/file'
+import { DeleteFileIcon } from '@features/file/delete-file'
+import { Avatar, Box, Collapse } from '@mui/material'
+import { BackdropWithSlidableModal } from '@shared/component/BackdropWithSlidableModal'
+import { CardCustom } from '@shared/component/CardCustom'
+import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import { getState } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
-import { IoSettingsOutline } from 'react-icons/io5'
-import { Avatar, Box, Collapse } from '@mui/material'
 import { format } from 'bytes'
-import { useMemo, useRef, useState, type JSX } from 'react'
-import { GrStorage } from 'react-icons/gr'
-import { useNavigate } from 'react-router-dom'
-import { BackdropWithSlidableModal } from '@shared/component/BackdropWithSlidableModal'
-import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
-import { CardCustom } from '@shared/component/CardCustom'
-import { MdExpandLess, MdExpandMore } from 'react-icons/md'
+import { type JSX, useMemo, useRef, useState } from 'react'
 import { FiFileText } from 'react-icons/fi'
-import { DeleteFileIcon } from '@features/file/delete-file'
-import { useGetFileListStatsQuery } from '@entities/file'
+import { GrStorage } from 'react-icons/gr'
+import { IoSettingsOutline } from 'react-icons/io5'
+import { MdExpandLess, MdExpandMore } from 'react-icons/md'
+import { useNavigate } from 'react-router-dom'
 
 export const SettingsModal = (): JSX.Element => {
   const cardRef = useRef<HTMLDivElement>(null)
@@ -126,10 +126,7 @@ export const SettingsModal = (): JSX.Element => {
                         },
                       }}
                     >
-                      <FiFileText
-                        color='grey'
-                        style={{ width: '20px' }}
-                      />
+                      <FiFileText color='grey' style={{ width: '20px' }} />
                       <a
                         href={`/uploads/${item.id}`}
                         style={{

@@ -1,9 +1,9 @@
 import { Tooltip } from '@mui/material'
-import { MdDeleteOutline } from 'react-icons/md'
 import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import { theme } from '@shared/theme'
-import { useFileDelete } from './useFileDelete'
 import type { JSX } from 'react'
+import { MdDeleteOutline } from 'react-icons/md'
+import { useFileDelete } from './useFileDelete'
 
 type Props = {
   fileId: string
@@ -17,10 +17,7 @@ export const DeleteFileIcon = ({ fileId }: Props): JSX.Element => {
   }
 
   return (
-    <Tooltip
-      placement='top'
-      title='Delete'
-    >
+    <Tooltip placement='top' title='Delete'>
       <MdDeleteOutline
         css={{
           width: '14px',

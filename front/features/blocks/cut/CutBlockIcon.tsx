@@ -1,7 +1,3 @@
-import { dispatch, getState, useSelector } from '@shared/lib/redux'
-import { theme } from '@shared/theme'
-import type { MouseEvent, JSX } from 'react'
-import { TbCut } from 'react-icons/tb'
 import { copySlice } from '@entities/copy'
 import {
   itemType,
@@ -10,11 +6,15 @@ import {
   selectIsLastBlock,
   useBlock,
 } from '@entities/quotation'
-import { cls } from '@shared/const/cls'
-import { fixElementDimensionStyle } from '@shared/util/fixElementDimensionStyle'
 import { Tooltip } from '@mui/material'
-import { getClosestPaperElementHtml } from '@shared/util/html-getter/getClosestPaperElementHtml'
+import { cls } from '@shared/const/cls'
 import { textSlice } from '@shared/lib/froala/textSlice'
+import { dispatch, getState, useSelector } from '@shared/lib/redux'
+import { theme } from '@shared/theme'
+import { fixElementDimensionStyle } from '@shared/util/fixElementDimensionStyle'
+import { getClosestPaperElementHtml } from '@shared/util/html-getter/getClosestPaperElementHtml'
+import type { JSX, MouseEvent } from 'react'
+import { TbCut } from 'react-icons/tb'
 
 export const CutBlockIcon = (): JSX.Element => {
   const { blockIndex } = useBlock()
@@ -23,12 +23,7 @@ export const CutBlockIcon = (): JSX.Element => {
   const disabled = isBlockAlone || isCuttable === false
 
   return (
-    <Tooltip
-      enterDelay={500}
-      enterNextDelay={500}
-      placement='left'
-      title='Cut'
-    >
+    <Tooltip enterDelay={500} enterNextDelay={500} placement='left' title='Cut'>
       <span className={cls.actionIconContainer}>
         <TbCut
           className={cls.actionIcon}

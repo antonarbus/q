@@ -3,40 +3,40 @@
   "folders": [
     {
       "name": "q (root)",
-      "path": "./",
+      "path": "./"
     },
     {
       "name": "back ↗",
-      "path": "./back",
+      "path": "./back"
     },
     {
       "name": "front ↗",
-      "path": "./front",
+      "path": "./front"
     },
     {
       "name": "app ↗",
-      "path": "./front/app",
+      "path": "./front/app"
     },
     {
       "name": "pages ↗",
-      "path": "./front/pages",
+      "path": "./front/pages"
     },
     {
       "name": "widgets ↗",
-      "path": "./front/widgets",
+      "path": "./front/widgets"
     },
     {
       "name": "features ↗",
-      "path": "./front/features",
+      "path": "./front/features"
     },
     {
       "name": "entities ↗",
-      "path": "./front/entities",
+      "path": "./front/entities"
     },
     {
       "name": "shared ↗",
-      "path": "./front/shared",
-    },
+      "path": "./front/shared"
+    }
   ],
-  "settings": {},
+  "settings": {}
 }

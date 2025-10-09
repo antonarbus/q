@@ -1,13 +1,13 @@
-import type {
-  ResBody,
-  ReqBody as Payload,
-  ErrorResBody,
-} from '@back/api/file/deleteFileHandler'
 import { api } from '@back/api'
-import { type UseMutationResult, useMutation } from '@tanstack/react-query'
-import type { AxiosError } from 'axios'
+import type {
+  ErrorResBody,
+  ReqBody as Payload,
+  ResBody,
+} from '@back/api/file/deleteFileHandler'
 import { queryKey } from '@shared/const/queryKey'
 import { axiosWithAuth } from '@shared/lib/axios'
+import { type UseMutationResult, useMutation } from '@tanstack/react-query'
+import type { AxiosError } from 'axios'
 
 type Res = UseMutationResult<ResBody, AxiosError<ErrorResBody>, Payload>
 

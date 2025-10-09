@@ -1,9 +1,9 @@
-import type { Request, Response, NextFunction } from 'express'
-import type { ErrorMessageCommon } from '@shared/const/errorMessageCommon'
+import { BookmarkModel } from '@back/entities/bookmark'
+import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { httpStatus } from '@back/shared/const/httpStatus'
 import type { Item } from '@entities/quotation'
-import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
-import { BookmarkModel } from '@back/entities/bookmark'
+import type { ErrorMessageCommon } from '@shared/const/errorMessageCommon'
+import type { NextFunction, Request, Response } from 'express'
 
 export type ReqBody = {
   id: Item['id']

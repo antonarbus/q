@@ -1,8 +1,8 @@
 import { useSelector } from '@shared/lib/redux'
-import { NavItem } from './NavItem'
+import type { JSX } from 'react'
 import { useWindowSize } from 'react-use'
 import { navMediaQuery } from '../navMediaQuery'
-import type { JSX } from 'react'
+import { NavItem } from './NavItem'
 
 export const NavList = (): JSX.Element => {
   const navStructure = useSelector((state) => state.nav.navStructure)
@@ -15,12 +15,7 @@ export const NavList = (): JSX.Element => {
 
   const nonHiddenNavItems = navStructureToLoad
     ?.filter((navItem) => navItem.isHidden === false)
-    .map((navItem) => (
-      <NavItem
-        key={navItem.id}
-        navItem={navItem}
-      />
-    ))
+    .map((navItem) => <NavItem key={navItem.id} navItem={navItem} />)
 
   return (
     <ul

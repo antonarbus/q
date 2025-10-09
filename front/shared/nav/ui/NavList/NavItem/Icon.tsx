@@ -1,6 +1,6 @@
-import { RoundSpanForIcon } from './RoundSpanForIcon'
 import { Tooltip } from '@mui/material'
 import type { JSX, ReactNode } from 'react'
+import { RoundSpanForIcon } from './RoundSpanForIcon'
 
 type Props = {
   icon: ReactNode | string
@@ -24,10 +24,7 @@ export const Icon = ({ icon, disabled, tooltipText }: Props): JSX.Element => {
       title={tooltipText}
     >
       <span className='element-that-keep-ref-from-mui'>
-        <RoundSpanForIcon
-          className='icon-round-wrapper'
-          disabled={disabled}
-        >
+        <RoundSpanForIcon className='icon-round-wrapper' disabled={disabled}>
           {typeof icon === 'string' ? (
             <span style={{ fontWeight: 600 }}>{icon}</span>
           ) : (

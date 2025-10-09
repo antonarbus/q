@@ -1,17 +1,17 @@
-import { Box } from '@mui/material'
-import { useSignal, useSignalEffect } from '@preact/signals-react'
-import { useRef, type ReactNode } from 'react'
-import { MdPassword } from 'react-icons/md'
-import { useParams } from 'react-router-dom'
 import { useResetPassword } from '@features/auth/reset-password'
 import { OpenLoginModalLink } from '@features/open-close/open-login-modal'
 import { OpenRegisterModalLink } from '@features/open-close/open-register-modal'
+import { Box } from '@mui/material'
+import { useSignal, useSignalEffect } from '@preact/signals-react'
 import { ConfirmPasswordField } from '@shared/component/ConfirmPasswordField'
-import { EmailField } from '@shared/component/input-field/EmailField'
 import { FormModal } from '@shared/component/FormModal'
+import { EmailField } from '@shared/component/input-field/EmailField'
 import { PasswordField } from '@shared/component/input-field/PasswordField'
 import { router } from '@shared/lib/react-router-dom'
 import { useSlide } from '@shared/util/useSlide'
+import { type ReactNode, useRef } from 'react'
+import { MdPassword } from 'react-icons/md'
+import { useParams } from 'react-router-dom'
 
 export const ResetPasswordModal = (): ReactNode => {
   const { ref: modalRef, slideOut } = useSlide()
@@ -61,10 +61,7 @@ export const ResetPasswordModal = (): ReactNode => {
         inputRef={inputRef}
         isEmailOkSignal={isEmailOkSignal}
       />
-      <PasswordField
-        autoFocus
-        passwordSignal={passwordSignal}
-      />
+      <PasswordField autoFocus passwordSignal={passwordSignal} />
       <ConfirmPasswordField
         isConfirmPasswordOkSignal={isConfirmPasswordOkSignal}
         originalPasswordSignal={passwordSignal}

@@ -1,7 +1,7 @@
-import { MenuItem } from './MenuItem'
 import type { NavItemId } from '@shared/const/navItemId'
+import type { ComponentRef, ReactNode, RefObject } from 'react'
 import { getNavItem } from './functions/getNavItem'
-import type { ReactNode, ComponentRef, RefObject } from 'react'
+import { MenuItem } from './MenuItem'
 
 type Props = {
   reference: RefObject<ComponentRef<'div'> | null>
@@ -23,18 +23,11 @@ export const SlidableMenuItemsContainer = ({
   const menuItemsNotHidden = navItem?.navItems
     ?.filter((item) => item.isHidden === false)
     .map((item, index) => (
-      <MenuItem
-        hoverIndex={index + 1}
-        key={item.id}
-        navItem={item}
-      />
+      <MenuItem hoverIndex={index + 1} key={item.id} navItem={item} />
     ))
 
   return (
-    <div
-      className={className}
-      ref={reference}
-    >
+    <div className={className} ref={reference}>
       {menuItemsNotHidden}
     </div>
   )

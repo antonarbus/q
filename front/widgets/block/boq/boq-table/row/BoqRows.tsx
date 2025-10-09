@@ -1,21 +1,21 @@
-import { useSelector } from '@shared/lib/redux'
-import { AnimatePresence } from 'motion/react'
-import { hideBoqRowPinsOnRowBlur } from '@features/blocks/cell/pin'
 import {
-  selectBoqRows,
-  RowProvider,
-  useBlock,
   boqRowKey,
+  RowProvider,
+  selectBoqRows,
+  useBlock,
 } from '@entities/quotation'
+import { hideBoqRowPinsOnRowBlur } from '@features/blocks/cell/pin'
 import { generateId } from '@shared/lib/nanoid'
+import { useSelector } from '@shared/lib/redux'
+import { arrayShapesEqualityFn } from '@shared/util/arrayShapesEqualityFn'
+import { AnimatePresence } from 'motion/react'
+import type { JSX } from 'react'
 import { BoqRowsLayout } from './BoqRowsLayout'
 import { BoqRowsSortableContext } from './BoqRowsSortableContext'
 import { BoqPasteRowTextOverlay } from './boq-row/BoqPasteRowTextOverlay'
 import { BoqRow } from './boq-row/BoqRow'
 import { BoqRowAnimate } from './boq-row/BoqRowAnimate'
 import { BoqRowSortable } from './boq-row/BoqRowSortable'
-import { arrayShapesEqualityFn } from '@shared/util/arrayShapesEqualityFn'
-import type { JSX } from 'react'
 
 export const BoqRows = (): JSX.Element => {
   const { blockIndex } = useBlock()
@@ -32,11 +32,7 @@ export const BoqRows = (): JSX.Element => {
           {boqRows.map((boqRow, rowIndex) => {
             if (boqRow.type === boqRowKey.row) {
               return (
-                <RowProvider
-                  key={boqRow.id}
-                  row={boqRow}
-                  rowIndex={rowIndex}
-                >
+                <RowProvider key={boqRow.id} row={boqRow} rowIndex={rowIndex}>
                   <BoqRowAnimate>
                     <BoqRowSortable>
                       {/* eslint-disable-next-line react/jsx-max-depth */}

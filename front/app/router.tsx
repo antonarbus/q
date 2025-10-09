@@ -1,31 +1,31 @@
-import { lazy, Suspense } from 'react'
-import { type RouteObject, createBrowserRouter } from 'react-router-dom'
+import { userRole } from '@entities/user'
+import { RequireRoles } from '@features/auth/check-required-roles'
+import { AccessToken } from '@features/auth/get-access-token'
+import { Logout } from '@features/auth/log-out'
+import { LoadQuotation } from '@features/quotation/load-quotation'
+import { ActivationModal } from '@pages/auth-activation-modal'
+import { LoginModal } from '@pages/auth-login-modal'
+import { RegisterModal } from '@pages/auth-register-modal'
+import { RequestPasswordResetModal } from '@pages/auth-request-password-reset-modal'
+import { ResetPasswordModal } from '@pages/auth-reset-password-modal'
 import { BookmarkModal } from '@pages/bookmark-modal'
 import { ErrorPage } from '@pages/error-page'
 import { InfoModal } from '@pages/info-modal'
 import { SaveQuotationModal } from '@pages/save-quotation-modal'
 import { SettingsModal } from '@pages/settings-modal'
-import { Copy } from '@widgets/copy'
-import { Nav } from '@widgets/nav'
-import { AccessToken } from '@features/auth/get-access-token'
-import { Logout } from '@features/auth/log-out'
+import { ShareQuotationModal } from '@pages/share-quotation-modal'
+import { TestPage } from '@pages/test-page'
+import { LoadingDotsOverlay } from '@shared/component/loading-dots-overlay'
 import { route } from '@shared/const/route'
 import { Main } from '@shared/layout/Main'
-import { LoadingDotsOverlay } from '@shared/component/loading-dots-overlay'
-import { LoginModal } from '@pages/auth-login-modal'
-import { RegisterModal } from '@pages/auth-register-modal'
-import { RequestPasswordResetModal } from '@pages/auth-request-password-reset-modal'
-import { ActivationModal } from '@pages/auth-activation-modal'
-import { ResetPasswordModal } from '@pages/auth-reset-password-modal'
-import { Footer } from '@widgets/footer'
-import { RequireRoles } from '@features/auth/check-required-roles'
 import { instantiateRouter } from '@shared/lib/react-router-dom/router'
-import { OnInitLoad } from './OnInitLoad'
-import { userRole } from '@entities/user'
+import { Copy } from '@widgets/copy'
+import { Footer } from '@widgets/footer'
+import { Nav } from '@widgets/nav'
+import { lazy, Suspense } from 'react'
+import { createBrowserRouter, type RouteObject } from 'react-router-dom'
 import { Toaster } from 'sonner'
-import { ShareQuotationModal } from '@pages/share-quotation-modal'
-import { LoadQuotation } from '@features/quotation/load-quotation'
-import { TestPage } from '@pages/test-page'
+import { OnInitLoad } from './OnInitLoad'
 
 const QuotationPageLazy = lazy(async () => {
   const module = await import('@pages/quotation-page')
@@ -114,15 +114,8 @@ const router = createBrowserRouter([
       <>
         <OnInitLoad />
         <AccessToken />
-        <Toaster
-          expand
-          position='bottom-center'
-          richColors
-        />
-        <LoadingDotsOverlay
-          shouldShowLoader={false}
-          text={null}
-        />
+        <Toaster expand position='bottom-center' richColors />
+        <LoadingDotsOverlay shouldShowLoader={false} text={null} />
         <Nav />
         <Copy />
         <Main />
@@ -134,12 +127,7 @@ const router = createBrowserRouter([
         path: ':quotationId?',
         element: (
           <Suspense
-            fallback={
-              <LoadingDotsOverlay
-                shouldShowLoader
-                text='Loading...'
-              />
-            }
+            fallback={<LoadingDotsOverlay shouldShowLoader text='Loading...' />}
           >
             <LoadQuotation />
             <QuotationPageLazy />
@@ -174,12 +162,7 @@ const router = createBrowserRouter([
         path: route.quotationList,
         element: (
           <Suspense
-            fallback={
-              <LoadingDotsOverlay
-                shouldShowLoader
-                text='Loading...'
-              />
-            }
+            fallback={<LoadingDotsOverlay shouldShowLoader text='Loading...' />}
           >
             <QuotationListPageLazy />
           </Suspense>
@@ -200,12 +183,7 @@ const router = createBrowserRouter([
         path: route.bookmarkList,
         element: (
           <Suspense
-            fallback={
-              <LoadingDotsOverlay
-                shouldShowLoader
-                text='Loading...'
-              />
-            }
+            fallback={<LoadingDotsOverlay shouldShowLoader text='Loading...' />}
           >
             <BookmarkListPageLazy />
           </Suspense>
@@ -222,12 +200,7 @@ const router = createBrowserRouter([
         path: route.userList,
         element: (
           <Suspense
-            fallback={
-              <LoadingDotsOverlay
-                shouldShowLoader
-                text='Loading...'
-              />
-            }
+            fallback={<LoadingDotsOverlay shouldShowLoader text='Loading...' />}
           >
             <RequireRoles requiredRoles={[userRole.superAdmin]}>
               <UserListPageLazy />
@@ -239,12 +212,7 @@ const router = createBrowserRouter([
         path: route.visitorList,
         element: (
           <Suspense
-            fallback={
-              <LoadingDotsOverlay
-                shouldShowLoader
-                text='Loading...'
-              />
-            }
+            fallback={<LoadingDotsOverlay shouldShowLoader text='Loading...' />}
           >
             <RequireRoles requiredRoles={[userRole.superAdmin]}>
               <VisitorListPageLazy />
@@ -256,12 +224,7 @@ const router = createBrowserRouter([
         path: route.quotationListAll,
         element: (
           <Suspense
-            fallback={
-              <LoadingDotsOverlay
-                shouldShowLoader
-                text='Loading...'
-              />
-            }
+            fallback={<LoadingDotsOverlay shouldShowLoader text='Loading...' />}
           >
             <RequireRoles requiredRoles={[userRole.superAdmin]}>
               <QuotationListAllPageLazy />
@@ -273,12 +236,7 @@ const router = createBrowserRouter([
         path: route.bookmarkListAll,
         element: (
           <Suspense
-            fallback={
-              <LoadingDotsOverlay
-                shouldShowLoader
-                text='Loading...'
-              />
-            }
+            fallback={<LoadingDotsOverlay shouldShowLoader text='Loading...' />}
           >
             <RequireRoles requiredRoles={[userRole.superAdmin]}>
               <BookmarkListAllPageLazy />
@@ -290,12 +248,7 @@ const router = createBrowserRouter([
         path: route.fileListAll,
         element: (
           <Suspense
-            fallback={
-              <LoadingDotsOverlay
-                shouldShowLoader
-                text='Loading...'
-              />
-            }
+            fallback={<LoadingDotsOverlay shouldShowLoader text='Loading...' />}
           >
             <RequireRoles requiredRoles={[userRole.superAdmin]}>
               <FileListAllPageLazy />

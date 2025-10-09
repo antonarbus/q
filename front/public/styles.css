@@ -25,7 +25,7 @@ html::-webkit-scrollbar-track {
 }
 
 html:after {
-  content: 'Q';
+  content: "Q";
   font-family: system-ui, sans-serif;
   position: fixed;
   color: #b2b2b2;

@@ -1,10 +1,10 @@
-import { Chip, Tooltip } from '@mui/material'
-import type { ICellRendererParams } from 'ag-grid-community'
 import type { QuotationPick } from '@back/api/quotation/getQuotationListHandler'
-import { Link } from 'react-router-dom'
+import { Chip, Tooltip } from '@mui/material'
 import { route } from '@shared/const/route'
 import { getTextWithBoldSubStringAsJsx } from '@shared/util/getTextWithBoldSubStringAsJsx'
+import type { ICellRendererParams } from 'ag-grid-community'
 import type { ReactNode } from 'react'
+import { Link } from 'react-router-dom'
 
 type FilterModel = {
   access?: {
@@ -83,11 +83,7 @@ export const SharedWithCellRenderer = (
         })
 
         return (
-          <Tooltip
-            key={email}
-            placement='top'
-            title={userList.join('; ')}
-          >
+          <Tooltip key={email} placement='top' title={userList.join('; ')}>
             <Link to={`share/${quotationId}`}>
               <Chip
                 label={text}

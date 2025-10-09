@@ -1,12 +1,12 @@
-import { Box } from '@mui/material'
-import type { HTMLAttributes, JSX } from 'react'
-import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
-import type { Signal } from '@preact/signals-react'
-import type { LoadBookmark } from '@features/bookmark/copy-bookmark'
 import type { ItemPick } from '@back/api/bookmark/getBookmarkListHandler'
-import { OptionItemName } from './OptionItemName'
+import type { LoadBookmark } from '@features/bookmark/copy-bookmark'
+import { Box } from '@mui/material'
+import type { Signal } from '@preact/signals-react'
+import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
+import type { HTMLAttributes, JSX } from 'react'
 import { OptionItemCategory } from './OptionItemCategory'
 import { OptionItemDescription } from './OptionItemDescription'
+import { OptionItemName } from './OptionItemName'
 
 type Props = {
   loadBookmark: LoadBookmark
@@ -67,10 +67,7 @@ export const renderOption = ({
           isAutocompleteOpen.value = false
         }}
       >
-        <OptionItemName
-          inputValueSignal={inputValueSignal}
-          option={option}
-        />
+        <OptionItemName inputValueSignal={inputValueSignal} option={option} />
 
         <OptionItemCategory
           inputValueSignal={inputValueSignal}

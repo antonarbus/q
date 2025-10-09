@@ -1,28 +1,29 @@
 /* eslint-disable react/jsx-max-depth */
+
+import {
+  Avatar,
+  Box,
+  IconButton,
+  type SxProps,
+  Typography,
+} from '@mui/material'
+import { cls } from '@shared/const/cls'
 import { theme } from '@shared/theme'
-import { IoClose } from 'react-icons/io5'
 import { AnimatePresence, motion } from 'motion/react'
 import type { AnimationScope } from 'motion-dom'
 import {
   Children,
-  type JSX,
-  type ReactNode,
   type ComponentRef,
-  type RefObject,
   type CSSProperties,
-  type MouseEvent,
   type FormEvent,
+  type JSX,
+  type MouseEvent,
+  type ReactNode,
+  type RefObject,
 } from 'react'
+import { IoClose } from 'react-icons/io5'
 import { BackdropWithSlidableModal } from './BackdropWithSlidableModal'
 import { ButtonCustom } from './ButtonCustom'
-import { cls } from '@shared/const/cls'
-import {
-  Avatar,
-  Box,
-  type SxProps,
-  Typography,
-  IconButton,
-} from '@mui/material'
 
 type Props = {
   width?: CSSProperties['width']
@@ -114,10 +115,7 @@ export const FormModal = ({
           <Avatar sx={{ bgcolor: theme.colors.darkBackground }}>
             {headerIcon}
           </Avatar>
-          <Typography
-            component='h1'
-            variant='h6'
-          >
+          <Typography component='h1' variant='h6'>
             {headerText}
           </Typography>
           <IconButton

@@ -1,14 +1,14 @@
 import {
+  closestCenter,
   DndContext,
   PointerSensor,
-  closestCenter,
   useSensor,
   useSensors,
 } from '@dnd-kit/core'
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
-import { useSelector } from '@shared/lib/redux'
-import { onBoqRowDragEnd, onBoqRowDragStart } from '@features/blocks/drag'
 import { selectBoqRows, useBlock } from '@entities/quotation'
+import { onBoqRowDragEnd, onBoqRowDragStart } from '@features/blocks/drag'
+import { useSelector } from '@shared/lib/redux'
 import { arrayShapesEqualityFn } from '@shared/util/arrayShapesEqualityFn'
 import type { JSX, ReactNode } from 'react'
 
@@ -36,10 +36,7 @@ export const BoqRowsSortableContext = ({ children }: Props): JSX.Element => {
       onDragStart={onBoqRowDragStart({ blockIndex })}
       sensors={sensors}
     >
-      <SortableContext
-        items={boqRowIds}
-        strategy={verticalListSortingStrategy}
-      >
+      <SortableContext items={boqRowIds} strategy={verticalListSortingStrategy}>
         {children}
       </SortableContext>
     </DndContext>

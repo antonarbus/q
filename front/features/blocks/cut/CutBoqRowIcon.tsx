@@ -1,7 +1,3 @@
-import { dispatch, getState, useSelector } from '@shared/lib/redux'
-import { theme } from '@shared/theme'
-import type { MouseEvent, JSX } from 'react'
-import { TbCut } from 'react-icons/tb'
 import { copySlice } from '@entities/copy'
 import {
   getBoqRowFromStore,
@@ -10,10 +6,14 @@ import {
   useBlock,
   useRow,
 } from '@entities/quotation'
-import { cls } from '@shared/const/cls'
 import { Tooltip } from '@mui/material'
-import { getClosestRowHtml } from '@shared/util/html-getter/getClosestRowHtml'
+import { cls } from '@shared/const/cls'
 import { textSlice } from '@shared/lib/froala/textSlice'
+import { dispatch, getState, useSelector } from '@shared/lib/redux'
+import { theme } from '@shared/theme'
+import { getClosestRowHtml } from '@shared/util/html-getter/getClosestRowHtml'
+import type { JSX, MouseEvent } from 'react'
+import { TbCut } from 'react-icons/tb'
 
 export const CutBoqRowIcon = (): JSX.Element => {
   const { blockIndex } = useBlock()
@@ -24,12 +24,7 @@ export const CutBoqRowIcon = (): JSX.Element => {
   const disabled = isLastBoqRow || isDeletable === false || isCopyable === false
 
   return (
-    <Tooltip
-      enterDelay={500}
-      enterNextDelay={500}
-      placement='left'
-      title='Cut'
-    >
+    <Tooltip enterDelay={500} enterNextDelay={500} placement='left' title='Cut'>
       <span className={cls.actionIconContainer}>
         <TbCut
           className={cls.actionIcon}

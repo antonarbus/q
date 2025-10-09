@@ -1,10 +1,10 @@
 import type { NavItem } from '@shared/nav/type'
-import { SpinnerIcon } from './SpinnerIcon'
-import { SuccessIcon } from './SuccessIcon'
+import type { ReactNode } from 'react'
+import { navMediaQuery } from '../../navMediaQuery'
 import { ErrorIcon } from './ErrorIcon'
 import { Icon } from './Icon'
-import { navMediaQuery } from '../../navMediaQuery'
-import type { ReactNode } from 'react'
+import { SpinnerIcon } from './SpinnerIcon'
+import { SuccessIcon } from './SuccessIcon'
 
 type Props = {
   navItem?: NavItem
@@ -27,12 +27,7 @@ export const IconWithLoader = (props: Props): ReactNode => {
   }
 
   if (Boolean(icon) === false) {
-    return (
-      <Icon
-        disabled={disabled}
-        icon={firstLetter}
-      />
-    )
+    return <Icon disabled={disabled} icon={firstLetter} />
   }
 
   if (isLoading === true) {
@@ -47,11 +42,5 @@ export const IconWithLoader = (props: Props): ReactNode => {
     return <ErrorIcon />
   }
 
-  return (
-    <Icon
-      disabled={disabled}
-      icon={icon}
-      tooltipText={tooltipText}
-    />
-  )
+  return <Icon disabled={disabled} icon={icon} tooltipText={tooltipText} />
 }

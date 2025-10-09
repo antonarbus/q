@@ -378,6 +378,7 @@ https://console.cloud.google.com/iam-admin/serviceaccounts?inv=1&invt=AblPCg&pro
 # TO-DO
 
 - [ ] use https://biomejs.dev instead of eslint + prettier (https://www.youtube.com/watch?v=x5kwmIaPty8)
+- [ ] use `useDeferredValue` in bookmark search https://react.dev/reference/react/useDeferredValue
 - [ ] Upgrade vitejs/plugin-react (currently blocked by TS declaration issue in ^5.0.4)
 - [ ] Add delete account button
 - [ ] Prevent re-uploading the same file

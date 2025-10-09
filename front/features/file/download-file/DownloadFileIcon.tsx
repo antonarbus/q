@@ -1,7 +1,7 @@
 import { Tooltip } from '@mui/material'
-import { HiDownload } from 'react-icons/hi'
 import { format } from 'bytes'
 import type { JSX } from 'react'
+import { HiDownload } from 'react-icons/hi'
 
 type Props = {
   fileSize: number
@@ -15,10 +15,7 @@ export const DownloadFileIcon = ({ fileSize }: Props): JSX.Element => {
   })
 
   return (
-    <Tooltip
-      placement='top'
-      title={`Download ${fileSizeFormatted}`}
-    >
+    <Tooltip placement='top' title={`Download ${fileSizeFormatted}`}>
       <HiDownload
         css={{
           width: '14px',

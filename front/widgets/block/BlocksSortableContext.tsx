@@ -1,7 +1,7 @@
 import {
+  closestCenter,
   DndContext,
   PointerSensor,
-  closestCenter,
   // pointerWithin, // bad for large elements
   // closestCorners, // bad for large elements
   // rectIntersection, // bad for large elements
@@ -9,8 +9,8 @@ import {
   useSensors,
 } from '@dnd-kit/core'
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
-import { getState } from '@shared/lib/redux'
 import { onBlockDragEnd, onBlockDragStart } from '@features/blocks/drag'
+import { getState } from '@shared/lib/redux'
 import type { JSX, ReactNode } from 'react'
 
 type Props = {
@@ -32,10 +32,7 @@ export const BlocksSortableContext = ({ children }: Props): JSX.Element => {
       onDragStart={onBlockDragStart}
       sensors={sensors}
     >
-      <SortableContext
-        items={blockIds}
-        strategy={verticalListSortingStrategy}
-      >
+      <SortableContext items={blockIds} strategy={verticalListSortingStrategy}>
         {children}
       </SortableContext>
     </DndContext>

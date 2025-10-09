@@ -1,9 +1,9 @@
 import { getState, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
-import { type Variants, AnimatePresence, motion } from 'motion/react'
+import { AnimatePresence, motion, type Variants } from 'motion/react'
+import type { JSX } from 'react'
 import { containerPadding, containerWidth, itemMarginBottom } from './const'
 import { ScaledCopyItem } from './ScaledCopyItem'
-import type { JSX } from 'react'
 
 type Props = {
   isCopying: boolean
@@ -81,10 +81,7 @@ export const FirstCopiedItem = (): JSX.Element | null => {
   }
 
   return (
-    <AnimatePresence
-      custom={animationProps}
-      mode='wait'
-    >
+    <AnimatePresence custom={animationProps} mode='wait'>
       <motion.div
         animate='animate'
         custom={animationProps}
