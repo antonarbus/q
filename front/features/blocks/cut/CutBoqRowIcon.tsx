@@ -45,7 +45,16 @@ export const CutBoqRowIcon = (): JSX.Element => {
               return
             }
 
+            // Save scroll position before setNotEditable
+            const scrollX = window.scrollX
+            const scrollY = window.scrollY
+
             dispatch(textSlice.actions.setNotEditable())
+
+            // Restore scroll position after React renders
+            requestAnimationFrame(() => {
+              window.scrollTo(scrollX, scrollY)
+            })
 
             dispatch(
               quotationSlice.actions.updateBoqRowHeightAndWidthReducer({
