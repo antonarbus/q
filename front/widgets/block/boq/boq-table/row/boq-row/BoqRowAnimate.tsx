@@ -15,20 +15,17 @@ export const BoqRowAnimate = ({ children }: Props): JSX.Element => {
         opacity: 1,
         transitionEnd: {
           height: 'auto',
-          // overflow: 'visible',
         },
         y: 0,
       }}
       exit={{
         height: 0,
         opacity: 0,
-        // overflow: 'visible',
         x: '150vw',
       }}
       initial={{
         height: 0,
         opacity: 0,
-        // overflow: 'visible',
         y: '100vh',
       }}
       transition={{
