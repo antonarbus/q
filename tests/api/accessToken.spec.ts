@@ -30,7 +30,7 @@ test.describe('#authTokenRefresh', () => {
 
       // Verify refresh token cookie is set
       const cookies = loginResponse.headers()['set-cookie'] || ''
-      expect(cookies).toContain('refreshJwtToken')
+      expect(cookies).toContain('refresh-jwt-token')
     })
   })
 
