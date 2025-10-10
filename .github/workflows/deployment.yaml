@@ -63,14 +63,15 @@ jobs:
       - name: Install back dependencies
         run: npm run install_back
 
+      - name: Run Biome (formatting + linting)
+        run: npm run biome:silent
+        
       - name: Run unit tests
         run: npm run test
 
       - name: Run TypeScript checks
         run: npm run tsc
 
-      - name: Run Biome (formatting + linting)
-        run: npm run biome:silent
 
       - name: Run Playwright tests
         run: npm run playwright
