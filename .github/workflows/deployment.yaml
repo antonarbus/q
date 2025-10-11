@@ -43,6 +43,9 @@ jobs:
         run: |-
           gcloud auth configure-docker '${{env.REGION}}-docker.pkg.dev'
 
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
       - name: Install NodeJS
         uses: actions/setup-node@v4
         with:
