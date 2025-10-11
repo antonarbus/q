@@ -5,7 +5,7 @@ import {
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
 import { userRole } from '@back/shared/const/userRole'
-import type { User } from '@entities/user'
+import type { User } from '@entities/user/type'
 import type { Pretty } from '@shared/lib/typescript/Pretty'
 import type { NextFunction, Request, Response } from 'express'
 import type { FlattenMaps } from 'mongoose'

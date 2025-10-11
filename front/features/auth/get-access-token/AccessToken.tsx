@@ -1,5 +1,7 @@
 import type { JwtPayloadExtended } from '@back/shared/lib/json-webtoken'
-import { useGetUserAccessTokenQuery, userRole, userSlice } from '@entities/user'
+import { useGetUserAccessTokenQuery } from '@entities/user/api/useGetUserAccessTokenQuery'
+import { userRole } from '@entities/user/const/userRole'
+import { userSlice } from '@entities/user/redux/userSlice'
 import { agGridSlice } from '@shared/lib/ag-grid/agGridSlice'
 import { dispatch, getState } from '@shared/lib/redux'
 import { navItemId } from '@shared/nav/navItemId'

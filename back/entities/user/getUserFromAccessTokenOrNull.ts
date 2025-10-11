@@ -1,6 +1,6 @@
 import { headerName } from '@back/shared/headers'
 import { verifyAccessToken } from '@back/shared/lib/json-webtoken'
-import type { User } from '@entities/user'
+import type { User } from '@entities/user/type'
 import type { Request } from 'express'
 
 type Props = {

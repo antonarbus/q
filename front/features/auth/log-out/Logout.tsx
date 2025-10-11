@@ -1,6 +1,7 @@
 import { deleteBookmarkListCache } from '@entities/bookmark/cache-updater/deleteBookmarkListCache'
 import { deleteQuotationListCache } from '@entities/quotation'
-import { useLogOutUserMutation, userSlice } from '@entities/user'
+import { useLogOutUserMutation } from '@entities/user/api/useLogOutUserMutation'
+import { userSlice } from '@entities/user/redux/userSlice'
 import { appSlice } from '@shared/appSlice'
 import { dispatch } from '@shared/lib/redux'
 import { navItemId } from '@shared/nav/navItemId'

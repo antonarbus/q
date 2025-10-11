@@ -1,5 +1,5 @@
 import type { UserPicked } from '@back/api/user/getUserListHandler'
-import { useGetUserListQuery } from '@entities/user'
+import { useGetUserListQuery } from '@entities/user/api/useGetUserListQuery'
 import { LoadingTableOverlay } from '@shared/component/LoadingTableOverlay'
 import { useDisableLoadingOverlayWhenItemsAreFetched } from '@shared/component/loading-dots-overlay'
 import { agGridSlice } from '@shared/lib/ag-grid/agGridSlice'

@@ -1,5 +1,5 @@
 import type { ReqBody as Payload } from '@back/api/user/deleteUserHandler'
-import { useDeleteUserMutation } from '@entities/user'
+import { useDeleteUserMutation } from '@entities/user/api/useDeleteUserMutation'
 import { IconButton, Tooltip } from '@mui/material'
 import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import { instance } from '@shared/instance'

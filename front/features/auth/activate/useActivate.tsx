@@ -1,4 +1,5 @@
-import { useActivateUserMutation, userSlice } from '@entities/user'
+import { useActivateUserMutation } from '@entities/user/api/useActivateUserMutation'
+import { userSlice } from '@entities/user/redux/userSlice'
 import { dispatch } from '@shared/lib/redux'
 import { navItemId } from '@shared/nav/navItemId'
 import { navSlice } from '@shared/nav/navSlice'

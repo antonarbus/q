@@ -1,4 +1,4 @@
-import { userSlice } from '@entities/user'
+import { userSlice } from '@entities/user/redux/userSlice'
 import { dispatch, useSelector } from '@shared/lib/redux'
 import { useUpdateEffect } from 'react-use'
 

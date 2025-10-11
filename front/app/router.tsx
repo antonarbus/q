@@ -1,4 +1,4 @@
-import { userRole } from '@entities/user'
+import { userRole } from '@entities/user/const/userRole'
 import { RequireRoles } from '@features/auth/check-required-roles'
 import { AccessToken } from '@features/auth/get-access-token'
 import { Logout } from '@features/auth/log-out'

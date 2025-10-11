@@ -6,7 +6,7 @@ import {
   removeRefreshTokenCookie,
 } from '@back/shared/headers'
 import { generateAccessToken } from '@back/shared/lib/json-webtoken'
-import type { User } from '@entities/user'
+import type { User } from '@entities/user/type'
 import type { NextFunction, Request, Response } from 'express'
 
 export type ResBody = {

@@ -1,7 +1,7 @@
 // import type { HydratedDocumentFromSchema, InferSchemaType } from 'mongoose'
 
 import { userRole } from '@back/shared/const/userRole'
-import type { User } from '@entities/user'
+import type { User } from '@entities/user/type'
 import { model, Schema } from 'mongoose'
 
 // define schema for documents in collection

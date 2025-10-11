@@ -1,4 +1,5 @@
-import { useRegisterUserMutation, userSlice } from '@entities/user'
+import { useRegisterUserMutation } from '@entities/user/api/useRegisterUserMutation'
+import { userSlice } from '@entities/user/redux/userSlice'
 import type { Signal } from '@preact/signals-react'
 import { appSlice } from '@shared/appSlice'
 import { trackSignUpEventAtGoogleTagManager } from '@shared/lib/google-tag-manager/trackSignUpEventAtGoogleTagManager'

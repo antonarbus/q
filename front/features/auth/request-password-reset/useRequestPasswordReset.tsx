@@ -1,4 +1,4 @@
-import { useRequestUserPasswordResetMutation } from '@entities/user'
+import { useRequestUserPasswordResetMutation } from '@entities/user/api/useRequestUserPasswordResetMutation'
 import type { Signal } from '@preact/signals-react'
 import { asyncDelay } from '@shared/util/delay'
 import type { UseMutationResult } from '@tanstack/react-query'

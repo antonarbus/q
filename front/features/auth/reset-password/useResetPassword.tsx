@@ -1,8 +1,6 @@
-import {
-  useResetUserPasswordMutation,
-  userRole,
-  userSlice,
-} from '@entities/user'
+import { useResetUserPasswordMutation } from '@entities/user/api/useResetUserPasswordMutation'
+import { userRole } from '@entities/user/const/userRole'
+import { userSlice } from '@entities/user/redux/userSlice'
 import type { Signal } from '@preact/signals-react'
 import { dispatch } from '@shared/lib/redux'
 import { navItemId } from '@shared/nav/navItemId'
