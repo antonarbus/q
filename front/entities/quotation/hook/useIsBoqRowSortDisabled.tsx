@@ -1,4 +1,4 @@
-import { useIsCopyModalVisible } from '@entities/copy'
+import { useIsCopyModalVisible } from '@entities/copy/useIsCopyModalVisible'
 import { useSelector } from '@shared/lib/redux'
 import { useBlock } from '../provider/BlockProvider'
 import { selectIsLastBoqRow } from '../redux/selector/selectIsLastBoqRow'

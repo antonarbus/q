@@ -1,4 +1,4 @@
-import { copySlice } from '@entities/copy'
+import { copySlice } from '@entities/copy/copySlice'
 import { itemType, saveBlockHeightByIndex, useBlock } from '@entities/quotation'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/cls'

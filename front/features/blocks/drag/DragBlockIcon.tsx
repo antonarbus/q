@@ -1,5 +1,5 @@
 import { useSortable } from '@dnd-kit/sortable'
-import { useIsCopyModalVisible } from '@entities/copy'
+import { useIsCopyModalVisible } from '@entities/copy/useIsCopyModalVisible'
 import { useBlock, useIsLastBlock } from '@entities/quotation'
 import { Tooltip } from '@mui/material'
 import { useSignal } from '@preact/signals-react'

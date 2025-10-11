@@ -1,6 +1,6 @@
 import type { ReqBody } from '@back/api/bookmark/getBookmarkHandler'
 import { useGetBookmarkMutation } from '@entities/bookmark/api/useGetBookmarkMutation'
-import { copySlice } from '@entities/copy'
+import { copySlice } from '@entities/copy/copySlice'
 import { IconButton, Tooltip } from '@mui/material'
 import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import { textSlice } from '@shared/lib/froala/textSlice'

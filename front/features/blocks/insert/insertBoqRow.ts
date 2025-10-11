@@ -1,4 +1,4 @@
-import { copySlice } from '@entities/copy'
+import { copySlice } from '@entities/copy/copySlice'
 import { boqRowKey, type Row } from '@entities/quotation'
 import { textSlice } from '@shared/lib/froala/textSlice'
 import { generateId } from '@shared/lib/nanoid'

@@ -1,4 +1,6 @@
-import { type CopyPlace, copySlice, getPastePlace } from '@entities/copy'
+import { copySlice } from '@entities/copy/copySlice'
+import { getPastePlace } from '@entities/copy/getPastePlace'
+import type { CopyPlace } from '@entities/copy/types'
 import { boqRowKey, itemType, quotationSlice } from '@entities/quotation'
 import { cls } from '@shared/cls'
 import { route } from '@shared/lib/react-router-dom/route'

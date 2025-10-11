@@ -1,4 +1,4 @@
-import { copySlice } from '@entities/copy'
+import { copySlice } from '@entities/copy/copySlice'
 import { quotationSlice } from '@entities/quotation'
 import { cls } from '@shared/cls'
 import { textSlice } from '@shared/lib/froala/textSlice'

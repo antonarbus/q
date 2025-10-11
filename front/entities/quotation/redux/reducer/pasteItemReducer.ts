@@ -1,4 +1,4 @@
-import type { PastePos } from '@entities/copy'
+import type { PastePos } from '@entities/copy/types'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { generateId } from '@shared/lib/nanoid'
 import { boqRowKey } from '../../const/boqRowKey'

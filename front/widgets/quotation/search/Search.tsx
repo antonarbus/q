@@ -1,5 +1,5 @@
 import { useGetBookmarkListQuery } from '@entities/bookmark/api/useGetBookmarkListQuery'
-import { useIsCopyModalVisible } from '@entities/copy'
+import { useIsCopyModalVisible } from '@entities/copy/useIsCopyModalVisible'
 import { useCopyBookmarkAtSearch } from '@features/bookmark/copy-bookmark'
 import { Autocomplete } from '@mui/material'
 import { useSignal } from '@preact/signals-react'

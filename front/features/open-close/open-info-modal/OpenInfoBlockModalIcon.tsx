@@ -1,4 +1,4 @@
-import { useIsCopyModalVisible } from '@entities/copy'
+import { useIsCopyModalVisible } from '@entities/copy/useIsCopyModalVisible'
 import { getBlockFromStore, itemType, useBlock } from '@entities/quotation'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/cls'

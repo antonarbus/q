@@ -1,4 +1,4 @@
-import type { CopyPlace } from '@entities/copy'
+import type { CopyPlace } from '@entities/copy/types'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { boqRowKey } from '../../const/boqRowKey'
 import type { Quotation, Row, RowCell } from '../../type'

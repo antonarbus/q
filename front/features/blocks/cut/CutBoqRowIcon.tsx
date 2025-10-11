@@ -1,4 +1,4 @@
-import { copySlice } from '@entities/copy'
+import { copySlice } from '@entities/copy/copySlice'
 import {
   getBoqRowFromStore,
   quotationSlice,

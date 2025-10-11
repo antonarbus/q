@@ -4,7 +4,7 @@ import type {
   ResBody,
 } from '@back/api/bookmark/getBookmarkHandler'
 import { useGetBookmarkMutation } from '@entities/bookmark/api/useGetBookmarkMutation'
-import { copySlice } from '@entities/copy'
+import { copySlice } from '@entities/copy/copySlice'
 import { textSlice } from '@shared/lib/froala/textSlice'
 import { dispatch } from '@shared/lib/redux'
 import type { UseMutateAsyncFunction } from '@tanstack/react-query'

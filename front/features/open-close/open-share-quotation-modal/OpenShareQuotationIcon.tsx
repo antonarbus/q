@@ -1,4 +1,4 @@
-import { useIsCopyModalVisible } from '@entities/copy'
+import { useIsCopyModalVisible } from '@entities/copy/useIsCopyModalVisible'
 import { Tooltip } from '@mui/material'
 import { route } from '@shared/lib/react-router-dom/route'
 import { useSelector } from '@shared/lib/redux'

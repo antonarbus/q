@@ -1,4 +1,4 @@
-import type { CopyPlace } from '@entities/copy'
+import type { CopyPlace } from '@entities/copy/types'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { generateId } from '@shared/lib/nanoid'
 import { itemType } from '../../const/itemType'

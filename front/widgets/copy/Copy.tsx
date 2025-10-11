@@ -1,4 +1,4 @@
-import { useIsCopyModalVisible } from '@entities/copy'
+import { useIsCopyModalVisible } from '@entities/copy/useIsCopyModalVisible'
 import type { JSX } from 'react'
 import { CopyModal } from './CopyModal'
 
