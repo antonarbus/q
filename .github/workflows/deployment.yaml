@@ -43,52 +43,22 @@ jobs:
         run: |-
           gcloud auth configure-docker '${{env.REGION}}-docker.pkg.dev'
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
       - name: Install NodeJS
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: 'npm'
-
-      - name: Print Node version
-        run: echo "Node.js version:$(node --version)"
 
       - name: Disable npm installation checks
         run: npm config set legacy-peer-deps true
 
-      - name: Cache node_modules
-        uses: actions/cache@v4
-        id: cache-modules
-        with:
-          path: |
-            node_modules
-            front/node_modules
-            back/node_modules
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-modules-
-
       - name: Install dev dependencies
-        if: steps.cache-modules.outputs.cache-hit != 'true'
         run: npm run install_dev_deps
 
       - name: Install front dependencies
-        if: steps.cache-modules.outputs.cache-hit != 'true'
         run: npm run install_front
 
       - name: Install back dependencies
-        if: steps.cache-modules.outputs.cache-hit != 'true'
         run: npm run install_back
-
-      - name: Cache Playwright browsers
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-playwright-
 
       - name: Run Biome (formatting + linting)
         run: npm run biome:silent
@@ -115,8 +85,6 @@ jobs:
           context: .
           file: ./Dockerfile.prod.back
           push: true
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
           tags: ${{env.REGION}}-docker.pkg.dev/${{env.PROJECT_ID}}/${{env.ARTIFACTS_REGISTRY_NAME}}/${{env.DOCKER_IMAGE_NAME}}-back:${{env.IMAGE_VERSION}}
 
       - name: Deploy to Cloud Run Backend
@@ -144,8 +112,6 @@ jobs:
           context: .
           file: ./Dockerfile.prod.front
           push: true
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
           tags: ${{env.REGION}}-docker.pkg.dev/${{env.PROJECT_ID}}/${{env.ARTIFACTS_REGISTRY_NAME}}/${{env.DOCKER_IMAGE_NAME}}-front:${{env.IMAGE_VERSION}}
 
       - name: Deploy to Cloud Run Frontend
