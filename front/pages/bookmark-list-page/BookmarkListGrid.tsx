@@ -1,5 +1,5 @@
 import type { ItemPick } from '@back/api/bookmark/getBookmarkListHandler'
-import { useGetBookmarkListQuery } from '@entities/bookmark'
+import { useGetBookmarkListQuery } from '@entities/bookmark/api/useGetBookmarkListQuery'
 import { LoadingTableOverlay } from '@shared/component/LoadingTableOverlay'
 import { useDisableLoadingOverlayWhenItemsAreFetched } from '@shared/component/loading-dots-overlay'
 import { agGridSlice } from '@shared/lib/ag-grid/agGridSlice'

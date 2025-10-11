@@ -1,4 +1,4 @@
-import { useGetBookmarkCategoryListQuery } from '@entities/bookmark'
+import { useGetBookmarkCategoryListQuery } from '@entities/bookmark/api/useGetBookmarkCategoryListQuery'
 import { useGetQuotationCategoryListQuery } from '@entities/quotation'
 import { useParams } from 'react-router-dom'
 

@@ -1,4 +1,4 @@
-import { useGetBookmarkCategoryListQuery } from '@entities/bookmark'
+import { useGetBookmarkCategoryListQuery } from '@entities/bookmark/api/useGetBookmarkCategoryListQuery'
 import { quotationSlice } from '@entities/quotation'
 import { useSaveBookmark } from '@features/bookmark/save-bookmark'
 import {

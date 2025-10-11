@@ -3,7 +3,7 @@ import type {
   ReqBody as Payload,
   ResBody,
 } from '@back/api/bookmark/getBookmarkHandler'
-import { useGetBookmarkMutation } from '@entities/bookmark'
+import { useGetBookmarkMutation } from '@entities/bookmark/api/useGetBookmarkMutation'
 import { copySlice } from '@entities/copy'
 import { textSlice } from '@shared/lib/froala/textSlice'
 import { dispatch } from '@shared/lib/redux'

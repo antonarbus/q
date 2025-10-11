@@ -1,7 +1,5 @@
-import {
-  type BookmarkFormValues,
-  useGetBookmarkMutation,
-} from '@entities/bookmark'
+import { useGetBookmarkMutation } from '@entities/bookmark/api/useGetBookmarkMutation'
+import type { BookmarkFormValues } from '@entities/bookmark/form/types'
 import { BOOKMARK_POS_AT_BLOCKS, quotationSlice } from '@entities/quotation'
 import { dispatch, getState } from '@shared/lib/redux'
 import { useNavigate, useParams } from 'react-router-dom'

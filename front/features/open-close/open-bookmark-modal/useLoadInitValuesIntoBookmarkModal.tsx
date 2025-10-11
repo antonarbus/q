@@ -1,4 +1,4 @@
-import type { BookmarkFormValues } from '@entities/bookmark'
+import type { BookmarkFormValues } from '@entities/bookmark/form/types'
 import { BOOKMARK_POS_AT_BLOCKS } from '@entities/quotation'
 import { useSignal } from '@preact/signals-react'
 import { getState } from '@shared/lib/redux'

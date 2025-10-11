@@ -1,4 +1,4 @@
-import { deleteBookmarkListCache } from '@entities/bookmark'
+import { deleteBookmarkListCache } from '@entities/bookmark/cache-updater/deleteBookmarkListCache'
 import { deleteQuotationListCache } from '@entities/quotation'
 import { useLogOutUserMutation, userSlice } from '@entities/user'
 import { appSlice } from '@shared/appSlice'

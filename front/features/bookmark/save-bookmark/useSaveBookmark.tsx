@@ -1,9 +1,7 @@
-import {
-  type BookmarkFormValues,
-  useGetBookmarkCategoryListQuery,
-  useGetBookmarkListQuery,
-  useSaveBookmarkMutation,
-} from '@entities/bookmark'
+import { useGetBookmarkCategoryListQuery } from '@entities/bookmark/api/useGetBookmarkCategoryListQuery'
+import { useGetBookmarkListQuery } from '@entities/bookmark/api/useGetBookmarkListQuery'
+import { useSaveBookmarkMutation } from '@entities/bookmark/api/useSaveBookmarkMutation'
+import type { BookmarkFormValues } from '@entities/bookmark/form/types'
 import { BOOKMARK_POS_AT_BLOCKS, quotationSlice } from '@entities/quotation'
 import { cls } from '@shared/cls'
 import { dispatch, getState } from '@shared/lib/redux'

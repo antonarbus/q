@@ -1,5 +1,5 @@
 import type { ReqBody } from '@back/api/bookmark/getBookmarkHandler'
-import { useGetBookmarkMutation } from '@entities/bookmark'
+import { useGetBookmarkMutation } from '@entities/bookmark/api/useGetBookmarkMutation'
 import { copySlice } from '@entities/copy'
 import { IconButton, Tooltip } from '@mui/material'
 import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'

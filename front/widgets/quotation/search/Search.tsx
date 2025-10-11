@@ -1,4 +1,4 @@
-import { useGetBookmarkListQuery } from '@entities/bookmark'
+import { useGetBookmarkListQuery } from '@entities/bookmark/api/useGetBookmarkListQuery'
 import { useIsCopyModalVisible } from '@entities/copy'
 import { useCopyBookmarkAtSearch } from '@features/bookmark/copy-bookmark'
 import { Autocomplete } from '@mui/material'

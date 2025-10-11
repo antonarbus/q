@@ -3,7 +3,7 @@ import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
 import { userRole } from '@back/shared/const/userRole'
-import type { Item } from '@entities/bookmark'
+import type { Item } from '@entities/quotation'
 import type { NextFunction, Request, Response } from 'express'
 import { z } from 'zod/v4'
 

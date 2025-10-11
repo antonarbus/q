@@ -1,8 +1,6 @@
 import type { ReqBody } from '@back/api/bookmark/deleteBookmarkHandler'
-import {
-  deleteFromBookmarkListCache,
-  useDeleteBookmarkMutation,
-} from '@entities/bookmark'
+import { useDeleteBookmarkMutation } from '@entities/bookmark/api/useDeleteBookmarkMutation'
+import { deleteFromBookmarkListCache } from '@entities/bookmark/cache-updater/deleteFromBookmarkListCache'
 import { IconButton, Tooltip } from '@mui/material'
 import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import type { JSX } from 'react'

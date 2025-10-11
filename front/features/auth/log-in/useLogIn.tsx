@@ -1,4 +1,4 @@
-import { useGetBookmarkListQuery } from '@entities/bookmark'
+import { useGetBookmarkListQuery } from '@entities/bookmark/api/useGetBookmarkListQuery'
 import { useGetQuotationListQuery } from '@entities/quotation'
 import { useLogInUserMutation, userRole, userSlice } from '@entities/user'
 import type { Signal } from '@preact/signals-react'

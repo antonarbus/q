@@ -1,5 +1,5 @@
 import { generateId } from '@back/shared/lib/nanoid'
-import type { Item } from '@entities/bookmark'
+import type { Item } from '@entities/quotation'
 import { model, Schema } from 'mongoose'
 
 const bookmarkSchema = new Schema<Item>(

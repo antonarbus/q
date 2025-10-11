@@ -1,5 +1,5 @@
 import type { ReqBody as Payload } from '@back/api/user/deleteUserHandler'
-import { useGetBookmarkListQuery } from '@entities/bookmark'
+import { useGetBookmarkListQuery } from '@entities/bookmark/api/useGetBookmarkListQuery'
 import { useGetQuotationListQuery } from '@entities/quotation'
 import { useLogInUserMutation, userRole, userSlice } from '@entities/user'
 import { IconButton, Tooltip } from '@mui/material'
