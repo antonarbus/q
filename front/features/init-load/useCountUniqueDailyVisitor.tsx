@@ -1,4 +1,4 @@
-import { useCountUniqueDailyVisitorsMutation } from '@entities/visitor'
+import { useCountUniqueDailyVisitorsMutation } from '@entities/visitor/api/useCountUniqueDailyVisitorsMutation'
 import { format } from 'date-fns'
 import { useEffectOnce } from 'react-use'
 
