@@ -1,4 +1,4 @@
-import { boqRowCellKey } from '@entities/quotation'
+import { boqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
 import { formatRowBlockCellNumber } from '@entities/quotation/util/formatRowBlockCellNumber'
 import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 

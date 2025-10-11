@@ -1,5 +1,7 @@
 import type { ReqBody } from '@back/api/bookmark/deleteBookmarkHandler'
-import { quotationSlice, useGetQuotationMutation } from '@entities/quotation'
+import { useGetQuotationMutation } from '@entities/quotation/api/useGetQuotationMutation'
+import { quotationSlice } from '@entities/quotation/redux/quotationSlice'
+
 import { IconButton, Tooltip } from '@mui/material'
 import { appSlice } from '@shared/appSlice'
 import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'

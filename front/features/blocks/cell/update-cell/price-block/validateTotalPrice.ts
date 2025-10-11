@@ -1,8 +1,6 @@
-import {
-  getTotalPriceAbove,
-  itemType,
-  quotationSlice,
-} from '@entities/quotation'
+import { itemType } from '@entities/quotation/const/itemType'
+import { quotationSlice } from '@entities/quotation/redux/quotationSlice'
+import { getTotalPriceAbove } from '@entities/quotation/util/getTotalPriceAbove'
 import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import { updateNumberAtHtmlIncrementally } from '@shared/lib/froala/updateNumberAtHtmlIncrementally'
 import { dispatch, getState } from '@shared/lib/redux'

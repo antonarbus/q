@@ -1,10 +1,8 @@
 import { copySlice } from '@entities/copy/copySlice'
-import {
-  quotationSlice,
-  selectIsLastBoqRow,
-  useBlock,
-  useRow,
-} from '@entities/quotation'
+import { useBlock } from '@entities/quotation/provider/BlockProvider'
+import { useRow } from '@entities/quotation/provider/RowProvider'
+import { quotationSlice } from '@entities/quotation/redux/quotationSlice'
+import { selectIsLastBoqRow } from '@entities/quotation/redux/selector/selectIsLastBoqRow'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/cls'
 import { dispatch, getState, useSelector } from '@shared/lib/redux'

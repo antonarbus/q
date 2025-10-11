@@ -1,4 +1,4 @@
-import { BlockComp } from '@entities/quotation'
+import { BlockComp } from '@entities/quotation/ui/BlockComp'
 import {
   onBoqBlockResize,
   onBoqBlockResizeStart,

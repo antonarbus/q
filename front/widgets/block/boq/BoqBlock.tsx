@@ -1,4 +1,5 @@
-import { BlockComp, BoqProvider } from '@entities/quotation'
+import { BoqProvider } from '@entities/quotation/provider/BoqBlockProvider'
+import { BlockComp } from '@entities/quotation/ui/BlockComp'
 import { CopyBlockIcon } from '@features/blocks/copy'
 import { CutBlockIcon } from '@features/blocks/cut'
 import { DeleteBlockIcon } from '@features/blocks/delete'

@@ -1,8 +1,6 @@
-import {
-  quotationSlice,
-  type SaveQuotationFormValues,
-  useGetQuotationMutation,
-} from '@entities/quotation'
+import { useGetQuotationMutation } from '@entities/quotation/api/useGetQuotationMutation'
+import { quotationSlice } from '@entities/quotation/redux/quotationSlice'
+import type { SaveQuotationFormValues } from '@entities/quotation/type'
 import { dispatch, getState } from '@shared/lib/redux'
 import { useParams } from 'react-router-dom'
 import { useEffectOnce, useUpdateEffect } from 'react-use'

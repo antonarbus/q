@@ -1,4 +1,5 @@
-import { getBoqBlockFromStore, quotationSlice } from '@entities/quotation'
+import { getBoqBlockFromStore } from '@entities/quotation/redux/getter/getBoqBlockFromStore'
+import { quotationSlice } from '@entities/quotation/redux/quotationSlice'
 import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import { dispatch } from '@shared/lib/redux'
 import { getStringWithNewFormattedNumber } from '@shared/util/getStringWithNewFormattedNumber'

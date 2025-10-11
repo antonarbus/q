@@ -1,4 +1,4 @@
-import { BOOKMARK_POS_AT_BLOCKS } from '@entities/quotation'
+import { BOOKMARK_POS_AT_BLOCKS } from '@entities/quotation/const/bookmarkPosAtBlocks'
 import { textSlice } from '@shared/lib/froala/textSlice'
 import { dispatch, useSelector } from '@shared/lib/redux'
 import { Block } from '@widgets/block/Block'

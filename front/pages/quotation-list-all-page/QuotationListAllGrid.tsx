@@ -1,5 +1,5 @@
 import type { ItemPick } from '@back/api/quotation/getQuotationListAllHandler'
-import { useQuotationListAllDatasource } from '@entities/quotation'
+import { useQuotationListAllDatasource } from '@entities/quotation/api/useQuotationListAllDatasource'
 import { LoadingTableOverlay } from '@shared/component/LoadingTableOverlay'
 import { useDisableLoadingOverlayWhenItemsAreFetched } from '@shared/component/loading-dots-overlay'
 import { agGridSlice } from '@shared/lib/ag-grid/agGridSlice'

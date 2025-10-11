@@ -1,6 +1,8 @@
 import { useGetBookmarkMutation } from '@entities/bookmark/api/useGetBookmarkMutation'
 import type { BookmarkFormValues } from '@entities/bookmark/form/types'
-import { BOOKMARK_POS_AT_BLOCKS, quotationSlice } from '@entities/quotation'
+import { BOOKMARK_POS_AT_BLOCKS } from '@entities/quotation/const/bookmarkPosAtBlocks'
+import { quotationSlice } from '@entities/quotation/redux/quotationSlice'
+
 import { dispatch, getState } from '@shared/lib/redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useEffectOnce, useUpdateEffect } from 'react-use'

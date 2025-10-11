@@ -1,8 +1,6 @@
-import {
-  didBoqCellContentChange,
-  updateBoqRowCellAtStore,
-} from '@entities/quotation'
 import type { BoqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
+import { updateBoqRowCellAtStore } from '@entities/quotation/redux/updater/updateBoqRowCellAtStore'
+import { didBoqCellContentChange } from '@entities/quotation/util/didBoqCellContentChange'
 import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 
 type Props = {

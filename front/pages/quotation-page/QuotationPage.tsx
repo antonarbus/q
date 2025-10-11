@@ -1,4 +1,4 @@
-import { BackgroundMessage } from '@entities/quotation'
+import { BackgroundMessage } from '@entities/quotation/ui/BackgroundMessage'
 import { useSelector } from '@shared/lib/redux'
 import { arrayShapesEqualityFn } from '@shared/util/arrayShapesEqualityFn'
 import { BlockMany } from '@widgets/block'

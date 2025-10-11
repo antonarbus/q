@@ -1,4 +1,4 @@
-import { useBlock } from '@entities/quotation'
+import { useBlock } from '@entities/quotation/provider/BlockProvider'
 import { theme } from '@shared/theme'
 import { motion } from 'motion/react'
 import type { JSX } from 'react'

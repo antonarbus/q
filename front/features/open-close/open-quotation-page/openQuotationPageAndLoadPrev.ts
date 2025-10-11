@@ -1,4 +1,4 @@
-import { backToQuotationRef } from '@entities/quotation'
+import { backToQuotationRef } from '@entities/quotation/ref/backToQuotationRef'
 import { appSlice } from '@shared/appSlice'
 import { router } from '@shared/lib/react-router-dom/router'
 import { dispatch } from '@shared/lib/redux'

@@ -1,4 +1,4 @@
-import { BlockComp } from '@entities/quotation'
+import { BlockComp } from '@entities/quotation/ui/BlockComp'
 import { CopyBlockIcon } from '@features/blocks/copy'
 import { CutBlockIcon } from '@features/blocks/cut'
 import { DeleteBlockIcon } from '@features/blocks/delete'

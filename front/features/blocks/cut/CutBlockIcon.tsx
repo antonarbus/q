@@ -1,11 +1,9 @@
 import { copySlice } from '@entities/copy/copySlice'
-import {
-  itemType,
-  quotationSlice,
-  saveBlockHeightByIndex,
-  selectIsLastBlock,
-  useBlock,
-} from '@entities/quotation'
+import { itemType } from '@entities/quotation/const/itemType'
+import { useBlock } from '@entities/quotation/provider/BlockProvider'
+import { quotationSlice } from '@entities/quotation/redux/quotationSlice'
+import { selectIsLastBlock } from '@entities/quotation/redux/selector/selectIsLastBlock'
+import { saveBlockHeightByIndex } from '@entities/quotation/util/saveBlockHeightByIndex'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/cls'
 import { textSlice } from '@shared/lib/froala/textSlice'

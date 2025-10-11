@@ -1,5 +1,8 @@
 import { copySlice } from '@entities/copy/copySlice'
-import { type Boq, boqRowKey, itemType } from '@entities/quotation'
+import { boqRowKey } from '@entities/quotation/const/boqRowKey'
+import { itemType } from '@entities/quotation/const/itemType'
+import type { Boq } from '@entities/quotation/type'
+
 import { textSlice } from '@shared/lib/froala/textSlice'
 import { generateId } from '@shared/lib/nanoid'
 import { dispatch, getState } from '@shared/lib/redux'

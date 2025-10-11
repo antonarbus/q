@@ -1,4 +1,4 @@
-import type { AccessFormValuesSignal } from '@entities/quotation'
+import type { AccessFormValuesSignal } from '@entities/quotation/type'
 import { getState } from '@shared/lib/redux'
 
 type Props = {

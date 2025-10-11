@@ -1,11 +1,9 @@
-import {
-  boqColumnKey,
-  columnHeaderStyle,
-  columnMinWidth,
-  Froala,
-  getBoqColumnHtmlFromStore,
-  useBlock,
-} from '@entities/quotation'
+import { boqColumnKey } from '@entities/quotation/const/boqColumnKey'
+import { columnMinWidth } from '@entities/quotation/const/columnMinWidth'
+import { useBlock } from '@entities/quotation/provider/BlockProvider'
+import { getBoqColumnHtmlFromStore } from '@entities/quotation/redux/getter/getBoqColumnHtmlFromStore'
+import { columnHeaderStyle } from '@entities/quotation/style/columnHeaderStyle'
+import { Froala } from '@entities/quotation/ui/froala/Froala'
 import { updateBoqColumnCell } from '@features/blocks/cell/update-cell'
 import type { FroalaEditor } from '@shared/lib/froala/froala'
 import { type ReactNode, useRef } from 'react'

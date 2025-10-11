@@ -1,5 +1,5 @@
 import { useGetBookmarkListQuery } from '@entities/bookmark/api/useGetBookmarkListQuery'
-import { useGetQuotationListQuery } from '@entities/quotation'
+import { useGetQuotationListQuery } from '@entities/quotation/api/useGetQuotationListQuery'
 import { useLogInUserMutation } from '@entities/user/api/useLogInUserMutation'
 import { userRole } from '@entities/user/const/userRole'
 import { userSlice } from '@entities/user/redux/userSlice'

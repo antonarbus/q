@@ -1,14 +1,12 @@
-import {
-  BOOKMARK_POS_AT_BLOCKS,
-  boqColumnKey,
-  boqRowCellKey,
-  boqRowCellStyle,
-  columnMinWidth,
-  Froala,
-  getRowCellHtmlFromStore,
-  useRow,
-  useStylesForResizableCell,
-} from '@entities/quotation'
+import { BOOKMARK_POS_AT_BLOCKS } from '@entities/quotation/const/bookmarkPosAtBlocks'
+import { boqColumnKey } from '@entities/quotation/const/boqColumnKey'
+import { boqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
+import { columnMinWidth } from '@entities/quotation/const/columnMinWidth'
+import { useStylesForResizableCell } from '@entities/quotation/hook/useStylesForResizableCell'
+import { useRow } from '@entities/quotation/provider/RowProvider'
+import { getRowCellHtmlFromStore } from '@entities/quotation/redux/getter/getRowCellHtmlFromStore'
+import { boqRowCellStyle } from '@entities/quotation/style/boqRowCellStyle'
+import { Froala } from '@entities/quotation/ui/froala/Froala'
 import { updateDescriptionCell } from '@features/blocks/cell/update-cell/row-block-cells/description/updateDescriptionCell'
 import { beforeUpload } from '@features/file/upload-file'
 import type { JSX } from 'react'

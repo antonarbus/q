@@ -1,10 +1,8 @@
 import { httpStatus } from '@back/shared/const/httpStatus'
-import {
-  backToQuotationRef,
-  newQuotationTemplate,
-  quotationSlice,
-  useGetQuotationMutation,
-} from '@entities/quotation'
+import { useGetQuotationMutation } from '@entities/quotation/api/useGetQuotationMutation'
+import { newQuotationTemplate } from '@entities/quotation/newQuotationTemplate'
+import { quotationSlice } from '@entities/quotation/redux/quotationSlice'
+import { backToQuotationRef } from '@entities/quotation/ref/backToQuotationRef'
 import { appSlice } from '@shared/appSlice'
 import { dispatch, useSelector } from '@shared/lib/redux'
 import { navItemId } from '@shared/nav/navItemId'

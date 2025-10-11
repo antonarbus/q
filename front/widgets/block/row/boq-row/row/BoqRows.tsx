@@ -1,4 +1,5 @@
-import { BOOKMARK_POS_AT_BLOCKS, RowProvider } from '@entities/quotation'
+import { BOOKMARK_POS_AT_BLOCKS } from '@entities/quotation/const/bookmarkPosAtBlocks'
+import { RowProvider } from '@entities/quotation/provider/RowProvider'
 import { hideBoqRowPinsOnRowBlur } from '@features/blocks/cell/pin'
 import { getState } from '@shared/lib/redux'
 import type { ReactNode } from 'react'

@@ -1,5 +1,8 @@
 import { useIsCopyModalVisible } from '@entities/copy/useIsCopyModalVisible'
-import { getBlockFromStore, itemType, useBlock } from '@entities/quotation'
+import { itemType } from '@entities/quotation/const/itemType'
+import { useBlock } from '@entities/quotation/provider/BlockProvider'
+import { getBlockFromStore } from '@entities/quotation/redux/getter/getBlockFromStore'
+
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/cls'
 import { route } from '@shared/lib/react-router-dom/route'

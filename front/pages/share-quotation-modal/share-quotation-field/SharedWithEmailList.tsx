@@ -1,4 +1,4 @@
-import type { AccessFormValuesSignal } from '@entities/quotation'
+import type { AccessFormValuesSignal } from '@entities/quotation/type'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 import { Box, Chip } from '@mui/material'
 import { motion } from 'motion/react'

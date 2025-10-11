@@ -1,8 +1,6 @@
-import {
-  boqColumnKey,
-  columnHeaderStyle,
-  columnMinWidth,
-} from '@entities/quotation'
+import { boqColumnKey } from '@entities/quotation/const/boqColumnKey'
+import { columnMinWidth } from '@entities/quotation/const/columnMinWidth'
+import { columnHeaderStyle } from '@entities/quotation/style/columnHeaderStyle'
 import { Box } from '@mui/material'
 import type { ReactNode } from 'react'
 import { ResizableColumn } from '../ResizableColumn'

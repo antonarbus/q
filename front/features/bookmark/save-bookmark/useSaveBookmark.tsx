@@ -2,7 +2,9 @@ import { useGetBookmarkCategoryListQuery } from '@entities/bookmark/api/useGetBo
 import { useGetBookmarkListQuery } from '@entities/bookmark/api/useGetBookmarkListQuery'
 import { useSaveBookmarkMutation } from '@entities/bookmark/api/useSaveBookmarkMutation'
 import type { BookmarkFormValues } from '@entities/bookmark/form/types'
-import { BOOKMARK_POS_AT_BLOCKS, quotationSlice } from '@entities/quotation'
+import { BOOKMARK_POS_AT_BLOCKS } from '@entities/quotation/const/bookmarkPosAtBlocks'
+import { quotationSlice } from '@entities/quotation/redux/quotationSlice'
+
 import { cls } from '@shared/cls'
 import { dispatch, getState } from '@shared/lib/redux'
 import { asyncDelay } from '@shared/util/delay'

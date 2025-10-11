@@ -1,15 +1,15 @@
+import { BOOKMARK_POS_AT_BLOCKS } from '@entities/quotation/const/bookmarkPosAtBlocks'
+import { boqColumnKey } from '@entities/quotation/const/boqColumnKey'
+import { boqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
+import { columnMinWidth } from '@entities/quotation/const/columnMinWidth'
+import { useStylesForResizableCell } from '@entities/quotation/hook/useStylesForResizableCell'
+import { useRow } from '@entities/quotation/provider/RowProvider'
+import { getRowCellHtmlFromStore } from '@entities/quotation/redux/getter/getRowCellHtmlFromStore'
 import {
-  BOOKMARK_POS_AT_BLOCKS,
-  boqColumnKey,
-  boqRowCellKey,
   boqRowCellStyle,
   boqRowCellSx,
-  columnMinWidth,
-  Froala,
-  getRowCellHtmlFromStore,
-  useRow,
-  useStylesForResizableCell,
-} from '@entities/quotation'
+} from '@entities/quotation/style/boqRowCellStyle'
+import { Froala } from '@entities/quotation/ui/froala/Froala'
 import { formatQtyCell } from '@features/blocks/cell/update-cell/row-block-cells/qty/formatQtyCell'
 import { updateQtyCell } from '@features/blocks/cell/update-cell/row-block-cells/qty/updateQtyCell'
 import { Box } from '@mui/material'

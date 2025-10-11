@@ -1,9 +1,7 @@
-import {
-  boqRowKey,
-  RowProvider,
-  selectBoqRows,
-  useBlock,
-} from '@entities/quotation'
+import { boqRowKey } from '@entities/quotation/const/boqRowKey'
+import { useBlock } from '@entities/quotation/provider/BlockProvider'
+import { RowProvider } from '@entities/quotation/provider/RowProvider'
+import { selectBoqRows } from '@entities/quotation/redux/selector/selectBoqRows'
 import { hideBoqRowPinsOnRowBlur } from '@features/blocks/cell/pin'
 import { generateId } from '@shared/lib/nanoid'
 import { useSelector } from '@shared/lib/redux'

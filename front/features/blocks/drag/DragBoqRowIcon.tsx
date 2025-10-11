@@ -1,5 +1,6 @@
 import { useSortable } from '@dnd-kit/sortable'
-import { useIsBoqRowSortDisabled, useRow } from '@entities/quotation'
+import { useIsBoqRowSortDisabled } from '@entities/quotation/hook/useIsBoqRowSortDisabled'
+import { useRow } from '@entities/quotation/provider/RowProvider'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/cls'
 import type { JSX } from 'react'

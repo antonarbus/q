@@ -1,12 +1,9 @@
-import {
-  boqRowCellKey,
-  getBoqRowsFromStore,
-  isBoqRowPriceValid,
-  type Row,
-  type RowEditorRefs,
-  updateBoqRowCellWithValue,
-  updateSubTotalPriceWithValue,
-} from '@entities/quotation'
+import { boqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
+import { getBoqRowsFromStore } from '@entities/quotation/redux/getter/getBoqRowsFromStore'
+import type { Row, RowEditorRefs } from '@entities/quotation/type'
+import { isBoqRowPriceValid } from '@entities/quotation/util/isBoqRowPriceValid'
+import { updateBoqRowCellWithValue } from '@entities/quotation/util/updateBoqRowCellWithValue'
+import { updateSubTotalPriceWithValue } from '@entities/quotation/util/updateSubTotalPriceWithValue'
 import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import { roundTo } from 'round-to'
 import { toast } from 'sonner'

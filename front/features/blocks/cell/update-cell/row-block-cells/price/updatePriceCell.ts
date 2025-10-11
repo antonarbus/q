@@ -1,8 +1,6 @@
-import {
-  BOOKMARK_POS_AT_BLOCKS,
-  boqRowCellKey,
-  itemType,
-} from '@entities/quotation'
+import { BOOKMARK_POS_AT_BLOCKS } from '@entities/quotation/const/bookmarkPosAtBlocks'
+import { boqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
+import { itemType } from '@entities/quotation/const/itemType'
 import { updateRowBlockCellAtStore } from '@entities/quotation/redux/updater/updateRowBlockCellAtStore'
 import { updateRowBlockCellWithValue } from '@entities/quotation/util/updateRowBlockCellWithValue'
 import type { FroalaEditorRef } from '@shared/lib/froala/froala'

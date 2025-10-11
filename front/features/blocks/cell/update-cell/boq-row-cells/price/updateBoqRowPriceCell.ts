@@ -1,12 +1,10 @@
-import {
-  boqRowCellKey,
-  getBoqRowFromStore,
-  getBoqRowsFromStore,
-  type Row,
-  updateBoqRowCellAtStore,
-  updateBoqRowCellWithValue,
-  updateSubTotalPriceWithValue,
-} from '@entities/quotation'
+import { boqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
+import { getBoqRowFromStore } from '@entities/quotation/redux/getter/getBoqRowFromStore'
+import { getBoqRowsFromStore } from '@entities/quotation/redux/getter/getBoqRowsFromStore'
+import { updateBoqRowCellAtStore } from '@entities/quotation/redux/updater/updateBoqRowCellAtStore'
+import type { Row } from '@entities/quotation/type'
+import { updateBoqRowCellWithValue } from '@entities/quotation/util/updateBoqRowCellWithValue'
+import { updateSubTotalPriceWithValue } from '@entities/quotation/util/updateSubTotalPriceWithValue'
 import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import { roundTo } from 'round-to'
 

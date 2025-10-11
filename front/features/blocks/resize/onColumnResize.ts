@@ -1,5 +1,6 @@
-import { getBoqColumnFromStore, quotationSlice } from '@entities/quotation'
 import type { BoqColumnKey } from '@entities/quotation/const/boqColumnKey'
+import { getBoqColumnFromStore } from '@entities/quotation/redux/getter/getBoqColumnFromStore'
+import { quotationSlice } from '@entities/quotation/redux/quotationSlice'
 import { cls } from '@shared/cls'
 import { dispatch } from '@shared/lib/redux'
 

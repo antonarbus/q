@@ -1,6 +1,6 @@
 import type { ReqBody } from '@back/api/bookmark/getBookmarkHandler'
 import { useGetBookmarkMutation } from '@entities/bookmark/api/useGetBookmarkMutation'
-import { quotationSlice } from '@entities/quotation'
+import { quotationSlice } from '@entities/quotation/redux/quotationSlice'
 import { IconButton, Tooltip } from '@mui/material'
 import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import { textSlice } from '@shared/lib/froala/textSlice'

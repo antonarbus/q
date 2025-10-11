@@ -1,10 +1,8 @@
-import {
-  BlockComp,
-  Froala,
-  getTextBlockHtmlFromStore,
-  textItemCellStyle,
-  useBlock,
-} from '@entities/quotation'
+import { useBlock } from '@entities/quotation/provider/BlockProvider'
+import { getTextBlockHtmlFromStore } from '@entities/quotation/redux/getter/getTextBlockHtmlFromStore'
+import { textItemCellStyle } from '@entities/quotation/style/textItemCellStyle'
+import { BlockComp } from '@entities/quotation/ui/BlockComp'
+import { Froala } from '@entities/quotation/ui/froala/Froala'
 import { updateTextBlock } from '@features/blocks/cell/update-cell'
 import { CopyBlockIcon } from '@features/blocks/copy'
 import { CutBlockIcon } from '@features/blocks/cut'

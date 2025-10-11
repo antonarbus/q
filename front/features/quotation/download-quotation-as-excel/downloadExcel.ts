@@ -1,4 +1,4 @@
-import type { Quotation } from '@entities/quotation'
+import type { Quotation } from '@entities/quotation/type'
 import { getState } from '@shared/lib/redux'
 import { navItemId } from '@shared/nav/navItemId'
 import { createLoadingMenuIconMachine } from '@shared/nav/state-machine/createLoadingMenuIconMachine'

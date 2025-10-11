@@ -1,11 +1,9 @@
-import {
-  Froala,
-  getBoqHeaderHtmlFromStore,
-  type HeaderKey,
-  subTotalPriceCellStyle,
-  useBlock,
-  useBoq,
-} from '@entities/quotation'
+import { useBlock } from '@entities/quotation/provider/BlockProvider'
+import { useBoq } from '@entities/quotation/provider/BoqBlockProvider'
+import { getBoqHeaderHtmlFromStore } from '@entities/quotation/redux/getter/getBoqHeaderHtmlFromStore'
+import { subTotalPriceCellStyle } from '@entities/quotation/style/subTotalPriceCellStyle'
+import type { HeaderKey } from '@entities/quotation/type'
+import { Froala } from '@entities/quotation/ui/froala/Froala'
 import { showHideBoqPricePins } from '@features/blocks/cell/pin'
 import {
   formatSubtotalPriceCell,

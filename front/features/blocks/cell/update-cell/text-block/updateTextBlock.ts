@@ -1,4 +1,5 @@
-import { itemType, quotationSlice } from '@entities/quotation'
+import { itemType } from '@entities/quotation/const/itemType'
+import { quotationSlice } from '@entities/quotation/redux/quotationSlice'
 import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import { dispatch, getState } from '@shared/lib/redux'
 

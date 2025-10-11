@@ -1,8 +1,6 @@
-import {
-  boqRowCellKey,
-  getBoqRowFromStore,
-  quotationSlice,
-} from '@entities/quotation'
+import { boqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
+import { getBoqRowFromStore } from '@entities/quotation/redux/getter/getBoqRowFromStore'
+import { quotationSlice } from '@entities/quotation/redux/quotationSlice'
 import { dispatch } from '@shared/lib/redux'
 
 type Props = {

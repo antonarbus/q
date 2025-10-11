@@ -1,4 +1,4 @@
-import { quotationSlice } from '@entities/quotation'
+import { quotationSlice } from '@entities/quotation/redux/quotationSlice'
 import { cls } from '@shared/cls'
 import { dispatch } from '@shared/lib/redux'
 import type { RefObject } from 'react'

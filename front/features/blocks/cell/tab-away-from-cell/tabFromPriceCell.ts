@@ -1,4 +1,4 @@
-import type { RowEditorRefs } from '@entities/quotation'
+import type { RowEditorRefs } from '@entities/quotation/type'
 import type { KeyboardEvent } from 'react'
 
 type Props = {

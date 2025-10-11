@@ -1,4 +1,5 @@
-import { getFromStore, type InfoFormValues } from '@entities/quotation'
+import { getFromStore } from '@entities/quotation/redux/getter/getFromStore'
+import type { InfoFormValues } from '@entities/quotation/type'
 import { useSelector } from '@shared/lib/redux'
 import { useParams } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'

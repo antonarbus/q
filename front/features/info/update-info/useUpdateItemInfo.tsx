@@ -1,4 +1,5 @@
-import { type InfoFormValues, quotationSlice } from '@entities/quotation'
+import { quotationSlice } from '@entities/quotation/redux/quotationSlice'
+import type { InfoFormValues } from '@entities/quotation/type'
 import { useSignalEffect } from '@preact/signals-react'
 import { dispatch } from '@shared/lib/redux'
 

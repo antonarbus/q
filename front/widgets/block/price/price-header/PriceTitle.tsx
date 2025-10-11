@@ -1,4 +1,6 @@
-import { Froala, itemType, useBlock } from '@entities/quotation'
+import { itemType } from '@entities/quotation/const/itemType'
+import { useBlock } from '@entities/quotation/provider/BlockProvider'
+import { Froala } from '@entities/quotation/ui/froala/Froala'
 import { updatePriceTitleCell } from '@features/blocks/cell/update-cell'
 import type { FroalaEditor } from '@shared/lib/froala/froala'
 import { getState } from '@shared/lib/redux'

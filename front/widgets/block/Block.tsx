@@ -1,4 +1,6 @@
-import { BlockProvider, type Item, itemType } from '@entities/quotation'
+import { itemType } from '@entities/quotation/const/itemType'
+import { BlockProvider } from '@entities/quotation/provider/BlockProvider'
+import type { Item } from '@entities/quotation/type'
 import type { ReactNode } from 'react'
 import { BoqBlock } from './boq/BoqBlock'
 import { PasteItem } from './paste/PasteItem'

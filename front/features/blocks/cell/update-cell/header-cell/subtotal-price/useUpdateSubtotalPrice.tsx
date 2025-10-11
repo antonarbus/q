@@ -1,10 +1,8 @@
-import {
-  getBoqRowsFromStore,
-  type Row,
-  updateSubTotalPriceWithValue,
-  useBlock,
-  useBoq,
-} from '@entities/quotation'
+import { useBlock } from '@entities/quotation/provider/BlockProvider'
+import { useBoq } from '@entities/quotation/provider/BoqBlockProvider'
+import { getBoqRowsFromStore } from '@entities/quotation/redux/getter/getBoqRowsFromStore'
+import type { Row } from '@entities/quotation/type'
+import { updateSubTotalPriceWithValue } from '@entities/quotation/util/updateSubTotalPriceWithValue'
 import { useSelector } from '@shared/lib/redux'
 import { useUpdateEffect } from 'react-use'
 import { roundTo } from 'round-to'

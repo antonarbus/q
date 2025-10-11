@@ -1,6 +1,7 @@
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import { useRow } from '@entities/quotation'
+import { useRow } from '@entities/quotation/provider/RowProvider'
+
 import type { JSX, ReactNode } from 'react'
 
 type Props = {

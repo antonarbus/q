@@ -1,10 +1,10 @@
-import {
-  type AccessFormValuesSignal,
-  type Quotation,
-  quotationSlice,
-  useGetQuotationListQuery,
-  useSaveQuotationMutation,
-} from '@entities/quotation'
+import { useGetQuotationListQuery } from '@entities/quotation/api/useGetQuotationListQuery'
+import { useSaveQuotationMutation } from '@entities/quotation/api/useSaveQuotationMutation'
+import { quotationSlice } from '@entities/quotation/redux/quotationSlice'
+import type {
+  AccessFormValuesSignal,
+  Quotation,
+} from '@entities/quotation/type'
 import { generateId } from '@shared/lib/nanoid'
 import { route } from '@shared/lib/react-router-dom/route'
 import { dispatch, getState } from '@shared/lib/redux'

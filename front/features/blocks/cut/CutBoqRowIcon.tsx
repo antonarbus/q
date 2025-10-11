@@ -1,11 +1,9 @@
 import { copySlice } from '@entities/copy/copySlice'
-import {
-  getBoqRowFromStore,
-  quotationSlice,
-  selectIsLastBoqRow,
-  useBlock,
-  useRow,
-} from '@entities/quotation'
+import { useBlock } from '@entities/quotation/provider/BlockProvider'
+import { useRow } from '@entities/quotation/provider/RowProvider'
+import { getBoqRowFromStore } from '@entities/quotation/redux/getter/getBoqRowFromStore'
+import { quotationSlice } from '@entities/quotation/redux/quotationSlice'
+import { selectIsLastBoqRow } from '@entities/quotation/redux/selector/selectIsLastBoqRow'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/cls'
 import { textSlice } from '@shared/lib/froala/textSlice'

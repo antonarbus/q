@@ -1,8 +1,6 @@
-import {
-  Froala,
-  getPriceBlockHtmlFromStore,
-  useBlock,
-} from '@entities/quotation'
+import { useBlock } from '@entities/quotation/provider/BlockProvider'
+import { getPriceBlockHtmlFromStore } from '@entities/quotation/redux/getter/getPriceBlockHtmlFromStore'
+import { Froala } from '@entities/quotation/ui/froala/Froala'
 import {
   updatePriceValueCell,
   useUpdateTotalPriceIfPricesAboveWereChanged,

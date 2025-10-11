@@ -1,4 +1,4 @@
-import { BoqProvider } from '@entities/quotation'
+import { BoqProvider } from '@entities/quotation/provider/BoqBlockProvider'
 import type { JSX } from 'react'
 import { RowColumns } from './column'
 import { RowLayout } from './RowLayout'

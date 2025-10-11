@@ -1,4 +1,7 @@
-import type { AccessFormValuesSignal, Quotation } from '@entities/quotation'
+import type {
+  AccessFormValuesSignal,
+  Quotation,
+} from '@entities/quotation/type'
 import { Box, FormControlLabel, Radio, RadioGroup } from '@mui/material'
 import type { JSX } from 'react'
 import { BsFillPersonPlusFill } from 'react-icons/bs'

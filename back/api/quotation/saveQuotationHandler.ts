@@ -4,7 +4,7 @@ import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import { generateId } from '@back/shared/lib/nanoid'
-import type { Quotation } from '@entities/quotation'
+import type { Quotation } from '@entities/quotation/type'
 import type { NextFunction, Request, Response } from 'express'
 import type { FlattenMaps } from 'mongoose'
 

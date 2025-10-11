@@ -1,4 +1,4 @@
-import type { Item } from '@entities/quotation'
+import type { Item } from '@entities/quotation/type'
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import type { CopyPlace } from './types'
 

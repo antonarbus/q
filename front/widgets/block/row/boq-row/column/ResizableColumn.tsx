@@ -1,5 +1,5 @@
-import { selectColumnWidth } from '@entities/quotation'
 import type { BoqColumnKey } from '@entities/quotation/const/boqColumnKey'
+import { selectColumnWidth } from '@entities/quotation/redux/selector/selectColumnWidth'
 import {
   onColumnResize,
   onColumnResizeStart,
@@ -45,21 +45,21 @@ export const ResizableColumn = ({
         },
       }}
       minWidth={minWidth}
-      onResize={(event, direction, element, delta): void => {
+      onResize={(_event, _direction, element, _delta): void => {
         onColumnResize({
           headerColumnElement: element,
           blockIndex: 0,
           boqColumnKey,
         })
       }}
-      onResizeStart={(event, direction, element): void => {
+      onResizeStart={(_event, _direction, element): void => {
         onColumnResizeStart({
           headerColumnElement: element,
           blockIndex: 0,
           boqColumnKey,
         })
       }}
-      onResizeStop={(event, direction, element): void => {
+      onResizeStop={(_event, _direction, element): void => {
         onColumnResizeStop({
           headerColumnElement: element,
           blockIndex: 0,

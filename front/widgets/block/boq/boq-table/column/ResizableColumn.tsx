@@ -1,5 +1,6 @@
-import { selectColumnWidth, useBlock } from '@entities/quotation'
 import type { BoqColumnKey } from '@entities/quotation/const/boqColumnKey'
+import { useBlock } from '@entities/quotation/provider/BlockProvider'
+import { selectColumnWidth } from '@entities/quotation/redux/selector/selectColumnWidth'
 import {
   onColumnResize,
   onColumnResizeStart,

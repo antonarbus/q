@@ -1,5 +1,5 @@
-import { updateBoqColumnCellAtStore } from '@entities/quotation'
 import type { BoqColumnKey } from '@entities/quotation/const/boqColumnKey'
+import { updateBoqColumnCellAtStore } from '@entities/quotation/redux/updater/updateBoqColumnCellAtStore'
 import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 
 type Props = {

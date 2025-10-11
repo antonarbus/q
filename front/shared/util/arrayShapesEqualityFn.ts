@@ -1,4 +1,4 @@
-import { BOOKMARK_POS_AT_BLOCKS } from '@entities/quotation'
+import { BOOKMARK_POS_AT_BLOCKS } from '@entities/quotation/const/bookmarkPosAtBlocks'
 
 type EqualityFn = (a: any, b: any) => boolean
 

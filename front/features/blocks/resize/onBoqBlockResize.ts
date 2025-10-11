@@ -1,10 +1,8 @@
-import {
-  boqColumnKey,
-  columnMinWidth,
-  getBoqColumnFromStore,
-  itemType,
-  quotationSlice,
-} from '@entities/quotation'
+import { boqColumnKey } from '@entities/quotation/const/boqColumnKey'
+import { columnMinWidth } from '@entities/quotation/const/columnMinWidth'
+import { itemType } from '@entities/quotation/const/itemType'
+import { getBoqColumnFromStore } from '@entities/quotation/redux/getter/getBoqColumnFromStore'
+import { quotationSlice } from '@entities/quotation/redux/quotationSlice'
 import type {
   OnBlockResize,
   OnBlockResizeStart,

@@ -1,5 +1,7 @@
-import { selectBoqCellPin, useBlock, useRow } from '@entities/quotation'
 import type { BoqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
+import { useBlock } from '@entities/quotation/provider/BlockProvider'
+import { useRow } from '@entities/quotation/provider/RowProvider'
+import { selectBoqCellPin } from '@entities/quotation/redux/selector/selectBoqCellPin'
 import { Box } from '@mui/material'
 import { cls } from '@shared/cls'
 import { useSelector } from '@shared/lib/redux'

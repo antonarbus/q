@@ -1,4 +1,4 @@
-import type { SaveQuotationFormValues } from '@entities/quotation'
+import type { SaveQuotationFormValues } from '@entities/quotation/type'
 import { getState } from '@shared/lib/redux'
 import { useEffectOnce } from 'react-use'
 

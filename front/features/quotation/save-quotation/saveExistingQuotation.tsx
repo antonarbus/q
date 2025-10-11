@@ -1,9 +1,7 @@
 import type { ErrorResBody } from '@back/api/quotation/saveQuotationHandler'
-import {
-  type Quotation,
-  quotationSlice,
-  saveQuotationMutationFn,
-} from '@entities/quotation'
+import { saveQuotationMutationFn } from '@entities/quotation/api/useSaveQuotationMutation'
+import { quotationSlice } from '@entities/quotation/redux/quotationSlice'
+import type { Quotation } from '@entities/quotation/type'
 import { route } from '@shared/lib/react-router-dom/route'
 import { router } from '@shared/lib/react-router-dom/router'
 import { dispatch, getState } from '@shared/lib/redux'

@@ -1,4 +1,4 @@
-import { quotationSlice } from '@entities/quotation'
+import { quotationSlice } from '@entities/quotation/redux/quotationSlice'
 import { dispatch } from '@shared/lib/redux'
 
 type Props = {

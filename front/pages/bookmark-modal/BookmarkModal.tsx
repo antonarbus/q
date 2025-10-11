@@ -1,5 +1,5 @@
 import { useGetBookmarkCategoryListQuery } from '@entities/bookmark/api/useGetBookmarkCategoryListQuery'
-import { quotationSlice } from '@entities/quotation'
+import { quotationSlice } from '@entities/quotation/redux/quotationSlice'
 import { useSaveBookmark } from '@features/bookmark/save-bookmark'
 import {
   useLoadBookmarkModalOpenedWithDirectLink,

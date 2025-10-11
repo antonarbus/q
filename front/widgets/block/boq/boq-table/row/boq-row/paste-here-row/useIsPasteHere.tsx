@@ -1,4 +1,4 @@
-import { useRow } from '@entities/quotation'
+import { useRow } from '@entities/quotation/provider/RowProvider'
 import { useSelector } from '@shared/lib/redux'
 
 export const useIsPasteHere = (): boolean => {

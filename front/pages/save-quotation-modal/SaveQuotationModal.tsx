@@ -1,4 +1,4 @@
-import { useGetQuotationCategoryListQuery } from '@entities/quotation'
+import { useGetQuotationCategoryListQuery } from '@entities/quotation/api/useGetQuotationCategoryListQuery'
 import {
   useLoadInitValuesIntoSaveQuotationModal,
   useLoadSaveQuotationModalWithDirectLink,

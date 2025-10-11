@@ -1,8 +1,6 @@
 import type { ReqBody as Payload } from '@back/api/quotation/deleteQuotationHandler'
-import {
-  deleteFromQuotationListCache,
-  useDeleteQuotationMutation,
-} from '@entities/quotation'
+import { useDeleteQuotationMutation } from '@entities/quotation/api/useDeleteQuotationMutation'
+import { deleteFromQuotationListCache } from '@entities/quotation/cache-updater/deleteFromQuotationListCache'
 import { IconButton, Tooltip } from '@mui/material'
 import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import type { ReactNode } from 'react'

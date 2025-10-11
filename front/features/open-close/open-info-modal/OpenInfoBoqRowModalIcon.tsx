@@ -1,10 +1,8 @@
 import { useIsCopyModalVisible } from '@entities/copy/useIsCopyModalVisible'
-import {
-  boqRowKey,
-  getBoqRowFromStore,
-  useBlock,
-  useRow,
-} from '@entities/quotation'
+import { boqRowKey } from '@entities/quotation/const/boqRowKey'
+import { useBlock } from '@entities/quotation/provider/BlockProvider'
+import { useRow } from '@entities/quotation/provider/RowProvider'
+import { getBoqRowFromStore } from '@entities/quotation/redux/getter/getBoqRowFromStore'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/cls'
 import { route } from '@shared/lib/react-router-dom/route'

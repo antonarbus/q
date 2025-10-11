@@ -1,5 +1,6 @@
 import { copySlice } from '@entities/copy/copySlice'
-import { quotationSlice } from '@entities/quotation'
+import { quotationSlice } from '@entities/quotation/redux/quotationSlice'
+
 import { cls } from '@shared/cls'
 import { textSlice } from '@shared/lib/froala/textSlice'
 import { generateId } from '@shared/lib/nanoid'

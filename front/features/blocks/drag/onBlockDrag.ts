@@ -1,5 +1,5 @@
 import type { DragEndEvent, DragStartEvent } from '@dnd-kit/core'
-import { quotationSlice } from '@entities/quotation'
+import { quotationSlice } from '@entities/quotation/redux/quotationSlice'
 import { textSlice } from '@shared/lib/froala/textSlice'
 import { dispatch, getState } from '@shared/lib/redux'
 import { arrayMoveImmutable } from 'array-move'

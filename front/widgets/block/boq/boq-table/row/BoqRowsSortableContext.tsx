@@ -6,7 +6,8 @@ import {
   useSensors,
 } from '@dnd-kit/core'
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
-import { selectBoqRows, useBlock } from '@entities/quotation'
+import { useBlock } from '@entities/quotation/provider/BlockProvider'
+import { selectBoqRows } from '@entities/quotation/redux/selector/selectBoqRows'
 import { onBoqRowDragEnd, onBoqRowDragStart } from '@features/blocks/drag'
 import { useSelector } from '@shared/lib/redux'
 import { arrayShapesEqualityFn } from '@shared/util/arrayShapesEqualityFn'

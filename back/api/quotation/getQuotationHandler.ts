@@ -6,7 +6,7 @@ import { userRole } from '@back/shared/const/userRole'
 import { getShouldNotTrace } from '@back/shared/headers'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import { jsonParseSafe } from '@back/shared/util/jsonParseSafe'
-import type { Quotation } from '@entities/quotation'
+import type { Quotation } from '@entities/quotation/type'
 import type { NextFunction, Request, Response } from 'express'
 
 export type ReqBody = {

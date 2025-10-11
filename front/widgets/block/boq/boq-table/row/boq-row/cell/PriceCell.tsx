@@ -1,16 +1,16 @@
+import { boqColumnKey } from '@entities/quotation/const/boqColumnKey'
+import { boqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
+import { columnMinWidth } from '@entities/quotation/const/columnMinWidth'
+import { useStylesForResizableCell } from '@entities/quotation/hook/useStylesForResizableCell'
+import { useBlock } from '@entities/quotation/provider/BlockProvider'
+import { useBoq } from '@entities/quotation/provider/BoqBlockProvider'
+import { useRow } from '@entities/quotation/provider/RowProvider'
+import { getBoqCellHtmlFromStore } from '@entities/quotation/redux/getter/getBoqCellHtmlFromStore'
 import {
-  boqColumnKey,
-  boqRowCellKey,
   boqRowCellStyle,
   boqRowCellSx,
-  columnMinWidth,
-  Froala,
-  getBoqCellHtmlFromStore,
-  useBlock,
-  useBoq,
-  useRow,
-  useStylesForResizableCell,
-} from '@entities/quotation'
+} from '@entities/quotation/style/boqRowCellStyle'
+import { Froala } from '@entities/quotation/ui/froala/Froala'
 import {
   Pin,
   pinBoqRowPriceCell,

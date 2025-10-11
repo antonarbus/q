@@ -1,5 +1,6 @@
 import { useGetBookmarkCategoryListQuery } from '@entities/bookmark/api/useGetBookmarkCategoryListQuery'
-import { useGetQuotationCategoryListQuery } from '@entities/quotation'
+import { useGetQuotationCategoryListQuery } from '@entities/quotation/api/useGetQuotationCategoryListQuery'
+
 import { useParams } from 'react-router-dom'
 
 type Res = {
