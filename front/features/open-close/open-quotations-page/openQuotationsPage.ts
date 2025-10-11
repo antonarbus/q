@@ -1,8 +1,16 @@
-import { showBackIconAtNav } from '@entities/quotation/util/setBackToQuotation'
+import { backToQuotationRef } from '@entities/quotation/ref/backToQuotationRef'
 import { route } from '@shared/lib/react-router-dom/route'
 import { router } from '@shared/lib/react-router-dom/router'
+import { dispatch, getState } from '@shared/lib/redux'
+import { navSlice } from '@shared/nav/navSlice'
 
 export const openQuotationsPage = (): void => {
-  showBackIconAtNav()
+  const currentQuotation = getState().quotation
+
+  if (Boolean(currentQuotation.id) === true) {
+    backToQuotationRef.current = currentQuotation
+    dispatch(navSlice.actions.showNavItems({ navItemIds: ['back'] }))
+  }
+
   void router.navigate(`/${route.quotationList}`)
 }
