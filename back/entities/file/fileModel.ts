@@ -1,4 +1,4 @@
-import type { File } from '@entities/file'
+import type { File } from '@entities/file/type'
 import { model, Schema } from 'mongoose'
 
 const fileSchema = new Schema<File>({

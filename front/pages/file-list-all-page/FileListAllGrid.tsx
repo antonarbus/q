@@ -1,5 +1,5 @@
 import type { Item } from '@back/api/file/getFileListAllHandler'
-import { useFileListAllDatasource } from '@entities/file'
+import { useFileListAllDatasource } from '@entities/file/api/useFileListAllDatasource'
 import { LoadingTableOverlay } from '@shared/component/LoadingTableOverlay'
 import { useDisableLoadingOverlayWhenItemsAreFetched } from '@shared/component/loading-dots-overlay'
 import { agGridSlice } from '@shared/lib/ag-grid/agGridSlice'

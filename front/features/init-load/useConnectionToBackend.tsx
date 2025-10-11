@@ -1,4 +1,4 @@
-import { useHealthCheckQuery } from '@entities/dev'
+import { useHealthCheckQuery } from '@entities/dev/api/useHealthCheckQuery'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
 

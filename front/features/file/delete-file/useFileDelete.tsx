@@ -1,4 +1,4 @@
-import { useDeleteFileMutation } from '@entities/file'
+import { useDeleteFileMutation } from '@entities/file/api/useDeleteFileMutation'
 import { instance } from '@shared/instance'
 import { queryKey } from '@shared/lib/tanstack/react-query/queryKey'
 import { type MouseEvent, useCallback } from 'react'

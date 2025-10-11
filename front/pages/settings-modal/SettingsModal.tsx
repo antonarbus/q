@@ -1,4 +1,4 @@
-import { useGetFileListStatsQuery } from '@entities/file'
+import { useGetFileListStatsQuery } from '@entities/file/api/useGetFileListStatsQuery'
 import { DeleteFileIcon } from '@features/file/delete-file'
 import { Avatar, Box, Collapse } from '@mui/material'
 import { BackdropWithSlidableModal } from '@shared/component/BackdropWithSlidableModal'
