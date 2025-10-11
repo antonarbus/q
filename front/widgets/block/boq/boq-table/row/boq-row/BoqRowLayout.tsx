@@ -1,3 +1,4 @@
+import { useRow } from '@entities/quotation/provider/RowProvider'
 import { Box } from '@mui/material'
 import { cls } from '@shared/cls'
 import type { FocusEvent, JSX, ReactNode } from 'react'
@@ -31,7 +32,4 @@ export const BoqRowLayout = ({ children, onBlur }: Props): JSX.Element => {
       <PasteBoqRowTextOverlay>{children}</PasteBoqRowTextOverlay>
     </Box>
   )
-}
-function useRow(): { row: any } {
-  throw new Error('Function not implemented.')
 }
