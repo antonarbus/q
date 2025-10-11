@@ -1,6 +1,6 @@
 import { useIsCopyModalVisible } from '@entities/copy'
 import { Tooltip } from '@mui/material'
-import { route } from '@shared/const/route'
+import { route } from '@shared/lib/react-router-dom/route'
 import { useSelector } from '@shared/lib/redux'
 import type { JSX } from 'react'
 import { BsPersonFillLock } from 'react-icons/bs'

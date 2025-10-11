@@ -1,6 +1,6 @@
-import type { NavItemId } from '@shared/const/navItemId'
 import { generateId } from '@shared/lib/nanoid'
 import { dispatch } from '@shared/lib/redux'
+import type { NavItemId } from '@shared/nav/navItemId'
 import { navSlice } from '@shared/nav/navSlice'
 import { theme } from '@shared/theme'
 import { elementHeight } from '@shared/util/elementHeight'

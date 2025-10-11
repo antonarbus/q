@@ -4,7 +4,7 @@ import {
 } from '@features/open-close/open-share-quotation-modal'
 import { useShareQuotation } from '@features/quotation/share-quotation'
 import { FormModal } from '@shared/component/FormModal'
-import { router } from '@shared/lib/react-router-dom'
+import { router } from '@shared/lib/react-router-dom/router'
 import { getState } from '@shared/lib/redux'
 import { useSlide } from '@shared/util/useSlide'
 import type { JSX } from 'react'

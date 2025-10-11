@@ -1,9 +1,9 @@
 import { QuotationModel } from '@back/entities/quotation'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
+import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
 import type { Quotation } from '@entities/quotation'
-import type { ErrorMessageCommon } from '@shared/const/errorMessageCommon'
-import type { Pretty } from '@shared/type/Pretty'
+import type { Pretty } from '@shared/lib/typescript/Pretty'
 import type { NextFunction, Request, Response } from 'express'
 import type { FlattenMaps } from 'mongoose'
 

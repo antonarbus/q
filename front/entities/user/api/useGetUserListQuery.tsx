@@ -1,7 +1,7 @@
 import { api } from '@back/api'
 import type { ErrorResBody, ResBody } from '@back/api/user/getUserListHandler'
-import { queryKey } from '@shared/const/queryKey'
 import { axiosWithAuth } from '@shared/lib/axios'
+import { queryKey } from '@shared/lib/tanstack/react-query/queryKey'
 import { type UseQueryResult, useQuery } from '@tanstack/react-query'
 import type { AxiosError, AxiosResponse } from 'axios'
 

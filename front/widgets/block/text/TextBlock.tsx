@@ -17,9 +17,9 @@ import {
 import { beforeUpload } from '@features/file/upload-file'
 import { BookmarkBlockIcon } from '@features/open-close/open-bookmark-modal'
 import { OpenInfoBlockModalIcon } from '@features/open-close/open-info-modal'
-import { cls } from '@shared/const/cls'
+import { cls } from '@shared/cls'
 import { ItemActionButtonsLayout } from '@shared/layout/ItemActionButtonsLayout'
-import type { FroalaEditor } from '@shared/type/froala'
+import type { FroalaEditor } from '@shared/lib/froala/froala'
 import { type JSX, useRef } from 'react'
 
 export const TextBlock = (): JSX.Element => {

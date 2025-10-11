@@ -3,7 +3,7 @@ import {
   updateBoqRowCellAtStore,
 } from '@entities/quotation'
 import type { BoqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
-import type { FroalaEditorRef } from '@shared/type/froala'
+import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 
 type Props = {
   editorRef: FroalaEditorRef

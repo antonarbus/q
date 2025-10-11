@@ -1,6 +1,6 @@
 import { getBoqBlockFromStore, quotationSlice } from '@entities/quotation'
+import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import { dispatch } from '@shared/lib/redux'
-import type { FroalaEditorRef } from '@shared/type/froala'
 import { getStringWithNewFormattedNumber } from '@shared/util/getStringWithNewFormattedNumber'
 import { roundTo } from 'round-to'
 

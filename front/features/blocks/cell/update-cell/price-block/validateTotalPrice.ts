@@ -3,9 +3,9 @@ import {
   itemType,
   quotationSlice,
 } from '@entities/quotation'
+import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import { updateNumberAtHtmlIncrementally } from '@shared/lib/froala/updateNumberAtHtmlIncrementally'
 import { dispatch, getState } from '@shared/lib/redux'
-import type { FroalaEditorRef } from '@shared/type/froala'
 import { getNumberFromString } from '@shared/util/getNumberFromString'
 import { getStringWithNewFormattedNumber } from '@shared/util/getStringWithNewFormattedNumber'
 import { getTextContentFromHtml } from '@shared/util/getTextContentFromHtml'

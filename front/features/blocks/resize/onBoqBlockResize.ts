@@ -5,12 +5,12 @@ import {
   itemType,
   quotationSlice,
 } from '@entities/quotation'
-import { dispatch, getState } from '@shared/lib/redux'
 import type {
   OnBlockResize,
   OnBlockResizeStart,
   OnBlockResizeStop,
-} from '@shared/type/resizablePaper'
+} from '@shared/lib/re-resizable/resizablePaper'
+import { dispatch, getState } from '@shared/lib/redux'
 
 // can be global var for different boqItems as we can change width of one item at a time
 let initNumberColumnWidth = 0

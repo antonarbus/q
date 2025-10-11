@@ -4,7 +4,7 @@ import {
   onBoqBlockResizeStart,
   onBoqBlockResizeStop,
 } from '@features/blocks/resize'
-import { cls } from '@shared/const/cls'
+import { cls } from '@shared/cls'
 import type { JSX } from 'react'
 import { OneRow } from './boq-row/OneRow'
 

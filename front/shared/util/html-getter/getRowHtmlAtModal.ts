@@ -1,4 +1,4 @@
-import { cls } from '@shared/const/cls'
+import { cls } from '@shared/cls'
 
 export const getRowHtmlAtModal = (): string => {
   const rowElement = document.querySelector(`.${cls.formModal} .${cls.boqRow}`)

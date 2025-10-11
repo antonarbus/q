@@ -1,4 +1,4 @@
-import type { FroalaEditorRef } from '@shared/type/froala'
+import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import type { KeyboardEvent } from 'react'
 
 type Props = {

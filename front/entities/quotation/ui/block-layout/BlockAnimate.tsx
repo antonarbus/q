@@ -1,11 +1,11 @@
 import { Box } from '@mui/material'
-import { cls } from '@shared/const/cls'
-import { theme } from '@shared/theme'
+import { cls } from '@shared/cls'
 import type {
   OnBlockResize,
   OnBlockResizeStart,
   OnBlockResizeStop,
-} from '@shared/type/resizablePaper'
+} from '@shared/lib/re-resizable/resizablePaper'
+import { theme } from '@shared/theme'
 import { motion } from 'motion/react'
 import type { ResizableProps } from 're-resizable'
 import type { JSX, ReactNode } from 'react'

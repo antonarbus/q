@@ -6,10 +6,11 @@ import {
   useGetQuotationListQuery,
   useSaveQuotationMutation,
 } from '@entities/quotation'
-import { navItemId } from '@shared/const/navItemId'
-import { route } from '@shared/const/route'
+import { route } from '@shared/lib/react-router-dom/route'
 import { dispatch, getState } from '@shared/lib/redux'
-import { createLoadingMenuIconMachine, navSlice } from '@shared/nav'
+import { navItemId } from '@shared/nav/navItemId'
+import { navSlice } from '@shared/nav/navSlice'
+import { createLoadingMenuIconMachine } from '@shared/nav/state-machine/createLoadingMenuIconMachine'
 import { asyncDelay } from '@shared/util/delay'
 import type { UseMutationResult } from '@tanstack/react-query'
 import type { FormEvent } from 'react'

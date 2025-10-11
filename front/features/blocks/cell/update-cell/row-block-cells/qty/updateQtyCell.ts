@@ -5,8 +5,8 @@ import {
 } from '@entities/quotation'
 import { updateRowBlockCellAtStore } from '@entities/quotation/redux/updater/updateRowBlockCellAtStore'
 import { updateRowBlockCellWithValue } from '@entities/quotation/util/updateRowBlockCellWithValue'
+import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import { getState } from '@shared/lib/redux'
-import type { FroalaEditorRef } from '@shared/type/froala'
 import { roundTo } from 'round-to'
 
 type Props = {

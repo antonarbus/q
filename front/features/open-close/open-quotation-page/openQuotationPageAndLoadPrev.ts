@@ -1,6 +1,6 @@
 import { backToQuotationRef } from '@entities/quotation'
 import { appSlice } from '@shared/appSlice'
-import { router } from '@shared/lib/react-router-dom'
+import { router } from '@shared/lib/react-router-dom/router'
 import { dispatch } from '@shared/lib/redux'
 
 export const openQuotationPageAndLoadPrev = (): void => {

@@ -4,8 +4,8 @@ import type {
   ResBody,
   SearchQuery,
 } from '@back/api/visitors/getUniqueDailyVisitorsHandler'
-import { queryKey } from '@shared/const/queryKey'
 import { axiosWithAuth } from '@shared/lib/axios'
+import { queryKey } from '@shared/lib/tanstack/react-query/queryKey'
 import { type UseQueryResult, useQuery } from '@tanstack/react-query'
 import type { AxiosError } from 'axios'
 

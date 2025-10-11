@@ -1,6 +1,6 @@
 import { useRow } from '@entities/quotation'
 import { Box } from '@mui/material'
-import { cls } from '@shared/const/cls'
+import { cls } from '@shared/cls'
 import type { FocusEvent, JSX, ReactNode } from 'react'
 import { PasteBoqRowTextOverlay } from './paste-here-row'
 

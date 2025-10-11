@@ -1,6 +1,6 @@
 import { getBoqColumnFromStore, quotationSlice } from '@entities/quotation'
 import type { BoqColumnKey } from '@entities/quotation/const/boqColumnKey'
-import { cls } from '@shared/const/cls'
+import { cls } from '@shared/cls'
 import { dispatch } from '@shared/lib/redux'
 
 type Props = {

@@ -1,4 +1,4 @@
-import type { NavItem } from '@shared/nav'
+import type { NavItem } from '@shared/nav/type'
 import { useNavigate } from 'react-router-dom'
 import { useEffectOnce } from 'react-use'
 

@@ -7,7 +7,7 @@ import {
   useRow,
 } from '@entities/quotation'
 import { Tooltip } from '@mui/material'
-import { cls } from '@shared/const/cls'
+import { cls } from '@shared/cls'
 import { textSlice } from '@shared/lib/froala/textSlice'
 import { dispatch, getState, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'

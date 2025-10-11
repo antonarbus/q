@@ -4,9 +4,9 @@ import {
   userSlice,
 } from '@entities/user'
 import type { Signal } from '@preact/signals-react'
-import { navItemId } from '@shared/const/navItemId'
 import { dispatch } from '@shared/lib/redux'
-import { navSlice } from '@shared/nav'
+import { navItemId } from '@shared/nav/navItemId'
+import { navSlice } from '@shared/nav/navSlice'
 import { asyncDelay } from '@shared/util/delay'
 import type { UseMutationResult } from '@tanstack/react-query'
 import type { AnimationScope } from 'motion-dom'

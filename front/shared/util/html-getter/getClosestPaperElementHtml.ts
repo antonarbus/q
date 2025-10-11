@@ -1,4 +1,4 @@
-import { cls } from '@shared/const/cls'
+import { cls } from '@shared/cls'
 import type { MouseEvent } from 'react'
 
 export const getClosestPaperElementHtml = (event: MouseEvent): string => {

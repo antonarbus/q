@@ -1,6 +1,6 @@
 import { appSlice } from '@shared/appSlice'
-import { route } from '@shared/const/route'
-import { router } from '@shared/lib/react-router-dom'
+import { route } from '@shared/lib/react-router-dom/route'
+import { router } from '@shared/lib/react-router-dom/router'
 import { dispatch, getState } from '@shared/lib/redux'
 
 export const openSaveQuotationModal = (): void => {

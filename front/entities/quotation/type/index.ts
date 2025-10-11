@@ -1,5 +1,5 @@
 import type { Signal } from '@preact/signals-react'
-import type { FroalaEditorRef } from '@shared/type/froala'
+import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import type { BoqColumnKey } from '../const/boqColumnKey'
 import type { BoqRowKey } from '../const/boqRowKey'
 import type { itemType } from '../const/itemType'

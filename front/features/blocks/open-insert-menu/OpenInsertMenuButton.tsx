@@ -1,8 +1,8 @@
 import { IconButton } from '@mui/material'
-import { cls } from '@shared/const/cls'
-import { navItemId } from '@shared/const/navItemId'
+import { cls } from '@shared/cls'
 import { dispatch } from '@shared/lib/redux'
-import { navSlice } from '@shared/nav'
+import { navItemId } from '@shared/nav/navItemId'
+import { navSlice } from '@shared/nav/navSlice'
 import type { ReactNode } from 'react'
 import { FaPlus } from 'react-icons/fa6'
 

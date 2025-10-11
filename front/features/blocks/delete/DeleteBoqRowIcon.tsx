@@ -6,7 +6,7 @@ import {
   useRow,
 } from '@entities/quotation'
 import { Tooltip } from '@mui/material'
-import { cls } from '@shared/const/cls'
+import { cls } from '@shared/cls'
 import { dispatch, getState, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import type { JSX } from 'react'

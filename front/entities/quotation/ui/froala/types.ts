@@ -1,5 +1,5 @@
 import type { SxProps } from '@mui/material'
-import type { FroalaEditor, FroalaEditorRef } from '@shared/type/froala'
+import type { FroalaEditor, FroalaEditorRef } from '@shared/lib/froala/froala'
 import type { CSSProperties, KeyboardEvent, MouseEvent } from 'react'
 
 export type FroalaProps = {

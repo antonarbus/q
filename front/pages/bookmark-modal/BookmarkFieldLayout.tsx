@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
+import { cls } from '@shared/cls'
 import { OutlinedDivWithLabel } from '@shared/component/OutlinedDivWithLabel'
-import { cls } from '@shared/const/cls'
 import type { JSX, ReactNode } from 'react'
 
 type Props = {

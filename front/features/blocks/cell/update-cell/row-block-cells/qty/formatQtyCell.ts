@@ -1,6 +1,6 @@
 import { boqRowCellKey } from '@entities/quotation'
 import { formatRowBlockCellNumber } from '@entities/quotation/util/formatRowBlockCellNumber'
-import type { FroalaEditorRef } from '@shared/type/froala'
+import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 
 type Props = {
   qtyCellEditorRef: FroalaEditorRef

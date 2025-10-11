@@ -1,4 +1,4 @@
-import { route } from '@shared/const/route'
+import { route } from '@shared/lib/react-router-dom/route'
 import type { JSX, MouseEvent } from 'react'
 import { Link } from 'react-router-dom'
 import { openRegisterModal } from './openRegisterModal'

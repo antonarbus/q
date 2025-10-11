@@ -1,4 +1,4 @@
-import type { FroalaEditor } from '@shared/type/froala'
+import type { FroalaEditor } from '@shared/lib/froala/froala'
 import type { BoqRowCellKey } from '../const/boqRowCellKey'
 import { getBoqCellFromStore } from '../redux/getter/getBoqCellFromStore'
 

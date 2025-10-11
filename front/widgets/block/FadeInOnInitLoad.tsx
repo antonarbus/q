@@ -1,4 +1,4 @@
-import { cls } from '@shared/const/cls'
+import { cls } from '@shared/cls'
 import { motion } from 'motion/react'
 import type { JSX, ReactNode } from 'react'
 

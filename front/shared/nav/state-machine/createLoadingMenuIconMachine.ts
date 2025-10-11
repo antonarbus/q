@@ -1,6 +1,6 @@
-import type { NavItemId } from '@shared/const/navItemId'
 import { dispatch } from '@shared/lib/redux'
-import { navSlice } from '@shared/nav'
+import type { NavItemId } from '@shared/nav/navItemId'
+import { navSlice } from '@shared/nav/navSlice'
 import { setup } from 'xstate'
 
 type Props = {

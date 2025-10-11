@@ -1,6 +1,6 @@
 import { useIsCopyModalVisible } from '@entities/copy'
 import { Tooltip } from '@mui/material'
-import { route } from '@shared/const/route'
+import { route } from '@shared/lib/react-router-dom/route'
 import type { JSX } from 'react'
 import { PiInfoBold } from 'react-icons/pi'
 import { Link } from 'react-router-dom'

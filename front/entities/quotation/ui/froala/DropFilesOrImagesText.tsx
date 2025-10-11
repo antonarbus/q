@@ -1,6 +1,6 @@
 import { useFroala } from '@entities/quotation/provider/FroalaProvider'
 import { Box } from '@mui/material'
-import { cls } from '@shared/const/cls'
+import { cls } from '@shared/cls'
 import { theme } from '@shared/theme'
 import type { ComponentRef, JSX, RefObject } from 'react'
 

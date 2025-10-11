@@ -1,4 +1,4 @@
-import type { FroalaEditor } from '@shared/type/froala'
+import type { FroalaEditor } from '@shared/lib/froala/froala'
 import { getBoqBlockFromStore } from '../redux/getter/getBoqBlockFromStore'
 import type { HeaderKey } from '../type'
 

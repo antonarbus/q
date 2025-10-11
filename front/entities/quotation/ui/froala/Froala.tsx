@@ -3,7 +3,7 @@ import {
   showDropFilesTextOnMouseLeave,
 } from '@features/file/upload-file/showDropFilesTextOnHover'
 import { Box } from '@mui/material'
-import { cls } from '@shared/const/cls'
+import { cls } from '@shared/cls'
 import { useSelector } from '@shared/lib/redux'
 import { type ComponentRef, type JSX, type MouseEvent, useRef } from 'react'
 import { useBlock } from '../../provider/BlockProvider'

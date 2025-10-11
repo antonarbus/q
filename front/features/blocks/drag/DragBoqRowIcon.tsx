@@ -1,7 +1,7 @@
 import { useSortable } from '@dnd-kit/sortable'
 import { useIsBoqRowSortDisabled, useRow } from '@entities/quotation'
 import { Tooltip } from '@mui/material'
-import { cls } from '@shared/const/cls'
+import { cls } from '@shared/cls'
 import type { JSX } from 'react'
 import { MdDragIndicator } from 'react-icons/md'
 

@@ -6,9 +6,9 @@ import {
   useGetQuotationMutation,
 } from '@entities/quotation'
 import { appSlice } from '@shared/appSlice'
-import { navItemId } from '@shared/const/navItemId'
 import { dispatch, useSelector } from '@shared/lib/redux'
-import { navSlice } from '@shared/nav'
+import { navItemId } from '@shared/nav/navItemId'
+import { navSlice } from '@shared/nav/navSlice'
 import { asyncDelay } from '@shared/util/delay'
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'

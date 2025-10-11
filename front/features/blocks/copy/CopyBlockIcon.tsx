@@ -1,7 +1,7 @@
 import { copySlice } from '@entities/copy'
 import { itemType, saveBlockHeightByIndex, useBlock } from '@entities/quotation'
 import { Tooltip } from '@mui/material'
-import { cls } from '@shared/const/cls'
+import { cls } from '@shared/cls'
 import { textSlice } from '@shared/lib/froala/textSlice'
 import { dispatch, getState, useSelector } from '@shared/lib/redux'
 import { getClosestPaperElementHtml } from '@shared/util/html-getter/getClosestPaperElementHtml'

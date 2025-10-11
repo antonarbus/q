@@ -1,6 +1,6 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
-import { navItemId as navItemIdKey } from '@shared/const/navItemId'
 import { instance } from '@shared/instance'
+import { navItemId as navItemIdKey } from '@shared/nav/navItemId'
 import { RiAdminLine } from 'react-icons/ri'
 import { RxPerson } from 'react-icons/rx'
 import { getMenuItemPropValue } from './getMenuItemPropValue'

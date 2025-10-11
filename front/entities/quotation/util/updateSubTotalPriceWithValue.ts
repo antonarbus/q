@@ -1,7 +1,7 @@
+import type { FroalaEditor } from '@shared/lib/froala/froala'
 import { updateNumberAtHtml } from '@shared/lib/froala/updateNumberAtHtml'
 import { updateNumberAtHtmlIncrementally } from '@shared/lib/froala/updateNumberAtHtmlIncrementally'
 import { dispatch } from '@shared/lib/redux'
-import type { FroalaEditor } from '@shared/type/froala'
 import { getNumberFromString } from '@shared/util/getNumberFromString'
 import { getStringWithNewFormattedNumber } from '@shared/util/getStringWithNewFormattedNumber'
 import { getTextContentFromHtml } from '@shared/util/getTextContentFromHtml'

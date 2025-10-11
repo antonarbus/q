@@ -3,9 +3,9 @@ import {
   itemType,
   quotationSlice,
 } from '@entities/quotation'
+import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import { updateNumberAtHtmlIncrementally } from '@shared/lib/froala/updateNumberAtHtmlIncrementally'
 import { dispatch, getState, useSelector } from '@shared/lib/redux'
-import type { FroalaEditorRef } from '@shared/type/froala'
 import { getStringWithNewFormattedNumber } from '@shared/util/getStringWithNewFormattedNumber'
 import { useUpdateEffect } from 'react-use'
 

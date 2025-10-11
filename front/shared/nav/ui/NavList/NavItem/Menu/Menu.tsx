@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
-import { navItemId } from '@shared/const/navItemId'
 import { dispatch, useSelector } from '@shared/lib/redux'
+import { navItemId } from '@shared/nav/navItemId'
 import { theme } from '@shared/theme'
 import { type ComponentRef, type JSX, useRef } from 'react'
 import { navSlice } from '../../../../navSlice'

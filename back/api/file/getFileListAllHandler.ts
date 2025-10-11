@@ -1,9 +1,9 @@
 import { FileModel } from '@back/entities/file'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
+import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
 import { userRole } from '@back/shared/const/userRole'
 import type { File } from '@entities/file'
-import type { ErrorMessageCommon } from '@shared/const/errorMessageCommon'
 import type { NextFunction, Request, Response } from 'express'
 
 export type Item = {

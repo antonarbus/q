@@ -7,7 +7,7 @@ import {
   updateBoqRowCellWithValue,
   updateSubTotalPriceWithValue,
 } from '@entities/quotation'
-import type { FroalaEditorRef } from '@shared/type/froala'
+import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import { roundTo } from 'round-to'
 
 type Props = {

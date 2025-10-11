@@ -1,6 +1,6 @@
 import { updateBoqColumnCellAtStore } from '@entities/quotation'
 import type { BoqColumnKey } from '@entities/quotation/const/boqColumnKey'
-import type { FroalaEditorRef } from '@shared/type/froala'
+import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 
 type Props = {
   editorRef: FroalaEditorRef

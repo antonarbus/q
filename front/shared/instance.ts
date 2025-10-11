@@ -1,5 +1,5 @@
 import type { QueryClientType } from '@app/queryClient'
-import type { NavItem } from './nav'
+import type { NavItem } from './nav/type'
 
 class Instance {
   #queryClientInstance: QueryClientType | null = null

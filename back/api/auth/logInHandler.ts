@@ -1,5 +1,6 @@
 import { config } from '@back/config'
 import { getUserFromAccessTokenOrNull, UserModel } from '@back/entities/user'
+import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
 import { userRole } from '@back/shared/const/userRole'
 import { setNoTraceMode, setRefreshTokenCookie } from '@back/shared/headers'
@@ -11,7 +12,6 @@ import {
 } from '@back/shared/lib/json-webtoken'
 import { sendEmail } from '@back/shared/lib/mailersend'
 import type { User } from '@entities/user'
-import type { ErrorMessageCommon } from '@shared/const/errorMessageCommon'
 import bcrypt from 'bcryptjs'
 import type { NextFunction, Request, Response } from 'express'
 

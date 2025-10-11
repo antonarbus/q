@@ -1,4 +1,4 @@
-import { cls } from '@shared/const/cls'
+import { cls } from '@shared/cls'
 import type { JSX, ReactNode } from 'react'
 
 type Props = {

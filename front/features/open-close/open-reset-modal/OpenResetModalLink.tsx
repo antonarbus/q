@@ -1,5 +1,5 @@
 import { appSlice } from '@shared/appSlice'
-import { route } from '@shared/const/route'
+import { route } from '@shared/lib/react-router-dom/route'
 import { dispatch } from '@shared/lib/redux'
 import type { JSX, MouseEvent } from 'react'
 import { Link, useNavigate } from 'react-router-dom'

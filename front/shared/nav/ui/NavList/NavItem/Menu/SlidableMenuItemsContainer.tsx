@@ -1,4 +1,4 @@
-import type { NavItemId } from '@shared/const/navItemId'
+import type { NavItemId } from '@shared/nav/navItemId'
 import type { ComponentRef, ReactNode, RefObject } from 'react'
 import { getNavItem } from './functions/getNavItem'
 import { MenuItem } from './MenuItem'

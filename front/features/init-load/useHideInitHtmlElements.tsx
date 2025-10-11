@@ -1,4 +1,4 @@
-import { cls } from '@shared/const/cls'
+import { cls } from '@shared/cls'
 import { useEffectOnce } from 'react-use'
 
 export const useHideInitHtmlElements = (): void => {

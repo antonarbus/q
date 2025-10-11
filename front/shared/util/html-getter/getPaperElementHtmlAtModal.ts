@@ -1,4 +1,4 @@
-import { cls } from '@shared/const/cls'
+import { cls } from '@shared/cls'
 
 export const getPaperElementHtmlAtModal = (): string => {
   const paperElement = document.querySelector(`.${cls.formModal} .${cls.paper}`)

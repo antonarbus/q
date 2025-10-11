@@ -7,7 +7,7 @@ import {
   useBlock,
 } from '@entities/quotation'
 import { updateBoqColumnCell } from '@features/blocks/cell/update-cell'
-import type { FroalaEditor } from '@shared/type/froala'
+import type { FroalaEditor } from '@shared/lib/froala/froala'
 import { type JSX, useRef } from 'react'
 import { ResizableColumn } from '../ResizableColumn'
 

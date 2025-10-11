@@ -1,5 +1,5 @@
+import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import { dispatch, getState } from '@shared/lib/redux'
-import type { FroalaEditorRef } from '@shared/type/froala'
 import { getStringWithNewFormattedNumber } from '@shared/util/getStringWithNewFormattedNumber'
 import { roundTo } from 'round-to'
 import { BOOKMARK_POS_AT_BLOCKS } from '../const/bookmarkPosAtBlocks'

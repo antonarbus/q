@@ -1,6 +1,6 @@
 import type { ResBody } from '@back/api/quotation/getQuotationListHandler'
-import { queryKey } from '@shared/const/queryKey'
 import { instance } from '@shared/instance'
+import { queryKey } from '@shared/lib/tanstack/react-query/queryKey'
 import { produce } from 'immer'
 
 type Props = {

@@ -1,5 +1,5 @@
 import { dispatch, getState } from '@shared/lib/redux'
-import { navSlice } from '@shared/nav'
+import { navSlice } from '@shared/nav/navSlice'
 import { backToQuotationRef } from '../ref/backToQuotationRef'
 
 export const setBackToQuotation = (): void => {

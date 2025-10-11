@@ -4,7 +4,7 @@ import type {
   OnBlockResize,
   OnBlockResizeStart,
   OnBlockResizeStop,
-} from '@shared/type/resizablePaper'
+} from '@shared/lib/re-resizable/resizablePaper'
 import type { ResizableProps } from 're-resizable'
 import type { JSX, ReactNode } from 'react'
 import { useBlock } from '../provider/BlockProvider'

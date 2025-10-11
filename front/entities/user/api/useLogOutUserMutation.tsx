@@ -1,6 +1,6 @@
 import { api } from '@back/api'
 import type { ErrorResBody, ResBody } from '@back/api/auth/logOutHandler'
-import { queryKey } from '@shared/const/queryKey'
+import { queryKey } from '@shared/lib/tanstack/react-query/queryKey'
 import { type UseMutationResult, useMutation } from '@tanstack/react-query'
 import axios, { type AxiosError } from 'axios'
 

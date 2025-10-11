@@ -5,7 +5,7 @@ import {
   type SxProps,
   Typography,
 } from '@mui/material'
-import { cls } from '@shared/const/cls'
+import { cls } from '@shared/cls'
 import { theme } from '@shared/theme'
 import { AnimatePresence, motion } from 'motion/react'
 import type { AnimationScope } from 'motion-dom'

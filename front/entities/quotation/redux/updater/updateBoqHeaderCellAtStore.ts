@@ -1,5 +1,5 @@
+import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import { dispatch } from '@shared/lib/redux'
-import type { FroalaEditorRef } from '@shared/type/froala'
 import { getNumberFromString } from '@shared/util/getNumberFromString'
 import { getTextContentFromHtml } from '@shared/util/getTextContentFromHtml'
 import type { HeaderKey } from '../../type'

@@ -1,5 +1,5 @@
 import { Box, IconButton, Paper } from '@mui/material'
-import { cls } from '@shared/const/cls'
+import { cls } from '@shared/cls'
 import type { HTMLAttributes, JSX } from 'react'
 import { IoClose } from 'react-icons/io5'
 

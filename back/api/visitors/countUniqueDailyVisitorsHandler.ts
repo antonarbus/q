@@ -2,9 +2,9 @@ import {
   type VisitorsCount,
   VisitorsCountModel,
 } from '@back/entities/visitors-count'
+import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
 import { headerName } from '@back/shared/headers'
-import type { ErrorMessageCommon } from '@shared/const/errorMessageCommon'
 import type { NextFunction, Request, Response } from 'express'
 
 export type ReqBody = {

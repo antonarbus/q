@@ -1,5 +1,5 @@
+import type { FroalaEditor } from '@shared/lib/froala/froala'
 import { updateNumberAtHtmlIncrementally } from '@shared/lib/froala/updateNumberAtHtmlIncrementally'
-import type { FroalaEditor } from '@shared/type/froala'
 import { getNumberFromString } from '@shared/util/getNumberFromString'
 import { getStringWithNewFormattedNumber } from '@shared/util/getStringWithNewFormattedNumber'
 import { getTextContentFromHtml } from '@shared/util/getTextContentFromHtml'

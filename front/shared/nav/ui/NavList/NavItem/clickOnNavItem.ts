@@ -1,5 +1,5 @@
-import { navItemId } from '@shared/const/navItemId'
 import { dispatch, getState } from '@shared/lib/redux'
+import { navItemId } from '@shared/nav/navItemId'
 import type { ComponentRef, MouseEvent, RefObject } from 'react'
 import { navSlice } from '../../../navSlice'
 import type { NavItem } from '../../../type'

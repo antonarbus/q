@@ -1,9 +1,9 @@
+import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
 import {
   removeNoTraceMode,
   removeRefreshTokenCookie,
 } from '@back/shared/headers'
-import type { ErrorMessageCommon } from '@shared/const/errorMessageCommon'
 import type { NextFunction, Request, Response } from 'express'
 
 export type ResBody = {

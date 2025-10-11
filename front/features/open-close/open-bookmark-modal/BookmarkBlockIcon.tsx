@@ -6,8 +6,8 @@ import {
   useBlock,
 } from '@entities/quotation'
 import { Tooltip } from '@mui/material'
-import { cls } from '@shared/const/cls'
-import { route } from '@shared/const/route'
+import { cls } from '@shared/cls'
+import { route } from '@shared/lib/react-router-dom/route'
 import { dispatch, getState } from '@shared/lib/redux'
 import type { MouseEvent, ReactNode } from 'react'
 import { MdOutlineStarOutline } from 'react-icons/md'

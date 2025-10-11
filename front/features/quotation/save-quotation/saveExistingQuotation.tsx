@@ -4,11 +4,12 @@ import {
   quotationSlice,
   saveQuotationMutationFn,
 } from '@entities/quotation'
-import { navItemId } from '@shared/const/navItemId'
-import { route } from '@shared/const/route'
-import { router } from '@shared/lib/react-router-dom'
+import { route } from '@shared/lib/react-router-dom/route'
+import { router } from '@shared/lib/react-router-dom/router'
 import { dispatch, getState } from '@shared/lib/redux'
-import { createLoadingMenuIconMachine, navSlice } from '@shared/nav'
+import { navItemId } from '@shared/nav/navItemId'
+import { navSlice } from '@shared/nav/navSlice'
+import { createLoadingMenuIconMachine } from '@shared/nav/state-machine/createLoadingMenuIconMachine'
 import type { AxiosError } from 'axios'
 import { toast } from 'sonner'
 import { createActor } from 'xstate'

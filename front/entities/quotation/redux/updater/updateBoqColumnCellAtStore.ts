@@ -1,6 +1,6 @@
 import type { BoqColumnKey } from '@entities/quotation/const/boqColumnKey'
+import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import { dispatch } from '@shared/lib/redux'
-import type { FroalaEditorRef } from '@shared/type/froala'
 import { getBoqBlockFromStore } from '../getter/getBoqBlockFromStore'
 import { quotationSlice } from '../quotationSlice'
 

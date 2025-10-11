@@ -1,7 +1,7 @@
 import { Froala, itemType, useBlock } from '@entities/quotation'
 import { updatePriceTitleCell } from '@features/blocks/cell/update-cell'
+import type { FroalaEditor } from '@shared/lib/froala/froala'
 import { getState } from '@shared/lib/redux'
-import type { FroalaEditor } from '@shared/type/froala'
 import { type JSX, useRef } from 'react'
 
 export const PriceTitle = (): JSX.Element => {

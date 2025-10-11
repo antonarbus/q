@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test'
-import { route } from '@shared/const/route'
+import { route } from '@shared/lib/react-router-dom/route'
 
 test('page is accessible', async ({ page }) => {
   const response = await page.goto(route.root)

@@ -1,10 +1,10 @@
 import { quotationSlice } from '@entities/quotation'
-import { dispatch, getState } from '@shared/lib/redux'
 import type {
   OnBlockResize,
   OnBlockResizeStart,
   OnBlockResizeStop,
-} from '@shared/type/resizablePaper'
+} from '@shared/lib/re-resizable/resizablePaper'
+import { dispatch, getState } from '@shared/lib/redux'
 
 export const onTextBlockResizeStart: OnBlockResizeStart = ({
   blockIndex,

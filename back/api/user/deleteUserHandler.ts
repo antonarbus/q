@@ -4,11 +4,11 @@ import {
   getUserFromAccessTokenOrThrowUnauthorized,
   UserModel,
 } from '@back/entities/user'
+import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
 import { userRole } from '@back/shared/const/userRole'
 // import { bucket, getFolderPath } from '@back/shared/services/storage'
 import type { User } from '@entities/user'
-import type { ErrorMessageCommon } from '@shared/const/errorMessageCommon'
 import type { NextFunction, Request, Response } from 'express'
 
 export type ReqBody = {

@@ -5,7 +5,7 @@ import {
   useSaveBookmarkMutation,
 } from '@entities/bookmark'
 import { BOOKMARK_POS_AT_BLOCKS, quotationSlice } from '@entities/quotation'
-import { cls } from '@shared/const/cls'
+import { cls } from '@shared/cls'
 import { dispatch, getState } from '@shared/lib/redux'
 import { asyncDelay } from '@shared/util/delay'
 import { getPaperElementHtmlAtModal } from '@shared/util/html-getter/getPaperElementHtmlAtModal'

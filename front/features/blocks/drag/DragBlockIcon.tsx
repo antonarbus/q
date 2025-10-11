@@ -3,7 +3,7 @@ import { useIsCopyModalVisible } from '@entities/copy'
 import { useBlock, useIsLastBlock } from '@entities/quotation'
 import { Tooltip } from '@mui/material'
 import { useSignal } from '@preact/signals-react'
-import { cls } from '@shared/const/cls'
+import { cls } from '@shared/cls'
 import { type JSX, useRef, useState } from 'react'
 import { MdDragIndicator } from 'react-icons/md'
 

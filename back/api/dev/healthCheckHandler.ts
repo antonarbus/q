@@ -1,5 +1,5 @@
+import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
-import type { ErrorMessageCommon } from '@shared/const/errorMessageCommon'
 import type { NextFunction, Request, Response } from 'express'
 import mongoose from 'mongoose'
 
