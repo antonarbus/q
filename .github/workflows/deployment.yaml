@@ -66,6 +66,8 @@ jobs:
       - name: Run TypeScript checks
         run: bun run tsc
 
+      - name: Install Playwright browsers
+        run: bunx playwright install --with-deps chromium
 
       - name: Run Playwright tests
         run: bun run playwright

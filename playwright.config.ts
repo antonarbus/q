@@ -46,7 +46,7 @@ export default defineConfig({
   // https://playwright.dev/docs/test-webserver
   webServer: [
     {
-      command: 'npm run start_back',
+      command: 'bun run start_back',
       url: config.back.baseUrl,
       ignoreHTTPSErrors: true,
       reuseExistingServer: getEnvVar('CI') === undefined,
@@ -54,7 +54,7 @@ export default defineConfig({
       stderr: getEnvVar('CI') === undefined ? 'pipe' : 'ignore', // Capture standard error
     },
     {
-      command: 'npm run start_front',
+      command: 'bun run start_front',
       url: config.front.baseUrl,
       ignoreHTTPSErrors: true,
       reuseExistingServer: getEnvVar('CI') === undefined,
