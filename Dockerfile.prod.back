@@ -1,21 +1,20 @@
-FROM node:22-alpine AS builder
-RUN npm config set legacy-peer-deps true
+FROM oven/bun:1-alpine AS builder
 
 # Install dependencies (cached unless package files change)
-WORKDIR /
-COPY package*.json ./
-RUN npm ci
+WORKDIR /app
+COPY package.json bun.lock* ./
+RUN bun install --frozen-lockfile
 
 # Copy rest of the code (this invalidates cache only when code changes)
 COPY . .
 
 # Build
-RUN npm run build_back
+RUN bun run build_back
 
-FROM node:22-alpine
-COPY --from=builder /back/build /back/build
-WORKDIR /back/build
-RUN npm ci
+FROM oven/bun:1-alpine
+COPY --from=builder /app/back/build /app/back/build
+WORKDIR /app/back/build
+RUN bun install --frozen-lockfile --production
 EXPOSE 4000
 ENV INSTALLATION=production
-CMD ["node", "index.js"]
+CMD ["bun", "run", "index.js"]

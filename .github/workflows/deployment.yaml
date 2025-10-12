@@ -43,35 +43,32 @@ jobs:
         run: |-
           gcloud auth configure-docker '${{env.REGION}}-docker.pkg.dev'
 
-      - name: Install NodeJS
-        uses: actions/setup-node@v4
+      - name: Install Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          node-version: '22'
-
-      - name: Disable npm installation checks
-        run: npm config set legacy-peer-deps true
+          bun-version: '1.1.38'
 
       - name: Install dev dependencies
-        run: npm run install_dev_deps
+        run: bun run install_dev_deps
 
       - name: Install front dependencies
-        run: npm run install_front
+        run: bun run install_front
 
       - name: Install back dependencies
-        run: npm run install_back
+        run: bun run install_back
 
       - name: Run Biome (formatting + linting)
-        run: npm run biome:silent
-        
+        run: bun run biome:silent
+
       - name: Run unit tests
-        run: npm run test
+        run: bun run test
 
       - name: Run TypeScript checks
-        run: npm run tsc
+        run: bun run tsc
 
 
       - name: Run Playwright tests
-        run: npm run playwright
+        run: bun run playwright
 
       - name: Set environment variables
         id: set-env
