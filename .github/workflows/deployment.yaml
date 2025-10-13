@@ -22,26 +22,12 @@ on:
       - closed
 
 jobs:
-  build-and-deploy:
-    permissions:
-      contents: 'read'
-      id-token: 'write'
-
+  lint-and-format:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        id: checkout
         uses: actions/checkout@v4
-
-      - name: 'Authenticate to Google Cloud'
-        uses: 'google-github-actions/auth@v2'
-        with:
-          credentials_json: '${{secrets.GCP_SA_KEY}}'
-
-      - name: 'Docker Auth'
-        run: |-
-          gcloud auth configure-docker '${{env.REGION}}-docker.pkg.dev'
 
       - name: Install Bun
         uses: oven-sh/setup-bun@v2
@@ -60,17 +46,100 @@ jobs:
       - name: Run Biome (formatting + linting)
         run: bun run biome:silent
 
+  unit-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: '1.1.38'
+
+      - name: Install dev dependencies
+        run: bun run install_dev_deps
+
+      - name: Install front dependencies
+        run: bun run install_front
+
+      - name: Install back dependencies
+        run: bun run install_back
+
       - name: Run unit tests
         run: bun run test
+
+  type-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: '1.1.38'
+
+      - name: Install dev dependencies
+        run: bun run install_dev_deps
+
+      - name: Install front dependencies
+        run: bun run install_front
+
+      - name: Install back dependencies
+        run: bun run install_back
 
       - name: Run TypeScript checks
         run: bun run tsc
 
-      - name: Install Playwright browsers
-        run: bunx playwright install --with-deps chromium
+  e2e-tests:
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.49.0-jammy
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: '1.1.38'
+
+      - name: Install dev dependencies
+        run: bun run install_dev_deps
+
+      - name: Install front dependencies
+        run: bun run install_front
+
+      - name: Install back dependencies
+        run: bun run install_back
 
       - name: Run Playwright tests
         run: bun run playwright
+
+  build-and-deploy:
+    needs: [lint-and-format, unit-tests, type-check, e2e-tests]
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v2'
+        with:
+          credentials_json: '${{secrets.GCP_SA_KEY}}'
+
+      - name: 'Docker Auth'
+        run: |-
+          gcloud auth configure-docker '${{env.REGION}}-docker.pkg.dev'
 
       - name: Set environment variables
         id: set-env
