@@ -178,7 +178,7 @@ jobs:
           flags: --port 4000 --allow-unauthenticated
 
   deploy-frontend:
-    needs: [deploy-backend]
+    needs: [lint-and-format, unit-tests, type-check, e2e-tests]
     permissions:
       contents: 'read'
       id-token: 'write'
