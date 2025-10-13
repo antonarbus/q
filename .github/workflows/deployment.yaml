@@ -96,8 +96,10 @@ jobs:
 
   e2e-tests:
     runs-on: ubuntu-latest
+    # Using latest Playwright image to always test against newest browser versions.
+    # If tests fail due to version mismatch, it signals that local Playwright should be upgraded.
     container:
-      image: mcr.microsoft.com/playwright:v1.49.0-jammy
+      image: mcr.microsoft.com/playwright:latest-jammy
 
     steps:
       - name: Checkout code
