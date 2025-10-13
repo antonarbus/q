@@ -127,13 +127,16 @@ jobs:
       - name: Run Playwright tests
         run: bun run playwright
 
-  build-and-deploy:
+  deploy-backend:
     needs: [lint-and-format, unit-tests, type-check, e2e-tests]
     permissions:
       contents: 'read'
       id-token: 'write'
 
     runs-on: ubuntu-latest
+
+    outputs:
+      backend_url: ${{steps.deploy-cloud-run-back.outputs.url}}
 
     steps:
       - name: Checkout code
@@ -172,9 +175,38 @@ jobs:
           project_id: ${{env.PROJECT_ID}}
           flags: --port 4000 --allow-unauthenticated
 
+  deploy-frontend:
+    needs: [deploy-backend]
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    runs-on: ubuntu-latest
+
+    outputs:
+      frontend_url: ${{steps.deploy-cloud-run-front.outputs.url}}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v2'
+        with:
+          credentials_json: '${{secrets.GCP_SA_KEY}}'
+
+      - name: 'Docker Auth'
+        run: |-
+          gcloud auth configure-docker '${{env.REGION}}-docker.pkg.dev'
+
+      - name: Set environment variables
+        id: set-env
+        run: |
+          echo "IMAGE_VERSION=${{github.ref_name}}" >> $GITHUB_ENV
+
       - name: Change backend stream NGINX config
         run: |
-          DOMAIN=$(echo ${{steps.deploy-cloud-run-back.outputs.url}} | cut -d'/' -f3)
+          DOMAIN=$(echo ${{needs.deploy-backend.outputs.backend_url}} | cut -d'/' -f3)
           echo "DOMAIN: ${DOMAIN}"
           sed -i 's|backend:4000|'${DOMAIN}'|g' ./nginx.conf
           sed -i 's|http://backend|https://'${DOMAIN}'|g' ./nginx.conf
@@ -199,7 +231,15 @@ jobs:
           project_id: ${{env.PROJECT_ID}}
           flags: --port 80 --allow-unauthenticated
 
-      - name: Test Cloud Run
+  test-deployment:
+    needs: [deploy-backend, deploy-frontend]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Test backend endpoint
         run: |
-          curl "${{steps.deploy-cloud-run-back.outputs.url}}" -I -s | grep "HTTP/2 200"
-          curl "${{steps.deploy-cloud-run-front.outputs.url}}" -I -s | grep "HTTP/2 200"
+          curl "${{needs.deploy-backend.outputs.backend_url}}" -I -s | grep "HTTP/2 200"
+
+      - name: Test frontend endpoint
+        run: |
+          curl "${{needs.deploy-frontend.outputs.frontend_url}}" -I -s | grep "HTTP/2 200"
