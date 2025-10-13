@@ -18,9 +18,19 @@ COPY . .
 RUN bun run build_front
 
 FROM nginx:alpine-slim
+
+# Accept backend URL as build argument
+ARG BACKEND_URL
+ENV BACKEND_URL=${BACKEND_URL}
+
 COPY --from=builder /app/front/build /front/build
 RUN chmod -R 755 /front/build/.
-COPY nginx.conf /etc/nginx/nginx.conf
+
+# Copy template and substitute environment variables
+COPY nginx.conf.template /tmp/nginx.conf.template
+RUN envsubst '${BACKEND_URL}' < /tmp/nginx.conf.template > /etc/nginx/nginx.conf && \
+    rm /tmp/nginx.conf.template
+
 EXPOSE 80
 ENV INSTALLATION=production
 CMD ["nginx", "-g", "daemon off;"]

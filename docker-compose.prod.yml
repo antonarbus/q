@@ -11,6 +11,8 @@ services:
   frontend:
     build:
       dockerfile: ./Dockerfile.prod.front
+      args:
+        BACKEND_URL: http://backend:4000
     ports:
       - '80:80'
     depends_on:

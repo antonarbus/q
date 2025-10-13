@@ -4,10 +4,6 @@ http {
   gzip on;
   client_max_body_size 50M;
 
-  upstream backend {
-    server backend:4000;
-  }
-
   server {
     listen 80;
     server_name _;
@@ -31,12 +27,12 @@ http {
     }
 
     location /api {
-      proxy_pass http://backend;
+      proxy_pass ${BACKEND_URL};
       proxy_ssl_verify off;
     }
 
     location /uploads {
-      proxy_pass http://backend;
+      proxy_pass ${BACKEND_URL};
       proxy_ssl_verify off;
     }
 

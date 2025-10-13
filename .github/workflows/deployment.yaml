@@ -7,6 +7,8 @@ env:
   DOCKER_IMAGE_NAME: 'docker-image'
   INSTALLATION: 'local'
   CI: 'true'
+  BACKEND_URL_MAIN: 'https://api.sendmequotation.today'
+  BACKEND_URL_DEV: 'https://api-dev.sendmequotation.today'
 
 on:
   push:
@@ -203,14 +205,14 @@ jobs:
         id: set-env
         run: |
           echo "IMAGE_VERSION=${{github.ref_name}}" >> $GITHUB_ENV
-
-      - name: Change backend stream NGINX config
-        run: |
-          DOMAIN=$(echo ${{needs.deploy-backend.outputs.backend_url}} | cut -d'/' -f3)
-          echo "DOMAIN: ${DOMAIN}"
-          sed -i 's|backend:4000|'${DOMAIN}'|g' ./nginx.conf
-          sed -i 's|http://backend|https://'${DOMAIN}'|g' ./nginx.conf
-          cat ./nginx.conf
+          if [ "${{github.ref_name}}" == "main" ]; then
+            echo "BACKEND_URL=${{env.BACKEND_URL_MAIN}}" >> $GITHUB_ENV
+          elif [ "${{github.ref_name}}" == "dev" ]; then
+            echo "BACKEND_URL=${{env.BACKEND_URL_DEV}}" >> $GITHUB_ENV
+          else
+            echo "Error: Unknown branch ${{github.ref_name}}"
+            exit 1
+          fi
 
       - name: Build and push Docker image Frontend
         id: build-push-front
@@ -220,6 +222,8 @@ jobs:
           file: ./Dockerfile.prod.front
           push: true
           tags: ${{env.REGION}}-docker.pkg.dev/${{env.PROJECT_ID}}/${{env.ARTIFACTS_REGISTRY_NAME}}/${{env.DOCKER_IMAGE_NAME}}-front:${{env.IMAGE_VERSION}}
+          build-args: |
+            BACKEND_URL=${{env.BACKEND_URL}}
 
       - name: Deploy to Cloud Run Frontend
         id: deploy-cloud-run-front
