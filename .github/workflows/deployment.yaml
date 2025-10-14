@@ -99,9 +99,8 @@ jobs:
   e2e-tests:
     runs-on: ubuntu-latest
     
+    # Must match local installation, when upgrading Playwright locally, update this version to match.
     # Available containers: https://playwright.dev/docs/docker#image-tags
-    # Must match local installation
-    # When upgrading Playwright locally, update this version to match.
     container:
       image: mcr.microsoft.com/playwright:v1.56.0-jammy
 
