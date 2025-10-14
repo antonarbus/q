@@ -98,10 +98,12 @@ jobs:
 
   e2e-tests:
     runs-on: ubuntu-latest
-    # Playwright doesn't provide a 'latest' tag - version must match local installation.
+    
+    # Available containers: https://playwright.dev/docs/docker#image-tags
+    # Must match local installation
     # When upgrading Playwright locally, update this version to match.
     container:
-      image: mcr.microsoft.com/playwright:v1.55.1-jammy
+      image: mcr.microsoft.com/playwright:v1.56.0-jammy
 
     steps:
       - name: Checkout code
