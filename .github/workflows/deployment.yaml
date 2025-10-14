@@ -36,14 +36,8 @@ jobs:
         with:
           bun-version: '1.1.38'
 
-      - name: Install dev dependencies
-        run: bun run install_dev_deps
-
-      - name: Install front dependencies
-        run: bun run install_front
-
-      - name: Install back dependencies
-        run: bun run install_back
+      - name: Install all dependencies
+        run: bun run install_all
 
       - name: Run Biome (formatting + linting)
         run: bun run biome:silent
@@ -60,14 +54,8 @@ jobs:
         with:
           bun-version: '1.1.38'
 
-      - name: Install dev dependencies
-        run: bun run install_dev_deps
-
-      - name: Install front dependencies
-        run: bun run install_front
-
-      - name: Install back dependencies
-        run: bun run install_back
+      - name: Install all dependencies
+        run: bun run install_all
 
       - name: Run unit tests
         run: bun run test
@@ -84,14 +72,8 @@ jobs:
         with:
           bun-version: '1.1.38'
 
-      - name: Install dev dependencies
-        run: bun run install_dev_deps
-
-      - name: Install front dependencies
-        run: bun run install_front
-
-      - name: Install back dependencies
-        run: bun run install_back
+      - name: Install all dependencies
+        run: bun run install_all
 
       - name: Run TypeScript checks
         run: bun run tsc
@@ -118,14 +100,8 @@ jobs:
         with:
           bun-version: '1.1.38'
 
-      - name: Install dev dependencies
-        run: bun run install_dev_deps
-
-      - name: Install front dependencies
-        run: bun run install_front
-
-      - name: Install back dependencies
-        run: bun run install_back
+      - name: Install all dependencies
+        run: bun run install_all
 
       - name: Run Playwright tests
         run: bun run playwright
