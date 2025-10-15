@@ -19,7 +19,9 @@ RUN bun run build_back
 
 FROM oven/bun:1-alpine
 COPY --from=builder /app/back/build /app/back/build
+COPY --from=builder /app/back/package.json /app/back/build/package.json
 COPY --from=builder /app/back/bun.lock /app/back/build/bun.lock
+COPY --from=builder /app/.env /app/back/build/.env
 WORKDIR /app/back/build
 RUN bun install --frozen-lockfile --production
 EXPOSE 4000

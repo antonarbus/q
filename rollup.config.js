@@ -1,6 +1,5 @@
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import typescript from '@rollup/plugin-typescript'
-import copy from 'rollup-plugin-copy'
 
 export default {
   input: './back/index.ts',
@@ -8,15 +7,9 @@ export default {
     dir: './back/build/',
     format: 'es',
   },
-  external: [/node_modules/u],
+  external: [/node_modules/u], // Don't bundle anything from node_modules
   plugins: [
-    nodeResolve(),
-    typescript(),
-    copy({
-      targets: [
-        { src: './back/package.json', dest: './back/build' },
-        { src: './.env', dest: './back/build' },
-      ],
-    }),
+    nodeResolve(), // Resolves node_modules imports to actual file paths
+    typescript(), // TypeScript → JavaScript
   ],
 }
