@@ -1,15 +1,9 @@
-import { getEnvVar } from './shared/lib/dot-env/getEnvVar'
+import { env } from './shared/lib/dot-env/env'
 
 export const config = {
-  get installation() {
-    // INSTALLATION=local is set at package.json & deployment.yaml
-    // INSTALLATION=production is set at Dockerfile.prod.front & Dockerfile.prod.back
-    if (getEnvVar('INSTALLATION') === 'local') {
-      return 'local'
-    }
-
-    return 'production'
-  },
+  // INSTALLATION=local is set at package.json & deployment.yaml
+  // INSTALLATION=production is set at Dockerfile.prod.front & Dockerfile.prod.back
+  installation: env.INSTALLATION,
   back: {
     protocol: 'http',
     hostname: 'localhost',

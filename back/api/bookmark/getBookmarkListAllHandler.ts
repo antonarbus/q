@@ -5,7 +5,7 @@ import { httpStatus } from '@back/shared/const/httpStatus'
 import { userRole } from '@back/shared/const/userRole'
 import type { Item } from '@entities/quotation/type'
 import type { NextFunction, Request, Response } from 'express'
-import { z } from 'zod/v4'
+import { z } from 'zod'
 
 export type ItemPick = Pick<
   Item,

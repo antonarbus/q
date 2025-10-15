@@ -1,1 +1,1 @@
-export { getEnvVar, getEnvVarOrThrow } from './getEnvVar'
+export { env } from './env'

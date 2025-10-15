@@ -1,14 +1,12 @@
 import jwt from 'jsonwebtoken'
-import { getEnvVarOrThrow } from '../dot-env/getEnvVar'
+import { env } from '../dot-env/env'
 import type { JwtPayloadExtended } from './types'
 
 export const verifyRefreshToken = (
   refreshJwtToken: string,
 ): JwtPayloadExtended | undefined => {
   try {
-    const salt = getEnvVarOrThrow('JWT_REFRESH_SECRET')
-
-    const jwtPayload = jwt.verify(refreshJwtToken, salt)
+    const jwtPayload = jwt.verify(refreshJwtToken, env.JWT_REFRESH_SECRET)
 
     if (typeof jwtPayload === 'string') {
       return undefined

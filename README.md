@@ -376,6 +376,7 @@ https://console.cloud.google.com/iam-admin/serviceaccounts?inv=1&invt=AblPCg&pro
 
 # TO-DO
 
+- [ ] use cloud secretes for passwords instead of .env
 - [ ] use `useDeferredValue` in bookmark search https://react.dev/reference/react/useDeferredValue
 - [ ] Add delete account button
 - [ ] Prevent re-uploading the same file

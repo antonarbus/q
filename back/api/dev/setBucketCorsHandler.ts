@@ -1,7 +1,7 @@
 import { getUserFromRefreshTokenOrJohn } from '@back/entities/user'
 import { httpStatus } from '@back/shared/const/httpStatus'
 import { userRole } from '@back/shared/const/userRole'
-import { getEnvVarOrThrow } from '@back/shared/lib/dot-env'
+import { env } from '@back/shared/lib/dot-env'
 import { bucket } from '@back/shared/lib/google-cloud-storage'
 import type { NextFunction, Request, Response } from 'express'
 
@@ -39,7 +39,7 @@ export const setBucketCorsHandler: RouterHandler = async (req, res, _next) => {
     },
   ])
 
-  console.info(`Bucket ${getEnvVarOrThrow('BUCKET_NAME')} CORS were updated`)
+  console.info(`Bucket ${env.BUCKET_NAME} CORS were updated`)
 
   res.json(corsUpdateRes.at(0)?.cors)
 }

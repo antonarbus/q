@@ -1,11 +1,8 @@
-import { getEnvVarOrThrow } from '@back/shared/lib/dot-env'
+import { env } from '@back/shared/lib/dot-env'
 import mongoose from 'mongoose'
 import { checkDbConnection } from './checkDbConnection'
 
 export const connectToDb = async (): Promise<void> => {
-  const mongoDbUrl = getEnvVarOrThrow('MONGO_DB_CONNECTION_STRING')
-  const dbName = 'q'
-
   try {
     const isConnectedToDb = checkDbConnection()
 
@@ -16,10 +13,13 @@ export const connectToDb = async (): Promise<void> => {
     }
 
     mongoose.set('strictQuery', false)
-    await mongoose.connect(`${mongoDbUrl}/${dbName}`, { autoIndex: false })
-    console.info(`🚀 connected to "${dbName}" database`)
+    await mongoose.connect(
+      `${env.MONGO_DB_CONNECTION_STRING}/${env.MONGO_DB_NAME}`,
+      { autoIndex: false },
+    )
+    console.info(`🚀 connected to "${env.MONGO_DB_NAME}" database`)
   } catch (error) {
-    console.warn(`💣 error to connect to "${dbName}" database`)
+    console.warn(`💣 error to connect to "${env.MONGO_DB_NAME}" database`)
     console.error(error)
   }
 }

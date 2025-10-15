@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import { getEnvVarOrThrow } from '../dot-env/getEnvVar'
+import { env } from '../dot-env'
 import { FIFTEEN_MIN_IN_SEC } from './const'
 import type { JwtPayloadExtended } from './types'
 
@@ -9,9 +9,7 @@ type Res = {
 }
 
 export const generateAccessToken = (payload: JwtPayloadExtended): Res => {
-  const salt = getEnvVarOrThrow('JWT_ACCESS_SECRET')
-
-  const accessJwtToken = jwt.sign(payload, salt, {
+  const accessJwtToken = jwt.sign(payload, env.JWT_ACCESS_SECRET, {
     expiresIn: FIFTEEN_MIN_IN_SEC,
   })
 
