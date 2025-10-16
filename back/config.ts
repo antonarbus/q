@@ -36,5 +36,8 @@ export const config = {
 
       return `${this.protocol}://${this.hostname}` as const
     },
+    get baseUrlPreview() {
+      return `${this.protocol}://${this.hostname}:${this.portPreview}` as const
+    },
   },
 } as const

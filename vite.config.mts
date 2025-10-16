@@ -74,7 +74,7 @@ export default {
   preview: {
     host: config.front.hostname,
     port: config.front.portPreview,
-    // https: true,
+    open: config.front.baseUrlPreview,
     proxy: {
       '/api': config.back.baseUrl,
       '/uploads': config.back.baseUrl,
@@ -107,6 +107,12 @@ export default {
           ['module:@preact/signals-react-transform'],
         ],
       },
+      // Exclude pre-built library files from Babel transformation
+      // These are already minified and don't need processing
+      exclude: [
+        /\/froala\/froalaPkg\.js$/,
+        /\/node_modules\/react-dom\/cjs\/.*\.production\.js$/,
+      ],
     }),
     // https://github.com/aleclarson/vite-tsconfig-paths
     tsconfigPaths(),

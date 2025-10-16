@@ -10,6 +10,11 @@ export default {
   external: [/node_modules/u], // Don't bundle anything from node_modules
   plugins: [
     nodeResolve(), // Resolves node_modules imports to actual file paths
-    typescript(), // TypeScript → JavaScript
+    typescript({
+      exclude: ['**/node_modules/**', 'front/**', '**/front/**'],
+      compilerOptions: {
+        noEmit: false,
+      },
+    }), // emit TypeScript → JavaScript
   ],
 }
