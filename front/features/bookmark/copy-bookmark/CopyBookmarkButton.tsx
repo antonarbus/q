@@ -18,7 +18,16 @@ export const CopyBookmarkButton = ({ id }: ReqBody): JSX.Element => {
       const { item } = getBookmarkMutation.data
 
       if (item !== undefined) {
+        // Save scroll position before setNotEditable
+        const scrollX = window.scrollX
+        const scrollY = window.scrollY
+
         dispatch(textSlice.actions.setNotEditable())
+
+        // Restore scroll position after React renders
+        requestAnimationFrame(() => {
+          window.scrollTo(scrollX, scrollY)
+        })
         dispatch(copySlice.actions.addItem({ item }))
         dispatch(copySlice.actions.allowToPaste())
         dispatch(copySlice.actions.showCopyModal())

@@ -65,7 +65,16 @@ export const DeleteBlockIcon = (): JSX.Element => {
             // width of animated element is changed for unknown reason, can't explain the issue, so let's fix it for animation purpose
             fixElementDimensionStyle({ element: paperElement })
 
+            // Save scroll position before setNotEditable
+            const scrollX = window.scrollX
+            const scrollY = window.scrollY
+
             dispatch(textSlice.actions.setNotEditable())
+
+            // Restore scroll position after React renders
+            requestAnimationFrame(() => {
+              window.scrollTo(scrollX, scrollY)
+            })
 
             dispatch(
               quotationSlice.actions.deleteBlockReducer({

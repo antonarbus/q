@@ -4,9 +4,19 @@ import { textSlice } from '@shared/lib/froala/textSlice'
 import { dispatch, getState } from '@shared/lib/redux'
 import { arrayMoveImmutable } from 'array-move'
 
-export const onBlockDragStart = (event: DragStartEvent): void => {
+export const onBlockDragStart = (_event: DragStartEvent): void => {
   document.body.style.cursor = 'move'
+
+  // Save scroll position before setNotEditable
+  const scrollX = window.scrollX
+  const scrollY = window.scrollY
+
   dispatch(textSlice.actions.setNotEditable())
+
+  // Restore scroll position after React renders
+  requestAnimationFrame(() => {
+    window.scrollTo(scrollX, scrollY)
+  })
 }
 
 export const onBlockDragEnd =

@@ -20,7 +20,16 @@ export const OpenBookmarkModalButton = ({ id }: ReqBody): JSX.Element => {
       const { item: block } = getBookmarkMutation.data
 
       if (block !== undefined) {
+        // Save scroll position before setNotEditable
+        const scrollX = window.scrollX
+        const scrollY = window.scrollY
+
         dispatch(textSlice.actions.setNotEditable())
+
+        // Restore scroll position after React renders
+        requestAnimationFrame(() => {
+          window.scrollTo(scrollX, scrollY)
+        })
 
         dispatch(
           quotationSlice.actions.loadBlockAtPosThousandReducer({ block }),
