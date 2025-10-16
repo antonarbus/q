@@ -1,8 +1,8 @@
 html {
   overflow-y: scroll;
   overflow-x: hidden;
-  background-color: #ccc;
-  overscroll-behavior: none; /* Disable elastic overscroll in Safari */
+  /* Disable elastic overscroll in Safari */
+  overscroll-behavior: none;
 }
 
 html::-webkit-scrollbar {
