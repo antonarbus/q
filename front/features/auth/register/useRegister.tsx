@@ -6,7 +6,7 @@ import { trackSignUpEventAtGoogleTagManager } from '@shared/lib/google-tag-manag
 import { dispatch, getState } from '@shared/lib/redux'
 import { navItemId } from '@shared/nav/navItemId'
 import { navSlice } from '@shared/nav/navSlice'
-import { asyncDelay } from '@shared/util/delay'
+import { asyncDelay } from '@shared/util/asyncDelay'
 import type { UseMutationResult } from '@tanstack/react-query'
 import type { FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'

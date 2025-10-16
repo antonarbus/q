@@ -1,4 +1,4 @@
-import { asyncDelay } from '@shared/util/delay'
+import { asyncDelay } from '@shared/util/asyncDelay'
 import { type ComponentRef, type JSX, useRef } from 'react'
 
 const MIN_SPINNER_TIME = 400

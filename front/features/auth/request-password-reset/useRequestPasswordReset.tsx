@@ -1,6 +1,6 @@
 import { useRequestUserPasswordResetMutation } from '@entities/user/api/useRequestUserPasswordResetMutation'
 import type { Signal } from '@preact/signals-react'
-import { asyncDelay } from '@shared/util/delay'
+import { asyncDelay } from '@shared/util/asyncDelay'
 import type { UseMutationResult } from '@tanstack/react-query'
 import type { FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'

@@ -1,0 +1,4 @@
+{
+  "entry": ["{back,front}/**/index.{ts,tsx}"],
+  "project": ["{back,front}/**/*.{ts,tsx}"]
+}

@@ -96,7 +96,7 @@ export default {
       babel: {
         plugins: [
           [
-            // 'babel-plugin-styled-components',
+            // from package 'babel-plugin-styled-components',
             '@emotion/babel-plugin',
             {
               displayName: true,

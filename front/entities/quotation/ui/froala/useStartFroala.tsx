@@ -72,13 +72,10 @@ export const useStartFroala = (): void => {
             return PREVENT_DEFAULT_BEHAVIOR
           },
           // 'image.inserted'(_response: any): void {
-          //   remindToSaveQuotationOnInsert()
           // },
           // 'file.inserted'(response: any): void {
-          //   remindToSaveQuotationOnInsert()
           // },
           // 'video.inserted'(response: any): void {
-          //   remindToSaveQuotationOnInsert()
           // },
           'file.unlink'(link: { getAttribute: (arg0: string) => any }): void {
             const href = link.getAttribute('href')

@@ -1,9 +1,9 @@
 import { defineConfig, devices } from '@playwright/test'
-import { userFilePath } from 'tests/setup/userFilePath'
+import { userFilePath } from './tests/setup/userFilePath'
 import 'dotenv/config'
-import { headerName } from '@back/shared/headers'
-import { env } from '@back/shared/lib/dot-env'
 import { config } from './back/config'
+import { headerName } from './back/shared/headers'
+import { env } from './back/shared/lib/dot-env'
 
 // https://playwright.dev/docs/test-configuration
 export default defineConfig({

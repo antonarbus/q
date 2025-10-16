@@ -7,7 +7,7 @@ import { quotationSlice } from '@entities/quotation/redux/quotationSlice'
 
 import { cls } from '@shared/cls'
 import { dispatch, getState } from '@shared/lib/redux'
-import { asyncDelay } from '@shared/util/delay'
+import { asyncDelay } from '@shared/util/asyncDelay'
 import { getPaperElementHtmlAtModal } from '@shared/util/html-getter/getPaperElementHtmlAtModal'
 import type { UseMutationResult } from '@tanstack/react-query'
 import { type FormEvent, useCallback } from 'react'
