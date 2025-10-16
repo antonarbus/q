@@ -20,7 +20,6 @@
     "noImplicitReturns": true,
     "jsx": "react-jsx",
     "jsxImportSource": "@emotion/react",
-    "types": ["vite/client", "vitest/globals", "@emotion/react/types/css-prop"],
     "baseUrl": ".",
     "paths": {
       "@back/*": ["./back/*"],
