@@ -34,7 +34,7 @@ export type ResBody = {
   message: 'Found'
 }
 
-export type ErrorResBody = {
+type ErrorResBody = {
   quotationList: ItemPick[]
   quotationListTotalCount: number
   message: ErrorMessageCommon | 'no permission to view' | 'Unhandled error'

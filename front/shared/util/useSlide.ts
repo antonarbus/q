@@ -1,5 +1,5 @@
+import type { AnimationScope } from 'motion'
 import { useAnimate } from 'motion/react'
-import type { AnimationScope } from 'motion-dom'
 import { useRef } from 'react'
 
 type Res = {

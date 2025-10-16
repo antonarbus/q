@@ -1,4 +1,12 @@
 {
-  "entry": ["{back,front}/**/index.{ts,tsx}"],
-  "project": ["{back,front}/**/*.{ts,tsx}"]
+  "workspaces": {
+    "front": {
+      "entry": ["**/index.{ts,tsx}"],
+      "project": ["**/*.{ts,tsx}"]
+    },
+    "back": {
+      "entry": ["**/index.{ts,tsx}"],
+      "project": ["**/*.{ts,tsx}"]
+    }
+  }
 }

@@ -1,12 +1,10 @@
 {
   "name": "quotation.app",
-  "private": true,
   "version": "0.0.0",
-  "type": "module",
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
     "@dnd-kit/sortable": "^10.0.0",
-    "@emotion/css": "^11.13.5",
+    "@dnd-kit/utilities": "^3.2.2",
     "@emotion/styled": "^11.14.1",
     "@formkit/auto-animate": "^0.9.0",
     "@mui/material": "^7.3.4",
@@ -15,7 +13,7 @@
     "@reduxjs/toolkit": "^2.9.0",
     "@tanstack/react-query": "^5.90.3",
     "@tanstack/react-query-devtools": "^5.90.2",
-    "@xstate/react": "^6.0.0",
+    "ag-grid-community": "^34.2.0",
     "ag-grid-react": "^34.2.0",
     "array-move": "^4.0.0",
     "axios": "^1.12.2",
@@ -31,10 +29,10 @@
     "lodash.isequal": "^4.5.0",
     "lodash.throttle": "^4.1.1",
     "lodash.uniq": "^4.5.0",
-    "lodash.uniqby": "^4.7.0",
     "mailcheck": "^1.1.1",
     "modern-screenshot": "^4.6.6",
     "motion": "^12.23.24",
+    "motion-dom": "^12.23.23",
     "nanoid": "^5.1.6",
     "re-resizable": "^6.11.2",
     "react": "^19.2.0",
@@ -47,5 +45,7 @@
     "sonner": "^2.0.7",
     "striptags": "^3.2.0",
     "xstate": "^5.23.0"
-  }
+  },
+  "private": true,
+  "type": "module"
 }

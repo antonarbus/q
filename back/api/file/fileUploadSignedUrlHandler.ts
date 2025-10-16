@@ -5,7 +5,7 @@ import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import { generateId } from '@back/shared/lib/nanoid'
 import type { NextFunction, Request, Response } from 'express'
 
-export type SearchQuery = {
+type SearchQuery = {
   fileName: string
 }
 
@@ -16,7 +16,7 @@ export type ResBody = {
   message: 'signed url generated'
 }
 
-export type ErrorResBody = {
+type ErrorResBody = {
   signedUrl: string | null
   url: string | null
   fileId: string

@@ -7,8 +7,8 @@ import {
 } from '@mui/material'
 import { cls } from '@shared/cls'
 import { theme } from '@shared/theme'
+import type { AnimationScope } from 'motion'
 import { AnimatePresence, motion } from 'motion/react'
-import type { AnimationScope } from 'motion-dom'
 import {
   Children,
   type ComponentRef,

@@ -38,7 +38,7 @@ export type ResBody = {
   message: 'Found'
 }
 
-export type ErrorResBody = {
+type ErrorResBody = {
   fileList: Item[]
   fileListTotalCount: number
   message: ErrorMessageCommon | 'no permission to view' | 'Unhandled error'

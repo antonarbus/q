@@ -1,9 +1,5 @@
 import type { NextFunction, Request, Response } from 'express'
 
-export type ResBody = {
-  message: 'connected' | 'disconnected'
-}
-
 type RouterHandler = (req: Request, res: Response, next: NextFunction) => void
 
 export const rootHandler: RouterHandler = (_req, res, _next) => {

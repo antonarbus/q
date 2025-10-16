@@ -15,7 +15,7 @@ export const onTextBlockResizeStart: OnBlockResizeStart = ({
   // nothing yet
 }
 
-export const onTextBlockResize: OnBlockResize = ({
+const onTextBlockResize: OnBlockResize = ({
   blockIndex,
   event,
   direction,

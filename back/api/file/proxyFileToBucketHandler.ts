@@ -7,7 +7,7 @@ type Params = {
   fileId: string
 }
 
-export type ResBody = string
+type ResBody = string
 
 type RouterHandler = (
   req: Request<Params>,

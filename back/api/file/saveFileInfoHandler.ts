@@ -18,7 +18,7 @@ export type ResBody = {
   message: 'saved file info'
 }
 
-export type ErrorResBody = {
+type ErrorResBody = {
   message: ErrorMessageCommon | 'invalid file id' | 'failed to make file public'
 }
 

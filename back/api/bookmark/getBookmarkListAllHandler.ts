@@ -12,7 +12,7 @@ export type ItemPick = Pick<
   'id' | 'email' | 'name' | 'type' | 'createdAt' | 'updatedAt'
 >
 
-export type SearchQuery = {
+type SearchQuery = {
   startRow: string
   endRow: string
   sortModel: string
@@ -25,7 +25,7 @@ export type ResBody = {
   message: 'Found'
 }
 
-export type ErrorResBody = {
+type ErrorResBody = {
   bookmarkList: ItemPick[]
   bookmarkListTotalCount: number
   message: ErrorMessageCommon | 'no permission to view' | 'Unhandled error'
