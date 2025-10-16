@@ -7,7 +7,7 @@ import { generateId } from '@shared/lib/nanoid'
 import { dispatch, getState } from '@shared/lib/redux'
 import type { MouseEvent } from 'react'
 
-export const insertBoqRow = (event?: MouseEvent): void => {
+export const insertBoqRow = (_event?: MouseEvent): void => {
   const boqRow: Row = {
     id: generateId(),
     type: boqRowKey.row,
@@ -105,7 +105,16 @@ export const insertBoqRow = (event?: MouseEvent): void => {
     },
   }
 
+  // Save scroll position before setNotEditable
+  const scrollX = window.scrollX
+  const scrollY = window.scrollY
+
   dispatch(textSlice.actions.setNotEditable())
+
+  // Restore scroll position after React renders
+  requestAnimationFrame(() => {
+    window.scrollTo(scrollX, scrollY)
+  })
 
   dispatch(copySlice.actions.addItem({ item: boqRow }))
 
