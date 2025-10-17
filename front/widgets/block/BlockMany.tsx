@@ -22,8 +22,8 @@ export const BlockMany = ({ blocks }: Props): ReactNode => {
   blocksCloned[BOOKMARK_POS_AT_BLOCKS] = null
 
   return (
-    <FadeInOnInitLoad>
-      <BlocksSortableContext>
+    <BlocksSortableContext>
+      <FadeInOnInitLoad>
         <AnimatePresence initial={false}>
           {blocksCloned
             .filter((block) => block !== null)
@@ -32,7 +32,7 @@ export const BlockMany = ({ blocks }: Props): ReactNode => {
             ))}
           <OpenInsertMenuButton />
         </AnimatePresence>
-      </BlocksSortableContext>
-    </FadeInOnInitLoad>
+      </FadeInOnInitLoad>
+    </BlocksSortableContext>
   )
 }
