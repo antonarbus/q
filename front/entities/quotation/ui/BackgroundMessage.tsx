@@ -4,7 +4,6 @@ import type { JSX } from 'react'
 
 export const BackgroundMessage = (): JSX.Element => {
   const backgroundMessage = useSelector((state) => state.app.backgroundMessage)
-  console.log('🚀 ~ backgroundMessage:', backgroundMessage)
 
   return (
     <Box
