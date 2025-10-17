@@ -9,6 +9,7 @@ export const onBoqRowDragStart =
   ({ blockIndex }: { blockIndex: number }) =>
   (_event: DragStartEvent): void => {
     document.body.style.cursor = 'move'
+    dispatch(quotationSlice.actions.disableFroalaReducer({ blockIndex }))
   }
 
 export const onBoqRowDragEnd =
@@ -16,6 +17,7 @@ export const onBoqRowDragEnd =
   (event: DragEndEvent): void => {
     const { active, over } = event
 
+    dispatch(quotationSlice.actions.enableFroalaReducer({ blockIndex }))
     document.body.style.removeProperty('cursor')
 
     if (over === null) {
