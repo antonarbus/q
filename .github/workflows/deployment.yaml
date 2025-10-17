@@ -24,7 +24,7 @@ on:
       - closed
 
 jobs:
-  TypeScript-and-other-checks:
+  ts-and-other-checks:
     runs-on: ubuntu-latest
 
     steps:
@@ -37,19 +37,19 @@ jobs:
           bun-version: '1.1.38'
 
       - name: Install all dependencies
-        run: bun run install_all
+        run: bun run install-all
 
       - name: Run Biome (formatting + linting)
-        run: bun run biome:silent
+        run: bun run biome-silent
 
       - name: Run unit tests
         run: bun run test
 
       - name: Find unused code
-        run: bun run find_unused_files
+        run: bun run find-unused-files
 
       - name: Find circular dependencies
-        run: bun run circular_deps
+        run: bun run find-circular-deps
 
       - name: Run TypeScript checks
         run: bun run tsc
@@ -77,13 +77,13 @@ jobs:
           bun-version: '1.1.38'
 
       - name: Install all dependencies
-        run: bun run install_all
+        run: bun run install-all
 
       - name: Run Playwright tests
-        run: bun run playwright
+        run: bun run e2e-test
 
   deploy-backend:
-    needs: [TypeScript-and-other-checks, e2e-tests]
+    needs: [ts-and-other-checks, e2e-tests]
     permissions:
       contents: 'read'
       id-token: 'write'
@@ -131,7 +131,7 @@ jobs:
           flags: --port 4000 --allow-unauthenticated
 
   deploy-frontend:
-    needs: [TypeScript-and-other-checks, e2e-tests]
+    needs: [ts-and-other-checks, e2e-tests]
     permissions:
       contents: 'read'
       id-token: 'write'

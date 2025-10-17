@@ -15,7 +15,7 @@ WORKDIR /app
 COPY . .
 
 # Build
-RUN bun run build_front
+RUN bun run build-front
 
 FROM nginx:alpine-slim
 

@@ -8,8 +8,8 @@ Full-stack quotation management application built with React (frontend) and Expr
 
 ```bash
 npm start                 # Start frontend (3000) and backend (4000)
-npm run start_front       # Start frontend only
-npm run start_back        # Start backend only
+npm run start-front       # Start frontend only
+npm run start-back        # Start backend only
 npm stop                  # Kill ports 3000 and 4000
 ```
 
@@ -22,20 +22,20 @@ npm stop                  # Kill ports 3000 and 4000
 ### Build
 
 ```bash
-npm run build_all         # Build both frontend and backend
-npm run build_front       # Build frontend only (Vite)
-npm run build_back        # Build backend only (Rollup)
+npm run build-all         # Build both frontend and backend
+npm run build-front       # Build frontend only (Vite)
+npm run build-back        # Build backend only (Rollup)
 ```
 
 ### Testing
 
 ```bash
 npm test                  # Run Vitest unit tests
-npm run test:ui           # Run Vitest with UI
+npm run unit-test-ui           # Run Vitest with UI
 npm run coverage          # Run tests with coverage report
-npm run playwright        # Run Playwright e2e tests
-npm run playwright_ui     # Run Playwright with UI
-npm run playwright_debug  # Debug Playwright tests
+npm run e2e-test        # Run Playwright e2e tests
+npm run e2e-test-ui     # Run Playwright with UI
+npm run e2e-test-debug  # Debug Playwright tests
 ```
 
 ### Code Quality
@@ -52,8 +52,8 @@ npm run prettier_fix      # Auto-format code
 
 ```bash
 npm run fsd               # Verify Feature-Sliced Design structure with Steiger
-npm run find_unused_files # Find unused files with Knip
-npm run circular_deps     # Detect circular dependencies with Madge
+npm run find-unused-files # Find unused files with Knip
+npm run find-circular-deps     # Detect circular dependencies with Madge
 ```
 
 # Feature-Sliced Design (FSD) for front-end applications
