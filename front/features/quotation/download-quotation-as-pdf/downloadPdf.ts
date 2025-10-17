@@ -5,20 +5,7 @@ import { createLoadingMenuIconMachine } from '@shared/nav/state-machine/createLo
 import { downloadBlobAsFile } from '@shared/util/downloadBlobAsFile'
 import { toast } from 'sonner'
 import { createActor } from 'xstate'
-import type { WorkerResponseMessage } from './pdfWorker'
-
-export type WorkerRequestMessage = {
-  imageData: string
-  width: number
-  height: number
-  links: {
-    url: string
-    x: number
-    y: number
-    width: number
-    height: number
-  }[]
-}
+import type { WorkerRequestMessage, WorkerResponseMessage } from './types'
 
 const menuIconMachine = createLoadingMenuIconMachine({
   navItemId: navItemId.share,

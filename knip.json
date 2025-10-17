@@ -8,5 +8,20 @@
       "entry": ["**/index.{ts,tsx}"],
       "project": ["**/*.{ts,tsx}"]
     }
-  }
+  },
+  "ignore": [
+    "tests/setup/auth.setup.ts",
+    "front/shared/lib/ag-grid/colDef/getNumberColDef.tsx",
+    "front/features/quotation/download-quotation-as-excel/excelWorker.ts",
+    "front/features/quotation/download-quotation-as-pdf/pdfWorker.ts",
+    "front/shared/util/stripHtmlWithBreaksPreserve.ts"
+  ],
+  "ignoreDependencies": [
+    "@babel/preset-typescript",
+    "@preact/signals-react-transform",
+    "@emotion/babel-plugin",
+    "exceljs",
+    "jspdf",
+    "striptags"
+  ]
 }

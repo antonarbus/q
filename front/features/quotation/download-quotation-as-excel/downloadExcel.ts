@@ -1,16 +1,10 @@
-import type { Quotation } from '@entities/quotation/type'
 import { getState } from '@shared/lib/redux'
 import { navItemId } from '@shared/nav/navItemId'
 import { createLoadingMenuIconMachine } from '@shared/nav/state-machine/createLoadingMenuIconMachine'
 import { downloadBlobAsFile } from '@shared/util/downloadBlobAsFile'
 import { toast } from 'sonner'
 import { createActor } from 'xstate'
-import type { WorkerResponseMessage } from './excelWorker'
-
-export type WorkerRequestMessage = {
-  msg: 'send me excel'
-  quotation: Quotation
-}
+import type { WorkerRequestMessage, WorkerResponseMessage } from './types'
 
 const loadingMenuIconMachine = createLoadingMenuIconMachine({
   navItemId: navItemId.share,

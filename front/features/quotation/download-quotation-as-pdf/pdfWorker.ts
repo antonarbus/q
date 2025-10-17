@@ -1,8 +1,4 @@
-import type { WorkerRequestMessage } from './downloadPdf'
-
-export type WorkerResponseMessage = {
-  pdfBlob: Blob
-}
+import type { WorkerRequestMessage, WorkerResponseMessage } from './types'
 
 self.onmessage = async (
   event: MessageEvent<WorkerRequestMessage>,

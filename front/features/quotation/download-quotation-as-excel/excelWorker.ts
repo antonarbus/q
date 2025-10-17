@@ -1,10 +1,6 @@
 import { stripHtmlWithBreaksPreserve } from '@shared/util/stripHtmlWithBreaksPreserve'
 import striptags from 'striptags'
-import type { WorkerRequestMessage } from './downloadExcel'
-
-export type WorkerResponseMessage = {
-  excelBlob: Blob
-}
+import type { WorkerRequestMessage, WorkerResponseMessage } from './types'
 
 self.onmessage = async (
   event: MessageEvent<WorkerRequestMessage>,
