@@ -376,6 +376,7 @@ https://console.cloud.google.com/iam-admin/serviceaccounts?inv=1&invt=AblPCg&pro
 
 # TO-DO
 
+- [ ] Refactor CI/CD workflow: Run e2e tests against deployed dev environment instead of local server, enforce dev->main merge flow with branch protection
 - [ ] froalaPkg.js file is deoptimised during build
 - [ ] use cloud secretes for passwords instead of .env
 - [ ] use `useDeferredValue` in bookmark search https://react.dev/reference/react/useDeferredValue

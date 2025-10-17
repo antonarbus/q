@@ -9,7 +9,7 @@ import { env } from './back/shared/lib/dot-env'
 export default defineConfig({
   testDir: './tests',
   fullyParallel: true,
-  forbidOnly: env.CI === true,
+  forbidOnly: env.CI === true, // set at .github/workflows/deployment.yaml:9.
   retries: env.CI === true ? 2 : 0,
   workers: env.CI === true ? 1 : undefined,
   reporter: env.CI === true ? 'dot' : 'list',
