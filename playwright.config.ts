@@ -10,9 +10,9 @@ export default defineConfig({
   testDir: './tests',
   fullyParallel: true,
   forbidOnly: env.CI === true,
-  retries: env.CI === false ? 0 : 2,
-  workers: env.CI === false ? undefined : 1,
-  reporter: env.CI === false ? 'list' : 'dot',
+  retries: env.CI === true ? 2 : 0,
+  workers: env.CI === true ? 1 : undefined,
+  reporter: env.CI === true ? 'dot' : 'list',
   use: {
     baseURL: config.front.baseUrl,
     trace: 'on-first-retry',
@@ -50,8 +50,8 @@ export default defineConfig({
       url: config.back.baseUrl,
       ignoreHTTPSErrors: true,
       reuseExistingServer: env.CI === false,
-      stdout: env.CI === false ? 'pipe' : 'ignore', // Capture standard output
-      stderr: env.CI === false ? 'pipe' : 'ignore', // Capture standard error
+      stdout: env.CI === true ? 'ignore' : 'pipe', // Capture standard output
+      stderr: env.CI === true ? 'ignore' : 'pipe', // Capture standard error
     },
     {
       command: 'bun run start-front',
