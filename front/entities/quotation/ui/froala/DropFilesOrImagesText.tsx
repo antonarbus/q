@@ -9,7 +9,7 @@ type Props = {
 }
 
 export const DropFilesOrImagesText = (props: Props): JSX.Element => {
-  const { editorRef } = useFroala()
+  const froala = useFroala()
 
   return (
     <Box
@@ -29,10 +29,10 @@ export const DropFilesOrImagesText = (props: Props): JSX.Element => {
       Drop{' '}
       <span
         onClick={(event) => {
-          if (editorRef.current !== null) {
-            editorRef.current.file.showInsertPopup()
+          if (froala.editorRef.current !== null) {
+            froala.editorRef.current.file.showInsertPopup()
 
-            editorRef.current.popups.show(
+            froala.editorRef.current.popups.show(
               'file.insert',
               event.pageX,
               event.pageY,
@@ -50,10 +50,10 @@ export const DropFilesOrImagesText = (props: Props): JSX.Element => {
       or{' '}
       <span
         onClick={(event) => {
-          if (editorRef.current !== null) {
-            editorRef.current.image.showInsertPopup()
+          if (froala.editorRef.current !== null) {
+            froala.editorRef.current.image.showInsertPopup()
 
-            editorRef.current.popups.show(
+            froala.editorRef.current.popups.show(
               'image.insert',
               event.pageX,
               event.pageY,

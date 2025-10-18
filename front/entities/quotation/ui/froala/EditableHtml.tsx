@@ -4,19 +4,19 @@ import { useFroala } from '../../provider/FroalaProvider'
 import { useStartFroala } from './useStartFroala'
 
 export const EditableHtml = (): JSX.Element => {
-  const { style, froalaElementRef, froalaHeightRef, sx } = useFroala()
+  const froala = useFroala()
   useStartFroala()
 
   return (
     <Box
       className='editable-html'
-      ref={froalaElementRef}
+      ref={froala.froalaElementRef}
       style={{
-        height: froalaHeightRef.current, // needed for animation, height will be removed after froala is initialized
+        height: froala.froalaHeightRef.current, // needed for animation, height will be removed after froala is initialized
         wordBreak: 'break-word',
-        ...style,
+        ...froala.style,
       }}
-      sx={sx}
+      sx={froala.sx}
     />
   )
 }

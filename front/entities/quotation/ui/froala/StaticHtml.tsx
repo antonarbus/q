@@ -13,29 +13,23 @@ type Props = {
   styleAgainstFroalaBlinks?: CSSProperties
 }
 
-export const StaticHtml = ({
-  styleAgainstFroalaBlinks,
-}: Props): JSX.Element => {
+export const StaticHtml = (props: Props): JSX.Element => {
   const staticHtmlRef = useRef<ComponentRef<'div'>>(null)
-  const { htmlGetter, style, froalaHeightRef, sx } = useFroala()
+  const froala = useFroala()
 
   // insert html into element
   useEffectOnce(() => {
-    if (staticHtmlRef.current === null) {
-      return
+    if (staticHtmlRef.current !== null) {
+      staticHtmlRef.current.innerHTML = froala.htmlGetter()
     }
-
-    staticHtmlRef.current.innerHTML = htmlGetter()
   })
 
   // save height after loading content
   useEffect(() => {
-    if (staticHtmlRef.current?.clientHeight === undefined) {
-      return
+    if (staticHtmlRef.current?.clientHeight !== undefined) {
+      froala.froalaHeightRef.current =
+        staticHtmlRef.current.getBoundingClientRect().height
     }
-
-    froalaHeightRef.current =
-      staticHtmlRef.current.getBoundingClientRect().height
   })
 
   return (
@@ -47,10 +41,10 @@ export const StaticHtml = ({
           style={{
             opacity: 0.5,
             wordBreak: 'break-word',
-            ...styleAgainstFroalaBlinks,
-            ...style,
+            ...props.styleAgainstFroalaBlinks,
+            ...froala.style,
           }}
-          sx={sx}
+          sx={froala.sx}
         />
       </Box>
     </Box>
