@@ -8,8 +8,8 @@ import react from '@vitejs/plugin-react'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import { config } from './back/config'
 
-const thisFilePath = fileURLToPath(import.meta.url)
-const thisDirPath = dirname(thisFilePath)
+const thisFilePath: string = fileURLToPath(import.meta.url)
+const thisDirPath: string = dirname(thisFilePath)
 
 /**
  * Strips the `handler` property from the api routes object in the backend.
@@ -95,7 +95,7 @@ export default {
       jsxImportSource: '@emotion/react',
       babel: {
         plugins: [
-          // 'babel-plugin-react-compiler',
+          // 'babel-plugin-react-compiler', //* Can not use react compiler, all animation and other things go crazy
           [
             '@emotion/babel-plugin', // from package 'babel-plugin-styled-components',
             {
