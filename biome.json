@@ -24,12 +24,18 @@
     "enabled": true,
     "rules": {
       "a11y": {
-        "useKeyWithClickEvents": "warn",
-        "noStaticElementInteractions": "warn",
+        "useKeyWithClickEvents": "off",
+        "noStaticElementInteractions": "off",
         "useValidAnchor": "warn"
       },
       "correctness": {
         "useExhaustiveDependencies": "warn"
+      },
+      "nursery": {
+        "useExplicitType": "warn"
+      },
+      "suspicious": {
+        "noConsole": "warn"
       }
     }
   },

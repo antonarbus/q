@@ -37,8 +37,12 @@ export const copySlice = createSlice({
   name: 'copy',
   initialState,
   reducers: {
-    showCopyModal: (state) => {
+    showCopyModal: (
+      state,
+      action: PayloadAction<{ initCursorPos: { x: number; y: number } }>,
+    ) => {
       state.isVisible = true
+      state.initCords = action.payload.initCursorPos
     },
     hideCopyModal: () => initialState,
     addItem: (

@@ -95,9 +95,9 @@ export default {
       jsxImportSource: '@emotion/react',
       babel: {
         plugins: [
+          // 'babel-plugin-react-compiler',
           [
-            // from package 'babel-plugin-styled-components',
-            '@emotion/babel-plugin',
+            '@emotion/babel-plugin', // from package 'babel-plugin-styled-components',
             {
               displayName: true,
               fileName: true,

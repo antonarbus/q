@@ -7,7 +7,7 @@ import { generateId } from '@shared/lib/nanoid'
 import { dispatch, getState } from '@shared/lib/redux'
 import type { MouseEvent } from 'react'
 
-export const insertPriceBlock = (_event?: MouseEvent): void => {
+export const insertPriceBlock = (event?: MouseEvent): void => {
   const block: Price = {
     id: generateId(),
     type: itemType.price,
@@ -67,7 +67,11 @@ export const insertPriceBlock = (_event?: MouseEvent): void => {
 
   const isCopyModalVisible = getState().copy.isVisible
 
-  if (isCopyModalVisible === false) {
-    dispatch(copySlice.actions.showCopyModal())
+  if (isCopyModalVisible === false && event !== undefined) {
+    dispatch(
+      copySlice.actions.showCopyModal({
+        initCursorPos: { x: event.clientX, y: event.clientY },
+      }),
+    )
   }
 }

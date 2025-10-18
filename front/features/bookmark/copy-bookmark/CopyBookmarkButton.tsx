@@ -14,28 +14,6 @@ export const CopyBookmarkButton = ({ id }: ReqBody): JSX.Element => {
   const getBookmarkMutation = useGetBookmarkMutation()
 
   useUpdateEffect(() => {
-    if (getBookmarkMutation.isSuccess === true) {
-      const { item } = getBookmarkMutation.data
-
-      if (item !== undefined) {
-        // Save scroll position before setNotEditable
-        const scrollX = window.scrollX
-        const scrollY = window.scrollY
-
-        dispatch(textSlice.actions.setNotEditable())
-
-        // Restore scroll position after React renders
-        requestAnimationFrame(() => {
-          window.scrollTo(scrollX, scrollY)
-        })
-        dispatch(copySlice.actions.addItem({ item }))
-        dispatch(copySlice.actions.allowToPaste())
-        dispatch(copySlice.actions.showCopyModal())
-      }
-    }
-  }, [getBookmarkMutation.isSuccess])
-
-  useUpdateEffect(() => {
     if (getBookmarkMutation.isError === true) {
       toast.error(getBookmarkMutation.error.response?.data.message)
     }
@@ -49,8 +27,37 @@ export const CopyBookmarkButton = ({ id }: ReqBody): JSX.Element => {
       title='Copy'
     >
       <IconButton
-        onClick={() => {
-          getBookmarkMutation.mutate({ id })
+        onClick={async (event: React.MouseEvent) => {
+          const data = await getBookmarkMutation.mutateAsync({ id })
+
+          if (data !== undefined) {
+            // Save scroll position before setNotEditable
+            const scrollX = window.scrollX
+            const scrollY = window.scrollY
+
+            dispatch(textSlice.actions.setNotEditable())
+
+            // Restore scroll position after React renders
+            requestAnimationFrame(() => {
+              window.scrollTo(scrollX, scrollY)
+            })
+
+            if (data.item !== undefined) {
+              dispatch(
+                copySlice.actions.addItem({
+                  item: data.item,
+                }),
+              )
+            }
+
+            dispatch(copySlice.actions.allowToPaste())
+
+            dispatch(
+              copySlice.actions.showCopyModal({
+                initCursorPos: { x: event.clientX, y: event.clientY },
+              }),
+            )
+          }
         }}
         size='small'
         sx={{

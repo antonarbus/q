@@ -3,12 +3,12 @@ import {
   PressEscIcon,
   useEnableFroalasOnCloseCopyModal,
 } from '@features/open-close/close-copy-modal'
-import { cursorPosSignal } from '@shared/util/cursorPosSignal'
 import { motion } from 'motion/react'
 import type { JSX } from 'react'
 import { FirstCopiedItem } from './FirstCopiedItem'
 import { RestOfCopiedItems } from './RestOfCopiedItems'
 import { useCopyModalAnimation } from './useCopyModalAnimation'
+import { useCursorPos } from './useCursorPos'
 import { useDisableNavItemsOnCopyModal } from './useDisableNavItemsOnCopyModal'
 
 export const CopyModal = (): JSX.Element => {
@@ -17,8 +17,7 @@ export const CopyModal = (): JSX.Element => {
   useDisableNavItemsOnCopyModal()
   useEnableFroalasOnCloseCopyModal()
   const copyModalRef = useCopyModalAnimation()
-  const { x, y } = cursorPosSignal.value
-  // const { x, y } = { x: 300, y: 0 }
+  const cursorPos = useCursorPos()
 
   return (
     <motion.div
@@ -26,8 +25,8 @@ export const CopyModal = (): JSX.Element => {
         borderRadius: 6,
         position: 'fixed',
         zIndex: 1001,
-        top: y + 30,
-        left: x + 15,
+        top: cursorPos.y + 30,
+        left: cursorPos.x + 15,
         background: 'white',
         boxShadow: '#00000033 0px 0px 6px 2px',
         overflow: 'hidden',

@@ -82,7 +82,11 @@ export const CutBoqRowIcon = (): JSX.Element => {
             const isCopyModalVisible = getState().copy.isVisible
 
             if (isCopyModalVisible === false) {
-              dispatch(copySlice.actions.showCopyModal())
+              dispatch(
+                copySlice.actions.showCopyModal({
+                  initCursorPos: { x: event.clientX, y: event.clientY },
+                }),
+              )
             }
 
             dispatch(

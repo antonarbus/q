@@ -9,8 +9,8 @@ type Shortcuts = {
   link: string | null
 }
 
-const shortcuts: Shortcuts[] = []
 let arrForNavStructureIteration: NavItem[] = []
+const shortcuts: Shortcuts[] = []
 
 const searchForShortcutsInNavStructure = ({
   navStructure,

@@ -1,25 +1,27 @@
+import type { ItemPick } from '@back/api/bookmark/getBookmarkListHandler'
 import { useGetBookmarkListQuery } from '@entities/bookmark/api/useGetBookmarkListQuery'
+import { useGetBookmarkMutation } from '@entities/bookmark/api/useGetBookmarkMutation'
+import { copySlice } from '@entities/copy/copySlice'
 import { useIsCopyModalVisible } from '@entities/copy/useIsCopyModalVisible'
-import { useCopyBookmarkAtSearch } from '@features/bookmark/copy-bookmark'
-import { Autocomplete } from '@mui/material'
+import { Autocomplete, Box } from '@mui/material'
 import { useSignal } from '@preact/signals-react'
 import { cls } from '@shared/cls'
-import { useSelector } from '@shared/lib/redux'
-import { type JSX, useEffect } from 'react'
+import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
+import { textSlice } from '@shared/lib/froala/textSlice'
+import { dispatch, useSelector } from '@shared/lib/redux'
+import { type HTMLAttributes, type JSX, useEffect } from 'react'
+import { useUpdateEffect } from 'react-use'
+import { toast } from 'sonner'
+import { OptionItemCategory } from './OptionItemCategory'
+import { OptionItemDescription } from './OptionItemDescription'
+import { OptionItemName } from './OptionItemName'
 import { PaperComponent } from './PaperComponent'
 import { renderInput } from './renderInput'
-import { renderOption } from './renderOption'
 
 export const Search = (): JSX.Element => {
   const getBookmarkListQuery = useGetBookmarkListQuery()
-
   const options = getBookmarkListQuery.data?.bookmarks ?? []
-
-  const { loadBookmark, isPendingBookmark, pendingBookmarkId } =
-    useCopyBookmarkAtSearch()
-
   const inputValueSignal = useSignal('')
-
   const email = useSelector((state) => state.user.email)
 
   useEffect(() => {
@@ -29,8 +31,14 @@ export const Search = (): JSX.Element => {
   }, [email])
 
   const isAutocompleteOpen = useSignal(false)
-
   const isCopyModalVisible = useIsCopyModalVisible()
+  const getBookmarkMutation = useGetBookmarkMutation()
+
+  useUpdateEffect(() => {
+    if (getBookmarkMutation.isError === true) {
+      toast.error(getBookmarkMutation.error.response?.data.message)
+    }
+  }, [getBookmarkMutation.isError])
 
   return (
     <Autocomplete
@@ -40,7 +48,7 @@ export const Search = (): JSX.Element => {
       disablePortal
       disabled={isCopyModalVisible}
       freeSolo={options.length !== 0} // show MUI autocomplete even if no options
-      getOptionLabel={(option) => {
+      getOptionLabel={(option: string | ItemPick) => {
         if (typeof option === 'string') {
           return option
         }
@@ -66,13 +74,101 @@ export const Search = (): JSX.Element => {
       options={options}
       popupIcon={null}
       renderInput={renderInput}
-      renderOption={renderOption({
-        loadBookmark,
-        inputValueSignal,
-        isPendingBookmark,
-        pendingBookmarkId,
-        isAutocompleteOpen,
-      })}
+      renderOption={(
+        _props: HTMLAttributes<HTMLLIElement>,
+        option: ItemPick,
+      ): JSX.Element => {
+        return (
+          <li
+            css={{
+              position: 'relative',
+              cursor: 'pointer',
+              display: 'block',
+              borderRadius: '6px',
+              padding: '5px !important',
+              margin: '2px 4px',
+              fontSize: '14px',
+              border: '1px solid #ccc',
+              ':hover': {
+                background: 'rgba(0, 0, 0, 0.05)',
+              },
+              ...(getBookmarkMutation.isPending === false && {
+                ':hover::after': {
+                  content: '"Click to copy"',
+                  position: 'absolute',
+                  fontSize: '10px',
+                  top: '2px',
+                  right: '5px',
+                },
+              }),
+            }}
+            key={option.id}
+            onClick={async (event: React.MouseEvent) => {
+              const data = await getBookmarkMutation.mutateAsync({
+                id: option.id,
+              })
+
+              isAutocompleteOpen.value = false
+
+              if (data.item !== undefined) {
+                const { item } = data
+
+                // Save scroll position before setNotEditable
+                const scrollX = window.scrollX
+                const scrollY = window.scrollY
+
+                dispatch(textSlice.actions.setNotEditable())
+
+                // Restore scroll position after React renders
+                requestAnimationFrame(() => {
+                  window.scrollTo(scrollX, scrollY)
+                })
+
+                dispatch(copySlice.actions.addItem({ item }))
+                dispatch(copySlice.actions.allowToPaste())
+
+                dispatch(
+                  copySlice.actions.showCopyModal({
+                    initCursorPos: { x: event.clientX, y: event.clientY },
+                  }),
+                )
+              }
+            }}
+          >
+            <OptionItemName
+              inputValueSignal={inputValueSignal}
+              option={option}
+            />
+
+            <OptionItemCategory
+              inputValueSignal={inputValueSignal}
+              option={option}
+            />
+
+            <OptionItemDescription
+              inputValueSignal={inputValueSignal}
+              option={option}
+            />
+
+            {getBookmarkMutation.isPending &&
+            option.id === getBookmarkMutation.variables.id ? (
+              <Box
+                sx={{
+                  position: 'absolute',
+                  inset: 0,
+                  background: 'rgba(0, 0, 0, 0.05)',
+                  backdropFilter: 'blur(3px)',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                <RotatingLoaderIcon />
+              </Box>
+            ) : null}
+          </li>
+        )
+      }}
       slotProps={{
         popper: {
           sx: {
