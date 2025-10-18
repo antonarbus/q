@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, type Reducer } from '@reduxjs/toolkit'
 import type { Quotation } from '../type'
 import { deleteBlockReducer } from './reducer/deleteBlockReducer'
 import { deleteBoqRowReducer } from './reducer/deleteBoqRowReducer'
@@ -93,4 +93,4 @@ export const quotationSlice = createSlice({
   },
 })
 
-export const quotationReducer = quotationSlice.reducer
+export const quotationReducer: Reducer<Quotation> = quotationSlice.reducer

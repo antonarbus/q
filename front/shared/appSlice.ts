@@ -1,6 +1,11 @@
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import {
+  createSlice,
+  type PayloadAction,
+  type Reducer,
+  type WritableDraft,
+} from '@reduxjs/toolkit'
 
-type State = {
+type InitState = {
   shouldLoadQuotation: {
     yesOrNo: 'yes' | 'no'
     from: 'server' | 'template' | 'memory' | undefined
@@ -16,7 +21,7 @@ type State = {
   }
 }
 
-const initialState: State = {
+const initialState: InitState = {
   shouldLoadQuotation: {
     yesOrNo: 'no',
     from: undefined,
@@ -37,10 +42,10 @@ export const appSlice = createSlice({
   initialState,
   reducers: {
     setShouldLoadQuotation: (
-      state,
+      state: WritableDraft<InitState>,
       action: PayloadAction<{
-        yesOrNo: State['shouldLoadQuotation']['yesOrNo']
-        from: State['shouldLoadQuotation']['from']
+        yesOrNo: InitState['shouldLoadQuotation']['yesOrNo']
+        from: InitState['shouldLoadQuotation']['from']
       }>,
     ) => {
       const { yesOrNo, from } = action.payload
@@ -48,27 +53,27 @@ export const appSlice = createSlice({
       state.shouldLoadQuotation.from = from
     },
     setBackgroundMessage: (
-      state,
-      action: PayloadAction<{ message: State['backgroundMessage'] }>,
+      state: WritableDraft<InitState>,
+      action: PayloadAction<{ message: InitState['backgroundMessage'] }>,
     ) => {
       const { message } = action.payload
       state.backgroundMessage = message
     },
     showLoadingOverlay: (
-      state,
-      action: PayloadAction<State['loadingOverlay']>,
+      state: WritableDraft<InitState>,
+      action: PayloadAction<InitState['loadingOverlay']>,
     ) => {
       const { shouldShowLoader, text } = action.payload
       state.loadingOverlay.shouldShowLoader = shouldShowLoader
       state.loadingOverlay.text = text
     },
-    hideLoadingOverlay: (state) => {
+    hideLoadingOverlay: (state: WritableDraft<InitState>) => {
       state.loadingOverlay.shouldShowLoader = false
       state.loadingOverlay.text = null
     },
     setNavigateState: (
-      state,
-      action: PayloadAction<State['navigateState']>,
+      state: WritableDraft<InitState>,
+      action: PayloadAction<InitState['navigateState']>,
     ) => {
       const { to, shouldSlide } = action.payload
 
@@ -80,11 +85,11 @@ export const appSlice = createSlice({
         state.navigateState.shouldSlide = shouldSlide
       }
     },
-    resetNavigateState: (state) => {
+    resetNavigateState: (state: WritableDraft<InitState>) => {
       state.navigateState.to = undefined
       state.navigateState.shouldSlide = undefined
     },
   },
 })
 
-export const appReducer = appSlice.reducer
+export const appReducer: Reducer<InitState> = appSlice.reducer

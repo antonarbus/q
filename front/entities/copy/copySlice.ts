@@ -1,8 +1,13 @@
 import type { Item } from '@entities/quotation/type'
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import {
+  createSlice,
+  type PayloadAction,
+  type Reducer,
+  type WritableDraft,
+} from '@reduxjs/toolkit'
 import type { CopyPlace } from './types'
 
-type Props = {
+type InitState = {
   isVisible: boolean
   initCords: { x: number; y: number }
   items: Item[]
@@ -16,7 +21,7 @@ type Props = {
   isDeletable: boolean
 }
 
-const initialState: Props = {
+const initialState: InitState = {
   isVisible: false,
   initCords: { x: 0, y: 0 },
   items: [],
@@ -38,7 +43,7 @@ export const copySlice = createSlice({
   initialState,
   reducers: {
     showCopyModal: (
-      state,
+      state: WritableDraft<InitState>,
       action: PayloadAction<{ initCursorPos: { x: number; y: number } }>,
     ) => {
       state.isVisible = true
@@ -46,42 +51,44 @@ export const copySlice = createSlice({
     },
     hideCopyModal: () => initialState,
     addItem: (
-      state,
+      state: WritableDraft<InitState>,
       action: PayloadAction<{
         item: Item
       }>,
     ) => {
-      const { item } = action.payload
       state.isCopying = true
-      state.items.unshift(item)
-      state.previews.unshift(item.preview ?? '')
+      state.items.unshift(action.payload.item)
+      state.previews.unshift(action.payload.item.preview ?? '')
     },
-    removeItem: (state) => {
+    removeItem: (state: WritableDraft<InitState>) => {
       state.items.shift()
       state.previews.shift()
       state.isCopying = false
       state.place = initialState.place
     },
-    updatePastePos: (state, action: PayloadAction<CopyPlace>) => {
+    updatePastePos: (
+      state: WritableDraft<InitState>,
+      action: PayloadAction<CopyPlace>,
+    ) => {
       const itemIdAndWhereToPlace = action.payload
       state.place = itemIdAndWhereToPlace
     },
-    showPasteText: (state) => {
+    showPasteText: (state: WritableDraft<InitState>) => {
       state.isPasteTextShown = true
     },
-    hidePasteText: (state) => {
+    hidePasteText: (state: WritableDraft<InitState>) => {
       state.isPasteTextShown = false
     },
-    allowToPaste: (state) => {
+    allowToPaste: (state: WritableDraft<InitState>) => {
       state.isPastable = true
     },
-    forbidAllActions: (state) => {
+    forbidAllActions: (state: WritableDraft<InitState>) => {
       state.isPastable = false
       state.isCopyable = false
       state.isCuttable = false
       state.isDeletable = false
     },
-    allowAllActions: (state) => {
+    allowAllActions: (state: WritableDraft<InitState>) => {
       state.isPastable = true
       state.isCopyable = true
       state.isCuttable = true
@@ -90,4 +97,4 @@ export const copySlice = createSlice({
   },
 })
 
-export const copyReducer = copySlice.reducer
+export const copyReducer: Reducer<InitState> = copySlice.reducer

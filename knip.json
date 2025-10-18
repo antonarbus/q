@@ -17,6 +17,7 @@
     "front/shared/util/stripHtmlWithBreaksPreserve.ts"
   ],
   "ignoreDependencies": [
+    "babel-plugin-react-compiler",
     "@babel/preset-typescript",
     "@preact/signals-react-transform",
     "@emotion/babel-plugin",

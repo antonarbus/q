@@ -1,6 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, type Reducer, type WritableDraft } from '@reduxjs/toolkit'
 
-const initialState = {
+type InitState = {
+  isEditable: boolean
+}
+
+const initialState: InitState = {
   isEditable: true,
 }
 
@@ -8,13 +12,13 @@ export const textSlice = createSlice({
   name: 'text',
   initialState,
   reducers: {
-    setEditable: (state) => {
+    setEditable: (state: WritableDraft<InitState>) => {
       state.isEditable = true
     },
-    setNotEditable: (state) => {
+    setNotEditable: (state: WritableDraft<InitState>) => {
       state.isEditable = false
     },
   },
 })
 
-export const textReducer = textSlice.reducer
+export const textReducer: Reducer<InitState> = textSlice.reducer

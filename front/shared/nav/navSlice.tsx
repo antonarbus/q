@@ -1,4 +1,9 @@
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import {
+  createSlice,
+  type PayloadAction,
+  type Reducer,
+  type WritableDraft,
+} from '@reduxjs/toolkit'
 import { instance } from '@shared/instance'
 import { navItemId as navItemIdKey } from '@shared/nav/navItemId'
 import { RiAdminLine } from 'react-icons/ri'
@@ -8,7 +13,19 @@ import { setMenuItemPropValue } from './setMenuItemPropValue'
 import type { NavItem, NavItemId } from './type'
 import { getNavItem } from './ui/NavList/NavItem/Menu/functions/getNavItem'
 
-const initialState = {
+type InitState = {
+  navStructure: NavItem[]
+  burger: {
+    isOpen: boolean
+  }
+  idsToCurrentMenuItems: NavItemId[]
+  currentMenuNavItemId: NavItemId | null
+  nextMenuNavItemId: NavItemId | null
+  navItemRightPos: number
+  hoverIndex: number
+}
+
+const initialState: InitState = {
   navStructure: [] as NavItem[],
   burger: { isOpen: false },
   idsToCurrentMenuItems: [navItemIdKey.burger] as NavItemId[],
@@ -23,7 +40,7 @@ export const navSlice = createSlice({
   initialState,
   reducers: {
     addNavStructure: (
-      state,
+      state: WritableDraft<InitState>,
       action: PayloadAction<{
         navStructure: NavItem[]
       }>,
@@ -31,21 +48,21 @@ export const navSlice = createSlice({
       const { navStructure } = action.payload
       state.navStructure = navStructure
     },
-    closeBurger: (state) => {
+    closeBurger: (state: WritableDraft<InitState>) => {
       state.burger.isOpen = false
     },
-    toggleBurger: (state) => {
+    toggleBurger: (state: WritableDraft<InitState>) => {
       state.burger.isOpen = state.burger.isOpen === false
     },
     setNavItemRightPos: (
-      state,
+      state: WritableDraft<InitState>,
       action: PayloadAction<{ navItemRightPos: number }>,
     ) => {
       const { navItemRightPos } = action.payload
       state.navItemRightPos = navItemRightPos
     },
     openMenuWithId: (
-      state,
+      state: WritableDraft<InitState>,
       action: PayloadAction<{ navItemId: NavItemId }>,
     ) => {
       const { navItemId } = action.payload
@@ -53,7 +70,7 @@ export const navSlice = createSlice({
       state.currentMenuNavItemId = navItemId
       state.nextMenuNavItemId = navItemId
     },
-    closeMenu: (state) => {
+    closeMenu: (state: WritableDraft<InitState>) => {
       state.idsToCurrentMenuItems = [navItemIdKey.burger]
       state.burger.isOpen = false
       state.hoverIndex = -1
@@ -61,14 +78,14 @@ export const navSlice = createSlice({
       state.nextMenuNavItemId = null
     },
     goDownInCurrentMenu: (
-      state,
+      state: WritableDraft<InitState>,
       action: PayloadAction<{ navItemId: NavItemId }>,
     ) => {
       const { navItemId } = action.payload
       state.idsToCurrentMenuItems = [...state.idsToCurrentMenuItems, navItemId]
       state.currentMenuNavItemId = navItemId
     },
-    goUpInCurrentMenu: (state) => {
+    goUpInCurrentMenu: (state: WritableDraft<InitState>) => {
       state.idsToCurrentMenuItems = state.idsToCurrentMenuItems.slice(0, -1)
       const { currentMenuNavItemId } = state
 
@@ -84,13 +101,13 @@ export const navSlice = createSlice({
       }
     },
     goDownInNextMenu: (
-      state,
+      state: WritableDraft<InitState>,
       action: PayloadAction<{ navItemId: NavItemId }>,
     ) => {
       const { navItemId } = action.payload
       state.nextMenuNavItemId = navItemId
     },
-    goUpInNextMenu: (state) => {
+    goUpInNextMenu: (state: WritableDraft<InitState>) => {
       const { nextMenuNavItemId } = state
 
       if (nextMenuNavItemId !== null) {
@@ -105,14 +122,14 @@ export const navSlice = createSlice({
       }
     },
     setMenuItemHoverIndex: (
-      state,
+      state: WritableDraft<InitState>,
       action: PayloadAction<{ menuItemHoverIndex: number }>,
     ) => {
       const { menuItemHoverIndex } = action.payload
       state.hoverIndex = menuItemHoverIndex
     },
     startLoadingIcon: (
-      state,
+      state: WritableDraft<InitState>,
       action: PayloadAction<{
         navItemId: NavItemId
         navItemNameWhileLoading?: string
@@ -137,7 +154,7 @@ export const navSlice = createSlice({
       }
     },
     stopLoadingIcon: (
-      state,
+      state: WritableDraft<InitState>,
       action: PayloadAction<{
         navItemId: NavItemId
         navItemNameWhileLoading?: string
@@ -168,7 +185,7 @@ export const navSlice = createSlice({
       }
     },
     showSuccessIcon: (
-      state,
+      state: WritableDraft<InitState>,
       action: PayloadAction<{
         navItemId: NavItemId
       }>,
@@ -183,7 +200,7 @@ export const navSlice = createSlice({
       })
     },
     hideSuccessIcon: (
-      state,
+      state: WritableDraft<InitState>,
       action: PayloadAction<{
         navItemId: NavItemId
       }>,
@@ -198,7 +215,7 @@ export const navSlice = createSlice({
       })
     },
     showErrorIcon: (
-      state,
+      state: WritableDraft<InitState>,
       action: PayloadAction<{
         navItemId: NavItemId
       }>,
@@ -213,7 +230,7 @@ export const navSlice = createSlice({
       })
     },
     hideErrorIcon: (
-      state,
+      state: WritableDraft<InitState>,
       action: PayloadAction<{
         navItemId: NavItemId
       }>,
@@ -228,7 +245,7 @@ export const navSlice = createSlice({
       })
     },
     disableTopNavItems: (
-      state,
+      state: WritableDraft<InitState>,
       action: PayloadAction<
         | {
             exceptNavItemIds?: NavItemId[]
@@ -237,7 +254,6 @@ export const navSlice = createSlice({
       >,
     ) => {
       const { exceptNavItemIds = [] } = action.payload ?? {}
-
       const [topLevelNavMenu] = state.navStructure
 
       if (topLevelNavMenu === undefined) {
@@ -264,7 +280,7 @@ export const navSlice = createSlice({
       })
     },
     enableTopNavItems: (
-      state,
+      state: WritableDraft<InitState>,
       action: PayloadAction<
         | {
             exceptNavItemIds?: NavItemId[]
@@ -273,7 +289,6 @@ export const navSlice = createSlice({
       >,
     ) => {
       const { exceptNavItemIds = [] } = action.payload ?? {}
-
       const [topLevelNavMenu] = state.navStructure
 
       if (topLevelNavMenu === undefined) {
@@ -300,7 +315,7 @@ export const navSlice = createSlice({
       })
     },
     disableNavItems: (
-      state,
+      state: WritableDraft<InitState>,
       action: PayloadAction<{
         navItemIds: NavItemId[]
       }>,
@@ -317,7 +332,7 @@ export const navSlice = createSlice({
       })
     },
     enableNavItems: (
-      state,
+      state: WritableDraft<InitState>,
       action: PayloadAction<{
         navItemIds?: NavItemId[]
       }>,
@@ -334,7 +349,7 @@ export const navSlice = createSlice({
       })
     },
     hideNavItems: (
-      state,
+      state: WritableDraft<InitState>,
       action: PayloadAction<{
         navItemIds: NavItemId[]
       }>,
@@ -351,7 +366,7 @@ export const navSlice = createSlice({
       })
     },
     showNavItems: (
-      state,
+      state: WritableDraft<InitState>,
       action: PayloadAction<{
         navItemIds: NavItemId[]
       }>,
@@ -367,7 +382,7 @@ export const navSlice = createSlice({
         })
       })
     },
-    removeUnderlineFromTopNav: (state) => {
+    removeUnderlineFromTopNav: (state: WritableDraft<InitState>) => {
       const [topLevelNavMenu] = state.navStructure
 
       if (topLevelNavMenu === undefined) {
@@ -388,7 +403,7 @@ export const navSlice = createSlice({
       })
     },
     underlineNavItem: (
-      state,
+      state: WritableDraft<InitState>,
       action: PayloadAction<{
         navItemId: NavItemId
       }>,
@@ -402,7 +417,7 @@ export const navSlice = createSlice({
         value: true,
       })
     },
-    showAdminIcon: (state) => {
+    showAdminIcon: (state: WritableDraft<InitState>) => {
       setMenuItemPropValue({
         menu: state.navStructure,
         navItemId: navItemIdKey.profile,
@@ -410,7 +425,7 @@ export const navSlice = createSlice({
         value: <RiAdminLine />,
       })
     },
-    showUserIcon: (state) => {
+    showUserIcon: (state: WritableDraft<InitState>) => {
       setMenuItemPropValue({
         menu: state.navStructure,
         navItemId: navItemIdKey.profile,
@@ -421,4 +436,4 @@ export const navSlice = createSlice({
   },
 })
 
-export const navReducer = navSlice.reducer
+export const navReducer: Reducer<InitState> = navSlice.reducer

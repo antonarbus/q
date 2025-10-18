@@ -1,6 +1,19 @@
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import {
+  createSlice,
+  type PayloadAction,
+  type Reducer,
+  type WritableDraft,
+} from '@reduxjs/toolkit'
 
-const initialState = {
+type InitState = {
+  displayedRowsCount: number
+  loadingOverlay: {
+    showLoader: boolean
+    text: string
+  }
+}
+
+const initialState: InitState = {
   displayedRowsCount: 0,
   loadingOverlay: {
     showLoader: false,
@@ -13,7 +26,7 @@ export const agGridSlice = createSlice({
   initialState,
   reducers: {
     setCount: (
-      state,
+      state: WritableDraft<InitState>,
       action: PayloadAction<{
         count: number
       }>,
@@ -22,7 +35,7 @@ export const agGridSlice = createSlice({
       state.displayedRowsCount = count
     },
     showLoadingOverlay: (
-      state,
+      state: WritableDraft<InitState>,
       action: PayloadAction<{
         showLoader: boolean
         text: string
@@ -32,11 +45,11 @@ export const agGridSlice = createSlice({
       state.loadingOverlay.showLoader = showLoader
       state.loadingOverlay.text = text
     },
-    hideLoadingOverlay: (state) => {
+    hideLoadingOverlay: (state: WritableDraft<InitState>) => {
       state.loadingOverlay.showLoader = false
       state.loadingOverlay.text = ''
     },
   },
 })
 
-export const agGridReducer = agGridSlice.reducer
+export const agGridReducer: Reducer<InitState> = agGridSlice.reducer
