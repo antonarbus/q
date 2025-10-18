@@ -22,14 +22,9 @@ export const getTextWithBoldSubStringAsJsx = ({
         const isMatch = part.toLowerCase() === subString.toLowerCase()
 
         return (
-          <span
-            key={`substring-${String(index)}`}
-            style={{
-              whiteSpace: 'pre-wrap',
-            }}
-          >
+          <span key={`substring-${String(index)}`}>
             {isMatch === true ? (
-              <span style={{ fontWeight: 600 }}>{part}</span>
+              <b style={{ fontWeight: 600 }}>{part}</b>
             ) : (
               part
             )}
