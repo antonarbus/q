@@ -9,15 +9,15 @@ import type { ReactNode } from 'react'
 
 type Props<
   TData extends Record<string, unknown>,
-  TValue extends string,
+  TValue extends string | Date = string,
 > = ColDef<TData, TValue> & {
   field: ColDefField<TData, TValue>
 }
 
-/** Column for date. */
+/** Column for date as object or ISO string value. */
 export const getDateColDef = <
   TData extends Record<string, unknown>,
-  TValue extends string,
+  TValue extends string | Date = string,
 >(
   props: Props<TData, TValue>,
 ): ColDef<TData, TValue> => {

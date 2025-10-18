@@ -8,15 +8,15 @@ import type { ReactNode } from 'react'
 
 type Props<
   TData extends Record<string, unknown>,
-  TValue extends string,
+  TValue extends string = string,
 > = ColDef<TData, TValue> & {
   field: ColDefField<TData, TValue>
 }
 
-/** Column for text. */
+/** Column for text value. */
 export const getTextColDef = <
   TData extends Record<string, unknown>,
-  TValue extends string,
+  TValue extends string = string,
 >(
   props: Props<TData, TValue>,
 ): ColDef<TData, TValue> => {
@@ -44,7 +44,17 @@ export const getTextColDef = <
         subString: filterValue,
       })
 
-      return <div>{text}</div>
+      return (
+        <div
+          style={{
+            overflow: 'hidden',
+            whiteSpace: 'nowrap',
+            textOverflow: 'ellipsis',
+          }}
+        >
+          {text}
+        </div>
+      )
     },
     ...props,
   }

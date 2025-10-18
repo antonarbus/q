@@ -2,15 +2,15 @@ import type { ColDef, ColDefField } from 'ag-grid-community'
 
 type Props<
   TData extends Record<string, unknown>,
-  TValue extends string,
+  TValue extends number = number,
 > = ColDef<TData, TValue> & {
   field: ColDefField<TData, TValue>
 }
 
-/** Column for numbers. */
+/** Column for number value */
 export const getNumberColDef = <
   TData extends Record<string, unknown>,
-  TValue extends string,
+  TValue extends number = number,
 >(
   props: Props<TData, TValue>,
 ): ColDef<TData, TValue> => {
