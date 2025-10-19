@@ -1,5 +1,5 @@
 import { boqColumnKey } from '@entities/quotation/const/boqColumnKey'
-import { updateRowBlockCellAtStore } from '@entities/quotation/redux/updater/updateRowBlockCellAtStore'
+import { updateBookmarkedRowCellAtStore } from '@entities/quotation/redux/updater/updateBookmarkedRowCellAtStore'
 import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 
 type Props = {
@@ -11,7 +11,7 @@ export const updateDescriptionCell = ({ editorRef }: Props): void => {
     return
   }
 
-  updateRowBlockCellAtStore({
+  updateBookmarkedRowCellAtStore({
     cellKey: boqColumnKey.description,
     html: editorRef.current.html.get(),
   })

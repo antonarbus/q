@@ -4,7 +4,7 @@ import { cellKey } from '@entities/quotation/const/cellKey'
 import { columnMinWidth } from '@entities/quotation/const/columnMinWidth'
 import { useStylesForResizableCell } from '@entities/quotation/hook/useStylesForResizableCell'
 import { useRow } from '@entities/quotation/provider/RowProvider'
-import { getRowCellHtmlFromStore } from '@entities/quotation/redux/getter/getRowCellHtmlFromStore'
+import { getBookmarkedRowCellHtmlFromStore } from '@entities/quotation/redux/getter/getBookmarkedRowCellHtmlFromStore'
 import { cellStyle, cellSx } from '@entities/quotation/style/cellStyle'
 import { Froala } from '@entities/quotation/ui/froala/Froala'
 import { formatQtyCell } from '@features/blocks/update/update-cell-row-block/qty/formatQtyCell'
@@ -26,7 +26,9 @@ export const QtyCell = (): JSX.Element => {
       <Froala
         className={`td ${cellKey.qty}`}
         editorRef={row.qtyCellEditorRef}
-        htmlGetter={() => getRowCellHtmlFromStore({ cellKey: cellKey.qty })}
+        htmlGetter={() =>
+          getBookmarkedRowCellHtmlFromStore({ cellKey: cellKey.qty })
+        }
         onBlur={() => {
           formatQtyCell({ qtyCellEditorRef: row.qtyCellEditorRef })
         }}

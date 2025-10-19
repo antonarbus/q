@@ -24,6 +24,7 @@ import { showCellPinReducer } from './reducer/showCellPinReducer'
 import { updateBlockHeightReducer } from './reducer/updateBlockHeightReducer'
 import { updateBlockTextReducer } from './reducer/updateBlockTextReducer'
 import { updateBlockWidthReducer } from './reducer/updateBlockWidthReducer'
+import { updateBookmarkedRowCellReducer } from './reducer/updateBookmarkedRowCellReducer'
 import { updateBoqColumnNameTextReducer } from './reducer/updateBoqColumnNameTextReducer'
 import { updateBoqHeaderTextReducer } from './reducer/updateBoqHeaderTextReducer'
 import { updateCellReducer } from './reducer/updateCellReducer'
@@ -33,7 +34,6 @@ import { updateItemPreviewReducer } from './reducer/updateItemPreviewReducer'
 import { updatePriceReducer } from './reducer/updatePriceReducer'
 import { updatePriceTitleReducer } from './reducer/updatePriceTitleReducer'
 import { updateQuotationInfoReducer } from './reducer/updateQuotationInfoReducer'
-import { updateRowBlockCellReducer } from './reducer/updateRowBlockCellReducer'
 import { updateRowHeightAndWidthReducer } from './reducer/updateRowHeightAndWidthReducer'
 import { updateSubTotalPriceReducer } from './reducer/updateSubTotalPriceReducer'
 
@@ -76,7 +76,7 @@ export const quotationSlice = createSlice({
     showBoqPriceCellPinsReducer,
     hideBoqPriceCellPinsReducer,
     updateCellReducer,
-    updateRowBlockCellReducer,
+    updateBookmarkedRowCellReducer,
     updateBoqColumnNameTextReducer,
     updateBoqHeaderTextReducer,
     updateRowHeightAndWidthReducer,

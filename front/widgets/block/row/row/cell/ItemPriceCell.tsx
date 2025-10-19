@@ -4,7 +4,7 @@ import { cellKey } from '@entities/quotation/const/cellKey'
 import { columnMinWidth } from '@entities/quotation/const/columnMinWidth'
 import { useStylesForResizableCell } from '@entities/quotation/hook/useStylesForResizableCell'
 import { useRow } from '@entities/quotation/provider/RowProvider'
-import { getRowCellHtmlFromStore } from '@entities/quotation/redux/getter/getRowCellHtmlFromStore'
+import { getBookmarkedRowCellHtmlFromStore } from '@entities/quotation/redux/getter/getBookmarkedRowCellHtmlFromStore'
 import { cellStyle, cellSx } from '@entities/quotation/style/cellStyle'
 import { Froala } from '@entities/quotation/ui/froala/Froala'
 import { formatItemPriceCell } from '@features/blocks/update/update-cell-row-block/item-price/formatItemPriceCell'
@@ -27,7 +27,7 @@ export const ItemPriceCell = (): JSX.Element => {
         className={`td ${cellKey.itemPrice}`}
         editorRef={row.itemPriceCellEditorRef}
         htmlGetter={() =>
-          getRowCellHtmlFromStore({ cellKey: cellKey.itemPrice })
+          getBookmarkedRowCellHtmlFromStore({ cellKey: cellKey.itemPrice })
         }
         onBlur={() => {
           formatItemPriceCell({

@@ -1,5 +1,5 @@
 import { cellKey } from '@entities/quotation/const/cellKey'
-import { formatRowBlockCellNumber } from '@entities/quotation/util/formatRowBlockCellNumber'
+import { formatBookmarkedRowCellNumber } from '@entities/quotation/util/formatBookmarkedRowCellNumber'
 import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 
 type Props = {
@@ -7,7 +7,7 @@ type Props = {
 }
 
 export const formatPriceCell = ({ priceCellEditorRef }: Props): void => {
-  formatRowBlockCellNumber({
+  formatBookmarkedRowCellNumber({
     cellKey: cellKey.price,
     editorRef: priceCellEditorRef,
     roundToTwoDecimals: true,

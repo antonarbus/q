@@ -7,7 +7,7 @@ import { getTextContentFromHtml } from '@shared/util/getTextContentFromHtml'
 import { BOOKMARK_POS_AT_BLOCKS } from '../const/bookmarkPosAtBlocks'
 import type { CellKey } from '../const/cellKey'
 import { itemType } from '../const/itemType'
-import { updateRowBlockCellAtStore } from '../redux/updater/updateRowBlockCellAtStore'
+import { updateBookmarkedRowCellAtStore } from '../redux/updater/updateBookmarkedRowCellAtStore'
 
 type Props = {
   editor: FroalaEditor | null
@@ -15,7 +15,7 @@ type Props = {
   value: number
 }
 
-export const updateRowBlockCellWithValue = ({
+export const updateBookmarkedRowCellWithValue = ({
   editor,
   cellKey,
   value,
@@ -46,7 +46,7 @@ export const updateRowBlockCellWithValue = ({
     newNumber: value,
   })
 
-  updateRowBlockCellAtStore({
+  updateBookmarkedRowCellAtStore({
     cellKey,
     html: updatedHtml,
   })

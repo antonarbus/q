@@ -7,7 +7,9 @@ type Props = {
   cellKey: CellKey
 }
 
-export const getRowCellHtmlFromStore = ({ cellKey }: Props): string => {
+export const getBookmarkedRowCellHtmlFromStore = ({
+  cellKey,
+}: Props): string => {
   const block = getState().quotation.blocks[BOOKMARK_POS_AT_BLOCKS]
 
   if (block?.type !== itemType.row) {

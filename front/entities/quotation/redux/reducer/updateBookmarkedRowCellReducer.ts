@@ -4,7 +4,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import { itemType } from '../../const/itemType'
 import type { Quotation } from '../../type'
 
-export const updateRowBlockCellReducer = (
+export const updateBookmarkedRowCellReducer = (
   state: Quotation,
   action: PayloadAction<{
     html: string

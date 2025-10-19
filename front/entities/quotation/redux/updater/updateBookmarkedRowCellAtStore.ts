@@ -15,7 +15,10 @@ type Res = {
   didUpdate: boolean
 }
 
-export const updateRowBlockCellAtStore = ({ html, cellKey }: Props): Res => {
+export const updateBookmarkedRowCellAtStore = ({
+  html,
+  cellKey,
+}: Props): Res => {
   const block = getState().quotation.blocks[BOOKMARK_POS_AT_BLOCKS]
 
   if (block?.type !== itemType.row) {
@@ -40,7 +43,7 @@ export const updateRowBlockCellAtStore = ({ html, cellKey }: Props): Res => {
   })
 
   dispatch(
-    quotationSlice.actions.updateRowBlockCellReducer({
+    quotationSlice.actions.updateBookmarkedRowCellReducer({
       html,
       value: cellValueFromHtml,
       cellKey,

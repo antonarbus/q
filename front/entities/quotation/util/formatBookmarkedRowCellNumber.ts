@@ -17,7 +17,7 @@ type Res = {
   didUpdate: boolean
 }
 
-export const formatRowBlockCellNumber = ({
+export const formatBookmarkedRowCellNumber = ({
   cellKey,
   editorRef,
   roundToTwoDecimals,
@@ -55,7 +55,7 @@ export const formatRowBlockCellNumber = ({
   }
 
   dispatch(
-    quotationSlice.actions.updateRowBlockCellReducer({
+    quotationSlice.actions.updateBookmarkedRowCellReducer({
       html: newHtml,
       value: roundToTwoDecimals === true ? roundedValue : value,
       cellKey,
