@@ -27,10 +27,10 @@ export const Rows = (): JSX.Element => {
     <RowsLayout>
       <RowsSortableContext>
         <AnimatePresence initial={false}>
-          {boqRows.map((boqRow, rowIndex) => {
-            if (boqRow.type === rowTypeKey.row) {
+          {boqRows.map((row, rowIndex) => {
+            if (row.type === rowTypeKey.row) {
               return (
-                <RowProvider key={boqRow.id} item={boqRow} index={rowIndex}>
+                <RowProvider key={row.id} item={row} index={rowIndex}>
                   <RowAnimate>
                     <RowSortable>
                       <Row
@@ -48,7 +48,7 @@ export const Rows = (): JSX.Element => {
               )
             }
 
-            // boqRow.type = 'paste'
+            // row.type = 'paste'
             return <PasteRowTextOverlay key={generateId()} />
           })}
         </AnimatePresence>

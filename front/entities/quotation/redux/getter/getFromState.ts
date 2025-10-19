@@ -23,9 +23,9 @@ export const getFromState = ({
 
   for (const block of state.blocks) {
     if (block.type === 'boq') {
-      for (const boqRow of block.boq.rows) {
-        if (boqRow.id === id) {
-          return boqRow
+      for (const row of block.boq.rows) {
+        if (row.id === id) {
+          return row
         }
       }
     }

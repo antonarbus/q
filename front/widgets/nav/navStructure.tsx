@@ -145,7 +145,7 @@ export const navStructure: NavItem[] = [
             func: insertBoqBlock,
           },
           {
-            id: navItemId.boqRow,
+            id: navItemId.row,
             name: 'Row',
             icon: <FaGripLines />,
             isHidden: false,

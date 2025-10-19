@@ -38,13 +38,13 @@ export const insertPasteRowReducer: Type = (state, action) => {
     }
 
     const boqRowsWithoutPasteText = boqItem.boq.rows.filter(
-      (boqRow) => boqRow.type === rowTypeKey.row,
+      (row) => row.type === rowTypeKey.row,
     )
 
     boqItem.boq.rows = boqRowsWithoutPasteText
 
     const boqRowIndex = boqRowsWithoutPasteText.findIndex(
-      (boqRow) => boqRow.id === id,
+      (row) => row.id === id,
     )
 
     if (boqRowIndex === -1 || pastePos === 'middle') {

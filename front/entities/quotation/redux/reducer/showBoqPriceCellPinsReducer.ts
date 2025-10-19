@@ -15,7 +15,7 @@ export const showBoqPriceCellPinsReducer = (
     return
   }
 
-  boqRows.forEach((boqRow) => {
-    boqRow.price.pin.isShown = true
+  boqRows.forEach((row) => {
+    row.price.pin.isShown = true
   })
 }

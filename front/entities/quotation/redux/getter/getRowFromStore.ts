@@ -16,7 +16,7 @@ export const getRowFromStore = ({
     return
   }
 
-  const boqRow = boqBlock.boq.rows[rowIndex]
+  const row = boqBlock.boq.rows[rowIndex]
 
-  return boqRow
+  return row
 }

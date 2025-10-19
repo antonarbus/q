@@ -14,14 +14,14 @@ export const isRowPriceValid = ({
   rowIndex,
   html,
 }: Props): boolean => {
-  const boqRow = getRowFromStore({ blockIndex, rowIndex })
+  const row = getRowFromStore({ blockIndex, rowIndex })
 
-  if (boqRow === undefined) {
+  if (row === undefined) {
     return true
   }
 
-  const priceValue = boqRow.price.value
-  const calculatedPriceValue = boqRow.qty.value * boqRow.itemPrice.value
+  const priceValue = row.price.value
+  const calculatedPriceValue = row.qty.value * row.itemPrice.value
   const calculatedPriceValueRounded = roundTo(calculatedPriceValue, 2)
   const isPriceValueValid = priceValue === calculatedPriceValueRounded
 

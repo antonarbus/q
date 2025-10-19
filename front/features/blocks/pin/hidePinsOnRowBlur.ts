@@ -23,13 +23,13 @@ export const hidePinsOnRowBlur = ({
     return
   }
 
-  const boqRow = getRowFromStore({ blockIndex, rowIndex })
+  const row = getRowFromStore({ blockIndex, rowIndex })
 
-  if (boqRow === undefined) {
+  if (row === undefined) {
     return
   }
 
-  const isItemPricePinShown = boqRow.itemPrice.pin.isShown
+  const isItemPricePinShown = row.itemPrice.pin.isShown
 
   if (isItemPricePinShown === true) {
     dispatch(
@@ -41,7 +41,7 @@ export const hidePinsOnRowBlur = ({
     )
   }
 
-  const isQtyPinShown = boqRow.qty.pin.isShown
+  const isQtyPinShown = row.qty.pin.isShown
 
   if (isQtyPinShown === true) {
     dispatch(

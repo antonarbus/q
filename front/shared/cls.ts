@@ -8,7 +8,7 @@ export const cls = {
   textBlock: 'text-block',
   paper: 'paper',
   boqRows: 'boq-rows',
-  boqRow: 'boq-row',
+  row: 'boq-row',
   pin: 'pin',
   searchAutocomplete: 'search-autocomplete',
   search: 'search',

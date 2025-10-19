@@ -25,7 +25,7 @@ export const RowsSortableContext = ({ children }: Props): JSX.Element => {
     arrayShapesEqualityFn,
   )
 
-  const boqRowIds = boqRows.map((boqRow) => boqRow.id)
+  const boqRowIds = boqRows.map((row) => row.id)
 
   const sensors = useSensors(useSensor(PointerSensor))
 

@@ -10,7 +10,7 @@ type Props = {
 export const RowLayout = ({ children, onBlur }: Props): JSX.Element => {
   return (
     <Box
-      className={cls.boqRow}
+      className={cls.row}
       onBlur={(event) => {
         onBlur(event)
       }}

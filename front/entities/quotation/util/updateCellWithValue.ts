@@ -26,14 +26,14 @@ export const updateCellWithValue = ({
     return
   }
 
-  const boqRow = getRowFromStore({ blockIndex, rowIndex })
+  const row = getRowFromStore({ blockIndex, rowIndex })
 
-  if (boqRow === undefined) {
+  if (row === undefined) {
     return
   }
 
   const priceTextContent = getTextContentFromHtml({
-    html: boqRow[cellKey].html,
+    html: row[cellKey].html,
   })
 
   const priceValueFromHtml = getNumberFromString({
@@ -41,7 +41,7 @@ export const updateCellWithValue = ({
   })
 
   const updatedHtml = getStringWithNewFormattedNumber({
-    string: boqRow[cellKey].html,
+    string: row[cellKey].html,
     oldNumber: priceValueFromHtml,
     newNumber: value,
   })
@@ -57,6 +57,6 @@ export const updateCellWithValue = ({
     oldNumber: priceValueFromHtml,
     newNumber: value,
     editor,
-    html: boqRow[cellKey].html,
+    html: row[cellKey].html,
   })
 }

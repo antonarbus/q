@@ -40,16 +40,16 @@ export const updatePriceCell = ({
     return
   }
 
-  const boqRow = getRowFromStore({ blockIndex, rowIndex })
+  const row = getRowFromStore({ blockIndex, rowIndex })
 
-  const isItemPricePinned = boqRow?.itemPrice.pin.isPinned
+  const isItemPricePinned = row?.itemPrice.pin.isPinned
 
   if (isItemPricePinned === true) {
-    if (boqRow.itemPrice.value === 0) {
+    if (row.itemPrice.value === 0) {
       return
     }
 
-    const newQtyValue = boqRow.price.value / boqRow.itemPrice.value
+    const newQtyValue = row.price.value / row.itemPrice.value
     const newQtyValueRounded = roundTo(newQtyValue, 5)
 
     updateCellWithValue({
@@ -61,14 +61,14 @@ export const updatePriceCell = ({
     })
   }
 
-  const isQtyPinned = boqRow?.qty.pin.isPinned
+  const isQtyPinned = row?.qty.pin.isPinned
 
   if (isQtyPinned === true) {
-    if (boqRow.qty.value === 0) {
+    if (row.qty.value === 0) {
       return
     }
 
-    const newItemPriceValue = boqRow.price.value / boqRow.qty.value
+    const newItemPriceValue = row.price.value / row.qty.value
     const newItemPriceValueRounded = roundTo(newItemPriceValue, 2)
 
     updateCellWithValue({

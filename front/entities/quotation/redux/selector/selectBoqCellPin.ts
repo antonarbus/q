@@ -12,13 +12,13 @@ type Props = {
 export const selectBoqCellPin =
   ({ blockIndex, rowIndex, cellKey }: Props) =>
   (_state: RootState): RowCellPin | undefined => {
-    const boqRow = getRowFromStore({ blockIndex, rowIndex })
+    const row = getRowFromStore({ blockIndex, rowIndex })
 
-    if (boqRow === undefined) {
+    if (row === undefined) {
       return
     }
 
-    const cellPin = boqRow[cellKey].pin
+    const cellPin = row[cellKey].pin
 
     return cellPin
   }

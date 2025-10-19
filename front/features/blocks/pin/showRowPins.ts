@@ -9,13 +9,13 @@ type Props = {
 }
 
 export const showRowPins = ({ blockIndex, rowIndex }: Props): void => {
-  const boqRow = getRowFromStore({ blockIndex, rowIndex })
+  const row = getRowFromStore({ blockIndex, rowIndex })
 
-  if (boqRow === undefined) {
+  if (row === undefined) {
     return
   }
 
-  const isItemPricePinShown = boqRow.itemPrice.pin.isShown
+  const isItemPricePinShown = row.itemPrice.pin.isShown
 
   if (isItemPricePinShown === false) {
     dispatch(
@@ -27,7 +27,7 @@ export const showRowPins = ({ blockIndex, rowIndex }: Props): void => {
     )
   }
 
-  const isQtyPinShown = boqRow.qty.pin.isShown
+  const isQtyPinShown = row.qty.pin.isShown
 
   if (isQtyPinShown === false) {
     dispatch(

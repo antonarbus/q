@@ -14,7 +14,7 @@ export const RowLayout = ({ children, onBlur }: Props): JSX.Element => {
 
   return (
     <Box
-      className={cls.boqRow}
+      className={cls.row}
       id={row.item.id}
       onBlur={(event) => {
         onBlur(event)

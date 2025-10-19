@@ -27,7 +27,7 @@ export const validatePrices = ({
 
   let didNotifyAboutInvalidPriceOnes = false
 
-  boqRows.forEach((boqRow, rowIndex) => {
+  boqRows.forEach((row, rowIndex) => {
     const priceCellEditorRef = boqRowEditorRefs.at(rowIndex)
 
     if (priceCellEditorRef === undefined) {
@@ -53,7 +53,7 @@ export const validatePrices = ({
         didNotifyAboutInvalidPriceOnes = true
       }
 
-      const newPriceValue = boqRow.qty.value * boqRow.itemPrice.value
+      const newPriceValue = row.qty.value * row.itemPrice.value
       const newPriceValueRounded = roundTo(newPriceValue, 2)
 
       updateCellWithValue({

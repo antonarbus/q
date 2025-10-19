@@ -33,8 +33,8 @@ export const useUpdateSubtotal = (): void => {
     }
 
     const subTotalPriceValueNew: number = boqRows.reduce(
-      (accumulator: number, boqRow: Row) => {
-        const price = boqRow.price.value
+      (accumulator: number, row: Row) => {
+        const price = row.price.value
 
         return accumulator + price
       },

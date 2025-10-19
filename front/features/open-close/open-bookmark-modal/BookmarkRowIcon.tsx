@@ -50,32 +50,32 @@ export const BookmarkRowIcon = (): ReactNode => {
               return
             }
 
-            const boqRowElement = clickedIconElement.closest(`.${cls.boqRow}`)
+            const boqRowElement = clickedIconElement.closest(`.${cls.row}`)
 
             if (boqRowElement === null) {
               return
             }
 
-            const boqRow = getRowFromStore({
+            const rowFromStore = getRowFromStore({
               rowIndex: row.index,
               blockIndex: block.index,
             })
 
-            if (boqRow === undefined) {
+            if (rowFromStore === undefined) {
               return
             }
 
-            if (boqRow.type === rowTypeKey.paste) {
+            if (rowFromStore.type === rowTypeKey.paste) {
               return
             }
 
             dispatch(
               quotationSlice.actions.loadBlockAtPosThousandReducer({
-                block: boqRow,
+                block: rowFromStore,
               }),
             )
 
-            void navigate(`./${route.bookmark}/${boqRow.id}`)
+            void navigate(`./${route.bookmark}/${rowFromStore.id}`)
           }}
           style={{
             color: disabled === true ? '#acacac' : '#000',

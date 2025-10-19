@@ -8,7 +8,7 @@ import { dispatch, getState } from '@shared/lib/redux'
 import type { MouseEvent } from 'react'
 
 export const insertRow = (event?: MouseEvent): void => {
-  const boqRow: Row = {
+  const row: Row = {
     id: generateId(),
     type: rowTypeKey.row,
     email: 'john@mail.com',
@@ -116,7 +116,7 @@ export const insertRow = (event?: MouseEvent): void => {
     window.scrollTo(scrollX, scrollY)
   })
 
-  dispatch(copySlice.actions.addItem({ item: boqRow }))
+  dispatch(copySlice.actions.addItem({ item: row }))
 
   const isCopyModalVisible = getState().copy.isVisible
 

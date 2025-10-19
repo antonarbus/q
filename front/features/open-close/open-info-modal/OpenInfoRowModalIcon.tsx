@@ -33,20 +33,20 @@ export const OpenInfoRowModalIcon = (): ReactNode => {
               return
             }
 
-            const boqRow = getRowFromStore({
+            const rowFromStore = getRowFromStore({
               rowIndex: row.index,
               blockIndex: block.index,
             })
 
-            if (boqRow === undefined) {
+            if (rowFromStore === undefined) {
               return
             }
 
-            if (boqRow.type === rowTypeKey.paste) {
+            if (rowFromStore.type === rowTypeKey.paste) {
               return
             }
 
-            void navigate(`./${route.info}/${boqRow.id}`)
+            void navigate(`./${route.info}/${rowFromStore.id}`)
           }}
           style={{
             color: disabled === true ? '#acacac' : '#000',

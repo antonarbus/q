@@ -31,15 +31,15 @@ export const formatCellNumber = ({
     }
   }
 
-  const boqRow = getRowFromStore({ blockIndex, rowIndex })
+  const row = getRowFromStore({ blockIndex, rowIndex })
 
-  if (boqRow === undefined) {
+  if (row === undefined) {
     return {
       didUpdate: false,
     }
   }
 
-  const { value, html } = boqRow[cellKey]
+  const { value, html } = row[cellKey]
 
   const roundedValue = roundTo(value, 2)
 

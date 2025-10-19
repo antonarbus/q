@@ -8,7 +8,7 @@ export const getClosestRowHtml = (event: MouseEvent): string => {
     return 'element not found'
   }
 
-  const rowElement = clickedIconElement.closest(`.${cls.boqRow}`)
+  const rowElement = clickedIconElement.closest(`.${cls.row}`)
 
   if (rowElement === null) {
     return 'element not found'

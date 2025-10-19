@@ -12,12 +12,12 @@ export const updateRowHeightAndWidthReducer = (
   }>,
 ): void => {
   const { blockIndex, rowIndex, height, width } = action.payload
-  const boqRow = getRowFromState({ blockIndex, rowIndex, state })
+  const row = getRowFromState({ blockIndex, rowIndex, state })
 
-  if (boqRow === undefined) {
+  if (row === undefined) {
     return
   }
 
-  boqRow.height = height
-  boqRow.width = width
+  row.height = height
+  row.width = width
 }

@@ -38,7 +38,7 @@ export const CopyRowIcon = (): JSX.Element => {
               return
             }
 
-            const boqRowElement = clickedIconElement.closest(`.${cls.boqRow}`)
+            const boqRowElement = clickedIconElement.closest(`.${cls.row}`)
 
             if (boqRowElement === null) {
               return
@@ -64,22 +64,22 @@ export const CopyRowIcon = (): JSX.Element => {
               }),
             )
 
-            const boqRow = getRowFromStore({
+            const rowFromStore = getRowFromStore({
               blockIndex: block.index,
               rowIndex: row.index,
             })
 
-            if (boqRow === undefined) {
+            if (rowFromStore === undefined) {
               return
             }
 
             const html = getClosestRowHtml(event)
-            const boqRowCloned = structuredClone(boqRow)
-            boqRowCloned.preview = html
+            const rowFromStoreCloned = structuredClone(rowFromStore)
+            rowFromStoreCloned.preview = html
 
             dispatch(
               copySlice.actions.addItem({
-                item: boqRowCloned,
+                item: rowFromStoreCloned,
               }),
             )
 

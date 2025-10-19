@@ -22,15 +22,15 @@ export const updateCellAtStore = ({
   rowIndex,
   cellKey,
 }: Props): Res => {
-  const boqRow = getRowFromStore({ blockIndex, rowIndex })
+  const row = getRowFromStore({ blockIndex, rowIndex })
 
-  if (boqRow === undefined) {
+  if (row === undefined) {
     return {
       didUpdate: false,
     }
   }
 
-  const prevHtml = boqRow[cellKey].html
+  const prevHtml = row[cellKey].html
   const didTextChange = prevHtml !== html
 
   if (didTextChange === false) {

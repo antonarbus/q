@@ -15,8 +15,8 @@ export const hideBoqItemPinsReducer = (
     return
   }
 
-  boqRowRows.forEach((boqRow) => {
-    boqRow.itemPrice.pin.isShown = false
-    boqRow.qty.pin.isShown = false
+  boqRowRows.forEach((row) => {
+    row.itemPrice.pin.isShown = false
+    row.qty.pin.isShown = false
   })
 }

@@ -15,13 +15,13 @@ export const getBoqCellFromState = ({
   cellKey,
   state,
 }: Props): RowCell | undefined => {
-  const boqRow = getRowFromState({ blockIndex, rowIndex, state })
+  const row = getRowFromState({ blockIndex, rowIndex, state })
 
-  if (boqRow === undefined) {
+  if (row === undefined) {
     return
   }
 
-  const cell = boqRow[cellKey]
+  const cell = row[cellKey]
 
   return cell
 }

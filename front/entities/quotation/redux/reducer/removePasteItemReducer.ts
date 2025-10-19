@@ -19,7 +19,7 @@ export const removePasteItemReducer = (state: Quotation): void => {
     const boqRows = block.boq.rows
 
     const pasteBoqRowIndex = boqRows.findIndex(
-      (boqRow) => boqRow.type === rowTypeKey.paste,
+      (row) => row.type === rowTypeKey.paste,
     )
 
     if (pasteBoqRowIndex >= 0) {

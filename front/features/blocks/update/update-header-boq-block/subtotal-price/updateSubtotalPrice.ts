@@ -48,13 +48,13 @@ export const updateSubtotalPrice = ({
     boqHeaderKey: 'subTotalPrice',
   })
 
-  const prevSubTotalPriceValue = boqRows.reduce((accumulator, boqRow) => {
-    return accumulator + boqRow.price.value
+  const prevSubTotalPriceValue = boqRows.reduce((accumulator, row) => {
+    return accumulator + row.price.value
   }, 0)
 
-  const pinnedPricesSum = boqRows.reduce((accumulator, boqRow) => {
-    if (boqRow.price.pin.isPinned) {
-      return accumulator + boqRow.price.value
+  const pinnedPricesSum = boqRows.reduce((accumulator, row) => {
+    if (row.price.pin.isPinned) {
+      return accumulator + row.price.value
     }
 
     return accumulator
@@ -81,9 +81,9 @@ export const updateSubtotalPrice = ({
     editor: FroalaEditor | null
   }[]
 
-  const prices: Prices = boqRows.map((boqRow, index) => {
-    const { value: oldValue } = boqRow.price
-    const { isPinned } = boqRow.price.pin
+  const prices: Prices = boqRows.map((row, index) => {
+    const { value: oldValue } = row.price
+    const { isPinned } = row.price.pin
 
     const newValue = oldValue * (unpinnedPricesSumTarget / unpinnedPricesSum)
 
@@ -130,16 +130,16 @@ export const updateSubtotalPrice = ({
       value: price.newValue,
     })
 
-    const boqRow = getRowFromStore({ blockIndex, rowIndex })
+    const row = getRowFromStore({ blockIndex, rowIndex })
 
-    const isItemPricePinned = boqRow?.itemPrice.pin.isPinned
+    const isItemPricePinned = row?.itemPrice.pin.isPinned
 
     if (isItemPricePinned === true) {
-      if (boqRow.itemPrice.value === 0) {
+      if (row.itemPrice.value === 0) {
         return
       }
 
-      const newQtyValue = boqRow.price.value / boqRow.itemPrice.value
+      const newQtyValue = row.price.value / row.itemPrice.value
       const newQtyValueRounded = roundTo(newQtyValue, 3)
 
       updateCellWithValue({
@@ -151,14 +151,14 @@ export const updateSubtotalPrice = ({
       })
     }
 
-    const isQtyPinned = boqRow?.qty.pin.isPinned
+    const isQtyPinned = row?.qty.pin.isPinned
 
     if (isQtyPinned === true) {
-      if (boqRow.qty.value === 0) {
+      if (row.qty.value === 0) {
         return
       }
 
-      const newItemPriceValue = boqRow.price.value / boqRow.qty.value
+      const newItemPriceValue = row.price.value / row.qty.value
       const newItemPriceValueRounded = roundTo(newItemPriceValue, 2)
 
       updateCellWithValue({
@@ -178,8 +178,8 @@ export const updateSubtotalPrice = ({
   }
 
   const subTotalPriceValueNew: number = boqRowsUpdated.reduce(
-    (accumulator: number, boqRow: Row) => {
-      const price = boqRow.price.value
+    (accumulator: number, row: Row) => {
+      const price = row.price.value
 
       return accumulator + price
     },

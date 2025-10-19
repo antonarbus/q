@@ -22,9 +22,9 @@ export const getFromStore = ({ id }: Props): Item | Quotation | undefined => {
 
   for (const block of quotation.blocks) {
     if (block.type === 'boq') {
-      for (const boqRow of block.boq.rows) {
-        if (boqRow.id === id) {
-          return boqRow
+      for (const row of block.boq.rows) {
+        if (row.id === id) {
+          return row
         }
       }
     }

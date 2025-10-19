@@ -168,7 +168,7 @@ const movePasteTextBoqRow = (event: MouseEvent): void => {
   const isBoqPasteRow = getState()
     .quotation.blocks.filter((block) => block.type === itemType.boq)
     .flatMap((block) => block.boq.rows)
-    .some((boqRow) => boqRow.type === rowTypeKey.paste)
+    .some((row) => row.type === rowTypeKey.paste)
 
   const removePasteIfNeeded = (): void => {
     if (isPasteTextShown === true) {
@@ -226,7 +226,7 @@ const movePasteTextBoqRow = (event: MouseEvent): void => {
     return
   }
 
-  const boqRowElement = event.target.closest(`.${cls.boqRow}`)
+  const boqRowElement = event.target.closest(`.${cls.row}`)
 
   if (boqRowElement === null) {
     return

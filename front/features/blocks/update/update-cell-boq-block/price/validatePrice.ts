@@ -36,13 +36,13 @@ export const validatePrice = ({
   })
 
   if (isPriceValid === false) {
-    const boqRow = getRowFromStore({ blockIndex, rowIndex })
+    const row = getRowFromStore({ blockIndex, rowIndex })
 
-    if (boqRow === undefined) {
+    if (row === undefined) {
       return
     }
 
-    const newPriceValue = boqRow.qty.value * boqRow.itemPrice.value
+    const newPriceValue = row.qty.value * row.itemPrice.value
     const newPriceValueRounded = roundTo(newPriceValue, 2)
 
     updateCellWithValue({

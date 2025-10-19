@@ -21,8 +21,8 @@ export const pasteItemReducer = (
   if (itemToPaste.type === itemType.boq) {
     const boqRows = itemToPaste.boq.rows
 
-    boqRows.forEach((boqRow) => {
-      boqRow.id = generateId()
+    boqRows.forEach((row) => {
+      row.id = generateId()
     })
   }
 
@@ -94,8 +94,8 @@ export const pasteItemReducer = (
 
       let spliceSettings: SplicingSettings | null = null
 
-      block.boq.rows.forEach((boqRow, hoveredItemIndex) => {
-        if (boqRow.id !== id) {
+      block.boq.rows.forEach((row, hoveredItemIndex) => {
+        if (row.id !== id) {
           return
         }
 
@@ -130,7 +130,7 @@ export const pasteItemReducer = (
       }
 
       const boqRowsWithoutPasteText = block.boq.rows.filter(
-        (boqRow) => boqRow.type !== rowTypeKey.paste,
+        (row) => row.type !== rowTypeKey.paste,
       )
 
       // todo: fix it
