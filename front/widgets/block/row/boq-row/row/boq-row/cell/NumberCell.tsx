@@ -5,7 +5,7 @@ import { Box } from '@mui/material'
 import type { JSX } from 'react'
 
 export const NumberCell = (): JSX.Element => {
-  const { stylesForResizableCell } = useStylesForResizableCell({
+  const stylesForResizableCell = useStylesForResizableCell({
     blockIndex: 0,
     boqColumnKey: boqColumnKey.number,
     minWidth: columnMinWidth.number,

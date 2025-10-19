@@ -25,7 +25,7 @@ export const ItemPriceCell = (): JSX.Element => {
   const boq = useBoq()
   const row = useRow()
 
-  const { stylesForResizableCell } = useStylesForResizableCell({
+  const stylesForResizableCell = useStylesForResizableCell({
     blockIndex: block.index,
     boqColumnKey: boqColumnKey.itemPrice,
     minWidth: `${columnMinWidth.itemPrice}px`,

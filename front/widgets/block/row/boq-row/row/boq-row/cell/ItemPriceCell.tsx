@@ -18,7 +18,7 @@ import type { JSX } from 'react'
 export const ItemPriceCell = (): JSX.Element => {
   const row = useRow()
 
-  const { stylesForResizableCell } = useStylesForResizableCell({
+  const stylesForResizableCell = useStylesForResizableCell({
     blockIndex: BOOKMARK_POS_AT_BLOCKS,
     boqColumnKey: boqColumnKey.itemPrice,
     minWidth: columnMinWidth.itemPrice,

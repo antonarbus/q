@@ -9,9 +9,7 @@ type Props = {
   minWidth: CSSProperties['minWidth']
 }
 
-type Res = {
-  stylesForResizableCell: CSSProperties
-}
+type Res = CSSProperties
 
 export const useStylesForResizableCell = ({
   blockIndex,
@@ -32,5 +30,5 @@ export const useStylesForResizableCell = ({
     padding: '2px',
   }
 
-  return { stylesForResizableCell }
+  return stylesForResizableCell
 }

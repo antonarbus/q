@@ -16,7 +16,7 @@ export const DescriptionCell = (): JSX.Element => {
   const block = useBlock()
   const row = useRow()
 
-  const { stylesForResizableCell } = useStylesForResizableCell({
+  const stylesForResizableCell = useStylesForResizableCell({
     blockIndex: block.index,
     boqColumnKey: boqColumnKey.description,
     minWidth: `${columnMinWidth.description}px`,
