@@ -12,44 +12,39 @@ type Props = {
   editor: FroalaEditor
 }
 
-export const updateNumberAtHtmlIncrementally = ({
-  oldNumber,
-  newNumber,
-  html,
-  editor,
-}: Props): void => {
+export const updateNumberAtHtmlIncrementally = (props: Props): void => {
   const steps = 100
-  const valueDifference = newNumber - oldNumber
+  const valueDifference = props.newNumber - props.oldNumber
 
   if (valueDifference === 0) {
     return
   }
 
   const stepValue = valueDifference / steps
-  const decimalPlaces = Math.min(getDecimalPlaces(newNumber), 2)
+  const decimalPlaces = Math.min(getDecimalPlaces(props.newNumber), 2)
 
   const incrementValues = async (): Promise<void> => {
     await new Promise((resolve) => {
       for (let index = 1; index <= steps; index = index + 1) {
         const incrementedValue = roundTo(
-          oldNumber + index * stepValue,
+          props.oldNumber + index * stepValue,
           decimalPlaces,
         )
 
-        const textContent = getTextContentFromHtml({ html })
+        const textContent = getTextContentFromHtml({ html: props.html })
 
         const numberFromHtml = getNumberFromString({
           string: textContent,
         })
 
         const updatedHtml = getStringWithNewFormattedNumber({
-          string: html,
+          string: props.html,
           oldNumber: numberFromHtml,
           newNumber: incrementedValue,
         })
 
         setTimeout(() => {
-          editor.html.set(updatedHtml)
+          props.editor.html.set(updatedHtml)
 
           if (index === steps) {
             resolve('done')
@@ -63,12 +58,12 @@ export const updateNumberAtHtmlIncrementally = ({
     await incrementValues()
 
     const finalHtml = getStringWithNewFormattedNumber({
-      string: html,
-      oldNumber,
-      newNumber,
+      string: props.html,
+      oldNumber: props.oldNumber,
+      newNumber: props.newNumber,
     })
 
-    editor.html.set(finalHtml)
+    props.editor.html.set(finalHtml)
   }
 
   setTimeout(() => {

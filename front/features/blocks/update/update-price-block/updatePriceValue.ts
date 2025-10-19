@@ -11,7 +11,6 @@ type Props = {
 }
 
 export const updatePriceValue = ({ editorRef, blockIndex }: Props): void => {
-  console.log(111)
   if (editorRef.current === null) {
     return
   }

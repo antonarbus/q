@@ -29,6 +29,7 @@ type Props = {
 }
 
 export const getStringWithNewFormattedNumber = (props: Props): string => {
+  console.log('🚀 ~ props:', props)
   const newNumberFormatted = new Intl.NumberFormat('fr', {
     minimumFractionDigits: 0,
     maximumFractionDigits: 10,
