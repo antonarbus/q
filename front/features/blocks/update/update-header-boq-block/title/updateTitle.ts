@@ -1,4 +1,4 @@
-import { updateBoqHeaderCellAtStore } from '@entities/quotation/redux/updater/updateBoqHeaderCellAtStore'
+import { updateBoqHeaderAtStore } from '@entities/quotation/redux/updater/updateBoqHeaderAtStore'
 import type { HeaderKey } from '@entities/quotation/type'
 import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 
@@ -13,7 +13,7 @@ export const updateTitle = ({
   blockIndex,
   boqHeaderKey,
 }: Props): void => {
-  updateBoqHeaderCellAtStore({
+  updateBoqHeaderAtStore({
     editorRef,
     blockIndex,
     boqHeaderKey,

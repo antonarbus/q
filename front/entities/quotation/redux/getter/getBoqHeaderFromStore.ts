@@ -1,6 +1,6 @@
 import { getState } from '@shared/lib/redux'
 import { itemType } from '../../const/itemType'
-import type { HeaderCell, HeaderKey } from '../../type'
+import type { HeaderKey, HeaderValue } from '../../type'
 
 type Props = {
   blockIndex: number
@@ -10,7 +10,7 @@ type Props = {
 export const getBoqHeaderFromStore = ({
   blockIndex,
   boqHeaderKey,
-}: Props): HeaderCell | undefined => {
+}: Props): HeaderValue | undefined => {
   const block = getState().quotation.blocks[blockIndex]
 
   if (block?.type !== itemType.boq) {

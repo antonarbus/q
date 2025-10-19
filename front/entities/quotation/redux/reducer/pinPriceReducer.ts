@@ -1,7 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { cellKey } from '../../const/cellKey'
 import type { Quotation } from '../../type'
-import { getBoqCellFromState } from '../getter/getBoqCellFromState'
+import { getCellFromState } from '../getter/getCellFromState'
 
 export const pinPriceReducer = (
   state: Quotation,
@@ -12,7 +12,7 @@ export const pinPriceReducer = (
 ): void => {
   const { blockIndex, rowIndex } = action.payload
 
-  const priceCell = getBoqCellFromState({
+  const priceCell = getCellFromState({
     blockIndex,
     rowIndex,
     cellKey: cellKey.price,

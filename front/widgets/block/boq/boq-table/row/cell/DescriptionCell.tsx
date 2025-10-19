@@ -4,7 +4,7 @@ import { columnMinWidth } from '@entities/quotation/const/columnMinWidth'
 import { useStylesForResizableCell } from '@entities/quotation/hook/useStylesForResizableCell'
 import { useBlock } from '@entities/quotation/provider/BlockProvider'
 import { useRow } from '@entities/quotation/provider/RowProvider'
-import { getBoqCellHtmlFromStore } from '@entities/quotation/redux/getter/getBoqCellHtmlFromStore'
+import { getCellHtmlFromStore } from '@entities/quotation/redux/getter/getCellHtmlFromStore'
 import { cellStyle } from '@entities/quotation/style/cellStyle'
 import { Froala } from '@entities/quotation/ui/froala/Froala'
 import { tabFromDescriptionCell } from '@features/blocks/tab-away-from-cell'
@@ -29,7 +29,7 @@ export const DescriptionCell = (): JSX.Element => {
       droppable
       editorRef={row.descriptionEditorRef}
       htmlGetter={() =>
-        getBoqCellHtmlFromStore({
+        getCellHtmlFromStore({
           blockIndex: block.index,
           cellKey: cellKey.description,
           rowIndex: row.index,

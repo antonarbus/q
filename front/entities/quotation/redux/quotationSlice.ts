@@ -24,9 +24,9 @@ import { showCellPinReducer } from './reducer/showCellPinReducer'
 import { updateBlockHeightReducer } from './reducer/updateBlockHeightReducer'
 import { updateBlockTextReducer } from './reducer/updateBlockTextReducer'
 import { updateBlockWidthReducer } from './reducer/updateBlockWidthReducer'
-import { updateBoqCellReducer } from './reducer/updateBoqCellReducer'
 import { updateBoqColumnNameTextReducer } from './reducer/updateBoqColumnNameTextReducer'
 import { updateBoqHeaderTextReducer } from './reducer/updateBoqHeaderTextReducer'
+import { updateCellReducer } from './reducer/updateCellReducer'
 import { updateColWidthReducer } from './reducer/updateColWidthReducer'
 import { updateItemInfoReducer } from './reducer/updateItemInfoReducer'
 import { updateItemPreviewReducer } from './reducer/updateItemPreviewReducer'
@@ -75,7 +75,7 @@ export const quotationSlice = createSlice({
     showCellPinReducer,
     showBoqPriceCellPinsReducer,
     hideBoqPriceCellPinsReducer,
-    updateBoqCellReducer,
+    updateCellReducer,
     updateRowBlockCellReducer,
     updateBoqColumnNameTextReducer,
     updateBoqHeaderTextReducer,

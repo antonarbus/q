@@ -1,6 +1,6 @@
 import type { CellKey } from '@entities/quotation/const/cellKey'
 import { updateCellAtStore } from '@entities/quotation/redux/updater/updateCellAtStore'
-import { didBoqCellContentChange } from '@entities/quotation/util/didBoqCellContentChange'
+import { didCellContentChange } from '@entities/quotation/util/didCellContentChange'
 import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 
 type Props = {
@@ -20,7 +20,7 @@ export const updateDescriptionCell = ({
     return
   }
 
-  const didContentChange = didBoqCellContentChange({
+  const didContentChange = didCellContentChange({
     editor: editorRef.current,
     blockIndex,
     rowIndex,

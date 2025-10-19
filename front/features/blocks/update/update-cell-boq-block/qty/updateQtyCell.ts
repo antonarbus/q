@@ -3,7 +3,7 @@ import { getRowFromStore } from '@entities/quotation/redux/getter/getRowFromStor
 import { getRowsFromStore } from '@entities/quotation/redux/getter/getRowsFromStore'
 import { updateCellAtStore } from '@entities/quotation/redux/updater/updateCellAtStore'
 import type { Row } from '@entities/quotation/type'
-import { didBoqCellContentChange } from '@entities/quotation/util/didBoqCellContentChange'
+import { didCellContentChange } from '@entities/quotation/util/didCellContentChange'
 import { updateCellWithValue } from '@entities/quotation/util/updateCellWithValue'
 import { updateSubTotalPriceWithValue } from '@entities/quotation/util/updateSubTotalPriceWithValue'
 import type { FroalaEditorRef } from '@shared/lib/froala/froala'
@@ -28,7 +28,7 @@ export const updateQtyCell = ({
     return
   }
 
-  const didContentChange = didBoqCellContentChange({
+  const didContentChange = didCellContentChange({
     editor: qtyCellEditorRef.current,
     blockIndex,
     rowIndex,

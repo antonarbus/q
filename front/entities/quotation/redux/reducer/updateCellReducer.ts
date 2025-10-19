@@ -3,7 +3,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import { itemType } from '../../const/itemType'
 import type { Quotation } from '../../type'
 
-export const updateBoqCellReducer = (
+export const updateCellReducer = (
   state: Quotation,
   action: PayloadAction<{
     blockIndex: number

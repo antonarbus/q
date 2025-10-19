@@ -20,23 +20,23 @@ type Common = {
 }
 
 // boq
-export type RowCellPin = {
+export type CellPin = {
   isPinned: boolean
   isShown: boolean
 }
 
-export type RowCell = {
+export type Cell = {
   html: string
   value: number
-  pin: RowCellPin
+  pin: CellPin
 }
 
 export type Row = Common & {
   type: RowTypeKey
-  description: RowCell
-  itemPrice: RowCell
-  qty: RowCell
-  price: RowCell
+  description: Cell
+  itemPrice: Cell
+  qty: Cell
+  price: Cell
 }
 
 export type Column = {
@@ -44,15 +44,15 @@ export type Column = {
   width: number
 }
 
-export type HeaderCell = {
+export type HeaderValue = {
   html: string
   value: number
 }
 
 type Header = {
-  title: HeaderCell
-  subtotalText: HeaderCell
-  subTotalPrice: HeaderCell
+  title: HeaderValue
+  subtotalText: HeaderValue
+  subTotalPrice: HeaderValue
 }
 
 export type HeaderKey = keyof Header

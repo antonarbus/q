@@ -1,7 +1,7 @@
 import type { CellKey } from '@entities/quotation/const/cellKey'
 import { useBlock } from '@entities/quotation/provider/BlockProvider'
 import { useRow } from '@entities/quotation/provider/RowProvider'
-import { selectBoqCellPin } from '@entities/quotation/redux/selector/selectBoqCellPin'
+import { selectCellPin } from '@entities/quotation/redux/selector/selectCellPin'
 import { Box } from '@mui/material'
 import { cls } from '@shared/cls'
 import { useSelector } from '@shared/lib/redux'
@@ -18,7 +18,7 @@ export const Pin = ({ cellKey, onClick }: Props): ReactNode => {
   const row = useRow()
 
   const pin = useSelector(
-    selectBoqCellPin({
+    selectCellPin({
       blockIndex: block.index,
       rowIndex: row.index,
       cellKey,

@@ -11,7 +11,7 @@ type Props = {
 // froala has a bug, on first render it always thinks that content is changed
 // https://github.com/froala/wysiwyg-editor/issues/3022
 
-export const didBoqHeaderCellContentChange = ({
+export const didBoqHeaderContentChange = ({
   editor,
   blockIndex,
   boqHeaderKey,

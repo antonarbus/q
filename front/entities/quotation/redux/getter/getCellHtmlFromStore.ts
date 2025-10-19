@@ -8,7 +8,7 @@ type Props = {
   cellKey: CellKey
 }
 
-export const getBoqCellHtmlFromStore = ({
+export const getCellHtmlFromStore = ({
   blockIndex,
   rowIndex,
   cellKey,

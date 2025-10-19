@@ -5,7 +5,7 @@ import { useStylesForResizableCell } from '@entities/quotation/hook/useStylesFor
 import { useBlock } from '@entities/quotation/provider/BlockProvider'
 import { useBoq } from '@entities/quotation/provider/BoqBlockProvider'
 import { useRow } from '@entities/quotation/provider/RowProvider'
-import { getBoqCellHtmlFromStore } from '@entities/quotation/redux/getter/getBoqCellHtmlFromStore'
+import { getCellHtmlFromStore } from '@entities/quotation/redux/getter/getCellHtmlFromStore'
 import { cellStyle, cellSx } from '@entities/quotation/style/cellStyle'
 import { Froala } from '@entities/quotation/ui/froala/Froala'
 import { Pin, pinQtyCell } from '@features/blocks/pin'
@@ -31,7 +31,7 @@ export const QtyCell = (): JSX.Element => {
         className={`td ${cellKey.qty}`}
         editorRef={row.qtyCellEditorRef}
         htmlGetter={() =>
-          getBoqCellHtmlFromStore({
+          getCellHtmlFromStore({
             blockIndex: block.index,
             rowIndex: row.index,
             cellKey: cellKey.qty,

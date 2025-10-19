@@ -56,7 +56,7 @@ export const formatCellNumber = ({
   }
 
   dispatch(
-    quotationSlice.actions.updateBoqCellReducer({
+    quotationSlice.actions.updateCellReducer({
       blockIndex,
       rowIndex,
       html: newHtml,

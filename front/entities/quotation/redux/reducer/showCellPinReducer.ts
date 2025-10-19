@@ -1,7 +1,7 @@
 import type { CellKey } from '@entities/quotation/const/cellKey'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { Quotation } from '../../type'
-import { getBoqCellFromState } from '../getter/getBoqCellFromState'
+import { getCellFromState } from '../getter/getCellFromState'
 
 export const showCellPinReducer = (
   state: Quotation,
@@ -13,7 +13,7 @@ export const showCellPinReducer = (
 ): void => {
   const { blockIndex, rowIndex, cellKey } = action.payload
 
-  const cell = getBoqCellFromState({
+  const cell = getCellFromState({
     blockIndex,
     rowIndex,
     cellKey,

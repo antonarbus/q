@@ -16,7 +16,7 @@ type Res = {
   didUpdate: boolean
 }
 
-export const updateBoqHeaderCellAtStore = ({
+export const updateBoqHeaderAtStore = ({
   editorRef,
   blockIndex,
   boqHeaderKey,

@@ -2,9 +2,9 @@ import { cellKey } from '@entities/quotation/const/cellKey'
 import { getBoqHeaderFromStore } from '@entities/quotation/redux/getter/getBoqHeaderFromStore'
 import { getRowFromStore } from '@entities/quotation/redux/getter/getRowFromStore'
 import { getRowsFromStore } from '@entities/quotation/redux/getter/getRowsFromStore'
-import { updateBoqHeaderCellAtStore } from '@entities/quotation/redux/updater/updateBoqHeaderCellAtStore'
+import { updateBoqHeaderAtStore } from '@entities/quotation/redux/updater/updateBoqHeaderAtStore'
 import type { Row, RowEditorRefs } from '@entities/quotation/type'
-import { didBoqHeaderCellContentChange } from '@entities/quotation/util/didBoqHeaderCellContentChange'
+import { didBoqHeaderContentChange } from '@entities/quotation/util/didBoqHeaderContentChange'
 import { updateCellWithValue } from '@entities/quotation/util/updateCellWithValue'
 import { updateSubTotalPriceWithValue } from '@entities/quotation/util/updateSubTotalPriceWithValue'
 import type { FroalaEditor, FroalaEditorRef } from '@shared/lib/froala/froala'
@@ -26,7 +26,7 @@ export const updateSubtotalPrice = ({
     return
   }
 
-  const didContentChange = didBoqHeaderCellContentChange({
+  const didContentChange = didBoqHeaderContentChange({
     editor: subTotalPriceEditorRef.current,
     blockIndex,
     boqHeaderKey: 'subTotalPrice',
@@ -42,7 +42,7 @@ export const updateSubtotalPrice = ({
     return
   }
 
-  updateBoqHeaderCellAtStore({
+  updateBoqHeaderAtStore({
     editorRef: subTotalPriceEditorRef,
     blockIndex,
     boqHeaderKey: 'subTotalPrice',
