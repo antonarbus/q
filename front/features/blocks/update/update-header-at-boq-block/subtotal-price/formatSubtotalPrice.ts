@@ -30,7 +30,6 @@ export const formatSubtotalPrice = ({
 
   const newHtml = getStringWithNewFormattedNumber({
     string: html,
-    oldNumber: value,
     newNumber: roundedValue,
   })
 

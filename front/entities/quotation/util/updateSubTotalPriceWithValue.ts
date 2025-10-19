@@ -2,9 +2,7 @@ import type { FroalaEditor } from '@shared/lib/froala/froala'
 import { updateNumberAtHtml } from '@shared/lib/froala/updateNumberAtHtml'
 import { updateNumberAtHtmlIncrementally } from '@shared/lib/froala/updateNumberAtHtmlIncrementally'
 import { dispatch } from '@shared/lib/redux'
-import { getNumberFromString } from '@shared/util/getNumberFromString'
 import { getStringWithNewFormattedNumber } from '@shared/util/getStringWithNewFormattedNumber'
-import { getTextContentFromHtml } from '@shared/util/getTextContentFromHtml'
 import { getBoqBlockFromStore } from '../redux/getter/getBoqBlockFromStore'
 import { quotationSlice } from '../redux/quotationSlice'
 
@@ -49,17 +47,8 @@ export const updateSubTotalPriceWithValue = ({
     }
   }
 
-  const subTotalPriceTextContent = getTextContentFromHtml({
-    html: boqBlock.boq.header.subTotalPrice.html,
-  })
-
-  const subTotalPriceValueFromHtml = getNumberFromString({
-    string: subTotalPriceTextContent,
-  })
-
   const updatedHtml = getStringWithNewFormattedNumber({
     string: boqBlock.boq.header.subTotalPrice.html,
-    oldNumber: subTotalPriceValueFromHtml,
     newNumber: value,
   })
 
@@ -80,7 +69,6 @@ export const updateSubTotalPriceWithValue = ({
     })
   } else {
     updateNumberAtHtml({
-      oldNumber: subTotalPriceValueCurrent,
       newNumber: value,
       editor: subTotalPriceEditor,
       html: boqBlock.boq.header.subTotalPrice.html,

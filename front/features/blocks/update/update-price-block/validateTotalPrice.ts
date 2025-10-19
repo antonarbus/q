@@ -41,7 +41,6 @@ export const validateTotalPrice = ({ editorRef, blockIndex }: Props): void => {
 
   const updatedHtml = getStringWithNewFormattedNumber({
     string: priceBlock.price.html,
-    oldNumber: priceBlock.price.value,
     newNumber: price,
   })
 

@@ -37,7 +37,6 @@ export const useUpdateTotalPriceIfPricesAboveWereChanged = (
 
     const updatedHtml = getStringWithNewFormattedNumber({
       string: priceBlock.price.html,
-      oldNumber: priceBlock.price.value,
       newNumber: totalPrice,
     })
 

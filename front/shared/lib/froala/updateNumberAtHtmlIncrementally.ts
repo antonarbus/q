@@ -1,9 +1,7 @@
 import type { FroalaEditor } from '@shared/lib/froala/froala'
 import { getDecimalPlaces } from '@shared/util/getDecimalPlaces'
 import { roundTo } from 'round-to'
-import { getNumberFromString } from '../../util/getNumberFromString'
 import { getStringWithNewFormattedNumber } from '../../util/getStringWithNewFormattedNumber'
-import { getTextContentFromHtml } from '../../util/getTextContentFromHtml'
 
 type Props = {
   oldNumber: number
@@ -31,15 +29,8 @@ export const updateNumberAtHtmlIncrementally = (props: Props): void => {
           decimalPlaces,
         )
 
-        const textContent = getTextContentFromHtml({ html: props.html })
-
-        const numberFromHtml = getNumberFromString({
-          string: textContent,
-        })
-
         const updatedHtml = getStringWithNewFormattedNumber({
           string: props.html,
-          oldNumber: numberFromHtml,
           newNumber: incrementedValue,
         })
 
@@ -59,7 +50,6 @@ export const updateNumberAtHtmlIncrementally = (props: Props): void => {
 
     const finalHtml = getStringWithNewFormattedNumber({
       string: props.html,
-      oldNumber: props.oldNumber,
       newNumber: props.newNumber,
     })
 

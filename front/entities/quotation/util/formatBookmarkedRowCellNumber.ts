@@ -44,7 +44,6 @@ export const formatBookmarkedRowCellNumber = ({
 
   const newHtml = getStringWithNewFormattedNumber({
     string: html,
-    oldNumber: value,
     newNumber: roundToTwoDecimals === true ? roundedValue : value,
   })
 

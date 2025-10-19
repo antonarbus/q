@@ -42,7 +42,6 @@ export const updateCellWithValue = ({
 
   const updatedHtml = getStringWithNewFormattedNumber({
     string: row[cellKey].html,
-    oldNumber: priceValueFromHtml,
     newNumber: value,
   })
 
