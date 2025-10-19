@@ -10,10 +10,8 @@ type Props = {
   blockIndex: number
 }
 
-export const updatePriceValueCell = ({
-  editorRef,
-  blockIndex,
-}: Props): void => {
+export const updatePriceValue = ({ editorRef, blockIndex }: Props): void => {
+  console.log(111)
   if (editorRef.current === null) {
     return
   }

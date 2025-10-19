@@ -2,7 +2,7 @@ import { useBlock } from '@entities/quotation/provider/BlockProvider'
 import { getPriceBlockHtmlFromStore } from '@entities/quotation/redux/getter/getPriceBlockHtmlFromStore'
 import { Froala } from '@entities/quotation/ui/froala/Froala'
 import {
-  updatePriceValueCell,
+  updatePriceValue,
   useUpdateTotalPriceIfPricesAboveWereChanged,
   validateTotalPrice,
 } from '@features/blocks/update'
@@ -26,7 +26,7 @@ export const PriceValue = (): JSX.Element => {
         validateTotalPrice({ editorRef, blockIndex: block.index })
       }}
       onContentChange={() => {
-        updatePriceValueCell({ editorRef, blockIndex: block.index })
+        updatePriceValue({ editorRef, blockIndex: block.index })
       }}
       onInitialized={() => {
         validateTotalPrice({ editorRef, blockIndex: block.index })

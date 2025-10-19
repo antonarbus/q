@@ -12,25 +12,24 @@ type Props = {
   blockIndex: number
 }
 
-export const useUpdateTotalPriceIfPricesAboveWereChanged = ({
-  blockIndex,
-  editorRef,
-}: Props): void => {
-  const price = useSelector((state) => {
-    const priceValue = getTotalPriceAbove({
-      blockIndex,
+export const useUpdateTotalPriceIfPricesAboveWereChanged = (
+  props: Props,
+): void => {
+  const totalPrice = useSelector((state) => {
+    const totalPriceAbove = getTotalPriceAbove({
+      blockIndex: props.blockIndex,
       blocks: state.quotation.blocks,
     })
 
-    return priceValue
+    return totalPriceAbove
   })
 
   useUpdateEffect(() => {
-    if (editorRef.current === null) {
+    if (props.editorRef.current === null) {
       return
     }
 
-    const priceBlock = getState().quotation.blocks[blockIndex]
+    const priceBlock = getState().quotation.blocks[props.blockIndex]
 
     if (priceBlock?.type !== itemType.price) {
       return
@@ -39,22 +38,22 @@ export const useUpdateTotalPriceIfPricesAboveWereChanged = ({
     const updatedHtml = getStringWithNewFormattedNumber({
       string: priceBlock.price.html,
       oldNumber: priceBlock.price.value,
-      newNumber: price,
+      newNumber: totalPrice,
     })
 
     dispatch(
       quotationSlice.actions.updatePriceReducer({
-        blockIndex,
+        blockIndex: props.blockIndex,
         html: updatedHtml,
-        value: price,
+        value: totalPrice,
       }),
     )
 
     updateNumberAtHtmlIncrementally({
       oldNumber: priceBlock.price.value,
-      newNumber: price,
-      editor: editorRef.current,
+      newNumber: totalPrice,
+      editor: props.editorRef.current,
       html: priceBlock.price.html,
     })
-  }, [price])
+  }, [totalPrice])
 }

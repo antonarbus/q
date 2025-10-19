@@ -1,8 +1,4 @@
-const findAndReplaceStringOutsideHtmlTags = ({
-  string,
-  searchText,
-  replacementText,
-}: {
+const findAndReplaceStringOutsideHtmlTags = (props: {
   string: string
   searchText: string
   replacementText: string
@@ -10,16 +6,16 @@ const findAndReplaceStringOutsideHtmlTags = ({
   const regExpToRemoveGapsBetweenDigits = /(?<=\d)\s+(?=\d)/gu
 
   const regExpToFindSearchTextOutsideHtmlTags = new RegExp(
-    `([^<>]*)(${searchText})([^<>]*)`,
+    `([^<>]*)(${props.searchText})([^<>]*)`,
     'gu',
   )
 
-  const resultString = string
+  const resultString = props.string
     .replace(regExpToRemoveGapsBetweenDigits, '')
     .replace(
       regExpToFindSearchTextOutsideHtmlTags,
       (match, before, found, after) => {
-        return String(before) + replacementText + String(after)
+        return String(before) + props.replacementText + String(after)
       },
     )
 
@@ -32,19 +28,15 @@ type Props = {
   newNumber: string | number
 }
 
-export const getStringWithNewFormattedNumber = ({
-  string,
-  oldNumber,
-  newNumber,
-}: Props): string => {
+export const getStringWithNewFormattedNumber = (props: Props): string => {
   const newNumberFormatted = new Intl.NumberFormat('fr', {
     minimumFractionDigits: 0,
     maximumFractionDigits: 10,
-  }).format(Number(newNumber))
+  }).format(Number(props.newNumber))
 
   const htmlWithNewNumber = findAndReplaceStringOutsideHtmlTags({
-    string,
-    searchText: String(oldNumber),
+    string: props.string,
+    searchText: String(props.oldNumber),
     replacementText: newNumberFormatted,
   })
 

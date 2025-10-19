@@ -1,7 +1,7 @@
 import { itemType } from '@entities/quotation/const/itemType'
 import { useBlock } from '@entities/quotation/provider/BlockProvider'
 import { Froala } from '@entities/quotation/ui/froala/Froala'
-import { updatePriceTitleCell } from '@features/blocks/update'
+import { updatePriceTitle } from '@features/blocks/update'
 import type { FroalaEditor } from '@shared/lib/froala/froala'
 import { getState } from '@shared/lib/redux'
 import { type JSX, useRef } from 'react'
@@ -25,7 +25,7 @@ export const PriceTitle = (): JSX.Element => {
         return titleHtml
       }}
       onContentChange={() => {
-        updatePriceTitleCell({ editorRef, blockIndex: block.index })
+        updatePriceTitle({ editorRef, blockIndex: block.index })
       }}
       placeholder='Total price...'
     />
