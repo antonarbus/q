@@ -29,7 +29,7 @@ export const RowProvider = ({
   rowIndex,
   row,
 }: Props): JSX.Element => {
-  const { boqRowEditorRefs } = useBoq()
+  const boq = useBoq()
 
   const rowCellEditorRef = useMemo(() => {
     return {
@@ -40,7 +40,7 @@ export const RowProvider = ({
     }
   }, [])
 
-  boqRowEditorRefs[rowIndex] = {
+  boq.boqRowEditorRefs[rowIndex] = {
     description: rowCellEditorRef.descriptionEditorRef,
     itemPrice: rowCellEditorRef.itemPriceCellEditorRef,
     qty: rowCellEditorRef.qtyCellEditorRef,
@@ -58,7 +58,7 @@ export const RowProvider = ({
     }
 
     return context
-  }, [rowIndex, row, boqRowEditorRefs])
+  }, [rowIndex, row, boq.boqRowEditorRefs])
 
   return (
     <RowContext.Provider value={rowContextData}>{children}</RowContext.Provider>

@@ -22,7 +22,7 @@ import type { JSX, MouseEvent } from 'react'
 
 export const ItemPriceCell = (): JSX.Element => {
   const block = useBlock()
-  const { subTotalPriceEditorRef } = useBoq()
+  const boq = useBoq()
 
   const {
     rowIndex,
@@ -62,7 +62,7 @@ export const ItemPriceCell = (): JSX.Element => {
             itemPriceCellEditorRef,
             priceCellEditorRef,
             rowIndex,
-            subTotalPriceEditorRef,
+            subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
           })
         }}
         onKeydown={(event) => {

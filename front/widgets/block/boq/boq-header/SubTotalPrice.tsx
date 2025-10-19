@@ -16,7 +16,7 @@ import { type JSX, type MouseEvent, useRef } from 'react'
 const boqHeaderKey: HeaderKey = 'subTotalPrice'
 
 export const SubTotalPrice = (): JSX.Element => {
-  const { subTotalPriceEditorRef, boqRowEditorRefs } = useBoq()
+  const boq = useBoq()
   const block = useBlock()
 
   const hidePinsClickHandlerRef = useRef<(e: globalThis.MouseEvent) => void>(
@@ -31,20 +31,20 @@ export const SubTotalPrice = (): JSX.Element => {
 
   return (
     <Froala
-      editorRef={subTotalPriceEditorRef}
+      editorRef={boq.subTotalPriceEditorRef}
       htmlGetter={() =>
         getBoqHeaderHtmlFromStore({ blockIndex: block.index, boqHeaderKey })
       }
       onBlur={() => {
         formatSubtotalPriceCell({
           blockIndex: block.index,
-          subTotalPriceEditorRef,
+          subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
         })
 
         validateBoqRowPrices({
           blockIndex: block.index,
-          boqRowEditorRefs,
-          subTotalPriceEditorRef,
+          boqRowEditorRefs: boq.boqRowEditorRefs,
+          subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
         })
       }}
       onClick={(event: MouseEvent) => {
@@ -58,8 +58,8 @@ export const SubTotalPrice = (): JSX.Element => {
       onContentChange={() => {
         updateSubtotalPriceCell({
           blockIndex: block.index,
-          boqRowEditorRefs,
-          subTotalPriceEditorRef,
+          boqRowEditorRefs: boq.boqRowEditorRefs,
+          subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
         })
       }}
       placeholder='Price...'

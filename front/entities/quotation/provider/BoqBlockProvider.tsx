@@ -1,5 +1,6 @@
 import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import {
+  type Context,
   createContext,
   type JSX,
   type ReactNode,
@@ -12,14 +13,14 @@ type Props = {
   children: ReactNode
 }
 
-type BoqContextType = {
+type Res = {
   subTotalPriceEditorRef: FroalaEditorRef
   boqRowEditorRefs: RowEditorRefs
 }
 
-const BoqContext = createContext<BoqContextType | null>(null)
+const BoqContext: Context<Res | null> = createContext<Res | null>(null)
 
-export const BoqProvider = ({ children }: Props): JSX.Element => {
+export const BoqProvider = (props: Props): JSX.Element => {
   const blockContextData = useMemo(() => {
     const contextData = {
       subTotalPriceEditorRef: { current: null },
@@ -31,12 +32,12 @@ export const BoqProvider = ({ children }: Props): JSX.Element => {
 
   return (
     <BoqContext.Provider value={blockContextData}>
-      {children}
+      {props.children}
     </BoqContext.Provider>
   )
 }
 
-export const useBoq = (): BoqContextType => {
+export const useBoq = (): Res => {
   const context = useContext(BoqContext)
 
   if (context === null) {

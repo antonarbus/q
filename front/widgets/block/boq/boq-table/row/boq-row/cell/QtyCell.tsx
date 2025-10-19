@@ -22,7 +22,7 @@ import type { JSX, MouseEvent } from 'react'
 
 export const QtyCell = (): JSX.Element => {
   const block = useBlock()
-  const { subTotalPriceEditorRef } = useBoq()
+  const boq = useBoq()
   const { rowIndex, qtyCellEditorRef, priceCellEditorRef } = useRow()
 
   const { stylesForResizableCell } = useStylesForResizableCell({
@@ -56,7 +56,7 @@ export const QtyCell = (): JSX.Element => {
             priceCellEditorRef,
             qtyCellEditorRef,
             rowIndex,
-            subTotalPriceEditorRef,
+            subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
           })
         }}
         onKeydown={(event) => {

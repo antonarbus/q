@@ -35,7 +35,7 @@ export const PriceCell = (): JSX.Element => {
     itemPriceCellEditorRef,
   } = useRow()
 
-  const { subTotalPriceEditorRef, boqRowEditorRefs } = useBoq()
+  const boq = useBoq()
 
   const { stylesForResizableCell } = useStylesForResizableCell({
     blockIndex: block.index,
@@ -66,7 +66,7 @@ export const PriceCell = (): JSX.Element => {
             blockIndex: block.index,
             priceCellEditorRef,
             rowIndex,
-            subTotalPriceEditorRef,
+            subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
           })
         }}
         onContentChange={() => {
@@ -76,7 +76,7 @@ export const PriceCell = (): JSX.Element => {
             priceCellEditorRef,
             qtyCellEditorRef,
             rowIndex,
-            subTotalPriceEditorRef,
+            subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
           })
         }}
         onFocus={() => {
@@ -84,7 +84,7 @@ export const PriceCell = (): JSX.Element => {
         }}
         onKeydown={(event) => {
           tabFromPriceCell({
-            boqRowEditorRefs,
+            boqRowEditorRefs: boq.boqRowEditorRefs,
             event,
             rowIndex,
           })

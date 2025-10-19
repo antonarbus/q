@@ -9,7 +9,7 @@ import { roundTo } from 'round-to'
 
 export const useUpdateSubtotalPrice = (): void => {
   const block = useBlock()
-  const { subTotalPriceEditorRef } = useBoq()
+  const boq = useBoq()
 
   const isBlockFroala = useSelector(
     (state) => state.quotation.blocks[block.index]?.isFroala,
@@ -46,7 +46,7 @@ export const useUpdateSubtotalPrice = (): void => {
     setTimeout(() => {
       updateSubTotalPriceWithValue({
         blockIndex: block.index,
-        subTotalPriceEditor: subTotalPriceEditorRef.current,
+        subTotalPriceEditor: boq.subTotalPriceEditorRef.current,
         value: subTotalPriceValueNewRounded,
         incrementally: true,
       })
