@@ -7,7 +7,7 @@ import { useRow } from '@entities/quotation/provider/RowProvider'
 import { getBookmarkedRowCellHtmlFromStore } from '@entities/quotation/redux/getter/getBookmarkedRowCellHtmlFromStore'
 import { cellStyle } from '@entities/quotation/style/cellStyle'
 import { Froala } from '@entities/quotation/ui/froala/Froala'
-import { updateDescriptionCell } from '@features/blocks/update/update-cell-row-block/description/updateDescriptionCell'
+import { updateDescriptionCell } from '@features/blocks/update/update-cell-at-bookmarked-row-block/description/updateDescriptionCell'
 import { beforeUpload } from '@features/file/upload-file'
 import type { JSX } from 'react'
 
