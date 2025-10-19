@@ -1,4 +1,4 @@
-import { boqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
+import { cellKey } from '@entities/quotation/const/cellKey'
 import { getBoqRowFromStore } from '@entities/quotation/redux/getter/getBoqRowFromStore'
 import { quotationSlice } from '@entities/quotation/redux/quotationSlice'
 import { cls } from '@shared/cls'
@@ -33,10 +33,10 @@ export const hideBoqRowPinsOnRowBlur = ({
 
   if (isItemPricePinShown === true) {
     dispatch(
-      quotationSlice.actions.hideBoqRowCellPinReducer({
+      quotationSlice.actions.hideCellPinReducer({
         blockIndex,
         rowIndex,
-        boqRowCellKey: boqRowCellKey.itemPrice,
+        cellKey: cellKey.itemPrice,
       }),
     )
   }
@@ -45,10 +45,10 @@ export const hideBoqRowPinsOnRowBlur = ({
 
   if (isQtyPinShown === true) {
     dispatch(
-      quotationSlice.actions.hideBoqRowCellPinReducer({
+      quotationSlice.actions.hideCellPinReducer({
         blockIndex,
         rowIndex,
-        boqRowCellKey: boqRowCellKey.qty,
+        cellKey: cellKey.qty,
       }),
     )
   }

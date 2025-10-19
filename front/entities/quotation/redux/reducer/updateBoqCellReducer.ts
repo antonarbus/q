@@ -1,4 +1,4 @@
-import type { BoqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
+import type { CellKey } from '@entities/quotation/const/cellKey'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { itemType } from '../../const/itemType'
 import type { Quotation } from '../../type'
@@ -10,10 +10,10 @@ export const updateBoqCellReducer = (
     rowIndex: number
     html: string
     value: number
-    boqRowCellKey: BoqRowCellKey
+    cellKey: CellKey
   }>,
 ): void => {
-  const { blockIndex, rowIndex, html, value, boqRowCellKey } = action.payload
+  const { blockIndex, rowIndex, html, value, cellKey } = action.payload
 
   const block = state.blocks[blockIndex]
 
@@ -27,6 +27,6 @@ export const updateBoqCellReducer = (
     return
   }
 
-  row[boqRowCellKey].html = html
-  row[boqRowCellKey].value = value
+  row[cellKey].html = html
+  row[cellKey].value = value
 }

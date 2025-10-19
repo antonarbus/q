@@ -6,7 +6,7 @@ import { disableFroalaReducer } from './reducer/disableFroalaReducer'
 import { enableFroalaReducer } from './reducer/enableFroalaReducer'
 import { hideBoqItemPinsReducer } from './reducer/hideBoqItemPinsReducer'
 import { hideBoqPriceCellPinsReducer } from './reducer/hideBoqPriceCellPinsReducer'
-import { hideBoqRowCellPinReducer } from './reducer/hideBoqRowCellPinReducer'
+import { hideCellPinReducer } from './reducer/hideCellPinReducer'
 import { insertPasteBlockReducer } from './reducer/insertPasteBlockReducer'
 import { insertPasteBoqRowReducer } from './reducer/insertPasteBoqRowReducer'
 import { loadBlockAtPosThousandReducer } from './reducer/loadBlockAtPosThousandReducer'
@@ -20,7 +20,7 @@ import { removePasteItemReducer } from './reducer/removePasteItemReducer'
 import { reOrderBoqRowsReducer } from './reducer/reOrderBoqRowsReducer'
 import { reOrderBlocksReducer } from './reducer/reOrderItemsReducer'
 import { showBoqPriceCellPinsReducer } from './reducer/showBoqPriceCellPinsReducer'
-import { showBoqRowCellPinReducer } from './reducer/showBoqRowCellPinReducer'
+import { showCellPinReducer } from './reducer/showCellPinReducer'
 import { updateBlockHeightReducer } from './reducer/updateBlockHeightReducer'
 import { updateBlockTextReducer } from './reducer/updateBlockTextReducer'
 import { updateBlockWidthReducer } from './reducer/updateBlockWidthReducer'
@@ -62,7 +62,7 @@ export const quotationSlice = createSlice({
     disableFroalaReducer,
     enableFroalaReducer,
     hideBoqItemPinsReducer,
-    hideBoqRowCellPinReducer,
+    hideCellPinReducer,
     insertPasteBoqRowReducer,
     insertPasteBlockReducer,
     pasteItemReducer,
@@ -72,7 +72,7 @@ export const quotationSlice = createSlice({
     removePasteItemReducer,
     reOrderBoqRowsReducer,
     reOrderBlocksReducer,
-    showBoqRowCellPinReducer,
+    showCellPinReducer,
     showBoqPriceCellPinsReducer,
     hideBoqPriceCellPinsReducer,
     updateBoqCellReducer,

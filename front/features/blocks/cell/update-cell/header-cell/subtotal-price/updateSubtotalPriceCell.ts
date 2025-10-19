@@ -1,11 +1,11 @@
-import { boqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
+import { cellKey } from '@entities/quotation/const/cellKey'
 import { getBoqHeaderFromStore } from '@entities/quotation/redux/getter/getBoqHeaderFromStore'
 import { getBoqRowFromStore } from '@entities/quotation/redux/getter/getBoqRowFromStore'
 import { getBoqRowsFromStore } from '@entities/quotation/redux/getter/getBoqRowsFromStore'
 import { updateBoqHeaderCellAtStore } from '@entities/quotation/redux/updater/updateBoqHeaderCellAtStore'
 import type { Row, RowEditorRefs } from '@entities/quotation/type'
 import { didBoqHeaderCellContentChange } from '@entities/quotation/util/didBoqHeaderCellContentChange'
-import { updateBoqRowCellWithValue } from '@entities/quotation/util/updateBoqRowCellWithValue'
+import { updateCellWithValue } from '@entities/quotation/util/updateCellWithValue'
 import { updateSubTotalPriceWithValue } from '@entities/quotation/util/updateSubTotalPriceWithValue'
 import type { FroalaEditor, FroalaEditorRef } from '@shared/lib/froala/froala'
 import { roundTo } from 'round-to'
@@ -122,8 +122,8 @@ export const updateSubtotalPriceCell = ({
   }
 
   prices.forEach((price, rowIndex) => {
-    updateBoqRowCellWithValue({
-      boqRowCellKey: boqRowCellKey.price,
+    updateCellWithValue({
+      cellKey: cellKey.price,
       editor: boqRowEditorRefs.at(rowIndex)?.price.current ?? null,
       blockIndex,
       rowIndex,
@@ -142,11 +142,11 @@ export const updateSubtotalPriceCell = ({
       const newQtyValue = boqRow.price.value / boqRow.itemPrice.value
       const newQtyValueRounded = roundTo(newQtyValue, 3)
 
-      updateBoqRowCellWithValue({
+      updateCellWithValue({
         editor: boqRowEditorRefs.at(rowIndex)?.qty.current ?? null,
         blockIndex,
         rowIndex,
-        boqRowCellKey: boqRowCellKey.qty,
+        cellKey: cellKey.qty,
         value: newQtyValueRounded,
       })
     }
@@ -161,11 +161,11 @@ export const updateSubtotalPriceCell = ({
       const newItemPriceValue = boqRow.price.value / boqRow.qty.value
       const newItemPriceValueRounded = roundTo(newItemPriceValue, 2)
 
-      updateBoqRowCellWithValue({
+      updateCellWithValue({
         editor: boqRowEditorRefs.at(rowIndex)?.itemPrice.current ?? null,
         blockIndex,
         rowIndex,
-        boqRowCellKey: boqRowCellKey.itemPrice,
+        cellKey: cellKey.itemPrice,
         value: newItemPriceValueRounded,
       })
     }

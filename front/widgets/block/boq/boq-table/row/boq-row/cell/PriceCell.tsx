@@ -1,15 +1,12 @@
 import { boqColumnKey } from '@entities/quotation/const/boqColumnKey'
-import { boqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
+import { cellKey } from '@entities/quotation/const/cellKey'
 import { columnMinWidth } from '@entities/quotation/const/columnMinWidth'
 import { useStylesForResizableCell } from '@entities/quotation/hook/useStylesForResizableCell'
 import { useBlock } from '@entities/quotation/provider/BlockProvider'
 import { useBoq } from '@entities/quotation/provider/BoqBlockProvider'
 import { useRow } from '@entities/quotation/provider/RowProvider'
 import { getBoqCellHtmlFromStore } from '@entities/quotation/redux/getter/getBoqCellHtmlFromStore'
-import {
-  boqRowCellStyle,
-  boqRowCellSx,
-} from '@entities/quotation/style/boqRowCellStyle'
+import { cellStyle, cellSx } from '@entities/quotation/style/cellStyle'
 import { Froala } from '@entities/quotation/ui/froala/Froala'
 import {
   Pin,
@@ -39,12 +36,12 @@ export const PriceCell = (): JSX.Element => {
   return (
     <Box sx={{ display: 'flex', position: 'relative' }}>
       <Froala
-        className={`td ${boqRowCellKey.price}`}
+        className={`td ${cellKey.price}`}
         editorRef={row.priceCellEditorRef}
         htmlGetter={() =>
           getBoqCellHtmlFromStore({
             blockIndex: block.index,
-            boqRowCellKey: boqRowCellKey.price,
+            cellKey: cellKey.price,
             rowIndex: row.index,
           })
         }
@@ -83,12 +80,12 @@ export const PriceCell = (): JSX.Element => {
           })
         }}
         placeholder='Price...'
-        style={boqRowCellStyle}
-        sx={boqRowCellSx}
+        style={cellStyle}
+        sx={cellSx}
         wrapperStyles={stylesForResizableCell}
       />
       <Pin
-        boqRowCellKey={boqRowCellKey.price}
+        cellKey={cellKey.price}
         onClick={(event: MouseEvent) => {
           event.preventDefault() // otherwise form is submitted (no idea why)
           pinBoqRowPriceCell({ blockIndex: block.index, rowIndex: row.index })

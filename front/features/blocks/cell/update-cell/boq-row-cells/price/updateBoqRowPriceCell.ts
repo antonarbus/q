@@ -1,9 +1,9 @@
-import { boqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
+import { cellKey } from '@entities/quotation/const/cellKey'
 import { getBoqRowFromStore } from '@entities/quotation/redux/getter/getBoqRowFromStore'
 import { getBoqRowsFromStore } from '@entities/quotation/redux/getter/getBoqRowsFromStore'
-import { updateBoqRowCellAtStore } from '@entities/quotation/redux/updater/updateBoqRowCellAtStore'
+import { updateCellAtStore } from '@entities/quotation/redux/updater/updateCellAtStore'
 import type { Row } from '@entities/quotation/type'
-import { updateBoqRowCellWithValue } from '@entities/quotation/util/updateBoqRowCellWithValue'
+import { updateCellWithValue } from '@entities/quotation/util/updateCellWithValue'
 import { updateSubTotalPriceWithValue } from '@entities/quotation/util/updateSubTotalPriceWithValue'
 import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import { roundTo } from 'round-to'
@@ -29,11 +29,11 @@ export const updateBoqRowPriceCell = ({
     return
   }
 
-  const { didUpdate } = updateBoqRowCellAtStore({
+  const { didUpdate } = updateCellAtStore({
     html: priceCellEditorRef.current.html.get(),
     blockIndex,
     rowIndex,
-    boqRowCellKey: boqRowCellKey.price,
+    cellKey: cellKey.price,
   })
 
   if (didUpdate === false) {
@@ -52,11 +52,11 @@ export const updateBoqRowPriceCell = ({
     const newQtyValue = boqRow.price.value / boqRow.itemPrice.value
     const newQtyValueRounded = roundTo(newQtyValue, 5)
 
-    updateBoqRowCellWithValue({
+    updateCellWithValue({
       editor: qtyCellEditorRef.current,
       blockIndex,
       rowIndex,
-      boqRowCellKey: boqRowCellKey.qty,
+      cellKey: cellKey.qty,
       value: newQtyValueRounded,
     })
   }
@@ -71,11 +71,11 @@ export const updateBoqRowPriceCell = ({
     const newItemPriceValue = boqRow.price.value / boqRow.qty.value
     const newItemPriceValueRounded = roundTo(newItemPriceValue, 2)
 
-    updateBoqRowCellWithValue({
+    updateCellWithValue({
       editor: itemPriceCellEditorRef.current,
       blockIndex,
       rowIndex,
-      boqRowCellKey: boqRowCellKey.itemPrice,
+      cellKey: cellKey.itemPrice,
       value: newItemPriceValueRounded,
     })
   }

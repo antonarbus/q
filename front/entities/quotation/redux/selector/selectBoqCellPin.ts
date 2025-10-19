@@ -1,4 +1,4 @@
-import type { BoqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
+import type { CellKey } from '@entities/quotation/const/cellKey'
 import type { RootState } from '@shared/lib/redux'
 import type { RowCellPin } from '../../type'
 import { getBoqRowFromStore } from '../getter/getBoqRowFromStore'
@@ -6,11 +6,11 @@ import { getBoqRowFromStore } from '../getter/getBoqRowFromStore'
 type Props = {
   blockIndex: number
   rowIndex: number
-  boqRowCellKey: BoqRowCellKey
+  cellKey: CellKey
 }
 
 export const selectBoqCellPin =
-  ({ blockIndex, rowIndex, boqRowCellKey }: Props) =>
+  ({ blockIndex, rowIndex, cellKey }: Props) =>
   (_state: RootState): RowCellPin | undefined => {
     const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
 
@@ -18,7 +18,7 @@ export const selectBoqCellPin =
       return
     }
 
-    const boqRowCellPin = boqRow[boqRowCellKey].pin
+    const cellPin = boqRow[cellKey].pin
 
-    return boqRowCellPin
+    return cellPin
   }

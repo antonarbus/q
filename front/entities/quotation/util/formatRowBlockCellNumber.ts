@@ -3,12 +3,12 @@ import { dispatch, getState } from '@shared/lib/redux'
 import { getStringWithNewFormattedNumber } from '@shared/util/getStringWithNewFormattedNumber'
 import { roundTo } from 'round-to'
 import { BOOKMARK_POS_AT_BLOCKS } from '../const/bookmarkPosAtBlocks'
-import type { BoqRowCellKey } from '../const/boqRowCellKey'
+import type { CellKey } from '../const/cellKey'
 import { itemType } from '../const/itemType'
 import { quotationSlice } from '../redux/quotationSlice'
 
 type Props = {
-  boqRowCellKey: BoqRowCellKey
+  cellKey: CellKey
   editorRef: FroalaEditorRef
   roundToTwoDecimals: boolean
 }
@@ -18,7 +18,7 @@ type Res = {
 }
 
 export const formatRowBlockCellNumber = ({
-  boqRowCellKey,
+  cellKey,
   editorRef,
   roundToTwoDecimals,
 }: Props): Res => {
@@ -38,7 +38,7 @@ export const formatRowBlockCellNumber = ({
 
   const row = block
 
-  const { value, html } = row[boqRowCellKey]
+  const { value, html } = row[cellKey]
 
   const roundedValue = roundTo(value, 2)
 
@@ -58,7 +58,7 @@ export const formatRowBlockCellNumber = ({
     quotationSlice.actions.updateRowBlockCellReducer({
       html: newHtml,
       value: roundToTwoDecimals === true ? roundedValue : value,
-      boqRowCellKey,
+      cellKey,
     }),
   )
 

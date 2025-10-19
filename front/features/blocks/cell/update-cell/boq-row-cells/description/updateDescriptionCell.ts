@@ -1,5 +1,5 @@
-import type { BoqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
-import { updateBoqRowCellAtStore } from '@entities/quotation/redux/updater/updateBoqRowCellAtStore'
+import type { CellKey } from '@entities/quotation/const/cellKey'
+import { updateCellAtStore } from '@entities/quotation/redux/updater/updateCellAtStore'
 import { didBoqCellContentChange } from '@entities/quotation/util/didBoqCellContentChange'
 import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 
@@ -7,14 +7,14 @@ type Props = {
   editorRef: FroalaEditorRef
   blockIndex: number
   rowIndex: number
-  boqRowCellKey: BoqRowCellKey
+  cellKey: CellKey
 }
 
 export const updateDescriptionCell = ({
   editorRef,
   blockIndex,
   rowIndex,
-  boqRowCellKey,
+  cellKey,
 }: Props): void => {
   if (editorRef.current === null) {
     return
@@ -24,17 +24,17 @@ export const updateDescriptionCell = ({
     editor: editorRef.current,
     blockIndex,
     rowIndex,
-    boqRowCellKey,
+    cellKey,
   })
 
   if (didContentChange === false) {
     return
   }
 
-  updateBoqRowCellAtStore({
+  updateCellAtStore({
     blockIndex,
     rowIndex,
-    boqRowCellKey,
+    cellKey,
     html: editorRef.current.html.get(),
   })
 }

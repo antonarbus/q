@@ -12,7 +12,7 @@ export const updateDescriptionCell = ({ editorRef }: Props): void => {
   }
 
   updateRowBlockCellAtStore({
-    boqRowCellKey: boqColumnKey.description,
+    cellKey: boqColumnKey.description,
     html: editorRef.current.html.get(),
   })
 }

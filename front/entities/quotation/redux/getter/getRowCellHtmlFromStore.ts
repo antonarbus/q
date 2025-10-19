@@ -1,13 +1,13 @@
 import { BOOKMARK_POS_AT_BLOCKS } from '@entities/quotation/const/bookmarkPosAtBlocks'
-import type { BoqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
+import type { CellKey } from '@entities/quotation/const/cellKey'
 import { getState } from '@shared/lib/redux'
 import { itemType } from '../../const/itemType'
 
 type Props = {
-  boqRowCellKey: BoqRowCellKey
+  cellKey: CellKey
 }
 
-export const getRowCellHtmlFromStore = ({ boqRowCellKey }: Props): string => {
+export const getRowCellHtmlFromStore = ({ cellKey }: Props): string => {
   const block = getState().quotation.blocks[BOOKMARK_POS_AT_BLOCKS]
 
   if (block?.type !== itemType.row) {
@@ -16,7 +16,7 @@ export const getRowCellHtmlFromStore = ({ boqRowCellKey }: Props): string => {
 
   const row = block
 
-  const { html } = row[boqRowCellKey]
+  const { html } = row[cellKey]
 
   return html
 }

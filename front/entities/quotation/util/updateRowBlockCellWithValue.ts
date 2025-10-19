@@ -5,19 +5,19 @@ import { getNumberFromString } from '@shared/util/getNumberFromString'
 import { getStringWithNewFormattedNumber } from '@shared/util/getStringWithNewFormattedNumber'
 import { getTextContentFromHtml } from '@shared/util/getTextContentFromHtml'
 import { BOOKMARK_POS_AT_BLOCKS } from '../const/bookmarkPosAtBlocks'
-import type { BoqRowCellKey } from '../const/boqRowCellKey'
+import type { CellKey } from '../const/cellKey'
 import { itemType } from '../const/itemType'
 import { updateRowBlockCellAtStore } from '../redux/updater/updateRowBlockCellAtStore'
 
 type Props = {
   editor: FroalaEditor | null
-  boqRowCellKey: BoqRowCellKey
+  cellKey: CellKey
   value: number
 }
 
 export const updateRowBlockCellWithValue = ({
   editor,
-  boqRowCellKey,
+  cellKey,
   value,
 }: Props): void => {
   if (editor === null) {
@@ -33,7 +33,7 @@ export const updateRowBlockCellWithValue = ({
   const row = block
 
   const priceTextContent = getTextContentFromHtml({
-    html: row[boqRowCellKey].html,
+    html: row[cellKey].html,
   })
 
   const priceValueFromHtml = getNumberFromString({
@@ -41,13 +41,13 @@ export const updateRowBlockCellWithValue = ({
   })
 
   const updatedHtml = getStringWithNewFormattedNumber({
-    string: row[boqRowCellKey].html,
+    string: row[cellKey].html,
     oldNumber: priceValueFromHtml,
     newNumber: value,
   })
 
   updateRowBlockCellAtStore({
-    boqRowCellKey,
+    cellKey,
     html: updatedHtml,
   })
 
@@ -55,6 +55,6 @@ export const updateRowBlockCellWithValue = ({
     oldNumber: priceValueFromHtml,
     newNumber: value,
     editor,
-    html: row[boqRowCellKey].html,
+    html: row[cellKey].html,
   })
 }

@@ -1,14 +1,11 @@
 import { BOOKMARK_POS_AT_BLOCKS } from '@entities/quotation/const/bookmarkPosAtBlocks'
 import { boqColumnKey } from '@entities/quotation/const/boqColumnKey'
-import { boqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
+import { cellKey } from '@entities/quotation/const/cellKey'
 import { columnMinWidth } from '@entities/quotation/const/columnMinWidth'
 import { useStylesForResizableCell } from '@entities/quotation/hook/useStylesForResizableCell'
 import { useRow } from '@entities/quotation/provider/RowProvider'
 import { getRowCellHtmlFromStore } from '@entities/quotation/redux/getter/getRowCellHtmlFromStore'
-import {
-  boqRowCellStyle,
-  boqRowCellSx,
-} from '@entities/quotation/style/boqRowCellStyle'
+import { cellStyle, cellSx } from '@entities/quotation/style/cellStyle'
 import { Froala } from '@entities/quotation/ui/froala/Froala'
 import { formatPriceCell } from '@features/blocks/cell/update-cell/row-block-cells/price/formatPriceCell'
 import { updatePriceCell } from '@features/blocks/cell/update-cell/row-block-cells/price/updatePriceCell'
@@ -27,11 +24,9 @@ export const PriceCell = (): JSX.Element => {
   return (
     <Box sx={{ display: 'flex', position: 'relative' }}>
       <Froala
-        className={`td ${boqRowCellKey.price}`}
+        className={`td ${cellKey.price}`}
         editorRef={row.priceCellEditorRef}
-        htmlGetter={() =>
-          getRowCellHtmlFromStore({ boqRowCellKey: boqRowCellKey.price })
-        }
+        htmlGetter={() => getRowCellHtmlFromStore({ cellKey: cellKey.price })}
         onBlur={() => {
           formatPriceCell({ priceCellEditorRef: row.priceCellEditorRef })
         }}
@@ -42,8 +37,8 @@ export const PriceCell = (): JSX.Element => {
           })
         }}
         placeholder='Price...'
-        style={boqRowCellStyle}
-        sx={boqRowCellSx}
+        style={cellStyle}
+        sx={cellSx}
         wrapperStyles={stylesForResizableCell}
       />
     </Box>

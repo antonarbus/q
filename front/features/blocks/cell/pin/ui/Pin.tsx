@@ -1,4 +1,4 @@
-import type { BoqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
+import type { CellKey } from '@entities/quotation/const/cellKey'
 import { useBlock } from '@entities/quotation/provider/BlockProvider'
 import { useRow } from '@entities/quotation/provider/RowProvider'
 import { selectBoqCellPin } from '@entities/quotation/redux/selector/selectBoqCellPin'
@@ -9,11 +9,11 @@ import type { MouseEvent, ReactNode } from 'react'
 import { VscPinned } from 'react-icons/vsc'
 
 type Props = {
-  boqRowCellKey: BoqRowCellKey
+  cellKey: CellKey
   onClick: (e: MouseEvent) => void
 }
 
-export const Pin = ({ boqRowCellKey, onClick }: Props): ReactNode => {
+export const Pin = ({ cellKey, onClick }: Props): ReactNode => {
   const block = useBlock()
   const row = useRow()
 
@@ -21,7 +21,7 @@ export const Pin = ({ boqRowCellKey, onClick }: Props): ReactNode => {
     selectBoqCellPin({
       blockIndex: block.index,
       rowIndex: row.index,
-      boqRowCellKey,
+      cellKey,
     }),
   )
 

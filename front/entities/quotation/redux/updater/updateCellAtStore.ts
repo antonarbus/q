@@ -1,4 +1,4 @@
-import type { BoqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
+import type { CellKey } from '@entities/quotation/const/cellKey'
 import { dispatch } from '@shared/lib/redux'
 import { getNumberFromString } from '@shared/util/getNumberFromString'
 import { getTextContentFromHtml } from '@shared/util/getTextContentFromHtml'
@@ -9,18 +9,18 @@ type Props = {
   html: string
   blockIndex: number
   rowIndex: number
-  boqRowCellKey: BoqRowCellKey
+  cellKey: CellKey
 }
 
 type Res = {
   didUpdate: boolean
 }
 
-export const updateBoqRowCellAtStore = ({
+export const updateCellAtStore = ({
   html,
   blockIndex,
   rowIndex,
-  boqRowCellKey,
+  cellKey,
 }: Props): Res => {
   const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
 
@@ -30,7 +30,7 @@ export const updateBoqRowCellAtStore = ({
     }
   }
 
-  const prevHtml = boqRow[boqRowCellKey].html
+  const prevHtml = boqRow[cellKey].html
   const didTextChange = prevHtml !== html
 
   if (didTextChange === false) {
@@ -51,7 +51,7 @@ export const updateBoqRowCellAtStore = ({
       rowIndex,
       html,
       value: cellValueFromHtml,
-      boqRowCellKey,
+      cellKey,
     }),
   )
 

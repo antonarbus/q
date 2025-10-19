@@ -1,5 +1,5 @@
 import { BOOKMARK_POS_AT_BLOCKS } from '@entities/quotation/const/bookmarkPosAtBlocks'
-import type { BoqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
+import type { CellKey } from '@entities/quotation/const/cellKey'
 import { itemType } from '@entities/quotation/const/itemType'
 import { dispatch, getState } from '@shared/lib/redux'
 import { getNumberFromString } from '@shared/util/getNumberFromString'
@@ -8,17 +8,14 @@ import { quotationSlice } from '../quotationSlice'
 
 type Props = {
   html: string
-  boqRowCellKey: BoqRowCellKey
+  cellKey: CellKey
 }
 
 type Res = {
   didUpdate: boolean
 }
 
-export const updateRowBlockCellAtStore = ({
-  html,
-  boqRowCellKey,
-}: Props): Res => {
+export const updateRowBlockCellAtStore = ({ html, cellKey }: Props): Res => {
   const block = getState().quotation.blocks[BOOKMARK_POS_AT_BLOCKS]
 
   if (block?.type !== itemType.row) {
@@ -27,7 +24,7 @@ export const updateRowBlockCellAtStore = ({
     }
   }
 
-  const prevHtml = block[boqRowCellKey].html
+  const prevHtml = block[cellKey].html
   const didTextChange = prevHtml !== html
 
   if (didTextChange === false) {
@@ -46,7 +43,7 @@ export const updateRowBlockCellAtStore = ({
     quotationSlice.actions.updateRowBlockCellReducer({
       html,
       value: cellValueFromHtml,
-      boqRowCellKey,
+      cellKey,
     }),
   )
 

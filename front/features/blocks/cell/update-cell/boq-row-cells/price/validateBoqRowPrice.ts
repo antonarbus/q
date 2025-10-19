@@ -1,9 +1,9 @@
-import { boqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
+import { cellKey } from '@entities/quotation/const/cellKey'
 import { getBoqRowFromStore } from '@entities/quotation/redux/getter/getBoqRowFromStore'
 import { getBoqRowsFromStore } from '@entities/quotation/redux/getter/getBoqRowsFromStore'
 import type { Row } from '@entities/quotation/type'
 import { isBoqRowPriceValid } from '@entities/quotation/util/isBoqRowPriceValid'
-import { updateBoqRowCellWithValue } from '@entities/quotation/util/updateBoqRowCellWithValue'
+import { updateCellWithValue } from '@entities/quotation/util/updateCellWithValue'
 import { updateSubTotalPriceWithValue } from '@entities/quotation/util/updateSubTotalPriceWithValue'
 import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import { roundTo } from 'round-to'
@@ -45,8 +45,8 @@ export const validateBoqRowPrice = ({
     const newPriceValue = boqRow.qty.value * boqRow.itemPrice.value
     const newPriceValueRounded = roundTo(newPriceValue, 2)
 
-    updateBoqRowCellWithValue({
-      boqRowCellKey: boqRowCellKey.price,
+    updateCellWithValue({
+      cellKey: cellKey.price,
       editor: priceCellEditorRef.current,
       blockIndex,
       rowIndex,

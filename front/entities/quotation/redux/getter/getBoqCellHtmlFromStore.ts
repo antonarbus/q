@@ -1,17 +1,17 @@
-import type { BoqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
+import type { CellKey } from '@entities/quotation/const/cellKey'
 import { getState } from '@shared/lib/redux'
 import { itemType } from '../../const/itemType'
 
 type Props = {
   blockIndex: number
   rowIndex: number
-  boqRowCellKey: BoqRowCellKey
+  cellKey: CellKey
 }
 
 export const getBoqCellHtmlFromStore = ({
   blockIndex,
   rowIndex,
-  boqRowCellKey,
+  cellKey,
 }: Props): string => {
   const block = getState().quotation.blocks[blockIndex]
 
@@ -25,7 +25,7 @@ export const getBoqCellHtmlFromStore = ({
     return ''
   }
 
-  const { html } = row[boqRowCellKey]
+  const { html } = row[cellKey]
 
   return html
 }

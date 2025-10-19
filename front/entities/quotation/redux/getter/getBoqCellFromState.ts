@@ -1,18 +1,18 @@
-import type { BoqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
+import type { CellKey } from '@entities/quotation/const/cellKey'
 import type { Quotation, RowCell } from '../../type'
 import { getBoqRowFromState } from './getBoqRowFromState'
 
 type Props = {
   blockIndex: number
   rowIndex: number
-  boqRowCellKey: BoqRowCellKey
+  cellKey: CellKey
   state: Quotation
 }
 
 export const getBoqCellFromState = ({
   blockIndex,
   rowIndex,
-  boqRowCellKey,
+  cellKey,
   state,
 }: Props): RowCell | undefined => {
   const boqRow = getBoqRowFromState({ blockIndex, rowIndex, state })
@@ -21,7 +21,7 @@ export const getBoqCellFromState = ({
     return
   }
 
-  const boqRowCell = boqRow[boqRowCellKey]
+  const cell = boqRow[cellKey]
 
-  return boqRowCell
+  return cell
 }

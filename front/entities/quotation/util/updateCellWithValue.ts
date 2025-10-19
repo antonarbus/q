@@ -3,23 +3,23 @@ import { updateNumberAtHtmlIncrementally } from '@shared/lib/froala/updateNumber
 import { getNumberFromString } from '@shared/util/getNumberFromString'
 import { getStringWithNewFormattedNumber } from '@shared/util/getStringWithNewFormattedNumber'
 import { getTextContentFromHtml } from '@shared/util/getTextContentFromHtml'
-import type { BoqRowCellKey } from '../const/boqRowCellKey'
+import type { CellKey } from '../const/cellKey'
 import { getBoqRowFromStore } from '../redux/getter/getBoqRowFromStore'
-import { updateBoqRowCellAtStore } from '../redux/updater/updateBoqRowCellAtStore'
+import { updateCellAtStore } from '../redux/updater/updateCellAtStore'
 
 type Props = {
   blockIndex: number
   rowIndex: number
   editor: FroalaEditor | null
-  boqRowCellKey: BoqRowCellKey
+  cellKey: CellKey
   value: number
 }
 
-export const updateBoqRowCellWithValue = ({
+export const updateCellWithValue = ({
   blockIndex,
   rowIndex,
   editor,
-  boqRowCellKey,
+  cellKey,
   value,
 }: Props): void => {
   if (editor === null) {
@@ -33,7 +33,7 @@ export const updateBoqRowCellWithValue = ({
   }
 
   const priceTextContent = getTextContentFromHtml({
-    html: boqRow[boqRowCellKey].html,
+    html: boqRow[cellKey].html,
   })
 
   const priceValueFromHtml = getNumberFromString({
@@ -41,15 +41,15 @@ export const updateBoqRowCellWithValue = ({
   })
 
   const updatedHtml = getStringWithNewFormattedNumber({
-    string: boqRow[boqRowCellKey].html,
+    string: boqRow[cellKey].html,
     oldNumber: priceValueFromHtml,
     newNumber: value,
   })
 
-  updateBoqRowCellAtStore({
+  updateCellAtStore({
     blockIndex,
     rowIndex,
-    boqRowCellKey,
+    cellKey,
     html: updatedHtml,
   })
 
@@ -57,6 +57,6 @@ export const updateBoqRowCellWithValue = ({
     oldNumber: priceValueFromHtml,
     newNumber: value,
     editor,
-    html: boqRow[boqRowCellKey].html,
+    html: boqRow[cellKey].html,
   })
 }

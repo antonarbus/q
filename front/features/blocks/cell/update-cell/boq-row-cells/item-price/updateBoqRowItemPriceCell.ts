@@ -1,10 +1,10 @@
-import { boqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
+import { cellKey } from '@entities/quotation/const/cellKey'
 import { getBoqRowFromStore } from '@entities/quotation/redux/getter/getBoqRowFromStore'
 import { getBoqRowsFromStore } from '@entities/quotation/redux/getter/getBoqRowsFromStore'
-import { updateBoqRowCellAtStore } from '@entities/quotation/redux/updater/updateBoqRowCellAtStore'
+import { updateCellAtStore } from '@entities/quotation/redux/updater/updateCellAtStore'
 import type { Row } from '@entities/quotation/type'
 import { didBoqCellContentChange } from '@entities/quotation/util/didBoqCellContentChange'
-import { updateBoqRowCellWithValue } from '@entities/quotation/util/updateBoqRowCellWithValue'
+import { updateCellWithValue } from '@entities/quotation/util/updateCellWithValue'
 import { updateSubTotalPriceWithValue } from '@entities/quotation/util/updateSubTotalPriceWithValue'
 import type { FroalaEditor } from '@shared/lib/froala/froala'
 import type { RefObject } from 'react'
@@ -33,17 +33,17 @@ export const updateBoqRowItemPriceCell = ({
     editor: itemPriceCellEditorRef.current,
     blockIndex,
     rowIndex,
-    boqRowCellKey: boqRowCellKey.itemPrice,
+    cellKey: cellKey.itemPrice,
   })
 
   if (didContentChange === false) {
     return
   }
 
-  updateBoqRowCellAtStore({
+  updateCellAtStore({
     blockIndex,
     rowIndex,
-    boqRowCellKey: boqRowCellKey.itemPrice,
+    cellKey: cellKey.itemPrice,
     html: itemPriceCellEditorRef.current.html.get(),
   })
 
@@ -56,8 +56,8 @@ export const updateBoqRowItemPriceCell = ({
   const newPriceValue = boqRow.qty.value * boqRow.itemPrice.value
   const newPriceValueRounded = roundTo(newPriceValue, 2)
 
-  updateBoqRowCellWithValue({
-    boqRowCellKey: boqRowCellKey.price,
+  updateCellWithValue({
+    cellKey: cellKey.price,
     editor: priceCellEditorRef.current,
     blockIndex,
     rowIndex,

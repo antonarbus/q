@@ -1,5 +1,5 @@
 import { BOOKMARK_POS_AT_BLOCKS } from '@entities/quotation/const/bookmarkPosAtBlocks'
-import type { BoqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
+import type { CellKey } from '@entities/quotation/const/cellKey'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { itemType } from '../../const/itemType'
 import type { Quotation } from '../../type'
@@ -9,10 +9,10 @@ export const updateRowBlockCellReducer = (
   action: PayloadAction<{
     html: string
     value: number
-    boqRowCellKey: BoqRowCellKey
+    cellKey: CellKey
   }>,
 ): void => {
-  const { html, value, boqRowCellKey } = action.payload
+  const { html, value, cellKey } = action.payload
 
   const block = state.blocks[BOOKMARK_POS_AT_BLOCKS]
 
@@ -23,7 +23,7 @@ export const updateRowBlockCellReducer = (
   if (block.type === itemType.row) {
     const row = block
 
-    row[boqRowCellKey].html = html
-    row[boqRowCellKey].value = value
+    row[cellKey].html = html
+    row[cellKey].value = value
   }
 }

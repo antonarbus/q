@@ -1,5 +1,5 @@
 import { BOOKMARK_POS_AT_BLOCKS } from '@entities/quotation/const/bookmarkPosAtBlocks'
-import { boqRowCellKey } from '@entities/quotation/const/boqRowCellKey'
+import { cellKey } from '@entities/quotation/const/cellKey'
 import { itemType } from '@entities/quotation/const/itemType'
 import { updateRowBlockCellAtStore } from '@entities/quotation/redux/updater/updateRowBlockCellAtStore'
 import { updateRowBlockCellWithValue } from '@entities/quotation/util/updateRowBlockCellWithValue'
@@ -22,7 +22,7 @@ export const updateItemPriceCell = ({
   }
 
   updateRowBlockCellAtStore({
-    boqRowCellKey: boqRowCellKey.itemPrice,
+    cellKey: cellKey.itemPrice,
     html: itemPriceCellEditorRef.current.html.get(),
   })
 
@@ -38,7 +38,7 @@ export const updateItemPriceCell = ({
   const newPriceValueRounded = roundTo(newPriceValue, 2)
 
   updateRowBlockCellWithValue({
-    boqRowCellKey: boqRowCellKey.price,
+    cellKey: cellKey.price,
     editor: priceCellEditorRef.current,
     value: newPriceValueRounded,
   })
