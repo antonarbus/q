@@ -9,7 +9,7 @@ import { cls } from '@shared/cls'
 import type { JSX } from 'react'
 import { RowColumns } from './column'
 import { RowLayout } from './RowLayout'
-import { Rows } from './row'
+import { RowsWithOneBookmarkedRow } from './RowsWithOneBookmarkedRow'
 
 export const BookmarkedRowBlock = (): JSX.Element => {
   return (
@@ -24,7 +24,7 @@ export const BookmarkedRowBlock = (): JSX.Element => {
       <BoqProvider>
         <RowLayout>
           <RowColumns />
-          <Rows />
+          <RowsWithOneBookmarkedRow />
         </RowLayout>
       </BoqProvider>
     </BlockComp>

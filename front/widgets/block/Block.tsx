@@ -2,11 +2,11 @@ import { itemType } from '@entities/quotation/const/itemType'
 import { BlockProvider } from '@entities/quotation/provider/BlockProvider'
 import type { Item } from '@entities/quotation/type'
 import type { ReactNode } from 'react'
-import { BookmarkedRowBlock } from './bookmarked-row/BookmarkedRowBlock'
-import { BoqBlock } from './boq/BoqBlock'
-import { PasteItem } from './paste/PasteItem'
-import { PriceBlock } from './price/PriceBlock'
-import { TextBlock } from './text/TextBlock'
+import { BookmarkedRowBlock } from './bookmarked-row-block'
+import { BoqBlock } from './boq-block/BoqBlock'
+import { PasteItemBlock } from './paste-block'
+import { PriceBlock } from './price-block'
+import { TextBlock } from './text-block'
 
 type Props = {
   block: Item
@@ -19,12 +19,8 @@ export const Block = ({ block, blockIndex }: Props): ReactNode => {
       {block.type === itemType.text && <TextBlock />}
       {block.type === itemType.boq && <BoqBlock />}
       {block.type === itemType.price && <PriceBlock />}
-      {
-        block.type === itemType.row && (
-          <BookmarkedRowBlock />
-        ) /* for bookmark modal */
-      }
-      {block.type === itemType.paste && <PasteItem />}
+      {block.type === itemType.row && <BookmarkedRowBlock />}
+      {block.type === itemType.paste && <PasteItemBlock />}
     </BlockProvider>
   )
 }

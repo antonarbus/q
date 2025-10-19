@@ -3,7 +3,7 @@ import { theme } from '@shared/theme'
 import { motion } from 'motion/react'
 import type { JSX } from 'react'
 
-export const PasteItem = (): JSX.Element => {
+export const PasteItemBlock = (): JSX.Element => {
   const block = useBlock()
 
   return (
