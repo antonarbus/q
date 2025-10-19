@@ -15,7 +15,7 @@ type Props = {
 
 type Res = {
   subTotalPriceEditorRef: FroalaEditorRef
-  boqRowEditorRefs: RowEditorRefs
+  rowEditorRefs: RowEditorRefs
 }
 
 const BoqContext: Context<Res | null> = createContext<Res | null>(null)
@@ -24,7 +24,7 @@ export const BoqProvider = (props: Props): JSX.Element => {
   const blockContextData = useMemo(() => {
     const contextData = {
       subTotalPriceEditorRef: { current: null },
-      boqRowEditorRefs: [],
+      rowEditorRefs: [],
     }
 
     return contextData

@@ -15,10 +15,10 @@ export const DeleteRowIcon = (): JSX.Element => {
   const block = useBlock()
   const row = useRow()
 
-  const isLastBoqRow = useSelector(selectIsLastRow({ blockIndex: block.index }))
+  const isLastRow = useSelector(selectIsLastRow({ blockIndex: block.index }))
 
   const isDeletable = useSelector((state) => state.copy.isDeletable)
-  const disabled = isLastBoqRow || isDeletable === false
+  const disabled = isLastRow || isDeletable === false
 
   return (
     <Tooltip
@@ -49,7 +49,7 @@ export const DeleteRowIcon = (): JSX.Element => {
             })
 
             dispatch(
-              quotationSlice.actions.deleteBoqRowReducer({
+              quotationSlice.actions.deleteRowReducer({
                 blockIndex: block.index,
                 rowIndex: row.index,
               }),

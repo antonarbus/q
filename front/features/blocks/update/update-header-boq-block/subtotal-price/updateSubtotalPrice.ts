@@ -14,13 +14,13 @@ import { toast } from 'sonner'
 type Props = {
   blockIndex: number
   subTotalPriceEditorRef: FroalaEditorRef
-  boqRowEditorRefs: RowEditorRefs
+  rowEditorRefs: RowEditorRefs
 }
 
 export const updateSubtotalPrice = ({
   subTotalPriceEditorRef,
   blockIndex,
-  boqRowEditorRefs,
+  rowEditorRefs,
 }: Props): void => {
   if (subTotalPriceEditorRef.current === null) {
     return
@@ -36,9 +36,9 @@ export const updateSubtotalPrice = ({
     return
   }
 
-  const boqRows = getRowsFromStore({ blockIndex })
+  const rows = getRowsFromStore({ blockIndex })
 
-  if (boqRows === undefined) {
+  if (rows === undefined) {
     return
   }
 
@@ -48,11 +48,11 @@ export const updateSubtotalPrice = ({
     boqHeaderKey: 'subTotalPrice',
   })
 
-  const prevSubTotalPriceValue = boqRows.reduce((accumulator, row) => {
+  const prevSubTotalPriceValue = rows.reduce((accumulator, row) => {
     return accumulator + row.price.value
   }, 0)
 
-  const pinnedPricesSum = boqRows.reduce((accumulator, row) => {
+  const pinnedPricesSum = rows.reduce((accumulator, row) => {
     if (row.price.pin.isPinned) {
       return accumulator + row.price.value
     }
@@ -81,7 +81,7 @@ export const updateSubtotalPrice = ({
     editor: FroalaEditor | null
   }[]
 
-  const prices: Prices = boqRows.map((row, index) => {
+  const prices: Prices = rows.map((row, index) => {
     const { value: oldValue } = row.price
     const { isPinned } = row.price.pin
 
@@ -91,7 +91,7 @@ export const updateSubtotalPrice = ({
       oldValue,
       isPinned,
       newValue: isPinned === true ? oldValue : roundTo(newValue, 2),
-      editor: boqRowEditorRefs.at(index)?.price.current ?? null,
+      editor: rowEditorRefs.at(index)?.price.current ?? null,
     }
   })
 
@@ -124,7 +124,7 @@ export const updateSubtotalPrice = ({
   prices.forEach((price, rowIndex) => {
     updateCellWithValue({
       cellKey: cellKey.price,
-      editor: boqRowEditorRefs.at(rowIndex)?.price.current ?? null,
+      editor: rowEditorRefs.at(rowIndex)?.price.current ?? null,
       blockIndex,
       rowIndex,
       value: price.newValue,
@@ -143,7 +143,7 @@ export const updateSubtotalPrice = ({
       const newQtyValueRounded = roundTo(newQtyValue, 3)
 
       updateCellWithValue({
-        editor: boqRowEditorRefs.at(rowIndex)?.qty.current ?? null,
+        editor: rowEditorRefs.at(rowIndex)?.qty.current ?? null,
         blockIndex,
         rowIndex,
         cellKey: cellKey.qty,
@@ -162,7 +162,7 @@ export const updateSubtotalPrice = ({
       const newItemPriceValueRounded = roundTo(newItemPriceValue, 2)
 
       updateCellWithValue({
-        editor: boqRowEditorRefs.at(rowIndex)?.itemPrice.current ?? null,
+        editor: rowEditorRefs.at(rowIndex)?.itemPrice.current ?? null,
         blockIndex,
         rowIndex,
         cellKey: cellKey.itemPrice,
@@ -171,13 +171,13 @@ export const updateSubtotalPrice = ({
     }
   })
 
-  const boqRowsUpdated = getRowsFromStore({ blockIndex })
+  const rowsUpdated = getRowsFromStore({ blockIndex })
 
-  if (boqRowsUpdated === undefined) {
+  if (rowsUpdated === undefined) {
     return
   }
 
-  const subTotalPriceValueNew: number = boqRowsUpdated.reduce(
+  const subTotalPriceValueNew: number = rowsUpdated.reduce(
     (accumulator: number, row: Row) => {
       const price = row.price.value
 

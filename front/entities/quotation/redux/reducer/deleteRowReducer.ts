@@ -16,8 +16,8 @@ export const deleteRowReducer = (
     return state
   }
 
-  const boqRowsWithoutDeletedRow = boqBlock.boq.rows.toSpliced(rowIndex, 1)
-  boqBlock.boq.rows = boqRowsWithoutDeletedRow
+  const rowsWithoutDeletedRow = boqBlock.boq.rows.toSpliced(rowIndex, 1)
+  boqBlock.boq.rows = rowsWithoutDeletedRow
 
   return state
 }

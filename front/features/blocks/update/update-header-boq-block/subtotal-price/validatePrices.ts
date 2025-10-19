@@ -11,24 +11,24 @@ import { toast } from 'sonner'
 type Props = {
   blockIndex: number
   subTotalPriceEditorRef: FroalaEditorRef
-  boqRowEditorRefs: RowEditorRefs
+  rowEditorRefs: RowEditorRefs
 }
 
 export const validatePrices = ({
   blockIndex,
-  boqRowEditorRefs,
+  rowEditorRefs,
   subTotalPriceEditorRef,
 }: Props): void => {
-  const boqRows = getRowsFromStore({ blockIndex })
+  const rows = getRowsFromStore({ blockIndex })
 
-  if (boqRows === undefined) {
+  if (rows === undefined) {
     return
   }
 
   let didNotifyAboutInvalidPriceOnes = false
 
-  boqRows.forEach((row, rowIndex) => {
-    const priceCellEditorRef = boqRowEditorRefs.at(rowIndex)
+  rows.forEach((row, rowIndex) => {
+    const priceCellEditorRef = rowEditorRefs.at(rowIndex)
 
     if (priceCellEditorRef === undefined) {
       return

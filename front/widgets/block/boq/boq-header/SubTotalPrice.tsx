@@ -43,7 +43,7 @@ export const SubTotalPrice = (): JSX.Element => {
 
         validatePrices({
           blockIndex: block.index,
-          boqRowEditorRefs: boq.boqRowEditorRefs,
+          rowEditorRefs: boq.rowEditorRefs,
           subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
         })
       }}
@@ -58,7 +58,7 @@ export const SubTotalPrice = (): JSX.Element => {
       onContentChange={() => {
         updateSubtotalPrice({
           blockIndex: block.index,
-          boqRowEditorRefs: boq.boqRowEditorRefs,
+          rowEditorRefs: boq.rowEditorRefs,
           subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
         })
       }}

@@ -19,9 +19,9 @@ export const pasteItemReducer = (
   const itemToPaste: Item = { ...structuredClone(item), id: newItemId }
 
   if (itemToPaste.type === itemType.boq) {
-    const boqRows = itemToPaste.boq.rows
+    const rows = itemToPaste.boq.rows
 
-    boqRows.forEach((row) => {
+    rows.forEach((row) => {
       row.id = generateId()
     })
   }
@@ -31,7 +31,7 @@ export const pasteItemReducer = (
     itemToPaste.type === itemType.text ||
     itemToPaste.type === itemType.price
 
-  const isBoqRow = itemToPaste.type === itemType.row
+  const isRow = itemToPaste.type === itemType.row
 
   if (isBlock === true) {
     const hoveredItemIndex = state.blocks.findIndex((block) => block.id === id)
@@ -81,7 +81,7 @@ export const pasteItemReducer = (
     return
   }
 
-  if (isBoqRow === true) {
+  if (isRow === true) {
     state.blocks.forEach((block) => {
       if (block.type !== itemType.boq) {
         return
@@ -129,12 +129,12 @@ export const pasteItemReducer = (
         return
       }
 
-      const boqRowsWithoutPasteText = block.boq.rows.filter(
+      const rowsWithoutPasteText = block.boq.rows.filter(
         (row) => row.type !== rowTypeKey.paste,
       )
 
       // todo: fix it
-      boqRowsWithoutPasteText.splice(
+      rowsWithoutPasteText.splice(
         // @ts-expect-error: some error
         spliceSettings.insertAtIndex,
         // @ts-expect-error: some error
@@ -142,7 +142,7 @@ export const pasteItemReducer = (
         itemToPaste,
       )
 
-      block.boq.rows = boqRowsWithoutPasteText
+      block.boq.rows = rowsWithoutPasteText
     })
   }
 }

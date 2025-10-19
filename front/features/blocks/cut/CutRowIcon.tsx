@@ -17,9 +17,9 @@ export const CutRowIcon = (): JSX.Element => {
   const block = useBlock()
   const row = useRow()
   const isCopyable = useSelector((state) => state.copy.isCopyable)
-  const isLastBoqRow = useSelector(selectIsLastRow({ blockIndex: block.index }))
+  const isLastRow = useSelector(selectIsLastRow({ blockIndex: block.index }))
   const isDeletable = useSelector((state) => state.copy.isDeletable)
-  const disabled = isLastBoqRow || isDeletable === false || isCopyable === false
+  const disabled = isLastRow || isDeletable === false || isCopyable === false
 
   return (
     <Tooltip enterDelay={500} enterNextDelay={500} placement='left' title='Cut'>
@@ -37,9 +37,9 @@ export const CutRowIcon = (): JSX.Element => {
               return
             }
 
-            const boqRowElement = clickedIconElement.closest(`.${cls.row}`)
+            const rowElement = clickedIconElement.closest(`.${cls.row}`)
 
-            if (boqRowElement === null) {
+            if (rowElement === null) {
               return
             }
 
@@ -55,11 +55,11 @@ export const CutRowIcon = (): JSX.Element => {
             })
 
             dispatch(
-              quotationSlice.actions.updateBoqRowHeightAndWidthReducer({
+              quotationSlice.actions.updateRowHeightAndWidthReducer({
                 blockIndex: block.index,
                 rowIndex: row.index,
-                height: boqRowElement.clientHeight,
-                width: boqRowElement.clientWidth,
+                height: rowElement.clientHeight,
+                width: rowElement.clientWidth,
               }),
             )
 
@@ -93,7 +93,7 @@ export const CutRowIcon = (): JSX.Element => {
             }
 
             dispatch(
-              quotationSlice.actions.deleteBoqRowReducer({
+              quotationSlice.actions.deleteRowReducer({
                 blockIndex: block.index,
                 rowIndex: row.index,
               }),

@@ -6,17 +6,17 @@ export const reOrderRowsReducer = (
   state: Quotation,
   action: PayloadAction<{
     blockIndex: number
-    reOrderedBoqRows: Row[]
+    reOrderedRows: Row[]
   }>,
 ): Quotation | undefined => {
-  const { reOrderedBoqRows, blockIndex } = action.payload
+  const { reOrderedRows, blockIndex } = action.payload
   const boqBlock = getBoqBlockFromState({ blockIndex, state })
 
   if (boqBlock === undefined) {
     return state
   }
 
-  boqBlock.boq.rows = reOrderedBoqRows
+  boqBlock.boq.rows = reOrderedRows
 
   return undefined
 }

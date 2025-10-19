@@ -36,7 +36,7 @@ export const Pin = ({ cellKey, onClick }: Props): ReactNode => {
   return (
     <Box
       className={cls.pin}
-      component='button' // to make it focusable to understand if we click within same row on pins and not hide them at BoqRow onBlur callback // https://stackoverflow.com/a/42764495/7239778
+      component='button' // to make it focusable to understand if we click within same row on pins and not hide them at Row onBlur callback // https://stackoverflow.com/a/42764495/7239778
       // use onMouseDown instead of click because in Safari it does not work for some reason
       onMouseDown={(event): void => {
         onClick(event)

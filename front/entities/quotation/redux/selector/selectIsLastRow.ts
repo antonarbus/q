@@ -8,13 +8,13 @@ type Props = {
 export const selectIsLastRow =
   ({ blockIndex }: Props) =>
   (state: RootState): boolean => {
-    const boqRows = getRowsFromStore({ blockIndex })
+    const rows = getRowsFromStore({ blockIndex })
 
-    if (boqRows === undefined) {
+    if (rows === undefined) {
       return false
     }
 
-    const isBoqRowAlone = boqRows.length === 1
+    const isRowAlone = rows.length === 1
 
-    return isBoqRowAlone
+    return isRowAlone
   }

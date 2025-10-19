@@ -12,7 +12,7 @@ export const onRowDragStart =
   }
 
 export const onRowDragEnd =
-  ({ blockIndex, boqRowIds }: { blockIndex: number; boqRowIds: string[] }) =>
+  ({ blockIndex, rowIds }: { blockIndex: number; rowIds: string[] }) =>
   (event: DragEndEvent): void => {
     const { active, over } = event
 
@@ -27,20 +27,17 @@ export const onRowDragEnd =
       return
     }
 
-    const oldIndex = boqRowIds.indexOf(String(active.id))
-    const newIndex = boqRowIds.indexOf(String(over.id))
-    const boqRows = getRowsFromStore({ blockIndex })
+    const oldIndex = rowIds.indexOf(String(active.id))
+    const newIndex = rowIds.indexOf(String(over.id))
+    const rows = getRowsFromStore({ blockIndex })
 
-    if (boqRows === undefined) {
+    if (rows === undefined) {
       return
     }
 
-    const reOrderedBoqRows = arrayMoveImmutable(boqRows, oldIndex, newIndex)
+    const reOrderedRows = arrayMoveImmutable(rows, oldIndex, newIndex)
 
     dispatch(
-      quotationSlice.actions.reOrderBoqRowsReducer({
-        reOrderedBoqRows,
-        blockIndex,
-      }),
+      quotationSlice.actions.reOrderRowsReducer({ reOrderedRows, blockIndex }),
     )
   }

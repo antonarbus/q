@@ -37,7 +37,7 @@ export const RowProvider = (props: Props): JSX.Element => {
     }
   }, [])
 
-  boq.boqRowEditorRefs[props.index] = {
+  boq.rowEditorRefs[props.index] = {
     description: rowCellEditorRef.descriptionEditorRef,
     itemPrice: rowCellEditorRef.itemPriceCellEditorRef,
     qty: rowCellEditorRef.qtyCellEditorRef,
@@ -55,7 +55,7 @@ export const RowProvider = (props: Props): JSX.Element => {
     }
 
     return context
-  }, [props.index, props.item, boq.boqRowEditorRefs])
+  }, [props.index, props.item, boq.rowEditorRefs])
 
   return (
     <RowContext.Provider value={rowContextData}>

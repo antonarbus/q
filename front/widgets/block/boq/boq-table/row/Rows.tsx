@@ -18,7 +18,7 @@ import { RowsSortableContext } from './RowsSortableContext'
 export const Rows = (): JSX.Element => {
   const block = useBlock()
 
-  const boqRows = useSelector(
+  const rows = useSelector(
     selectRows({ blockIndex: block.index }),
     arrayShapesEqualityFn,
   )
@@ -27,7 +27,7 @@ export const Rows = (): JSX.Element => {
     <RowsLayout>
       <RowsSortableContext>
         <AnimatePresence initial={false}>
-          {boqRows.map((row, rowIndex) => {
+          {rows.map((row, rowIndex) => {
             if (row.type === rowTypeKey.row) {
               return (
                 <RowProvider key={row.id} item={row} index={rowIndex}>

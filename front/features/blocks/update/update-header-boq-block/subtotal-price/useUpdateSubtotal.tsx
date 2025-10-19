@@ -26,13 +26,13 @@ export const useUpdateSubtotal = (): void => {
       return
     }
 
-    const boqRows = getRowsFromStore({ blockIndex: block.index })
+    const rows = getRowsFromStore({ blockIndex: block.index })
 
-    if (boqRows === undefined) {
+    if (rows === undefined) {
       return
     }
 
-    const subTotalPriceValueNew: number = boqRows.reduce(
+    const subTotalPriceValueNew: number = rows.reduce(
       (accumulator: number, row: Row) => {
         const price = row.price.value
 

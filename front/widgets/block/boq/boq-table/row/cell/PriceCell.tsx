@@ -70,7 +70,7 @@ export const PriceCell = (): JSX.Element => {
         }}
         onKeydown={(event) => {
           tabFromPriceCell({
-            boqRowEditorRefs: boq.boqRowEditorRefs,
+            rowEditorRefs: boq.rowEditorRefs,
             event,
             rowIndex: row.index,
           })

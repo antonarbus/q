@@ -81,13 +81,13 @@ export const updatePriceCell = ({
   }
 
   // update subTotalPrice
-  const boqRows = getRowsFromStore({ blockIndex })
+  const rows = getRowsFromStore({ blockIndex })
 
-  if (boqRows === undefined) {
+  if (rows === undefined) {
     return
   }
 
-  const subTotalPriceValueNew: number = boqRows.reduce(
+  const subTotalPriceValueNew: number = rows.reduce(
     (accumulator: number, row: Row) => {
       const price = row.price.value
 

@@ -20,24 +20,23 @@ type Props = {
 export const RowsSortableContext = ({ children }: Props): JSX.Element => {
   const block = useBlock()
 
-  const boqRows = useSelector(
+  const rows = useSelector(
     selectRows({ blockIndex: block.index }),
     arrayShapesEqualityFn,
   )
 
-  const boqRowIds = boqRows.map((row) => row.id)
-
+  const rowIds = rows.map((row) => row.id)
   const sensors = useSensors(useSensor(PointerSensor))
 
   return (
     <DndContext
       autoScroll={{ layoutShiftCompensation: false }}
       collisionDetection={closestCenter}
-      onDragEnd={onRowDragEnd({ blockIndex: block.index, boqRowIds })}
+      onDragEnd={onRowDragEnd({ blockIndex: block.index, rowIds: rowIds })}
       onDragStart={onRowDragStart({ blockIndex: block.index })}
       sensors={sensors}
     >
-      <SortableContext items={boqRowIds} strategy={verticalListSortingStrategy}>
+      <SortableContext items={rowIds} strategy={verticalListSortingStrategy}>
         {children}
       </SortableContext>
     </DndContext>

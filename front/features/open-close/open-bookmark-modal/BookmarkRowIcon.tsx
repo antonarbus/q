@@ -50,9 +50,9 @@ export const BookmarkRowIcon = (): ReactNode => {
               return
             }
 
-            const boqRowElement = clickedIconElement.closest(`.${cls.row}`)
+            const rowElement = clickedIconElement.closest(`.${cls.row}`)
 
-            if (boqRowElement === null) {
+            if (rowElement === null) {
               return
             }
 

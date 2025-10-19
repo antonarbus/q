@@ -8,7 +8,7 @@ type Props = {
 export const RowsLayout = ({ children }: Props): JSX.Element => {
   return (
     <div
-      className={cls.boqRows}
+      className={cls.rows}
       style={{
         display: 'flex',
         flexDirection: 'column',

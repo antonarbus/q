@@ -38,9 +38,9 @@ export const CopyRowIcon = (): JSX.Element => {
               return
             }
 
-            const boqRowElement = clickedIconElement.closest(`.${cls.row}`)
+            const rowElement = clickedIconElement.closest(`.${cls.row}`)
 
-            if (boqRowElement === null) {
+            if (rowElement === null) {
               return
             }
 
@@ -56,11 +56,11 @@ export const CopyRowIcon = (): JSX.Element => {
             })
 
             dispatch(
-              quotationSlice.actions.updateBoqRowHeightAndWidthReducer({
+              quotationSlice.actions.updateRowHeightAndWidthReducer({
                 blockIndex: block.index,
                 rowIndex: row.index,
-                height: boqRowElement.clientHeight,
-                width: boqRowElement.clientWidth,
+                height: rowElement.clientHeight,
+                width: rowElement.clientWidth,
               }),
             )
 

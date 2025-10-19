@@ -156,14 +156,14 @@ const movePasteTextItem = (event: MouseEvent): void => {
   dispatch(quotationSlice.actions.insertPasteBlockReducer(pastePlace))
 }
 
-const movePasteTextBoqRow = (event: MouseEvent): void => {
+const movePasteTextRow = (event: MouseEvent): void => {
   if (event.target instanceof Element === false) {
     return
   }
 
   const prevPlace = getState().copy.place
   const { isPasteTextShown } = getState().copy
-  const boqRowsElement = event.target.closest(`.${cls.boqRows}`)
+  const rowsElement = event.target.closest(`.${cls.rows}`)
 
   const isBoqPasteRow = getState()
     .quotation.blocks.filter((block) => block.type === itemType.boq)
@@ -180,7 +180,7 @@ const movePasteTextBoqRow = (event: MouseEvent): void => {
     }
   }
 
-  if (boqRowsElement === null) {
+  if (rowsElement === null) {
     removePasteIfNeeded()
 
     return
@@ -226,14 +226,14 @@ const movePasteTextBoqRow = (event: MouseEvent): void => {
     return
   }
 
-  const boqRowElement = event.target.closest(`.${cls.row}`)
+  const rowElement = event.target.closest(`.${cls.row}`)
 
-  if (boqRowElement === null) {
+  if (rowElement === null) {
     return
   }
 
   const pastePlace = getPastePlace({
-    hoveredElement: boqRowElement,
+    hoveredElement: rowElement,
     event,
     distanceToEdge: 10,
   })
@@ -247,7 +247,7 @@ const movePasteTextBoqRow = (event: MouseEvent): void => {
 
   dispatch(copySlice.actions.updatePastePos(pastePlace))
   dispatch(copySlice.actions.showPasteText())
-  dispatch(quotationSlice.actions.insertPasteBoqRowReducer(pastePlace))
+  dispatch(quotationSlice.actions.insertPasteRowReducer(pastePlace))
 }
 
 export const useMovePasteText = (): void => {
@@ -260,7 +260,7 @@ export const useMovePasteText = (): void => {
     typeOfNextPasteItem === itemType.text ||
     typeOfNextPasteItem === itemType.price
 
-  const isBoqRow = typeOfNextPasteItem === rowTypeKey.row
+  const isRow = typeOfNextPasteItem === rowTypeKey.row
 
   useEffect(() => {
     const controller = new AbortController()
@@ -274,10 +274,10 @@ export const useMovePasteText = (): void => {
       })
     }
 
-    if (isBoqRow === true) {
+    if (isRow === true) {
       document.body.style.cursor = 'pointer'
 
-      document.addEventListener('mousemove', movePasteTextBoqRow, {
+      document.addEventListener('mousemove', movePasteTextRow, {
         passive: true,
         signal: controller.signal,
       })
@@ -287,5 +287,5 @@ export const useMovePasteText = (): void => {
       document.body.style.removeProperty('cursor')
       controller.abort()
     }
-  }, [isBlock, isBoqRow])
+  }, [isBlock, isRow])
 }

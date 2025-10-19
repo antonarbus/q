@@ -9,11 +9,11 @@ type Props = {
 export const selectRows =
   ({ blockIndex }: Props) =>
   (_state: RootState): Row[] => {
-    const boqRows = getRowsFromStore({ blockIndex })
+    const rows = getRowsFromStore({ blockIndex })
 
-    if (boqRows === undefined) {
+    if (rows === undefined) {
       return []
     }
 
-    return boqRows
+    return rows
   }
