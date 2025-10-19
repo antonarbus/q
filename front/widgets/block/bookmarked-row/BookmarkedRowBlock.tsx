@@ -1,3 +1,4 @@
+import { BoqProvider } from '@entities/quotation/provider/BoqBlockProvider'
 import { BlockComp } from '@entities/quotation/ui/BlockComp'
 import {
   onBoqBlockResize,
@@ -6,9 +7,11 @@ import {
 } from '@features/blocks/resize'
 import { cls } from '@shared/cls'
 import type { JSX } from 'react'
-import { OneRow } from './OneRow'
+import { RowColumns } from './column'
+import { RowLayout } from './RowLayout'
+import { Rows } from './row'
 
-export const RowBlock = (): JSX.Element => {
+export const BookmarkedRowBlock = (): JSX.Element => {
   return (
     <BlockComp
       autoWidth
@@ -18,7 +21,12 @@ export const RowBlock = (): JSX.Element => {
       onBlockResizeStart={onBoqBlockResizeStart}
       onBlockResizeStop={onBoqBlockResizeStop}
     >
-      <OneRow />
+      <BoqProvider>
+        <RowLayout>
+          <RowColumns />
+          <Rows />
+        </RowLayout>
+      </BoqProvider>
     </BlockComp>
   )
 }
