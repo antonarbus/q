@@ -11,25 +11,25 @@ import { type JSX, useRef } from 'react'
 
 export const PriceValue = (): JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)
-  const { blockIndex } = useBlock()
+  const block = useBlock()
 
   useUpdateTotalPriceIfPricesAboveWereChanged({
-    blockIndex,
+    blockIndex: block.index,
     editorRef,
   })
 
   return (
     <Froala
       editorRef={editorRef}
-      htmlGetter={() => getPriceBlockHtmlFromStore({ blockIndex })}
+      htmlGetter={() => getPriceBlockHtmlFromStore({ blockIndex: block.index })}
       onBlur={() => {
-        validateTotalPrice({ editorRef, blockIndex })
+        validateTotalPrice({ editorRef, blockIndex: block.index })
       }}
       onContentChange={() => {
-        updatePriceValueCell({ editorRef, blockIndex })
+        updatePriceValueCell({ editorRef, blockIndex: block.index })
       }}
       onInitialized={() => {
-        validateTotalPrice({ editorRef, blockIndex })
+        validateTotalPrice({ editorRef, blockIndex: block.index })
       }}
       placeholder='Total price...'
     />

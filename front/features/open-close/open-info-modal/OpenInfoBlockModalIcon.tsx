@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom'
 
 export const OpenInfoBlockModalIcon = (): ReactNode => {
   const navigate = useNavigate()
-  const { blockIndex } = useBlock()
+  const block = useBlock()
   const isCopyModalVisible = useIsCopyModalVisible()
   const disabled = isCopyModalVisible
 
@@ -32,7 +32,7 @@ export const OpenInfoBlockModalIcon = (): ReactNode => {
               return
             }
 
-            const item = getBlockFromStore({ blockIndex })
+            const item = getBlockFromStore({ blockIndex: block.index })
 
             if (item === undefined) {
               return

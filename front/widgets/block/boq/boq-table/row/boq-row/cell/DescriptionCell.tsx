@@ -13,11 +13,11 @@ import { beforeUpload } from '@features/file/upload-file'
 import type { JSX, KeyboardEvent } from 'react'
 
 export const DescriptionCell = (): JSX.Element => {
-  const { blockIndex } = useBlock()
+  const block = useBlock()
   const { rowIndex, itemPriceCellEditorRef, descriptionEditorRef } = useRow()
 
   const { stylesForResizableCell } = useStylesForResizableCell({
-    blockIndex,
+    blockIndex: block.index,
     boqColumnKey: boqColumnKey.description,
     minWidth: `${columnMinWidth.description}px`,
   })
@@ -30,14 +30,14 @@ export const DescriptionCell = (): JSX.Element => {
       editorRef={descriptionEditorRef}
       htmlGetter={() =>
         getBoqCellHtmlFromStore({
-          blockIndex,
+          blockIndex: block.index,
           boqRowCellKey: boqRowCellKey.description,
           rowIndex,
         })
       }
       onContentChange={() => {
         updateDescriptionCell({
-          blockIndex,
+          blockIndex: block.index,
           boqRowCellKey: boqRowCellKey.description,
           editorRef: descriptionEditorRef,
           rowIndex,

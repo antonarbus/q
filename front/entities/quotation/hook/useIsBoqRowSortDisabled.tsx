@@ -5,8 +5,12 @@ import { selectIsLastBoqRow } from '../redux/selector/selectIsLastBoqRow'
 
 export const useIsBoqRowSortDisabled = (): boolean => {
   const isCopyModalVisible = useIsCopyModalVisible()
-  const { blockIndex } = useBlock()
-  const isLastBoqRow = useSelector(selectIsLastBoqRow({ blockIndex }))
+  const block = useBlock()
+
+  const isLastBoqRow = useSelector(
+    selectIsLastBoqRow({ blockIndex: block.index }),
+  )
+
   const isBoqRowSortDisabled = isCopyModalVisible || isLastBoqRow
 
   return isBoqRowSortDisabled

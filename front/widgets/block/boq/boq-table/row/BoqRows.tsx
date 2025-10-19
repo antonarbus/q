@@ -16,10 +16,10 @@ import { BoqRowAnimate } from './boq-row/BoqRowAnimate'
 import { BoqRowSortable } from './boq-row/BoqRowSortable'
 
 export const BoqRows = (): JSX.Element => {
-  const { blockIndex } = useBlock()
+  const block = useBlock()
 
   const boqRows = useSelector(
-    selectBoqRows({ blockIndex }),
+    selectBoqRows({ blockIndex: block.index }),
     arrayShapesEqualityFn,
   )
 
@@ -36,7 +36,7 @@ export const BoqRows = (): JSX.Element => {
                       <BoqRow
                         onBlur={(event) => {
                           hideBoqRowPinsOnRowBlur({
-                            blockIndex,
+                            blockIndex: block.index,
                             event,
                             rowIndex,
                           })

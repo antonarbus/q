@@ -8,13 +8,13 @@ import { type JSX, useRef } from 'react'
 
 export const PriceTitle = (): JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)
-  const { blockIndex } = useBlock()
+  const block = useBlock()
 
   return (
     <Froala
       editorRef={editorRef}
       htmlGetter={() => {
-        const priceBlock = getState().quotation.blocks[blockIndex]
+        const priceBlock = getState().quotation.blocks[block.index]
 
         if (priceBlock?.type !== itemType.price) {
           return ''
@@ -25,7 +25,7 @@ export const PriceTitle = (): JSX.Element => {
         return titleHtml
       }}
       onContentChange={() => {
-        updatePriceTitleCell({ editorRef, blockIndex })
+        updatePriceTitleCell({ editorRef, blockIndex: block.index })
       }}
       placeholder='Total price...'
     />

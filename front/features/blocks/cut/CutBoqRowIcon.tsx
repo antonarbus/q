@@ -14,10 +14,12 @@ import type { JSX, MouseEvent } from 'react'
 import { TbCut } from 'react-icons/tb'
 
 export const CutBoqRowIcon = (): JSX.Element => {
-  const { blockIndex } = useBlock()
+  const block = useBlock()
   const { rowIndex } = useRow()
   const isCopyable = useSelector((state) => state.copy.isCopyable)
-  const isLastBoqRow = useSelector(selectIsLastBoqRow({ blockIndex }))
+  const isLastBoqRow = useSelector(
+    selectIsLastBoqRow({ blockIndex: block.index }),
+  )
   const isDeletable = useSelector((state) => state.copy.isDeletable)
   const disabled = isLastBoqRow || isDeletable === false || isCopyable === false
 
@@ -56,14 +58,17 @@ export const CutBoqRowIcon = (): JSX.Element => {
 
             dispatch(
               quotationSlice.actions.updateBoqRowHeightAndWidthReducer({
-                blockIndex,
+                blockIndex: block.index,
                 rowIndex,
                 height: boqRowElement.clientHeight,
                 width: boqRowElement.clientWidth,
               }),
             )
 
-            const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
+            const boqRow = getBoqRowFromStore({
+              blockIndex: block.index,
+              rowIndex,
+            })
 
             if (boqRow === undefined) {
               return
@@ -91,7 +96,7 @@ export const CutBoqRowIcon = (): JSX.Element => {
 
             dispatch(
               quotationSlice.actions.deleteBoqRowReducer({
-                blockIndex,
+                blockIndex: block.index,
                 rowIndex,
               }),
             )

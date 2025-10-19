@@ -13,12 +13,12 @@ export const DragBlockIcon = (): JSX.Element => {
   const isLastBlock = useIsLastBlock()
   const isCopyModalVisible = useIsCopyModalVisible()
   const disabled = isLastBlock || isCopyModalVisible
-  const { block } = useBlock()
+  const block = useBlock()
 
   const dragTooltipTextSignal = useSignal<'Drag' | 'Drop'>('Drag')
 
   const { listeners, attributes, isDragging } = useSortable({
-    id: block.id,
+    id: block.item.id,
     disabled,
   })
 

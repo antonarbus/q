@@ -20,11 +20,11 @@ import { useFixedHeightForAnimation } from './useFixedHeightForAnimation'
 export const Froala = (props: FroalaProps): JSX.Element => {
   const dropFilesTextRef = useRef<ComponentRef<'div'> | null>(null)
   const froalaElementRef = useRef<ComponentRef<'div'> | null>(null)
-  const { blockIndex } = useBlock()
+  const block = useBlock()
   const { froalaHeightRef } = useFixedHeightForAnimation({ froalaElementRef })
 
   const isBlockFroala = useSelector(
-    (state) => state.quotation.blocks[blockIndex]?.isFroala ?? true,
+    (state) => state.quotation.blocks[block.index]?.isFroala ?? true,
   )
 
   const isEditable = useSelector((state) => state.text.isEditable)

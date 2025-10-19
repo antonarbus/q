@@ -11,14 +11,20 @@ const boqHeaderKey: HeaderKey = 'subtotalText'
 
 export const SubtotalText = (): JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)
-  const { blockIndex } = useBlock()
+  const block = useBlock()
 
   return (
     <Froala
       editorRef={editorRef}
-      htmlGetter={() => getBoqHeaderHtmlFromStore({ blockIndex, boqHeaderKey })}
+      htmlGetter={() =>
+        getBoqHeaderHtmlFromStore({ blockIndex: block.index, boqHeaderKey })
+      }
       onContentChange={() => {
-        updateSubtotalTextCell({ editorRef, blockIndex, boqHeaderKey })
+        updateSubtotalTextCell({
+          editorRef,
+          blockIndex: block.index,
+          boqHeaderKey,
+        })
       }}
       placeholder='Subtotal...'
       style={subTotalTextCellStyle}

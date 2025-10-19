@@ -11,7 +11,7 @@ import { ResizableColumn } from '../ResizableColumn'
 
 export const QtyColumn = (): JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)
-  const { blockIndex } = useBlock()
+  const block = useBlock()
 
   return (
     <ResizableColumn
@@ -24,13 +24,13 @@ export const QtyColumn = (): JSX.Element => {
         editorRef={editorRef}
         htmlGetter={() =>
           getBoqColumnHtmlFromStore({
-            blockIndex,
+            blockIndex: block.index,
             boqColumnKey: boqColumnKey.qty,
           })
         }
         onContentChange={() => {
           updateBoqColumnCell({
-            blockIndex,
+            blockIndex: block.index,
             boqColumnKey: boqColumnKey.qty,
             editorRef,
           })

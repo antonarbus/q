@@ -36,10 +36,10 @@ export const BlockComp = ({
   rightBlockActionButtons,
   className,
 }: Props): JSX.Element => {
-  const { block } = useBlock()
+  const block = useBlock()
 
   const { setNodeRef, transform, transition, isDragging } = useSortable({
-    id: block.id,
+    id: block.item.id,
   })
 
   return (
@@ -53,10 +53,10 @@ export const BlockComp = ({
     >
       <BlockAnimate
         autoWidth={autoWidth}
-        blockHeight={block.height ?? 0}
+        blockHeight={block.item.height ?? 0}
         className={className}
         disableResize={disableResize}
-        id={block.id}
+        id={block.item.id}
         leftItemActionButtons={leftBlockActionButtons}
         minWidth={minWidth}
         onItemResize={onBlockResize}

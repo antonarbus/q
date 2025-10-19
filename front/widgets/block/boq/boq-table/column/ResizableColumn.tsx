@@ -25,9 +25,11 @@ export const ResizableColumn = ({
   boqColumnKey,
   minWidth,
 }: Props): JSX.Element => {
-  const { blockIndex } = useBlock()
+  const block = useBlock()
 
-  const colWidth = useSelector(selectColumnWidth({ blockIndex, boqColumnKey }))
+  const colWidth = useSelector(
+    selectColumnWidth({ blockIndex: block.index, boqColumnKey }),
+  )
 
   return (
     <Resizable
@@ -50,21 +52,21 @@ export const ResizableColumn = ({
       minWidth={minWidth}
       onResize={(event, direction, element, delta): void => {
         onColumnResize({
-          blockIndex,
+          blockIndex: block.index,
           boqColumnKey,
           headerColumnElement: element,
         })
       }}
       onResizeStart={(event, direction, element): void => {
         onColumnResizeStart({
-          blockIndex,
+          blockIndex: block.index,
           boqColumnKey,
           headerColumnElement: element,
         })
       }}
       onResizeStop={(event, direction, element): void => {
         onColumnResizeStop({
-          blockIndex,
+          blockIndex: block.index,
           boqColumnKey,
           headerColumnElement: element,
         })

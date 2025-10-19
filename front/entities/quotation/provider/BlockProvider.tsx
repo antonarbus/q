@@ -1,4 +1,5 @@
 import {
+  type Context,
   createContext,
   type JSX,
   type ReactNode,
@@ -7,39 +8,35 @@ import {
 } from 'react'
 import type { Item } from '../type'
 
-type Context = {
-  blockIndex: number
-  block: Item
+type Res = {
+  index: number
+  item: Item
 }
 
-type Props = Context & {
+type Props = Res & {
   children: ReactNode
 }
 
-const BlockContext = createContext<Context | null>(null)
+const BlockContext: Context<Res | null> = createContext<Res | null>(null)
 
-export const BlockProvider = ({
-  children,
-  blockIndex,
-  block,
-}: Props): JSX.Element => {
+export const BlockProvider = (props: Props): JSX.Element => {
   const blockContextData = useMemo(() => {
     const contextData = {
-      blockIndex,
-      block,
+      index: props.index,
+      item: props.item,
     }
 
     return contextData
-  }, [blockIndex, block])
+  }, [props.index, props.item])
 
   return (
     <BlockContext.Provider value={blockContextData}>
-      {children}
+      {props.children}
     </BlockContext.Provider>
   )
 }
 
-export const useBlock = (): Context => {
+export const useBlock = (): Res => {
   const context = useContext(BlockContext)
 
   if (context === null) {

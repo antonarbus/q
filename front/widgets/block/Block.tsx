@@ -15,7 +15,7 @@ type Props = {
 
 export const Block = ({ block, blockIndex }: Props): ReactNode => {
   return (
-    <BlockProvider block={block} blockIndex={blockIndex}>
+    <BlockProvider item={block} index={blockIndex}>
       {block.type === itemType.text && <TextBlock />}
       {block.type === itemType.boq && <BoqBlock />}
       {block.type === itemType.price && <PriceBlock />}

@@ -15,7 +15,7 @@ import type { JSX, MouseEvent } from 'react'
 import { TbCut } from 'react-icons/tb'
 
 export const CutBlockIcon = (): JSX.Element => {
-  const { blockIndex } = useBlock()
+  const block = useBlock()
   const isBlockAlone = useSelector(selectIsLastBlock)
   const isCuttable = useSelector((state) => state.copy.isCuttable)
   const disabled = isBlockAlone || isCuttable === false
@@ -30,9 +30,9 @@ export const CutBlockIcon = (): JSX.Element => {
               return
             }
 
-            saveBlockHeightByIndex({ blockIndex })
+            saveBlockHeightByIndex({ blockIndex: block.index })
 
-            const blockToCut = getState().quotation.blocks[blockIndex]
+            const blockToCut = getState().quotation.blocks[block.index]
 
             if (blockToCut === undefined) {
               return
@@ -76,10 +76,10 @@ export const CutBlockIcon = (): JSX.Element => {
               window.scrollTo(scrollX, scrollY)
             })
 
-            const block = structuredClone(blockToCut)
-            block.preview = html
+            const blockCloned = structuredClone(blockToCut)
+            blockCloned.preview = html
 
-            dispatch(copySlice.actions.addItem({ item: block }))
+            dispatch(copySlice.actions.addItem({ item: blockCloned }))
 
             dispatch(
               quotationSlice.actions.deleteBlockReducer({ id: blockToCut.id }),

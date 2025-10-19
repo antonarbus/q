@@ -28,10 +28,10 @@ export const ResizableBlockPaper = ({
   onItemResizeStop,
   minWidth,
 }: Props): JSX.Element => {
-  const { blockIndex } = useBlock()
+  const block = useBlock()
 
   const width = useSelector(
-    (state) => state.quotation.blocks[blockIndex]?.width,
+    (state) => state.quotation.blocks[block.index]?.width,
   )
 
   const isWidthSetManually = width !== undefined
@@ -61,7 +61,7 @@ export const ResizableBlockPaper = ({
           direction,
           elementRef,
           delta,
-          blockIndex,
+          blockIndex: block.index,
         })()
       }}
       onResizeStart={(event, dir, elementRef): void => {
@@ -69,7 +69,7 @@ export const ResizableBlockPaper = ({
           event,
           dir,
           elementRef,
-          blockIndex,
+          blockIndex: block.index,
         })()
       }}
       onResizeStop={(event, direction, elementRef, delta): void => {
@@ -78,7 +78,7 @@ export const ResizableBlockPaper = ({
           direction,
           elementRef,
           delta,
-          blockIndex,
+          blockIndex: block.index,
         })()
       }}
       size={{

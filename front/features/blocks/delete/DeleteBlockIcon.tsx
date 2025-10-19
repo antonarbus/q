@@ -12,7 +12,7 @@ import type { JSX, MouseEvent } from 'react'
 import { GoTrash } from 'react-icons/go'
 
 export const DeleteBlockIcon = (): JSX.Element => {
-  const { blockIndex } = useBlock()
+  const block = useBlock()
 
   const isBlockAlone = useSelector(selectIsLastBlock)
   const isDeletable = useSelector((state) => state.copy.isDeletable)
@@ -38,7 +38,7 @@ export const DeleteBlockIcon = (): JSX.Element => {
               return
             }
 
-            const blockToDelete = getState().quotation.blocks[blockIndex]
+            const blockToDelete = getState().quotation.blocks[block.index]
 
             if (blockToDelete === undefined) {
               return

@@ -8,11 +8,11 @@ import { Box } from '@mui/material'
 import type { JSX } from 'react'
 
 export const NumberCell = (): JSX.Element => {
-  const { blockIndex } = useBlock()
+  const block = useBlock()
   const { rowIndex } = useRow()
 
   const { stylesForResizableCell } = useStylesForResizableCell({
-    blockIndex,
+    blockIndex: block.index,
     boqColumnKey: boqColumnKey.number,
     minWidth: `${columnMinWidth.number}px`,
   })
@@ -27,7 +27,8 @@ export const NumberCell = (): JSX.Element => {
         paddingBottom: '4px',
       }}
     >
-      {getNumberOfBoqBlocksAbove({ blockIndex }) + 1}.{rowIndex + 1}
+      {getNumberOfBoqBlocksAbove({ blockIndex: block.index }) + 1}.
+      {rowIndex + 1}
     </Box>
   )
 }

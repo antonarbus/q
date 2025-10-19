@@ -12,10 +12,13 @@ import { flushSync } from 'react-dom'
 import { GoTrash } from 'react-icons/go'
 
 export const DeleteBoqRowIcon = (): JSX.Element => {
-  const { blockIndex } = useBlock()
+  const block = useBlock()
   const { rowIndex } = useRow()
 
-  const isLastBoqRow = useSelector(selectIsLastBoqRow({ blockIndex }))
+  const isLastBoqRow = useSelector(
+    selectIsLastBoqRow({ blockIndex: block.index }),
+  )
+
   const isDeletable = useSelector((state) => state.copy.isDeletable)
   const disabled = isLastBoqRow || isDeletable === false
 
@@ -41,13 +44,15 @@ export const DeleteBoqRowIcon = (): JSX.Element => {
 
             flushSync(() => {
               dispatch(
-                quotationSlice.actions.disableFroalaReducer({ blockIndex }),
+                quotationSlice.actions.disableFroalaReducer({
+                  blockIndex: block.index,
+                }),
               )
             })
 
             dispatch(
               quotationSlice.actions.deleteBoqRowReducer({
-                blockIndex,
+                blockIndex: block.index,
                 rowIndex,
               }),
             )
@@ -64,7 +69,9 @@ export const DeleteBoqRowIcon = (): JSX.Element => {
               setTimeout(
                 () => {
                   dispatch(
-                    quotationSlice.actions.enableFroalaReducer({ blockIndex }),
+                    quotationSlice.actions.enableFroalaReducer({
+                      blockIndex: block.index,
+                    }),
                   )
                 },
                 1000 * theme.block.animationDuration + 500,

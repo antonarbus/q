@@ -8,11 +8,11 @@ import { useUpdateEffect } from 'react-use'
 import { roundTo } from 'round-to'
 
 export const useUpdateSubtotalPrice = (): void => {
-  const { blockIndex } = useBlock()
+  const block = useBlock()
   const { subTotalPriceEditorRef } = useBoq()
 
   const isBlockFroala = useSelector(
-    (state) => state.quotation.blocks[blockIndex]?.isFroala,
+    (state) => state.quotation.blocks[block.index]?.isFroala,
   )
 
   const isEditable = useSelector((state) => state.text.isEditable)
@@ -26,7 +26,7 @@ export const useUpdateSubtotalPrice = (): void => {
       return
     }
 
-    const boqRows = getBoqRowsFromStore({ blockIndex })
+    const boqRows = getBoqRowsFromStore({ blockIndex: block.index })
 
     if (boqRows === undefined) {
       return
@@ -45,7 +45,7 @@ export const useUpdateSubtotalPrice = (): void => {
 
     setTimeout(() => {
       updateSubTotalPriceWithValue({
-        blockIndex,
+        blockIndex: block.index,
         subTotalPriceEditor: subTotalPriceEditorRef.current,
         value: subTotalPriceValueNewRounded,
         incrementally: true,

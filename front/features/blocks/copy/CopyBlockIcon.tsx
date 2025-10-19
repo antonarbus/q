@@ -11,7 +11,7 @@ import type { JSX, MouseEvent } from 'react'
 import { MdCopyAll } from 'react-icons/md'
 
 export const CopyBlockIcon = (): JSX.Element => {
-  const { blockIndex } = useBlock()
+  const block = useBlock()
   const isCopyable = useSelector((state) => state.copy.isCopyable)
   const disabled = isCopyable === false
 
@@ -30,9 +30,9 @@ export const CopyBlockIcon = (): JSX.Element => {
               return
             }
 
-            saveBlockHeightByIndex({ blockIndex })
+            saveBlockHeightByIndex({ blockIndex: block.index })
 
-            const blockToCopy = getState().quotation.blocks[blockIndex]
+            const blockToCopy = getState().quotation.blocks[block.index]
 
             if (blockToCopy === undefined) {
               return
@@ -55,10 +55,10 @@ export const CopyBlockIcon = (): JSX.Element => {
               window.scrollTo(scrollX, scrollY)
             })
 
-            const block = structuredClone(blockToCopy)
-            block.preview = html
+            const blockCloned = structuredClone(blockToCopy)
+            blockCloned.preview = html
 
-            dispatch(copySlice.actions.addItem({ item: block }))
+            dispatch(copySlice.actions.addItem({ item: blockCloned }))
 
             dispatch(copySlice.actions.allowToPaste())
 

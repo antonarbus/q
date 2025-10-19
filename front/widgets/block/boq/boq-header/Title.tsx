@@ -11,15 +11,17 @@ const boqHeaderKey: HeaderKey = 'title'
 
 export const Title = (): JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)
-  const { blockIndex } = useBlock()
+  const block = useBlock()
 
   return (
     <Froala
       editorRef={editorRef}
-      htmlGetter={() => getBoqHeaderHtmlFromStore({ blockIndex, boqHeaderKey })}
+      htmlGetter={() =>
+        getBoqHeaderHtmlFromStore({ blockIndex: block.index, boqHeaderKey })
+      }
       onContentChange={() => {
         updateTitleCell({
-          blockIndex,
+          blockIndex: block.index,
           boqHeaderKey,
           editorRef,
         })

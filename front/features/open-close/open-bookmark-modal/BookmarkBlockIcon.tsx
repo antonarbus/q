@@ -14,7 +14,7 @@ import { toast } from 'sonner'
 
 export const BookmarkBlockIcon = (): ReactNode => {
   const navigate = useNavigate()
-  const { blockIndex } = useBlock()
+  const block = useBlock()
   const isCopyModalVisible = useIsCopyModalVisible()
   const disabled = isCopyModalVisible
 
@@ -42,21 +42,25 @@ export const BookmarkBlockIcon = (): ReactNode => {
               return
             }
 
-            const block = getBlockFromStore({ blockIndex })
+            const blockFromStore = getBlockFromStore({
+              blockIndex: block.index,
+            })
 
-            if (block === undefined) {
+            if (blockFromStore === undefined) {
               return
             }
 
-            if (block.type === itemType.paste) {
+            if (blockFromStore.type === itemType.paste) {
               return
             }
 
             dispatch(
-              quotationSlice.actions.loadBlockAtPosThousandReducer({ block }),
+              quotationSlice.actions.loadBlockAtPosThousandReducer({
+                block: blockFromStore,
+              }),
             )
 
-            void navigate(`./${route.bookmark}/${block.id}`)
+            void navigate(`./${route.bookmark}/${blockFromStore.id}`)
           }}
           style={{
             color: disabled === true ? '#acacac' : '#000',

@@ -12,7 +12,7 @@ import type { JSX, MouseEvent } from 'react'
 import { MdCopyAll } from 'react-icons/md'
 
 export const CopyBoqRowIcon = (): JSX.Element => {
-  const { blockIndex } = useBlock()
+  const block = useBlock()
   const { rowIndex } = useRow()
   const isCopyable = useSelector((state) => state.copy.isCopyable)
   const disabled = isCopyable === false
@@ -57,14 +57,17 @@ export const CopyBoqRowIcon = (): JSX.Element => {
 
             dispatch(
               quotationSlice.actions.updateBoqRowHeightAndWidthReducer({
-                blockIndex,
+                blockIndex: block.index,
                 rowIndex,
                 height: boqRowElement.clientHeight,
                 width: boqRowElement.clientWidth,
               }),
             )
 
-            const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
+            const boqRow = getBoqRowFromStore({
+              blockIndex: block.index,
+              rowIndex,
+            })
 
             if (boqRow === undefined) {
               return

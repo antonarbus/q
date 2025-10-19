@@ -4,7 +4,7 @@ import { motion } from 'motion/react'
 import type { JSX } from 'react'
 
 export const PasteItem = (): JSX.Element => {
-  const { block } = useBlock()
+  const block = useBlock()
 
   return (
     <motion.div
@@ -18,7 +18,7 @@ export const PasteItem = (): JSX.Element => {
         marginBottom: 0,
         opacity: 0,
       }}
-      id={block.id}
+      id={block.item.id}
       initial={{
         height: 0,
         marginBottom: 0,

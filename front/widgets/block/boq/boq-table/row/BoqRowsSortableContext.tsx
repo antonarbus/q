@@ -18,10 +18,10 @@ type Props = {
 }
 
 export const BoqRowsSortableContext = ({ children }: Props): JSX.Element => {
-  const { blockIndex } = useBlock()
+  const block = useBlock()
 
   const boqRows = useSelector(
-    selectBoqRows({ blockIndex }),
+    selectBoqRows({ blockIndex: block.index }),
     arrayShapesEqualityFn,
   )
 
@@ -33,8 +33,8 @@ export const BoqRowsSortableContext = ({ children }: Props): JSX.Element => {
     <DndContext
       autoScroll={{ layoutShiftCompensation: false }}
       collisionDetection={closestCenter}
-      onDragEnd={onBoqRowDragEnd({ blockIndex, boqRowIds })}
-      onDragStart={onBoqRowDragStart({ blockIndex })}
+      onDragEnd={onBoqRowDragEnd({ blockIndex: block.index, boqRowIds })}
+      onDragStart={onBoqRowDragStart({ blockIndex: block.index })}
       sensors={sensors}
     >
       <SortableContext items={boqRowIds} strategy={verticalListSortingStrategy}>

@@ -17,7 +17,7 @@ const boqHeaderKey: HeaderKey = 'subTotalPrice'
 
 export const SubTotalPrice = (): JSX.Element => {
   const { subTotalPriceEditorRef, boqRowEditorRefs } = useBoq()
-  const { blockIndex } = useBlock()
+  const block = useBlock()
 
   const hidePinsClickHandlerRef = useRef<(e: globalThis.MouseEvent) => void>(
     (event) => {
@@ -32,19 +32,24 @@ export const SubTotalPrice = (): JSX.Element => {
   return (
     <Froala
       editorRef={subTotalPriceEditorRef}
-      htmlGetter={() => getBoqHeaderHtmlFromStore({ blockIndex, boqHeaderKey })}
+      htmlGetter={() =>
+        getBoqHeaderHtmlFromStore({ blockIndex: block.index, boqHeaderKey })
+      }
       onBlur={() => {
-        formatSubtotalPriceCell({ blockIndex, subTotalPriceEditorRef })
+        formatSubtotalPriceCell({
+          blockIndex: block.index,
+          subTotalPriceEditorRef,
+        })
 
         validateBoqRowPrices({
-          blockIndex,
+          blockIndex: block.index,
           boqRowEditorRefs,
           subTotalPriceEditorRef,
         })
       }}
       onClick={(event: MouseEvent) => {
         showHideBoqPricePins({
-          blockIndex,
+          blockIndex: block.index,
           event: event.nativeEvent,
           hidePinsClickHandlerRef,
           isInitClickRef,
@@ -52,7 +57,7 @@ export const SubTotalPrice = (): JSX.Element => {
       }}
       onContentChange={() => {
         updateSubtotalPriceCell({
-          blockIndex,
+          blockIndex: block.index,
           boqRowEditorRefs,
           subTotalPriceEditorRef,
         })

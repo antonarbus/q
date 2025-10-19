@@ -26,7 +26,7 @@ import { Box } from '@mui/material'
 import type { JSX, MouseEvent } from 'react'
 
 export const PriceCell = (): JSX.Element => {
-  const { blockIndex } = useBlock()
+  const block = useBlock()
 
   const {
     rowIndex,
@@ -38,7 +38,7 @@ export const PriceCell = (): JSX.Element => {
   const { subTotalPriceEditorRef, boqRowEditorRefs } = useBoq()
 
   const { stylesForResizableCell } = useStylesForResizableCell({
-    blockIndex,
+    blockIndex: block.index,
     boqColumnKey: boqColumnKey.price,
     minWidth: `${columnMinWidth.price}px`,
   })
@@ -50,20 +50,20 @@ export const PriceCell = (): JSX.Element => {
         editorRef={priceCellEditorRef}
         htmlGetter={() =>
           getBoqCellHtmlFromStore({
-            blockIndex,
+            blockIndex: block.index,
             boqRowCellKey: boqRowCellKey.price,
             rowIndex,
           })
         }
         onBlur={() => {
           formatBoqRowPriceCell({
-            blockIndex,
+            blockIndex: block.index,
             priceCellEditorRef,
             rowIndex,
           })
 
           validateBoqRowPrice({
-            blockIndex,
+            blockIndex: block.index,
             priceCellEditorRef,
             rowIndex,
             subTotalPriceEditorRef,
@@ -71,7 +71,7 @@ export const PriceCell = (): JSX.Element => {
         }}
         onContentChange={() => {
           updateBoqRowPriceCell({
-            blockIndex,
+            blockIndex: block.index,
             itemPriceCellEditorRef,
             priceCellEditorRef,
             qtyCellEditorRef,
@@ -80,7 +80,7 @@ export const PriceCell = (): JSX.Element => {
           })
         }}
         onFocus={() => {
-          showBoqRowPins({ blockIndex, rowIndex })
+          showBoqRowPins({ blockIndex: block.index, rowIndex })
         }}
         onKeydown={(event) => {
           tabFromPriceCell({
@@ -98,7 +98,7 @@ export const PriceCell = (): JSX.Element => {
         boqRowCellKey={boqRowCellKey.price}
         onClick={(event: MouseEvent) => {
           event.preventDefault() // otherwise form is submitted (no idea why)
-          pinBoqRowPriceCell({ blockIndex, rowIndex })
+          pinBoqRowPriceCell({ blockIndex: block.index, rowIndex })
         }}
       />
     </Box>

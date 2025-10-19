@@ -22,7 +22,7 @@ import { type JSX, useRef } from 'react'
 
 export const TextBlock = (): JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)
-  const { blockIndex } = useBlock()
+  const block = useBlock()
 
   return (
     <BlockComp
@@ -48,9 +48,11 @@ export const TextBlock = (): JSX.Element => {
         beforeUpload={beforeUpload}
         droppable
         editorRef={editorRef}
-        htmlGetter={() => getTextBlockHtmlFromStore({ blockIndex })}
+        htmlGetter={() =>
+          getTextBlockHtmlFromStore({ blockIndex: block.index })
+        }
         onContentChange={() => {
-          updateTextBlock({ editorRef, blockIndex })
+          updateTextBlock({ editorRef, blockIndex: block.index })
         }}
         placeholder='Add text, tables, drop images, files, links, select to format...'
         style={textItemCellStyle}

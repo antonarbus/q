@@ -21,12 +21,12 @@ import { Box } from '@mui/material'
 import type { JSX, MouseEvent } from 'react'
 
 export const QtyCell = (): JSX.Element => {
-  const { blockIndex } = useBlock()
+  const block = useBlock()
   const { subTotalPriceEditorRef } = useBoq()
   const { rowIndex, qtyCellEditorRef, priceCellEditorRef } = useRow()
 
   const { stylesForResizableCell } = useStylesForResizableCell({
-    blockIndex,
+    blockIndex: block.index,
     boqColumnKey: boqColumnKey.qty,
     minWidth: `${columnMinWidth.qty}px`,
   })
@@ -38,17 +38,21 @@ export const QtyCell = (): JSX.Element => {
         editorRef={qtyCellEditorRef}
         htmlGetter={() =>
           getBoqCellHtmlFromStore({
-            blockIndex,
+            blockIndex: block.index,
             rowIndex,
             boqRowCellKey: boqRowCellKey.qty,
           })
         }
         onBlur={() => {
-          formatBoqRowQtyCell({ blockIndex, qtyCellEditorRef, rowIndex })
+          formatBoqRowQtyCell({
+            blockIndex: block.index,
+            qtyCellEditorRef,
+            rowIndex,
+          })
         }}
         onContentChange={() => {
           updateBoqRowQtyCell({
-            blockIndex,
+            blockIndex: block.index,
             priceCellEditorRef,
             qtyCellEditorRef,
             rowIndex,
@@ -67,7 +71,7 @@ export const QtyCell = (): JSX.Element => {
         boqRowCellKey={boqRowCellKey.qty}
         onClick={(event: MouseEvent) => {
           event.preventDefault() // otherwise form is submitted (no idea why)
-          pinBoqRowQtyCell({ blockIndex, rowIndex })
+          pinBoqRowQtyCell({ blockIndex: block.index, rowIndex })
         }}
       />
     </Box>
