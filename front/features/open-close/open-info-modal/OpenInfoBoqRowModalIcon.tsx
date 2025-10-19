@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom'
 export const OpenInfoBoqRowModalIcon = (): ReactNode => {
   const navigate = useNavigate()
   const block = useBlock()
-  const { rowIndex } = useRow()
+  const row = useRow()
   const isisCopyModalVisible = useIsCopyModalVisible()
   const disabled = isisCopyModalVisible
 
@@ -34,7 +34,7 @@ export const OpenInfoBoqRowModalIcon = (): ReactNode => {
             }
 
             const boqRow = getBoqRowFromStore({
-              rowIndex,
+              rowIndex: row.index,
               blockIndex: block.index,
             })
 

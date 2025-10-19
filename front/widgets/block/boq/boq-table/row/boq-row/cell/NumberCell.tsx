@@ -9,7 +9,7 @@ import type { JSX } from 'react'
 
 export const NumberCell = (): JSX.Element => {
   const block = useBlock()
-  const { rowIndex } = useRow()
+  const row = useRow()
 
   const { stylesForResizableCell } = useStylesForResizableCell({
     blockIndex: block.index,
@@ -28,7 +28,7 @@ export const NumberCell = (): JSX.Element => {
       }}
     >
       {getNumberOfBoqBlocksAbove({ blockIndex: block.index }) + 1}.
-      {rowIndex + 1}
+      {row.index + 1}
     </Box>
   )
 }

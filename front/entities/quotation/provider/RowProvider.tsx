@@ -1,5 +1,6 @@
 import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import {
+  type Context,
   createContext,
   type JSX,
   type ReactNode,
@@ -10,25 +11,21 @@ import type { Row } from '../type'
 import { useBoq } from './BoqBlockProvider'
 
 type Props = {
-  rowIndex: number
-  row: Row
+  index: number
+  item: Row
   children: ReactNode
 }
 
-type Context = Omit<Props, 'children'> & {
+type Res = Omit<Props, 'children'> & {
   descriptionEditorRef: FroalaEditorRef
   itemPriceCellEditorRef: FroalaEditorRef
   qtyCellEditorRef: FroalaEditorRef
   priceCellEditorRef: FroalaEditorRef
 }
 
-const RowContext = createContext<Context | null>(null)
+const RowContext: Context<Res | null> = createContext<Res | null>(null)
 
-export const RowProvider = ({
-  children,
-  rowIndex,
-  row,
-}: Props): JSX.Element => {
+export const RowProvider = (props: Props): JSX.Element => {
   const boq = useBoq()
 
   const rowCellEditorRef = useMemo(() => {
@@ -40,7 +37,7 @@ export const RowProvider = ({
     }
   }, [])
 
-  boq.boqRowEditorRefs[rowIndex] = {
+  boq.boqRowEditorRefs[props.index] = {
     description: rowCellEditorRef.descriptionEditorRef,
     itemPrice: rowCellEditorRef.itemPriceCellEditorRef,
     qty: rowCellEditorRef.qtyCellEditorRef,
@@ -49,8 +46,8 @@ export const RowProvider = ({
 
   const rowContextData = useMemo(() => {
     const context = {
-      rowIndex,
-      row,
+      index: props.index,
+      item: props.item,
       descriptionEditorRef: rowCellEditorRef.descriptionEditorRef,
       itemPriceCellEditorRef: rowCellEditorRef.itemPriceCellEditorRef,
       qtyCellEditorRef: rowCellEditorRef.qtyCellEditorRef,
@@ -58,14 +55,16 @@ export const RowProvider = ({
     }
 
     return context
-  }, [rowIndex, row, boq.boqRowEditorRefs])
+  }, [props.index, props.item, boq.boqRowEditorRefs])
 
   return (
-    <RowContext.Provider value={rowContextData}>{children}</RowContext.Provider>
+    <RowContext.Provider value={rowContextData}>
+      {props.children}
+    </RowContext.Provider>
   )
 }
 
-export const useRow = (): Context => {
+export const useRow = (): Res => {
   const context = useContext(RowContext)
 
   if (context === null) {

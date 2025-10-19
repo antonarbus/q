@@ -30,7 +30,7 @@ export const BoqRows = (): JSX.Element => {
           {boqRows.map((boqRow, rowIndex) => {
             if (boqRow.type === boqRowKey.row) {
               return (
-                <RowProvider key={boqRow.id} row={boqRow} rowIndex={rowIndex}>
+                <RowProvider key={boqRow.id} item={boqRow} index={rowIndex}>
                   <BoqRowAnimate>
                     <BoqRowSortable>
                       <BoqRow

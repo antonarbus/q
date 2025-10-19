@@ -23,7 +23,7 @@ import type { JSX, MouseEvent } from 'react'
 export const QtyCell = (): JSX.Element => {
   const block = useBlock()
   const boq = useBoq()
-  const { rowIndex, qtyCellEditorRef, priceCellEditorRef } = useRow()
+  const row = useRow()
 
   const { stylesForResizableCell } = useStylesForResizableCell({
     blockIndex: block.index,
@@ -35,32 +35,36 @@ export const QtyCell = (): JSX.Element => {
     <Box sx={{ display: 'flex', position: 'relative' }}>
       <Froala
         className={`td ${boqRowCellKey.qty}`}
-        editorRef={qtyCellEditorRef}
+        editorRef={row.qtyCellEditorRef}
         htmlGetter={() =>
           getBoqCellHtmlFromStore({
             blockIndex: block.index,
-            rowIndex,
+            rowIndex: row.index,
             boqRowCellKey: boqRowCellKey.qty,
           })
         }
         onBlur={() => {
           formatBoqRowQtyCell({
             blockIndex: block.index,
-            qtyCellEditorRef,
-            rowIndex,
+            qtyCellEditorRef: row.qtyCellEditorRef,
+            rowIndex: row.index,
           })
         }}
         onContentChange={() => {
           updateBoqRowQtyCell({
             blockIndex: block.index,
-            priceCellEditorRef,
-            qtyCellEditorRef,
-            rowIndex,
+            priceCellEditorRef: row.priceCellEditorRef,
+            qtyCellEditorRef: row.qtyCellEditorRef,
+            rowIndex: row.index,
             subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
           })
         }}
         onKeydown={(event) => {
-          tabFromQtyCell({ event, rowIndex, priceCellEditorRef })
+          tabFromQtyCell({
+            event,
+            rowIndex: row.index,
+            priceCellEditorRef: row.priceCellEditorRef,
+          })
         }}
         placeholder='Qty...'
         style={boqRowCellStyle}
@@ -71,7 +75,7 @@ export const QtyCell = (): JSX.Element => {
         boqRowCellKey={boqRowCellKey.qty}
         onClick={(event: MouseEvent) => {
           event.preventDefault() // otherwise form is submitted (no idea why)
-          pinBoqRowQtyCell({ blockIndex: block.index, rowIndex })
+          pinBoqRowQtyCell({ blockIndex: block.index, rowIndex: row.index })
         }}
       />
     </Box>

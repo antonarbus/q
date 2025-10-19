@@ -8,10 +8,10 @@ import { MdDragIndicator } from 'react-icons/md'
 
 export const DragBoqRowIcon = (): JSX.Element => {
   const disabled = useIsBoqRowSortDisabled()
-  const { row } = useRow()
+  const row = useRow()
 
   const { listeners } = useSortable({
-    id: row.id,
+    id: row.item.id,
     disabled,
   })
 

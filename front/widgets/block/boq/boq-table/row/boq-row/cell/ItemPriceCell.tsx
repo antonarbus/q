@@ -23,13 +23,7 @@ import type { JSX, MouseEvent } from 'react'
 export const ItemPriceCell = (): JSX.Element => {
   const block = useBlock()
   const boq = useBoq()
-
-  const {
-    rowIndex,
-    itemPriceCellEditorRef,
-    priceCellEditorRef,
-    qtyCellEditorRef,
-  } = useRow()
+  const row = useRow()
 
   const { stylesForResizableCell } = useStylesForResizableCell({
     blockIndex: block.index,
@@ -41,35 +35,35 @@ export const ItemPriceCell = (): JSX.Element => {
     <Box sx={{ display: 'flex', position: 'relative' }}>
       <Froala
         className={`td ${boqRowCellKey.itemPrice}`}
-        editorRef={itemPriceCellEditorRef}
+        editorRef={row.itemPriceCellEditorRef}
         htmlGetter={() =>
           getBoqCellHtmlFromStore({
             blockIndex: block.index,
             boqRowCellKey: boqRowCellKey.itemPrice,
-            rowIndex,
+            rowIndex: row.index,
           })
         }
         onBlur={() => {
           formatBoqRowItemPriceCell({
             blockIndex: block.index,
-            itemPriceCellEditorRef,
-            rowIndex,
+            itemPriceCellEditorRef: row.itemPriceCellEditorRef,
+            rowIndex: row.index,
           })
         }}
         onContentChange={() => {
           updateBoqRowItemPriceCell({
             blockIndex: block.index,
-            itemPriceCellEditorRef,
-            priceCellEditorRef,
-            rowIndex,
+            itemPriceCellEditorRef: row.itemPriceCellEditorRef,
+            priceCellEditorRef: row.priceCellEditorRef,
+            rowIndex: row.index,
             subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
           })
         }}
         onKeydown={(event) => {
           tabFromItemPriceCell({
             event,
-            qtyCellEditorRef,
-            rowIndex,
+            qtyCellEditorRef: row.qtyCellEditorRef,
+            rowIndex: row.index,
           })
         }}
         placeholder='Item price...'
@@ -81,7 +75,10 @@ export const ItemPriceCell = (): JSX.Element => {
         boqRowCellKey={boqRowCellKey.itemPrice}
         onClick={(event: MouseEvent) => {
           event.preventDefault() // otherwise form is submitted (no idea why)
-          pinBoqRowItemPriceCell({ blockIndex: block.index, rowIndex })
+          pinBoqRowItemPriceCell({
+            blockIndex: block.index,
+            rowIndex: row.index,
+          })
         }}
       />
     </Box>

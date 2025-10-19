@@ -15,7 +15,7 @@ import { TbCut } from 'react-icons/tb'
 
 export const CutBoqRowIcon = (): JSX.Element => {
   const block = useBlock()
-  const { rowIndex } = useRow()
+  const row = useRow()
   const isCopyable = useSelector((state) => state.copy.isCopyable)
   const isLastBoqRow = useSelector(
     selectIsLastBoqRow({ blockIndex: block.index }),
@@ -59,7 +59,7 @@ export const CutBoqRowIcon = (): JSX.Element => {
             dispatch(
               quotationSlice.actions.updateBoqRowHeightAndWidthReducer({
                 blockIndex: block.index,
-                rowIndex,
+                rowIndex: row.index,
                 height: boqRowElement.clientHeight,
                 width: boqRowElement.clientWidth,
               }),
@@ -67,7 +67,7 @@ export const CutBoqRowIcon = (): JSX.Element => {
 
             const boqRow = getBoqRowFromStore({
               blockIndex: block.index,
-              rowIndex,
+              rowIndex: row.index,
             })
 
             if (boqRow === undefined) {
@@ -97,7 +97,7 @@ export const CutBoqRowIcon = (): JSX.Element => {
             dispatch(
               quotationSlice.actions.deleteBoqRowReducer({
                 blockIndex: block.index,
-                rowIndex,
+                rowIndex: row.index,
               }),
             )
 

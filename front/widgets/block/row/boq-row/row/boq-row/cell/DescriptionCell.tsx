@@ -12,7 +12,7 @@ import { beforeUpload } from '@features/file/upload-file'
 import type { JSX } from 'react'
 
 export const DescriptionCell = (): JSX.Element => {
-  const { descriptionEditorRef } = useRow()
+  const row = useRow()
 
   const { stylesForResizableCell } = useStylesForResizableCell({
     blockIndex: BOOKMARK_POS_AT_BLOCKS,
@@ -24,13 +24,13 @@ export const DescriptionCell = (): JSX.Element => {
     <Froala
       beforeUpload={beforeUpload}
       className={`td ${boqRowCellKey.description}`}
-      editorRef={descriptionEditorRef}
+      editorRef={row.descriptionEditorRef}
       htmlGetter={() =>
         getRowCellHtmlFromStore({ boqRowCellKey: boqRowCellKey.description })
       }
       onContentChange={() => {
         updateDescriptionCell({
-          editorRef: descriptionEditorRef,
+          editorRef: row.descriptionEditorRef,
         })
       }}
       placeholder='Description...'

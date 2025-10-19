@@ -15,10 +15,14 @@ type Props = {
 
 export const Pin = ({ boqRowCellKey, onClick }: Props): ReactNode => {
   const block = useBlock()
-  const { rowIndex } = useRow()
+  const row = useRow()
 
   const pin = useSelector(
-    selectBoqCellPin({ blockIndex: block.index, rowIndex, boqRowCellKey }),
+    selectBoqCellPin({
+      blockIndex: block.index,
+      rowIndex: row.index,
+      boqRowCellKey,
+    }),
   )
 
   if (pin === undefined) {

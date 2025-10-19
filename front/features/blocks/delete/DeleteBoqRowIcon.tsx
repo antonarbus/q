@@ -13,7 +13,7 @@ import { GoTrash } from 'react-icons/go'
 
 export const DeleteBoqRowIcon = (): JSX.Element => {
   const block = useBlock()
-  const { rowIndex } = useRow()
+  const row = useRow()
 
   const isLastBoqRow = useSelector(
     selectIsLastBoqRow({ blockIndex: block.index }),
@@ -53,7 +53,7 @@ export const DeleteBoqRowIcon = (): JSX.Element => {
             dispatch(
               quotationSlice.actions.deleteBoqRowReducer({
                 blockIndex: block.index,
-                rowIndex,
+                rowIndex: row.index,
               }),
             )
 

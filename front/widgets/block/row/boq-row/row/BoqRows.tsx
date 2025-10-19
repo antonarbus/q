@@ -13,7 +13,7 @@ export const BoqRows = (): ReactNode => {
   }
 
   return (
-    <RowProvider key={block.id} row={block} rowIndex={0}>
+    <RowProvider key={block.id} item={block} index={0}>
       <BoqRow
         onBlur={(event) => {
           hideBoqRowPinsOnRowBlur({

@@ -16,7 +16,7 @@ import { toast } from 'sonner'
 export const BookmarkBoqRowIcon = (): ReactNode => {
   const navigate = useNavigate()
   const block = useBlock()
-  const { rowIndex } = useRow()
+  const row = useRow()
   const isCopyModalVisible = useIsCopyModalVisible()
   const disabled = isCopyModalVisible
 
@@ -57,7 +57,7 @@ export const BookmarkBoqRowIcon = (): ReactNode => {
             }
 
             const boqRow = getBoqRowFromStore({
-              rowIndex,
+              rowIndex: row.index,
               blockIndex: block.index,
             })
 

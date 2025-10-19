@@ -16,7 +16,7 @@ import { Box } from '@mui/material'
 import type { JSX } from 'react'
 
 export const PriceCell = (): JSX.Element => {
-  const { priceCellEditorRef, itemPriceCellEditorRef } = useRow()
+  const row = useRow()
 
   const { stylesForResizableCell } = useStylesForResizableCell({
     blockIndex: BOOKMARK_POS_AT_BLOCKS,
@@ -28,17 +28,17 @@ export const PriceCell = (): JSX.Element => {
     <Box sx={{ display: 'flex', position: 'relative' }}>
       <Froala
         className={`td ${boqRowCellKey.price}`}
-        editorRef={priceCellEditorRef}
+        editorRef={row.priceCellEditorRef}
         htmlGetter={() =>
           getRowCellHtmlFromStore({ boqRowCellKey: boqRowCellKey.price })
         }
         onBlur={() => {
-          formatPriceCell({ priceCellEditorRef })
+          formatPriceCell({ priceCellEditorRef: row.priceCellEditorRef })
         }}
         onContentChange={() => {
           updatePriceCell({
-            itemPriceCellEditorRef,
-            priceCellEditorRef,
+            itemPriceCellEditorRef: row.itemPriceCellEditorRef,
+            priceCellEditorRef: row.priceCellEditorRef,
           })
         }}
         placeholder='Price...'

@@ -10,12 +10,12 @@ type Props = {
 }
 
 export const BoqRowLayout = ({ children, onBlur }: Props): JSX.Element => {
-  const { row } = useRow()
+  const row = useRow()
 
   return (
     <Box
       className={cls.boqRow}
-      id={row.id}
+      id={row.item.id}
       onBlur={(event) => {
         onBlur(event)
       }}

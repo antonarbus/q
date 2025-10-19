@@ -14,7 +14,7 @@ import type { JSX, KeyboardEvent } from 'react'
 
 export const DescriptionCell = (): JSX.Element => {
   const block = useBlock()
-  const { rowIndex, itemPriceCellEditorRef, descriptionEditorRef } = useRow()
+  const row = useRow()
 
   const { stylesForResizableCell } = useStylesForResizableCell({
     blockIndex: block.index,
@@ -27,27 +27,27 @@ export const DescriptionCell = (): JSX.Element => {
       beforeUpload={beforeUpload}
       className={`td ${boqRowCellKey.description}`}
       droppable
-      editorRef={descriptionEditorRef}
+      editorRef={row.descriptionEditorRef}
       htmlGetter={() =>
         getBoqCellHtmlFromStore({
           blockIndex: block.index,
           boqRowCellKey: boqRowCellKey.description,
-          rowIndex,
+          rowIndex: row.index,
         })
       }
       onContentChange={() => {
         updateDescriptionCell({
           blockIndex: block.index,
           boqRowCellKey: boqRowCellKey.description,
-          editorRef: descriptionEditorRef,
-          rowIndex,
+          editorRef: row.descriptionEditorRef,
+          rowIndex: row.index,
         })
       }}
       onKeydown={(event: KeyboardEvent) => {
         tabFromDescriptionCell({
           event,
-          itemPriceCellEditorRef,
-          rowIndex,
+          itemPriceCellEditorRef: row.itemPriceCellEditorRef,
+          rowIndex: row.index,
         })
       }}
       placeholder='Description...'

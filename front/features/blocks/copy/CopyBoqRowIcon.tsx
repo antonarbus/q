@@ -13,7 +13,7 @@ import { MdCopyAll } from 'react-icons/md'
 
 export const CopyBoqRowIcon = (): JSX.Element => {
   const block = useBlock()
-  const { rowIndex } = useRow()
+  const row = useRow()
   const isCopyable = useSelector((state) => state.copy.isCopyable)
   const disabled = isCopyable === false
 
@@ -58,7 +58,7 @@ export const CopyBoqRowIcon = (): JSX.Element => {
             dispatch(
               quotationSlice.actions.updateBoqRowHeightAndWidthReducer({
                 blockIndex: block.index,
-                rowIndex,
+                rowIndex: row.index,
                 height: boqRowElement.clientHeight,
                 width: boqRowElement.clientWidth,
               }),
@@ -66,7 +66,7 @@ export const CopyBoqRowIcon = (): JSX.Element => {
 
             const boqRow = getBoqRowFromStore({
               blockIndex: block.index,
-              rowIndex,
+              rowIndex: row.index,
             })
 
             if (boqRow === undefined) {
