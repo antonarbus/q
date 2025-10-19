@@ -1,1 +1,1 @@
-export { BoqRows } from './BoqRows'
+export { Rows } from './Rows'

@@ -2,7 +2,7 @@ import type { CellKey } from '@entities/quotation/const/cellKey'
 import { dispatch } from '@shared/lib/redux'
 import { getNumberFromString } from '@shared/util/getNumberFromString'
 import { getTextContentFromHtml } from '@shared/util/getTextContentFromHtml'
-import { getBoqRowFromStore } from '../getter/getBoqRowFromStore'
+import { getRowFromStore } from '../getter/getRowFromStore'
 import { quotationSlice } from '../quotationSlice'
 
 type Props = {
@@ -22,7 +22,7 @@ export const updateCellAtStore = ({
   rowIndex,
   cellKey,
 }: Props): Res => {
-  const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
+  const boqRow = getRowFromStore({ blockIndex, rowIndex })
 
   if (boqRow === undefined) {
     return {

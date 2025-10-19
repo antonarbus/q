@@ -1,0 +1,46 @@
+import type { DragEndEvent, DragStartEvent } from '@dnd-kit/core'
+import { getRowsFromStore } from '@entities/quotation/redux/getter/getRowsFromStore'
+import { quotationSlice } from '@entities/quotation/redux/quotationSlice'
+import { dispatch } from '@shared/lib/redux'
+import { arrayMoveImmutable } from 'array-move'
+
+export const onRowDragStart =
+  ({ blockIndex }: { blockIndex: number }) =>
+  (_event: DragStartEvent): void => {
+    document.body.style.cursor = 'move'
+    dispatch(quotationSlice.actions.disableFroalaReducer({ blockIndex }))
+  }
+
+export const onRowDragEnd =
+  ({ blockIndex, boqRowIds }: { blockIndex: number; boqRowIds: string[] }) =>
+  (event: DragEndEvent): void => {
+    const { active, over } = event
+
+    dispatch(quotationSlice.actions.enableFroalaReducer({ blockIndex }))
+    document.body.style.removeProperty('cursor')
+
+    if (over === null) {
+      return
+    }
+
+    if (active.id === over.id) {
+      return
+    }
+
+    const oldIndex = boqRowIds.indexOf(String(active.id))
+    const newIndex = boqRowIds.indexOf(String(over.id))
+    const boqRows = getRowsFromStore({ blockIndex })
+
+    if (boqRows === undefined) {
+      return
+    }
+
+    const reOrderedBoqRows = arrayMoveImmutable(boqRows, oldIndex, newIndex)
+
+    dispatch(
+      quotationSlice.actions.reOrderBoqRowsReducer({
+        reOrderedBoqRows,
+        blockIndex,
+      }),
+    )
+  }

@@ -4,13 +4,13 @@ import { getBoqHeaderHtmlFromStore } from '@entities/quotation/redux/getter/getB
 import { subTotalPriceCellStyle } from '@entities/quotation/style/subTotalPriceCellStyle'
 import type { HeaderKey } from '@entities/quotation/type'
 import { Froala } from '@entities/quotation/ui/froala/Froala'
-import { showHideBoqPricePins } from '@features/blocks/cell/pin'
+import { showHidePricePins } from '@features/blocks/pin'
 import {
-  formatSubtotalPriceCell,
-  updateSubtotalPriceCell,
-  useUpdateSubtotalPrice,
-  validateBoqRowPrices,
-} from '@features/blocks/cell/update-cell'
+  formatSubtotalPrice,
+  updateSubtotalPrice,
+  useUpdateSubtotal,
+  validatePrices,
+} from '@features/blocks/update'
 import { type JSX, type MouseEvent, useRef } from 'react'
 
 const boqHeaderKey: HeaderKey = 'subTotalPrice'
@@ -27,7 +27,7 @@ export const SubTotalPrice = (): JSX.Element => {
 
   const isInitClickRef = useRef(true)
 
-  useUpdateSubtotalPrice()
+  useUpdateSubtotal()
 
   return (
     <Froala
@@ -36,19 +36,19 @@ export const SubTotalPrice = (): JSX.Element => {
         getBoqHeaderHtmlFromStore({ blockIndex: block.index, boqHeaderKey })
       }
       onBlur={() => {
-        formatSubtotalPriceCell({
+        formatSubtotalPrice({
           blockIndex: block.index,
           subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
         })
 
-        validateBoqRowPrices({
+        validatePrices({
           blockIndex: block.index,
           boqRowEditorRefs: boq.boqRowEditorRefs,
           subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
         })
       }}
       onClick={(event: MouseEvent) => {
-        showHideBoqPricePins({
+        showHidePricePins({
           blockIndex: block.index,
           event: event.nativeEvent,
           hidePinsClickHandlerRef,
@@ -56,7 +56,7 @@ export const SubTotalPrice = (): JSX.Element => {
         })
       }}
       onContentChange={() => {
-        updateSubtotalPriceCell({
+        updateSubtotalPrice({
           blockIndex: block.index,
           boqRowEditorRefs: boq.boqRowEditorRefs,
           subTotalPriceEditorRef: boq.subTotalPriceEditorRef,

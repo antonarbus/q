@@ -3,7 +3,6 @@ import { getTextBlockHtmlFromStore } from '@entities/quotation/redux/getter/getT
 import { textItemCellStyle } from '@entities/quotation/style/textItemCellStyle'
 import { BlockComp } from '@entities/quotation/ui/BlockComp'
 import { Froala } from '@entities/quotation/ui/froala/Froala'
-import { updateTextBlock } from '@features/blocks/cell/update-cell'
 import { CopyBlockIcon } from '@features/blocks/copy'
 import { CutBlockIcon } from '@features/blocks/cut'
 import { DeleteBlockIcon } from '@features/blocks/delete'
@@ -12,6 +11,7 @@ import {
   onTextBlockResizeStart,
   onTextBlockResizeStop,
 } from '@features/blocks/resize'
+import { updateTextBlock } from '@features/blocks/update'
 import { beforeUpload } from '@features/file/upload-file'
 import { BookmarkBlockIcon } from '@features/open-close/open-bookmark-modal'
 import { OpenInfoBlockModalIcon } from '@features/open-close/open-info-modal'

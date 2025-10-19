@@ -3,7 +3,7 @@ import { getBoqHeaderHtmlFromStore } from '@entities/quotation/redux/getter/getB
 import { titleCellStyle } from '@entities/quotation/style/titleCellStyle'
 import type { HeaderKey } from '@entities/quotation/type'
 import { Froala } from '@entities/quotation/ui/froala/Froala'
-import { updateTitleCell } from '@features/blocks/cell/update-cell'
+import { updateTitle } from '@features/blocks/update'
 import type { FroalaEditor } from '@shared/lib/froala/froala'
 import { type JSX, useRef } from 'react'
 
@@ -20,7 +20,7 @@ export const Title = (): JSX.Element => {
         getBoqHeaderHtmlFromStore({ blockIndex: block.index, boqHeaderKey })
       }
       onContentChange={() => {
-        updateTitleCell({
+        updateTitle({
           blockIndex: block.index,
           boqHeaderKey,
           editorRef,

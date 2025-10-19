@@ -1,6 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { Quotation } from '../../type'
-import { getBoqRowsFromState } from '../getter/getBoqRowsFromState'
+import { getRowsFromState } from '../getter/getRowsFromState'
 
 export const showBoqPriceCellPinsReducer = (
   state: Quotation,
@@ -9,7 +9,7 @@ export const showBoqPriceCellPinsReducer = (
   }>,
 ): void => {
   const { blockIndex } = action.payload
-  const boqRows = getBoqRowsFromState({ blockIndex, state })
+  const boqRows = getRowsFromState({ blockIndex, state })
 
   if (boqRows === undefined) {
     return

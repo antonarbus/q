@@ -1,6 +1,6 @@
 import { copySlice } from '@entities/copy/copySlice'
-import { boqRowKey } from '@entities/quotation/const/boqRowKey'
 import { itemType } from '@entities/quotation/const/itemType'
+import { rowTypeKey } from '@entities/quotation/const/rowTypeKey'
 import type { Boq } from '@entities/quotation/type'
 
 import { textSlice } from '@shared/lib/froala/textSlice'
@@ -355,7 +355,7 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
       rows: [
         {
           id: generateId(),
-          type: boqRowKey.row,
+          type: rowTypeKey.row,
           email: 'john@mail.com',
           height: 0,
           width: 0,
@@ -394,7 +394,7 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
         },
         {
           id: generateId(),
-          type: boqRowKey.row,
+          type: rowTypeKey.row,
           email: 'john@mail.com',
           height: 0,
           width: 0,
@@ -433,7 +433,7 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
         },
         {
           id: generateId(),
-          type: boqRowKey.row,
+          type: rowTypeKey.row,
           email: 'john@mail.com',
           height: 0,
           width: 0,

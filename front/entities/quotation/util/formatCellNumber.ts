@@ -3,7 +3,7 @@ import { dispatch } from '@shared/lib/redux'
 import { getStringWithNewFormattedNumber } from '@shared/util/getStringWithNewFormattedNumber'
 import { roundTo } from 'round-to'
 import type { CellKey } from '../const/cellKey'
-import { getBoqRowFromStore } from '../redux/getter/getBoqRowFromStore'
+import { getRowFromStore } from '../redux/getter/getRowFromStore'
 import { quotationSlice } from '../redux/quotationSlice'
 
 type Props = {
@@ -31,7 +31,7 @@ export const formatCellNumber = ({
     }
   }
 
-  const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
+  const boqRow = getRowFromStore({ blockIndex, rowIndex })
 
   if (boqRow === undefined) {
     return {

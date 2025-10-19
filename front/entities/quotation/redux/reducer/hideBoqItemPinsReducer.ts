@@ -1,6 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { Quotation } from '../../type'
-import { getBoqRowsFromState } from '../getter/getBoqRowsFromState'
+import { getRowsFromState } from '../getter/getRowsFromState'
 
 export const hideBoqItemPinsReducer = (
   state: Quotation,
@@ -9,7 +9,7 @@ export const hideBoqItemPinsReducer = (
   }>,
 ): void => {
   const { blockIndex } = action.payload
-  const boqRowRows = getBoqRowsFromState({ blockIndex, state })
+  const boqRowRows = getRowsFromState({ blockIndex, state })
 
   if (boqRowRows === undefined) {
     return

@@ -1,4 +1,4 @@
 export { insertBoqBlock } from './insertBoqBlock'
-export { insertBoqRow } from './insertBoqRow'
 export { insertPriceBlock } from './insertPriceBlock'
+export { insertRow } from './insertRow'
 export { insertTextBlock } from './insertTextBlock'

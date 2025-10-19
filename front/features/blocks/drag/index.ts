@@ -1,4 +1,4 @@
 export { DragBlockIcon } from './DragBlockIcon'
-export { DragBoqRowIcon } from './DragBoqRowIcon'
+export { DragRowIcon } from './DragRowIcon'
 export { onBlockDragEnd, onBlockDragStart } from './onBlockDrag'
-export { onBoqRowDragEnd, onBoqRowDragStart } from './onBoqRowDrag'
+export { onRowDragEnd, onRowDragStart } from './onRowDrag'

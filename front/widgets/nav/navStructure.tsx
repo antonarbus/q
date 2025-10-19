@@ -1,7 +1,7 @@
 import {
   insertBoqBlock,
-  insertBoqRow,
   insertPriceBlock,
+  insertRow,
   insertTextBlock,
 } from '@features/blocks/insert'
 import { openBookmarksPage } from '@features/open-close/open-bookmarks-page'
@@ -150,7 +150,7 @@ export const navStructure: NavItem[] = [
             icon: <FaGripLines />,
             isHidden: false,
             shortcut: ['control', 'shift', 'r'],
-            func: insertBoqRow,
+            func: insertRow,
           },
           {
             id: navItemId.textItem,

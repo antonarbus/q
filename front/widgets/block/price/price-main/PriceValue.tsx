@@ -5,7 +5,7 @@ import {
   updatePriceValueCell,
   useUpdateTotalPriceIfPricesAboveWereChanged,
   validateTotalPrice,
-} from '@features/blocks/cell/update-cell'
+} from '@features/blocks/update'
 import type { FroalaEditor } from '@shared/lib/froala/froala'
 import { type JSX, useRef } from 'react'
 

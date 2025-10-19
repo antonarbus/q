@@ -1,8 +1,8 @@
 import { copySlice } from '@entities/copy/copySlice'
 import { getPastePlace } from '@entities/copy/getPastePlace'
 import type { CopyPlace } from '@entities/copy/types'
-import { boqRowKey } from '@entities/quotation/const/boqRowKey'
 import { itemType } from '@entities/quotation/const/itemType'
+import { rowTypeKey } from '@entities/quotation/const/rowTypeKey'
 import { quotationSlice } from '@entities/quotation/redux/quotationSlice'
 import { cls } from '@shared/cls'
 import { route } from '@shared/lib/react-router-dom/route'
@@ -168,7 +168,7 @@ const movePasteTextBoqRow = (event: MouseEvent): void => {
   const isBoqPasteRow = getState()
     .quotation.blocks.filter((block) => block.type === itemType.boq)
     .flatMap((block) => block.boq.rows)
-    .some((boqRow) => boqRow.type === boqRowKey.paste)
+    .some((boqRow) => boqRow.type === rowTypeKey.paste)
 
   const removePasteIfNeeded = (): void => {
     if (isPasteTextShown === true) {
@@ -260,7 +260,7 @@ export const useMovePasteText = (): void => {
     typeOfNextPasteItem === itemType.text ||
     typeOfNextPasteItem === itemType.price
 
-  const isBoqRow = typeOfNextPasteItem === boqRowKey.row
+  const isBoqRow = typeOfNextPasteItem === rowTypeKey.row
 
   useEffect(() => {
     const controller = new AbortController()

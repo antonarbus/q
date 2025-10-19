@@ -4,7 +4,7 @@ import { getNumberFromString } from '@shared/util/getNumberFromString'
 import { getStringWithNewFormattedNumber } from '@shared/util/getStringWithNewFormattedNumber'
 import { getTextContentFromHtml } from '@shared/util/getTextContentFromHtml'
 import type { CellKey } from '../const/cellKey'
-import { getBoqRowFromStore } from '../redux/getter/getBoqRowFromStore'
+import { getRowFromStore } from '../redux/getter/getRowFromStore'
 import { updateCellAtStore } from '../redux/updater/updateCellAtStore'
 
 type Props = {
@@ -26,7 +26,7 @@ export const updateCellWithValue = ({
     return
   }
 
-  const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
+  const boqRow = getRowFromStore({ blockIndex, rowIndex })
 
   if (boqRow === undefined) {
     return

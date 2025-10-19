@@ -1,5 +1,5 @@
 export { BookmarkBlockIcon } from './BookmarkBlockIcon'
-export { BookmarkBoqRowIcon } from './BookmarkBoqRowIcon'
+export { BookmarkRowIcon } from './BookmarkRowIcon'
 export { OpenBookmarkModalButton } from './OpenBookmarkModalButton'
 export { useLoadBookmarkModalOpenedWithDirectLink } from './useLoadBookmarkModalOpenedWithDirectLink'
 export { useLoadInitValuesIntoBookmarkModal } from './useLoadInitValuesIntoBookmarkModal'

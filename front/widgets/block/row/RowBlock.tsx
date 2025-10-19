@@ -6,7 +6,7 @@ import {
 } from '@features/blocks/resize'
 import { cls } from '@shared/cls'
 import type { JSX } from 'react'
-import { OneRow } from './boq-row/OneRow'
+import { OneRow } from './OneRow'
 
 export const RowBlock = (): JSX.Element => {
   return (

@@ -3,7 +3,7 @@ import { getBoqHeaderHtmlFromStore } from '@entities/quotation/redux/getter/getB
 import { subTotalTextCellStyle } from '@entities/quotation/style/subTotalTextCellStyle'
 import type { HeaderKey } from '@entities/quotation/type'
 import { Froala } from '@entities/quotation/ui/froala/Froala'
-import { updateSubtotalTextCell } from '@features/blocks/cell/update-cell'
+import { updateSubtotalText } from '@features/blocks/update'
 import type { FroalaEditor } from '@shared/lib/froala/froala'
 import { type JSX, useRef } from 'react'
 
@@ -20,7 +20,7 @@ export const SubtotalText = (): JSX.Element => {
         getBoqHeaderHtmlFromStore({ blockIndex: block.index, boqHeaderKey })
       }
       onContentChange={() => {
-        updateSubtotalTextCell({
+        updateSubtotalText({
           editorRef,
           blockIndex: block.index,
           boqHeaderKey,

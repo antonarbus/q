@@ -1,6 +1,6 @@
 import type { CellKey } from '@entities/quotation/const/cellKey'
 import type { RowCell } from '../../type'
-import { getBoqRowFromStore } from './getBoqRowFromStore'
+import { getRowFromStore } from './getRowFromStore'
 
 type Props = {
   blockIndex: number
@@ -13,7 +13,7 @@ export const getBoqCellFromStore = ({
   rowIndex,
   cellKey,
 }: Props): RowCell | undefined => {
-  const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
+  const boqRow = getRowFromStore({ blockIndex, rowIndex })
 
   if (boqRow === undefined) {
     return

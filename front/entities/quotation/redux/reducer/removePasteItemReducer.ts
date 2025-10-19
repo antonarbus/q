@@ -1,5 +1,5 @@
-import { boqRowKey } from '../../const/boqRowKey'
 import { itemType } from '../../const/itemType'
+import { rowTypeKey } from '../../const/rowTypeKey'
 import type { Quotation } from '../../type'
 
 export const removePasteItemReducer = (state: Quotation): void => {
@@ -19,7 +19,7 @@ export const removePasteItemReducer = (state: Quotation): void => {
     const boqRows = block.boq.rows
 
     const pasteBoqRowIndex = boqRows.findIndex(
-      (boqRow) => boqRow.type === boqRowKey.paste,
+      (boqRow) => boqRow.type === rowTypeKey.paste,
     )
 
     if (pasteBoqRowIndex >= 0) {

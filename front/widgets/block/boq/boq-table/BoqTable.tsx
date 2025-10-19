@@ -1,13 +1,13 @@
 import type { JSX } from 'react'
 import { BoqTableLayout } from './BoqTableLayout'
 import { BoqColumns } from './column'
-import { BoqRows } from './row'
+import { Rows } from './row'
 
 export const BoqTable = (): JSX.Element => {
   return (
     <BoqTableLayout>
       <BoqColumns />
-      <BoqRows />
+      <Rows />
     </BoqTableLayout>
   )
 }

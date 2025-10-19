@@ -1,6 +1,6 @@
 import { generateId } from '@shared/lib/nanoid'
-import { boqRowKey } from './const/boqRowKey'
 import { itemType } from './const/itemType'
+import { rowTypeKey } from './const/rowTypeKey'
 import type { Quotation } from './type'
 
 export const newQuotationTemplate: Quotation = {
@@ -73,7 +73,7 @@ export const newQuotationTemplate: Quotation = {
         rows: [
           {
             id: generateId(),
-            type: boqRowKey.row,
+            type: rowTypeKey.row,
             email: 'john@mail.com',
             height: 0,
             width: 0,
@@ -112,7 +112,7 @@ export const newQuotationTemplate: Quotation = {
           },
           {
             id: generateId(),
-            type: boqRowKey.row,
+            type: rowTypeKey.row,
             email: 'john@mail.com',
             height: 0,
             width: 0,
@@ -151,7 +151,7 @@ export const newQuotationTemplate: Quotation = {
           },
           {
             id: generateId(),
-            type: boqRowKey.row,
+            type: rowTypeKey.row,
             email: 'john@mail.com',
             height: 0,
             width: 0,

@@ -1,8 +1,8 @@
 import type { Signal } from '@preact/signals-react'
 import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import type { BoqColumnKey } from '../const/boqColumnKey'
-import type { BoqRowKey } from '../const/boqRowKey'
 import type { itemType } from '../const/itemType'
+import type { RowTypeKey } from '../const/rowTypeKey'
 
 type Common = {
   id: 'new' | (string & {})
@@ -32,7 +32,7 @@ export type RowCell = {
 }
 
 export type Row = Common & {
-  type: BoqRowKey
+  type: RowTypeKey
   description: RowCell
   itemPrice: RowCell
   qty: RowCell

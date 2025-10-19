@@ -1,4 +1,4 @@
 export { OpenInfoBlockModalIcon } from './OpenInfoBlockModalIcon'
-export { OpenInfoBoqRowModalIcon } from './OpenInfoBoqRowModalIcon'
 export { OpenInfoQuotationIcon } from './OpenInfoQuotationIcon'
+export { OpenInfoRowModalIcon } from './OpenInfoRowModalIcon'
 export { useLoadInitValuesIntoInfoModal } from './useLoadInitValuesIntoInfoModal'

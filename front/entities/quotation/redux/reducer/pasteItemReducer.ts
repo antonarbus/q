@@ -1,8 +1,8 @@
 import type { PastePos } from '@entities/copy/types'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { generateId } from '@shared/lib/nanoid'
-import { boqRowKey } from '../../const/boqRowKey'
 import { itemType } from '../../const/itemType'
+import { rowTypeKey } from '../../const/rowTypeKey'
 import type { Item, Quotation } from '../../type'
 
 export const pasteItemReducer = (
@@ -130,7 +130,7 @@ export const pasteItemReducer = (
       }
 
       const boqRowsWithoutPasteText = block.boq.rows.filter(
-        (boqRow) => boqRow.type !== boqRowKey.paste,
+        (boqRow) => boqRow.type !== rowTypeKey.paste,
       )
 
       // todo: fix it
