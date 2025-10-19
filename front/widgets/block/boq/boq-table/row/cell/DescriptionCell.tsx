@@ -27,7 +27,7 @@ export const DescriptionCell = (): JSX.Element => {
       beforeUpload={beforeUpload}
       className={`td ${cellKey.description}`}
       droppable
-      editorRef={row.descriptionEditorRef}
+      editorRef={row.descriptionCellEditorRef}
       htmlGetter={() =>
         getCellHtmlFromStore({
           blockIndex: block.index,
@@ -39,7 +39,7 @@ export const DescriptionCell = (): JSX.Element => {
         updateDescriptionCell({
           blockIndex: block.index,
           cellKey: cellKey.description,
-          editorRef: row.descriptionEditorRef,
+          editorRef: row.descriptionCellEditorRef,
           rowIndex: row.index,
         })
       }}

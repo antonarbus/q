@@ -24,13 +24,13 @@ export const DescriptionCell = (): JSX.Element => {
     <Froala
       beforeUpload={beforeUpload}
       className={`td ${cellKey.description}`}
-      editorRef={row.descriptionEditorRef}
+      editorRef={row.descriptionCellEditorRef}
       htmlGetter={() =>
         getRowCellHtmlFromStore({ cellKey: cellKey.description })
       }
       onContentChange={() => {
         updateDescriptionCell({
-          editorRef: row.descriptionEditorRef,
+          editorRef: row.descriptionCellEditorRef,
         })
       }}
       placeholder='Description...'

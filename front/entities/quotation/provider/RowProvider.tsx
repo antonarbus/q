@@ -17,7 +17,7 @@ type Props = {
 }
 
 type Res = Omit<Props, 'children'> & {
-  descriptionEditorRef: FroalaEditorRef
+  descriptionCellEditorRef: FroalaEditorRef
   itemPriceCellEditorRef: FroalaEditorRef
   qtyCellEditorRef: FroalaEditorRef
   priceCellEditorRef: FroalaEditorRef
@@ -28,9 +28,9 @@ const RowContext: Context<Res | null> = createContext<Res | null>(null)
 export const RowProvider = (props: Props): JSX.Element => {
   const boq = useBoq()
 
-  const rowCellEditorRef = useMemo(() => {
+  const rowEditorRef = useMemo(() => {
     return {
-      descriptionEditorRef: { current: null },
+      descriptionCellEditorRef: { current: null },
       itemPriceCellEditorRef: { current: null },
       qtyCellEditorRef: { current: null },
       priceCellEditorRef: { current: null },
@@ -38,20 +38,20 @@ export const RowProvider = (props: Props): JSX.Element => {
   }, [])
 
   boq.rowEditorRefs[props.index] = {
-    description: rowCellEditorRef.descriptionEditorRef,
-    itemPrice: rowCellEditorRef.itemPriceCellEditorRef,
-    qty: rowCellEditorRef.qtyCellEditorRef,
-    price: rowCellEditorRef.priceCellEditorRef,
+    description: rowEditorRef.descriptionCellEditorRef,
+    itemPrice: rowEditorRef.itemPriceCellEditorRef,
+    qty: rowEditorRef.qtyCellEditorRef,
+    price: rowEditorRef.priceCellEditorRef,
   }
 
   const rowContextData = useMemo(() => {
     const context = {
       index: props.index,
       item: props.item,
-      descriptionEditorRef: rowCellEditorRef.descriptionEditorRef,
-      itemPriceCellEditorRef: rowCellEditorRef.itemPriceCellEditorRef,
-      qtyCellEditorRef: rowCellEditorRef.qtyCellEditorRef,
-      priceCellEditorRef: rowCellEditorRef.priceCellEditorRef,
+      descriptionCellEditorRef: rowEditorRef.descriptionCellEditorRef,
+      itemPriceCellEditorRef: rowEditorRef.itemPriceCellEditorRef,
+      qtyCellEditorRef: rowEditorRef.qtyCellEditorRef,
+      priceCellEditorRef: rowEditorRef.priceCellEditorRef,
     }
 
     return context
