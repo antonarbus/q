@@ -21,9 +21,10 @@ export const DropFilesOrImagesText = (props: Props): JSX.Element => {
         right: '5px',
         fontSize: '8px',
         opacity: 0,
-        visibility: 'hidden',
+        pointerEvents: 'none',
         transition: 'opacity 0.3s ease-in-out 0.8s',
         userSelect: 'none',
+        zIndex: 10,
       }}
     >
       Drop{' '}

@@ -13,8 +13,8 @@ export const showDropFilesTextOnMouseEnter = ({
     return
   }
 
-  textElement.style.visibility = 'visible'
   textElement.style.opacity = '1'
+  textElement.style.pointerEvents = 'auto'
 }
 
 export const showDropFilesTextOnMouseLeave = ({
@@ -26,6 +26,6 @@ export const showDropFilesTextOnMouseLeave = ({
     return
   }
 
-  textElement.style.visibility = 'hidden'
   textElement.style.opacity = '0'
+  textElement.style.pointerEvents = 'none'
 }
