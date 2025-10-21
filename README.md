@@ -374,6 +374,565 @@ https://console.cloud.google.com/artifacts?inv=1&invt=AblO7A&project=quotationap
 
 https://console.cloud.google.com/iam-admin/serviceaccounts?inv=1&invt=AblPCg&project=quotationapp-8014c&supportedpurview=project
 
+---
+
+# CODE IMPROVEMENT GUIDE
+
+## Overview
+
+This guide provides actionable recommendations to maintain code quality as the project scales. Based on codebase analysis of 662 frontend files and 88 backend files.
+
+## Current Architecture Strengths
+
+1. **Feature-Sliced Design (FSD)** - Clean layer separation with enforced boundaries
+2. **Strict TypeScript** - Full strict mode with `noUncheckedIndexedAccess`
+3. **Modern Stack** - React 19, Vite, Redux Toolkit, React Query
+4. **Build Optimization** - Manual chunking for large libraries (Froala, AG Grid, MUI)
+5. **Automated Quality** - Biome linting, Playwright E2E, TypeScript checks
+
+## Critical Issues to Address
+
+### 1. Large Inline HTML Templates (HIGH PRIORITY)
+
+**Problem:** `/front/features/blocks/insert/insertBoqBlock.ts` contains 300+ lines of HTML string literal
+
+**Current:**
+```typescript
+const boqBlock: Boq = {
+  preview: `
+    <div class="MuiBox-root">
+      <!-- 300+ lines of inline HTML -->
+    </div>
+  `
+}
+```
+
+**Solution:** Extract to separate template file
+```typescript
+// Create: /front/features/blocks/insert/templates/boqBlockTemplate.html.ts
+export const boqBlockTemplate = `...`
+
+// In insertBoqBlock.ts:
+import { boqBlockTemplate } from './templates/boqBlockTemplate.html'
+const boqBlock: Boq = { preview: boqBlockTemplate }
+```
+
+**Benefits:** Maintainability, syntax highlighting, smaller diffs, reusability
+
+**Files to refactor:**
+- `/front/features/blocks/insert/insertBoqBlock.ts:19-250`
+- `/front/entities/quotation/newQuotationTemplate.ts:241`
+
+---
+
+### 2. Monolithic Redux Slice (HIGH PRIORITY)
+
+**Problem:** `/front/entities/quotation/redux/quotationSlice.ts` contains 30+ reducers handling diverse concerns
+
+**Current Structure:**
+- Delete operations (deleteBlockReducer, deleteRowReducer)
+- Insert operations (insertPasteBlockReducer, insertRowReducer)
+- Update operations (pinItemPriceReducer, updateCellReducer)
+- Layout operations (resizeReducer, moveReducer)
+
+**Solution:** Split into feature-based slices
+```typescript
+// quotationSlice.ts - Main coordinator
+// quotationDeleteSlice.ts - Delete operations
+// quotationInsertSlice.ts - Insert operations
+// quotationUpdateSlice.ts - Update operations
+// quotationLayoutSlice.ts - Resize, move, pin operations
+
+// Combine in store:
+export const quotationReducer = combineReducers({
+  data: quotationSlice.reducer,
+  delete: quotationDeleteSlice.reducer,
+  insert: quotationInsertSlice.reducer,
+  // ...
+})
+```
+
+**Benefits:** Easier testing, better code organization, faster file navigation
+
+---
+
+### 3. Global Redux Access Pattern (HIGH PRIORITY)
+
+**Problem:** Using global `dispatch()` and `getState()` exports makes testing difficult
+
+**Current Pattern:**
+```typescript
+// /front/shared/lib/redux/redux.ts
+export let dispatch = null as unknown as Dispatch
+
+// Usage in functions:
+import { dispatch, getState } from '@shared/lib/redux'
+export const movePasteTextItem = (event: MouseEvent): void => {
+  const { isPasteTextShown } = getState().copy
+  dispatch(copySlice.actions.hidePasteText())
+}
+```
+
+**Solution:** Use React hooks instead
+```typescript
+// Convert to custom hook:
+export const useMovePasteTextItem = () => {
+  const dispatch = useDispatch()
+  const isPasteTextShown = useSelector(state => state.copy.isPasteTextShown)
+
+  return useCallback((event: MouseEvent) => {
+    if (isPasteTextShown) {
+      dispatch(copySlice.actions.hidePasteText())
+    }
+  }, [isPasteTextShown, dispatch])
+}
+
+// Usage in component:
+const movePasteTextItem = useMovePasteTextItem()
+```
+
+**Benefits:** Testable, follows React patterns, better type safety
+
+**Files affected:**
+- `/front/features/blocks/paste/useMovePasteText.tsx`
+- All functions using `dispatch()` outside components
+
+---
+
+### 4. Deep Folder Nesting (MEDIUM PRIORITY)
+
+**Problem:** 5-6 level nesting makes navigation difficult
+
+**Current:**
+```
+features/blocks/update/update-cell-at-boq-block/price/updatePriceCell.ts
+features/blocks/update/update-header-at-boq-block/subtotal-price/updateSubtotalPrice.ts
+```
+
+**Solution:** Flatten to 3-4 levels
+```
+features/blocks/update-cell/boq/price/updatePriceCell.ts
+features/blocks/update-header/boq/subtotal/updateSubtotalPrice.ts
+```
+
+**Alternative:** Group by operation type
+```
+features/blocks/price/updateCell.ts
+features/blocks/price/updateHeader.ts
+features/blocks/price/validatePrices.ts
+```
+
+---
+
+### 5. Repetitive Conditional Chains (MEDIUM PRIORITY)
+
+**Problem:** Same removal logic repeated 5+ times in paste handler
+
+**Current:** `/front/features/blocks/paste/useMovePasteText.tsx:42-70`
+```typescript
+const navElement = event.target.closest('nav')
+if (navElement !== null) { removePasteIfNeeded(); return }
+
+const elementsUnderCursor = document.elementsFromPoint(event.x, event.y)
+const isCursorOverActionsContainer = elementsUnderCursor.some(...)
+if (isCursorOverActionsContainer === true) { removePasteIfNeeded(); return }
+
+const isSearchElement = elementsUnderCursor.some(...)
+if (isSearchElement === true) { removePasteIfNeeded(); return }
+// ... 3 more times
+```
+
+**Solution:** Extract helper function
+```typescript
+const shouldRemovePaste = (event: MouseEvent): boolean => {
+  const navElement = event.target.closest('nav')
+  if (navElement !== null) return true
+
+  const elementsUnderCursor = document.elementsFromPoint(event.x, event.y)
+  const removeOnSelectors = [
+    '.actions-container',
+    '.search-element',
+    '.modal-dialog',
+    // ... other selectors
+  ]
+
+  return removeOnSelectors.some(selector =>
+    elementsUnderCursor.some(el => el.closest(selector))
+  )
+}
+
+// Usage:
+if (shouldRemovePaste(event)) {
+  removePasteIfNeeded()
+  return
+}
+```
+
+---
+
+### 6. Missing Error Boundaries (MEDIUM PRIORITY)
+
+**Problem:** No error boundaries visible at page/route level - single error crashes entire app
+
+**Solution:** Add error boundaries at route level
+```typescript
+// /front/shared/component/ErrorBoundary/ErrorBoundary.tsx
+import { Component, ErrorInfo, ReactNode } from 'react'
+
+interface Props { children: ReactNode; fallback?: ReactNode }
+interface State { hasError: boolean; error?: Error }
+
+export class ErrorBoundary extends Component<Props, State> {
+  state: State = { hasError: false }
+
+  static getDerivedStateFromError(error: Error): State {
+    return { hasError: true, error }
+  }
+
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    console.error('Error boundary caught:', error, errorInfo)
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return this.props.fallback || <div>Something went wrong</div>
+    }
+    return this.props.children
+  }
+}
+
+// Wrap routes:
+<ErrorBoundary fallback={<ErrorPage />}>
+  <QuotationPage />
+</ErrorBoundary>
+```
+
+**Where to add:**
+- `/front/pages/quotation-page/`
+- `/front/pages/quotation-list-page/`
+- All modal pages
+
+---
+
+### 7. Large Handler Functions (LOW PRIORITY)
+
+**Problem:** Backend handlers contain mixed concerns
+
+**Example:** `/back/api/auth/logInHandler.ts` (224 LOC) handles:
+- Password validation
+- JWT generation
+- Cookie setting
+- Super-admin flow
+
+**Solution:** Extract utilities
+```typescript
+// /back/shared/lib/auth/generateTokens.ts
+export const generateTokens = (email: string, role: string) => ({
+  access: generateAccessToken({ email, role }),
+  refresh: generateRefreshToken({ email, role })
+})
+
+// /back/shared/lib/auth/setCookies.ts
+export const setAuthCookies = (res: Response, refreshToken: string) => {
+  res.cookie('refresh-jwt-token', refreshToken, {
+    httpOnly: true,
+    secure: config.isProd,
+    sameSite: 'strict',
+    maxAge: 90 * 24 * 60 * 60 * 1000
+  })
+}
+
+// Simplified handler:
+export const logInHandler = async (req, res) => {
+  const user = await validateCredentials(req.body)
+  const tokens = generateTokens(user.email, user.role)
+  setAuthCookies(res, tokens.refresh)
+  res.json({ accessToken: tokens.access })
+}
+```
+
+**Files to refactor:**
+- `/back/api/auth/logInHandler.ts:224`
+- `/back/api/user/deleteUserHandler.ts:195`
+
+---
+
+## Best Practices to Maintain
+
+### 1. Feature-Sliced Design Import Rules
+
+**Always follow layer hierarchy:**
+```
+app → pages → widgets → features → entities → shared
+```
+
+**BAD:**
+```typescript
+// In entities/quotation/
+import { NavBar } from '@widgets/nav' // ❌ entities can't import widgets
+```
+
+**GOOD:**
+```typescript
+// In widgets/nav/
+import { Quotation } from '@entities/quotation' // ✅ widgets can import entities
+```
+
+### 2. Public API via index.ts
+
+**Each slice must export public API:**
+```typescript
+// features/blocks/insert/index.ts
+export { insertBoqBlock } from './insertBoqBlock'
+export { insertPriceBlock } from './insertPriceBlock'
+// Don't export internal helpers
+```
+
+**Usage:**
+```typescript
+// ✅ Good - uses public API
+import { insertBoqBlock } from '@features/blocks/insert'
+
+// ❌ Bad - references internal structure
+import { insertBoqBlock } from '@features/blocks/insert/insertBoqBlock'
+```
+
+### 3. Type Safety Patterns
+
+**Use const assertions for literal types:**
+```typescript
+// ✅ Good
+export const itemType = {
+  text: 'text',
+  boq: 'boq',
+  price: 'price',
+} as const
+
+type ItemType = typeof itemType[keyof typeof itemType]
+
+// ❌ Bad - allows any string
+export const itemType = {
+  text: 'text',
+  boq: 'boq',
+}
+```
+
+### 4. Naming Conventions
+
+**Maintain consistency:**
+- Reducers: `*Reducer` suffix (`deleteBlockReducer`)
+- Hooks: `use*` prefix (`useLoadQuotation`)
+- Handlers: `*Handler` suffix (`logInHandler`)
+- Utilities: Descriptive names (`getStringWithNewFormattedNumber`)
+
+---
+
+## Testing Strategy
+
+### Current State
+- Only 7 test files for 662 frontend files
+- E2E tests exist but coverage unclear
+
+### Recommended Approach
+
+**1. Unit Tests for Pure Functions**
+```typescript
+// /front/shared/util/getStringWithNewFormattedNumber.test.ts
+import { describe, it, expect } from 'vitest'
+import { getStringWithNewFormattedNumber } from './getStringWithNewFormattedNumber'
+
+describe('getStringWithNewFormattedNumber', () => {
+  it('formats number with spaces', () => {
+    expect(getStringWithNewFormattedNumber('1000')).toBe('1 000')
+  })
+})
+```
+
+**2. Integration Tests for Redux Slices**
+```typescript
+// /front/entities/quotation/redux/quotationSlice.test.ts
+import { configureStore } from '@reduxjs/toolkit'
+import { quotationSlice } from './quotationSlice'
+
+describe('quotationSlice', () => {
+  it('deletes block correctly', () => {
+    const store = configureStore({ reducer: { quotation: quotationSlice.reducer } })
+    store.dispatch(quotationSlice.actions.deleteBlockReducer({ id: '123' }))
+    expect(store.getState().quotation.blocks).not.toContainEqual(expect.objectContaining({ id: '123' }))
+  })
+})
+```
+
+**3. E2E Tests for Critical Flows**
+```typescript
+// /tests/quotation-save.spec.ts
+import { test, expect } from '@playwright/test'
+
+test('saves quotation successfully', async ({ page }) => {
+  await page.goto('/quotation/new')
+  await page.fill('[data-testid="quotation-title"]', 'Test Quote')
+  await page.click('[data-testid="save-button"]')
+  await expect(page.locator('.success-toast')).toBeVisible()
+})
+```
+
+**Priority Tests to Add:**
+1. Auth flow (login, register, token refresh)
+2. Quotation CRUD (create, save, load, delete)
+3. Block operations (insert, update, delete)
+4. Bookmark management
+5. File upload/download
+
+---
+
+## Performance Optimization
+
+### 1. Memoization for Large Components
+
+**Candidates for optimization:**
+- `/front/widgets/nav/navStructure.tsx` (303 LOC)
+- `/front/widgets/quotation/search/Search.tsx` (190 LOC)
+- `/front/features/quotation/load-quotation/useLoadQuotation.tsx` (282 LOC)
+
+**Example:**
+```typescript
+// Before
+export const Search = (props) => {
+  const results = expensiveSearch(props.query)
+  return <SearchResults results={results} />
+}
+
+// After
+import { useMemo } from 'react'
+export const Search = (props) => {
+  const results = useMemo(() => expensiveSearch(props.query), [props.query])
+  return <SearchResults results={results} />
+}
+```
+
+### 2. Code Splitting for Routes
+
+**Already implemented in router.tsx:**
+```typescript
+const QuotationPage = lazy(() => import('@pages/quotation-page'))
+const BookmarkListPage = lazy(() => import('@pages/bookmark-list-page'))
+```
+
+**Ensure all pages are lazy-loaded**
+
+### 3. Bundle Analysis
+
+**Run periodically:**
+```bash
+npm run build-front
+npx vite-bundle-visualizer
+```
+
+**Monitor chunking effectiveness:**
+- Froala → `qwerty` chunk
+- AG Grid → `ag-grid` chunk
+- MUI → `@mui` chunk
+
+---
+
+## Tooling Recommendations
+
+### 1. Run Architecture Checks Regularly
+
+```bash
+npm run fsd                    # Verify FSD boundaries
+npm run find-unused-files      # Find dead code with Knip
+npm run find-circular-deps     # Detect circular deps with Madge
+```
+
+**Add to CI pipeline:**
+```yaml
+# .github/workflows/quality.yml
+- name: Architecture checks
+  run: |
+    npm run fsd
+    npm run find-unused-files
+    npm run find-circular-deps
+```
+
+### 2. Type Coverage
+
+**Add type coverage tool:**
+```bash
+npm install --save-dev type-coverage
+```
+
+**In package.json:**
+```json
+{
+  "scripts": {
+    "type-coverage": "type-coverage --detail --at-least 95"
+  }
+}
+```
+
+---
+
+## Migration Plan (Suggested Order)
+
+### Phase 1: Quick Wins (1-2 weeks)
+1. Extract HTML templates from `insertBoqBlock.ts`
+2. Add error boundaries to all pages
+3. Refactor repetitive conditional chains
+4. Add 10 unit tests for critical utilities
+
+### Phase 2: Architecture Improvements (2-3 weeks)
+5. Split `quotationSlice` into feature-based slices
+6. Flatten deep folder nesting in `features/blocks/update/`
+7. Replace global `dispatch()` usage with hooks
+8. Add integration tests for Redux slices
+
+### Phase 3: Backend Refactoring (1-2 weeks)
+9. Extract utilities from large handlers
+10. Add API contract validation with Zod
+11. Add unit tests for backend utilities
+
+### Phase 4: Performance & Polish (1-2 weeks)
+12. Add memoization to large components
+13. Analyze bundle size and optimize chunks
+14. Add E2E tests for critical flows
+15. Setup continuous architecture checks in CI
+
+---
+
+## Code Review Checklist
+
+Before merging PRs, verify:
+
+- [ ] Follows FSD layer hierarchy (no upward imports)
+- [ ] Public API exported via `index.ts`
+- [ ] No inline HTML templates over 50 lines
+- [ ] No functions over 100 lines (extract helpers)
+- [ ] Uses React hooks instead of global Redux access
+- [ ] Tests added for new features
+- [ ] TypeScript strict mode passes
+- [ ] Biome linting passes
+- [ ] No new circular dependencies (`npm run find-circular-deps`)
+
+---
+
+## Resources
+
+**Feature-Sliced Design:**
+- Official docs: https://feature-sliced.design/
+- Layer reference: https://feature-sliced.design/docs/reference/layers
+
+**Testing:**
+- Vitest: https://vitest.dev/
+- Playwright: https://playwright.dev/
+- Testing Library: https://testing-library.com/
+
+**TypeScript:**
+- Strict mode guide: https://www.typescriptlang.org/tsconfig#strict
+- Type challenges: https://github.com/type-challenges/type-challenges
+
+---
+
 # TO-DO
 
 - [ ] Refactor CI/CD workflow: Run e2e tests against deployed dev environment instead of local server, enforce dev->main merge flow with branch protection
