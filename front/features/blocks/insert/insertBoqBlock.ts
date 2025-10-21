@@ -14,9 +14,18 @@ import boqHeaderQtyHtml from './templates/boqHeaderQty.html?raw'
 import boqSubtotalPriceHtml from './templates/boqSubtotalPrice.html?raw'
 import boqSubtotalTextHtml from './templates/boqSubtotalText.html?raw'
 import boqTitleHtml from './templates/boqTitle.html?raw'
-import rowItemHtml from './templates/rowItem.html?raw'
-import rowItemPriceHtml from './templates/rowItemPrice.html?raw'
-import rowQtyHtml from './templates/rowQty.html?raw'
+import rowOneItemHtml from './templates/rowOneItem.html?raw'
+import rowOneItemPriceHtml from './templates/rowOneItemPrice.html?raw'
+import rowOnePriceHtml from './templates/rowOnePrice.html?raw'
+import rowOneQtyHtml from './templates/rowOneQty.html?raw'
+import rowThreeItemHtml from './templates/rowThreeItem.html?raw'
+import rowThreeItemPriceHtml from './templates/rowThreeItemPrice.html?raw'
+import rowThreePriceHtml from './templates/rowThreePrice.html?raw'
+import rowThreeQtyHtml from './templates/rowThreeQty.html?raw'
+import rowTwoItemHtml from './templates/rowTwoItem.html?raw'
+import rowTwoItemPriceHtml from './templates/rowTwoItemPrice.html?raw'
+import rowTwoPriceHtml from './templates/rowTwoPrice.html?raw'
+import rowTwoQtyHtml from './templates/rowTwoQty.html?raw'
 
 export const insertBoqBlock = (event?: MouseEvent): void => {
   const boqBlock: Boq = {
@@ -72,7 +81,7 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
           height: 0,
           width: 0,
           description: {
-            html: rowItemHtml,
+            html: rowOneItemHtml,
             value: 0,
             pin: {
               isPinned: false,
@@ -80,7 +89,7 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
             },
           },
           itemPrice: {
-            html: rowItemPriceHtml,
+            html: rowOneItemPriceHtml,
             value: 10,
             pin: {
               isPinned: false,
@@ -88,7 +97,7 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
             },
           },
           qty: {
-            html: rowQtyHtml,
+            html: rowOneQtyHtml,
             value: 1,
             pin: {
               isPinned: true,
@@ -96,7 +105,7 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
             },
           },
           price: {
-            html: rowItemPriceHtml,
+            html: rowOnePriceHtml,
             value: 10,
             pin: {
               isPinned: false,
@@ -111,7 +120,7 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
           height: 0,
           width: 0,
           description: {
-            html: rowItemHtml,
+            html: rowTwoItemHtml,
             value: 0,
             pin: {
               isPinned: false,
@@ -119,7 +128,7 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
             },
           },
           itemPrice: {
-            html: rowItemPriceHtml,
+            html: rowTwoItemPriceHtml,
             value: 20,
             pin: {
               isPinned: false,
@@ -127,7 +136,7 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
             },
           },
           qty: {
-            html: rowQtyHtml,
+            html: rowTwoQtyHtml,
             value: 2,
             pin: {
               isPinned: true,
@@ -135,7 +144,7 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
             },
           },
           price: {
-            html: rowItemPriceHtml,
+            html: rowTwoPriceHtml,
             value: 40,
             pin: {
               isPinned: false,
@@ -150,7 +159,7 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
           height: 0,
           width: 0,
           description: {
-            html: rowItemHtml,
+            html: rowThreeItemHtml,
             value: 0,
             pin: {
               isPinned: false,
@@ -158,7 +167,7 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
             },
           },
           itemPrice: {
-            html: rowItemPriceHtml,
+            html: rowThreeItemPriceHtml,
             value: 30,
             pin: {
               isPinned: false,
@@ -166,7 +175,7 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
             },
           },
           qty: {
-            html: rowQtyHtml,
+            html: rowThreeQtyHtml,
             value: 3,
             pin: {
               isPinned: true,
@@ -174,7 +183,7 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
             },
           },
           price: {
-            html: rowItemPriceHtml,
+            html: rowThreeItemPriceHtml,
             value: 90,
             pin: {
               isPinned: false,

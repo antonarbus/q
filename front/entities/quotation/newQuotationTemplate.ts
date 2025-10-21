@@ -5,9 +5,18 @@ import boqHeaderQtyHtml from '@features/blocks/insert/templates/boqHeaderQty.htm
 import boqSubtotalPriceHtml from '@features/blocks/insert/templates/boqSubtotalPrice.html?raw'
 import boqSubtotalTextHtml from '@features/blocks/insert/templates/boqSubtotalText.html?raw'
 import boqTitleHtml from '@features/blocks/insert/templates/boqTitle.html?raw'
-import rowItemHtml from '@features/blocks/insert/templates/rowItem.html?raw'
-import rowItemPriceHtml from '@features/blocks/insert/templates/rowItemPrice.html?raw'
-import rowQtyHtml from '@features/blocks/insert/templates/rowQty.html?raw'
+import rowOneDescriptionHtml from '@features/blocks/insert/templates/rowOneDescription.html?raw'
+import rowOneItemPriceHtml from '@features/blocks/insert/templates/rowOneItemPrice.html?raw'
+import rowOnePriceHtml from '@features/blocks/insert/templates/rowOnePrice.html?raw'
+import rowOneQtyHtml from '@features/blocks/insert/templates/rowOneQty.html?raw'
+import rowThreeDescriptionHtml from '@features/blocks/insert/templates/rowThreeDescription.html?raw'
+import rowThreeItemPriceHtml from '@features/blocks/insert/templates/rowThreeItemPrice.html?raw'
+import rowThreePriceHtml from '@features/blocks/insert/templates/rowThreePrice.html?raw'
+import rowThreeQtyHtml from '@features/blocks/insert/templates/rowThreeQty.html?raw'
+import rowTwoDescriptionHtml from '@features/blocks/insert/templates/rowTwoDescription.html?raw'
+import rowTwoItemPriceHtml from '@features/blocks/insert/templates/rowTwoItemPrice.html?raw'
+import rowTwoPriceHtml from '@features/blocks/insert/templates/rowTwoPrice.html?raw'
+import rowTwoQtyHtml from '@features/blocks/insert/templates/rowTwoQty.html?raw'
 import { generateId } from '@shared/lib/nanoid'
 import { itemType } from './const/itemType'
 import { rowTypeKey } from './const/rowTypeKey'
@@ -92,7 +101,7 @@ export const newQuotationTemplate: Quotation = {
             height: 0,
             width: 0,
             description: {
-              html: rowItemHtml,
+              html: rowOneDescriptionHtml,
               value: 0,
               pin: {
                 isPinned: false,
@@ -100,7 +109,7 @@ export const newQuotationTemplate: Quotation = {
               },
             },
             itemPrice: {
-              html: rowItemPriceHtml,
+              html: rowOneItemPriceHtml,
               value: 10,
               pin: {
                 isPinned: false,
@@ -108,7 +117,7 @@ export const newQuotationTemplate: Quotation = {
               },
             },
             qty: {
-              html: rowQtyHtml,
+              html: rowOneQtyHtml,
               value: 1,
               pin: {
                 isPinned: true,
@@ -116,7 +125,7 @@ export const newQuotationTemplate: Quotation = {
               },
             },
             price: {
-              html: rowItemPriceHtml,
+              html: rowOnePriceHtml,
               value: 10,
               pin: {
                 isPinned: false,
@@ -131,7 +140,7 @@ export const newQuotationTemplate: Quotation = {
             height: 0,
             width: 0,
             description: {
-              html: rowItemHtml,
+              html: rowTwoDescriptionHtml,
               value: 0,
               pin: {
                 isPinned: false,
@@ -139,7 +148,7 @@ export const newQuotationTemplate: Quotation = {
               },
             },
             itemPrice: {
-              html: rowItemPriceHtml,
+              html: rowTwoItemPriceHtml,
               value: 20,
               pin: {
                 isPinned: false,
@@ -147,7 +156,7 @@ export const newQuotationTemplate: Quotation = {
               },
             },
             qty: {
-              html: rowQtyHtml,
+              html: rowTwoQtyHtml,
               value: 2,
               pin: {
                 isPinned: true,
@@ -155,7 +164,7 @@ export const newQuotationTemplate: Quotation = {
               },
             },
             price: {
-              html: rowItemPriceHtml,
+              html: rowTwoPriceHtml,
               value: 40,
               pin: {
                 isPinned: false,
@@ -170,7 +179,7 @@ export const newQuotationTemplate: Quotation = {
             height: 0,
             width: 0,
             description: {
-              html: rowItemHtml,
+              html: rowThreeDescriptionHtml,
               value: 0,
               pin: {
                 isPinned: false,
@@ -178,7 +187,7 @@ export const newQuotationTemplate: Quotation = {
               },
             },
             itemPrice: {
-              html: rowItemPriceHtml,
+              html: rowThreeItemPriceHtml,
               value: 30,
               pin: {
                 isPinned: false,
@@ -186,7 +195,7 @@ export const newQuotationTemplate: Quotation = {
               },
             },
             qty: {
-              html: rowQtyHtml,
+              html: rowThreeQtyHtml,
               value: 3,
               pin: {
                 isPinned: true,
@@ -194,7 +203,7 @@ export const newQuotationTemplate: Quotation = {
               },
             },
             price: {
-              html: rowItemPriceHtml,
+              html: rowThreePriceHtml,
               value: 90,
               pin: {
                 isPinned: false,
