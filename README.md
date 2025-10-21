@@ -380,39 +380,6 @@ https://console.cloud.google.com/iam-admin/serviceaccounts?inv=1&invt=AblPCg&pro
 
 ## Critical Issues to Address
 
-### 1. Large Inline HTML Templates (HIGH PRIORITY)
-
-**Problem:** `/front/features/blocks/insert/insertBoqBlock.ts` contains 300+ lines of HTML string literal
-
-**Current:**
-```typescript
-const boqBlock: Boq = {
-  preview: `
-    <div class="MuiBox-root">
-      <!-- 300+ lines of inline HTML -->
-    </div>
-  `
-}
-```
-
-**Solution:** Extract to separate template file
-```typescript
-// Create: /front/features/blocks/insert/templates/boqBlockTemplate.html.ts
-export const boqBlockTemplate = `...`
-
-// In insertBoqBlock.ts:
-import { boqBlockTemplate } from './templates/boqBlockTemplate.html'
-const boqBlock: Boq = { preview: boqBlockTemplate }
-```
-
-**Benefits:** Maintainability, syntax highlighting, smaller diffs, reusability
-
-**Files to refactor:**
-- `/front/features/blocks/insert/insertBoqBlock.ts:19-250`
-- `/front/entities/quotation/newQuotationTemplate.ts:241`
-
----
-
 ### 2. Monolithic Redux Slice (HIGH PRIORITY)
 
 **Problem:** `/front/entities/quotation/redux/quotationSlice.ts` contains 30+ reducers handling diverse concerns

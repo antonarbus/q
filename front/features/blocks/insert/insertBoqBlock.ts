@@ -2,11 +2,21 @@ import { copySlice } from '@entities/copy/copySlice'
 import { itemType } from '@entities/quotation/const/itemType'
 import { rowTypeKey } from '@entities/quotation/const/rowTypeKey'
 import type { Boq } from '@entities/quotation/type'
-
 import { textSlice } from '@shared/lib/froala/textSlice'
 import { generateId } from '@shared/lib/nanoid'
 import { dispatch, getState } from '@shared/lib/redux'
 import type { MouseEvent } from 'react'
+import boqBlockPreviewHtml from './templates/boqBlockPreview.html?raw'
+import boqHeaderDescriptionHtml from './templates/boqHeaderDescription.html?raw'
+import boqHeaderItemPriceHtml from './templates/boqHeaderItemPrice.html?raw'
+import boqHeaderPriceHtml from './templates/boqHeaderPrice.html?raw'
+import boqHeaderQtyHtml from './templates/boqHeaderQty.html?raw'
+import boqSubtotalPriceHtml from './templates/boqSubtotalPrice.html?raw'
+import boqSubtotalTextHtml from './templates/boqSubtotalText.html?raw'
+import boqTitleHtml from './templates/boqTitle.html?raw'
+import rowItemHtml from './templates/rowItem.html?raw'
+import rowItemPriceHtml from './templates/rowItemPrice.html?raw'
+import rowQtyHtml from './templates/rowQty.html?raw'
 
 export const insertBoqBlock = (event?: MouseEvent): void => {
   const boqBlock: Boq = {
@@ -16,317 +26,19 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
     width: 600,
     height: 279,
     isFroala: true,
-    preview: `
-      <div class="MuiBox-root">
-        <div class="layout title-subtotal MuiBox-root" style="display: flex; justify-content: space-between; align-items: flex-end; gap: 10px; background: rgba(52, 52, 52, 0.9); padding: 10px 15px; color: rgb(188, 188, 188); border-top-left-radius: 6px; border-top-right-radius: 6px;">
-          <div class="layout item title MuiBox-root" style="flex-grow: 1;">
-            <div class="froala-wrapper  MuiBox-root" style="cursor: pointer;">
-              <div style="width: 100%; position: relative;">
-                <div class="editable-html MuiBox-root fr-box fr-inline" style="word-break: break-word; flex-grow: 1; min-height: 24px;">
-                  <div class="fr-wrapper">
-                    <div class="fr-element fr-view">
-                      <p><strong>Title 1</strong></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="layout subtotal-container MuiBox-root" style="display: flex; flex-direction: column; align-items: flex-end; min-width: 150px; flex-shrink: 0;">
-            <div class="layout item subtotal-text MuiBox-root" style="width: 100%; text-align: right;">
-              <div class="froala-wrapper  MuiBox-root" style="cursor: pointer;">
-                <div style="width: 100%; position: relative;">
-                  <div class="editable-html MuiBox-root fr-box fr-inline" style="word-break: break-word; width: 100%; white-space: nowrap; text-align: right; min-height: 24px;">
-                    <div class="fr-wrapper">
-                      <div class="fr-element fr-view">
-                        <div>Subtotal</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="layout price MuiBox-root" style="display: flex; justify-content: flex-end; align-items: baseline; gap: 10px; width: 100%;">
-              <div class="layout item price MuiBox-root" style="text-align: right; white-space: nowrap; min-width: 60px;">
-                <div class="froala-wrapper  MuiBox-root" style="cursor: pointer;">
-                  <div style="width: 100%; position: relative;">
-                    <div class="editable-html MuiBox-root fr-box fr-inline"
-                      style="word-break: break-word; width: 100%; min-width: 100px; white-space: nowrap; text-align: right; flex-shrink: 0; right: 0px; min-height: 24px;">
-                      <div class="fr-wrapper">
-                        <div class="fr-element fr-view">
-                          <p><strong>140</strong></p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="boq-table-container-with-paddings MuiBox-root" style="padding: 10px 10px 2px;">
-        <div class="boq-table-container MuiBox-root" style="padding: 5px; clip-path: inset(0px 0px 0px -100px);">
-          <div class="header tr MuiBox-root" style="display: flex; align-items: stretch; position: relative;">
-            <div class="th number resizable" style="position: relative; user-select: auto; display: block; flex-grow: 0; width: 30px; height: auto; min-width: 30px; box-sizing: border-box; flex-shrink: 0;">
-              <div class="MuiBox-root" style="flex-grow: 1; text-align: center; min-height: 24px; padding-inline: 5px;"></div>
-              <div>
-                <div style="position: absolute; user-select: none; width: 3px; height: 100%; top: 0px; cursor: col-resize; right: -1px; background: rgb(235, 233, 233); border-radius: 3px; z-index: 1;"></div>
-              </div>
-            </div>
-            <div class="th description resizable" style="position: relative; user-select: auto; display: block; flex-grow: 0; width: 240px; height: auto; min-width: 200px; box-sizing: border-box; flex-shrink: 0;">
-              <div class="froala-wrapper  MuiBox-root" style="cursor: pointer;">
-                <div style="width: 100%; position: relative;">
-                  <div class="editable-html MuiBox-root fr-box fr-inline" style="word-break: break-word; flex-grow: 1; text-align: left; min-height: 24px; padding-inline: 5px;">
-                    <div class="fr-wrapper">
-                      <div class="fr-element fr-view">
-                        <p><strong>Description</strong></p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <div style="position: absolute; user-select: none; width: 3px; height: 100%; top: 0px; cursor: col-resize; right: -1px; background: rgb(235, 233, 233); border-radius: 3px; z-index: 1;"></div>
-              </div>
-            </div>
-            <div class="th itemPrice resizable" style="position: relative; user-select: auto; display: block; flex-grow: 0; width: 100px; height: auto; min-width: 100px; box-sizing: border-box; flex-shrink: 0;">
-              <div class="froala-wrapper  MuiBox-root" style="cursor: pointer;">
-                <div style="width: 100%; position: relative;">
-                  <div class="editable-html MuiBox-root fr-box fr-inline" style="word-break: break-word; flex-grow: 1; text-align: center; min-height: 24px; padding-inline: 5px;">
-                    <div class="fr-wrapper">
-                      <div class="fr-element fr-view">
-                        <p><strong>Item price</strong></p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <div style="position: absolute; user-select: none; width: 3px; height: 100%; top: 0px; cursor: col-resize; right: -1px; background: rgb(235, 233, 233); border-radius: 3px; z-index: 1;"></div>
-              </div>
-            </div>
-            <div class="th qty resizable" style="position: relative; user-select: auto; display: block; flex-grow: 0; width: 100px; height: auto; min-width: 100px; box-sizing: border-box; flex-shrink: 0;">
-              <div class="froala-wrapper  MuiBox-root" style="cursor: pointer;">
-                <div style="width: 100%; position: relative;">
-                  <div class="editable-html MuiBox-root fr-box fr-inline" style="word-break: break-word; flex-grow: 1; text-align: center; min-height: 24px; padding-inline: 5px;">
-                    <div class="fr-wrapper">
-                      <div class="fr-element fr-view">
-                        <p><strong>Qty</strong></p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <div style="position: absolute; user-select: none; width: 3px; height: 100%; top: 0px; cursor: col-resize; right: -1px; background: rgb(235, 233, 233); border-radius: 3px; z-index: 1;"></div>
-              </div>
-            </div>
-            <div class="th price resizable" style="position: relative; user-select: auto; display: block; flex-grow: 0; width: 100px; height: auto; min-width: 100px; box-sizing: border-box; flex-shrink: 0;">
-              <div class="froala-wrapper  MuiBox-root" style="cursor: pointer;">
-                <div style="width: 100%; position: relative;">
-                  <div class="editable-html MuiBox-root fr-box fr-inline" style="word-break: break-word; flex-grow: 1; text-align: center; min-height: 24px; padding-inline: 5px;">
-                    <div class="fr-wrapper">
-                      <div class="fr-element fr-view">
-                        <p><strong>Price</strong></p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <div style="position: absolute; user-select: none; width: 3px; height: 100%; top: 0px; cursor: col-resize; right: -1px; background: rgb(235, 233, 233); border-radius: 3px; z-index: 1;"></div>
-              </div>
-            </div>
-          </div>
-          <div id="boq-rows" class="boq-rows" style="display: flex; flex-direction: column;">
-            <div style="height: auto; opacity: 1; overflow: visible; transform: none;">
-              <div class="boq-row MuiBox-root" id="PwR" style="display: flex; flex-direction: column; justify-content: flex-end; position: relative; border-bottom: 1px solid rgb(232, 232, 232);">
-                <div class="paste-here" style="opacity: 1; display: flex; align-items: stretch;">
-                  <div class="td number MuiBox-root" style="display: flex; align-items: flex-end; position: relative; width: 30px; max-width: 30px; min-width: 30px; font-size: 10px; color: grey; padding-bottom: 2px;">1.1</div>
-                  <div class="froala-wrapper td description MuiBox-root" style="display: flex; align-items: flex-end; position: relative; width: 240px; max-width: 240px; min-width: 200px; cursor: pointer;">
-                    <div style="width: 100%; position: relative;">
-                      <div class="editable-html MuiBox-root fr-box fr-inline" style="word-break: break-word; text-align: left; padding: 30px 5px 0px; min-height: 50px;">
-                        <div class="fr-wrapper">
-                          <div class="fr-element fr-view">
-                            <p>item 1</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="MuiBox-root">
-                    <div class="froala-wrapper td itemPrice MuiBox-root" style="display: flex; align-items: flex-end; position: relative; width: 100px; max-width: 100px; min-width: 100px; cursor: pointer;">
-                      <div style="width: 100%; position: relative;">
-                        <div class="editable-html MuiBox-root fr-box fr-inline" style="word-break: break-word; text-align: center; padding: 30px 5px 0px; min-height: 50px;">
-                          <div class="fr-wrapper">
-                            <div class="fr-element fr-view">
-                              <p>10 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="MuiBox-root">
-                    <div class="froala-wrapper td qty MuiBox-root" style="display: flex; align-items: flex-end; position: relative; width: 100px; max-width: 100px; min-width: 100px; cursor: pointer;">
-                      <div style="width: 100%; position: relative;">
-                        <div class="editable-html MuiBox-root fr-box fr-inline" style="word-break: break-word; text-align: center; padding: 30px 5px 0px; min-height: 50px;">
-                          <div class="fr-wrapper">
-                            <div class="fr-element fr-view">
-                              <p>1 <span style="font-size: 12px; color: rgb(61, 142, 185);">pcs</span></p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="MuiBox-root">
-                    <div class="froala-wrapper td price MuiBox-root" style="display: flex; align-items: flex-end; position: relative; width: 100px; max-width: 100px; min-width: 100px; cursor: pointer;">
-                      <div style="width: 100%; position: relative;">
-                        <div class="editable-html MuiBox-root fr-box fr-inline" style="word-break: break-word; text-align: center; padding: 30px 5px 0px; min-height: 50px;">
-                          <div class="fr-wrapper">
-                            <div class="fr-element fr-view">
-                              <p>10 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div style="height: auto; opacity: 1; overflow: visible; transform: none;">
-              <div class="boq-row MuiBox-root" id="Qak" style="display: flex; flex-direction: column; justify-content: flex-end; position: relative; border-bottom: 1px solid rgb(232, 232, 232);">
-                <div class="paste-here" style="opacity: 1; display: flex; align-items: stretch;">
-                  <div class="td number MuiBox-root" style="display: flex; align-items: flex-end; position: relative; width: 30px; max-width: 30px; min-width: 30px; font-size: 10px; color: grey; padding-bottom: 2px;">1.2</div>
-                  <div class="froala-wrapper td description MuiBox-root" style="display: flex; align-items: flex-end; position: relative; width: 240px; max-width: 240px; min-width: 200px; cursor: pointer;">
-                    <div style="width: 100%; position: relative;">
-                      <div class="editable-html MuiBox-root fr-box fr-inline" style="word-break: break-word; text-align: left; padding: 30px 5px 0px; min-height: 50px;">
-                        <div class="fr-wrapper">
-                          <div class="fr-element fr-view">
-                            <p>item 2</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="MuiBox-root">
-                    <div class="froala-wrapper td itemPrice MuiBox-root" style="display: flex; align-items: flex-end; position: relative; width: 100px; max-width: 100px; min-width: 100px; cursor: pointer;">
-                      <div style="width: 100%; position: relative;">
-                        <div class="editable-html MuiBox-root fr-box fr-inline" style="word-break: break-word; text-align: center; padding: 30px 5px 0px; min-height: 50px;">
-                          <div class="fr-wrapper">
-                            <div class="fr-element fr-view">
-                              <p>20 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="MuiBox-root">
-                    <div class="froala-wrapper td qty MuiBox-root" style="display: flex; align-items: flex-end; position: relative; width: 100px; max-width: 100px; min-width: 100px; cursor: pointer;">
-                      <div style="width: 100%; position: relative;">
-                        <div class="editable-html MuiBox-root fr-box fr-inline" style="word-break: break-word; text-align: center; padding: 30px 5px 0px; min-height: 50px;">
-                          <div class="fr-wrapper">
-                            <div class="fr-element fr-view">
-                              <p>2 <span style="font-size: 12px; color: rgb(61, 142, 185);">pcs</span></p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="MuiBox-root">
-                    <div class="froala-wrapper td price MuiBox-root" style="display: flex; align-items: flex-end; position: relative; width: 100px; max-width: 100px; min-width: 100px; cursor: pointer;">
-                      <div style="width: 100%; position: relative;">
-                        <div class="editable-html MuiBox-root fr-box fr-inline" style="word-break: break-word; text-align: center; padding: 30px 5px 0px; min-height: 50px;">
-                          <div class="fr-wrapper">
-                            <div class="fr-element fr-view">
-                              <p>40 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div style="height: auto; opacity: 1; overflow: visible; transform: none;">
-              <div class="boq-row MuiBox-root" id="Ebx" style="display: flex; flex-direction: column; justify-content: flex-end; position: relative; border-bottom: 1px solid rgb(232, 232, 232);">
-                <div class="paste-here" style="opacity: 1; display: flex; align-items: stretch;">
-                  <div class="td number MuiBox-root" style="display: flex; align-items: flex-end; position: relative; width: 30px; max-width: 30px; min-width: 30px; font-size: 10px; color: grey; padding-bottom: 2px;">1.3</div>
-                  <div class="froala-wrapper td description MuiBox-root" style="display: flex; align-items: flex-end; position: relative; width: 240px; max-width: 240px; min-width: 200px; cursor: pointer;">
-                    <div style="width: 100%; position: relative;">
-                      <div class="editable-html MuiBox-root fr-box fr-inline" style="word-break: break-word; text-align: left; padding: 30px 5px 0px; min-height: 50px;">
-                        <div class="fr-wrapper">
-                          <div class="fr-element fr-view">
-                            <p>service</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="MuiBox-root">
-                    <div class="froala-wrapper td itemPrice MuiBox-root" style="display: flex; align-items: flex-end; position: relative; width: 100px; max-width: 100px; min-width: 100px; cursor: pointer;">
-                      <div style="width: 100%; position: relative;">
-                        <div class="editable-html MuiBox-root fr-box fr-inline" style="word-break: break-word; text-align: center; padding: 30px 5px 0px; min-height: 50px;">
-                          <div class="fr-wrapper">
-                            <div class="fr-element fr-view">
-                              <p>30 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="MuiBox-root">
-                    <div class="froala-wrapper td qty MuiBox-root" style="display: flex; align-items: flex-end; position: relative; width: 100px; max-width: 100px; min-width: 100px; cursor: pointer;">
-                      <div style="width: 100%; position: relative;">
-                        <div class="editable-html MuiBox-root fr-box fr-inline" style="word-break: break-word; text-align: center; padding: 30px 5px 0px; min-height: 50px;">
-                          <div class="fr-wrapper">
-                            <div class="fr-element fr-view">
-                              <p>3 <span style="font-size: 12px; color: rgb(61, 142, 185);">h</span></p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="MuiBox-root">
-                    <div class="froala-wrapper td price MuiBox-root" style="display: flex; align-items: flex-end; position: relative; width: 100px; max-width: 100px; min-width: 100px; cursor: pointer;">
-                      <div style="width: 100%; position: relative;">
-                        <div class="editable-html MuiBox-root fr-box fr-inline" style="word-break: break-word; text-align: center; padding: 30px 5px 0px; min-height: 50px;">
-                          <div class="fr-wrapper">
-                            <div class="fr-element fr-view">
-                              <p>90 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    `,
+    preview: boqBlockPreviewHtml,
     boq: {
       header: {
         title: {
-          html: '<p><strong>Title 1</strong></p>',
+          html: boqTitleHtml,
           value: 0,
         },
         subtotalText: {
-          html: '<div>Subtotal</div>',
+          html: boqSubtotalTextHtml,
           value: 0,
         },
         subTotalPrice: {
-          html: '<p><strong>140</strong></p>',
+          html: boqSubtotalPriceHtml,
           value: 140,
         },
       },
@@ -336,19 +48,19 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
           width: 30,
         },
         description: {
-          html: '<p><strong>Description</strong></p>',
+          html: boqHeaderDescriptionHtml,
           width: 240,
         },
         itemPrice: {
-          html: '<p><strong>Item price</strong></p>',
+          html: boqHeaderItemPriceHtml,
           width: 100,
         },
         qty: {
-          html: '<p><strong>Qty</strong></p>',
+          html: boqHeaderQtyHtml,
           width: 100,
         },
         price: {
-          html: '<p><strong>Price</strong></p>',
+          html: boqHeaderPriceHtml,
           width: 100,
         },
       },
@@ -360,7 +72,7 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
           height: 0,
           width: 0,
           description: {
-            html: '<p>item 1</p>',
+            html: rowItemHtml,
             value: 0,
             pin: {
               isPinned: false,
@@ -368,7 +80,7 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
             },
           },
           itemPrice: {
-            html: '<p>10 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
+            html: rowItemPriceHtml,
             value: 10,
             pin: {
               isPinned: false,
@@ -376,7 +88,7 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
             },
           },
           qty: {
-            html: '<p>1 <span style="font-size: 12px; color: rgb(61, 142, 185);">pcs</span></p>',
+            html: rowQtyHtml,
             value: 1,
             pin: {
               isPinned: true,
@@ -384,7 +96,7 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
             },
           },
           price: {
-            html: '<p>10 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
+            html: rowItemPriceHtml,
             value: 10,
             pin: {
               isPinned: false,
@@ -399,7 +111,7 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
           height: 0,
           width: 0,
           description: {
-            html: '<p>item 2</p>',
+            html: rowItemHtml,
             value: 0,
             pin: {
               isPinned: false,
@@ -407,7 +119,7 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
             },
           },
           itemPrice: {
-            html: '<p>20 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
+            html: rowItemPriceHtml,
             value: 20,
             pin: {
               isPinned: false,
@@ -415,7 +127,7 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
             },
           },
           qty: {
-            html: '<p>2 <span style="font-size: 12px; color: rgb(61, 142, 185);">pcs</span></p>',
+            html: rowQtyHtml,
             value: 2,
             pin: {
               isPinned: true,
@@ -423,7 +135,7 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
             },
           },
           price: {
-            html: '<p>40 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
+            html: rowItemPriceHtml,
             value: 40,
             pin: {
               isPinned: false,
@@ -438,7 +150,7 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
           height: 0,
           width: 0,
           description: {
-            html: '<p>service</p>',
+            html: rowItemHtml,
             value: 0,
             pin: {
               isPinned: false,
@@ -446,7 +158,7 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
             },
           },
           itemPrice: {
-            html: '<p>30 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
+            html: rowItemPriceHtml,
             value: 30,
             pin: {
               isPinned: false,
@@ -454,7 +166,7 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
             },
           },
           qty: {
-            html: '<p>3 <span style="font-size: 12px; color: rgb(61, 142, 185);">h</span></p>',
+            html: rowQtyHtml,
             value: 3,
             pin: {
               isPinned: true,
@@ -462,7 +174,7 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
             },
           },
           price: {
-            html: '<p>90 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
+            html: rowItemPriceHtml,
             value: 90,
             pin: {
               isPinned: false,

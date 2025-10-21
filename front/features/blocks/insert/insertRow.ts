@@ -1,11 +1,14 @@
 import { copySlice } from '@entities/copy/copySlice'
 import { rowTypeKey } from '@entities/quotation/const/rowTypeKey'
 import type { Row } from '@entities/quotation/type'
-
 import { textSlice } from '@shared/lib/froala/textSlice'
 import { generateId } from '@shared/lib/nanoid'
 import { dispatch, getState } from '@shared/lib/redux'
 import type { MouseEvent } from 'react'
+import rowItemHtml from './templates/rowItem.html?raw'
+import rowItemPriceHtml from './templates/rowItemPrice.html?raw'
+import rowPreviewHtml from './templates/rowPreview.html?raw'
+import rowQtyHtml from './templates/rowQty.html?raw'
 
 export const insertRow = (event?: MouseEvent): void => {
   const row: Row = {
@@ -14,65 +17,9 @@ export const insertRow = (event?: MouseEvent): void => {
     email: 'john@mail.com',
     height: 55,
     width: 570,
-    preview: `
-      <div class="boq-row MuiBox-root" id="ynT" style="display: flex; flex-direction: column; justify-content: flex-end; position: relative; border-bottom: 1px solid rgb(232, 232, 232);">
-        <div class="paste-here" style="opacity: 1; display: flex; align-items: stretch;">
-          <div class="td number MuiBox-root" style="display: flex; align-items: flex-end; position: relative; width: 30px; max-width: 30px; min-width: 30px; font-size: 10px; color: grey; padding-bottom: 2px;">1.1</div>
-          <div class="froala-wrapper td description MuiBox-root" style="display: flex; align-items: flex-end; position: relative; width: 240px; max-width: 240px; min-width: 200px; cursor: pointer;">
-            <div style="width: 100%; position: relative;">
-              <div class="editable-html MuiBox-root fr-box fr-inline" style="word-break: break-word; text-align: left; padding: 30px 5px 0px; min-height: 50px;">
-                <div class="fr-wrapper">
-                  <div class="fr-element fr-view">
-                    <p>item 1</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="MuiBox-root">
-            <div class="froala-wrapper td itemPrice MuiBox-root" style="display: flex; align-items: flex-end; position: relative; width: 100px; max-width: 100px; min-width: 100px; cursor: pointer;">
-              <div style="width: 100%; position: relative;">
-                <div class="editable-html MuiBox-root fr-box fr-inline" style="word-break: break-word; text-align: center; padding: 30px 5px 0px; min-height: 50px;">
-                  <div class="fr-wrapper">
-                    <div class="fr-element fr-view">
-                      <p>10 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="MuiBox-root">
-            <div class="froala-wrapper td qty MuiBox-root" style="display: flex; align-items: flex-end; position: relative; width: 100px; max-width: 100px; min-width: 100px; cursor: pointer;">
-              <div style="width: 100%; position: relative;">
-                <div class="editable-html MuiBox-root fr-box fr-inline" style="word-break: break-word; text-align: center; padding: 30px 5px 0px; min-height: 50px;">
-                  <div class="fr-wrapper">
-                    <div class="fr-element fr-view">
-                      <p>1 <span style="font-size: 12px; color: rgb(61, 142, 185);">pcs</span></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="MuiBox-root">
-            <div class="froala-wrapper td price MuiBox-root" style="display: flex; align-items: flex-end; position: relative; width: 100px; max-width: 100px; min-width: 100px; cursor: pointer;">
-              <div style="width: 100%; position: relative;">
-                <div class="editable-html MuiBox-root fr-box fr-inline" style="word-break: break-word; text-align: center; padding: 30px 5px 0px; min-height: 50px;">
-                  <div class="fr-wrapper">
-                    <div class="fr-element fr-view">
-                      <p>10 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    `,
+    preview: rowPreviewHtml,
     description: {
-      html: '<p>item 1</p>',
+      html: rowItemHtml,
       value: 0,
       pin: {
         isPinned: false,
@@ -80,7 +27,7 @@ export const insertRow = (event?: MouseEvent): void => {
       },
     },
     itemPrice: {
-      html: '<p>10 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
+      html: rowItemPriceHtml,
       value: 10,
       pin: {
         isPinned: false,
@@ -88,7 +35,7 @@ export const insertRow = (event?: MouseEvent): void => {
       },
     },
     qty: {
-      html: '<p>1 <span style="font-size: 12px; color: rgb(61, 142, 185);">pcs</span></p>',
+      html: rowQtyHtml,
       value: 1,
       pin: {
         isPinned: true,
@@ -96,7 +43,7 @@ export const insertRow = (event?: MouseEvent): void => {
       },
     },
     price: {
-      html: '<p>10 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
+      html: rowItemPriceHtml,
       value: 10,
       pin: {
         isPinned: false,

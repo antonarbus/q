@@ -1,6 +1,20 @@
+import boqHeaderDescriptionHtml from '@features/blocks/insert/templates/boqHeaderDescription.html?raw'
+import boqHeaderItemPriceHtml from '@features/blocks/insert/templates/boqHeaderItemPrice.html?raw'
+import boqHeaderPriceHtml from '@features/blocks/insert/templates/boqHeaderPrice.html?raw'
+import boqHeaderQtyHtml from '@features/blocks/insert/templates/boqHeaderQty.html?raw'
+import boqSubtotalPriceHtml from '@features/blocks/insert/templates/boqSubtotalPrice.html?raw'
+import boqSubtotalTextHtml from '@features/blocks/insert/templates/boqSubtotalText.html?raw'
+import boqTitleHtml from '@features/blocks/insert/templates/boqTitle.html?raw'
+import rowItemHtml from '@features/blocks/insert/templates/rowItem.html?raw'
+import rowItemPriceHtml from '@features/blocks/insert/templates/rowItemPrice.html?raw'
+import rowQtyHtml from '@features/blocks/insert/templates/rowQty.html?raw'
 import { generateId } from '@shared/lib/nanoid'
 import { itemType } from './const/itemType'
 import { rowTypeKey } from './const/rowTypeKey'
+import termsAndConditionsHtml from './templates/termsAndConditions.html?raw'
+import totalPriceTitleHtml from './templates/totalPriceTitle.html?raw'
+import totalPriceValueHtml from './templates/totalPriceValue.html?raw'
+import welcomeTextHtml from './templates/welcomeText.html?raw'
 import type { Quotation } from './type'
 
 export const newQuotationTemplate: Quotation = {
@@ -22,7 +36,7 @@ export const newQuotationTemplate: Quotation = {
       height: 0,
       isFroala: true,
       text: {
-        html: '<p style="text-align: center; font-size: 24px;">Commercial quotation</p><p><br></p><p style="text-align: center;"><span>Here goes any technical and commercial information.</span></p><p><br></p><p style="text-align: center;"><span>You may...</span></p><p><br></p><ul><li>write, select and <span style="color: rgb(226, 80, 65);">format</span> text</li><li>insert tables, drop <a href="/911.pdf" rel="noopener noreferrer" target="_blank">files</a>, images, attach videos</li><li>copy, cut, delete, insert, sort, resize blocks and rows</li><li>calculate prices</li><li>store and share quotation as link or .pdf file</li><li>review, track and update quotation</li><li>save and search through bookmarked portfolio</li><li>copy and paste items from other quotations</li></ul>',
+        html: welcomeTextHtml,
         value: null,
       },
     },
@@ -36,15 +50,15 @@ export const newQuotationTemplate: Quotation = {
       boq: {
         header: {
           title: {
-            html: '<p><strong>Title 1</strong></p>',
+            html: boqTitleHtml,
             value: 0,
           },
           subtotalText: {
-            html: '<div>Subtotal</div>',
+            html: boqSubtotalTextHtml,
             value: 0,
           },
           subTotalPrice: {
-            html: '<p><strong>140</strong></p>',
+            html: boqSubtotalPriceHtml,
             value: 140,
           },
         },
@@ -54,19 +68,19 @@ export const newQuotationTemplate: Quotation = {
             width: 30,
           },
           description: {
-            html: '<p><strong>Description</strong></p>',
+            html: boqHeaderDescriptionHtml,
             width: 240,
           },
           itemPrice: {
-            html: '<p><strong>Item price</strong></p>',
+            html: boqHeaderItemPriceHtml,
             width: 100,
           },
           qty: {
-            html: '<p><strong>Qty</strong></p>',
+            html: boqHeaderQtyHtml,
             width: 100,
           },
           price: {
-            html: '<p><strong>Price</strong></p>',
+            html: boqHeaderPriceHtml,
             width: 100,
           },
         },
@@ -78,7 +92,7 @@ export const newQuotationTemplate: Quotation = {
             height: 0,
             width: 0,
             description: {
-              html: '<p>item 1</p>',
+              html: rowItemHtml,
               value: 0,
               pin: {
                 isPinned: false,
@@ -86,7 +100,7 @@ export const newQuotationTemplate: Quotation = {
               },
             },
             itemPrice: {
-              html: '<p>10 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
+              html: rowItemPriceHtml,
               value: 10,
               pin: {
                 isPinned: false,
@@ -94,7 +108,7 @@ export const newQuotationTemplate: Quotation = {
               },
             },
             qty: {
-              html: '<p>1 <span style="font-size: 12px; color: rgb(61, 142, 185);">pcs</span></p>',
+              html: rowQtyHtml,
               value: 1,
               pin: {
                 isPinned: true,
@@ -102,7 +116,7 @@ export const newQuotationTemplate: Quotation = {
               },
             },
             price: {
-              html: '<p>10 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
+              html: rowItemPriceHtml,
               value: 10,
               pin: {
                 isPinned: false,
@@ -117,7 +131,7 @@ export const newQuotationTemplate: Quotation = {
             height: 0,
             width: 0,
             description: {
-              html: '<p>item 2</p>',
+              html: rowItemHtml,
               value: 0,
               pin: {
                 isPinned: false,
@@ -125,7 +139,7 @@ export const newQuotationTemplate: Quotation = {
               },
             },
             itemPrice: {
-              html: '<p>20 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
+              html: rowItemPriceHtml,
               value: 20,
               pin: {
                 isPinned: false,
@@ -133,7 +147,7 @@ export const newQuotationTemplate: Quotation = {
               },
             },
             qty: {
-              html: '<p>2 <span style="font-size: 12px; color: rgb(61, 142, 185);">pcs</span></p>',
+              html: rowQtyHtml,
               value: 2,
               pin: {
                 isPinned: true,
@@ -141,7 +155,7 @@ export const newQuotationTemplate: Quotation = {
               },
             },
             price: {
-              html: '<p>40 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
+              html: rowItemPriceHtml,
               value: 40,
               pin: {
                 isPinned: false,
@@ -156,7 +170,7 @@ export const newQuotationTemplate: Quotation = {
             height: 0,
             width: 0,
             description: {
-              html: '<p>service</p>',
+              html: rowItemHtml,
               value: 0,
               pin: {
                 isPinned: false,
@@ -164,7 +178,7 @@ export const newQuotationTemplate: Quotation = {
               },
             },
             itemPrice: {
-              html: '<p>30 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
+              html: rowItemPriceHtml,
               value: 30,
               pin: {
                 isPinned: false,
@@ -172,7 +186,7 @@ export const newQuotationTemplate: Quotation = {
               },
             },
             qty: {
-              html: '<p>3 <span style="font-size: 12px; color: rgb(61, 142, 185);">h</span></p>',
+              html: rowQtyHtml,
               value: 3,
               pin: {
                 isPinned: true,
@@ -180,7 +194,7 @@ export const newQuotationTemplate: Quotation = {
               },
             },
             price: {
-              html: '<p>90 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
+              html: rowItemPriceHtml,
               value: 90,
               pin: {
                 isPinned: false,
@@ -199,11 +213,11 @@ export const newQuotationTemplate: Quotation = {
       height: 0,
       isFroala: true,
       title: {
-        html: '<p style="text-align: center;"><strong>Total price</strong></p>',
+        html: totalPriceTitleHtml,
         value: null,
       },
       price: {
-        html: '<p style="text-align: center;">280 <span>USD</span></p>',
+        html: totalPriceValueHtml,
         value: 280,
       },
     },
@@ -215,25 +229,7 @@ export const newQuotationTemplate: Quotation = {
       height: 0,
       isFroala: true,
       text: {
-        html: `
-        <p style="font-size: 24px; text-align: center;">Terms &amp; Conditions</p><p><br></p>
-        <p><strong>Parties.</strong> The "Seller" refers to [Seller Name], and the "Buyer" refers to [Buyer Name].</p><p><br></p>
-        <p><strong>Validity.</strong> This quotation is valid for 14 days from the date of issuance.</p><p><br></p>
-        <p><strong>Payment.</strong> Payment is due within 30 days of the invoice date. Late payments may incur penalties.</p><p><br></p>
-        <p><strong>Delivery.</strong> Delivery times are estimated at 2-4 weeks from order confirmation.</p><p><br></p>
-        <p><strong>Cancellation.</strong> Orders may be canceled within 48 hours of placement without penalty. Cancellations after this period may incur fees.</p><p><br></p>
-        <p><strong>Ownership.</strong> Ownership of goods remains with Seller until full payment is received.</p><p><br></p>
-        <p><strong>Warranty.</strong> Products are covered by a 12 months warranty against defects in materials and workmanship.</p><p><br></p>
-        <p><strong>Returns.</strong> Returns or exchanges are accepted within 14 days of receipt, subject to terms outlined in our returns policy.</p><p><br></p>
-        <p><strong>Variations.</strong> Any changes to the quotation must be agreed upon in writing.</p><p><br></p>
-        <p><strong>Liability.</strong> Seller is not liable for damages occurring during transportation.</p><p><br></p>
-        <p><strong>Governing Law.</strong> This quotation shall be governed by and construed in accordance with the laws of Seller jurisdiction.</p><p><br></p>
-        <p><strong>Confidentiality.</strong> Both parties agree to keep all information exchanged in relation to this quotation confidential.</p><p><br></p>
-        <p><strong>Intellectual Property.</strong> All intellectual property rights related to the quotation and any associated materials remain with Seller.</p><p><br></p>
-        <p><strong>Force Majeure.</strong> Neither party shall be liable for any failure to perform their obligations under this quotation due to unforeseen circumstances beyond their control.</p><p><br></p>
-        <p><strong>Indemnity.</strong> The Buyer agrees to indemnify and hold Seller harmless from any claims arising from the use of the products or services provided under this quotation.</p><p><br></p>
-        <p><strong>Notices.</strong> Any notices or communications regarding this quotation shall be sent to the addresses provided by each party.</p><p><br></p>
-      `,
+        html: termsAndConditionsHtml,
         value: null,
       },
     },

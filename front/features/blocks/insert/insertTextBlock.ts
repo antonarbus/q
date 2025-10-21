@@ -5,6 +5,8 @@ import { textSlice } from '@shared/lib/froala/textSlice'
 import { generateId } from '@shared/lib/nanoid'
 import { dispatch, getState } from '@shared/lib/redux'
 import type { MouseEvent } from 'react'
+import textBlockContentHtml from './templates/textBlockContent.html?raw'
+import textBlockPreviewHtml from './templates/textBlockPreview.html?raw'
 
 export const insertTextBlock = (event?: MouseEvent): void => {
   const block: Text = {
@@ -14,20 +16,9 @@ export const insertTextBlock = (event?: MouseEvent): void => {
     width: 600,
     height: 59.2,
     isFroala: true,
-    preview: `
-      <div class="froala-wrapper  MuiBox-root">
-        <div class="static-html fr-box fr-inline MuiBox-root">
-          <div class="fr-wrapper MuiBox-root">
-            <div class="fr-element fr-view MuiBox-root"
-              style="padding: 30px 20px;">
-              <p>Add text, tables, drop images, drop <a href="/911.pdf" rel="noopener noreferrer" target="_blank">files</a>, links, select to <span style="color: rgb(226, 80, 65);">format</span>...</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    `,
+    preview: textBlockPreviewHtml,
     text: {
-      html: '<p>Add text, tables, drop images, drop <a href="/911.pdf" rel="noopener noreferrer" target="_blank">files</a>, links, select to <span style="color: rgb(226, 80, 65);">format</span>...</p>',
+      html: textBlockContentHtml,
       value: null,
     },
   }
