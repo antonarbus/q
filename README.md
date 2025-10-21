@@ -374,25 +374,6 @@ https://console.cloud.google.com/artifacts?inv=1&invt=AblO7A&project=quotationap
 
 https://console.cloud.google.com/iam-admin/serviceaccounts?inv=1&invt=AblPCg&project=quotationapp-8014c&supportedpurview=project
 
----
-
-# CODE IMPROVEMENT GUIDE
-
-## Performance Optimization
-
-
-### 2. Code Splitting for Routes
-
-
-
-**Monitor chunking effectiveness:**
-- Froala → `qwerty` chunk
-- AG Grid → `ag-grid` chunk
-- MUI → `@mui` chunk
-
-
----
-
 ## Code Review Checklist
 
 Before merging PRs, verify:
