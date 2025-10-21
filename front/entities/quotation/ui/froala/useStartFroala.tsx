@@ -1,5 +1,3 @@
-import './froalaPkg'
-import './froalaPkg.css'
 import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import { generateId } from '@shared/lib/nanoid'
 import type { KeyboardEvent, MouseEvent } from 'react'
@@ -21,6 +19,10 @@ export const useStartFroala = (): void => {
 
   useEffectOnce(() => {
     const initFroalaInstance = async (): Promise<void> => {
+      // Dynamically import Froala to reduce initial bundle size
+      await import('./froalaPkg')
+      await import('./froalaPkg.css')
+
       //@ts-expect-error: some error
       const froalaInstance = new FroalaEditor(froala.froalaElementRef.current, {
         ...froalaDefaultOptions,
