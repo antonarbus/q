@@ -14,15 +14,15 @@ import boqHeaderQtyHtml from './templates/boqHeaderQty.html?raw'
 import boqSubtotalPriceHtml from './templates/boqSubtotalPrice.html?raw'
 import boqSubtotalTextHtml from './templates/boqSubtotalText.html?raw'
 import boqTitleHtml from './templates/boqTitle.html?raw'
-import rowOneItemHtml from './templates/rowOneItem.html?raw'
+import rowOneDescriptionHtml from './templates/rowOneDescription.html?raw'
 import rowOneItemPriceHtml from './templates/rowOneItemPrice.html?raw'
 import rowOnePriceHtml from './templates/rowOnePrice.html?raw'
 import rowOneQtyHtml from './templates/rowOneQty.html?raw'
-import rowThreeItemHtml from './templates/rowThreeItem.html?raw'
+import rowThreeDescriptionHtml from './templates/rowThreeDescription.html?raw'
 import rowThreeItemPriceHtml from './templates/rowThreeItemPrice.html?raw'
 import rowThreePriceHtml from './templates/rowThreePrice.html?raw'
 import rowThreeQtyHtml from './templates/rowThreeQty.html?raw'
-import rowTwoItemHtml from './templates/rowTwoItem.html?raw'
+import rowTwoDescriptionHtml from './templates/rowTwoDescription.html?raw'
 import rowTwoItemPriceHtml from './templates/rowTwoItemPrice.html?raw'
 import rowTwoPriceHtml from './templates/rowTwoPrice.html?raw'
 import rowTwoQtyHtml from './templates/rowTwoQty.html?raw'
@@ -81,7 +81,7 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
           height: 0,
           width: 0,
           description: {
-            html: rowOneItemHtml,
+            html: rowOneDescriptionHtml,
             value: 0,
             pin: {
               isPinned: false,
@@ -120,7 +120,7 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
           height: 0,
           width: 0,
           description: {
-            html: rowTwoItemHtml,
+            html: rowTwoDescriptionHtml,
             value: 0,
             pin: {
               isPinned: false,
@@ -159,7 +159,7 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
           height: 0,
           width: 0,
           description: {
-            html: rowThreeItemHtml,
+            html: rowThreeDescriptionHtml,
             value: 0,
             pin: {
               isPinned: false,
