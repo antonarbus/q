@@ -1,31 +1,31 @@
 import { copySlice } from '@entities/copy/copySlice'
 import { itemType } from '@entities/quotation/const/itemType'
 import { rowTypeKey } from '@entities/quotation/const/rowTypeKey'
+import boqBlockPreviewHtml from '@entities/quotation/templates/boqBlockPreview.html?raw' // assets can be imported as strings using the ?raw suffix
+import boqHeaderDescriptionHtml from '@entities/quotation/templates/boqHeaderDescription.html?raw'
+import boqHeaderItemPriceHtml from '@entities/quotation/templates/boqHeaderItemPrice.html?raw'
+import boqHeaderPriceHtml from '@entities/quotation/templates/boqHeaderPrice.html?raw'
+import boqHeaderQtyHtml from '@entities/quotation/templates/boqHeaderQty.html?raw'
+import boqSubtotalPriceHtml from '@entities/quotation/templates/boqSubtotalPrice.html?raw'
+import boqSubtotalTextHtml from '@entities/quotation/templates/boqSubtotalText.html?raw'
+import boqTitleHtml from '@entities/quotation/templates/boqTitle.html?raw'
+import rowOneDescriptionHtml from '@entities/quotation/templates/rowOneDescription.html?raw'
+import rowOneItemPriceHtml from '@entities/quotation/templates/rowOneItemPrice.html?raw'
+import rowOnePriceHtml from '@entities/quotation/templates/rowOnePrice.html?raw'
+import rowOneQtyHtml from '@entities/quotation/templates/rowOneQty.html?raw'
+import rowThreeDescriptionHtml from '@entities/quotation/templates/rowThreeDescription.html?raw'
+import rowThreeItemPriceHtml from '@entities/quotation/templates/rowThreeItemPrice.html?raw'
+import rowThreePriceHtml from '@entities/quotation/templates/rowThreePrice.html?raw'
+import rowThreeQtyHtml from '@entities/quotation/templates/rowThreeQty.html?raw'
+import rowTwoDescriptionHtml from '@entities/quotation/templates/rowTwoDescription.html?raw'
+import rowTwoItemPriceHtml from '@entities/quotation/templates/rowTwoItemPrice.html?raw'
+import rowTwoPriceHtml from '@entities/quotation/templates/rowTwoPrice.html?raw'
+import rowTwoQtyHtml from '@entities/quotation/templates/rowTwoQty.html?raw'
 import type { Boq } from '@entities/quotation/type'
 import { textSlice } from '@shared/lib/froala/textSlice'
 import { generateId } from '@shared/lib/nanoid'
 import { dispatch, getState } from '@shared/lib/redux'
 import type { MouseEvent } from 'react'
-import boqBlockPreviewHtml from './templates/boqBlockPreview.html?raw' // assets can be imported as strings using the ?raw suffix
-import boqHeaderDescriptionHtml from './templates/boqHeaderDescription.html?raw'
-import boqHeaderItemPriceHtml from './templates/boqHeaderItemPrice.html?raw'
-import boqHeaderPriceHtml from './templates/boqHeaderPrice.html?raw'
-import boqHeaderQtyHtml from './templates/boqHeaderQty.html?raw'
-import boqSubtotalPriceHtml from './templates/boqSubtotalPrice.html?raw'
-import boqSubtotalTextHtml from './templates/boqSubtotalText.html?raw'
-import boqTitleHtml from './templates/boqTitle.html?raw'
-import rowOneDescriptionHtml from './templates/rowOneDescription.html?raw'
-import rowOneItemPriceHtml from './templates/rowOneItemPrice.html?raw'
-import rowOnePriceHtml from './templates/rowOnePrice.html?raw'
-import rowOneQtyHtml from './templates/rowOneQty.html?raw'
-import rowThreeDescriptionHtml from './templates/rowThreeDescription.html?raw'
-import rowThreeItemPriceHtml from './templates/rowThreeItemPrice.html?raw'
-import rowThreePriceHtml from './templates/rowThreePrice.html?raw'
-import rowThreeQtyHtml from './templates/rowThreeQty.html?raw'
-import rowTwoDescriptionHtml from './templates/rowTwoDescription.html?raw'
-import rowTwoItemPriceHtml from './templates/rowTwoItemPrice.html?raw'
-import rowTwoPriceHtml from './templates/rowTwoPrice.html?raw'
-import rowTwoQtyHtml from './templates/rowTwoQty.html?raw'
 
 export const insertBoqBlock = (event?: MouseEvent): void => {
   const boqBlock: Boq = {
@@ -183,7 +183,7 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
             },
           },
           price: {
-            html: rowThreeItemPriceHtml,
+            html: rowThreePriceHtml,
             value: 90,
             pin: {
               isPinned: false,

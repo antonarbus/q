@@ -1,14 +1,14 @@
 import { copySlice } from '@entities/copy/copySlice'
 import { rowTypeKey } from '@entities/quotation/const/rowTypeKey'
+import rowItemHtml from '@entities/quotation/templates/rowItem.html?raw' // assets can be imported as strings using the ?raw suffix
+import rowItemPriceHtml from '@entities/quotation/templates/rowItemPrice.html?raw'
+import rowPreviewHtml from '@entities/quotation/templates/rowPreview.html?raw'
+import rowQtyHtml from '@entities/quotation/templates/rowQty.html?raw'
 import type { Row } from '@entities/quotation/type'
 import { textSlice } from '@shared/lib/froala/textSlice'
 import { generateId } from '@shared/lib/nanoid'
 import { dispatch, getState } from '@shared/lib/redux'
 import type { MouseEvent } from 'react'
-import rowItemHtml from './templates/rowItem.html?raw' // assets can be imported as strings using the ?raw suffix
-import rowItemPriceHtml from './templates/rowItemPrice.html?raw'
-import rowPreviewHtml from './templates/rowPreview.html?raw'
-import rowQtyHtml from './templates/rowQty.html?raw'
 
 export const insertRow = (event?: MouseEvent): void => {
   const row: Row = {

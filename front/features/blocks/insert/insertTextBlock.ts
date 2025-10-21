@@ -1,12 +1,12 @@
 import { copySlice } from '@entities/copy/copySlice'
 import { itemType } from '@entities/quotation/const/itemType'
+import textBlockContentHtml from '@entities/quotation/templates/textBlockContent.html?raw' // assets can be imported as strings using the ?raw suffix
+import textBlockPreviewHtml from '@entities/quotation/templates/textBlockPreview.html?raw'
 import type { Text } from '@entities/quotation/type'
 import { textSlice } from '@shared/lib/froala/textSlice'
 import { generateId } from '@shared/lib/nanoid'
 import { dispatch, getState } from '@shared/lib/redux'
 import type { MouseEvent } from 'react'
-import textBlockContentHtml from './templates/textBlockContent.html?raw' // assets can be imported as strings using the ?raw suffix
-import textBlockPreviewHtml from './templates/textBlockPreview.html?raw'
 
 export const insertTextBlock = (event?: MouseEvent): void => {
   const block: Text = {

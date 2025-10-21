@@ -1,13 +1,13 @@
 import { copySlice } from '@entities/copy/copySlice'
 import { itemType } from '@entities/quotation/const/itemType'
+import priceBlockPreviewHtml from '@entities/quotation/templates/priceBlockPreview.html?raw' // assets can be imported as strings using the ?raw suffix
+import priceBlockTitleHtml from '@entities/quotation/templates/priceBlockTitle.html?raw'
+import priceBlockValueHtml from '@entities/quotation/templates/priceBlockValue.html?raw'
 import type { Price } from '@entities/quotation/type'
 import { textSlice } from '@shared/lib/froala/textSlice'
 import { generateId } from '@shared/lib/nanoid'
 import { dispatch, getState } from '@shared/lib/redux'
 import type { MouseEvent } from 'react'
-import priceBlockPreviewHtml from './templates/priceBlockPreview.html?raw' // assets can be imported as strings using the ?raw suffix
-import priceBlockTitleHtml from './templates/priceBlockTitle.html?raw'
-import priceBlockValueHtml from './templates/priceBlockValue.html?raw'
 
 export const insertPriceBlock = (event?: MouseEvent): void => {
   const block: Price = {
