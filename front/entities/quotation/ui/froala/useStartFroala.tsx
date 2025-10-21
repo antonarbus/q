@@ -1,12 +1,9 @@
 import './froalaPkg'
 import './froalaPkg.css'
 import type { FroalaEditorRef } from '@shared/lib/froala/froala'
-import { removeLoadingBar } from '@shared/lib/froala/removeLoadingBar'
 import { generateId } from '@shared/lib/nanoid'
-import { getState } from '@shared/lib/redux'
 import type { KeyboardEvent, MouseEvent } from 'react'
 import { useEffectOnce } from 'react-use'
-import { toast } from 'sonner'
 import { useFroala } from '../../provider/FroalaProvider'
 import { froalaDefaultOptions } from './froalaDefaultOptions'
 
