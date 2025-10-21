@@ -5,21 +5,18 @@ type Props = {
   subString: string
 }
 
-export const getTextWithBoldSubStringAsJsx = ({
-  text,
-  subString,
-}: Props): ReactNode => {
-  if (subString.length === 0) {
-    return text
+export const getTextWithBoldSubStringAsJsx = (props: Props): ReactNode => {
+  if (props.subString.length === 0) {
+    return props.text
   }
 
-  const matchAllOccurrencesRegExp = new RegExp(`(${subString})`, 'giu')
-  const parts = text.split(matchAllOccurrencesRegExp)
+  const matchAllOccurrencesRegExp = new RegExp(`(${props.subString})`, 'giu')
+  const parts = props.text.split(matchAllOccurrencesRegExp)
 
   return (
     <>
       {parts.map((part, index) => {
-        const isMatch = part.toLowerCase() === subString.toLowerCase()
+        const isMatch = part.toLowerCase() === props.subString.toLowerCase()
 
         return (
           <span key={`substring-${String(index)}`}>
