@@ -6,7 +6,7 @@ import { textSlice } from '@shared/lib/froala/textSlice'
 import { generateId } from '@shared/lib/nanoid'
 import { dispatch, getState } from '@shared/lib/redux'
 import type { MouseEvent } from 'react'
-import boqBlockPreviewHtml from './templates/boqBlockPreview.html?raw'
+import boqBlockPreviewHtml from './templates/boqBlockPreview.html?raw' // assets can be imported as strings using the ?raw suffix
 import boqHeaderDescriptionHtml from './templates/boqHeaderDescription.html?raw'
 import boqHeaderItemPriceHtml from './templates/boqHeaderItemPrice.html?raw'
 import boqHeaderPriceHtml from './templates/boqHeaderPrice.html?raw'

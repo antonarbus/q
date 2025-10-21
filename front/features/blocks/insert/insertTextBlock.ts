@@ -5,7 +5,7 @@ import { textSlice } from '@shared/lib/froala/textSlice'
 import { generateId } from '@shared/lib/nanoid'
 import { dispatch, getState } from '@shared/lib/redux'
 import type { MouseEvent } from 'react'
-import textBlockContentHtml from './templates/textBlockContent.html?raw'
+import textBlockContentHtml from './templates/textBlockContent.html?raw' // assets can be imported as strings using the ?raw suffix
 import textBlockPreviewHtml from './templates/textBlockPreview.html?raw'
 
 export const insertTextBlock = (event?: MouseEvent): void => {

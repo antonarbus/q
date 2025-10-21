@@ -1,4 +1,4 @@
-import boqHeaderDescriptionHtml from '@features/blocks/insert/templates/boqHeaderDescription.html?raw'
+import boqHeaderDescriptionHtml from '@features/blocks/insert/templates/boqHeaderDescription.html?raw' // assets can be imported as strings using the ?raw suffix
 import boqHeaderItemPriceHtml from '@features/blocks/insert/templates/boqHeaderItemPrice.html?raw'
 import boqHeaderPriceHtml from '@features/blocks/insert/templates/boqHeaderPrice.html?raw'
 import boqHeaderQtyHtml from '@features/blocks/insert/templates/boqHeaderQty.html?raw'

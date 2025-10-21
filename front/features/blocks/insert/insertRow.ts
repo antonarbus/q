@@ -5,7 +5,7 @@ import { textSlice } from '@shared/lib/froala/textSlice'
 import { generateId } from '@shared/lib/nanoid'
 import { dispatch, getState } from '@shared/lib/redux'
 import type { MouseEvent } from 'react'
-import rowItemHtml from './templates/rowItem.html?raw'
+import rowItemHtml from './templates/rowItem.html?raw' // assets can be imported as strings using the ?raw suffix
 import rowItemPriceHtml from './templates/rowItemPrice.html?raw'
 import rowPreviewHtml from './templates/rowPreview.html?raw'
 import rowQtyHtml from './templates/rowQty.html?raw'
