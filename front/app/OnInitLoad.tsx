@@ -4,7 +4,7 @@ import { useConnectionToBackendCheck } from '@features/init-load/useConnectionTo
 import { useCountUniqueDailyVisitor } from '@features/init-load/useCountUniqueDailyVisitor'
 import { useHideInitHtmlElements } from '@features/init-load/useHideInitHtmlElements'
 import { useRemoveThirdPartyCookies } from '@features/init-load/useRemoveThirdPartyCookies'
-import { useInitMousePositionTracking } from '@shared/lib/mouse-position'
+import { useInitMousePositionTracking } from '@shared/util/mousePosition'
 import type { ReactNode } from 'react'
 
 export const OnInitLoad = (): ReactNode => {

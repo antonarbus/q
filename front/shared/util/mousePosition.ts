@@ -1,5 +1,7 @@
 import { useEffectOnce } from 'react-use'
-import { trackMousePosition } from './mousePosition'
+
+/** Mouse coordinates tracked globally */
+export const mousePosition = { x: 0, y: 0 }
 
 /**
  * Hook to initialize global mouse position tracking.
@@ -7,6 +9,9 @@ import { trackMousePosition } from './mousePosition'
  */
 export const useInitMousePositionTracking = (): void => {
   useEffectOnce(() => {
-    trackMousePosition()
+    window.addEventListener('mousemove', (event: MouseEvent): void => {
+      mousePosition.x = event.clientX
+      mousePosition.y = event.clientY
+    })
   })
 }

@@ -1,5 +1,5 @@
 import type { NavItem } from '@entities/nav/type'
-import { mousePosition } from '@shared/lib/mouse-position'
+import { mousePosition } from '@shared/util/mousePosition'
 import { functionRegistry } from '@widgets/nav/functionRegistry'
 import type { MouseEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
