@@ -9,7 +9,7 @@ import { cls } from '@shared/cls'
 import { route } from '@shared/lib/react-router-dom/route'
 import { dispatch, getState } from '@shared/lib/redux'
 import type { MouseEvent, ReactNode } from 'react'
-import { MdOutlineStarOutline } from 'react-icons/md'
+import { FaRegStar } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 
@@ -28,8 +28,13 @@ export const BookmarkRowIcon = (): ReactNode => {
       title='Add to bookmarks'
     >
       <span className={cls.actionIconContainer}>
-        <MdOutlineStarOutline
+        <FaRegStar
           className={cls.actionIcon}
+          css={{
+            '&:hover': {
+              color: disabled === true ? '#acacac' : '#ff7f00 !important',
+            },
+          }}
           onClick={(event: MouseEvent): void => {
             if (disabled === true) {
               return

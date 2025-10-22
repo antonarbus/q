@@ -1,6 +1,6 @@
 import { Burger } from '@entities/nav/ui/NavList/NavItem/Burger'
 import { CiViewTable } from 'react-icons/ci'
-import { FaRegFileImage, FaRegFilePdf } from 'react-icons/fa'
+import { FaRegFileImage, FaRegFilePdf, FaRegStar } from 'react-icons/fa'
 import {
   FaGripLines,
   FaRegRectangleList,
@@ -16,8 +16,8 @@ import {
   IoStatsChartOutline,
   IoText,
 } from 'react-icons/io5'
-import { PiFolderSimpleStarDuotone } from 'react-icons/pi'
-import { RiAdminLine, RiFileExcel2Line, RiMenuAddFill } from 'react-icons/ri'
+import { LuBetweenHorizontalStart } from 'react-icons/lu'
+import { RiAdminLine, RiFileExcel2Line } from 'react-icons/ri'
 import { RxPerson } from 'react-icons/rx'
 import { VscNewFile } from 'react-icons/vsc'
 
@@ -35,12 +35,12 @@ export const iconRegistry = {
   link: <ImLink data-testid='link icon' />,
   pdf: <FaRegFilePdf data-testid='pdf icon' />,
   excel: <RiFileExcel2Line data-testid='excel icon' />,
-  insert: <RiMenuAddFill data-testid='insert icon' />,
+  insert: <LuBetweenHorizontalStart data-testid='insert icon' />,
   boqItem: <FaRegRectangleList />,
   row: <FaGripLines />,
   textItem: <IoText />,
   priceItem: <FiDollarSign />,
-  bookmarkList: <PiFolderSimpleStarDuotone data-testid='bookmarks icon' />,
+  bookmarkList: <FaRegStar data-testid='bookmarks icon' />,
   quotationList: <CiViewTable data-testid='quotations icon' />,
   blog: <HiOutlineBookOpen data-testid='blog icon' />,
   login: <FiLogIn data-testid='login icon' />,

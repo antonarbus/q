@@ -418,11 +418,9 @@ Before merging PRs, verify:
 - [ ] Instead of preview, render same component but scale it down (save bucket space)
 - [ ] Add app description on Q logo
 - [ ] Make info field use Froala editor
-- [ ] Visual indicator when item is bookmarked (yellow star)
 - [ ] Add price, valid to, status fields to quotation model and table
 - [ ] Evaluate pdfkit library for text-based PDF generation
 - [ ] Copy shared quotations to prevent file deletion issues (need URL rewriting)
 - [ ] Investigate Google Cloud Run deployment via template.yaml
 - [ ] Add Cloudflare integration
-- [ ] Fix activation flow for unregistered users saving quotations
-- [ ] Replace re-resizable library (maintenance issues) with react-rnd or @dnd-kit/sortable
+- [ ] Change MongoDB to some type safe
