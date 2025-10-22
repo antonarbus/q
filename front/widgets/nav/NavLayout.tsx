@@ -1,4 +1,4 @@
-import { navMediaQuery } from '@shared/nav/ui/navMediaQuery'
+import { navMediaQuery } from '@entities/nav/ui/navMediaQuery'
 import { theme } from '@shared/theme'
 import type { JSX, ReactNode } from 'react'
 

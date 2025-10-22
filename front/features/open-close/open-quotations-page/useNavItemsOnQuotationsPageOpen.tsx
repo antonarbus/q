@@ -1,6 +1,6 @@
+import { navItemId } from '@entities/nav/navItemId'
+import { navSlice } from '@entities/nav/navSlice'
 import { dispatch } from '@shared/lib/redux'
-import { navItemId } from '@shared/nav/navItemId'
-import { navSlice } from '@shared/nav/navSlice'
 import { useEffectOnce, useUnmount } from 'react-use'
 
 export const useNavItemsOnQuotationsPageOpen = (): void => {

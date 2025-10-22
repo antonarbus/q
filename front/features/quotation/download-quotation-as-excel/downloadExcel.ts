@@ -1,6 +1,6 @@
+import { navItemId } from '@entities/nav/navItemId'
+import { createLoadingMenuIconMachine } from '@entities/nav/state-machine/createLoadingMenuIconMachine'
 import { getState } from '@shared/lib/redux'
-import { navItemId } from '@shared/nav/navItemId'
-import { createLoadingMenuIconMachine } from '@shared/nav/state-machine/createLoadingMenuIconMachine'
 import { downloadBlobAsFile } from '@shared/util/downloadBlobAsFile'
 import { toast } from 'sonner'
 import { createActor } from 'xstate'

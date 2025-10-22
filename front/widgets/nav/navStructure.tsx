@@ -1,100 +1,47 @@
-import {
-  insertBoqBlock,
-  insertPriceBlock,
-  insertRow,
-  insertTextBlock,
-} from '@features/blocks/insert'
-import { openBookmarksPage } from '@features/open-close/open-bookmarks-page'
-import { openLoginModal } from '@features/open-close/open-login-modal'
-import {
-  openQuotationPageAndLoadNew,
-  openQuotationPageAndLoadPrev,
-} from '@features/open-close/open-quotation-page'
-import { openQuotationsPage } from '@features/open-close/open-quotations-page'
-import { openSaveQuotationModal } from '@features/open-close/open-save-quotation-modal'
-import { openSettingsModal } from '@features/open-close/open-settings-modal'
-import { openShareQuotationModal } from '@features/open-close/open-share-quotation-modal'
-import { downloadExcel } from '@features/quotation/download-quotation-as-excel'
-import { downloadPdf } from '@features/quotation/download-quotation-as-pdf'
-import { saveExistingQuotation } from '@features/quotation/save-quotation'
+import { navItemId } from '@entities/nav/navItemId'
+import type { NavItem } from '@entities/nav/type'
 import { instance } from '@shared/instance'
 import { route } from '@shared/lib/react-router-dom/route'
-import { getState } from '@shared/lib/redux'
-import { navItemId } from '@shared/nav/navItemId'
-import type { NavItem } from '@shared/nav/type'
-import { Burger } from '@shared/nav/ui/NavList/NavItem/Burger'
-import { CiViewTable } from 'react-icons/ci'
-import { FaRegFileImage, FaRegFilePdf } from 'react-icons/fa'
-import {
-  FaGripLines,
-  FaRegRectangleList,
-  FaRegShareFromSquare,
-  FaUsersGear,
-} from 'react-icons/fa6'
-import { FiDollarSign, FiLogIn, FiLogOut, FiSave } from 'react-icons/fi'
-import { HiOutlineBookOpen } from 'react-icons/hi2'
-import { ImLink } from 'react-icons/im'
-import {
-  IoChevronBackOutline,
-  IoSettingsOutline,
-  IoStatsChartOutline,
-  IoText,
-} from 'react-icons/io5'
-import { PiFolderSimpleStarDuotone } from 'react-icons/pi'
-import { RiAdminLine, RiFileExcel2Line, RiMenuAddFill } from 'react-icons/ri'
-import { RxPerson } from 'react-icons/rx'
-import { VscNewFile } from 'react-icons/vsc'
 
 export const navStructure: NavItem[] = [
   {
     id: navItemId.burger,
     name: 'burger',
-    icon: <Burger />,
+    iconId: 'burger',
     isHidden: false,
     navItems: [
       {
         id: navItemId.back,
-        icon: (
-          <IoChevronBackOutline
-            data-testid='back icon'
-            style={{ color: '#3bc3ff' }}
-          />
-        ),
+        iconId: 'back',
         isHidden: true,
         name: 'Back',
-        func: openQuotationPageAndLoadPrev,
+        funcId: 'openQuotationPageAndLoadPrev',
         isActive: true,
         tooltip: 'Back to quotation',
       },
       {
         id: navItemId.new,
-        icon: <VscNewFile data-testid='new icon' />,
+        iconId: 'new',
         isHidden: false,
         name: 'New',
         link: route.new,
-        func: openQuotationPageAndLoadNew,
+        funcId: 'openQuotationPageAndLoadNew',
         isActive: true,
         tooltip: 'New quotation',
       },
       {
         id: navItemId.save,
-        icon: <FiSave data-testid='save icon' />,
+        iconId: 'save',
         isHidden: false,
         name: 'Save',
         shortcut: ['control', 'shift', 's'],
         link: `./${route.save}`,
         tooltip: 'Save or update quotation (shortcut: ctrl+shift+s)',
-        func: (): void => {
-          if (getState().quotation.id === 'new') {
-            openSaveQuotationModal()
-          } else {
-            void saveExistingQuotation()
-          }
-        },
+        funcId: 'saveQuotation',
       },
       {
         id: navItemId.share,
-        icon: <FaRegShareFromSquare data-testid='share icon' />,
+        iconId: 'share',
         isHidden: false,
         name: 'Share',
         disabled: false,
@@ -102,36 +49,36 @@ export const navStructure: NavItem[] = [
         navItems: [
           {
             id: navItemId.link,
-            icon: <ImLink data-testid='link icon' />,
+            iconId: 'link',
             name: 'Link',
             isHidden: false,
             disabled: false,
             tooltip: 'Share link for quotation',
-            func: openShareQuotationModal,
+            funcId: 'openShareQuotationModal',
           },
           {
             id: navItemId.pdf,
-            icon: <FaRegFilePdf data-testid='pdf icon' />,
+            iconId: 'pdf',
             isHidden: false,
             disabled: false,
             name: 'Download as .pdf',
             tooltip: 'Download as .pdf',
-            func: downloadPdf,
+            funcId: 'downloadPdf',
           },
           {
             id: navItemId.excel,
-            icon: <RiFileExcel2Line data-testid='excel icon' />,
+            iconId: 'excel',
             isHidden: false,
             disabled: false,
             name: 'Download as .xlsx',
             tooltip: 'Download as .xlsx',
-            func: downloadExcel,
+            funcId: 'downloadExcel',
           },
         ],
       },
       {
         id: navItemId.insert,
-        icon: <RiMenuAddFill data-testid='insert icon' />,
+        iconId: 'insert',
         isHidden: false,
         name: 'Insert',
         disabled: true,
@@ -139,59 +86,59 @@ export const navStructure: NavItem[] = [
           {
             id: navItemId.boqItem,
             name: 'Items',
-            icon: <FaRegRectangleList />,
+            iconId: 'boqItem',
             isHidden: false,
             shortcut: ['control', 'shift', 'i'],
-            func: insertBoqBlock,
+            funcId: 'insertBoqBlock',
           },
           {
             id: navItemId.row,
             name: 'Row',
-            icon: <FaGripLines />,
+            iconId: 'row',
             isHidden: false,
             shortcut: ['control', 'shift', 'r'],
-            func: insertRow,
+            funcId: 'insertRow',
           },
           {
             id: navItemId.textItem,
             name: 'Text',
-            icon: <IoText />,
+            iconId: 'textItem',
             isHidden: false,
             shortcut: ['control', 'shift', 't'],
-            func: insertTextBlock,
+            funcId: 'insertTextBlock',
           },
           {
             id: navItemId.priceItem,
             name: 'Price',
-            icon: <FiDollarSign />,
+            iconId: 'priceItem',
             isHidden: false,
             shortcut: ['control', 'shift', 'p'],
-            func: insertPriceBlock,
+            funcId: 'insertPriceBlock',
           },
         ],
         tooltip: 'Insert block or row',
       },
       {
         id: navItemId.bookmarkList,
-        icon: <PiFolderSimpleStarDuotone data-testid='bookmarks icon' />,
+        iconId: 'bookmarkList',
         isHidden: false,
         name: 'Bookmarks',
         link: route.bookmarkList,
-        func: openBookmarksPage,
+        funcId: 'openBookmarksPage',
         tooltip: 'Your bookmarks',
       },
       {
         id: navItemId.quotationList,
-        icon: <CiViewTable data-testid='quotations icon' />,
+        iconId: 'quotationList',
         isHidden: false,
         name: 'Quotations',
         link: route.quotationList,
-        func: openQuotationsPage,
+        funcId: 'openQuotationsPage',
         tooltip: 'Your quotations',
       },
       {
         id: navItemId.blog,
-        icon: <HiOutlineBookOpen data-testid='blog icon' />,
+        iconId: 'blog',
         isHidden: false,
         name: 'Blog',
         tooltip: 'Guides and resources',
@@ -221,65 +168,65 @@ export const navStructure: NavItem[] = [
       },
       {
         id: navItemId.login,
-        icon: <FiLogIn data-testid='login icon' />,
+        iconId: 'login',
         isHidden: false,
         name: 'Log in',
         link: `./${route.login}`,
-        func: openLoginModal,
+        funcId: 'openLoginModal',
         tooltip: 'Log in',
       },
       {
         id: navItemId.profile,
-        icon: <RxPerson data-testid='profile icon' />,
+        iconId: 'profile',
         name: 'Profile',
         isHidden: true,
         navItems: [
           {
             id: navItemId.settings,
-            icon: <IoSettingsOutline />,
+            iconId: 'settings',
             isHidden: false,
             name: 'Settings',
             link: `./${route.settings}`,
-            func: openSettingsModal,
+            funcId: 'openSettingsModal',
           },
           {
             id: navItemId.admin,
-            icon: <RiAdminLine data-testid='admin icon' />,
+            iconId: 'admin',
             isHidden: false,
             name: 'Admin',
             tooltip: 'Admin links',
             navItems: [
               {
                 id: navItemId.quotationListAll,
-                icon: <CiViewTable />,
+                iconId: 'quotationList',
                 isHidden: false,
                 name: 'Quotations',
                 link: `/${route.quotationListAll}`,
               },
               {
                 id: navItemId.bookmarkListAll,
-                icon: <PiFolderSimpleStarDuotone />,
+                iconId: 'bookmarkList',
                 isHidden: false,
                 name: 'Bookmarks',
                 link: `/${route.bookmarkListAll}`,
               },
               {
                 id: navItemId.fileListAll,
-                icon: <FaRegFileImage />,
+                iconId: 'fileListAll',
                 isHidden: false,
                 name: 'Files',
                 link: `/${route.fileListAll}`,
               },
               {
                 id: navItemId.userList,
-                icon: <FaUsersGear />,
+                iconId: 'userList',
                 isHidden: false,
                 name: 'Users',
                 link: `/${route.userList}`,
               },
               {
                 id: navItemId.visitors,
-                icon: <IoStatsChartOutline />,
+                iconId: 'visitors',
                 isHidden: false,
                 name: 'Visitors',
                 link: `/${route.visitorList}`,
@@ -288,7 +235,7 @@ export const navStructure: NavItem[] = [
           },
           {
             id: navItemId.logout,
-            icon: <FiLogOut />,
+            iconId: 'logout',
             isHidden: false,
             name: 'Log out',
             link: `./${route.logout}`,

@@ -1,0 +1,55 @@
+import type { NavItemId } from '@entities/nav/navItemId'
+import { navSlice } from '@entities/nav/navSlice'
+import { getNavItem } from '@entities/nav/ui/NavList/NavItem/Menu/functions/getNavItem'
+import { navigateInMenu } from '@entities/nav/ui/NavList/NavItem/Menu/functions/useMenuAnimation'
+import { dispatch, getState } from '@shared/lib/redux'
+import { functionRegistry } from '@widgets/nav/functionRegistry'
+import type { MouseEvent } from 'react'
+
+export const clickOnMenuItem = (
+  event: MouseEvent,
+  navItemId: NavItemId,
+  disabled: boolean,
+): void => {
+  const { navItem } = getNavItem({ navItemId })
+
+  const nextMenuItems = navItem?.navItems ?? []
+
+  const isNestedMenuAvailable = Boolean(nextMenuItems.length)
+
+  const { navItem: currentMenuNavItem } = getNavItem({
+    navItemId: getState().nav.currentMenuNavItemId,
+  })
+
+  const menuItems = currentMenuNavItem?.navItems ?? []
+
+  const menuItem = menuItems.find((item) => item.id === navItemId)
+  const link = menuItem?.link
+  const funcId = menuItem?.funcId
+  const func = funcId ? functionRegistry[funcId] : undefined
+
+  if (disabled === true) {
+    return
+  }
+
+  if (link !== undefined) {
+    // follow the link natively and call the func
+    void func?.(event)
+    dispatch(navSlice.actions.closeMenu())
+
+    return
+  }
+
+  event.preventDefault()
+
+  if (func !== undefined) {
+    void func(event)
+    dispatch(navSlice.actions.closeMenu())
+
+    return
+  }
+
+  if (isNestedMenuAvailable === true) {
+    void navigateInMenu.down({ navItemId })
+  }
+}

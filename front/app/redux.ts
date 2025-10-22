@@ -1,4 +1,5 @@
 import { copyReducer } from '@entities/copy/copySlice'
+import { navReducer } from '@entities/nav/navSlice'
 import { quotationReducer } from '@entities/quotation/redux/quotationSlice'
 import { userReducer } from '@entities/user/redux/userSlice'
 import { configureStore } from '@reduxjs/toolkit'
@@ -6,7 +7,6 @@ import { appReducer } from '@shared/appSlice'
 import { agGridReducer } from '@shared/lib/ag-grid/agGridSlice'
 import { textReducer } from '@shared/lib/froala/textSlice'
 import { instantiateStore } from '@shared/lib/redux/redux'
-import { navReducer } from '@shared/nav/navSlice'
 import type { TypedUseSelectorHook } from 'react-redux'
 
 const store = configureStore({
@@ -20,8 +20,6 @@ const store = configureStore({
     text: textReducer,
   },
   devTools: process.env.NODE_ENV !== 'production',
-  middleware: (defaultMiddleware) =>
-    defaultMiddleware({ serializableCheck: false }), // we have not serializable components and functions in nav structure
 })
 
 export type Store = typeof store
