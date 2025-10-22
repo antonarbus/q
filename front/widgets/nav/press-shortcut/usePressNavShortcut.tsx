@@ -1,4 +1,5 @@
 import type { NavItem } from '@entities/nav/type'
+import { mousePosition } from '@shared/lib/mouse-position'
 import { functionRegistry } from '@widgets/nav/functionRegistry'
 import type { MouseEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -51,16 +52,16 @@ export const usePressNavShortcut = (props: Props): void => {
   useEffectOnce(() => {
     searchForShortcutsInNavStructure({ navStructure: props.navStructure })
 
-    let keysBeingPressed: string[] = []
+    let keysAreBeingPressed: string[] = []
 
     window.addEventListener('keydown', (event) => {
       const keyPressed = event.key.toLowerCase()
-      keysBeingPressed.push(keyPressed)
-      keysBeingPressed = [...new Set(keysBeingPressed)].toSorted()
+      keysAreBeingPressed.push(keyPressed)
+      keysAreBeingPressed = [...new Set(keysAreBeingPressed)].toSorted()
 
       const matchedNavItemByShortcut = shortcuts.find((item) => {
         const shortcutStr = item.shortcut.join('')
-        const pressedKeysStr = keysBeingPressed.join('')
+        const pressedKeysStr = keysAreBeingPressed.join('')
         const isMatch = shortcutStr === pressedKeysStr
 
         return isMatch
@@ -70,11 +71,11 @@ export const usePressNavShortcut = (props: Props): void => {
         event.preventDefault()
 
         if (matchedNavItemByShortcut.function !== null) {
-          // Create a synthetic event-like object with center screen position
+          // Create a synthetic event-like object with current mouse position
           // so that copy modal can be opened when triggered by shortcuts
           const syntheticEvent = {
-            clientX: window.innerWidth / 2,
-            clientY: window.innerHeight / 2,
+            clientX: mousePosition.x,
+            clientY: mousePosition.y,
           } as MouseEvent
 
           matchedNavItemByShortcut.function(syntheticEvent)
@@ -90,7 +91,9 @@ export const usePressNavShortcut = (props: Props): void => {
 
     window.addEventListener('keyup', (event) => {
       const keyReleased = event.key.toLowerCase()
-      keysBeingPressed = keysBeingPressed.filter((key) => key !== keyReleased)
+      keysAreBeingPressed = keysAreBeingPressed.filter(
+        (key) => key !== keyReleased,
+      )
     })
   })
 }
