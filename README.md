@@ -409,7 +409,6 @@ Before merging PRs, verify:
 
 # TO-DO
 
-- [ ] copy container should be opened at cursor when shortcut is used
 - [ ] Refactor CI/CD workflow: Run e2e tests against deployed dev environment instead of local server, enforce dev->main merge flow with branch protection
 - [ ] use cloud secretes for passwords instead of .env
 - [ ] use `useDeferredValue` in bookmark search https://react.dev/reference/react/useDeferredValue
