@@ -1,12 +1,13 @@
 import type { NavItem } from '@entities/nav/type'
 import { functionRegistry } from '@widgets/nav/functionRegistry'
+import type { MouseEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useEffectOnce } from 'react-use'
 
 type Shortcuts = {
   name: string
   shortcut: string[]
-  function: (() => void) | null
+  function: ((event?: MouseEvent) => void) | null
   link: string | null
 }
 
@@ -27,7 +28,7 @@ const searchForShortcutsInNavStructure = (props: Props): void => {
       shortcuts.push({
         name: navItem.name,
         shortcut: navItem.shortcut.toSorted(),
-        function: func ? () => void func() : null,
+        function: func ? (event?: MouseEvent) => void func(event) : null,
         link: navItem.link ?? null,
       })
     }
@@ -69,7 +70,14 @@ export const usePressNavShortcut = (props: Props): void => {
         event.preventDefault()
 
         if (matchedNavItemByShortcut.function !== null) {
-          matchedNavItemByShortcut.function()
+          // Create a synthetic event-like object with center screen position
+          // so that copy modal can be opened when triggered by shortcuts
+          const syntheticEvent = {
+            clientX: window.innerWidth / 2,
+            clientY: window.innerHeight / 2,
+          } as MouseEvent
+
+          matchedNavItemByShortcut.function(syntheticEvent)
 
           return
         }
