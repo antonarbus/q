@@ -7,9 +7,9 @@ export const useCountUniqueDailyVisitor = (): void => {
 
   useEffectOnce(() => {
     const countVisitor = async (): Promise<void> => {
-      const LAST_VISIT_DATE = 'lastVisitDate'
+      const NAME_AT_LOCAL_STORAGE = 'lastVisitDate'
 
-      const lastVisitDate = localStorage.getItem(LAST_VISIT_DATE)
+      const lastVisitDate = localStorage.getItem(NAME_AT_LOCAL_STORAGE)
       const today = format(new Date(), 'yyyy-MM-dd')
 
       if (lastVisitDate === today) {
@@ -22,7 +22,7 @@ export const useCountUniqueDailyVisitor = (): void => {
       })
 
       if (res.message === 'visitor counted') {
-        localStorage.setItem(LAST_VISIT_DATE, today)
+        localStorage.setItem(NAME_AT_LOCAL_STORAGE, today)
       }
     }
 
