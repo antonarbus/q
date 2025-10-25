@@ -22,7 +22,7 @@ export const NavLayout = (props: Props): JSX.Element => {
         height: `${theme.nav.height}px`,
         // liquid glass
         background: 'rgba(0, 0, 0, 0.7)',
-        backdropFilter: 'blur(12px) saturate(180%)',
+        backdropFilter: 'blur(4px) saturate(180%)',
         border: '1px solid rgba(255, 255, 255, 0.1)',
         borderRadius: '8px',
         boxShadow:
