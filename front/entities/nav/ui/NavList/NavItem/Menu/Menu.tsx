@@ -80,8 +80,6 @@ export const Menu = (props?: Props): ReactNode => {
     return null
   }
 
-  // return createPortal(menuContent, document.body)
-
   return (
     <Portal>
       <Box
