@@ -20,7 +20,9 @@ export const useCloseMenuOnClickOutside = (props: Props): void => {
       const menuContainer = props.menuContainerRef.current
 
       // Use provided navItemRef if available, otherwise fall back to parentElement
-      const navItem = props.navItemRef?.current ?? props.menuContainerRef.current.parentElement
+      const navItem =
+        props.navItemRef?.current ??
+        props.menuContainerRef.current.parentElement
 
       if (navItem === null) {
         return
