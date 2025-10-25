@@ -21,6 +21,7 @@ export const CopyModal = (): JSX.Element => {
 
   return (
     <motion.div
+      ref={copyModalRef}
       css={{
         // borderRadius: 6,
         position: 'fixed',
@@ -44,7 +45,6 @@ export const CopyModal = (): JSX.Element => {
         boxShadow:
           '0 8px 32px 0 rgba(0, 0, 0, 0.37), inset 0 1px 1px 0 rgba(255, 255, 255, 0.05)',
       }}
-      ref={copyModalRef}
     >
       <div
         style={{
