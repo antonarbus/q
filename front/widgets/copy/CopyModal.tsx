@@ -22,13 +22,13 @@ export const CopyModal = (): JSX.Element => {
   return (
     <motion.div
       css={{
-        borderRadius: 6,
+        // borderRadius: 6,
         position: 'fixed',
         zIndex: 1001,
         top: cursorPos.y + 30,
         left: cursorPos.x + 15,
-        background: 'white',
-        boxShadow: '#00000033 0px 0px 6px 2px',
+        // background: 'white',
+        // boxShadow: '#00000033 0px 0px 6px 2px',
         overflow: 'hidden',
         height: 0,
         width: 0,
@@ -36,6 +36,13 @@ export const CopyModal = (): JSX.Element => {
         '.static-html .fr-element.fr-view': {
           opacity: '1 !important',
         },
+
+        // liquid glass
+        backdropFilter: 'blur(4px) saturate(180%)',
+        border: '1px solid rgba(255, 255, 255, 0.1)',
+        borderRadius: '8px',
+        boxShadow:
+          '0 8px 32px 0 rgba(0, 0, 0, 0.37), inset 0 1px 1px 0 rgba(255, 255, 255, 0.05)',
       }}
       ref={copyModalRef}
     >
