@@ -62,7 +62,7 @@ export const MenuItem = (props: Props): JSX.Element => {
         name={props.navItem.name}
         reserveSpaceForIcon={isNextMenuAvailable}
       />
-      {isNextMenuAvailable && props.navItem.disabled === false ? (
+      {isNextMenuAvailable && props.navItem.disabled !== true ? (
         <RoundSpanForIcon
           css={{
             background: 'transparent',
