@@ -22,7 +22,6 @@ export const FooterLayout = (props: Props): JSX.Element => {
         zIndex: '666',
 
         // liquid glass
-        background: 'rgba(0, 0, 0, 0.7)',
         backdropFilter: 'blur(4px) saturate(180%)',
         border: '1px solid rgba(255, 255, 255, 0.1)',
         borderTop: '1px solid #e0e0e0',
