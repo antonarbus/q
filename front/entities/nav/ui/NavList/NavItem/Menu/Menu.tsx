@@ -5,13 +5,11 @@ import { theme } from '@shared/theme'
 import { useKeysForMenuNavigation } from '@widgets/nav/handlers/useKeysForMenuNavigation'
 import {
   type ComponentRef,
-  type JSX,
   type ReactNode,
   useEffect,
   useRef,
   useState,
 } from 'react'
-import { createPortal } from 'react-dom'
 import { navSlice } from '../../../../navSlice'
 import { EmailAtBottomOfMenu } from './EmailAtBottomOfMenu'
 import { useCloseMenuOnClickOutside } from './functions/useCloseMenuOnClickOutside'
@@ -29,6 +27,7 @@ export const Menu = (props?: Props): ReactNode => {
   const currentMenuRef = useRef<ComponentRef<'div'> | null>(null)
   const nextMenuRef = useRef<ComponentRef<'div'> | null>(null)
   const fakeMenuRef = useRef<ComponentRef<'div'> | null>(null)
+
   const [menuPosition, setMenuPosition] = useState<{
     top: number
     left: number
@@ -53,6 +52,7 @@ export const Menu = (props?: Props): ReactNode => {
   })
 
   useKeysForMenuNavigation()
+
   useCloseMenuOnClickOutside({
     menuContainerRef,
     navItemRef: props?.navItemRef,
@@ -83,7 +83,13 @@ export const Menu = (props?: Props): ReactNode => {
   return (
     <Portal>
       <Box
+        ref={menuContainerRef}
         className='drop-down-nav-menu'
+        onMouseLeave={(): void => {
+          dispatch(
+            navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: -1 }),
+          )
+        }}
         sx={{
           position: 'fixed',
           top: menuPosition ? `${menuPosition.top}px` : 'calc(100% + 5px)',
@@ -99,6 +105,7 @@ export const Menu = (props?: Props): ReactNode => {
           paddingTop: `${theme.menu.paddingTop}px`,
           paddingBottom: `${theme.menu.paddingBottom}px`,
           overflow: 'hidden',
+          zIndex: 666,
 
           // liquid glass
           background: 'rgba(0, 0, 0, 0.75)',
@@ -126,12 +133,6 @@ export const Menu = (props?: Props): ReactNode => {
             transform: 'translateX(9999px)',
           },
         }}
-        onMouseLeave={(): void => {
-          dispatch(
-            navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: -1 }),
-          )
-        }}
-        ref={menuContainerRef}
       >
         <TopMenuItemsContainer />
         <SlidableMenuItemsContainer

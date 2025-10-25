@@ -138,12 +138,21 @@ export const useMenuAnimation = (props: Props): void => {
         return
       }
 
+      const fakeElementHeight = getFakeElementHeight()
+      const prevElementHeight = getPrevElementHeight()
+
+      // Set initial height explicitly if it's auto (first render)
+      if (
+        props.menuContainerRef.current.style.height === '' ||
+        props.menuContainerRef.current.style.height === 'auto'
+      ) {
+        props.menuContainerRef.current.style.height = `${prevElementHeight}px`
+      }
+
       animate(
         props.menuContainerRef.current,
         {
-          height: isGoingDown.current
-            ? getFakeElementHeight()
-            : getPrevElementHeight(),
+          height: isGoingDown.current ? fakeElementHeight : prevElementHeight,
         },
         { duration: isFirstMount === true ? 0 : duration },
       )
