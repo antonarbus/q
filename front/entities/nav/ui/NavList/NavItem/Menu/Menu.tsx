@@ -1,5 +1,6 @@
 import { css } from '@emotion/react'
 import { navItemId } from '@entities/nav/navItemId'
+import { Box } from '@mui/material'
 import { dispatch, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import { useKeysForMenuNavigation } from '@widgets/nav/handlers/useKeysForMenuNavigation'
@@ -43,44 +44,41 @@ export const Menu = (): JSX.Element => {
   const isProfileMenu = idsToCurrentMenuItems.includes(navItemId.profile)
 
   return (
-    <div
+    <Box
       className='drop-down-nav-menu'
-      css={css`
-        position: absolute;
-        top: calc(100% + 5px);
-        right: 0;
+      sx={{
+        position: 'absolute',
+        top: 'calc(100% + 5px)',
+        right: 0,
         /* if right corner goes over the screen fix the left instead of right */
-        left: ${isMenuOutsideWindow === true ? '0' : 'not set'};
-        width: ${theme.menu.width}px;
-        padding-top: ${theme.menu.paddingTop}px;
-        padding-bottom: ${theme.menu.paddingBottom}px;
-        background: ${theme.colors.darkBackground};
-        backdrop-filter: blur(4px);
-        border: 1px solid #474a4d;
-        border-radius: 4px;
-        overflow: hidden;
+        left: isMenuOutsideWindow === true ? '0' : 'not set',
+        width: `${theme.menu.width}px`,
+        paddingTop: `${theme.menu.paddingTop}px`,
+        paddingBottom: `${theme.menu.paddingBottom}px`,
+        background: theme.colors.darkBackground,
+        backdropFilter: 'blur(4px)',
+        border: '1px solid #474a4d',
+        borderRadius: '4px',
+        overflow: 'hidden',
 
-        @media screen and (width <= 480px) {
-          left: 0px;
-          right: 0px;
-          width: auto;
-        }
-
-        .slidable {
-          position: absolute;
-          right: 0px;
-          left: 0px;
-          height: auto;
-        }
-
-        .next {
-          transform: translateX(100%);
-        }
-
-        .measurable-div {
-          transform: translateX(9999px);
-        }
-      `}
+        '@media screen and (width <= 480px) ': {
+          left: '0px',
+          right: '0px',
+          width: 'auto',
+        },
+        '.slidable': {
+          position: 'absolute',
+          right: '0px',
+          left: '0px',
+          height: 'auto',
+        },
+        '.next': {
+          transform: 'translateX(100%)',
+        },
+        '.measurable-div': {
+          transform: 'translateX(9999px)',
+        },
+      }}
       onMouseLeave={(): void => {
         dispatch(
           navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: -1 }),
@@ -105,6 +103,6 @@ export const Menu = (): JSX.Element => {
         reference={fakeMenuRef}
       />
       {isProfileMenu === true ? <EmailAtBottomOfMenu /> : null}
-    </div>
+    </Box>
   )
 }
