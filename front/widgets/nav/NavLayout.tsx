@@ -20,9 +20,14 @@ export const NavLayout = (props: Props): JSX.Element => {
         marginLeft: '10px',
         marginRight: '10px',
         height: `${theme.nav.height}px`,
-        borderRadius: '4px',
-        background: theme.colors.darkBackground,
-        boxShadow: '0 0px 5px 0 #0000005c',
+        // liquid glass
+        background: 'rgba(0, 0, 0, 0.7)',
+        backdropFilter: 'blur(12px) saturate(180%)',
+        WebkitBackdropFilter: 'blur(12px) saturate(180%)',
+        border: '1px solid rgba(255, 255, 255, 0.1)',
+        borderRadius: '8px',
+        boxShadow:
+          '0 8px 32px 0 rgba(0, 0, 0, 0.37), inset 0 1px 1px 0 rgba(255, 255, 255, 0.05)',
         zIndex: 6,
         contain: 'layout inline-size',
         fontWeight: 300,
