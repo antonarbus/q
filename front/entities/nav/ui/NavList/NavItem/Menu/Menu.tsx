@@ -1,10 +1,10 @@
-import { css } from '@emotion/react'
 import { navItemId } from '@entities/nav/navItemId'
 import { Box } from '@mui/material'
 import { dispatch, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import { useKeysForMenuNavigation } from '@widgets/nav/handlers/useKeysForMenuNavigation'
-import { type ComponentRef, type JSX, useRef } from 'react'
+import { type ComponentRef, type JSX, useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { navSlice } from '../../../../navSlice'
 import { EmailAtBottomOfMenu } from './EmailAtBottomOfMenu'
 import { useCloseMenuOnClickOutside } from './functions/useCloseMenuOnClickOutside'
@@ -13,11 +13,20 @@ import { useMenuAnimation } from './functions/useMenuAnimation'
 import { SlidableMenuItemsContainer } from './SlidableMenuItemsContainer'
 import { TopMenuItemsContainer } from './TopMenuItemsContainer'
 
-export const Menu = (): JSX.Element => {
+type Props = {
+  navItemRef?: { current: HTMLElement | null }
+}
+
+export const Menu = (props?: Props): JSX.Element => {
   const menuContainerRef = useRef<ComponentRef<'div'> | null>(null)
   const currentMenuRef = useRef<ComponentRef<'div'> | null>(null)
   const nextMenuRef = useRef<ComponentRef<'div'> | null>(null)
   const fakeMenuRef = useRef<ComponentRef<'div'> | null>(null)
+  const [menuPosition, setMenuPosition] = useState<{
+    top: number
+    left: number
+    right: number
+  } | null>(null)
 
   const currentMenuNavItemId = useSelector(
     (state) => state.nav.currentMenuNavItemId,
@@ -37,29 +46,53 @@ export const Menu = (): JSX.Element => {
   })
 
   useKeysForMenuNavigation()
-  useCloseMenuOnClickOutside({ menuContainerRef })
+  useCloseMenuOnClickOutside({
+    menuContainerRef,
+    navItemRef: props?.navItemRef,
+  })
 
   const isMenuOutsideWindow = useIsMenuOutsideWindow()
 
   const isProfileMenu = idsToCurrentMenuItems.includes(navItemId.profile)
 
-  return (
+  // Calculate menu position based on parent nav item
+  useEffect(() => {
+    const navItem = props?.navItemRef?.current
+
+    if (navItem) {
+      const rect = navItem.getBoundingClientRect()
+      setMenuPosition({
+        top: rect.bottom + 5,
+        left: isMenuOutsideWindow ? rect.left : rect.right - theme.menu.width,
+        right: window.innerWidth - rect.right,
+      })
+    }
+  }, [isMenuOutsideWindow, props?.navItemRef])
+
+  const menuContent = (
     <Box
       className='drop-down-nav-menu'
       sx={{
-        position: 'absolute',
-        top: 'calc(100% + 5px)',
-        right: 0,
-        /* if right corner goes over the screen fix the left instead of right */
-        left: isMenuOutsideWindow === true ? '0' : 'not set',
+        position: 'fixed',
+        top: menuPosition ? `${menuPosition.top}px` : 'calc(100% + 5px)',
+        left:
+          isMenuOutsideWindow && menuPosition
+            ? `${menuPosition.left}px`
+            : 'auto',
+        right:
+          !isMenuOutsideWindow && menuPosition ? `${menuPosition.right}px` : 0,
         width: `${theme.menu.width}px`,
         paddingTop: `${theme.menu.paddingTop}px`,
         paddingBottom: `${theme.menu.paddingBottom}px`,
-        background: theme.colors.darkBackground,
-        backdropFilter: 'blur(4px)',
-        border: '1px solid #474a4d',
-        borderRadius: '4px',
         overflow: 'hidden',
+
+        // liquid glass
+        background: 'rgba(0, 0, 0, 0.75)',
+        backdropFilter: 'blur(4px) saturate(180%)',
+        border: '1px solid rgba(255, 255, 255, 0.1)',
+        borderRadius: '8px',
+        boxShadow:
+          '0 8px 32px 0 rgba(0, 0, 0, 0.37), inset 0 1px 1px 0 rgba(255, 255, 255, 0.05)',
 
         '@media screen and (width <= 480px) ': {
           left: '0px',
@@ -105,4 +138,10 @@ export const Menu = (): JSX.Element => {
       {isProfileMenu === true ? <EmailAtBottomOfMenu /> : null}
     </Box>
   )
+
+  if (!menuPosition) {
+    return menuContent // Fallback before position is calculated
+  }
+
+  return createPortal(menuContent, document.body)
 }

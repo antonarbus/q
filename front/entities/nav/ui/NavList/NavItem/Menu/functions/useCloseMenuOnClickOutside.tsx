@@ -5,6 +5,7 @@ import { type ComponentRef, type RefObject, useEffect } from 'react'
 
 type Props = {
   menuContainerRef: RefObject<ComponentRef<'div'> | null>
+  navItemRef?: RefObject<HTMLElement | null>
 }
 
 export const useCloseMenuOnClickOutside = (props: Props): void => {
@@ -18,7 +19,8 @@ export const useCloseMenuOnClickOutside = (props: Props): void => {
     if (props.menuContainerRef.current !== null) {
       const menuContainer = props.menuContainerRef.current
 
-      const navItem = props.menuContainerRef.current.parentElement
+      // Use provided navItemRef if available, otherwise fall back to parentElement
+      const navItem = props.navItemRef?.current ?? props.menuContainerRef.current.parentElement
 
       if (navItem === null) {
         return

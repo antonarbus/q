@@ -68,7 +68,7 @@ export const NavItem = (props: Props): JSX.Element => {
           <NavName name={props.navItem.name} />
           <ArrowForNestedMenu navItem={props.navItem} />
         </a>
-        {isMenuOpen === true ? <Menu /> : null}
+        {isMenuOpen === true ? <Menu navItemRef={navItemRef} /> : null}
       </NavItemLayout>
     )
   }
@@ -114,7 +114,7 @@ export const NavItem = (props: Props): JSX.Element => {
         <NavName name={props.navItem.name} />
         <ArrowForNestedMenu navItem={props.navItem} />
       </Link>
-      {isMenuOpen === true ? <Menu /> : null}
+      {isMenuOpen === true ? <Menu navItemRef={navItemRef} /> : null}
     </NavItemLayout>
   )
 }
