@@ -47,31 +47,29 @@ export const useMenuAnimation = (props: Props): void => {
   const [animateHeight, setAnimateHeight] = useState(generateId())
 
   const getFakeElementHeight = (): number => {
-    if (props.fakeMenuRef.current instanceof HTMLElement === false) {
-      return 0
+    if (props.fakeMenuRef.current instanceof HTMLElement === true) {
+      const height =
+        elementHeight(props.fakeMenuRef.current) +
+        theme.menu.paddingTop +
+        theme.menu.paddingBottom
+
+      return height
     }
 
-    const height =
-      elementHeight(props.fakeMenuRef.current) +
-      theme.menu.paddingTop +
-      theme.menu.paddingBottom +
-      theme.menu.navItem.height
-
-    return height
+    return 0
   }
 
   const getPrevElementHeight = (): number => {
-    if (props.currentMenuRef.current instanceof HTMLElement === false) {
-      return 0
+    if (props.currentMenuRef.current instanceof HTMLElement === true) {
+      const height =
+        elementHeight(props.currentMenuRef.current) +
+        theme.menu.paddingTop +
+        theme.menu.paddingBottom
+
+      return height
     }
 
-    const height =
-      elementHeight(props.currentMenuRef.current) +
-      theme.menu.paddingTop +
-      theme.menu.paddingBottom +
-      theme.menu.navItem.height
-
-    return height
+    return 0
   }
 
   const goDownInMenu = async ({
@@ -79,83 +77,79 @@ export const useMenuAnimation = (props: Props): void => {
   }: {
     navItemId: NavItemId
   }): Promise<void> => {
-    if (props.currentMenuRef.current === null) {
-      return
+    if (
+      props.currentMenuRef.current !== null &&
+      props.nextMenuRef.current !== null
+    ) {
+      isGoingDown.current = true
+
+      dispatch(navSlice.actions.goDownInNextMenu({ navItemId }))
+
+      setAnimateHeight(generateId())
+
+      await Promise.all([
+        animate(
+          props.currentMenuRef.current,
+          { x: ['0%', '-100%'] },
+          { duration },
+        ),
+        animate(props.nextMenuRef.current, { x: ['100%', '0'] }, { duration }),
+      ])
+
+      dispatch(navSlice.actions.goDownInCurrentMenu({ navItemId }))
     }
-
-    if (props.nextMenuRef.current === null) {
-      return
-    }
-
-    isGoingDown.current = true
-
-    dispatch(navSlice.actions.goDownInNextMenu({ navItemId }))
-
-    setAnimateHeight(generateId())
-
-    await Promise.all([
-      animate(
-        props.currentMenuRef.current,
-        { x: ['0%', '-100%'] },
-        { duration },
-      ),
-      animate(props.nextMenuRef.current, { x: ['100%', '0'] }, { duration }),
-    ])
-
-    dispatch(navSlice.actions.goDownInCurrentMenu({ navItemId }))
   }
 
   const goUpInMenu = async (): Promise<void> => {
-    if (props.currentMenuRef.current === null) {
-      return
+    if (
+      props.currentMenuRef.current !== null &&
+      props.nextMenuRef.current !== null
+    ) {
+      isGoingDown.current = false
+
+      dispatch(navSlice.actions.goUpInCurrentMenu())
+
+      setAnimateHeight(generateId())
+
+      await Promise.all([
+        animate(
+          props.currentMenuRef.current,
+          { x: ['-100%', '0%'] },
+          { duration },
+        ),
+        animate(
+          props.nextMenuRef.current,
+          { x: ['0%', ' 100%'] },
+          { duration },
+        ),
+      ])
+
+      dispatch(navSlice.actions.goUpInNextMenu())
     }
-
-    if (props.nextMenuRef.current === null) {
-      return
-    }
-
-    isGoingDown.current = false
-
-    dispatch(navSlice.actions.goUpInCurrentMenu())
-
-    setAnimateHeight(generateId())
-
-    await Promise.all([
-      animate(
-        props.currentMenuRef.current,
-        { x: ['-100%', '0%'] },
-        { duration },
-      ),
-      animate(props.nextMenuRef.current, { x: ['0%', ' 100%'] }, { duration }),
-    ])
-
-    dispatch(navSlice.actions.goUpInNextMenu())
   }
 
   useEffect(() => {
     const animateHeightIntoNextMenu = (): void => {
-      if (props.menuContainerRef.current === null) {
-        return
+      if (props.menuContainerRef.current !== null) {
+        const fakeElementHeight = getFakeElementHeight()
+        const prevElementHeight = getPrevElementHeight()
+
+        // Set initial height explicitly if it's auto (first render)
+        if (
+          props.menuContainerRef.current.style.height === '' ||
+          props.menuContainerRef.current.style.height === 'auto'
+        ) {
+          props.menuContainerRef.current.style.height = `${prevElementHeight}px`
+        }
+
+        animate(
+          props.menuContainerRef.current,
+          {
+            height: isGoingDown.current ? fakeElementHeight : prevElementHeight,
+          },
+          { duration: isFirstMount === true ? 0 : duration },
+        )
       }
-
-      const fakeElementHeight = getFakeElementHeight()
-      const prevElementHeight = getPrevElementHeight()
-
-      // Set initial height explicitly if it's auto (first render)
-      if (
-        props.menuContainerRef.current.style.height === '' ||
-        props.menuContainerRef.current.style.height === 'auto'
-      ) {
-        props.menuContainerRef.current.style.height = `${prevElementHeight}px`
-      }
-
-      animate(
-        props.menuContainerRef.current,
-        {
-          height: isGoingDown.current ? fakeElementHeight : prevElementHeight,
-        },
-        { duration: isFirstMount === true ? 0 : duration },
-      )
     }
 
     animateHeightIntoNextMenu()

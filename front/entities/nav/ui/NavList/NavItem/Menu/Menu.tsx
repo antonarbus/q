@@ -83,13 +83,7 @@ export const Menu = (props?: Props): ReactNode => {
   return (
     <Portal>
       <Box
-        ref={menuContainerRef}
-        className='drop-down-nav-menu'
-        onMouseLeave={(): void => {
-          dispatch(
-            navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: -1 }),
-          )
-        }}
+        className='menu-layout'
         sx={{
           position: 'fixed',
           top: menuPosition ? `${menuPosition.top}px` : 'calc(100% + 5px)',
@@ -134,23 +128,35 @@ export const Menu = (props?: Props): ReactNode => {
           },
         }}
       >
-        <TopMenuItemsContainer />
-        <SlidableMenuItemsContainer
-          className='slidable current'
-          menuNavItemId={currentMenuNavItemId}
-          reference={currentMenuRef}
-        />
-        <SlidableMenuItemsContainer
-          className='slidable next'
-          menuNavItemId={nextMenuNavItemId}
-          reference={nextMenuRef}
-        />
-        <SlidableMenuItemsContainer
-          className='measurable-div'
-          menuNavItemId={nextMenuNavItemId}
-          reference={fakeMenuRef}
-        />
-        {isProfileMenu === true ? <EmailAtBottomOfMenu /> : null}
+        <Box
+          ref={menuContainerRef}
+          className='drop-down-nav-menu'
+          onMouseLeave={(): void => {
+            dispatch(
+              navSlice.actions.setMenuItemHoverIndex({
+                menuItemHoverIndex: -1,
+              }),
+            )
+          }}
+        >
+          <TopMenuItemsContainer />
+          <SlidableMenuItemsContainer
+            className='slidable current'
+            menuNavItemId={currentMenuNavItemId}
+            reference={currentMenuRef}
+          />
+          <SlidableMenuItemsContainer
+            className='slidable next'
+            menuNavItemId={nextMenuNavItemId}
+            reference={nextMenuRef}
+          />
+          <SlidableMenuItemsContainer
+            className='measurable-div'
+            menuNavItemId={nextMenuNavItemId}
+            reference={fakeMenuRef}
+          />
+          {isProfileMenu === true ? <EmailAtBottomOfMenu /> : null}
+        </Box>
       </Box>
     </Portal>
   )
