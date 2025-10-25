@@ -20,6 +20,7 @@ export const NavLayout = (props: Props): JSX.Element => {
         marginLeft: '10px',
         marginRight: '10px',
         height: `${theme.nav.height}px`,
+
         // liquid glass
         background: 'rgba(0, 0, 0, 0.7)',
         backdropFilter: 'blur(4px) saturate(180%)',
