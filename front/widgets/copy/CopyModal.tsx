@@ -23,13 +23,10 @@ export const CopyModal = (): JSX.Element => {
     <motion.div
       ref={copyModalRef}
       css={{
-        // borderRadius: 6,
         position: 'fixed',
         zIndex: 1001,
         top: cursorPos.y + 30,
         left: cursorPos.x + 15,
-        // background: 'white',
-        // boxShadow: '#00000033 0px 0px 6px 2px',
         overflow: 'hidden',
         height: 0,
         width: 0,
