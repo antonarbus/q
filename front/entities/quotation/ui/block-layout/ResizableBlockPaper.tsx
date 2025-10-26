@@ -85,11 +85,15 @@ export const ResizableBlockPaper = ({
         width: isAutoWidth === true ? 'auto' : width,
         height: 'auto',
       }}
-      style={{
-        background: 'white',
+      css={{
         borderRadius: 6,
-        boxShadow: '#00000033 0px 0px 10px 0px',
         position: 'relative',
+
+        // liquid glass
+        background: 'rgb(255 255 255 / 80%)',
+        backdropFilter: 'blur(4px) saturate(180%)',
+        boxShadow:
+          '0 8px 32px 0 rgba(0, 0, 0, 0.37), inset 0 1px 1px 0 rgba(255, 255, 255, 0.05)',
       }}
       // grid={[20, 0]}
     >
