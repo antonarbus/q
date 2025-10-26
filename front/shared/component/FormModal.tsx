@@ -83,16 +83,18 @@ export const FormModal = ({
           maxWidth: 'calc(100vw - 64px)',
           minWidth: '300px',
           width: width ?? '500px',
-          background: 'white',
+          background: 'rgba(255, 255, 255, 0.7)',
           color: 'rgba(0, 0, 0, 0.87)',
-          borderRadius: '4px',
+          borderRadius: '12px',
           transition: 'box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
           overflowY: 'visible',
+          backdropFilter: 'blur(4px) saturate(180%)',
+          border: '1px solid rgba(255, 255, 255, 0.1)',
           boxShadow:
-            '0px 11px 15px -7px rgb(0 0 0 / 20%), 0px 24px 38px 3px rgb(0 0 0 / 14%), 0px 9px 46px 8px rgb(0 0 0 / 12%)',
+            '0 8px 32px 0 rgba(0, 0, 0, 0.37), inset 0 1px 1px 0 rgba(255, 255, 255, 0.05)',
           '&:hover, &:focus-within': {
             boxShadow:
-              '0px 11px 15px -7px rgb(0 0 0 / 40%), 0px 24px 38px 3px rgb(0 0 0 / 28%), 0px 9px 46px 8px rgb(0 0 0 / 24%)',
+              '0 8px 32px 0 rgba(0, 0, 0, 0.5), inset 0 1px 1px 0 rgba(255, 255, 255, 0.1)',
           },
           ...sx,
         }}
@@ -106,8 +108,8 @@ export const FormModal = ({
             justifyContent: 'center',
             alignItems: 'center',
             padding: '15px 20px 5px 20px',
-            borderBottom: '1px solid rgb(223, 223, 223)',
-            backgroundColor: '#80808017',
+            borderBottom: '1px solid rgba(0, 0, 0, 0.1)',
+            backgroundColor: 'rgba(255, 255, 255, 0.1)',
             position: 'relative',
           }}
         >
@@ -123,13 +125,20 @@ export const FormModal = ({
               position: 'absolute',
               top: '-35px',
               right: '-35px',
+              backgroundColor: 'transparent',
+              '&:hover': {
+                backgroundColor: 'rgba(0, 0, 0, 0.1)',
+              },
             }}
           >
             <IoClose
               css={{
-                color: '#bebebe',
+                color: '#000000',
+                fontSize: '28px',
+                filter: 'drop-shadow(0px 0px 2px rgba(255, 255, 255, 0.8))',
                 ':hover': {
-                  color: '#dedede',
+                  color: '#333333',
+                  filter: 'drop-shadow(0px 0px 3px rgba(255, 255, 255, 1))',
                 },
               }}
             />
@@ -142,7 +151,7 @@ export const FormModal = ({
             display: 'flex',
             flexDirection: 'column',
             padding: paddingContent ?? '40px 50px',
-            backgroundColor: '#8080800f',
+            backgroundColor: 'rgba(255, 255, 255, 0.05)',
             overflowY: 'auto',
             '> *': {
               marginTop: '25px',
@@ -193,8 +202,8 @@ export const FormModal = ({
               padding: '15px',
               justifyContent: 'center',
               alignItems: 'center',
-              borderTop: '1px solid rgb(223, 223, 223)',
-              backgroundColor: '#80808017',
+              borderTop: '1px solid rgba(0, 0, 0, 0.1)',
+              backgroundColor: 'rgba(255, 255, 255, 0.1)',
             }}
           >
             <ButtonCustom

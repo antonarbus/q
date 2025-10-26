@@ -30,17 +30,19 @@ export const CardCustom = ({
       width: '400px',
       margin: '32px',
       padding: '40px',
-      background: 'white',
+      background: 'rgba(255, 255, 255, 0.7)',
       zIndex: 1001,
       color: 'rgba(0, 0, 0, 0.87)',
-      borderRadius: '4px',
+      borderRadius: '12px',
       transition: 'box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+      backdropFilter: 'blur(4px) saturate(180%)',
+      border: '1px solid rgba(255, 255, 255, 0.1)',
       boxShadow:
-        '0px 11px 15px -7px rgb(0 0 0 / 20%), 0px 24px 38px 3px rgb(0 0 0 / 14%), 0px 9px 46px 8px rgb(0 0 0 / 12%)',
+        '0 8px 32px 0 rgba(0, 0, 0, 0.37), inset 0 1px 1px 0 rgba(255, 255, 255, 0.05)',
       overflowY: 'auto',
       '&:hover, &:focus-within': {
         boxShadow:
-          '0px 11px 15px -7px rgb(0 0 0 / 40%), 0px 24px 38px 3px rgb(0 0 0 / 28%), 0px 9px 46px 8px rgb(0 0 0 / 24%)',
+          '0 8px 32px 0 rgba(0, 0, 0, 0.5), inset 0 1px 1px 0 rgba(255, 255, 255, 0.1)',
       },
       ...sx,
     }}

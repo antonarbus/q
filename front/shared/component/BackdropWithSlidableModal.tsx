@@ -119,7 +119,7 @@ export const BackdropWithSlidableModal = ({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        background: 'rgba(0, 0, 0, 0.5)',
+        background: 'rgba(0, 0, 0, 0.1)',
         WebkitTapHighlightColor: 'transparent',
         zIndex: 1000,
       }}
