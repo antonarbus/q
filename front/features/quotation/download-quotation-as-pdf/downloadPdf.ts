@@ -109,6 +109,15 @@ export const downloadPdf = async (): Promise<void> => {
       actionElements.forEach((element) => {
         element.remove()
       })
+
+      const paperElements = blocksElement.querySelectorAll(`.${cls.paper}`)
+
+      // Remove liquid glass from .pdf
+      paperElements.forEach((paperElement) => {
+        if (paperElement instanceof HTMLElement === true) {
+          paperElement.style.backgroundColor = 'white'
+        }
+      })
     },
   })
 
