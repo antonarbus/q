@@ -6886,6 +6886,12 @@ span.fr-img-caption.fr-view.fr-dii.fr-fir {
 .fr-popup.fr-desktop.fr-inline.fr-active {
   translate: -120px 0px;
   z-index: 10001 !important;
+
+  /* liquid glass */
+  background-color: rgba(255, 255, 255, 0.6) !important;
+  backdrop-filter: blur(4px) saturate(180%);
+  border-radius: 8px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37), inset 0 1px 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .fr-element.fr-view * {
