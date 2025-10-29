@@ -19,6 +19,7 @@ export const RowActionButtonsLayout = (props: Props): JSX.Element => {
         gap: '2px',
         justifyContent: 'flex-end',
         position: 'absolute',
+        height: '100%',
         ...props.style,
       }}
       sx={{
