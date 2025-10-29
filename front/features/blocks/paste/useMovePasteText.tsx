@@ -188,31 +188,11 @@ const movePasteTextRow = (event: MouseEvent): void => {
 
   const elementsUnderCursor = document.elementsFromPoint(event.x, event.y)
 
-  const isCursorOverActionsContainer = elementsUnderCursor.some((element) =>
-    element.classList.contains(cls.actionsContainer),
+  const isCursorOverRows = elementsUnderCursor.some((element) =>
+    element.classList.contains(cls.rows),
   )
 
-  if (isCursorOverActionsContainer === true) {
-    removePasteIfNeeded()
-
-    return
-  }
-
-  const isSearchElement = elementsUnderCursor.some((element) =>
-    element.classList.contains(cls.search),
-  )
-
-  if (isSearchElement === true) {
-    removePasteIfNeeded()
-
-    return
-  }
-
-  const isSearchAutocompleteElement = elementsUnderCursor.some((element) =>
-    element.classList.contains(cls.searchAutocomplete),
-  )
-
-  if (isSearchAutocompleteElement === true) {
+  if (isCursorOverRows === false) {
     removePasteIfNeeded()
 
     return
