@@ -16,9 +16,8 @@ export const CopyModal = (): JSX.Element => {
   usePasteClick()
   useDisableNavItemsOnCopyModal()
   useEnableFroalasOnCloseCopyModal()
-  const copyModalRef = useCopyModalAnimation()
-  const cursorPos = useCursorPos()
-  // const cursorPos = { x: 50, y: 50 } // fixed position for dev purpose
+  const { copyModalRef } = useCopyModalAnimation()
+  useCursorPos({ copyModalRef })
 
   return (
     <motion.div
@@ -26,8 +25,8 @@ export const CopyModal = (): JSX.Element => {
       css={{
         position: 'fixed',
         zIndex: 1001,
-        top: cursorPos.y + 30,
-        left: cursorPos.x + 15,
+        top: 'calc(var(--cursor-y, 0px) + 30px)',
+        left: 'calc(var(--cursor-x, 0px) + 15px)',
         height: 0,
         width: 0,
         maxHeight: 265,

@@ -1,47 +1,41 @@
-import { getState, useSelector } from '@shared/lib/redux'
-import { theme } from '@shared/theme'
+import { getState } from '@shared/lib/redux'
 import throttle from 'lodash.throttle'
-import { useEffect, useRef, useState } from 'react'
+import type { AnimationScope } from 'motion/react'
+import { useEffect } from 'react'
 
-type Res = {
-  x: number
-  y: number
+type Props = {
+  copyModalRef: AnimationScope
 }
 
-export const useCursorPos = (): Res => {
-  const [cursorPos, setCursorPos] = useState({
-    x: getState().copy.initCords.x,
-    y: getState().copy.initCords.y,
-  })
-
-  const isAnimatingRef = useRef(false)
-  const items = useSelector((state) => state.copy.items)
-
-  // Track when animations start/end
-  useEffect(() => {
-    isAnimatingRef.current = true
-
-    const timeoutId = setTimeout(() => {
-      isAnimatingRef.current = false
-    }, theme.copy.animationDuration * 1000)
-
-    return () => {
-      clearTimeout(timeoutId)
-    }
-  }, [items.length])
-
+export const useCursorPos = (props: Props): void => {
   useEffect(() => {
     const abortController = new AbortController()
+    const container = props.copyModalRef.current
+
+    if (container === null) {
+      return
+    }
+
+    // Initialize position from Redux
+    const initCords = getState().copy.initCords
+    container.style.setProperty('--cursor-x', `${initCords.x}px`)
+    container.style.setProperty('--cursor-y', `${initCords.y}px`)
 
     const WAIT_MS = 20
 
     const throttledMouseMove = throttle((event: MouseEvent): void => {
-      // Skip updates during animation
-      if (isAnimatingRef.current === true) {
-        return
-      }
+      // Update CSS variables directly - no React re-render!
+      if (props.copyModalRef.current !== null) {
+        props.copyModalRef.current.style.setProperty(
+          '--cursor-x',
+          `${event.x}px`,
+        )
 
-      setCursorPos({ x: event.x, y: event.y })
+        props.copyModalRef.current.style.setProperty(
+          '--cursor-y',
+          `${event.y}px`,
+        )
+      }
     }, WAIT_MS)
 
     document.addEventListener('mousemove', throttledMouseMove, {
@@ -51,7 +45,5 @@ export const useCursorPos = (): Res => {
     return () => {
       abortController.abort()
     }
-  }, [])
-
-  return cursorPos
+  }, [props.copyModalRef])
 }

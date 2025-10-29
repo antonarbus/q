@@ -6,7 +6,11 @@ import { useEffect } from 'react'
 import { useFirstMountState } from 'react-use'
 import { containerPadding, containerWidth } from './const'
 
-export const useCopyModalAnimation = (): AnimationScope => {
+type Res = {
+  copyModalRef: AnimationScope
+}
+
+export const useCopyModalAnimation = (): Res => {
   const [scope, animate] = useAnimate()
   const isFirstMount = useFirstMountState()
   const items = useSelector((state) => state.copy.items)
@@ -59,5 +63,7 @@ export const useCopyModalAnimation = (): AnimationScope => {
     }, 1000 * theme.block.animationDuration)
   }, [items.length])
 
-  return scope
+  return {
+    copyModalRef: scope,
+  }
 }
