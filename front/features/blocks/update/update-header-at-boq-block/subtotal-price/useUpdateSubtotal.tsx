@@ -50,6 +50,6 @@ export const useUpdateSubtotal = (): void => {
         value: subTotalPriceValueNewRounded,
         incrementally: true,
       })
-    })
+    }, 100) // froala needs time to initialize, better if we update some state in Froala, but do not see elegant way
   }, [isBlockFroala, isEditable])
 }

@@ -18,6 +18,7 @@ export const CopyModal = (): JSX.Element => {
   useEnableFroalasOnCloseCopyModal()
   const copyModalRef = useCopyModalAnimation()
   const cursorPos = useCursorPos()
+  // const cursorPos = { x: 50, y: 50 } // fixed position for dev purpose
 
   return (
     <motion.div
@@ -27,10 +28,10 @@ export const CopyModal = (): JSX.Element => {
         zIndex: 1001,
         top: cursorPos.y + 30,
         left: cursorPos.x + 15,
-        overflow: 'hidden',
         height: 0,
         width: 0,
         maxHeight: 265,
+        overflow: 'hidden',
         '.static-html .fr-element.fr-view': {
           opacity: '1 !important',
         },
