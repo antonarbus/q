@@ -18,24 +18,14 @@ export const useCursorPos = (props: Props): void => {
 
     // Initialize position from Redux
     const initCords = getState().copy.initCords
-    container.style.setProperty('--cursor-x', `${initCords.x}px`)
-    container.style.setProperty('--cursor-y', `${initCords.y}px`)
+    container.style.left = `${initCords.x + 30}px`
+    container.style.top = `${initCords.y + 30}px`
 
     const WAIT_MS = 20
 
     const throttledMouseMove = throttle((event: MouseEvent): void => {
-      // Update CSS variables directly - no React re-render!
-      if (props.copyModalRef.current !== null) {
-        props.copyModalRef.current.style.setProperty(
-          '--cursor-x',
-          `${event.x}px`,
-        )
-
-        props.copyModalRef.current.style.setProperty(
-          '--cursor-y',
-          `${event.y}px`,
-        )
-      }
+      container.style.left = `${event.x + 30}px`
+      container.style.top = `${event.y + 30}px`
     }, WAIT_MS)
 
     document.addEventListener('mousemove', throttledMouseMove, {

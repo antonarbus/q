@@ -25,8 +25,8 @@ export const CopyModal = (): JSX.Element => {
       css={{
         position: 'fixed',
         zIndex: 1001,
-        top: 'calc(var(--cursor-y, 0px) + 30px)',
-        left: 'calc(var(--cursor-x, 0px) + 15px)',
+        // top: <-- update  on cursor move
+        // left: <-- update  on cursor move'
         height: 0,
         width: 0,
         maxHeight: 265,
