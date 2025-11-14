@@ -24,13 +24,17 @@ export const useMenuAnimation = (props: Props): MenuNavigation => {
   const duration = 0.5
   const isGoingDown = useRef(true)
 
+  // Gap between TopMenuItemsContainer (non-slidable) and SlidableMenuItemsContainer
+  // This appears to be from browser default spacing or margin collapsing
+  const topMenuGap = 10
+
   const getFakeElementHeight = (): number => {
     if (props.fakeMenuRef.current instanceof HTMLElement === true) {
       const height =
         elementHeight(props.fakeMenuRef.current) +
         theme.menu.paddingTop +
         theme.menu.paddingBottom +
-        10 // Gap between non-slidable and slidable content
+        topMenuGap
 
       return height
     }
@@ -44,7 +48,7 @@ export const useMenuAnimation = (props: Props): MenuNavigation => {
         elementHeight(props.currentMenuRef.current) +
         theme.menu.paddingTop +
         theme.menu.paddingBottom +
-        10 // Gap between non-slidable and slidable content
+        topMenuGap
 
       return height
     }
@@ -109,13 +113,6 @@ export const useMenuAnimation = (props: Props): MenuNavigation => {
       if (props.menuContainerRef.current !== null) {
         const fakeElementHeight = getFakeElementHeight()
         const prevElementHeight = getPrevElementHeight()
-
-        console.log('Height animation:', {
-          isGoingDown: isGoingDown.current,
-          fakeElementHeight,
-          prevElementHeight,
-          targetHeight: isGoingDown.current ? fakeElementHeight : prevElementHeight,
-        })
 
         // Set initial height explicitly if it's auto (first render)
         if (
