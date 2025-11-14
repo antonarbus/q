@@ -34,7 +34,7 @@ jobs:
       - name: Install Bun
         uses: oven-sh/setup-bun@v2
         with:
-          bun-version: '1.1.38'
+          bun-version: latest 
 
       - name: Install all dependencies
         run: bun run install-all
