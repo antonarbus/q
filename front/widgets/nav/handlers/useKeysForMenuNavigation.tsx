@@ -1,6 +1,6 @@
 import { navSlice } from '@entities/nav/navSlice'
+import { useMenuNavigation } from '@entities/nav/provider/MenuNavigationProvider'
 import { getNavItem } from '@entities/nav/ui/NavList/NavItem/Menu/functions/getNavItem'
-import { navigateInMenu } from '@entities/nav/ui/NavList/NavItem/Menu/functions/useMenuAnimation'
 import { dispatch, getState } from '@shared/lib/redux'
 import { functionRegistry } from '@widgets/nav/functionRegistry'
 import { useEffect } from 'react'
@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom'
 
 export const useKeysForMenuNavigation = (): void => {
   const navigate = useNavigate()
+  const menuNavigation = useMenuNavigation()
 
   const navKeyboardHandler = (event: KeyboardEvent): void => {
     const { currentMenuNavItemId } = getState().nav
@@ -78,7 +79,7 @@ export const useKeysForMenuNavigation = (): void => {
         navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
       )
 
-      void navigateInMenu.up()
+      void menuNavigation.goUp()
 
       return
     }
@@ -105,7 +106,7 @@ export const useKeysForMenuNavigation = (): void => {
           navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
         )
 
-        void navigateInMenu.up()
+        void menuNavigation.goUp()
 
         return
       }
@@ -161,7 +162,7 @@ export const useKeysForMenuNavigation = (): void => {
       )
 
       if (isNestedMenuAvailable === true) {
-        void navigateInMenu.down({ navItemId })
+        void menuNavigation.goDown({ navItemId })
 
         return
       }

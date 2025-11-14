@@ -1,15 +1,19 @@
 import type { NavItemId } from '@entities/nav/navItemId'
 import { navSlice } from '@entities/nav/navSlice'
 import { getNavItem } from '@entities/nav/ui/NavList/NavItem/Menu/functions/getNavItem'
-import { navigateInMenu } from '@entities/nav/ui/NavList/NavItem/Menu/functions/useMenuAnimation'
 import { dispatch, getState } from '@shared/lib/redux'
 import { functionRegistry } from '@widgets/nav/functionRegistry'
 import type { MouseEvent } from 'react'
+
+type MenuNavigation = {
+  goDown: (args: { navItemId: NavItemId }) => Promise<void>
+}
 
 export const clickOnMenuItem = (
   event: MouseEvent,
   navItemId: NavItemId,
   disabled: boolean,
+  menuNavigation: MenuNavigation,
 ): void => {
   const { navItem } = getNavItem({ navItemId })
 
@@ -50,6 +54,6 @@ export const clickOnMenuItem = (
   }
 
   if (isNestedMenuAvailable === true) {
-    void navigateInMenu.down({ navItemId })
+    void menuNavigation.goDown({ navItemId })
   }
 }

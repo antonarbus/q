@@ -7,22 +7,9 @@ import { animate } from 'motion'
 import { type ComponentRef, type RefObject, useEffect, useRef } from 'react'
 import { useFirstMountState } from 'react-use'
 
-type PropsForNavigateInMenu = {
-  up: () => Promise<void> | void
-  down: ({ navItemId }: { navItemId: NavItemId }) => Promise<void> | void
-}
-
-export const navigateInMenu: PropsForNavigateInMenu = {
-  up: () => {
-    console.warn(
-      'put function here for going up the menu, otherwise need to pass it in many props',
-    )
-  },
-  down: (id) => {
-    console.warn(
-      'put function here for going into submenu, otherwise need to pass it in many props',
-    )
-  },
+type MenuNavigation = {
+  goUp: () => Promise<void>
+  goDown: (args: { navItemId: NavItemId }) => Promise<void>
 }
 
 type Props = {
@@ -32,7 +19,7 @@ type Props = {
   fakeMenuRef: RefObject<ComponentRef<'div'> | null>
 }
 
-export const useMenuAnimation = (props: Props): void => {
+export const useMenuAnimation = (props: Props): MenuNavigation => {
   const isFirstMount = useFirstMountState()
   const duration = 0.5
   const isGoingDown = useRef(true)
@@ -142,6 +129,8 @@ export const useMenuAnimation = (props: Props): void => {
     animateHeightIntoNextMenu()
   })
 
-  navigateInMenu.up = goUpInMenu
-  navigateInMenu.down = goDownInMenu
+  return {
+    goUp: goUpInMenu,
+    goDown: goDownInMenu,
+  }
 }

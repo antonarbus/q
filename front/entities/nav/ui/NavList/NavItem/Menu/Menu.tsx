@@ -1,4 +1,5 @@
-import { navItemId } from '@entities/nav/navItemId'
+import { navItemId, type NavItemId } from '@entities/nav/navItemId'
+import { MenuNavigationProvider } from '@entities/nav/provider/MenuNavigationProvider'
 import { Box } from '@mui/material'
 import { dispatch, useSelector } from '@shared/lib/redux'
 import { useKeysForMenuNavigation } from '@widgets/nav/handlers/useKeysForMenuNavigation'
@@ -13,6 +14,60 @@ import { TopMenuItemsContainer } from './TopMenuItemsContainer'
 
 type Props = {
   navItemRef?: { current: HTMLElement | null }
+}
+
+type MenuContentProps = {
+  currentMenuNavItemId: NavItemId | null
+  nextMenuNavItemId: NavItemId | null
+  currentMenuRef: React.RefObject<ComponentRef<'div'> | null>
+  nextMenuRef: React.RefObject<ComponentRef<'div'> | null>
+  menuContainerRef: React.RefObject<ComponentRef<'div'> | null>
+  fakeMenuRef: React.RefObject<ComponentRef<'div'> | null>
+  navItemRef?: { current: HTMLElement | null }
+  isProfileMenu: boolean
+}
+
+const MenuContent = (props: MenuContentProps): ReactNode => {
+  useKeysForMenuNavigation()
+
+  useCloseMenuOnClickOutside({
+    menuContainerRef: props.menuContainerRef,
+    navItemRef: props.navItemRef,
+  })
+
+  return (
+    <MenuLayout navItemRef={props.navItemRef}>
+      <Box
+        ref={props.menuContainerRef}
+        className='drop-down-nav-menu'
+        onMouseLeave={(): void => {
+          dispatch(
+            navSlice.actions.setMenuItemHoverIndex({
+              menuItemHoverIndex: -1,
+            }),
+          )
+        }}
+      >
+        <TopMenuItemsContainer />
+        <SlidableMenuItemsContainer
+          className='slidable current'
+          menuNavItemId={props.currentMenuNavItemId}
+          reference={props.currentMenuRef}
+        />
+        <SlidableMenuItemsContainer
+          className='slidable next'
+          menuNavItemId={props.nextMenuNavItemId}
+          reference={props.nextMenuRef}
+        />
+        <SlidableMenuItemsContainer
+          className='measurable-div'
+          menuNavItemId={props.nextMenuNavItemId}
+          reference={props.fakeMenuRef}
+        />
+        {props.isProfileMenu === true ? <EmailAtBottomOfMenu /> : null}
+      </Box>
+    </MenuLayout>
+  )
 }
 
 export const Menu = (props?: Props): ReactNode => {
@@ -31,53 +86,30 @@ export const Menu = (props?: Props): ReactNode => {
     (state) => state.nav.idsToCurrentMenuItems,
   )
 
-  useMenuAnimation({
+  const menuNavigation = useMenuAnimation({
     currentMenuRef,
     nextMenuRef,
     menuContainerRef,
     fakeMenuRef,
   })
 
-  useKeysForMenuNavigation()
-
-  useCloseMenuOnClickOutside({
-    menuContainerRef,
-    navItemRef: props?.navItemRef,
-  })
-
   const isProfileMenu = idsToCurrentMenuItems.includes(navItemId.profile)
 
   return (
-    <MenuLayout navItemRef={props?.navItemRef}>
-      <Box
-        ref={menuContainerRef}
-        className='drop-down-nav-menu'
-        onMouseLeave={(): void => {
-          dispatch(
-            navSlice.actions.setMenuItemHoverIndex({
-              menuItemHoverIndex: -1,
-            }),
-          )
-        }}
-      >
-        <TopMenuItemsContainer />
-        <SlidableMenuItemsContainer
-          className='slidable current'
-          menuNavItemId={currentMenuNavItemId}
-          reference={currentMenuRef}
-        />
-        <SlidableMenuItemsContainer
-          className='slidable next'
-          menuNavItemId={nextMenuNavItemId}
-          reference={nextMenuRef}
-        />
-        <SlidableMenuItemsContainer
-          className='measurable-div'
-          menuNavItemId={nextMenuNavItemId}
-          reference={fakeMenuRef}
-        />
-        {isProfileMenu === true ? <EmailAtBottomOfMenu /> : null}
-      </Box>
-    </MenuLayout>
+    <MenuNavigationProvider
+      goUp={menuNavigation.goUp}
+      goDown={menuNavigation.goDown}
+    >
+      <MenuContent
+        currentMenuNavItemId={currentMenuNavItemId}
+        nextMenuNavItemId={nextMenuNavItemId}
+        currentMenuRef={currentMenuRef}
+        nextMenuRef={nextMenuRef}
+        menuContainerRef={menuContainerRef}
+        fakeMenuRef={fakeMenuRef}
+        navItemRef={props?.navItemRef}
+        isProfileMenu={isProfileMenu}
+      />
+    </MenuNavigationProvider>
   )
 }

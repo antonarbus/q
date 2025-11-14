@@ -1,3 +1,4 @@
+import { useMenuNavigation } from '@entities/nav/provider/MenuNavigationProvider'
 import { dispatch, useSelector } from '@shared/lib/redux'
 import { clickOnMenuItem } from '@widgets/nav/handlers/clickOnMenuItem'
 import { iconRegistry } from '@widgets/nav/iconRegistry'
@@ -22,6 +23,7 @@ type Props = {
 
 export const MenuItem = (props: Props): JSX.Element => {
   const location = useLocation()
+  const menuNavigation = useMenuNavigation()
 
   const isHovered = useSelector(
     (state) => state.nav.hoverIndex === props.hoverIndex,
@@ -166,6 +168,7 @@ export const MenuItem = (props: Props): JSX.Element => {
           event,
           props.navItem.id,
           Boolean(props.navItem.disabled),
+          menuNavigation,
         )
       }}
       onMouseEnter={(): void => {
