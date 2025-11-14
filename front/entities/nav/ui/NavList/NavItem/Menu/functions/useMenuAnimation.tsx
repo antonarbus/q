@@ -1,17 +1,10 @@
 import type { NavItemId } from '@entities/nav/navItemId'
 import { navSlice } from '@entities/nav/navSlice'
-import { generateId } from '@shared/lib/nanoid'
 import { dispatch } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import { elementHeight } from '@shared/util/elementHeight'
 import { animate } from 'motion'
-import {
-  type ComponentRef,
-  type RefObject,
-  useEffect,
-  useRef,
-  useState,
-} from 'react'
+import { type ComponentRef, type RefObject, useEffect, useRef } from 'react'
 import { useFirstMountState } from 'react-use'
 
 type PropsForNavigateInMenu = {
@@ -43,8 +36,6 @@ export const useMenuAnimation = (props: Props): void => {
   const isFirstMount = useFirstMountState()
   const duration = 0.5
   const isGoingDown = useRef(true)
-
-  const [animateHeight, setAnimateHeight] = useState(generateId())
 
   const getFakeElementHeight = (): number => {
     if (props.fakeMenuRef.current instanceof HTMLElement === true) {
@@ -85,8 +76,6 @@ export const useMenuAnimation = (props: Props): void => {
 
       dispatch(navSlice.actions.goDownInNextMenu({ navItemId }))
 
-      setAnimateHeight(generateId())
-
       await Promise.all([
         animate(
           props.currentMenuRef.current,
@@ -108,8 +97,6 @@ export const useMenuAnimation = (props: Props): void => {
       isGoingDown.current = false
 
       dispatch(navSlice.actions.goUpInCurrentMenu())
-
-      setAnimateHeight(generateId())
 
       await Promise.all([
         animate(
@@ -153,7 +140,7 @@ export const useMenuAnimation = (props: Props): void => {
     }
 
     animateHeightIntoNextMenu()
-  }, [animateHeight])
+  })
 
   navigateInMenu.up = goUpInMenu
   navigateInMenu.down = goDownInMenu
