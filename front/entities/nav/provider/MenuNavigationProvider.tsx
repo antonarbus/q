@@ -1,4 +1,4 @@
-import { navItemId, type NavItemId } from '@entities/nav/navItemId'
+import { type NavItemId, navItemId } from '@entities/nav/navItemId'
 import { useMenuAnimation } from '@entities/nav/ui/NavList/NavItem/Menu/functions/useMenuAnimation'
 import { useSelector } from '@shared/lib/redux'
 import {
