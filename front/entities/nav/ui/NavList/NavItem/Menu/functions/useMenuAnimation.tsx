@@ -29,7 +29,8 @@ export const useMenuAnimation = (props: Props): MenuNavigation => {
       const height =
         elementHeight(props.fakeMenuRef.current) +
         theme.menu.paddingTop +
-        theme.menu.paddingBottom
+        theme.menu.paddingBottom +
+        10 // Gap between non-slidable and slidable content
 
       return height
     }
@@ -42,7 +43,8 @@ export const useMenuAnimation = (props: Props): MenuNavigation => {
       const height =
         elementHeight(props.currentMenuRef.current) +
         theme.menu.paddingTop +
-        theme.menu.paddingBottom
+        theme.menu.paddingBottom +
+        10 // Gap between non-slidable and slidable content
 
       return height
     }
@@ -107,6 +109,13 @@ export const useMenuAnimation = (props: Props): MenuNavigation => {
       if (props.menuContainerRef.current !== null) {
         const fakeElementHeight = getFakeElementHeight()
         const prevElementHeight = getPrevElementHeight()
+
+        console.log('Height animation:', {
+          isGoingDown: isGoingDown.current,
+          fakeElementHeight,
+          prevElementHeight,
+          targetHeight: isGoingDown.current ? fakeElementHeight : prevElementHeight,
+        })
 
         // Set initial height explicitly if it's auto (first render)
         if (
