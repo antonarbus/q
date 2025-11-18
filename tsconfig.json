@@ -18,6 +18,7 @@
     "noUncheckedIndexedAccess": true,
     "strictNullChecks": true,
     "noImplicitReturns": true,
+    "incremental": true,
     "jsx": "react-jsx",
     "jsxImportSource": "@emotion/react",
     "baseUrl": ".",
