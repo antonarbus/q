@@ -410,6 +410,7 @@ Before merging PRs, verify:
 # TO-DO
 
 - [ ] Refactor CI/CD workflow: Run e2e tests against deployed dev environment instead of local server, enforce dev->main merge flow with branch protection
+- [ ] Multi-region redundancy: Deploy to multiple GCP regions with Cloud Load Balancer for failover and lower latency (99.95% SLA, not needed for personal projects)
 - [ ] use cloud secretes for passwords instead of .env
 - [ ] use `useDeferredValue` in bookmark search https://react.dev/reference/react/useDeferredValue
 - [ ] Add delete account button
