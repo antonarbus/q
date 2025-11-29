@@ -409,6 +409,7 @@ Before merging PRs, verify:
 
 # TO-DO
 
+- [ ] Move from Mongo to SQL/Postgres with Drizzle or Kysely or something else
 - [ ] Refactor CI/CD workflow: Run e2e tests against deployed dev environment instead of local server, enforce dev->main merge flow with branch protection
 - [ ] Multi-region redundancy: Deploy to multiple GCP regions with Cloud Load Balancer for failover and lower latency (99.95% SLA, not needed for personal projects)
 - [ ] use cloud secretes for passwords instead of .env
