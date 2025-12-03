@@ -1,33 +1,41 @@
-// ==============================================================================
-// CONFIGURATION VARIABLES
-// ==============================================================================
-// Single source of truth for all configuration
-// Used to generate .tfvars files and configure deployment scripts
-//
-// IMPORTANT: After modifying this file, regenerate .tfvars files:
-//   bun deploy-scripts/cli.ts generate-tfvars
+import z from 'zod'
 
-import { z } from 'zod'
+//* MODIFY
+const DOMAIN = 'sendmequotation.today'
 
-// ==============================================================================
-// SHARED CONFIGURATION (applies to all environments)
-// ==============================================================================
+/**
+ * The .tfvars files are GENERATED from this file by `bun deploy-scripts/cli.ts generate-tfvars`
+ * * DO NOT MODIFY, does not hurt.
+ */
+const envName = {
+  dev: 'dev',
+  test: 'test',
+  pilot: 'pilot',
+  prod: 'prod',
+} as const
+
+//* DO NOT MODIFY, does not hurt.
+export const envSchema = z.enum([envName.dev, envName.test, envName.pilot, envName.prod])
+
+export type Env = z.infer<typeof envSchema>
+
+//* MODIFY
 export const sharedConfigVariables = {
   // Google Cloud Project
-  projectId: '<PROJECT_ID>',
-  projectNumber: '<PROJECT_NUMBER>',
+  projectId: 'quotationapp-8014c',
+  projectNumber: '665701178658',
   region: 'us-central1',
 
   // GitHub
-  githubRepository: '<GITHUB_USER>/<REPO_NAME>',
+  githubRepository: 'antonarbus/q',
 
   // Terraform State
-  bucketForTerraformStateName: '<BUCKET_NAME>',
+  bucketForTerraformStateName: 'q-terraform-state',
 
   // Artifact Registry (Docker images)
   artifactRegistryName: 'docker-images',
-  dockerImageNameFrontend: 'q-frontend',
-  dockerImageNameBackend: 'q-backend',
+  dockerImageNameFrontend: 'web-app-frontend',
+  dockerImageNameBackend: 'web-app-backend',
 
   // Service Accounts
   githubActionsSaName: 'github-actions-sa',
@@ -46,102 +54,68 @@ export const sharedConfigVariables = {
   cpuLimitBackend: '1',
   memoryLimitBackend: '512Mi',
   containerPortBackend: '4000',
-}
+} as const
 
-// ==============================================================================
-// DEPLOYMENT MODE
-// ==============================================================================
-// Controls which environment the main/master branch deploys to
-// Options: 'prod' | 'dev'
-//
-// 'prod': Main/master deploys directly to production (single-stage workflow)
-// 'dev': Main/master deploys to dev, use promotion workflow for test → pilot → prod
-export const MASTER_DEPLOYS_TO_ENV: 'prod' | 'dev' = 'dev'
-
-// ==============================================================================
-// ENVIRONMENT-SPECIFIC CONFIGURATION
-// ==============================================================================
-
-export const devConfigVariables = {
-  environment: 'dev',
-  cloudRunServiceNameFrontend: 'q-frontend-dev',
-  cloudRunServiceNameBackend: 'q-backend-dev',
-  customDomainFrontend: 'dev.sendmequotation.today',
-  // Backend typically doesn't need custom domain, accessed via frontend
-  maxInstancesFrontend: '3',
-  maxInstancesBackend: '3',
-  memoryLimitFrontend: '512Mi',
-  memoryLimitBackend: '512Mi',
-}
-
-export const testConfigVariables = {
-  environment: 'test',
-  cloudRunServiceNameFrontend: 'q-frontend-test',
-  cloudRunServiceNameBackend: 'q-backend-test',
-  customDomainFrontend: 'test.sendmequotation.today',
-  maxInstancesFrontend: '3',
-  maxInstancesBackend: '3',
-  memoryLimitFrontend: '512Mi',
-  memoryLimitBackend: '512Mi',
-}
-
-export const pilotConfigVariables = {
-  environment: 'pilot',
-  cloudRunServiceNameFrontend: 'q-frontend-pilot',
-  cloudRunServiceNameBackend: 'q-backend-pilot',
-  customDomainFrontend: 'pilot.sendmequotation.today',
-  maxInstancesFrontend: '5',
-  maxInstancesBackend: '5',
-  memoryLimitFrontend: '512Mi',
-  memoryLimitBackend: '512Mi',
-}
-
-export const prodConfigVariables = {
-  environment: 'prod',
-  cloudRunServiceNameFrontend: 'q-frontend-prod',
-  cloudRunServiceNameBackend: 'q-backend-prod',
-  customDomainFrontend: 'sendmequotation.today',
-  maxInstancesFrontend: '10',
-  maxInstancesBackend: '10',
-  memoryLimitFrontend: '1Gi',
-  memoryLimitBackend: '1Gi',
-}
-
-// ==============================================================================
-// ENVIRONMENT CONFIGURATION MAP
-// ==============================================================================
-export const environmentConfigMap = {
-  dev: devConfigVariables,
-  test: testConfigVariables,
-  pilot: pilotConfigVariables,
-  prod: prodConfigVariables,
-}
-
-// ==============================================================================
-// FULL CONFIGURATION BUILDER
-// ==============================================================================
-export function getFullConfig(env: keyof typeof environmentConfigMap) {
-  return {
-    ...sharedConfigVariables,
-    ...environmentConfigMap[env],
-  }
-}
-
-// Type for the full configuration
-export type FullConfig = ReturnType<typeof getFullConfig>
-
-// ==============================================================================
-// CONFIGURATION VALIDATION
-// ==============================================================================
-export const envSchema = z.enum(['dev', 'test', 'pilot', 'prod'])
-export type Env = z.infer<typeof envSchema>
-
-// ==============================================================================
-// CONFIG EXPORT FOR DEPLOY SCRIPTS
-// ==============================================================================
+//* DO NOT MODIFY, does not hurt
 export const configVariables = {
-  dev: getFullConfig('dev'),
-  test: getFullConfig('test'),
-  pilot: getFullConfig('pilot'),
-  prod: getFullConfig('prod'),
-}
+  [envName.prod]: {
+    ...sharedConfigVariables,
+    cloudRunServiceNameFrontend: `web-app-frontend-${envName.prod}`,
+    cloudRunServiceNameBackend: `web-app-backend-${envName.prod}`,
+    customDomainFrontend: DOMAIN,
+    environment: envName.prod,
+  },
+  [envName.pilot]: {
+    ...sharedConfigVariables,
+    cloudRunServiceNameFrontend: `web-app-frontend-${envName.pilot}`,
+    cloudRunServiceNameBackend: `web-app-backend-${envName.pilot}`,
+    customDomainFrontend: `${envName.pilot}.${DOMAIN}`,
+    environment: envName.pilot,
+  },
+  [envName.test]: {
+    ...sharedConfigVariables,
+    cloudRunServiceNameFrontend: `web-app-frontend-${envName.test}`,
+    cloudRunServiceNameBackend: `web-app-backend-${envName.test}`,
+    customDomainFrontend: `${envName.test}.${DOMAIN}`,
+    environment: envName.test,
+  },
+  [envName.dev]: {
+    ...sharedConfigVariables,
+    cloudRunServiceNameFrontend: `web-app-frontend-${envName.dev}`,
+    cloudRunServiceNameBackend: `web-app-backend-${envName.dev}`,
+    customDomainFrontend: `${envName.dev}.${DOMAIN}`,
+    environment: envName.dev,
+  },
+} as const
+
+export type ConfigVariables = (typeof configVariables)[keyof typeof configVariables]
+
+/**
+ * Defines which environment master/main branch deploys to
+ * - For production-only repos: set to 'prod'
+ * - For repos with staging: set to 'dev'
+ * - If set to 'dev' and you need to push hot-fix asap, switch to 'prod'
+ * * MODIFY (if needed)
+ */
+export const MASTER_DEPLOYS_TO_ENV: Env = envName.dev
+
+/**
+ * Allowed promotion paths for environments (e.g., dev → test → pilot → prod)
+ *
+ * NOTE: When MASTER_DEPLOYS_TO_ENV is set to 'prod' (direct master → prod workflow),
+ * these promotion paths are NOT applicable and deployment happens directly from master branch.
+ * All environment stages (dev, test, pilot) are kept here as a template for future use
+ * and do not harm the production-only workflow.
+ *
+ * * DO NOT MODIFY, but may (most likely this is correct)
+ * * If modified, then to be aligned with .github/workflows/promote.yml:12
+ */
+export const allowedPromotionPath = [
+  `${envName.dev}-${envName.test}`,
+  `${envName.test}-${envName.pilot}`,
+  `${envName.pilot}-${envName.prod}`,
+] as const
+
+export const allowedPromotionPathSchema = z.enum(allowedPromotionPath)
+
+export type AllowedPromotionPath = z.infer<typeof allowedPromotionPathSchema>
