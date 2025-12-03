@@ -31,9 +31,9 @@
     "find-unused-files": "knip",
     "find-circular-deps": "bun madge --circular --extensions ts,tsx .",
     "check": "bun run tsc && bun run biome-silent && bun run test && bun run find-unused-files && bun run find-circular-deps && bun run e2e-test",
-    "update-root": "bun update --interactive",
-    "update-front": "cd ./front && bun update --interactive",
-    "update-back": "cd ./back && bun update --interactive",
+    "update-packages-root": "bun update --interactive",
+    "update-packages-front": "cd ./front && bun update --interactive",
+    "update-packages-back": "cd ./back && bun update --interactive",
     "docker-prod-build": "docker compose -f docker-compose.prod.yml build",
     "docker-prod-start": "docker compose -f docker-compose.prod.yml up"
   },
