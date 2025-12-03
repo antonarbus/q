@@ -120,7 +120,7 @@ resource "google_cloud_run_v2_service" "backend" {
 
       startup_probe {
         http_get {
-          path = "/api/health" # Backend health check endpoint
+          path = "/api/health-check" # Backend health check endpoint
           port = var.container_port_backend
         }
         initial_delay_seconds = 10
@@ -131,7 +131,7 @@ resource "google_cloud_run_v2_service" "backend" {
 
       liveness_probe {
         http_get {
-          path = "/api/health"
+          path = "/api/health-check"
           port = var.container_port_backend
         }
         initial_delay_seconds = 30
