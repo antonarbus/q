@@ -68,6 +68,7 @@ export const configVariables = {
     cloudRunServiceNameFrontend: `web-app-frontend-${envName.prod}`,
     cloudRunServiceNameBackend: `web-app-backend-${envName.prod}`,
     customDomainFrontend: DOMAIN,
+    customDomainBackend: `api.${DOMAIN}`,
     environment: envName.prod,
   },
   [envName.pilot]: {
@@ -75,6 +76,7 @@ export const configVariables = {
     cloudRunServiceNameFrontend: `web-app-frontend-${envName.pilot}`,
     cloudRunServiceNameBackend: `web-app-backend-${envName.pilot}`,
     customDomainFrontend: `${envName.pilot}.${DOMAIN}`,
+    customDomainBackend: `api-${envName.pilot}.${DOMAIN}`,
     environment: envName.pilot,
   },
   [envName.test]: {
@@ -82,6 +84,7 @@ export const configVariables = {
     cloudRunServiceNameFrontend: `web-app-frontend-${envName.test}`,
     cloudRunServiceNameBackend: `web-app-backend-${envName.test}`,
     customDomainFrontend: `${envName.test}.${DOMAIN}`,
+    customDomainBackend: `api-${envName.test}.${DOMAIN}`,
     environment: envName.test,
   },
   [envName.dev]: {
@@ -89,6 +92,7 @@ export const configVariables = {
     cloudRunServiceNameFrontend: `web-app-frontend-${envName.dev}`,
     cloudRunServiceNameBackend: `web-app-backend-${envName.dev}`,
     customDomainFrontend: `${envName.dev}.${DOMAIN}`,
+    customDomainBackend: `api-${envName.dev}.${DOMAIN}`,
     environment: envName.dev,
   },
 } as const

@@ -219,6 +219,17 @@ variable "custom_domain_frontend" {
   # Value provided by config/*.tfvars file
 }
 
+variable "custom_domain_backend" {
+  description = "Custom domain name to map to the backend Cloud Run service"
+  type        = string
+  # Your API domain name (without www or https://)
+  # After Terraform creates the mapping, you need to:
+  # 1. Go to Cloud Run > Manage custom domains in Google Cloud Console
+  # 2. Copy the DNS records shown
+  # 3. Add them to your domain registrar (GoDaddy, Namecheap, etc.)
+  # Value provided by config/*.tfvars file
+}
+
 # ==============================================================================
 # ENVIRONMENT
 # ==============================================================================

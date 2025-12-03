@@ -142,11 +142,7 @@ resource "google_cloud_run_v2_service" "backend" {
 
       # Environment variables for backend
       # Add MongoDB connection string, API keys, etc. via secrets
-      env {
-        name  = "PORT"
-        value = tostring(var.container_port_backend)
-      }
-
+      # Note: PORT is automatically set by Cloud Run based on container_port
       env {
         name  = "NODE_ENV"
         value = var.environment

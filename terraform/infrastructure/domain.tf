@@ -43,5 +43,17 @@ resource "google_cloud_run_domain_mapping" "frontend" {
   }
 }
 
-# Note: Backend does not need a custom domain
-# Frontend will proxy API requests to the backend Cloud Run URL
+resource "google_cloud_run_domain_mapping" "backend" {
+  name     = var.custom_domain_backend # Custom domain from config (e.g., "api.sendmequotation.today", "api-dev.sendmequotation.today")
+  location = var.region                # Same region as Cloud Run service
+
+  # Project namespace
+  metadata {
+    namespace = var.project_id
+  }
+
+  # Which Cloud Run service this domain points to
+  spec {
+    route_name = google_cloud_run_v2_service.backend.name
+  }
+}

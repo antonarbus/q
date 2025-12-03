@@ -84,5 +84,12 @@ output "custom_domain_frontend_output" {
   # The DNS records should be configured at your domain registrar
 }
 
+output "custom_domain_backend_output" {
+  description = "Custom domain mapped to your backend Cloud Run service"
+  value       = google_cloud_run_domain_mapping.backend.name
+  # Example: api.sendmequotation.today or api-dev.sendmequotation.today
+  # The DNS records should be configured at your domain registrar
+}
+
 # Note: No database outputs as currently using MongoDB (external)
 # When migrating to Cloud SQL, uncomment cloud-sql.tf and add outputs here
