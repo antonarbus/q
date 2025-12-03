@@ -68,27 +68,45 @@ jobs:
         run: bun deploy-scripts/cli.ts terraform-apply --env ${{ steps.detect-env.outputs.env }}
 
       # ============================================================================
-      # DOCKER STEPS
+      # DOCKER STEPS - BACKEND
       # ============================================================================
-      # Docker build uses cache - rebuilding identical code is fast
-      # Always deploy to dev - other envs use image promotion workflow
 
       - name: 'Docker Auth'
         run: gcloud auth configure-docker '${{ steps.config.outputs.region }}-docker.pkg.dev'
 
-      - name: 'Build and Push Docker Image to Artifact Registry'
+      - name: 'Build and Push Backend Docker Image'
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: ./dockerfile.prod
+          file: ./Dockerfile.prod.back
           push: true
           tags: |
-            ${{ steps.config.outputs.region }}-docker.pkg.dev/${{ steps.config.outputs.projectId }}/${{ steps.config.outputs.artifactRegistryName }}/${{ steps.config.outputs.dockerImageName }}:${{ steps.detect-env.outputs.env }}
-            ${{ steps.config.outputs.region }}-docker.pkg.dev/${{ steps.config.outputs.projectId }}/${{ steps.config.outputs.artifactRegistryName }}/${{ steps.config.outputs.dockerImageName }}:${{ github.sha }}
+            ${{ steps.config.outputs.region }}-docker.pkg.dev/${{ steps.config.outputs.projectId }}/${{ steps.config.outputs.artifactRegistryName }}/${{ steps.config.outputs.dockerImageNameBackend }}:${{ steps.detect-env.outputs.env }}
+            ${{ steps.config.outputs.region }}-docker.pkg.dev/${{ steps.config.outputs.projectId }}/${{ steps.config.outputs.artifactRegistryName }}/${{ steps.config.outputs.dockerImageNameBackend }}:${{ github.sha }}
 
-      - name: 'Deploy Docker Image to Cloud Run'
+      # ============================================================================
+      # DOCKER STEPS - FRONTEND
+      # ============================================================================
+
+      - name: 'Build and Push Frontend Docker Image'
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile.prod.front
+          push: true
+          tags: |
+            ${{ steps.config.outputs.region }}-docker.pkg.dev/${{ steps.config.outputs.projectId }}/${{ steps.config.outputs.artifactRegistryName }}/${{ steps.config.outputs.dockerImageNameFrontend }}:${{ steps.detect-env.outputs.env }}
+            ${{ steps.config.outputs.region }}-docker.pkg.dev/${{ steps.config.outputs.projectId }}/${{ steps.config.outputs.artifactRegistryName }}/${{ steps.config.outputs.dockerImageNameFrontend }}:${{ github.sha }}
+          build-args: |
+            BACKEND_URL=https://${{ steps.config.outputs.customDomainBackend }}
+
+      # ============================================================================
+      # DEPLOY TO CLOUD RUN
+      # ============================================================================
+
+      - name: 'Deploy to Cloud Run (Both Services)'
         id: deploy
         run: bun deploy-scripts/cli.ts deploy-cloudrun --env ${{ steps.detect-env.outputs.env }} >> $GITHUB_OUTPUT
 
       - name: 'Verify Deployment'
-        run: bun deploy-scripts/cli.ts verify-deployment --env ${{ steps.detect-env.outputs.env }} --previous-image "${{ steps.deploy.outputs.previousImage }}"
+        run: bun deploy-scripts/cli.ts verify-deployment --env ${{ steps.detect-env.outputs.env }} --previous-image-frontend "${{ steps.deploy.outputs.previousImageFrontend }}" --previous-image-backend "${{ steps.deploy.outputs.previousImageBackend }}"
