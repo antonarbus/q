@@ -1,0 +1,94 @@
+name: 'Deploy'
+
+# Single workflow that handles both Terraform and Docker deployment
+# Deployment target is determined by MASTER_DEPLOYS_TO_ENV in config/configVariables.ts:
+# - When set to 'prod': main/master branch deploys directly to production (single-stage workflow)
+# - When set to 'dev': main/master branch deploys to dev, other environments use promotion workflow
+on:
+  push:
+    branches:
+      - main
+      - master
+
+  # Allow manual trigger in GitHub, useful to test workflow without pushing code
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: 'Deploy Infrastructure and Application'
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: 'Checkout repository code'
+        uses: actions/checkout@v4
+
+      - name: 'Setup Bun'
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: 'Generate Terraform Variables'
+        run: bun deploy-scripts/cli.ts generate-tfvars
+
+      - name: 'Detect Environment'
+        id: detect-env
+        run: bun deploy-scripts/cli.ts detect-env >> $GITHUB_OUTPUT
+
+      - name: 'Load Config'
+        id: config
+        run: bun deploy-scripts/cli.ts load-config --env ${{ steps.detect-env.outputs.env }} >> $GITHUB_OUTPUT
+
+      - name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v3'
+        with:
+          workload_identity_provider: 'projects/${{ steps.config.outputs.projectNumber }}/locations/global/workloadIdentityPools/github-pool/providers/github-provider'
+          service_account: 'github-actions-sa@${{ steps.config.outputs.projectId }}.iam.gserviceaccount.com'
+
+      # ============================================================================
+      # TERRAFORM STEPS
+      # ============================================================================
+      # Terraform is idempotent - if no changes, it completes in ~10 second
+      # No need for conditional logic - always run for simplicity
+
+      - name: 'Setup Terraform'
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: '1.5.0'
+
+      - name: 'Terraform Format Check'
+        id: fmt
+        run: terraform fmt -check -recursive
+        working-directory: ./terraform
+
+      - name: 'Terraform Apply'
+        run: bun deploy-scripts/cli.ts terraform-apply --env ${{ steps.detect-env.outputs.env }}
+
+      # ============================================================================
+      # DOCKER STEPS
+      # ============================================================================
+      # Docker build uses cache - rebuilding identical code is fast
+      # Always deploy to dev - other envs use image promotion workflow
+
+      - name: 'Docker Auth'
+        run: gcloud auth configure-docker '${{ steps.config.outputs.region }}-docker.pkg.dev'
+
+      - name: 'Build and Push Docker Image to Artifact Registry'
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./dockerfile.prod
+          push: true
+          tags: |
+            ${{ steps.config.outputs.region }}-docker.pkg.dev/${{ steps.config.outputs.projectId }}/${{ steps.config.outputs.artifactRegistryName }}/${{ steps.config.outputs.dockerImageName }}:${{ steps.detect-env.outputs.env }}
+            ${{ steps.config.outputs.region }}-docker.pkg.dev/${{ steps.config.outputs.projectId }}/${{ steps.config.outputs.artifactRegistryName }}/${{ steps.config.outputs.dockerImageName }}:${{ github.sha }}
+
+      - name: 'Deploy Docker Image to Cloud Run'
+        id: deploy
+        run: bun deploy-scripts/cli.ts deploy-cloudrun --env ${{ steps.detect-env.outputs.env }} >> $GITHUB_OUTPUT
+
+      - name: 'Verify Deployment'
+        run: bun deploy-scripts/cli.ts verify-deployment --env ${{ steps.detect-env.outputs.env }} --previous-image "${{ steps.deploy.outputs.previousImage }}"

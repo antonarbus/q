@@ -1,0 +1,125 @@
+#!/usr/bin/env bun
+import { Command } from 'commander'
+import { detectEnvironment } from './commands/detect-env'
+import { loadConfig } from './commands/load-config'
+import { deployCloudRun } from './commands/deploy-cloudrun'
+import { verifyDeployment } from './commands/verify-deployment'
+import { terraformApply } from './commands/terraform-apply'
+import { promoteImage } from './commands/promote-image'
+import { validatePromotion } from './commands/validate-promotion'
+import { generateTfvars } from './commands/generate-tfvars'
+import { showDeploymentInfo } from './commands/show-deployment-info'
+import { listGcloudServices } from './commands/list-gcloud-services'
+import { terraformFormat } from './commands/terraform-format'
+import { runInteractiveMode } from './lib/interactive'
+import { envSchema } from '../config/configVariables'
+
+const noArgumentsProvided = process.argv.length === 2
+
+if (noArgumentsProvided) {
+  await runInteractiveMode()
+  process.exit(0)
+}
+
+// Otherwise, use Commander for CLI arguments
+const program = new Command()
+
+program.name('deploy-cli').description('Deployment automation').version('1.0.0')
+
+program
+  .command('show-deployment-info')
+  .description('Show deployment info for a specific environment')
+  .requiredOption('--env <environment>', 'Environment name (dev, test, pilot, prod)')
+  .action(async (options: { env: string }) => {
+    const validatedEnv = envSchema.parse(options.env)
+    await showDeploymentInfo({ env: validatedEnv })
+  })
+
+program
+  .command('list-gcloud-services')
+  .description('List all enabled Google Cloud services for the project')
+  .action(async () => {
+    await listGcloudServices()
+  })
+
+program
+  .command('generate-tfvars')
+  .description('Generate .tfvars files from TypeScript config')
+  .action(async () => {
+    await generateTfvars()
+  })
+
+program
+  .command('detect-env')
+  .description('Detect deployment environment from git branch')
+  .action(async () => {
+    await detectEnvironment()
+  })
+
+program
+  .command('load-config')
+  .description('Load config for specified environment and output as env vars')
+  .requiredOption('--env <environment>', 'Environment name (dev, test, pilot, prod)')
+  .action(async (options: { env: string }) => {
+    const validatedEnv = envSchema.parse(options.env)
+    loadConfig({ env: validatedEnv })
+  })
+
+program
+  .command('terraform-apply')
+  .description('Apply Terraform configuration for environment')
+  .requiredOption('--env <environment>', 'Environment name (dev, test, pilot, prod)')
+  .action(async (options: { env: string }) => {
+    const validatedEnv = envSchema.parse(options.env)
+    await terraformApply({ env: validatedEnv })
+  })
+
+program
+  .command('terraform-format')
+  .description('Format Terraform files')
+  .action(async () => {
+    await terraformFormat()
+  })
+
+program
+  .command('deploy-cloudrun')
+  .description('Deploy Docker image to Cloud Run')
+  .requiredOption('--env <environment>', 'Environment name (dev, test, pilot, prod)')
+  .action(async (options: { env: string }) => {
+    const validatedEnv = envSchema.parse(options.env)
+    await deployCloudRun({ env: validatedEnv })
+  })
+
+program
+  .command('verify-deployment')
+  .description('Verify Cloud Run deployment')
+  .requiredOption('--env <environment>', 'Environment name (dev, test, pilot, prod)')
+  .option('--previous-image <image>', 'Previous image URL for rollback')
+  .action(async (options: { env: string; previousImage?: string }) => {
+    const validatedEnv = envSchema.parse(options.env)
+    await verifyDeployment({ env: validatedEnv, previousImage: options.previousImage })
+  })
+
+program
+  .command('validate-promotion')
+  .description('Validate promotion path between environments')
+  .requiredOption('--source-env <environment>', 'Source environment name')
+  .requiredOption('--target-env <environment>', 'Target environment name')
+  .action((options: { sourceEnv: string; targetEnv: string }) => {
+    const validatedSourceEnv = envSchema.parse(options.sourceEnv)
+    const validatedTargetEnv = envSchema.parse(options.targetEnv)
+    validatePromotion({ sourceEnv: validatedSourceEnv, targetEnv: validatedTargetEnv })
+  })
+
+program
+  .command('promote-image')
+  .description('Promote Docker image from source to target environment')
+  .requiredOption('--source-env <environment>', 'Source environment name')
+  .requiredOption('--target-env <environment>', 'Target environment name')
+  .action(async (options: { sourceEnv: string; targetEnv: string }) => {
+    const validatedSourceEnv = envSchema.parse(options.sourceEnv)
+    const validatedTargetEnv = envSchema.parse(options.targetEnv)
+    await promoteImage({ sourceEnv: validatedSourceEnv, targetEnv: validatedTargetEnv })
+  })
+
+program.parse()

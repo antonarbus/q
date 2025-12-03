@@ -1,0 +1,139 @@
+name: 'Promote Release'
+run-name: 'Promote ${{ inputs.source-env }} → ${{ inputs.target-env }} by ${{ github.actor }}'
+
+# Promotes a tested Docker image from one environment to another
+# Instead of rebuilding, copies the exact same image that was tested
+#
+# NOTE: This workflow is only used when following a multi-stage deployment path (dev→test→pilot→prod).
+# When MASTER_DEPLOYS_TO_ENV is set to 'prod', deployment happens directly from main/master branch
+# to production, and this promotion workflow is not applicable.
+on:
+  workflow_dispatch:
+    inputs:
+      source-env:
+        description: 'Source environment (where the tested image is)'
+        required: true
+        type: choice
+        options:
+          - dev
+          - test
+          - pilot
+      target-env:
+        description: 'Target environment (where to deploy)'
+        required: true
+        type: choice
+        options:
+          - test
+          - pilot
+          - prod
+
+jobs:
+  validate:
+    name: 'Validate Promotion Path'
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          filter: blob:none
+
+      - name: 'Setup Bun'
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: 'Generate Terraform Variables'
+        run: bun deploy-scripts/cli.ts generate-tfvars
+
+      - name: 'Check promotion path'
+        run: bun deploy-scripts/cli.ts validate-promotion --source-env "${{ github.event.inputs.source-env }}" --target-env "${{ github.event.inputs.target-env }}"
+
+      - name: 'Load source environment config'
+        id: source-config
+        run: bun deploy-scripts/cli.ts load-config --env "${{ github.event.inputs.source-env }}" >> $GITHUB_OUTPUT
+
+      - name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v3'
+        with:
+          workload_identity_provider: 'projects/${{ steps.source-config.outputs.projectNumber }}/locations/global/workloadIdentityPools/github-pool/providers/github-provider'
+          service_account: 'github-actions-sa@${{ steps.source-config.outputs.projectId }}.iam.gserviceaccount.com'
+
+      - name: 'Show promotion preview title'
+        run: echo "## Promotion Preview" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: 'Show source deployment info'
+        run: bun deploy-scripts/cli.ts show-deployment-info --env "${{ github.event.inputs.source-env }}" >> "$GITHUB_STEP_SUMMARY" 2>&1
+
+      - name: 'Show target deployment info'
+        run: bun deploy-scripts/cli.ts show-deployment-info --env "${{ github.event.inputs.target-env }}" >> "$GITHUB_STEP_SUMMARY" 2>&1
+
+  promote:
+    name: 'Promote to ${{ github.event.inputs.target-env }}'
+    needs: validate
+    runs-on: ubuntu-latest
+    # GitHub Environment for approval gates
+    # Configure required reviewers in GitHub repo settings -> Environments
+    environment: ${{ github.event.inputs.target-env }}
+
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@v4
+
+      - name: 'Setup Bun'
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: 'Generate Terraform Variables'
+        run: bun deploy-scripts/cli.ts generate-tfvars
+
+      - name: 'Load target environment config'
+        id: config
+        run: bun deploy-scripts/cli.ts load-config --env "${{ github.event.inputs.target-env }}" >> $GITHUB_OUTPUT
+
+      - name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v3'
+        with:
+          workload_identity_provider: 'projects/${{ steps.config.outputs.projectNumber }}/locations/global/workloadIdentityPools/github-pool/providers/github-provider'
+          service_account: 'github-actions-sa@${{ steps.config.outputs.projectId }}.iam.gserviceaccount.com'
+
+      - name: 'Configure gcloud'
+        run: gcloud config set project '${{ steps.config.outputs.projectId }}'
+
+      - name: 'Promote Docker Image'
+        id: promote
+        run: bun deploy-scripts/cli.ts promote-image --source-env "${{ github.event.inputs.source-env }}" --target-env "${{ github.event.inputs.target-env }}" >> $GITHUB_OUTPUT
+
+      - name: 'Deploy promoted image to Cloud Run'
+        id: deploy
+        run: bun deploy-scripts/cli.ts deploy-cloudrun --env "${{ github.event.inputs.target-env }}" >> $GITHUB_OUTPUT
+
+      - name: 'Verify Deployment'
+        run: bun deploy-scripts/cli.ts verify-deployment --env "${{ github.event.inputs.target-env }}" --previous-image "${{ steps.deploy.outputs.previousImage }}"
+
+      - name: 'Add promotion summary'
+        if: always()
+        run: |
+          echo "## Release Promotion Summary" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "**Source**: ${{ github.event.inputs.source-env }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "**Target**: ${{ github.event.inputs.target-env }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "**Digest**: \`${{ steps.promote.outputs.sourceImageDigest }}\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "**Promoted by**: ${{ github.actor }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "**Timestamp**: $(date -u +"%Y-%m-%d %H:%M:%S UTC")" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          if [ "${{ job.status }}" == "success" ]; then
+            echo "Status: Promotion successful" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "Status: Promotion failed" >> "$GITHUB_STEP_SUMMARY"
+          fi
