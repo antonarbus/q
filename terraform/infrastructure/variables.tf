@@ -56,21 +56,41 @@ variable "artifact_registry_name" {
 }
 
 # ==============================================================================
-# CLOUD RUN
+# CLOUD RUN - FRONTEND
 # ==============================================================================
 
-variable "cloud_run_service_name" {
-  description = "Name of the Cloud Run service"
+variable "cloud_run_service_name_frontend" {
+  description = "Name of the Cloud Run service for frontend"
   type        = string
-  # This is the name of your running application
+  # This is the name of your frontend running application
   # Will appear in Google Cloud Console and URLs
   # Value provided by config/*.tfvars file
 }
 
-variable "docker_image_name" {
-  description = "Name of the Docker image in Artifact Registry"
+variable "docker_image_name_frontend" {
+  description = "Name of the Docker image in Artifact Registry for frontend"
   type        = string
-  # The name for your Docker image
+  # The name for your frontend Docker image
+  # Full path will be: REGION-docker.pkg.dev/PROJECT/REGISTRY/IMAGE:TAG
+  # Value provided by config/*.tfvars file
+}
+
+# ==============================================================================
+# CLOUD RUN - BACKEND
+# ==============================================================================
+
+variable "cloud_run_service_name_backend" {
+  description = "Name of the Cloud Run service for backend"
+  type        = string
+  # This is the name of your backend running application
+  # Will appear in Google Cloud Console and URLs
+  # Value provided by config/*.tfvars file
+}
+
+variable "docker_image_name_backend" {
+  description = "Name of the Docker image in Artifact Registry for backend"
+  type        = string
+  # The name for your backend Docker image
   # Full path will be: REGION-docker.pkg.dev/PROJECT/REGISTRY/IMAGE:TAG
   # Value provided by config/*.tfvars file
 }
@@ -98,11 +118,11 @@ variable "cloud_run_sa_name" {
 }
 
 # ==============================================================================
-# SCALING & PERFORMANCE
+# SCALING & PERFORMANCE - FRONTEND
 # ==============================================================================
 
-variable "min_instances" {
-  description = "Minimum number of Cloud Run instances to keep running"
+variable "min_instances_frontend" {
+  description = "Minimum number of Cloud Run instances to keep running for frontend"
   type        = number
   # 0 = Scale to zero when idle (saves money, but first request is slower)
   # 1+ = Keep instances warm (faster response, but costs money even when idle)
@@ -110,8 +130,8 @@ variable "min_instances" {
   # Value provided by config/*.tfvars file
 }
 
-variable "max_instances" {
-  description = "Maximum number of Cloud Run instances allowed"
+variable "max_instances_frontend" {
+  description = "Maximum number of Cloud Run instances allowed for frontend"
   type        = number
   # Prevents runaway costs if you get sudden traffic spike
   # Each instance handles ~80 concurrent requests by default
@@ -119,8 +139,8 @@ variable "max_instances" {
   # Value provided by config/*.tfvars file
 }
 
-variable "cpu_limit" {
-  description = "CPU limit for each Cloud Run container"
+variable "cpu_limit_frontend" {
+  description = "CPU limit for each Cloud Run container for frontend"
   type        = string
   # Options: "1" (1 CPU), "2" (2 CPUs), "4" (4 CPUs), "8" (8 CPUs)
   # More CPU = faster processing but higher cost
@@ -129,8 +149,8 @@ variable "cpu_limit" {
   # Value provided by config/*.tfvars file
 }
 
-variable "memory_limit" {
-  description = "Memory limit for each Cloud Run container"
+variable "memory_limit_frontend" {
+  description = "Memory limit for each Cloud Run container for frontend"
   type        = string
   # Options: 128Mi, 256Mi, 512Mi, 1Gi, 2Gi, 4Gi, 8Gi, 16Gi, 32Gi
   # Mi = Mebibytes, Gi = Gibibytes
@@ -140,8 +160,8 @@ variable "memory_limit" {
   # Value provided by config/*.tfvars file
 }
 
-variable "container_port" {
-  description = "Port that the container listens on for HTTP requests"
+variable "container_port_frontend" {
+  description = "Port that the frontend container listens on for HTTP requests"
   type        = number
   # Your application must listen on this port
   # Cloud Run forwards HTTP/HTTPS traffic to this port
@@ -151,11 +171,45 @@ variable "container_port" {
 }
 
 # ==============================================================================
+# SCALING & PERFORMANCE - BACKEND
+# ==============================================================================
+
+variable "min_instances_backend" {
+  description = "Minimum number of Cloud Run instances to keep running for backend"
+  type        = number
+  # Value provided by config/*.tfvars file
+}
+
+variable "max_instances_backend" {
+  description = "Maximum number of Cloud Run instances allowed for backend"
+  type        = number
+  # Value provided by config/*.tfvars file
+}
+
+variable "cpu_limit_backend" {
+  description = "CPU limit for each Cloud Run container for backend"
+  type        = string
+  # Value provided by config/*.tfvars file
+}
+
+variable "memory_limit_backend" {
+  description = "Memory limit for each Cloud Run container for backend"
+  type        = string
+  # Value provided by config/*.tfvars file
+}
+
+variable "container_port_backend" {
+  description = "Port that the backend container listens on for HTTP requests"
+  type        = number
+  # Value provided by config/*.tfvars file
+}
+
+# ==============================================================================
 # CUSTOM DOMAIN
 # ==============================================================================
 
-variable "custom_domain" {
-  description = "Custom domain name to map to the Cloud Run service"
+variable "custom_domain_frontend" {
+  description = "Custom domain name to map to the frontend Cloud Run service"
   type        = string
   # Your domain name (without www or https://)
   # After Terraform creates the mapping, you need to:
@@ -177,36 +231,37 @@ variable "environment" {
 }
 
 # ==============================================================================
-# CLOUD SQL DATABASE
+# CLOUD SQL DATABASE (OPTIONAL - currently using MongoDB)
 # ==============================================================================
+# Uncomment these when migrating from MongoDB to Cloud SQL
 
-variable "sql_instance_name" {
-  description = "Name of the Cloud SQL instance"
-  type        = string
-  # Shared instance name across all environments
-  # Value provided by config/*.tfvars file
-}
+# variable "sql_instance_name" {
+#   description = "Name of the Cloud SQL instance"
+#   type        = string
+#   # Shared instance name across all environments
+#   # Value provided by config/*.tfvars file
+# }
 
-variable "sql_database_version" {
-  description = "MySQL database version"
-  type        = string
-  # Example: MYSQL_8_4, MYSQL_8_0
-  # Value provided by config/*.tfvars file
-}
+# variable "sql_database_version" {
+#   description = "MySQL database version"
+#   type        = string
+#   # Example: MYSQL_8_4, MYSQL_8_0
+#   # Value provided by config/*.tfvars file
+# }
 
-variable "sql_tier" {
-  description = "Machine tier for Cloud SQL instance"
-  type        = string
-  # Example: db-f1-micro, db-n1-standard-1
-  # Value provided by config/*.tfvars file
-}
+# variable "sql_tier" {
+#   description = "Machine tier for Cloud SQL instance"
+#   type        = string
+#   # Example: db-f1-micro, db-n1-standard-1
+#   # Value provided by config/*.tfvars file
+# }
 
-variable "sql_disk_size" {
-  description = "Disk size in GB for Cloud SQL instance"
-  type        = number
-  # Minimum: 10 GB
-  # Value provided by config/*.tfvars file
-}
+# variable "sql_disk_size" {
+#   description = "Disk size in GB for Cloud SQL instance"
+#   type        = number
+#   # Minimum: 10 GB
+#   # Value provided by config/*.tfvars file
+# }
 
 variable "github_repository" {
   description = "GitHub repository in format 'owner/repo' - not used in infrastructure but prevents warnings"

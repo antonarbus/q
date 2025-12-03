@@ -7,6 +7,8 @@
 // IMPORTANT: After modifying this file, regenerate .tfvars files:
 //   bun deploy-scripts/cli.ts generate-tfvars
 
+import { z } from 'zod'
+
 // ==============================================================================
 // SHARED CONFIGURATION (applies to all environments)
 // ==============================================================================
@@ -31,19 +33,19 @@ export const sharedConfigVariables = {
   githubActionsSaName: 'github-actions-sa',
   cloudRunSaName: 'cloud-run-sa',
 
-  // Cloud Run Configuration
-  minInstances: '0',
-  maxInstances: '5',
-  cpuLimit: '1',
-  memoryLimit: '512Mi',
+  // Cloud Run Configuration - Frontend
+  minInstancesFrontend: '0',
+  maxInstancesFrontend: '5',
+  cpuLimitFrontend: '1',
+  memoryLimitFrontend: '512Mi',
   containerPortFrontend: '80',
-  containerPortBackend: '4000',
 
-  // Cloud SQL Database (MongoDB replacement - for future migration)
-  // sqlInstanceName: 'q-mysql',
-  // sqlDatabaseVersion: 'MYSQL_8_4',
-  // sqlTier: 'db-f1-micro',
-  // sqlDiskSize: '10',
+  // Cloud Run Configuration - Backend
+  minInstancesBackend: '0',
+  maxInstancesBackend: '5',
+  cpuLimitBackend: '1',
+  memoryLimitBackend: '512Mi',
+  containerPortBackend: '4000',
 }
 
 // ==============================================================================
@@ -66,8 +68,10 @@ export const devConfigVariables = {
   cloudRunServiceNameBackend: 'q-backend-dev',
   customDomainFrontend: 'dev.sendmequotation.today',
   // Backend typically doesn't need custom domain, accessed via frontend
-  maxInstances: '3',
-  memoryLimit: '512Mi',
+  maxInstancesFrontend: '3',
+  maxInstancesBackend: '3',
+  memoryLimitFrontend: '512Mi',
+  memoryLimitBackend: '512Mi',
 }
 
 export const testConfigVariables = {
@@ -75,8 +79,10 @@ export const testConfigVariables = {
   cloudRunServiceNameFrontend: 'q-frontend-test',
   cloudRunServiceNameBackend: 'q-backend-test',
   customDomainFrontend: 'test.sendmequotation.today',
-  maxInstances: '3',
-  memoryLimit: '512Mi',
+  maxInstancesFrontend: '3',
+  maxInstancesBackend: '3',
+  memoryLimitFrontend: '512Mi',
+  memoryLimitBackend: '512Mi',
 }
 
 export const pilotConfigVariables = {
@@ -84,8 +90,10 @@ export const pilotConfigVariables = {
   cloudRunServiceNameFrontend: 'q-frontend-pilot',
   cloudRunServiceNameBackend: 'q-backend-pilot',
   customDomainFrontend: 'pilot.sendmequotation.today',
-  maxInstances: '5',
-  memoryLimit: '512Mi',
+  maxInstancesFrontend: '5',
+  maxInstancesBackend: '5',
+  memoryLimitFrontend: '512Mi',
+  memoryLimitBackend: '512Mi',
 }
 
 export const prodConfigVariables = {
@@ -93,8 +101,10 @@ export const prodConfigVariables = {
   cloudRunServiceNameFrontend: 'q-frontend-prod',
   cloudRunServiceNameBackend: 'q-backend-prod',
   customDomainFrontend: 'sendmequotation.today',
-  maxInstances: '10',
-  memoryLimit: '1Gi',
+  maxInstancesFrontend: '10',
+  maxInstancesBackend: '10',
+  memoryLimitFrontend: '1Gi',
+  memoryLimitBackend: '1Gi',
 }
 
 // ==============================================================================
@@ -119,3 +129,19 @@ export function getFullConfig(env: keyof typeof environmentConfigMap) {
 
 // Type for the full configuration
 export type FullConfig = ReturnType<typeof getFullConfig>
+
+// ==============================================================================
+// CONFIGURATION VALIDATION
+// ==============================================================================
+export const envSchema = z.enum(['dev', 'test', 'pilot', 'prod'])
+export type Env = z.infer<typeof envSchema>
+
+// ==============================================================================
+// CONFIG EXPORT FOR DEPLOY SCRIPTS
+// ==============================================================================
+export const configVariables = {
+  dev: getFullConfig('dev'),
+  test: getFullConfig('test'),
+  pilot: getFullConfig('pilot'),
+  prod: getFullConfig('prod'),
+}

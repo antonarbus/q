@@ -1,428 +1,609 @@
 # Quotation Management App
 
-Full-stack quotation management application built with React (frontend) and Express (backend).
+Full-stack quotation management application with React frontend and Express backend, deployed to Google Cloud Run with Terraform infrastructure as code.
 
-## Development Commands
+## Table of Contents
 
-### Start Development
+- [Architecture](#architecture)
+- [Development](#development)
+- [First-Time Setup](#first-time-setup)
+- [Deployment](#deployment)
+- [CLI Commands](#cli-commands)
+- [Release Promotion](#release-promotion)
+- [Configuration](#configuration)
+- [Testing](#testing)
+- [Troubleshooting](#troubleshooting)
+- [Monitoring](#monitoring)
+
+---
+
+## Architecture
+
+**Project**: All environments run in GCP project `<PROJECT_ID>`
+
+| Environment | Frontend Service     | Backend Service      | Domain                        |
+| ----------- | -------------------- | -------------------- | ----------------------------- |
+| **Dev**     | `<APP_NAME>-frontend-dev`     | `<APP_NAME>-backend-dev`      | dev.<DOMAIN>     |
+| **Test**    | `<APP_NAME>-frontend-test`    | `<APP_NAME>-backend-test`     | test.<DOMAIN>    |
+| **Pilot**   | `<APP_NAME>-frontend-pilot`   | `<APP_NAME>-backend-pilot`    | pilot.<DOMAIN>   |
+| **Prod**    | `<APP_NAME>-frontend-prod`    | `<APP_NAME>-backend-prod`     | <DOMAIN>         |
+
+**Git workflow**: Single `main` branch. Environments are deployment targets.
+
+**Deployment mode** (configured via `MASTER_DEPLOYS_TO_ENV` in `config/configVariables.ts`):
+
+- `prod`: Main deploys directly to production (single-stage workflow)
+- `dev`: Main deploys to dev, promotion workflow for test → pilot → prod
+
+### Infrastructure Organization
+
+**Bootstrap** (`terraform/bootstrap/`) - One-time shared infrastructure:
+- State bucket: `gs://<BUCKET_NAME>/` (Terraform state storage)
+- Service accounts: `github-actions-sa`, `cloud-run-sa`
+- Workload Identity Federation: Keyless GitHub Actions authentication
+- Infrastructure-level APIs: IAM, Storage, Cloud Run, Logging, Monitoring
+
+**Infrastructure** (`terraform/infrastructure/`) - Application resources (CI/CD managed):
+- Artifact Registry: `docker-images` (shared registry, per-env tags)
+- Cloud Run services: 2 services per environment (frontend + backend)
+- Custom domain mappings: Frontend only (backend uses Cloud Run URL)
+- Terraform state: Separate files per environment via prefix `terraform/state/{env}/`
+
+**Docker Images**:
+- Frontend: `us-central1-docker.pkg.dev/<PROJECT_ID>/docker-images/<APP_NAME>-frontend:<env>`
+- Backend: `us-central1-docker.pkg.dev/<PROJECT_ID>/docker-images/<APP_NAME>-backend:<env>`
+- Tags: `dev`, `test`, `pilot`, `prod` (enables image promotion)
+
+**Database**: MongoDB Atlas (external) - not managed by Terraform
+
+---
+
+## Development
 
 ```bash
-npm start                 # Start frontend (3000) and backend (4000)
-npm run start-front       # Start frontend only
-npm run start-back        # Start backend only
-npm stop                  # Kill ports 3000 and 4000
+bun install                     # Install dependencies
+bun start                       # Start both frontend and backend locally
+bun run start-front             # Frontend only (port 3000)
+bun run start-back              # Backend only (port 4000)
+bun run build-all               # Build both for production
+bun run test                    # Run unit tests
+bun run e2e-test                # Run Playwright e2e tests
+bun deploy-scripts/cli.ts       # Interactive deployment CLI
 ```
 
-**Testing Blog Locally:**
+**Local development:**
+- Frontend: https://localhost:3000
+- Backend API: https://localhost:4000
+- E2E tests run against local services
 
-- Visit app at `https://localhost:3000` → Click "Blog" in navigation
-- Or directly: `https://localhost:3000/blog/`
-- Blog files are served by Vite from `front/public/blog/`
+---
 
-### Build
+## First-Time Setup
+
+### 1. Prerequisites
+
+**Install Bun:**
 
 ```bash
-npm run build-all         # Build both frontend and backend
-npm run build-front       # Build frontend only (Vite)
-npm run build-back        # Build backend only (Rollup)
+# Install Bun runtime
+curl -fsSL https://bun.sh/install | bash
+
+# Verify installation
+bun --version
+
+# Install project dependencies
+bun install
 ```
 
-### Testing
+**Configure GCP:**
 
 ```bash
-npm test                  # Run Vitest unit tests
-npm run unit-test-ui           # Run Vitest with UI
-npm run coverage          # Run tests with coverage report
-npm run e2e-test        # Run Playwright e2e tests
-npm run e2e-test-ui     # Run Playwright with UI
-npm run e2e-test-debug  # Debug Playwright tests
+# Authenticate with GCP (requires Owner/Admin permissions)
+gcloud auth application-default login
+
+# Verify project
+gcloud projects describe <PROJECT_ID>
+
+# Enable bootstrap APIs
+# IMPORTANT: These APIs have a circular dependency and must be enabled manually
+# before Terraform can manage other APIs. One-time operation, requires Owner/Admin permissions.
+# See: https://github.com/hashicorp/terraform-provider-google/issues/8544
+gcloud services enable serviceusage.googleapis.com --project=<PROJECT_ID>
+gcloud services enable cloudresourcemanager.googleapis.com --project=<PROJECT_ID>
+
+# Verify bootstrap APIs are enabled
+gcloud services list --enabled --filter="name:serviceusage.googleapis.com OR name:cloudresourcemanager.googleapis.com"
 ```
+
+**Database Setup:**
+
+This app uses MongoDB Atlas (external). Configure your MongoDB connection string as an environment variable or in Google Secret Manager.
+
+### 2. Configure Project
+
+Edit `config/configVariables.ts` with your project details:
+
+```typescript
+export const sharedConfigVariables = {
+  projectId: '<PROJECT_ID>',                      // Your GCP project ID
+  projectNumber: '<PROJECT_NUMBER>',              // Find in GCP console dashboard
+  githubRepository: '<GITHUB_USER>/<REPO_NAME>',  // e.g., 'yourusername/q'
+  bucketForTerraformStateName: '<BUCKET_NAME>',   // Unique bucket for Terraform state
+  region: 'us-central1',
+  // ... other settings
+}
+```
+
+### 3. Generate Terraform Variables
+
+Generate `.tfvars` files from the TypeScript configuration:
+
+```bash
+bun deploy-scripts/cli.ts generate-tfvars
+```
+
+This creates/updates all environment `.tfvars` files from `config/configVariables.ts`.
+
+### 4. Run Bootstrap (One-Time)
+
+Bootstrap creates shared resources that all environments use.
+
+```bash
+cd terraform/bootstrap
+
+# Remove any leftovers from the template or old project
+rm -rf .terraform .terraform.lock.hcl terraform.tfstate terraform.tfstate.backup
+
+# Initialize Terraform
+terraform init
+
+# Review what will be created
+terraform plan -var-file="../../config/prod.tfvars"
+
+# Create resources
+terraform apply -var-file="../../config/prod.tfvars"
+```
+
+**Resources created:**
+
+- GCS bucket: Terraform state storage with versioning
+- Artifact Registry: `docker-images` (shared)
+- Service accounts: `github-actions-sa`, `cloud-run-sa`
+- IAM permissions: Roles for GitHub Actions SA
+- Workload Identity Federation: Keyless GitHub Actions authentication
+- Infrastructure-level APIs
+
+### 5. Domain Verification (One-Time)
+
+To allow automated domain mapping creation, add the service account as a verified owner:
+
+1. Go to [Google Search Console](https://search.google.com/search-console)
+2. Select your domain property (e.g., `<DOMAIN>`)
+3. **Settings** → **Users and permissions** → **Add user**
+4. Enter: `github-actions-sa@<PROJECT_ID>.iam.gserviceaccount.com`
+5. Grant **Owner** permission
+6. Click **Add**
+
+### 6. Configure GitHub Environments
+
+Set up approval gates for release promotion:
+
+1. Go to **Repository Settings** → **Environments**
+2. Click **New environment**, create: `dev`, `test`, `pilot`, `prod`
+3. Click on each environment name to configure it
+4. For `prod` (and optionally `pilot`):
+   - Enable **Required reviewers** checkbox
+   - Add GitHub usernames who must approve deployments
+
+### 7. DNS Setup (Per Environment)
+
+After first deployment to each environment:
+
+1. Go to Cloud Run → Manage Custom Domains
+2. Copy DNS records shown
+3. Add them to your domain registrar (e.g., GoDaddy, Namecheap)
+
+---
+
+## Deployment
+
+### Automatic (via GitHub Actions)
+
+Push to `main` branch triggers deployment to the environment specified by `MASTER_DEPLOYS_TO_ENV`:
+
+1. Push/merge to `main` branch
+2. Detects target environment from `MASTER_DEPLOYS_TO_ENV` config
+3. Generates `.tfvars` files from TypeScript config
+4. Runs Terraform format check
+5. Applies Terraform infrastructure (idempotent - runs every time)
+6. Builds and pushes frontend Docker image (tagged with environment + git SHA)
+7. Builds and pushes backend Docker image (tagged with environment + git SHA)
+8. Deploys both images to Cloud Run services
+9. Runs Playwright e2e tests against deployed services
+10. Verifies deployment (auto-rollback on failure)
+
+- **`MASTER_DEPLOYS_TO_ENV='prod'`**: Direct to production deployment. Other environments remain as config templates.
+- **`MASTER_DEPLOYS_TO_ENV='dev'`**: Main deploys to dev, then use [Release Promotion](#release-promotion) for test/pilot/prod.
+
+---
+
+## CLI Commands
+
+All deployment automation is handled by an interactive TypeScript CLI:
+
+```bash
+bun deploy-scripts/cli.ts
+```
+
+This will prompt you to:
+
+1. Select a command (generate-tfvars, show-deployment-info, terraform-apply)
+2. Select an environment (if needed)
+3. Execute the command
+
+**Direct usage examples:**
+
+```bash
+# Generate tfvars files
+bun deploy-scripts/cli.ts generate-tfvars
+
+# Apply Terraform for dev environment
+bun deploy-scripts/cli.ts terraform-apply --env dev
+
+# Deploy both services to dev
+bun deploy-scripts/cli.ts deploy-cloudrun --env dev
+
+# Deploy only frontend
+bun deploy-scripts/cli.ts deploy-cloudrun --env dev --service frontend
+
+# Verify deployment
+bun deploy-scripts/cli.ts verify-deployment --env dev
+
+# Show deployment info
+bun deploy-scripts/cli.ts show-deployment-info --env dev
+```
+
+---
+
+## Release Promotion
+
+**Promote tested images between environments** (instead of rebuilding):
+
+```
+dev → test → pilot → prod
+```
+
+**NOTE**: Promotion workflow applies only when `MASTER_DEPLOYS_TO_ENV='dev'`. When set to `'prod'`, deployment goes directly to production and promotion workflow is unused.
+
+### Using the Promotion Workflow
+
+1. Go to **Actions** → **Promote Release** → **Run workflow**
+2. Select source environment (e.g., `dev`)
+3. Select target environment (e.g., `test`)
+4. Click **Run workflow**
+
+The workflow:
+
+- Validates promotion path (dev → test, test → pilot, pilot → prod only)
+- Requires approval from configured reviewers
+- Re-tags both Docker images (instant, no rebuild)
+- Deploys both images to target Cloud Run services
+- Runs e2e tests
+- Verifies with health checks
+- Auto-rollback on failure
+
+---
+
+## Configuration
+
+### Single Source of Truth
+
+All configuration lives in `config/configVariables.ts`:
+
+```typescript
+export const sharedConfigVariables = {
+  // Google Cloud Project
+  projectId: '<PROJECT_ID>',
+  projectNumber: '<PROJECT_NUMBER>',
+  region: 'us-central1',
+
+  // GitHub
+  githubRepository: '<GITHUB_USER>/<REPO_NAME>',
+
+  // Terraform State
+  bucketForTerraformStateName: '<BUCKET_NAME>',
+
+  // Artifact Registry (Docker images)
+  artifactRegistryName: 'docker-images',
+  dockerImageNameFrontend: '<APP_NAME>-frontend',
+  dockerImageNameBackend: '<APP_NAME>-backend',
+
+  // Service Accounts
+  githubActionsSaName: 'github-actions-sa',
+  cloudRunSaName: 'cloud-run-sa',
+
+  // Cloud Run Configuration - Frontend
+  minInstancesFrontend: '0',
+  maxInstancesFrontend: '5',
+  cpuLimitFrontend: '1',
+  memoryLimitFrontend: '512Mi',
+  containerPortFrontend: '80',
+
+  // Cloud Run Configuration - Backend
+  minInstancesBackend: '0',
+  maxInstancesBackend: '5',
+  cpuLimitBackend: '1',
+  memoryLimitBackend: '512Mi',
+  containerPortBackend: '4000',
+}
+```
+
+The `.tfvars` files are **generated** from this TypeScript config using `bun deploy-scripts/cli.ts generate-tfvars`.
+
+### Key Variables
+
+| Variable                        | Environment-Specific | Shared |
+| ------------------------------- | -------------------- | ------ |
+| `projectId`                     |                      | ✓      |
+| `region`                        |                      | ✓      |
+| `artifactRegistryName`          |                      | ✓      |
+| `dockerImageNameFrontend`       |                      | ✓      |
+| `dockerImageNameBackend`        |                      | ✓      |
+| `cloudRunServiceNameFrontend`   | ✓                    |        |
+| `cloudRunServiceNameBackend`    | ✓                    |        |
+| `customDomainFrontend`          | ✓                    |        |
+| `maxInstancesFrontend`          | ✓                    |        |
+| `maxInstancesBackend`           | ✓                    |        |
+
+### Changing Configuration
+
+1. Edit `config/configVariables.ts`
+2. Run `bun deploy-scripts/cli.ts generate-tfvars` to regenerate `.tfvars` files
+3. Commit both files
+4. Push to `main` (auto-applies to target environment)
+5. For non-target environments: manual Terraform or promotion workflow
+
+---
+
+## Testing
+
+### Unit Tests
+
+```bash
+bun test                # Run Vitest unit tests
+bun run unit-test-ui    # Run with UI
+```
+
+### E2E Tests
+
+```bash
+bun run e2e-test        # Run Playwright tests against local services
+bun run e2e-test-ui     # Run with Playwright UI
+bun run e2e-test-debug  # Debug mode
+```
+
+**E2E tests in CI/CD:**
+- Run automatically after each deployment
+- Test against deployed Cloud Run services
+- Verify end-to-end functionality including API calls
+- Auto-rollback deployment if tests fail
 
 ### Code Quality
 
 ```bash
-npm run check             # Run all checks: tsc, lint, prettier, test, playwright
-npm run tsc               # TypeScript type checking (no emit)
-npm run biome             # Lint and format
-npm run prettier          # Check code formatting
-npm run prettier_fix      # Auto-format code
+bun run tsc             # TypeScript type checking
+bun run biome           # Lint and format
+bun run check           # Run all checks (tsc, biome, tests)
 ```
-
-### Architecture Analysis
-
-```bash
-npm run fsd               # Verify Feature-Sliced Design structure with Steiger
-npm run find-unused-files # Find unused files with Knip
-npm run find-circular-deps     # Detect circular dependencies with Madge
-```
-
-# Feature-Sliced Design (FSD) for front-end applications
-
-https://feature-sliced.design/docs/get-started/overview
-
-In FSD, a project consists of _layers_, _slices_ and _segments_.
-
-![FSD diagram](./fsd.png)
-
-## Layers
-
-_Layers_ are vertically arranged. ❗️Code on one _layer_ can only interact with code from the _layers_ below.
-
-### 1. `shared/`
-
-Reusable functionality, detached from the business (e.g. UIKit, libs, API). ❗️No business logic here.
-
-### 2. `entities/`
-
-Elements which have a business value (e.g. BlogPost, User, Order, Product). Can be a components with slots for content/interactive elements.
-
-Should contain the logic to describe how _entity_ looks and behaves (e.g. static UI elements, data stores, CRUD operations, reducers, selectors, mappers).
-
-### 3. `features/`
-
-_Entity_ can act differently depending on _features_ we apply on top of it (e.g. the User _entity_ with different _features_ can show a contact card or get a personal ad or be granted access etc...).
-
-_Feature_ is an action on _entity_ to achieve a valuable outcome (e.g. create-blog-post, login-by-auth, edit-account, publish-video).
-
-Can contain interactive UI elements, internal state and API calls that enable value-producing actions.
-
-### 4. `widgets/`
-
-Compositional _layer_ to combine lower-level units from _entities_ + _features_ into meaningful assembled blocks with content and interactive buttons wired to the api calls (e.g. PostCard, IssuesList, UserProfile).
-
-In this _layer_ we fill slots left in the UI of _Entities_ with other _Entities_ and interactive elements from _Features_.
-
-Usually non-business logic come here (e.g. gestures, keyboard interaction, etc). For reach widgets business logic is permitted.
-
-❗️It might be hard to decide what goes into _Entities_ and _Features_. Do not worry. Just put all logic into _Widgets_ layer. You will feel later if it should be split into _Entities_ and _Features_.
-
-### 5. `pages/`
-
-Compositional layer to construct full pages or views from _entities_, _features_ and _widgets_ (e.g. route components for each page/slot). ❗️No business and minimum other logic here.
-
-### 6. `app/`
-
-App-wide settings, (e.g. styles, providers, router, store).
-
-https://feature-sliced.design/docs/reference/layers
-
-## Slices
-
-A _layer_ can be divided into business oriented _slices_ to keep related code together (e.g. post, add-user-to-friends, news-feed...)
-
-1. `Shared` and `App` _layers_ never have _slices_ (they do not have business logic inside).
-2. ❗️*Slices* cannot use other _slices_ on the same _layer_.
-3. Closely related slices can be grouped in a directory, but they still should follow rule above.
-4. ❗️*Slices* (and _segments_ without _slices_) must contain the `index.ts` entry points (public API) with module re-exports. Code outside should not reference internal _slice_ file structure, but public API only.
-
-## Segments
-
-A _slice_ consists of _segments_ to separate code by its technical nature, common _segments_, ❗️but not necessarily are:
-
-1. `ui/` ui-logic, components
-2. `model/` business logic, store, actions, selectors
-3. `lib/` utils, helpers, hooks
-4. `api/` communication with external APIs, backend API methods
-
-# Auth
-
-Authentication - verifying user identity (checking password correctness)
-
-Authorization - verifying user permissions (checking user roles/access rights)
-
-(A) At registration we store at db email + hashed salted password +
-`refresh` jwt token with 90d validity which contains email & role payload.
-
-(B) Client is authenticated by comparing email & password's hash
-against stored email and hashed password at the login stage.
-
-(C) On successful authentication the server issues 15 min `access` jwt token and
-rarely issues new `refresh` jwt token if previous one is expired (once per 90d).
-
-(D) `refresh` jwt token is needed to issue `access` token for a user without
-asking for credentials.
-
-(E) `refresh` token is saved by server in db + in secured cookies on login.
-
-(F) If we want to forbid user's access we may simply delete or modify `refresh` token from db.
-
-(G) `access` token is stored locally in memory on client side and is
-attached to request's http headers `access-jwt-token` for protected api requests.
-
-(H) `access` token is attached by 'request' interceptor at `axiosWithAuth`.
-If we do a request to a protected endpoint we just use `axiosWithAuth`
-instance to avoid attaching token manually.
-
-(I) At protected routes we get user details from `access` token.
-Verification is fast and does not involve database. If token is expired or wrong
-en error response of status `401` with message "Not logged in" is returned.
-
-(J) `access` token expires every 15 min.
-'Response' interceptor in `axiosWithAuth` checks for `401` status and
-if it is the `401` status, it makes additional request to get new `access` token by
-checking already attached `refresh` token from cookies, which has 90d expiry time.
-
-(K) `axiosWithAuth` remembers initial request with all parameters when it
-got first `401` error and after getting new refreshed `access` token it
-repeats remembered initial http request.
-
-(L) If `refresh` token is invalid or old, then `access` token is not
-issued, client is considered to be unauthenticated and new login action
-is required.
-
-(M) If a user is deleted from the database, the user is still authenticated for
-current browser session until `access` token is expired (15 min).
-We should consider the duration of access token depending on
-sensitivity of our data.
-
-(N) Apart from protected routes tokens are also checked and refreshed at
-the initial app load in `<AccessToken />` to avoid prompting a user
-for credentials on every page refresh.
-
-(O) We use JWT token which contains **base64-encoded** (not encrypted)
-payload with user email & role data, validation time,
-and a signature based on secret keys kept on the server in env variables.
-**Note:** JWT payload is readable by anyone; never store sensitive data in it.
-
-(P) Server can validate the token only if it knows the secret key.
-
-# Email
-
-For emails sending MailerSend is used.
-
-# Item
-
-- `Item` in the code is a thing which can be sorted or bookmarked: text, boq, price, row.
-- `Block` in the code is a direct defendant in quotation document: text, boq, price.
-
-# Files
-
-- Files are stored at https://console.cloud.google.com/storage/browser/quotation-app-bucket/
-- path: email/files/new_fileName.jpg (for unsaved quotations)
-- path: email/files/12345_fileName.jpg (for saved quotations)
-- when quotation is saved file names are modified
-
-# CI/CD (outdated)
-
-- create the project and get project ID
-- add project into session env
-- add project also into env var at deployment.yaml
-
-```bash
-gcloud projects list
-```
-
-```bash
-export PROJECT_ID="<your-project-id>"
-```
-
-- create the folder (repository) for docker in Artifact Registry with name "cloud-run" at "us-central1 (Iowa)" with "Delete artifacts" option
-- add the "cloud-run" folder name into env var at deployment.yaml
-
-- get github user and repo names
-
-```bash
-export REPO_OWNER="<your-github-username>"
-```
-
-```bash
-export REPO_NAME="<your-repo-name>"
-```
-
-- enable service
-
-```bash
-gcloud services enable iamcredentials.googleapis.com \
-run.googleapis.com \
-artifactregistry.googleapis.com --project="${PROJECT_ID}"
-```
-
-- create Service Account in Google Cloud IAM, Service Account functions as a restriction on access to resources we use later
-
-```bash
-gcloud iam service-accounts create "cloud-run-sa" \
---project="${PROJECT_ID}" \
---description="Cloud Run Service Account" \
---display-name="Cloud Run Service Account"
-```
-
-- set roles as Artifact Registry Admin and Cloud Run Admin
-
-```bash
-gcloud projects add-iam-policy-binding "${PROJECT_ID}" \
---member="serviceAccount:cloud-run-sa@${PROJECT_ID}.iam.gserviceaccount.com" \
---role="roles/artifactregistry.repoAdmin"
-```
-
-```bash
-gcloud projects add-iam-policy-binding "${PROJECT_ID}" \
---member="serviceAccount:cloud-run-sa@${PROJECT_ID}.iam.gserviceaccount.com" \
---role="roles/run.admin"
-```
-
-```bash
-gcloud projects add-iam-policy-binding "${PROJECT_ID}" \
---member="serviceAccount:cloud-run-sa@${PROJECT_ID}.iam.gserviceaccount.com" \
---role="roles/iam.serviceAccountUser"
-```
-
-- create a Workload Identity Pool we named “github”
-
-```bash
-gcloud iam workload-identity-pools create "github" \
---project="${PROJECT_ID}" \
---location="global" \
---display-name="GitHub Actions Pool"
-
-```
-
-- check WIP was successfully created or not
-
-```bash
-gcloud iam workload-identity-pools describe "github" \
---project="${PROJECT_ID}" \
---location="global" \
---format="value(name)"
-
-```
-
-- sets up an OIDC identity provider that allows Google Cloud to trust tokens issued by GitHub Actions
-
-```bash
-gcloud iam workload-identity-pools providers create-oidc "github-repo-provider" \
---project="${PROJECT_ID}" \
---location="global" \
---workload-identity-pool="github" \
---display-name="My GitHub repo Provider" \
---attribute-mapping="google.subject=assertion.sub,attribute.actor=assertion.actor,attribute.repository=assertion.repository,attribute.repository_owner=assertion.repository_owner,attribute.repository_id=assertion.repository_id" \
---issuer-uri="https://token.actions.githubusercontent.com"
-```
-
-- allow GitHub repos to assume the cloud-run-sa service account's identity to interact with Google Cloud resources as this service account. This setup is useful for securely granting permissions to GitHub Actions workflows to interact with Google Cloud
-
-```bash
-export SA_EMAIL="cloud-run-sa@${PROJECT_ID}.iam.gserviceaccount.com"
-```
-
-```bash
-export WORKLOAD_POOL=`gcloud iam workload-identity-pools describe "github" \
---project="${PROJECT_ID}" \
---location="global" \
---format="value(name)"`
-```
-
-```bash
-gcloud iam service-accounts add-iam-policy-binding ${SA_EMAIL} \
---project="${PROJECT_ID}" \
---role="roles/iam.workloadIdentityUser" \
---member="principalSet://iam.googleapis.com/${WORKLOAD_POOL}/attribute.repository/${REPO_OWNER}/${REPO_NAME}"
-```
-
-- add PROJECT_ID, SERVICE_ACCOUNT, WORKLOAD_IDENTITY_PROVIDER to env var at deployment.yaml
-
-```bash
-echo $PROJECT_ID
-```
-
-```bash
-echo $SA_EMAIL
-```
-
-```bash
-gcloud iam workload-identity-pools providers describe "github-repo-provider" \
---project="${PROJECT_ID}" \
---location="global" \
---workload-identity-pool="github" \
---format="value(name)"
-```
-
-## CI/CD with Github Actions
-
-- Container is automatically build, dockerized, uploaded to Artifact Registry and deployed to Cloud Run with github actions on merge to main and dev branches
-- Configuration is kept at /.github/workflows/deployment.yml
-
-## Database
-
-https://cloud.mongodb.com/v2/62def546ebe15846276a5a82#/serverless/detail/ServerlessInstance
-
-## Cloud Run
-
-- create a cloud run container with unauthenticated access + min 0 instances + 'us-central1' region
-- give it a name "cloud-run" (not sure it is used anywhere)
-- env.REGION goes to workflows/deployment.yml
-- it is possible that on first deployment you have to adjust security --> "Allow unauthenticated invocations"
-- go to Manage custom domains --> Add mapping --> Select domain --> generate dns settings --> add it to your hosting
-
-https://console.cloud.google.com/run?inv=1&invt=AblO7A&project=quotationapp-8014c
-
-## Artifact Registry
-
-- create repository for docker + 'us-central1' region + with delete artifacts option
-- give it a name "cloud-run"
-- env.ARTIFACTS_REGISTRY_NAME goes to workflows/deployment.yml
-
-https://console.cloud.google.com/artifacts?inv=1&invt=AblO7A&project=quotationapp-8014c
-
-## IAM-Admin
-
-- go to Service Accounts --> Create Service Account to let github actions upload docker to Artifact Registery
-- give it a name "github-actions-sa"
-- add roles: 1. "Cloud Run Admin" 2. "Artifact Registry Administrator" 3. "Service Account User"
-- go into created account --> keys --> add key --> create new json key
-- copy full content of the key (big object) and add into github --> settings --> secretes & variables --> actions --> New repository secrets --> under "GCP_SA_KEY" name
-- secrets.GCP_SA_KEY goes to workflows/deployment.yml
-
-https://console.cloud.google.com/iam-admin/serviceaccounts?inv=1&invt=AblPCg&project=quotationapp-8014c&supportedpurview=project
-
-## Code Review Checklist
-
-Before merging PRs, verify:
-
-- [ ] Follows FSD layer hierarchy (no upward imports)
-- [ ] Public API exported via `index.ts`
-- [ ] No inline HTML templates over 50 lines
-- [ ] No functions over 100 lines (extract helpers)
-- [ ] Uses React hooks instead of global Redux access
-- [ ] Tests added for new features
-- [ ] TypeScript strict mode passes
-- [ ] Biome linting passes
-- [ ] No new circular dependencies (`npm run find-circular-deps`)
 
 ---
 
-## Resources
+## Troubleshooting
 
-**Feature-Sliced Design:**
-- Official docs: https://feature-sliced.design/
-- Layer reference: https://feature-sliced.design/docs/reference/layers
+### "409: Already Exists" Errors
 
-**Testing:**
-- Vitest: https://vitest.dev/
-- Playwright: https://playwright.dev/
-- Testing Library: https://testing-library.com/
+Resource was created manually before Terraform. **Import it:**
 
-**TypeScript:**
-- Strict mode guide: https://www.typescriptlang.org/tsconfig#strict
-- Type challenges: https://github.com/type-challenges/type-challenges
+```bash
+cd terraform/infrastructure
+terraform init -reconfigure -backend-config=bucket=<BUCKET_NAME> -backend-config=prefix=terraform/state/<env>
+```
+
+**Frontend Cloud Run Service:**
+
+```bash
+terraform import -var-file="../../config/<env>.tfvars" \
+  google_cloud_run_v2_service.frontend \
+  projects/<PROJECT_ID>/locations/us-central1/services/<APP_NAME>-frontend-<env>
+```
+
+**Backend Cloud Run Service:**
+
+```bash
+terraform import -var-file="../../config/<env>.tfvars" \
+  google_cloud_run_v2_service.backend \
+  projects/<PROJECT_ID>/locations/us-central1/services/<APP_NAME>-backend-<env>
+```
+
+**Domain Mapping:**
+
+```bash
+terraform import -var-file="../../config/<env>.tfvars" \
+  google_cloud_run_domain_mapping.frontend \
+  locations/us-central1/namespaces/<PROJECT_ID>/domainmappings/<DOMAIN>
+```
+
+**Public Access IAM (Frontend):**
+
+```bash
+terraform import -var-file="../../config/<env>.tfvars" \
+  google_cloud_run_v2_service_iam_member.frontend_public_access \
+  "projects/<PROJECT_ID>/locations/us-central1/services/<APP_NAME>-frontend-<env> roles/run.invoker allUsers"
+```
+
+**Public Access IAM (Backend):**
+
+```bash
+terraform import -var-file="../../config/<env>.tfvars" \
+  google_cloud_run_v2_service_iam_member.backend_public_access \
+  "projects/<PROJECT_ID>/locations/us-central1/services/<APP_NAME>-backend-<env> roles/run.invoker allUsers"
+```
+
+### "Error acquiring the state lock"
+
+Terraform is already running or has a stale lock from a crashed operation.
+
+**Check lock owner** (from error message):
+
+```
+Who: runner@runnervmw9dnm    # CI/CD
+Who: <USER>@<MACHINE>         # Your local machine
+```
+
+```bash
+# Find locks
+gcloud storage ls --recursive gs://<BUCKET_NAME>/terraform/state/ | grep -i lock
+
+# Remove specific lock
+gcloud storage rm gs://<BUCKET_NAME>/terraform/state/<env>.tflock
+
+# Or remove all locks (use with caution!)
+gcloud storage rm gs://<BUCKET_NAME>/terraform/state/**/*.tflock
+```
+
+### "Caller is not authorized to administer the domain"
+
+Domain verification missing. See [Domain Verification](#5-domain-verification-one-time) section.
+
+### E2E Tests Failing
+
+```bash
+# Check service logs
+gcloud run services logs read <APP_NAME>-frontend-<env> --limit=50
+gcloud run services logs read <APP_NAME>-backend-<env> --limit=50
+
+# Test services manually
+curl https://<FRONTEND_URL>
+curl https://<BACKEND_URL>/api/health
+
+# Run tests locally
+bun run e2e-test-debug
+```
+
+### CLI Command Errors
+
+**"Command not found"**
+
+- Install Bun: `bun --version` to verify
+- Run `bun install` in project root
+
+**Config validation fails**
+
+- Check `config/configVariables.ts` for missing properties
+- Regenerate: `bun deploy-scripts/cli.ts generate-tfvars`
+
+**GCP commands fail**
+
+- Authenticate: `gcloud auth login`
+- Set project: `gcloud config set project <PROJECT_ID>`
+- Verify APIs enabled (see [Prerequisites](#1-prerequisites))
+
+### Finding Resource IDs for Import
+
+```bash
+# Service accounts
+gcloud iam service-accounts list
+
+# Artifact Registry
+gcloud artifacts repositories list --location=us-central1
+
+# Cloud Run services
+gcloud run services list --region=us-central1
+
+# Domain mappings
+gcloud run domain-mappings list --region=us-central1
+```
 
 ---
 
-# TO-DO
+## Monitoring
 
-- [ ] Move from Mongo to SQL/Postgres with Drizzle or Kysely or something else
-- [ ] Refactor CI/CD workflow: Run e2e tests against deployed dev environment instead of local server, enforce dev->main merge flow with branch protection
-- [ ] Multi-region redundancy: Deploy to multiple GCP regions with Cloud Load Balancer for failover and lower latency (99.95% SLA, not needed for personal projects)
-- [ ] use cloud secretes for passwords instead of .env
-- [ ] use `useDeferredValue` in bookmark search https://react.dev/reference/react/useDeferredValue
-- [ ] Add delete account button
-- [ ] Prevent re-uploading the same file
-- [ ] Remove file from DB on delete
-- [ ] Instead of preview, render same component but scale it down (save bucket space)
-- [ ] Add app description on Q logo
-- [ ] Make info field use Froala editor
-- [ ] Add price, valid to, status fields to quotation model and table
-- [ ] Evaluate pdfkit library for text-based PDF generation
-- [ ] Copy shared quotations to prevent file deletion issues (need URL rewriting)
-- [ ] Investigate Google Cloud Run deployment via template.yaml
-- [ ] Add Cloudflare integration
-- [ ] Change MongoDB to some type safe
+- [Cloud Run Console](https://console.cloud.google.com/run?project=<PROJECT_ID>)
+- [Logs](https://console.cloud.google.com/logs/query?project=<PROJECT_ID>)
+- [Artifact Registry](https://console.cloud.google.com/artifacts?project=<PROJECT_ID>)
+- GitHub Actions: Repository → Actions tab
+
+**View logs:**
+
+```bash
+# Frontend logs
+gcloud run services logs read <APP_NAME>-frontend-<env> --limit=100
+
+# Backend logs
+gcloud run services logs read <APP_NAME>-backend-<env> --limit=100
+
+# Follow logs in real-time
+gcloud run services logs tail <APP_NAME>-backend-<env>
+```
+
+---
+
+## Project Structure
+
+```
+/
+├── config/                          # Single source of truth for configuration
+│   ├── configVariables.ts           # TypeScript config (authoritative)
+│   ├── dev.tfvars                   # Generated from configVariables.ts
+│   ├── test.tfvars                  # Generated from configVariables.ts
+│   ├── pilot.tfvars                 # Generated from configVariables.ts
+│   └── prod.tfvars                  # Generated from configVariables.ts
+├── deploy-scripts/                  # TypeScript CLI for deployment automation
+│   ├── cli.ts                       # Main CLI entry point
+│   ├── commands/                    # Command implementations
+│   │   ├── deploy-cloudrun.ts       # Deploy both services
+│   │   ├── promote-image.ts         # Promote both images
+│   │   ├── verify-deployment.ts     # Verify both services
+│   │   └── ...
+│   └── lib/                         # Shared utilities (gcloud, output, etc.)
+├── terraform/
+│   ├── bootstrap/                   # One-time setup (shared resources)
+│   │   ├── provider.tf              # Provider configuration
+│   │   ├── state-bucket.tf          # Terraform state bucket
+│   │   ├── apis.tf                  # Infrastructure-level APIs
+│   │   ├── service-accounts.tf      # Service accounts & IAM
+│   │   └── workload-identity.tf     # GitHub Actions authentication
+│   └── infrastructure/              # Application resources (per environment)
+│       ├── provider.tf              # Provider configuration
+│       ├── backend.tf               # GCS backend config
+│       ├── variables.tf             # Variables for 2 services
+│       ├── data-sources.tf          # References to bootstrap resources
+│       ├── apis.tf                  # Application-specific APIs (empty)
+│       ├── artifact-registry.tf     # Shared Docker registry
+│       ├── cloud-run.tf             # 2 Cloud Run services (frontend + backend)
+│       ├── domain.tf                # Custom domain for frontend
+│       ├── outputs.tf               # Outputs for both services
+│       └── cloud-sql.tf.disabled    # Disabled (using MongoDB Atlas)
+├── .github/
+│   └── workflows/
+│       ├── deploy.yml               # Auto-deploy on push to main (2 images + e2e)
+│       └── promote.yml              # Manual image promotion (both images)
+├── front/                           # React frontend
+├── back/                            # Express backend
+├── tests/                           # Playwright e2e tests
+├── Dockerfile.prod.front            # Frontend production image (Nginx)
+├── Dockerfile.prod.back             # Backend production image (Bun)
+├── playwright.config.ts             # E2E test configuration
+└── README.md                        # This file
+```
+
+---
+
+
+## Notes
+
+**Database**: This app uses MongoDB Atlas (external), not Cloud SQL. Configure your MongoDB connection string via environment variables or Google Secret Manager.
+
+**No Google AI APIs**: This setup does not use Google Translation or Text-to-Speech APIs. If you need them in the future, add them to `terraform/infrastructure/apis.tf`.
+
+**2 Container Architecture**: Frontend (Nginx) and Backend (Express/Bun) run as separate Cloud Run services. Frontend proxies API requests to backend.
