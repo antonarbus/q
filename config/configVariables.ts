@@ -15,7 +15,12 @@ const envName = {
 } as const
 
 //* DO NOT MODIFY, does not hurt.
-export const envSchema = z.enum([envName.dev, envName.test, envName.pilot, envName.prod])
+export const envSchema = z.enum([
+  envName.dev,
+  envName.test,
+  envName.pilot,
+  envName.prod,
+])
 
 export type Env = z.infer<typeof envSchema>
 
@@ -30,7 +35,7 @@ export const sharedConfigVariables = {
   githubRepository: 'antonarbus/q',
 
   // Terraform State
-  bucketForTerraformStateName: 'q-terraform-state',
+  bucketForTerraformStateName: 'quotationapp-terraform-state',
 
   // Artifact Registry (Docker images)
   artifactRegistryName: 'docker-images',
@@ -88,7 +93,8 @@ export const configVariables = {
   },
 } as const
 
-export type ConfigVariables = (typeof configVariables)[keyof typeof configVariables]
+export type ConfigVariables =
+  (typeof configVariables)[keyof typeof configVariables]
 
 /**
  * Defines which environment master/main branch deploys to
