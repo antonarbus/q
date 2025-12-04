@@ -1,4 +1,5 @@
 import { $ } from 'bun'
+import type { Env } from '../../../config/infrastructure'
 import { logger } from '../output/logger'
 
 type Props = {
@@ -6,6 +7,7 @@ type Props = {
   imageUrl: string
   region: string
   projectId: string
+  environment: Env
 }
 
 /** Update Cloud Run service with new image */
@@ -15,9 +17,10 @@ export const updateCloudRunService = async (props: Props): Promise<void> => {
   logger.info(`  Region: ${props.region}`)
   logger.info(`  Project: ${props.projectId}`)
   logger.info(`  Image: ${props.imageUrl}`)
+  logger.info(`  Environment: ${props.environment}`)
   logger.emptyLine()
 
-  await $`gcloud run services update ${props.cloudRunServiceName} --image ${props.imageUrl} --region ${props.region} --project ${props.projectId}`
+  await $`gcloud run services update ${props.cloudRunServiceName} --image ${props.imageUrl} --region ${props.region} --project ${props.projectId} --set-env-vars ENVIRONMENT=${props.environment}`
 
   logger.emptyLine()
   logger.success('Docker image deployed to Cloud Run successfully')

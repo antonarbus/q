@@ -1,18 +1,9 @@
-const getNodeEnv = (): 'development' | 'production' => {
-  if (typeof process === 'undefined') return 'development'
-  return process.env.NODE_ENV === 'production' ? 'production' : 'development'
-}
-
-const getCI = (): boolean => {
-  if (typeof process === 'undefined') return false
-  return process.env.CI === 'true'
-}
+import { processEnv } from './processEnv'
 
 export const runtimeConfig = {
-  // NODE_ENV=development is set at package.json scripts
-  // NODE_ENV=production is set at Dockerfile.prod.front & Dockerfile.prod.back
-  nodeEnv: getNodeEnv(),
-  ci: getCI(),
+  nodeEnv: processEnv.NODE_ENV,
+  ci: processEnv.CI,
+  environment: processEnv.ENVIRONMENT,
   back: {
     protocol: 'http',
     hostname: 'localhost',

@@ -37,6 +37,7 @@ export async function deployCloudRun(props: Props): Promise<void> {
       imageUrl,
       region: config.region,
       projectId: config.projectId,
+      environment: env,
     })
   }
 
@@ -61,6 +62,7 @@ export async function deployCloudRun(props: Props): Promise<void> {
       imageUrl,
       region: config.region,
       projectId: config.projectId,
+      environment: env,
     })
   }
 
