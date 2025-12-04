@@ -19,6 +19,10 @@ const store = configureStore({
     agGrid: agGridReducer,
     text: textReducer,
   },
+  // Vite's magic, browser does not have 'process' variable,
+  // Vite replaces process.env.NODE_ENV with the actual string value at build time
+  // This only works for process.env.NODE_ENV specifically. Other process.env.* variables
+  // import.meta.env.MODE !== 'production' (Vite-idiomatic way and makes it clearer that it's a build-time constant. )
   devTools: process.env.NODE_ENV !== 'production',
 })
 
