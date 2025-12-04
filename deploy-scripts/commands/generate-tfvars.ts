@@ -1,10 +1,10 @@
-import { resolve } from 'path'
+import { resolve } from 'node:path'
 import { configVariables } from '../../config/configVariables'
 import { logger } from '../lib/output/logger'
 
 type Props = {
   env: string
-  config: Record<string, string>
+  config: Record<string, string | readonly string[]>
 }
 
 /**
@@ -42,7 +42,7 @@ export const generateTfvars = async (): Promise<void> => {
       return `${snakeKey} = "${value}"`
     })
 
-    return header + lines.join('\n') + '\n'
+    return `${header + lines.join('\n')}\n`
   }
 
   for (const [env, config] of Object.entries(configVariables)) {

@@ -5,9 +5,14 @@
  * @example githubOutput({ environment: 'dev' })
  */
 export const githubOutput = (
-  outputs: Record<string, string | number | boolean>,
+  outputs: Record<string, string | number | boolean | readonly string[]>,
 ): void => {
   Object.entries(outputs).forEach(([key, value]) => {
-    console.log(`${key}=${value}`)
+    // Handle arrays by converting them to JSON string
+    if (Array.isArray(value)) {
+      console.log(`${key}=${JSON.stringify(value)}`)
+    } else {
+      console.log(`${key}=${value}`)
+    }
   })
 }

@@ -78,12 +78,13 @@ async function showServiceInfo(props: ShowServiceInfoProps): Promise<void> {
 
       for (const line of lines) {
         const parts = line.trim().split(/\s+/)
+
         if (parts.length >= 3) {
           const tagPath = parts[0]
           const tagDigest = parts[2] // Column 3: DIGEST (0=TAG, 1=IMAGE, 2=DIGEST)
           const tag = tagPath?.split('/tags/').pop() ?? null
 
-          if (tag === envTag) {
+          if (tag === envTag && tagDigest !== undefined) {
             digest = tagDigest
             break
           }
