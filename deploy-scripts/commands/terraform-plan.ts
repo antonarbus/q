@@ -1,7 +1,7 @@
 import { $ } from 'bun'
 import { resolve } from 'path'
-import { configVariables, Env } from '../../config/configVariables'
 import { chdir } from 'process'
+import { configVariables, type Env } from '../../config/configVariables'
 import { logger } from '../lib/output/logger'
 
 type Props = {
@@ -14,12 +14,17 @@ export async function terraformPlan(props: Props): Promise<void> {
   const { bucketForTerraformStateName } = configVariables[props.env]
 
   const TERRAFORM_DIR = resolve(__dirname, '../../terraform/infrastructure')
-  const TFVARS_FILE_PATH = resolve(__dirname, `../../config/${props.env}.tfvars`)
+  const TFVARS_FILE_PATH = resolve(
+    __dirname,
+    `../../config/${props.env}.tfvars`,
+  )
 
   logger.info(`Config: ${TFVARS_FILE_PATH}`)
   logger.emptyLine()
 
-  logger.warning(`Planning infrastructure changes for environment: ${props.env}`)
+  logger.warning(
+    `Planning infrastructure changes for environment: ${props.env}`,
+  )
   logger.emptyLine()
 
   logger.info('Initializing Terraform with remote backend...')

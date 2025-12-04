@@ -40,7 +40,7 @@ type Api = {
   method: 'get' | 'post' | 'put' | 'delete' | 'patch'
   description: string
   handler: (
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+    // biome-ignore lint/suspicious/noExplicitAny: <any type>
     req: Request<any, any, any, any>,
     res: Response,
     next: NextFunction,

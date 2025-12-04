@@ -1,18 +1,18 @@
 #!/usr/bin/env bun
 import { Command } from 'commander'
-import { detectEnvironment } from './commands/detect-env'
-import { loadConfig } from './commands/load-config'
-import { deployCloudRun } from './commands/deploy-cloudrun'
-import { verifyDeployment } from './commands/verify-deployment'
-import { terraformApply } from './commands/terraform-apply'
-import { promoteImage } from './commands/promote-image'
-import { validatePromotion } from './commands/validate-promotion'
-import { generateTfvars } from './commands/generate-tfvars'
-import { showDeploymentInfo } from './commands/show-deployment-info'
-import { listGcloudServices } from './commands/list-gcloud-services'
-import { terraformFormat } from './commands/terraform-format'
-import { runInteractiveMode } from './lib/interactive'
 import { envSchema } from '../config/configVariables'
+import { deployCloudRun } from './commands/deploy-cloudrun'
+import { detectEnvironment } from './commands/detect-env'
+import { generateTfvars } from './commands/generate-tfvars'
+import { listGcloudServices } from './commands/list-gcloud-services'
+import { loadConfig } from './commands/load-config'
+import { promoteImage } from './commands/promote-image'
+import { showDeploymentInfo } from './commands/show-deployment-info'
+import { terraformApply } from './commands/terraform-apply'
+import { terraformFormat } from './commands/terraform-format'
+import { validatePromotion } from './commands/validate-promotion'
+import { verifyDeployment } from './commands/verify-deployment'
+import { runInteractiveMode } from './lib/interactive'
 
 const noArgumentsProvided = process.argv.length === 2
 
@@ -29,7 +29,10 @@ program.name('deploy-cli').description('Deployment automation').version('1.0.0')
 program
   .command('show-deployment-info')
   .description('Show deployment info for a specific environment')
-  .requiredOption('--env <environment>', 'Environment name (dev, test, pilot, prod)')
+  .requiredOption(
+    '--env <environment>',
+    'Environment name (dev, test, pilot, prod)',
+  )
   .action(async (options: { env: string }) => {
     const validatedEnv = envSchema.parse(options.env)
     await showDeploymentInfo({ env: validatedEnv })
@@ -59,7 +62,10 @@ program
 program
   .command('load-config')
   .description('Load config for specified environment and output as env vars')
-  .requiredOption('--env <environment>', 'Environment name (dev, test, pilot, prod)')
+  .requiredOption(
+    '--env <environment>',
+    'Environment name (dev, test, pilot, prod)',
+  )
   .action(async (options: { env: string }) => {
     const validatedEnv = envSchema.parse(options.env)
     loadConfig({ env: validatedEnv })
@@ -68,7 +74,10 @@ program
 program
   .command('terraform-apply')
   .description('Apply Terraform configuration for environment')
-  .requiredOption('--env <environment>', 'Environment name (dev, test, pilot, prod)')
+  .requiredOption(
+    '--env <environment>',
+    'Environment name (dev, test, pilot, prod)',
+  )
   .action(async (options: { env: string }) => {
     const validatedEnv = envSchema.parse(options.env)
     await terraformApply({ env: validatedEnv })
@@ -84,27 +93,54 @@ program
 program
   .command('deploy-cloudrun')
   .description('Deploy Docker image to Cloud Run')
-  .requiredOption('--env <environment>', 'Environment name (dev, test, pilot, prod)')
-  .option('--service <service>', 'Service to deploy (frontend, backend, or both)', 'both')
-  .action(async (options: { env: string; service: 'frontend' | 'backend' | 'both' }) => {
-    const validatedEnv = envSchema.parse(options.env)
-    await deployCloudRun({ env: validatedEnv, service: options.service })
-  })
+  .requiredOption(
+    '--env <environment>',
+    'Environment name (dev, test, pilot, prod)',
+  )
+  .option(
+    '--service <service>',
+    'Service to deploy (frontend, backend, or both)',
+    'both',
+  )
+  .action(
+    async (options: {
+      env: string
+      service: 'frontend' | 'backend' | 'both'
+    }) => {
+      const validatedEnv = envSchema.parse(options.env)
+      await deployCloudRun({ env: validatedEnv, service: options.service })
+    },
+  )
 
 program
   .command('verify-deployment')
   .description('Verify Cloud Run deployment')
-  .requiredOption('--env <environment>', 'Environment name (dev, test, pilot, prod)')
-  .requiredOption('--previous-image-frontend <image>', 'Previous frontend image URL for rollback')
-  .requiredOption('--previous-image-backend <image>', 'Previous backend image URL for rollback')
-  .action(async (options: { env: string; previousImageFrontend: string; previousImageBackend: string }) => {
-    const validatedEnv = envSchema.parse(options.env)
-    await verifyDeployment({
-      env: validatedEnv,
-      previousImageFrontend: options.previousImageFrontend,
-      previousImageBackend: options.previousImageBackend
-    })
-  })
+  .requiredOption(
+    '--env <environment>',
+    'Environment name (dev, test, pilot, prod)',
+  )
+  .requiredOption(
+    '--previous-image-frontend <image>',
+    'Previous frontend image URL for rollback',
+  )
+  .requiredOption(
+    '--previous-image-backend <image>',
+    'Previous backend image URL for rollback',
+  )
+  .action(
+    async (options: {
+      env: string
+      previousImageFrontend: string
+      previousImageBackend: string
+    }) => {
+      const validatedEnv = envSchema.parse(options.env)
+      await verifyDeployment({
+        env: validatedEnv,
+        previousImageFrontend: options.previousImageFrontend,
+        previousImageBackend: options.previousImageBackend,
+      })
+    },
+  )
 
 program
   .command('validate-promotion')
@@ -114,7 +150,10 @@ program
   .action((options: { sourceEnv: string; targetEnv: string }) => {
     const validatedSourceEnv = envSchema.parse(options.sourceEnv)
     const validatedTargetEnv = envSchema.parse(options.targetEnv)
-    validatePromotion({ sourceEnv: validatedSourceEnv, targetEnv: validatedTargetEnv })
+    validatePromotion({
+      sourceEnv: validatedSourceEnv,
+      targetEnv: validatedTargetEnv,
+    })
   })
 
 program
@@ -122,11 +161,25 @@ program
   .description('Promote Docker image from source to target environment')
   .requiredOption('--source-env <environment>', 'Source environment name')
   .requiredOption('--target-env <environment>', 'Target environment name')
-  .option('--service <service>', 'Service to promote (frontend, backend, or both)', 'both')
-  .action(async (options: { sourceEnv: string; targetEnv: string; service: 'frontend' | 'backend' | 'both' }) => {
-    const validatedSourceEnv = envSchema.parse(options.sourceEnv)
-    const validatedTargetEnv = envSchema.parse(options.targetEnv)
-    await promoteImage({ sourceEnv: validatedSourceEnv, targetEnv: validatedTargetEnv, service: options.service })
-  })
+  .option(
+    '--service <service>',
+    'Service to promote (frontend, backend, or both)',
+    'both',
+  )
+  .action(
+    async (options: {
+      sourceEnv: string
+      targetEnv: string
+      service: 'frontend' | 'backend' | 'both'
+    }) => {
+      const validatedSourceEnv = envSchema.parse(options.sourceEnv)
+      const validatedTargetEnv = envSchema.parse(options.targetEnv)
+      await promoteImage({
+        sourceEnv: validatedSourceEnv,
+        targetEnv: validatedTargetEnv,
+        service: options.service,
+      })
+    },
+  )
 
 program.parse()

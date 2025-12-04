@@ -31,5 +31,5 @@ export const logger = {
 
   emptyLine: (): void => {
     console.error('')
-  }
+  },
 }

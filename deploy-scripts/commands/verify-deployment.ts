@@ -1,5 +1,5 @@
-import { configVariables, Env } from '../../config/configVariables'
 import { exit } from 'process'
+import { configVariables, type Env } from '../../config/configVariables'
 import { getCloudRunServiceUrl } from '../lib/gcloud/getCloudRunServiceUrl'
 import { rollbackCloudRunService } from '../lib/gcloud/rollbackCloudRunService'
 import { logger } from '../lib/output/logger'
@@ -24,7 +24,7 @@ export const verifyDeployment = async (props: Props): Promise<void> => {
     const frontendUrl = await getCloudRunServiceUrl({
       cloudRunServiceName: config.cloudRunServiceNameFrontend,
       region: config.region,
-      projectId: config.projectId
+      projectId: config.projectId,
     })
 
     logger.info(`Testing Frontend URL: ${frontendUrl}`)
@@ -35,13 +35,18 @@ export const verifyDeployment = async (props: Props): Promise<void> => {
     const frontendHttpCode = frontendResponse.status
 
     if (frontendHttpCode === 200) {
-      logger.success(`Frontend is live and responding (HTTP ${frontendHttpCode})`)
+      logger.success(
+        `Frontend is live and responding (HTTP ${frontendHttpCode})`,
+      )
 
       const body = await frontendResponse.text()
 
       // Check for HTML content
       logger.info('  Checking for HTML content...')
-      if (body.toLowerCase().includes('<html') || body.toLowerCase().includes('<!doctype')) {
+      if (
+        body.toLowerCase().includes('<html') ||
+        body.toLowerCase().includes('<!doctype')
+      ) {
         logger.success('     HTML content detected')
       } else {
         logger.error('     No HTML content found')
@@ -54,7 +59,9 @@ export const verifyDeployment = async (props: Props): Promise<void> => {
       if (responseSize > 100) {
         logger.success(`     Response size: ${responseSize} bytes`)
       } else {
-        logger.error(`     Response too small: ${responseSize} bytes (expected > 100)`)
+        logger.error(
+          `     Response too small: ${responseSize} bytes (expected > 100)`,
+        )
         frontendFailures++
       }
     } else {
@@ -69,7 +76,7 @@ export const verifyDeployment = async (props: Props): Promise<void> => {
     const backendUrl = await getCloudRunServiceUrl({
       cloudRunServiceName: config.cloudRunServiceNameBackend,
       region: config.region,
-      projectId: config.projectId
+      projectId: config.projectId,
     })
 
     logger.info(`Testing Backend URL: ${backendUrl}/api/health-check`)
@@ -90,7 +97,9 @@ export const verifyDeployment = async (props: Props): Promise<void> => {
         if (healthData.message === 'connected') {
           logger.success('     Health check message correct: "connected"')
         } else {
-          logger.error(`     Unexpected message: "${healthData.message}" (expected "connected")`)
+          logger.error(
+            `     Unexpected message: "${healthData.message}" (expected "connected")`,
+          )
           backendFailures++
         }
       } catch {
@@ -127,7 +136,7 @@ export const verifyDeployment = async (props: Props): Promise<void> => {
           cloudRunServiceName: config.cloudRunServiceNameFrontend,
           previousImage: props.previousImageFrontend,
           region: config.region,
-          projectId: config.projectId
+          projectId: config.projectId,
         })
       }
 
@@ -138,7 +147,7 @@ export const verifyDeployment = async (props: Props): Promise<void> => {
           cloudRunServiceName: config.cloudRunServiceNameBackend,
           previousImage: props.previousImageBackend,
           region: config.region,
-          projectId: config.projectId
+          projectId: config.projectId,
         })
       }
 

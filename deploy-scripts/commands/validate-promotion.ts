@@ -1,10 +1,10 @@
-import {
-  AllowedPromotionPath,
-  Env,
-  allowedPromotionPath,
-  allowedPromotionPathSchema
-} from '../../config/configVariables'
 import { exit } from 'process'
+import {
+  type AllowedPromotionPath,
+  allowedPromotionPath,
+  allowedPromotionPathSchema,
+  type Env,
+} from '../../config/configVariables'
 
 type Props = {
   sourceEnv: Env
@@ -20,14 +20,16 @@ type Props = {
  */
 export const validatePromotion = (props: Props): void => {
   const validationResult = allowedPromotionPathSchema.safeParse(
-    `${props.sourceEnv}-${props.targetEnv}`
+    `${props.sourceEnv}-${props.targetEnv}`,
   )
 
   if (!validationResult.success) {
-    console.error(`❌ Invalid promotion path: ${props.sourceEnv} → ${props.targetEnv}`)
+    console.error(
+      `❌ Invalid promotion path: ${props.sourceEnv} → ${props.targetEnv}`,
+    )
 
     console.error(
-      `Allowed promotion paths: ${allowedPromotionPath.map((p) => p.replace('-', '→')).join(', ')}`
+      `Allowed promotion paths: ${allowedPromotionPath.map((p) => p.replace('-', '→')).join(', ')}`,
     )
 
     exit(1)
@@ -35,5 +37,7 @@ export const validatePromotion = (props: Props): void => {
 
   const validatedPromotionPath: AllowedPromotionPath = validationResult.data
 
-  console.log(`✅ Valid promotion path: ${validatedPromotionPath.replace('-', '→')}`)
+  console.log(
+    `✅ Valid promotion path: ${validatedPromotionPath.replace('-', '→')}`,
+  )
 }

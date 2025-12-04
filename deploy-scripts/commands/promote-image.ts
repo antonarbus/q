@@ -1,6 +1,6 @@
 import { $ } from 'bun'
-import { sharedConfigVariables, Env } from '../../config/configVariables'
 import { exit } from 'process'
+import { type Env, sharedConfigVariables } from '../../config/configVariables'
 import { githubOutput } from '../lib/output/githubOutput'
 import { logger } from '../lib/output/logger'
 
@@ -11,7 +11,13 @@ type Props = {
 }
 
 export const promoteImage = async (props: Props): Promise<void> => {
-  const { region, projectId, artifactRegistryName, dockerImageNameFrontend, dockerImageNameBackend } = sharedConfigVariables
+  const {
+    region,
+    projectId,
+    artifactRegistryName,
+    dockerImageNameFrontend,
+    dockerImageNameBackend,
+  } = sharedConfigVariables
   const service = props.service || 'both'
 
   logger.info('Promoting Docker images...')
@@ -58,8 +64,18 @@ type PromoteServiceImageProps = {
   targetEnv: Env
 }
 
-async function promoteServiceImage(props: PromoteServiceImageProps): Promise<void> {
-  const { serviceName, dockerImageName, region, projectId, artifactRegistryName, sourceEnv, targetEnv } = props
+async function promoteServiceImage(
+  props: PromoteServiceImageProps,
+): Promise<void> {
+  const {
+    serviceName,
+    dockerImageName,
+    region,
+    projectId,
+    artifactRegistryName,
+    sourceEnv,
+    targetEnv,
+  } = props
 
   logger.info(`Promoting ${serviceName} image...`)
 
@@ -105,5 +121,7 @@ async function promoteServiceImage(props: PromoteServiceImageProps): Promise<voi
   logger.emptyLine()
 
   // Export source image digest for traceability
-  githubOutput({ [`${serviceName.toLowerCase()}SourceImageDigest`]: sourceImageDigest })
+  githubOutput({
+    [`${serviceName.toLowerCase()}SourceImageDigest`]: sourceImageDigest,
+  })
 }
