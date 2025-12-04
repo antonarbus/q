@@ -279,3 +279,31 @@ variable "github_repository" {
   type        = string
   default     = null
 }
+
+# ==============================================================================
+# STORAGE BUCKET
+# ==============================================================================
+
+variable "storage_bucket_name" {
+  description = "Name of the GCS bucket for application file storage"
+  type        = string
+  # This is a SHARED bucket across all environments
+  # The bucket stores user-uploaded files (quotations, bookmarks, etc.)
+  # Value provided by config/*.tfvars file
+}
+
+variable "storage_bucket_location" {
+  description = "Location for the storage bucket (e.g., US, EU, us-central1)"
+  type        = string
+  # Multi-region locations (US, EU, ASIA) offer highest availability
+  # Single-region locations offer lowest latency and cost
+  # Value provided by config/*.tfvars file
+}
+
+variable "storage_bucket_cors_origins" {
+  description = "List of allowed CORS origins for the storage bucket"
+  type        = list(string)
+  # Origins that are allowed to upload/download files from the bucket
+  # Should include all your frontend domains
+  # Value provided by config/*.tfvars file
+}

@@ -91,5 +91,17 @@ output "custom_domain_backend_output" {
   # The DNS records should be configured at your domain registrar
 }
 
+# ==============================================================================
+# STORAGE BUCKET
+# ==============================================================================
+
+output "storage_bucket_name_output" {
+  description = "Name of the GCS bucket for application file storage (shared across all environments)"
+  value       = google_storage_bucket.app_bucket.name
+  # Example: quotation-app-bucket
+  # This bucket is shared across all environments (dev, test, pilot, prod)
+  # Used for user-uploaded files, quotations, bookmarks, etc.
+}
+
 # Note: No database outputs as currently using MongoDB (external)
 # When migrating to Cloud SQL, uncomment cloud-sql.tf and add outputs here

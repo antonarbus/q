@@ -30,8 +30,16 @@ export const generateTfvars = async (): Promise<void> => {
     }
 
     const lines = Object.entries(props.config).map(([key, value]) => {
-      const lineWithKeyValuePair = `${toSnakeCase(key)} = "${value}"`
-      return lineWithKeyValuePair
+      const snakeKey = toSnakeCase(key)
+
+      // Handle arrays - format as Terraform list
+      if (Array.isArray(value)) {
+        const arrayValues = value.map(item => `"${item}"`).join(', ')
+        return `${snakeKey} = [${arrayValues}]`
+      }
+
+      // Handle regular strings
+      return `${snakeKey} = "${value}"`
     })
 
     return header + lines.join('\n') + '\n'

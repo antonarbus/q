@@ -46,6 +46,21 @@ export const sharedConfigVariables = {
   githubActionsSaName: 'github-actions-sa',
   cloudRunSaName: 'cloud-run-sa',
 
+  // Storage Bucket (shared across all environments)
+  storageBucketName: 'quotation-app-bucket',
+  storageBucketLocation: 'US',
+  storageBucketCorsOrigins: [
+    'https://sendmequotation.today',
+    'http://sendmequotation.today',
+    'https://*.sendmequotation.today',
+    'http://*.sendmequotation.today',
+    'http://local.sendmequotation.today:3000',
+    'https://local.sendmequotation.today:3000',
+    'http://localhost:3000',
+    'https://localhost:3000',
+    '*',
+  ],
+
   // Cloud Run Configuration - Frontend
   minInstancesFrontend: '0',
   maxInstancesFrontend: '5',
