@@ -26,5 +26,5 @@
     "jspdf",
     "striptags"
   ],
-  "ignoreBinaries": ["gcloud", "terraform"]
+  "ignoreBinaries": ["gcloud", "terraform", "sleep", "open"]
 }
