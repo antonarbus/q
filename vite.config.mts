@@ -17,6 +17,24 @@ const thisDirPath: string = dirname(thisFilePath)
  * Sensitive functions are leaked to the frontend.
  * Also it breaks the connection between front and back ends, otherwise whole
  * node_modules will be included in the frontend build.
+ * 
+ * TODO: remove this hack in future by splitting meta data from api handler function
+ * 
+ *   // back/api/api-routes.ts (metadata only)
+  export const apiRoutes = {
+    getUser: { url: '/api/user', method: 'get' },
+  } as const
+
+  // back/api/api.ts (with handlers, backend only)
+  import { getUserHandler } from './handlers'
+  export const api = {
+    getUser: {
+      ...apiRoutes.getUser,
+      handler: getUserHandler,
+    },
+  }
+
+  // frontend imports apiRoutes, not api
  */
 const stripHandlerFromApiRoutes = (): unknown => {
   const targetFilePath = resolve(thisDirPath, 'back/api/api.ts')
