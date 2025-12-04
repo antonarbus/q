@@ -1,6 +1,9 @@
 import { $ } from 'bun'
 import { exit } from 'process'
-import { type Env, sharedConfigVariables } from '../../config/configVariables'
+import {
+  type Env,
+  sharedInfraConfigVariables,
+} from '../../config/infrastructure'
 import { githubOutput } from '../lib/output/githubOutput'
 import { logger } from '../lib/output/logger'
 
@@ -17,7 +20,7 @@ export const promoteImage = async (props: Props): Promise<void> => {
     artifactRegistryName,
     dockerImageNameFrontend,
     dockerImageNameBackend,
-  } = sharedConfigVariables
+  } = sharedInfraConfigVariables
   const service = props.service || 'both'
 
   logger.info('Promoting Docker images...')

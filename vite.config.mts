@@ -6,7 +6,7 @@ import type { ObjectProperty } from '@babel/types'
 import basicSsl from '@vitejs/plugin-basic-ssl'
 import react from '@vitejs/plugin-react'
 import tsconfigPaths from 'vite-tsconfig-paths'
-import { config } from './back/config'
+import { runtimeConfig } from './config/runtime'
 
 const thisFilePath: string = fileURLToPath(import.meta.url)
 const thisDirPath: string = dirname(thisFilePath)
@@ -63,21 +63,21 @@ const stripHandlerFromApiRoutes = (): unknown => {
 export default {
   root: './front/',
   server: {
-    host: config.front.hostname,
-    port: config.front.port,
-    open: config.front.baseUrl,
+    host: runtimeConfig.front.hostname,
+    port: runtimeConfig.front.port,
+    open: runtimeConfig.front.baseUrl,
     proxy: {
-      '/api': config.back.baseUrl,
-      '/uploads': config.back.baseUrl,
+      '/api': runtimeConfig.back.baseUrl,
+      '/uploads': runtimeConfig.back.baseUrl,
     },
   },
   preview: {
-    host: config.front.hostname,
-    port: config.front.portPreview,
-    open: config.front.baseUrlPreview,
+    host: runtimeConfig.front.hostname,
+    port: runtimeConfig.front.portPreview,
+    open: runtimeConfig.front.baseUrlPreview,
     proxy: {
-      '/api': config.back.baseUrl,
-      '/uploads': config.back.baseUrl,
+      '/api': runtimeConfig.back.baseUrl,
+      '/uploads': runtimeConfig.back.baseUrl,
     },
   },
   worker: {

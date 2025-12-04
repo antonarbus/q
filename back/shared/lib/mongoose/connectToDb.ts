@@ -1,5 +1,5 @@
-import { env } from '@back/shared/lib/dot-env'
 import mongoose from 'mongoose'
+import { secret } from '../../../../config/secrets'
 import { checkDbConnection } from './checkDbConnection'
 
 export const connectToDb = async (): Promise<void> => {
@@ -14,12 +14,12 @@ export const connectToDb = async (): Promise<void> => {
 
     mongoose.set('strictQuery', false)
     await mongoose.connect(
-      `${env.MONGO_DB_CONNECTION_STRING}/${env.MONGO_DB_NAME}`,
+      `${secret.MONGO_DB_CONNECTION_STRING}/${secret.MONGO_DB_NAME}`,
       { autoIndex: false },
     )
-    console.info(`🚀 connected to "${env.MONGO_DB_NAME}" database`)
+    console.info(`🚀 connected to "${secret.MONGO_DB_NAME}" database`)
   } catch (error) {
-    console.warn(`💣 error to connect to "${env.MONGO_DB_NAME}" database`)
+    console.warn(`💣 error to connect to "${secret.MONGO_DB_NAME}" database`)
     console.error(error)
   }
 }

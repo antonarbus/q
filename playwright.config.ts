@@ -1,20 +1,18 @@
 import { defineConfig, devices } from '@playwright/test'
-import { userFilePath } from './tests/setup/userFilePath'
-import 'dotenv/config'
-import { config } from './back/config'
 import { headerName } from './back/shared/headers'
-import { env } from './back/shared/lib/dot-env'
+import { runtimeConfig } from './config/runtime'
+import { userFilePath } from './tests/setup/userFilePath'
 
 // https://playwright.dev/docs/test-configuration
 export default defineConfig({
   testDir: './tests',
   fullyParallel: true,
-  forbidOnly: env.CI === true, // set at .github/workflows/deployment.yaml:9.
-  retries: env.CI === true ? 2 : 0,
-  workers: env.CI === true ? 1 : undefined,
-  reporter: env.CI === true ? 'dot' : 'list',
+  forbidOnly: runtimeConfig.ci === true, // set at .github/workflows/deployment.yaml:9.
+  retries: runtimeConfig.ci === true ? 2 : 0,
+  workers: runtimeConfig.ci === true ? 1 : undefined,
+  reporter: runtimeConfig.ci === true ? 'dot' : 'list',
   use: {
-    baseURL: config.front.baseUrl,
+    baseURL: runtimeConfig.front.baseUrl,
     trace: 'on-first-retry',
     extraHTTPHeaders: {
       [headerName.playwrightTest]: 'true',
@@ -47,17 +45,17 @@ export default defineConfig({
   webServer: [
     {
       command: 'bun run start-back',
-      url: config.back.baseUrl,
+      url: runtimeConfig.back.baseUrl,
       ignoreHTTPSErrors: true,
-      reuseExistingServer: env.CI === false,
-      stdout: env.CI === true ? 'ignore' : 'pipe', // Capture standard output
-      stderr: env.CI === true ? 'ignore' : 'pipe', // Capture standard error
+      reuseExistingServer: runtimeConfig.ci === false,
+      stdout: runtimeConfig.ci === true ? 'ignore' : 'pipe', // Capture standard output
+      stderr: runtimeConfig.ci === true ? 'ignore' : 'pipe', // Capture standard error
     },
     {
       command: 'bun run start-front',
-      url: config.front.baseUrl,
+      url: runtimeConfig.front.baseUrl,
       ignoreHTTPSErrors: true,
-      reuseExistingServer: env.CI === false,
+      reuseExistingServer: runtimeConfig.ci === false,
     },
   ],
 })

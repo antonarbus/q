@@ -15,7 +15,7 @@
     "front/features/quotation/download-quotation-as-excel/excelWorker.ts",
     "front/features/quotation/download-quotation-as-pdf/pdfWorker.ts",
     "front/shared/util/stripHtmlWithBreaksPreserve.ts",
-    "config/configVariables.ts"
+    "config/infrastructure.ts"
   ],
   "ignoreDependencies": [
     "babel-plugin-react-compiler",

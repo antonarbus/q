@@ -1,9 +1,18 @@
-import { env } from './shared/lib/dot-env/env'
+const getNodeEnv = (): 'development' | 'production' => {
+  if (typeof process === 'undefined') return 'development'
+  return process.env.NODE_ENV === 'production' ? 'production' : 'development'
+}
 
-export const config = {
-  // INSTALLATION=local is set at package.json & deployment.yaml
-  // INSTALLATION=production is set at Dockerfile.prod.front & Dockerfile.prod.back
-  installation: env.INSTALLATION,
+const getCI = (): boolean => {
+  if (typeof process === 'undefined') return false
+  return process.env.CI === 'true'
+}
+
+export const runtimeConfig = {
+  // NODE_ENV=development is set at package.json scripts
+  // NODE_ENV=production is set at Dockerfile.prod.front & Dockerfile.prod.back
+  nodeEnv: getNodeEnv(),
+  ci: getCI(),
   back: {
     protocol: 'http',
     hostname: 'localhost',
@@ -15,14 +24,14 @@ export const config = {
   front: {
     protocol: 'https',
     get hostname() {
-      if (config.installation === 'local') {
+      if (runtimeConfig.nodeEnv === 'development') {
         return 'localhost'
       }
 
       return 'sendmequotation.today'
     },
     get port() {
-      if (config.installation === 'local') {
+      if (runtimeConfig.nodeEnv === 'development') {
         return 3000
       }
 
@@ -30,7 +39,7 @@ export const config = {
     },
     portPreview: 3666,
     get baseUrl() {
-      if (config.installation === 'local') {
+      if (runtimeConfig.nodeEnv === 'development') {
         return `${this.protocol}://${this.hostname}:${this.port}` as const
       }
 

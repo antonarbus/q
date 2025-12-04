@@ -4,7 +4,7 @@ import {
   allowedPromotionPath,
   allowedPromotionPathSchema,
   type Env,
-} from '../../config/configVariables'
+} from '../../config/infrastructure'
 
 type Props = {
   sourceEnv: Env

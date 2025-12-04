@@ -1,10 +1,9 @@
-import 'dotenv/config'
 import { EmailParams, MailerSend, Recipient, Sender } from 'mailersend'
 import type { APIResponse } from 'mailersend/lib/services/request.service'
-import { env } from '../dot-env'
+import { secret } from '../../../../config/secrets'
 
 const mailerSend: MailerSend = new MailerSend({
-  apiKey: env.MAILERSEND_API_KEY,
+  apiKey: secret.MAILERSEND_API_KEY,
 })
 
 type Props = {

@@ -1,7 +1,7 @@
 name: 'Deploy'
 
 # Single workflow that handles both Terraform and Docker deployment
-# Deployment target is determined by MASTER_DEPLOYS_TO_ENV in config/configVariables.ts:
+# Deployment target is determined by MASTER_DEPLOYS_TO_ENV in config/infrastructure.ts:
 # - When set to 'prod': main/master branch deploys directly to production (single-stage workflow)
 # - When set to 'dev': main/master branch deploys to dev, other environments use promotion workflow
 on:

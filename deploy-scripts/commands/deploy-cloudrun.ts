@@ -1,4 +1,4 @@
-import { configVariables, type Env } from '../../config/configVariables'
+import { type Env, infraConfigVariables } from '../../config/infrastructure'
 import { getCurrentCloudRunImage } from '../lib/gcloud/getCurrentCloudRunImage'
 import { updateCloudRunService } from '../lib/gcloud/updateCloudRunService'
 import { githubOutput } from '../lib/output/githubOutput'
@@ -11,7 +11,7 @@ type Props = {
 
 export async function deployCloudRun(props: Props): Promise<void> {
   const { env, service = 'both' } = props
-  const config = configVariables[env]
+  const config = infraConfigVariables[env]
 
   // Use environment name as the docker image tag
   const dockerImageTag = env

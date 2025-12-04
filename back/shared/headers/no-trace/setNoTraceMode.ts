@@ -1,4 +1,5 @@
 import type { Response } from 'express'
+import { runtimeConfig } from '../../../../config/runtime'
 import { cookieName } from '../const/cookieName'
 
 type Props = {
@@ -15,7 +16,7 @@ type Props = {
 export const setNoTraceMode = ({ res }: Props): void => {
   res.cookie(cookieName.noTrace, true, {
     httpOnly: true,
-    secure: process.env.INSTALLATION !== 'local',
+    secure: runtimeConfig.nodeEnv === 'production',
     maxAge: 3 * 24 * 60 * 60 * 1000, // 3 days in ms,
   })
 }

@@ -1,8 +1,8 @@
 import { api } from '@back/api'
-import { config } from '@back/config'
 import { UserModel } from '@back/entities/user'
 import { connectToDb } from '@back/shared/lib/mongoose/connectToDb'
 import { expect, test } from '@playwright/test'
+import { runtimeConfig } from '../../config/runtime'
 
 test.describe.configure({ mode: 'serial' })
 
@@ -11,7 +11,7 @@ test.describe('#activateRouter', () => {
     await connectToDb()
   })
 
-  test.use({ baseURL: config.back.baseUrl })
+  test.use({ baseURL: runtimeConfig.back.baseUrl })
 
   const email = 'test-user@sendmequotation.today'
 

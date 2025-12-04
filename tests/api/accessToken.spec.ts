@@ -1,13 +1,13 @@
 // @ts-nocheck
 
 import { api } from '@back/api'
-import { config } from '@back/config'
 import { expect, test } from '@playwright/test'
+import { runtimeConfig } from '../../config/runtime'
 
 test.describe.configure({ mode: 'serial' })
 
 test.describe('#authTokenRefresh', () => {
-  test.use({ baseURL: config.back.baseUrl })
+  test.use({ baseURL: runtimeConfig.back.baseUrl })
 
   const email = 'test-user@sendmequotation.today'
   const password = 'xxx'

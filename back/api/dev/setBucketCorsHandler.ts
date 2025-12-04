@@ -1,9 +1,9 @@
 import { getUserFromRefreshTokenOrJohn } from '@back/entities/user'
 import { httpStatus } from '@back/shared/const/httpStatus'
 import { userRole } from '@back/shared/const/userRole'
-import { env } from '@back/shared/lib/dot-env'
 import { bucket } from '@back/shared/lib/google-cloud-storage'
 import type { NextFunction, Request, Response } from 'express'
+import { secret } from '../../../config/secrets'
 
 // https://cloud.google.com/storage/docs/samples/storage-cors-configuration#storage_cors_configuration-nodejs
 
@@ -39,7 +39,7 @@ export const setBucketCorsHandler: RouterHandler = async (req, res, _next) => {
     },
   ])
 
-  console.info(`Bucket ${env.BUCKET_NAME} CORS were updated`)
+  console.info(`Bucket ${secret.BUCKET_NAME} CORS were updated`)
 
   res.json(corsUpdateRes.at(0)?.cors)
 }

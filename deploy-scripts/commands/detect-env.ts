@@ -1,5 +1,5 @@
 import { exit } from 'process'
-import { type Env, MASTER_DEPLOYS_TO_ENV } from '../../config/configVariables'
+import { type Env, MASTER_DEPLOYS_TO_ENV } from '../../config/infrastructure'
 import { getCurrentGitBranchName } from '../lib/git/getCurrentGitBranchName'
 import { githubOutput } from '../lib/output/githubOutput'
 import { logger } from '../lib/output/logger'

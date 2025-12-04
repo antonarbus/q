@@ -1,4 +1,3 @@
-import { config } from '@back/config'
 import { UserModel } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
@@ -6,6 +5,7 @@ import { sendEmail } from '@back/shared/lib/mailersend'
 import { generateId } from '@back/shared/lib/nanoid'
 import type { User } from '@entities/user/type'
 import type { NextFunction, Request, Response } from 'express'
+import { runtimeConfig } from '../../../config/runtime'
 
 export type ReqBody = {
   email: User['email']
@@ -78,9 +78,9 @@ export const requestPasswordResetHandler: RouterHandler = async (
         <p>
           <a
             clicktracking="off"
-            href="${config.front.baseUrl}/reset-password/${emailFromInput}/${resetPasswordKey}"
+            href="${runtimeConfig.front.baseUrl}/reset-password/${emailFromInput}/${resetPasswordKey}"
           >
-            ${config.front.baseUrl}/reset-password/${emailFromInput}/${resetPasswordKey}
+            ${runtimeConfig.front.baseUrl}/reset-password/${emailFromInput}/${resetPasswordKey}
           </a>
         </p>
       `,

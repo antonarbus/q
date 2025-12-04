@@ -25,7 +25,7 @@ export const envSchema = z.enum([
 export type Env = z.infer<typeof envSchema>
 
 //* MODIFY
-export const sharedConfigVariables = {
+export const sharedInfraConfigVariables = {
   // Google Cloud Project
   projectId: 'quotationapp-8014c',
   projectNumber: '665701178658',
@@ -77,9 +77,9 @@ export const sharedConfigVariables = {
 } as const
 
 //* DO NOT MODIFY, does not hurt
-export const configVariables = {
+export const infraConfigVariables = {
   [envName.prod]: {
-    ...sharedConfigVariables,
+    ...sharedInfraConfigVariables,
     cloudRunServiceNameFrontend: `web-app-frontend-${envName.prod}`,
     cloudRunServiceNameBackend: `web-app-backend-${envName.prod}`,
     customDomainFrontend: DOMAIN,
@@ -87,7 +87,7 @@ export const configVariables = {
     environment: envName.prod,
   },
   [envName.pilot]: {
-    ...sharedConfigVariables,
+    ...sharedInfraConfigVariables,
     cloudRunServiceNameFrontend: `web-app-frontend-${envName.pilot}`,
     cloudRunServiceNameBackend: `web-app-backend-${envName.pilot}`,
     customDomainFrontend: `${envName.pilot}.${DOMAIN}`,
@@ -95,7 +95,7 @@ export const configVariables = {
     environment: envName.pilot,
   },
   [envName.test]: {
-    ...sharedConfigVariables,
+    ...sharedInfraConfigVariables,
     cloudRunServiceNameFrontend: `web-app-frontend-${envName.test}`,
     cloudRunServiceNameBackend: `web-app-backend-${envName.test}`,
     customDomainFrontend: `${envName.test}.${DOMAIN}`,
@@ -103,7 +103,7 @@ export const configVariables = {
     environment: envName.test,
   },
   [envName.dev]: {
-    ...sharedConfigVariables,
+    ...sharedInfraConfigVariables,
     cloudRunServiceNameFrontend: `web-app-frontend-${envName.dev}`,
     cloudRunServiceNameBackend: `web-app-backend-${envName.dev}`,
     customDomainFrontend: `${envName.dev}.${DOMAIN}`,
@@ -112,8 +112,8 @@ export const configVariables = {
   },
 } as const
 
-export type ConfigVariables =
-  (typeof configVariables)[keyof typeof configVariables]
+export type InfraConfigVariables =
+  (typeof infraConfigVariables)[keyof typeof infraConfigVariables]
 
 /**
  * Defines which environment master/main branch deploys to

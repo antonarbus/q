@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import { env } from '../dot-env/env'
+import { secret } from '../../../../config/secrets'
 import { THREE_MONTHS_IN_SEC } from './const'
 import { getJwtExpirationInDays } from './getJwtExpirationInDays'
 import type { JwtPayloadExtended } from './types'
@@ -11,7 +11,7 @@ type Res = {
 }
 
 export const generateRefreshToken = (payload: JwtPayloadExtended): Res => {
-  const refreshJwtToken = jwt.sign(payload, env.JWT_REFRESH_SECRET, {
+  const refreshJwtToken = jwt.sign(payload, secret.JWT_REFRESH_SECRET, {
     expiresIn: THREE_MONTHS_IN_SEC,
   })
 

@@ -1,4 +1,3 @@
-import { config } from '@back/config'
 import { UserModel } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
@@ -13,6 +12,7 @@ import { generateId } from '@back/shared/lib/nanoid'
 import type { User } from '@entities/user/type'
 import bcrypt from 'bcryptjs'
 import type { NextFunction, Request, Response } from 'express'
+import { runtimeConfig } from '../../../config/runtime'
 
 export type ReqBody = {
   email: User['email']
@@ -109,9 +109,9 @@ export const registerHandler: RouterHandler = async (req, res, _next) => {
         <p>
           <a
             clicktracking="off"
-            href="${config.front.baseUrl}/activate/${activationKey}"
+            href="${runtimeConfig.front.baseUrl}/activate/${activationKey}"
           >
-            ${config.front.baseUrl}/activate/${activationKey}
+            ${runtimeConfig.front.baseUrl}/activate/${activationKey}
           </a>
         </p>
       `,

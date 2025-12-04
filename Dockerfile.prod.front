@@ -32,5 +32,5 @@ RUN envsubst '${BACKEND_URL}' < /tmp/nginx.conf.template > /etc/nginx/nginx.conf
     rm /tmp/nginx.conf.template
 
 EXPOSE 80
-ENV INSTALLATION=production
+ENV NODE_ENV=production
 CMD ["nginx", "-g", "daemon off;"]

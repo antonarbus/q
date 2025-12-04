@@ -1,4 +1,3 @@
-import { config } from '@back/config'
 import { getUserFromAccessTokenOrNull, UserModel } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
@@ -14,6 +13,7 @@ import { sendEmail } from '@back/shared/lib/mailersend'
 import type { User } from '@entities/user/type'
 import bcrypt from 'bcryptjs'
 import type { NextFunction, Request, Response } from 'express'
+import { runtimeConfig } from '../../../config/runtime'
 
 export type ReqBody = {
   email: User['email']
@@ -144,9 +144,9 @@ export const logInHandler: RouterHandler = async (req, res, _next) => {
           <p>
             <a
               clicktracking="off"
-              href="${config.front.baseUrl}/activate/${userFromDb.activationKey}"
+              href="${runtimeConfig.front.baseUrl}/activate/${userFromDb.activationKey}"
             >
-              ${config.front.baseUrl}/activate/${userFromDb.activationKey}
+              ${runtimeConfig.front.baseUrl}/activate/${userFromDb.activationKey}
             </a>
           </p>
         `,

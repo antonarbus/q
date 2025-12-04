@@ -1,6 +1,6 @@
 import { $ } from 'bun'
-import type { Env } from '../../config/configVariables'
-import { configVariables } from '../../config/configVariables'
+import type { Env } from '../../config/infrastructure'
+import { infraConfigVariables } from '../../config/infrastructure'
 import { logger } from '../lib/output/logger'
 
 type Props = {
@@ -13,7 +13,7 @@ type Props = {
  * Displays git commit SHA and message for currently deployed image
  */
 export const showDeploymentInfo = async (props: Props): Promise<void> => {
-  const config = configVariables[props.env]
+  const config = infraConfigVariables[props.env]
   const service = props.service || 'both'
 
   // Print section header

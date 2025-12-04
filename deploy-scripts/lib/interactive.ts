@@ -1,6 +1,6 @@
 import { select } from '@inquirer/prompts'
 import chalk from 'chalk'
-import type { Env } from '../../config/configVariables'
+import type { Env } from '../../config/infrastructure'
 import { generateTfvars } from '../commands/generate-tfvars'
 import { listGcloudServices } from '../commands/list-gcloud-services'
 import { showDeploymentInfo } from '../commands/show-deployment-info'

@@ -1,10 +1,10 @@
 import { $ } from 'bun'
-import { sharedConfigVariables } from '../../config/configVariables'
+import { sharedInfraConfigVariables } from '../../config/infrastructure'
 import { logger } from '../lib/output/logger'
 
 /** List all enabled Google Cloud services for the project */
 export const listGcloudServices = async (): Promise<void> => {
-  const { projectId } = sharedConfigVariables
+  const { projectId } = sharedInfraConfigVariables
 
   try {
     logger.info(`Listing enabled services for project: ${projectId}`)

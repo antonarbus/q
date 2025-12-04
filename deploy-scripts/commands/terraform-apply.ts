@@ -1,7 +1,7 @@
 import { $ } from 'bun'
 import { resolve } from 'path'
 import { chdir } from 'process'
-import { configVariables, type Env } from '../../config/configVariables'
+import { type Env, infraConfigVariables } from '../../config/infrastructure'
 import { logger } from '../lib/output/logger'
 
 type Props = {
@@ -11,7 +11,7 @@ type Props = {
 export async function terraformApply(props: Props): Promise<void> {
   logger.info(`Environment: ${props.env}`)
 
-  const { bucketForTerraformStateName } = configVariables[props.env]
+  const { bucketForTerraformStateName } = infraConfigVariables[props.env]
 
   const TERRAFORM_DIR = resolve(__dirname, '../../terraform/infrastructure')
   const TFVARS_FILE_PATH = resolve(

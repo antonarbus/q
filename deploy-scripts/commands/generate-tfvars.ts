@@ -1,5 +1,5 @@
 import { resolve } from 'node:path'
-import { configVariables } from '../../config/configVariables'
+import { infraConfigVariables } from '../../config/infrastructure'
 import { logger } from '../lib/output/logger'
 
 type Props = {
@@ -18,7 +18,7 @@ export const generateTfvars = async (): Promise<void> => {
   logger.emptyLine()
 
   const generateTfvarsContent = (props: Props): string => {
-    const header = `# Generated from config/configVariables.ts\n\n`
+    const header = `# Generated from "../config/infrastructure.ts\n\n`
 
     /**
      *  Convert camelCase to snake_case
@@ -45,7 +45,7 @@ export const generateTfvars = async (): Promise<void> => {
     return `${header + lines.join('\n')}\n`
   }
 
-  for (const [env, config] of Object.entries(configVariables)) {
+  for (const [env, config] of Object.entries(infraConfigVariables)) {
     const CONFIG_DIR = resolve(__dirname, '../../config')
     const TFVARS_FILE_PATH = resolve(CONFIG_DIR, `${env}.tfvars`)
 

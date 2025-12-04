@@ -1,5 +1,5 @@
 import { exit } from 'process'
-import { configVariables, type Env } from '../../config/configVariables'
+import { type Env, infraConfigVariables } from '../../config/infrastructure'
 import { getCloudRunServiceUrl } from '../lib/gcloud/getCloudRunServiceUrl'
 import { rollbackCloudRunService } from '../lib/gcloud/rollbackCloudRunService'
 import { logger } from '../lib/output/logger'
@@ -11,7 +11,7 @@ type Props = {
 }
 
 export const verifyDeployment = async (props: Props): Promise<void> => {
-  const config = configVariables[props.env]
+  const config = infraConfigVariables[props.env]
 
   try {
     logger.info('Waiting for deployment to be ready...')

@@ -1,9 +1,8 @@
-import express from 'express'
-import 'dotenv/config'
 import cookieParser from 'cookie-parser'
+import express from 'express'
 import morgan from 'morgan'
+import { runtimeConfig } from '../config/runtime'
 import { api } from './api'
-import { config } from './config'
 import { errorHandlerMiddleware } from './middleware/errorHandlerMiddleware'
 import { asyncHandler } from './shared/lib/express'
 import { connectToDb } from './shared/lib/mongoose/connectToDb'
@@ -22,9 +21,9 @@ const startServer = async (): Promise<void> => {
 
   app.use(errorHandlerMiddleware)
 
-  app.listen(config.back.port, () => {
+  app.listen(runtimeConfig.back.port, () => {
     console.info(
-      `🚀 ${config.installation} backend server started at ${config.back.baseUrl} based on ${config.installation} installation`,
+      `🚀 ${runtimeConfig.nodeEnv} backend server started at ${runtimeConfig.back.baseUrl}`,
     )
   })
 }

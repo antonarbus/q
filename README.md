@@ -142,7 +142,7 @@ Generate `.tfvars` files from the TypeScript configuration:
 bun deploy-scripts/cli.ts generate-tfvars
 ```
 
-This creates/updates all environment `.tfvars` files from `config/configVariables.ts`.
+This creates/updates all environment `.tfvars` files from "./config/infrastructure.ts`.
 
 ### 4. Run Bootstrap (One-Time)
 

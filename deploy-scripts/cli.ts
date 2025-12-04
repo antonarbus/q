@@ -1,6 +1,6 @@
 #!/usr/bin/env bun
 import { Command } from 'commander'
-import { envSchema } from '../config/configVariables'
+import { envSchema } from '../config/infrastructure'
 import { deployCloudRun } from './commands/deploy-cloudrun'
 import { detectEnvironment } from './commands/detect-env'
 import { generateTfvars } from './commands/generate-tfvars'

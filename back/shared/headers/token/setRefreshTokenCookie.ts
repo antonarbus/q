@@ -1,4 +1,5 @@
 import type { Response } from 'express'
+import { runtimeConfig } from '../../../../config/runtime'
 import { cookieName } from '../const/cookieName'
 
 type Props = {
@@ -11,7 +12,7 @@ export const setRefreshTokenCookie = (props: Props): void => {
 
   props.res.cookie(cookieName.refreshJwtToken, props.refreshJwtToken, {
     httpOnly: true,
-    secure: process.env.INSTALLATION !== 'local',
+    secure: runtimeConfig.nodeEnv === 'production',
     maxAge: threeMonthsInMs,
   })
 }
