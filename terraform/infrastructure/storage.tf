@@ -80,3 +80,15 @@ resource "google_storage_bucket_iam_member" "app_bucket_object_admin" {
   role   = "roles/storage.objectAdmin"
   member = "serviceAccount:${data.google_service_account.cloud_run_service.email}"
 }
+
+# ==============================================================================
+# IAM PERMISSIONS - GITHUB ACTIONS SERVICE ACCOUNT
+# ==============================================================================
+# Grant GitHub Actions permission to view bucket configuration
+# This allows Terraform to read and manage the bucket during CI/CD
+
+resource "google_storage_bucket_iam_member" "github_actions_bucket_viewer" {
+  bucket = google_storage_bucket.app_bucket.name
+  role   = "roles/storage.legacyBucketReader"
+  member = "serviceAccount:${data.google_service_account.github_actions.email}"
+}
