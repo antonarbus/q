@@ -1,9 +1,11 @@
 import { $ } from 'bun'
-import { configVariables, Env } from '../../config/configVariables'
+import type { Env } from '../../config/configVariables'
+import { configVariables } from '../../config/configVariables'
 import { logger } from '../lib/output/logger'
 
 type Props = {
   env: Env
+  service?: 'frontend' | 'backend' | 'both'
 }
 
 /**
@@ -11,10 +13,47 @@ type Props = {
  * Displays git commit SHA and message for currently deployed image
  */
 export const showDeploymentInfo = async (props: Props): Promise<void> => {
-  const { region, projectId, cloudRunServiceName } = configVariables[props.env]
+  const config = configVariables[props.env]
+  const service = props.service || 'both'
 
   // Print section header
   logger.warning(`${props.env.toUpperCase()}`)
+  logger.emptyLine()
+
+  // Show Frontend
+  if (service === 'frontend' || service === 'both') {
+    logger.info('=== Frontend Service ===')
+    await showServiceInfo({
+      serviceName: 'Frontend',
+      cloudRunServiceName: config.cloudRunServiceNameFrontend,
+      region: config.region,
+      projectId: config.projectId,
+    })
+    logger.emptyLine()
+  }
+
+  // Show Backend
+  if (service === 'backend' || service === 'both') {
+    logger.info('=== Backend Service ===')
+    await showServiceInfo({
+      serviceName: 'Backend',
+      cloudRunServiceName: config.cloudRunServiceNameBackend,
+      region: config.region,
+      projectId: config.projectId,
+    })
+    logger.emptyLine()
+  }
+}
+
+type ShowServiceInfoProps = {
+  serviceName: string
+  cloudRunServiceName: string
+  region: string
+  projectId: string
+}
+
+async function showServiceInfo(props: ShowServiceInfoProps): Promise<void> {
+  const { cloudRunServiceName, region, projectId } = props
 
   try {
     // Get current image URL
@@ -42,7 +81,7 @@ export const showDeploymentInfo = async (props: Props): Promise<void> => {
         if (parts.length >= 3) {
           const tagPath = parts[0]
           const tagDigest = parts[2] // Column 3: DIGEST (0=TAG, 1=IMAGE, 2=DIGEST)
-          const tag = tagPath.split('/tags/').pop()
+          const tag = tagPath?.split('/tags/').pop() ?? null
 
           if (tag === envTag) {
             digest = tagDigest
@@ -55,7 +94,7 @@ export const showDeploymentInfo = async (props: Props): Promise<void> => {
         logger.warning(`Could not find digest for tag: ${envTag}`)
         return
       }
-    } catch (error) {
+    } catch {
       logger.warning('Could not get image digest')
       return
     }
@@ -74,7 +113,7 @@ export const showDeploymentInfo = async (props: Props): Promise<void> => {
         if (parts.length >= 3) {
           const tagPath = parts[0]
           const tagDigest = parts[2] // Column 3: DIGEST (0=TAG, 1=IMAGE, 2=DIGEST)
-          const tag = tagPath.split('/tags/').pop()
+          const tag = tagPath?.split('/tags/').pop() ?? null
 
           // If this tag points to same digest and looks like a git SHA (40 hex chars), use it
           if (tagDigest === digest && tag && tag.match(/^[0-9a-f]{40}$/)) {
@@ -83,7 +122,7 @@ export const showDeploymentInfo = async (props: Props): Promise<void> => {
           }
         }
       }
-    } catch (error) {
+    } catch {
       logger.warning('Could not list repository tags')
     }
 
@@ -105,7 +144,7 @@ export const showDeploymentInfo = async (props: Props): Promise<void> => {
       logger.warning('Could not determine git commit SHA')
     }
   } catch (error) {
-    logger.error(`Failed to get deployment info for ${props.env}`)
+    logger.error(`Failed to get deployment info for ${props.serviceName}`)
     throw error
   }
 }
