@@ -107,3 +107,6 @@ jobs:
       - name: 'Deploy to Cloud Run (Both Services)'
         id: deploy
         run: bun deploy-scripts/cli.ts deploy-cloudrun --env ${{ steps.detect-env.outputs.env }} >> $GITHUB_OUTPUT
+
+      - name: 'Verify Deployment'
+        run: bun deploy-scripts/cli.ts verify-deployment --env ${{ steps.detect-env.outputs.env }} --previous-image-frontend "${{ steps.deploy.outputs.previousImageFrontend }}" --previous-image-backend "${{ steps.deploy.outputs.previousImageBackend }}"

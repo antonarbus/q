@@ -118,8 +118,8 @@ jobs:
         id: deploy
         run: bun deploy-scripts/cli.ts deploy-cloudrun --env "${{ github.event.inputs.target-env }}" >> $GITHUB_OUTPUT
 
-      # Note: Verify deployment step removed - needs rewrite for 2-service architecture
-      # TODO: Reimplement verify-deployment to support frontend + backend services
+      - name: 'Verify Deployment'
+        run: bun deploy-scripts/cli.ts verify-deployment --env "${{ github.event.inputs.target-env }}" --previous-image-frontend "${{ steps.deploy.outputs.previousImageFrontend }}" --previous-image-backend "${{ steps.deploy.outputs.previousImageBackend }}"
 
       - name: 'Add promotion summary'
         if: always()

@@ -94,10 +94,15 @@ program
   .command('verify-deployment')
   .description('Verify Cloud Run deployment')
   .requiredOption('--env <environment>', 'Environment name (dev, test, pilot, prod)')
-  .option('--previous-image <image>', 'Previous image URL for rollback')
-  .action(async (options: { env: string; previousImage?: string }) => {
+  .requiredOption('--previous-image-frontend <image>', 'Previous frontend image URL for rollback')
+  .requiredOption('--previous-image-backend <image>', 'Previous backend image URL for rollback')
+  .action(async (options: { env: string; previousImageFrontend: string; previousImageBackend: string }) => {
     const validatedEnv = envSchema.parse(options.env)
-    await verifyDeployment({ env: validatedEnv, previousImage: options.previousImage })
+    await verifyDeployment({
+      env: validatedEnv,
+      previousImageFrontend: options.previousImageFrontend,
+      previousImageBackend: options.previousImageBackend
+    })
   })
 
 program
