@@ -85,9 +85,10 @@ program
   .command('deploy-cloudrun')
   .description('Deploy Docker image to Cloud Run')
   .requiredOption('--env <environment>', 'Environment name (dev, test, pilot, prod)')
-  .action(async (options: { env: string }) => {
+  .option('--service <service>', 'Service to deploy (frontend, backend, or both)', 'both')
+  .action(async (options: { env: string; service: 'frontend' | 'backend' | 'both' }) => {
     const validatedEnv = envSchema.parse(options.env)
-    await deployCloudRun({ env: validatedEnv })
+    await deployCloudRun({ env: validatedEnv, service: options.service })
   })
 
 program
@@ -121,10 +122,11 @@ program
   .description('Promote Docker image from source to target environment')
   .requiredOption('--source-env <environment>', 'Source environment name')
   .requiredOption('--target-env <environment>', 'Target environment name')
-  .action(async (options: { sourceEnv: string; targetEnv: string }) => {
+  .option('--service <service>', 'Service to promote (frontend, backend, or both)', 'both')
+  .action(async (options: { sourceEnv: string; targetEnv: string; service: 'frontend' | 'backend' | 'both' }) => {
     const validatedSourceEnv = envSchema.parse(options.sourceEnv)
     const validatedTargetEnv = envSchema.parse(options.targetEnv)
-    await promoteImage({ sourceEnv: validatedSourceEnv, targetEnv: validatedTargetEnv })
+    await promoteImage({ sourceEnv: validatedSourceEnv, targetEnv: validatedTargetEnv, service: options.service })
   })
 
 program.parse()

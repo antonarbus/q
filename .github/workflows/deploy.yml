@@ -14,13 +14,23 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy:
-    name: 'Deploy Infrastructure and Application'
+  terraform:
+    name: 'Infrastructure Setup (Terraform)'
     runs-on: ubuntu-latest
 
     permissions:
       contents: read
       id-token: write
+
+    outputs:
+      env: ${{ steps.detect-env.outputs.env }}
+      projectId: ${{ steps.config.outputs.projectId }}
+      projectNumber: ${{ steps.config.outputs.projectNumber }}
+      region: ${{ steps.config.outputs.region }}
+      artifactRegistryName: ${{ steps.config.outputs.artifactRegistryName }}
+      dockerImageNameFrontend: ${{ steps.config.outputs.dockerImageNameFrontend }}
+      dockerImageNameBackend: ${{ steps.config.outputs.dockerImageNameBackend }}
+      customDomainBackend: ${{ steps.config.outputs.customDomainBackend }}
 
     steps:
       - name: 'Checkout repository code'
@@ -48,12 +58,6 @@ jobs:
           workload_identity_provider: 'projects/${{ steps.config.outputs.projectNumber }}/locations/global/workloadIdentityPools/github-pool/providers/github-provider'
           service_account: 'github-actions-sa@${{ steps.config.outputs.projectId }}.iam.gserviceaccount.com'
 
-      # ============================================================================
-      # TERRAFORM STEPS
-      # ============================================================================
-      # Terraform is idempotent - if no changes, it completes in ~10 second
-      # No need for conditional logic - always run for simplicity
-
       - name: 'Setup Terraform'
         uses: hashicorp/setup-terraform@v3
         with:
@@ -67,12 +71,97 @@ jobs:
       - name: 'Terraform Apply'
         run: bun deploy-scripts/cli.ts terraform-apply --env ${{ steps.detect-env.outputs.env }}
 
-      # ============================================================================
-      # DOCKER STEPS - BACKEND
-      # ============================================================================
+  ts-and-other-checks:
+    name: 'TypeScript and Code Quality Checks'
+    needs: terraform
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 'Checkout repository code'
+        uses: actions/checkout@v4
+
+      - name: 'Setup Bun'
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: 'Install all dependencies'
+        run: bun run install-all
+
+      - name: 'Run Biome (formatting + linting)'
+        run: bun run biome-silent
+
+      - name: 'Run unit tests'
+        run: bun run test
+
+      - name: 'Find unused code'
+        run: bun run find-unused-files
+
+      - name: 'Find circular dependencies'
+        run: bun run find-circular-deps
+
+      - name: 'Run TypeScript checks'
+        run: bun run tsc
+
+  e2e-tests:
+    name: 'E2E Tests'
+    needs: terraform
+    runs-on: ubuntu-latest
+
+    # Must match local installation, when upgrading Playwright locally, update this version to match.
+    # Available containers: https://playwright.dev/docs/docker#image-tags
+    container:
+      image: mcr.microsoft.com/playwright:v1.56.0-jammy
+
+    steps:
+      - name: 'Checkout repository code'
+        uses: actions/checkout@v4
+
+      - name: 'Install unzip'
+        run: |
+          apt-get update
+          apt-get install -y unzip
+
+      - name: 'Setup Bun'
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: '1.1.38'
+
+      - name: 'Install all dependencies'
+        run: bun run install-all
+
+      - name: 'Run Playwright tests'
+        run: bun run e2e-test
+
+  deploy-backend:
+    name: 'Build and Deploy Backend'
+    needs: [terraform, ts-and-other-checks, e2e-tests]
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write
+
+    outputs:
+      previousImageBackend: ${{ steps.deploy.outputs.previousImageBackend }}
+
+    steps:
+      - name: 'Checkout repository code'
+        uses: actions/checkout@v4
+
+      - name: 'Setup Bun'
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v3'
+        with:
+          workload_identity_provider: 'projects/${{ needs.terraform.outputs.projectNumber }}/locations/global/workloadIdentityPools/github-pool/providers/github-provider'
+          service_account: 'github-actions-sa@${{ needs.terraform.outputs.projectId }}.iam.gserviceaccount.com'
 
       - name: 'Docker Auth'
-        run: gcloud auth configure-docker '${{ steps.config.outputs.region }}-docker.pkg.dev'
+        run: gcloud auth configure-docker '${{ needs.terraform.outputs.region }}-docker.pkg.dev'
 
       - name: 'Build and Push Backend Docker Image'
         uses: docker/build-push-action@v6
@@ -81,12 +170,42 @@ jobs:
           file: ./Dockerfile.prod.back
           push: true
           tags: |
-            ${{ steps.config.outputs.region }}-docker.pkg.dev/${{ steps.config.outputs.projectId }}/${{ steps.config.outputs.artifactRegistryName }}/${{ steps.config.outputs.dockerImageNameBackend }}:${{ steps.detect-env.outputs.env }}
-            ${{ steps.config.outputs.region }}-docker.pkg.dev/${{ steps.config.outputs.projectId }}/${{ steps.config.outputs.artifactRegistryName }}/${{ steps.config.outputs.dockerImageNameBackend }}:${{ github.sha }}
+            ${{ needs.terraform.outputs.region }}-docker.pkg.dev/${{ needs.terraform.outputs.projectId }}/${{ needs.terraform.outputs.artifactRegistryName }}/${{ needs.terraform.outputs.dockerImageNameBackend }}:${{ needs.terraform.outputs.env }}
+            ${{ needs.terraform.outputs.region }}-docker.pkg.dev/${{ needs.terraform.outputs.projectId }}/${{ needs.terraform.outputs.artifactRegistryName }}/${{ needs.terraform.outputs.dockerImageNameBackend }}:${{ github.sha }}
 
-      # ============================================================================
-      # DOCKER STEPS - FRONTEND
-      # ============================================================================
+      - name: 'Deploy Backend to Cloud Run'
+        id: deploy
+        run: bun deploy-scripts/cli.ts deploy-cloudrun --env ${{ needs.terraform.outputs.env }} --service backend >> $GITHUB_OUTPUT
+
+  deploy-frontend:
+    name: 'Build and Deploy Frontend'
+    needs: [terraform, ts-and-other-checks, e2e-tests]
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write
+
+    outputs:
+      previousImageFrontend: ${{ steps.deploy.outputs.previousImageFrontend }}
+
+    steps:
+      - name: 'Checkout repository code'
+        uses: actions/checkout@v4
+
+      - name: 'Setup Bun'
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v3'
+        with:
+          workload_identity_provider: 'projects/${{ needs.terraform.outputs.projectNumber }}/locations/global/workloadIdentityPools/github-pool/providers/github-provider'
+          service_account: 'github-actions-sa@${{ needs.terraform.outputs.projectId }}.iam.gserviceaccount.com'
+
+      - name: 'Docker Auth'
+        run: gcloud auth configure-docker '${{ needs.terraform.outputs.region }}-docker.pkg.dev'
 
       - name: 'Build and Push Frontend Docker Image'
         uses: docker/build-push-action@v6
@@ -95,18 +214,38 @@ jobs:
           file: ./Dockerfile.prod.front
           push: true
           tags: |
-            ${{ steps.config.outputs.region }}-docker.pkg.dev/${{ steps.config.outputs.projectId }}/${{ steps.config.outputs.artifactRegistryName }}/${{ steps.config.outputs.dockerImageNameFrontend }}:${{ steps.detect-env.outputs.env }}
-            ${{ steps.config.outputs.region }}-docker.pkg.dev/${{ steps.config.outputs.projectId }}/${{ steps.config.outputs.artifactRegistryName }}/${{ steps.config.outputs.dockerImageNameFrontend }}:${{ github.sha }}
+            ${{ needs.terraform.outputs.region }}-docker.pkg.dev/${{ needs.terraform.outputs.projectId }}/${{ needs.terraform.outputs.artifactRegistryName }}/${{ needs.terraform.outputs.dockerImageNameFrontend }}:${{ needs.terraform.outputs.env }}
+            ${{ needs.terraform.outputs.region }}-docker.pkg.dev/${{ needs.terraform.outputs.projectId }}/${{ needs.terraform.outputs.artifactRegistryName }}/${{ needs.terraform.outputs.dockerImageNameFrontend }}:${{ github.sha }}
           build-args: |
-            BACKEND_URL=https://${{ steps.config.outputs.customDomainBackend }}
+            BACKEND_URL=https://${{ needs.terraform.outputs.customDomainBackend }}
 
-      # ============================================================================
-      # DEPLOY TO CLOUD RUN
-      # ============================================================================
-
-      - name: 'Deploy to Cloud Run (Both Services)'
+      - name: 'Deploy Frontend to Cloud Run'
         id: deploy
-        run: bun deploy-scripts/cli.ts deploy-cloudrun --env ${{ steps.detect-env.outputs.env }} >> $GITHUB_OUTPUT
+        run: bun deploy-scripts/cli.ts deploy-cloudrun --env ${{ needs.terraform.outputs.env }} --service frontend >> $GITHUB_OUTPUT
+
+  verify-deployment:
+    name: 'Verify Deployment'
+    needs: [terraform, deploy-backend, deploy-frontend]
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: 'Checkout repository code'
+        uses: actions/checkout@v4
+
+      - name: 'Setup Bun'
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v3'
+        with:
+          workload_identity_provider: 'projects/${{ needs.terraform.outputs.projectNumber }}/locations/global/workloadIdentityPools/github-pool/providers/github-provider'
+          service_account: 'github-actions-sa@${{ needs.terraform.outputs.projectId }}.iam.gserviceaccount.com'
 
       - name: 'Verify Deployment'
-        run: bun deploy-scripts/cli.ts verify-deployment --env ${{ steps.detect-env.outputs.env }} --previous-image-frontend "${{ steps.deploy.outputs.previousImageFrontend }}" --previous-image-backend "${{ steps.deploy.outputs.previousImageBackend }}"
+        run: bun deploy-scripts/cli.ts verify-deployment --env ${{ needs.terraform.outputs.env }} --previous-image-frontend "${{ needs.deploy-frontend.outputs.previousImageFrontend }}" --previous-image-backend "${{ needs.deploy-backend.outputs.previousImageBackend }}"
