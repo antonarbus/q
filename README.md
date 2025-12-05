@@ -21,12 +21,12 @@ Full-stack quotation management application with React frontend and Express back
 
 **Project**: All environments run in GCP project `<PROJECT_ID>`
 
-| Environment | Frontend Service     | Backend Service      | Domain                        |
-| ----------- | -------------------- | -------------------- | ----------------------------- |
-| **Dev**     | `<APP_NAME>-frontend-dev`     | `<APP_NAME>-backend-dev`      | dev.<DOMAIN>     |
-| **Test**    | `<APP_NAME>-frontend-test`    | `<APP_NAME>-backend-test`     | test.<DOMAIN>    |
-| **Pilot**   | `<APP_NAME>-frontend-pilot`   | `<APP_NAME>-backend-pilot`    | pilot.<DOMAIN>   |
-| **Prod**    | `<APP_NAME>-frontend-prod`    | `<APP_NAME>-backend-prod`     | <DOMAIN>         |
+| Environment | Frontend Service            | Backend Service            | Domain         |
+| ----------- | --------------------------- | -------------------------- | -------------- |
+| **Dev**     | `<APP_NAME>-frontend-dev`   | `<APP_NAME>-backend-dev`   | dev.<DOMAIN>   |
+| **Test**    | `<APP_NAME>-frontend-test`  | `<APP_NAME>-backend-test`  | test.<DOMAIN>  |
+| **Pilot**   | `<APP_NAME>-frontend-pilot` | `<APP_NAME>-backend-pilot` | pilot.<DOMAIN> |
+| **Prod**    | `<APP_NAME>-frontend-prod`  | `<APP_NAME>-backend-prod`  | <DOMAIN>       |
 
 **Git workflow**: Single `main` branch. Environments are deployment targets.
 
@@ -38,18 +38,21 @@ Full-stack quotation management application with React frontend and Express back
 ### Infrastructure Organization
 
 **Bootstrap** (`terraform/bootstrap/`) - One-time shared infrastructure:
+
 - State bucket: `gs://<BUCKET_NAME>/` (Terraform state storage)
 - Service accounts: `github-actions-sa`, `cloud-run-sa`
 - Workload Identity Federation: Keyless GitHub Actions authentication
 - Infrastructure-level APIs: IAM, Storage, Cloud Run, Logging, Monitoring
 
 **Infrastructure** (`terraform/infrastructure/`) - Application resources (CI/CD managed):
+
 - Artifact Registry: `docker-images` (shared registry, per-env tags)
 - Cloud Run services: 2 services per environment (frontend + backend)
 - Custom domain mappings: Frontend only (backend uses Cloud Run URL)
 - Terraform state: Separate files per environment via prefix `terraform/state/{env}/`
 
 **Docker Images**:
+
 - Frontend: `us-central1-docker.pkg.dev/<PROJECT_ID>/docker-images/<APP_NAME>-frontend:<env>`
 - Backend: `us-central1-docker.pkg.dev/<PROJECT_ID>/docker-images/<APP_NAME>-backend:<env>`
 - Tags: `dev`, `test`, `pilot`, `prod` (enables image promotion)
@@ -72,6 +75,7 @@ bun deploy-scripts/cli.ts       # Interactive deployment CLI
 ```
 
 **Local development:**
+
 - Frontend: https://localhost:3000
 - Backend API: https://localhost:4000
 - E2E tests run against local services
@@ -125,10 +129,10 @@ Edit `config/configVariables.ts` with your project details:
 
 ```typescript
 export const sharedConfigVariables = {
-  projectId: '<PROJECT_ID>',                      // Your GCP project ID
-  projectNumber: '<PROJECT_NUMBER>',              // Find in GCP console dashboard
-  githubRepository: '<GITHUB_USER>/<REPO_NAME>',  // e.g., 'yourusername/q'
-  bucketForTerraformStateName: '<BUCKET_NAME>',   // Unique bucket for Terraform state
+  projectId: '<PROJECT_ID>', // Your GCP project ID
+  projectNumber: '<PROJECT_NUMBER>', // Find in GCP console dashboard
+  githubRepository: '<GITHUB_USER>/<REPO_NAME>', // e.g., 'yourusername/q'
+  bucketForTerraformStateName: '<BUCKET_NAME>', // Unique bucket for Terraform state
   region: 'us-central1',
   // ... other settings
 }
@@ -342,18 +346,18 @@ The `.tfvars` files are **generated** from this TypeScript config using `bun dep
 
 ### Key Variables
 
-| Variable                        | Environment-Specific | Shared |
-| ------------------------------- | -------------------- | ------ |
-| `projectId`                     |                      | ✓      |
-| `region`                        |                      | ✓      |
-| `artifactRegistryName`          |                      | ✓      |
-| `dockerImageNameFrontend`       |                      | ✓      |
-| `dockerImageNameBackend`        |                      | ✓      |
-| `cloudRunServiceNameFrontend`   | ✓                    |        |
-| `cloudRunServiceNameBackend`    | ✓                    |        |
-| `customDomainFrontend`          | ✓                    |        |
-| `maxInstancesFrontend`          | ✓                    |        |
-| `maxInstancesBackend`           | ✓                    |        |
+| Variable                      | Environment-Specific | Shared |
+| ----------------------------- | -------------------- | ------ |
+| `projectId`                   |                      | ✓      |
+| `region`                      |                      | ✓      |
+| `artifactRegistryName`        |                      | ✓      |
+| `dockerImageNameFrontend`     |                      | ✓      |
+| `dockerImageNameBackend`      |                      | ✓      |
+| `cloudRunServiceNameFrontend` | ✓                    |        |
+| `cloudRunServiceNameBackend`  | ✓                    |        |
+| `customDomainFrontend`        | ✓                    |        |
+| `maxInstancesFrontend`        | ✓                    |        |
+| `maxInstancesBackend`         | ✓                    |        |
 
 ### Changing Configuration
 
@@ -383,6 +387,7 @@ bun run e2e-test-debug  # Debug mode
 ```
 
 **E2E tests in CI/CD:**
+
 - Run automatically after each deployment
 - Test against deployed Cloud Run services
 - Verify end-to-end functionality including API calls
@@ -598,7 +603,6 @@ gcloud run services logs tail <APP_NAME>-backend-<env>
 ```
 
 ---
-
 
 ## Notes
 

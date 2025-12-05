@@ -1,0 +1,14 @@
+dist
+build
+node_modules
+.terraform
+coverage
+*.min.js
+*.min.css
+*.tfstate
+*.tfstate.backup
+package-lock.json
+pnpm-lock.yaml
+bun.lockb
+.next
+.cache
