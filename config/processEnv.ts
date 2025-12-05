@@ -11,10 +11,13 @@ const processEnvSchema = z.object({
     .optional()
     .transform((val) => val === 'true'),
   // ENVIRONMENT indicates which deployed environment we're running against
-  // Set to 'local' in package.json scripts
+  // Optional during build (defaults to 'unknown')
+  // Set to 'local' for local development in package.json scripts
   // Set to 'dev' | 'test' | 'pilot' | 'prod' in Cloud Run deployments (via updateCloudRunService.ts by --set-env-vars gcloud CLI flag)
-  // todo: use it for playwright configuration against dev environment during promotion from dev to test
-  ENVIRONMENT: z.enum(['local', 'dev', 'test', 'pilot', 'prod']),
+  ENVIRONMENT: z
+    .enum(['local', 'dev', 'test', 'pilot', 'prod', 'unknown'])
+    .optional()
+    .default('unknown'),
 })
 
 export const processEnv =
@@ -23,5 +26,5 @@ export const processEnv =
     : {
         NODE_ENV: 'development' as const,
         CI: false,
-        ENVIRONMENT: 'local' as const,
+        ENVIRONMENT: 'unknown' as const,
       }
