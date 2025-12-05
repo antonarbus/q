@@ -41,6 +41,9 @@ jobs:
         with:
           bun-version: latest
 
+      - name: 'Install dependencies'
+        run: bun install
+
       - name: 'Generate Terraform Variables'
         run: bun deploy-scripts/cli.ts generate-tfvars
 
@@ -154,6 +157,9 @@ jobs:
         with:
           bun-version: latest
 
+      - name: 'Install dependencies'
+        run: bun install
+
       - name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v3'
         with:
@@ -198,6 +204,9 @@ jobs:
         with:
           bun-version: latest
 
+      - name: 'Install dependencies'
+        run: bun install
+
       - name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v3'
         with:
@@ -240,6 +249,9 @@ jobs:
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
+
+      - name: 'Install dependencies'
+        run: bun install
 
       - name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v3'

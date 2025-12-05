@@ -1,4 +1,4 @@
-# Generated from config/infrastructure.ts
+# Generated from "../config/infrastructure.ts
 
 project_id = "quotationapp-8014c"
 project_number = "665701178658"
