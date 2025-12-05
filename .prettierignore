@@ -12,3 +12,7 @@ pnpm-lock.yaml
 bun.lockb
 .next
 .cache
+
+fontAwesome.css
+froalaPkg.css
+froalaPkg.js
