@@ -1,4 +1,6 @@
-import type { FroalaEditorRef } from '@shared/lib/froala/froala'
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import { FroalaEditor, type FroalaEditorRef } from '@shared/lib/froala/froala'
 import { generateId } from '@shared/lib/nanoid'
 import type { KeyboardEvent, MouseEvent } from 'react'
 import { useEffectOnce } from 'react-use'
@@ -23,7 +25,6 @@ export const useStartFroala = (): void => {
       await import('./froalaPkg')
       await import('./froalaPkg.css')
 
-      //@ts-expect-error: some error
       const froalaInstance = new FroalaEditor(froala.froalaElementRef.current, {
         ...froalaDefaultOptions,
         placeholderText: froala.placeholder ?? 'Text...',
@@ -34,23 +35,23 @@ export const useStartFroala = (): void => {
           focus: (): void => {
             froala.onFocus?.()
           },
-          click: (e: MouseEvent): void => {
+          click: (event: MouseEvent): void => {
             // close opened inline toolbar
             // there is some bug in froala that it does not close initial toolbar on first 2...3 clicks
             const toolbarElement = froalaInstance.$tb['0']
             const isToolbarOpened = toolbarElement.style.display === 'block'
 
-            if (isToolbarOpened) {
+            if (isToolbarOpened === true) {
               froalaInstance.toolbar.hide()
             }
 
-            froala.onClick?.(e)
+            froala.onClick?.(event)
           },
-          keydown: (e: KeyboardEvent): void => {
-            froala.onKeydown?.(e)
+          keydown: (event: KeyboardEvent): void => {
+            froala.onKeydown?.(event)
           },
-          blur: (e: MouseEvent): void => {
-            froala.onBlur?.(e)
+          blur: (event: MouseEvent): void => {
+            froala.onBlur?.(event)
           },
           'image.beforeUpload'(files: any): false | undefined {
             froala.beforeUpload?.({
@@ -78,6 +79,7 @@ export const useStartFroala = (): void => {
           // },
           'file.unlink'(link: { getAttribute: (arg0: string) => any }): void {
             const href = link.getAttribute('href')
+
             const isFileInBucket = href.includes('bucket')
 
             if (!isFileInBucket) {
@@ -89,13 +91,13 @@ export const useStartFroala = (): void => {
                 ${href}
               `)
 
-            if (removeFile) {
+            if (removeFile === true) {
               // todo: remove file from DB
               // todo: check if any other offers or depend on the file
             }
           },
 
-          'image.removed'($img: any): void {
+          'image.removed'(): void {
             // console.log($img.attr('src'))
           },
           'image.loaded'(props: { '0': HTMLImageElement }): void {
@@ -117,7 +119,7 @@ export const useStartFroala = (): void => {
           initialized: (): void => {
             window.froalas.push(froala.editorRef)
 
-            if (!froala.editorRef.current?.html) {
+            if (froala.editorRef.current?.html === undefined) {
               return
             }
 
@@ -137,7 +139,7 @@ export const useStartFroala = (): void => {
       froala.editorRef.current = froalaInstance
     }
 
-    initFroalaInstance()
+    void initFroalaInstance()
 
     return (): void => {
       froala.editorRef.current?.destroy()
