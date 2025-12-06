@@ -1,5 +1,17 @@
 {
-  "include": ["."],
+  "include": [
+    "*.js",
+    "*.jx",
+    "*.ts",
+    "*.tsx",
+    "*.mjs",
+    "*.cjs",
+    "front/**/*",
+    "back/**/*",
+    "tests/**/*",
+    "config/**/*",
+    "deploy-scripts/**/*"
+  ],
   "exclude": ["**/node_modules", "**/build", "**/fr.js", "**/froalaPkg.js"],
   "compilerOptions": {
     "target": "ESNext",
