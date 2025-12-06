@@ -1,7 +1,7 @@
 import { getState, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import { AnimatePresence, motion, type Variants } from 'motion/react'
-import { type JSX, useRef } from 'react'
+import { type JSX, useEffect, useState } from 'react'
 import { containerPadding, containerWidth, itemMarginBottom } from './const'
 import { ScaledCopyItem } from './ScaledCopyItem'
 
@@ -56,9 +56,29 @@ const variants: Variants = {
 export const RestOfCopiedItems = (): JSX.Element | null => {
   const items = useSelector((state) => state.copy.items)
   const isCopying = useSelector((state) => state.copy.isCopying)
-  const prevFirstItemHeightRef = useRef(0)
+  const [prevFirstItemHeight, setPrevFirstItemHeight] = useState(0)
 
   const [firstItem] = items
+
+  const scaleFactorForFirstItem =
+    firstItem?.width === undefined
+      ? 0
+      : (containerWidth - 2 * containerPadding) / firstItem.width
+
+  const firstItemHeight =
+    firstItem?.height === undefined
+      ? 0
+      : firstItem.height * scaleFactorForFirstItem + itemMarginBottom
+
+  const animationProps: Props = {
+    firstItemHeight,
+    isCopying,
+    prevFirstItemHeight,
+  }
+
+  useEffect(() => {
+    setPrevFirstItemHeight(firstItemHeight)
+  }, [firstItemHeight])
 
   if (firstItem?.width === undefined) {
     return null
@@ -67,20 +87,6 @@ export const RestOfCopiedItems = (): JSX.Element | null => {
   if (firstItem.height === undefined) {
     return null
   }
-
-  const scaleFactorForFirstItem =
-    (containerWidth - 2 * containerPadding) / firstItem.width
-
-  const firstItemHeight =
-    firstItem.height * scaleFactorForFirstItem + itemMarginBottom
-
-  const animationProps: Props = {
-    firstItemHeight,
-    isCopying,
-    prevFirstItemHeight: prevFirstItemHeightRef.current,
-  }
-
-  prevFirstItemHeightRef.current = firstItemHeight
 
   return (
     <AnimatePresence custom={animationProps} mode='wait'>
