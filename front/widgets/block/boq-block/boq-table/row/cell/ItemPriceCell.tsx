@@ -72,6 +72,7 @@ export const ItemPriceCell = (): JSX.Element => {
         cellKey={cellKey.itemPrice}
         onClick={(event: MouseEvent) => {
           event.preventDefault() // otherwise form is submitted (no idea why)
+
           pinItemPriceCell({
             blockIndex: block.index,
             rowIndex: row.index,

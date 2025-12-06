@@ -157,6 +157,7 @@ export default [
       ],
 
       // adjust React rules,
+      'react/jsx-max-depth': 'off', // too aggressive
       'react-hooks/exhaustive-deps': 'warn', // full dep arrays are noisy, not visible real intention
       'react-hooks/immutability': 'off', // gives error for modifying signal's value
       'react/jsx-sort-props': 'off',

@@ -7,11 +7,11 @@ import { useFirstMountState } from 'react-use'
 import { containerPadding, containerWidth } from './const'
 
 type Res = {
-  copyModalRef: AnimationScope
+  copyModalRef: AnimationScope<HTMLDivElement>
 }
 
 export const useCopyModalAnimation = (): Res => {
-  const [scope, animate] = useAnimate()
+  const [scope, animate] = useAnimate<HTMLDivElement>()
   const isFirstMount = useFirstMountState()
   const items = useSelector((state) => state.copy.items)
 

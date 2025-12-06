@@ -32,7 +32,7 @@ export const RowsSortableContext = ({ children }: Props): JSX.Element => {
     <DndContext
       autoScroll={{ layoutShiftCompensation: false }}
       collisionDetection={closestCenter}
-      onDragEnd={onRowDragEnd({ blockIndex: block.index, rowIds: rowIds })}
+      onDragEnd={onRowDragEnd({ blockIndex: block.index, rowIds })}
       onDragStart={onRowDragStart({ blockIndex: block.index })}
       sensors={sensors}
     >
