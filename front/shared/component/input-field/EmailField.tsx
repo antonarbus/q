@@ -4,7 +4,7 @@ import { theme } from '@shared/theme'
 import mailcheck from 'mailcheck'
 import type { ComponentRef, JSX, RefObject } from 'react'
 import { RiUser3Line } from 'react-icons/ri'
-import { isEmailPatternOk } from '../../util/isEmailPatternOk'
+import { z } from 'zod'
 
 type Props = {
   emailSignal: Signal<string>
@@ -37,7 +37,7 @@ export const EmailField = ({
   const inputFocusedOutOnesSignal = useSignal(false)
 
   useSignalEffect(() => {
-    isEmailOkSignal.value = isEmailPatternOk(emailSignal.value)
+    isEmailOkSignal.value = z.email().safeParse(emailSignal.value).success
 
     const isMailPatternOk =
       inputFocusedOutOnesSignal.value &&

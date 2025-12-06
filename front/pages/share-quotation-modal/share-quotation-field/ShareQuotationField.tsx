@@ -1,7 +1,7 @@
 import type { AccessFormValuesSignal } from '@entities/quotation/type'
 import { useSignal } from '@preact/signals-react'
-import { isEmailPatternOk } from '@shared/util/isEmailPatternOk'
 import { type JSX, useEffect } from 'react'
+import { z } from 'zod'
 import { Layout } from './Layout'
 import { SharedWithEmailInputField } from './SharedWithEmailInputField'
 import { SharedWithEmailList } from './SharedWithEmailList'
@@ -19,7 +19,7 @@ export const ShareQuotationField = ({
 
   // disable button
   useEffect(() => {
-    const isEmailOk = isEmailPatternOk(emailSignal.value)
+    const isEmailOk = z.email().safeParse(emailSignal.value).success
     isButtonDisabledSignal.value = isEmailOk === false
   }, [emailSignal.value])
 
