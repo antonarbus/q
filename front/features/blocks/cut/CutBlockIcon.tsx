@@ -66,8 +66,7 @@ export const CutBlockIcon = (): JSX.Element => {
             const html = getClosestPaperElementHtml(event)
 
             // Save scroll position before setNotEditable
-            const scrollX = window.scrollX
-            const scrollY = window.scrollY
+            const { scrollX, scrollY } = window
 
             dispatch(textSlice.actions.setNotEditable())
 

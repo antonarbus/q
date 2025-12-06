@@ -60,8 +60,8 @@ export const validatePrice = ({
     }
 
     const subTotalPriceValueNew: number = rows.reduce(
-      (accumulator: number, row: Row) => {
-        const price = row.price.value
+      (accumulator: number, _row: Row) => {
+        const price = _row.price.value
 
         return accumulator + price
       },

@@ -14,8 +14,7 @@ export const onBlockDragEnd =
     const { active, over } = event
 
     // Save scroll position before setNotEditable
-    const scrollX = window.scrollX
-    const scrollY = window.scrollY
+    const { scrollX, scrollY } = window
 
     // Basically we wish to disable edit on drag start, but drag positions of dnd-kit goes crazy
     // Thus to re-render elements to let them take data from redux we switch edit, which causes blink

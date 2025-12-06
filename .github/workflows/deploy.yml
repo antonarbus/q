@@ -92,7 +92,7 @@ jobs:
         run: bun run install-all
 
       - name: 'Run ESLint'
-        run: bun run lint-check
+        run: bun run lint-check-quiet
 
       - name: 'Run Prettier'
         run: bun run format-check
