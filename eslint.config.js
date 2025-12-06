@@ -147,8 +147,17 @@ export default [
       '@typescript-eslint/explicit-function-return-type': 'error', // feel that sometimes return type is so complex that it does not make much sense to type it manually, for ex in useQuery hooks, maybe good to use "warn" instead of "error"
       '@typescript-eslint/explicit-module-boundary-types': 'error', // same as above, but for exported functions
       '@typescript-eslint/no-unnecessary-condition': 'warn', // same it is good to have explicit unnecessary condition
+      '@typescript-eslint/no-misused-promises': [
+        'error',
+        {
+          checksVoidReturn: {
+            attributes: false, // Allow async event handlers
+          },
+        },
+      ],
 
       // adjust React rules,
+      'react-hooks/immutability': 'off', // gives error for modifying signal's value
       'react/jsx-sort-props': 'off',
       'react/react-in-jsx-scope': 'off', // suppress error 'React' must be in scope when using JSX
       'react/display-name': 'off', // function inside forward ref can by anonymous

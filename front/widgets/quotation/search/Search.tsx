@@ -28,7 +28,7 @@ export const Search = (): JSX.Element => {
     if (email !== null) {
       void getBookmarkListQuery.refetch()
     }
-  }, [email])
+  }, [email, getBookmarkListQuery])
 
   const isAutocompleteOpen = useSignal(false)
   const isCopyModalVisible = useIsCopyModalVisible()
@@ -114,8 +114,8 @@ export const Search = (): JSX.Element => {
                 const { item } = data
 
                 // Save scroll position before setNotEditable
-                const scrollX = window.scrollX
-                const scrollY = window.scrollY
+                const { scrollX } = window
+                const { scrollY } = window
 
                 dispatch(textSlice.actions.setNotEditable())
 

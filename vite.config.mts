@@ -54,6 +54,7 @@ const stripHandlerFromApiRoutes = (): unknown => {
         configFile: false,
         filename: id,
         plugins: [
+          // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
           () => ({
             visitor: {
               ObjectProperty(path: NodePath<ObjectProperty>): void {
