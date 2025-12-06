@@ -8,9 +8,6 @@ import stylistic from '@stylistic/eslint-plugin'
 
 export default [
   {
-    files: ['**.*{js,mjs,cjs,ts,jsx,tsx}'],
-  },
-  {
     ignores: [
       '**/build/',
       '**/froalaPkg.js',
@@ -152,6 +149,7 @@ export default [
       '@typescript-eslint/no-unnecessary-condition': 'warn', // same it is good to have explicit unnecessary condition
 
       // adjust React rules,
+      'react/jsx-sort-props': 'off',
       'react/react-in-jsx-scope': 'off', // suppress error 'React' must be in scope when using JSX
       'react/display-name': 'off', // function inside forward ref can by anonymous
       'react/jsx-no-literals': 'off', // requires to <div>{'text'}</div>
