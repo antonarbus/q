@@ -4,7 +4,7 @@ import type { AnimationScope } from 'motion/react'
 import { useEffect } from 'react'
 
 type Props = {
-  copyModalRef: AnimationScope
+  copyModalRef: AnimationScope<HTMLElement | null>
 }
 
 export const useCursorPos = (props: Props): void => {
@@ -32,7 +32,7 @@ export const useCursorPos = (props: Props): void => {
       signal: abortController.signal,
     })
 
-    return () => {
+    return (): void => {
       abortController.abort()
     }
   }, [props.copyModalRef])
