@@ -170,4 +170,16 @@ export default [
       '@stylistic/multiline-comment-style': 'off',
     },
   },
+  // Test-specific overrides
+  {
+    files: ['tests/**/*.spec.ts', 'tests/**/*.test.ts', '**/__tests__/**'],
+    rules: {
+      // Variables in test suites often need to be shared across tests
+      '@typescript-eslint/init-declarations': 'off',
+
+      // Test response types are often any from external APIs
+      '@typescript-eslint/no-unsafe-assignment': 'off',
+      '@typescript-eslint/no-unsafe-member-access': 'off',
+    },
+  },
 ]

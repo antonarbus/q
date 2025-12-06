@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import { api } from '@back/api'
 import { expect, test } from '@playwright/test'
 import { runtimeConfig } from '../../config/runtime'
@@ -30,7 +28,7 @@ test.describe('#authTokenRefresh', () => {
       accessToken = loginData.accessJwtToken
 
       // Verify refresh token cookie is set
-      const cookies = loginResponse.headers()['set-cookie'] || ''
+      const cookies = loginResponse.headers()['set-cookie'] ?? ''
       expect(cookies).toContain('refresh-jwt-token')
 
       // Store the refresh token cookie for later use
