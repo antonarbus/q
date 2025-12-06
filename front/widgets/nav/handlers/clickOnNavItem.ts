@@ -20,7 +20,7 @@ export const clickOnNavItem = (props: Props): void => {
   document.activeElement.blur() // to prevent open an active navItem link on Enter key
 
   const { link, funcId } = props.navItem
-  const func = funcId ? functionRegistry[funcId] : undefined
+  const func = funcId === undefined ? undefined : functionRegistry[funcId]
 
   if (props.disabled === true) {
     return
@@ -28,7 +28,7 @@ export const clickOnNavItem = (props: Props): void => {
 
   if (link !== undefined) {
     // just follow the link natively and call the func
-    void func?.(props.event)
+    func?.(props.event)
 
     return
   }
@@ -60,7 +60,7 @@ export const clickOnNavItem = (props: Props): void => {
   }
 
   if (func !== undefined) {
-    void func(props.event)
+    func(props.event)
 
     return
   }
@@ -69,6 +69,7 @@ export const clickOnNavItem = (props: Props): void => {
     // open menu and determine its position (right: 0 OR left: 0)
     const navItemRightPos =
       props.navItemRef.current.getBoundingClientRect().right
+
     dispatch(navSlice.actions.setNavItemRightPos({ navItemRightPos }))
     dispatch(navSlice.actions.openMenuWithId({ navItemId: props.navItem.id }))
   }

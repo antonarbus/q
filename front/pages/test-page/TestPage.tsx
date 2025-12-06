@@ -23,14 +23,14 @@ const onClick = async (): Promise<void> => {
   ])
 
   if (res !== 'show spinner') {
-    console.log('✅ Fast response, no spinner')
-    console.log(res)
+    console.info('✅ Fast response, no spinner')
+    console.info(res)
 
     return
   }
 
   if (res === 'show spinner') {
-    console.log('⏳ Show spinner')
+    console.info('⏳ Show spinner')
 
     const spinnerStart = Date.now()
     const finalRes = await sayHelloAfterDelay()
@@ -38,11 +38,11 @@ const onClick = async (): Promise<void> => {
     const remaining = MIN_SPINNER_TIME - spinnerTime
 
     if (remaining > 0) {
-      console.log('⏳ Extend spinner a bit')
+      console.info('⏳ Extend spinner a bit')
       await asyncDelay(remaining) // ensure spinner is visible for min time
     }
 
-    console.log('✅ Done:', finalRes)
+    console.info('✅ Done:', finalRes)
   }
 }
 

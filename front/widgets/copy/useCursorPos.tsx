@@ -17,7 +17,7 @@ export const useCursorPos = (props: Props): void => {
     }
 
     // Initialize position from Redux
-    const initCords = getState().copy.initCords
+    const { initCords } = getState().copy
     container.style.left = `${initCords.x + 30}px`
     container.style.top = `${initCords.y + 30}px`
 

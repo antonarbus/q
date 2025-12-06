@@ -30,7 +30,7 @@ export const clickOnMenuItem = (
   const menuItem = menuItems.find((item) => item.id === navItemId)
   const link = menuItem?.link
   const funcId = menuItem?.funcId
-  const func = funcId ? functionRegistry[funcId] : undefined
+  const func = funcId === undefined ? undefined : functionRegistry[funcId]
 
   if (disabled === true) {
     return
@@ -38,7 +38,7 @@ export const clickOnMenuItem = (
 
   if (link !== undefined) {
     // follow the link natively and call the func
-    void func?.(event)
+    func?.(event)
     dispatch(navSlice.actions.closeMenu())
 
     return
@@ -47,7 +47,7 @@ export const clickOnMenuItem = (
   event.preventDefault()
 
   if (func !== undefined) {
-    void func(event)
+    func(event)
     dispatch(navSlice.actions.closeMenu())
 
     return

@@ -5,10 +5,12 @@ import type { MouseEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useEffectOnce } from 'react-use'
 
+type MouseEventLike = Pick<MouseEvent, 'clientX' | 'clientY'>
+
 type Shortcuts = {
   name: string
   shortcut: string[]
-  function: ((event?: MouseEvent) => void) | null
+  function: ((event?: MouseEventLike) => void) | null
   link: string | null
 }
 
@@ -24,12 +26,20 @@ const searchForShortcutsInNavStructure = (props: Props): void => {
 
   arrForNavStructureIteration.forEach((navItem) => {
     if (navItem.shortcut !== undefined) {
-      const func = navItem.funcId ? functionRegistry[navItem.funcId] : null
+      const func =
+        navItem.funcId === undefined ? null : functionRegistry[navItem.funcId]
 
       shortcuts.push({
         name: navItem.name,
         shortcut: navItem.shortcut.toSorted(),
-        function: func ? (event?: MouseEvent) => void func(event) : null,
+        function:
+          func === null
+            ? null
+            : (event?: MouseEventLike): void => {
+                // Safe: func only uses clientX/clientY properties
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+                func(event as MouseEvent | undefined)
+              },
         link: navItem.link ?? null,
       })
     }
@@ -73,10 +83,10 @@ export const usePressNavShortcut = (props: Props): void => {
         if (matchedNavItemByShortcut.function !== null) {
           // Create a synthetic event-like object with current mouse position
           // so that copy modal can be opened when triggered by shortcuts
-          const syntheticEvent = {
+          const syntheticEvent: MouseEventLike = {
             clientX: mousePosition.x,
             clientY: mousePosition.y,
-          } as MouseEvent
+          }
 
           matchedNavItemByShortcut.function(syntheticEvent)
 
@@ -91,6 +101,7 @@ export const usePressNavShortcut = (props: Props): void => {
 
     window.addEventListener('keyup', (event) => {
       const keyReleased = event.key.toLowerCase()
+
       keysAreBeingPressed = keysAreBeingPressed.filter(
         (key) => key !== keyReleased,
       )

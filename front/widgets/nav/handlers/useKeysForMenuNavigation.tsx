@@ -10,98 +10,74 @@ export const useKeysForMenuNavigation = (): void => {
   const navigate = useNavigate()
   const menuNavigation = useMenuNavigation()
 
-  const navKeyboardHandler = (event: KeyboardEvent): void => {
-    const { currentMenuNavItemId } = getState().nav
+  useEffect(() => {
+    const controller = new AbortController()
 
-    const { navItem: currentNavItem } = getNavItem({
-      navItemId: currentMenuNavItemId,
-    })
+    const navKeyboardHandler = (event: KeyboardEvent): void => {
+      const { currentMenuNavItemId } = getState().nav
 
-    // +1 for "Close" or "Back" item before currentMenuItems
-    const navItems = (currentNavItem?.navItems ?? []).filter(
-      (item) => item.isHidden === false,
-    ) // 3 items without first "close" or "Back"
+      const { navItem: currentNavItem } = getNavItem({
+        navItemId: currentMenuNavItemId,
+      })
 
-    const menuItemsQty = navItems.length // 3
+      // +1 for "Close" or "Back" item before currentMenuItems
+      const navItems = (currentNavItem?.navItems ?? []).filter(
+        (item) => item.isHidden === false,
+      ) // 3 items without first "close" or "Back"
 
-    const { hoverIndex } = getState().nav // -1
+      const menuItemsQty = navItems.length // 3
 
-    const isNestedMenu = getState().nav.idsToCurrentMenuItems.length > 2
+      const { hoverIndex } = getState().nav // -1
 
-    if (event.key === 'ArrowDown') {
-      event.preventDefault()
-      const isLastMenuItem = hoverIndex === menuItemsQty
+      const isNestedMenu = getState().nav.idsToCurrentMenuItems.length > 2
 
-      if (isLastMenuItem === true) {
-        dispatch(
-          navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
-        )
+      if (event.key === 'ArrowDown') {
+        event.preventDefault()
+        const isLastMenuItem = hoverIndex === menuItemsQty
 
-        return
-      }
+        if (isLastMenuItem === true) {
+          dispatch(
+            navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
+          )
 
-      dispatch(
-        navSlice.actions.setMenuItemHoverIndex({
-          menuItemHoverIndex: hoverIndex + 1,
-        }),
-      )
+          return
+        }
 
-      return
-    }
-
-    if (event.key === 'ArrowUp') {
-      event.preventDefault()
-      const isTopMenuItem = hoverIndex < 1
-
-      if (isTopMenuItem === true) {
         dispatch(
           navSlice.actions.setMenuItemHoverIndex({
-            menuItemHoverIndex: menuItemsQty,
+            menuItemHoverIndex: hoverIndex + 1,
           }),
         )
 
         return
       }
 
-      dispatch(
-        navSlice.actions.setMenuItemHoverIndex({
-          menuItemHoverIndex: hoverIndex - 1,
-        }),
-      )
+      if (event.key === 'ArrowUp') {
+        event.preventDefault()
+        const isTopMenuItem = hoverIndex < 1
 
-      return
-    }
+        if (isTopMenuItem === true) {
+          dispatch(
+            navSlice.actions.setMenuItemHoverIndex({
+              menuItemHoverIndex: menuItemsQty,
+            }),
+          )
 
-    const shouldGoBack = isNestedMenu && event.key === 'Backspace'
+          return
+        }
 
-    if (shouldGoBack === true) {
-      dispatch(
-        navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
-      )
+        dispatch(
+          navSlice.actions.setMenuItemHoverIndex({
+            menuItemHoverIndex: hoverIndex - 1,
+          }),
+        )
 
-      void menuNavigation.goUp()
+        return
+      }
 
-      return
-    }
+      const shouldGoBack = isNestedMenu && event.key === 'Backspace'
 
-    const shouldClose = isNestedMenu === false && event.key === 'Backspace'
-
-    if (shouldClose === true) {
-      dispatch(navSlice.actions.closeMenu())
-
-      return
-    }
-
-    if (event.key === 'Escape') {
-      dispatch(navSlice.actions.closeMenu())
-
-      return
-    }
-
-    if (event.key === 'Enter') {
-      const isBackMenuItem = hoverIndex === 0 && isNestedMenu
-
-      if (isBackMenuItem === true) {
+      if (shouldGoBack === true) {
         dispatch(
           navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
         )
@@ -111,136 +87,161 @@ export const useKeysForMenuNavigation = (): void => {
         return
       }
 
-      const isCloseMenuItem = hoverIndex === 0 && isNestedMenu === false
+      const shouldClose = isNestedMenu === false && event.key === 'Backspace'
 
-      if (isCloseMenuItem === true) {
+      if (shouldClose === true) {
         dispatch(navSlice.actions.closeMenu())
 
         return
       }
 
-      const navItemId = navItems[hoverIndex - 1]?.id
-
-      if (navItemId === undefined) {
-        return
-      }
-
-      const { navItem } = getNavItem({ navItemId })
-
-      const externalLink = navItem?.externalLink
-
-      if (externalLink !== undefined) {
-        window.open(externalLink, '_blank', 'noopener,noreferrer')
+      if (event.key === 'Escape') {
         dispatch(navSlice.actions.closeMenu())
 
         return
       }
 
-      const link = navItem?.link
+      if (event.key === 'Enter') {
+        const isBackMenuItem = hoverIndex === 0 && isNestedMenu
 
-      if (link !== undefined) {
-        void navigate(link)
-        dispatch(navSlice.actions.closeMenu())
+        if (isBackMenuItem === true) {
+          dispatch(
+            navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
+          )
 
-        return
-      }
+          void menuNavigation.goUp()
 
-      const funcId = navItem?.funcId
-      const func = funcId ? functionRegistry[funcId] : undefined
+          return
+        }
 
-      if (func !== undefined) {
-        void func()
-        dispatch(navSlice.actions.closeMenu())
+        const isCloseMenuItem = hoverIndex === 0 && isNestedMenu === false
 
-        return
-      }
+        if (isCloseMenuItem === true) {
+          dispatch(navSlice.actions.closeMenu())
 
-      const isNestedMenuAvailable = Boolean(navItem?.navItems)
+          return
+        }
 
-      dispatch(
-        navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
-      )
+        const navItemId = navItems[hoverIndex - 1]?.id
 
-      if (isNestedMenuAvailable === true) {
-        void menuNavigation.goDown({ navItemId })
+        if (navItemId === undefined) {
+          return
+        }
 
-        return
-      }
-    }
+        const { navItem } = getNavItem({ navItemId })
 
-    const anyLetter = /\w/u
-    const anyLetterPressed = anyLetter.exec(event.key)
+        const externalLink = navItem?.externalLink
 
-    // jump to "Close" & "Back"
-    if (anyLetterPressed !== null) {
-      const shouldJumpToClose = isNestedMenu === false && event.key === 'c'
+        if (externalLink !== undefined) {
+          window.open(externalLink, '_blank', 'noopener,noreferrer')
+          dispatch(navSlice.actions.closeMenu())
 
-      if (shouldJumpToClose === true) {
+          return
+        }
+
+        const link = navItem?.link
+
+        if (link !== undefined) {
+          void navigate(link)
+          dispatch(navSlice.actions.closeMenu())
+
+          return
+        }
+
+        const funcId = navItem?.funcId
+
+        const func = funcId === undefined ? undefined : functionRegistry[funcId]
+
+        if (func !== undefined) {
+          func()
+          dispatch(navSlice.actions.closeMenu())
+
+          return
+        }
+
+        const isNestedMenuAvailable = Boolean(navItem?.navItems)
+
         dispatch(
           navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
         )
 
-        return
+        if (isNestedMenuAvailable === true) {
+          void menuNavigation.goDown({ navItemId })
+
+          return
+        }
       }
 
-      const shouldJumpToGoBack = isNestedMenu && event.key === 'b'
+      const anyLetter = /\w/u
+      const anyLetterPressed = anyLetter.exec(event.key)
 
-      if (shouldJumpToGoBack === true) {
-        dispatch(
-          navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
-        )
+      // jump to "Close" & "Back"
+      if (anyLetterPressed !== null) {
+        const shouldJumpToClose = isNestedMenu === false && event.key === 'c'
 
-        return
-      }
+        if (shouldJumpToClose === true) {
+          dispatch(
+            navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
+          )
 
-      // jump to item by letter
-      const index = navItems.findIndex((navItem, navIndex) => {
-        const isiKeySameAsFirstItemLetter = navItem.name
-          .toLowerCase()
-          .startsWith(event.key)
-
-        if (isiKeySameAsFirstItemLetter === false) {
-          return false
+          return
         }
 
-        if (navIndex + 2 > hoverIndex) {
-          return true
+        const shouldJumpToGoBack = isNestedMenu && event.key === 'b'
+
+        if (shouldJumpToGoBack === true) {
+          dispatch(
+            navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
+          )
+
+          return
         }
 
-        return false
-      })
-
-      if (index > -1) {
-        dispatch(
-          navSlice.actions.setMenuItemHoverIndex({
-            menuItemHoverIndex: index + 1,
-          }),
-        )
-      }
-
-      // if no found below hovered item, do it again from the top
-      if (index === -1) {
-        const newIndex = navItems.findIndex((navItem) => {
+        // jump to item by letter
+        const index = navItems.findIndex((navItem, navIndex) => {
           const isiKeySameAsFirstItemLetter = navItem.name
             .toLowerCase()
             .startsWith(event.key)
 
-          return isiKeySameAsFirstItemLetter
+          if (isiKeySameAsFirstItemLetter === false) {
+            return false
+          }
+
+          if (navIndex + 2 > hoverIndex) {
+            return true
+          }
+
+          return false
         })
 
-        if (newIndex > -1) {
+        if (index > -1) {
           dispatch(
             navSlice.actions.setMenuItemHoverIndex({
-              menuItemHoverIndex: newIndex + 1,
+              menuItemHoverIndex: index + 1,
             }),
           )
         }
+
+        // if no found below hovered item, do it again from the top
+        if (index === -1) {
+          const newIndex = navItems.findIndex((navItem) => {
+            const isiKeySameAsFirstItemLetter = navItem.name
+              .toLowerCase()
+              .startsWith(event.key)
+
+            return isiKeySameAsFirstItemLetter
+          })
+
+          if (newIndex > -1) {
+            dispatch(
+              navSlice.actions.setMenuItemHoverIndex({
+                menuItemHoverIndex: newIndex + 1,
+              }),
+            )
+          }
+        }
       }
     }
-  }
-
-  useEffect(() => {
-    const controller = new AbortController()
 
     window.addEventListener('keydown', navKeyboardHandler, {
       signal: controller.signal,
@@ -249,5 +250,5 @@ export const useKeysForMenuNavigation = (): void => {
     return (): void => {
       controller.abort()
     }
-  }, [])
+  }, [menuNavigation, navigate])
 }
