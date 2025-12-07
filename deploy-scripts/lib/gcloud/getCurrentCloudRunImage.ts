@@ -21,6 +21,7 @@ export const getCurrentCloudRunImage = async (
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : String(error)
     logger.warning(`Could not retrieve current image: ${errorMessage}`)
+
     return null
   }
 }

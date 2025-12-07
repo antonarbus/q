@@ -43,6 +43,7 @@ export const verifyDeployment = async (props: Props): Promise<void> => {
 
       // Check for HTML content
       logger.info('  Checking for HTML content...')
+
       if (
         body.toLowerCase().includes('<html') ||
         body.toLowerCase().includes('<!doctype')
@@ -56,12 +57,14 @@ export const verifyDeployment = async (props: Props): Promise<void> => {
       // Check response size
       logger.info('  Checking response size...')
       const responseSize = body.length
+
       if (responseSize > 100) {
         logger.success(`     Response size: ${responseSize} bytes`)
       } else {
         logger.error(
           `     Response too small: ${responseSize} bytes (expected > 100)`,
         )
+
         frontendFailures++
       }
     } else {
@@ -94,12 +97,14 @@ export const verifyDeployment = async (props: Props): Promise<void> => {
 
         // Check for 'connected' message
         logger.info('  Checking health check message...')
+
         if (healthData.message === 'connected') {
           logger.success('     Health check message correct: "connected"')
         } else {
           logger.error(
             `     Unexpected message: "${healthData.message}" (expected "connected")`,
           )
+
           backendFailures++
         }
       } catch {
@@ -132,6 +137,7 @@ export const verifyDeployment = async (props: Props): Promise<void> => {
       // Rollback frontend if needed
       if (frontendFailures > 0 && props.previousImageFrontend) {
         logger.info('Rolling back frontend...')
+
         await rollbackCloudRunService({
           cloudRunServiceName: config.cloudRunServiceNameFrontend,
           previousImage: props.previousImageFrontend,
@@ -143,6 +149,7 @@ export const verifyDeployment = async (props: Props): Promise<void> => {
       // Rollback backend if needed
       if (backendFailures > 0 && props.previousImageBackend) {
         logger.info('Rolling back backend...')
+
         await rollbackCloudRunService({
           cloudRunServiceName: config.cloudRunServiceNameBackend,
           previousImage: props.previousImageBackend,

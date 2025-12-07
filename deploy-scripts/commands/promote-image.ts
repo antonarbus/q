@@ -21,6 +21,7 @@ export const promoteImage = async (props: Props): Promise<void> => {
     dockerImageNameFrontend,
     dockerImageNameBackend,
   } = sharedInfraConfigVariables
+
   const service = props.service || 'both'
 
   logger.info('Promoting Docker images...')

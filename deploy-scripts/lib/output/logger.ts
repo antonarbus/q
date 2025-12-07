@@ -22,7 +22,7 @@ export const logger = {
   },
 
   section: (message: string): void => {
-    console.error('\n' + chalk.bold(message))
+    console.error(`\n${chalk.bold(message)}`)
   },
 
   plain: (message: string): void => {

@@ -15,6 +15,7 @@ export const detectEnvironment = async (): Promise<Env> => {
     logger.info(
       `Environment: ${MASTER_DEPLOYS_TO_ENV} (from branch: ${branchName})`,
     )
+
     logger.success('Environment detection complete')
     githubOutput({ env: MASTER_DEPLOYS_TO_ENV })
 
@@ -26,6 +27,7 @@ export const detectEnvironment = async (): Promise<Env> => {
   )
 
   logger.error(`Current branch: ${branchName}`)
+
   logger.error(
     'Use the Promote Release workflow at GitHub to deploy to other environments',
   )

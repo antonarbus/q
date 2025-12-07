@@ -17,30 +17,34 @@ export const showDeploymentInfo = async (props: Props): Promise<void> => {
   const service = props.service || 'both'
 
   // Print section header
-  logger.warning(`${props.env.toUpperCase()}`)
+  logger.warning(props.env.toUpperCase())
   logger.emptyLine()
 
   // Show Frontend
   if (service === 'frontend' || service === 'both') {
     logger.info('=== Frontend Service ===')
+
     await showServiceInfo({
       serviceName: 'Frontend',
       cloudRunServiceName: config.cloudRunServiceNameFrontend,
       region: config.region,
       projectId: config.projectId,
     })
+
     logger.emptyLine()
   }
 
   // Show Backend
   if (service === 'backend' || service === 'both') {
     logger.info('=== Backend Service ===')
+
     await showServiceInfo({
       serviceName: 'Backend',
       cloudRunServiceName: config.cloudRunServiceNameBackend,
       region: config.region,
       projectId: config.projectId,
     })
+
     logger.emptyLine()
   }
 }
@@ -93,10 +97,12 @@ async function showServiceInfo(props: ShowServiceInfoProps): Promise<void> {
 
       if (!digest) {
         logger.warning(`Could not find digest for tag: ${envTag}`)
+
         return
       }
     } catch {
       logger.warning('Could not get image digest')
+
       return
     }
 
@@ -111,13 +117,14 @@ async function showServiceInfo(props: ShowServiceInfoProps): Promise<void> {
 
       for (const line of lines) {
         const parts = line.trim().split(/\s+/)
+
         if (parts.length >= 3) {
           const tagPath = parts[0]
           const tagDigest = parts[2] // Column 3: DIGEST (0=TAG, 1=IMAGE, 2=DIGEST)
           const tag = tagPath?.split('/tags/').pop() ?? null
 
           // If this tag points to same digest and looks like a git SHA (40 hex chars), use it
-          if (tagDigest === digest && tag && tag.match(/^[0-9a-f]{40}$/)) {
+          if (tagDigest === digest && tag && /^[0-9a-f]{40}$/.exec(tag)) {
             gitSha = tag
             break
           }
@@ -146,6 +153,7 @@ async function showServiceInfo(props: ShowServiceInfoProps): Promise<void> {
     }
   } catch (error) {
     logger.error(`Failed to get deployment info for ${props.serviceName}`)
+
     throw error
   }
 }

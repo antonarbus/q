@@ -35,6 +35,7 @@ export const generateTfvars = async (): Promise<void> => {
       // Handle arrays - format as Terraform list
       if (Array.isArray(value)) {
         const arrayValues = value.map((item) => `"${item}"`).join(', ')
+
         return `${snakeKey} = [${arrayValues}]`
       }
 

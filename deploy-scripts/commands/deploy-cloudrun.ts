@@ -22,6 +22,7 @@ export async function deployCloudRun(props: Props): Promise<void> {
     const imageUrl = `${config.region}-docker.pkg.dev/${config.projectId}/${config.artifactRegistryName}/${config.dockerImageNameFrontend}:${dockerImageTag}`
 
     logger.info('Capturing current frontend image for rollback capability...')
+
     const previousImageFrontend = await getCurrentCloudRunImage({
       cloudRunServiceName: config.cloudRunServiceNameFrontend,
       region: config.region,
@@ -47,6 +48,7 @@ export async function deployCloudRun(props: Props): Promise<void> {
     const imageUrl = `${config.region}-docker.pkg.dev/${config.projectId}/${config.artifactRegistryName}/${config.dockerImageNameBackend}:${dockerImageTag}`
 
     logger.info('Capturing current backend image for rollback capability...')
+
     const previousImageBackend = await getCurrentCloudRunImage({
       cloudRunServiceName: config.cloudRunServiceNameBackend,
       region: config.region,
