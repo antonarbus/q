@@ -1,6 +1,6 @@
 import { Box, Portal } from '@mui/material'
 import { theme } from '@shared/theme'
-import { type ReactNode, useEffect, useState } from 'react'
+import { type ReactNode, useMemo } from 'react'
 import { useIsMenuOutsideWindow } from './functions/useIsMenuOutsideWindow'
 
 type Props = {
@@ -9,37 +9,33 @@ type Props = {
 }
 
 export const MenuLayout = (props: Props): ReactNode => {
-  const [menuPosition, setMenuPosition] = useState<{
-    top: number
-    left: number
-    right: number
-  } | null>(null)
-
   const isMenuOutsideWindow = useIsMenuOutsideWindow()
 
   // Calculate menu position based on parent nav item
-  useEffect(() => {
+  const menuPosition = useMemo(() => {
     const navItem = props.navItemRef?.current
 
-    if (navItem instanceof HTMLElement) {
-      const rect = navItem.getBoundingClientRect()
-
-      setMenuPosition({
-        top: rect.bottom + 5,
-        right: window.innerWidth - rect.right,
-        left:
-          isMenuOutsideWindow === true
-            ? rect.left
-            : rect.right - theme.menu.width,
-      })
+    if (navItem instanceof HTMLElement === false) {
+      return null
     }
-  }, [isMenuOutsideWindow, props.navItemRef])
+
+    const rect = navItem.getBoundingClientRect()
+
+    return {
+      top: rect.bottom + 5,
+      right: window.innerWidth - rect.right,
+      left: rect.left,
+    }
+  }, [props.navItemRef])
 
   if (menuPosition === null) {
     return null
   }
 
-  console.log('🚀 ~ menuPosition:', menuPosition)
+  const leftPosition =
+    isMenuOutsideWindow === true
+      ? menuPosition.left
+      : menuPosition.right - theme.menu.width
 
   return (
     <Portal>
@@ -48,8 +44,7 @@ export const MenuLayout = (props: Props): ReactNode => {
         sx={{
           position: 'fixed',
           top: `${menuPosition.top}px`,
-          left:
-            isMenuOutsideWindow === true ? `${menuPosition.left}px` : 'auto',
+          left: isMenuOutsideWindow === true ? `${leftPosition}px` : 'auto',
           right: isMenuOutsideWindow === false ? `${menuPosition.right}px` : 0,
           width: `${theme.menu.width}px`,
           paddingTop: `${theme.menu.paddingTop}px`,
