@@ -158,6 +158,7 @@ export default [
       ],
 
       // adjust React rules,
+      'react/no-multi-comp': 'warn', // sometimes 2 components are needed
       'react-hooks/refs': 'off', // buggy rule
       'react-hooks/preserve-manual-memoization': 'off', // do not use react compiler
       'react/jsx-max-depth': 'off', // too aggressive

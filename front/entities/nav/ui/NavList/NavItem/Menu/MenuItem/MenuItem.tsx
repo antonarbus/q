@@ -38,9 +38,11 @@ export const MenuItem = (props: Props): JSX.Element => {
     .replace('//', '/')
 
   const to = link.includes('.') ? fixedLink : link
-  const icon = props.navItem.iconId
-    ? iconRegistry[props.navItem.iconId]
-    : undefined
+
+  const icon =
+    props.navItem.iconId === undefined
+      ? undefined
+      : iconRegistry[props.navItem.iconId]
 
   const menuItemContent = (
     <>
