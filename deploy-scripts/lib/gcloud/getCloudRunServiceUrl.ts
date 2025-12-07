@@ -1,4 +1,5 @@
 import { $ } from 'bun'
+import { z } from 'zod'
 
 type Props = {
   cloudRunServiceName: string
@@ -8,8 +9,16 @@ type Props = {
 
 /** Get Cloud Run service URL */
 export const getCloudRunServiceUrl = async (props: Props): Promise<string> => {
-  const result =
+  const result: unknown =
     await $`gcloud run services describe ${props.cloudRunServiceName} --region ${props.region} --project ${props.projectId} --format=json`.json()
 
-  return result.status.url
+  const cloudRunServiceResponseSchema = z.object({
+    status: z.object({
+      url: z.string(),
+    }),
+  })
+
+  const parsedResult = cloudRunServiceResponseSchema.parse(result)
+
+  return parsedResult.status.url
 }

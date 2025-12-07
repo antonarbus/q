@@ -17,7 +17,9 @@ export const getCurrentCloudRunImage = async (
     const result =
       await $`gcloud run services describe ${props.cloudRunServiceName} --region ${props.region} --project ${props.projectId} --format=${format}`.text()
 
-    return result.trim() || null
+    const imageName = result.trim() === '' ? null : result.trim()
+
+    return imageName
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : String(error)
     logger.warning(`Could not retrieve current image: ${errorMessage}`)
