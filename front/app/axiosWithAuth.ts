@@ -25,16 +25,22 @@ axiosWithAuth.interceptors.response.use(
   },
   async (error: AxiosError) => {
     // remember original request to use it when we refresh user's access token
-    const originalRequestConfig = error.config as ExtendedAxiosRequestConfig
+    const originalRequestConfig: ExtendedAxiosRequestConfig | undefined =
+      error.config
+
+    const isRetry = originalRequestConfig?.isRetry
 
     // most likely access token was expired
     const isUnauthorizedAfterCheckingAccessToken =
-      (error instanceof AxiosError &&
-        error.response?.status === 401 &&
-        (error.config as ExtendedAxiosRequestConfig).isRetry === false) ||
-      (error.config as ExtendedAxiosRequestConfig).isRetry === undefined
+      error instanceof AxiosError &&
+      error.response?.status === 401 &&
+      (isRetry === false || isRetry === undefined)
 
-    if (isUnauthorizedAfterCheckingAccessToken === true) {
+    const shouldRetry =
+      isUnauthorizedAfterCheckingAccessToken === true &&
+      originalRequestConfig !== undefined
+
+    if (shouldRetry === true) {
       originalRequestConfig.isRetry = true
 
       try {
