@@ -32,7 +32,7 @@ export const getAccessTokenHandler: RouterHandler = async (req, res, _next) => {
   const userDataPerviouslyLoggedIn = getUserFromRefreshTokenOrNull({ req })
 
   if (userDataPerviouslyLoggedIn === null) {
-    res.status(httpStatus.unauthorized_401).json({ message: 'Not logged in' })
+    res.status(httpStatus.unauthorized401).json({ message: 'Not logged in' })
 
     return
   }
@@ -53,7 +53,7 @@ export const getAccessTokenHandler: RouterHandler = async (req, res, _next) => {
 
   if (user === null) {
     removeRefreshTokenCookie({ res })
-    res.status(httpStatus.unauthorized_401).json({ message: 'Not logged in' })
+    res.status(httpStatus.unauthorized401).json({ message: 'Not logged in' })
 
     return
   }
@@ -63,7 +63,7 @@ export const getAccessTokenHandler: RouterHandler = async (req, res, _next) => {
     roles,
   })
 
-  res.status(httpStatus.success_200).json({
+  res.status(httpStatus.success200).json({
     message: 'issued access token',
     accessJwtToken,
     accessJwtTokenExpiresOn,

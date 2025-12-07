@@ -51,7 +51,7 @@ export const getQuotationListHandler: RouterHandler = async (
 
   if (documents.length === 0) {
     res
-      .status(httpStatus.success_200)
+      .status(httpStatus.success200)
       .json({ message: 'No content', quotations: [] })
 
     return
@@ -59,12 +59,12 @@ export const getQuotationListHandler: RouterHandler = async (
 
   if (documents.length !== 0) {
     const quotations = documents.map((doc) => doc.toObject({ getters: true }))
-    res.status(httpStatus.success_200).json({ message: 'Found', quotations })
+    res.status(httpStatus.success200).json({ message: 'Found', quotations })
 
     return
   }
 
   res
-    .status(httpStatus.notFound_404)
+    .status(httpStatus.notFound404)
     .json({ message: 'Unhandled case', quotations: [] })
 }

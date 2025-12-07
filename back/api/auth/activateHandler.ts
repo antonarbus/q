@@ -40,7 +40,7 @@ export const activateHandler: RouterHandler = async (req, res, _next) => {
 
   if (user === null) {
     res
-      .status(httpStatus.badRequest_400)
+      .status(httpStatus.badRequest400)
       .json({ message: 'activation key not found' })
 
     return
@@ -49,7 +49,7 @@ export const activateHandler: RouterHandler = async (req, res, _next) => {
   const { email, roles, isActivated } = user
 
   if (isActivated === true) {
-    res.status(httpStatus.success_200).json({ message: 'already activated' })
+    res.status(httpStatus.success200).json({ message: 'already activated' })
 
     return
   }
@@ -68,7 +68,7 @@ export const activateHandler: RouterHandler = async (req, res, _next) => {
     roles,
   })
 
-  res.status(httpStatus.success_200).json({
+  res.status(httpStatus.success200).json({
     message: 'activated',
     accessJwtToken,
     accessJwtTokenExpiresOn,

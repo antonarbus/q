@@ -27,5 +27,5 @@ export const getQuotationCategoriesHandler: RouterHandler = async (
 ) => {
   const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req, res })
   const categories = await QuotationModel.find({ email }).distinct('category')
-  res.status(httpStatus.success_200).json({ message: 'Found', categories })
+  res.status(httpStatus.success200).json({ message: 'Found', categories })
 }

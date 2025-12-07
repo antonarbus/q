@@ -42,7 +42,7 @@ export const saveFileInfoHandler: RouterHandler = async (req, res, _next) => {
 
     const fileDocument = createFileDocRes.toObject()
 
-    res.status(httpStatus.success_200).json({
+    res.status(httpStatus.success200).json({
       fileId: fileDocument.id,
       fileName: fileDocument.name,
       fileSize: fileDocument.size,
@@ -50,7 +50,7 @@ export const saveFileInfoHandler: RouterHandler = async (req, res, _next) => {
       message: 'saved file info',
     })
   } catch {
-    res.status(httpStatus.serverError_500).json({
+    res.status(httpStatus.serverError500).json({
       message: 'failed to make file public',
     })
   }

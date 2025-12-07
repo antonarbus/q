@@ -54,7 +54,7 @@ export const getFileListAllHandler: RouterHandler = async (req, res, _next) => {
   const { roles } = getUserFromAccessTokenOrThrowUnauthorized({ req, res })
 
   if (roles.includes(userRole.superAdmin) === false) {
-    res.status(httpStatus.forbidden_403).json({
+    res.status(httpStatus.forbidden403).json({
       message: 'no permission to view',
       fileList: [],
       fileListTotalCount: 0,
@@ -112,7 +112,7 @@ export const getFileListAllHandler: RouterHandler = async (req, res, _next) => {
     fileListTotalCountResponse.status === 'fulfilled'
 
   if (fulfilled === false) {
-    res.status(httpStatus.notFound_404).json({
+    res.status(httpStatus.notFound404).json({
       message: 'Unhandled error',
       fileList: [],
       fileListTotalCount: 0,
@@ -121,7 +121,7 @@ export const getFileListAllHandler: RouterHandler = async (req, res, _next) => {
     return
   }
 
-  res.status(httpStatus.success_200).json({
+  res.status(httpStatus.success200).json({
     message: 'Found',
     fileList: fileListResponse.value,
     fileListTotalCount: fileListTotalCountResponse.value,

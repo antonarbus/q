@@ -31,5 +31,5 @@ export const getFileListHandler: RouterHandler = async (req, res, _next) => {
     .select({ _id: 0, id: 1, name: 1, size: 1 })
     .lean()
 
-  res.status(httpStatus.success_200).json({ message: 'file stats', fileList })
+  res.status(httpStatus.success200).json({ message: 'file stats', fileList })
 }

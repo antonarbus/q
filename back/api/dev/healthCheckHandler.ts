@@ -21,10 +21,10 @@ export const healthCheckHandler: RouterHandler = (_req, res, _next) => {
   const mongoState = mongoose.connection.readyState
 
   if (mongoState === mongoose.ConnectionStates.connected) {
-    res.status(httpStatus.success_200).json({ message: 'connected' })
+    res.status(httpStatus.success200).json({ message: 'connected' })
 
     return
   }
 
-  res.status(httpStatus.serverError_500).json({ message: 'disconnected' })
+  res.status(httpStatus.serverError500).json({ message: 'disconnected' })
 }

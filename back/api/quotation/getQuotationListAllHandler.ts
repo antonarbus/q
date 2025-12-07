@@ -54,7 +54,7 @@ export const getQuotationListAllHandler: RouterHandler = async (
   const { roles } = getUserFromAccessTokenOrThrowUnauthorized({ req, res })
 
   if (roles.includes(userRole.superAdmin) === false) {
-    res.status(httpStatus.forbidden_403).json({
+    res.status(httpStatus.forbidden403).json({
       message: 'no permission to view',
       quotationList: [],
       quotationListTotalCount: 0,
@@ -116,7 +116,7 @@ export const getQuotationListAllHandler: RouterHandler = async (
     quotationListTotalCountResponse.status === 'fulfilled'
 
   if (fulfilled === false) {
-    res.status(httpStatus.notFound_404).json({
+    res.status(httpStatus.notFound404).json({
       message: 'Unhandled error',
       quotationList: [],
       quotationListTotalCount: 0,
@@ -125,7 +125,7 @@ export const getQuotationListAllHandler: RouterHandler = async (
     return
   }
 
-  res.status(httpStatus.success_200).json({
+  res.status(httpStatus.success200).json({
     message: 'Found',
     quotationList: quotationListResponse.value,
     quotationListTotalCount: quotationListTotalCountResponse.value,

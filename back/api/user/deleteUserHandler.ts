@@ -44,7 +44,7 @@ export const deleteUserHandler: RouterHandler = async (req, res, _next) => {
 
   if (notAllowed === true) {
     res
-      .status(httpStatus.forbidden_403)
+      .status(httpStatus.forbidden403)
       .json({ message: 'not allowed', statistics: [] })
 
     return
@@ -191,5 +191,5 @@ export const deleteUserHandler: RouterHandler = async (req, res, _next) => {
   
   */
 
-  res.status(httpStatus.success_200).json({ message: 'deleted', statistics })
+  res.status(httpStatus.success200).json({ message: 'deleted', statistics })
 }

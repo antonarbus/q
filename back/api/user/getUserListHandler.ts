@@ -40,7 +40,7 @@ export const getUserListHandler: RouterHandler = async (req, res, _next) => {
 
   if (roles.includes(userRole.superAdmin) === false) {
     res
-      .status(httpStatus.forbidden_403)
+      .status(httpStatus.forbidden403)
       .json({ message: 'no permission to view', users: [] })
 
     return
@@ -61,19 +61,19 @@ export const getUserListHandler: RouterHandler = async (req, res, _next) => {
 
   if (users.length === 0) {
     res
-      .status(httpStatus.notFound_404)
+      .status(httpStatus.notFound404)
       .json({ message: 'No content', users: [] })
 
     return
   }
 
   if (users.length !== 0) {
-    res.status(httpStatus.success_200).json({ message: 'users data', users })
+    res.status(httpStatus.success200).json({ message: 'users data', users })
 
     return
   }
 
   res
-    .status(httpStatus.notFound_404)
+    .status(httpStatus.notFound404)
     .json({ message: 'Unhandled case', users: [] })
 }

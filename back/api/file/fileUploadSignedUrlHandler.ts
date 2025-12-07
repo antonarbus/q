@@ -50,14 +50,14 @@ export const fileUploadSignedUrlHandler: RouterHandler = async (
       },
     })
 
-    res.status(httpStatus.success_200).json({
+    res.status(httpStatus.success200).json({
       message: 'signed url generated',
       signedUrl,
       url,
       fileId,
     })
   } catch {
-    res.status(httpStatus.serverError_500).json({
+    res.status(httpStatus.serverError500).json({
       message: 'failed to generate signed url',
       signedUrl: null,
       url: null,

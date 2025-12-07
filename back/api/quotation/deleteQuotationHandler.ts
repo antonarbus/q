@@ -40,7 +40,7 @@ export const deleteQuotationHandler: RouterHandler = async (
   })
 
   if (deleteFromDbResult.deletedCount === 0) {
-    res.status(httpStatus.notFound_404).json({ message: 'not found' })
+    res.status(httpStatus.notFound404).json({ message: 'not found' })
 
     return
   }
@@ -49,10 +49,10 @@ export const deleteQuotationHandler: RouterHandler = async (
   const [{ statusCode }] = await bucket.file(path).delete()
 
   if (statusCode === 204) {
-    res.status(httpStatus.success_200).json({ message: 'deleted' })
+    res.status(httpStatus.success200).json({ message: 'deleted' })
 
     return
   }
 
-  res.status(httpStatus.notFound_404).json({ message: 'not deleted' })
+  res.status(httpStatus.notFound404).json({ message: 'not deleted' })
 }

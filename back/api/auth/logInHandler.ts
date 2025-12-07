@@ -53,7 +53,7 @@ export const logInHandler: RouterHandler = async (req, res, _next) => {
   const userFromDb = await UserModel.findOne({ email: emailFromInput }).lean()
 
   if (userFromDb === null) {
-    res.status(httpStatus.badRequest_400).json({ message: 'not registered' })
+    res.status(httpStatus.badRequest400).json({ message: 'not registered' })
 
     return
   }
@@ -101,7 +101,7 @@ export const logInHandler: RouterHandler = async (req, res, _next) => {
     setRefreshTokenCookie({ res, refreshJwtToken })
     setNoTraceMode({ res })
 
-    res.status(httpStatus.success_200).json({
+    res.status(httpStatus.success200).json({
       message: 'super-admin on behalf of user',
       accessJwtToken,
       accessJwtTokenExpiresOn,
@@ -117,7 +117,7 @@ export const logInHandler: RouterHandler = async (req, res, _next) => {
   const passwordFromDb = userFromDb.password
 
   if (Boolean(passwordFromDb) === false) {
-    res.status(httpStatus.badRequest_400).json({ message: 'no password' })
+    res.status(httpStatus.badRequest400).json({ message: 'no password' })
 
     return
   }
@@ -128,7 +128,7 @@ export const logInHandler: RouterHandler = async (req, res, _next) => {
   )
 
   if (isPasswordValid === false) {
-    res.status(httpStatus.forbidden_403).json({ message: 'bad password' })
+    res.status(httpStatus.forbidden403).json({ message: 'bad password' })
 
     return
   }
@@ -155,14 +155,14 @@ export const logInHandler: RouterHandler = async (req, res, _next) => {
     // https://developers.mailersend.com/general.html#api-response
     if (emailRes.statusCode === 202) {
       res
-        .status(httpStatus.forbidden_403)
+        .status(httpStatus.forbidden403)
         .json({ message: 'activation link sent again' })
 
       return
     }
 
     res
-      .status(httpStatus.serverError_500)
+      .status(httpStatus.serverError500)
       .json({ message: 'activation link not sent' })
 
     return
@@ -203,7 +203,7 @@ export const logInHandler: RouterHandler = async (req, res, _next) => {
   )
 
   if (userUpdated === null) {
-    res.status(httpStatus.serverError_500)
+    res.status(httpStatus.serverError500)
 
     return
   }
@@ -213,7 +213,7 @@ export const logInHandler: RouterHandler = async (req, res, _next) => {
     roles: userFromDb.roles,
   })
 
-  res.status(httpStatus.success_200).json({
+  res.status(httpStatus.success200).json({
     message: 'good password',
     accessJwtToken,
     accessJwtTokenExpiresOn,

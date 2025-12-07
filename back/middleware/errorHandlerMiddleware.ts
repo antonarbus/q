@@ -26,7 +26,7 @@ export const errorHandlerMiddleware: RouterHandler = (
   console.error(error)
   const { message, name, stack } = error
 
-  res.status(httpStatus.serverError_500).json({
+  res.status(httpStatus.serverError500).json({
     message: errorMessageCommon.internalError,
     errorAsString: JSON.stringify({ name, message, stack }),
   })

@@ -45,15 +45,13 @@ export const resetPasswordHandler: RouterHandler = async (req, res, _next) => {
   }).lean()
 
   if (user === null) {
-    res
-      .status(httpStatus.forbidden_403)
-      .json({ message: 'incorrect reset key' })
+    res.status(httpStatus.forbidden403).json({ message: 'incorrect reset key' })
 
     return
   }
 
   if (user.isActivated === false) {
-    res.status(httpStatus.forbidden_403).json({ message: 'not activated' })
+    res.status(httpStatus.forbidden403).json({ message: 'not activated' })
 
     return
   }
@@ -84,7 +82,7 @@ export const resetPasswordHandler: RouterHandler = async (req, res, _next) => {
     { new: true },
   ).lean()
 
-  res.status(httpStatus.created_201).json({
+  res.status(httpStatus.created201).json({
     message: 'password was reset',
     accessJwtToken,
     accessJwtTokenExpiresOn,

@@ -245,7 +245,7 @@ export const useLoadQuotation = (): void => {
   useUpdateEffect(() => {
     if (getQuotationMutation.isError === true) {
       if (
-        getQuotationMutation.error.response?.status === httpStatus.forbidden_403
+        getQuotationMutation.error.response?.status === httpStatus.forbidden403
       ) {
         dispatch(
           quotationSlice.actions.loadQuotationReducer({
@@ -259,7 +259,7 @@ export const useLoadQuotation = (): void => {
           }),
         )
       } else if (
-        getQuotationMutation.error.response?.status === httpStatus.notFound_404
+        getQuotationMutation.error.response?.status === httpStatus.notFound404
       ) {
         dispatch(
           appSlice.actions.setBackgroundMessage({

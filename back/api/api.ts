@@ -40,7 +40,7 @@ type Api = {
   method: 'get' | 'post' | 'put' | 'delete' | 'patch'
   description: string
   handler: (
-    // biome-ignore lint/suspicious/noExplicitAny: <any type>
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     req: Request<any, any, any, any>,
     res: Response,
     next: NextFunction,

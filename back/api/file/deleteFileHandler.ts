@@ -50,14 +50,14 @@ export const deleteFileHandler: RouterHandler = async (req, res, _next) => {
   const fileOwnerShip = await getFileOwnerShip()
 
   if (fileOwnerShip === 'file not found') {
-    res.status(httpStatus.notFound_404).json({ message: 'not found' })
+    res.status(httpStatus.notFound404).json({ message: 'not found' })
 
     return
   }
 
   if (fileOwnerShip === 'not owner') {
     res
-      .status(httpStatus.notFound_404)
+      .status(httpStatus.notFound404)
       .json({ message: 'you did not upload this file' })
 
     return
@@ -76,11 +76,11 @@ export const deleteFileHandler: RouterHandler = async (req, res, _next) => {
 
       await Promise.all([deleteFromBucketPromise, deleteFromDatabasePromise])
     } catch {
-      res.status(httpStatus.notFound_404).json({ message: 'failed to delete' })
+      res.status(httpStatus.notFound404).json({ message: 'failed to delete' })
 
       return
     }
 
-    res.status(httpStatus.success_200).json({ message: 'deleted' })
+    res.status(httpStatus.success200).json({ message: 'deleted' })
   }
 }

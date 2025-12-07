@@ -33,10 +33,10 @@ export const deleteBookmarkHandler: RouterHandler = async (req, res, _next) => {
   })
 
   if (deleteFromDbResult.deletedCount === 0) {
-    res.status(httpStatus.notFound_404).json({ message: 'did not find' })
+    res.status(httpStatus.notFound404).json({ message: 'did not find' })
 
     return
   }
 
-  res.status(httpStatus.success_200).json({ message: 'deleted' })
+  res.status(httpStatus.success200).json({ message: 'deleted' })
 }

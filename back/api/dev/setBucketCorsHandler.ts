@@ -17,7 +17,7 @@ export const setBucketCorsHandler: RouterHandler = async (req, res, _next) => {
   const { roles } = getUserFromRefreshTokenOrJohn({ req })
 
   if (roles.includes(userRole.superAdmin) === false) {
-    res.status(httpStatus.forbidden_403).json({ message: 'forbidden' })
+    res.status(httpStatus.forbidden403).json({ message: 'forbidden' })
   }
 
   const corsUpdateRes = await bucket.setCorsConfiguration([

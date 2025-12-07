@@ -54,7 +54,7 @@ export const registerHandler: RouterHandler = async (req, res, _next) => {
   }).lean()
 
   if (user !== null) {
-    res.status(httpStatus.forbidden_403).json({
+    res.status(httpStatus.forbidden403).json({
       message: 'already exists',
       accessJwtToken: 'no access token',
       email: emailFromInput,
@@ -90,7 +90,7 @@ export const registerHandler: RouterHandler = async (req, res, _next) => {
 
   // ? not clear why this is needed, it should always be true
   if (newUser.activationKey !== activationKey) {
-    res.status(httpStatus.serverError_500).json({
+    res.status(httpStatus.serverError500).json({
       message: 'activation key not issued',
       accessJwtToken: 'no access token',
       email: emailFromInput,
@@ -124,7 +124,7 @@ export const registerHandler: RouterHandler = async (req, res, _next) => {
 
   // https://developers.mailersend.com/general.html#api-response
   if (emailRes.statusCode === 202) {
-    res.status(httpStatus.created_201).json({
+    res.status(httpStatus.created201).json({
       message: 'activation link sent',
       email: emailFromInput,
       roles: [userRole.user],
@@ -135,7 +135,7 @@ export const registerHandler: RouterHandler = async (req, res, _next) => {
     return
   }
 
-  res.status(httpStatus.serverError_500).json({
+  res.status(httpStatus.serverError500).json({
     message: 'activation link not sent',
     accessJwtToken: 'no access token',
     email: emailFromInput,

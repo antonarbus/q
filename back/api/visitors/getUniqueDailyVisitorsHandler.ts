@@ -41,7 +41,7 @@ export const getUniqueDailyVisitorsHandler: RouterHandler = async (
 
   if (roles.includes(userRole.superAdmin) === false) {
     res
-      .status(httpStatus.forbidden_403)
+      .status(httpStatus.forbidden403)
       .json({ visitorsCount: [], message: 'forbidden' })
 
     return
@@ -57,5 +57,5 @@ export const getUniqueDailyVisitorsHandler: RouterHandler = async (
     _id: 0,
   })
 
-  res.status(httpStatus.success_200).json({ visitorsCount, message: 'ok' })
+  res.status(httpStatus.success200).json({ visitorsCount, message: 'ok' })
 }

@@ -50,10 +50,10 @@ export const countUniqueDailyVisitorsHandler: RouterHandler = async (
   )
 
   if (visitorsCount.count !== 0) {
-    res.status(httpStatus.success_200).json({ message: 'visitor counted' })
+    res.status(httpStatus.success200).json({ message: 'visitor counted' })
 
     return
   }
 
-  res.status(httpStatus.notFound_404).json({ message: 'Internal error' })
+  res.status(httpStatus.notFound404).json({ message: 'Internal error' })
 }

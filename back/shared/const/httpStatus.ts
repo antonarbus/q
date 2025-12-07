@@ -8,14 +8,13 @@
   - 404 - requested URL is not available on the server
   - 500 - generic error indicating that something went wrong on the server-side,
 */
-
 export const httpStatus = {
-  success_200: 200,
-  created_201: 201,
-  noContent_204: 204,
-  badRequest_400: 400,
-  unauthorized_401: 401,
-  forbidden_403: 403,
-  notFound_404: 404,
-  serverError_500: 500,
+  success200: 200,
+  created201: 201,
+  noContent204: 204,
+  badRequest400: 400,
+  unauthorized401: 401,
+  forbidden403: 403,
+  notFound404: 404,
+  serverError500: 500,
 } as const

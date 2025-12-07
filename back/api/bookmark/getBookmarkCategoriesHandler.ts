@@ -27,5 +27,5 @@ export const getBookmarkCategoriesHandler: RouterHandler = async (
 ) => {
   const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req, res })
   const categories = await BookmarkModel.find({ email }).distinct('category')
-  res.status(httpStatus.success_200).json({ message: 'Found', categories })
+  res.status(httpStatus.success200).json({ message: 'Found', categories })
 }

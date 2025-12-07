@@ -33,7 +33,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, _next) => {
   const { quotation } = req.body
 
   if (quotation.id === '') {
-    res.status(httpStatus.forbidden_403).json({ message: 'id is not provided' })
+    res.status(httpStatus.forbidden403).json({ message: 'id is not provided' })
 
     return
   }
@@ -87,7 +87,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, _next) => {
 
     await quotationFile.save(quotationJson)
 
-    res.status(httpStatus.success_200).json({
+    res.status(httpStatus.success200).json({
       message: 'saved',
       quotation: fullQuotation,
     })
@@ -124,7 +124,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, _next) => {
     const quotationJson = JSON.stringify(fullQuotation, null, 2)
     await file.save(quotationJson)
 
-    res.status(httpStatus.success_200).json({
+    res.status(httpStatus.success200).json({
       message: 'updated',
       quotation: fullQuotation,
     })
@@ -157,7 +157,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, _next) => {
 
     await quotationFile.save(quotationJson)
 
-    res.status(httpStatus.success_200).json({
+    res.status(httpStatus.success200).json({
       message: 'copied and saved',
       quotation: fullQuotation,
     })

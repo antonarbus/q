@@ -47,7 +47,7 @@ export const getQuotationHandler: RouterHandler = async (req, res, _next) => {
   const quotationDocumentRaw = await QuotationModel.findOne({ id: quotationId })
 
   if (quotationDocumentRaw === null) {
-    res.status(httpStatus.notFound_404).json({
+    res.status(httpStatus.notFound404).json({
       message: 'not found',
       quotation: emptyQuotation,
     })
@@ -103,7 +103,7 @@ export const getQuotationHandler: RouterHandler = async (req, res, _next) => {
   const permissionLevel = getPermissionLevel()
 
   if (permissionLevel === 'Forbidden') {
-    res.status(httpStatus.forbidden_403).json({
+    res.status(httpStatus.forbidden403).json({
       message: 'found',
       quotation: { ...emptyQuotation, permissionLevel },
     })
@@ -140,7 +140,7 @@ export const getQuotationHandler: RouterHandler = async (req, res, _next) => {
   const quotationParsed = jsonParseSafe<Quotation>(quotationJson)
 
   if (quotationParsed === undefined) {
-    res.status(httpStatus.notFound_404).json({
+    res.status(httpStatus.notFound404).json({
       message: 'not found',
       quotation: emptyQuotation,
     })
@@ -184,7 +184,7 @@ export const getQuotationHandler: RouterHandler = async (req, res, _next) => {
     })
   }
 
-  res.status(httpStatus.success_200).json({
+  res.status(httpStatus.success200).json({
     message: 'found',
     quotation: { ...quotationDocument, ...quotationParsed, permissionLevel },
   })

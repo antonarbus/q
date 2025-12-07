@@ -49,20 +49,18 @@ export const getBookmarkListHandler: RouterHandler = async (
   ).lean()
 
   if (bookmarks.length === 0) {
-    res
-      .status(httpStatus.success_200)
-      .json({ message: 'No content', bookmarks })
+    res.status(httpStatus.success200).json({ message: 'No content', bookmarks })
 
     return
   }
 
   if (bookmarks.length !== 0) {
-    res.status(httpStatus.success_200).json({ message: 'Found', bookmarks })
+    res.status(httpStatus.success200).json({ message: 'Found', bookmarks })
 
     return
   }
 
   res
-    .status(httpStatus.notFound_404)
+    .status(httpStatus.notFound404)
     .json({ message: 'Unhandled error', bookmarks: [] })
 }

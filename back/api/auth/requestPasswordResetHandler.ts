@@ -40,14 +40,14 @@ export const requestPasswordResetHandler: RouterHandler = async (
   const user = await UserModel.findOne({ email: emailFromInput }).lean()
 
   if (user === null) {
-    res.status(httpStatus.forbidden_403).json({ message: 'does not exists' })
+    res.status(httpStatus.forbidden403).json({ message: 'does not exists' })
 
     return
   }
 
   if (user.isActivated === false) {
     res
-      .status(httpStatus.forbidden_403)
+      .status(httpStatus.forbidden403)
       .json({ message: 'account not activated' })
 
     return
@@ -63,7 +63,7 @@ export const requestPasswordResetHandler: RouterHandler = async (
 
   if (resetPasswordKey === undefined) {
     res
-      .status(httpStatus.serverError_500)
+      .status(httpStatus.serverError500)
       .json({ message: 'reset key not issued' })
 
     return
@@ -88,12 +88,10 @@ export const requestPasswordResetHandler: RouterHandler = async (
 
   // https://developers.mailersend.com/general.html#api-response
   if (emailRes.statusCode === 202) {
-    res.status(httpStatus.created_201).json({ message: 'reset link sent' })
+    res.status(httpStatus.created201).json({ message: 'reset link sent' })
 
     return
   }
 
-  res
-    .status(httpStatus.serverError_500)
-    .json({ message: 'reset link not sent' })
+  res.status(httpStatus.serverError500).json({ message: 'reset link not sent' })
 }

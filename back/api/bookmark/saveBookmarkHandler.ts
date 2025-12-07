@@ -35,7 +35,7 @@ export const saveBookmarkHandler: RouterHandler = async (req, res, _next) => {
   const { item: bookmarkItem } = req.body
 
   if (bookmarkItem.id === '') {
-    res.status(httpStatus.forbidden_403).json({ message: 'id is not provided' })
+    res.status(httpStatus.forbidden403).json({ message: 'id is not provided' })
 
     return
   }
@@ -89,7 +89,7 @@ export const saveBookmarkHandler: RouterHandler = async (req, res, _next) => {
 
   await bookmarkFile.save(contents)
 
-  res.status(httpStatus.success_200).json({
+  res.status(httpStatus.success200).json({
     message: bookmarkStatus === 'new' ? 'saved' : 'updated',
     item: { ...bookmarkFromDb, ...bookmarkItem },
   })
