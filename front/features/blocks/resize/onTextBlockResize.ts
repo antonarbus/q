@@ -1,6 +1,6 @@
 import { quotationSlice } from '@entities/quotation/redux/quotationSlice'
 import type {
-  OnBlockResize,
+  // OnBlockResize,
   OnBlockResizeStart,
   OnBlockResizeStop,
 } from '@shared/lib/re-resizable/resizablePaper'
@@ -15,15 +15,15 @@ export const onTextBlockResizeStart: OnBlockResizeStart = ({
   // nothing yet
 }
 
-const onTextBlockResize: OnBlockResize = ({
-  blockIndex,
-  event,
-  direction,
-  elementRef,
-  delta,
-}) => {
-  // nothing yet
-}
+// const onTextBlockResize: OnBlockResize = ({
+//   blockIndex,
+//   event,
+//   direction,
+//   elementRef,
+//   delta,
+// }) => {
+//   // nothing yet
+// }
 
 export const onTextBlockResizeStop: OnBlockResizeStop = ({
   blockIndex,

@@ -29,8 +29,7 @@ export const insertPriceBlock = (event?: MouseEvent): void => {
   }
 
   // Save scroll position before setNotEditable
-  const scrollX = window.scrollX
-  const scrollY = window.scrollY
+  const { scrollX, scrollY } = window
 
   dispatch(textSlice.actions.setNotEditable())
 

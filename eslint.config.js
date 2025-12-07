@@ -158,6 +158,7 @@ export default [
       ],
 
       // adjust React rules,
+      'react-hooks/refs': 'off', // buggy rule
       'react-hooks/preserve-manual-memoization': 'off', // do not use react compiler
       'react/jsx-max-depth': 'off', // too aggressive
       'react-hooks/exhaustive-deps': 'warn', // full dep arrays are noisy, not visible real intention

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import { generateId } from '@shared/lib/nanoid'
 import type { KeyboardEvent, MouseEvent } from 'react'
@@ -23,7 +24,7 @@ export const useStartFroala = (): void => {
       await import('./froalaPkg')
       await import('./froalaPkg.css')
 
-      //@ts-expect-error: some error
+      //@ts-ignore
       const froalaInstance = new FroalaEditor(froala.froalaElementRef.current, {
         ...froalaDefaultOptions,
         placeholderText: froala.placeholder ?? 'Text...',

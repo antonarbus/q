@@ -19,7 +19,7 @@ export const pasteItemReducer = (
   const itemToPaste: Item = { ...structuredClone(item), id: newItemId }
 
   if (itemToPaste.type === itemType.boq) {
-    const rows = itemToPaste.boq.rows
+    const { rows } = itemToPaste.boq
 
     rows.forEach((row) => {
       row.id = generateId()

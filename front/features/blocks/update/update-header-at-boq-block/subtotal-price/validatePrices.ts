@@ -64,15 +64,15 @@ export const validatePrices = ({
         value: newPriceValueRounded,
       })
 
-      const rows = getRowsFromStore({ blockIndex })
+      const boqRows = getRowsFromStore({ blockIndex })
 
-      if (rows === undefined) {
+      if (boqRows === undefined) {
         return
       }
 
-      const subTotalPriceValueNew: number = rows.reduce(
-        (accumulator: number, row: Row) => {
-          const price = row.price.value
+      const subTotalPriceValueNew: number = boqRows.reduce(
+        (accumulator: number, boqRow: Row) => {
+          const price = boqRow.price.value
 
           return accumulator + price
         },
