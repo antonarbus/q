@@ -16,7 +16,7 @@ export const getRowsFromState = ({
     return
   }
 
-  const rows = boqBlock.boq.rows
+  const { rows } = boqBlock.boq
 
   return rows
 }

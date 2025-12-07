@@ -12,7 +12,7 @@ export const getRowsFromStore = ({ blockIndex }: Props): Row[] | undefined => {
     return
   }
 
-  const rows = boqBlock.boq.rows
+  const { rows } = boqBlock.boq
 
   return rows
 }
