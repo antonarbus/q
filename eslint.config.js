@@ -122,7 +122,6 @@ export default [
       ],
 
       // adjust TS rules
-      '@typescript-eslint/no-misused-spread': 'off',
       '@typescript-eslint/no-unused-vars': ['error', { args: 'none' }],
       '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
       '@typescript-eslint/strict-boolean-expressions': [

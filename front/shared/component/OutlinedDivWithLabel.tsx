@@ -6,7 +6,6 @@ type InputComponentProps = Record<string, unknown> & {
 }
 
 const InputComponent = (props: InputComponentProps): JSX.Element => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { ownerState, ref, ...other } = props
 
   return (
@@ -28,7 +27,6 @@ type Props = {
   sx?: SxProps
 }
 
-// eslint-disable-next-line react/no-multi-comp
 export const OutlinedDivWithLabel = (props: Props): JSX.Element => {
   return (
     <TextField
