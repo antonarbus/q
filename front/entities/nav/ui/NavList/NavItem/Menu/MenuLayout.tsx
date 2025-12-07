@@ -19,22 +19,27 @@ export const MenuLayout = (props: Props): ReactNode => {
 
   // Calculate menu position based on parent nav item
   useEffect(() => {
-    const navItem = props?.navItemRef?.current
+    const navItem = props.navItemRef?.current
 
-    if (navItem) {
+    if (navItem instanceof HTMLElement) {
       const rect = navItem.getBoundingClientRect()
 
       setMenuPosition({
         top: rect.bottom + 5,
-        left: isMenuOutsideWindow ? rect.left : rect.right - theme.menu.width,
         right: window.innerWidth - rect.right,
+        left:
+          isMenuOutsideWindow === true
+            ? rect.left
+            : rect.right - theme.menu.width,
       })
     }
-  }, [isMenuOutsideWindow, props?.navItemRef])
+  }, [isMenuOutsideWindow, props.navItemRef])
 
-  if (!menuPosition) {
+  if (menuPosition === null) {
     return null
   }
+
+  console.log('🚀 ~ menuPosition:', menuPosition)
 
   return (
     <Portal>
@@ -42,15 +47,10 @@ export const MenuLayout = (props: Props): ReactNode => {
         className='menu-layout'
         sx={{
           position: 'fixed',
-          top: menuPosition ? `${menuPosition.top}px` : 'calc(100% + 5px)',
+          top: `${menuPosition.top}px`,
           left:
-            isMenuOutsideWindow && menuPosition
-              ? `${menuPosition.left}px`
-              : 'auto',
-          right:
-            !isMenuOutsideWindow && menuPosition
-              ? `${menuPosition.right}px`
-              : 0,
+            isMenuOutsideWindow === true ? `${menuPosition.left}px` : 'auto',
+          right: isMenuOutsideWindow === false ? `${menuPosition.right}px` : 0,
           width: `${theme.menu.width}px`,
           paddingTop: `${theme.menu.paddingTop}px`,
           paddingBottom: `${theme.menu.paddingBottom}px`,
