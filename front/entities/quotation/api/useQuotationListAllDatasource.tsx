@@ -26,15 +26,6 @@ export const useQuotationListAllDatasource = (): Res => {
     const ds: IDatasource = {
       rowCount: undefined,
       getRows: async (params) => {
-        const {
-          startRow,
-          endRow,
-          sortModel,
-          filterModel,
-          successCallback,
-          failCallback,
-        } = params
-
         try {
           if (isFirstMount === true) {
             setIsLoading(true)
@@ -53,19 +44,22 @@ export const useQuotationListAllDatasource = (): Res => {
             url: api.getQuotationListAll.url,
             method: api.getQuotationListAll.method,
             data: {
-              startRow,
-              endRow,
-              sortModel,
-              filterModel,
+              startRow: params.startRow,
+              endRow: params.endRow,
+              sortModel: params.sortModel,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              filterModel: params.filterModel,
             },
           })
 
           const getLastRow = (): number => {
             const quotationListCount = data.quotationList.length
-            const didReachEndOfTheList = quotationListCount >= endRow - startRow
+
+            const didReachEndOfTheList =
+              quotationListCount >= params.endRow - params.startRow
 
             if (didReachEndOfTheList === false) {
-              const lastRow = startRow + quotationListCount
+              const lastRow = params.startRow + quotationListCount
 
               return lastRow
             }
@@ -77,9 +71,9 @@ export const useQuotationListAllDatasource = (): Res => {
           }
 
           const lastRow = getLastRow()
-          successCallback(data.quotationList, lastRow)
+          params.successCallback(data.quotationList, lastRow)
         } catch {
-          failCallback()
+          params.failCallback()
         } finally {
           setIsLoading(false)
           setIsFetching(false)
