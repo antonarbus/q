@@ -1,53 +1,7 @@
+/* eslint-disable max-depth */
 import { $ } from 'bun'
-import type { Env } from '../../config/infrastructure'
-import { infraConfigVariables } from '../../config/infrastructure'
+import { type Env, infraConfigVariables } from '../../config/infrastructure'
 import { logger } from '../lib/output/logger'
-
-type Props = {
-  env: Env
-  service?: 'frontend' | 'backend' | 'both'
-}
-
-/**
- * Show deployment info for a specific environment
- * Displays git commit SHA and message for currently deployed image
- */
-export const showDeploymentInfo = async (props: Props): Promise<void> => {
-  const config = infraConfigVariables[props.env]
-  const service = props.service || 'both'
-
-  // Print section header
-  logger.warning(props.env.toUpperCase())
-  logger.emptyLine()
-
-  // Show Frontend
-  if (service === 'frontend' || service === 'both') {
-    logger.info('=== Frontend Service ===')
-
-    await showServiceInfo({
-      serviceName: 'Frontend',
-      cloudRunServiceName: config.cloudRunServiceNameFrontend,
-      region: config.region,
-      projectId: config.projectId,
-    })
-
-    logger.emptyLine()
-  }
-
-  // Show Backend
-  if (service === 'backend' || service === 'both') {
-    logger.info('=== Backend Service ===')
-
-    await showServiceInfo({
-      serviceName: 'Backend',
-      cloudRunServiceName: config.cloudRunServiceNameBackend,
-      region: config.region,
-      projectId: config.projectId,
-    })
-
-    logger.emptyLine()
-  }
-}
 
 type ShowServiceInfoProps = {
   serviceName: string
@@ -56,7 +10,7 @@ type ShowServiceInfoProps = {
   projectId: string
 }
 
-async function showServiceInfo(props: ShowServiceInfoProps): Promise<void> {
+const showServiceInfo = async (props: ShowServiceInfoProps): Promise<void> => {
   const { cloudRunServiceName, region, projectId } = props
 
   try {
@@ -67,8 +21,7 @@ async function showServiceInfo(props: ShowServiceInfoProps): Promise<void> {
       await $`gcloud run services describe ${cloudRunServiceName} --region ${region} --project ${projectId} --format=${format}`.text()
 
     const imageUrl = imageOutput.trim()
-    const baseImageUrl = imageUrl.split(':')[0]
-    const envTag = imageUrl.split(':')[1]
+    const [baseImageUrl, envTag] = imageUrl.split(':')
 
     // Get digest for the environment tag
     let digest: string | null = null
@@ -81,21 +34,22 @@ async function showServiceInfo(props: ShowServiceInfoProps): Promise<void> {
       const lines = tagListOutput.trim().split('\n').slice(1) // Skip header
 
       for (const line of lines) {
-        const parts = line.trim().split(/\s+/)
+        const parts = line.trim().split(/\s+/u)
 
         if (parts.length >= 3) {
-          const tagPath = parts[0]
-          const tagDigest = parts[2] // Column 3: DIGEST (0=TAG, 1=IMAGE, 2=DIGEST)
+          const [tagPath, , tagDigest] = parts
           const tag = tagPath?.split('/tags/').pop() ?? null
 
-          if (tag === envTag && tagDigest !== undefined) {
+          const isDigest = tag === envTag && tagDigest !== undefined
+
+          if (isDigest === true) {
             digest = tagDigest
             break
           }
         }
       }
 
-      if (!digest) {
+      if (digest === null) {
         logger.warning(`Could not find digest for tag: ${envTag}`)
 
         return
@@ -116,15 +70,20 @@ async function showServiceInfo(props: ShowServiceInfoProps): Promise<void> {
       const lines = tagListOutput.trim().split('\n').slice(1) // Skip header
 
       for (const line of lines) {
-        const parts = line.trim().split(/\s+/)
+        const parts = line.trim().split(/\s+/u)
 
         if (parts.length >= 3) {
-          const tagPath = parts[0]
-          const tagDigest = parts[2] // Column 3: DIGEST (0=TAG, 1=IMAGE, 2=DIGEST)
+          const [tagPath, , tagDigest] = parts // Column 3: DIGEST (0=TAG, 1=IMAGE, 2=DIGEST)
           const tag = tagPath?.split('/tags/').pop() ?? null
 
           // If this tag points to same digest and looks like a git SHA (40 hex chars), use it
-          if (tagDigest === digest && tag && /^[0-9a-f]{40}$/.exec(tag)) {
+
+          const isGitSha =
+            tagDigest === digest &&
+            tag !== null &&
+            /^[0-9a-f]{40}$/u.exec(tag) !== null
+
+          if (isGitSha === true) {
             gitSha = tag
             break
           }
@@ -135,7 +94,7 @@ async function showServiceInfo(props: ShowServiceInfoProps): Promise<void> {
     }
 
     // If we found a git SHA, get commit details
-    if (gitSha) {
+    if (typeof gitSha === 'string') {
       try {
         const commitMessage = await $`git log -1 --format=%s ${gitSha}`.text()
         const commitAuthor = await $`git log -1 --format=%an ${gitSha}`.text()
@@ -155,5 +114,56 @@ async function showServiceInfo(props: ShowServiceInfoProps): Promise<void> {
     logger.error(`Failed to get deployment info for ${props.serviceName}`)
 
     throw error
+  }
+}
+
+type Props = {
+  env: Env
+  service?: 'frontend' | 'backend' | 'both'
+}
+
+/**
+ * Show deployment info for a specific environment
+ * Displays git commit SHA and message for currently deployed image
+ */
+export const showDeploymentInfo = async (props: Props): Promise<void> => {
+  const config = infraConfigVariables[props.env]
+  const service = props.service ?? 'both'
+
+  // Print section header
+  logger.warning(props.env.toUpperCase())
+  logger.emptyLine()
+
+  // Show Frontend
+  const shouldShowInfoAboutFrontend =
+    service === 'frontend' || service === 'both'
+
+  if (shouldShowInfoAboutFrontend === true) {
+    logger.info('=== Frontend Service ===')
+
+    await showServiceInfo({
+      serviceName: 'Frontend',
+      cloudRunServiceName: config.cloudRunServiceNameFrontend,
+      region: config.region,
+      projectId: config.projectId,
+    })
+
+    logger.emptyLine()
+  }
+
+  // Show Backend
+  const shouldShowInfoAboutBackend = service === 'backend' || service === 'both'
+
+  if (shouldShowInfoAboutBackend === true) {
+    logger.info('=== Backend Service ===')
+
+    await showServiceInfo({
+      serviceName: 'Backend',
+      cloudRunServiceName: config.cloudRunServiceNameBackend,
+      region: config.region,
+      projectId: config.projectId,
+    })
+
+    logger.emptyLine()
   }
 }

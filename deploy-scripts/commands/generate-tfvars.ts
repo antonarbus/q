@@ -26,21 +26,28 @@ export const generateTfvars = async (): Promise<void> => {
      *  Terraform variables use snake_case: project_id, artifact_registry_name, etc.
      */
     const toSnakeCase = (str: string): string => {
-      return str.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`)
+      const strSnakedCased = str.replace(
+        /[A-Z]/gu,
+        (letter) => `_${letter.toLowerCase()}`,
+      )
+
+      return strSnakedCased
     }
 
     const lines = Object.entries(props.config).map(([key, value]) => {
       const snakeKey = toSnakeCase(key)
 
       // Handle arrays - format as Terraform list
-      if (Array.isArray(value)) {
+      const isArray = Array.isArray(value)
+
+      if (isArray === true) {
         const arrayValues = value.map((item) => `"${item}"`).join(', ')
 
         return `${snakeKey} = [${arrayValues}]`
       }
 
       // Handle regular strings
-      return `${snakeKey} = "${value}"`
+      return `${snakeKey} = "${String(value)}"`
     })
 
     return `${header + lines.join('\n')}\n`
@@ -52,6 +59,7 @@ export const generateTfvars = async (): Promise<void> => {
 
     const content = generateTfvarsContent({ env, config })
 
+    // eslint-disable-next-line no-await-in-loop
     await Bun.write(TFVARS_FILE_PATH, content)
     logger.success(`Generated ${env}.tfvars`)
   }

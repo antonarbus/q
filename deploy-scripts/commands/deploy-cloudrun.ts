@@ -1,7 +1,7 @@
 import { type Env, infraConfigVariables } from '../../config/infrastructure'
 import { getCurrentCloudRunImage } from '../lib/gcloud/getCurrentCloudRunImage'
 import { updateCloudRunService } from '../lib/gcloud/updateCloudRunService'
-import { githubOutput } from '../lib/output/githubOutput'
+import { logToGithubOutput } from '../lib/output/logToGithubOutput'
 import { logger } from '../lib/output/logger'
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
   service?: 'frontend' | 'backend' | 'both'
 }
 
-export async function deployCloudRun(props: Props): Promise<void> {
+export const deployCloudRun = async (props: Props): Promise<void> => {
   const { env, service = 'both' } = props
   const config = infraConfigVariables[env]
 
@@ -17,7 +17,9 @@ export async function deployCloudRun(props: Props): Promise<void> {
   const dockerImageTag = env
 
   // Deploy frontend
-  if (service === 'frontend' || service === 'both') {
+  const shouldDeployFrontend = service === 'frontend' || service === 'both'
+
+  if (shouldDeployFrontend === true) {
     logger.info('=== Deploying Frontend ===')
     const imageUrl = `${config.region}-docker.pkg.dev/${config.projectId}/${config.artifactRegistryName}/${config.dockerImageNameFrontend}:${dockerImageTag}`
 
@@ -29,9 +31,9 @@ export async function deployCloudRun(props: Props): Promise<void> {
       projectId: config.projectId,
     })
 
-    logger.info(`  Previous image: ${previousImageFrontend || 'none'}`)
+    logger.info(`  Previous image: ${previousImageFrontend ?? 'none'}`)
 
-    githubOutput({ previousImageFrontend: previousImageFrontend || '' })
+    logToGithubOutput({ previousImageFrontend: previousImageFrontend ?? '' })
 
     await updateCloudRunService({
       cloudRunServiceName: config.cloudRunServiceNameFrontend,
@@ -43,7 +45,9 @@ export async function deployCloudRun(props: Props): Promise<void> {
   }
 
   // Deploy backend
-  if (service === 'backend' || service === 'both') {
+  const shouldDeployBackend = service === 'backend' || service === 'both'
+
+  if (shouldDeployBackend === true) {
     logger.info('=== Deploying Backend ===')
     const imageUrl = `${config.region}-docker.pkg.dev/${config.projectId}/${config.artifactRegistryName}/${config.dockerImageNameBackend}:${dockerImageTag}`
 
@@ -55,9 +59,9 @@ export async function deployCloudRun(props: Props): Promise<void> {
       projectId: config.projectId,
     })
 
-    logger.info(`  Previous image: ${previousImageBackend || 'none'}`)
+    logger.info(`  Previous image: ${previousImageBackend ?? 'none'}`)
 
-    githubOutput({ previousImageBackend: previousImageBackend || '' })
+    logToGithubOutput({ previousImageBackend: previousImageBackend ?? '' })
 
     await updateCloudRunService({
       cloudRunServiceName: config.cloudRunServiceNameBackend,

@@ -29,7 +29,7 @@ export const validatePromotion = (props: Props): void => {
     )
 
     console.error(
-      `Allowed promotion paths: ${allowedPromotionPath.map((p) => p.replace('-', '→')).join(', ')}`,
+      `Allowed promotion paths: ${allowedPromotionPath.map((path) => path.replace('-', '→')).join(', ')}`,
     )
 
     exit(1)

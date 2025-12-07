@@ -4,59 +4,8 @@ import {
   type Env,
   sharedInfraConfigVariables,
 } from '../../config/infrastructure'
-import { githubOutput } from '../lib/output/githubOutput'
+import { logToGithubOutput } from '../lib/output/logToGithubOutput'
 import { logger } from '../lib/output/logger'
-
-type Props = {
-  sourceEnv: Env
-  targetEnv: Env
-  service?: 'frontend' | 'backend' | 'both'
-}
-
-export const promoteImage = async (props: Props): Promise<void> => {
-  const {
-    region,
-    projectId,
-    artifactRegistryName,
-    dockerImageNameFrontend,
-    dockerImageNameBackend,
-  } = sharedInfraConfigVariables
-
-  const service = props.service || 'both'
-
-  logger.info('Promoting Docker images...')
-  logger.info(`  Registry: ${artifactRegistryName}`)
-  logger.info(`  Source tag: ${props.sourceEnv}`)
-  logger.info(`  Target tag: ${props.targetEnv}`)
-  logger.info(`  Service: ${service}`)
-  logger.emptyLine()
-
-  // Promote Frontend
-  if (service === 'frontend' || service === 'both') {
-    await promoteServiceImage({
-      serviceName: 'Frontend',
-      dockerImageName: dockerImageNameFrontend,
-      region,
-      projectId,
-      artifactRegistryName,
-      sourceEnv: props.sourceEnv,
-      targetEnv: props.targetEnv,
-    })
-  }
-
-  // Promote Backend
-  if (service === 'backend' || service === 'both') {
-    await promoteServiceImage({
-      serviceName: 'Backend',
-      dockerImageName: dockerImageNameBackend,
-      region,
-      projectId,
-      artifactRegistryName,
-      sourceEnv: props.sourceEnv,
-      targetEnv: props.targetEnv,
-    })
-  }
-}
 
 type PromoteServiceImageProps = {
   serviceName: string
@@ -68,9 +17,9 @@ type PromoteServiceImageProps = {
   targetEnv: Env
 }
 
-async function promoteServiceImage(
+const promoteServiceImage = async (
   props: PromoteServiceImageProps,
-): Promise<void> {
+): Promise<void> => {
   const {
     serviceName,
     dockerImageName,
@@ -125,7 +74,62 @@ async function promoteServiceImage(
   logger.emptyLine()
 
   // Export source image digest for traceability
-  githubOutput({
+  logToGithubOutput({
     [`${serviceName.toLowerCase()}SourceImageDigest`]: sourceImageDigest,
   })
+}
+
+type Props = {
+  sourceEnv: Env
+  targetEnv: Env
+  service?: 'frontend' | 'backend' | 'both'
+}
+
+export const promoteImage = async (props: Props): Promise<void> => {
+  const {
+    region,
+    projectId,
+    artifactRegistryName,
+    dockerImageNameFrontend,
+    dockerImageNameBackend,
+  } = sharedInfraConfigVariables
+
+  const service = props.service ?? 'both'
+
+  logger.info('Promoting Docker images...')
+  logger.info(`  Registry: ${artifactRegistryName}`)
+  logger.info(`  Source tag: ${props.sourceEnv}`)
+  logger.info(`  Target tag: ${props.targetEnv}`)
+  logger.info(`  Service: ${service}`)
+  logger.emptyLine()
+
+  // Promote Frontend
+  const shouldPromoteFrontend = service === 'frontend' || service === 'both'
+
+  if (shouldPromoteFrontend === true) {
+    await promoteServiceImage({
+      serviceName: 'Frontend',
+      dockerImageName: dockerImageNameFrontend,
+      region,
+      projectId,
+      artifactRegistryName,
+      sourceEnv: props.sourceEnv,
+      targetEnv: props.targetEnv,
+    })
+  }
+
+  // Promote Backend
+  const shouldPromoteBackend = service === 'backend' || service === 'both'
+
+  if (shouldPromoteBackend === true) {
+    await promoteServiceImage({
+      serviceName: 'Backend',
+      dockerImageName: dockerImageNameBackend,
+      region,
+      projectId,
+      artifactRegistryName,
+      sourceEnv: props.sourceEnv,
+      targetEnv: props.targetEnv,
+    })
+  }
 }

@@ -1,7 +1,7 @@
 import { exit } from 'process'
 import { type Env, MASTER_DEPLOYS_TO_ENV } from '../../config/infrastructure'
 import { getCurrentGitBranchName } from '../lib/git/getCurrentGitBranchName'
-import { githubOutput } from '../lib/output/githubOutput'
+import { logToGithubOutput } from '../lib/output/logToGithubOutput'
 import { logger } from '../lib/output/logger'
 
 export const detectEnvironment = async (): Promise<Env> => {
@@ -11,13 +11,13 @@ export const detectEnvironment = async (): Promise<Env> => {
   // Other environments are reached via promotion workflow at GitHub, not direct push
   const isMaster = ['master', 'main'].includes(branchName) === true
 
-  if (isMaster) {
+  if (isMaster === true) {
     logger.info(
       `Environment: ${MASTER_DEPLOYS_TO_ENV} (from branch: ${branchName})`,
     )
 
     logger.success('Environment detection complete')
-    githubOutput({ env: MASTER_DEPLOYS_TO_ENV })
+    logToGithubOutput({ env: MASTER_DEPLOYS_TO_ENV })
 
     return MASTER_DEPLOYS_TO_ENV
   }

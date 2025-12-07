@@ -12,10 +12,10 @@ export const listGcloudServices = async (): Promise<void> => {
     const output =
       await $`gcloud services list --enabled --project=${projectId}`.text()
 
-    console.log(output)
+    console.info(output)
     logger.success('Services listed successfully')
   } catch (error) {
-    logger.error(`Failed to list services: ${error}`)
+    logger.error(`Failed to list services: ${String(error)}`)
 
     throw error
   }

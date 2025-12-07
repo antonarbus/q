@@ -15,7 +15,7 @@ type Command = {
   action: (env?: Env) => Promise<void>
 }
 
-export async function runInteractiveMode(): Promise<void> {
+export const runInteractiveMode = async (): Promise<void> => {
   const commands: Command[] = [
     {
       name: 'generate-tfvars',
@@ -33,8 +33,11 @@ export async function runInteractiveMode(): Promise<void> {
       name: 'show-deployment-info',
       description: 'Show what is currently deployed',
       requiresEnv: true,
-      action: async (env?: Env) => {
-        if (!env) throw new Error('Environment required')
+      action: async (env?: Env): Promise<void> => {
+        if (env === undefined) {
+          throw new Error('Environment required')
+        }
+
         await showDeploymentInfo({ env })
       },
     },
@@ -42,8 +45,11 @@ export async function runInteractiveMode(): Promise<void> {
       name: 'terraform-plan',
       description: 'Plan infrastructure changes',
       requiresEnv: true,
-      action: async (env?: Env) => {
-        if (!env) throw new Error('Environment required')
+      action: async (env?: Env): Promise<void> => {
+        if (env === undefined) {
+          throw new Error('Environment required')
+        }
+
         await terraformPlan({ env })
       },
     },
@@ -51,8 +57,11 @@ export async function runInteractiveMode(): Promise<void> {
       name: 'terraform-apply',
       description: 'Apply infrastructure changes',
       requiresEnv: true,
-      action: async (env?: Env) => {
-        if (!env) throw new Error('Environment required')
+      action: async (env?: Env): Promise<void> => {
+        if (env === undefined) {
+          throw new Error('Environment required')
+        }
+
         await terraformApply({ env })
       },
     },
@@ -66,8 +75,8 @@ export async function runInteractiveMode(): Promise<void> {
       name: 'exit',
       description: chalk.gray('Exit'),
       requiresEnv: false,
-      action: async () => {
-        console.log('Goodbye!')
+      action: (): never => {
+        console.info('Goodbye!')
         process.exit(0)
       },
     },
@@ -82,11 +91,12 @@ export async function runInteractiveMode(): Promise<void> {
     })),
   })
 
-  const command = commands.find((cmd) => cmd.name === selectedCommand)!
+  const command = commands.find((cmd) => cmd.name === selectedCommand)
 
+  // eslint-disable-next-line @typescript-eslint/init-declarations
   let env: Env | undefined
 
-  if (command.requiresEnv) {
+  if (command?.requiresEnv === true) {
     env = await select({
       message: 'Select environment:',
       choices: [
@@ -98,5 +108,5 @@ export async function runInteractiveMode(): Promise<void> {
     })
   }
 
-  await command.action(env)
+  await command?.action(env)
 }
