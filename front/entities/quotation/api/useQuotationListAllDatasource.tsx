@@ -25,6 +25,7 @@ export const useQuotationListAllDatasource = (): Res => {
   const datasource = useMemo(() => {
     const ds: IDatasource = {
       rowCount: undefined,
+      // eslint-disable-next-line @typescript-eslint/no-misused-promises
       getRows: async (params) => {
         try {
           if (isFirstMount === true) {
