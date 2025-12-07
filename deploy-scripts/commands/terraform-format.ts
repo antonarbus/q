@@ -2,7 +2,7 @@ import { $ } from 'bun'
 import { resolve } from 'path'
 import { logger } from '../lib/output/logger'
 
-export async function terraformFormat(): Promise<void> {
+export const terraformFormat = async (): Promise<void> => {
   const TERRAFORM_DIR = resolve(__dirname, '../../terraform')
 
   logger.info('Formatting Terraform files...')

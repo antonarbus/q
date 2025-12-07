@@ -8,12 +8,13 @@ type Props = {
   env: Env
 }
 
-export async function terraformApply(props: Props): Promise<void> {
+export const terraformApply = async (props: Props): Promise<void> => {
   logger.info(`Environment: ${props.env}`)
 
   const { bucketForTerraformStateName } = infraConfigVariables[props.env]
 
   const TERRAFORM_DIR = resolve(__dirname, '../../terraform/infrastructure')
+
   const TFVARS_FILE_PATH = resolve(
     __dirname,
     `../../config/${props.env}.tfvars`,

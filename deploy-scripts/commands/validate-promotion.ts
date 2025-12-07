@@ -23,7 +23,7 @@ export const validatePromotion = (props: Props): void => {
     `${props.sourceEnv}-${props.targetEnv}`,
   )
 
-  if (!validationResult.success) {
+  if (validationResult.success === false) {
     console.error(
       `❌ Invalid promotion path: ${props.sourceEnv} → ${props.targetEnv}`,
     )
@@ -37,7 +37,7 @@ export const validatePromotion = (props: Props): void => {
 
   const validatedPromotionPath: AllowedPromotionPath = validationResult.data
 
-  console.log(
+  console.info(
     `✅ Valid promotion path: ${validatedPromotionPath.replace('-', '→')}`,
   )
 }

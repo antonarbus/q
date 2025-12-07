@@ -8,12 +8,13 @@ type Props = {
   env: Env
 }
 
-export async function terraformPlan(props: Props): Promise<void> {
+export const terraformPlan = async (props: Props): Promise<void> => {
   logger.info(`Environment: ${props.env}`)
 
   const { bucketForTerraformStateName } = infraConfigVariables[props.env]
 
   const TERRAFORM_DIR = resolve(__dirname, '../../terraform/infrastructure')
+
   const TFVARS_FILE_PATH = resolve(
     __dirname,
     `../../config/${props.env}.tfvars`,
@@ -25,6 +26,7 @@ export async function terraformPlan(props: Props): Promise<void> {
   logger.warning(
     `Planning infrastructure changes for environment: ${props.env}`,
   )
+
   logger.emptyLine()
 
   logger.info('Initializing Terraform with remote backend...')
