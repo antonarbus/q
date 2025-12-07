@@ -28,6 +28,7 @@ type Props = {
   sx?: SxProps
 }
 
+// eslint-disable-next-line react/no-multi-comp
 export const OutlinedDivWithLabel = (props: Props): JSX.Element => {
   return (
     <TextField
