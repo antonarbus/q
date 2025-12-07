@@ -1,8 +1,5 @@
 import { api } from '@back/api'
-import type {
-  ReqBody as Payload,
-  ResBody,
-} from '@back/api/file/getFileListAllHandler'
+import type { ResBody } from '@back/api/file/getFileListAllHandler'
 import { axiosWithAuth } from '@shared/lib/axios'
 import type { IDatasource } from 'ag-grid-community'
 import type { AxiosResponse } from 'axios'
@@ -25,16 +22,8 @@ export const useFileListAllDatasource = (): Res => {
   const datasource = useMemo(() => {
     const ds: IDatasource = {
       rowCount: undefined,
+      // eslint-disable-next-line @typescript-eslint/no-misused-promises
       getRows: async (params) => {
-        const {
-          startRow,
-          endRow,
-          sortModel,
-          filterModel,
-          successCallback,
-          failCallback,
-        } = params
-
         try {
           if (isFirstMount === true) {
             setIsLoading(true)
@@ -45,27 +34,28 @@ export const useFileListAllDatasource = (): Res => {
             setIsFetching(true)
           }
 
-          const { data } = await axiosWithAuth<
-            ResBody,
-            AxiosResponse<ResBody>,
-            Payload
-          >({
-            url: api.getFileListAll.url,
-            method: api.getFileListAll.method,
-            data: {
-              startRow,
-              endRow,
-              sortModel,
-              filterModel,
+          const { data } = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>(
+            {
+              url: api.getFileListAll.url,
+              method: api.getFileListAll.method,
+              data: {
+                startRow: params.startRow,
+                endRow: params.endRow,
+                sortModel: params.sortModel,
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                filterModel: params.filterModel,
+              },
             },
-          })
+          )
 
           const getLastRow = (): number => {
             const fileListCount = data.fileList.length
-            const didReachEndOfTheList = fileListCount >= endRow - startRow
+
+            const didReachEndOfTheList =
+              fileListCount >= params.endRow - params.startRow
 
             if (didReachEndOfTheList === false) {
-              const lastRow = startRow + fileListCount
+              const lastRow = params.startRow + fileListCount
 
               return lastRow
             }
@@ -77,9 +67,9 @@ export const useFileListAllDatasource = (): Res => {
           }
 
           const lastRow = getLastRow()
-          successCallback(data.fileList, lastRow)
+          params.successCallback(data.fileList, lastRow)
         } catch {
-          failCallback()
+          params.failCallback()
         } finally {
           setIsLoading(false)
           setIsFetching(false)

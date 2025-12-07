@@ -22,16 +22,8 @@ export const useBookmarkListAllDatasource = (): Res => {
   const datasource = useMemo(() => {
     const ds: IDatasource = {
       rowCount: undefined,
+      // eslint-disable-next-line @typescript-eslint/no-misused-promises
       getRows: async (params) => {
-        const {
-          startRow,
-          endRow,
-          sortModel,
-          filterModel,
-          successCallback,
-          failCallback,
-        } = params
-
         try {
           if (isFirstMount === true) {
             setIsLoading(true)
@@ -45,22 +37,24 @@ export const useBookmarkListAllDatasource = (): Res => {
           const { data } = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>(
             {
               url: api.getBookmarkListAll.url,
-              params: {
-                startRow,
-                endRow,
-                sortModel: JSON.stringify(sortModel),
-                filterModel: JSON.stringify(filterModel),
-              },
               method: api.getBookmarkListAll.method,
+              params: {
+                startRow: params.startRow,
+                endRow: params.endRow,
+                sortModel: JSON.stringify(params.sortModel),
+                filterModel: JSON.stringify(params.filterModel),
+              },
             },
           )
 
           const getLastRow = (): number => {
             const bookmarkListCount = data.bookmarkList.length
-            const didReachEndOfTheList = bookmarkListCount >= endRow - startRow
+
+            const didReachEndOfTheList =
+              bookmarkListCount >= params.endRow - params.startRow
 
             if (didReachEndOfTheList === false) {
-              const lastRow = startRow + bookmarkListCount
+              const lastRow = params.startRow + bookmarkListCount
 
               return lastRow
             }
@@ -72,9 +66,9 @@ export const useBookmarkListAllDatasource = (): Res => {
           }
 
           const lastRow = getLastRow()
-          successCallback(data.bookmarkList, lastRow)
+          params.successCallback(data.bookmarkList, lastRow)
         } catch {
-          failCallback()
+          params.failCallback()
         } finally {
           setIsLoading(false)
           setIsFetching(false)

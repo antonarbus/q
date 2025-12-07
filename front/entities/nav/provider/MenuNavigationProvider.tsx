@@ -10,6 +10,7 @@ import {
   type RefObject,
   useContext,
   useRef,
+  useMemo,
 } from 'react'
 
 type MenuNavigation = {
@@ -55,18 +56,31 @@ export const MenuNavigationProvider = (props: Props): JSX.Element => {
     fakeMenuRef,
   })
 
-  const navigationContextData: MenuNavigation = {
-    goUp: menuAnimation.goUp,
-    goDown: menuAnimation.goDown,
-    menuContainerRef,
-    currentMenuRef,
-    nextMenuRef,
-    fakeMenuRef,
-    currentMenuNavItemId,
-    nextMenuNavItemId,
-    idsToCurrentMenuItems,
-    isProfileMenu: idsToCurrentMenuItems.includes(navItemId.profile),
-  }
+  const navigationContextData: MenuNavigation = useMemo(
+    () => ({
+      goUp: menuAnimation.goUp,
+      goDown: menuAnimation.goDown,
+      menuContainerRef,
+      currentMenuRef,
+      nextMenuRef,
+      fakeMenuRef,
+      currentMenuNavItemId,
+      nextMenuNavItemId,
+      idsToCurrentMenuItems,
+      isProfileMenu: idsToCurrentMenuItems.includes(navItemId.profile),
+    }),
+    [
+      menuAnimation.goUp,
+      menuAnimation.goDown,
+      menuContainerRef,
+      currentMenuRef,
+      nextMenuRef,
+      fakeMenuRef,
+      currentMenuNavItemId,
+      nextMenuNavItemId,
+      idsToCurrentMenuItems,
+    ],
+  )
 
   return (
     <MenuNavigationContext.Provider value={navigationContextData}>
