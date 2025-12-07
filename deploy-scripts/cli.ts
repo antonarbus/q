@@ -66,7 +66,7 @@ program
     '--env <environment>',
     'Environment name (dev, test, pilot, prod)',
   )
-  .action(async (options: { env: string }) => {
+  .action((options: { env: string }) => {
     const validatedEnv = envSchema.parse(options.env)
     loadConfig({ env: validatedEnv })
   })
@@ -134,6 +134,7 @@ program
       previousImageBackend: string
     }) => {
       const validatedEnv = envSchema.parse(options.env)
+
       await verifyDeployment({
         env: validatedEnv,
         previousImageFrontend: options.previousImageFrontend,
@@ -150,6 +151,7 @@ program
   .action((options: { sourceEnv: string; targetEnv: string }) => {
     const validatedSourceEnv = envSchema.parse(options.sourceEnv)
     const validatedTargetEnv = envSchema.parse(options.targetEnv)
+
     validatePromotion({
       sourceEnv: validatedSourceEnv,
       targetEnv: validatedTargetEnv,
@@ -174,6 +176,7 @@ program
     }) => {
       const validatedSourceEnv = envSchema.parse(options.sourceEnv)
       const validatedTargetEnv = envSchema.parse(options.targetEnv)
+
       await promoteImage({
         sourceEnv: validatedSourceEnv,
         targetEnv: validatedTargetEnv,

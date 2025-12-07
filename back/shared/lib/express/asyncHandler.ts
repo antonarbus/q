@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from 'express'
 
 type AsyncRequestHandler = (
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   req: Request<any, any, any, any>,
   res: Response,
   next: NextFunction,

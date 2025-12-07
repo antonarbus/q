@@ -18,10 +18,10 @@ const processEnvSchema = z.object({
 })
 
 export const processEnv =
-  typeof process !== 'undefined'
-    ? processEnvSchema.parse(process.env)
-    : {
+  typeof process === 'undefined'
+    ? {
         NODE_ENV: 'development' as const,
         CI: false,
         ENVIRONMENT: 'unknown' as const,
       }
+    : processEnvSchema.parse(process.env)
