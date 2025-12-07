@@ -51,7 +51,7 @@ export const verifyDeployment = async (props: Props): Promise<void> => {
         logger.success('     HTML content detected')
       } else {
         logger.error('     No HTML content found')
-        frontendFailures++
+        frontendFailures = frontendFailures + 1
       }
 
       // Check response size
@@ -65,11 +65,11 @@ export const verifyDeployment = async (props: Props): Promise<void> => {
           `     Response too small: ${responseSize} bytes (expected > 100)`,
         )
 
-        frontendFailures++
+        frontendFailures = frontendFailures + 1
       }
     } else {
       logger.error(`Frontend returned HTTP ${frontendHttpCode}`)
-      frontendFailures++
+      frontendFailures = frontendFailures + 1
     }
 
     logger.emptyLine()
@@ -95,7 +95,6 @@ export const verifyDeployment = async (props: Props): Promise<void> => {
       try {
         const healthData = await backendResponse.json()
 
-        // Check for 'connected' message
         logger.info('  Checking health check message...')
 
         if (healthData.message === 'connected') {
@@ -105,15 +104,15 @@ export const verifyDeployment = async (props: Props): Promise<void> => {
             `     Unexpected message: "${healthData.message}" (expected "connected")`,
           )
 
-          backendFailures++
+          backendFailures = backendFailures + 1
         }
       } catch {
         logger.error('     Failed to parse JSON response')
-        backendFailures++
+        backendFailures = backendFailures + 1
       }
     } else {
       logger.error(`Backend health check returned HTTP ${backendHttpCode}`)
-      backendFailures++
+      backendFailures = backendFailures + 1
     }
 
     logger.emptyLine()
@@ -135,7 +134,10 @@ export const verifyDeployment = async (props: Props): Promise<void> => {
       logger.emptyLine()
 
       // Rollback frontend if needed
-      if (frontendFailures > 0 && props.previousImageFrontend) {
+      const shouldRollbackFrontend =
+        frontendFailures > 0 && Boolean(props.previousImageFrontend)
+
+      if (shouldRollbackFrontend === true) {
         logger.info('Rolling back frontend...')
 
         await rollbackCloudRunService({
@@ -147,7 +149,10 @@ export const verifyDeployment = async (props: Props): Promise<void> => {
       }
 
       // Rollback backend if needed
-      if (backendFailures > 0 && props.previousImageBackend) {
+      const shouldRollbackBackend =
+        backendFailures > 0 && Boolean(props.previousImageBackend)
+
+      if (shouldRollbackBackend === true) {
         logger.info('Rolling back backend...')
 
         await rollbackCloudRunService({
@@ -161,7 +166,7 @@ export const verifyDeployment = async (props: Props): Promise<void> => {
       exit(1)
     }
   } catch (error) {
-    logger.error(`Deployment verification failed: ${error}`)
+    logger.error(`Deployment verification failed: ${String(error)}`)
     exit(1)
   }
 }
