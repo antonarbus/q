@@ -30,36 +30,38 @@ type Type = (state: Quotation, action: PayloadAction<CopyPlace>) => Quotation
 export const insertPasteRowReducer: Type = (state, action) => {
   const { pastePos, id } = action.payload
 
-  for (let blockIndex = 0; blockIndex < state.blocks.length; blockIndex++) {
+  for (
+    let blockIndex = 0;
+    blockIndex < state.blocks.length;
+    blockIndex = blockIndex + 1
+  ) {
     const boqBlock = getBoqBlockFromState({ blockIndex, state })
 
-    if (boqBlock === undefined) {
-      continue
+    if (boqBlock !== undefined) {
+      const rowsWithoutPasteText = boqBlock.boq.rows.filter(
+        (row) => row.type === rowTypeKey.row,
+      )
+
+      boqBlock.boq.rows = rowsWithoutPasteText
+
+      const rowIndex = rowsWithoutPasteText.findIndex((row) => row.id === id)
+
+      const notInMiddle = rowIndex !== -1 && pastePos !== 'middle'
+
+      if (notInMiddle === true) {
+        const insertAtIndex = rowIndex + (pastePos === 'bottom' ? 1 : 0)
+
+        const rowsWithPasteText = rowsWithoutPasteText.toSpliced(
+          insertAtIndex,
+          0,
+          pasteText,
+        )
+
+        boqBlock.boq.rows = rowsWithPasteText
+
+        break
+      }
     }
-
-    const rowsWithoutPasteText = boqBlock.boq.rows.filter(
-      (row) => row.type === rowTypeKey.row,
-    )
-
-    boqBlock.boq.rows = rowsWithoutPasteText
-
-    const rowIndex = rowsWithoutPasteText.findIndex((row) => row.id === id)
-
-    if (rowIndex === -1 || pastePos === 'middle') {
-      continue
-    }
-
-    const insertAtIndex = rowIndex + (pastePos === 'bottom' ? 1 : 0)
-
-    const rowsWithPasteText = rowsWithoutPasteText.toSpliced(
-      insertAtIndex,
-      0,
-      pasteText,
-    )
-
-    boqBlock.boq.rows = rowsWithPasteText
-
-    break
   }
 
   return state
