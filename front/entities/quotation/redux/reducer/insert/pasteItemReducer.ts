@@ -3,7 +3,111 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import { generateId } from '@shared/lib/nanoid'
 import { itemType } from '../../../const/itemType'
 import { rowTypeKey } from '../../../const/rowTypeKey'
-import type { Item, Quotation } from '../../../type'
+import type { Item, Quotation, Row } from '../../../type'
+
+type SpliceSettings = {
+  insertAtIndex: number
+  deleteCount: number
+}
+
+const calculateSpliceSettings = (
+  baseIndex: number,
+  pastePos: PastePos,
+): SpliceSettings => {
+  if (pastePos === 'top') {
+    return {
+      insertAtIndex: baseIndex - 1,
+      deleteCount: 0,
+    }
+  }
+
+  if (pastePos === 'bottom') {
+    return {
+      insertAtIndex: baseIndex + 1,
+      deleteCount: 0,
+    }
+  }
+
+  return {
+    insertAtIndex: baseIndex,
+    deleteCount: 1,
+  }
+}
+
+const prepareItemForPasting = (item: Item, newItemId: string): Item => {
+  const clonedItem: Item = { ...structuredClone(item), id: newItemId }
+
+  if (clonedItem.type === itemType.boq) {
+    clonedItem.boq.rows.forEach((row) => {
+      row.id = generateId()
+    })
+  }
+
+  return clonedItem
+}
+
+const isBlockType = (item: Item): boolean => {
+  const isBoq = item.type === itemType.boq
+  const isText = item.type === itemType.text
+  const isPrice = item.type === itemType.price
+  const isBlock = isBoq || isText || isPrice
+
+  return isBlock
+}
+
+const pasteBlock = (
+  state: Quotation,
+  id: string,
+  pastePos: PastePos,
+  itemToPaste: Item,
+): void => {
+  const hoveredItemIndex = state.blocks.findIndex((block) => block.id === id)
+  const spliceSettings = calculateSpliceSettings(hoveredItemIndex, pastePos)
+
+  const blocksWithoutPaste = state.blocks.filter(
+    (block) => block.type !== itemType.paste,
+  )
+
+  blocksWithoutPaste.splice(
+    spliceSettings.insertAtIndex,
+    spliceSettings.deleteCount,
+    itemToPaste,
+  )
+
+  state.blocks = blocksWithoutPaste
+}
+
+const pasteRow = (
+  state: Quotation,
+  id: string,
+  pastePos: PastePos,
+  itemToPaste: Row,
+): void => {
+  const boqBlocks = state.blocks.filter((block) => block.type === itemType.boq)
+
+  for (const block of boqBlocks) {
+    const rowIndex = block.boq.rows.findIndex((row) => row.id === id)
+    const rowFound = rowIndex !== -1
+
+    if (rowFound === true) {
+      const spliceSettings = calculateSpliceSettings(rowIndex, pastePos)
+
+      const rowsWithoutPaste = block.boq.rows.filter(
+        (row) => row.type !== rowTypeKey.paste,
+      )
+
+      rowsWithoutPaste.splice(
+        spliceSettings.insertAtIndex,
+        spliceSettings.deleteCount,
+        itemToPaste,
+      )
+
+      block.boq.rows = rowsWithoutPaste
+
+      return
+    }
+  }
+}
 
 export const pasteItemReducer = (
   state: Quotation,
@@ -15,134 +119,18 @@ export const pasteItemReducer = (
   }>,
 ): void => {
   const { id, newItemId, pastePos, item } = action.payload
-
-  const itemToPaste: Item = { ...structuredClone(item), id: newItemId }
-
-  if (itemToPaste.type === itemType.boq) {
-    const { rows } = itemToPaste.boq
-
-    rows.forEach((row) => {
-      row.id = generateId()
-    })
-  }
-
-  const isBlock =
-    itemToPaste.type === itemType.boq ||
-    itemToPaste.type === itemType.text ||
-    itemToPaste.type === itemType.price
-
-  const isRow = itemToPaste.type === itemType.row
+  const itemToPaste = prepareItemForPasting(item, newItemId)
+  const isBlock = isBlockType(itemToPaste)
 
   if (isBlock === true) {
-    const hoveredItemIndex = state.blocks.findIndex((block) => block.id === id)
-
-    type SplicingSettings = {
-      insertAtIndex: number
-      deleteCount: number
-    }
-
-    const getSpliceSettings = (): SplicingSettings => {
-      const spliceSettings = {
-        insertAtIndex: hoveredItemIndex,
-        deleteCount: 0,
-      }
-
-      if (pastePos === 'top') {
-        spliceSettings.insertAtIndex = spliceSettings.insertAtIndex - 1
-
-        return spliceSettings
-      }
-
-      if (pastePos === 'bottom') {
-        spliceSettings.insertAtIndex = spliceSettings.insertAtIndex + 1
-
-        return spliceSettings
-      }
-
-      spliceSettings.deleteCount = spliceSettings.deleteCount + 1
-
-      return spliceSettings
-    }
-
-    const spliceSettings = getSpliceSettings()
-
-    const blocksWithoutPasteText = state.blocks.filter(
-      (block) => block.type !== itemType.paste,
-    )
-
-    blocksWithoutPasteText.splice(
-      spliceSettings.insertAtIndex,
-      spliceSettings.deleteCount,
-      itemToPaste,
-    )
-
-    state.blocks = blocksWithoutPasteText
+    pasteBlock(state, id, pastePos, itemToPaste)
 
     return
   }
 
+  const isRow = itemToPaste.type === itemType.row
+
   if (isRow === true) {
-    state.blocks.forEach((block) => {
-      if (block.type !== itemType.boq) {
-        return
-      }
-
-      type SplicingSettings = {
-        insertAtIndex: number
-        deleteCount: number
-      }
-
-      let spliceSettings: SplicingSettings | null = null
-
-      block.boq.rows.forEach((row, hoveredItemIndex) => {
-        if (row.id !== id) {
-          return
-        }
-
-        const getSpliceSettings = (): SplicingSettings => {
-          const spliceParams: SplicingSettings = {
-            insertAtIndex: hoveredItemIndex,
-            deleteCount: 0,
-          }
-
-          if (pastePos === 'top') {
-            spliceParams.insertAtIndex = spliceParams.insertAtIndex - 1
-
-            return spliceParams
-          }
-
-          if (pastePos === 'bottom') {
-            spliceParams.insertAtIndex = spliceParams.insertAtIndex + 1
-
-            return spliceParams
-          }
-
-          spliceParams.deleteCount = spliceParams.deleteCount + 1
-
-          return spliceParams
-        }
-
-        spliceSettings = getSpliceSettings()
-      })
-
-      if ((spliceSettings as SplicingSettings | null) === null) {
-        return
-      }
-
-      const rowsWithoutPasteText = block.boq.rows.filter(
-        (row) => row.type !== rowTypeKey.paste,
-      )
-
-      // todo: fix it
-      rowsWithoutPasteText.splice(
-        // @ts-expect-error: some error
-        spliceSettings.insertAtIndex,
-        // @ts-expect-error: some error
-        spliceSettings.deleteCount,
-        itemToPaste,
-      )
-
-      block.boq.rows = rowsWithoutPasteText
-    })
+    pasteRow(state, id, pastePos, itemToPaste)
   }
 }
