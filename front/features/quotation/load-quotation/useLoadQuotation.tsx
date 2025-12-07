@@ -62,6 +62,7 @@ export const useLoadQuotation = (): void => {
     const loadQuotation = async (): Promise<void> => {
       if (shouldLoadQuotation.yesOrNo === 'yes') {
         const fromWhereToLoad = getFromWhereToLoadQuotation()
+        backToQuotationRef.current = null
 
         // load previous quotation when user clicks on "< Back" button
         if (fromWhereToLoad === 'memory') {
@@ -209,8 +210,6 @@ export const useLoadQuotation = (): void => {
             }),
           )
         }
-
-        backToQuotationRef.current = null
       }
     }
 

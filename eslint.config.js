@@ -122,7 +122,7 @@ export default [
       ],
 
       // adjust TS rules
-      '@typescript-eslint/no-misused-spread': 'off',
+      '@typescript-eslint/no-misused-spread': 'off', // ...sx produces error
       '@typescript-eslint/no-unused-vars': ['error', { args: 'none' }],
       '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
       '@typescript-eslint/strict-boolean-expressions': [
@@ -158,6 +158,7 @@ export default [
       ],
 
       // adjust React rules,
+      'react-hooks/preserve-manual-memoization': 'off', // do not use react compiler
       'react/jsx-max-depth': 'off', // too aggressive
       'react-hooks/exhaustive-deps': 'warn', // full dep arrays are noisy, not visible real intention
       'react-hooks/immutability': 'off', // gives error for modifying signal's value

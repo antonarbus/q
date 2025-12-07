@@ -21,8 +21,7 @@ export const OpenBookmarkModalButton = ({ id }: ReqBody): JSX.Element => {
 
       if (block !== undefined) {
         // Save scroll position before setNotEditable
-        const scrollX = window.scrollX
-        const scrollY = window.scrollY
+        const { scrollX, scrollY } = window
 
         dispatch(textSlice.actions.setNotEditable())
 
