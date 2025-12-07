@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 import { secret } from '../../../../config/secrets'
-import type { JwtPayloadExtended } from './types'
+import { isJwtPayloadExtended, type JwtPayloadExtended } from './types'
 
 export const verifyAccessToken = (
   accessJwtToken: string,
@@ -12,19 +12,13 @@ export const verifyAccessToken = (
       return undefined
     }
 
-    if ('email' in jwtPayload === false) {
+    if (isJwtPayloadExtended(jwtPayload) === false) {
       throw new Error(
-        'JWT payload is wrong, it exists and valid, but there is no "email"',
+        'JWT payload is wrong, it exists and valid, but there is no "email" or "role"',
       )
     }
 
-    if ('roles' in jwtPayload === false) {
-      throw new Error(
-        'JWT payload is wrong, it exists and valid, but there is no "roles"',
-      )
-    }
-
-    return jwtPayload as JwtPayloadExtended
+    return jwtPayload
   } catch {
     return undefined // if token is expired it will result in error
   }
