@@ -21,9 +21,11 @@ export const IconWithLoader = (props: Props): ReactNode => {
   const firstLetter = props.navItem.name.at(0)
   const disabled = Boolean(props.navItem.disabled)
   const tooltipText = props.navItem.tooltip
-  const icon = props.navItem.iconId
-    ? iconRegistry[props.navItem.iconId]
-    : undefined
+
+  const icon =
+    props.navItem.iconId === undefined
+      ? undefined
+      : iconRegistry[props.navItem.iconId]
 
   if (isMobile === true) {
     return icon
