@@ -40,9 +40,9 @@ export const useLoadQuotation = (): void => {
 
     if (shouldAutoDetectFromWhereToLoadQuotation === true) {
       return 'template'
-    } else {
-      return 'server'
     }
+
+    return 'server'
   }
 
   /** Decide which quotation to load on first mount  */
