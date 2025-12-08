@@ -604,10 +604,170 @@ gcloud run services logs tail <APP_NAME>-backend-<env>
 
 ---
 
+## Environment Variables in Cloud Run
+
+Understanding how environment variables are configured across different layers of the deployment pipeline.
+
+### The 3-Layer Hierarchy
+
+Environment variables in Cloud Run can be set at three different stages, each serving a specific purpose:
+
+#### Layer 1: Dockerfile (Baked into Image) 🍞
+
+```dockerfile
+# Dockerfile.prod.back:28
+ENV NODE_ENV=production
+```
+
+- **When**: Build time (when Docker image is created)
+- **Scope**: Inside the Docker image itself
+- **Can be overridden**: Yes, by Cloud Run runtime configuration
+
+This sets default values that are baked into the image. These are baseline values that can be overridden by subsequent layers.
+
+#### Layer 2: Terraform (Infrastructure Baseline) 🏗️
+
+```hcl
+# terraform/infrastructure/cloud-run.tf
+env {
+  name  = "NODE_ENV"
+  value = "production"
+}
+
+env {
+  name  = "ENVIRONMENT"
+  value = var.environment  # "dev", "test", "pilot", or "prod"
+}
+```
+
+- **When**: Infrastructure provisioning (initial Cloud Run service creation)
+- **Scope**: Cloud Run service configuration
+- **Can be overridden**: Yes, by gcloud CLI updates
+
+Terraform defines what the infrastructure **should** look like. This is your infrastructure-as-code source of truth.
+
+**Why you need this layer:**
+
+- **Initial creation**: When you run `terraform apply` for the first time, there's no Cloud Run service yet
+- **Disaster recovery**: If the service is deleted and recreated with Terraform, it will have correct env vars
+- **Drift detection**: Terraform can detect and fix manual changes made in GCP Console
+- **Documentation**: Infrastructure-as-code serves as documentation for your team
+
+#### Layer 3: GitHub Actions Deployment (Runtime Updates) 🚀
+
+```typescript
+// deploy-scripts/lib/gcloud/updateCloudRunService.ts:23
+await $`gcloud run services update ${cloudRunServiceName} \
+  --image ${imageUrl} \
+  --set-env-vars ENVIRONMENT=${environment}`
+```
+
+- **When**: Every deployment (when you push new code)
+- **Scope**: Updates the running Cloud Run service
+- **Can be overridden**: No (this is the final layer)
+
+GitHub Actions updates specific environment variables on each deployment without changing the entire service configuration.
+
+### How They Work Together
+
+**Scenario 1: Fresh Terraform Apply (First Time)**
+
+```bash
+terraform apply
+```
+
+**Result:** Cloud Run service created with:
+
+- `NODE_ENV="production"` (from Terraform)
+- `ENVIRONMENT="dev"` (from Terraform, using `var.environment`)
+
+**Scenario 2: GitHub Actions Deployment (Every Push)**
+
+```bash
+gcloud run services update backend \
+  --image <new-image> \
+  --set-env-vars ENVIRONMENT=dev
+```
+
+**Result:** Cloud Run service updated with:
+
+- `NODE_ENV="production"` (unchanged, still from Terraform/Dockerfile)
+- `ENVIRONMENT="dev"` (updated by gcloud CLI)
+
+**Scenario 3: Terraform Apply Again (After Deployments)**
+
+```bash
+terraform apply
+```
+
+**What Terraform sees:**
+
+- Current state: `NODE_ENV="production"`, `ENVIRONMENT="dev"`
+- Desired state: `NODE_ENV="production"`, `ENVIRONMENT="dev"`
+- **No changes needed** ✅
+
+### Visual Flow
+
+```
+┌─────────────────────────────────────────────────────────┐
+│ 1. Build Time (Dockerfile)                             │
+│    ENV NODE_ENV=production                              │
+│    (Baked into image)                                   │
+└─────────────────────────────────────────────────────────┘
+                         ↓
+┌─────────────────────────────────────────────────────────┐
+│ 2. Infrastructure Creation (Terraform - First Time)     │
+│    env { NODE_ENV = "production" }                      │
+│    env { ENVIRONMENT = "dev" }                          │
+│    (Creates Cloud Run service with these defaults)      │
+└─────────────────────────────────────────────────────────┘
+                         ↓
+┌─────────────────────────────────────────────────────────┐
+│ 3. Deployment (GitHub Actions - Every Push)             │
+│    gcloud run services update                           │
+│      --set-env-vars ENVIRONMENT=dev                     │
+│    (Updates only ENVIRONMENT, NODE_ENV unchanged)       │
+└─────────────────────────────────────────────────────────┘
+                         ↓
+┌─────────────────────────────────────────────────────────┐
+│ Final Running Container                                 │
+│    NODE_ENV=production   ← From Terraform/Dockerfile    │
+│    ENVIRONMENT=dev       ← From GitHub Actions          │
+└─────────────────────────────────────────────────────────┘
+```
+
+### Understanding NODE_ENV vs ENVIRONMENT
+
+**NODE_ENV** (Node.js standard):
+
+- Values: `"development"`, `"test"`, or `"production"`
+- Purpose: Controls Node.js behavior, npm install mode, and framework optimizations
+- In Cloud Run: Always `"production"` (running production builds)
+
+**ENVIRONMENT** (Your custom variable):
+
+- Values: `"dev"`, `"test"`, `"pilot"`, or `"prod"`
+- Purpose: Identifies which deployed environment you're running in
+- In Cloud Run: Set per environment (`dev`, `test`, `pilot`, `prod`)
+
+### Why All 3 Layers Are Needed
+
+Each layer serves a different purpose at different stages:
+
+- **Dockerfile**: Default baked into image (portable baseline)
+- **Terraform**: Infrastructure baseline (source of truth, drift detection, disaster recovery)
+- **GitHub Actions**: Runtime updates (deployment-specific overrides)
+
+This separation allows for:
+
+- **Flexibility**: Change deployment-specific values without rebuilding images
+- **Safety**: Infrastructure-as-code prevents configuration drift
+- **Speed**: Update environment variables instantly without re-provisioning infrastructure
+
+---
+
 ## Notes
 
 **Database**: This app uses MongoDB Atlas (external), not Cloud SQL. Configure your MongoDB connection string via environment variables or Google Secret Manager.
 
-**No Google AI APIs**: This setup does not use Google Translation or Text-to-Speech APIs. If you need them in the future, add them to `terraform/infrastructure/apis.tf`.
-
-**2 Container Architecture**: Frontend (Nginx) and Backend (Express/Bun) run as separate Cloud Run services. Frontend proxies API requests to backend.
+**Container Architecture**: Frontend (Nginx) and Backend (Express/Bun) run as separate Cloud Run services. Frontend proxies API requests to backend.
