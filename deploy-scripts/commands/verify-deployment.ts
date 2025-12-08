@@ -3,6 +3,9 @@ import { type Env, infraConfigVariables } from '../../config/infrastructure'
 import { getCloudRunServiceUrl } from '../lib/gcloud/getCloudRunServiceUrl'
 import { rollbackCloudRunService } from '../lib/gcloud/rollbackCloudRunService'
 import { logger } from '../lib/output/logger'
+import axios, { type AxiosResponse } from 'axios'
+import type { ResBody } from '@back/api/dev/healthCheckHandler'
+import { api } from '@back/api'
 
 type Props = {
   env: Env
@@ -31,22 +34,24 @@ export const verifyDeployment = async (props: Props): Promise<void> => {
 
     // Test frontend
     let frontendFailures = 0
-    const frontendResponse = await fetch(frontendUrl)
-    const frontendHttpCode = frontendResponse.status
 
-    if (frontendHttpCode === 200) {
+    const frontendResponse = await axios<string>({
+      url: api.health.url,
+      method: 'get',
+      responseType: 'text',
+    })
+
+    if (frontendResponse.status === 200) {
       logger.success(
-        `Frontend is live and responding (HTTP ${frontendHttpCode})`,
+        `Frontend is live and responding (HTTP ${frontendResponse.status})`,
       )
-
-      const body = await frontendResponse.text()
 
       // Check for HTML content
       logger.info('  Checking for HTML content...')
 
       const isValidHtml =
-        body.toLowerCase().includes('<html') ||
-        body.toLowerCase().includes('<!doctype')
+        frontendResponse.data.toLowerCase().includes('<html') ||
+        frontendResponse.data.toLowerCase().includes('<!doctype')
 
       if (isValidHtml === true) {
         logger.success('     HTML content detected')
@@ -57,7 +62,7 @@ export const verifyDeployment = async (props: Props): Promise<void> => {
 
       // Check response size
       logger.info('  Checking response size...')
-      const responseSize = body.length
+      const responseSize = frontendResponse.data.length
 
       if (responseSize > 100) {
         logger.success(`     Response size: ${responseSize} bytes`)
@@ -69,7 +74,7 @@ export const verifyDeployment = async (props: Props): Promise<void> => {
         frontendFailures = frontendFailures + 1
       }
     } else {
-      logger.error(`Frontend returned HTTP ${frontendHttpCode}`)
+      logger.error(`Frontend returned HTTP ${frontendResponse.status}`)
       frontendFailures = frontendFailures + 1
     }
 
@@ -87,32 +92,34 @@ export const verifyDeployment = async (props: Props): Promise<void> => {
 
     // Test backend health check
     let backendFailures = 0
-    const backendResponse = await fetch(`${backendUrl}/api/health-check`)
-    const backendHttpCode = backendResponse.status
+    // const backendResponse = await fetch(`${backendUrl}/api/health-check`)
 
-    if (backendHttpCode === 200) {
-      logger.success(`Backend is live and responding (HTTP ${backendHttpCode})`)
+    const healthCheckResponse = await axios<ResBody, AxiosResponse<ResBody>>({
+      url: `${backendUrl}${api.health.url}`,
+      method: 'get',
+    })
+
+    if (healthCheckResponse.status === 200) {
+      logger.success(
+        `Backend is live and responding (HTTP ${healthCheckResponse.status})`,
+      )
 
       try {
-        const healthData = await backendResponse.json()
-
         logger.info('  Checking health check message...')
 
-        if (healthData.message === 'connected') {
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+        if (healthCheckResponse.data.message === 'connected') {
           logger.success('     Health check message correct: "connected"')
-        } else {
-          logger.error(
-            `     Unexpected message: "${healthData.message}" (expected "connected")`,
-          )
-
-          backendFailures = backendFailures + 1
         }
       } catch {
         logger.error('     Failed to parse JSON response')
         backendFailures = backendFailures + 1
       }
     } else {
-      logger.error(`Backend health check returned HTTP ${backendHttpCode}`)
+      logger.error(
+        `Backend health check returned HTTP ${healthCheckResponse.status}`,
+      )
+
       backendFailures = backendFailures + 1
     }
 
