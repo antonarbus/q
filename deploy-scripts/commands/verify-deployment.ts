@@ -44,10 +44,11 @@ export const verifyDeployment = async (props: Props): Promise<void> => {
       // Check for HTML content
       logger.info('  Checking for HTML content...')
 
-      if (
+      const isValidHtml =
         body.toLowerCase().includes('<html') ||
         body.toLowerCase().includes('<!doctype')
-      ) {
+
+      if (isValidHtml === true) {
         logger.success('     HTML content detected')
       } else {
         logger.error('     No HTML content found')
