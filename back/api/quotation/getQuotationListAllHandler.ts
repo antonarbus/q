@@ -11,7 +11,7 @@ export type ItemPick = Pick<
   'id' | 'email' | 'name' | 'type' | 'createdAt' | 'updatedAt'
 >
 
-export type ReqBody = {
+type ReqBody = {
   startRow: number
   endRow: number
   sortModel: {

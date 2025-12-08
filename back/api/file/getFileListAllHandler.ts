@@ -15,7 +15,7 @@ export type Item = {
   usedByIdList: File['usedByIdList']
 }
 
-export type ReqBody = {
+type ReqBody = {
   startRow: number
   endRow: number
   sortModel: {
