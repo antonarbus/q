@@ -1,4 +1,4 @@
-import { api } from '@back/api'
+import { apiRoute } from '@back/api/apiRoute'
 import type {
   ErrorResBody,
   ReqBody as Payload,
@@ -17,8 +17,8 @@ export const saveQuotationMutationFn = async ({
     AxiosResponse<ResBody>,
     Payload
   >({
-    url: api.saveQuotation.url,
-    method: api.saveQuotation.method,
+    url: apiRoute.saveQuotation.url,
+    method: apiRoute.saveQuotation.method,
     data: { quotation },
   })
 

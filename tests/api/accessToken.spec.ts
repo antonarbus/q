@@ -1,4 +1,4 @@
-import { api } from '@back/api'
+import { apiRoute } from '@back/api/apiRoute'
 import { expect, test } from '@playwright/test'
 import { runtimeConfig } from '../../config/runtime'
 
@@ -17,9 +17,12 @@ test.describe('#authTokenRefresh', () => {
     test('should login successfully and return access token', async ({
       request,
     }) => {
-      const loginResponse = await request[api.logIn.method](api.logIn.url, {
-        data: { email, password },
-      })
+      const loginResponse = await request[apiRoute.logIn.method](
+        apiRoute.logIn.url,
+        {
+          data: { email, password },
+        },
+      )
 
       expect(loginResponse.ok()).toBeTruthy()
       const loginData = await loginResponse.json()
@@ -40,8 +43,8 @@ test.describe('#authTokenRefresh', () => {
     test('should make successful protected request with valid token', async ({
       request,
     }) => {
-      const res = await request[api.getQuotationList.method](
-        api.getQuotationList.url,
+      const res = await request[apiRoute.getQuotationList.method](
+        apiRoute.getQuotationList.url,
         {
           headers: {
             'access-jwt-token': accessToken,
@@ -57,8 +60,8 @@ test.describe('#authTokenRefresh', () => {
     test('should return 401 with "Not logged in" message', async ({
       request,
     }) => {
-      const res = await request[api.getQuotationList.method](
-        api.getQuotationList.url,
+      const res = await request[apiRoute.getQuotationList.method](
+        apiRoute.getQuotationList.url,
         {
           headers: {
             'access-jwt-token': 'invalid token value',
@@ -76,8 +79,8 @@ test.describe('#authTokenRefresh', () => {
     test('should get new access token using refresh token from cookie', async ({
       request,
     }) => {
-      const accessTokenResponse = await request[api.getAccessToken.method](
-        api.getAccessToken.url,
+      const accessTokenResponse = await request[apiRoute.getAccessToken.method](
+        apiRoute.getAccessToken.url,
         {
           headers: {
             Cookie: refreshTokenCookie,
@@ -103,8 +106,8 @@ test.describe('#authTokenRefresh', () => {
     test('should make successful protected request with refreshed token', async ({
       request,
     }) => {
-      const res = await request[api.getQuotationList.method](
-        api.getQuotationList.url,
+      const res = await request[apiRoute.getQuotationList.method](
+        apiRoute.getQuotationList.url,
         {
           headers: {
             'access-jwt-token': accessToken,
@@ -122,8 +125,8 @@ test.describe('#authTokenRefresh', () => {
     }) => {
       const invalidRefreshToken = 'refresh-jwt-token=invalid_token_value'
 
-      const res = await request[api.getAccessToken.method](
-        api.getAccessToken.url,
+      const res = await request[apiRoute.getAccessToken.method](
+        apiRoute.getAccessToken.url,
         {
           headers: {
             Cookie: invalidRefreshToken,

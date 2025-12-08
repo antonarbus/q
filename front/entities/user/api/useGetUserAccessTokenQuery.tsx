@@ -1,4 +1,4 @@
-import { api } from '@back/api'
+import { apiRoute } from '@back/api/apiRoute'
 import type {
   ErrorResBody,
   ResBody,
@@ -20,8 +20,8 @@ export const useGetUserAccessTokenQuery = (): Res => {
     enabled: false,
     queryFn: async () => {
       const { data } = await axios<ResBody, AxiosResponse<ResBody>>({
-        url: api.getAccessToken.url,
-        method: api.getAccessToken.method,
+        url: apiRoute.getAccessToken.url,
+        method: apiRoute.getAccessToken.method,
         withCredentials: true,
         timeout: 10000,
       })

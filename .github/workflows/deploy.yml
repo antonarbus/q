@@ -42,7 +42,7 @@ jobs:
           bun-version: latest
 
       - name: 'Install dependencies'
-        run: bun run install-all
+        run: bun run install-dev-deps
 
       - name: 'Generate Terraform Variables'
         run: bun deploy-scripts/cli.ts generate-tfvars
@@ -88,8 +88,8 @@ jobs:
         with:
           bun-version: latest
 
-      - name: 'Install all dependencies'
-        run: bun run install-all
+      - name: 'Install dependencies'
+        run: bun run install-dev-deps
 
       - name: 'Run ESLint'
         run: bun run lint-check-quiet
@@ -133,7 +133,7 @@ jobs:
         with:
           bun-version: latest
 
-      - name: 'Install all dependencies'
+      - name: 'Install dependencies'
         run: bun run install-all
 
       - name: 'Run Playwright tests'
@@ -161,7 +161,7 @@ jobs:
           bun-version: latest
 
       - name: 'Install dependencies'
-        run: bun run install-all
+        run: bun run install-dev-deps
 
       - name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v3'
@@ -208,7 +208,7 @@ jobs:
           bun-version: latest
 
       - name: 'Install dependencies'
-        run: bun run install-all
+        run: bun run install-dev-deps
 
       - name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v3'
@@ -254,7 +254,7 @@ jobs:
           bun-version: latest
 
       - name: 'Install dependencies'
-        run: bun run install-all
+        run: bun run install-dev-deps
 
       - name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v3'

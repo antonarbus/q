@@ -1,8 +1,5 @@
-import { dirname, join, resolve } from 'node:path'
+import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { type BabelFileResult, transformAsync } from '@babel/core'
-import type { NodePath } from '@babel/traverse'
-import type { ObjectProperty } from '@babel/types'
 import basicSsl from '@vitejs/plugin-basic-ssl'
 import react from '@vitejs/plugin-react'
 import tsconfigPaths from 'vite-tsconfig-paths'
@@ -12,70 +9,11 @@ const thisFilePath: string = fileURLToPath(import.meta.url)
 const thisDirPath: string = dirname(thisFilePath)
 
 /**
- * Strips the `handler` property from the api routes object in the backend.
- * This is needed because api are shared between front and back ends and
- * Sensitive functions are leaked to the frontend.
- * Also it breaks the connection between front and back ends, otherwise whole
- * node_modules will be included in the frontend build.
- * 
- * TODO: remove this hack in future by splitting meta data from api handler function
- * 
- *   // back/api/api-routes.ts (metadata only)
-  export const apiRoutes = {
-    getUser: { url: '/api/user', method: 'get' },
-  } as const
-
-  // back/api/api.ts (with handlers, backend only)
-  import { getUserHandler } from './handlers'
-  export const api = {
-    getUser: {
-      ...apiRoutes.getUser,
-      handler: getUserHandler,
-    },
-  }
-
-  // frontend imports apiRoutes, not api
+ * API routes are now properly separated:
+ * - back/api/api-routes.ts contains metadata only (no handlers, no backend dependencies)
+ * - back/api/api.ts contains handlers for backend use only
+ * - Frontend and deploy scripts import from api-routes.ts for proper tree-shaking
  */
-const stripHandlerFromApiRoutes = (): unknown => {
-  const targetFilePath = resolve(thisDirPath, 'back/api/api.ts')
-
-  return {
-    enforce: 'pre',
-    name: 'vite-strip-handler-from-api-routes',
-    async transform(code: string, id: string): Promise<BabelFileResult | null> {
-      if (resolve(id) !== targetFilePath) {
-        return null
-      }
-
-      console.info('⛭ Stripping "handler" props from api object')
-
-      const result = await transformAsync(code, {
-        babelrc: false,
-        configFile: false,
-        filename: id,
-        plugins: [
-          // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-          () => ({
-            visitor: {
-              ObjectProperty(path: NodePath<ObjectProperty>): void {
-                const isHandlerIdentifier =
-                  path.node.key.type === 'Identifier' &&
-                  path.node.key.name === 'handler'
-
-                if (isHandlerIdentifier === true) {
-                  path.remove()
-                }
-              },
-            },
-          }),
-        ],
-        presets: ['@babel/preset-typescript'],
-      })
-
-      return result === null ? null : { code: result.code, map: null }
-    },
-  }
-}
 
 // https://vitejs.dev/config/
 
@@ -114,7 +52,6 @@ export default {
       jsxImportSource: '@emotion/react',
       babel: {
         plugins: [
-          // 'babel-plugin-react-compiler', //* Can not use react compiler, all animation and other things go crazy
           [
             '@emotion/babel-plugin', // from package 'babel-plugin-styled-components',
             {
@@ -130,7 +67,6 @@ export default {
     // https://github.com/aleclarson/vite-tsconfig-paths
     tsconfigPaths(),
     basicSsl(),
-    stripHandlerFromApiRoutes(),
   ],
   resolve: {
     alias: {

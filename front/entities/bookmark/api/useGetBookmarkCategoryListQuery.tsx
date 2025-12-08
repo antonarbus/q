@@ -1,4 +1,4 @@
-import { api } from '@back/api'
+import { apiRoute } from '@back/api/apiRoute'
 import type {
   ErrorResBody,
   ResBody,
@@ -20,8 +20,8 @@ export const useGetBookmarkCategoryListQuery = (): Res => {
     retry: 0,
     queryFn: async () => {
       const { data } = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
-        url: api.getUniqueBookmarkCategoryList.url,
-        method: api.getUniqueBookmarkCategoryList.method,
+        url: apiRoute.getUniqueBookmarkCategoryList.url,
+        method: apiRoute.getUniqueBookmarkCategoryList.method,
       })
 
       return data

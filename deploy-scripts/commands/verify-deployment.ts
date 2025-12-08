@@ -5,7 +5,7 @@ import { rollbackCloudRunService } from '../lib/gcloud/rollbackCloudRunService'
 import { logger } from '../lib/output/logger'
 import axios, { type AxiosResponse } from 'axios'
 import type { ResBody } from '@back/api/dev/healthCheckHandler'
-import { api } from '@back/api'
+import { apiRoute } from '@back/api/apiRoute'
 
 type Props = {
   env: Env
@@ -93,7 +93,7 @@ export const verifyDeployment = async (props: Props): Promise<void> => {
     let backendFailures = 0
 
     const healthCheckResponse = await axios<ResBody, AxiosResponse<ResBody>>({
-      url: `${backendUrl}${api.health.url}`,
+      url: `${backendUrl}${apiRoute.health.url}`,
       method: 'get',
     })
 

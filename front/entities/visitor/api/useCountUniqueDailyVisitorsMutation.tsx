@@ -1,4 +1,4 @@
-import { api } from '@back/api'
+import { apiRoute } from '@back/api/apiRoute'
 import type {
   ErrorResBody,
   ReqBody as Payload,
@@ -15,8 +15,8 @@ export const useCountUniqueDailyVisitorsMutation = (): Res => {
     mutationKey: [queryKey.countUniqueDailyVisitors],
     mutationFn: async ({ date, isNew }: Payload) => {
       const { data } = await axios<ResBody>({
-        url: api.countUniqueDailyVisitors.url,
-        method: api.countUniqueDailyVisitors.method,
+        url: apiRoute.countUniqueDailyVisitors.url,
+        method: apiRoute.countUniqueDailyVisitors.method,
         data: { date, isNew },
       })
 

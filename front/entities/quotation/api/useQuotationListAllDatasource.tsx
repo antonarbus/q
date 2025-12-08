@@ -1,4 +1,4 @@
-import { api } from '@back/api'
+import { apiRoute } from '@back/api/apiRoute'
 import type { ResBody } from '@back/api/quotation/getQuotationListAllHandler'
 import { axiosWithAuth } from '@shared/lib/axios'
 import type { IDatasource } from 'ag-grid-community'
@@ -36,8 +36,8 @@ export const useQuotationListAllDatasource = (): Res => {
 
           const { data } = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>(
             {
-              url: api.getQuotationListAll.url,
-              method: api.getQuotationListAll.method,
+              url: apiRoute.getQuotationListAll.url,
+              method: apiRoute.getQuotationListAll.method,
               data: {
                 startRow: params.startRow,
                 endRow: params.endRow,

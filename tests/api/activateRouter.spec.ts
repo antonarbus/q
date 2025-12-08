@@ -1,4 +1,4 @@
-import { api } from '@back/api'
+import { apiRoute } from '@back/api/apiRoute'
 import { UserModel } from '@back/entities/user'
 import { connectToDb } from '@back/shared/lib/mongoose/connectToDb'
 import { expect, test } from '@playwright/test'
@@ -24,7 +24,7 @@ test.describe('#activateRouter', () => {
       { upsert: true, new: true },
     ).lean()
 
-    const res = await request[api.activate.method](api.activate.url, {
+    const res = await request[apiRoute.activate.method](apiRoute.activate.url, {
       data: {
         activationKey: userDocument.activationKey,
       },

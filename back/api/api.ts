@@ -34,6 +34,7 @@ import { deleteFileHandler } from './file/deleteFileHandler'
 import { getFileListAllHandler } from './file/getFileListAllHandler'
 import { proxyFileToBucketHandler } from './file/proxyFileToBucketHandler'
 import { getQuotationListAllHandler } from './quotation/getQuotationListAllHandler'
+import { apiRoute } from './apiRoute'
 
 type Api = {
   url: string
@@ -47,248 +48,155 @@ type Api = {
   ) => void | Promise<void>
 }
 
+//* Routes metadata is kept separately at apiRoutes for proper code splitting,
+//* Otherwise handler functions leak into the frontend
+
 export const api = {
   // dev
   root: {
-    url: '/',
-    method: 'get',
+    ...apiRoute.root,
     handler: rootHandler,
-    description: `
-      Root endpoint, no real purpose, good to show some info for dev purpose
-    `,
   },
   rootApi: {
-    url: '/api',
-    method: 'get',
+    ...apiRoute.rootApi,
     handler: rootApiHandler,
-    description: `
-      Root api endpoint, no real purpose, good to show some info for dev purpose
-    `,
   },
   health: {
-    url: '/api/health-check',
-    method: 'get',
+    ...apiRoute.health,
     handler: healthCheckHandler,
-    description: `
-      Google Cloud Run checks this endpoint to see if the app is alive. 
-      It checks if ExpressJS and DB connection are OK.
-    `,
   },
   test: {
-    url: '/api/test',
-    method: 'get',
+    ...apiRoute.test,
     handler: testHandler,
-    description: 'Test playground for dev purpose',
   },
   setBucketCors: {
-    url: '/api/set-bucket-cors',
-    method: 'get',
+    ...apiRoute.setBucketCors,
     handler: setBucketCorsHandler,
-    description: 'Set CORS for bucket & visit the endpoint to apply',
   },
   getBucketCors: {
-    url: '/api/get-bucket-cors',
-    method: 'get',
+    ...apiRoute.getBucketCors,
     handler: getBucketCorsHandler,
-    description: 'Get CORS for bucket. Visit the endpoint to apply.',
   },
   // auth
   register: {
-    url: '/api/register',
-    method: 'post',
+    ...apiRoute.register,
     handler: registerHandler,
-    description: 'When user clicks on register button',
   },
   logIn: {
-    url: '/api/login',
-    method: 'post',
+    ...apiRoute.logIn,
     handler: logInHandler,
-    description: 'When user clicks on login button',
   },
   logOut: {
-    url: '/api/logout',
-    method: 'get',
+    ...apiRoute.logOut,
     handler: logOutHandler,
-    description: 'When user clicks on logout button',
   },
   activate: {
-    url: '/api/activate',
-    method: 'post',
+    ...apiRoute.activate,
     handler: activateHandler,
-    description: 'When user clicks on activate link in email',
   },
   getAccessToken: {
-    url: '/api/get-access-token',
-    method: 'get',
+    ...apiRoute.getAccessToken,
     handler: getAccessTokenHandler,
-    description: `
-      Calls initially on app load (<AccessToken />) to get access token
-      and puts it into memory (state.user.accessToken).
-      Then for every protected request we add this token to the request header ("access-jwt-token").
-      If access token is expired, backend responds with 401 and we
-      a) save initial request config to resend it later
-      b) call this endpoint to get new access token and save it in memory
-      c) resend initial request with new access token
-      d) if access token is still invalid, we log out user
-    `,
   },
   requestPasswordReset: {
-    url: '/api/request-password-reset',
-    method: 'post',
+    ...apiRoute.requestPasswordReset,
     handler: requestPasswordResetHandler,
-    description: `
-      When user clicks on forgot password link to get an email with reset link
-    `,
   },
   resetPassword: {
-    url: '/api/reset-password',
-    method: 'post',
+    ...apiRoute.resetPassword,
     handler: resetPasswordHandler,
-    description: 'When user clicks on reset password link in email',
   },
   // user
   getUserList: {
-    url: '/api/get-user-list',
-    method: 'get',
+    ...apiRoute.getUserList,
     handler: getUserListHandler,
-    description: 'Users list for admin page',
   },
   deleteUser: {
-    url: '/api/delete-user',
-    method: 'delete',
+    ...apiRoute.deleteUser,
     handler: deleteUserHandler,
-    description: 'When admin deletes a user with button in table',
   },
   // quotation
   saveQuotation: {
-    url: '/api/save-quotation',
-    method: 'post',
+    ...apiRoute.saveQuotation,
     handler: saveQuotationHandler,
-    description: 'When user clicks on save button in the modal',
   },
   getQuotation: {
-    url: '/api/get-quotation',
-    method: 'post',
+    ...apiRoute.getQuotation,
     handler: getQuotationHandler,
-    description: 'When user opens the quotation page',
   },
   getQuotationList: {
-    url: '/api/get-quotation-list',
-    method: 'get',
+    ...apiRoute.getQuotationList,
     handler: getQuotationListHandler,
-    description: 'User quotations table',
   },
   getQuotationListAll: {
-    url: '/api/get-quotation-list-all',
-    method: 'post', // idiomatically not correct, here "post" is used instead of "get" to send data in body which is automatically stringified and parsed
+    ...apiRoute.getQuotationListAll,
     handler: getQuotationListAllHandler,
-    description: 'All quotations table',
   },
   getUniqueQuotationCategoryList: {
-    url: '/api/get-unique-quotation-category-list',
-    method: 'get',
+    ...apiRoute.getUniqueQuotationCategoryList,
     handler: getQuotationCategoriesHandler,
-    description: 'For the category field on save quotation modal',
   },
   deleteQuotation: {
-    url: '/api/delete-quotation',
-    method: 'delete',
+    ...apiRoute.deleteQuotation,
     handler: deleteQuotationHandler,
-    description: 'When user clicks on delete button in quotations table',
   },
   // bookmark
   saveBookmark: {
-    url: '/api/save-bookmark',
-    method: 'post',
+    ...apiRoute.saveBookmark,
     handler: saveBookmarkHandler,
-    description: 'When user clicks on save button in the modal',
   },
   getBookmark: {
-    url: '/api/get-bookmark',
-    method: 'post',
+    ...apiRoute.getBookmark,
     handler: getBookmarkHandler,
-    description: 'When user clicks on bookmark in search or on bookmarks page',
   },
   getBookmarkList: {
-    url: '/api/get-bookmark-list',
-    method: 'get',
+    ...apiRoute.getBookmarkList,
     handler: getBookmarkListHandler,
-    description: 'User bookmarks table',
   },
   getBookmarkListAll: {
-    url: '/api/get-bookmark-list-all',
-    method: 'get',
+    ...apiRoute.getBookmarkListAll,
     handler: getBookmarkListAllHandler,
-    description: 'All bookmarks table',
   },
   getUniqueBookmarkCategoryList: {
-    url: '/api/get-unique-bookmark-category-list',
-    method: 'get',
+    ...apiRoute.getUniqueBookmarkCategoryList,
     handler: getBookmarkCategoriesHandler,
-    description: 'For the category field on save bookmark modal',
   },
   deleteBookmark: {
-    url: '/api/delete-bookmark',
-    method: 'delete',
+    ...apiRoute.deleteBookmark,
     handler: deleteBookmarkHandler,
-    description: 'When user clicks on delete button in bookmarks table',
   },
   // files
   proxyFileToBucket: {
-    url: '/uploads/:fileId', // <-- not under /api
-    method: 'get',
+    ...apiRoute.proxyFileToBucket,
     handler: proxyFileToBucketHandler,
-    description: `
-      Get file data from db, generate 5 min singed url
-      to Google Cloud Storage and redirect request.
-    `,
   },
   fileUploadSignedUrl: {
-    url: '/api/file-upload-signed-url',
-    method: 'get',
+    ...apiRoute.fileUploadSignedUrl,
     handler: fileUploadSignedUrlHandler,
-    description: `
-      On file upload we send light request for Google Cloud Storage url
-      where file is uploaded on client side
-    `,
   },
   saveFileInfo: {
-    url: '/api/save-file-info',
-    method: 'patch',
+    ...apiRoute.saveFileInfo,
     handler: saveFileInfoHandler,
-    description:
-      'After file is uploaded we make it public and add info into File db',
   },
   getFileList: {
-    url: '/api/get-file-list',
-    method: 'get',
+    ...apiRoute.getFileList,
     handler: getFileListHandler,
-    description: 'Get file list for settings modal',
   },
   getFileListAll: {
-    url: '/api/get-file-list-all',
-    method: 'post', // idiomatically not correct, here "post" is used instead of "get" to send data in body which is automatically stringified and parsed
+    ...apiRoute.getFileListAll,
     handler: getFileListAllHandler,
-    description: 'All files table',
   },
   deleteFile: {
-    url: '/api/delete-file',
-    method: 'delete',
+    ...apiRoute.deleteFile,
     handler: deleteFileHandler,
-    description:
-      'Delete file from the bucket + from quotations db + from quotation json',
   },
   // visitors
   countUniqueDailyVisitors: {
-    url: '/api/count-unique-daily-visitors',
-    method: 'post',
+    ...apiRoute.countUniqueDailyVisitors,
     handler: countUniqueDailyVisitorsHandler,
-    description: 'Records unique daily visitors per day',
   },
   getUniqueDailyVisitors: {
-    url: '/api/get-unique-daily-visitors',
-    method: 'get',
+    ...apiRoute.getUniqueDailyVisitors,
     handler: getUniqueDailyVisitorsHandler,
-    description: 'Gets unique daily visitors for admin page',
   },
 } as const satisfies Record<string, Api>

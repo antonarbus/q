@@ -1,4 +1,4 @@
-import { api } from '@back/api'
+import { apiRoute } from '@back/api/apiRoute'
 import type {
   ErrorResBody,
   ReqBody as Payload,
@@ -15,8 +15,8 @@ export const useActivateUserMutation = (): Res => {
     mutationKey: [queryKey.activate],
     mutationFn: async ({ activationKey }: Payload) => {
       const { data } = await axios<ResBody>({
-        url: api.activate.url,
-        method: api.activate.method,
+        url: apiRoute.activate.url,
+        method: apiRoute.activate.method,
         data: { activationKey },
       })
 

@@ -1,4 +1,4 @@
-import { api } from '@back/api'
+import { apiRoute } from '@back/api/apiRoute'
 import type {
   ErrorResBody,
   ReqBody as Payload,
@@ -20,8 +20,8 @@ export const useGetBookmarkMutation = (): Res => {
         AxiosResponse<ResBody>,
         Payload
       >({
-        url: api.getBookmark.url,
-        method: api.getBookmark.method,
+        url: apiRoute.getBookmark.url,
+        method: apiRoute.getBookmark.method,
         data: { id },
       })
 

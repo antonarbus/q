@@ -1,4 +1,4 @@
-import { api } from '@back/api'
+import { apiRoute } from '@back/api/apiRoute'
 import type { ResBody } from '@back/api/bookmark/getBookmarkListAllHandler'
 import { axiosWithAuth } from '@shared/lib/axios'
 import type { IDatasource } from 'ag-grid-community'
@@ -36,8 +36,8 @@ export const useBookmarkListAllDatasource = (): Res => {
 
           const { data } = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>(
             {
-              url: api.getBookmarkListAll.url,
-              method: api.getBookmarkListAll.method,
+              url: apiRoute.getBookmarkListAll.url,
+              method: apiRoute.getBookmarkListAll.method,
               params: {
                 startRow: params.startRow,
                 endRow: params.endRow,

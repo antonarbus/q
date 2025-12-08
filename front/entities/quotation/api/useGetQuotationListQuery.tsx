@@ -1,4 +1,4 @@
-import { api } from '@back/api'
+import { apiRoute } from '@back/api/apiRoute'
 import type {
   ErrorResBody,
   ResBody,
@@ -21,8 +21,8 @@ export const useGetQuotationListQuery = (): Res => {
     enabled: false,
     queryFn: async ({ signal }) => {
       const { data } = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
-        url: api.getQuotationList.url,
-        method: api.getQuotationList.method,
+        url: apiRoute.getQuotationList.url,
+        method: apiRoute.getQuotationList.method,
         signal,
       })
 
