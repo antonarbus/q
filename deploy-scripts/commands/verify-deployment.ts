@@ -36,7 +36,7 @@ export const verifyDeployment = async (props: Props): Promise<void> => {
     let frontendFailures = 0
 
     const frontendResponse = await axios<string>({
-      url: api.health.url,
+      url: frontendUrl,
       method: 'get',
       responseType: 'text',
     })
@@ -90,9 +90,7 @@ export const verifyDeployment = async (props: Props): Promise<void> => {
 
     logger.info(`Testing Backend URL: ${backendUrl}/api/health-check`)
 
-    // Test backend health check
     let backendFailures = 0
-    // const backendResponse = await fetch(`${backendUrl}/api/health-check`)
 
     const healthCheckResponse = await axios<ResBody, AxiosResponse<ResBody>>({
       url: `${backendUrl}${api.health.url}`,
