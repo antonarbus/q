@@ -38,8 +38,8 @@
     "update-packages-back": "cd ./back && bun update --interactive",
     "docker-prod-build": "docker compose -f docker-compose.prod.yml build",
     "docker-prod-start": "docker compose -f docker-compose.prod.yml up & sleep 5 && open http://localhost:80",
-    "cli": "bun deploy-scripts/cli.ts",
-    "cli-help": "bun deploy-scripts/cli.ts --help"
+    "cli": "NODE_ENV=development bun deploy-scripts/cli.ts",
+    "cli-help": "NODE_ENV=development bun deploy-scripts/cli.ts --help"
   },
   "devDependencies": {
     "@babel/core": "^7.28.4",

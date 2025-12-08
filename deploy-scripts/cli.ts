@@ -16,7 +16,7 @@ import { runInteractiveMode } from './lib/interactive'
 
 const noArgumentsProvided = process.argv.length === 2
 
-if (noArgumentsProvided) {
+if (noArgumentsProvided === true) {
   await runInteractiveMode()
   process.exit(0)
 }
