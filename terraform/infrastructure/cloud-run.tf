@@ -145,6 +145,11 @@ resource "google_cloud_run_v2_service" "backend" {
       # Note: PORT is automatically set by Cloud Run based on container_port
       env {
         name  = "NODE_ENV"
+        value = "production"
+      }
+
+      env {
+        name  = "ENVIRONMENT"
         value = var.environment
       }
     }
