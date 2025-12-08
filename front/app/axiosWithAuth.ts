@@ -1,4 +1,4 @@
-import { apiRoute } from '@back/api/apiRoute'
+import { route } from '@back/api/route'
 import type { ResBody } from '@back/api/auth/getAccessTokenHandler'
 import { headerName } from '@back/shared/headers'
 import { userSlice } from '@entities/user/redux/userSlice'
@@ -45,8 +45,8 @@ axiosWithAuth.interceptors.response.use(
 
       try {
         // refresh expired or invalid access token & extend refresh token if it is about to expire
-        const res = await axios[apiRoute.getAccessToken.method]<ResBody>(
-          apiRoute.getAccessToken.url,
+        const res = await axios[route.getAccessToken.method]<ResBody>(
+          route.getAccessToken.url,
           {
             withCredentials: true,
           },

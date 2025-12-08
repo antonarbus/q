@@ -1,4 +1,4 @@
-import { apiRoute } from '@back/api/apiRoute'
+import { route } from '@back/api/route'
 import type {
   ErrorResBody,
   ReqBody as Payload,
@@ -15,8 +15,8 @@ export const useRegisterUserMutation = (): Res => {
     mutationKey: [queryKey.register],
     mutationFn: async ({ email, password }: Payload) => {
       const { data } = await axios<ResBody>({
-        url: apiRoute.register.url,
-        method: apiRoute.register.method,
+        url: route.register.url,
+        method: route.register.method,
         data: { email, password },
       })
 

@@ -1,4 +1,4 @@
-import { apiRoute } from '@back/api/apiRoute'
+import { route } from '@back/api/route'
 import type { ErrorResBody, ResBody } from '@back/api/dev/healthCheckHandler'
 import { queryKey } from '@shared/lib/tanstack/react-query/queryKey'
 import { type UseQueryResult, useQuery } from '@tanstack/react-query'
@@ -13,8 +13,8 @@ export const useHealthCheckQuery = (): Res => {
     retryDelay: 3000,
     queryFn: async () => {
       const { data } = await axios<ResBody, AxiosResponse<ResBody>>({
-        url: apiRoute.health.url,
-        method: apiRoute.health.method,
+        url: route.health.url,
+        method: route.health.method,
         withCredentials: true,
         timeout: 30000,
       })

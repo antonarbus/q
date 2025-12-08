@@ -1,4 +1,4 @@
-import { apiRoute } from '@back/api/apiRoute'
+import { route } from '@back/api/route'
 import type {
   ErrorResBody,
   ReqBody as Payload,
@@ -16,8 +16,8 @@ export const useLogInUserMutation = (): Res => {
     mutationKey: [queryKey.logIn],
     mutationFn: async ({ email, password }: Payload) => {
       const { data } = await axiosWithAuth<ResBody>({
-        url: apiRoute.logIn.url,
-        method: apiRoute.logIn.method,
+        url: route.logIn.url,
+        method: route.logIn.method,
         data: { email, password },
       })
 

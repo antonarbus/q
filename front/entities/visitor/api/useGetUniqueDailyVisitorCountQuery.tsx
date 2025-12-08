@@ -1,4 +1,4 @@
-import { apiRoute } from '@back/api/apiRoute'
+import { route } from '@back/api/route'
 import type {
   ErrorResBody,
   ResBody,
@@ -19,8 +19,8 @@ export const useGetUniqueDailyVisitorCountQuery = ({
     queryKey: [queryKey.getUniqueDailyVisitors, { startDate, endDate }],
     queryFn: async () => {
       const { data } = await axiosWithAuth<ResBody>({
-        url: `${apiRoute.getUniqueDailyVisitors.url}?startDate=${startDate}&endDate=${endDate}`,
-        method: apiRoute.getUniqueDailyVisitors.method,
+        url: `${route.getUniqueDailyVisitors.url}?startDate=${startDate}&endDate=${endDate}`,
+        method: route.getUniqueDailyVisitors.method,
       })
 
       return data

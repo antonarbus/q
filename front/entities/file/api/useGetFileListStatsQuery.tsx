@@ -1,4 +1,4 @@
-import { apiRoute } from '@back/api/apiRoute'
+import { route } from '@back/api/route'
 import type { ErrorResBody, ResBody } from '@back/api/file/getFileListHandler'
 import { axiosWithAuth } from '@shared/lib/axios'
 import { queryKey } from '@shared/lib/tanstack/react-query/queryKey'
@@ -18,8 +18,8 @@ export const useGetFileListStatsQuery = (): Res => {
     enabled: true,
     queryFn: async () => {
       const { data } = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
-        url: apiRoute.getFileList.url,
-        method: apiRoute.getFileList.method,
+        url: route.getFileList.url,
+        method: route.getFileList.method,
         withCredentials: true,
       })
 

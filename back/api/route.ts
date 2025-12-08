@@ -1,10 +1,10 @@
-type ApiRoute = {
+type Route = {
   url: string
   method: 'get' | 'post' | 'put' | 'delete' | 'patch'
   description: string
 }
 
-export const apiRoute = {
+export const route = {
   // dev
   root: {
     url: '/',
@@ -213,4 +213,4 @@ export const apiRoute = {
     method: 'get',
     description: 'Gets unique daily visitors for admin page',
   },
-} as const satisfies Record<string, ApiRoute>
+} as const satisfies Record<string, Route>

@@ -1,4 +1,4 @@
-import { apiRoute } from '@back/api/apiRoute'
+import { route } from '@back/api/route'
 import type {
   ErrorResBody,
   ReqBody as Payload,
@@ -16,8 +16,8 @@ export const useDeleteQuotationMutation = (): Res => {
     mutationKey: [queryKey.deleteQuotation],
     mutationFn: async (payload: Payload) => {
       const { data } = await axiosWithAuth<ResBody>({
-        url: apiRoute.deleteQuotation.url,
-        method: apiRoute.deleteQuotation.method,
+        url: route.deleteQuotation.url,
+        method: route.deleteQuotation.method,
         data: payload,
       })
 

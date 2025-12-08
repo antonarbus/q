@@ -1,4 +1,4 @@
-import { apiRoute } from '@back/api/apiRoute'
+import { route } from '@back/api/route'
 import type { ErrorResBody, ResBody } from '@back/api/user/getUserListHandler'
 import { axiosWithAuth } from '@shared/lib/axios'
 import { queryKey } from '@shared/lib/tanstack/react-query/queryKey'
@@ -18,8 +18,8 @@ export const useGetUserListQuery = (): Res => {
     // enabled: false,
     queryFn: async ({ signal }) => {
       const { data } = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
-        url: apiRoute.getUserList.url,
-        method: apiRoute.getUserList.method,
+        url: route.getUserList.url,
+        method: route.getUserList.method,
         signal,
       })
 

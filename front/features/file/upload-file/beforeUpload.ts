@@ -1,4 +1,4 @@
-import { apiRoute } from '@back/api/apiRoute'
+import { route } from '@back/api/route'
 import type { ResBody as ResBodyGetSignedUrl } from '@back/api/file/fileUploadSignedUrlHandler'
 import type {
   ReqBody as Payload,
@@ -93,8 +93,8 @@ export const beforeUpload: BeforeUpload = async (props) => {
   const toastId = toast.loading(`Uploading 0%...`)
 
   const { data: signedUrlRes } = await axiosWithAuth<ResBodyGetSignedUrl>({
-    url: apiRoute.fileUploadSignedUrl.url,
-    method: apiRoute.fileUploadSignedUrl.method,
+    url: route.fileUploadSignedUrl.url,
+    method: route.fileUploadSignedUrl.method,
   })
 
   if (signedUrlRes.signedUrl === null) {
@@ -198,8 +198,8 @@ export const beforeUpload: BeforeUpload = async (props) => {
     AxiosError<ResBodyMakeFilePublic>,
     Payload
   >({
-    url: apiRoute.saveFileInfo.url,
-    method: apiRoute.saveFileInfo.method,
+    url: route.saveFileInfo.url,
+    method: route.saveFileInfo.method,
     data: {
       id: signedUrlRes.fileId,
       name: file.name,

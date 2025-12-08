@@ -16,7 +16,9 @@ const startServer = async (): Promise<void> => {
 
   Object.entries(api).forEach(([_key, apiData]) => {
     const { method, url, handler } = apiData
-    app[method](url, asyncHandler(handler)) // register express route
+
+    // register express route
+    app[method](url, asyncHandler(handler))
   })
 
   app.use(errorHandlerMiddleware)

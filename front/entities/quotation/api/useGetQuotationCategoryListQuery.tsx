@@ -1,4 +1,4 @@
-import { apiRoute } from '@back/api/apiRoute'
+import { route } from '@back/api/route'
 import type {
   ErrorResBody,
   ResBody,
@@ -20,8 +20,8 @@ export const useGetQuotationCategoryListQuery = (): Res => {
     retry: 0,
     queryFn: async () => {
       const { data } = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
-        url: apiRoute.getUniqueQuotationCategoryList.url,
-        method: apiRoute.getUniqueQuotationCategoryList.method,
+        url: route.getUniqueQuotationCategoryList.url,
+        method: route.getUniqueQuotationCategoryList.method,
       })
 
       return data

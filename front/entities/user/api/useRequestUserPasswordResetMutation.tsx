@@ -1,4 +1,4 @@
-import { apiRoute } from '@back/api/apiRoute'
+import { route } from '@back/api/route'
 import type {
   ErrorResBody,
   ReqBody as Payload,
@@ -15,8 +15,8 @@ export const useRequestUserPasswordResetMutation = (): Res => {
     mutationKey: [queryKey.requestPasswordReset],
     mutationFn: async ({ email }: Payload) => {
       const { data } = await axios<ResBody>({
-        url: apiRoute.requestPasswordReset.url,
-        method: apiRoute.requestPasswordReset.method,
+        url: route.requestPasswordReset.url,
+        method: route.requestPasswordReset.method,
         data: { email },
       })
 

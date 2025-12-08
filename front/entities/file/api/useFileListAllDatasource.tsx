@@ -1,4 +1,4 @@
-import { apiRoute } from '@back/api/apiRoute'
+import { route } from '@back/api/route'
 import type { ResBody } from '@back/api/file/getFileListAllHandler'
 import { axiosWithAuth } from '@shared/lib/axios'
 import type { IDatasource } from 'ag-grid-community'
@@ -36,8 +36,8 @@ export const useFileListAllDatasource = (): Res => {
 
           const { data } = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>(
             {
-              url: apiRoute.getFileListAll.url,
-              method: apiRoute.getFileListAll.method,
+              url: route.getFileListAll.url,
+              method: route.getFileListAll.method,
               data: {
                 startRow: params.startRow,
                 endRow: params.endRow,

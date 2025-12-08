@@ -1,4 +1,4 @@
-import { apiRoute } from '@back/api/apiRoute'
+import { route } from '@back/api/route'
 import type {
   ErrorResBody,
   ReqBody as Payload,
@@ -20,8 +20,8 @@ export const useGetQuotationMutation = (): Res => {
         AxiosResponse<ResBody>,
         Payload
       >({
-        url: apiRoute.getQuotation.url,
-        method: apiRoute.getQuotation.method,
+        url: route.getQuotation.url,
+        method: route.getQuotation.method,
         data: { id },
       })
 
