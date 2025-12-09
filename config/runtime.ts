@@ -1,11 +1,11 @@
 import { processEnv } from './processEnv'
 
-const DOMAIN = 'sendmequotation.today'
+const DOMAIN = 'sendmequotation.today' // todo: duplication, take from infrastructure.ts
 
 export const runtimeConfig = {
   nodeEnv: processEnv.NODE_ENV,
   ci: processEnv.CI,
-  environment: processEnv.ENVIRONMENT,
+  environment: processEnv.ENVIRONMENT, // todo: check, not really like that at envSchema we have it different without local and unknown
   back: {
     get protocol() {
       // Local development uses http
