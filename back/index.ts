@@ -26,9 +26,9 @@ const startServer = async (): Promise<void> => {
   app.listen(runtimeConfig.back.port, () => {
     console.info(`
       Backend server started 🚀
-      URL: ${runtimeConfig.back.baseUrl} 
-      NODE_ENV: ${runtimeConfig.nodeEnv} 
-      Environment: ${runtimeConfig.environment} 
+      URL: ${runtimeConfig.back.baseUrl}
+      NODE_ENV: ${runtimeConfig.nodeEnv}
+      Environment: ${runtimeConfig.environment}
       CI/CD pipeline: ${runtimeConfig.ci}
     `)
   })
