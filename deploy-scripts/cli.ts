@@ -12,7 +12,7 @@ import { terraformFormat } from './commands/terraform-format'
 import { validatePromotion } from './commands/validate-promotion'
 import { verifyDeployment } from './commands/verify-deployment'
 import { runInteractiveMode } from './lib/interactive'
-import { deployedEnvSchema } from 'config/environment'
+import { deployedEnvironmentSchema } from 'config/environment'
 
 const noArgumentsProvided = process.argv.length === 2
 
@@ -34,8 +34,8 @@ program
     'Environment name (dev, test, pilot, prod)',
   )
   .action(async (options: { env: string }) => {
-    const validatedEnv = deployedEnvSchema.parse(options.env)
-    await showDeploymentInfo({ env: validatedEnv })
+    const validatedEnvironment = deployedEnvironmentSchema.parse(options.env)
+    await showDeploymentInfo({ environment: validatedEnvironment })
   })
 
 program
@@ -67,8 +67,8 @@ program
     'Environment name (dev, test, pilot, prod)',
   )
   .action((options: { env: string }) => {
-    const validatedEnv = deployedEnvSchema.parse(options.env)
-    loadConfig({ env: validatedEnv })
+    const validatedEnvironment = deployedEnvironmentSchema.parse(options.env)
+    loadConfig({ environment: validatedEnvironment })
   })
 
 program
@@ -79,8 +79,8 @@ program
     'Environment name (dev, test, pilot, prod)',
   )
   .action(async (options: { env: string }) => {
-    const validatedEnv = deployedEnvSchema.parse(options.env)
-    await terraformApply({ env: validatedEnv })
+    const validatedEnvironment = deployedEnvironmentSchema.parse(options.env)
+    await terraformApply({ environment: validatedEnvironment })
   })
 
 program
@@ -107,8 +107,12 @@ program
       env: string
       service: 'frontend' | 'backend' | 'both'
     }) => {
-      const validatedEnv = deployedEnvSchema.parse(options.env)
-      await deployCloudRun({ env: validatedEnv, service: options.service })
+      const validatedEnvironment = deployedEnvironmentSchema.parse(options.env)
+
+      await deployCloudRun({
+        environment: validatedEnvironment,
+        service: options.service,
+      })
     },
   )
 
@@ -129,14 +133,16 @@ program
   )
   .action(
     async (options: {
-      env: string
+      environment: string
       previousImageFrontend: string
       previousImageBackend: string
     }) => {
-      const validatedEnv = deployedEnvSchema.parse(options.env)
+      const validatedEnvironment = deployedEnvironmentSchema.parse(
+        options.environment,
+      )
 
       await verifyDeployment({
-        env: validatedEnv,
+        environment: validatedEnvironment,
         previousImageFrontend: options.previousImageFrontend,
         previousImageBackend: options.previousImageBackend,
       })
@@ -148,15 +154,22 @@ program
   .description('Validate promotion path between environments')
   .requiredOption('--source-env <environment>', 'Source environment name')
   .requiredOption('--target-env <environment>', 'Target environment name')
-  .action((options: { sourceEnv: string; targetEnv: string }) => {
-    const validatedSourceEnv = deployedEnvSchema.parse(options.sourceEnv)
-    const validatedTargetEnv = deployedEnvSchema.parse(options.targetEnv)
+  .action(
+    (options: { sourceEnvironment: string; targetEnvironment: string }) => {
+      const validatedSourceEnvironment = deployedEnvironmentSchema.parse(
+        options.sourceEnvironment,
+      )
 
-    validatePromotion({
-      sourceEnv: validatedSourceEnv,
-      targetEnv: validatedTargetEnv,
-    })
-  })
+      const validatedTargetEnv = deployedEnvironmentSchema.parse(
+        options.targetEnvironment,
+      )
+
+      validatePromotion({
+        sourceEnvironment: validatedSourceEnvironment,
+        targetEnvironment: validatedTargetEnv,
+      })
+    },
+  )
 
 program
   .command('promote-image')
@@ -170,16 +183,21 @@ program
   )
   .action(
     async (options: {
-      sourceEnv: string
-      targetEnv: string
+      sourceEnvironment: string
+      targetEnvironment: string
       service: 'frontend' | 'backend' | 'both'
     }) => {
-      const validatedSourceEnv = deployedEnvSchema.parse(options.sourceEnv)
-      const validatedTargetEnv = deployedEnvSchema.parse(options.targetEnv)
+      const validatedSourceEnvironment = deployedEnvironmentSchema.parse(
+        options.sourceEnvironment,
+      )
+
+      const validatedTargetEnvironment = deployedEnvironmentSchema.parse(
+        options.targetEnvironment,
+      )
 
       await promoteImage({
-        sourceEnv: validatedSourceEnv,
-        targetEnv: validatedTargetEnv,
+        sourceEnvironment: validatedSourceEnvironment,
+        targetEnvironment: validatedTargetEnvironment,
         service: options.service,
       })
     },

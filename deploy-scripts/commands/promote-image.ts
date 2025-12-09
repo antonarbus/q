@@ -1,9 +1,9 @@
 import { $ } from 'bun'
 import { exit } from 'process'
-import { sharedInfraConfigVariables } from '../../config/infrastructure'
+import { sharedInfraConfig } from '../../config/infrastructure'
 import { logToGithubOutput } from '../lib/output/logToGithubOutput'
 import { logger } from '../lib/output/logger'
-import type { DeployedEnv } from 'config/environment'
+import type { DeployedEnvironment } from 'config/environment'
 
 type PromoteServiceImageProps = {
   serviceName: string
@@ -11,93 +11,77 @@ type PromoteServiceImageProps = {
   region: string
   projectId: string
   artifactRegistryName: string
-  sourceEnv: DeployedEnv
-  targetEnv: DeployedEnv
+  sourceEnvironment: DeployedEnvironment
+  targetEnvironment: DeployedEnvironment
 }
 
 const promoteServiceImage = async (
   props: PromoteServiceImageProps,
 ): Promise<void> => {
-  const {
-    serviceName,
-    dockerImageName,
-    region,
-    projectId,
-    artifactRegistryName,
-    sourceEnv,
-    targetEnv,
-  } = props
-
-  logger.info(`Promoting ${serviceName} image...`)
+  logger.info(`Promoting ${props.serviceName} image...`)
 
   // Construct image URLs (same registry, different tags)
-  const baseImage = `${region}-docker.pkg.dev/${projectId}/${artifactRegistryName}/${dockerImageName}`
-  const sourceImage = `${baseImage}:${sourceEnv}`
-  const targetImage = `${baseImage}:${targetEnv}`
+  const baseImage = `${props.region}-docker.pkg.dev/${props.projectId}/${props.artifactRegistryName}/${props.dockerImageName}`
+  const sourceImage = `${baseImage}:${props.sourceEnvironment}`
+  const targetImage = `${baseImage}:${props.targetEnvironment}`
 
   // Verify source image exists
-  logger.info(`  Verifying ${serviceName} source image exists...`)
+  logger.info(`  Verifying ${props.serviceName} source image exists...`)
 
   try {
-    await $`gcloud artifacts docker images describe ${sourceImage} --project=${projectId}`.quiet()
+    await $`gcloud artifacts docker images describe ${sourceImage} --project=${props.projectId}`.quiet()
   } catch {
-    logger.error(`${serviceName} source image not found: ${sourceImage}`)
+    logger.error(`${props.serviceName} source image not found: ${sourceImage}`)
     logger.error('Make sure the source environment has been deployed first.')
     exit(1)
   }
 
-  logger.success(`  ${serviceName} source image found`)
+  logger.success(`  ${props.serviceName} source image found`)
 
   // Get the digest (hash) of the source image for traceability
   let sourceImageDigest = 'unknown'
 
   try {
     const digestOutput =
-      await $`gcloud artifacts docker images describe ${sourceImage} --project=${projectId} --format=value(image_summary.digest)`.text()
+      await $`gcloud artifacts docker images describe ${sourceImage} --project=${props.projectId} --format=value(image_summary.digest)`.text()
 
     sourceImageDigest = digestOutput.trim()
   } catch {
-    logger.warning(`  Could not retrieve ${serviceName} source image digest`)
+    logger.warning(
+      `  Could not retrieve ${props.serviceName} source image digest`,
+    )
   }
 
-  logger.info(`  ${serviceName} digest: ${sourceImageDigest}`)
+  logger.info(`  ${props.serviceName} digest: ${sourceImageDigest}`)
 
   // Add target environment tag to the same image (no pull/push needed)
-  logger.info(`  Adding ${serviceName} target environment tag...`)
-  await $`gcloud artifacts docker tags add ${sourceImage} ${targetImage} --project=${projectId} --quiet`
+  logger.info(`  Adding ${props.serviceName} target environment tag...`)
+  await $`gcloud artifacts docker tags add ${sourceImage} ${targetImage} --project=${props.projectId} --quiet`
 
-  logger.success(`  ${serviceName} image promoted successfully`)
+  logger.success(`  ${props.serviceName} image promoted successfully`)
   logger.info(`    Source: ${sourceImage}`)
   logger.info(`    Target: ${targetImage}`)
   logger.emptyLine()
 
   // Export source image digest for traceability
   logToGithubOutput({
-    [`${serviceName.toLowerCase()}SourceImageDigest`]: sourceImageDigest,
+    [`${props.serviceName.toLowerCase()}SourceImageDigest`]: sourceImageDigest,
   })
 }
 
 type Props = {
-  sourceEnv: DeployedEnv
-  targetEnv: DeployedEnv
+  sourceEnvironment: DeployedEnvironment
+  targetEnvironment: DeployedEnvironment
   service?: 'frontend' | 'backend' | 'both'
 }
 
 export const promoteImage = async (props: Props): Promise<void> => {
-  const {
-    region,
-    projectId,
-    artifactRegistryName,
-    dockerImageNameFrontend,
-    dockerImageNameBackend,
-  } = sharedInfraConfigVariables
-
   const service = props.service ?? 'both'
 
   logger.info('Promoting Docker images...')
-  logger.info(`  Registry: ${artifactRegistryName}`)
-  logger.info(`  Source tag: ${props.sourceEnv}`)
-  logger.info(`  Target tag: ${props.targetEnv}`)
+  logger.info(`  Registry: ${sharedInfraConfig.artifactRegistryName}`)
+  logger.info(`  Source tag: ${props.sourceEnvironment}`)
+  logger.info(`  Target tag: ${props.targetEnvironment}`)
   logger.info(`  Service: ${service}`)
   logger.emptyLine()
 
@@ -107,12 +91,12 @@ export const promoteImage = async (props: Props): Promise<void> => {
   if (shouldPromoteFrontend === true) {
     await promoteServiceImage({
       serviceName: 'Frontend',
-      dockerImageName: dockerImageNameFrontend,
-      region,
-      projectId,
-      artifactRegistryName,
-      sourceEnv: props.sourceEnv,
-      targetEnv: props.targetEnv,
+      dockerImageName: sharedInfraConfig.dockerImageNameFrontend,
+      region: sharedInfraConfig.region,
+      projectId: sharedInfraConfig.projectId,
+      artifactRegistryName: sharedInfraConfig.artifactRegistryName,
+      sourceEnvironment: props.sourceEnvironment,
+      targetEnvironment: props.targetEnvironment,
     })
   }
 
@@ -122,12 +106,12 @@ export const promoteImage = async (props: Props): Promise<void> => {
   if (shouldPromoteBackend === true) {
     await promoteServiceImage({
       serviceName: 'Backend',
-      dockerImageName: dockerImageNameBackend,
-      region,
-      projectId,
-      artifactRegistryName,
-      sourceEnv: props.sourceEnv,
-      targetEnv: props.targetEnv,
+      dockerImageName: sharedInfraConfig.dockerImageNameBackend,
+      region: sharedInfraConfig.region,
+      projectId: sharedInfraConfig.projectId,
+      artifactRegistryName: sharedInfraConfig.artifactRegistryName,
+      sourceEnvironment: props.sourceEnvironment,
+      targetEnvironment: props.targetEnvironment,
     })
   }
 }

@@ -1,30 +1,33 @@
 import { $ } from 'bun'
 import { resolve } from 'path'
 import { chdir } from 'process'
-import { infraConfigVariables } from '../../config/infrastructure'
+import { infraConfig } from '../../config/infrastructure'
 import { logger } from '../lib/output/logger'
-import type { DeployedEnv } from 'config/environment'
+import type { DeployedEnvironment } from 'config/environment'
 
 type Props = {
-  env: DeployedEnv
+  environment: DeployedEnvironment
 }
 
 export const terraformApply = async (props: Props): Promise<void> => {
-  logger.info(`Environment: ${props.env}`)
+  logger.info(`Environment: ${props.environment}`)
 
-  const { bucketForTerraformStateName } = infraConfigVariables[props.env]
+  const { bucketForTerraformStateName } = infraConfig[props.environment]
 
   const TERRAFORM_DIR = resolve(__dirname, '../../terraform/infrastructure')
 
   const TFVARS_FILE_PATH = resolve(
     __dirname,
-    `../../config/${props.env}.tfvars`,
+    `../../config/${props.environment}.tfvars`,
   )
 
   logger.info(`Config: ${TFVARS_FILE_PATH}`)
   logger.emptyLine()
 
-  logger.warning(`Deploying main infrastructure for environment: ${props.env}`)
+  logger.warning(
+    `Deploying main infrastructure for environment: ${props.environment}`,
+  )
+
   logger.emptyLine()
 
   logger.info('Initializing Terraform with remote backend...')
@@ -32,7 +35,7 @@ export const terraformApply = async (props: Props): Promise<void> => {
   // Change to terraform directory
   chdir(TERRAFORM_DIR)
 
-  await $`terraform init -reconfigure -backend-config=bucket=${bucketForTerraformStateName} -backend-config=prefix=terraform/state/${props.env}`
+  await $`terraform init -reconfigure -backend-config=bucket=${bucketForTerraformStateName} -backend-config=prefix=terraform/state/${props.environment}`
 
   logger.emptyLine()
   logger.info('Applying Terraform configuration...')

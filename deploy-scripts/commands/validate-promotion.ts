@@ -4,11 +4,11 @@ import {
   allowedPromotionPath,
   allowedPromotionPathSchema,
 } from '../../config/infrastructure'
-import type { DeployedEnv } from 'config/environment'
+import type { DeployedEnvironment } from 'config/environment'
 
 type Props = {
-  sourceEnv: DeployedEnv
-  targetEnv: DeployedEnv
+  sourceEnvironment: DeployedEnvironment
+  targetEnvironment: DeployedEnvironment
 }
 
 /**
@@ -20,12 +20,12 @@ type Props = {
  */
 export const validatePromotion = (props: Props): void => {
   const validationResult = allowedPromotionPathSchema.safeParse(
-    `${props.sourceEnv}-${props.targetEnv}`,
+    `${props.sourceEnvironment}-${props.targetEnvironment}`,
   )
 
   if (validationResult.success === false) {
     console.error(
-      `❌ Invalid promotion path: ${props.sourceEnv} → ${props.targetEnv}`,
+      `❌ Invalid promotion path: ${props.sourceEnvironment} → ${props.targetEnvironment}`,
     )
 
     console.error(

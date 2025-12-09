@@ -1,12 +1,12 @@
 // eslint-disable-next-line id-length
 import z from 'zod'
-import type { DeployedEnv } from './environment'
+import type { DeployedEnvironment } from './environment'
 
 //* MODIFY
 export const DOMAIN = 'sendmequotation.today'
 
 //* MODIFY
-export const sharedInfraConfigVariables = {
+export const sharedInfraConfig = {
   // Google Cloud Project
   projectId: 'quotationapp-8014c',
   projectNumber: '665701178658',
@@ -58,9 +58,9 @@ export const sharedInfraConfigVariables = {
 } as const
 
 //* DO NOT MODIFY, does not hurt
-export const infraConfigVariables = {
+export const infraConfig = {
   prod: {
-    ...sharedInfraConfigVariables,
+    ...sharedInfraConfig,
     cloudRunServiceNameFrontend: `web-app-frontend-prod`,
     cloudRunServiceNameBackend: `web-app-backend-prod`,
     customDomainFrontend: DOMAIN,
@@ -68,7 +68,7 @@ export const infraConfigVariables = {
     environment: 'prod',
   },
   pilot: {
-    ...sharedInfraConfigVariables,
+    ...sharedInfraConfig,
     cloudRunServiceNameFrontend: `web-app-frontend-pilot`,
     cloudRunServiceNameBackend: `web-app-backend-pilot`,
     customDomainFrontend: `pilot.${DOMAIN}`,
@@ -76,7 +76,7 @@ export const infraConfigVariables = {
     environment: 'pilot',
   },
   test: {
-    ...sharedInfraConfigVariables,
+    ...sharedInfraConfig,
     cloudRunServiceNameFrontend: `web-app-frontend-test`,
     cloudRunServiceNameBackend: `web-app-backend-test`,
     customDomainFrontend: `test.${DOMAIN}`,
@@ -84,7 +84,7 @@ export const infraConfigVariables = {
     environment: 'test',
   },
   dev: {
-    ...sharedInfraConfigVariables,
+    ...sharedInfraConfig,
     cloudRunServiceNameFrontend: `web-app-frontend-dev`,
     cloudRunServiceNameBackend: `web-app-backend-dev`,
     customDomainFrontend: `dev.${DOMAIN}`,
@@ -94,7 +94,7 @@ export const infraConfigVariables = {
 } as const
 
 export type InfraConfigVariables =
-  (typeof infraConfigVariables)[keyof typeof infraConfigVariables]
+  (typeof infraConfig)[keyof typeof infraConfig]
 
 // * MODIFY (if needed)
 
@@ -104,7 +104,7 @@ export type InfraConfigVariables =
  * - For repos with staging: set to 'dev'
  * - If set to 'dev' and you need to push hot-fix asap, switch to 'prod'
  */
-export const MASTER_DEPLOYS_TO_ENV: DeployedEnv = 'dev'
+export const MASTER_DEPLOYS_TO_ENVIRONMENT: DeployedEnvironment = 'dev'
 
 /**
  * Allowed promotion paths for environments (e.g., dev → test → pilot → prod)

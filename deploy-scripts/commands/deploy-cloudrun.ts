@@ -1,35 +1,36 @@
-import type { DeployedEnv } from 'config/environment'
-import { infraConfigVariables } from '../../config/infrastructure'
+import type { DeployedEnvironment } from 'config/environment'
+import { infraConfig } from '../../config/infrastructure'
 import { getCurrentCloudRunImage } from '../lib/gcloud/getCurrentCloudRunImage'
 import { updateCloudRunService } from '../lib/gcloud/updateCloudRunService'
 import { logToGithubOutput } from '../lib/output/logToGithubOutput'
 import { logger } from '../lib/output/logger'
 
 type Props = {
-  env: DeployedEnv
+  environment: DeployedEnvironment
   service?: 'frontend' | 'backend' | 'both'
 }
 
 export const deployCloudRun = async (props: Props): Promise<void> => {
-  const { env, service = 'both' } = props
-  const config = infraConfigVariables[env]
+  const { service = 'both' } = props // todo: get rid of both if possible
+  const infraConfigForEnvironment = infraConfig[props.environment]
 
   // Use environment name as the docker image tag
-  const dockerImageTag = env
+  const dockerImageTag = props.environment
 
   // Deploy frontend
   const shouldDeployFrontend = service === 'frontend' || service === 'both'
 
   if (shouldDeployFrontend === true) {
     logger.info('=== Deploying Frontend ===')
-    const imageUrl = `${config.region}-docker.pkg.dev/${config.projectId}/${config.artifactRegistryName}/${config.dockerImageNameFrontend}:${dockerImageTag}`
+    const imageUrl = `${infraConfigForEnvironment.region}-docker.pkg.dev/${infraConfigForEnvironment.projectId}/${infraConfigForEnvironment.artifactRegistryName}/${infraConfigForEnvironment.dockerImageNameFrontend}:${dockerImageTag}`
 
     logger.info('Capturing current frontend image for rollback capability...')
 
     const previousImageFrontend = await getCurrentCloudRunImage({
-      cloudRunServiceName: config.cloudRunServiceNameFrontend,
-      region: config.region,
-      projectId: config.projectId,
+      cloudRunServiceName:
+        infraConfigForEnvironment.cloudRunServiceNameFrontend,
+      region: infraConfigForEnvironment.region,
+      projectId: infraConfigForEnvironment.projectId,
     })
 
     logger.info(`  Previous image: ${previousImageFrontend ?? 'none'}`)
@@ -37,11 +38,12 @@ export const deployCloudRun = async (props: Props): Promise<void> => {
     logToGithubOutput({ previousImageFrontend: previousImageFrontend ?? '' })
 
     await updateCloudRunService({
-      cloudRunServiceName: config.cloudRunServiceNameFrontend,
+      cloudRunServiceName:
+        infraConfigForEnvironment.cloudRunServiceNameFrontend,
       imageUrl,
-      region: config.region,
-      projectId: config.projectId,
-      environment: env,
+      region: infraConfigForEnvironment.region,
+      projectId: infraConfigForEnvironment.projectId,
+      environment: props.environment,
     })
   }
 
@@ -50,14 +52,14 @@ export const deployCloudRun = async (props: Props): Promise<void> => {
 
   if (shouldDeployBackend === true) {
     logger.info('=== Deploying Backend ===')
-    const imageUrl = `${config.region}-docker.pkg.dev/${config.projectId}/${config.artifactRegistryName}/${config.dockerImageNameBackend}:${dockerImageTag}`
+    const imageUrl = `${infraConfigForEnvironment.region}-docker.pkg.dev/${infraConfigForEnvironment.projectId}/${infraConfigForEnvironment.artifactRegistryName}/${infraConfigForEnvironment.dockerImageNameBackend}:${dockerImageTag}`
 
     logger.info('Capturing current backend image for rollback capability...')
 
     const previousImageBackend = await getCurrentCloudRunImage({
-      cloudRunServiceName: config.cloudRunServiceNameBackend,
-      region: config.region,
-      projectId: config.projectId,
+      cloudRunServiceName: infraConfigForEnvironment.cloudRunServiceNameBackend,
+      region: infraConfigForEnvironment.region,
+      projectId: infraConfigForEnvironment.projectId,
     })
 
     logger.info(`  Previous image: ${previousImageBackend ?? 'none'}`)
@@ -65,11 +67,11 @@ export const deployCloudRun = async (props: Props): Promise<void> => {
     logToGithubOutput({ previousImageBackend: previousImageBackend ?? '' })
 
     await updateCloudRunService({
-      cloudRunServiceName: config.cloudRunServiceNameBackend,
+      cloudRunServiceName: infraConfigForEnvironment.cloudRunServiceNameBackend,
       imageUrl,
-      region: config.region,
-      projectId: config.projectId,
-      environment: env,
+      region: infraConfigForEnvironment.region,
+      projectId: infraConfigForEnvironment.projectId,
+      environment: props.environment,
     })
   }
 

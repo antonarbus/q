@@ -14,9 +14,9 @@ import { z } from 'zod'
  * Deployed environments - used by infrastructure and deployment scripts
  * These are the actual Cloud Run deployment targets
  */
-const DEPLOYED_ENVS = ['dev', 'test', 'pilot', 'prod'] as const
-export const deployedEnvSchema = z.enum(DEPLOYED_ENVS)
-export type DeployedEnv = z.infer<typeof deployedEnvSchema>
+const deployedEnvironmentList = ['dev', 'test', 'pilot', 'prod'] as const
+export const deployedEnvironmentSchema = z.enum(deployedEnvironmentList)
+export type DeployedEnvironment = z.infer<typeof deployedEnvironmentSchema>
 
 /**
  * Runtime environments - includes all possible runtime contexts
@@ -24,14 +24,14 @@ export type DeployedEnv = z.infer<typeof deployedEnvSchema>
  * - 'local': Local development (localhost URLs, http protocol, different ports)
  * - Deployed environments: Set by Cloud Run via --set-env-vars
  */
-const RUNTIME_ENVS = [
+const runtimeEnvironmentList = [
   // 'unknown' is essentially a placeholder that says: "I need to provide some value during the build, but it
   // doesn't actually matter because the real value gets set at deployment time."
   'unknown',
   // 'local' is set at package.json scripts to run server locally
   'local',
-  ...DEPLOYED_ENVS,
+  ...deployedEnvironmentList,
 ] as const
 
-export const runtimeEnvSchema = z.enum(RUNTIME_ENVS)
+export const runtimeEnvironmentSchema = z.enum(runtimeEnvironmentList)
 // export type RuntimeEnv = z.infer<typeof runtimeEnvSchema>

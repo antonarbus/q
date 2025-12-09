@@ -6,13 +6,13 @@ import { showDeploymentInfo } from '../commands/show-deployment-info'
 import { terraformApply } from '../commands/terraform-apply'
 import { terraformFormat } from '../commands/terraform-format'
 import { terraformPlan } from '../commands/terraform-plan'
-import type { DeployedEnv } from 'config/environment'
+import type { DeployedEnvironment } from 'config/environment'
 
 type Command = {
   name: string
   description: string
   requiresEnv: boolean
-  action: (env?: DeployedEnv) => Promise<void>
+  action: (env?: DeployedEnvironment) => Promise<void>
 }
 
 export const runInteractiveMode = async (): Promise<void> => {
@@ -33,36 +33,36 @@ export const runInteractiveMode = async (): Promise<void> => {
       name: 'show-deployment-info',
       description: 'Show what is currently deployed',
       requiresEnv: true,
-      action: async (env?: DeployedEnv): Promise<void> => {
-        if (env === undefined) {
+      action: async (environment?: DeployedEnvironment): Promise<void> => {
+        if (environment === undefined) {
           throw new Error('Environment required')
         }
 
-        await showDeploymentInfo({ env })
+        await showDeploymentInfo({ environment })
       },
     },
     {
       name: 'terraform-plan',
       description: 'Plan infrastructure changes',
       requiresEnv: true,
-      action: async (env?: DeployedEnv): Promise<void> => {
-        if (env === undefined) {
+      action: async (environment?: DeployedEnvironment): Promise<void> => {
+        if (environment === undefined) {
           throw new Error('Environment required')
         }
 
-        await terraformPlan({ env })
+        await terraformPlan({ environment })
       },
     },
     {
       name: 'terraform-apply',
       description: 'Apply infrastructure changes',
       requiresEnv: true,
-      action: async (env?: DeployedEnv): Promise<void> => {
-        if (env === undefined) {
+      action: async (environment?: DeployedEnvironment): Promise<void> => {
+        if (environment === undefined) {
           throw new Error('Environment required')
         }
 
-        await terraformApply({ env })
+        await terraformApply({ environment })
       },
     },
     {
@@ -94,10 +94,10 @@ export const runInteractiveMode = async (): Promise<void> => {
   const command = commands.find((cmd) => cmd.name === selectedCommand)
 
   // eslint-disable-next-line @typescript-eslint/init-declarations
-  let env: DeployedEnv | undefined
+  let environment: DeployedEnvironment | undefined
 
   if (command?.requiresEnv === true) {
-    env = await select({
+    environment = await select({
       message: 'Select environment:',
       choices: [
         { name: 'dev', value: 'dev' },
@@ -108,5 +108,5 @@ export const runInteractiveMode = async (): Promise<void> => {
     })
   }
 
-  await command?.action(env)
+  await command?.action(environment)
 }

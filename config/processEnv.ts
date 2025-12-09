@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { runtimeEnvSchema } from './environment'
+import { runtimeEnvironmentSchema } from './environment'
 
 const processEnvSchema = z.object({
   // NODE_ENV=development should be set at package.json scripts, but we make it default value to make scripts short
@@ -18,7 +18,7 @@ const processEnvSchema = z.object({
   // ENVIRONMENT=unknown - Build time (Docker images)
   // ENVIRONMENT=local - Local development (default)
   // ENVIRONMENT=dev|test|pilot|prod - Cloud Run deployments (set via --set-env-vars)
-  ENVIRONMENT: runtimeEnvSchema.optional().default('local'),
+  ENVIRONMENT: runtimeEnvironmentSchema.optional().default('local'),
 })
 
 export const processEnv =

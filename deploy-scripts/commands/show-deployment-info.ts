@@ -1,8 +1,8 @@
 /* eslint-disable max-depth */
 import { $ } from 'bun'
-import { infraConfigVariables } from '../../config/infrastructure'
+import { infraConfig } from '../../config/infrastructure'
 import { logger } from '../lib/output/logger'
-import type { DeployedEnv } from 'config/environment'
+import type { DeployedEnvironment } from 'config/environment'
 
 type ShowServiceInfoProps = {
   serviceName: string
@@ -12,14 +12,12 @@ type ShowServiceInfoProps = {
 }
 
 const showServiceInfo = async (props: ShowServiceInfoProps): Promise<void> => {
-  const { cloudRunServiceName, region, projectId } = props
-
   try {
     // Get current image URL
     const format = 'value(spec.template.spec.containers[0].image)'
 
     const imageOutput =
-      await $`gcloud run services describe ${cloudRunServiceName} --region ${region} --project ${projectId} --format=${format}`.text()
+      await $`gcloud run services describe ${props.cloudRunServiceName} --region ${props.region} --project ${props.projectId} --format=${format}`.text()
 
     const imageUrl = imageOutput.trim()
     const [baseImageUrl, envTag] = imageUrl.split(':')
@@ -29,7 +27,7 @@ const showServiceInfo = async (props: ShowServiceInfoProps): Promise<void> => {
 
     try {
       const tagListOutput =
-        await $`gcloud artifacts docker tags list ${baseImageUrl} --project=${projectId}`.text()
+        await $`gcloud artifacts docker tags list ${baseImageUrl} --project=${props.projectId}`.text()
 
       // Find the digest for the environment tag (e.g., "dev", "test")
       const lines = tagListOutput.trim().split('\n').slice(1) // Skip header
@@ -66,7 +64,7 @@ const showServiceInfo = async (props: ShowServiceInfoProps): Promise<void> => {
 
     try {
       const tagListOutput =
-        await $`gcloud artifacts docker tags list ${baseImageUrl} --project=${projectId}`.text()
+        await $`gcloud artifacts docker tags list ${baseImageUrl} --project=${props.projectId}`.text()
 
       const lines = tagListOutput.trim().split('\n').slice(1) // Skip header
 
@@ -119,7 +117,7 @@ const showServiceInfo = async (props: ShowServiceInfoProps): Promise<void> => {
 }
 
 type Props = {
-  env: DeployedEnv
+  environment: DeployedEnvironment
   service?: 'frontend' | 'backend' | 'both'
 }
 
@@ -128,11 +126,11 @@ type Props = {
  * Displays git commit SHA and message for currently deployed image
  */
 export const showDeploymentInfo = async (props: Props): Promise<void> => {
-  const config = infraConfigVariables[props.env]
+  const infraConfigForEnvironment = infraConfig[props.environment]
   const service = props.service ?? 'both'
 
   // Print section header
-  logger.warning(props.env.toUpperCase())
+  logger.warning(props.environment.toUpperCase())
   logger.emptyLine()
 
   // Show Frontend
@@ -144,9 +142,10 @@ export const showDeploymentInfo = async (props: Props): Promise<void> => {
 
     await showServiceInfo({
       serviceName: 'Frontend',
-      cloudRunServiceName: config.cloudRunServiceNameFrontend,
-      region: config.region,
-      projectId: config.projectId,
+      cloudRunServiceName:
+        infraConfigForEnvironment.cloudRunServiceNameFrontend,
+      region: infraConfigForEnvironment.region,
+      projectId: infraConfigForEnvironment.projectId,
     })
 
     logger.emptyLine()
@@ -160,9 +159,9 @@ export const showDeploymentInfo = async (props: Props): Promise<void> => {
 
     await showServiceInfo({
       serviceName: 'Backend',
-      cloudRunServiceName: config.cloudRunServiceNameBackend,
-      region: config.region,
-      projectId: config.projectId,
+      cloudRunServiceName: infraConfigForEnvironment.cloudRunServiceNameBackend,
+      region: infraConfigForEnvironment.region,
+      projectId: infraConfigForEnvironment.projectId,
     })
 
     logger.emptyLine()

@@ -1,22 +1,20 @@
 import { exit } from 'process'
-import { infraConfigVariables } from '../../config/infrastructure'
+import { infraConfig } from '../../config/infrastructure'
 import { getCloudRunServiceUrl } from '../lib/gcloud/getCloudRunServiceUrl'
 import { rollbackCloudRunService } from '../lib/gcloud/rollbackCloudRunService'
 import { logger } from '../lib/output/logger'
 import axios, { type AxiosResponse } from 'axios'
 import type { ResBody } from '@back/api/dev/healthCheckHandler'
 import { route } from '@back/api/route'
-import type { DeployedEnv } from 'config/environment'
+import type { DeployedEnvironment } from 'config/environment'
 
 type Props = {
-  env: DeployedEnv
+  environment: DeployedEnvironment
   previousImageFrontend: string
   previousImageBackend: string
 }
 
 export const verifyDeployment = async (props: Props): Promise<void> => {
-  const config = infraConfigVariables[props.env]
-
   try {
     logger.info('Waiting for deployment to be ready...')
     await Bun.sleep(10000)
@@ -26,9 +24,10 @@ export const verifyDeployment = async (props: Props): Promise<void> => {
 
     // Get frontend URL
     const frontendUrl = await getCloudRunServiceUrl({
-      cloudRunServiceName: config.cloudRunServiceNameFrontend,
-      region: config.region,
-      projectId: config.projectId,
+      cloudRunServiceName:
+        infraConfig[props.environment].cloudRunServiceNameFrontend,
+      region: infraConfig[props.environment].region,
+      projectId: infraConfig[props.environment].projectId,
     })
 
     logger.info(`Testing Frontend URL: ${frontendUrl}`)
@@ -84,9 +83,10 @@ export const verifyDeployment = async (props: Props): Promise<void> => {
 
     // Get backend URL
     const backendUrl = await getCloudRunServiceUrl({
-      cloudRunServiceName: config.cloudRunServiceNameBackend,
-      region: config.region,
-      projectId: config.projectId,
+      cloudRunServiceName:
+        infraConfig[props.environment].cloudRunServiceNameBackend,
+      region: infraConfig[props.environment].region,
+      projectId: infraConfig[props.environment].projectId,
     })
 
     logger.info(`Testing Backend URL: ${backendUrl}/api/health-check`)
@@ -148,10 +148,11 @@ export const verifyDeployment = async (props: Props): Promise<void> => {
         logger.info('Rolling back frontend...')
 
         await rollbackCloudRunService({
-          cloudRunServiceName: config.cloudRunServiceNameFrontend,
+          cloudRunServiceName:
+            infraConfig[props.environment].cloudRunServiceNameFrontend,
           previousImage: props.previousImageFrontend,
-          region: config.region,
-          projectId: config.projectId,
+          region: infraConfig[props.environment].region,
+          projectId: infraConfig[props.environment].projectId,
         })
       }
 
@@ -163,10 +164,11 @@ export const verifyDeployment = async (props: Props): Promise<void> => {
         logger.info('Rolling back backend...')
 
         await rollbackCloudRunService({
-          cloudRunServiceName: config.cloudRunServiceNameBackend,
+          cloudRunServiceName:
+            infraConfig[props.environment].cloudRunServiceNameBackend,
           previousImage: props.previousImageBackend,
-          region: config.region,
-          projectId: config.projectId,
+          region: infraConfig[props.environment].region,
+          projectId: infraConfig[props.environment].projectId,
         })
       }
 

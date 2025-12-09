@@ -1,9 +1,9 @@
 import { resolve } from 'node:path'
-import { infraConfigVariables } from '../../config/infrastructure'
+import { infraConfig } from '../../config/infrastructure'
 import { logger } from '../lib/output/logger'
 
 type Props = {
-  env: string
+  environment: string
   config: Record<string, string | readonly string[]>
 }
 
@@ -53,11 +53,11 @@ export const generateTfvars = async (): Promise<void> => {
     return `${header + lines.join('\n')}\n`
   }
 
-  for (const [env, config] of Object.entries(infraConfigVariables)) {
+  for (const [env, config] of Object.entries(infraConfig)) {
     const CONFIG_DIR = resolve(__dirname, '../../config')
     const TFVARS_FILE_PATH = resolve(CONFIG_DIR, `${env}.tfvars`)
 
-    const content = generateTfvarsContent({ env, config })
+    const content = generateTfvarsContent({ environment: env, config })
 
     // eslint-disable-next-line no-await-in-loop
     await Bun.write(TFVARS_FILE_PATH, content)

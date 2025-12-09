@@ -1,17 +1,17 @@
 import { exit } from 'process'
-import { infraConfigVariables } from '../../config/infrastructure'
+import { infraConfig } from '../../config/infrastructure'
 import { logToGithubOutput } from '../lib/output/logToGithubOutput'
 import { logger } from '../lib/output/logger'
-import type { DeployedEnv } from 'config/environment'
+import type { DeployedEnvironment } from 'config/environment'
 
 type Props = {
-  env: DeployedEnv
+  environment: DeployedEnvironment
 }
 
 export const loadConfig = (props: Props): void => {
   try {
-    logger.info(`Loading config for environment: ${props.env}`)
-    logToGithubOutput(infraConfigVariables[props.env])
+    logger.info(`Loading config for environment: ${props.environment}`)
+    logToGithubOutput(infraConfig[props.environment])
     logger.success('Config loaded successfully')
   } catch (error) {
     logger.error(`Failed to load config: ${String(error)}`)
