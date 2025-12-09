@@ -40,15 +40,7 @@ export const runtimeConfig = {
       // Fallback for unknown environment (build time)
       return 'localhost'
     },
-    get port() {
-      // Only local development specifies a port
-      if (runtimeConfig.environment === 'local') {
-        return 4000
-      }
-
-      // Deployed environments use default HTTPS port (443)
-      return 443
-    },
+    port: 4000,
     get baseUrl() {
       if (runtimeConfig.environment === 'local') {
         return `${this.protocol}://${this.hostname}:${this.port}` as const
