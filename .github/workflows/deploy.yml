@@ -23,7 +23,7 @@ jobs:
       id-token: write
 
     outputs:
-      env: ${{ steps.detect-env.outputs.env }}
+      environment: ${{ steps.detect-env.outputs.environmentironment }}
       projectId: ${{ steps.config.outputs.projectId }}
       projectNumber: ${{ steps.config.outputs.projectNumber }}
       region: ${{ steps.config.outputs.region }}
@@ -53,7 +53,7 @@ jobs:
 
       - name: 'Load Config'
         id: config
-        run: bun deploy-scripts/cli.ts load-config --env ${{ steps.detect-env.outputs.env }} >> $GITHUB_OUTPUT
+        run: bun deploy-scripts/cli.ts load-config --env ${{ steps.detect-env.outputs.environment }} >> $GITHUB_OUTPUT
 
       - name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v3'
@@ -72,7 +72,7 @@ jobs:
         working-directory: ./terraform
 
       - name: 'Terraform Apply'
-        run: bun deploy-scripts/cli.ts terraform-apply --env ${{ steps.detect-env.outputs.env }}
+        run: bun deploy-scripts/cli.ts terraform-apply --env ${{ steps.detect-env.outputs.environment }}
 
   ts-and-other-checks:
     name: 'TypeScript and Code Quality Checks'
