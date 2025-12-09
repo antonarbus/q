@@ -1,11 +1,12 @@
 import { $ } from 'bun'
 import { resolve } from 'path'
 import { chdir } from 'process'
-import { type Env, infraConfigVariables } from '../../config/infrastructure'
+import { infraConfigVariables } from '../../config/infrastructure'
 import { logger } from '../lib/output/logger'
+import type { DeployedEnv } from 'config/environment'
 
 type Props = {
-  env: Env
+  env: DeployedEnv
 }
 
 export const terraformApply = async (props: Props): Promise<void> => {

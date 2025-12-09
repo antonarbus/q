@@ -1,7 +1,8 @@
 /* eslint-disable max-depth */
 import { $ } from 'bun'
-import { type Env, infraConfigVariables } from '../../config/infrastructure'
+import { infraConfigVariables } from '../../config/infrastructure'
 import { logger } from '../lib/output/logger'
+import type { DeployedEnv } from 'config/environment'
 
 type ShowServiceInfoProps = {
   serviceName: string
@@ -118,7 +119,7 @@ const showServiceInfo = async (props: ShowServiceInfoProps): Promise<void> => {
 }
 
 type Props = {
-  env: Env
+  env: DeployedEnv
   service?: 'frontend' | 'backend' | 'both'
 }
 

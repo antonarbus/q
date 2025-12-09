@@ -1,11 +1,9 @@
 import { $ } from 'bun'
 import { exit } from 'process'
-import {
-  type Env,
-  sharedInfraConfigVariables,
-} from '../../config/infrastructure'
+import { sharedInfraConfigVariables } from '../../config/infrastructure'
 import { logToGithubOutput } from '../lib/output/logToGithubOutput'
 import { logger } from '../lib/output/logger'
+import type { DeployedEnv } from 'config/environment'
 
 type PromoteServiceImageProps = {
   serviceName: string
@@ -13,8 +11,8 @@ type PromoteServiceImageProps = {
   region: string
   projectId: string
   artifactRegistryName: string
-  sourceEnv: Env
-  targetEnv: Env
+  sourceEnv: DeployedEnv
+  targetEnv: DeployedEnv
 }
 
 const promoteServiceImage = async (
@@ -80,8 +78,8 @@ const promoteServiceImage = async (
 }
 
 type Props = {
-  sourceEnv: Env
-  targetEnv: Env
+  sourceEnv: DeployedEnv
+  targetEnv: DeployedEnv
   service?: 'frontend' | 'backend' | 'both'
 }
 

@@ -4,7 +4,10 @@ import { processEnv } from './processEnv'
 export const runtimeConfig = {
   nodeEnv: processEnv.NODE_ENV,
   ci: processEnv.CI,
-  environment: processEnv.ENVIRONMENT, // todo: check, not really like that at envSchema we have it different without local and unknown
+  // Runtime environment includes 'unknown' (build time) and 'local' (local dev)
+  // in addition to deployed environments (dev/test/pilot/prod).
+  // See config/environment.ts for the distinction between RuntimeEnv and DeployedEnv.
+  environment: processEnv.ENVIRONMENT,
   back: {
     get protocol() {
       // Local development uses http

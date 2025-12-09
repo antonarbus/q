@@ -1,18 +1,18 @@
 import { select } from '@inquirer/prompts'
 import chalk from 'chalk'
-import type { Env } from '../../config/infrastructure'
 import { generateTfvars } from '../commands/generate-tfvars'
 import { listGcloudServices } from '../commands/list-gcloud-services'
 import { showDeploymentInfo } from '../commands/show-deployment-info'
 import { terraformApply } from '../commands/terraform-apply'
 import { terraformFormat } from '../commands/terraform-format'
 import { terraformPlan } from '../commands/terraform-plan'
+import type { DeployedEnv } from 'config/environment'
 
 type Command = {
   name: string
   description: string
   requiresEnv: boolean
-  action: (env?: Env) => Promise<void>
+  action: (env?: DeployedEnv) => Promise<void>
 }
 
 export const runInteractiveMode = async (): Promise<void> => {
@@ -33,7 +33,7 @@ export const runInteractiveMode = async (): Promise<void> => {
       name: 'show-deployment-info',
       description: 'Show what is currently deployed',
       requiresEnv: true,
-      action: async (env?: Env): Promise<void> => {
+      action: async (env?: DeployedEnv): Promise<void> => {
         if (env === undefined) {
           throw new Error('Environment required')
         }
@@ -45,7 +45,7 @@ export const runInteractiveMode = async (): Promise<void> => {
       name: 'terraform-plan',
       description: 'Plan infrastructure changes',
       requiresEnv: true,
-      action: async (env?: Env): Promise<void> => {
+      action: async (env?: DeployedEnv): Promise<void> => {
         if (env === undefined) {
           throw new Error('Environment required')
         }
@@ -57,7 +57,7 @@ export const runInteractiveMode = async (): Promise<void> => {
       name: 'terraform-apply',
       description: 'Apply infrastructure changes',
       requiresEnv: true,
-      action: async (env?: Env): Promise<void> => {
+      action: async (env?: DeployedEnv): Promise<void> => {
         if (env === undefined) {
           throw new Error('Environment required')
         }
@@ -94,7 +94,7 @@ export const runInteractiveMode = async (): Promise<void> => {
   const command = commands.find((cmd) => cmd.name === selectedCommand)
 
   // eslint-disable-next-line @typescript-eslint/init-declarations
-  let env: Env | undefined
+  let env: DeployedEnv | undefined
 
   if (command?.requiresEnv === true) {
     env = await select({

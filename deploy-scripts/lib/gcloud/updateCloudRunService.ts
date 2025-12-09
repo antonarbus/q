@@ -1,13 +1,13 @@
 import { $ } from 'bun'
-import type { Env } from '../../../config/infrastructure'
 import { logger } from '../output/logger'
+import type { DeployedEnv } from 'config/environment'
 
 type Props = {
   cloudRunServiceName: string
   imageUrl: string
   region: string
   projectId: string
-  environment: Env
+  environment: DeployedEnv
 }
 
 /** Update Cloud Run service with new image */

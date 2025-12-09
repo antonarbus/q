@@ -1,29 +1,9 @@
 // eslint-disable-next-line id-length
 import z from 'zod'
+import type { DeployedEnv } from './environment'
 
 //* MODIFY
 export const DOMAIN = 'sendmequotation.today'
-
-/**
- * The .tfvars files are GENERATED from this file by `bun deploy-scripts/cli.ts generate-tfvars`
- * * DO NOT MODIFY, does not hurt.
- */
-const envName = {
-  dev: 'dev',
-  test: 'test',
-  pilot: 'pilot',
-  prod: 'prod',
-} as const
-
-//* DO NOT MODIFY, does not hurt.
-export const envSchema = z.enum([
-  envName.dev,
-  envName.test,
-  envName.pilot,
-  envName.prod,
-])
-
-export type Env = z.infer<typeof envSchema>
 
 //* MODIFY
 export const sharedInfraConfigVariables = {
@@ -79,51 +59,52 @@ export const sharedInfraConfigVariables = {
 
 //* DO NOT MODIFY, does not hurt
 export const infraConfigVariables = {
-  [envName.prod]: {
+  prod: {
     ...sharedInfraConfigVariables,
-    cloudRunServiceNameFrontend: `web-app-frontend-${envName.prod}`,
-    cloudRunServiceNameBackend: `web-app-backend-${envName.prod}`,
+    cloudRunServiceNameFrontend: `web-app-frontend-prod`,
+    cloudRunServiceNameBackend: `web-app-backend-prod`,
     customDomainFrontend: DOMAIN,
     customDomainBackend: `api.${DOMAIN}`,
-    environment: envName.prod,
+    environment: 'prod',
   },
-  [envName.pilot]: {
+  pilot: {
     ...sharedInfraConfigVariables,
-    cloudRunServiceNameFrontend: `web-app-frontend-${envName.pilot}`,
-    cloudRunServiceNameBackend: `web-app-backend-${envName.pilot}`,
-    customDomainFrontend: `${envName.pilot}.${DOMAIN}`,
-    customDomainBackend: `api-${envName.pilot}.${DOMAIN}`,
-    environment: envName.pilot,
+    cloudRunServiceNameFrontend: `web-app-frontend-pilot`,
+    cloudRunServiceNameBackend: `web-app-backend-pilot`,
+    customDomainFrontend: `pilot.${DOMAIN}`,
+    customDomainBackend: `api-pilot.${DOMAIN}`,
+    environment: 'pilot',
   },
-  [envName.test]: {
+  test: {
     ...sharedInfraConfigVariables,
-    cloudRunServiceNameFrontend: `web-app-frontend-${envName.test}`,
-    cloudRunServiceNameBackend: `web-app-backend-${envName.test}`,
-    customDomainFrontend: `${envName.test}.${DOMAIN}`,
-    customDomainBackend: `api-${envName.test}.${DOMAIN}`,
-    environment: envName.test,
+    cloudRunServiceNameFrontend: `web-app-frontend-test`,
+    cloudRunServiceNameBackend: `web-app-backend-test`,
+    customDomainFrontend: `test.${DOMAIN}`,
+    customDomainBackend: `api-test.${DOMAIN}`,
+    environment: 'test',
   },
-  [envName.dev]: {
+  dev: {
     ...sharedInfraConfigVariables,
-    cloudRunServiceNameFrontend: `web-app-frontend-${envName.dev}`,
-    cloudRunServiceNameBackend: `web-app-backend-${envName.dev}`,
-    customDomainFrontend: `${envName.dev}.${DOMAIN}`,
-    customDomainBackend: `api-${envName.dev}.${DOMAIN}`,
-    environment: envName.dev,
+    cloudRunServiceNameFrontend: `web-app-frontend-dev`,
+    cloudRunServiceNameBackend: `web-app-backend-dev`,
+    customDomainFrontend: `dev.${DOMAIN}`,
+    customDomainBackend: `api-dev.${DOMAIN}`,
+    environment: 'dev',
   },
 } as const
 
 export type InfraConfigVariables =
   (typeof infraConfigVariables)[keyof typeof infraConfigVariables]
 
+// * MODIFY (if needed)
+
 /**
  * Defines which environment master/main branch deploys to
  * - For production-only repos: set to 'prod'
  * - For repos with staging: set to 'dev'
  * - If set to 'dev' and you need to push hot-fix asap, switch to 'prod'
- * * MODIFY (if needed)
  */
-export const MASTER_DEPLOYS_TO_ENV: Env = envName.dev
+export const MASTER_DEPLOYS_TO_ENV: DeployedEnv = 'dev'
 
 /**
  * Allowed promotion paths for environments (e.g., dev → test → pilot → prod)
@@ -137,9 +118,9 @@ export const MASTER_DEPLOYS_TO_ENV: Env = envName.dev
  * * If modified, then to be aligned with .github/workflows/promote.yml:12
  */
 export const allowedPromotionPath = [
-  `${envName.dev}-${envName.test}`,
-  `${envName.test}-${envName.pilot}`,
-  `${envName.pilot}-${envName.prod}`,
+  `dev-test`,
+  `test-pilot`,
+  `pilot-prod`,
 ] as const
 
 export const allowedPromotionPathSchema = z.enum(allowedPromotionPath)

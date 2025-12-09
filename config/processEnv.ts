@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { runtimeEnvSchema } from './environment'
 
 const processEnvSchema = z.object({
   // NODE_ENV=development should be set at package.json scripts, but we make it default value to make scripts short
@@ -12,14 +13,12 @@ const processEnvSchema = z.object({
     .string()
     .optional()
     .transform((val) => val === 'true'),
-  // ENVIRONMENT indicates which deployed environment we're running against
-  // ENVIRONMENT=unknown used during build
-  // ENVIRONMENT=local should be set in package.json scripts for local development, but to make scripts short made it default value
-  // ENVIRONMENT=dev (test | pilot | prod) in Cloud Run deployments via updateCloudRunService.ts (by --set-env-vars gcloud CLI flag)
-  ENVIRONMENT: z
-    .enum(['unknown', 'local', 'dev', 'test', 'pilot', 'prod'])
-    .optional()
-    .default('local'),
+  // ENVIRONMENT indicates the runtime environment context
+  // See config/environment.ts for detailed explanation of each value
+  // ENVIRONMENT=unknown - Build time (Docker images)
+  // ENVIRONMENT=local - Local development (default)
+  // ENVIRONMENT=dev|test|pilot|prod - Cloud Run deployments (set via --set-env-vars)
+  ENVIRONMENT: runtimeEnvSchema.optional().default('local'),
 })
 
 export const processEnv =

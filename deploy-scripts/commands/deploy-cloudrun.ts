@@ -1,11 +1,12 @@
-import { type Env, infraConfigVariables } from '../../config/infrastructure'
+import type { DeployedEnv } from 'config/environment'
+import { infraConfigVariables } from '../../config/infrastructure'
 import { getCurrentCloudRunImage } from '../lib/gcloud/getCurrentCloudRunImage'
 import { updateCloudRunService } from '../lib/gcloud/updateCloudRunService'
 import { logToGithubOutput } from '../lib/output/logToGithubOutput'
 import { logger } from '../lib/output/logger'
 
 type Props = {
-  env: Env
+  env: DeployedEnv
   service?: 'frontend' | 'backend' | 'both'
 }
 

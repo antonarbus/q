@@ -1,14 +1,15 @@
 import { exit } from 'process'
-import { type Env, infraConfigVariables } from '../../config/infrastructure'
+import { infraConfigVariables } from '../../config/infrastructure'
 import { getCloudRunServiceUrl } from '../lib/gcloud/getCloudRunServiceUrl'
 import { rollbackCloudRunService } from '../lib/gcloud/rollbackCloudRunService'
 import { logger } from '../lib/output/logger'
 import axios, { type AxiosResponse } from 'axios'
 import type { ResBody } from '@back/api/dev/healthCheckHandler'
 import { route } from '@back/api/route'
+import type { DeployedEnv } from 'config/environment'
 
 type Props = {
-  env: Env
+  env: DeployedEnv
   previousImageFrontend: string
   previousImageBackend: string
 }
