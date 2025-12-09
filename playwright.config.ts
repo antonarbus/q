@@ -10,7 +10,8 @@ export default defineConfig({
   forbidOnly: runtimeConfig.ci === true, // set at .github/workflows/deployment.yaml:9.
   retries: runtimeConfig.ci === true ? 2 : 0,
   workers: runtimeConfig.ci === true ? 1 : undefined,
-  reporter: runtimeConfig.ci === true ? 'dot' : 'list',
+  reporter: runtimeConfig.ci === true ? 'dot' : 'line',
+  globalSetup: './tests/setup/global.setup.ts',
   use: {
     baseURL: runtimeConfig.front.baseUrl,
     trace: 'on-first-retry',
@@ -48,8 +49,8 @@ export default defineConfig({
       url: runtimeConfig.back.baseUrl,
       ignoreHTTPSErrors: true,
       reuseExistingServer: runtimeConfig.ci === false,
-      stdout: runtimeConfig.ci === true ? 'ignore' : 'pipe', // Capture standard output
-      stderr: runtimeConfig.ci === true ? 'ignore' : 'pipe', // Capture standard error
+      stdout: 'ignore',
+      stderr: 'ignore',
     },
     {
       command: 'bun run start-front',
