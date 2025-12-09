@@ -43,20 +43,24 @@ export default defineConfig({
     },
   ],
   // https://playwright.dev/docs/test-webserver
-  webServer: [
-    {
-      command: 'bun run start-back',
-      url: runtimeConfig.back.baseUrl,
-      ignoreHTTPSErrors: true,
-      reuseExistingServer: runtimeConfig.ci === false,
-      stdout: 'ignore',
-      stderr: 'ignore',
-    },
-    {
-      command: 'bun run start-front',
-      url: runtimeConfig.front.baseUrl,
-      ignoreHTTPSErrors: true,
-      reuseExistingServer: runtimeConfig.ci === false,
-    },
-  ],
+  // Only start local servers for local environment
+  webServer:
+    runtimeConfig.environment === 'local'
+      ? [
+          {
+            command: 'bun run start-back',
+            url: runtimeConfig.back.baseUrl,
+            ignoreHTTPSErrors: true,
+            reuseExistingServer: runtimeConfig.ci === false,
+            stdout: 'ignore',
+            stderr: 'ignore',
+          },
+          {
+            command: 'bun run start-front',
+            url: runtimeConfig.front.baseUrl,
+            ignoreHTTPSErrors: true,
+            reuseExistingServer: runtimeConfig.ci === false,
+          },
+        ]
+      : undefined,
 })

@@ -137,7 +137,9 @@ jobs:
         run: bun run install-all
 
       - name: 'Run Playwright tests'
-        run: ENVIRONMENT=${{ needs.terraform.outputs.env }} bun run e2e-test
+        env:
+          ENVIRONMENT: ${{ needs.terraform.outputs.env }}
+        run: bun run e2e-test
 
   deploy-backend:
     name: 'Build and Deploy Backend'

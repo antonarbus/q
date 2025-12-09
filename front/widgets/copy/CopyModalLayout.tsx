@@ -9,7 +9,6 @@ type Props = {
 export const CopyModalLayout = (props: Props): JSX.Element => {
   return (
     <motion.div
-      // eslint-disable-next-line react-hooks/refs -- False positive: passing AnimationScope to ref is valid
       ref={props.ref}
       css={{
         position: 'fixed',
@@ -40,7 +39,6 @@ export const CopyModalLayout = (props: Props): JSX.Element => {
           maxHeight: 240,
         }}
       >
-        {/* eslint-disable-next-line react-hooks/refs -- False positive: props.children is not accessing a ref */}
         {props.children}
       </div>
     </motion.div>
