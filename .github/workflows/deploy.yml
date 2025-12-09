@@ -23,7 +23,7 @@ jobs:
       id-token: write
 
     outputs:
-      environment: ${{ steps.detect-env.outputs.environmentironment }}
+      environment: ${{ steps.detect-env.outputs.environment }}
       projectId: ${{ steps.config.outputs.projectId }}
       projectNumber: ${{ steps.config.outputs.projectNumber }}
       region: ${{ steps.config.outputs.region }}
@@ -179,12 +179,12 @@ jobs:
           file: ./Dockerfile.prod.back
           push: true
           tags: |
-            ${{ needs.terraform.outputs.region }}-docker.pkg.dev/${{ needs.terraform.outputs.projectId }}/${{ needs.terraform.outputs.artifactRegistryName }}/${{ needs.terraform.outputs.dockerImageNameBackend }}:${{ needs.terraform.outputs.env }}
+            ${{ needs.terraform.outputs.region }}-docker.pkg.dev/${{ needs.terraform.outputs.projectId }}/${{ needs.terraform.outputs.artifactRegistryName }}/${{ needs.terraform.outputs.dockerImageNameBackend }}:${{ needs.terraform.outputs.environment }}
             ${{ needs.terraform.outputs.region }}-docker.pkg.dev/${{ needs.terraform.outputs.projectId }}/${{ needs.terraform.outputs.artifactRegistryName }}/${{ needs.terraform.outputs.dockerImageNameBackend }}:${{ github.sha }}
 
       - name: 'Deploy Backend to Cloud Run'
         id: deploy
-        run: bun deploy-scripts/cli.ts deploy-cloudrun --env ${{ needs.terraform.outputs.env }} --service backend >> $GITHUB_OUTPUT
+        run: bun deploy-scripts/cli.ts deploy-cloudrun --env ${{ needs.terraform.outputs.environment }} --service backend >> $GITHUB_OUTPUT
 
   deploy-frontend:
     name: 'Build and Deploy Frontend'
@@ -226,14 +226,14 @@ jobs:
           file: ./Dockerfile.prod.front
           push: true
           tags: |
-            ${{ needs.terraform.outputs.region }}-docker.pkg.dev/${{ needs.terraform.outputs.projectId }}/${{ needs.terraform.outputs.artifactRegistryName }}/${{ needs.terraform.outputs.dockerImageNameFrontend }}:${{ needs.terraform.outputs.env }}
+            ${{ needs.terraform.outputs.region }}-docker.pkg.dev/${{ needs.terraform.outputs.projectId }}/${{ needs.terraform.outputs.artifactRegistryName }}/${{ needs.terraform.outputs.dockerImageNameFrontend }}:${{ needs.terraform.outputs.environment }}
             ${{ needs.terraform.outputs.region }}-docker.pkg.dev/${{ needs.terraform.outputs.projectId }}/${{ needs.terraform.outputs.artifactRegistryName }}/${{ needs.terraform.outputs.dockerImageNameFrontend }}:${{ github.sha }}
           build-args: |
             BACKEND_URL=https://${{ needs.terraform.outputs.customDomainBackend }}
 
       - name: 'Deploy Frontend to Cloud Run'
         id: deploy
-        run: bun deploy-scripts/cli.ts deploy-cloudrun --env ${{ needs.terraform.outputs.env }} --service frontend >> $GITHUB_OUTPUT
+        run: bun deploy-scripts/cli.ts deploy-cloudrun --env ${{ needs.terraform.outputs.environment }} --service frontend >> $GITHUB_OUTPUT
 
   verify-deployment:
     name: 'Verify Deployment'
@@ -263,4 +263,4 @@ jobs:
           service_account: 'github-actions-sa@${{ needs.terraform.outputs.projectId }}.iam.gserviceaccount.com'
 
       - name: 'Verify Deployment'
-        run: bun deploy-scripts/cli.ts verify-deployment --env ${{ needs.terraform.outputs.env }} --previous-image-frontend "${{ needs.deploy-frontend.outputs.previousImageFrontend }}" --previous-image-backend "${{ needs.deploy-backend.outputs.previousImageBackend }}"
+        run: bun deploy-scripts/cli.ts verify-deployment --env ${{ needs.terraform.outputs.environment }} --previous-image-frontend "${{ needs.deploy-frontend.outputs.previousImageFrontend }}" --previous-image-backend "${{ needs.deploy-backend.outputs.previousImageBackend }}"
