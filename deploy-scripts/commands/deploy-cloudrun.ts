@@ -7,17 +7,16 @@ import { logger } from '../lib/output/logger'
 
 type Props = {
   environment: DeployedEnvironment
-  service?: 'frontend' | 'backend' | 'both'
+  service: 'frontend' | 'backend' | 'both'
 }
 
 export const deployCloudRun = async (props: Props): Promise<void> => {
-  const { service = 'both' } = props // todo: get rid of both if possible
-
   // Use environment name as the docker image tag
   const dockerImageTag = props.environment
 
   // Deploy frontend
-  const shouldDeployFrontend = service === 'frontend' || service === 'both'
+  const shouldDeployFrontend =
+    props.service === 'frontend' || props.service === 'both'
 
   if (shouldDeployFrontend === true) {
     logger.info('=== Deploying Frontend ===')
@@ -47,7 +46,8 @@ export const deployCloudRun = async (props: Props): Promise<void> => {
   }
 
   // Deploy backend
-  const shouldDeployBackend = service === 'backend' || service === 'both'
+  const shouldDeployBackend =
+    props.service === 'backend' || props.service === 'both'
 
   if (shouldDeployBackend === true) {
     logger.info('=== Deploying Backend ===')

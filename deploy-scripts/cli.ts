@@ -13,6 +13,8 @@ import { validatePromotion } from './commands/validate-promotion'
 import { verifyDeployment } from './commands/verify-deployment'
 import { runInteractiveMode } from './lib/interactive'
 import { deployedEnvironmentSchema } from 'config/environment'
+// eslint-disable-next-line id-length
+import z from 'zod'
 
 const noArgumentsProvided = process.argv.length === 2
 
@@ -97,24 +99,21 @@ program
     '--env <environment>',
     'Environment name (dev, test, pilot, prod)',
   )
-  .option(
+  .requiredOption(
     '--service <service>',
     'Service to deploy (frontend, backend, or both)',
-    'both',
   )
-  .action(
-    async (options: {
-      env: string
-      service: 'frontend' | 'backend' | 'both'
-    }) => {
-      const validatedEnvironment = deployedEnvironmentSchema.parse(options.env)
+  .action(async (options: { env: string; service: string }) => {
+    const validatedEnvironment = deployedEnvironmentSchema.parse(options.env)
 
-      await deployCloudRun({
-        environment: validatedEnvironment,
-        service: options.service,
-      })
-    },
-  )
+    const serviceSchema = z.enum(['frontend', 'backend', 'both'])
+    const validatedService = serviceSchema.parse(options.service)
+
+    await deployCloudRun({
+      environment: validatedEnvironment,
+      service: validatedService,
+    })
+  })
 
 program
   .command('verify-deployment')
@@ -133,13 +132,11 @@ program
   )
   .action(
     async (options: {
-      environment: string
+      env: string
       previousImageFrontend: string
       previousImageBackend: string
     }) => {
-      const validatedEnvironment = deployedEnvironmentSchema.parse(
-        options.environment,
-      )
+      const validatedEnvironment = deployedEnvironmentSchema.parse(options.env)
 
       await verifyDeployment({
         environment: validatedEnvironment,
@@ -154,51 +151,51 @@ program
   .description('Validate promotion path between environments')
   .requiredOption('--source-env <environment>', 'Source environment name')
   .requiredOption('--target-env <environment>', 'Target environment name')
-  .action(
-    (options: { sourceEnvironment: string; targetEnvironment: string }) => {
-      const validatedSourceEnvironment = deployedEnvironmentSchema.parse(
-        options.sourceEnvironment,
-      )
+  .action((options: { sourceEnv: string; targetEnv: string }) => {
+    const validatedSourceEnvironment = deployedEnvironmentSchema.parse(
+      options.sourceEnv,
+    )
 
-      const validatedTargetEnv = deployedEnvironmentSchema.parse(
-        options.targetEnvironment,
-      )
+    const validatedTargetEnv = deployedEnvironmentSchema.parse(
+      options.targetEnv,
+    )
 
-      validatePromotion({
-        sourceEnvironment: validatedSourceEnvironment,
-        targetEnvironment: validatedTargetEnv,
-      })
-    },
-  )
+    validatePromotion({
+      sourceEnvironment: validatedSourceEnvironment,
+      targetEnvironment: validatedTargetEnv,
+    })
+  })
 
 program
   .command('promote-image')
   .description('Promote Docker image from source to target environment')
   .requiredOption('--source-env <environment>', 'Source environment name')
   .requiredOption('--target-env <environment>', 'Target environment name')
-  .option(
+  .requiredOption(
     '--service <service>',
     'Service to promote (frontend, backend, or both)',
-    'both',
   )
   .action(
     async (options: {
-      sourceEnvironment: string
-      targetEnvironment: string
-      service: 'frontend' | 'backend' | 'both'
+      sourceEnv: string
+      targetEnv: string
+      service: string
     }) => {
       const validatedSourceEnvironment = deployedEnvironmentSchema.parse(
-        options.sourceEnvironment,
+        options.sourceEnv,
       )
 
       const validatedTargetEnvironment = deployedEnvironmentSchema.parse(
-        options.targetEnvironment,
+        options.targetEnv,
       )
+
+      const serviceSchema = z.enum(['frontend', 'backend', 'both'])
+      const validatedService = serviceSchema.parse(options.service)
 
       await promoteImage({
         sourceEnvironment: validatedSourceEnvironment,
         targetEnvironment: validatedTargetEnvironment,
-        service: options.service,
+        service: validatedService,
       })
     },
   )

@@ -72,21 +72,20 @@ const promoteServiceImage = async (
 type Props = {
   sourceEnvironment: DeployedEnvironment
   targetEnvironment: DeployedEnvironment
-  service?: 'frontend' | 'backend' | 'both'
+  service: 'frontend' | 'backend' | 'both'
 }
 
 export const promoteImage = async (props: Props): Promise<void> => {
-  const service = props.service ?? 'both'
-
   logger.info('Promoting Docker images...')
   logger.info(`  Registry: ${sharedInfraConfig.artifactRegistryName}`)
   logger.info(`  Source tag: ${props.sourceEnvironment}`)
   logger.info(`  Target tag: ${props.targetEnvironment}`)
-  logger.info(`  Service: ${service}`)
+  logger.info(`  Service: ${props.service}`)
   logger.emptyLine()
 
   // Promote Frontend
-  const shouldPromoteFrontend = service === 'frontend' || service === 'both'
+  const shouldPromoteFrontend =
+    props.service === 'frontend' || props.service === 'both'
 
   if (shouldPromoteFrontend === true) {
     await promoteServiceImage({
@@ -101,7 +100,8 @@ export const promoteImage = async (props: Props): Promise<void> => {
   }
 
   // Promote Backend
-  const shouldPromoteBackend = service === 'backend' || service === 'both'
+  const shouldPromoteBackend =
+    props.service === 'backend' || props.service === 'both'
 
   if (shouldPromoteBackend === true) {
     await promoteServiceImage({
