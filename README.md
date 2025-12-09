@@ -659,14 +659,16 @@ Terraform defines what the infrastructure **should** look like. This is your inf
 // deploy-scripts/lib/gcloud/updateCloudRunService.ts:23
 await $`gcloud run services update ${cloudRunServiceName} \
   --image ${imageUrl} \
-  --set-env-vars ENVIRONMENT=${environment}`
+  --set-env-vars NODE_ENV=production,ENVIRONMENT=${environment}`
 ```
 
 - **When**: Every deployment (when you push new code)
 - **Scope**: Updates the running Cloud Run service
 - **Can be overridden**: No (this is the final layer)
 
-GitHub Actions updates specific environment variables on each deployment without changing the entire service configuration.
+GitHub Actions explicitly sets all environment variables on each deployment, ensuring runtime state matches infrastructure configuration.
+
+**IMPORTANT**: We use `--set-env-vars` to declaratively define the complete set of environment variables. This replaces all user-defined env vars with exactly what we specify, preventing configuration drift. While Terraform documents the expected env vars, GitHub Actions is the source of truth for runtime configuration. Cloud Run system variables (PORT, K_SERVICE, etc.) are unaffected and managed separately by the platform.
 
 ### How They Work Together
 
@@ -686,13 +688,13 @@ terraform apply
 ```bash
 gcloud run services update backend \
   --image <new-image> \
-  --set-env-vars ENVIRONMENT=dev
+  --set-env-vars NODE_ENV=production,ENVIRONMENT=dev
 ```
 
 **Result:** Cloud Run service updated with:
 
-- `NODE_ENV="production"` (unchanged, still from Terraform/Dockerfile)
-- `ENVIRONMENT="dev"` (updated by gcloud CLI)
+- `NODE_ENV="production"` (explicitly set by gcloud CLI)
+- `ENVIRONMENT="dev"` (explicitly set by gcloud CLI)
 
 **Scenario 3: Terraform Apply Again (After Deployments)**
 
@@ -725,8 +727,8 @@ terraform apply
 ┌─────────────────────────────────────────────────────────┐
 │ 3. Deployment (GitHub Actions - Every Push)             │
 │    gcloud run services update                           │
-│      --set-env-vars ENVIRONMENT=dev                     │
-│    (Updates only ENVIRONMENT, NODE_ENV unchanged)       │
+│      --set-env-vars NODE_ENV=production,ENVIRONMENT=dev │
+│    (Replaces all env vars - declarative & explicit)     │
 └─────────────────────────────────────────────────────────┘
                          ↓
 ┌─────────────────────────────────────────────────────────┐
@@ -754,14 +756,15 @@ terraform apply
 
 Each layer serves a different purpose at different stages:
 
-- **Dockerfile**: Default baked into image (portable baseline)
-- **Terraform**: Infrastructure baseline (source of truth, drift detection, disaster recovery)
-- **GitHub Actions**: Runtime updates (deployment-specific overrides)
+- **Dockerfile**: Default baked into image (portable baseline for local development)
+- **Terraform**: Infrastructure documentation (defines contract for what env vars should exist)
+- **GitHub Actions**: Runtime enforcement (single source of truth for deployed environments)
 
 This separation allows for:
 
-- **Flexibility**: Change deployment-specific values without rebuilding images
-- **Safety**: Infrastructure-as-code prevents configuration drift
+- **Clarity**: Terraform documents infrastructure expectations
+- **Consistency**: GitHub Actions explicitly enforces runtime state on every deployment
+- **Safety**: No drift because both layers agree on values
 - **Speed**: Update environment variables instantly without re-provisioning infrastructure
 
 ---

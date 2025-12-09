@@ -20,7 +20,7 @@ export const updateCloudRunService = async (props: Props): Promise<void> => {
   logger.info(`  Environment: ${props.environment}`)
   logger.emptyLine()
 
-  await $`gcloud run services update ${props.cloudRunServiceName} --image ${props.imageUrl} --region ${props.region} --project ${props.projectId} --set-env-vars ENVIRONMENT=${props.environment}`
+  await $`gcloud run services update ${props.cloudRunServiceName} --image ${props.imageUrl} --region ${props.region} --project ${props.projectId} --set-env-vars NODE_ENV=production,ENVIRONMENT=${props.environment}`
 
   logger.emptyLine()
   logger.success('Docker image deployed to Cloud Run successfully')
