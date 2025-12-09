@@ -12,7 +12,6 @@ type Props = {
 
 export const deployCloudRun = async (props: Props): Promise<void> => {
   const { service = 'both' } = props // todo: get rid of both if possible
-  const infraConfigForEnvironment = infraConfig[props.environment]
 
   // Use environment name as the docker image tag
   const dockerImageTag = props.environment
@@ -22,15 +21,15 @@ export const deployCloudRun = async (props: Props): Promise<void> => {
 
   if (shouldDeployFrontend === true) {
     logger.info('=== Deploying Frontend ===')
-    const imageUrl = `${infraConfigForEnvironment.region}-docker.pkg.dev/${infraConfigForEnvironment.projectId}/${infraConfigForEnvironment.artifactRegistryName}/${infraConfigForEnvironment.dockerImageNameFrontend}:${dockerImageTag}`
+    const imageUrl = `${infraConfig[props.environment].region}-docker.pkg.dev/${infraConfig[props.environment].projectId}/${infraConfig[props.environment].artifactRegistryName}/${infraConfig[props.environment].dockerImageNameFrontend}:${dockerImageTag}`
 
     logger.info('Capturing current frontend image for rollback capability...')
 
     const previousImageFrontend = await getCurrentCloudRunImage({
       cloudRunServiceName:
-        infraConfigForEnvironment.cloudRunServiceNameFrontend,
-      region: infraConfigForEnvironment.region,
-      projectId: infraConfigForEnvironment.projectId,
+        infraConfig[props.environment].cloudRunServiceNameFrontend,
+      region: infraConfig[props.environment].region,
+      projectId: infraConfig[props.environment].projectId,
     })
 
     logger.info(`  Previous image: ${previousImageFrontend ?? 'none'}`)
@@ -39,10 +38,10 @@ export const deployCloudRun = async (props: Props): Promise<void> => {
 
     await updateCloudRunService({
       cloudRunServiceName:
-        infraConfigForEnvironment.cloudRunServiceNameFrontend,
+        infraConfig[props.environment].cloudRunServiceNameFrontend,
       imageUrl,
-      region: infraConfigForEnvironment.region,
-      projectId: infraConfigForEnvironment.projectId,
+      region: infraConfig[props.environment].region,
+      projectId: infraConfig[props.environment].projectId,
       environment: props.environment,
     })
   }
@@ -52,14 +51,15 @@ export const deployCloudRun = async (props: Props): Promise<void> => {
 
   if (shouldDeployBackend === true) {
     logger.info('=== Deploying Backend ===')
-    const imageUrl = `${infraConfigForEnvironment.region}-docker.pkg.dev/${infraConfigForEnvironment.projectId}/${infraConfigForEnvironment.artifactRegistryName}/${infraConfigForEnvironment.dockerImageNameBackend}:${dockerImageTag}`
+    const imageUrl = `${infraConfig[props.environment].region}-docker.pkg.dev/${infraConfig[props.environment].projectId}/${infraConfig[props.environment].artifactRegistryName}/${infraConfig[props.environment].dockerImageNameBackend}:${dockerImageTag}`
 
     logger.info('Capturing current backend image for rollback capability...')
 
     const previousImageBackend = await getCurrentCloudRunImage({
-      cloudRunServiceName: infraConfigForEnvironment.cloudRunServiceNameBackend,
-      region: infraConfigForEnvironment.region,
-      projectId: infraConfigForEnvironment.projectId,
+      cloudRunServiceName:
+        infraConfig[props.environment].cloudRunServiceNameBackend,
+      region: infraConfig[props.environment].region,
+      projectId: infraConfig[props.environment].projectId,
     })
 
     logger.info(`  Previous image: ${previousImageBackend ?? 'none'}`)
@@ -67,10 +67,11 @@ export const deployCloudRun = async (props: Props): Promise<void> => {
     logToGithubOutput({ previousImageBackend: previousImageBackend ?? '' })
 
     await updateCloudRunService({
-      cloudRunServiceName: infraConfigForEnvironment.cloudRunServiceNameBackend,
+      cloudRunServiceName:
+        infraConfig[props.environment].cloudRunServiceNameBackend,
       imageUrl,
-      region: infraConfigForEnvironment.region,
-      projectId: infraConfigForEnvironment.projectId,
+      region: infraConfig[props.environment].region,
+      projectId: infraConfig[props.environment].projectId,
       environment: props.environment,
     })
   }

@@ -126,7 +126,6 @@ type Props = {
  * Displays git commit SHA and message for currently deployed image
  */
 export const showDeploymentInfo = async (props: Props): Promise<void> => {
-  const infraConfigForEnvironment = infraConfig[props.environment]
   const service = props.service ?? 'both'
 
   // Print section header
@@ -143,9 +142,9 @@ export const showDeploymentInfo = async (props: Props): Promise<void> => {
     await showServiceInfo({
       serviceName: 'Frontend',
       cloudRunServiceName:
-        infraConfigForEnvironment.cloudRunServiceNameFrontend,
-      region: infraConfigForEnvironment.region,
-      projectId: infraConfigForEnvironment.projectId,
+        infraConfig[props.environment].cloudRunServiceNameFrontend,
+      region: infraConfig[props.environment].region,
+      projectId: infraConfig[props.environment].projectId,
     })
 
     logger.emptyLine()
@@ -159,9 +158,10 @@ export const showDeploymentInfo = async (props: Props): Promise<void> => {
 
     await showServiceInfo({
       serviceName: 'Backend',
-      cloudRunServiceName: infraConfigForEnvironment.cloudRunServiceNameBackend,
-      region: infraConfigForEnvironment.region,
-      projectId: infraConfigForEnvironment.projectId,
+      cloudRunServiceName:
+        infraConfig[props.environment].cloudRunServiceNameBackend,
+      region: infraConfig[props.environment].region,
+      projectId: infraConfig[props.environment].projectId,
     })
 
     logger.emptyLine()

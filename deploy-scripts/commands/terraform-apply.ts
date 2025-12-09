@@ -12,8 +12,6 @@ type Props = {
 export const terraformApply = async (props: Props): Promise<void> => {
   logger.info(`Environment: ${props.environment}`)
 
-  const { bucketForTerraformStateName } = infraConfig[props.environment]
-
   const TERRAFORM_DIR = resolve(__dirname, '../../terraform/infrastructure')
 
   const TFVARS_FILE_PATH = resolve(
@@ -35,7 +33,7 @@ export const terraformApply = async (props: Props): Promise<void> => {
   // Change to terraform directory
   chdir(TERRAFORM_DIR)
 
-  await $`terraform init -reconfigure -backend-config=bucket=${bucketForTerraformStateName} -backend-config=prefix=terraform/state/${props.environment}`
+  await $`terraform init -reconfigure -backend-config=bucket=${infraConfig[props.environment].bucketForTerraformStateName} -backend-config=prefix=terraform/state/${props.environment}`
 
   logger.emptyLine()
   logger.info('Applying Terraform configuration...')
