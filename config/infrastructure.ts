@@ -2,7 +2,7 @@
 import z from 'zod'
 
 //* MODIFY
-const DOMAIN = 'sendmequotation.today'
+export const DOMAIN = 'sendmequotation.today'
 
 /**
  * The .tfvars files are GENERATED from this file by `bun deploy-scripts/cli.ts generate-tfvars`

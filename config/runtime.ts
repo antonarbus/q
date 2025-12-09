@@ -1,6 +1,5 @@
+import { DOMAIN } from './infrastructure'
 import { processEnv } from './processEnv'
-
-const DOMAIN = 'sendmequotation.today' // todo: duplication, take from infrastructure.ts
 
 export const runtimeConfig = {
   nodeEnv: processEnv.NODE_ENV,

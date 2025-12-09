@@ -4,6 +4,7 @@ import { userRole } from '@back/shared/const/userRole'
 import { bucket } from '@back/shared/lib/google-cloud-storage'
 import type { NextFunction, Request, Response } from 'express'
 import { secret } from '../../../config/secrets'
+import { DOMAIN } from 'config/infrastructure'
 
 // https://cloud.google.com/storage/docs/samples/storage-cors-configuration#storage_cors_configuration-nodejs
 
@@ -23,12 +24,12 @@ export const setBucketCorsHandler: RouterHandler = async (req, res, _next) => {
   const corsUpdateRes = await bucket.setCorsConfiguration([
     {
       origin: [
-        'https://sendmequotation.today',
-        'http://sendmequotation.today',
-        'https://*.sendmequotation.today',
-        'http://*.sendmequotation.today',
-        'http://local.sendmequotation.today:3000', // pdf download does not work without port
-        'https://local.sendmequotation.today:3000', // pdf download does not work without port
+        `https://${DOMAIN}`,
+        `http://${DOMAIN}`,
+        `https://*.${DOMAIN}`,
+        `http://*.${DOMAIN}`,
+        `http://local.${DOMAIN}:3000`, // pdf download does not work without port
+        `https://local.${DOMAIN}:3000`, // pdf download does not work without port
         'http://localhost:3000', // pdf download does not work without port
         'https://localhost:3000', // pdf download does not work without port
         '*', // pdf download does not work without port
