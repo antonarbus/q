@@ -307,3 +307,73 @@ variable "storage_bucket_cors_origins" {
   # Should include all your frontend domains
   # Value provided by config/*.tfvars file
 }
+
+# ==============================================================================
+# NEON POSTGRESQL DATABASE
+# ==============================================================================
+
+variable "neon_api_key" {
+  description = "Neon API key for authentication"
+  type        = string
+  sensitive   = true
+  # Value provided by config/*.tfvars file (from secrets.ts)
+}
+
+variable "neon_org_id" {
+  description = "Neon organization ID"
+  type        = string
+  # Value provided by config/*.tfvars file
+}
+
+variable "neon_project_name" {
+  description = "Base name for the Neon project (will be suffixed with environment)"
+  type        = string
+  # Example: "myapp" becomes "myapp-dev", "myapp-prod", etc.
+  # Value provided by config/*.tfvars file
+}
+
+variable "neon_region" {
+  description = "Neon region for the PostgreSQL database"
+  type        = string
+  # Neon regions: aws-us-east-1, aws-us-east-2, aws-us-west-2,
+  #               aws-eu-central-1, aws-ap-southeast-1, etc.
+  # Choose a region close to your Cloud Run services for low latency
+  # Full list: https://neon.tech/docs/introduction/regions
+  # Value provided by config/*.tfvars file
+}
+
+variable "neon_pg_version" {
+  description = "PostgreSQL version for Neon database"
+  type        = string
+  # Options: "14", "15", "16", "17"
+  # Recommended: "16" (latest stable)
+  # Value provided by config/*.tfvars file
+  default     = "16"
+}
+
+variable "neon_database_name" {
+  description = "Name of the PostgreSQL database within the Neon project"
+  type        = string
+  # This is the actual database name your application connects to
+  # Value provided by config/*.tfvars file
+}
+
+variable "neon_min_cu" {
+  description = "Minimum compute units for Neon autoscaling"
+  type        = number
+  # Compute Units (CU): 1 CU = 1 vCPU + 4GB RAM
+  # Minimum: 0.25 (good for dev/test)
+  # For production: consider 0.5 or higher
+  # Value provided by config/*.tfvars file
+  default     = 0.25
+}
+
+variable "neon_max_cu" {
+  description = "Maximum compute units for Neon autoscaling"
+  type        = number
+  # Maximum CU determines the upper scaling limit
+  # Dev/Test: 1-2 CU
+  # Production: 2-4 CU or higher based on load
+  # Value provided by config/*.tfvars file
+  default     = 1
+}

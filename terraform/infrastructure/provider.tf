@@ -34,6 +34,10 @@ terraform {
       source  = "hashicorp/google" # Official Google Cloud provider
       version = "~> 5.0"           # Use version 5.x (any minor/patch version)
     }
+    neon = {
+      source  = "kislerdm/neon" # Official Neon provider
+      version = "~> 0.6"        # Use version 0.6.x
+    }
   }
 }
 
@@ -46,6 +50,15 @@ terraform {
 provider "google" {
   project = var.project_id # Which GCP project to use (from variables.tf)
   region  = var.region     # Default region for resources (from variables.tf)
+}
+
+# ==============================================================================
+# NEON PROVIDER
+# ==============================================================================
+# Configure the Neon provider for PostgreSQL database
+# https://registry.terraform.io/providers/kislerdm/neon/latest/docs
+provider "neon" {
+  api_key = var.neon_api_key # API key from config/*.tfvars (sourced from secrets.ts)
 }
 
 # ==============================================================================

@@ -1,6 +1,7 @@
 // eslint-disable-next-line id-length
 import z from 'zod'
 import type { DeployedEnvironment } from './environment'
+import { secret } from './secrets'
 
 //* MODIFY
 export const DOMAIN = 'sendmequotation.today'
@@ -55,6 +56,18 @@ export const sharedInfraConfig = {
   cpuLimitBackend: '1',
   memoryLimitBackend: '512Mi',
   containerPortBackend: '4000',
+
+  // Neon PostgreSQL Database
+  // NOTE: Using one shared database 'prod' for all environments (free tier)
+  // All environments (dev/test/pilot/prod) connect to the same database
+  neonApiKey: secret.NEON_API_KEY, // API key from secrets.ts
+  neonOrgId: 'org-winter-tree-49001956', // Organization ID
+  neonProjectName: 'q',
+  neonRegion: 'aws-us-east-2', // Close to us-central1
+  neonPgVersion: '16',
+  neonDatabaseName: 'prod', // Shared database for all environments
+  neonMinCu: 0.25, // Free tier minimum
+  neonMaxCu: 0.25, // Keep at 0.25 to minimize costs (free tier max is 2)
 } as const
 
 //* DO NOT MODIFY, does not hurt
