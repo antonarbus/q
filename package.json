@@ -39,7 +39,10 @@
     "docker-prod-build": "docker compose -f docker-compose.prod.yml build",
     "docker-prod-start": "docker compose -f docker-compose.prod.yml up & sleep 5 && open http://localhost:80",
     "cli": "bun deploy-scripts/cli.ts",
-    "cli-help": "bun deploy-scripts/cli.ts --help"
+    "cli-help": "bun deploy-scripts/cli.ts --help",
+    "db-generate-migration": "bun drizzle-kit generate",
+    "db-apply-migration": "bun drizzle-kit migrate",
+    "db-push-migration": "bun drizzle-kit push"
   },
   "devDependencies": {
     "@emotion/babel-plugin": "^11.13.5",
