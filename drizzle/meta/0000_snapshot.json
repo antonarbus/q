@@ -1,6 +1,6 @@
 {
-  "id": "790e07ed-436b-42b9-8344-dfd0338b99f0",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "f53a8f2c-48ce-4fb6-b2f2-82bbdc23c45f",
+  "prevId": "0d89c0cf-6a9a-4ac2-81c4-7b47c5082b05",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -10,49 +10,52 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "text",
+          "type": "varchar(8)",
           "primaryKey": true,
           "notNull": true
         },
         "email": {
           "name": "email",
-          "type": "text",
+          "type": "varchar(320)",
           "primaryKey": false,
           "notNull": true
         },
         "type": {
           "name": "type",
-          "type": "text",
+          "type": "varchar(128)",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "name": {
           "name": "name",
-          "type": "text",
+          "type": "varchar(255)",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true,
+          "default": "''"
         },
         "category": {
           "name": "category",
-          "type": "text",
+          "type": "varchar(100)",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true,
+          "default": "''"
         },
         "desc": {
           "name": "desc",
-          "type": "text",
+          "type": "varchar(2000)",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true,
+          "default": "''"
         },
-        "created_at": {
-          "name": "created_at",
+        "createdAt": {
+          "name": "createdAt",
           "type": "timestamp",
           "primaryKey": false,
           "notNull": true,
           "default": "now()"
         },
-        "updated_at": {
-          "name": "updated_at",
+        "updatedAt": {
+          "name": "updatedAt",
           "type": "timestamp",
           "primaryKey": false,
           "notNull": true,

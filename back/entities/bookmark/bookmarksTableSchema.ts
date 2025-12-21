@@ -1,13 +1,5 @@
-import { index, pgEnum, pgTable, timestamp, varchar } from 'drizzle-orm/pg-core'
+import { index, pgTable, timestamp, varchar } from 'drizzle-orm/pg-core'
 import { generateId } from '@back/shared/lib/nanoid'
-
-export const bookmarkTypeEnum = pgEnum('bookmark_type', [
-  'boq',
-  'text',
-  'price',
-  'row',
-  'paste',
-])
 
 export const bookmarksTable = pgTable(
   'bookmarks',
@@ -16,7 +8,10 @@ export const bookmarksTable = pgTable(
       .primaryKey()
       .$defaultFn(() => generateId()),
     email: varchar({ length: 320 }).notNull(),
-    type: bookmarkTypeEnum().notNull(),
+    type: varchar({
+      length: 128,
+      enum: ['boq', 'text', 'price', 'row', 'paste'],
+    }).notNull(),
     name: varchar({ length: 255 }).notNull().default(''),
     category: varchar({ length: 100 }).notNull().default(''),
     desc: varchar({ length: 2000 }).notNull().default(''),
