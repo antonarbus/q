@@ -29,13 +29,17 @@ type RouterHandler = (
 ) => Promise<void>
 
 export const saveFileInfoHandler: RouterHandler = async (req, res, _next) => {
-  const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req, res })
+  const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({
+    req,
+    res,
+  })
+
   const { id: fileId, name: fileName, size: fileSize } = req.body
 
   try {
     const createFileDocRes = await FileModel.create({
       id: fileId,
-      email,
+      email: userFromAccessToken.email,
       name: fileName,
       size: fileSize,
     })

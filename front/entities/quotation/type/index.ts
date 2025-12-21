@@ -7,15 +7,15 @@ import type { RowTypeKey } from '../const/rowTypeKey'
 type Common = {
   id: 'new' | (string & {})
   email: string
-  name?: string
-  category?: string
-  desc?: string
-  info?: string
+  name: string
+  category: string
+  desc: string
+  info: string
   width?: number
   height?: number
   isFroala?: boolean
-  createdAt?: Date
-  updatedAt?: Date
+  createdAt: Date
+  updatedAt: Date
   preview?: string
 }
 

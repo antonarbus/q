@@ -51,9 +51,12 @@ type RouterHandler = (
 ) => Promise<void>
 
 export const getFileListAllHandler: RouterHandler = async (req, res, _next) => {
-  const { roles } = getUserFromAccessTokenOrThrowUnauthorized({ req, res })
+  const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({
+    req,
+    res,
+  })
 
-  if (roles.includes(userRole.superAdmin) === false) {
+  if (userFromAccessToken.roles.includes(userRole.superAdmin) === false) {
     res.status(httpStatus.forbidden403).json({
       message: 'no permission to view',
       fileList: [],

@@ -34,11 +34,13 @@ type RouterHandler = (
 export const deleteUserHandler: RouterHandler = async (req, res, _next) => {
   const userEmailToBeDeleted = req.body.email
 
-  const { email: emailFromToken, roles } =
-    getUserFromAccessTokenOrThrowUnauthorized({ req, res })
+  const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({
+    req,
+    res,
+  })
 
-  const isOwner = emailFromToken === userEmailToBeDeleted
-  const isSuperAdmin = roles.includes(userRole.superAdmin)
+  const isOwner = userFromAccessToken.email === userEmailToBeDeleted
+  const isSuperAdmin = userFromAccessToken.roles.includes(userRole.superAdmin)
 
   const notAllowed = isOwner === false && isSuperAdmin === false
 

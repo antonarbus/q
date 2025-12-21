@@ -42,10 +42,13 @@ export const getQuotationListHandler: RouterHandler = async (
   res,
   _next,
 ) => {
-  const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req, res })
+  const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({
+    req,
+    res,
+  })
 
   const documents = await QuotationModel.find(
-    { email },
+    { email: userFromAccessToken.email },
     { _id: 0, __v: 0, email: 0 },
   )
 

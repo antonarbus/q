@@ -29,7 +29,11 @@ type RouterHandler = (
 ) => Promise<void>
 
 export const saveQuotationHandler: RouterHandler = async (req, res, _next) => {
-  const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req, res })
+  const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({
+    req,
+    res,
+  })
+
   const { quotation } = req.body
 
   if (quotation.id === '') {
@@ -51,7 +55,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, _next) => {
       return 'your new'
     }
 
-    if (foundQuotation.email === email) {
+    if (foundQuotation.email === userFromAccessToken.email) {
       return 'your existing'
     }
 
@@ -66,7 +70,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, _next) => {
 
     const createQuotationResponse = await QuotationModel.create({
       id: quotationId,
-      email,
+      email: userFromAccessToken.email,
       name: quotation.name,
       category: quotation.category,
       desc: quotation.desc,
@@ -99,7 +103,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, _next) => {
     const updateQuotationResponse = await QuotationModel.findOneAndUpdate(
       {
         id: quotation.id,
-        email,
+        email: userFromAccessToken.email,
       },
       {
         name: quotation.name,
@@ -137,7 +141,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, _next) => {
 
     const createResponse = await QuotationModel.create({
       id: newQuotationId,
-      email,
+      email: userFromAccessToken.email,
       name: quotation.name,
       category: quotation.category,
       desc: quotation.desc,

@@ -31,11 +31,15 @@ export const deleteQuotationHandler: RouterHandler = async (
   res,
   _next,
 ) => {
-  const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req, res })
+  const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({
+    req,
+    res,
+  })
+
   const { id: quotationId } = req.body
 
   const deleteFromDbResult = await QuotationModel.deleteOne({
-    email,
+    email: userFromAccessToken.email,
     id: quotationId,
   })
 

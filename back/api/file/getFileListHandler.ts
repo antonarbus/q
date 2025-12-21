@@ -25,9 +25,12 @@ type RouterHandler = (
 ) => Promise<void>
 
 export const getFileListHandler: RouterHandler = async (req, res, _next) => {
-  const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req, res })
+  const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({
+    req,
+    res,
+  })
 
-  const fileList = await FileModel.find({ email })
+  const fileList = await FileModel.find({ email: userFromAccessToken.email })
     .select({ _id: 0, id: 1, name: 1, size: 1 })
     .lean()
 

@@ -29,6 +29,7 @@ ModuleRegistry.registerModules([AllCommunityModule])
 export const BookmarkListGrid = (): JSX.Element => {
   const gridContainerRef = useRef<ComponentRef<'div'> | null>(null)
   const getBookmarkListQuery = useGetBookmarkListQuery()
+  console.log('🚀 ~ getBookmarkListQuery:', getBookmarkListQuery)
 
   useDisableLoadingOverlayWhenItemsAreFetched({
     isFetched: getBookmarkListQuery.isFetched,

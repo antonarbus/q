@@ -42,9 +42,12 @@ export const getBookmarkListAllHandler: RouterHandler = async (
   res,
   _next,
 ) => {
-  const { roles } = getUserFromAccessTokenOrThrowUnauthorized({ req, res })
+  const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({
+    req,
+    res,
+  })
 
-  if (roles.includes(userRole.superAdmin) === false) {
+  if (userFromAccessToken.roles.includes(userRole.superAdmin) === false) {
     res.status(httpStatus.forbidden403).json({
       message: 'no permission to view',
       bookmarkList: [],

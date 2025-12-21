@@ -119,7 +119,7 @@ export const useSaveBookmark = ({
       info: bookmarkFromValues.infoSignal.value,
     }
 
-    saveBookmarkMutation.mutate({ item })
+    saveBookmarkMutation.mutate({ bookmark: item })
   }, [])
 
   return {

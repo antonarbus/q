@@ -8,6 +8,20 @@
       "when": 1766253468708,
       "tag": "0000_concerned_snowbird",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1766335409694,
+      "tag": "0001_tiny_the_fury",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1766340203642,
+      "tag": "0002_motionless_living_tribunal",
+      "breakpoints": true
     }
   ]
 }

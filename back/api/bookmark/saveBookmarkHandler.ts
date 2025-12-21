@@ -1,18 +1,18 @@
-import { BookmarkModel } from '@back/entities/bookmark'
+import { bookmarksTable } from '@back/entities/bookmark/bookmarksTableSchema'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
+import { db } from '@back/shared/lib/drizzle/db'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import type { Item } from '@entities/quotation/type'
 import type { NextFunction, Request, Response } from 'express'
-import type { FlattenMaps } from 'mongoose'
 
 export type ReqBody = {
-  item: Item
+  bookmark: Item
 }
 
 export type ResBody = {
-  item?: FlattenMaps<Item>
+  bookmark: Item
   message: 'saved' | 'updated'
 }
 
@@ -22,6 +22,7 @@ export type ErrorResBody = {
     | 'name is not provided'
     | 'category is not provided'
     | 'id is not provided'
+    | 'failed to save'
 }
 
 type RouterHandler = (
@@ -31,66 +32,60 @@ type RouterHandler = (
 ) => Promise<void>
 
 export const saveBookmarkHandler: RouterHandler = async (req, res, _next) => {
-  const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req, res })
-  const { item: bookmarkItem } = req.body
+  const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({
+    req,
+    res,
+  })
 
-  if (bookmarkItem.id === '') {
+  if (req.body.bookmark.id === '') {
     res.status(httpStatus.forbidden403).json({ message: 'id is not provided' })
 
     return
   }
 
-  const getBookmarkStatus = async (): Promise<'new' | 'existing'> => {
-    const existingItem = await BookmarkModel.findOne({
-      email,
-      id: bookmarkItem.id,
+  const [bookmark] = await db
+    .insert(bookmarksTable)
+    .values({
+      id: req.body.bookmark.id,
+      email: userFromAccessToken.email,
+      type: req.body.bookmark.type,
+      name: req.body.bookmark.name,
+      category: req.body.bookmark.category,
+      desc: req.body.bookmark.desc,
     })
+    .onConflictDoUpdate({
+      target: bookmarksTable.id,
+      set: {
+        type: req.body.bookmark.type,
+        name: req.body.bookmark.name,
+        category: req.body.bookmark.category,
+        desc: req.body.bookmark.desc,
+        updatedAt: new Date(),
+      },
+    })
+    .returning()
 
-    if (existingItem === null) {
-      return 'new'
-    }
+  if (bookmark === undefined) {
+    res.status(httpStatus.serverError500).json({ message: 'failed to save' })
 
-    return 'existing'
+    return
   }
 
-  const bookmarkStatus = await getBookmarkStatus()
-
-  const bookmarkFromDb = await BookmarkModel.findOneAndUpdate(
-    {
-      id: bookmarkItem.id,
-      email,
-    },
-    {
-      id: bookmarkItem.id,
-      email,
-      type: bookmarkItem.type,
-      name: bookmarkItem.name,
-      category: bookmarkItem.category,
-      desc: bookmarkItem.desc,
-      updatedAt: Date.now(),
-      ...(bookmarkStatus === 'new' && { createdAt: Date.now() }),
-    },
-    {
-      new: true,
-      upsert: true,
-    },
-  )
-    .select({ _id: 0, __v: 0 })
-    .lean()
-
-  const { path } = getFileInfo({ id: bookmarkItem.id })
+  const { path } = getFileInfo({ id: req.body.bookmark.id })
   const bookmarkFile = bucket.file(path)
 
   const contents = JSON.stringify(
-    { ...bookmarkFromDb, ...bookmarkItem },
+    { ...bookmark, ...req.body.bookmark },
     null,
     2,
   )
 
   await bookmarkFile.save(contents)
 
+  const isNew = bookmark.createdAt.getTime() === bookmark.updatedAt.getTime()
+
   res.status(httpStatus.success200).json({
-    message: bookmarkStatus === 'new' ? 'saved' : 'updated',
-    item: { ...bookmarkFromDb, ...bookmarkItem },
+    message: isNew === true ? 'saved' : 'updated',
+    bookmark: { ...bookmark, ...req.body.bookmark },
   })
 }

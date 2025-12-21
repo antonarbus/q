@@ -24,11 +24,15 @@ type RouterHandler = (
 ) => Promise<void>
 
 export const deleteBookmarkHandler: RouterHandler = async (req, res, _next) => {
-  const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req, res })
+  const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({
+    req,
+    res,
+  })
+
   const bookmarkId = req.body.id
 
   const deleteFromDbResult = await BookmarkModel.deleteOne({
-    email,
+    email: userFromAccessToken.email,
     id: bookmarkId,
   })
 

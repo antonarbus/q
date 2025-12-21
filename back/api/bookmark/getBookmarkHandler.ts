@@ -28,8 +28,16 @@ type RouterHandler = (
 
 export const getBookmarkHandler: RouterHandler = async (req, res, _next) => {
   const bookmarkId = req.body.id
-  const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req, res })
-  const document = await BookmarkModel.findOne({ email, id: bookmarkId })
+
+  const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({
+    req,
+    res,
+  })
+
+  const document = await BookmarkModel.findOne({
+    email: userFromAccessToken.email,
+    id: bookmarkId,
+  })
 
   if (document === null) {
     res.status(httpStatus.notFound404).json({ message: 'not found' })

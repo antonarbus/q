@@ -28,7 +28,11 @@ type RouterHandler = (
 ) => Promise<void>
 
 export const deleteFileHandler: RouterHandler = async (req, res, _next) => {
-  const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req, res })
+  const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({
+    req,
+    res,
+  })
+
   const { fileId } = req.body
 
   type FileOwnerShip = 'file not found' | 'owner' | 'not owner'
@@ -40,7 +44,7 @@ export const deleteFileHandler: RouterHandler = async (req, res, _next) => {
       return 'file not found'
     }
 
-    if (fileInfo.email !== email) {
+    if (fileInfo.email !== userFromAccessToken.email) {
       return 'not owner'
     }
 
@@ -71,7 +75,7 @@ export const deleteFileHandler: RouterHandler = async (req, res, _next) => {
 
       const deleteFromDatabasePromise = FileModel.deleteOne({
         id: fileId,
-        email,
+        email: userFromAccessToken.email,
       })
 
       await Promise.all([deleteFromBucketPromise, deleteFromDatabasePromise])

@@ -1,8 +1,11 @@
 import { BookmarkModel } from '@back/entities/bookmark'
+import { bookmarksTable } from '@back/entities/bookmark/bookmarksTableSchema'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
+import { db } from '@back/shared/lib/drizzle/db'
 import type { Item } from '@entities/quotation/type'
+import { eq } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
 
 export type ItemPick = Pick<
@@ -31,10 +34,20 @@ export const getBookmarkListHandler: RouterHandler = async (
   res,
   _next,
 ) => {
-  const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req, res })
+  const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({
+    req,
+    res,
+  })
+
+  const bookmarkList = await db
+    .select()
+    .from(bookmarksTable)
+    .where(eq(bookmarksTable.email, userFromAccessToken.email))
+
+  console.log('🚀 ~ bookmarkList:', bookmarkList)
 
   const bookmarks = await BookmarkModel.find(
-    { email },
+    { email: userFromAccessToken.email },
     {
       _id: 0,
       id: 1,
