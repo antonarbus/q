@@ -319,6 +319,14 @@ variable "neon_api_key" {
   # Value provided by config/*.tfvars file (from secrets.ts)
 }
 
+variable "neon_project_id" {
+  description = "Neon project ID (existing shared project across all environments)"
+  type        = string
+  # This is the ID of the existing Neon project that all environments share
+  # The project itself is managed outside of per-environment Terraform states
+  # Value provided by config/*.tfvars file
+}
+
 variable "neon_org_id" {
   description = "Neon organization ID"
   type        = string
@@ -326,9 +334,10 @@ variable "neon_org_id" {
 }
 
 variable "neon_project_name" {
-  description = "Base name for the Neon project (will be suffixed with environment)"
+  description = "Name of the shared Neon project (for reference only, not used to create project)"
   type        = string
-  # Example: "myapp" becomes "myapp-dev", "myapp-prod", etc.
+  # This variable is kept for documentation purposes
+  # The actual project is referenced by neon_project_id
   # Value provided by config/*.tfvars file
 }
 
@@ -352,9 +361,12 @@ variable "neon_pg_version" {
 }
 
 variable "neon_database_name" {
-  description = "Name of the PostgreSQL database within the Neon project"
+  description = "Name of the PostgreSQL database within the Neon project (environment-specific)"
   type        = string
-  # This is the actual database name your application connects to
+  # Each environment creates its own database:
+  # - dev: "dev"
+  # - test: "test"
+  # - prod: "prod" (shared with pilot)
   # Value provided by config/*.tfvars file
 }
 

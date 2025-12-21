@@ -58,14 +58,14 @@ export const sharedInfraConfig = {
   containerPortBackend: '4000',
 
   // Neon PostgreSQL Database
-  // NOTE: Using one shared database 'prod' for all environments (free tier)
-  // All environments (dev/test/pilot/prod) connect to the same database
+  // NOTE: One shared project across all environments
+  // Each environment has its own database within the shared project
   neonApiKey: secret.NEON_API_KEY, // API key from secrets.ts
+  neonProjectId: 'noisy-water-33471538', // Shared project ID
   neonOrgId: 'org-winter-tree-49001956', // Organization ID
-  neonProjectName: 'q',
+  neonProjectName: 'q', // Project name (for reference)
   neonRegion: 'aws-us-east-2', // Close to us-central1
   neonPgVersion: '16',
-  neonDatabaseName: 'prod', // Shared database for all environments
   neonMinCu: 0.25, // Free tier minimum
   neonMaxCu: 0.25, // Keep at 0.25 to minimize costs (free tier max is 2)
 } as const
@@ -78,6 +78,7 @@ export const infraConfig = {
     cloudRunServiceNameBackend: `web-app-backend-prod`,
     customDomainFrontend: DOMAIN,
     customDomainBackend: `api.${DOMAIN}`,
+    neonDatabaseName: 'prod', // Production database
     environment: 'prod',
   },
   pilot: {
@@ -86,6 +87,7 @@ export const infraConfig = {
     cloudRunServiceNameBackend: `web-app-backend-pilot`,
     customDomainFrontend: `pilot.${DOMAIN}`,
     customDomainBackend: `api-pilot.${DOMAIN}`,
+    neonDatabaseName: 'prod', // Shares production database
     environment: 'pilot',
   },
   test: {
@@ -94,6 +96,7 @@ export const infraConfig = {
     cloudRunServiceNameBackend: `web-app-backend-test`,
     customDomainFrontend: `test.${DOMAIN}`,
     customDomainBackend: `api-test.${DOMAIN}`,
+    neonDatabaseName: 'test', // Test database
     environment: 'test',
   },
   dev: {
@@ -102,6 +105,7 @@ export const infraConfig = {
     cloudRunServiceNameBackend: `web-app-backend-dev`,
     customDomainFrontend: `dev.${DOMAIN}`,
     customDomainBackend: `api-dev.${DOMAIN}`,
+    neonDatabaseName: 'dev', // Development database
     environment: 'dev',
   },
 } as const
