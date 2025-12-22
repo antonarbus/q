@@ -11,13 +11,15 @@ import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
 
-export const OpenBookmarkModalButton = ({ id }: ReqBody): JSX.Element => {
+export const OpenBookmarkModalButton = ({
+  bookmarkId: id,
+}: ReqBody): JSX.Element => {
   const navigate = useNavigate()
   const getBookmarkMutation = useGetBookmarkMutation()
 
   useUpdateEffect(() => {
     if (getBookmarkMutation.isSuccess === true) {
-      const { item: block } = getBookmarkMutation.data
+      const { bookmark: block } = getBookmarkMutation.data
 
       if (block !== undefined) {
         // Save scroll position before setNotEditable
@@ -54,7 +56,7 @@ export const OpenBookmarkModalButton = ({ id }: ReqBody): JSX.Element => {
     >
       <IconButton
         onClick={() => {
-          getBookmarkMutation.mutate({ id })
+          getBookmarkMutation.mutate({ bookmarkId: id })
         }}
         size='small'
         sx={{

@@ -105,13 +105,13 @@ export const Search = (): JSX.Element => {
             key={option.id}
             onClick={async (event: React.MouseEvent) => {
               const data = await getBookmarkMutation.mutateAsync({
-                id: option.id,
+                bookmarkId: option.id,
               })
 
               isAutocompleteOpen.value = false
 
-              if (data.item !== undefined) {
-                const { item } = data
+              if (data.bookmark !== undefined) {
+                const { bookmark: item } = data
 
                 // Save scroll position before setNotEditable
                 const { scrollX } = window
@@ -151,7 +151,7 @@ export const Search = (): JSX.Element => {
             />
 
             {getBookmarkMutation.isPending &&
-            option.id === getBookmarkMutation.variables.id ? (
+            option.id === getBookmarkMutation.variables.bookmarkId ? (
               <Box
                 sx={{
                   position: 'absolute',

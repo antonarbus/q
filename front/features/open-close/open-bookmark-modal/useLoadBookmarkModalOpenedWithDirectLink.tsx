@@ -32,18 +32,18 @@ export const useLoadBookmarkModalOpenedWithDirectLink = ({
       return
     }
 
-    getBookmarkMutation.mutate({ id: bookmarkId })
+    getBookmarkMutation.mutate({ bookmarkId: bookmarkId })
   })
 
   useUpdateEffect(() => {
-    if (getBookmarkMutation.data?.item === undefined) {
+    if (getBookmarkMutation.data?.bookmark === undefined) {
       return
     }
 
     if (getBookmarkMutation.isSuccess === true) {
       dispatch(
         quotationSlice.actions.loadBlockAtPosThousandReducer({
-          block: getBookmarkMutation.data.item,
+          block: getBookmarkMutation.data.bookmark,
         }),
       )
 

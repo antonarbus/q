@@ -1,18 +1,20 @@
-import { BookmarkModel } from '@back/entities/bookmark'
+import { bookmarksTable } from '@back/entities/bookmark/bookmarksTableSchema'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
+import { db } from '@back/shared/lib/drizzle/db'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import { jsonParseSafe } from '@back/shared/util/jsonParseSafe'
 import type { Item } from '@entities/quotation/type'
+import { and, eq } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
 
 export type ReqBody = {
-  id: Item['id']
+  bookmarkId: Item['id']
 }
 
 export type ResBody = {
-  item: Item
+  bookmark: Item
   message: 'found'
 }
 
@@ -27,28 +29,36 @@ type RouterHandler = (
 ) => Promise<void>
 
 export const getBookmarkHandler: RouterHandler = async (req, res, _next) => {
-  const bookmarkId = req.body.id
-
   const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({
     req,
     res,
   })
 
-  const document = await BookmarkModel.findOne({
-    email: userFromAccessToken.email,
-    id: bookmarkId,
-  })
+  const [bookmark] = await db
+    .select()
+    .from(bookmarksTable)
+    .where(
+      and(
+        eq(bookmarksTable.email, userFromAccessToken.email),
+        eq(bookmarksTable.id, req.body.bookmarkId),
+      ),
+    )
 
-  if (document === null) {
+  // const document = await BookmarkModel.findOne({
+  //   email: userFromAccessToken.email,
+  //   id: req.body.bookmarkId,
+  // })
+
+  if (bookmark === undefined) {
     res.status(httpStatus.notFound404).json({ message: 'not found' })
 
     return
   }
 
-  const bookmarkInfo = document.toObject()
+  // const bookmarkInfo = document.toObject()
 
-  const { path } = getFileInfo({ id: bookmarkId })
-  const [fileBuffer] = await bucket.file(path).download()
+  const fileInfo = getFileInfo({ id: req.body.bookmarkId })
+  const [fileBuffer] = await bucket.file(fileInfo.path).download()
   const fileAsString = fileBuffer.toString()
   const bookmarkData = jsonParseSafe<Item>(fileAsString)
 
@@ -60,6 +70,6 @@ export const getBookmarkHandler: RouterHandler = async (req, res, _next) => {
 
   res.status(httpStatus.success200).json({
     message: 'found',
-    item: { ...bookmarkData, ...bookmarkInfo },
+    bookmark: bookmarkData,
   })
 }

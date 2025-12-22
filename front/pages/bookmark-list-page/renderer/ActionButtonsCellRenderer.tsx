@@ -15,8 +15,8 @@ export const ActionButtonsCellRenderer = (params: Params): ReactNode => {
 
   return (
     <Box sx={{ display: 'flex', gap: '5px' }}>
-      <CopyBookmarkButton id={params.data.id} />
-      <OpenBookmarkModalButton id={params.data.id} />
+      <CopyBookmarkButton bookmarkId={params.data.id} />
+      <OpenBookmarkModalButton bookmarkId={params.data.id} />
       <DeleteBookmarkButton id={params.data.id} />
     </Box>
   )
