@@ -1,11 +1,11 @@
 {
   "workspaces": {
     "front": {
-      "entry": ["**/index.{ts,tsx}"],
+      "entry": ["index.tsx"],
       "project": ["**/*.{ts,tsx}"]
     },
     "back": {
-      "entry": ["**/index.{ts,tsx}"],
+      "entry": ["index.ts"],
       "project": ["**/*.{ts,tsx}"]
     }
   },

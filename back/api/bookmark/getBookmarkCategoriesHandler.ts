@@ -1,4 +1,4 @@
-import { bookmarksTable } from '@back/entities/bookmark/bookmarksTableSchema'
+import { bookmarksTable } from '@back/entities/bookmark'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'

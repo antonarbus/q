@@ -1,7 +1,4 @@
-import {
-  bookmarksTable,
-  type SelectBookmark,
-} from '@back/entities/bookmark/bookmarksTableSchema'
+import { bookmarksTable, type SelectBookmark } from '@back/entities/bookmark'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
@@ -82,8 +79,7 @@ export const getBookmarkListAllHandler: RouterHandler = async (
       const column = bookmarksTable[item.colId as keyof typeof bookmarksTable]
 
       // Check if it's a valid column (has columnType property)
-      const isValidColumn =
-        typeof column === 'object' && 'columnType' in column
+      const isValidColumn = typeof column === 'object' && 'columnType' in column
 
       if (isValidColumn === false) {
         return null
@@ -120,8 +116,7 @@ export const getBookmarkListAllHandler: RouterHandler = async (
       const column = bookmarksTable[field as keyof typeof bookmarksTable]
 
       // Check if it's a valid column (has columnType property)
-      const isValidColumn =
-        typeof column === 'object' && 'columnType' in column
+      const isValidColumn = typeof column === 'object' && 'columnType' in column
 
       if (isValidColumn === false) {
         return null

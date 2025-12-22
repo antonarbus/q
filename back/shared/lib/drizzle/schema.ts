@@ -2,4 +2,4 @@ export {
   bookmarksTable,
   type SelectBookmark,
   type InsertBookmark,
-} from '@back/entities/bookmark/bookmarksTableSchema'
+} from '@back/entities/bookmark'

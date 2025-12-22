@@ -1,4 +1,4 @@
-import { bookmarksTable } from '@back/entities/bookmark/bookmarksTableSchema'
+import { bookmarksTable } from '@back/entities/bookmark'
 import { QuotationModel } from '@back/entities/quotation'
 import {
   getUserFromAccessTokenOrThrowUnauthorized,
