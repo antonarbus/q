@@ -57,8 +57,6 @@ export const getBookmarkListAllHandler: RouterHandler = async (
     return
   }
 
-  const { startRow = 0, endRow = 100, sortModel, filterModel } = req.query
-
   const sortModelSchema = z.array(
     z.object({
       colId: z.string(),
@@ -68,18 +66,18 @@ export const getBookmarkListAllHandler: RouterHandler = async (
 
   // ? maybe it is not a good idea to pass parameters in search query params, coz they are strings
   // ? to type we need to have parse it with schema, dah...
-  // but it is a good example how to do it
-  const {
-    success: parseSortModelSuccess,
-    error: parseSortModelError,
-    data: parsedSortModel,
-  } = sortModelSchema.safeParse(JSON.parse(sortModel))
+  // ? body params via axios are easier, but this probably more semantic
+  // * but it is a good example how to do it
 
-  if (parseSortModelSuccess === false) {
-    throw new Error('Invalid sortModel format', parseSortModelError)
+  const sortModelParsed = sortModelSchema.safeParse(
+    JSON.parse(req.query.sortModel),
+  )
+
+  if (sortModelParsed.success === false) {
+    throw new Error('Invalid sortModel format', sortModelParsed.error)
   }
 
-  const sort = parsedSortModel.reduce<Record<string, 1 | -1>>(
+  const sort = sortModelParsed.data.reduce<Record<string, 1 | -1>>(
     (accumulator, item) => {
       if (item.sort === 'asc') {
         accumulator[item.colId] = 1
@@ -103,17 +101,15 @@ export const getBookmarkListAllHandler: RouterHandler = async (
     }),
   )
 
-  const {
-    success: parseFilterModelSuccess,
-    error: parseFilterModelError,
-    data: parsedFilterModel,
-  } = filterModelSchema.safeParse(JSON.parse(filterModel))
+  const filterModelParsed = filterModelSchema.safeParse(
+    JSON.parse(req.query.filterModel),
+  )
 
-  if (parseFilterModelSuccess === false) {
-    throw new Error('Invalid filterModel format', parseFilterModelError)
+  if (filterModelParsed.success === false) {
+    throw new Error('Invalid filterModel format', filterModelParsed.error)
   }
 
-  const filter = Object.entries(parsedFilterModel).reduce<
+  const filter = Object.entries(filterModelParsed.data).reduce<
     Record<string, { $regex: string; $options: 'i' }>
   >((accumulator, item) => {
     const [field, filterDef] = item
@@ -135,8 +131,8 @@ export const getBookmarkListAllHandler: RouterHandler = async (
     email: 1,
   })
     .sort(sort)
-    .skip(Number(startRow))
-    .limit(Number(endRow) - Number(startRow))
+    .skip(Number(req.query.startRow))
+    .limit(Number(req.query.endRow) - Number(req.query.startRow))
     .lean()
 
   const bookmarkListTotalCountPromise = BookmarkModel.countDocuments(filter)
