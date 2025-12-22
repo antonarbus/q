@@ -1,14 +1,13 @@
-import { bookmarksTable } from '@back/entities/bookmark'
+import { bookmarksTable, type SelectBookmark } from '@back/entities/bookmark'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
 import { db } from '@back/shared/lib/drizzle/db'
-import type { Item } from '@entities/quotation/type'
 import { and, eq, ne } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
 
 export type ResBody = {
-  distinctCategoryList?: Item['category'][]
+  distinctCategoryList: SelectBookmark['category'][]
   message: 'Found'
 }
 

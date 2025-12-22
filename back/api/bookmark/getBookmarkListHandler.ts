@@ -1,24 +1,18 @@
-import { bookmarksTable } from '@back/entities/bookmark'
+import { type SelectBookmark, bookmarksTable } from '@back/entities/bookmark'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
 import { db } from '@back/shared/lib/drizzle/db'
-import type { Item } from '@entities/quotation/type'
 import { eq } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
 
-export type ItemPick = Pick<
-  Item,
-  'id' | 'name' | 'category' | 'desc' | 'type' | 'createdAt' | 'updatedAt'
->
-
 export type ResBody = {
-  bookmarkList: ItemPick[]
+  bookmarkList: SelectBookmark[]
   message: 'Found' | 'No content'
 }
 
 export type ErrorResBody = {
-  bookmarkList: ItemPick[]
+  bookmarkList: SelectBookmark[]
   message: ErrorMessageCommon | 'Unhandled error'
 }
 

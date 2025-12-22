@@ -1,4 +1,4 @@
-import type { ItemPick } from '@back/api/bookmark/getBookmarkListHandler'
+import type { ResBody } from '@back/api/bookmark/getBookmarkListHandler'
 import { useGetBookmarkListQuery } from '@entities/bookmark/api/useGetBookmarkListQuery'
 import { useGetBookmarkMutation } from '@entities/bookmark/api/useGetBookmarkMutation'
 import { copySlice } from '@entities/copy/copySlice'
@@ -48,7 +48,7 @@ export const Search = (): JSX.Element => {
       disablePortal
       disabled={isCopyModalVisible}
       freeSolo={options.length !== 0} // show MUI autocomplete even if no options
-      getOptionLabel={(option: string | ItemPick) => {
+      getOptionLabel={(option: string | ResBody['bookmarkList'][number]) => {
         if (typeof option === 'string') {
           return option
         }
@@ -76,7 +76,7 @@ export const Search = (): JSX.Element => {
       renderInput={renderInput}
       renderOption={(
         _props: HTMLAttributes<HTMLLIElement>,
-        option: ItemPick,
+        option: ResBody['bookmarkList'][number],
       ): JSX.Element => {
         return (
           <li

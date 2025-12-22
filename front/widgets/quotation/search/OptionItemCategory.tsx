@@ -1,4 +1,4 @@
-import type { ItemPick } from '@back/api/bookmark/getBookmarkListHandler'
+import type { ResBody } from '@back/api/bookmark/getBookmarkListHandler'
 import { Box } from '@mui/material'
 import { getTextWithBoldSubStringAsJsx } from '@shared/util/getTextWithBoldSubStringAsJsx'
 import type { JSX } from 'react'
@@ -6,7 +6,7 @@ import { BsTags } from 'react-icons/bs'
 
 type Props = {
   inputValueSignal: { value: string }
-  option: ItemPick
+  option: ResBody['bookmarkList'][number]
 }
 
 export const OptionItemCategory = (props: Props): JSX.Element => {
