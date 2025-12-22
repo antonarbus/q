@@ -14,7 +14,7 @@ export type ReqBody = {
 }
 
 export type ResBody = {
-  bookmark: SelectBookmark
+  bookmark: Item
   message: 'found'
 }
 

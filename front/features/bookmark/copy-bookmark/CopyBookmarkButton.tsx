@@ -31,7 +31,6 @@ export const CopyBookmarkButton = ({
       <IconButton
         onClick={async (event: React.MouseEvent) => {
           const data = await getBookmarkMutation.mutateAsync({ bookmarkId: id })
-          console.log('🚀 ~ data:', data)
 
           if (data !== undefined) {
             // Save scroll position before setNotEditable
