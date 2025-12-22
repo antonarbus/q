@@ -5,10 +5,10 @@ const nanoid = customAlphabet(
 )
 
 /**
- * Returns 6 chars ID with easy numbers and letters
-  ~42.2 billion possible combinations(59^6)
+ * Returns 8 chars ID with easy numbers and letters
+ * ~146 trillion possible combinations(59^8)
  */
-export const generateId = ({ size = 6 } = {}): string => {
+export const generateId = ({ size = 8 } = {}): string => {
   const id = nanoid(size)
 
   return id
