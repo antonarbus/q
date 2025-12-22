@@ -17,7 +17,7 @@ export const useCategories = (): Res => {
   ).filter((cat) => cat !== undefined)
 
   const bookmarkCategories = (
-    getBookmarkCategoryListQuery.data?.categories ?? []
+    getBookmarkCategoryListQuery.data?.distinctCategoryList ?? []
   ).filter((cat) => cat !== undefined)
 
   const categories =

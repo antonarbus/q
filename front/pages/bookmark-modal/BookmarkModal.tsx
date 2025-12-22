@@ -39,7 +39,7 @@ export const BookmarkModal = (): JSX.Element => {
   const getBookmarkCategoryListQuery = useGetBookmarkCategoryListQuery()
 
   const categories = (
-    getBookmarkCategoryListQuery.data?.categories ?? []
+    getBookmarkCategoryListQuery.data?.distinctCategoryList ?? []
   ).filter((cat) => cat !== undefined)
 
   return (

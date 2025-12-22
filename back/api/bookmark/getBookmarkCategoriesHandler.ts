@@ -1,12 +1,14 @@
-import { BookmarkModel } from '@back/entities/bookmark'
+import { bookmarksTable } from '@back/entities/bookmark/bookmarksTableSchema'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
+import { db } from '@back/shared/lib/drizzle/db'
 import type { Item } from '@entities/quotation/type'
+import { and, eq, ne } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
 
 export type ResBody = {
-  categories?: Item['category'][]
+  distinctCategoryList?: Item['category'][]
   message: 'Found'
 }
 
@@ -30,9 +32,22 @@ export const getBookmarkCategoriesHandler: RouterHandler = async (
     res,
   })
 
-  const categories = await BookmarkModel.find({
-    email: userFromAccessToken.email,
-  }).distinct('category')
+  const bookmarkListWithDistinctCategories = await db
+    .selectDistinct({ category: bookmarksTable.category })
+    .from(bookmarksTable)
+    .where(
+      and(
+        eq(bookmarksTable.email, userFromAccessToken.email),
+        ne(bookmarksTable.category, ''),
+      ),
+    )
+    .orderBy(bookmarksTable.category)
 
-  res.status(httpStatus.success200).json({ message: 'Found', categories })
+  const distinctCategoryList = bookmarkListWithDistinctCategories.map(
+    (row) => row.category,
+  )
+
+  res
+    .status(httpStatus.success200)
+    .json({ message: 'Found', distinctCategoryList })
 }
