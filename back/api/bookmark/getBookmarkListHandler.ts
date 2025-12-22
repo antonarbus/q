@@ -1,4 +1,3 @@
-import { BookmarkModel } from '@back/entities/bookmark'
 import { bookmarksTable } from '@back/entities/bookmark/bookmarksTableSchema'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
@@ -14,12 +13,12 @@ export type ItemPick = Pick<
 >
 
 export type ResBody = {
-  bookmarks: ItemPick[]
+  bookmarkList: ItemPick[]
   message: 'Found' | 'No content'
 }
 
 export type ErrorResBody = {
-  bookmarks: ItemPick[]
+  bookmarkList: ItemPick[]
   message: ErrorMessageCommon | 'Unhandled error'
 }
 
@@ -44,36 +43,21 @@ export const getBookmarkListHandler: RouterHandler = async (
     .from(bookmarksTable)
     .where(eq(bookmarksTable.email, userFromAccessToken.email))
 
-  console.log('🚀 ~ bookmarkList:', bookmarkList)
-
-  const bookmarks = await BookmarkModel.find(
-    { email: userFromAccessToken.email },
-    {
-      _id: 0,
-      id: 1,
-      name: 1,
-      category: 1,
-      desc: 1,
-      type: 1,
-      createdAt: 1,
-      updatedAt: 1,
-      email: 1,
-    },
-  ).lean()
-
-  if (bookmarks.length === 0) {
-    res.status(httpStatus.success200).json({ message: 'No content', bookmarks })
+  if (bookmarkList.length === 0) {
+    res
+      .status(httpStatus.success200)
+      .json({ message: 'No content', bookmarkList })
 
     return
   }
 
-  if (bookmarks.length !== 0) {
-    res.status(httpStatus.success200).json({ message: 'Found', bookmarks })
+  if (bookmarkList.length !== 0) {
+    res.status(httpStatus.success200).json({ message: 'Found', bookmarkList })
 
     return
   }
 
   res
     .status(httpStatus.notFound404)
-    .json({ message: 'Unhandled error', bookmarks: [] })
+    .json({ message: 'Unhandled error', bookmarkList: [] })
 }

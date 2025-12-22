@@ -29,24 +29,28 @@ type RouterHandler = (
 ) => Promise<void>
 
 export const getAccessTokenHandler: RouterHandler = async (req, res, _next) => {
-  const userDataPerviouslyLoggedIn = getUserFromRefreshTokenOrNull({ req })
+  // User perviously logged in
+  const userFromRefreshToken = getUserFromRefreshTokenOrNull({ req })
 
-  if (userDataPerviouslyLoggedIn === null) {
+  if (userFromRefreshToken === null) {
     res.status(httpStatus.unauthorized401).json({ message: 'Not logged in' })
 
     return
   }
 
-  const { email, roles, refreshJwtToken, jwtRefreshTokenExpirationDays } =
-    userDataPerviouslyLoggedIn
-
   const shouldNotTrace = getShouldNotTrace({ req })
 
   const user =
     shouldNotTrace === true
-      ? await UserModel.findOne({ email, refreshJwtToken })
+      ? await UserModel.findOne({
+          email: userFromRefreshToken.email,
+          refreshJwtToken: userFromRefreshToken.refreshJwtToken,
+        })
       : await UserModel.findOneAndUpdate(
-          { email, refreshJwtToken },
+          {
+            email: userFromRefreshToken.email,
+            refreshJwtToken: userFromRefreshToken.refreshJwtToken,
+          },
           { loggedAt: Date.now() },
           { new: true },
         )
@@ -59,16 +63,17 @@ export const getAccessTokenHandler: RouterHandler = async (req, res, _next) => {
   }
 
   const { accessJwtToken, accessJwtTokenExpiresOn } = generateAccessToken({
-    email,
-    roles,
+    email: userFromRefreshToken.email,
+    roles: userFromRefreshToken.roles,
   })
 
   res.status(httpStatus.success200).json({
     message: 'issued access token',
     accessJwtToken,
     accessJwtTokenExpiresOn,
-    roles,
-    email,
-    jwtRefreshTokenExpirationDays,
+    roles: userFromRefreshToken.roles,
+    email: userFromRefreshToken.email,
+    jwtRefreshTokenExpirationDays:
+      userFromRefreshToken.jwtRefreshTokenExpirationDays,
   })
 }

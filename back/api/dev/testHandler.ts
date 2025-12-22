@@ -10,9 +10,9 @@ type RouterHandler = (
 ) => Promise<void>
 
 export const testHandler: RouterHandler = async (req, res, _next) => {
-  const { roles } = getUserFromRefreshTokenOrJohn({ req })
+  const userFromRefreshToken = getUserFromRefreshTokenOrJohn({ req })
 
-  if (roles.includes(userRole.superAdmin) === false) {
+  if (userFromRefreshToken.roles.includes(userRole.superAdmin) === false) {
     res.status(httpStatus.forbidden403).json({ message: 'forbidden' })
 
     return

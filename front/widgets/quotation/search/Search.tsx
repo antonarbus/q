@@ -20,7 +20,7 @@ import { renderInput } from './renderInput'
 
 export const Search = (): JSX.Element => {
   const getBookmarkListQuery = useGetBookmarkListQuery()
-  const options = getBookmarkListQuery.data?.bookmarks ?? []
+  const options = getBookmarkListQuery.data?.bookmarkList ?? []
   const inputValueSignal = useSignal('')
   const email = useSelector((state) => state.user.email)
 

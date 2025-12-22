@@ -8,11 +8,11 @@ export const deleteBookmarkListCache = (): void => {
     { queryKey: [queryKey.getBookmarkList] },
     (cacheData) => {
       const updatedCacheData = produce(cacheData, (draft) => {
-        if (draft?.bookmarks === undefined) {
+        if (draft?.bookmarkList === undefined) {
           return
         }
 
-        draft.bookmarks = []
+        draft.bookmarkList = []
       })
 
       return updatedCacheData

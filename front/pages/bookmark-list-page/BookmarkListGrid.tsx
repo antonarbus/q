@@ -61,7 +61,7 @@ export const BookmarkListGrid = (): JSX.Element => {
           dispatch(agGridSlice.actions.setCount({ count }))
         }}
         ref={bookmarkListAgGridRef}
-        rowData={getBookmarkListQuery.data?.bookmarks}
+        rowData={getBookmarkListQuery.data?.bookmarkList}
         suppressCellFocus
         suppressColumnVirtualisation
         theme={themeQuartz}

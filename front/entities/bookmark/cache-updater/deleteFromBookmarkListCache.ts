@@ -12,11 +12,11 @@ export const deleteFromBookmarkListCache = ({ id }: Props): void => {
     { queryKey: [queryKey.getBookmarkList] },
     (cacheData) => {
       const updatedCacheData = produce(cacheData, (draft) => {
-        if (draft?.bookmarks === undefined) {
+        if (draft?.bookmarkList === undefined) {
           return
         }
 
-        const items = draft.bookmarks
+        const items = draft.bookmarkList
         const index = items.findIndex((item) => item.id === id)
         const foundInCache = index !== -1
 
