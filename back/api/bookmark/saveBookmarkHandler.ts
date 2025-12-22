@@ -1,4 +1,8 @@
-import { bookmarksTable, type SelectBookmark } from '@back/entities/bookmark'
+import {
+  bookmarksTable,
+  type InsertBookmark,
+  type SelectBookmark,
+} from '@back/entities/bookmark'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
@@ -7,7 +11,9 @@ import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import type { NextFunction, Request, Response } from 'express'
 
 export type ReqBody = {
-  bookmark: SelectBookmark
+  bookmark: Required<
+    Pick<InsertBookmark, 'id' | 'type' | 'name' | 'category' | 'desc'>
+  >
 }
 
 export type ResBody = {
@@ -85,6 +91,6 @@ export const saveBookmarkHandler: RouterHandler = async (req, res, _next) => {
 
   res.status(httpStatus.success200).json({
     message: isNew === true ? 'saved' : 'updated',
-    bookmark: { ...bookmark, ...req.body.bookmark },
+    bookmark,
   })
 }

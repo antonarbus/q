@@ -50,12 +50,16 @@ export const getBookmarkHandler: RouterHandler = async (req, res, _next) => {
     return
   }
 
-  const fileInfo = getFileInfo({ id: req.body.bookmarkId })
-  const [fileBuffer] = await bucket.file(fileInfo.path).download()
-  const fileAsString = fileBuffer.toString()
-  const bookmarkData = jsonParseSafe<Item>(fileAsString)
+  const bookmarkFileInfo = getFileInfo({ id: req.body.bookmarkId })
 
-  if (bookmarkData === undefined) {
+  const [bookmarkFileBuffer] = await bucket
+    .file(bookmarkFileInfo.path)
+    .download()
+
+  const bookmarkFileAsString = bookmarkFileBuffer.toString()
+  const bookmarkFileData = jsonParseSafe<Item>(bookmarkFileAsString)
+
+  if (bookmarkFileData === undefined) {
     res.status(httpStatus.notFound404).json({ message: 'not found' })
 
     return
@@ -63,6 +67,6 @@ export const getBookmarkHandler: RouterHandler = async (req, res, _next) => {
 
   res.status(httpStatus.success200).json({
     message: 'found',
-    bookmark: bookmarkData,
+    bookmark: bookmarkFileData,
   })
 }
