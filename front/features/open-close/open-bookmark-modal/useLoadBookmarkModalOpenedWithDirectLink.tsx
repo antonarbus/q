@@ -50,10 +50,10 @@ export const useLoadBookmarkModalOpenedWithDirectLink = ({
       const block = getState().quotation.blocks.at(BOOKMARK_POS_AT_BLOCKS)
 
       if (block !== undefined) {
-        bookmarkFromValues.nameSignal.value = block.name ?? ''
-        bookmarkFromValues.categorySignal.value = block.category ?? ''
-        bookmarkFromValues.descSignal.value = block.desc ?? ''
-        bookmarkFromValues.infoSignal.value = block.info ?? ''
+        bookmarkFromValues.nameSignal.value = block.name
+        bookmarkFromValues.categorySignal.value = block.category
+        bookmarkFromValues.descSignal.value = block.desc
+        bookmarkFromValues.infoSignal.value = block.info
       }
     }
   }, [getBookmarkMutation.isSuccess])
