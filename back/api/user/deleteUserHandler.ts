@@ -1,4 +1,4 @@
-import { BookmarkModel } from '@back/entities/bookmark'
+import { bookmarksTable } from '@back/entities/bookmark/bookmarksTableSchema'
 import { QuotationModel } from '@back/entities/quotation'
 import {
   getUserFromAccessTokenOrThrowUnauthorized,
@@ -7,8 +7,10 @@ import {
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
 import { userRole } from '@back/shared/const/userRole'
+import { db } from '@back/shared/lib/drizzle/db'
 // import { bucket, getFolderPath } from '@back/shared/services/storage'
 import type { User } from '@entities/user/type'
+import { eq } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
 
 export type ReqBody = {
@@ -32,14 +34,12 @@ type RouterHandler = (
 ) => Promise<void>
 
 export const deleteUserHandler: RouterHandler = async (req, res, _next) => {
-  const userEmailToBeDeleted = req.body.email
-
   const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({
     req,
     res,
   })
 
-  const isOwner = userFromAccessToken.email === userEmailToBeDeleted
+  const isOwner = userFromAccessToken.email === req.body.email
   const isSuperAdmin = userFromAccessToken.roles.includes(userRole.superAdmin)
 
   const notAllowed = isOwner === false && isSuperAdmin === false
@@ -57,17 +57,17 @@ export const deleteUserHandler: RouterHandler = async (req, res, _next) => {
   // delete from db
 
   const deleteUserResult = await UserModel.deleteOne({
-    email: userEmailToBeDeleted,
+    email: req.body.email,
   })
 
   if (deleteUserResult.deletedCount === 0) {
-    statistics.push(`${userEmailToBeDeleted} was not found in database ❌`)
+    statistics.push(`${req.body.email} was not found in database ❌`)
   } else {
-    statistics.push(`${userEmailToBeDeleted} was deleted from database ✅`)
+    statistics.push(`${req.body.email} was deleted from database ✅`)
   }
 
   const deleteQuotationsResult = await QuotationModel.deleteMany({
-    email: userEmailToBeDeleted,
+    email: req.body.email,
   })
 
   if (deleteQuotationsResult.deletedCount === 0) {
@@ -78,15 +78,15 @@ export const deleteUserHandler: RouterHandler = async (req, res, _next) => {
     )
   }
 
-  const deleteBookmarksResult = await BookmarkModel.deleteMany({
-    email: userEmailToBeDeleted,
-  })
+  const deleteResponse = await db
+    .delete(bookmarksTable)
+    .where(eq(bookmarksTable.email, userFromAccessToken.email))
 
-  if (deleteBookmarksResult.deletedCount === 0) {
+  if (deleteResponse.rowCount === 0) {
     statistics.push(`bookmarks were not found in database ❌`)
   } else {
     statistics.push(
-      `${deleteBookmarksResult.deletedCount} bookmarks were deleted from database ✅`,
+      `${deleteResponse.rowCount} bookmarks were deleted from database ✅`,
     )
   }
 

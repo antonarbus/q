@@ -32,7 +32,7 @@ export const deleteBookmarkHandler: RouterHandler = async (req, res, _next) => {
     res,
   })
 
-  const [deletedBookmark] = await db
+  const deleteResponse = await db
     .delete(bookmarksTable)
     .where(
       and(
@@ -40,9 +40,8 @@ export const deleteBookmarkHandler: RouterHandler = async (req, res, _next) => {
         eq(bookmarksTable.id, req.body.bookmarkId),
       ),
     )
-    .returning()
 
-  if (deletedBookmark === undefined) {
+  if (deleteResponse.rowCount === 0) {
     res.status(httpStatus.notFound404).json({ message: 'not found' })
 
     return
