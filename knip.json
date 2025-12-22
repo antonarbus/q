@@ -10,19 +10,22 @@
     }
   },
   "ignore": [
-    "tests/setup/auth.setup.ts",
+    "back/shared/lib/drizzle/schema.ts",
     "front/shared/lib/ag-grid/colDef/getNumberColDef.tsx",
     "front/features/quotation/download-quotation-as-excel/excelWorker.ts",
     "front/features/quotation/download-quotation-as-pdf/pdfWorker.ts",
     "front/shared/util/stripHtmlWithBreaksPreserve.ts",
-    "config/infrastructure.ts"
+    "tests/setup/auth.setup.ts",
+    "config/infrastructure.ts",
+    "drizzle.config.ts"
   ],
   "ignoreDependencies": [
     "@preact/signals-react-transform",
     "@emotion/babel-plugin",
     "exceljs",
     "jspdf",
-    "striptags"
+    "striptags",
+    "drizzle-orm"
   ],
   "ignoreBinaries": ["gcloud", "terraform", "sleep", "open"]
 }

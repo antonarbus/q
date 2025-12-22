@@ -1,5 +1,5 @@
 import { defineConfig } from 'drizzle-kit'
-import { runtimeConfig } from 'config/runtime'
+import { runtimeConfig } from './config/runtime'
 
 // https://neon.com/docs/guides/drizzle#configure-drizzle-kit
 

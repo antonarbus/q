@@ -1,16 +1,15 @@
-import { BookmarkModel } from '@back/entities/bookmark'
+import {
+  bookmarksTable,
+  type SelectBookmark,
+} from '@back/entities/bookmark/bookmarksTableSchema'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
+import { db } from '@back/shared/lib/drizzle/db'
 import { userRole } from '@back/shared/const/userRole'
-import type { Item } from '@entities/quotation/type'
+import { and, asc, count, desc, ilike } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
 import { z } from 'zod'
-
-export type ItemPick = Pick<
-  Item,
-  'id' | 'email' | 'name' | 'type' | 'createdAt' | 'updatedAt'
->
 
 type SearchQuery = {
   startRow: string
@@ -20,13 +19,13 @@ type SearchQuery = {
 }
 
 export type ResBody = {
-  bookmarkList: ItemPick[]
+  bookmarkList: SelectBookmark[]
   bookmarkListTotalCount: number
   message: 'Found'
 }
 
 type ErrorResBody = {
-  bookmarkList: ItemPick[]
+  bookmarkList: SelectBookmark[]
   bookmarkListTotalCount: number
   message: ErrorMessageCommon | 'no permission to view' | 'Unhandled error'
 }
@@ -77,20 +76,26 @@ export const getBookmarkListAllHandler: RouterHandler = async (
     throw new Error('Invalid sortModel format', sortModelParsed.error)
   }
 
-  const sort = sortModelParsed.data.reduce<Record<string, 1 | -1>>(
-    (accumulator, item) => {
-      if (item.sort === 'asc') {
-        accumulator[item.colId] = 1
+  const sortConditions = sortModelParsed.data
+    .map((item) => {
+      // eslint-disable-next-line
+      const column = bookmarksTable[item.colId as keyof typeof bookmarksTable]
+
+      // Check if it's a valid column (has columnType property)
+      const isValidColumn =
+        typeof column === 'object' && 'columnType' in column
+
+      if (isValidColumn === false) {
+        return null
       }
 
-      if (item.sort === 'desc') {
-        accumulator[item.colId] = -1
-      }
+      const sortedColumn = item.sort === 'asc' ? asc(column) : desc(column)
 
-      return accumulator
-    },
-    {},
-  )
+      return sortedColumn
+    })
+    .filter((condition): condition is NonNullable<typeof condition> =>
+      Boolean(condition),
+    )
 
   const filterModelSchema = z.record(
     z.string(),
@@ -109,33 +114,54 @@ export const getBookmarkListAllHandler: RouterHandler = async (
     throw new Error('Invalid filterModel format', filterModelParsed.error)
   }
 
-  const filter = Object.entries(filterModelParsed.data).reduce<
-    Record<string, { $regex: string; $options: 'i' }>
-  >((accumulator, item) => {
-    const [field, filterDef] = item
-    accumulator[field] = { $regex: filterDef.filter, $options: 'i' }
+  const filterConditions = Object.entries(filterModelParsed.data)
+    .map(([field, filterDef]) => {
+      // eslint-disable-next-line
+      const column = bookmarksTable[field as keyof typeof bookmarksTable]
 
-    return accumulator
-  }, {})
+      // Check if it's a valid column (has columnType property)
+      const isValidColumn =
+        typeof column === 'object' && 'columnType' in column
+
+      if (isValidColumn === false) {
+        return null
+      }
+
+      const filterCondition = ilike(column, `%${filterDef.filter}%`)
+
+      return filterCondition
+    })
+    .filter((condition): condition is NonNullable<typeof condition> =>
+      Boolean(condition),
+    )
 
   // Query all bookmarks (no user filter)
-  const bookmarkListPromise = BookmarkModel.find(filter, {
-    _id: 0,
-    id: 1,
-    name: 1,
-    category: 1,
-    desc: 1,
-    type: 1,
-    createdAt: 1,
-    updatedAt: 1,
-    email: 1,
-  })
-    .sort(sort)
-    .skip(Number(req.query.startRow))
-    .limit(Number(req.query.endRow) - Number(req.query.startRow))
-    .lean()
+  const baseQuery = db.select().from(bookmarksTable)
 
-  const bookmarkListTotalCountPromise = BookmarkModel.countDocuments(filter)
+  const queryWithFilters =
+    filterConditions.length > 0
+      ? baseQuery.where(and(...filterConditions))
+      : baseQuery
+
+  const queryWithSort =
+    sortConditions.length > 0
+      ? queryWithFilters.orderBy(...sortConditions)
+      : queryWithFilters
+
+  const bookmarkListPromise = queryWithSort
+    .offset(Number(req.query.startRow))
+    .limit(Number(req.query.endRow) - Number(req.query.startRow))
+
+  const baseCountQuery = db.select({ count: count() }).from(bookmarksTable)
+
+  const countQueryWithFilters =
+    filterConditions.length > 0
+      ? baseCountQuery.where(and(...filterConditions))
+      : baseCountQuery
+
+  const bookmarkListTotalCountPromise = countQueryWithFilters.then(
+    (result) => result[0]?.count ?? 0,
+  )
 
   const [bookmarkListResponse, bookmarkListTotalCountResponse] =
     await Promise.allSettled([

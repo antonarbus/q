@@ -86,7 +86,6 @@
     "kill-port": "^2.0.1",
     "knip": "^5.65.0",
     "madge": "^8.0.0",
-    "postgres": "^3.4.7",
     "prettier": "^3.7.4",
     "rollup": "^4.52.4",
     "typescript": "^5.9.3",
