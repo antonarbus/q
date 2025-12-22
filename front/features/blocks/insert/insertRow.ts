@@ -14,6 +14,12 @@ import type { MouseEvent } from 'react'
 export const insertRow = (event?: MouseEvent): void => {
   const row: Row = {
     id: generateId(),
+    name: '',
+    category: '',
+    desc: '',
+    info: '',
+    createdAt: new Date(),
+    updatedAt: new Date(),
     type: rowTypeKey.row,
     email: 'john@mail.com',
     height: 55,

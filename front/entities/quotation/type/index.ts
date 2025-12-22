@@ -110,7 +110,6 @@ export type Quotation = Common & {
     level: 'everyone' | 'nobody' | 'custom'
     userList: string[]
   }
-
   from?: {
     email?: string
     name?: string

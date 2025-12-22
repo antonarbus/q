@@ -11,6 +11,12 @@ import type { MouseEvent } from 'react'
 export const insertTextBlock = (event?: MouseEvent): void => {
   const block: Text = {
     id: generateId(),
+    name: '',
+    category: '',
+    desc: '',
+    info: '',
+    createdAt: new Date(),
+    updatedAt: new Date(),
     type: itemType.text,
     email: 'john@mail.com',
     width: 600,

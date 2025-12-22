@@ -30,6 +30,12 @@ import type { MouseEvent } from 'react'
 export const insertBoqBlock = (event?: MouseEvent): void => {
   const boqBlock: Boq = {
     id: generateId(),
+    name: '',
+    category: '',
+    desc: '',
+    info: '',
+    createdAt: new Date(),
+    updatedAt: new Date(),
     type: itemType.boq,
     email: 'john@mail.com',
     width: 600,
@@ -76,6 +82,12 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
       rows: [
         {
           id: generateId(),
+          name: '',
+          category: '',
+          desc: '',
+          info: '',
+          createdAt: new Date(),
+          updatedAt: new Date(),
           type: rowTypeKey.row,
           email: 'john@mail.com',
           height: 0,
@@ -115,6 +127,12 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
         },
         {
           id: generateId(),
+          name: '',
+          category: '',
+          desc: '',
+          info: '',
+          createdAt: new Date(),
+          updatedAt: new Date(),
           type: rowTypeKey.row,
           email: 'john@mail.com',
           height: 0,
@@ -154,6 +172,12 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
         },
         {
           id: generateId(),
+          name: '',
+          category: '',
+          desc: '',
+          info: '',
+          createdAt: new Date(),
+          updatedAt: new Date(),
           type: rowTypeKey.row,
           email: 'john@mail.com',
           height: 0,

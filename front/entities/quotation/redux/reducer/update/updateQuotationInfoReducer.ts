@@ -4,10 +4,10 @@ import type { Quotation } from '../../../type'
 export const updateQuotationInfoReducer = (
   state: Quotation,
   action: PayloadAction<{
-    name: string | undefined
-    category: string | undefined
-    desc: string | undefined
-    info: string | undefined
+    name: string
+    category: string
+    desc: string
+    info: string
   }>,
 ): void => {
   const { name, category, desc, info } = action.payload

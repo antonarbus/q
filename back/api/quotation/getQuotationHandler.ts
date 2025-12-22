@@ -35,6 +35,12 @@ export const getQuotationHandler: RouterHandler = async (req, res, _next) => {
 
   const emptyQuotation: Quotation = {
     id: quotationId,
+    name: '',
+    category: '',
+    desc: '',
+    info: '',
+    createdAt: new Date(),
+    updatedAt: new Date(),
     type: 'quotation',
     email: 'john@gmail.com',
     access: {
@@ -151,34 +157,44 @@ export const getQuotationHandler: RouterHandler = async (req, res, _next) => {
   if (publicOrSharedWithYou === true) {
     // remove sensitive data from quotation
     // quotation.email = 'john@mail.com'
-    delete quotationParsed.name
-    delete quotationParsed.category
-    delete quotationParsed.desc
-    delete quotationParsed.info
-    delete quotationParsed.createdAt
-    delete quotationParsed.updatedAt
-    delete quotationParsed.openedAt
-    delete quotationParsed.from
-    delete quotationParsed.to
+    quotationParsed.name = 'private'
+    quotationParsed.category = 'private'
+    quotationParsed.desc = 'private'
+    quotationParsed.info = 'private'
+    quotationParsed.createdAt = new Date()
+    quotationParsed.updatedAt = new Date()
+    quotationParsed.openedAt = new Date()
+
+    quotationParsed.from = {
+      name: 'private',
+      company: 'private',
+      email: 'private',
+    }
+
+    quotationParsed.to = {
+      name: 'private',
+      company: 'private',
+      email: 'private',
+    }
 
     quotationParsed.blocks.forEach((block) => {
       // block.email = 'john@mail.com'
-      delete block.name
-      delete block.category
-      delete block.desc
-      delete block.info
-      delete block.createdAt
-      delete block.updatedAt
+      block.name = 'private'
+      block.category = 'private'
+      block.desc = 'private'
+      block.info = 'private'
+      block.createdAt = new Date()
+      block.updatedAt = new Date()
 
       if (block.type === 'boq') {
         block.boq.rows.forEach((row) => {
           // row.email = 'john@mail.com'
-          delete row.name
-          delete row.category
-          delete row.desc
-          delete row.info
-          delete row.createdAt
-          delete row.updatedAt
+          row.name = 'private'
+          row.category = 'private'
+          row.desc = 'private'
+          row.info = 'private'
+          row.createdAt = new Date()
+          row.updatedAt = new Date()
         })
       }
     })

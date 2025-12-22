@@ -51,6 +51,12 @@ import { updateSubTotalPriceReducer } from './reducer/update/updateSubTotalPrice
 
 const initialState: Quotation = {
   id: '',
+  name: '',
+  category: '',
+  desc: '',
+  info: '',
+  createdAt: new Date(),
+  updatedAt: new Date(),
   type: 'quotation',
   email: 'john@mail.com',
   permissionLevel: undefined,

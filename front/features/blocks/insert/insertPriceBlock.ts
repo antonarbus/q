@@ -12,6 +12,12 @@ import type { MouseEvent } from 'react'
 export const insertPriceBlock = (event?: MouseEvent): void => {
   const block: Price = {
     id: generateId(),
+    name: '',
+    category: '',
+    desc: '',
+    info: '',
+    createdAt: new Date(),
+    updatedAt: new Date(),
     type: itemType.price,
     email: 'john@mail.com',
     width: 150,

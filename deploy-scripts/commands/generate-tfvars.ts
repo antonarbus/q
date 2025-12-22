@@ -4,7 +4,7 @@ import { logger } from '../lib/output/logger'
 
 type Props = {
   environment: string
-  config: Record<string, string | readonly string[]>
+  config: Record<string, number | string | readonly string[]>
 }
 
 /**

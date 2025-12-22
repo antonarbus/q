@@ -6,10 +6,10 @@ export const updateItemInfoReducer = (
   state: Quotation,
   action: PayloadAction<{
     id: string
-    name: string | undefined
-    category: string | undefined
-    desc: string | undefined
-    info: string | undefined
+    name: string
+    category: string
+    desc: string
+    info: string
   }>,
 ): void => {
   const { id, name, category, desc, info } = action.payload

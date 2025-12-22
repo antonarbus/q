@@ -26,6 +26,12 @@ export const insertPasteBlockReducer = (
 
   const pasteBlock: Paste = {
     id: generateId(),
+    name: '',
+    category: '',
+    desc: '',
+    info: '',
+    createdAt: new Date(),
+    updatedAt: new Date(),
     type: itemType.paste,
     email: 'john@mail.com',
     height: 0,

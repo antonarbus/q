@@ -15,6 +15,12 @@ const defaultCellValues: Cell = {
 
 const pasteText: Row = {
   id: 'id of boq row paste',
+  name: '',
+  category: '',
+  desc: '',
+  info: '',
+  createdAt: new Date(),
+  updatedAt: new Date(),
   type: rowTypeKey.paste,
   email: 'john@mail.com',
   height: 0,
