@@ -44,18 +44,11 @@ export const getBookmarkHandler: RouterHandler = async (req, res, _next) => {
       ),
     )
 
-  // const document = await BookmarkModel.findOne({
-  //   email: userFromAccessToken.email,
-  //   id: req.body.bookmarkId,
-  // })
-
   if (bookmark === undefined) {
     res.status(httpStatus.notFound404).json({ message: 'not found' })
 
     return
   }
-
-  // const bookmarkInfo = document.toObject()
 
   const fileInfo = getFileInfo({ id: req.body.bookmarkId })
   const [fileBuffer] = await bucket.file(fileInfo.path).download()
