@@ -1,4 +1,4 @@
-import type { ItemPick } from '@back/api/bookmark/getBookmarkListAllHandler'
+import type { ResBody } from '@back/api/bookmark/getBookmarkListAllHandler'
 import { useBookmarkListAllDatasource } from '@entities/bookmark/api/useBookmarkListAllDatasource'
 import { LoadingTableOverlay } from '@shared/component/LoadingTableOverlay'
 import { useDisableLoadingOverlayWhenItemsAreFetched } from '@shared/component/loading-dots-overlay'
@@ -39,7 +39,7 @@ export const BookmarkListAllGrid = (): JSX.Element => {
       <AgGridStyles />
       <DisplayedRowsCount />
       <ProgressGridBar isShown={isFetching} />
-      <AgGridReact<ItemPick>
+      <AgGridReact<ResBody['bookmarkList'][number]>
         columnDefs={columnDefs}
         datasource={datasource}
         defaultColDef={getDefaultColDef()}

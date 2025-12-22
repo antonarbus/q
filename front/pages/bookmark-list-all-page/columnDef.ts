@@ -1,10 +1,10 @@
-import type { ItemPick } from '@back/api/bookmark/getBookmarkListAllHandler'
+import type { ResBody } from '@back/api/bookmark/getBookmarkListAllHandler'
 import { getDateColDef } from '@shared/lib/ag-grid/colDef/getDateColDef'
 import { getTextColDef } from '@shared/lib/ag-grid/colDef/getTextColDef'
 import type { ColDef } from 'ag-grid-community'
 import { ActionButtonsCellRenderer } from './renderer/ActionButtonsCellRenderer'
 
-export const columnDefs: ColDef<ItemPick>[] = [
+export const columnDefs: ColDef<ResBody['bookmarkList'][number]>[] = [
   {
     cellRenderer: ActionButtonsCellRenderer,
     width: 150,
