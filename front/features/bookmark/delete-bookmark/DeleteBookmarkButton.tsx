@@ -8,7 +8,9 @@ import { MdDeleteOutline } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
 
-export const DeleteBookmarkButton = ({ id }: ReqBody): JSX.Element => {
+export const DeleteBookmarkButton = ({
+  bookmarkId: id,
+}: ReqBody): JSX.Element => {
   const deleteBookmarkMutation = useDeleteBookmarkMutation()
 
   useUpdateEffect(() => {
@@ -43,7 +45,7 @@ export const DeleteBookmarkButton = ({ id }: ReqBody): JSX.Element => {
             return
           }
 
-          deleteBookmarkMutation.mutate({ id })
+          deleteBookmarkMutation.mutate({ bookmarkId: id })
         }}
         size='small'
       >

@@ -44,7 +44,7 @@ export const OpenSaveQuotationModalButton = (props: ReqBody): JSX.Element => {
         }),
       )
 
-      void navigate(`./${props.id}`)
+      void navigate(`./${props.bookmarkId}`)
     }
   }, [quotationMutation.isSuccess])
 
@@ -64,9 +64,9 @@ export const OpenSaveQuotationModalButton = (props: ReqBody): JSX.Element => {
       <Link
         onClick={(event) => {
           event.preventDefault()
-          quotationMutation.mutate({ id: props.id })
+          quotationMutation.mutate({ id: props.bookmarkId })
         }}
-        to={`./${props.id}`}
+        to={`./${props.bookmarkId}`}
       >
         <IconButton
           size='small'

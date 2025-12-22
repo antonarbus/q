@@ -16,7 +16,7 @@ export const ActionButtonsCellRenderer = (params: Params): ReactNode => {
   return (
     <Box sx={{ display: 'flex', gap: '5px' }}>
       <OpenQuotationPageAndLoadFromServerButton id={params.data.id} />
-      <OpenSaveQuotationModalButton id={params.data.id} />
+      <OpenSaveQuotationModalButton bookmarkId={params.data.id} />
       <DeleteQuotationButton id={params.data.id} />
     </Box>
   )

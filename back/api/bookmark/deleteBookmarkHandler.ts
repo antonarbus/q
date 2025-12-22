@@ -1,12 +1,14 @@
-import { BookmarkModel } from '@back/entities/bookmark'
+import { bookmarksTable } from '@back/entities/bookmark/bookmarksTableSchema'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
+import { db } from '@back/shared/lib/drizzle/db'
 import type { Item } from '@entities/quotation/type'
+import { and, eq } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
 
 export type ReqBody = {
-  id: Item['id']
+  bookmarkId: Item['id']
 }
 
 export type ResBody = {
@@ -29,14 +31,17 @@ export const deleteBookmarkHandler: RouterHandler = async (req, res, _next) => {
     res,
   })
 
-  const bookmarkId = req.body.id
+  const [deletedBookmark] = await db
+    .delete(bookmarksTable)
+    .where(
+      and(
+        eq(bookmarksTable.email, userFromAccessToken.email),
+        eq(bookmarksTable.id, req.body.bookmarkId),
+      ),
+    )
+    .returning()
 
-  const deleteFromDbResult = await BookmarkModel.deleteOne({
-    email: userFromAccessToken.email,
-    id: bookmarkId,
-  })
-
-  if (deleteFromDbResult.deletedCount === 0) {
+  if (deletedBookmark === undefined) {
     res.status(httpStatus.notFound404).json({ message: 'did not find' })
 
     return
