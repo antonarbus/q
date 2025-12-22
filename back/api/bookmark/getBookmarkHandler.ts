@@ -12,7 +12,7 @@ export type ReqBody = {
 }
 
 export type ResBody = {
-  item?: Item
+  item: Item
   message: 'found'
 }
 
