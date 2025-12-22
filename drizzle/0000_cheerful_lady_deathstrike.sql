@@ -1,1 +1,0 @@
-ALTER TABLE "bookmarks" ALTER COLUMN "type" SET DATA TYPE varchar(128);

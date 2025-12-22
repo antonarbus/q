@@ -1,5 +1,5 @@
 import { defineConfig } from 'drizzle-kit'
-import { secret } from 'config/secrets'
+import { runtimeConfig } from 'config/runtime'
 
 // https://neon.com/docs/guides/drizzle#configure-drizzle-kit
 
@@ -8,6 +8,6 @@ export default defineConfig({
   out: './drizzle', // migrations folder
   dialect: 'postgresql',
   dbCredentials: {
-    url: secret.NEON_DATABASE_URL,
+    url: runtimeConfig.database.url,
   },
 })
