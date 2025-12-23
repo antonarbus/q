@@ -1,11 +1,11 @@
-import 'chart.js/auto'
+// import 'chart.js/auto'
 import { useGetUniqueDailyVisitorCountQuery } from '@entities/visitor/api/useGetUniqueDailyVisitorCountQuery'
 import { Box } from '@mui/material'
 import { DatePicker } from '@mui/x-date-pickers'
 import { format, subDays } from 'date-fns'
 import { type JSX, useState } from 'react'
-import { useInstantiateChart } from './useInstantiateChart'
-import { useUpdateChart } from './useUpdateChart'
+import { useInstantiateChart } from '@shared/lib/chart-js'
+import { useUpdateChart } from '@features/visitors/update-chart-acc-to-date-range'
 
 const today = new Date()
 const thirtyDaysAgo = subDays(today, 30)

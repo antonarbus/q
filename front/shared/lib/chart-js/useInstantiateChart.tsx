@@ -1,6 +1,28 @@
-import { chartConfigurationForVisitorList } from '@shared/lib/chart-js'
-import { Chart } from 'chart.js'
+import { chartConfigurationForVisitorList } from './chartConfigurationForVisitorList'
 import { type RefObject, useEffect, useRef } from 'react'
+import {
+  Chart,
+  BarController,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  Legend,
+  Title,
+  Tooltip,
+} from 'chart.js'
+
+// may import all components without manual registration
+// import 'chart.js/auto'
+
+Chart.register(
+  BarController,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  Legend,
+  Title,
+  Tooltip,
+)
 
 type Res = {
   canvasRef: RefObject<HTMLCanvasElement | null>

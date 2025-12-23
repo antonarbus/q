@@ -1,1 +1,1 @@
-export { chartConfigurationForVisitorList } from './chartConfigurationForVisitorList'
+export { useInstantiateChart } from './useInstantiateChart'
