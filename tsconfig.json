@@ -43,6 +43,7 @@
       "@features/*": ["./front/features/*"],
       "@entities/*": ["./front/entities/*"],
       "@shared/*": ["./front/shared/*"],
+      "@front/*": ["./front/*"],
       "@back/*": ["./back/*"],
       "@root/*": ["./*"]
     }

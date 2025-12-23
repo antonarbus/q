@@ -2,10 +2,10 @@ import cookieParser from 'cookie-parser'
 import express from 'express'
 import morgan from 'morgan'
 import { runtimeConfig } from '@root/config/runtime'
-import { api } from './api'
-import { errorHandlerMiddleware } from './middleware/errorHandlerMiddleware'
-import { asyncHandler } from './shared/lib/express'
-import { connectToDb } from './shared/lib/mongoose/connectToDb'
+import { api } from '@back/api'
+import { errorHandlerMiddleware } from '@back/middleware/errorHandlerMiddleware'
+import { asyncHandler } from '@back/shared/lib/express'
+import { connectToDb } from '@back/shared/lib/mongoose/connectToDb'
 
 const startServer = async (): Promise<void> => {
   const app = express()
