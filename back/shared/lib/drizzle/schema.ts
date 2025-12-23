@@ -1,7 +1,7 @@
 /**
  * The schema.ts file is used by Drizzle Kit in drizzle.config.ts
  * Drizzle Kit requires a single entry point that exports all database table schemas so it can:
- * Generate migration, push schema changes - When you run drizzle-kit generate, it needs to know about all tables to create migration files
+ * Generate migration, push schema changes
  */
 export { bookmarksTable } from '@back/entities/bookmark'
 export { filesTable } from '@back/entities/file'

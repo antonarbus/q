@@ -42,7 +42,8 @@
     "cli-help": "bun deploy-scripts/cli.ts --help",
     "db-generate": "bun drizzle-kit generate",
     "db-migrate": "bun drizzle-kit migrate",
-    "db-push": "bun drizzle-kit push"
+    "db-push": "bun drizzle-kit push",
+    "db-studio": "bun drizzle-kit studio"
   },
   "devDependencies": {
     "@emotion/babel-plugin": "^11.13.5",
