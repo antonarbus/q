@@ -1,4 +1,4 @@
-import type { Item } from '@back/api/file/getFileListAllHandler'
+import type { ResBody } from '@back/api/file/getFileListAllHandler'
 import { useFileListAllDatasource } from '@entities/file/api/useFileListAllDatasource'
 import { LoadingTableOverlay } from '@shared/component/LoadingTableOverlay'
 import { useDisableLoadingOverlayWhenItemsAreFetched } from '@shared/component/loading-dots-overlay'
@@ -39,7 +39,7 @@ export const FileListAllGrid = (): JSX.Element => {
       <AgGridStyles />
       <DisplayedRowsCount />
       <ProgressGridBar isShown={isFetching} />
-      <AgGridReact<Item>
+      <AgGridReact<ResBody['fileList'][number]>
         columnDefs={columnDefs}
         datasource={datasource}
         defaultColDef={getDefaultColDef()}

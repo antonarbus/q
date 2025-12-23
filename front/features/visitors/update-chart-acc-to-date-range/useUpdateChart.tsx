@@ -4,20 +4,23 @@ import { format } from 'date-fns'
 import { type RefObject, useEffect } from 'react'
 
 type Props = {
-  visitors: ResBody['visitorsCount']
+  visitorList: ResBody['visitorList']
   chartInstanceRef: RefObject<Chart | null>
 }
 
-export const useUpdateChart = ({ visitors, chartInstanceRef }: Props): void => {
+export const useUpdateChart = ({
+  visitorList,
+  chartInstanceRef,
+}: Props): void => {
   useEffect(() => {
     const updateChart = (): void => {
       if (chartInstanceRef.current === null) {
         return
       }
 
-      const totalCount = visitors.map((item) => item.totalCount)
-      const newCount = visitors.map((item) => item.newCount)
-      const labels = visitors.map((item) => format(item.visitedAt, 'MMM dd'))
+      const totalCount = visitorList.map((item) => item.totalCount)
+      const newCount = visitorList.map((item) => item.newCount)
+      const labels = visitorList.map((item) => format(item.visitedAt, 'MMM dd'))
 
       chartInstanceRef.current.data.labels = labels
 
@@ -33,5 +36,5 @@ export const useUpdateChart = ({ visitors, chartInstanceRef }: Props): void => {
     }
 
     updateChart()
-  }, [visitors])
+  }, [visitorList])
 }

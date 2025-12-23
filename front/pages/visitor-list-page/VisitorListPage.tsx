@@ -22,7 +22,7 @@ export const VisitorListPage = (): JSX.Element => {
 
   useUpdateChart({
     chartInstanceRef,
-    visitors: getUniqueDailyVisitorCountQuery.data?.visitorsCount ?? [],
+    visitorList: getUniqueDailyVisitorCountQuery.data?.visitorList ?? [],
   })
 
   return (

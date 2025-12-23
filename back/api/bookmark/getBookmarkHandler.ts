@@ -34,7 +34,7 @@ export const getBookmarkHandler: RouterHandler = async (req, res, _next) => {
     res,
   })
 
-  const [bookmark] = await db
+  const [selectedBookmark] = await db
     .select()
     .from(bookmarksTable)
     .where(
@@ -44,7 +44,7 @@ export const getBookmarkHandler: RouterHandler = async (req, res, _next) => {
       ),
     )
 
-  if (bookmark === undefined) {
+  if (selectedBookmark === undefined) {
     res.status(httpStatus.notFound404).json({ message: 'not found' })
 
     return

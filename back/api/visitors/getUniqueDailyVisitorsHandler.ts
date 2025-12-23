@@ -13,7 +13,7 @@ export type SearchQuery = {
 }
 
 export type ResBody = {
-  visitorsCount: SelectVisitors[]
+  visitorList: SelectVisitors[]
   message: 'ok'
 }
 
@@ -44,7 +44,7 @@ export const getUniqueDailyVisitorsHandler: RouterHandler = async (
     return
   }
 
-  const visitorsCount = await db
+  const selectedVisitorList = await db
     .select()
     .from(visitorsTable)
     .where(
@@ -54,5 +54,7 @@ export const getUniqueDailyVisitorsHandler: RouterHandler = async (
       ),
     )
 
-  res.status(httpStatus.success200).json({ visitorsCount, message: 'ok' })
+  res
+    .status(httpStatus.success200)
+    .json({ visitorList: selectedVisitorList, message: 'ok' })
 }

@@ -48,7 +48,7 @@ export const saveBookmarkHandler: RouterHandler = async (req, res, _next) => {
     return
   }
 
-  const [bookmark] = await db
+  const [insertedBookmark] = await db
     .insert(bookmarksTable)
     .values({
       id: req.body.bookmark.id,
@@ -70,27 +70,29 @@ export const saveBookmarkHandler: RouterHandler = async (req, res, _next) => {
     })
     .returning()
 
-  if (bookmark === undefined) {
+  if (insertedBookmark === undefined) {
     res.status(httpStatus.serverError500).json({ message: 'failed to save' })
 
     return
   }
 
-  const { path } = getFileInfo({ id: req.body.bookmark.id })
-  const bookmarkFile = bucket.file(path)
+  const fileInfo = getFileInfo({ id: req.body.bookmark.id })
+  const bookmarkFile = bucket.file(fileInfo.path)
 
   const contents = JSON.stringify(
-    { ...bookmark, ...req.body.bookmark },
+    { ...insertedBookmark, ...req.body.bookmark },
     null,
     2,
   )
 
   await bookmarkFile.save(contents)
 
-  const isNew = bookmark.createdAt.getTime() === bookmark.updatedAt.getTime()
+  const isNew =
+    insertedBookmark.createdAt.getTime() ===
+    insertedBookmark.updatedAt.getTime()
 
   res.status(httpStatus.success200).json({
     message: isNew === true ? 'saved' : 'updated',
-    bookmark,
+    bookmark: insertedBookmark,
   })
 }

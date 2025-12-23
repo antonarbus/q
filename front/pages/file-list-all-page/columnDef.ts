@@ -1,10 +1,10 @@
-import type { Item } from '@back/api/file/getFileListAllHandler'
+import type { ResBody } from '@back/api/file/getFileListAllHandler'
 import { getDateColDef } from '@shared/lib/ag-grid/colDef/getDateColDef'
 import { getTextColDef } from '@shared/lib/ag-grid/colDef/getTextColDef'
 import type { ColDef } from 'ag-grid-community'
 import { ActionButtonsCellRenderer } from './renderer/ActionButtonsCellRenderer'
 
-export const columnDefs: ColDef<Item>[] = [
+export const columnDefs: ColDef<ResBody['fileList'][number]>[] = [
   {
     cellRenderer: ActionButtonsCellRenderer,
     width: 150,
@@ -31,10 +31,6 @@ export const columnDefs: ColDef<Item>[] = [
   getTextColDef({
     field: 'email',
   }),
-  {
-    field: 'usedByIdList',
-    headerName: 'usedByIdList',
-  },
   getDateColDef({
     field: 'uploadedAt',
     headerName: 'uploadedAt',
