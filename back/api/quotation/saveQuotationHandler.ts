@@ -1,4 +1,3 @@
-import { QuotationModel } from '@back/entities/quotation'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
@@ -6,19 +5,20 @@ import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import { generateId } from '@back/shared/lib/nanoid'
 import type { Quotation } from '@entities/quotation/type'
 import type { NextFunction, Request, Response } from 'express'
-import type { FlattenMaps } from 'mongoose'
+import { quotationsTable, type SelectQuotation } from '@back/entities/quotation'
+import { db } from '@back/shared/lib/drizzle/db'
+import { and, eq } from 'drizzle-orm'
 
 export type ReqBody = {
   quotation: Quotation
 }
 
 export type ResBody = {
-  quotation?: FlattenMaps<Quotation>
   message: 'saved' | 'updated' | 'copied and saved'
+  quotation: Quotation
 }
 
 export type ErrorResBody = {
-  quotation?: FlattenMaps<Quotation>
   message: ErrorMessageCommon | 'not saved' | 'id is not provided'
 }
 
@@ -34,9 +34,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, _next) => {
     res,
   })
 
-  const { quotation } = req.body
-
-  if (quotation.id === '') {
+  if (req.body.quotation.id === '') {
     res.status(httpStatus.forbidden403).json({ message: 'id is not provided' })
 
     return
@@ -45,17 +43,20 @@ export const saveQuotationHandler: RouterHandler = async (req, res, _next) => {
   type QuotationOwnership = 'your new' | 'your existing' | 'foreign existing'
 
   const getQuotationOwnership = async (): Promise<QuotationOwnership> => {
-    if (quotation.id === 'new') {
+    if (req.body.quotation.id === 'new') {
       return 'your new'
     }
 
-    const foundQuotation = await QuotationModel.findOne({ id: quotation.id })
+    const [selectedQuotation] = await db
+      .select()
+      .from(quotationsTable)
+      .where(eq(quotationsTable.id, req.body.quotation.id))
 
-    if (foundQuotation === null) {
+    if (selectedQuotation === undefined) {
       return 'your new'
     }
 
-    if (foundQuotation.email === userFromAccessToken.email) {
+    if (selectedQuotation.email === userFromAccessToken.email) {
       return 'your existing'
     }
 
@@ -68,25 +69,37 @@ export const saveQuotationHandler: RouterHandler = async (req, res, _next) => {
   if (quotationOwnership === 'your new') {
     const quotationId = generateId()
 
-    const createQuotationResponse = await QuotationModel.create({
-      id: quotationId,
-      email: userFromAccessToken.email,
-      name: quotation.name,
-      category: quotation.category,
-      desc: quotation.desc,
-      info: quotation.info,
-      access: quotation.access,
-      blocks: 'too big to keep in db, find it in the bucket under same id',
-      updatedAt: Date.now(),
-      createdAt: Date.now(),
-      openedAt: Date.now(),
-    })
+    const [insertedQuotation] = await db
+      .insert(quotationsTable)
+      .values({
+        id: quotationId,
+        email: userFromAccessToken.email,
+        name: req.body.quotation.name,
+        category: req.body.quotation.category,
+        desc: req.body.quotation.desc,
+        info: req.body.quotation.info,
+        access: req.body.quotation.access,
+        updatedAt: new Date(),
+        createdAt: new Date(),
+        openedAt: new Date(),
+        // blocks: 'too big to keep in db, find it in the bucket under same id',
+      })
+      .returning()
 
-    const quotationDataFromDb = createQuotationResponse.toObject()
+    if (insertedQuotation === undefined) {
+      res.status(httpStatus.serverError500).json({ message: 'not saved' })
 
-    const { path } = getFileInfo({ id: quotationId })
-    const quotationFile = bucket.file(path)
-    const fullQuotation = { ...quotationDataFromDb, blocks: quotation.blocks }
+      return
+    }
+
+    const fileInfo = getFileInfo({ id: quotationId })
+    const quotationFile = bucket.file(fileInfo.path)
+
+    const fullQuotation = {
+      ...insertedQuotation,
+      blocks: req.body.quotation.blocks,
+    }
+
     const quotationJson = JSON.stringify(fullQuotation, null, 2)
 
     await quotationFile.save(quotationJson)
@@ -100,31 +113,39 @@ export const saveQuotationHandler: RouterHandler = async (req, res, _next) => {
   }
 
   if (quotationOwnership === 'your existing') {
-    const updateQuotationResponse = await QuotationModel.findOneAndUpdate(
-      {
-        id: quotation.id,
-        email: userFromAccessToken.email,
-      },
-      {
-        name: quotation.name,
-        category: quotation.category,
-        desc: quotation.desc,
-        info: quotation.info,
-        access: quotation.access,
-        blocks: 'to be found in bucket under same id',
-        updatedAt: Date.now(),
-      },
-      {
-        new: true,
-        upsert: true,
-      },
-    )
+    const [updatedQuotation] = await db
+      .update(quotationsTable)
+      .set({
+        name: req.body.quotation.name,
+        category: req.body.quotation.category,
+        desc: req.body.quotation.desc,
+        info: req.body.quotation.info,
+        access: req.body.quotation.access,
+        updatedAt: new Date(),
+        // blocks: 'too big to keep in db, find it in the bucket under same id',
+      })
+      .where(
+        and(
+          eq(quotationsTable.id, req.body.quotation.id),
+          eq(quotationsTable.email, userFromAccessToken.email),
+        ),
+      )
+      .returning()
 
-    const quotationDataFromDb = updateQuotationResponse.toObject()
+    if (updatedQuotation === undefined) {
+      res.status(httpStatus.serverError500).json({ message: 'not saved' })
 
-    const { path } = getFileInfo({ id: quotation.id })
-    const file = bucket.file(path)
-    const fullQuotation = { ...quotationDataFromDb, blocks: quotation.blocks }
+      return
+    }
+
+    const fileInfo = getFileInfo({ id: req.body.quotation.id })
+    const file = bucket.file(fileInfo.path)
+
+    const fullQuotation = {
+      ...updatedQuotation,
+      blocks: req.body.quotation.blocks,
+    }
+
     const quotationJson = JSON.stringify(fullQuotation, null, 2)
     await file.save(quotationJson)
 
@@ -139,24 +160,38 @@ export const saveQuotationHandler: RouterHandler = async (req, res, _next) => {
   if (quotationOwnership === 'foreign existing') {
     const newQuotationId = generateId()
 
-    const createResponse = await QuotationModel.create({
-      id: newQuotationId,
-      email: userFromAccessToken.email,
-      name: quotation.name,
-      category: quotation.category,
-      desc: quotation.desc,
-      info: quotation.info,
-      access: quotation.access,
-      blocks: 'find in bucket under same id',
-      updatedAt: Date.now(),
-      createdAt: Date.now(),
-      openedAt: Date.now(),
-    })
+    const [insertedQuotation] = await db
+      .insert(quotationsTable)
+      .values({
+        id: newQuotationId,
+        email: userFromAccessToken.email,
+        name: req.body.quotation.name,
+        category: req.body.quotation.category,
+        desc: req.body.quotation.desc,
+        info: req.body.quotation.info,
+        access: req.body.quotation.access,
+        updatedAt: new Date(),
+        createdAt: new Date(),
+        openedAt: new Date(),
+        // blocks: 'too big to keep in db, find it in the bucket under same id',
+      })
+      .returning()
 
-    const quotationDataFromDb = createResponse.toObject()
-    const { path } = getFileInfo({ id: newQuotationId })
-    const quotationFile = bucket.file(path)
-    const fullQuotation = { ...quotationDataFromDb, blocks: quotation.blocks }
+    if (insertedQuotation === undefined) {
+      res.status(httpStatus.serverError500).json({ message: 'not saved' })
+
+      return
+    }
+
+    // const quotationDataFromDb = createResponse.toObject()
+    const fileInfo = getFileInfo({ id: newQuotationId })
+    const quotationFile = bucket.file(fileInfo.path)
+
+    const fullQuotation = {
+      ...insertedQuotation,
+      blocks: req.body.quotation.blocks,
+    }
+
     const quotationJson = JSON.stringify(fullQuotation, null, 2)
 
     await quotationFile.save(quotationJson)
