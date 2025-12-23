@@ -34,7 +34,7 @@ export const countUniqueDailyVisitorsHandler: RouterHandler = async (
     return
   }
 
-  const [visitorsCount] = await db
+  await db
     .insert(visitorsTable)
     .values({
       visitedAt: new Date(),
@@ -48,13 +48,6 @@ export const countUniqueDailyVisitorsHandler: RouterHandler = async (
         newCount: sql`${visitorsTable.newCount} + ${req.body.isNew === true ? 1 : 0}`,
       },
     })
-    .returning()
 
-  if (visitorsCount !== undefined) {
-    res.status(httpStatus.success200).json({ message: 'visitor counted' })
-
-    return
-  }
-
-  res.status(httpStatus.notFound404).json({ message: 'Internal error' })
+  res.status(httpStatus.success200).json({ message: 'visitor counted' })
 }
