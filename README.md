@@ -884,6 +884,26 @@ This separation allows for:
 
 ---
 
+## To-Do
+
+### Backend Middleware & Infrastructure
+
+The backend main file (`/back/index.ts`) is minimal and clean, but consider adding:
+
+1. **CORS middleware** - Required if frontend is on a different domain/port in development
+2. **Security headers (Helmet)** - Best practice security headers (CSP, HSTS, etc.)
+3. **Rate limiting** - Prevent abuse and DoS attacks
+4. **Compression middleware** - gzip/brotli compression for API responses
+5. **Health check endpoint** - For load balancers, monitoring, and container orchestration
+6. **Graceful shutdown** - Handle SIGTERM/SIGINT for clean shutdowns (close DB connections, finish requests)
+7. **Process error handlers** - Global handlers for `uncaughtException` and `unhandledRejection`
+
+### Database Migration
+
+8. **Update database connection** - The project is on branch `migrate-from-mongo` but `back/index.ts:8` still imports from `mongoose/connectToDb`. Verify if this should be updated to use Drizzle/PostgreSQL connection instead.
+
+---
+
 ## Notes
 
 **Database**: This app uses MongoDB Atlas (external), not Cloud SQL. Configure your MongoDB connection string via environment variables or Google Secret Manager.
