@@ -1,17 +1,13 @@
-import { type SelectFile, filesTable } from '@back/entities/file'
+import { type InsertFile, filesTable } from '@back/entities/file'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
 import { db } from '@back/shared/lib/drizzle/db'
 import type { NextFunction, Request, Response } from 'express'
 
-export type ReqBody = {
-  id: SelectFile['id']
-  name: SelectFile['name']
-  size: SelectFile['size']
-}
+export type ReqBody = Required<Pick<InsertFile, 'id' | 'name' | 'size'>>
 
-export type ResBody = SelectFile
+export type ResBody = InsertFile
 
 type ErrorResBody = {
   message: ErrorMessageCommon | 'invalid file id' | 'failed to make file public'

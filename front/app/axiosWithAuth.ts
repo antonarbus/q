@@ -1,5 +1,5 @@
 import { route } from '@back/api/route'
-import type { ResBody } from '@back/api/auth/getAccessTokenHandler'
+import type { ResBody } from '@back/api/user/getAccessTokenHandler'
 import { headerName } from '@back/shared/headers'
 import { userSlice } from '@entities/user/redux/userSlice'
 import { initAccessTokenFetchingPromise } from '@features/auth/get-access-token/AccessToken'

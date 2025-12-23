@@ -3,7 +3,7 @@ import type {
   ErrorResBody,
   ReqBody as Payload,
   ResBody,
-} from '@back/api/auth/resetPasswordHandler'
+} from '@back/api/user/resetPasswordHandler'
 import { queryKey } from '@shared/lib/tanstack/react-query/queryKey'
 import { type UseMutationResult, useMutation } from '@tanstack/react-query'
 import axios, { type AxiosError } from 'axios'
