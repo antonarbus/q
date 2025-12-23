@@ -165,18 +165,6 @@ export const getQuotationHandler: RouterHandler = async (req, res, _next) => {
     quotationParsed.updatedAt = new Date()
     quotationParsed.openedAt = new Date()
 
-    quotationParsed.from = {
-      name: 'private',
-      company: 'private',
-      email: 'private',
-    }
-
-    quotationParsed.to = {
-      name: 'private',
-      company: 'private',
-      email: 'private',
-    }
-
     quotationParsed.blocks.forEach((block) => {
       // block.email = 'john@mail.com'
       block.name = 'private'

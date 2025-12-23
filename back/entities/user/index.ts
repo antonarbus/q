@@ -3,3 +3,4 @@ export { getUserFromAccessTokenOrThrowUnauthorized } from './getUserFromAccessTo
 export { getUserFromRefreshTokenOrJohn } from './getUserFromRefreshTokenOrJohn'
 export { getUserFromRefreshTokenOrNull } from './getUserFromRefreshTokenOrNull'
 export { UserModel } from './userModel'
+export { usersTable, type SelectUser, type InsertUser } from './usersTableSchema'
