@@ -4,5 +4,4 @@
  */
 export const headerName = {
   accessJwtToken: 'access-jwt-token',
-  playwrightTest: 'playwright-test',
 } as const

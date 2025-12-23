@@ -17,7 +17,6 @@ export const useCountUniqueDailyVisitor = (): void => {
       }
 
       const res = await countUniqueDailyVisitorsMutation.mutateAsync({
-        date: today,
         isNew: lastVisitDate === null,
       })
 

@@ -1,3 +1,5 @@
-export { type VisitorsCount, VisitorsCountModel } from './visitorsCountModel'
-export type { SelectVisitors, InsertVisitors } from './visitorsTableSchema'
-export { visitorsTable } from './visitorsTableSchema'
+export {
+  visitorsTable,
+  type SelectVisitors,
+  type InsertVisitors,
+} from './visitorsTableSchema'

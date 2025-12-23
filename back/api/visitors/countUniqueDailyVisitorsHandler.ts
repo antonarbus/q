@@ -1,12 +1,12 @@
-import { type VisitorsCount, VisitorsCountModel } from '@back/entities/visitor'
+import { visitorsTable } from '@back/entities/visitor'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
-import { headerName } from '@back/shared/headers'
+import { db } from '@back/shared/lib/drizzle/db'
 import { runtimeConfig } from '@root/config/runtime'
+import { sql } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
 
 export type ReqBody = {
-  date: VisitorsCount['date']
   isNew: boolean
 }
 
@@ -29,29 +29,27 @@ export const countUniqueDailyVisitorsHandler: RouterHandler = async (
   res,
   _next,
 ) => {
-  const { isNew, date: today } = req.body
-
-  // do not distort statistics by tests
-  if (req.headers[headerName.playwrightTest] === 'true') {
-    return
-  }
-
+  // Do not distort statistics by tests
   if (runtimeConfig.nodeEnv === 'test') {
     return
   }
 
-  const visitorsCount = await VisitorsCountModel.findOneAndUpdate(
-    { date: today },
-    {
-      $inc: {
-        count: 1,
-        new: isNew === true ? 1 : 0,
+  const [visitorsCount] = await db
+    .insert(visitorsTable)
+    .values({
+      totalCount: 1,
+      newCount: req.body.isNew === true ? 1 : 0,
+    })
+    .onConflictDoUpdate({
+      target: visitorsTable.visitedAt,
+      set: {
+        totalCount: sql`${visitorsTable.totalCount} + 1`,
+        newCount: sql`${visitorsTable.newCount} + ${req.body.isNew === true ? 1 : 0}`,
       },
-    },
-    { upsert: true, new: true },
-  )
+    })
+    .returning()
 
-  if (visitorsCount.count !== 0) {
+  if (visitorsCount !== undefined) {
     res.status(httpStatus.success200).json({ message: 'visitor counted' })
 
     return

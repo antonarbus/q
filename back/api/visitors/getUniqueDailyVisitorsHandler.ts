@@ -1,8 +1,10 @@
 import { getUserFromAccessTokenOrNull } from '@back/entities/user'
-import { type VisitorsCount, VisitorsCountModel } from '@back/entities/visitor'
+import { type SelectVisitors, visitorsTable } from '@back/entities/visitor'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
+import { db } from '@back/shared/lib/drizzle/db'
 import { userRole } from '@back/shared/const/userRole'
+import { and, gte, lte } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
 
 export type SearchQuery = {
@@ -11,12 +13,12 @@ export type SearchQuery = {
 }
 
 export type ResBody = {
-  visitorsCount: VisitorsCount[]
+  visitorsCount: SelectVisitors[]
   message: 'ok'
 }
 
 export type ErrorResBody = {
-  visitorsCount: VisitorsCount[]
+  visitorsCount: SelectVisitors[]
   message: ErrorMessageCommon | 'forbidden'
 }
 
@@ -31,8 +33,6 @@ export const getUniqueDailyVisitorsHandler: RouterHandler = async (
   res,
   _next,
 ) => {
-  const { startDate, endDate } = req.query
-
   const userFromAccessToken = getUserFromAccessTokenOrNull({ req })
   const roles = userFromAccessToken?.roles ?? []
 
@@ -44,15 +44,15 @@ export const getUniqueDailyVisitorsHandler: RouterHandler = async (
     return
   }
 
-  const visitorsCount = await VisitorsCountModel.find({
-    date: {
-      $gte: startDate,
-      $lte: endDate,
-    },
-  }).select({
-    __v: 0,
-    _id: 0,
-  })
+  const visitorsCount = await db
+    .select()
+    .from(visitorsTable)
+    .where(
+      and(
+        gte(visitorsTable.visitedAt, new Date(req.query.startDate)),
+        lte(visitorsTable.visitedAt, new Date(req.query.endDate)),
+      ),
+    )
 
   res.status(httpStatus.success200).json({ visitorsCount, message: 'ok' })
 }

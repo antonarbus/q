@@ -1,6 +1,6 @@
 import type { ResBody } from '@back/api/visitors/getUniqueDailyVisitorsHandler'
 import type { Chart } from 'chart.js'
-import { format, parseISO } from 'date-fns'
+import { format } from 'date-fns'
 import { type RefObject, useEffect } from 'react'
 
 type Props = {
@@ -15,21 +15,18 @@ export const useUpdateChart = ({ visitors, chartInstanceRef }: Props): void => {
         return
       }
 
-      const countData = visitors.map((item) => item.count)
-      const newData = visitors.map((item) => item.new)
-
-      const labels = visitors.map((item) =>
-        format(parseISO(item.date), 'MMM dd'),
-      )
+      const totalCount = visitors.map((item) => item.totalCount)
+      const newCount = visitors.map((item) => item.newCount)
+      const labels = visitors.map((item) => format(item.visitedAt, 'MMM dd'))
 
       chartInstanceRef.current.data.labels = labels
 
       if (chartInstanceRef.current.data.datasets[0] !== undefined) {
-        chartInstanceRef.current.data.datasets[0].data = countData
+        chartInstanceRef.current.data.datasets[0].data = totalCount
       }
 
       if (chartInstanceRef.current.data.datasets[1] !== undefined) {
-        chartInstanceRef.current.data.datasets[1].data = newData
+        chartInstanceRef.current.data.datasets[1].data = newCount
       }
 
       chartInstanceRef.current.update()
