@@ -29,8 +29,8 @@ export const countUniqueDailyVisitorsHandler: RouterHandler = async (
   res,
   _next,
 ) => {
-  // Do not distort statistics by tests
-  if (runtimeConfig.nodeEnv === 'test') {
+  // Do not distort statistics by e2e tests
+  if (runtimeConfig.e2eTest === true) {
     return
   }
 

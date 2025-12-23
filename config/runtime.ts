@@ -5,6 +5,7 @@ import { secret } from './secrets'
 export const runtimeConfig = {
   nodeEnv: processEnv.NODE_ENV,
   ci: processEnv.CI,
+  e2eTest: processEnv.E2E_TEST,
   // Runtime environment includes 'unknown' (build time) and 'local' (local dev)
   // in addition to deployed environments (dev/test/pilot/prod).
   // See config/environment.ts for the distinction between RuntimeEnv and DeployedEnv.
