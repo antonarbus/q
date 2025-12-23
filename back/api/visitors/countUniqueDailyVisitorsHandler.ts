@@ -1,4 +1,4 @@
-import { type VisitorsCount, VisitorsCountModel } from '@back/entities/visitors'
+import { type VisitorsCount, VisitorsCountModel } from '@back/entities/visitor'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
 import { headerName } from '@back/shared/headers'
