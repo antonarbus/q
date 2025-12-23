@@ -36,7 +36,9 @@ export const SaveQuotationModal = (): JSX.Element => {
 
   const getQuotationCategoryListQuery = useGetQuotationCategoryListQuery()
 
-  const options = (getQuotationCategoryListQuery.data?.categories ?? [])
+  const options = (
+    getQuotationCategoryListQuery.data?.distinctQuotationList ?? []
+  )
     .filter((cat) => cat !== undefined)
     .filter((cat) => cat !== '')
 

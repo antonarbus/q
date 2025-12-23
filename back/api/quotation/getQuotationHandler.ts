@@ -1,4 +1,3 @@
-import { QuotationModel } from '@back/entities/quotation'
 import { getUserFromAccessTokenOrNull } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
@@ -8,9 +7,12 @@ import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import { jsonParseSafe } from '@back/shared/util/jsonParseSafe'
 import type { Quotation } from '@entities/quotation/type'
 import type { NextFunction, Request, Response } from 'express'
+import { quotationsTable, type SelectQuotation } from '@back/entities/quotation'
+import { db } from '@back/shared/lib/drizzle/db'
+import { eq } from 'drizzle-orm'
 
 export type ReqBody = {
-  id: Quotation['id']
+  id: SelectQuotation['id']
 }
 
 export type ResBody = {
@@ -30,11 +32,10 @@ type RouterHandler = (
 ) => Promise<void>
 
 export const getQuotationHandler: RouterHandler = async (req, res, _next) => {
-  const { id: quotationId } = req.body
   const userFromAccessToken = getUserFromAccessTokenOrNull({ req })
 
   const emptyQuotation: Quotation = {
-    id: quotationId,
+    id: req.body.id,
     name: '',
     category: '',
     desc: '',
@@ -50,9 +51,12 @@ export const getQuotationHandler: RouterHandler = async (req, res, _next) => {
     blocks: [],
   }
 
-  const quotationDocumentRaw = await QuotationModel.findOne({ id: quotationId })
+  const [selectedQuotation] = await db
+    .select()
+    .from(quotationsTable)
+    .where(eq(quotationsTable.id, req.body.id))
 
-  if (quotationDocumentRaw === null) {
+  if (selectedQuotation === undefined) {
     res.status(httpStatus.notFound404).json({
       message: 'not found',
       quotation: emptyQuotation,
@@ -61,15 +65,13 @@ export const getQuotationHandler: RouterHandler = async (req, res, _next) => {
     return
   }
 
-  const quotationDocument = quotationDocumentRaw.toObject({ getters: true })
-
   const shouldNotTrace = getShouldNotTrace({ req })
 
   const getPermissionLevel = (): Quotation['permissionLevel'] => {
     const isLoggedUser = userFromAccessToken !== null
     const emailFromToken = userFromAccessToken?.email
 
-    const isOwner = isLoggedUser && emailFromToken === quotationDocument.email
+    const isOwner = isLoggedUser && emailFromToken === selectedQuotation.email
 
     if (isOwner === true) {
       return 'Owner'
@@ -77,14 +79,14 @@ export const getQuotationHandler: RouterHandler = async (req, res, _next) => {
 
     const isSharedWithYou =
       emailFromToken !== undefined &&
-      quotationDocument.access.level === 'custom' &&
-      quotationDocument.access.userList.includes(emailFromToken)
+      selectedQuotation.access.level === 'custom' &&
+      selectedQuotation.access.userList.includes(emailFromToken)
 
     if (isSharedWithYou === true) {
       return 'Shared with you'
     }
 
-    const isSharedWithEveryone = quotationDocument.access.level === 'everyone'
+    const isSharedWithEveryone = selectedQuotation.access.level === 'everyone'
 
     if (isSharedWithEveryone === true) {
       return 'Public'
@@ -122,26 +124,32 @@ export const getQuotationHandler: RouterHandler = async (req, res, _next) => {
 
   if (shouldNotTrace === false) {
     if (permissionLevel === 'Owner') {
-      await QuotationModel.updateOne(
-        { id: quotationId },
-        { openedAt: Date.now() },
-      ).catch((error: unknown) => {
-        console.error('failed to update openedAt field', error)
-      })
+      await db
+        .update(quotationsTable)
+        .set({
+          openedAt: new Date(),
+        })
+        .where(eq(quotationsTable.id, req.body.id))
+        .catch((error: unknown) => {
+          console.error('failed to update openedAt field', error)
+        })
     }
 
     if (publicOrSharedWithYou === true) {
-      await QuotationModel.updateOne(
-        { id: quotationId },
-        { viewedAt: Date.now() },
-      ).catch((error: unknown) => {
-        console.error('failed to update viewedAt field', error)
-      })
+      await db
+        .update(quotationsTable)
+        .set({
+          viewedAt: new Date(),
+        })
+        .where(eq(quotationsTable.id, req.body.id))
+        .catch((error: unknown) => {
+          console.error('failed to update viewedAt field', error)
+        })
     }
   }
 
-  const { path } = getFileInfo({ id: quotationId })
-  const [fileBuffer] = await bucket.file(path).download()
+  const fileInfo = getFileInfo({ id: req.body.id })
+  const [fileBuffer] = await bucket.file(fileInfo.path).download()
   const quotationJson = fileBuffer.toString()
   const quotationParsed = jsonParseSafe<Quotation>(quotationJson)
 
@@ -190,6 +198,6 @@ export const getQuotationHandler: RouterHandler = async (req, res, _next) => {
 
   res.status(httpStatus.success200).json({
     message: 'found',
-    quotation: { ...quotationDocument, ...quotationParsed, permissionLevel },
+    quotation: { ...selectedQuotation, ...quotationParsed, permissionLevel },
   })
 }
