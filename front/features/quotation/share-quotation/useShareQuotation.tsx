@@ -77,7 +77,16 @@ export const useShareQuotation = ({
       }
 
       void getQuotationListQuery.refetch()
-      dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
+
+      dispatch(
+        quotationSlice.actions.loadQuotationReducer({
+          quotation: {
+            ...getState().quotation,
+            ...saveQuotationMutation.data.quotation,
+          },
+        }),
+      )
+
       loadingIconActor.send({ type: 'show success icon' })
       dispatch(navSlice.actions.removeUnderlineFromTopNav())
 

@@ -65,7 +65,7 @@ export const saveExistingQuotation = async (): Promise<void> => {
 
       dispatch(
         quotationSlice.actions.loadQuotationReducer({
-          quotation: data.quotation,
+          quotation: { ...getState().quotation, ...data.quotation },
         }),
       )
 

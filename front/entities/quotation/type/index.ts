@@ -104,8 +104,8 @@ export type Quotation = Common & {
   type: 'quotation'
   createdAt?: Date
   updatedAt?: Date
-  openedAt?: Date
-  viewedAt?: Date
+  openedAt?: Date | null
+  viewedAt?: Date | null
   access: {
     level: 'everyone' | 'nobody' | 'custom'
     userList: string[]

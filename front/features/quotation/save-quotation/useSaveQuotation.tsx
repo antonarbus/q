@@ -93,7 +93,10 @@ export const useSaveQuotation = ({
 
       dispatch(
         quotationSlice.actions.loadQuotationReducer({
-          quotation: saveQuotationMutation.data.quotation,
+          quotation: {
+            ...getState().quotation,
+            ...saveQuotationMutation.data.quotation,
+          },
         }),
       )
 
