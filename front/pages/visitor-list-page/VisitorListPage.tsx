@@ -1,4 +1,3 @@
-// import 'chart.js/auto'
 import { useGetUniqueDailyVisitorCountQuery } from '@entities/visitor/api/useGetUniqueDailyVisitorCountQuery'
 import { Box } from '@mui/material'
 import { DatePicker } from '@mui/x-date-pickers'
