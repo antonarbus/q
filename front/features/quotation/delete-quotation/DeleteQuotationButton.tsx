@@ -8,7 +8,9 @@ import { MdDeleteOutline } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
 
-export const DeleteQuotationButton = ({ id }: Payload): ReactNode => {
+export const DeleteQuotationButton = ({
+  quotationId: id,
+}: Payload): ReactNode => {
   const deleteQuotationMutation = useDeleteQuotationMutation()
 
   useUpdateEffect(() => {
@@ -43,7 +45,7 @@ export const DeleteQuotationButton = ({ id }: Payload): ReactNode => {
             return
           }
 
-          deleteQuotationMutation.mutate({ id })
+          deleteQuotationMutation.mutate({ quotationId: id })
         }}
         size='small'
       >

@@ -1,18 +1,18 @@
-import { QuotationModel } from '@back/entities/quotation'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
-import type { Quotation } from '@entities/quotation/type'
 import type { NextFunction, Request, Response } from 'express'
-import type { HydratedDocument } from 'mongoose'
+import { quotationsTable, type SelectQuotation } from '@back/entities/quotation'
+import { db } from '@back/shared/lib/drizzle/db'
+import { and, eq } from 'drizzle-orm'
 
 export type ReqBody = {
-  id: Quotation['id']
+  quotationId: SelectQuotation['id']
 }
 
 export type ResBody = {
-  document?: HydratedDocument<Quotation>
+  document?: SelectQuotation
   message: 'deleted'
 }
 
@@ -36,21 +36,23 @@ export const deleteQuotationHandler: RouterHandler = async (
     res,
   })
 
-  const { id: quotationId } = req.body
+  const deleteResponse = await db
+    .delete(quotationsTable)
+    .where(
+      and(
+        eq(quotationsTable.email, userFromAccessToken.email),
+        eq(quotationsTable.id, req.body.quotationId),
+      ),
+    )
 
-  const deleteFromDbResult = await QuotationModel.deleteOne({
-    email: userFromAccessToken.email,
-    id: quotationId,
-  })
-
-  if (deleteFromDbResult.deletedCount === 0) {
+  if (deleteResponse.rowCount === 0) {
     res.status(httpStatus.notFound404).json({ message: 'not found' })
 
     return
   }
 
-  const { path } = getFileInfo({ id: quotationId })
-  const [{ statusCode }] = await bucket.file(path).delete()
+  const fileInfo = getFileInfo({ id: req.body.quotationId })
+  const [{ statusCode }] = await bucket.file(fileInfo.path).delete()
 
   if (statusCode === 204) {
     res.status(httpStatus.success200).json({ message: 'deleted' })
