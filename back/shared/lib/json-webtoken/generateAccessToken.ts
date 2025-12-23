@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import { secret } from '../../../../config/secrets'
+import { secret } from '@root/config/secrets'
 import { FIFTEEN_MIN_IN_SEC } from './const'
 import type { JwtPayloadExtended } from './types'
 

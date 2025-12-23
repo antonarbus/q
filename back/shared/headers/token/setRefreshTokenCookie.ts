@@ -1,5 +1,5 @@
 import type { Response } from 'express'
-import { runtimeConfig } from '../../../../config/runtime'
+import { runtimeConfig } from '@root/config/runtime'
 import { cookieName } from '../const/cookieName'
 
 type Props = {

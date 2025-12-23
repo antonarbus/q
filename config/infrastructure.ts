@@ -110,9 +110,6 @@ export const infraConfig = {
   },
 } as const
 
-export type InfraConfigVariables =
-  (typeof infraConfig)[keyof typeof infraConfig]
-
 // * MODIFY (if needed)
 
 /**

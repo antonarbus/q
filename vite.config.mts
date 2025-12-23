@@ -1,9 +1,9 @@
-import { dirname, join } from 'node:path'
+import { dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import basicSsl from '@vitejs/plugin-basic-ssl'
 import react from '@vitejs/plugin-react'
 import tsconfigPaths from 'vite-tsconfig-paths'
-import { runtimeConfig } from './config/runtime'
+import { runtimeConfig } from './config/runtime' // relative imports, otherwise some scripts break
 
 const thisFilePath: string = fileURLToPath(import.meta.url)
 const thisDirPath: string = dirname(thisFilePath)
@@ -65,20 +65,12 @@ export default {
       },
     }),
     // https://github.com/aleclarson/vite-tsconfig-paths
-    tsconfigPaths(),
+    tsconfigPaths({
+      root: thisDirPath,
+    }),
     basicSsl(),
   ],
-  resolve: {
-    alias: {
-      '@back': join(thisDirPath, 'back'),
-      '@entities': join(thisDirPath, 'front', 'entities'),
-      '@features': join(thisDirPath, 'front', 'features'),
-      '@lib_instances': join(thisDirPath, 'front', 'lib_instances'),
-      '@pages': join(thisDirPath, 'front', 'pages'),
-      '@shared': join(thisDirPath, 'front', 'shared'),
-      '@widgets': join(thisDirPath, 'front', 'widgets'),
-    },
-  },
+  // Path aliases are automatically loaded from tsconfig.json via tsconfigPaths() plugin
   build: {
     outDir: './build',
     rollupOptions: {

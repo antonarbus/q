@@ -1,9 +1,9 @@
 import { exit } from 'process'
-import { MASTER_DEPLOYS_TO_ENVIRONMENT } from '../../config/infrastructure'
+import { MASTER_DEPLOYS_TO_ENVIRONMENT } from '@root/config/infrastructure'
 import { getCurrentGitBranchName } from '../lib/git/getCurrentGitBranchName'
 import { logToGithubOutput } from '../lib/output/logToGithubOutput'
 import { logger } from '../lib/output/logger'
-import type { DeployedEnvironment } from 'config/environment'
+import type { DeployedEnvironment } from '@root/config/environment'
 
 export const detectEnvironment = async (): Promise<DeployedEnvironment> => {
   const branchName = await getCurrentGitBranchName()

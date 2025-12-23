@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import { Storage } from '@google-cloud/storage'
-import { secret } from '../../../../config/secrets'
+import { secret } from '@root/config/secrets'
 
 //* https://console.cloud.google.com/storage/browser/quotation-app-bucket
 //* https://cloud.google.com/nodejs/docs/reference/storage/latest

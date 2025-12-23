@@ -15,9 +15,7 @@
     "front/features/quotation/download-quotation-as-excel/excelWorker.ts",
     "front/features/quotation/download-quotation-as-pdf/pdfWorker.ts",
     "front/shared/util/stripHtmlWithBreaksPreserve.ts",
-    "tests/setup/auth.setup.ts",
-    "config/infrastructure.ts",
-    "drizzle.config.ts"
+    "tests/setup/auth.setup.ts"
   ],
   "ignoreDependencies": [
     "@preact/signals-react-transform",

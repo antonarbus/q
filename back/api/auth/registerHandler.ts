@@ -12,7 +12,7 @@ import { generateId } from '@back/shared/lib/nanoid'
 import type { User } from '@entities/user/type'
 import bcrypt from 'bcryptjs'
 import type { NextFunction, Request, Response } from 'express'
-import { runtimeConfig } from '../../../config/runtime'
+import { runtimeConfig } from '@root/config/runtime'
 
 export type ReqBody = {
   email: User['email']

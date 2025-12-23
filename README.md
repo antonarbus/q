@@ -82,6 +82,7 @@ The application uses a **hybrid storage pattern** for bookmarks and quotations, 
 ```
 
 **Why this pattern?**
+
 - **Performance**: Query/filter metadata without loading large HTML documents
 - **Scalability**: Object storage is cheaper and scales better for large files
 - **Flexibility**: Can store arbitrarily large documents without DB limits
@@ -91,11 +92,13 @@ The application uses a **hybrid storage pattern** for bookmarks and quotations, 
 The current implementation has **confusing type naming** that needs refactoring:
 
 **Problem 1: Type Overlap**
+
 - `SelectBookmark` (from DB) has: `id`, `email`, `type`, `name`, `category`, `desc`, `createdAt`, `updatedAt`
 - `Item` (from GCS) has same fields PLUS HTML blocks/rows/cells data
 - Overlap creates confusion about which type to use where
 
 **Problem 2: Inconsistent Handler Types**
+
 - `saveBookmarkHandler`: Request uses `InsertBookmark` picks, Response uses `SelectBookmark` (❌ wrong - should return full `Item`)
 - `getBookmarkHandler`: Response uses `Item` (✅ correct)
 - No clear naming indicating storage layer
@@ -114,7 +117,7 @@ export type BookmarkMetadata = typeof bookmarksTable.$inferSelect
 export type InsertBookmarkMetadata = typeof bookmarksTable.$inferInsert
 
 // 2. Storage layer (GCS document)
-export type BookmarkDocument = Item  // Full document with HTML/blocks
+export type BookmarkDocument = Item // Full document with HTML/blocks
 
 // 3. API/DTO layer (what handlers return)
 export type BookmarkDTO = {
@@ -134,8 +137,11 @@ export type BookmarkDTO = {
 
 // 4. Save request (client -> server)
 export type SaveBookmarkRequest = {
-  metadata: Pick<InsertBookmarkMetadata, 'id' | 'type' | 'name' | 'category' | 'desc'>
-  document: BookmarkDocument  // Full Item data
+  metadata: Pick<
+    InsertBookmarkMetadata,
+    'id' | 'type' | 'name' | 'category' | 'desc'
+  >
+  document: BookmarkDocument // Full Item data
 }
 ```
 
@@ -147,21 +153,23 @@ export type BookmarkMetadata = typeof bookmarksTable.$inferSelect
 
 // Extended bookmark (metadata + document)
 export type Bookmark = BookmarkMetadata & {
-  content: Item  // Explicitly show this is additional data
+  content: Item // Explicitly show this is additional data
 }
 
 // Clear separation
-export type BookmarkListItem = BookmarkMetadata  // No content
-export type BookmarkDetail = Bookmark  // With content
+export type BookmarkListItem = BookmarkMetadata // No content
+export type BookmarkDetail = Bookmark // With content
 ```
 
 **Benefits of refactoring:**
+
 1. ✅ Clear naming shows which layer each type belongs to
 2. ✅ No confusion between database types and document types
 3. ✅ Type safety catches when you mix layers
 4. ✅ Easy for new developers to understand the architecture
 
 **Similar patterns used by:**
+
 - **Notion**: Metadata in PostgreSQL, content in S3
 - **GitHub**: Repo metadata in MySQL, Git objects in distributed storage
 - **Stripe**: Transaction metadata in PostgreSQL, logs in object storage

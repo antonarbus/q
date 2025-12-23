@@ -1,12 +1,12 @@
 import { exit } from 'process'
-import { infraConfig } from '../../config/infrastructure'
+import { infraConfig } from '@root/config/infrastructure'
 import { getCloudRunServiceUrl } from '../lib/gcloud/getCloudRunServiceUrl'
 import { rollbackCloudRunService } from '../lib/gcloud/rollbackCloudRunService'
 import { logger } from '../lib/output/logger'
 import axios, { type AxiosResponse } from 'axios'
 import type { ResBody } from '@back/api/dev/healthCheckHandler'
 import { route } from '@back/api/route'
-import type { DeployedEnvironment } from 'config/environment'
+import type { DeployedEnvironment } from '@root/config/environment'
 
 type Props = {
   environment: DeployedEnvironment

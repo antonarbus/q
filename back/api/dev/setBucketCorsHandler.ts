@@ -3,8 +3,8 @@ import { httpStatus } from '@back/shared/const/httpStatus'
 import { userRole } from '@back/shared/const/userRole'
 import { bucket } from '@back/shared/lib/google-cloud-storage'
 import type { NextFunction, Request, Response } from 'express'
-import { secret } from '../../../config/secrets'
-import { DOMAIN } from 'config/infrastructure'
+import { secret } from '@root/config/secrets'
+import { DOMAIN } from '@root/config/infrastructure'
 
 // https://cloud.google.com/storage/docs/samples/storage-cors-configuration#storage_cors_configuration-nodejs
 

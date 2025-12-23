@@ -2,7 +2,7 @@ import { route } from '@back/api/route'
 import { UserModel } from '@back/entities/user'
 import { connectToDb } from '@back/shared/lib/mongoose/connectToDb'
 import { expect, test } from '@playwright/test'
-import { runtimeConfig } from '../../config/runtime'
+import { runtimeConfig } from '@root/config/runtime'
 
 test.describe.configure({ mode: 'serial' })
 

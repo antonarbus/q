@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import { secret } from '../../../../config/secrets'
+import { secret } from '@root/config/secrets'
 import { checkDbConnection } from './checkDbConnection'
 
 export const connectToDb = async (): Promise<void> => {

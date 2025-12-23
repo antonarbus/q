@@ -1,6 +1,6 @@
 import { drizzle } from 'drizzle-orm/neon-http'
 import { neon } from '@neondatabase/serverless'
-import { runtimeConfig } from 'config/runtime'
+import { runtimeConfig } from '@root/config/runtime'
 
 // https://neon.com/docs/guides/drizzle#initialize-the-drizzle-client
 

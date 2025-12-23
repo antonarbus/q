@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import { secret } from '../../../../config/secrets'
+import { secret } from '@root/config/secrets'
 import { THREE_MONTHS_IN_SEC } from './const'
 import { getJwtExpirationInDays } from './getJwtExpirationInDays'
 import type { JwtPayloadExtended } from './types'

@@ -1,6 +1,6 @@
 import { EmailParams, MailerSend, Recipient, Sender } from 'mailersend'
 import type { APIResponse } from 'mailersend/lib/services/request.service'
-import { secret } from '../../../../config/secrets'
+import { secret } from '@root/config/secrets'
 
 const mailerSend: MailerSend = new MailerSend({
   apiKey: secret.MAILERSEND_API_KEY,

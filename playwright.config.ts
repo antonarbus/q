@@ -1,7 +1,6 @@
 import { defineConfig, devices } from '@playwright/test'
-import { headerName } from './back/shared/headers'
-import { runtimeConfig } from './config/runtime'
-import { userFilePath } from './tests/setup/userFilePath'
+import { runtimeConfig } from '@root/config/runtime'
+import { userFilePath } from '@root/tests/setup/userFilePath'
 
 // https://playwright.dev/docs/test-configuration
 export default defineConfig({
@@ -15,9 +14,6 @@ export default defineConfig({
   use: {
     baseURL: runtimeConfig.front.baseUrl,
     trace: 'on-first-retry',
-    extraHTTPHeaders: {
-      [headerName.playwrightTest]: 'true',
-    },
   },
   projects: [
     // https://playwright.dev/docs/auth#authenticate-with-api-request

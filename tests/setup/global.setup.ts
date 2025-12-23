@@ -1,4 +1,4 @@
-import { runtimeConfig } from '../../config/runtime'
+import { runtimeConfig } from '@root/config/runtime'
 
 export default function globalSetup(): void {
   console.info('\n📝 Playwright test Environment Info:')

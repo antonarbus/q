@@ -1,6 +1,6 @@
 import { $ } from 'bun'
 import { logger } from '../output/logger'
-import type { DeployedEnvironment } from 'config/environment'
+import type { DeployedEnvironment } from '@root/config/environment'
 
 type Props = {
   cloudRunServiceName: string

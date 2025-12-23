@@ -6,7 +6,7 @@ import { showDeploymentInfo } from '../commands/show-deployment-info'
 import { terraformApply } from '../commands/terraform-apply'
 import { terraformFormat } from '../commands/terraform-format'
 import { terraformPlan } from '../commands/terraform-plan'
-import type { DeployedEnvironment } from 'config/environment'
+import type { DeployedEnvironment } from '@root/config/environment'
 
 type Command = {
   name: string

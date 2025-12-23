@@ -1,6 +1,6 @@
 import { route } from '@back/api/route'
 import { expect, test } from '@playwright/test'
-import { runtimeConfig } from '../../config/runtime'
+import { runtimeConfig } from '@root/config/runtime'
 
 test.describe.configure({ mode: 'serial' })
 

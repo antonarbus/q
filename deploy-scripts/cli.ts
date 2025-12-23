@@ -12,7 +12,7 @@ import { terraformFormat } from './commands/terraform-format'
 import { validatePromotion } from './commands/validate-promotion'
 import { verifyDeployment } from './commands/verify-deployment'
 import { runInteractiveMode } from './lib/interactive'
-import { deployedEnvironmentSchema } from 'config/environment'
+import { deployedEnvironmentSchema } from '@root/config/environment'
 // eslint-disable-next-line id-length
 import z from 'zod'
 

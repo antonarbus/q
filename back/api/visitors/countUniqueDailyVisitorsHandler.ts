@@ -2,6 +2,7 @@ import { type VisitorsCount, VisitorsCountModel } from '@back/entities/visitor'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
 import { headerName } from '@back/shared/headers'
+import { runtimeConfig } from '@root/config/runtime'
 import type { NextFunction, Request, Response } from 'express'
 
 export type ReqBody = {
@@ -32,6 +33,10 @@ export const countUniqueDailyVisitorsHandler: RouterHandler = async (
 
   // do not distort statistics by tests
   if (req.headers[headerName.playwrightTest] === 'true') {
+    return
+  }
+
+  if (runtimeConfig.nodeEnv === 'test') {
     return
   }
 

@@ -1,5 +1,5 @@
 import { resolve } from 'node:path'
-import { infraConfig } from '../../config/infrastructure'
+import { infraConfig } from '@root/config/infrastructure'
 import { logger } from '../lib/output/logger'
 
 type Props = {

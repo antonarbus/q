@@ -37,14 +37,14 @@
     "jsxImportSource": "@emotion/react",
     "baseUrl": ".",
     "paths": {
+      "@root/*": ["./*"],
       "@back/*": ["./back/*"],
       "@app/*": ["./front/app/*"],
       "@pages/*": ["./front/pages/*"],
       "@widgets/*": ["./front/widgets/*"],
       "@features/*": ["./front/features/*"],
       "@entities/*": ["./front/entities/*"],
-      "@shared/*": ["./front/shared/*"],
-      "@lib_instances/*": ["./front/lib_instances/*"]
+      "@shared/*": ["./front/shared/*"]
     }
   }
 }

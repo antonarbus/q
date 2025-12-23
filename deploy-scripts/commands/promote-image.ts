@@ -1,9 +1,9 @@
 import { $ } from 'bun'
 import { exit } from 'process'
-import { sharedInfraConfig } from '../../config/infrastructure'
+import { sharedInfraConfig } from '@root/config/infrastructure'
 import { logToGithubOutput } from '../lib/output/logToGithubOutput'
 import { logger } from '../lib/output/logger'
-import type { DeployedEnvironment } from 'config/environment'
+import type { DeployedEnvironment } from '@root/config/environment'
 
 type PromoteServiceImageProps = {
   serviceName: string

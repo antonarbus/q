@@ -1,5 +1,5 @@
 import { $ } from 'bun'
-import { sharedInfraConfig } from '../../config/infrastructure'
+import { sharedInfraConfig } from '@root/config/infrastructure'
 import { logger } from '../lib/output/logger'
 
 /** List all enabled Google Cloud services for the project */

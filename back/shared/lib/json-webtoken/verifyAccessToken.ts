@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import { secret } from '../../../../config/secrets'
+import { secret } from '@root/config/secrets'
 import { isJwtPayloadExtended, type JwtPayloadExtended } from './types'
 
 export const verifyAccessToken = (

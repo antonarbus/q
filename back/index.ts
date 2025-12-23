@@ -1,7 +1,7 @@
 import cookieParser from 'cookie-parser'
 import express from 'express'
 import morgan from 'morgan'
-import { runtimeConfig } from '../config/runtime'
+import { runtimeConfig } from '@root/config/runtime'
 import { api } from './api'
 import { errorHandlerMiddleware } from './middleware/errorHandlerMiddleware'
 import { asyncHandler } from './shared/lib/express'

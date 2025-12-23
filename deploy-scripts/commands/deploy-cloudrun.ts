@@ -1,5 +1,5 @@
-import type { DeployedEnvironment } from 'config/environment'
-import { infraConfig } from '../../config/infrastructure'
+import type { DeployedEnvironment } from '@root/config/environment'
+import { infraConfig } from '@root/config/infrastructure'
 import { getCurrentCloudRunImage } from '../lib/gcloud/getCurrentCloudRunImage'
 import { updateCloudRunService } from '../lib/gcloud/updateCloudRunService'
 import { logToGithubOutput } from '../lib/output/logToGithubOutput'
