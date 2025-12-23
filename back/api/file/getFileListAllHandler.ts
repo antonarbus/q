@@ -1,9 +1,10 @@
-import { FileModel } from '@back/entities/file'
 import { filesTable, type SelectFile } from '@back/entities/file'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
+import { db } from '@back/shared/lib/drizzle/db'
 import { userRole } from '@back/shared/const/userRole'
+import { and, asc, count, desc, ilike } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
 
 type ReqBody = {
@@ -59,44 +60,73 @@ export const getFileListAllHandler: RouterHandler = async (req, res, _next) => {
 
   const { startRow = 0, endRow = 100, sortModel, filterModel } = req.body
 
-  const sort = sortModel.reduce<Record<string, 1 | -1>>((accumulator, item) => {
-    if (item.sort === 'asc') {
-      accumulator[item.colId] = 1
-    }
+  const sortConditions = sortModel
+    .map((item) => {
+      // eslint-disable-next-line
+      const column = filesTable[item.colId as keyof typeof filesTable]
 
-    if (item.sort === 'desc') {
-      accumulator[item.colId] = -1
-    }
+      // Check if it's a valid column (has columnType property)
+      const isValidColumn = typeof column === 'object' && 'columnType' in column
 
-    return accumulator
-  }, {})
+      if (isValidColumn === false) {
+        return null
+      }
 
-  const filter = Object.entries(filterModel).reduce<
-    Record<string, { $regex: string; $options: 'i' }>
-  >((accumulator, item) => {
-    const [field, filterDef] = item
-    accumulator[field] = { $regex: filterDef.filter, $options: 'i' }
+      const sortedColumn = item.sort === 'asc' ? asc(column) : desc(column)
 
-    return accumulator
-  }, {})
-
-  // Query all bookmarks (no user filter)
-  const fileListPromise = FileModel.find(filter)
-    .select({
-      _id: 0,
-      id: 1,
-      name: 1,
-      size: 1,
-      email: 1,
-      usedByIdList: 1,
-      uploadedAt: 1,
+      return sortedColumn
     })
-    .sort(sort)
-    .skip(startRow)
-    .limit(endRow - startRow)
-    .lean()
+    .filter((condition): condition is NonNullable<typeof condition> =>
+      Boolean(condition),
+    )
 
-  const fileListTotalCountPromise = FileModel.countDocuments(filter)
+  const filterConditions = Object.entries(filterModel)
+    .map(([field, filterDef]) => {
+      // eslint-disable-next-line
+      const column = filesTable[field as keyof typeof filesTable]
+
+      // Check if it's a valid column (has columnType property)
+      const isValidColumn = typeof column === 'object' && 'columnType' in column
+
+      if (isValidColumn === false) {
+        return null
+      }
+
+      const filterCondition = ilike(column, `%${filterDef.filter}%`)
+
+      return filterCondition
+    })
+    .filter((condition): condition is NonNullable<typeof condition> =>
+      Boolean(condition),
+    )
+
+  // Query all files (no user filter)
+  const baseQuery = db.select().from(filesTable)
+
+  const queryWithFilters =
+    filterConditions.length > 0
+      ? baseQuery.where(and(...filterConditions))
+      : baseQuery
+
+  const queryWithSort =
+    sortConditions.length > 0
+      ? queryWithFilters.orderBy(...sortConditions)
+      : queryWithFilters
+
+  const fileListPromise = queryWithSort
+    .offset(startRow)
+    .limit(endRow - startRow)
+
+  const baseCountQuery = db.select({ count: count() }).from(filesTable)
+
+  const countQueryWithFilters =
+    filterConditions.length > 0
+      ? baseCountQuery.where(and(...filterConditions))
+      : baseCountQuery
+
+  const fileListTotalCountPromise = countQueryWithFilters.then(
+    (result) => result[0]?.count ?? 0,
+  )
 
   const [fileListResponse, fileListTotalCountResponse] =
     await Promise.allSettled([fileListPromise, fileListTotalCountPromise])
