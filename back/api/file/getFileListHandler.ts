@@ -1,15 +1,16 @@
-import { FileModel } from '@back/entities/file'
+import { filesTable, type SelectFile } from '@back/entities/file'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
-import type { File } from '@entities/file/type'
+import { db } from '@back/shared/lib/drizzle/db'
+import { eq } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
 
 export type ResBody = {
   fileList: {
-    id: File['id']
-    name: File['name']
-    size: File['size']
+    id: SelectFile['id']
+    name: SelectFile['name']
+    size: SelectFile['size']
   }[]
   message: 'file stats'
 }
@@ -30,9 +31,12 @@ export const getFileListHandler: RouterHandler = async (req, res, _next) => {
     res,
   })
 
-  const fileList = await FileModel.find({ email: userFromAccessToken.email })
-    .select({ _id: 0, id: 1, name: 1, size: 1 })
-    .lean()
+  const selectedFileList = await db
+    .select()
+    .from(filesTable)
+    .where(eq(filesTable.email, userFromAccessToken.email))
 
-  res.status(httpStatus.success200).json({ message: 'file stats', fileList })
+  res
+    .status(httpStatus.success200)
+    .json({ message: 'file stats', fileList: selectedFileList })
 }

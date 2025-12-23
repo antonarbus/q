@@ -1,12 +1,14 @@
-import { FileModel } from '@back/entities/file'
+import { filesTable, type SelectFile } from '@back/entities/file'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
+import { db } from '@back/shared/lib/drizzle/db'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
+import { and, eq } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
 
 export type ReqBody = {
-  fileId: string
+  fileId: SelectFile['id']
 }
 
 export type ResBody = {
@@ -33,18 +35,19 @@ export const deleteFileHandler: RouterHandler = async (req, res, _next) => {
     res,
   })
 
-  const { fileId } = req.body
-
   type FileOwnerShip = 'file not found' | 'owner' | 'not owner'
 
   const getFileOwnerShip = async (): Promise<FileOwnerShip> => {
-    const fileInfo = await FileModel.findOne({ id: fileId }).lean()
+    const [selectedFile] = await db
+      .select()
+      .from(filesTable)
+      .where(eq(filesTable.id, req.body.fileId))
 
-    if (fileInfo === null) {
+    if (selectedFile === undefined) {
       return 'file not found'
     }
 
-    if (fileInfo.email !== userFromAccessToken.email) {
+    if (selectedFile.email !== userFromAccessToken.email) {
       return 'not owner'
     }
 
@@ -68,15 +71,19 @@ export const deleteFileHandler: RouterHandler = async (req, res, _next) => {
   }
 
   if (fileOwnerShip === 'owner') {
-    const { path } = getFileInfo({ id: fileId })
+    const fileInfo = getFileInfo({ id: req.body.fileId })
 
     try {
-      const deleteFromBucketPromise = bucket.file(path).delete()
+      const deleteFromBucketPromise = bucket.file(fileInfo.path).delete()
 
-      const deleteFromDatabasePromise = FileModel.deleteOne({
-        id: fileId,
-        email: userFromAccessToken.email,
-      })
+      const deleteFromDatabasePromise = db
+        .delete(filesTable)
+        .where(
+          and(
+            eq(filesTable.email, userFromAccessToken.email),
+            eq(filesTable.id, req.body.fileId),
+          ),
+        )
 
       await Promise.all([deleteFromBucketPromise, deleteFromDatabasePromise])
     } catch {

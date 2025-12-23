@@ -1,10 +1,12 @@
-import { FileModel } from '@back/entities/file'
+import { filesTable, type SelectFile } from '@back/entities/file'
 import { httpStatus } from '@back/shared/const/httpStatus'
+import { db } from '@back/shared/lib/drizzle/db'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
+import { eq } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
 
 type Params = {
-  fileId: string
+  fileId: SelectFile['id']
 }
 
 type ResBody = string
@@ -26,9 +28,8 @@ export const proxyFileToBucketHandler: RouterHandler = async (
   _next,
 ) => {
   // const user = getUserFromAccessTokenOrNull({ req })
-  const { fileId } = req.params
 
-  const cached = signedUrlCache.get(fileId)
+  const cached = signedUrlCache.get(req.params.fileId)
 
   const cacheIsNotExpired =
     cached !== undefined && cached.expiresAt > Date.now()
@@ -44,31 +45,32 @@ export const proxyFileToBucketHandler: RouterHandler = async (
     return
   }
 
-  const fileInfo = await FileModel.findOne({ id: fileId })
-    .select({ _id: 0, id: 1, name: 1, size: 1 })
-    .lean()
+  const [selectedFile] = await db
+    .select()
+    .from(filesTable)
+    .where(eq(filesTable.id, req.params.fileId))
 
-  if (fileInfo === null) {
+  if (selectedFile === undefined) {
     res.status(httpStatus.notFound404).send('File not found')
 
     return
   }
 
   try {
-    const { path } = getFileInfo({ id: fileId })
-    const file = bucket.file(path) // Get reference to the file in the bucket
+    const fileInfo = getFileInfo({ id: req.params.fileId })
+    const file = bucket.file(fileInfo.path) // Get reference to the file in the bucket
 
     const [signedUrl] = await file.getSignedUrl({
       version: 'v4',
       action: 'read',
       expires: Date.now() + SIGNED_URL_TTL_MS,
-      responseDisposition: `inline; filename="${fileInfo.name}"`, // display in browser
+      responseDisposition: `inline; filename="${selectedFile.name}"`, // display in browser
       // responseDisposition: `attachment; filename="${fileMeta.originalName}"`, // force to download
     })
 
     await file.setMetadata({ cacheControl: 'public, max-age=300' })
 
-    signedUrlCache.set(fileId, {
+    signedUrlCache.set(req.params.fileId, {
       url: signedUrl,
       expiresAt: Date.now() + SIGNED_URL_TTL_MS, // should be slightly less, but let it be like this for now
     })

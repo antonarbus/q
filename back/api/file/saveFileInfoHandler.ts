@@ -1,22 +1,17 @@
-import { FileModel } from '@back/entities/file'
+import { type SelectFile, filesTable } from '@back/entities/file'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
+import { db } from '@back/shared/lib/drizzle/db'
 import type { NextFunction, Request, Response } from 'express'
 
 export type ReqBody = {
-  id: string
-  name: string
-  size: number
+  id: SelectFile['id']
+  name: SelectFile['name']
+  size: SelectFile['size']
 }
 
-export type ResBody = {
-  fileId?: string
-  fileName?: string
-  fileSize?: number
-  uploadedAt?: Date
-  message: 'saved file info'
-}
+export type ResBody = SelectFile
 
 type ErrorResBody = {
   message: ErrorMessageCommon | 'invalid file id' | 'failed to make file public'
@@ -34,28 +29,24 @@ export const saveFileInfoHandler: RouterHandler = async (req, res, _next) => {
     res,
   })
 
-  const { id: fileId, name: fileName, size: fileSize } = req.body
-
-  try {
-    const createFileDocRes = await FileModel.create({
-      id: fileId,
+  const [insertedFile] = await db
+    .insert(filesTable)
+    .values({
+      id: req.body.id,
       email: userFromAccessToken.email,
-      name: fileName,
-      size: fileSize,
+      name: req.body.name,
+      size: req.body.size,
     })
+    .onConflictDoNothing()
+    .returning()
 
-    const fileDocument = createFileDocRes.toObject()
-
-    res.status(httpStatus.success200).json({
-      fileId: fileDocument.id,
-      fileName: fileDocument.name,
-      fileSize: fileDocument.size,
-      uploadedAt: fileDocument.uploadedAt,
-      message: 'saved file info',
-    })
-  } catch {
+  if (insertedFile === undefined) {
     res.status(httpStatus.serverError500).json({
       message: 'failed to make file public',
     })
+
+    return
   }
+
+  res.status(httpStatus.success200).json(insertedFile)
 }

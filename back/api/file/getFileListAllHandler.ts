@@ -1,19 +1,10 @@
 import { FileModel } from '@back/entities/file'
+import { filesTable, type SelectFile } from '@back/entities/file'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
 import { userRole } from '@back/shared/const/userRole'
-import type { File } from '@entities/file/type'
 import type { NextFunction, Request, Response } from 'express'
-
-export type Item = {
-  id: File['id']
-  name: File['name']
-  size: File['size']
-  email: File['email']
-  uploadedAt: File['uploadedAt']
-  usedByIdList: File['usedByIdList']
-}
 
 type ReqBody = {
   startRow: number
@@ -33,13 +24,13 @@ type ReqBody = {
 }
 
 export type ResBody = {
-  fileList: Item[]
+  fileList: SelectFile[]
   fileListTotalCount: number
   message: 'Found'
 }
 
 type ErrorResBody = {
-  fileList: Item[]
+  fileList: SelectFile[]
   fileListTotalCount: number
   message: ErrorMessageCommon | 'no permission to view' | 'Unhandled error'
 }

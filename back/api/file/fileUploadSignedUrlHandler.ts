@@ -5,26 +5,18 @@ import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import { generateId } from '@back/shared/lib/nanoid'
 import type { NextFunction, Request, Response } from 'express'
 
-type SearchQuery = {
-  fileName: string
-}
-
 export type ResBody = {
-  signedUrl: string | null
-  url: string | null
+  signedUrl: string
+  url: string
   fileId: string
-  message: 'signed url generated'
 }
 
 type ErrorResBody = {
-  signedUrl: string | null
-  url: string | null
-  fileId: string
   message: ErrorMessageCommon | 'failed to generate signed url'
 }
 
 type RouterHandler = (
-  req: Request<unknown, unknown, unknown, SearchQuery>,
+  req: Request,
   res: Response<ResBody | ErrorResBody>,
   next: NextFunction,
 ) => Promise<void>
@@ -37,8 +29,8 @@ export const fileUploadSignedUrlHandler: RouterHandler = async (
   getUserFromAccessTokenOrThrowUnauthorized({ req, res })
 
   const fileId = generateId()
-  const { path, url } = getFileInfo({ id: fileId })
-  const file = bucket.file(path)
+  const fileInfo = getFileInfo({ id: fileId })
+  const file = bucket.file(fileInfo.path)
 
   try {
     const [signedUrl] = await file.getSignedUrl({
@@ -51,17 +43,13 @@ export const fileUploadSignedUrlHandler: RouterHandler = async (
     })
 
     res.status(httpStatus.success200).json({
-      message: 'signed url generated',
       signedUrl,
-      url,
+      url: fileInfo.url,
       fileId,
     })
   } catch {
     res.status(httpStatus.serverError500).json({
       message: 'failed to generate signed url',
-      signedUrl: null,
-      url: null,
-      fileId: '',
     })
   }
 }
