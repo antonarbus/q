@@ -1,7 +1,7 @@
 import { date, integer, pgTable } from 'drizzle-orm/pg-core'
 
 export const visitorsTable = pgTable('visitors', {
-  visitedAt: date({ mode: 'date' }).primaryKey().defaultNow(),
+  visitedAt: date({ mode: 'date' }).primaryKey(),
   totalCount: integer().notNull().default(0),
   newCount: integer().notNull().default(0),
 })

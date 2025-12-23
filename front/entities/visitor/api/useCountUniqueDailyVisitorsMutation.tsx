@@ -13,11 +13,13 @@ type Res = UseMutationResult<ResBody, AxiosError<ErrorResBody>, Payload>
 export const useCountUniqueDailyVisitorsMutation = (): Res => {
   const query = useMutation<ResBody, AxiosError<ErrorResBody>, Payload>({
     mutationKey: [queryKey.countUniqueDailyVisitors],
-    mutationFn: async ({ isNew }: Payload) => {
+    mutationFn: async (payload: Payload) => {
       const { data } = await axios<ResBody>({
         url: route.countUniqueDailyVisitors.url,
         method: route.countUniqueDailyVisitors.method,
-        data: { isNew },
+        data: {
+          isNew: payload.isNew,
+        },
       })
 
       return data

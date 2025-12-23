@@ -37,6 +37,7 @@ export const countUniqueDailyVisitorsHandler: RouterHandler = async (
   const [visitorsCount] = await db
     .insert(visitorsTable)
     .values({
+      visitedAt: new Date(),
       totalCount: 1,
       newCount: req.body.isNew === true ? 1 : 0,
     })
