@@ -357,7 +357,7 @@ variable "neon_pg_version" {
   # Options: "14", "15", "16", "17"
   # Recommended: "16" (latest stable)
   # Value provided by config/*.tfvars file
-  default     = "16"
+  default = "16"
 }
 
 variable "neon_database_name" {
@@ -377,7 +377,7 @@ variable "neon_min_cu" {
   # Minimum: 0.25 (good for dev/test)
   # For production: consider 0.5 or higher
   # Value provided by config/*.tfvars file
-  default     = 0.25
+  default = 0.25
 }
 
 variable "neon_max_cu" {
@@ -387,5 +387,5 @@ variable "neon_max_cu" {
   # Dev/Test: 1-2 CU
   # Production: 2-4 CU or higher based on load
   # Value provided by config/*.tfvars file
-  default     = 1
+  default = 1
 }
