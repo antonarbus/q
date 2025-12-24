@@ -3,9 +3,13 @@ import { secret } from '@root/config/secrets'
 import { isJwtPayloadExtended, type JwtPayloadExtended } from './types'
 
 export const verifyAccessToken = (
-  accessJwtToken: string,
+  accessJwtToken: unknown,
 ): JwtPayloadExtended | undefined => {
   try {
+    if (typeof accessJwtToken !== 'string') {
+      throw new Error('JWT is not a string')
+    }
+
     const jwtPayload = jwt.verify(accessJwtToken, secret.JWT_ACCESS_SECRET)
 
     if (typeof jwtPayload === 'string') {
