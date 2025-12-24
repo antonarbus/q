@@ -6,6 +6,7 @@ export type JwtPayloadExtended = JwtPayload & {
   roles: User['roles']
 }
 
+/** Check if 'email' and 'roles' properties are in payload */
 export const isJwtPayloadExtended = (
   payload: JwtPayload,
 ): payload is JwtPayloadExtended => {
