@@ -23,7 +23,6 @@ export type ReqBody = {
 }
 
 export type ResBody = {
-  name?: 'MongooseError'
   accessJwtToken?: string
   accessJwtTokenExpiresOn?: string
   email?: User['email']

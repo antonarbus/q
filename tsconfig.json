@@ -35,6 +35,7 @@
     "incremental": true,
     "jsx": "react-jsx",
     "jsxImportSource": "@emotion/react",
+    "types": ["bun", "node"],
     "baseUrl": ".",
     "paths": {
       "@app/*": ["./front/app/*"],
