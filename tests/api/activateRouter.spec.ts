@@ -15,14 +15,14 @@ test.describe('#activateRouter', () => {
   const testUserEmail = 'test-user@sendmequotation.today'
 
   // Clean up test data before each test to ensure isolation
-  test.beforeEach(async () => {
-    await db.delete(usersTable).where(eq(usersTable.email, testUserEmail))
-  })
+  // test.beforeEach(async () => {
+  //   await db.delete(usersTable).where(eq(usersTable.email, testUserEmail))
+  // })
 
-  // Clean up test data after each test
-  test.afterEach(async () => {
-    await db.delete(usersTable).where(eq(usersTable.email, testUserEmail))
-  })
+  // // Clean up test data after each test
+  // test.afterEach(async () => {
+  //   await db.delete(usersTable).where(eq(usersTable.email, testUserEmail))
+  // })
 
   test('should return successful status if account had been already activated', async ({
     request,
