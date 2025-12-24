@@ -1,4 +1,4 @@
-import type { QuotationPick } from '@back/api/quotation/getQuotationListHandler'
+import type { ResBody } from '@back/api/quotation/getQuotationListHandler'
 import { Chip, Tooltip } from '@mui/material'
 import { route } from '@shared/lib/react-router-dom/route'
 import { getTextWithBoldSubStringAsJsx } from '@shared/util/getTextWithBoldSubStringAsJsx'
@@ -15,7 +15,7 @@ type FilterModel = {
 }
 
 export const SharedWithCellRenderer = (
-  params: ICellRendererParams<QuotationPick, string>,
+  params: ICellRendererParams<ResBody['quotationList'][number], string>,
 ): ReactNode => {
   const quotationId = params.data?.id
   const accessLevel = params.data?.access.level

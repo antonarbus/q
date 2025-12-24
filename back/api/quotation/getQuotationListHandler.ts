@@ -1,33 +1,19 @@
-import { QuotationModel } from '@back/entities/quotation'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
-import type { Quotation } from '@entities/quotation/type'
 import type { Pretty } from '@shared/lib/typescript/Pretty'
 import type { NextFunction, Request, Response } from 'express'
-import type { FlattenMaps } from 'mongoose'
-
-export type QuotationPick = Pick<
-  Quotation,
-  | 'category'
-  | 'createdAt'
-  | 'desc'
-  | 'id'
-  | 'info'
-  | 'name'
-  | 'openedAt'
-  | 'access'
-  | 'viewedAt'
-  | 'updatedAt'
->
+import { db } from '@back/shared/lib/drizzle/db'
+import { eq } from 'drizzle-orm'
+import { type SelectQuotation, quotationsTable } from '@back/entities/quotation'
 
 export type ResBody = Pretty<{
-  quotations: FlattenMaps<QuotationPick>[]
+  quotationList: SelectQuotation[]
   message: 'Found' | 'No content'
 }>
 
 export type ErrorResBody = {
-  quotations: FlattenMaps<QuotationPick>[]
+  quotationList: SelectQuotation[]
   message: ErrorMessageCommon | 'Unhandled case'
 }
 
@@ -47,27 +33,28 @@ export const getQuotationListHandler: RouterHandler = async (
     res,
   })
 
-  const documents = await QuotationModel.find(
-    { email: userFromAccessToken.email },
-    { _id: 0, __v: 0, email: 0 },
-  )
+  const selectedQuotationList = await db
+    .select()
+    .from(quotationsTable)
+    .where(eq(quotationsTable.email, userFromAccessToken.email))
 
-  if (documents.length === 0) {
+  if (selectedQuotationList.length === 0) {
     res
       .status(httpStatus.success200)
-      .json({ message: 'No content', quotations: [] })
+      .json({ message: 'No content', quotationList: [] })
 
     return
   }
 
-  if (documents.length !== 0) {
-    const quotations = documents.map((doc) => doc.toObject({ getters: true }))
-    res.status(httpStatus.success200).json({ message: 'Found', quotations })
+  if (selectedQuotationList.length !== 0) {
+    res
+      .status(httpStatus.success200)
+      .json({ message: 'Found', quotationList: selectedQuotationList })
 
     return
   }
 
   res
     .status(httpStatus.notFound404)
-    .json({ message: 'Unhandled case', quotations: [] })
+    .json({ message: 'Unhandled case', quotationList: [] })
 }

@@ -1,4 +1,4 @@
-import type { QuotationPick } from '@back/api/quotation/getQuotationListHandler'
+import type { ResBody } from '@back/api/quotation/getQuotationListHandler'
 import { OpenQuotationPageAndLoadFromServerButton } from '@features/open-close/open-quotation-page'
 import { OpenSaveQuotationModalButton } from '@features/open-close/open-save-quotation-modal'
 import { DeleteQuotationButton } from '@features/quotation/delete-quotation'
@@ -6,7 +6,7 @@ import { Box } from '@mui/material'
 import type { ICellRendererParams } from 'ag-grid-community'
 import type { ReactNode } from 'react'
 
-type Params = ICellRendererParams<QuotationPick>
+type Params = ICellRendererParams<ResBody['quotationList'][number]>
 
 export const ActionButtonsCellRenderer = (params: Params): ReactNode => {
   if (params.data?.id === undefined) {

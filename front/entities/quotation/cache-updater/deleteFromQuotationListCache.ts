@@ -12,11 +12,11 @@ export const deleteFromQuotationListCache = ({ id }: Props): void => {
     { queryKey: [queryKey.getQuotationList] },
     (cacheData) => {
       const updatedCacheData = produce(cacheData, (draft) => {
-        if (draft?.quotations === undefined) {
+        if (draft?.quotationList === undefined) {
           return
         }
 
-        const { quotations } = draft
+        const { quotationList: quotations } = draft
         const index = quotations.findIndex((quotation) => quotation.id === id)
         const foundInCache = index !== -1
 

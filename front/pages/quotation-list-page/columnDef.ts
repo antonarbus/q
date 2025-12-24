@@ -1,11 +1,11 @@
-import type { QuotationPick } from '@back/api/quotation/getQuotationListHandler'
+import type { ResBody } from '@back/api/quotation/getQuotationListHandler'
 import { getDateColDef } from '@shared/lib/ag-grid/colDef/getDateColDef'
 import { getTextColDef } from '@shared/lib/ag-grid/colDef/getTextColDef'
 import type { ColDef, ValueGetterParams } from 'ag-grid-community'
 import { ActionButtonsCellRenderer } from './renderer/ActionButtonsCellRenderer'
 import { SharedWithCellRenderer } from './renderer/SharedWithCellRenderer'
 
-export const columnDefs: ColDef<QuotationPick>[] = [
+export const columnDefs: ColDef<ResBody['quotationList'][number]>[] = [
   {
     cellRenderer: ActionButtonsCellRenderer,
     width: 150,
@@ -58,7 +58,10 @@ export const columnDefs: ColDef<QuotationPick>[] = [
     headerName: 'shared with',
     cellRenderer: SharedWithCellRenderer,
     valueGetter: (
-      params: ValueGetterParams<QuotationPick, QuotationPick['access']>,
+      params: ValueGetterParams<
+        ResBody['quotationList'][number],
+        ResBody['quotationList'][number]['access']
+      >,
     ): string => {
       const access = params.data?.access
 

@@ -1,4 +1,4 @@
-import type { QuotationPick } from '@back/api/quotation/getQuotationListHandler'
+import type { ResBody } from '@back/api/quotation/getQuotationListHandler'
 import { useGetQuotationListQuery } from '@entities/quotation/api/useGetQuotationListQuery'
 import { LoadingTableOverlay } from '@shared/component/LoadingTableOverlay'
 import { useDisableLoadingOverlayWhenItemsAreFetched } from '@shared/component/loading-dots-overlay'
@@ -42,7 +42,7 @@ export const QuotationListGrid = (): JSX.Element => {
       <AgGridStyles />
       <DisplayedRowsCount />
       <ProgressGridBar isShown={getQuotationListQuery.isFetching} />
-      <AgGridReact<QuotationPick>
+      <AgGridReact<ResBody['quotationList'][number]>
         columnDefs={columnDefs}
         defaultColDef={getDefaultColDef()}
         enableCellTextSelection
@@ -61,7 +61,7 @@ export const QuotationListGrid = (): JSX.Element => {
           dispatch(agGridSlice.actions.setCount({ count }))
         }}
         ref={quotationListAgGridRef}
-        rowData={getQuotationListQuery.data?.quotations}
+        rowData={getQuotationListQuery.data?.quotationList}
         suppressCellFocus
         suppressColumnVirtualisation
         theme={themeQuartz}

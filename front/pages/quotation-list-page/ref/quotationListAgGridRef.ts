@@ -1,8 +1,9 @@
-import type { QuotationPick } from '@back/api/quotation/getQuotationListHandler'
+import type { ResBody } from '@back/api/quotation/getQuotationListHandler'
 import type { AgGridReact } from 'ag-grid-react'
 import type { RefObject } from 'react'
 
-export const quotationListAgGridRef: RefObject<AgGridReact<QuotationPick> | null> =
-  {
-    current: null,
-  }
+export const quotationListAgGridRef: RefObject<AgGridReact<
+  ResBody['quotationList'][number]
+> | null> = {
+  current: null,
+}
