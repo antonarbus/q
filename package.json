@@ -3,7 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "workspaces": ["front", "back"],
+  "workspaces": [
+    "front",
+    "back"
+  ],
   "scripts": {
     "start": "concurrently \"bun run start-back\" \"bun run start-front\"",
     "stop": "kill-port 3000 4000",
@@ -12,7 +15,7 @@
     "build-front": "vite build",
     "build-back": "rollup -c rollup.config.js",
     "build-all": "concurrently \"bun run build-front\" \"bun run build-back\"",
-    "install": "bun install",
+    "install-all": "bun install",
     "install-ci": "bun install --frozen-lockfile",
     "install-prod": "bun install --frozen-lockfile --production",
     "preview-front": "vite preview",
@@ -66,7 +69,6 @@
     "@types/lodash.throttle": "^4.1.9",
     "@types/lodash.uniq": "^4.5.9",
     "@types/mailcheck": "^1.1.37",
-    "@types/mongoose": "^5.11.97",
     "@types/morgan": "^1.9.10",
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.2",
