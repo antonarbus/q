@@ -201,7 +201,7 @@ export const logInHandler: RouterHandler = async (req, res, _next) => {
     .update(usersTable)
     .set({
       refreshJwtToken,
-      loggedAt: new Date(),
+      loggedAt: new Date().toISOString(),
     })
     .where(eq(usersTable.email, emailFromInput))
     .returning()

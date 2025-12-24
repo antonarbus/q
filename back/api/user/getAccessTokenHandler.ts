@@ -64,7 +64,9 @@ export const getAccessTokenHandler: RouterHandler = async (req, res, _next) => {
     // Update loggedAt and return the updated user
     const [userUpdated] = await db
       .update(usersTable)
-      .set({ loggedAt: new Date() })
+      .set({
+        loggedAt: new Date().toISOString(),
+      })
       .where(
         and(
           eq(usersTable.email, userFromRefreshToken.email),

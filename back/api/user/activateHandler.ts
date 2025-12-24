@@ -67,7 +67,7 @@ export const activateHandler: RouterHandler = async (req, res, _next) => {
     .set({
       refreshJwtToken: refreshToken.value,
       isActivated: true,
-      loggedAt: new Date(),
+      loggedAt: new Date().toISOString(),
     })
     .where(
       and(

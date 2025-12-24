@@ -15,8 +15,8 @@ export const bookmarksTable = pgTable(
     name: varchar({ length: 255 }).notNull().default(''),
     category: varchar({ length: 100 }).notNull().default(''),
     desc: varchar({ length: 2000 }).notNull().default(''),
-    createdAt: timestamp({ mode: 'date' }).notNull().defaultNow(),
-    updatedAt: timestamp({ mode: 'date' }).notNull().defaultNow(),
+    createdAt: timestamp({ mode: 'string' }).notNull().defaultNow(),
+    updatedAt: timestamp({ mode: 'string' }).notNull().defaultNow(),
   },
   (table) => [index('email_idx').on(table.email)],
 )

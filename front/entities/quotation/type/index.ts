@@ -14,8 +14,8 @@ type Common = {
   width?: number
   height?: number
   isFroala?: boolean
-  createdAt: Date
-  updatedAt: Date
+  createdAt: string
+  updatedAt: string
   preview?: string
 }
 
@@ -102,10 +102,10 @@ export type Item = Boq | Paste | Text | Price | Row
 
 export type Quotation = Common & {
   type: 'quotation'
-  createdAt?: Date
-  updatedAt?: Date
-  openedAt?: Date | null
-  viewedAt?: Date | null
+  createdAt?: string
+  updatedAt?: string
+  openedAt?: string | null
+  viewedAt?: string | null
   access: {
     level: 'everyone' | 'nobody' | 'custom'
     userList: string[]

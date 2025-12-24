@@ -79,9 +79,9 @@ export const saveQuotationHandler: RouterHandler = async (req, res, _next) => {
         desc: req.body.quotation.desc,
         info: req.body.quotation.info,
         access: req.body.quotation.access,
-        updatedAt: new Date(),
-        createdAt: new Date(),
-        openedAt: new Date(),
+        updatedAt: new Date().toISOString(),
+        createdAt: new Date().toISOString(),
+        openedAt: new Date().toISOString(),
         // blocks: 'too big to keep in db, find it in the bucket under same id',
       })
       .returning()
@@ -121,7 +121,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, _next) => {
         desc: req.body.quotation.desc,
         info: req.body.quotation.info,
         access: req.body.quotation.access,
-        updatedAt: new Date(),
+        updatedAt: new Date().toISOString(),
         // blocks: 'too big to keep in db, find it in the bucket under same id',
       })
       .where(
@@ -170,9 +170,9 @@ export const saveQuotationHandler: RouterHandler = async (req, res, _next) => {
         desc: req.body.quotation.desc,
         info: req.body.quotation.info,
         access: req.body.quotation.access,
-        updatedAt: new Date(),
-        createdAt: new Date(),
-        openedAt: new Date(),
+        updatedAt: new Date().toISOString(),
+        createdAt: new Date().toISOString(),
+        openedAt: new Date().toISOString(),
         // blocks: 'too big to keep in db, find it in the bucket under same id',
       })
       .returning()

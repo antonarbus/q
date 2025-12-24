@@ -40,8 +40,8 @@ export const getQuotationHandler: RouterHandler = async (req, res, _next) => {
     category: '',
     desc: '',
     info: '',
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
     type: 'quotation',
     email: 'john@gmail.com',
     access: {
@@ -127,7 +127,7 @@ export const getQuotationHandler: RouterHandler = async (req, res, _next) => {
       await db
         .update(quotationsTable)
         .set({
-          openedAt: new Date(),
+          openedAt: new Date().toISOString(),
         })
         .where(eq(quotationsTable.id, req.body.id))
         .catch((error: unknown) => {
@@ -139,7 +139,7 @@ export const getQuotationHandler: RouterHandler = async (req, res, _next) => {
       await db
         .update(quotationsTable)
         .set({
-          viewedAt: new Date(),
+          viewedAt: new Date().toISOString(),
         })
         .where(eq(quotationsTable.id, req.body.id))
         .catch((error: unknown) => {
@@ -169,9 +169,9 @@ export const getQuotationHandler: RouterHandler = async (req, res, _next) => {
     quotationParsed.category = 'private'
     quotationParsed.desc = 'private'
     quotationParsed.info = 'private'
-    quotationParsed.createdAt = new Date()
-    quotationParsed.updatedAt = new Date()
-    quotationParsed.openedAt = new Date()
+    quotationParsed.createdAt = new Date().toISOString()
+    quotationParsed.updatedAt = new Date().toISOString()
+    quotationParsed.openedAt = new Date().toISOString()
 
     quotationParsed.blocks.forEach((block) => {
       // block.email = 'john@mail.com'
@@ -179,8 +179,8 @@ export const getQuotationHandler: RouterHandler = async (req, res, _next) => {
       block.category = 'private'
       block.desc = 'private'
       block.info = 'private'
-      block.createdAt = new Date()
-      block.updatedAt = new Date()
+      block.createdAt = new Date().toISOString()
+      block.updatedAt = new Date().toISOString()
 
       if (block.type === 'boq') {
         block.boq.rows.forEach((row) => {
@@ -189,8 +189,8 @@ export const getQuotationHandler: RouterHandler = async (req, res, _next) => {
           row.category = 'private'
           row.desc = 'private'
           row.info = 'private'
-          row.createdAt = new Date()
-          row.updatedAt = new Date()
+          row.createdAt = new Date().toISOString()
+          row.updatedAt = new Date().toISOString()
         })
       }
     })

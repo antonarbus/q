@@ -84,7 +84,7 @@ export const resetPasswordHandler: RouterHandler = async (req, res, _next) => {
       password: passwordEncrypted,
       refreshJwtToken: refreshToken.value,
       resetPasswordKey: '',
-      loggedAt: new Date(),
+      loggedAt: new Date().toISOString(),
     })
     .where(
       and(

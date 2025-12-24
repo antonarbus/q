@@ -65,7 +65,7 @@ export const saveBookmarkHandler: RouterHandler = async (req, res, _next) => {
         name: req.body.bookmark.name,
         category: req.body.bookmark.category,
         desc: req.body.bookmark.desc,
-        updatedAt: new Date(),
+        updatedAt: new Date().toISOString(),
       },
     })
     .returning()
@@ -87,9 +87,7 @@ export const saveBookmarkHandler: RouterHandler = async (req, res, _next) => {
 
   await bookmarkFile.save(contents)
 
-  const isNew =
-    bookmarkInserted.createdAt.getTime() ===
-    bookmarkInserted.updatedAt.getTime()
+  const isNew = bookmarkInserted.createdAt === bookmarkInserted.updatedAt
 
   res.status(httpStatus.success200).json({
     message: isNew === true ? 'saved' : 'updated',
