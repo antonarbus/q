@@ -62,9 +62,7 @@ export const getQuotationListAllHandler: RouterHandler = async (
     return
   }
 
-  const { startRow = 0, endRow = 100, sortModel, filterModel } = req.body
-
-  const sortConditions = sortModel
+  const sortConditions = req.body.sortModel
     .map((item) => {
       // eslint-disable-next-line
       const column = quotationsTable[item.colId as keyof typeof quotationsTable]
@@ -84,7 +82,7 @@ export const getQuotationListAllHandler: RouterHandler = async (
       Boolean(condition),
     )
 
-  const filterConditions = Object.entries(filterModel)
+  const filterConditions = Object.entries(req.body.filterModel)
     .map(([field, filterDef]) => {
       // eslint-disable-next-line
       const column = quotationsTable[field as keyof typeof quotationsTable]
@@ -118,8 +116,8 @@ export const getQuotationListAllHandler: RouterHandler = async (
       : queryWithFilters
 
   const quotationListPromise = queryWithSort
-    .offset(startRow)
-    .limit(endRow - startRow)
+    .offset(req.body.startRow)
+    .limit(req.body.endRow - req.body.startRow)
 
   const baseCountQuery = db.select({ count: count() }).from(quotationsTable)
 
