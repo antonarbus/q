@@ -43,6 +43,7 @@
     "docker-prod-start": "docker compose -f docker-compose.prod.yml up & sleep 5 && open http://localhost:80",
     "cli": "bun deploy-scripts/cli.ts",
     "cli-help": "bun deploy-scripts/cli.ts --help",
+    "db-pull": "bun drizzle-kit pull",
     "db-check": "bun drizzle-kit check",
     "db-generate": "bun drizzle-kit generate",
     "db-migrate": "bun drizzle-kit migrate",
