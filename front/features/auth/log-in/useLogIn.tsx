@@ -44,37 +44,28 @@ export const useLogIn = ({
 
   useUpdateEffect(() => {
     if (logInUserMutation.isSuccess === true) {
-      const { accessJwtToken, email, roles, message, name } =
-        logInUserMutation.data
-
-      if (name === 'MongooseError') {
-        toast.warning('Database error')
-
+      if (logInUserMutation.data.message !== 'good password') {
         return
       }
 
-      if (message !== 'good password') {
+      if (logInUserMutation.data.accessJwtToken === undefined) {
         return
       }
 
-      if (accessJwtToken === undefined) {
-        return
-      }
-
-      if (email === undefined) {
+      if (logInUserMutation.data.email === undefined) {
         return
       }
 
       dispatch(
         userSlice.actions.setAccessToken({
-          accessToken: accessJwtToken,
+          accessToken: logInUserMutation.data.accessJwtToken,
         }),
       )
 
       dispatch(
         userSlice.actions.rememberLoggedUser({
-          email,
-          roles: roles ?? [userRole.user],
+          email: logInUserMutation.data.email,
+          roles: logInUserMutation.data.roles ?? [userRole.user],
         }),
       )
 
@@ -84,7 +75,8 @@ export const useLogIn = ({
         navSlice.actions.showNavItems({ navItemIds: [navItemId.profile] }),
       )
 
-      const isSuperAdmin = roles?.includes(userRole.superAdmin) === true
+      const isSuperAdmin =
+        logInUserMutation.data.roles?.includes(userRole.superAdmin) === true
 
       if (isSuperAdmin === true) {
         dispatch(navSlice.actions.showNavItems({ navItemIds: ['admin'] }))
