@@ -1,41 +1,46 @@
 import { expect, test } from '@playwright/test'
+import { runtimeConfig } from '@root/config/runtime'
 import { route } from '@shared/lib/react-router-dom/route'
 
-test('page is accessible', async ({ page }) => {
-  const response = await page.goto(route.root)
+test.describe('basic ui elements on front page', () => {
+  test.use({ baseURL: runtimeConfig.front.baseUrl })
 
-  expect(response?.status()).toBe(200)
-})
+  test('page is accessible', async ({ page }) => {
+    const response = await page.goto(route.root)
 
-test('has title', async ({ page }) => {
-  await page.goto(route.root)
-  await expect(page).toHaveTitle(/SendMeQuotation.today/u)
-})
+    expect(response?.status()).toBe(200)
+  })
 
-test('has main elements & texts on index page', async ({ page }) => {
-  await page.goto(route.root)
+  test('has title', async ({ page }) => {
+    await page.goto(route.root)
+    await expect(page).toHaveTitle(/SendMeQuotation.today/u)
+  })
 
-  const mainElement = await page.$('main')
+  test('has main elements & texts on index page', async ({ page }) => {
+    await page.goto(route.root)
 
-  expect(mainElement).not.toBeNull()
+    const mainElement = await page.$('main')
 
-  const navElement = await page.$('nav')
+    expect(mainElement).not.toBeNull()
 
-  expect(navElement).not.toBeNull()
+    const navElement = await page.$('nav')
 
-  const footerElement = await page.$('footer')
+    expect(navElement).not.toBeNull()
 
-  expect(footerElement).not.toBeNull()
+    const footerElement = await page.$('footer')
 
-  const body = page.locator('body')
+    expect(footerElement).not.toBeNull()
 
-  await expect(body).toHaveText(/Commercial quotation/u)
-  await expect(body).toHaveText(/Title/u)
-  await expect(body).toHaveText(/Subtotal/u)
-  await expect(body).toHaveText(/Description/u)
-  await expect(body).toHaveText(/Item price/u)
-  await expect(body).toHaveText(/Qty/u)
-  await expect(body).toHaveText(/Price/u)
-  await expect(body).toHaveText(/Total price/u)
-  await expect(body).toHaveText(/Terms & Conditions/u)
+    const body = page.locator('body')
+
+    await expect(body).toHaveText(/Commercial quotation/u)
+    await expect(body).toHaveText(/Title/u)
+    await expect(body).toHaveText(/Subtotal/u)
+    await expect(body).toHaveText(/Description/u)
+    await expect(body).toHaveText(/Item price/u)
+    await expect(body).toHaveText(/Qty/u)
+    await expect(body).toHaveText(/Price/u)
+    await expect(body).toHaveText(/Total price/u)
+    await expect(body).toHaveText(/Terms & Conditions/u)
+  })
 })

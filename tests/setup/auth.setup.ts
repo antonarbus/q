@@ -1,28 +1,33 @@
-import { request, test as setup } from '@playwright/test'
+import { request, test } from '@playwright/test'
 import { userFilePath } from './userFilePath'
+import { runtimeConfig } from '@root/config/runtime'
 
-setup('authenticate', async () => {
-  const context = await request.newContext({
-    ignoreHTTPSErrors: true, // This line ignores certificate errors
+test.describe('authenticate for all further tests', () => {
+  test.use({ baseURL: runtimeConfig.front.baseUrl })
+
+  test('authenticate', async () => {
+    const context = await request.newContext({
+      ignoreHTTPSErrors: true, // This line ignores certificate errors
+    })
+
+    const response = await context.post('/api/login', {
+      data: {
+        email: 'test-user@sendmequotation.today',
+        password: 'xxx',
+      },
+    })
+
+    const isResponseOk = response.ok()
+
+    if (isResponseOk === true) {
+      await context.storageState({ path: userFilePath.authenticated })
+      console.info('🫡 authenticated before all tests')
+    } else {
+      const responseBody = await response.text() // Get the response body as text
+
+      throw new Error(
+        `Failed to authenticate: ${response.status()} - ${responseBody}`,
+      )
+    }
   })
-
-  const response = await context.post('/api/login', {
-    data: {
-      email: 'test-user@sendmequotation.today',
-      password: 'xxx',
-    },
-  })
-
-  const isResponseOk = response.ok()
-
-  if (isResponseOk === true) {
-    await context.storageState({ path: userFilePath.authenticated })
-    console.info('🫡 authenticated before all tests')
-  } else {
-    const responseBody = await response.text() // Get the response body as text
-
-    throw new Error(
-      `Failed to authenticate: ${response.status()} - ${responseBody}`,
-    )
-  }
 })

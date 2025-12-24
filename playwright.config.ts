@@ -12,7 +12,6 @@ export default defineConfig({
   reporter: runtimeConfig.ci === true ? 'dot' : 'line',
   globalSetup: './tests/setup/global.setup.ts',
   use: {
-    baseURL: runtimeConfig.front.baseUrl,
     trace: 'on-first-retry',
   },
   projects: [

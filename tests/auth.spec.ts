@@ -1,9 +1,11 @@
 import { expect, test } from '@playwright/test'
 import { route } from '@shared/lib/react-router-dom/route'
 import { userFilePath } from './setup/userFilePath'
+import { runtimeConfig } from '@root/config/runtime'
 
 test.describe('nav bar for logged-in vs guest user', () => {
   test.use({ storageState: userFilePath.guest })
+  test.use({ baseURL: runtimeConfig.front.baseUrl })
 
   test('log in & out', async ({ page }) => {
     const email = 'test-user@sendmequotation.today'
