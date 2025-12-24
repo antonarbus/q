@@ -11,7 +11,7 @@ type Props = {
  * do not want to log timestamp of sign-in, open
  * quotation or bookmark.
  *
- * We set the 'no-trace-mode': true cookie to the header
+ * We set the 'no-trace': true cookie to the header
  */
 export const setNoTraceMode = ({ res }: Props): void => {
   res.cookie(cookieName.noTrace, true, {

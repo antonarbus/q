@@ -1,4 +1,3 @@
-import { getUserFromRefreshTokenOrNull, UserModel } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
 import {
@@ -8,6 +7,9 @@ import {
 import { generateAccessToken } from '@back/shared/lib/json-webtoken'
 import type { User } from '@entities/user/type'
 import type { NextFunction, Request, Response } from 'express'
+import { usersTable, getUserFromRefreshTokenOrNull } from '@back/entities/user'
+import { db } from '@back/shared/lib/drizzle/db'
+import { and, eq } from 'drizzle-orm'
 
 export type ResBody = {
   message: 'issued access token'
@@ -40,26 +42,43 @@ export const getAccessTokenHandler: RouterHandler = async (req, res, _next) => {
 
   const shouldNotTrace = getShouldNotTrace({ req })
 
-  const user =
-    shouldNotTrace === true
-      ? await UserModel.findOne({
-          email: userFromRefreshToken.email,
-          refreshJwtToken: userFromRefreshToken.refreshJwtToken,
-        })
-      : await UserModel.findOneAndUpdate(
-          {
-            email: userFromRefreshToken.email,
-            refreshJwtToken: userFromRefreshToken.refreshJwtToken,
-          },
-          { loggedAt: Date.now() },
-          { new: true },
-        )
+  if (shouldNotTrace === true) {
+    // Just select without updating
+    const [selectedUser] = await db
+      .select()
+      .from(usersTable)
+      .where(
+        and(
+          eq(usersTable.email, userFromRefreshToken.email),
+          eq(usersTable.refreshJwtToken, userFromRefreshToken.refreshJwtToken),
+        ),
+      )
 
-  if (user === null) {
-    removeRefreshTokenCookie({ res })
-    res.status(httpStatus.unauthorized401).json({ message: 'Not logged in' })
+    if (selectedUser === undefined) {
+      removeRefreshTokenCookie({ res })
+      res.status(httpStatus.unauthorized401).json({ message: 'Not logged in' })
 
-    return
+      return
+    }
+  } else {
+    // Update loggedAt and return the updated user
+    const [updatedUser] = await db
+      .update(usersTable)
+      .set({ loggedAt: new Date() })
+      .where(
+        and(
+          eq(usersTable.email, userFromRefreshToken.email),
+          eq(usersTable.refreshJwtToken, userFromRefreshToken.refreshJwtToken),
+        ),
+      )
+      .returning()
+
+    if (updatedUser === undefined) {
+      removeRefreshTokenCookie({ res })
+      res.status(httpStatus.unauthorized401).json({ message: 'Not logged in' })
+
+      return
+    }
   }
 
   const accessToken = generateAccessToken({

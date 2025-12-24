@@ -11,6 +11,13 @@ type Props = {
   req: RequestWithCookies
 }
 
+/**
+ * If super-admin logs into someone user's account we
+ * do not want to log timestamp of sign-in, open
+ * quotation or bookmark.
+ *
+ * We set the 'no-trace': true cookie to the header
+ */
 export const getShouldNotTrace = ({ req }: Props): boolean => {
   const noTraceCookie = req.cookies[cookieName.noTrace]
 

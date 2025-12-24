@@ -5,6 +5,13 @@ type Props = {
   res: Response
 }
 
+/**
+ * If super-admin logs into someone user's account we
+ * do not want to log timestamp of sign-in, open
+ * quotation or bookmark.
+ *
+ * We set the 'no-trace': true cookie to the header
+ */
 export const removeNoTraceMode = ({ res }: Props): void => {
   res.clearCookie(cookieName.noTrace)
 }
