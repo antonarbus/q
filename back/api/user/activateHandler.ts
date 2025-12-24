@@ -11,7 +11,7 @@ import { db } from '@back/shared/lib/drizzle/db'
 import { and, eq } from 'drizzle-orm'
 
 export type ReqBody = {
-  activationKey: SelectUser['activationKey']
+  activationKey: NonNullable<SelectUser['activationKey']>
 }
 
 export type ResBody = {
