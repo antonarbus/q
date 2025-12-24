@@ -18,7 +18,9 @@ export const usersTable = pgTable(
     isActivated: boolean().notNull().default(false),
     activationKey: varchar({ length: 255 }),
     resetPasswordKey: varchar({ length: 255 }),
-    refreshJwtToken: varchar({ length: 500 }),
+    refreshJwtToken: varchar({ length: 500 })
+      .notNull()
+      .default('incorrect token'),
     registeredAt: timestamp({ mode: 'date' }).notNull().defaultNow(),
     loggedAt: timestamp({ mode: 'date' }).notNull().defaultNow(),
   },

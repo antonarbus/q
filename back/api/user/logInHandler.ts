@@ -74,12 +74,12 @@ export const logInHandler: RouterHandler = async (req, res, _next) => {
     // just log in as a user without password coz you are a super-admin
     // do not leave traces of login + opening quotations & bookmarks
 
-    const isExistingRefreshJwtToken = Boolean(
+    const isExistingRefreshJwtTokenValid = Boolean(
       verifyRefreshToken(userFromDb.refreshJwtToken),
     )
 
     const getRefreshToken = (): string => {
-      if (isExistingRefreshJwtToken === true) {
+      if (isExistingRefreshJwtTokenValid === true) {
         return userFromDb.refreshJwtToken
       }
 
