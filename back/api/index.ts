@@ -2,7 +2,7 @@ import { activateHandler } from '@back/api/user/activateHandler'
 import { getAccessTokenHandler } from '@back/api/user/getAccessTokenHandler'
 import { logInHandler } from '@back/api/user/logInHandler'
 import { logOutHandler } from '@back/api/user/logOutHandler'
-import { registerHandler } from '@back/api/user/registerHandler'
+import { registerUserHandler } from '@back/api/user/registerUserHandler'
 import { requestPasswordResetHandler } from '@back/api/user/requestPasswordResetHandler'
 import { resetPasswordHandler } from '@back/api/user/resetPasswordHandler'
 import { deleteBookmarkHandler } from '@back/api/bookmark/deleteBookmarkHandler'
@@ -79,8 +79,8 @@ export const api = {
   },
   // auth
   register: {
-    ...route.register,
-    handler: registerHandler,
+    ...route.registerUser,
+    handler: registerUserHandler,
   },
   logIn: {
     ...route.logIn,

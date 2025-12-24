@@ -3,7 +3,7 @@ import type {
   ErrorResBody,
   ReqBody as Payload,
   ResBody,
-} from '@back/api/user/registerHandler'
+} from '@back/api/user/registerUserHandler'
 import { queryKey } from '@shared/lib/tanstack/react-query/queryKey'
 import { type UseMutationResult, useMutation } from '@tanstack/react-query'
 import axios, { type AxiosError } from 'axios'
@@ -15,8 +15,8 @@ export const useRegisterUserMutation = (): Res => {
     mutationKey: [queryKey.register],
     mutationFn: async ({ email, password }: Payload) => {
       const { data } = await axios<ResBody>({
-        url: route.register.url,
-        method: route.register.method,
+        url: route.registerUser.url,
+        method: route.registerUser.method,
         data: { email, password },
       })
 

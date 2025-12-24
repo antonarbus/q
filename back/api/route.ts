@@ -43,9 +43,9 @@ export const route = {
     method: 'get',
     description: 'Get CORS for bucket. Visit the endpoint to apply.',
   },
-  // auth
-  register: {
-    url: '/api/register',
+  // user
+  registerUser: {
+    url: '/api/register-user',
     method: 'post',
     description: 'When user clicks on register button',
   },
