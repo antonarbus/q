@@ -898,10 +898,6 @@ The backend main file (`/back/index.ts`) is minimal and clean, but consider addi
 6. **Graceful shutdown** - Handle SIGTERM/SIGINT for clean shutdowns (close DB connections, finish requests)
 7. **Process error handlers** - Global handlers for `uncaughtException` and `unhandledRejection`
 
-### Database Migration
-
-8. **Update database connection** - The project is on branch `migrate-from-mongo` but `back/index.ts:8` still imports from `mongoose/connectToDb`. Verify if this should be updated to use Drizzle/PostgreSQL connection instead.
-
 ---
 
 ## Notes
