@@ -114,7 +114,7 @@ export const registerUserHandler: RouterHandler = async (req, res, _next) => {
       `,
   })
 
-  const { accessJwtToken, accessJwtTokenExpiresOn } = generateAccessToken({
+  const accessToken = generateAccessToken({
     email: emailFromInput,
     roles: [userRole.user],
   })
@@ -125,8 +125,8 @@ export const registerUserHandler: RouterHandler = async (req, res, _next) => {
       message: 'activation link sent',
       email: emailFromInput,
       roles: [userRole.user],
-      accessJwtToken,
-      accessJwtTokenExpiresOn,
+      accessJwtToken: accessToken.value,
+      accessJwtTokenExpiresOn: accessToken.expiresOn,
     })
 
     return

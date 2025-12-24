@@ -59,7 +59,7 @@ export const resetPasswordHandler: RouterHandler = async (req, res, _next) => {
   const saltRounds = 10
   const passwordEncrypted = await bcrypt.hash(passwordFromInput, saltRounds)
 
-  const { accessJwtToken, accessJwtTokenExpiresOn } = generateAccessToken({
+  const accessToken = generateAccessToken({
     email: emailFromInput,
     roles: user.roles,
   })
@@ -84,8 +84,8 @@ export const resetPasswordHandler: RouterHandler = async (req, res, _next) => {
 
   res.status(httpStatus.created201).json({
     message: 'password was reset',
-    accessJwtToken,
-    accessJwtTokenExpiresOn,
+    accessJwtToken: accessToken.value,
+    accessJwtTokenExpiresOn: accessToken.expiresOn,
     email: updatedUser?.email,
     roles: updatedUser?.roles,
   })

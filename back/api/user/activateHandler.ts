@@ -1,4 +1,3 @@
-import { UserModel } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
 import { setRefreshTokenCookie } from '@back/shared/headers'
@@ -6,18 +5,20 @@ import {
   generateAccessToken,
   generateRefreshToken,
 } from '@back/shared/lib/json-webtoken'
-import type { User } from '@entities/user/type'
 import type { NextFunction, Request, Response } from 'express'
+import { usersTable, type SelectUser } from '@back/entities/user'
+import { db } from '@back/shared/lib/drizzle/db'
+import { and, eq } from 'drizzle-orm'
 
 export type ReqBody = {
-  activationKey: User['activationKey']
+  activationKey: SelectUser['activationKey']
 }
 
 export type ResBody = {
   accessJwtToken?: string
   accessJwtTokenExpiresOn?: string
-  email?: User['email']
-  roles?: User['roles']
+  email?: SelectUser['email']
+  roles?: SelectUser['roles']
   message: 'already activated' | 'activated'
 }
 
@@ -32,13 +33,12 @@ type RouterHandler = (
 ) => Promise<void>
 
 export const activateHandler: RouterHandler = async (req, res, _next) => {
-  const activationKeyFromInput = req.body.activationKey
+  const [selectedUser] = await db
+    .select()
+    .from(usersTable)
+    .where(eq(usersTable.activationKey, req.body.activationKey))
 
-  const user = await UserModel.findOne({
-    activationKey: activationKeyFromInput,
-  })
-
-  if (user === null) {
+  if (selectedUser === undefined) {
     res
       .status(httpStatus.badRequest400)
       .json({ message: 'activation key not found' })
@@ -46,37 +46,44 @@ export const activateHandler: RouterHandler = async (req, res, _next) => {
     return
   }
 
-  const { email, roles, isActivated } = user
-
-  if (isActivated === true) {
+  if (selectedUser.isActivated === true) {
     res.status(httpStatus.success200).json({ message: 'already activated' })
 
     return
   }
 
-  const refreshToken = generateRefreshToken({ email, roles })
+  const refreshToken = generateRefreshToken({
+    email: selectedUser.email,
+    roles: selectedUser.roles,
+  })
+
   setRefreshTokenCookie({ res, refreshJwtToken: refreshToken.value })
 
-  const userDocument = await UserModel.findOneAndUpdate(
-    { email, activationKey: activationKeyFromInput },
-    {
+  await db
+    .update(usersTable)
+    .set({
       refreshJwtToken: refreshToken.value,
       isActivated: true,
-      loggedAt: Date.now(),
-    },
-    { new: true },
-  ).lean()
+      loggedAt: new Date(),
+    })
+    .where(
+      and(
+        eq(usersTable.activationKey, req.body.activationKey),
+        eq(usersTable.email, selectedUser.email),
+      ),
+    )
+    .returning()
 
-  const { accessJwtToken, accessJwtTokenExpiresOn } = generateAccessToken({
-    email,
-    roles,
+  const accessToken = generateAccessToken({
+    email: selectedUser.email,
+    roles: selectedUser.roles,
   })
 
   res.status(httpStatus.success200).json({
     message: 'activated',
-    accessJwtToken,
-    accessJwtTokenExpiresOn,
-    email: userDocument?.email,
-    roles: userDocument?.roles,
+    accessJwtToken: accessToken.value,
+    accessJwtTokenExpiresOn: accessToken.expiresOn,
+    email: selectedUser.email,
+    roles: selectedUser.roles,
   })
 }

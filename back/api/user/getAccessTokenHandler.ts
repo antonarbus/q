@@ -62,15 +62,15 @@ export const getAccessTokenHandler: RouterHandler = async (req, res, _next) => {
     return
   }
 
-  const { accessJwtToken, accessJwtTokenExpiresOn } = generateAccessToken({
+  const accessToken = generateAccessToken({
     email: userFromRefreshToken.email,
     roles: userFromRefreshToken.roles,
   })
 
   res.status(httpStatus.success200).json({
     message: 'issued access token',
-    accessJwtToken,
-    accessJwtTokenExpiresOn,
+    accessJwtToken: accessToken.value,
+    accessJwtTokenExpiresOn: accessToken.expiresOn,
     roles: userFromRefreshToken.roles,
     email: userFromRefreshToken.email,
     jwtRefreshTokenExpirationDays:

@@ -4,21 +4,23 @@ import { FIFTEEN_MIN_IN_SEC } from './const'
 import type { JwtPayloadExtended } from './types'
 
 type Res = {
-  accessJwtToken: string
-  accessJwtTokenExpiresOn: string
+  value: string
+  expiresOn: string
 }
 
 export const generateAccessToken = (payload: JwtPayloadExtended): Res => {
-  const accessJwtToken = jwt.sign(payload, secret.JWT_ACCESS_SECRET, {
+  const value = jwt.sign(payload, secret.JWT_ACCESS_SECRET, {
     expiresIn: FIFTEEN_MIN_IN_SEC,
   })
 
-  const accessJwtTokenExpiresOn = new Date(
+  const expiresOn = new Date(
     Date.now() + FIFTEEN_MIN_IN_SEC * 1000,
   ).toISOString()
 
-  return {
-    accessJwtToken,
-    accessJwtTokenExpiresOn,
+  const accessToken = {
+    value,
+    expiresOn,
   }
+
+  return accessToken
 }

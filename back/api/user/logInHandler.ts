@@ -93,7 +93,7 @@ export const logInHandler: RouterHandler = async (req, res, _next) => {
       token: refreshJwtToken,
     })
 
-    const { accessJwtToken, accessJwtTokenExpiresOn } = generateAccessToken({
+    const accessToken = generateAccessToken({
       email: emailFromInput,
       roles: userFromDb.roles,
     })
@@ -103,8 +103,8 @@ export const logInHandler: RouterHandler = async (req, res, _next) => {
 
     res.status(httpStatus.success200).json({
       message: 'super-admin on behalf of user',
-      accessJwtToken,
-      accessJwtTokenExpiresOn,
+      accessJwtToken: accessToken.value,
+      accessJwtTokenExpiresOn: accessToken.expiresOn,
       email: userFromDb.email,
       roles: userFromDb.roles,
       jwtRefreshTokenExpirationDays,
@@ -208,15 +208,15 @@ export const logInHandler: RouterHandler = async (req, res, _next) => {
     return
   }
 
-  const { accessJwtToken, accessJwtTokenExpiresOn } = generateAccessToken({
+  const accessToken = generateAccessToken({
     email: emailFromInput,
     roles: userFromDb.roles,
   })
 
   res.status(httpStatus.success200).json({
     message: 'good password',
-    accessJwtToken,
-    accessJwtTokenExpiresOn,
+    accessJwtToken: accessToken.value,
+    accessJwtTokenExpiresOn: accessToken.expiresOn,
     email: userUpdated.email,
     roles: userUpdated.roles,
     jwtRefreshTokenExpirationDays,
