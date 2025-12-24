@@ -1,4 +1,4 @@
-import type { ItemPick } from '@back/api/quotation/getQuotationListAllHandler'
+import type { ResBody } from '@back/api/quotation/getQuotationListAllHandler'
 import { useQuotationListAllDatasource } from '@entities/quotation/api/useQuotationListAllDatasource'
 import { LoadingTableOverlay } from '@shared/component/LoadingTableOverlay'
 import { useDisableLoadingOverlayWhenItemsAreFetched } from '@shared/component/loading-dots-overlay'
@@ -39,7 +39,7 @@ export const QuotationListAllGrid = (): JSX.Element => {
       <AgGridStyles />
       <DisplayedRowsCount />
       <ProgressGridBar isShown={isFetching} />
-      <AgGridReact<ItemPick>
+      <AgGridReact<ResBody['quotationList'][number]>
         columnDefs={columnDefs}
         datasource={datasource}
         defaultColDef={getDefaultColDef()}
