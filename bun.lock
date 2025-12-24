@@ -36,6 +36,7 @@
         "commander": "^14.0.2",
         "concurrently": "^9.2.1",
         "drizzle-kit": "^0.31.8",
+        "drizzle-orm": "^0.45.1",
         "eslint": "^9.39.1",
         "eslint-config-prettier": "^10.1.8",
         "eslint-plugin-react": "^7.37.5",
