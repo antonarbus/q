@@ -31,7 +31,7 @@ export const getBookmarkCategoriesHandler: RouterHandler = async (
     res,
   })
 
-  const selectedBookmarkList = await db
+  const bookmarkListSelected = await db
     .selectDistinct({ category: bookmarksTable.category })
     .from(bookmarksTable)
     .where(
@@ -42,7 +42,7 @@ export const getBookmarkCategoriesHandler: RouterHandler = async (
     )
     .orderBy(bookmarksTable.category)
 
-  const distinctCategoryList = selectedBookmarkList.map((row) => row.category)
+  const distinctCategoryList = bookmarkListSelected.map((row) => row.category)
 
   res
     .status(httpStatus.success200)

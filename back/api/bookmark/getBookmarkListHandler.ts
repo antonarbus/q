@@ -32,23 +32,23 @@ export const getBookmarkListHandler: RouterHandler = async (
     res,
   })
 
-  const selectedBookmarkList = await db
+  const bookmarkListSelected = await db
     .select()
     .from(bookmarksTable)
     .where(eq(bookmarksTable.email, userFromAccessToken.email))
 
-  if (selectedBookmarkList.length === 0) {
+  if (bookmarkListSelected.length === 0) {
     res
       .status(httpStatus.success200)
-      .json({ message: 'No content', bookmarkList: selectedBookmarkList })
+      .json({ message: 'No content', bookmarkList: bookmarkListSelected })
 
     return
   }
 
-  if (selectedBookmarkList.length !== 0) {
+  if (bookmarkListSelected.length !== 0) {
     res
       .status(httpStatus.success200)
-      .json({ message: 'Found', bookmarkList: selectedBookmarkList })
+      .json({ message: 'Found', bookmarkList: bookmarkListSelected })
 
     return
   }

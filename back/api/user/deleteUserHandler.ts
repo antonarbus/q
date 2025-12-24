@@ -56,11 +56,11 @@ export const deleteUserHandler: RouterHandler = async (req, res, _next) => {
 
   // delete from db
 
-  const deleteUserResult = await db
+  const deleteUserResponse = await db
     .delete(usersTable)
     .where(eq(usersTable.email, req.body.email))
 
-  if (deleteUserResult.rowCount === 0) {
+  if (deleteUserResponse.rowCount === 0) {
     statistics.push(`${req.body.email} was not found in database ❌`)
   } else {
     statistics.push(`${req.body.email} was deleted from database ✅`)
@@ -78,15 +78,15 @@ export const deleteUserHandler: RouterHandler = async (req, res, _next) => {
     )
   }
 
-  const deleteResponse = await db
+  const deleteBookmarkResponse = await db
     .delete(bookmarksTable)
     .where(eq(bookmarksTable.email, userFromAccessToken.email))
 
-  if (deleteResponse.rowCount === 0) {
+  if (deleteBookmarkResponse.rowCount === 0) {
     statistics.push(`bookmarks were not found in database ❌`)
   } else {
     statistics.push(
-      `${deleteResponse.rowCount} bookmarks were deleted from database ✅`,
+      `${deleteBookmarkResponse.rowCount} bookmarks were deleted from database ✅`,
     )
   }
 

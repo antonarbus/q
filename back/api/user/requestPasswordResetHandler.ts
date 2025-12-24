@@ -39,18 +39,18 @@ export const requestPasswordResetHandler: RouterHandler = async (
 ) => {
   const emailFromInput = req.body.email.toLowerCase()
 
-  const [user] = await db
+  const [userSelected] = await db
     .select()
     .from(usersTable)
     .where(eq(usersTable.email, emailFromInput))
 
-  if (user === undefined) {
+  if (userSelected === undefined) {
     res.status(httpStatus.forbidden403).json({ message: 'does not exists' })
 
     return
   }
 
-  if (user.isActivated === false) {
+  if (userSelected.isActivated === false) {
     res
       .status(httpStatus.forbidden403)
       .json({ message: 'account not activated' })
@@ -60,13 +60,13 @@ export const requestPasswordResetHandler: RouterHandler = async (
 
   const resetPasswordKey = generateId()
 
-  const [updatedUser] = await db
+  const [userUpdated] = await db
     .update(usersTable)
     .set({ resetPasswordKey })
     .where(eq(usersTable.email, emailFromInput))
     .returning()
 
-  if (updatedUser === undefined) {
+  if (userUpdated === undefined) {
     res
       .status(httpStatus.serverError500)
       .json({ message: 'reset key not issued' })

@@ -25,7 +25,7 @@ export const saveFileInfoHandler: RouterHandler = async (req, res, _next) => {
     res,
   })
 
-  const [insertedFile] = await db
+  const [fileInserted] = await db
     .insert(filesTable)
     .values({
       id: req.body.id,
@@ -36,7 +36,7 @@ export const saveFileInfoHandler: RouterHandler = async (req, res, _next) => {
     .onConflictDoNothing()
     .returning()
 
-  if (insertedFile === undefined) {
+  if (fileInserted === undefined) {
     res.status(httpStatus.serverError500).json({
       message: 'failed to make file public',
     })
@@ -44,5 +44,5 @@ export const saveFileInfoHandler: RouterHandler = async (req, res, _next) => {
     return
   }
 
-  res.status(httpStatus.success200).json(insertedFile)
+  res.status(httpStatus.success200).json(fileInserted)
 }

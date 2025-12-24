@@ -19,7 +19,7 @@ test.describe('#activateRouter', () => {
     // Arrange: Create an already-activated user
     const activationKey = generateId()
 
-    const [userDocument] = await db
+    const [userInserted] = await db
       .insert(usersTable)
       .values({
         email: testUserEmail,
@@ -34,14 +34,14 @@ test.describe('#activateRouter', () => {
       })
       .returning()
 
-    if (userDocument === undefined) {
+    if (userInserted === undefined) {
       throw new Error('Failed to create test user')
     }
 
     // Act: Attempt to activate again
     const res = await request[route.activate.method](route.activate.url, {
       data: {
-        activationKey: userDocument.activationKey,
+        activationKey: userInserted.activationKey,
       },
     })
 

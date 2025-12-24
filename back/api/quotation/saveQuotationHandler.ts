@@ -47,16 +47,16 @@ export const saveQuotationHandler: RouterHandler = async (req, res, _next) => {
       return 'your new'
     }
 
-    const [selectedQuotation] = await db
+    const [quotationSelected] = await db
       .select()
       .from(quotationsTable)
       .where(eq(quotationsTable.id, req.body.quotation.id))
 
-    if (selectedQuotation === undefined) {
+    if (quotationSelected === undefined) {
       return 'your new'
     }
 
-    if (selectedQuotation.email === userFromAccessToken.email) {
+    if (quotationSelected.email === userFromAccessToken.email) {
       return 'your existing'
     }
 
@@ -69,7 +69,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, _next) => {
   if (quotationOwnership === 'your new') {
     const quotationId = generateId()
 
-    const [insertedQuotation] = await db
+    const [quotationInserted] = await db
       .insert(quotationsTable)
       .values({
         id: quotationId,
@@ -86,7 +86,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, _next) => {
       })
       .returning()
 
-    if (insertedQuotation === undefined) {
+    if (quotationInserted === undefined) {
       res.status(httpStatus.serverError500).json({ message: 'not saved' })
 
       return
@@ -96,7 +96,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, _next) => {
     const quotationFile = bucket.file(fileInfo.path)
 
     const fullQuotation = {
-      ...insertedQuotation,
+      ...quotationInserted,
       blocks: req.body.quotation.blocks,
     }
 
@@ -106,14 +106,14 @@ export const saveQuotationHandler: RouterHandler = async (req, res, _next) => {
 
     res.status(httpStatus.success200).json({
       message: 'saved',
-      quotation: insertedQuotation,
+      quotation: quotationInserted,
     })
 
     return
   }
 
   if (quotationOwnership === 'your existing') {
-    const [updatedQuotation] = await db
+    const [quotationUpdated] = await db
       .update(quotationsTable)
       .set({
         name: req.body.quotation.name,
@@ -132,7 +132,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, _next) => {
       )
       .returning()
 
-    if (updatedQuotation === undefined) {
+    if (quotationUpdated === undefined) {
       res.status(httpStatus.serverError500).json({ message: 'not saved' })
 
       return
@@ -142,7 +142,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, _next) => {
     const file = bucket.file(fileInfo.path)
 
     const fullQuotation = {
-      ...updatedQuotation,
+      ...quotationUpdated,
       blocks: req.body.quotation.blocks,
     }
 
@@ -151,7 +151,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, _next) => {
 
     res.status(httpStatus.success200).json({
       message: 'updated',
-      quotation: updatedQuotation,
+      quotation: quotationUpdated,
     })
 
     return
@@ -160,7 +160,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, _next) => {
   if (quotationOwnership === 'foreign existing') {
     const newQuotationId = generateId()
 
-    const [insertedQuotation] = await db
+    const [quotationInserted] = await db
       .insert(quotationsTable)
       .values({
         id: newQuotationId,
@@ -177,7 +177,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, _next) => {
       })
       .returning()
 
-    if (insertedQuotation === undefined) {
+    if (quotationInserted === undefined) {
       res.status(httpStatus.serverError500).json({ message: 'not saved' })
 
       return
@@ -188,7 +188,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, _next) => {
     const quotationFile = bucket.file(fileInfo.path)
 
     const fullQuotation = {
-      ...insertedQuotation,
+      ...quotationInserted,
       blocks: req.body.quotation.blocks,
     }
 
@@ -198,7 +198,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, _next) => {
 
     res.status(httpStatus.success200).json({
       message: 'copied and saved',
-      quotation: insertedQuotation,
+      quotation: quotationInserted,
     })
   }
 }

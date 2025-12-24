@@ -107,7 +107,7 @@ export const verifyDeployment = async (props: Props): Promise<void> => {
         logger.info('  Checking health check message...')
 
         // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-        if (healthCheckResponse.data.message === 'connected') {
+        if (healthCheckResponse.data.message === 'connected to db') {
           logger.success('     Health check message correct: "connected"')
         }
       } catch {

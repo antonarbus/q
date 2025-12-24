@@ -17,12 +17,12 @@ export type UserPicked = Pick<
 >
 
 export type ResBody = Pretty<{
-  users: UserPicked[]
+  userList: UserPicked[]
   message: 'users data'
 }>
 
 export type ErrorResBody = {
-  users: UserPicked[]
+  userList: UserPicked[]
   message:
     | ErrorMessageCommon
     | 'no permission to view'
@@ -45,12 +45,12 @@ export const getUserListHandler: RouterHandler = async (req, res, _next) => {
   if (userFromAccessToken.roles.includes(userRole.superAdmin) === false) {
     res
       .status(httpStatus.forbidden403)
-      .json({ message: 'no permission to view', users: [] })
+      .json({ message: 'no permission to view', userList: [] })
 
     return
   }
 
-  const users = await db
+  const usersListSelected = await db
     .select({
       email: usersTable.email,
       isActivated: usersTable.isActivated,
@@ -60,21 +60,23 @@ export const getUserListHandler: RouterHandler = async (req, res, _next) => {
     .from(usersTable)
     .orderBy(desc(usersTable.loggedAt))
 
-  if (users.length === 0) {
+  if (usersListSelected.length === 0) {
     res
       .status(httpStatus.notFound404)
-      .json({ message: 'No content', users: [] })
+      .json({ message: 'No content', userList: [] })
 
     return
   }
 
-  if (users.length !== 0) {
-    res.status(httpStatus.success200).json({ message: 'users data', users })
+  if (usersListSelected.length !== 0) {
+    res
+      .status(httpStatus.success200)
+      .json({ message: 'users data', userList: usersListSelected })
 
     return
   }
 
   res
     .status(httpStatus.notFound404)
-    .json({ message: 'Unhandled case', users: [] })
+    .json({ message: 'Unhandled case', userList: [] })
 }

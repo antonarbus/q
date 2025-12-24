@@ -38,16 +38,16 @@ export const deleteFileHandler: RouterHandler = async (req, res, _next) => {
   type FileOwnerShip = 'file not found' | 'owner' | 'not owner'
 
   const getFileOwnerShip = async (): Promise<FileOwnerShip> => {
-    const [selectedFile] = await db
+    const [fileSelected] = await db
       .select()
       .from(filesTable)
       .where(eq(filesTable.id, req.body.fileId))
 
-    if (selectedFile === undefined) {
+    if (fileSelected === undefined) {
       return 'file not found'
     }
 
-    if (selectedFile.email !== userFromAccessToken.email) {
+    if (fileSelected.email !== userFromAccessToken.email) {
       return 'not owner'
     }
 

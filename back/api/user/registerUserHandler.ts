@@ -50,7 +50,7 @@ export const registerUserHandler: RouterHandler = async (req, res, _next) => {
   const emailFromInput = req.body.email.toLowerCase()
   const passwordFromInput = req.body.password
 
-  const [selectedUser] = await db
+  const [userSelected] = await db
     .select()
     .from(usersTable)
     .where(
@@ -60,7 +60,7 @@ export const registerUserHandler: RouterHandler = async (req, res, _next) => {
       ),
     )
 
-  if (selectedUser !== undefined) {
+  if (userSelected !== undefined) {
     res.status(httpStatus.forbidden403).json({
       message: 'already exists',
     })
@@ -79,7 +79,7 @@ export const registerUserHandler: RouterHandler = async (req, res, _next) => {
 
   setRefreshTokenCookie({ res, refreshJwtToken: refreshToken.value })
 
-  const [insertedUser] = await db
+  const [userInserted] = await db
     .insert(usersTable)
     .values({
       email: emailFromInput,
@@ -89,7 +89,7 @@ export const registerUserHandler: RouterHandler = async (req, res, _next) => {
     })
     .returning()
 
-  if (insertedUser === undefined) {
+  if (userInserted === undefined) {
     res.status(httpStatus.serverError500).json({
       message: 'Internal error',
     })

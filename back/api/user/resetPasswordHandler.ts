@@ -41,7 +41,7 @@ export const resetPasswordHandler: RouterHandler = async (req, res, _next) => {
   const passwordFromInput = req.body.password
   const resetPasswordKeyFromInput = req.body.resetPasswordKey
 
-  const [user] = await db
+  const [userSelected] = await db
     .select()
     .from(usersTable)
     .where(
@@ -51,13 +51,13 @@ export const resetPasswordHandler: RouterHandler = async (req, res, _next) => {
       ),
     )
 
-  if (user === undefined) {
+  if (userSelected === undefined) {
     res.status(httpStatus.forbidden403).json({ message: 'incorrect reset key' })
 
     return
   }
 
-  if (user.isActivated === false) {
+  if (userSelected.isActivated === false) {
     res.status(httpStatus.forbidden403).json({ message: 'not activated' })
 
     return
@@ -68,17 +68,17 @@ export const resetPasswordHandler: RouterHandler = async (req, res, _next) => {
 
   const accessToken = generateAccessToken({
     email: emailFromInput,
-    roles: user.roles,
+    roles: userSelected.roles,
   })
 
   const refreshToken = generateRefreshToken({
     email: emailFromInput,
-    roles: user.roles,
+    roles: userSelected.roles,
   })
 
   setRefreshTokenCookie({ res, refreshJwtToken: refreshToken.value })
 
-  const [updatedUser] = await db
+  const [userUpdated] = await db
     .update(usersTable)
     .set({
       password: passwordEncrypted,
@@ -98,7 +98,7 @@ export const resetPasswordHandler: RouterHandler = async (req, res, _next) => {
     message: 'password was reset',
     accessJwtToken: accessToken.value,
     accessJwtTokenExpiresOn: accessToken.expiresOn,
-    email: updatedUser?.email,
-    roles: updatedUser?.roles,
+    email: userUpdated?.email,
+    roles: userUpdated?.roles,
   })
 }

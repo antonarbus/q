@@ -51,12 +51,12 @@ export const logInHandler: RouterHandler = async (req, res, _next) => {
   const passwordFromInput = req.body.password
   const emailFromInput = req.body.email.toLowerCase()
 
-  const [userFromDb] = await db
+  const [userSelected] = await db
     .select()
     .from(usersTable)
     .where(eq(usersTable.email, emailFromInput))
 
-  if (userFromDb === undefined) {
+  if (userSelected === undefined) {
     res.status(httpStatus.badRequest400).json({ message: 'not registered' })
 
     return
@@ -75,17 +75,17 @@ export const logInHandler: RouterHandler = async (req, res, _next) => {
     // do not leave traces of login + opening quotations & bookmarks
 
     const isExistingRefreshJwtTokenValid = Boolean(
-      verifyRefreshToken(userFromDb.refreshJwtToken),
+      verifyRefreshToken(userSelected.refreshJwtToken),
     )
 
     const getRefreshToken = (): string => {
       if (isExistingRefreshJwtTokenValid === true) {
-        return userFromDb.refreshJwtToken
+        return userSelected.refreshJwtToken
       }
 
       const refreshToken = generateRefreshToken({
         email: emailFromInput,
-        roles: userFromDb.roles,
+        roles: userSelected.roles,
       })
 
       return refreshToken.value
@@ -99,7 +99,7 @@ export const logInHandler: RouterHandler = async (req, res, _next) => {
 
     const accessToken = generateAccessToken({
       email: emailFromInput,
-      roles: userFromDb.roles,
+      roles: userSelected.roles,
     })
 
     setRefreshTokenCookie({ res, refreshJwtToken })
@@ -109,8 +109,8 @@ export const logInHandler: RouterHandler = async (req, res, _next) => {
       message: 'super-admin on behalf of user',
       accessJwtToken: accessToken.value,
       accessJwtTokenExpiresOn: accessToken.expiresOn,
-      email: userFromDb.email,
-      roles: userFromDb.roles,
+      email: userSelected.email,
+      roles: userSelected.roles,
       jwtRefreshTokenExpirationDays,
     })
 
@@ -118,7 +118,7 @@ export const logInHandler: RouterHandler = async (req, res, _next) => {
   }
 
   // normal login process
-  const passwordFromDb = userFromDb.password
+  const passwordFromDb = userSelected.password
 
   if (Boolean(passwordFromDb) === false) {
     res.status(httpStatus.badRequest400).json({ message: 'no password' })
@@ -137,7 +137,7 @@ export const logInHandler: RouterHandler = async (req, res, _next) => {
     return
   }
 
-  if (userFromDb.isActivated === false) {
+  if (userSelected.isActivated === false) {
     const emailRes = await sendEmail({
       to: emailFromInput,
       subject: 'Activate your account again',
@@ -148,9 +148,9 @@ export const logInHandler: RouterHandler = async (req, res, _next) => {
           <p>
             <a
               clicktracking="off"
-              href="${runtimeConfig.front.baseUrl}/activate/${userFromDb.activationKey}"
+              href="${runtimeConfig.front.baseUrl}/activate/${userSelected.activationKey}"
             >
-              ${runtimeConfig.front.baseUrl}/activate/${userFromDb.activationKey}
+              ${runtimeConfig.front.baseUrl}/activate/${userSelected.activationKey}
             </a>
           </p>
         `,
@@ -173,17 +173,17 @@ export const logInHandler: RouterHandler = async (req, res, _next) => {
   }
 
   const isExistingRefreshJwtToken = Boolean(
-    verifyRefreshToken(userFromDb.refreshJwtToken),
+    verifyRefreshToken(userSelected.refreshJwtToken),
   )
 
   const getRefreshToken = (): string => {
     if (isExistingRefreshJwtToken === true) {
-      return userFromDb.refreshJwtToken
+      return userSelected.refreshJwtToken
     }
 
     const refreshToken = generateRefreshToken({
       email: emailFromInput,
-      roles: userFromDb.roles,
+      roles: userSelected.roles,
     })
 
     return refreshToken.value
@@ -214,7 +214,7 @@ export const logInHandler: RouterHandler = async (req, res, _next) => {
 
   const accessToken = generateAccessToken({
     email: emailFromInput,
-    roles: userFromDb.roles,
+    roles: userSelected.roles,
   })
 
   res.status(httpStatus.success200).json({

@@ -45,12 +45,12 @@ export const proxyFileToBucketHandler: RouterHandler = async (
     return
   }
 
-  const [selectedFile] = await db
+  const [fileSelected] = await db
     .select()
     .from(filesTable)
     .where(eq(filesTable.id, req.params.fileId))
 
-  if (selectedFile === undefined) {
+  if (fileSelected === undefined) {
     res.status(httpStatus.notFound404).send('File not found')
 
     return
@@ -64,7 +64,7 @@ export const proxyFileToBucketHandler: RouterHandler = async (
       version: 'v4',
       action: 'read',
       expires: Date.now() + SIGNED_URL_TTL_MS,
-      responseDisposition: `inline; filename="${selectedFile.name}"`, // display in browser
+      responseDisposition: `inline; filename="${fileSelected.name}"`, // display in browser
       // responseDisposition: `attachment; filename="${fileMeta.originalName}"`, // force to download
     })
 

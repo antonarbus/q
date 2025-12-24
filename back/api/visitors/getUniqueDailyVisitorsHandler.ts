@@ -44,7 +44,7 @@ export const getUniqueDailyVisitorsHandler: RouterHandler = async (
     return
   }
 
-  const selectedVisitorList = await db
+  const visitorListSelected = await db
     .select()
     .from(visitorsTable)
     .where(
@@ -56,5 +56,5 @@ export const getUniqueDailyVisitorsHandler: RouterHandler = async (
 
   res
     .status(httpStatus.success200)
-    .json({ visitorList: selectedVisitorList, message: 'ok' })
+    .json({ visitorList: visitorListSelected, message: 'ok' })
 }

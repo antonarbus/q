@@ -31,7 +31,7 @@ export const getQuotationCategoriesHandler: RouterHandler = async (
     res,
   })
 
-  const selectedQuotationList = await db
+  const quotationListSelected = await db
     .selectDistinct({ category: quotationsTable.category })
     .from(quotationsTable)
     .where(
@@ -42,7 +42,7 @@ export const getQuotationCategoriesHandler: RouterHandler = async (
     )
     .orderBy(quotationsTable.category)
 
-  const distinctCategoryList = selectedQuotationList.map((row) => row.category)
+  const distinctCategoryList = quotationListSelected.map((row) => row.category)
 
   res
     .status(httpStatus.success200)

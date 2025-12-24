@@ -44,7 +44,7 @@ export const getAccessTokenHandler: RouterHandler = async (req, res, _next) => {
 
   if (shouldNotTrace === true) {
     // Just select without updating
-    const [selectedUser] = await db
+    const [userSelected] = await db
       .select()
       .from(usersTable)
       .where(
@@ -54,7 +54,7 @@ export const getAccessTokenHandler: RouterHandler = async (req, res, _next) => {
         ),
       )
 
-    if (selectedUser === undefined) {
+    if (userSelected === undefined) {
       removeRefreshTokenCookie({ res })
       res.status(httpStatus.unauthorized401).json({ message: 'Not logged in' })
 
@@ -62,7 +62,7 @@ export const getAccessTokenHandler: RouterHandler = async (req, res, _next) => {
     }
   } else {
     // Update loggedAt and return the updated user
-    const [updatedUser] = await db
+    const [userUpdated] = await db
       .update(usersTable)
       .set({ loggedAt: new Date() })
       .where(
@@ -73,7 +73,7 @@ export const getAccessTokenHandler: RouterHandler = async (req, res, _next) => {
       )
       .returning()
 
-    if (updatedUser === undefined) {
+    if (userUpdated === undefined) {
       removeRefreshTokenCookie({ res })
       res.status(httpStatus.unauthorized401).json({ message: 'Not logged in' })
 

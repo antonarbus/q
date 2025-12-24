@@ -23,7 +23,10 @@ export type ResBody = {
 }
 
 export type ErrorResBody = {
-  message: ErrorMessageCommon | 'activation key not found'
+  message:
+    | ErrorMessageCommon
+    | 'activation key not found'
+    | 'failed to activate'
 }
 
 type RouterHandler = (
@@ -33,12 +36,12 @@ type RouterHandler = (
 ) => Promise<void>
 
 export const activateHandler: RouterHandler = async (req, res, _next) => {
-  const [selectedUser] = await db
+  const [userSelected] = await db
     .select()
     .from(usersTable)
     .where(eq(usersTable.activationKey, req.body.activationKey))
 
-  if (selectedUser === undefined) {
+  if (userSelected === undefined) {
     res
       .status(httpStatus.badRequest400)
       .json({ message: 'activation key not found' })
@@ -46,20 +49,20 @@ export const activateHandler: RouterHandler = async (req, res, _next) => {
     return
   }
 
-  if (selectedUser.isActivated === true) {
+  if (userSelected.isActivated === true) {
     res.status(httpStatus.success200).json({ message: 'already activated' })
 
     return
   }
 
   const refreshToken = generateRefreshToken({
-    email: selectedUser.email,
-    roles: selectedUser.roles,
+    email: userSelected.email,
+    roles: userSelected.roles,
   })
 
   setRefreshTokenCookie({ res, refreshJwtToken: refreshToken.value })
 
-  await db
+  const [userUpdated] = await db
     .update(usersTable)
     .set({
       refreshJwtToken: refreshToken.value,
@@ -69,21 +72,29 @@ export const activateHandler: RouterHandler = async (req, res, _next) => {
     .where(
       and(
         eq(usersTable.activationKey, req.body.activationKey),
-        eq(usersTable.email, selectedUser.email),
+        eq(usersTable.email, userSelected.email),
       ),
     )
     .returning()
 
+  if (userUpdated === undefined) {
+    res
+      .status(httpStatus.serverError500)
+      .json({ message: 'failed to activate' })
+
+    return
+  }
+
   const accessToken = generateAccessToken({
-    email: selectedUser.email,
-    roles: selectedUser.roles,
+    email: userUpdated.email,
+    roles: userUpdated.roles,
   })
 
   res.status(httpStatus.success200).json({
     message: 'activated',
     accessJwtToken: accessToken.value,
     accessJwtTokenExpiresOn: accessToken.expiresOn,
-    email: selectedUser.email,
-    roles: selectedUser.roles,
+    email: userUpdated.email,
+    roles: userUpdated.roles,
   })
 }

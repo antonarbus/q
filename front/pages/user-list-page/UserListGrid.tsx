@@ -56,7 +56,7 @@ export const UserListGrid = (): JSX.Element => {
           dispatch(agGridSlice.actions.setCount({ count }))
         }}
         ref={usersAgGridRef}
-        rowData={getUserListQuery.data?.users}
+        rowData={getUserListQuery.data?.userList}
         suppressCellFocus
         suppressColumnVirtualisation
         theme={themeQuartz}

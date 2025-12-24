@@ -31,12 +31,12 @@ export const getFileListHandler: RouterHandler = async (req, res, _next) => {
     res,
   })
 
-  const selectedFileList = await db
+  const fileListSelected = await db
     .select()
     .from(filesTable)
     .where(eq(filesTable.email, userFromAccessToken.email))
 
   res
     .status(httpStatus.success200)
-    .json({ message: 'file stats', fileList: selectedFileList })
+    .json({ message: 'file stats', fileList: fileListSelected })
 }

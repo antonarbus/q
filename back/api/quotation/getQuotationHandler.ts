@@ -51,12 +51,12 @@ export const getQuotationHandler: RouterHandler = async (req, res, _next) => {
     blocks: [],
   }
 
-  const [selectedQuotation] = await db
+  const [quotationSelected] = await db
     .select()
     .from(quotationsTable)
     .where(eq(quotationsTable.id, req.body.id))
 
-  if (selectedQuotation === undefined) {
+  if (quotationSelected === undefined) {
     res.status(httpStatus.notFound404).json({
       message: 'not found',
       quotation: emptyQuotation,
@@ -71,7 +71,7 @@ export const getQuotationHandler: RouterHandler = async (req, res, _next) => {
     const isLoggedUser = userFromAccessToken !== null
     const emailFromToken = userFromAccessToken?.email
 
-    const isOwner = isLoggedUser && emailFromToken === selectedQuotation.email
+    const isOwner = isLoggedUser && emailFromToken === quotationSelected.email
 
     if (isOwner === true) {
       return 'Owner'
@@ -79,14 +79,14 @@ export const getQuotationHandler: RouterHandler = async (req, res, _next) => {
 
     const isSharedWithYou =
       emailFromToken !== undefined &&
-      selectedQuotation.access.level === 'custom' &&
-      selectedQuotation.access.userList.includes(emailFromToken)
+      quotationSelected.access.level === 'custom' &&
+      quotationSelected.access.userList.includes(emailFromToken)
 
     if (isSharedWithYou === true) {
       return 'Shared with you'
     }
 
-    const isSharedWithEveryone = selectedQuotation.access.level === 'everyone'
+    const isSharedWithEveryone = quotationSelected.access.level === 'everyone'
 
     if (isSharedWithEveryone === true) {
       return 'Public'
@@ -198,6 +198,6 @@ export const getQuotationHandler: RouterHandler = async (req, res, _next) => {
 
   res.status(httpStatus.success200).json({
     message: 'found',
-    quotation: { ...selectedQuotation, ...quotationParsed, permissionLevel },
+    quotation: { ...quotationSelected, ...quotationParsed, permissionLevel },
   })
 }

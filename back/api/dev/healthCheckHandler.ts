@@ -5,11 +5,11 @@ import { sql } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
 
 export type ResBody = {
-  message: 'connected'
+  message: 'connected to db'
 }
 
 export type ErrorResBody = {
-  message: ErrorMessageCommon | 'disconnected'
+  message: ErrorMessageCommon | 'connection to db failed'
 }
 
 type RouterHandler = (
@@ -23,10 +23,12 @@ export const healthCheckHandler: RouterHandler = async (_req, res, _next) => {
     // Simple query to verify Postgres / Drizzle connectivity
     await db.execute(sql`select 1`)
 
-    res.status(httpStatus.success200).json({ message: 'connected' })
+    res.status(httpStatus.success200).json({ message: 'connected to db' })
   } catch (error) {
     console.error('health check database error', error)
 
-    res.status(httpStatus.serverError500).json({ message: 'disconnected' })
+    res
+      .status(httpStatus.serverError500)
+      .json({ message: 'connection to db failed' })
   }
 }

@@ -33,12 +33,12 @@ export const getQuotationListHandler: RouterHandler = async (
     res,
   })
 
-  const selectedQuotationList = await db
+  const quotationListSelected = await db
     .select()
     .from(quotationsTable)
     .where(eq(quotationsTable.email, userFromAccessToken.email))
 
-  if (selectedQuotationList.length === 0) {
+  if (quotationListSelected.length === 0) {
     res
       .status(httpStatus.success200)
       .json({ message: 'No content', quotationList: [] })
@@ -46,10 +46,10 @@ export const getQuotationListHandler: RouterHandler = async (
     return
   }
 
-  if (selectedQuotationList.length !== 0) {
+  if (quotationListSelected.length !== 0) {
     res
       .status(httpStatus.success200)
-      .json({ message: 'Found', quotationList: selectedQuotationList })
+      .json({ message: 'Found', quotationList: quotationListSelected })
 
     return
   }
