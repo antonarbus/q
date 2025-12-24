@@ -22,9 +22,13 @@ export const DownloadFileIcon = ({ fileSize }: Props): JSX.Element => {
           height: '14px',
           marginLeft: '5px',
           color: 'grey',
+          cursor: 'pointer',
           '&:hover': {
             color: 'black',
           },
+        }}
+        onClick={() => {
+          alert('Not implemented')
         }}
       />
     </Tooltip>

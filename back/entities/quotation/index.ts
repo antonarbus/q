@@ -1,5 +1,5 @@
 export {
   quotationsTable,
   type SelectQuotation,
-  type InsertQuotation,
+  // type InsertQuotation,
 } from './quotationsTableSchema'

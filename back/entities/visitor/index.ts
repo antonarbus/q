@@ -1,5 +1,5 @@
 export {
   visitorsTable,
   type SelectVisitors,
-  type InsertVisitors,
+  // type InsertVisitors,
 } from './visitorsTableSchema'

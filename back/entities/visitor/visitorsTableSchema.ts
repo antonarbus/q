@@ -7,4 +7,4 @@ export const visitorsTable = pgTable('visitors', {
 })
 
 export type SelectVisitors = typeof visitorsTable.$inferSelect
-export type InsertVisitors = typeof visitorsTable.$inferInsert
+// export type InsertVisitors = typeof visitorsTable.$inferInsert

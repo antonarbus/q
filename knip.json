@@ -19,11 +19,7 @@
   ],
   "ignoreDependencies": [
     "@preact/signals-react-transform",
-    "@emotion/babel-plugin",
-    "exceljs",
-    "jspdf",
-    "striptags",
-    "drizzle-orm"
+    "@emotion/babel-plugin"
   ],
   "ignoreBinaries": ["gcloud", "terraform", "sleep", "open"]
 }

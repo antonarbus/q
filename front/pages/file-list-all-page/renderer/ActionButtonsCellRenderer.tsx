@@ -1,12 +1,10 @@
-import type { Quotation } from '@entities/quotation/type'
-import { CopyBookmarkButton } from '@features/bookmark/copy-bookmark'
-import { DeleteBookmarkButton } from '@features/bookmark/delete-bookmark'
-import { OpenBookmarkModalButton } from '@features/open-close/open-bookmark-modal'
+import { DownloadFileIcon } from '@features/file/download-file'
 import { Box } from '@mui/material'
 import type { ICellRendererParams } from 'ag-grid-community'
 import type { ReactNode } from 'react'
+import type { ResBody } from '@back/api/file/getFileListAllHandler'
 
-type Params = ICellRendererParams<Partial<Quotation>>
+type Params = ICellRendererParams<ResBody['fileList'][number]>
 
 export const ActionButtonsCellRenderer = (params: Params): ReactNode => {
   if (params.data?.id === undefined) {
@@ -15,9 +13,7 @@ export const ActionButtonsCellRenderer = (params: Params): ReactNode => {
 
   return (
     <Box sx={{ display: 'flex', gap: '5px' }}>
-      <CopyBookmarkButton bookmarkId={params.data.id} />
-      <OpenBookmarkModalButton bookmarkId={params.data.id} />
-      <DeleteBookmarkButton bookmarkId={params.data.id} />
+      <DownloadFileIcon fileSize={params.data.size} />
     </Box>
   )
 }

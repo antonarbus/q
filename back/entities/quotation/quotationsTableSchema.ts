@@ -31,4 +31,4 @@ export const quotationsTable = pgTable(
 )
 
 export type SelectQuotation = typeof quotationsTable.$inferSelect
-export type InsertQuotation = typeof quotationsTable.$inferInsert
+// export type InsertQuotation = typeof quotationsTable.$inferInsert
