@@ -1,5 +1,5 @@
 import { bookmarksTable } from '@back/entities/bookmark'
-import { QuotationModel } from '@back/entities/quotation'
+import { quotationsTable } from '@back/entities/quotation'
 import {
   getUserFromAccessTokenOrThrowUnauthorized,
   usersTable,
@@ -66,15 +66,15 @@ export const deleteUserHandler: RouterHandler = async (req, res, _next) => {
     statistics.push(`${req.body.email} was deleted from database ✅`)
   }
 
-  const deleteQuotationsResult = await QuotationModel.deleteMany({
-    email: req.body.email,
-  })
+  const deleteQuotationsResult = await db
+    .delete(quotationsTable)
+    .where(eq(quotationsTable.email, req.body.email))
 
-  if (deleteQuotationsResult.deletedCount === 0) {
+  if (deleteQuotationsResult.rowCount === 0) {
     statistics.push(`quotations were not found in database ❌`)
   } else {
     statistics.push(
-      `${deleteQuotationsResult.deletedCount} quotations were deleted from database ✅`,
+      `${deleteQuotationsResult.rowCount} quotations were deleted from database ✅`,
     )
   }
 

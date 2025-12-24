@@ -1,7 +1,9 @@
-import { getUserFromRefreshTokenOrJohn, UserModel } from '@back/entities/user'
+import { getUserFromRefreshTokenOrJohn, usersTable } from '@back/entities/user'
 import { httpStatus } from '@back/shared/const/httpStatus'
 import { userRole } from '@back/shared/const/userRole'
 import type { NextFunction, Request, Response } from 'express'
+import { db } from '@back/shared/lib/drizzle/db'
+import { eq } from 'drizzle-orm'
 
 type RouterHandler = (
   req: Request,
@@ -18,13 +20,10 @@ export const testHandler: RouterHandler = async (req, res, _next) => {
     return
   }
 
-  const dbRes = await UserModel.find({ email: 'some random guy' })
-  // const dbRes = await UserModel.find()
-  // const dbRes = await UserModel.find({ email: 'test-user@sendmequotation.today' })
-  // await UserModel.deleteOne({ email: 'info@sendmequotation.today' })
-  // const dbRes = await UserModel.find().select({ _id: 0, email: 1 })
-  // const dbRes = await ItemModel.find().distinct('category', { email: 'anton.arbus@gmail.com' })
-  // const dbRes = await QuotationModel.find()
+  const userListSelected = await db
+    .select()
+    .from(usersTable)
+    .where(eq(usersTable.email, 'some random guy'))
 
-  res.status(200).json({ dbRes })
+  res.status(200).json({ dbRes: userListSelected })
 }

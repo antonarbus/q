@@ -1,4 +1,3 @@
-export { QuotationModel } from './quotationModel'
 export {
   quotationsTable,
   type SelectQuotation,
