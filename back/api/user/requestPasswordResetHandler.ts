@@ -1,4 +1,4 @@
-import { UserModel } from '@back/entities/user'
+import { usersTable } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
 import { sendEmail } from '@back/shared/lib/mailersend'
@@ -6,6 +6,8 @@ import { generateId } from '@back/shared/lib/nanoid'
 import type { User } from '@entities/user/type'
 import type { NextFunction, Request, Response } from 'express'
 import { runtimeConfig } from '@root/config/runtime'
+import { db } from '@back/shared/lib/drizzle/db'
+import { eq } from 'drizzle-orm'
 
 export type ReqBody = {
   email: User['email']
@@ -37,9 +39,12 @@ export const requestPasswordResetHandler: RouterHandler = async (
 ) => {
   const emailFromInput = req.body.email.toLowerCase()
 
-  const user = await UserModel.findOne({ email: emailFromInput }).lean()
+  const [user] = await db
+    .select()
+    .from(usersTable)
+    .where(eq(usersTable.email, emailFromInput))
 
-  if (user === null) {
+  if (user === undefined) {
     res.status(httpStatus.forbidden403).json({ message: 'does not exists' })
 
     return
@@ -53,15 +58,15 @@ export const requestPasswordResetHandler: RouterHandler = async (
     return
   }
 
-  const updatedUser = await UserModel.findOneAndUpdate(
-    { email: emailFromInput },
-    { resetPasswordKey: generateId() },
-    { new: true },
-  )
+  const resetPasswordKey = generateId()
 
-  const resetPasswordKey = updatedUser?.resetPasswordKey
+  const [updatedUser] = await db
+    .update(usersTable)
+    .set({ resetPasswordKey })
+    .where(eq(usersTable.email, emailFromInput))
+    .returning()
 
-  if (resetPasswordKey === undefined) {
+  if (updatedUser === undefined) {
     res
       .status(httpStatus.serverError500)
       .json({ message: 'reset key not issued' })

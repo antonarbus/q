@@ -1,27 +1,28 @@
 import {
   getUserFromAccessTokenOrThrowUnauthorized,
-  UserModel,
+  usersTable,
+  type SelectUser,
 } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
 import { userRole } from '@back/shared/const/userRole'
-import type { User } from '@entities/user/type'
 import type { Pretty } from '@shared/lib/typescript/Pretty'
 import type { NextFunction, Request, Response } from 'express'
-import type { FlattenMaps } from 'mongoose'
+import { db } from '@back/shared/lib/drizzle/db'
+import { desc } from 'drizzle-orm'
 
 export type UserPicked = Pick<
-  User,
+  SelectUser,
   'email' | 'isActivated' | 'loggedAt' | 'registeredAt'
 >
 
 export type ResBody = Pretty<{
-  users: FlattenMaps<UserPicked>[]
+  users: UserPicked[]
   message: 'users data'
 }>
 
 export type ErrorResBody = {
-  users: FlattenMaps<UserPicked>[]
+  users: UserPicked[]
   message:
     | ErrorMessageCommon
     | 'no permission to view'
@@ -49,18 +50,15 @@ export const getUserListHandler: RouterHandler = async (req, res, _next) => {
     return
   }
 
-  const users = await UserModel.find(
-    {},
-    {
-      _id: 0,
-      email: 1,
-      isActivated: 1,
-      loggedAt: 1,
-      registeredAt: 1,
-    },
-  )
-    .sort({ loggedAt: -1 })
-    .lean()
+  const users = await db
+    .select({
+      email: usersTable.email,
+      isActivated: usersTable.isActivated,
+      loggedAt: usersTable.loggedAt,
+      registeredAt: usersTable.registeredAt,
+    })
+    .from(usersTable)
+    .orderBy(desc(usersTable.loggedAt))
 
   if (users.length === 0) {
     res

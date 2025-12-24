@@ -1,4 +1,4 @@
-import { getUserFromAccessTokenOrNull, UserModel } from '@back/entities/user'
+import { getUserFromAccessTokenOrNull, usersTable } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
 import { userRole } from '@back/shared/const/userRole'
@@ -14,6 +14,8 @@ import type { User } from '@entities/user/type'
 import bcrypt from 'bcryptjs'
 import type { NextFunction, Request, Response } from 'express'
 import { runtimeConfig } from '@root/config/runtime'
+import { db } from '@back/shared/lib/drizzle/db'
+import { eq } from 'drizzle-orm'
 
 export type ReqBody = {
   email: User['email']
@@ -50,9 +52,12 @@ export const logInHandler: RouterHandler = async (req, res, _next) => {
   const passwordFromInput = req.body.password
   const emailFromInput = req.body.email.toLowerCase()
 
-  const userFromDb = await UserModel.findOne({ email: emailFromInput }).lean()
+  const [userFromDb] = await db
+    .select()
+    .from(usersTable)
+    .where(eq(usersTable.email, emailFromInput))
 
-  if (userFromDb === null) {
+  if (userFromDb === undefined) {
     res.status(httpStatus.badRequest400).json({ message: 'not registered' })
 
     return
@@ -193,16 +198,16 @@ export const logInHandler: RouterHandler = async (req, res, _next) => {
 
   setRefreshTokenCookie({ res, refreshJwtToken })
 
-  const userUpdated = await UserModel.findOneAndUpdate(
-    { email: emailFromInput },
-    {
+  const [userUpdated] = await db
+    .update(usersTable)
+    .set({
       refreshJwtToken,
-      loggedAt: Date.now(),
-    },
-    { new: true },
-  )
+      loggedAt: new Date(),
+    })
+    .where(eq(usersTable.email, emailFromInput))
+    .returning()
 
-  if (userUpdated === null) {
+  if (userUpdated === undefined) {
     res.status(httpStatus.serverError500)
 
     return

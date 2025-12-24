@@ -2,7 +2,7 @@ import { bookmarksTable } from '@back/entities/bookmark'
 import { QuotationModel } from '@back/entities/quotation'
 import {
   getUserFromAccessTokenOrThrowUnauthorized,
-  UserModel,
+  usersTable,
 } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
@@ -56,11 +56,11 @@ export const deleteUserHandler: RouterHandler = async (req, res, _next) => {
 
   // delete from db
 
-  const deleteUserResult = await UserModel.deleteOne({
-    email: req.body.email,
-  })
+  const deleteUserResult = await db
+    .delete(usersTable)
+    .where(eq(usersTable.email, req.body.email))
 
-  if (deleteUserResult.deletedCount === 0) {
+  if (deleteUserResult.rowCount === 0) {
     statistics.push(`${req.body.email} was not found in database ❌`)
   } else {
     statistics.push(`${req.body.email} was deleted from database ✅`)

@@ -1,4 +1,4 @@
-import { UserModel } from '@back/entities/user'
+import { usersTable } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
 import { setRefreshTokenCookie } from '@back/shared/headers'
@@ -9,6 +9,8 @@ import {
 import type { User } from '@entities/user/type'
 import bcrypt from 'bcryptjs'
 import type { NextFunction, Request, Response } from 'express'
+import { db } from '@back/shared/lib/drizzle/db'
+import { and, eq } from 'drizzle-orm'
 
 export type ReqBody = {
   email: User['email']
@@ -39,12 +41,17 @@ export const resetPasswordHandler: RouterHandler = async (req, res, _next) => {
   const passwordFromInput = req.body.password
   const resetPasswordKeyFromInput = req.body.resetPasswordKey
 
-  const user = await UserModel.findOne({
-    email: emailFromInput,
-    resetPasswordKey: resetPasswordKeyFromInput,
-  }).lean()
+  const [user] = await db
+    .select()
+    .from(usersTable)
+    .where(
+      and(
+        eq(usersTable.email, emailFromInput),
+        eq(usersTable.resetPasswordKey, resetPasswordKeyFromInput),
+      ),
+    )
 
-  if (user === null) {
+  if (user === undefined) {
     res.status(httpStatus.forbidden403).json({ message: 'incorrect reset key' })
 
     return
@@ -71,16 +78,21 @@ export const resetPasswordHandler: RouterHandler = async (req, res, _next) => {
 
   setRefreshTokenCookie({ res, refreshJwtToken: refreshToken.value })
 
-  const updatedUser = await UserModel.findOneAndUpdate(
-    { email: emailFromInput, resetPasswordKey: resetPasswordKeyFromInput },
-    {
+  const [updatedUser] = await db
+    .update(usersTable)
+    .set({
       password: passwordEncrypted,
       refreshJwtToken: refreshToken.value,
       resetPasswordKey: '',
-      loggedAt: Date.now(),
-    },
-    { new: true },
-  ).lean()
+      loggedAt: new Date(),
+    })
+    .where(
+      and(
+        eq(usersTable.email, emailFromInput),
+        eq(usersTable.resetPasswordKey, resetPasswordKeyFromInput),
+      ),
+    )
+    .returning()
 
   res.status(httpStatus.created201).json({
     message: 'password was reset',
