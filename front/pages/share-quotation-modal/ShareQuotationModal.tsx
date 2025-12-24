@@ -9,7 +9,7 @@ import { getState } from '@shared/lib/redux'
 import { useSlide } from '@shared/util/useSlide'
 import type { JSX } from 'react'
 import { ImLink } from 'react-icons/im'
-import { ShareQuotationField } from './share-quotation-field/ShareQuotationField'
+import { ShareQuotationField } from './share-quotation-field'
 import { useIsButtonDisabled } from './useIsButtonDisabled'
 import { useShareQuotationFormValues } from './useShareQuotationFormValues'
 

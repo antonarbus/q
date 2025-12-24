@@ -1,1 +1,0 @@
-export { openAdminPage } from './openAdminPage'
