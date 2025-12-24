@@ -54,12 +54,16 @@ export const activateHandler: RouterHandler = async (req, res, _next) => {
     return
   }
 
-  const { refreshJwtToken } = generateRefreshToken({ email, roles })
-  setRefreshTokenCookie({ res, refreshJwtToken })
+  const refreshToken = generateRefreshToken({ email, roles })
+  setRefreshTokenCookie({ res, refreshJwtToken: refreshToken.value })
 
   const userDocument = await UserModel.findOneAndUpdate(
     { email, activationKey: activationKeyFromInput },
-    { refreshJwtToken, isActivated: true, loggedAt: Date.now() },
+    {
+      refreshJwtToken: refreshToken.value,
+      isActivated: true,
+      loggedAt: Date.now(),
+    },
     { new: true },
   ).lean()
 

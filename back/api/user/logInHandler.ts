@@ -79,12 +79,12 @@ export const logInHandler: RouterHandler = async (req, res, _next) => {
         return userFromDb.refreshJwtToken
       }
 
-      const { refreshJwtToken } = generateRefreshToken({
+      const refreshToken = generateRefreshToken({
         email: emailFromInput,
         roles: userFromDb.roles,
       })
 
-      return refreshJwtToken
+      return refreshToken.value
     }
 
     const refreshJwtToken = getRefreshToken()
@@ -177,12 +177,12 @@ export const logInHandler: RouterHandler = async (req, res, _next) => {
       return userFromDb.refreshJwtToken
     }
 
-    const { refreshJwtToken } = generateRefreshToken({
+    const refreshToken = generateRefreshToken({
       email: emailFromInput,
       roles: userFromDb.roles,
     })
 
-    return refreshJwtToken
+    return refreshToken.value
   }
 
   const refreshJwtToken = getRefreshToken()

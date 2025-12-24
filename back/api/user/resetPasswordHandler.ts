@@ -64,18 +64,18 @@ export const resetPasswordHandler: RouterHandler = async (req, res, _next) => {
     roles: user.roles,
   })
 
-  const { refreshJwtToken } = generateRefreshToken({
+  const refreshToken = generateRefreshToken({
     email: emailFromInput,
     roles: user.roles,
   })
 
-  setRefreshTokenCookie({ res, refreshJwtToken })
+  setRefreshTokenCookie({ res, refreshJwtToken: refreshToken.value })
 
   const updatedUser = await UserModel.findOneAndUpdate(
     { email: emailFromInput, resetPasswordKey: resetPasswordKeyFromInput },
     {
       password: passwordEncrypted,
-      refreshJwtToken,
+      refreshJwtToken: refreshToken.value,
       resetPasswordKey: '',
       loggedAt: Date.now(),
     },

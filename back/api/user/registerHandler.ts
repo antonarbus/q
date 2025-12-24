@@ -1,4 +1,3 @@
-import { UserModel } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
 import { userRole } from '@back/shared/const/userRole'
@@ -9,28 +8,31 @@ import {
 } from '@back/shared/lib/json-webtoken'
 import { sendEmail } from '@back/shared/lib/mailersend'
 import { generateId } from '@back/shared/lib/nanoid'
-import type { User } from '@entities/user/type'
 import bcrypt from 'bcryptjs'
 import type { NextFunction, Request, Response } from 'express'
 import { runtimeConfig } from '@root/config/runtime'
+import {
+  usersTable,
+  type InsertUser,
+  type SelectUser,
+} from '@back/entities/user'
+import { db } from '@back/shared/lib/drizzle/db'
+import { and, eq } from 'drizzle-orm'
 
 export type ReqBody = {
-  email: User['email']
-  password: User['password']
+  email: InsertUser['email']
+  password: InsertUser['password']
 }
 
 export type ResBody = {
   accessJwtToken: string
   accessJwtTokenExpiresOn: string
-  email: User['email']
-  roles: User['roles']
+  email: SelectUser['email']
+  roles: SelectUser['roles']
   message: 'activation link sent'
 }
 
 export type ErrorResBody = {
-  accessJwtToken: string
-  email: User['email']
-  roles: User['roles']
   message:
     | ErrorMessageCommon
     | 'already exists'
@@ -48,17 +50,19 @@ export const registerHandler: RouterHandler = async (req, res, _next) => {
   const emailFromInput = req.body.email.toLowerCase()
   const passwordFromInput = req.body.password
 
-  const user = await UserModel.findOne({
-    email: emailFromInput,
-    isActivated: true,
-  }).lean()
+  const [selectedUser] = await db
+    .select()
+    .from(usersTable)
+    .where(
+      and(
+        eq(usersTable.email, emailFromInput),
+        eq(usersTable.isActivated, true),
+      ),
+    )
 
-  if (user !== null) {
+  if (selectedUser !== undefined) {
     res.status(httpStatus.forbidden403).json({
       message: 'already exists',
-      accessJwtToken: 'no access token',
-      email: emailFromInput,
-      roles: [userRole.user],
     })
 
     return
@@ -68,33 +72,26 @@ export const registerHandler: RouterHandler = async (req, res, _next) => {
   const passwordEncrypted = await bcrypt.hash(passwordFromInput, saltRounds)
   const activationKey = generateId()
 
-  const { refreshJwtToken } = generateRefreshToken({
+  const refreshToken = generateRefreshToken({
     email: emailFromInput,
     roles: [userRole.user],
   })
 
-  setRefreshTokenCookie({ res, refreshJwtToken })
+  setRefreshTokenCookie({ res, refreshJwtToken: refreshToken.value })
 
-  const newUser = await UserModel.findOneAndUpdate(
-    { email: emailFromInput },
-    {
+  const [insertedUser] = await db
+    .insert(usersTable)
+    .values({
+      email: emailFromInput,
       password: passwordEncrypted,
       activationKey,
-      refreshJwtToken,
-      isActivated: false,
-      registeredAt: new Date(),
-      loggedAt: new Date(),
-    },
-    { new: true, upsert: true },
-  ).lean()
+      refreshJwtToken: refreshToken.value,
+    })
+    .returning()
 
-  // ? not clear why this is needed, it should always be true
-  if (newUser.activationKey !== activationKey) {
+  if (insertedUser === undefined) {
     res.status(httpStatus.serverError500).json({
-      message: 'activation key not issued',
-      accessJwtToken: 'no access token',
-      email: emailFromInput,
-      roles: [userRole.user],
+      message: 'Internal error',
     })
 
     return
@@ -137,8 +134,5 @@ export const registerHandler: RouterHandler = async (req, res, _next) => {
 
   res.status(httpStatus.serverError500).json({
     message: 'activation link not sent',
-    accessJwtToken: 'no access token',
-    email: emailFromInput,
-    roles: [userRole.user],
   })
 }

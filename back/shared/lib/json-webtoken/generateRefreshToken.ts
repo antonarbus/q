@@ -5,25 +5,27 @@ import { getJwtExpirationInDays } from './getJwtExpirationInDays'
 import type { JwtPayloadExtended } from './types'
 
 type Res = {
-  refreshJwtToken: string
-  refreshJwtTokenExpiresOn: string
-  jwtExpirationInDays: number
+  value: string
+  expiresOn: string
+  expiresInDays: number
 }
 
 export const generateRefreshToken = (payload: JwtPayloadExtended): Res => {
-  const refreshJwtToken = jwt.sign(payload, secret.JWT_REFRESH_SECRET, {
+  const value = jwt.sign(payload, secret.JWT_REFRESH_SECRET, {
     expiresIn: THREE_MONTHS_IN_SEC,
   })
 
-  const refreshJwtTokenExpiresOn = new Date(
+  const expiresOn = new Date(
     Date.now() + THREE_MONTHS_IN_SEC * 1000,
   ).toISOString()
 
-  const jwtExpirationInDays = getJwtExpirationInDays({ token: refreshJwtToken })
+  const expiresInDays = getJwtExpirationInDays({ token: value })
 
-  return {
-    refreshJwtToken,
-    refreshJwtTokenExpiresOn,
-    jwtExpirationInDays,
+  const refreshJwtToken = {
+    value,
+    expiresOn,
+    expiresInDays,
   }
+
+  return refreshJwtToken
 }
