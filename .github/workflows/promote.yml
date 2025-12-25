@@ -158,6 +158,7 @@ jobs:
   promote-backend:
     name: 'Promote and Deploy Backend'
     needs: setup-promotion
+    if: ${{ !cancelled() && needs.setup-promotion.result == 'success' }}
     runs-on: ubuntu-latest
 
     permissions:
@@ -197,6 +198,7 @@ jobs:
   promote-frontend:
     name: 'Promote and Deploy Frontend'
     needs: setup-promotion
+    if: ${{ !cancelled() && needs.setup-promotion.result == 'success' }}
     runs-on: ubuntu-latest
 
     permissions:
@@ -236,6 +238,7 @@ jobs:
   verify-promotion:
     name: 'Verify Promoted Deployment'
     needs: [setup-promotion, promote-backend, promote-frontend]
+    if: ${{ !cancelled() && needs.setup-promotion.result == 'success' && needs.promote-backend.result == 'success' && needs.promote-frontend.result == 'success' }}
     runs-on: ubuntu-latest
 
     permissions:
