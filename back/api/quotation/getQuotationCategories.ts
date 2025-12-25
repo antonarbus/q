@@ -1,6 +1,6 @@
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
-import { httpStatus } from '@back/shared/const/httpStatus'
+import { httpStatusCode } from '@back/shared/const/HttpStatusCode'
 import type { NextFunction, Request, Response } from 'express'
 import { quotationsTable, type SelectQuotation } from '@back/entities/quotation'
 import { db } from '@back/shared/lib/drizzle/db'
@@ -45,6 +45,6 @@ export const getQuotationCategoriesHandler: RouterHandler = async (
   const distinctCategoryList = quotationListSelected.map((row) => row.category)
 
   res
-    .status(httpStatus.success200)
+    .status(httpStatusCode.success200)
     .json({ message: 'Found', distinctQuotationList: distinctCategoryList })
 }

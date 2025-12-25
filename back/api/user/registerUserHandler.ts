@@ -1,5 +1,5 @@
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
-import { httpStatus } from '@back/shared/const/httpStatus'
+import { httpStatusCode } from '@back/shared/const/HttpStatusCode'
 import { userRole } from '@back/shared/const/userRole'
 import { setRefreshTokenCookie } from '@back/shared/headers'
 import {
@@ -61,7 +61,7 @@ export const registerUserHandler: RouterHandler = async (req, res, _next) => {
     )
 
   if (userSelected !== undefined) {
-    res.status(httpStatus.forbidden403).json({
+    res.status(httpStatusCode.forbidden403).json({
       message: 'already exists',
     })
 
@@ -90,7 +90,7 @@ export const registerUserHandler: RouterHandler = async (req, res, _next) => {
     .returning()
 
   if (userInserted === undefined) {
-    res.status(httpStatus.serverError500).json({
+    res.status(httpStatusCode.serverError500).json({
       message: 'Internal error',
     })
 
@@ -121,7 +121,7 @@ export const registerUserHandler: RouterHandler = async (req, res, _next) => {
 
   // https://developers.mailersend.com/general.html#api-response
   if (emailRes.statusCode === 202) {
-    res.status(httpStatus.created201).json({
+    res.status(httpStatusCode.created201).json({
       message: 'activation link sent',
       email: emailFromInput,
       roles: [userRole.user],
@@ -132,7 +132,7 @@ export const registerUserHandler: RouterHandler = async (req, res, _next) => {
     return
   }
 
-  res.status(httpStatus.serverError500).json({
+  res.status(httpStatusCode.serverError500).json({
     message: 'activation link not sent',
   })
 }

@@ -5,7 +5,7 @@ import {
   usersTable,
 } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
-import { httpStatus } from '@back/shared/const/httpStatus'
+import { httpStatusCode } from '@back/shared/const/HttpStatusCode'
 import { userRole } from '@back/shared/const/userRole'
 import { db } from '@back/shared/lib/drizzle/db'
 // import { bucket, getFolderPath } from '@back/shared/services/storage'
@@ -46,7 +46,7 @@ export const deleteUserHandler: RouterHandler = async (req, res, _next) => {
 
   if (notAllowed === true) {
     res
-      .status(httpStatus.forbidden403)
+      .status(httpStatusCode.forbidden403)
       .json({ message: 'not allowed', statistics: [] })
 
     return
@@ -193,5 +193,5 @@ export const deleteUserHandler: RouterHandler = async (req, res, _next) => {
   
   */
 
-  res.status(httpStatus.success200).json({ message: 'deleted', statistics })
+  res.status(httpStatusCode.success200).json({ message: 'deleted', statistics })
 }

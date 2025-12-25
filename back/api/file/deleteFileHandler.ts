@@ -1,7 +1,7 @@
 import { filesTable, type SelectFile } from '@back/entities/file'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
-import { httpStatus } from '@back/shared/const/httpStatus'
+import { httpStatusCode } from '@back/shared/const/HttpStatusCode'
 import { db } from '@back/shared/lib/drizzle/db'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import { and, eq } from 'drizzle-orm'
@@ -57,14 +57,14 @@ export const deleteFileHandler: RouterHandler = async (req, res, _next) => {
   const fileOwnerShip = await getFileOwnerShip()
 
   if (fileOwnerShip === 'file not found') {
-    res.status(httpStatus.notFound404).json({ message: 'not found' })
+    res.status(httpStatusCode.notFound404).json({ message: 'not found' })
 
     return
   }
 
   if (fileOwnerShip === 'not owner') {
     res
-      .status(httpStatus.notFound404)
+      .status(httpStatusCode.notFound404)
       .json({ message: 'you did not upload this file' })
 
     return
@@ -87,11 +87,13 @@ export const deleteFileHandler: RouterHandler = async (req, res, _next) => {
 
       await Promise.all([deleteFromBucketPromise, deleteFromDatabasePromise])
     } catch {
-      res.status(httpStatus.notFound404).json({ message: 'failed to delete' })
+      res
+        .status(httpStatusCode.notFound404)
+        .json({ message: 'failed to delete' })
 
       return
     }
 
-    res.status(httpStatus.success200).json({ message: 'deleted' })
+    res.status(httpStatusCode.success200).json({ message: 'deleted' })
   }
 }

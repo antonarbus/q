@@ -1,6 +1,6 @@
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
-import { httpStatus } from '@back/shared/const/httpStatus'
+import { httpStatusCode } from '@back/shared/const/HttpStatusCode'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import { generateId } from '@back/shared/lib/nanoid'
 import type { Quotation } from '@entities/quotation/type'
@@ -35,7 +35,9 @@ export const saveQuotationHandler: RouterHandler = async (req, res, _next) => {
   })
 
   if (req.body.quotation.id === '') {
-    res.status(httpStatus.forbidden403).json({ message: 'id is not provided' })
+    res
+      .status(httpStatusCode.forbidden403)
+      .json({ message: 'id is not provided' })
 
     return
   }
@@ -87,7 +89,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, _next) => {
       .returning()
 
     if (quotationInserted === undefined) {
-      res.status(httpStatus.serverError500).json({ message: 'not saved' })
+      res.status(httpStatusCode.serverError500).json({ message: 'not saved' })
 
       return
     }
@@ -104,7 +106,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, _next) => {
 
     await quotationFile.save(quotationJson)
 
-    res.status(httpStatus.success200).json({
+    res.status(httpStatusCode.success200).json({
       message: 'saved',
       quotation: quotationInserted,
     })
@@ -133,7 +135,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, _next) => {
       .returning()
 
     if (quotationUpdated === undefined) {
-      res.status(httpStatus.serverError500).json({ message: 'not saved' })
+      res.status(httpStatusCode.serverError500).json({ message: 'not saved' })
 
       return
     }
@@ -149,7 +151,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, _next) => {
     const quotationJson = JSON.stringify(fullQuotation, null, 2)
     await file.save(quotationJson)
 
-    res.status(httpStatus.success200).json({
+    res.status(httpStatusCode.success200).json({
       message: 'updated',
       quotation: quotationUpdated,
     })
@@ -178,7 +180,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, _next) => {
       .returning()
 
     if (quotationInserted === undefined) {
-      res.status(httpStatus.serverError500).json({ message: 'not saved' })
+      res.status(httpStatusCode.serverError500).json({ message: 'not saved' })
 
       return
     }
@@ -196,7 +198,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, _next) => {
 
     await quotationFile.save(quotationJson)
 
-    res.status(httpStatus.success200).json({
+    res.status(httpStatusCode.success200).json({
       message: 'copied and saved',
       quotation: quotationInserted,
     })

@@ -1,6 +1,6 @@
 import { getUserFromAccessTokenOrNull } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
-import { httpStatus } from '@back/shared/const/httpStatus'
+import { httpStatusCode } from '@back/shared/const/HttpStatusCode'
 import { userRole } from '@back/shared/const/userRole'
 import { getShouldNotTrace } from '@back/shared/headers'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
@@ -57,7 +57,7 @@ export const getQuotationHandler: RouterHandler = async (req, res, _next) => {
     .where(eq(quotationsTable.id, req.body.id))
 
   if (quotationSelected === undefined) {
-    res.status(httpStatus.notFound404).json({
+    res.status(httpStatusCode.notFound404).json({
       message: 'not found',
       quotation: emptyQuotation,
     })
@@ -111,7 +111,7 @@ export const getQuotationHandler: RouterHandler = async (req, res, _next) => {
   const permissionLevel = getPermissionLevel()
 
   if (permissionLevel === 'Forbidden') {
-    res.status(httpStatus.forbidden403).json({
+    res.status(httpStatusCode.forbidden403).json({
       message: 'found',
       quotation: { ...emptyQuotation, permissionLevel },
     })
@@ -154,7 +154,7 @@ export const getQuotationHandler: RouterHandler = async (req, res, _next) => {
   const quotationParsed = jsonParseSafe<Quotation>(quotationJson)
 
   if (quotationParsed === undefined) {
-    res.status(httpStatus.notFound404).json({
+    res.status(httpStatusCode.notFound404).json({
       message: 'not found',
       quotation: emptyQuotation,
     })
@@ -196,7 +196,7 @@ export const getQuotationHandler: RouterHandler = async (req, res, _next) => {
     })
   }
 
-  res.status(httpStatus.success200).json({
+  res.status(httpStatusCode.success200).json({
     message: 'found',
     quotation: { ...quotationSelected, ...quotationParsed, permissionLevel },
   })

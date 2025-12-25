@@ -1,13 +1,12 @@
-import {
-  type ErrorMessageCommon,
-  errorMessageCommon,
-} from '@back/shared/const/errorMessageCommon'
+import { HttpError } from '@back/shared/errors/HttpError'
 import type { NextFunction, Request, Response } from 'express'
-import { httpStatus } from '../shared/const/httpStatus'
+import { httpStatusCode } from '../shared/const/HttpStatusCode'
+import { errorCodeCommon } from '@back/shared/const/errorCodeCommon'
 
 type ErrorHandlerBody = {
-  message: ErrorMessageCommon
-  errorAsString?: string
+  errorCode: string
+  message: string
+  errorAsString: string
 }
 
 type RouterHandler = (
@@ -24,10 +23,30 @@ export const errorHandlerMiddleware: RouterHandler = (
   _next,
 ) => {
   console.error(error)
-  const { message, name, stack } = error
 
-  res.status(httpStatus.serverError500).json({
-    message: errorMessageCommon.internalError,
-    errorAsString: JSON.stringify({ name, message, stack }),
+  // Handle our custom AppError
+  if (error instanceof HttpError) {
+    res.status(error.statusCode).json({
+      errorCode: String(error.errorCode),
+      message: error.message,
+      errorAsString: JSON.stringify({
+        name: error.name,
+        message: error.message,
+        stack: error.stack,
+      }),
+    })
+
+    return
+  }
+
+  // Handle unknown errors
+  res.status(httpStatusCode.serverError500).json({
+    errorCode: errorCodeCommon.internalError,
+    message: 'Internal error',
+    errorAsString: JSON.stringify({
+      name: error.name,
+      message: error.message,
+      stack: error.stack,
+    }),
   })
 }

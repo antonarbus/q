@@ -1,5 +1,5 @@
 import { filesTable, type SelectFile } from '@back/entities/file'
-import { httpStatus } from '@back/shared/const/httpStatus'
+import { httpStatusCode } from '@back/shared/const/HttpStatusCode'
 import { db } from '@back/shared/lib/drizzle/db'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import { eq } from 'drizzle-orm'
@@ -51,7 +51,7 @@ export const proxyFileToBucketHandler: RouterHandler = async (
     .where(eq(filesTable.id, req.params.fileId))
 
   if (fileSelected === undefined) {
-    res.status(httpStatus.notFound404).send('File not found')
+    res.status(httpStatusCode.notFound404).send('File not found')
 
     return
   }
@@ -83,6 +83,8 @@ export const proxyFileToBucketHandler: RouterHandler = async (
     res.redirect(signedUrl)
   } catch (error) {
     console.error('Error generating signed URL:', error)
-    res.status(httpStatus.serverError500).send('Failed to generate file link')
+    res
+      .status(httpStatusCode.serverError500)
+      .send('Failed to generate file link')
   }
 }

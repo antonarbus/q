@@ -1,5 +1,5 @@
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
-import { httpStatus } from '@back/shared/const/httpStatus'
+import { httpStatusCode } from '@back/shared/const/HttpStatusCode'
 import { db } from '@back/shared/lib/drizzle/db'
 import { runtimeConfig } from '@root/config/runtime'
 import { sql } from 'drizzle-orm'
@@ -25,7 +25,7 @@ export const healthCheckHandler: RouterHandler = async (_req, res, _next) => {
     // Simple query to verify Postgres / Drizzle connectivity
     await db.execute(sql`select 1`)
 
-    res.status(httpStatus.success200).json({
+    res.status(httpStatusCode.success200).json({
       message: 'connected to db',
       runtimeConfig,
     })
@@ -33,7 +33,7 @@ export const healthCheckHandler: RouterHandler = async (_req, res, _next) => {
     console.error('health check database error', error)
 
     res
-      .status(httpStatus.serverError500)
+      .status(httpStatusCode.serverError500)
       .json({ message: 'connection to db failed' })
   }
 }

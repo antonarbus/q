@@ -1,6 +1,6 @@
 import { usersTable } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
-import { httpStatus } from '@back/shared/const/httpStatus'
+import { httpStatusCode } from '@back/shared/const/HttpStatusCode'
 import { setRefreshTokenCookie } from '@back/shared/headers'
 import {
   generateAccessToken,
@@ -52,13 +52,15 @@ export const resetPasswordHandler: RouterHandler = async (req, res, _next) => {
     )
 
   if (userSelected === undefined) {
-    res.status(httpStatus.forbidden403).json({ message: 'incorrect reset key' })
+    res
+      .status(httpStatusCode.forbidden403)
+      .json({ message: 'incorrect reset key' })
 
     return
   }
 
   if (userSelected.isActivated === false) {
-    res.status(httpStatus.forbidden403).json({ message: 'not activated' })
+    res.status(httpStatusCode.forbidden403).json({ message: 'not activated' })
 
     return
   }
@@ -94,7 +96,7 @@ export const resetPasswordHandler: RouterHandler = async (req, res, _next) => {
     )
     .returning()
 
-  res.status(httpStatus.created201).json({
+  res.status(httpStatusCode.created201).json({
     message: 'password was reset',
     accessJwtToken: accessToken.value,
     accessJwtTokenExpiresOn: accessToken.expiresOn,

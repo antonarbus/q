@@ -4,7 +4,7 @@ import {
   type SelectUser,
 } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
-import { httpStatus } from '@back/shared/const/httpStatus'
+import { httpStatusCode } from '@back/shared/const/HttpStatusCode'
 import { userRole } from '@back/shared/const/userRole'
 import type { Pretty } from '@shared/lib/typescript/Pretty'
 import type { NextFunction, Request, Response } from 'express'
@@ -44,7 +44,7 @@ export const getUserListHandler: RouterHandler = async (req, res, _next) => {
 
   if (userFromAccessToken.roles.includes(userRole.superAdmin) === false) {
     res
-      .status(httpStatus.forbidden403)
+      .status(httpStatusCode.forbidden403)
       .json({ message: 'no permission to view', userList: [] })
 
     return
@@ -62,7 +62,7 @@ export const getUserListHandler: RouterHandler = async (req, res, _next) => {
 
   if (usersListSelected.length === 0) {
     res
-      .status(httpStatus.notFound404)
+      .status(httpStatusCode.notFound404)
       .json({ message: 'No content', userList: [] })
 
     return
@@ -70,13 +70,13 @@ export const getUserListHandler: RouterHandler = async (req, res, _next) => {
 
   if (usersListSelected.length !== 0) {
     res
-      .status(httpStatus.success200)
+      .status(httpStatusCode.success200)
       .json({ message: 'users data', userList: usersListSelected })
 
     return
   }
 
   res
-    .status(httpStatus.notFound404)
+    .status(httpStatusCode.notFound404)
     .json({ message: 'Unhandled case', userList: [] })
 }

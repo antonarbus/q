@@ -1,6 +1,5 @@
 import { getUserFromAccessTokenOrNull, usersTable } from '@back/entities/user'
-import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
-import { httpStatus } from '@back/shared/const/httpStatus'
+import { httpStatusCode } from '@back/shared/const/HttpStatusCode'
 import { userRole } from '@back/shared/const/userRole'
 import { setNoTraceMode, setRefreshTokenCookie } from '@back/shared/headers'
 import {
@@ -16,6 +15,8 @@ import type { NextFunction, Request, Response } from 'express'
 import { runtimeConfig } from '@root/config/runtime'
 import { db } from '@back/shared/lib/drizzle/db'
 import { eq } from 'drizzle-orm'
+import { HttpError } from '@back/shared/errors/HttpError'
+import type { ErrorCodeCommon } from '@back/shared/const/errorCodeCommon'
 
 export type ReqBody = {
   email: User['email']
@@ -32,13 +33,15 @@ export type ResBody = {
 }
 
 export type ErrorResBody = {
-  message:
-    | ErrorMessageCommon
-    | 'not registered'
-    | 'no password'
-    | 'bad password'
-    | 'activation link sent again'
-    | 'activation link not sent'
+  message: string
+  errorAsString: string
+  errorCode:
+    | ErrorCodeCommon
+    | 'NOT_REGISTERED'
+    | 'NO_PASSWORD'
+    | 'BAD_PASSWORD'
+    | 'ACTIVATION_LINK_SENT_AGAIN'
+    | 'ACTIVATION_LINK_NOT_SENT'
 }
 
 type RouterHandler = (
@@ -47,7 +50,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const logInHandler: RouterHandler = async (req, res, _next) => {
+export const logInHandler: RouterHandler = async (req, res, next) => {
   const passwordFromInput = req.body.password
   const emailFromInput = req.body.email.toLowerCase()
 
@@ -57,9 +60,11 @@ export const logInHandler: RouterHandler = async (req, res, _next) => {
     .where(eq(usersTable.email, emailFromInput))
 
   if (userSelected === undefined) {
-    res.status(httpStatus.badRequest400).json({ message: 'not registered' })
-
-    return
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'NOT_REGISTERED',
+      statusCode: httpStatusCode.badRequest400,
+      message: 'User not registered',
+    })
   }
 
   const userFromAccessToken = getUserFromAccessTokenOrNull({ req })
@@ -105,7 +110,7 @@ export const logInHandler: RouterHandler = async (req, res, _next) => {
     setRefreshTokenCookie({ res, refreshJwtToken })
     setNoTraceMode({ res })
 
-    res.status(httpStatus.success200).json({
+    res.status(httpStatusCode.success200).json({
       message: 'super-admin on behalf of user',
       accessJwtToken: accessToken.value,
       accessJwtTokenExpiresOn: accessToken.expiresOn,
@@ -121,9 +126,11 @@ export const logInHandler: RouterHandler = async (req, res, _next) => {
   const passwordFromDb = userSelected.password
 
   if (Boolean(passwordFromDb) === false) {
-    res.status(httpStatus.badRequest400).json({ message: 'no password' })
-
-    return
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'NO_PASSWORD',
+      statusCode: httpStatusCode.badRequest400,
+      message: 'No password set for this account',
+    })
   }
 
   const isPasswordValid = await bcrypt.compare(
@@ -132,9 +139,11 @@ export const logInHandler: RouterHandler = async (req, res, _next) => {
   )
 
   if (isPasswordValid === false) {
-    res.status(httpStatus.forbidden403).json({ message: 'bad password' })
-
-    return
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'BAD_PASSWORD',
+      statusCode: httpStatusCode.forbidden403,
+      message: 'Invalid credentials',
+    })
   }
 
   if (userSelected.isActivated === false) {
@@ -158,18 +167,18 @@ export const logInHandler: RouterHandler = async (req, res, _next) => {
 
     // https://developers.mailersend.com/general.html#api-response
     if (emailRes.statusCode === 202) {
-      res
-        .status(httpStatus.forbidden403)
-        .json({ message: 'activation link sent again' })
-
-      return
+      throw new HttpError<ErrorResBody['errorCode']>({
+        errorCode: 'ACTIVATION_LINK_SENT_AGAIN',
+        statusCode: httpStatusCode.forbidden403,
+        message: 'Account not activated. Activation link sent to email',
+      })
     }
 
-    res
-      .status(httpStatus.serverError500)
-      .json({ message: 'activation link not sent' })
-
-    return
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'ACTIVATION_LINK_NOT_SENT',
+      statusCode: httpStatusCode.serverError500,
+      message: 'Failed to send activation link',
+    })
   }
 
   const isExistingRefreshJwtToken = Boolean(
@@ -207,9 +216,11 @@ export const logInHandler: RouterHandler = async (req, res, _next) => {
     .returning()
 
   if (userUpdated === undefined) {
-    res.status(httpStatus.serverError500)
-
-    return
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'INTERNAL_ERROR',
+      statusCode: httpStatusCode.serverError500,
+      message: 'Failed to update user',
+    })
   }
 
   const accessToken = generateAccessToken({
@@ -217,7 +228,7 @@ export const logInHandler: RouterHandler = async (req, res, _next) => {
     roles: userSelected.roles,
   })
 
-  res.status(httpStatus.success200).json({
+  res.status(httpStatusCode.success200).json({
     message: 'good password',
     accessJwtToken: accessToken.value,
     accessJwtTokenExpiresOn: accessToken.expiresOn,

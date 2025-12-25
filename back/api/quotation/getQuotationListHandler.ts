@@ -1,6 +1,6 @@
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
-import { httpStatus } from '@back/shared/const/httpStatus'
+import { httpStatusCode } from '@back/shared/const/HttpStatusCode'
 import type { Pretty } from '@shared/lib/typescript/Pretty'
 import type { NextFunction, Request, Response } from 'express'
 import { db } from '@back/shared/lib/drizzle/db'
@@ -40,7 +40,7 @@ export const getQuotationListHandler: RouterHandler = async (
 
   if (quotationListSelected.length === 0) {
     res
-      .status(httpStatus.success200)
+      .status(httpStatusCode.success200)
       .json({ message: 'No content', quotationList: [] })
 
     return
@@ -48,13 +48,13 @@ export const getQuotationListHandler: RouterHandler = async (
 
   if (quotationListSelected.length !== 0) {
     res
-      .status(httpStatus.success200)
+      .status(httpStatusCode.success200)
       .json({ message: 'Found', quotationList: quotationListSelected })
 
     return
   }
 
   res
-    .status(httpStatus.notFound404)
+    .status(httpStatusCode.notFound404)
     .json({ message: 'Unhandled case', quotationList: [] })
 }

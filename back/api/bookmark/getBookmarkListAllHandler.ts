@@ -1,7 +1,7 @@
 import { bookmarksTable, type SelectBookmark } from '@back/entities/bookmark'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
-import { httpStatus } from '@back/shared/const/httpStatus'
+import { httpStatusCode } from '@back/shared/const/HttpStatusCode'
 import { db } from '@back/shared/lib/drizzle/db'
 import { userRole } from '@back/shared/const/userRole'
 import { and, asc, count, desc, ilike } from 'drizzle-orm'
@@ -44,7 +44,7 @@ export const getBookmarkListAllHandler: RouterHandler = async (
   })
 
   if (userFromAccessToken.roles.includes(userRole.superAdmin) === false) {
-    res.status(httpStatus.forbidden403).json({
+    res.status(httpStatusCode.forbidden403).json({
       message: 'no permission to view',
       bookmarkList: [],
       bookmarkListTotalCount: 0,
@@ -169,7 +169,7 @@ export const getBookmarkListAllHandler: RouterHandler = async (
     bookmarkListTotalCountResponse.status === 'fulfilled'
 
   if (fulfilled === false) {
-    res.status(httpStatus.notFound404).json({
+    res.status(httpStatusCode.notFound404).json({
       message: 'Unhandled error',
       bookmarkList: [],
       bookmarkListTotalCount: 0,
@@ -178,7 +178,7 @@ export const getBookmarkListAllHandler: RouterHandler = async (
     return
   }
 
-  res.status(httpStatus.success200).json({
+  res.status(httpStatusCode.success200).json({
     message: 'Found',
     bookmarkList: bookmarkListResponse.value,
     bookmarkListTotalCount: bookmarkListTotalCountResponse.value,

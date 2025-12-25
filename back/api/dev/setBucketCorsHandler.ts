@@ -1,5 +1,5 @@
 import { getUserFromRefreshTokenOrJohn } from '@back/entities/user'
-import { httpStatus } from '@back/shared/const/httpStatus'
+import { httpStatusCode } from '@back/shared/const/HttpStatusCode'
 import { userRole } from '@back/shared/const/userRole'
 import { bucket } from '@back/shared/lib/google-cloud-storage'
 import type { NextFunction, Request, Response } from 'express'
@@ -18,7 +18,7 @@ export const setBucketCorsHandler: RouterHandler = async (req, res, _next) => {
   const userFromRefreshToken = getUserFromRefreshTokenOrJohn({ req })
 
   if (userFromRefreshToken.roles.includes(userRole.superAdmin) === false) {
-    res.status(httpStatus.forbidden403).json({ message: 'forbidden' })
+    res.status(httpStatusCode.forbidden403).json({ message: 'forbidden' })
   }
 
   const corsUpdateRes = await bucket.setCorsConfiguration([

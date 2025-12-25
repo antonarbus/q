@@ -1,5 +1,5 @@
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
-import { httpStatus } from '@back/shared/const/httpStatus'
+import { httpStatusCode } from '@back/shared/const/HttpStatusCode'
 import {
   removeNoTraceMode,
   removeRefreshTokenCookie,
@@ -23,5 +23,5 @@ type RouterHandler = (
 export const logOutHandler: RouterHandler = (_req, res, _next) => {
   removeNoTraceMode({ res })
   removeRefreshTokenCookie({ res })
-  res.status(httpStatus.success200).json({ message: 'logged out' })
+  res.status(httpStatusCode.success200).json({ message: 'logged out' })
 }

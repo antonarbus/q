@@ -1,4 +1,4 @@
-import { httpStatus } from '@back/shared/const/httpStatus'
+import { httpStatusCode } from '@back/shared/const/HttpStatusCode'
 import { navItemId } from '@entities/nav/navItemId'
 import { navSlice } from '@entities/nav/navSlice'
 import { useGetQuotationMutation } from '@entities/quotation/api/useGetQuotationMutation'
@@ -244,7 +244,8 @@ export const useLoadQuotation = (): void => {
   useUpdateEffect(() => {
     if (getQuotationMutation.isError === true) {
       if (
-        getQuotationMutation.error.response?.status === httpStatus.forbidden403
+        getQuotationMutation.error.response?.status ===
+        httpStatusCode.forbidden403
       ) {
         dispatch(
           quotationSlice.actions.loadQuotationReducer({
@@ -258,7 +259,8 @@ export const useLoadQuotation = (): void => {
           }),
         )
       } else if (
-        getQuotationMutation.error.response?.status === httpStatus.notFound404
+        getQuotationMutation.error.response?.status ===
+        httpStatusCode.notFound404
       ) {
         dispatch(
           appSlice.actions.setBackgroundMessage({

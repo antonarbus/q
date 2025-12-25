@@ -1,4 +1,4 @@
-import { httpStatus } from '@back/shared/const/httpStatus'
+import { httpStatusCode } from '@back/shared/const/HttpStatusCode'
 import { headerName } from '@back/shared/headers'
 import { verifyAccessToken } from '@back/shared/lib/json-webtoken'
 import type { User } from '@entities/user/type'
@@ -24,7 +24,9 @@ export const getUserFromAccessTokenOrThrowUnauthorized = ({
   const accessJwtToken = req.headers[headerName.accessJwtToken]
 
   if (typeof accessJwtToken !== 'string') {
-    res.status(httpStatus.unauthorized401).json({ message: 'Not logged in' })
+    res
+      .status(httpStatusCode.unauthorized401)
+      .json({ message: 'Not logged in' })
 
     throw new Error('Not logged in')
   }
@@ -32,7 +34,9 @@ export const getUserFromAccessTokenOrThrowUnauthorized = ({
   const jwtPayload = verifyAccessToken(accessJwtToken)
 
   if (jwtPayload === undefined) {
-    res.status(httpStatus.unauthorized401).json({ message: 'Not logged in' })
+    res
+      .status(httpStatusCode.unauthorized401)
+      .json({ message: 'Not logged in' })
 
     throw new Error('Not logged in')
   }

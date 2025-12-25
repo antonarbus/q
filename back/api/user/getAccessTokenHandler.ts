@@ -1,5 +1,5 @@
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
-import { httpStatus } from '@back/shared/const/httpStatus'
+import { httpStatusCode } from '@back/shared/const/HttpStatusCode'
 import {
   getShouldNotTrace,
   removeRefreshTokenCookie,
@@ -35,7 +35,9 @@ export const getAccessTokenHandler: RouterHandler = async (req, res, _next) => {
   const userFromRefreshToken = getUserFromRefreshTokenOrNull({ req })
 
   if (userFromRefreshToken === null) {
-    res.status(httpStatus.unauthorized401).json({ message: 'Not logged in' })
+    res
+      .status(httpStatusCode.unauthorized401)
+      .json({ message: 'Not logged in' })
 
     return
   }
@@ -56,7 +58,9 @@ export const getAccessTokenHandler: RouterHandler = async (req, res, _next) => {
 
     if (userSelected === undefined) {
       removeRefreshTokenCookie({ res })
-      res.status(httpStatus.unauthorized401).json({ message: 'Not logged in' })
+      res
+        .status(httpStatusCode.unauthorized401)
+        .json({ message: 'Not logged in' })
 
       return
     }
@@ -77,7 +81,9 @@ export const getAccessTokenHandler: RouterHandler = async (req, res, _next) => {
 
     if (userUpdated === undefined) {
       removeRefreshTokenCookie({ res })
-      res.status(httpStatus.unauthorized401).json({ message: 'Not logged in' })
+      res
+        .status(httpStatusCode.unauthorized401)
+        .json({ message: 'Not logged in' })
 
       return
     }
@@ -88,7 +94,7 @@ export const getAccessTokenHandler: RouterHandler = async (req, res, _next) => {
     roles: userFromRefreshToken.roles,
   })
 
-  res.status(httpStatus.success200).json({
+  res.status(httpStatusCode.success200).json({
     message: 'issued access token',
     accessJwtToken: accessToken.value,
     accessJwtTokenExpiresOn: accessToken.expiresOn,

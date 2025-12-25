@@ -1,7 +1,7 @@
 import { type InsertFile, filesTable } from '@back/entities/file'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
-import { httpStatus } from '@back/shared/const/httpStatus'
+import { httpStatusCode } from '@back/shared/const/HttpStatusCode'
 import { db } from '@back/shared/lib/drizzle/db'
 import type { NextFunction, Request, Response } from 'express'
 
@@ -37,12 +37,12 @@ export const saveFileInfoHandler: RouterHandler = async (req, res, _next) => {
     .returning()
 
   if (fileInserted === undefined) {
-    res.status(httpStatus.serverError500).json({
+    res.status(httpStatusCode.serverError500).json({
       message: 'failed to make file public',
     })
 
     return
   }
 
-  res.status(httpStatus.success200).json(fileInserted)
+  res.status(httpStatusCode.success200).json(fileInserted)
 }

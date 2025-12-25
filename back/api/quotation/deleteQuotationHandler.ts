@@ -1,6 +1,6 @@
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
-import { httpStatus } from '@back/shared/const/httpStatus'
+import { httpStatusCode } from '@back/shared/const/HttpStatusCode'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import type { NextFunction, Request, Response } from 'express'
 import { quotationsTable, type SelectQuotation } from '@back/entities/quotation'
@@ -46,7 +46,7 @@ export const deleteQuotationHandler: RouterHandler = async (
     )
 
   if (deleteResponse.rowCount === 0) {
-    res.status(httpStatus.notFound404).json({ message: 'not found' })
+    res.status(httpStatusCode.notFound404).json({ message: 'not found' })
 
     return
   }
@@ -55,10 +55,10 @@ export const deleteQuotationHandler: RouterHandler = async (
   const [{ statusCode }] = await bucket.file(fileInfo.path).delete()
 
   if (statusCode === 204) {
-    res.status(httpStatus.success200).json({ message: 'deleted' })
+    res.status(httpStatusCode.success200).json({ message: 'deleted' })
 
     return
   }
 
-  res.status(httpStatus.notFound404).json({ message: 'not deleted' })
+  res.status(httpStatusCode.notFound404).json({ message: 'not deleted' })
 }

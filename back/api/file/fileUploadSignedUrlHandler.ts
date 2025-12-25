@@ -1,6 +1,6 @@
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
-import { httpStatus } from '@back/shared/const/httpStatus'
+import { httpStatusCode } from '@back/shared/const/HttpStatusCode'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import { generateId } from '@back/shared/lib/nanoid'
 import type { NextFunction, Request, Response } from 'express'
@@ -42,13 +42,13 @@ export const fileUploadSignedUrlHandler: RouterHandler = async (
       },
     })
 
-    res.status(httpStatus.success200).json({
+    res.status(httpStatusCode.success200).json({
       signedUrl,
       url: fileInfo.url,
       fileId,
     })
   } catch {
-    res.status(httpStatus.serverError500).json({
+    res.status(httpStatusCode.serverError500).json({
       message: 'failed to generate signed url',
     })
   }

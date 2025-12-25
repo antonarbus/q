@@ -1,6 +1,6 @@
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
-import { httpStatus } from '@back/shared/const/httpStatus'
+import { httpStatusCode } from '@back/shared/const/HttpStatusCode'
 import { userRole } from '@back/shared/const/userRole'
 import type { NextFunction, Request, Response } from 'express'
 import { quotationsTable, type SelectQuotation } from '@back/entities/quotation'
@@ -53,7 +53,7 @@ export const getQuotationListAllHandler: RouterHandler = async (
   })
 
   if (userFromAccessToken.roles.includes(userRole.superAdmin) === false) {
-    res.status(httpStatus.forbidden403).json({
+    res.status(httpStatusCode.forbidden403).json({
       message: 'no permission to view',
       quotationList: [],
       quotationListTotalCount: 0,
@@ -141,7 +141,7 @@ export const getQuotationListAllHandler: RouterHandler = async (
     quotationListTotalCountResponse.status === 'fulfilled'
 
   if (fulfilled === false) {
-    res.status(httpStatus.notFound404).json({
+    res.status(httpStatusCode.notFound404).json({
       message: 'Unhandled error',
       quotationList: [],
       quotationListTotalCount: 0,
@@ -150,7 +150,7 @@ export const getQuotationListAllHandler: RouterHandler = async (
     return
   }
 
-  res.status(httpStatus.success200).json({
+  res.status(httpStatusCode.success200).json({
     message: 'Found',
     quotationList: quotationListResponse.value,
     quotationListTotalCount: quotationListTotalCountResponse.value,

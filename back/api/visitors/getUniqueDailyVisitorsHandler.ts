@@ -1,7 +1,7 @@
 import { getUserFromAccessTokenOrNull } from '@back/entities/user'
 import { type SelectVisitors, visitorsTable } from '@back/entities/visitor'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
-import { httpStatus } from '@back/shared/const/httpStatus'
+import { httpStatusCode } from '@back/shared/const/HttpStatusCode'
 import { db } from '@back/shared/lib/drizzle/db'
 import { userRole } from '@back/shared/const/userRole'
 import { and, gte, lte } from 'drizzle-orm'
@@ -38,7 +38,7 @@ export const getUniqueDailyVisitorsHandler: RouterHandler = async (
 
   if (roles.includes(userRole.superAdmin) === false) {
     res
-      .status(httpStatus.forbidden403)
+      .status(httpStatusCode.forbidden403)
       .json({ visitorsCount: [], message: 'forbidden' })
 
     return
@@ -55,6 +55,6 @@ export const getUniqueDailyVisitorsHandler: RouterHandler = async (
     )
 
   res
-    .status(httpStatus.success200)
+    .status(httpStatusCode.success200)
     .json({ visitorList: visitorListSelected, message: 'ok' })
 }

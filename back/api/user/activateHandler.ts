@@ -1,5 +1,5 @@
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
-import { httpStatus } from '@back/shared/const/httpStatus'
+import { httpStatusCode } from '@back/shared/const/HttpStatusCode'
 import { setRefreshTokenCookie } from '@back/shared/headers'
 import {
   generateAccessToken,
@@ -43,14 +43,14 @@ export const activateHandler: RouterHandler = async (req, res, _next) => {
 
   if (userSelected === undefined) {
     res
-      .status(httpStatus.badRequest400)
+      .status(httpStatusCode.badRequest400)
       .json({ message: 'activation key not found' })
 
     return
   }
 
   if (userSelected.isActivated === true) {
-    res.status(httpStatus.success200).json({ message: 'already activated' })
+    res.status(httpStatusCode.success200).json({ message: 'already activated' })
 
     return
   }
@@ -79,7 +79,7 @@ export const activateHandler: RouterHandler = async (req, res, _next) => {
 
   if (userUpdated === undefined) {
     res
-      .status(httpStatus.serverError500)
+      .status(httpStatusCode.serverError500)
       .json({ message: 'failed to activate' })
 
     return
@@ -90,7 +90,7 @@ export const activateHandler: RouterHandler = async (req, res, _next) => {
     roles: userUpdated.roles,
   })
 
-  res.status(httpStatus.success200).json({
+  res.status(httpStatusCode.success200).json({
     message: 'activated',
     accessJwtToken: accessToken.value,
     accessJwtTokenExpiresOn: accessToken.expiresOn,

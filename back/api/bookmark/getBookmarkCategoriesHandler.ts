@@ -1,7 +1,7 @@
 import { bookmarksTable, type SelectBookmark } from '@back/entities/bookmark'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
-import { httpStatus } from '@back/shared/const/httpStatus'
+import { httpStatusCode } from '@back/shared/const/HttpStatusCode'
 import { db } from '@back/shared/lib/drizzle/db'
 import { and, eq, ne } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
@@ -45,6 +45,6 @@ export const getBookmarkCategoriesHandler: RouterHandler = async (
   const distinctCategoryList = bookmarkListSelected.map((row) => row.category)
 
   res
-    .status(httpStatus.success200)
+    .status(httpStatusCode.success200)
     .json({ message: 'Found', distinctCategoryList })
 }

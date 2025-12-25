@@ -1,7 +1,7 @@
 import { type SelectBookmark, bookmarksTable } from '@back/entities/bookmark'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
-import { httpStatus } from '@back/shared/const/httpStatus'
+import { httpStatusCode } from '@back/shared/const/HttpStatusCode'
 import { db } from '@back/shared/lib/drizzle/db'
 import { and, eq } from 'drizzle-orm'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
@@ -45,7 +45,7 @@ export const getBookmarkHandler: RouterHandler = async (req, res, _next) => {
     )
 
   if (bookmarkSelected === undefined) {
-    res.status(httpStatus.notFound404).json({ message: 'not found' })
+    res.status(httpStatusCode.notFound404).json({ message: 'not found' })
 
     return
   }
@@ -60,12 +60,12 @@ export const getBookmarkHandler: RouterHandler = async (req, res, _next) => {
   const bookmarkFileData = jsonParseSafe<Item>(bookmarkFileAsString)
 
   if (bookmarkFileData === undefined) {
-    res.status(httpStatus.notFound404).json({ message: 'not found' })
+    res.status(httpStatusCode.notFound404).json({ message: 'not found' })
 
     return
   }
 
-  res.status(httpStatus.success200).json({
+  res.status(httpStatusCode.success200).json({
     message: 'found',
     bookmark: bookmarkFileData,
   })

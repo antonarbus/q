@@ -5,7 +5,7 @@ import {
 } from '@back/entities/bookmark'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
-import { httpStatus } from '@back/shared/const/httpStatus'
+import { httpStatusCode } from '@back/shared/const/HttpStatusCode'
 import { db } from '@back/shared/lib/drizzle/db'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import type { NextFunction, Request, Response } from 'express'
@@ -43,7 +43,9 @@ export const saveBookmarkHandler: RouterHandler = async (req, res, _next) => {
   })
 
   if (req.body.bookmark.id === '') {
-    res.status(httpStatus.forbidden403).json({ message: 'id is not provided' })
+    res
+      .status(httpStatusCode.forbidden403)
+      .json({ message: 'id is not provided' })
 
     return
   }
@@ -71,7 +73,9 @@ export const saveBookmarkHandler: RouterHandler = async (req, res, _next) => {
     .returning()
 
   if (bookmarkInserted === undefined) {
-    res.status(httpStatus.serverError500).json({ message: 'failed to save' })
+    res
+      .status(httpStatusCode.serverError500)
+      .json({ message: 'failed to save' })
 
     return
   }
@@ -89,7 +93,7 @@ export const saveBookmarkHandler: RouterHandler = async (req, res, _next) => {
 
   const isNew = bookmarkInserted.createdAt === bookmarkInserted.updatedAt
 
-  res.status(httpStatus.success200).json({
+  res.status(httpStatusCode.success200).json({
     message: isNew === true ? 'saved' : 'updated',
     bookmark: bookmarkInserted,
   })

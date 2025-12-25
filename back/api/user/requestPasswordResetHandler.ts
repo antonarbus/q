@@ -1,6 +1,6 @@
 import { usersTable } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
-import { httpStatus } from '@back/shared/const/httpStatus'
+import { httpStatusCode } from '@back/shared/const/HttpStatusCode'
 import { sendEmail } from '@back/shared/lib/mailersend'
 import { generateId } from '@back/shared/lib/nanoid'
 import type { User } from '@entities/user/type'
@@ -45,14 +45,14 @@ export const requestPasswordResetHandler: RouterHandler = async (
     .where(eq(usersTable.email, emailFromInput))
 
   if (userSelected === undefined) {
-    res.status(httpStatus.forbidden403).json({ message: 'does not exists' })
+    res.status(httpStatusCode.forbidden403).json({ message: 'does not exists' })
 
     return
   }
 
   if (userSelected.isActivated === false) {
     res
-      .status(httpStatus.forbidden403)
+      .status(httpStatusCode.forbidden403)
       .json({ message: 'account not activated' })
 
     return
@@ -68,7 +68,7 @@ export const requestPasswordResetHandler: RouterHandler = async (
 
   if (userUpdated === undefined) {
     res
-      .status(httpStatus.serverError500)
+      .status(httpStatusCode.serverError500)
       .json({ message: 'reset key not issued' })
 
     return
@@ -93,10 +93,12 @@ export const requestPasswordResetHandler: RouterHandler = async (
 
   // https://developers.mailersend.com/general.html#api-response
   if (emailRes.statusCode === 202) {
-    res.status(httpStatus.created201).json({ message: 'reset link sent' })
+    res.status(httpStatusCode.created201).json({ message: 'reset link sent' })
 
     return
   }
 
-  res.status(httpStatus.serverError500).json({ message: 'reset link not sent' })
+  res
+    .status(httpStatusCode.serverError500)
+    .json({ message: 'reset link not sent' })
 }
