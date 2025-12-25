@@ -470,7 +470,7 @@ The `.tfvars` files are **generated** from this TypeScript config using `bun dep
 | `dockerImageNameBackend`      |                      | ✓      |
 | `cloudRunServiceNameFrontend` | ✓                    |        |
 | `cloudRunServiceNameBackend`  | ✓                    |        |
-| `customDomainFrontend`        | ✓                    |        |
+| `domainFrontend`              | ✓                    |        |
 | `maxInstancesFrontend`        | ✓                    |        |
 | `maxInstancesBackend`         | ✓                    |        |
 

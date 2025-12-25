@@ -30,7 +30,6 @@ jobs:
       artifactRegistryName: ${{ steps.config.outputs.artifactRegistryName }}
       dockerImageNameFrontend: ${{ steps.config.outputs.dockerImageNameFrontend }}
       dockerImageNameBackend: ${{ steps.config.outputs.dockerImageNameBackend }}
-      customDomainBackend: ${{ steps.config.outputs.customDomainBackend }}
 
     steps:
       - name: 'Checkout repository code'

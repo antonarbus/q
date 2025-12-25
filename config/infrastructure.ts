@@ -70,14 +70,26 @@ export const sharedInfraConfig = {
   neonMaxCu: 0.25, // Keep at 0.25 to minimize costs (free tier max is 2)
 } as const
 
+type InfraConfig = Record<
+  DeployedEnvironment,
+  typeof sharedInfraConfig & {
+    cloudRunServiceNameFrontend: string
+    cloudRunServiceNameBackend: string
+    domainFrontend: string
+    domainBackend: string
+    neonDatabaseName: string
+    environment: string
+  }
+>
+
 //* DO NOT MODIFY, does not hurt
 export const infraConfig = {
   prod: {
     ...sharedInfraConfig,
     cloudRunServiceNameFrontend: `web-app-frontend-prod`,
     cloudRunServiceNameBackend: `web-app-backend-prod`,
-    customDomainFrontend: DOMAIN,
-    customDomainBackend: `api.${DOMAIN}`,
+    domainFrontend: DOMAIN,
+    domainBackend: `api.${DOMAIN}`,
     neonDatabaseName: 'prod', // Production database
     environment: 'prod',
   },
@@ -85,8 +97,8 @@ export const infraConfig = {
     ...sharedInfraConfig,
     cloudRunServiceNameFrontend: `web-app-frontend-pilot`,
     cloudRunServiceNameBackend: `web-app-backend-pilot`,
-    customDomainFrontend: `pilot.${DOMAIN}`,
-    customDomainBackend: `api-pilot.${DOMAIN}`,
+    domainFrontend: `pilot.${DOMAIN}`,
+    domainBackend: `api-pilot.${DOMAIN}`,
     neonDatabaseName: 'prod', // Shares production database
     environment: 'pilot',
   },
@@ -94,8 +106,8 @@ export const infraConfig = {
     ...sharedInfraConfig,
     cloudRunServiceNameFrontend: `web-app-frontend-test`,
     cloudRunServiceNameBackend: `web-app-backend-test`,
-    customDomainFrontend: `test.${DOMAIN}`,
-    customDomainBackend: `api-test.${DOMAIN}`,
+    domainFrontend: `test.${DOMAIN}`,
+    domainBackend: `api-test.${DOMAIN}`,
     neonDatabaseName: 'test', // Test database
     environment: 'test',
   },
@@ -103,12 +115,12 @@ export const infraConfig = {
     ...sharedInfraConfig,
     cloudRunServiceNameFrontend: `web-app-frontend-dev`,
     cloudRunServiceNameBackend: `web-app-backend-dev`,
-    customDomainFrontend: `dev.${DOMAIN}`,
-    customDomainBackend: `api-dev.${DOMAIN}`,
+    domainFrontend: `dev.${DOMAIN}`,
+    domainBackend: `api-dev.${DOMAIN}`,
     neonDatabaseName: 'dev', // Development database
     environment: 'dev',
   },
-} as const
+} as const satisfies InfraConfig
 
 // * MODIFY (if needed)
 
