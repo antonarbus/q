@@ -100,11 +100,15 @@ program
     '--env <environment>',
     'Environment name (dev, test, pilot, prod)',
   )
-  .option('--lock-id <lockId>', 'Lock ID to remove (auto-detects if not provided)')
+  .option(
+    '--lock-id <lockId>',
+    'Lock ID to remove (auto-detects if not provided)',
+  )
   .option('--force', 'Force unlock without prompting for confirmation')
   .action(
     async (options: { env: string; lockId?: string; force?: boolean }) => {
       const validatedEnvironment = deployedEnvironmentSchema.parse(options.env)
+
       await terraformUnlock({
         environment: validatedEnvironment,
         lockId: options.lockId,
