@@ -37,7 +37,7 @@
     "find-circular-deps": "bun madge --circular --extensions ts,tsx .",
     "terraform-check": "cd terraform && terraform fmt -check -recursive",
     "terraform-format": "cd terraform && terraform fmt -recursive",
-    "check": "bun run tsc && bun run lint-check-quiet && bun run format-check && bun run unit-test && bun run find-unused-files && bun run find-circular-deps && bun run terraform-check && bun run e2e-test",
+    "check": "bun run tsc && bun run lint-check-quiet && bun run format-check && bun run unit-test && bun run find-unused-files && bun run find-circular-deps && bun run terraform-check && bun run e2e-test && bun run build-back && bun run build-front",
     "update-packages-root": "bun update --interactive",
     "update-packages-front": "cd ./front && bun update --interactive",
     "update-packages-back": "cd ./back && bun update --interactive",

@@ -4,6 +4,7 @@ import basicSsl from '@vitejs/plugin-basic-ssl'
 import react from '@vitejs/plugin-react'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import { runtimeConfig } from './config/runtime' // relative imports, otherwise some scripts break
+import type { Plugin } from 'vite'
 
 const thisFilePath: string = fileURLToPath(import.meta.url)
 const thisDirPath: string = dirname(thisFilePath)
@@ -39,7 +40,7 @@ export default {
   },
   worker: {
     format: 'es',
-    plugins: () => [
+    plugins: (): Plugin[] => [
       tsconfigPaths({
         root: thisDirPath,
       }),
