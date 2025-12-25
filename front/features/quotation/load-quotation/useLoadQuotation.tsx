@@ -1,4 +1,3 @@
-import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { navItemId } from '@entities/nav/navItemId'
 import { navSlice } from '@entities/nav/navSlice'
 import { useGetQuotationMutation } from '@entities/quotation/api/useGetQuotationMutation'
@@ -258,15 +257,30 @@ export const useLoadQuotation = (): void => {
   useUpdateEffect(() => {
     if (getQuotationMutation.isError === true) {
       if (
-        getQuotationMutation.error.response?.status ===
-        httpStatusCode.notFound404
+        getQuotationMutation.error.response?.data.errorCode ===
+        'QUOTATION_NOT_FOUND'
       ) {
         dispatch(
           appSlice.actions.setBackgroundMessage({
-            message: `Quotation ${quotationId} is not found`,
+            message: `Quotation ${quotationId} not found`,
           }),
         )
-      } else {
+      }
+
+      if (
+        getQuotationMutation.error.response?.data.errorCode ===
+        'FILE_NOT_FOUND_IN_BUCKET'
+      ) {
+        dispatch(
+          appSlice.actions.setBackgroundMessage({
+            message: `Quotation ${quotationId} not found, probably deleted`,
+          }),
+        )
+      }
+
+      if (
+        getQuotationMutation.error.response?.data.errorCode === 'INTERNAL_ERROR'
+      ) {
         toast.error('Internal error')
 
         dispatch(

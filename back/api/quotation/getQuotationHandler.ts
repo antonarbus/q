@@ -28,7 +28,10 @@ export type ResBody = {
 
 export type ErrorResBody = {
   message: string
-  errorCode: ErrorCodeCommon | 'QUOTATION_NOT_FOUND'
+  errorCode:
+    | ErrorCodeCommon
+    | 'QUOTATION_NOT_FOUND'
+    | 'FILE_NOT_FOUND_IN_BUCKET'
 }
 
 type RouterHandler = (
@@ -37,7 +40,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const getQuotationHandler: RouterHandler = async (req, res, _next) => {
+export const getQuotationHandler: RouterHandler = async (req, res) => {
   const userFromAccessToken = getUserFromAccessTokenOrNull({ req })
 
   const emptyQuotation: Quotation = {
@@ -154,7 +157,18 @@ export const getQuotationHandler: RouterHandler = async (req, res, _next) => {
   }
 
   const fileInfo = getFileInfo({ id: req.body.id })
-  const [fileBuffer] = await bucket.file(fileInfo.path).download()
+
+  const [fileBuffer] = await bucket
+    .file(fileInfo.path)
+    .download()
+    .catch(() => {
+      throw new HttpError<ErrorResBody['errorCode']>({
+        errorCode: 'FILE_NOT_FOUND_IN_BUCKET',
+        statusCode: httpStatusCode.serverError500,
+        message: 'Quotation data not found in storage',
+      })
+    })
+
   const quotationJson = fileBuffer.toString()
   const quotationParsed = jsonParseSafe<Quotation>(quotationJson)
 
@@ -162,7 +176,7 @@ export const getQuotationHandler: RouterHandler = async (req, res, _next) => {
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'QUOTATION_NOT_FOUND',
       statusCode: httpStatusCode.notFound404,
-      message: 'Quotation data not found in storage',
+      message: 'Quotation not parsed',
     })
   }
 
