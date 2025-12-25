@@ -1,5 +1,4 @@
 import { getUserFromAccessTokenOrNull, usersTable } from '@back/entities/user'
-import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { userRole } from '@back/shared/const/userRole'
 import { setNoTraceMode, setRefreshTokenCookie } from '@back/shared/headers'
 import {
@@ -15,8 +14,12 @@ import type { NextFunction, Request, Response } from 'express'
 import { runtimeConfig } from '@root/config/runtime'
 import { db } from '@back/shared/lib/drizzle/db'
 import { eq } from 'drizzle-orm'
+import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCodeCommon } from '@back/shared/const/errorCodeCommon'
+
+type SearchQuery = unknown
+type UrlParam = unknown
 
 export type ReqBody = {
   email: User['email']
@@ -45,8 +48,8 @@ export type ErrorResBody = {
 }
 
 type RouterHandler = (
-  req: Request<unknown, unknown, ReqBody>,
-  res: Response<ResBody | ErrorResBody>,
+  req: Request<UrlParam, unknown, ReqBody, SearchQuery>,
+  res: Response<ResBody>,
   next: NextFunction,
 ) => Promise<void>
 

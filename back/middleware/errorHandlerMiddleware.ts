@@ -3,7 +3,7 @@ import type { NextFunction, Request, Response } from 'express'
 import { httpStatusCode } from '../shared/const/httpStatusCode'
 import { errorCodeCommon } from '@back/shared/const/errorCodeCommon'
 
-type ErrorHandlerBody = {
+type ErrorResBody = {
   errorCode: string
   message: string
   errorAsString: string
@@ -12,7 +12,7 @@ type ErrorHandlerBody = {
 type RouterHandler = (
   error: Error,
   req: Request,
-  res: Response<ErrorHandlerBody>,
+  res: Response<ErrorResBody>,
   next: NextFunction,
 ) => void
 
