@@ -82,8 +82,7 @@ export const runInteractiveMode = async (): Promise<void> => {
         }
 
         const lockId = await input({
-          message:
-            'Enter the lock ID to remove (leave empty to auto-detect):',
+          message: 'Enter the lock ID to remove (leave empty to auto-detect):',
           default: '',
         })
 
