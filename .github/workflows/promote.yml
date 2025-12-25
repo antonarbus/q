@@ -111,9 +111,9 @@ jobs:
 
   setup-promotion:
     name: 'Setup Promotion'
-    needs: validate
-    # Run this job unless a dependency failed or was cancelled
-    if: ${{ !failure() && !cancelled() }}
+    needs: [validate, e2e-tests]
+    # Run if e2e-tests succeeded OR was skipped (for non-dev promotions)
+    if: ${{ !cancelled() && (needs.e2e-tests.result == 'success' || needs.e2e-tests.result == 'skipped') }}
     runs-on: ubuntu-latest
     # GitHub Environment for approval gates
     # Configure required reviewers in GitHub repo settings -> Environments
