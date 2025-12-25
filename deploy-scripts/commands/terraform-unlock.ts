@@ -11,7 +11,9 @@ type Props = {
   force?: boolean
 }
 
-const detectLockId = async (tfvarsFilePath: string): Promise<string | null> => {
+const detectLockId = async (
+  tfvarsFilePath: string,
+): Promise<string | undefined> => {
   try {
     // Try to run terraform plan which will fail if locked
     // Use -input=false to prevent any prompts and -lock-timeout to fail fast
@@ -20,23 +22,23 @@ const detectLockId = async (tfvarsFilePath: string): Promise<string | null> => {
 
     // If exit code is 0, there's no lock
     if (result.exitCode === 0) {
-      return null
+      return undefined
     }
 
     // Command failed, check if it's a lock error
     const errorMessage = [result.stderr, result.stdout].join('\n')
 
     // Look for ID: followed by numbers (with or without hyphens)
-    const lockIdMatch = errorMessage.match(/ID:\s+([0-9a-f-]+)/i)
+    const lockIdMatch = /ID:\s+(?<temp1>[0-9a-f-]+)/iu.exec(errorMessage)
 
-    if (lockIdMatch !== null && lockIdMatch[1] !== undefined) {
+    if (lockIdMatch?.[1] !== undefined) {
       return lockIdMatch[1]
     }
 
     // Try alternative pattern "Lock ID:"
-    const altMatch = errorMessage.match(/Lock ID:\s+([0-9a-f-]+)/i)
+    const altMatch = /Lock ID:\s+(?<temp1>[0-9a-f-]+)/iu.exec(errorMessage)
 
-    if (altMatch !== null && altMatch[1] !== undefined) {
+    if (altMatch?.[1] !== undefined) {
       return altMatch[1]
     }
 
@@ -47,12 +49,13 @@ const detectLockId = async (tfvarsFilePath: string): Promise<string | null> => {
       console.error(errorMessage)
     }
 
-    return null
+    return undefined
   } catch (error: unknown) {
     // Unexpected error
     logger.warning('Unexpected error during lock detection')
     console.error(error)
-    return null
+
+    return undefined
   }
 }
 
@@ -92,6 +95,7 @@ export const terraformUnlock = async (props: Props): Promise<void> => {
     if (lockIdToUse === null) {
       logger.warning('No lock detected on the state.')
       logger.emptyLine()
+
       return
     }
 
