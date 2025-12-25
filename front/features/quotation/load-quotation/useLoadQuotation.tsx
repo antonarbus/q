@@ -223,6 +223,20 @@ export const useLoadQuotation = (): void => {
 
       dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
 
+      if (quotation.permissionLevel === 'Forbidden') {
+        dispatch(
+          quotationSlice.actions.loadQuotationReducer({
+            quotation: getQuotationMutation.data.quotation,
+          }),
+        )
+
+        dispatch(
+          appSlice.actions.setBackgroundMessage({
+            message: `Forbidden to view quotation ${quotationId}`,
+          }),
+        )
+      }
+
       dispatch(
         navSlice.actions.enableNavItems({
           navItemIds: [
@@ -244,21 +258,6 @@ export const useLoadQuotation = (): void => {
   useUpdateEffect(() => {
     if (getQuotationMutation.isError === true) {
       if (
-        getQuotationMutation.error.response?.status ===
-        httpStatusCode.forbidden403
-      ) {
-        dispatch(
-          quotationSlice.actions.loadQuotationReducer({
-            quotation: getQuotationMutation.error.response.data.quotation,
-          }),
-        )
-
-        dispatch(
-          appSlice.actions.setBackgroundMessage({
-            message: `Forbidden to view quotation ${quotationId}`,
-          }),
-        )
-      } else if (
         getQuotationMutation.error.response?.status ===
         httpStatusCode.notFound404
       ) {
