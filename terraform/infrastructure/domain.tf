@@ -29,8 +29,8 @@
 # Cloud Run domain mapping (v1 API)
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/cloud_run_domain_mapping
 resource "google_cloud_run_domain_mapping" "frontend" {
-  name     = var.domain_frontend        # Custom domain from config (e.g., "sendmequotation.today", "dev.sendmequotation.today")
-  location = var.region                 # Same region as Cloud Run service
+  name     = var.domain_frontend # Custom domain from config (e.g., "sendmequotation.today", "dev.sendmequotation.today")
+  location = var.region          # Same region as Cloud Run service
 
   # Project namespace
   metadata {
@@ -44,8 +44,8 @@ resource "google_cloud_run_domain_mapping" "frontend" {
 }
 
 resource "google_cloud_run_domain_mapping" "backend" {
-  name     = var.domain_backend        # Custom domain from config (e.g., "api.sendmequotation.today", "api-dev.sendmequotation.today")
-  location = var.region                # Same region as Cloud Run service
+  name     = var.domain_backend # Custom domain from config (e.g., "api.sendmequotation.today", "api-dev.sendmequotation.today")
+  location = var.region         # Same region as Cloud Run service
 
   # Project namespace
   metadata {
