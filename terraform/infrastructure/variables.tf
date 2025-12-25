@@ -208,7 +208,7 @@ variable "container_port_backend" {
 # CUSTOM DOMAIN
 # ==============================================================================
 
-variable "custom_domain_frontend" {
+variable "domain_frontend" {
   description = "Custom domain name to map to the frontend Cloud Run service"
   type        = string
   # Your domain name (without www or https://)

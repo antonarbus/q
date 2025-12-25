@@ -77,7 +77,7 @@ output "docker_image_backend_path_output" {
 # CUSTOM DOMAIN
 # ==============================================================================
 
-output "custom_domain_frontend_output" {
+output "domain_frontend_output" {
   description = "Custom domain mapped to your frontend Cloud Run service"
   value       = google_cloud_run_domain_mapping.frontend.name
   # Example: sendmequotation.today or dev.sendmequotation.today

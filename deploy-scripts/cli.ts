@@ -9,6 +9,7 @@ import { promoteImage } from './commands/promote-image'
 import { showDeploymentInfo } from './commands/show-deployment-info'
 import { terraformApply } from './commands/terraform-apply'
 import { terraformFormat } from './commands/terraform-format'
+import { terraformUnlock } from './commands/terraform-unlock'
 import { validatePromotion } from './commands/validate-promotion'
 import { verifyDeployment } from './commands/verify-deployment'
 import { runInteractiveMode } from './lib/interactive'
@@ -91,6 +92,26 @@ program
   .action(async () => {
     await terraformFormat()
   })
+
+program
+  .command('terraform-unlock')
+  .description('Remove Terraform state lock')
+  .requiredOption(
+    '--env <environment>',
+    'Environment name (dev, test, pilot, prod)',
+  )
+  .option('--lock-id <lockId>', 'Lock ID to remove (auto-detects if not provided)')
+  .option('--force', 'Force unlock without prompting for confirmation')
+  .action(
+    async (options: { env: string; lockId?: string; force?: boolean }) => {
+      const validatedEnvironment = deployedEnvironmentSchema.parse(options.env)
+      await terraformUnlock({
+        environment: validatedEnvironment,
+        lockId: options.lockId,
+        force: options.force,
+      })
+    },
+  )
 
 program
   .command('deploy-cloudrun')

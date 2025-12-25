@@ -1,4 +1,4 @@
-import { select } from '@inquirer/prompts'
+import { input, select } from '@inquirer/prompts'
 import chalk from 'chalk'
 import { generateTfvars } from '../commands/generate-tfvars'
 import { listGcloudServices } from '../commands/list-gcloud-services'
@@ -6,6 +6,7 @@ import { showDeploymentInfo } from '../commands/show-deployment-info'
 import { terraformApply } from '../commands/terraform-apply'
 import { terraformFormat } from '../commands/terraform-format'
 import { terraformPlan } from '../commands/terraform-plan'
+import { terraformUnlock } from '../commands/terraform-unlock'
 import type { DeployedEnvironment } from '@root/config/environment'
 
 type Command = {
@@ -70,6 +71,36 @@ export const runInteractiveMode = async (): Promise<void> => {
       description: 'Format Terraform files',
       requiresEnv: false,
       action: async () => terraformFormat(),
+    },
+    {
+      name: 'terraform-unlock',
+      description: 'Remove Terraform state lock',
+      requiresEnv: true,
+      action: async (environment?: DeployedEnvironment): Promise<void> => {
+        if (environment === undefined) {
+          throw new Error('Environment required')
+        }
+
+        const lockId = await input({
+          message:
+            'Enter the lock ID to remove (leave empty to auto-detect):',
+          default: '',
+        })
+
+        const forceConfirm = await select({
+          message: 'Force unlock without confirmation?',
+          choices: [
+            { name: 'No', value: false },
+            { name: 'Yes', value: true },
+          ],
+        })
+
+        await terraformUnlock({
+          environment,
+          lockId: lockId === '' ? undefined : lockId,
+          force: forceConfirm,
+        })
+      },
     },
     {
       name: 'exit',
