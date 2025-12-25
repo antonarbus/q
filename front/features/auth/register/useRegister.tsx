@@ -80,7 +80,7 @@ export const useRegister = ({
   useUpdateEffect(() => {
     if (registerUserMutation.isError === true) {
       if (
-        registerUserMutation.error.response?.data.message === 'already exists'
+        registerUserMutation.error.response?.data.errorCode === 'ALREADY_EXISTS'
       ) {
         toast.info('Already registered')
 
@@ -88,8 +88,8 @@ export const useRegister = ({
       }
 
       if (
-        registerUserMutation.error.response?.data.message ===
-        'activation key not issued'
+        registerUserMutation.error.response?.data.errorCode ===
+        'ACTIVATION_KEY_NOT_ISSUED'
       ) {
         toast.warning('Something went wrong, activation key was not issued')
 
@@ -97,8 +97,8 @@ export const useRegister = ({
       }
 
       if (
-        registerUserMutation.error.response?.data.message ===
-        'activation link not sent'
+        registerUserMutation.error.response?.data.errorCode ===
+        'ACTIVATION_LINK_NOT_SENT'
       ) {
         toast.warning('Something went wrong, activation key was not sent')
 

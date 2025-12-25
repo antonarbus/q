@@ -10,8 +10,8 @@ export const useConnectionToBackendCheck = (): void => {
       console.error(healthCheckQuery.error)
 
       if (
-        healthCheckQuery.error.response?.data.message ===
-        'connection to db failed'
+        healthCheckQuery.error.response?.data.errorCode ===
+        'DB_CONNECTION_FAILED'
       ) {
         toast.warning(
           'Ups, looks like we have problems with database connection ☹️',

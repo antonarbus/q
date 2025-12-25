@@ -82,8 +82,8 @@ export const useResetPassword = ({ passwordSignal, slideOut }: Props): Res => {
   useUpdateEffect(() => {
     if (resetUserPasswordMutation.isError === true) {
       if (
-        resetUserPasswordMutation.error.response?.data.message ===
-        'incorrect reset key'
+        resetUserPasswordMutation.error.response?.data.errorCode ===
+        'INCORRECT_RESET_KEY'
       ) {
         toast.warning('Incorrect reset key')
 
@@ -91,8 +91,8 @@ export const useResetPassword = ({ passwordSignal, slideOut }: Props): Res => {
       }
 
       if (
-        resetUserPasswordMutation.error.response?.data.message ===
-        'not activated'
+        resetUserPasswordMutation.error.response?.data.errorCode ===
+        'NOT_ACTIVATED'
       ) {
         toast.warning('Account not activated')
 

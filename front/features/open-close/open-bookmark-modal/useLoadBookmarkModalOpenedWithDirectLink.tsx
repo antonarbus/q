@@ -60,7 +60,7 @@ export const useLoadBookmarkModalOpenedWithDirectLink = ({
 
   useUpdateEffect(() => {
     if (getBookmarkMutation.isError === true) {
-      if (getBookmarkMutation.error.response?.data.message === 'not found') {
+      if (getBookmarkMutation.error.response?.data.errorCode === 'NOT_FOUND') {
         toast.warning('Bookmark not found')
         void navigate('..')
       }
