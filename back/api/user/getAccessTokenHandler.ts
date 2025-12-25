@@ -58,6 +58,7 @@ export const getAccessTokenHandler: RouterHandler = async (req, res, _next) => {
 
     if (userSelected === undefined) {
       removeRefreshTokenCookie({ res })
+
       res
         .status(httpStatusCode.unauthorized401)
         .json({ message: 'Not logged in' })
@@ -81,6 +82,7 @@ export const getAccessTokenHandler: RouterHandler = async (req, res, _next) => {
 
     if (userUpdated === undefined) {
       removeRefreshTokenCookie({ res })
+
       res
         .status(httpStatusCode.unauthorized401)
         .json({ message: 'Not logged in' })

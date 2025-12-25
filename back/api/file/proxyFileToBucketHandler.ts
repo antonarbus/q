@@ -83,6 +83,7 @@ export const proxyFileToBucketHandler: RouterHandler = async (
     res.redirect(signedUrl)
   } catch (error) {
     console.error('Error generating signed URL:', error)
+
     res
       .status(httpStatusCode.serverError500)
       .send('Failed to generate file link')
