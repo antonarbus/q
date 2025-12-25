@@ -1,7 +1,7 @@
 import { filesTable, type SelectFile } from '@back/entities/file'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
-import { httpStatusCode } from '@back/shared/const/HttpStatusCode'
+import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { db } from '@back/shared/lib/drizzle/db'
 import { userRole } from '@back/shared/const/userRole'
 import { and, asc, count, desc, ilike } from 'drizzle-orm'

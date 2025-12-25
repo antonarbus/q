@@ -1,4 +1,4 @@
-import { httpStatusCode } from '@back/shared/const/HttpStatusCode'
+import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { navItemId } from '@entities/nav/navItemId'
 import { navSlice } from '@entities/nav/navSlice'
 import { useGetQuotationMutation } from '@entities/quotation/api/useGetQuotationMutation'

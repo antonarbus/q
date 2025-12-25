@@ -1,5 +1,5 @@
 import { getUserFromRefreshTokenOrJohn, usersTable } from '@back/entities/user'
-import { httpStatusCode } from '@back/shared/const/HttpStatusCode'
+import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { userRole } from '@back/shared/const/userRole'
 import type { NextFunction, Request, Response } from 'express'
 import { db } from '@back/shared/lib/drizzle/db'

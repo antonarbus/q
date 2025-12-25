@@ -1,6 +1,6 @@
 import { visitorsTable } from '@back/entities/visitor'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
-import { httpStatusCode } from '@back/shared/const/HttpStatusCode'
+import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { db } from '@back/shared/lib/drizzle/db'
 import { runtimeConfig } from '@root/config/runtime'
 import { sql } from 'drizzle-orm'

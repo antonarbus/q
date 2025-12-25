@@ -5,7 +5,7 @@ import {
 } from '@back/entities/bookmark'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
-import { httpStatusCode } from '@back/shared/const/HttpStatusCode'
+import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { db } from '@back/shared/lib/drizzle/db'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import type { NextFunction, Request, Response } from 'express'

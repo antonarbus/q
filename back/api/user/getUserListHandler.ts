@@ -4,7 +4,7 @@ import {
   type SelectUser,
 } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
-import { httpStatusCode } from '@back/shared/const/HttpStatusCode'
+import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { userRole } from '@back/shared/const/userRole'
 import type { Pretty } from '@shared/lib/typescript/Pretty'
 import type { NextFunction, Request, Response } from 'express'

@@ -1,6 +1,6 @@
 import { usersTable } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
-import { httpStatusCode } from '@back/shared/const/HttpStatusCode'
+import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { sendEmail } from '@back/shared/lib/mailersend'
 import { generateId } from '@back/shared/lib/nanoid'
 import type { User } from '@entities/user/type'

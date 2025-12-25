@@ -1,6 +1,6 @@
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
-import { httpStatusCode } from '@back/shared/const/HttpStatusCode'
+import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import { generateId } from '@back/shared/lib/nanoid'
 import type { Quotation } from '@entities/quotation/type'

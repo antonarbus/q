@@ -1,5 +1,5 @@
 import { getUserFromRefreshTokenOrJohn } from '@back/entities/user'
-import { httpStatusCode } from '@back/shared/const/HttpStatusCode'
+import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { userRole } from '@back/shared/const/userRole'
 import { bucket } from '@back/shared/lib/google-cloud-storage'
 import type { NextFunction, Request, Response } from 'express'

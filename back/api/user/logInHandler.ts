@@ -1,5 +1,5 @@
 import { getUserFromAccessTokenOrNull, usersTable } from '@back/entities/user'
-import { httpStatusCode } from '@back/shared/const/HttpStatusCode'
+import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { userRole } from '@back/shared/const/userRole'
 import { setNoTraceMode, setRefreshTokenCookie } from '@back/shared/headers'
 import {
