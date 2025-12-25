@@ -48,7 +48,7 @@ export type ErrorResBody = {
 }
 
 type RouterHandler = (
-  req: Request<UrlParam, unknown, ReqBody, SearchQuery>,
+  req: Request<UrlParam, ResBody, ReqBody, SearchQuery>,
   res: Response<ResBody>,
   next: NextFunction,
 ) => Promise<void>

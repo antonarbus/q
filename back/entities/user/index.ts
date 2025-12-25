@@ -1,6 +1,6 @@
 export { getUserFromAccessTokenOrNull } from './getUserFromAccessTokenOrNull'
 export { getUserFromAccessTokenOrThrowUnauthorized } from './getUserFromAccessTokenOrThrowUnauthorized'
-export { getUserFromRefreshTokenOrJohn } from './getUserFromRefreshTokenOrJohn'
+export { getUserFromRefreshTokenOrUnknownPerson as getUserFromRefreshTokenOrJohn } from './getUserFromRefreshTokenOrUnknownPerson'
 export { getUserFromRefreshTokenOrNull } from './getUserFromRefreshTokenOrNull'
 
 export {

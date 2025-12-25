@@ -10,6 +10,7 @@ import type { ParsedQs } from 'qs'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
+type ReqBody = unknown
 
 export type ResBody = {
   message: 'connected to db'
@@ -22,12 +23,12 @@ export type ErrorResBody = {
 }
 
 type RouterHandler = (
-  req: Request<UrlParam, unknown, unknown, SearchQuery>,
+  req: Request<UrlParam, ResBody, ReqBody, SearchQuery>,
   res: Response<ResBody>,
   next: NextFunction,
 ) => Promise<void>
 
-export const healthCheckHandler: RouterHandler = async (_req, res, _next) => {
+export const healthCheckHandler: RouterHandler = async (_req, res) => {
   try {
     // Simple query to verify Postgres / Drizzle connectivity
     await db.execute(sql`select 1`)

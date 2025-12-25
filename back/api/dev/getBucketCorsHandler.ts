@@ -8,10 +8,12 @@ import type { NextFunction, Request, Response } from 'express'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
 
+// https://cloud.google.com/storage/docs/using-cors#storage-get-bucket-metadata-nodejs
+
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
-
-// https://cloud.google.com/storage/docs/using-cors#storage-get-bucket-metadata-nodejs
+type ReqBody = unknown
+type ResBody = unknown
 
 type ErrorResBody = {
   message: string
@@ -19,12 +21,12 @@ type ErrorResBody = {
 }
 
 type RouterHandler = (
-  req: Request<UrlParam, unknown, unknown, SearchQuery>,
-  res: Response,
+  req: Request<UrlParam, ResBody, ReqBody, SearchQuery>,
+  res: Response<ResBody>,
   next: NextFunction,
 ) => Promise<void>
 
-export const getBucketCorsHandler: RouterHandler = async (req, res, _next) => {
+export const getBucketCorsHandler: RouterHandler = async (req, res) => {
   const userFromRefreshToken = getUserFromRefreshTokenOrJohn({ req })
 
   if (userFromRefreshToken.roles.includes(userRole.superAdmin) === false) {

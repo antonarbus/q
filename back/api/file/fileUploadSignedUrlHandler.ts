@@ -10,6 +10,7 @@ import type { ParsedQs } from 'qs'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
+type ReqBody = unknown
 
 export type ResBody = {
   signedUrl: string
@@ -23,16 +24,12 @@ type ErrorResBody = {
 }
 
 type RouterHandler = (
-  req: Request<UrlParam, unknown, unknown, SearchQuery>,
+  req: Request<UrlParam, ResBody, ReqBody, SearchQuery>,
   res: Response<ResBody>,
   next: NextFunction,
 ) => Promise<void>
 
-export const fileUploadSignedUrlHandler: RouterHandler = async (
-  req,
-  res,
-  _next,
-) => {
+export const fileUploadSignedUrlHandler: RouterHandler = async (req, res) => {
   getUserFromAccessTokenOrThrowUnauthorized({ req, res })
 
   const fileId = generateId()

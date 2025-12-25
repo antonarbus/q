@@ -16,6 +16,8 @@ export type SearchQuery = {
   endDate: string
 }
 
+type ReqBody = unknown
+
 export type ResBody = {
   visitorList: SelectVisitors[]
   message: 'ok'
@@ -27,7 +29,7 @@ export type ErrorResBody = {
 }
 
 type RouterHandler = (
-  req: Request<UrlParam, unknown, unknown, SearchQuery>,
+  req: Request<UrlParam, ResBody, ReqBody, SearchQuery>,
   res: Response<ResBody>,
   next: NextFunction,
 ) => Promise<void>

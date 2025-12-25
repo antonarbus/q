@@ -12,7 +12,7 @@ type SearchQuery = ParsedQs
 type UrlParam = {
   fileId: SelectFile['id']
 }
-
+type ReqBody = unknown
 type ResBody = string
 
 type ErrorResBody = {
@@ -21,7 +21,7 @@ type ErrorResBody = {
 }
 
 type RouterHandler = (
-  req: Request<UrlParam, unknown, unknown, SearchQuery>,
+  req: Request<UrlParam, ResBody, ReqBody, SearchQuery>,
   res: Response<ResBody>,
   next: NextFunction,
 ) => Promise<void>
@@ -31,11 +31,7 @@ const signedUrlCache = new Map<string, { url: string; expiresAt: number }>()
 const SIGNED_URL_TTL_MS = 5 * 60 * 1000 // 5 minutes
 const CLIENT_CACHE_MAX_AGE = SIGNED_URL_TTL_MS / 1000 // 5 min in seconds
 
-export const proxyFileToBucketHandler: RouterHandler = async (
-  req,
-  res,
-  _next,
-) => {
+export const proxyFileToBucketHandler: RouterHandler = async (req, res) => {
   // const user = getUserFromAccessTokenOrNull({ req })
 
   const cached = signedUrlCache.get(req.params.fileId)

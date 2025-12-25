@@ -12,6 +12,7 @@ import type { ParsedQs } from 'qs'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
+type ReqBody = unknown
 
 export type ResBody = Pretty<{
   quotationList: SelectQuotation[]
@@ -24,16 +25,12 @@ export type ErrorResBody = {
 }
 
 type RouterHandler = (
-  req: Request<UrlParam, unknown, unknown, SearchQuery>,
+  req: Request<UrlParam, ResBody, ReqBody, SearchQuery>,
   res: Response<ResBody>,
   next: NextFunction,
 ) => Promise<void>
 
-export const getQuotationListHandler: RouterHandler = async (
-  req,
-  res,
-  _next,
-) => {
+export const getQuotationListHandler: RouterHandler = async (req, res) => {
   const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({
     req,
     res,

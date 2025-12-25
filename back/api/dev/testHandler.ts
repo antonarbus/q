@@ -11,6 +11,9 @@ import type { ParsedQs } from 'qs'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
+type ReqBody = unknown
+
+type ResBody = unknown
 
 type ErrorResBody = {
   message: string
@@ -18,12 +21,12 @@ type ErrorResBody = {
 }
 
 type RouterHandler = (
-  req: Request<UrlParam, unknown, unknown, SearchQuery>,
-  res: Response,
+  req: Request<UrlParam, ResBody, ReqBody, SearchQuery>,
+  res: Response<ResBody>,
   next: NextFunction,
 ) => Promise<void>
 
-export const testHandler: RouterHandler = async (req, res, _next) => {
+export const testHandler: RouterHandler = async (req, res) => {
   const userFromRefreshToken = getUserFromRefreshTokenOrJohn({ req })
 
   if (userFromRefreshToken.roles.includes(userRole.superAdmin) === false) {

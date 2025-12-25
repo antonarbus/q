@@ -23,7 +23,7 @@ export type ErrorResBody = {
 }
 
 type RouterHandler = (
-  req: Request<UrlParam, unknown, ReqBody, SearchQuery>,
+  req: Request<UrlParam, ResBody, ReqBody, SearchQuery>,
   res: Response<ResBody>,
   next: NextFunction,
 ) => Promise<void>
@@ -31,7 +31,6 @@ type RouterHandler = (
 export const getQuotationCategoriesHandler: RouterHandler = async (
   req,
   res,
-  _next,
 ) => {
   const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({
     req,

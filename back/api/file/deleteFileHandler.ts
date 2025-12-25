@@ -31,12 +31,12 @@ export type ErrorResBody = {
 }
 
 type RouterHandler = (
-  req: Request<UrlParam, unknown, ReqBody, SearchQuery>,
+  req: Request<UrlParam, ResBody, ReqBody, SearchQuery>,
   res: Response<ResBody>,
   next: NextFunction,
 ) => Promise<void>
 
-export const deleteFileHandler: RouterHandler = async (req, res, _next) => {
+export const deleteFileHandler: RouterHandler = async (req, res) => {
   const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({
     req,
     res,

@@ -1,4 +1,5 @@
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
+import { HttpError } from '@back/shared/errors/HttpError'
 import { headerName } from '@back/shared/headers'
 import { verifyAccessToken } from '@back/shared/lib/json-webtoken'
 import type { User } from '@entities/user/type'
@@ -14,9 +15,7 @@ type Res = {
   roles: User['roles']
 }
 
-/**
- * Used to get a user details for all protected routes where a user should be logged in
- */
+/** Used to get a user details for all protected routes where a user should be logged in */
 export const getUserFromAccessTokenOrThrowUnauthorized = ({
   req,
   res,
@@ -24,24 +23,25 @@ export const getUserFromAccessTokenOrThrowUnauthorized = ({
   const accessJwtToken = req.headers[headerName.accessJwtToken]
 
   if (typeof accessJwtToken !== 'string') {
-    res
-      .status(httpStatusCode.unauthorized401)
-      .json({ message: 'Not logged in' })
-
-    throw new Error('Not logged in')
+    throw new HttpError<'UNAUTHORIZED'>({
+      errorCode: 'UNAUTHORIZED',
+      statusCode: httpStatusCode.unauthorized401,
+      message: 'Not logged in',
+    })
   }
 
   const jwtPayload = verifyAccessToken(accessJwtToken)
 
   if (jwtPayload === undefined) {
-    res
-      .status(httpStatusCode.unauthorized401)
-      .json({ message: 'Not logged in' })
-
-    throw new Error('Not logged in')
+    throw new HttpError<'UNAUTHORIZED'>({
+      errorCode: 'UNAUTHORIZED',
+      statusCode: httpStatusCode.unauthorized401,
+      message: 'Not logged in',
+    })
   }
 
-  const { email, roles } = jwtPayload
-
-  return { email, roles }
+  return {
+    email: jwtPayload.email,
+    roles: jwtPayload.roles,
+  }
 }

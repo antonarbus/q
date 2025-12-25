@@ -31,7 +31,8 @@ export const getUserFromAccessTokenOrNull = ({ req }: Props): Res => {
     return null
   }
 
-  const { email, roles } = jwtPayload
-
-  return { email, roles }
+  return {
+    email: jwtPayload.email,
+    roles: jwtPayload.roles,
+  }
 }

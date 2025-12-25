@@ -5,7 +5,7 @@ import type { User } from '@entities/user/type'
 import type { Request } from 'express'
 
 type Props = {
-  req: Request<unknown>
+  req: Request
 }
 
 type Res = {
@@ -16,33 +16,32 @@ type Res = {
 /**
  * Used only for dev purposes to access
  * dev apis directly under super-admin role at
+ *
  * https://sendmequotation.today/api/test
  * https://sendmequotation.today/api/set-bucket-cors
  * https://sendmequotation.today/api/get-bucket-cor
  */
-export const getUserFromRefreshTokenOrJohn = ({ req }: Props): Res => {
+export const getUserFromRefreshTokenOrUnknownPerson = ({ req }: Props): Res => {
   const refreshJwtToken = getRefreshTokenFromCookie({ req })
 
-  const john = {
-    email: 'john@gmail.com',
+  const unknownPerson = {
+    email: 'unknown@gmail.com',
     roles: [userRole.user],
   }
 
   if (refreshJwtToken === undefined) {
-    return john
+    return unknownPerson
   }
 
   const jwtPayload = verifyRefreshToken(refreshJwtToken)
 
   if (jwtPayload === undefined) {
-    return john
+    return unknownPerson
   }
 
-  const { email, roles } = jwtPayload
-
-  if (typeof email !== 'string') {
-    return john
+  if (typeof jwtPayload.email !== 'string') {
+    return unknownPerson
   }
 
-  return { email, roles }
+  return { email: jwtPayload.email, roles: jwtPayload.roles }
 }
