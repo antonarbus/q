@@ -1,14 +1,18 @@
-import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
-import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { setRefreshTokenCookie } from '@back/shared/headers'
 import {
   generateAccessToken,
   generateRefreshToken,
 } from '@back/shared/lib/json-webtoken'
-import type { NextFunction, Request, Response } from 'express'
 import { usersTable, type SelectUser } from '@back/entities/user'
 import { db } from '@back/shared/lib/drizzle/db'
 import { and, eq } from 'drizzle-orm'
+import type { NextFunction, Request, Response } from 'express'
+import { httpStatusCode } from '@back/shared/const/httpStatusCode'
+import { HttpError } from '@back/shared/errors/HttpError'
+import type { ErrorCodeCommon } from '@back/shared/const/errorCodeCommon'
+
+type SearchQuery = unknown
+type UrlParam = unknown
 
 export type ReqBody = {
   activationKey: NonNullable<SelectUser['activationKey']>
@@ -19,19 +23,18 @@ export type ResBody = {
   accessJwtTokenExpiresOn?: string
   email?: SelectUser['email']
   roles?: SelectUser['roles']
-  message: 'already activated' | 'activated'
+  message: 'Already activated' | 'Activated'
 }
 
 export type ErrorResBody = {
-  message:
-    | ErrorMessageCommon
-    | 'activation key not found'
-    | 'failed to activate'
+  message: string
+  errorAsString: string
+  errorCode: ErrorCodeCommon | 'KEY_NOT_FOUND' | 'FAILED'
 }
 
 type RouterHandler = (
-  req: Request<unknown, unknown, ReqBody>,
-  res: Response<ResBody | ErrorResBody>,
+  req: Request<UrlParam, unknown, ReqBody, SearchQuery>,
+  res: Response<ResBody>,
   next: NextFunction,
 ) => Promise<void>
 
@@ -42,15 +45,15 @@ export const activateHandler: RouterHandler = async (req, res, _next) => {
     .where(eq(usersTable.activationKey, req.body.activationKey))
 
   if (userSelected === undefined) {
-    res
-      .status(httpStatusCode.badRequest400)
-      .json({ message: 'activation key not found' })
-
-    return
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'KEY_NOT_FOUND',
+      statusCode: httpStatusCode.badRequest400,
+      message: 'Activation key not found',
+    })
   }
 
   if (userSelected.isActivated === true) {
-    res.status(httpStatusCode.success200).json({ message: 'already activated' })
+    res.status(httpStatusCode.success200).json({ message: 'Already activated' })
 
     return
   }
@@ -78,11 +81,11 @@ export const activateHandler: RouterHandler = async (req, res, _next) => {
     .returning()
 
   if (userUpdated === undefined) {
-    res
-      .status(httpStatusCode.serverError500)
-      .json({ message: 'failed to activate' })
-
-    return
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'FAILED',
+      statusCode: httpStatusCode.serverError500,
+      message: 'Failed to activate',
+    })
   }
 
   const accessToken = generateAccessToken({
@@ -91,7 +94,7 @@ export const activateHandler: RouterHandler = async (req, res, _next) => {
   })
 
   res.status(httpStatusCode.success200).json({
-    message: 'activated',
+    message: 'Activated',
     accessJwtToken: accessToken.value,
     accessJwtTokenExpiresOn: accessToken.expiresOn,
     email: userUpdated.email,

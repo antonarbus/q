@@ -27,7 +27,7 @@ export const useActivate = (): Res => {
 
   useUpdateEffect(() => {
     if (activateUserMutation.isSuccess === true) {
-      if (activateUserMutation.data.message === 'activated') {
+      if (activateUserMutation.data.message === 'Activated') {
         const { accessJwtToken, email, roles } = activateUserMutation.data
 
         if (accessJwtToken === undefined) {
@@ -59,7 +59,7 @@ export const useActivate = (): Res => {
         )
       }
 
-      if (activateUserMutation.data.message === 'already activated') {
+      if (activateUserMutation.data.message === 'Already activated') {
         toast.info('Already activated')
       }
     }
@@ -68,8 +68,7 @@ export const useActivate = (): Res => {
   useUpdateEffect(() => {
     if (activateUserMutation.isError === true) {
       if (
-        activateUserMutation.error.response?.data.message ===
-        'activation key not found'
+        activateUserMutation.error.response?.data.errorCode === 'KEY_NOT_FOUND'
       ) {
         toast.warning('Activation key not found')
 
