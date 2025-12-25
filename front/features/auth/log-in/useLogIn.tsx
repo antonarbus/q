@@ -133,22 +133,21 @@ export const useLogIn = ({
     if (logInUserMutation.isError === true) {
       dispatch(userSlice.actions.setAccessToken({ accessToken: null }))
 
-      if (logInUserMutation.error.response?.data.message === 'not registered') {
+      const errorCode = logInUserMutation.error.response?.data.errorCode
+
+      if (errorCode === 'NOT_REGISTERED') {
         toast.info('Not registered')
 
         return
       }
 
-      if (logInUserMutation.error.response?.data.message === 'bad password') {
+      if (errorCode === 'BAD_PASSWORD') {
         toast.warning('Invalid credentials')
 
         return
       }
 
-      if (
-        logInUserMutation.error.response?.data.message ===
-        'activation link sent again'
-      ) {
+      if (errorCode === 'ACTIVATION_LINK_SENT_AGAIN') {
         toast.info(
           'Account registered but not activated. Check mailbox or spam.',
         )

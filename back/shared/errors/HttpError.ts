@@ -1,17 +1,21 @@
 import type { HttpStatusCode } from '@back/shared/const/HttpStatusCode'
 
-type HttpErrorParams<TErrorCode extends string> = {
-  errorCode: TErrorCode
+type HttpErrorParams<ErrorCode extends string> = {
+  errorCode: ErrorCode
   statusCode: HttpStatusCode
   message: string
 }
 
-export class HttpError<TErrorCode extends string> extends Error {
-  public readonly errorCode: TErrorCode
+export class HttpError<ErrorCode extends string> extends Error {
+  public readonly errorCode: ErrorCode
 
   public readonly statusCode: HttpStatusCode
 
-  public constructor({ errorCode, statusCode, message }: HttpErrorParams<TErrorCode>) {
+  public constructor({
+    errorCode,
+    statusCode,
+    message,
+  }: HttpErrorParams<ErrorCode>) {
     super(message)
     this.errorCode = errorCode
     this.statusCode = statusCode
