@@ -39,6 +39,11 @@ export default {
   },
   worker: {
     format: 'es',
+    plugins: () => [
+      tsconfigPaths({
+        root: thisDirPath,
+      }),
+    ],
   },
   esbuild: {
     define: {

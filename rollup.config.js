@@ -11,10 +11,8 @@ export default {
   plugins: [
     nodeResolve(), // Resolves node_modules imports to actual file paths
     typescript({
+      tsconfig: './back/tsconfig.json',
       exclude: ['**/node_modules/**', 'front/**', '**/front/**'],
-      compilerOptions: {
-        noEmit: false,
-      },
     }), // emit TypeScript → JavaScript
   ],
 }
