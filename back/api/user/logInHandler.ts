@@ -17,9 +17,11 @@ import type { NextFunction, Request, Response } from 'express'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCodeCommon } from '@back/shared/const/errorCodeCommon'
+import type { ParamsDictionary } from 'express-serve-static-core'
+import type { ParsedQs } from 'qs'
 
-type SearchQuery = unknown
-type UrlParam = unknown
+type SearchQuery = ParsedQs
+type UrlParam = ParamsDictionary
 
 export type ReqBody = {
   email: User['email']
