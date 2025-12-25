@@ -1,11 +1,17 @@
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
-import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
+import { HttpError } from '@back/shared/errors/HttpError'
+import type { ErrorCodeCommon } from '@back/shared/const/errorCodeCommon'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import type { Pretty } from '@shared/lib/typescript/Pretty'
 import type { NextFunction, Request, Response } from 'express'
 import { db } from '@back/shared/lib/drizzle/db'
 import { eq } from 'drizzle-orm'
 import { type SelectQuotation, quotationsTable } from '@back/entities/quotation'
+import type { ParamsDictionary } from 'express-serve-static-core'
+import type { ParsedQs } from 'qs'
+
+type SearchQuery = ParsedQs
+type UrlParam = ParamsDictionary
 
 export type ResBody = Pretty<{
   quotationList: SelectQuotation[]
@@ -13,13 +19,13 @@ export type ResBody = Pretty<{
 }>
 
 export type ErrorResBody = {
-  quotationList: SelectQuotation[]
-  message: ErrorMessageCommon | 'Unhandled case'
+  message: string
+  errorCode: ErrorCodeCommon | 'UNHANDLED_CASE'
 }
 
 type RouterHandler = (
-  req: Request,
-  res: Response<ResBody | ErrorResBody>,
+  req: Request<UrlParam, unknown, unknown, SearchQuery>,
+  res: Response<ResBody>,
   next: NextFunction,
 ) => Promise<void>
 
@@ -54,7 +60,9 @@ export const getQuotationListHandler: RouterHandler = async (
     return
   }
 
-  res
-    .status(httpStatusCode.notFound404)
-    .json({ message: 'Unhandled case', quotationList: [] })
+  throw new HttpError<ErrorResBody['errorCode']>({
+    errorCode: 'UNHANDLED_CASE',
+    statusCode: httpStatusCode.notFound404,
+    message: 'Unhandled case in quotation list retrieval',
+  })
 }

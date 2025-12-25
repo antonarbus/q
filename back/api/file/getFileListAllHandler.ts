@@ -1,11 +1,17 @@
 import { filesTable, type SelectFile } from '@back/entities/file'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
-import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
+import { HttpError } from '@back/shared/errors/HttpError'
+import type { ErrorCodeCommon } from '@back/shared/const/errorCodeCommon'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { db } from '@back/shared/lib/drizzle/db'
 import { userRole } from '@back/shared/const/userRole'
 import { and, asc, count, desc, ilike } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
+import type { ParamsDictionary } from 'express-serve-static-core'
+import type { ParsedQs } from 'qs'
+
+type SearchQuery = ParsedQs
+type UrlParam = ParamsDictionary
 
 type ReqBody = {
   startRow: number
@@ -31,14 +37,13 @@ export type ResBody = {
 }
 
 type ErrorResBody = {
-  fileList: SelectFile[]
-  fileListTotalCount: number
-  message: ErrorMessageCommon | 'no permission to view' | 'Unhandled error'
+  message: string
+  errorCode: ErrorCodeCommon | 'NO_PERMISSION_TO_VIEW' | 'UNHANDLED_ERROR'
 }
 
 type RouterHandler = (
-  req: Request<unknown, unknown, ReqBody>,
-  res: Response<ResBody | ErrorResBody>,
+  req: Request<UrlParam, unknown, ReqBody, SearchQuery>,
+  res: Response<ResBody>,
   next: NextFunction,
 ) => Promise<void>
 
@@ -49,13 +54,11 @@ export const getFileListAllHandler: RouterHandler = async (req, res, _next) => {
   })
 
   if (userFromAccessToken.roles.includes(userRole.superAdmin) === false) {
-    res.status(httpStatusCode.forbidden403).json({
-      message: 'no permission to view',
-      fileList: [],
-      fileListTotalCount: 0,
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'NO_PERMISSION_TO_VIEW',
+      statusCode: httpStatusCode.forbidden403,
+      message: 'No permission to view all files',
     })
-
-    return
   }
 
   const sortConditions = req.body.sortModel
@@ -134,13 +137,11 @@ export const getFileListAllHandler: RouterHandler = async (req, res, _next) => {
     fileListTotalCountResponse.status === 'fulfilled'
 
   if (fulfilled === false) {
-    res.status(httpStatusCode.notFound404).json({
-      message: 'Unhandled error',
-      fileList: [],
-      fileListTotalCount: 0,
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'UNHANDLED_ERROR',
+      statusCode: httpStatusCode.notFound404,
+      message: 'Failed to fetch file list',
     })
-
-    return
   }
 
   res.status(httpStatusCode.success200).json({

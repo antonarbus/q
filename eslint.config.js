@@ -123,7 +123,7 @@ export default [
       ],
 
       // adjust TS rules
-      '@typescript-eslint/no-unnecessary-type-arguments': 'warn', // sometimes good to provide
+      '@typescript-eslint/no-unnecessary-type-arguments': 'off', // sometimes good to provide
       '@typescript-eslint/no-misused-spread': 'off', // ...sx produces error
       '@typescript-eslint/no-unused-vars': ['error', { args: 'none' }],
       '@typescript-eslint/consistent-type-definitions': ['error', 'type'],

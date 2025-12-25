@@ -1,11 +1,17 @@
 import { filesTable, type SelectFile } from '@back/entities/file'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
-import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
+import { HttpError } from '@back/shared/errors/HttpError'
+import type { ErrorCodeCommon } from '@back/shared/const/errorCodeCommon'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { db } from '@back/shared/lib/drizzle/db'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import { and, eq } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
+import type { ParamsDictionary } from 'express-serve-static-core'
+import type { ParsedQs } from 'qs'
+
+type SearchQuery = ParsedQs
+type UrlParam = ParamsDictionary
 
 export type ReqBody = {
   fileId: SelectFile['id']
@@ -16,16 +22,17 @@ export type ResBody = {
 }
 
 export type ErrorResBody = {
-  message:
-    | ErrorMessageCommon
-    | 'failed to delete'
-    | 'you did not upload this file'
-    | 'not found'
+  message: string
+  errorCode:
+    | ErrorCodeCommon
+    | 'FILE_DELETE_FAILED'
+    | 'FILE_NOT_OWNED'
+    | 'FILE_NOT_FOUND'
 }
 
 type RouterHandler = (
-  req: Request<unknown, unknown, ReqBody>,
-  res: Response<ResBody | ErrorResBody>,
+  req: Request<UrlParam, unknown, ReqBody, SearchQuery>,
+  res: Response<ResBody>,
   next: NextFunction,
 ) => Promise<void>
 
@@ -57,17 +64,19 @@ export const deleteFileHandler: RouterHandler = async (req, res, _next) => {
   const fileOwnerShip = await getFileOwnerShip()
 
   if (fileOwnerShip === 'file not found') {
-    res.status(httpStatusCode.notFound404).json({ message: 'not found' })
-
-    return
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'FILE_NOT_FOUND',
+      statusCode: httpStatusCode.notFound404,
+      message: 'File not found',
+    })
   }
 
   if (fileOwnerShip === 'not owner') {
-    res
-      .status(httpStatusCode.notFound404)
-      .json({ message: 'you did not upload this file' })
-
-    return
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'FILE_NOT_OWNED',
+      statusCode: httpStatusCode.notFound404,
+      message: 'You did not upload this file',
+    })
   }
 
   if (fileOwnerShip === 'owner') {
@@ -87,11 +96,11 @@ export const deleteFileHandler: RouterHandler = async (req, res, _next) => {
 
       await Promise.all([deleteFromBucketPromise, deleteFromDatabasePromise])
     } catch {
-      res
-        .status(httpStatusCode.notFound404)
-        .json({ message: 'failed to delete' })
-
-      return
+      throw new HttpError<ErrorResBody['errorCode']>({
+        errorCode: 'FILE_DELETE_FAILED',
+        statusCode: httpStatusCode.notFound404,
+        message: 'Failed to delete file',
+      })
     }
 
     res.status(httpStatusCode.success200).json({ message: 'deleted' })

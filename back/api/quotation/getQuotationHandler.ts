@@ -1,5 +1,6 @@
 import { getUserFromAccessTokenOrNull } from '@back/entities/user'
-import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
+import { HttpError } from '@back/shared/errors/HttpError'
+import type { ErrorCodeCommon } from '@back/shared/const/errorCodeCommon'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { userRole } from '@back/shared/const/userRole'
 import { getShouldNotTrace } from '@back/shared/headers'
@@ -10,6 +11,11 @@ import type { NextFunction, Request, Response } from 'express'
 import { quotationsTable, type SelectQuotation } from '@back/entities/quotation'
 import { db } from '@back/shared/lib/drizzle/db'
 import { eq } from 'drizzle-orm'
+import type { ParamsDictionary } from 'express-serve-static-core'
+import type { ParsedQs } from 'qs'
+
+type SearchQuery = ParsedQs
+type UrlParam = ParamsDictionary
 
 export type ReqBody = {
   id: SelectQuotation['id']
@@ -21,13 +27,13 @@ export type ResBody = {
 }
 
 export type ErrorResBody = {
-  quotation: Quotation
-  message: ErrorMessageCommon | 'not found'
+  message: string
+  errorCode: ErrorCodeCommon | 'QUOTATION_NOT_FOUND'
 }
 
 type RouterHandler = (
-  req: Request<unknown, unknown, ReqBody>,
-  res: Response<ResBody | ErrorResBody>,
+  req: Request<UrlParam, unknown, ReqBody, SearchQuery>,
+  res: Response<ResBody>,
   next: NextFunction,
 ) => Promise<void>
 
@@ -57,12 +63,11 @@ export const getQuotationHandler: RouterHandler = async (req, res, _next) => {
     .where(eq(quotationsTable.id, req.body.id))
 
   if (quotationSelected === undefined) {
-    res.status(httpStatusCode.notFound404).json({
-      message: 'not found',
-      quotation: emptyQuotation,
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'QUOTATION_NOT_FOUND',
+      statusCode: httpStatusCode.notFound404,
+      message: 'Quotation not found',
     })
-
-    return
   }
 
   const shouldNotTrace = getShouldNotTrace({ req })
@@ -111,7 +116,7 @@ export const getQuotationHandler: RouterHandler = async (req, res, _next) => {
   const permissionLevel = getPermissionLevel()
 
   if (permissionLevel === 'Forbidden') {
-    res.status(httpStatusCode.forbidden403).json({
+    res.status(httpStatusCode.success200).json({
       message: 'found',
       quotation: { ...emptyQuotation, permissionLevel },
     })
@@ -154,12 +159,11 @@ export const getQuotationHandler: RouterHandler = async (req, res, _next) => {
   const quotationParsed = jsonParseSafe<Quotation>(quotationJson)
 
   if (quotationParsed === undefined) {
-    res.status(httpStatusCode.notFound404).json({
-      message: 'not found',
-      quotation: emptyQuotation,
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'QUOTATION_NOT_FOUND',
+      statusCode: httpStatusCode.notFound404,
+      message: 'Quotation data not found in storage',
     })
-
-    return
   }
 
   if (publicOrSharedWithYou === true) {

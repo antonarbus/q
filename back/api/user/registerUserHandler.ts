@@ -1,4 +1,3 @@
-import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { userRole } from '@back/shared/const/userRole'
 import { setRefreshTokenCookie } from '@back/shared/headers'
@@ -18,6 +17,13 @@ import {
 } from '@back/entities/user'
 import { db } from '@back/shared/lib/drizzle/db'
 import { and, eq } from 'drizzle-orm'
+import { HttpError } from '@back/shared/errors/HttpError'
+import type { ErrorCodeCommon } from '@back/shared/const/errorCodeCommon'
+import type { ParamsDictionary } from 'express-serve-static-core'
+import type { ParsedQs } from 'qs'
+
+type SearchQuery = ParsedQs
+type UrlParam = ParamsDictionary
 
 export type ReqBody = {
   email: InsertUser['email']
@@ -33,16 +39,17 @@ export type ResBody = {
 }
 
 export type ErrorResBody = {
-  message:
-    | ErrorMessageCommon
-    | 'already exists'
-    | 'activation link not sent'
-    | 'activation key not issued'
+  message: string
+  errorCode:
+    | ErrorCodeCommon
+    | 'ALREADY_EXISTS'
+    | 'ACTIVATION_LINK_NOT_SENT'
+    | 'ACTIVATION_KEY_NOT_ISSUED'
 }
 
 type RouterHandler = (
-  req: Request<unknown, unknown, ReqBody>,
-  res: Response<ResBody | ErrorResBody>,
+  req: Request<UrlParam, unknown, ReqBody, SearchQuery>,
+  res: Response<ResBody>,
   next: NextFunction,
 ) => Promise<void>
 
@@ -61,11 +68,11 @@ export const registerUserHandler: RouterHandler = async (req, res, _next) => {
     )
 
   if (userSelected !== undefined) {
-    res.status(httpStatusCode.forbidden403).json({
-      message: 'already exists',
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'ALREADY_EXISTS',
+      statusCode: httpStatusCode.forbidden403,
+      message: 'User already exists',
     })
-
-    return
   }
 
   const saltRounds = 10
@@ -90,11 +97,11 @@ export const registerUserHandler: RouterHandler = async (req, res, _next) => {
     .returning()
 
   if (userInserted === undefined) {
-    res.status(httpStatusCode.serverError500).json({
-      message: 'Internal error',
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'INTERNAL_ERROR',
+      statusCode: httpStatusCode.serverError500,
+      message: 'Failed to register user',
     })
-
-    return
   }
 
   const emailRes = await sendEmail({
@@ -132,7 +139,9 @@ export const registerUserHandler: RouterHandler = async (req, res, _next) => {
     return
   }
 
-  res.status(httpStatusCode.serverError500).json({
-    message: 'activation link not sent',
+  throw new HttpError<ErrorResBody['errorCode']>({
+    errorCode: 'ACTIVATION_LINK_NOT_SENT',
+    statusCode: httpStatusCode.serverError500,
+    message: 'Failed to send activation link',
   })
 }

@@ -1,5 +1,4 @@
 import { usersTable } from '@back/entities/user'
-import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { setRefreshTokenCookie } from '@back/shared/headers'
 import {
@@ -11,6 +10,13 @@ import bcrypt from 'bcryptjs'
 import type { NextFunction, Request, Response } from 'express'
 import { db } from '@back/shared/lib/drizzle/db'
 import { and, eq } from 'drizzle-orm'
+import { HttpError } from '@back/shared/errors/HttpError'
+import type { ErrorCodeCommon } from '@back/shared/const/errorCodeCommon'
+import type { ParamsDictionary } from 'express-serve-static-core'
+import type { ParsedQs } from 'qs'
+
+type SearchQuery = ParsedQs
+type UrlParam = ParamsDictionary
 
 export type ReqBody = {
   email: User['email']
@@ -27,12 +33,13 @@ export type ResBody = {
 }
 
 export type ErrorResBody = {
-  message: ErrorMessageCommon | 'incorrect reset key' | 'not activated'
+  message: string
+  errorCode: ErrorCodeCommon | 'INCORRECT_RESET_KEY' | 'NOT_ACTIVATED'
 }
 
 type RouterHandler = (
-  req: Request<unknown, unknown, ReqBody>,
-  res: Response<ResBody | ErrorResBody>,
+  req: Request<UrlParam, unknown, ReqBody, SearchQuery>,
+  res: Response<ResBody>,
   next: NextFunction,
 ) => Promise<void>
 
@@ -52,17 +59,19 @@ export const resetPasswordHandler: RouterHandler = async (req, res, _next) => {
     )
 
   if (userSelected === undefined) {
-    res
-      .status(httpStatusCode.forbidden403)
-      .json({ message: 'incorrect reset key' })
-
-    return
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'INCORRECT_RESET_KEY',
+      statusCode: httpStatusCode.forbidden403,
+      message: 'Incorrect reset key',
+    })
   }
 
   if (userSelected.isActivated === false) {
-    res.status(httpStatusCode.forbidden403).json({ message: 'not activated' })
-
-    return
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'NOT_ACTIVATED',
+      statusCode: httpStatusCode.forbidden403,
+      message: 'Account not activated',
+    })
   }
 
   const saltRounds = 10

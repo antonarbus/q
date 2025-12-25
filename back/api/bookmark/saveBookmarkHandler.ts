@@ -4,11 +4,17 @@ import {
   type SelectBookmark,
 } from '@back/entities/bookmark'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
-import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { db } from '@back/shared/lib/drizzle/db'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import type { NextFunction, Request, Response } from 'express'
+import { HttpError } from '@back/shared/errors/HttpError'
+import type { ErrorCodeCommon } from '@back/shared/const/errorCodeCommon'
+import type { ParamsDictionary } from 'express-serve-static-core'
+import type { ParsedQs } from 'qs'
+
+type SearchQuery = ParsedQs
+type UrlParam = ParamsDictionary
 
 export type ReqBody = {
   bookmark: Required<
@@ -22,17 +28,13 @@ export type ResBody = {
 }
 
 export type ErrorResBody = {
-  message:
-    | ErrorMessageCommon
-    | 'name is not provided'
-    | 'category is not provided'
-    | 'id is not provided'
-    | 'failed to save'
+  message: string
+  errorCode: ErrorCodeCommon | 'ID_NOT_PROVIDED' | 'FAILED_TO_SAVE'
 }
 
 type RouterHandler = (
-  req: Request<unknown, unknown, ReqBody>,
-  res: Response<ResBody | ErrorResBody>,
+  req: Request<UrlParam, unknown, ReqBody, SearchQuery>,
+  res: Response<ResBody>,
   next: NextFunction,
 ) => Promise<void>
 
@@ -43,11 +45,11 @@ export const saveBookmarkHandler: RouterHandler = async (req, res, _next) => {
   })
 
   if (req.body.bookmark.id === '') {
-    res
-      .status(httpStatusCode.forbidden403)
-      .json({ message: 'id is not provided' })
-
-    return
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'ID_NOT_PROVIDED',
+      statusCode: httpStatusCode.badRequest400,
+      message: 'Bookmark ID is required',
+    })
   }
 
   const [bookmarkInserted] = await db
@@ -73,11 +75,11 @@ export const saveBookmarkHandler: RouterHandler = async (req, res, _next) => {
     .returning()
 
   if (bookmarkInserted === undefined) {
-    res
-      .status(httpStatusCode.serverError500)
-      .json({ message: 'failed to save' })
-
-    return
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'FAILED_TO_SAVE',
+      statusCode: httpStatusCode.serverError500,
+      message: 'Failed to save bookmark',
+    })
   }
 
   const fileInfo = getFileInfo({ id: req.body.bookmark.id })

@@ -5,7 +5,7 @@ import type { User } from '@entities/user/type'
 import type { Request, Response } from 'express'
 
 type Props = {
-  req: Request<unknown, unknown, unknown, unknown>
+  req: Request
   res: Response
 }
 

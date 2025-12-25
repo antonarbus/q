@@ -1,6 +1,5 @@
 import { type SelectBookmark, bookmarksTable } from '@back/entities/bookmark'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
-import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { db } from '@back/shared/lib/drizzle/db'
 import { and, eq } from 'drizzle-orm'
@@ -8,6 +7,13 @@ import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import { jsonParseSafe } from '@back/shared/util/jsonParseSafe'
 import type { Item } from '@entities/quotation/type'
 import type { NextFunction, Request, Response } from 'express'
+import { HttpError } from '@back/shared/errors/HttpError'
+import type { ErrorCodeCommon } from '@back/shared/const/errorCodeCommon'
+import type { ParamsDictionary } from 'express-serve-static-core'
+import type { ParsedQs } from 'qs'
+
+type SearchQuery = ParsedQs
+type UrlParam = ParamsDictionary
 
 export type ReqBody = {
   bookmarkId: SelectBookmark['id']
@@ -19,12 +25,13 @@ export type ResBody = {
 }
 
 export type ErrorResBody = {
-  message: ErrorMessageCommon | 'not found'
+  message: string
+  errorCode: ErrorCodeCommon | 'NOT_FOUND'
 }
 
 type RouterHandler = (
-  req: Request<unknown, unknown, ReqBody>,
-  res: Response<ResBody | ErrorResBody>,
+  req: Request<UrlParam, unknown, ReqBody, SearchQuery>,
+  res: Response<ResBody>,
   next: NextFunction,
 ) => Promise<void>
 
@@ -45,9 +52,11 @@ export const getBookmarkHandler: RouterHandler = async (req, res, _next) => {
     )
 
   if (bookmarkSelected === undefined) {
-    res.status(httpStatusCode.notFound404).json({ message: 'not found' })
-
-    return
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'NOT_FOUND',
+      statusCode: httpStatusCode.notFound404,
+      message: 'Bookmark not found',
+    })
   }
 
   const bookmarkFileInfo = getFileInfo({ id: req.body.bookmarkId })
@@ -60,9 +69,11 @@ export const getBookmarkHandler: RouterHandler = async (req, res, _next) => {
   const bookmarkFileData = jsonParseSafe<Item>(bookmarkFileAsString)
 
   if (bookmarkFileData === undefined) {
-    res.status(httpStatusCode.notFound404).json({ message: 'not found' })
-
-    return
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'NOT_FOUND',
+      statusCode: httpStatusCode.notFound404,
+      message: 'Bookmark file not found',
+    })
   }
 
   res.status(httpStatusCode.success200).json({

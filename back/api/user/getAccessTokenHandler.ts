@@ -1,4 +1,3 @@
-import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import {
   getShouldNotTrace,
@@ -10,6 +9,14 @@ import type { NextFunction, Request, Response } from 'express'
 import { usersTable, getUserFromRefreshTokenOrNull } from '@back/entities/user'
 import { db } from '@back/shared/lib/drizzle/db'
 import { and, eq } from 'drizzle-orm'
+import { HttpError } from '@back/shared/errors/HttpError'
+import type { ErrorCodeCommon } from '@back/shared/const/errorCodeCommon'
+import type { ParamsDictionary } from 'express-serve-static-core'
+import type { ParsedQs } from 'qs'
+
+type SearchQuery = ParsedQs
+type UrlParam = ParamsDictionary
+type ReqBody = unknown
 
 export type ResBody = {
   message: 'issued access token'
@@ -21,12 +28,13 @@ export type ResBody = {
 }
 
 export type ErrorResBody = {
-  message: ErrorMessageCommon | 'Not logged in'
+  message: string
+  errorCode: ErrorCodeCommon | 'NOT_LOGGED_IN'
 }
 
 type RouterHandler = (
-  req: Request,
-  res: Response<ResBody | ErrorResBody>,
+  req: Request<UrlParam, unknown, ReqBody, SearchQuery>,
+  res: Response<ResBody>,
   next: NextFunction,
 ) => Promise<void>
 
@@ -35,11 +43,11 @@ export const getAccessTokenHandler: RouterHandler = async (req, res, _next) => {
   const userFromRefreshToken = getUserFromRefreshTokenOrNull({ req })
 
   if (userFromRefreshToken === null) {
-    res
-      .status(httpStatusCode.unauthorized401)
-      .json({ message: 'Not logged in' })
-
-    return
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'NOT_LOGGED_IN',
+      statusCode: httpStatusCode.unauthorized401,
+      message: 'Not logged in',
+    })
   }
 
   const shouldNotTrace = getShouldNotTrace({ req })
@@ -59,11 +67,11 @@ export const getAccessTokenHandler: RouterHandler = async (req, res, _next) => {
     if (userSelected === undefined) {
       removeRefreshTokenCookie({ res })
 
-      res
-        .status(httpStatusCode.unauthorized401)
-        .json({ message: 'Not logged in' })
-
-      return
+      throw new HttpError<ErrorResBody['errorCode']>({
+        errorCode: 'NOT_LOGGED_IN',
+        statusCode: httpStatusCode.unauthorized401,
+        message: 'Not logged in',
+      })
     }
   } else {
     // Update loggedAt and return the updated user
@@ -83,11 +91,11 @@ export const getAccessTokenHandler: RouterHandler = async (req, res, _next) => {
     if (userUpdated === undefined) {
       removeRefreshTokenCookie({ res })
 
-      res
-        .status(httpStatusCode.unauthorized401)
-        .json({ message: 'Not logged in' })
-
-      return
+      throw new HttpError<ErrorResBody['errorCode']>({
+        errorCode: 'NOT_LOGGED_IN',
+        statusCode: httpStatusCode.unauthorized401,
+        message: 'Not logged in',
+      })
     }
   }
 

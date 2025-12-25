@@ -1,18 +1,27 @@
 import { filesTable, type SelectFile } from '@back/entities/file'
+import { HttpError } from '@back/shared/errors/HttpError'
+import type { ErrorCodeCommon } from '@back/shared/const/errorCodeCommon'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { db } from '@back/shared/lib/drizzle/db'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import { eq } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
+import type { ParsedQs } from 'qs'
 
-type Params = {
+type SearchQuery = ParsedQs
+type UrlParam = {
   fileId: SelectFile['id']
 }
 
 type ResBody = string
 
+type ErrorResBody = {
+  message: string
+  errorCode: ErrorCodeCommon | 'FILE_NOT_FOUND' | 'SIGNED_URL_GENERATION_FAILED'
+}
+
 type RouterHandler = (
-  req: Request<Params>,
+  req: Request<UrlParam, unknown, unknown, SearchQuery>,
   res: Response<ResBody>,
   next: NextFunction,
 ) => Promise<void>
@@ -51,9 +60,11 @@ export const proxyFileToBucketHandler: RouterHandler = async (
     .where(eq(filesTable.id, req.params.fileId))
 
   if (fileSelected === undefined) {
-    res.status(httpStatusCode.notFound404).send('File not found')
-
-    return
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'FILE_NOT_FOUND',
+      statusCode: httpStatusCode.notFound404,
+      message: 'File not found',
+    })
   }
 
   try {
@@ -84,8 +95,10 @@ export const proxyFileToBucketHandler: RouterHandler = async (
   } catch (error) {
     console.error('Error generating signed URL:', error)
 
-    res
-      .status(httpStatusCode.serverError500)
-      .send('Failed to generate file link')
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'SIGNED_URL_GENERATION_FAILED',
+      statusCode: httpStatusCode.serverError500,
+      message: 'Failed to generate file link',
+    })
   }
 }

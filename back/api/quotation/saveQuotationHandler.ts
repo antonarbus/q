@@ -1,5 +1,6 @@
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
-import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
+import { HttpError } from '@back/shared/errors/HttpError'
+import type { ErrorCodeCommon } from '@back/shared/const/errorCodeCommon'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import { generateId } from '@back/shared/lib/nanoid'
@@ -8,6 +9,11 @@ import type { NextFunction, Request, Response } from 'express'
 import { quotationsTable, type SelectQuotation } from '@back/entities/quotation'
 import { db } from '@back/shared/lib/drizzle/db'
 import { and, eq } from 'drizzle-orm'
+import type { ParamsDictionary } from 'express-serve-static-core'
+import type { ParsedQs } from 'qs'
+
+type SearchQuery = ParsedQs
+type UrlParam = ParamsDictionary
 
 export type ReqBody = {
   quotation: Quotation
@@ -19,12 +25,13 @@ export type ResBody = {
 }
 
 export type ErrorResBody = {
-  message: ErrorMessageCommon | 'not saved' | 'id is not provided'
+  message: string
+  errorCode: ErrorCodeCommon | 'QUOTATION_NOT_SAVED' | 'ID_NOT_PROVIDED'
 }
 
 type RouterHandler = (
-  req: Request<unknown, unknown, ReqBody>,
-  res: Response<ResBody | ErrorResBody>,
+  req: Request<UrlParam, unknown, ReqBody, SearchQuery>,
+  res: Response<ResBody>,
   next: NextFunction,
 ) => Promise<void>
 
@@ -35,11 +42,11 @@ export const saveQuotationHandler: RouterHandler = async (req, res, _next) => {
   })
 
   if (req.body.quotation.id === '') {
-    res
-      .status(httpStatusCode.forbidden403)
-      .json({ message: 'id is not provided' })
-
-    return
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'ID_NOT_PROVIDED',
+      statusCode: httpStatusCode.forbidden403,
+      message: 'Quotation ID is not provided',
+    })
   }
 
   type QuotationOwnership = 'your new' | 'your existing' | 'foreign existing'
@@ -89,9 +96,11 @@ export const saveQuotationHandler: RouterHandler = async (req, res, _next) => {
       .returning()
 
     if (quotationInserted === undefined) {
-      res.status(httpStatusCode.serverError500).json({ message: 'not saved' })
-
-      return
+      throw new HttpError<ErrorResBody['errorCode']>({
+        errorCode: 'QUOTATION_NOT_SAVED',
+        statusCode: httpStatusCode.serverError500,
+        message: 'Failed to save new quotation',
+      })
     }
 
     const fileInfo = getFileInfo({ id: quotationId })
@@ -135,9 +144,11 @@ export const saveQuotationHandler: RouterHandler = async (req, res, _next) => {
       .returning()
 
     if (quotationUpdated === undefined) {
-      res.status(httpStatusCode.serverError500).json({ message: 'not saved' })
-
-      return
+      throw new HttpError<ErrorResBody['errorCode']>({
+        errorCode: 'QUOTATION_NOT_SAVED',
+        statusCode: httpStatusCode.serverError500,
+        message: 'Failed to update existing quotation',
+      })
     }
 
     const fileInfo = getFileInfo({ id: req.body.quotation.id })
@@ -180,9 +191,11 @@ export const saveQuotationHandler: RouterHandler = async (req, res, _next) => {
       .returning()
 
     if (quotationInserted === undefined) {
-      res.status(httpStatusCode.serverError500).json({ message: 'not saved' })
-
-      return
+      throw new HttpError<ErrorResBody['errorCode']>({
+        errorCode: 'QUOTATION_NOT_SAVED',
+        statusCode: httpStatusCode.serverError500,
+        message: 'Failed to copy and save quotation',
+      })
     }
 
     // const quotationDataFromDb = createResponse.toObject()

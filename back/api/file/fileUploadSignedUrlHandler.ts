@@ -1,9 +1,15 @@
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
-import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
+import { HttpError } from '@back/shared/errors/HttpError'
+import type { ErrorCodeCommon } from '@back/shared/const/errorCodeCommon'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import { generateId } from '@back/shared/lib/nanoid'
 import type { NextFunction, Request, Response } from 'express'
+import type { ParamsDictionary } from 'express-serve-static-core'
+import type { ParsedQs } from 'qs'
+
+type SearchQuery = ParsedQs
+type UrlParam = ParamsDictionary
 
 export type ResBody = {
   signedUrl: string
@@ -12,12 +18,13 @@ export type ResBody = {
 }
 
 type ErrorResBody = {
-  message: ErrorMessageCommon | 'failed to generate signed url'
+  message: string
+  errorCode: ErrorCodeCommon | 'SIGNED_URL_GENERATION_FAILED'
 }
 
 type RouterHandler = (
-  req: Request,
-  res: Response<ResBody | ErrorResBody>,
+  req: Request<UrlParam, unknown, unknown, SearchQuery>,
+  res: Response<ResBody>,
   next: NextFunction,
 ) => Promise<void>
 
@@ -48,8 +55,10 @@ export const fileUploadSignedUrlHandler: RouterHandler = async (
       fileId,
     })
   } catch {
-    res.status(httpStatusCode.serverError500).json({
-      message: 'failed to generate signed url',
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'SIGNED_URL_GENERATION_FAILED',
+      statusCode: httpStatusCode.serverError500,
+      message: 'Failed to generate signed URL for file upload',
     })
   }
 }

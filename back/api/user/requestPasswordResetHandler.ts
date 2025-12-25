@@ -1,5 +1,4 @@
 import { usersTable } from '@back/entities/user'
-import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { sendEmail } from '@back/shared/lib/mailersend'
 import { generateId } from '@back/shared/lib/nanoid'
@@ -8,6 +7,13 @@ import type { NextFunction, Request, Response } from 'express'
 import { runtimeConfig } from '@root/config/runtime'
 import { db } from '@back/shared/lib/drizzle/db'
 import { eq } from 'drizzle-orm'
+import { HttpError } from '@back/shared/errors/HttpError'
+import type { ErrorCodeCommon } from '@back/shared/const/errorCodeCommon'
+import type { ParamsDictionary } from 'express-serve-static-core'
+import type { ParsedQs } from 'qs'
+
+type SearchQuery = ParsedQs
+type UrlParam = ParamsDictionary
 
 export type ReqBody = {
   email: User['email']
@@ -18,17 +24,18 @@ export type ResBody = {
 }
 
 export type ErrorResBody = {
-  message:
-    | ErrorMessageCommon
-    | 'does not exists'
-    | 'account not activated'
-    | 'reset key not issued'
-    | 'reset link not sent'
+  message: string
+  errorCode:
+    | ErrorCodeCommon
+    | 'USER_NOT_FOUND'
+    | 'ACCOUNT_NOT_ACTIVATED'
+    | 'RESET_KEY_NOT_ISSUED'
+    | 'RESET_LINK_NOT_SENT'
 }
 
 type RouterHandler = (
-  req: Request<unknown, unknown, ReqBody>,
-  res: Response<ResBody | ErrorResBody>,
+  req: Request<UrlParam, unknown, ReqBody, SearchQuery>,
+  res: Response<ResBody>,
   next: NextFunction,
 ) => Promise<void>
 
@@ -45,17 +52,19 @@ export const requestPasswordResetHandler: RouterHandler = async (
     .where(eq(usersTable.email, emailFromInput))
 
   if (userSelected === undefined) {
-    res.status(httpStatusCode.forbidden403).json({ message: 'does not exists' })
-
-    return
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'USER_NOT_FOUND',
+      statusCode: httpStatusCode.forbidden403,
+      message: 'User not found',
+    })
   }
 
   if (userSelected.isActivated === false) {
-    res
-      .status(httpStatusCode.forbidden403)
-      .json({ message: 'account not activated' })
-
-    return
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'ACCOUNT_NOT_ACTIVATED',
+      statusCode: httpStatusCode.forbidden403,
+      message: 'Account not activated',
+    })
   }
 
   const resetPasswordKey = generateId()
@@ -67,11 +76,11 @@ export const requestPasswordResetHandler: RouterHandler = async (
     .returning()
 
   if (userUpdated === undefined) {
-    res
-      .status(httpStatusCode.serverError500)
-      .json({ message: 'reset key not issued' })
-
-    return
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'RESET_KEY_NOT_ISSUED',
+      statusCode: httpStatusCode.serverError500,
+      message: 'Failed to issue reset key',
+    })
   }
 
   const emailRes = await sendEmail({
@@ -98,7 +107,9 @@ export const requestPasswordResetHandler: RouterHandler = async (
     return
   }
 
-  res
-    .status(httpStatusCode.serverError500)
-    .json({ message: 'reset link not sent' })
+  throw new HttpError<ErrorResBody['errorCode']>({
+    errorCode: 'RESET_LINK_NOT_SENT',
+    statusCode: httpStatusCode.serverError500,
+    message: 'Failed to send reset link',
+  })
 }

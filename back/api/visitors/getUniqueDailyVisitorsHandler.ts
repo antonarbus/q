@@ -1,11 +1,15 @@
 import { getUserFromAccessTokenOrNull } from '@back/entities/user'
 import { type SelectVisitors, visitorsTable } from '@back/entities/visitor'
-import type { ErrorMessageCommon } from '@back/shared/const/errorMessageCommon'
+import { HttpError } from '@back/shared/errors/HttpError'
+import type { ErrorCodeCommon } from '@back/shared/const/errorCodeCommon'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { db } from '@back/shared/lib/drizzle/db'
 import { userRole } from '@back/shared/const/userRole'
 import { and, gte, lte } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
+import type { ParamsDictionary } from 'express-serve-static-core'
+
+type UrlParam = ParamsDictionary
 
 export type SearchQuery = {
   startDate: string
@@ -18,13 +22,13 @@ export type ResBody = {
 }
 
 export type ErrorResBody = {
-  visitorsCount: SelectVisitors[]
-  message: ErrorMessageCommon | 'forbidden'
+  message: string
+  errorCode: ErrorCodeCommon | 'FORBIDDEN'
 }
 
 type RouterHandler = (
-  req: Request<unknown, unknown, unknown, SearchQuery>,
-  res: Response<ResBody | ErrorResBody>,
+  req: Request<UrlParam, unknown, unknown, SearchQuery>,
+  res: Response<ResBody>,
   next: NextFunction,
 ) => Promise<void>
 
@@ -37,11 +41,11 @@ export const getUniqueDailyVisitorsHandler: RouterHandler = async (
   const roles = userFromAccessToken?.roles ?? []
 
   if (roles.includes(userRole.superAdmin) === false) {
-    res
-      .status(httpStatusCode.forbidden403)
-      .json({ visitorsCount: [], message: 'forbidden' })
-
-    return
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'FORBIDDEN',
+      statusCode: httpStatusCode.forbidden403,
+      message: 'Forbidden - super admin access required',
+    })
   }
 
   const visitorListSelected = await db
