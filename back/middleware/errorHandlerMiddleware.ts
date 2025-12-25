@@ -6,7 +6,6 @@ import { errorCodeCommon } from '@back/shared/const/errorCodeCommon'
 type ErrorResBody = {
   errorCode: string
   message: string
-  errorAsString: string
 }
 
 type RouterHandler = (
@@ -29,11 +28,6 @@ export const errorHandlerMiddleware: RouterHandler = (
     res.status(error.statusCode).json({
       errorCode: String(error.errorCode),
       message: error.message,
-      errorAsString: JSON.stringify({
-        name: error.name,
-        message: error.message,
-        stack: error.stack,
-      }),
     })
 
     return
@@ -43,10 +37,5 @@ export const errorHandlerMiddleware: RouterHandler = (
   res.status(httpStatusCode.serverError500).json({
     errorCode: errorCodeCommon.internalError,
     message: 'Internal error',
-    errorAsString: JSON.stringify({
-      name: error.name,
-      message: error.message,
-      stack: error.stack,
-    }),
   })
 }
