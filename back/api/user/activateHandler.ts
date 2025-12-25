@@ -28,7 +28,6 @@ export type ResBody = {
 
 export type ErrorResBody = {
   message: string
-  errorAsString: string
   errorCode: ErrorCodeCommon | 'KEY_NOT_FOUND' | 'FAILED'
 }
 

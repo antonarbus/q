@@ -37,7 +37,6 @@ export type ResBody = {
 
 export type ErrorResBody = {
   message: string
-  errorAsString: string
   errorCode:
     | ErrorCodeCommon
     | 'NOT_REGISTERED'
