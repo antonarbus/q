@@ -42,6 +42,7 @@ export const deployCloudRun = async (props: Props): Promise<void> => {
       region: infraConfig[props.environment].region,
       projectId: infraConfig[props.environment].projectId,
       environment: props.environment,
+      backendUrl: `https://${infraConfig[props.environment].customDomainBackend}`,
     })
   }
 
@@ -73,6 +74,7 @@ export const deployCloudRun = async (props: Props): Promise<void> => {
       region: infraConfig[props.environment].region,
       projectId: infraConfig[props.environment].projectId,
       environment: props.environment,
+      backendUrl: `https://${infraConfig[props.environment].customDomainBackend}`,
     })
   }
 

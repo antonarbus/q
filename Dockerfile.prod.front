@@ -18,19 +18,18 @@ RUN bun run build-front
 
 FROM nginx:alpine-slim
 
-# Accept backend URL as build argument
-ARG BACKEND_URL
-ENV BACKEND_URL=${BACKEND_URL}
-
 COPY --from=builder /app/front/build /front/build
 RUN chmod -R 755 /front/build/.
 
-# Copy template and substitute environment variables
+# Copy nginx config template (will be processed at runtime)
 COPY nginx.conf.template /tmp/nginx.conf.template
-RUN envsubst '${BACKEND_URL}' < /tmp/nginx.conf.template > /etc/nginx/nginx.conf && \
-    rm /tmp/nginx.conf.template
+
+# Copy entrypoint script
+COPY docker-entrypoint.sh /docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
 
 EXPOSE 80
-# Not really needed, not read by Nginx
 ENV NODE_ENV=production
-CMD ["nginx", "-g", "daemon off;"]
+
+# Entrypoint will substitute BACKEND_URL at container startup
+ENTRYPOINT ["/docker-entrypoint.sh"]

@@ -8,6 +8,7 @@ type Props = {
   region: string
   projectId: string
   environment: DeployedEnvironment
+  backendUrl: string // For frontend: nginx proxy target. For backend: not used but required.
 }
 
 /** Update Cloud Run service with new image */
@@ -20,7 +21,10 @@ export const updateCloudRunService = async (props: Props): Promise<void> => {
   logger.info(`  Environment: ${props.environment}`)
   logger.emptyLine()
 
-  await $`gcloud run services update ${props.cloudRunServiceName} --image ${props.imageUrl} --region ${props.region} --project ${props.projectId} --set-env-vars NODE_ENV=production,ENVIRONMENT=${props.environment}`
+  // Build env vars string - BACKEND_URL is only used by frontend nginx
+  const envVars = `NODE_ENV=production,ENVIRONMENT=${props.environment},BACKEND_URL=${props.backendUrl}`
+
+  await $`gcloud run services update ${props.cloudRunServiceName} --image ${props.imageUrl} --region ${props.region} --project ${props.projectId} --set-env-vars ${envVars}`
 
   logger.emptyLine()
   logger.success('Docker image deployed to Cloud Run successfully')

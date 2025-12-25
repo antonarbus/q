@@ -234,8 +234,6 @@ jobs:
           tags: |
             ${{ needs.terraform.outputs.region }}-docker.pkg.dev/${{ needs.terraform.outputs.projectId }}/${{ needs.terraform.outputs.artifactRegistryName }}/${{ needs.terraform.outputs.dockerImageNameFrontend }}:${{ needs.terraform.outputs.environment }}
             ${{ needs.terraform.outputs.region }}-docker.pkg.dev/${{ needs.terraform.outputs.projectId }}/${{ needs.terraform.outputs.artifactRegistryName }}/${{ needs.terraform.outputs.dockerImageNameFrontend }}:${{ github.sha }}
-          build-args: |
-            BACKEND_URL=https://${{ needs.terraform.outputs.customDomainBackend }}
 
       - name: 'Deploy Frontend to Cloud Run'
         id: deploy
