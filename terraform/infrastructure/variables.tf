@@ -219,7 +219,7 @@ variable "domain_frontend" {
   # Value provided by config/*.tfvars file
 }
 
-variable "custom_domain_backend" {
+variable "domain_backend" {
   description = "Custom domain name to map to the backend Cloud Run service"
   type        = string
   # Your API domain name (without www or https://)

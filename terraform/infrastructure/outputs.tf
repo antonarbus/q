@@ -84,7 +84,7 @@ output "domain_frontend_output" {
   # The DNS records should be configured at your domain registrar
 }
 
-output "custom_domain_backend_output" {
+output "domain_backend_output" {
   description = "Custom domain mapped to your backend Cloud Run service"
   value       = google_cloud_run_domain_mapping.backend.name
   # Example: api.sendmequotation.today or api-dev.sendmequotation.today

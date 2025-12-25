@@ -44,7 +44,7 @@ resource "google_cloud_run_domain_mapping" "frontend" {
 }
 
 resource "google_cloud_run_domain_mapping" "backend" {
-  name     = var.custom_domain_backend # Custom domain from config (e.g., "api.sendmequotation.today", "api-dev.sendmequotation.today")
+  name     = var.domain_backend        # Custom domain from config (e.g., "api.sendmequotation.today", "api-dev.sendmequotation.today")
   location = var.region                # Same region as Cloud Run service
 
   # Project namespace
