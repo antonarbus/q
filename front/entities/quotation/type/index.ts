@@ -106,7 +106,6 @@ export type BlockItem = Boq | Paste | Text | Price | Row
 type QuotationMetaData = SelectQuotation
 
 type QuotationFromBucket = {
-  type: 'quotation'
   info: string
   blocks: BlockItem[]
 }

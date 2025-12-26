@@ -59,7 +59,6 @@ const initialState: Quotation = {
   updatedAt: new Date().toISOString(),
   openedAt: null,
   viewedAt: null,
-  type: 'quotation',
   email: 'unknown@gmail.com',
   permissionLevel: undefined,
   access: {
