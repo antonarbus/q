@@ -5,7 +5,7 @@ import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpStatusCode } from '@back/shared/const/httpCode'
 import { db } from '@back/shared/lib/drizzle/db'
 import { userRole } from '@back/shared/const/userRole'
-import { and, gte, lte } from 'drizzle-orm'
+import { and, asc, desc, gte, lte } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
 import type { ParamsDictionary } from 'express-serve-static-core'
 
@@ -57,6 +57,7 @@ export const getUniqueDailyVisitorsHandler: RouterHandler = async (
         lte(visitorsTable.visitedAt, new Date(req.query.endDate)),
       ),
     )
+    .orderBy(asc(visitorsTable.visitedAt))
 
   res
     .status(httpStatusCode.success200)
