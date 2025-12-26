@@ -1,4 +1,3 @@
-import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import {
   getShouldNotTrace,
   removeRefreshTokenCookie,
@@ -13,6 +12,7 @@ import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCodeCommon } from '@back/shared/const/errorCodeCommon'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
+import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
