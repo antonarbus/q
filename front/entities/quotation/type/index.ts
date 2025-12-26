@@ -109,16 +109,6 @@ export type Quotation = Common & {
     level: 'everyone' | 'nobody' | 'custom'
     userList: string[]
   }
-  from?: {
-    email?: string
-    name?: string
-    company?: string
-  }
-  to?: {
-    email?: string
-    name?: string
-    company?: string
-  }
   permissionLevel?:
     | 'Public'
     | 'Shared with you'
