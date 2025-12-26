@@ -1,4 +1,5 @@
-import type { Quotation, Row } from '../../type'
+import type { Quotation } from '../../types/Quotation'
+import type { Row } from '../../types/BlockItem'
 import { getBoqBlockFromState } from './getBoqBlockFromState'
 
 type Props = {

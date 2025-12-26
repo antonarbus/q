@@ -1,6 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { itemType } from '../../../const/itemType'
-import type { HeaderKey, Quotation } from '../../../type'
+import type { HeaderKey } from '../../../types/BlockItem'
+import type { Quotation } from '../../../types/Quotation'
 
 export const updateBoqHeaderTextReducer = (
   state: Quotation,

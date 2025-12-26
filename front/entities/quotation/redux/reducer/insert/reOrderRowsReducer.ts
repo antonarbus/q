@@ -1,5 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { Quotation, Row } from '../../../type'
+import type { Quotation } from '../../../types/Quotation'
+import type { Row } from '../../../types/BlockItem'
 import { getBoqBlockFromState } from '../../getter/getBoqBlockFromState'
 
 export const reOrderRowsReducer = (

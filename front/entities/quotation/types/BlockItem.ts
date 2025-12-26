@@ -2,7 +2,6 @@ import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import type { BoqColumnKey } from '../const/boqColumnKey'
 import type { itemType } from '../const/itemType'
 import type { RowTypeKey } from '../const/rowTypeKey'
-import type { SelectQuotation } from '@back/entities/quotation'
 
 type Common = {
   id: 'new' | (string & {})
@@ -102,24 +101,3 @@ export type Paste = Common & {
 }
 
 export type BlockItem = Boq | Paste | Text | Price | Row
-
-type QuotationMetaData = SelectQuotation
-
-type QuotationFromBucket = {
-  info: string
-  blocks: BlockItem[]
-}
-
-type QuotationPermission = {
-  permissionLevel?:
-    | 'Public'
-    | 'Shared with you'
-    | 'Owner'
-    | 'Super admin'
-    | 'Super admin on behalf of a user'
-    | 'Forbidden'
-}
-
-export type Quotation = QuotationMetaData &
-  QuotationFromBucket &
-  QuotationPermission

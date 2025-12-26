@@ -24,7 +24,7 @@ import termsAndConditionsHtml from './templates/termsAndConditions.html?raw'
 import totalPriceTitleHtml from './templates/totalPriceTitle.html?raw'
 import totalPriceValueHtml from './templates/totalPriceValue.html?raw'
 import welcomeTextHtml from './templates/welcomeText.html?raw'
-import type { Quotation } from './type'
+import type { Quotation } from './types/Quotation'
 
 export const newQuotationTemplate: Quotation = {
   id: 'new',

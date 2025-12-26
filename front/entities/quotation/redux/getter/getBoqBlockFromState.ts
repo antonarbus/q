@@ -1,5 +1,6 @@
 import { itemType } from '../../const/itemType'
-import type { Boq, Quotation } from '../../type'
+import type { Boq } from '../../types/BlockItem'
+import type { Quotation } from '../../types/Quotation'
 
 type Props = {
   blockIndex: number

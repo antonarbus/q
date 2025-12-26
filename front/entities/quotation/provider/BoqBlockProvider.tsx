@@ -7,7 +7,7 @@ import {
   useContext,
   useMemo,
 } from 'react'
-import type { RowEditorRefs } from '../type'
+import type { RowEditorRefs } from '../types/BlockItem'
 
 type Props = {
   children: ReactNode

@@ -1,4 +1,5 @@
-import type { BlockItem, Quotation } from '../../type'
+import type { BlockItem } from '../../types/BlockItem'
+import type { Quotation } from '../../types/Quotation'
 
 type Props = {
   id: string

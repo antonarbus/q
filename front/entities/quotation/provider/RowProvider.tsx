@@ -7,7 +7,7 @@ import {
   useContext,
   useMemo,
 } from 'react'
-import type { Row } from '../type'
+import type { Row } from '../types/BlockItem'
 import { useBoq } from './BoqBlockProvider'
 
 type Props = {

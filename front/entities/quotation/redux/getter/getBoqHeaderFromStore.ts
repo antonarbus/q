@@ -1,6 +1,6 @@
 import { getState } from '@shared/lib/redux'
 import { itemType } from '../../const/itemType'
-import type { HeaderKey, HeaderValue } from '../../type'
+import type { HeaderKey, HeaderValue } from '../../types/BlockItem'
 
 type Props = {
   blockIndex: number

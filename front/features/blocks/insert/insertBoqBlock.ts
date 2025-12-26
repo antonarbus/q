@@ -21,7 +21,7 @@ import rowTwoDescriptionHtml from '@entities/quotation/templates/rowTwoDescripti
 import rowTwoItemPriceHtml from '@entities/quotation/templates/rowTwoItemPrice.html?raw'
 import rowTwoPriceHtml from '@entities/quotation/templates/rowTwoPrice.html?raw'
 import rowTwoQtyHtml from '@entities/quotation/templates/rowTwoQty.html?raw'
-import type { Boq } from '@entities/quotation/type'
+import type { Boq } from '@entities/quotation/types/BlockItem'
 import { textSlice } from '@shared/lib/froala/textSlice'
 import { generateId } from '@shared/lib/nanoid'
 import { dispatch, getState } from '@shared/lib/redux'

@@ -1,7 +1,8 @@
 import type { CopyPlace } from '@entities/copy/types'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { rowTypeKey } from '../../../const/rowTypeKey'
-import type { Cell, Quotation, Row } from '../../../type'
+import type { Quotation } from '../../../types/Quotation'
+import type { Cell, Row } from '../../../types/BlockItem'
 import { getBoqBlockFromState } from '../../getter/getBoqBlockFromState'
 
 const defaultCellValues: Cell = {

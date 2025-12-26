@@ -2,7 +2,8 @@ import type { CopyPlace } from '@entities/copy/types'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { generateId } from '@shared/lib/nanoid'
 import { itemType } from '../../../const/itemType'
-import type { BlockItem, Paste, Quotation } from '../../../type'
+import type { Quotation } from '../../../types/Quotation'
+import type { BlockItem, Paste } from '../../../types/BlockItem'
 
 export const insertPasteBlockReducer = (
   state: Quotation,

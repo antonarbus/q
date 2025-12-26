@@ -1,6 +1,6 @@
 import { itemType } from '../../../const/itemType'
 import { rowTypeKey } from '../../../const/rowTypeKey'
-import type { Quotation } from '../../../type'
+import type { Quotation } from '../../../types/Quotation'
 
 export const removePasteItemReducer = (state: Quotation): void => {
   const pasteBlockIndex = state.blocks.findIndex(

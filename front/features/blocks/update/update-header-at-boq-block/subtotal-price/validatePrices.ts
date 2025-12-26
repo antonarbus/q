@@ -1,6 +1,6 @@
 import { cellKey } from '@entities/quotation/const/cellKey'
 import { getRowsFromStore } from '@entities/quotation/redux/getter/getRowsFromStore'
-import type { Row, RowEditorRefs } from '@entities/quotation/type'
+import type { Row, RowEditorRefs } from '@entities/quotation/types/BlockItem'
 import { isRowPriceValid } from '@entities/quotation/util/isRowPriceValid'
 import { updateCellWithValue } from '@entities/quotation/util/updateCellWithValue'
 import { updateSubTotalPriceWithValue } from '@entities/quotation/util/updateSubTotalPriceWithValue'

@@ -1,5 +1,5 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { Quotation } from '../../../type'
+import type { Quotation } from '../../../types/Quotation'
 import { getBoqBlockFromState } from '../../getter/getBoqBlockFromState'
 
 export const updateSubTotalPriceReducer = (

@@ -1,6 +1,6 @@
 import type { CellKey } from '@entities/quotation/const/cellKey'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { Quotation } from '../../../type'
+import type { Quotation } from '../../../types/Quotation'
 import { getCellFromState } from '../../getter/getCellFromState'
 
 export const showCellPinReducer = (

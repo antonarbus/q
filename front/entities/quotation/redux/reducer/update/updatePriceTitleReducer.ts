@@ -1,6 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { itemType } from '../../../const/itemType'
-import type { Quotation } from '../../../type'
+import type { Quotation } from '../../../types/Quotation'
 
 export const updatePriceTitleReducer = (
   state: Quotation,

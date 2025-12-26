@@ -1,7 +1,7 @@
 import type { CellKey } from '@entities/quotation/const/cellKey'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { itemType } from '../../../const/itemType'
-import type { Quotation } from '../../../type'
+import type { Quotation } from '../../../types/Quotation'
 
 export const updateCellReducer = (
   state: Quotation,

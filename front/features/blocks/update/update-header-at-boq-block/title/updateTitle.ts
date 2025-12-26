@@ -1,5 +1,5 @@
 import { updateBoqHeaderAtStore } from '@entities/quotation/redux/updater/updateBoqHeaderAtStore'
-import type { HeaderKey } from '@entities/quotation/type'
+import type { HeaderKey } from '@entities/quotation/types/BlockItem'
 import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 
 type Props = {
