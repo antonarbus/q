@@ -3,9 +3,12 @@ import {
   removeRefreshTokenCookie,
 } from '@back/shared/headers'
 import { generateAccessToken } from '@back/shared/lib/json-webtoken'
-import type { User } from '@entities/user/type'
 import type { NextFunction, Request, Response } from 'express'
-import { usersTable, getUserFromRefreshTokenOrNull } from '@back/entities/user'
+import {
+  usersTable,
+  getUserFromRefreshTokenOrNull,
+  type SelectUser,
+} from '@back/entities/user'
 import { db } from '@back/shared/lib/drizzle/db'
 import { and, eq } from 'drizzle-orm'
 import { HttpError } from '@back/shared/errors/HttpError'
@@ -19,10 +22,10 @@ type UrlParam = ParamsDictionary
 type ReqBody = undefined
 
 export type ResBody = {
-  email: User['email']
+  email: SelectUser['email']
   accessJwtToken: string
   accessJwtTokenExpiresOn: string
-  roles: User['roles']
+  roles: SelectUser['roles']
   jwtRefreshTokenExpirationDays: number
 }
 

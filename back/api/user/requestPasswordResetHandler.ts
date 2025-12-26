@@ -1,8 +1,7 @@
-import { usersTable } from '@back/entities/user'
+import { usersTable, type SelectUser } from '@back/entities/user'
 import { httpStatusCode } from '@back/shared/const/httpCode'
 import { sendEmail } from '@back/shared/lib/mailersend'
 import { generateId } from '@back/shared/lib/nanoid'
-import type { User } from '@entities/user/type'
 import type { NextFunction, Request, Response } from 'express'
 import { runtimeConfig } from '@root/config/runtime'
 import { db } from '@back/shared/lib/drizzle/db'
@@ -16,7 +15,7 @@ type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
 
 export type ReqBody = {
-  email: User['email']
+  email: SelectUser['email']
 }
 
 export type ResBody = undefined

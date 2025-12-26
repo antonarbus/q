@@ -1,9 +1,9 @@
-import type { User } from '@entities/user/type'
+import type { SelectUser } from '@back/entities/user'
 import type { JwtPayload } from 'jsonwebtoken'
 
 export type JwtPayloadExtended = JwtPayload & {
-  email: User['email']
-  roles: User['roles']
+  email: SelectUser['email']
+  roles: SelectUser['roles']
 }
 
 /** Check if 'email' and 'roles' properties are in payload */

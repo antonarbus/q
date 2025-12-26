@@ -1,15 +1,15 @@
 import { headerName } from '@back/shared/headers'
 import { verifyAccessToken } from '@back/shared/lib/json-webtoken'
-import type { User } from '@entities/user/type'
 import type { Request } from 'express'
+import type { SelectUser } from './usersTableSchema'
 
 type Props = {
   req: Request
 }
 
 type Res = {
-  email: User['email']
-  roles: User['roles']
+  email: SelectUser['email']
+  roles: SelectUser['roles']
 } | null
 
 /**

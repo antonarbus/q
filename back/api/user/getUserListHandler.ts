@@ -17,7 +17,7 @@ type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
 type ReqBody = undefined
 
-export type UserPicked = Pick<
+type UserPicked = Pick<
   SelectUser,
   'email' | 'isActivated' | 'loggedAt' | 'registeredAt'
 >

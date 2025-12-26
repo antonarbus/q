@@ -3,23 +3,21 @@ import {
   getJwtExpirationInDays,
   verifyRefreshToken,
 } from '@back/shared/lib/json-webtoken'
-import type { User } from '@entities/user/type'
 import type { Request } from 'express'
+import type { SelectUser } from './usersTableSchema'
 
 type Props = {
   req: Request
 }
 
 type Res = {
-  email: User['email']
-  roles: User['roles']
+  email: SelectUser['email']
+  roles: SelectUser['roles']
   refreshJwtToken: string
   jwtRefreshTokenExpirationDays: number
 } | null
 
-/**
- * Used only to get short lived access token.
- */
+/** Used only to get short lived access token. */
 export const getUserFromRefreshTokenOrNull = ({ req }: Props): Res => {
   const refreshJwtToken = getRefreshTokenFromCookie({ req })
 

@@ -1,4 +1,4 @@
-import type { UserPicked } from '@back/api/user/getUserListHandler'
+import type { ResBody } from '@back/api/user/getUserListHandler'
 import { useGetUserListQuery } from '@entities/user/api/useGetUserListQuery'
 import { LoadingTableOverlay } from '@shared/component/LoadingTableOverlay'
 import { useDisableLoadingOverlayWhenItemsAreFetched } from '@shared/component/loading-dots-overlay'
@@ -41,7 +41,7 @@ export const UserListGrid = (): JSX.Element => {
       <AgGridStyles />
       <DisplayedRowsCount />
       <ProgressGridBar isShown={getUserListQuery.isFetching} />
-      <AgGridReact<UserPicked>
+      <AgGridReact<ResBody['userList'][number]>
         columnDefs={columnDefs}
         defaultColDef={getDefaultColDef()}
         enableCellTextSelection

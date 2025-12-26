@@ -5,11 +5,11 @@ import {
   type WritableDraft,
 } from '@reduxjs/toolkit'
 import { userRole } from '../const/userRole'
-import type { User } from '../type'
+import type { SelectUser } from '@back/entities/user'
 
 type InitState = {
   email: string | null
-  roles: User['roles']
+  roles: SelectUser['roles']
   accessToken: string | null
 }
 
@@ -27,7 +27,7 @@ export const userSlice = createSlice({
       state: WritableDraft<InitState>,
       action: PayloadAction<{
         email: string | null
-        roles: User['roles']
+        roles: SelectUser['roles']
       }>,
     ) => {
       const { email, roles } = action.payload

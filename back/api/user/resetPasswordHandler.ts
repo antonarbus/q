@@ -1,11 +1,10 @@
-import { usersTable } from '@back/entities/user'
+import { usersTable, type SelectUser } from '@back/entities/user'
 import { httpStatusCode } from '@back/shared/const/httpCode'
 import { setRefreshTokenCookie } from '@back/shared/headers'
 import {
   generateAccessToken,
   generateRefreshToken,
 } from '@back/shared/lib/json-webtoken'
-import type { User } from '@entities/user/type'
 import bcrypt from 'bcryptjs'
 import type { NextFunction, Request, Response } from 'express'
 import { db } from '@back/shared/lib/drizzle/db'
@@ -19,16 +18,16 @@ type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
 
 export type ReqBody = {
-  email: User['email']
-  password: User['password']
-  resetPasswordKey: User['resetPasswordKey']
+  email: string
+  password: string
+  resetPasswordKey: string
 }
 
 export type ResBody = {
   accessJwtToken?: string
   accessJwtTokenExpiresOn?: string
-  email?: User['email']
-  roles?: User['roles']
+  email: SelectUser['email']
+  roles: SelectUser['roles']
 }
 
 export type ErrorResBody = {
@@ -104,10 +103,18 @@ export const resetPasswordHandler: RouterHandler = async (req, res) => {
     )
     .returning()
 
+  if (userUpdated === undefined) {
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'INTERNAL_ERROR',
+      statusCode: httpStatusCode.serverError500,
+      message: 'Failed to update the user in db',
+    })
+  }
+
   res.status(httpStatusCode.created201).json({
     accessJwtToken: accessToken.value,
     accessJwtTokenExpiresOn: accessToken.expiresOn,
-    email: userUpdated?.email,
-    roles: userUpdated?.roles,
+    email: userUpdated.email,
+    roles: userUpdated.roles,
   })
 }

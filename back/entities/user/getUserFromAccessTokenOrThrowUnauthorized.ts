@@ -2,8 +2,8 @@ import { httpStatusCode } from '@back/shared/const/httpCode'
 import { HttpError } from '@back/shared/errors/HttpError'
 import { headerName } from '@back/shared/headers'
 import { verifyAccessToken } from '@back/shared/lib/json-webtoken'
-import type { User } from '@entities/user/type'
 import type { Request, Response } from 'express'
+import type { SelectUser } from './usersTableSchema'
 
 type Props = {
   req: Request
@@ -11,8 +11,8 @@ type Props = {
 }
 
 type Res = {
-  email: User['email']
-  roles: User['roles']
+  email: SelectUser['email']
+  roles: SelectUser['roles']
 }
 
 /** Used to get a user details for all protected routes where a user should be logged in */

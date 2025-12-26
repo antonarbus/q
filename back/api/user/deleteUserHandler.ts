@@ -1,6 +1,7 @@
 import { bookmarksTable } from '@back/entities/bookmark'
 import { quotationsTable } from '@back/entities/quotation'
 import {
+  type SelectUser,
   getUserFromAccessTokenOrThrowUnauthorized,
   usersTable,
 } from '@back/entities/user'
@@ -8,7 +9,6 @@ import { httpStatusCode } from '@back/shared/const/httpCode'
 import { userRole } from '@back/shared/const/userRole'
 import { db } from '@back/shared/lib/drizzle/db'
 // import { bucket, getFolderPath } from '@back/shared/services/storage'
-import type { User } from '@entities/user/type'
 import { eq } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
 import { HttpError } from '@back/shared/errors/HttpError'
@@ -20,7 +20,7 @@ type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
 
 export type ReqBody = {
-  email: User['email']
+  email: SelectUser['email']
 }
 
 export type ResBody = {

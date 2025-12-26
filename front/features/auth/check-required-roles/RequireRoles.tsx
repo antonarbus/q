@@ -1,10 +1,10 @@
+import type { SelectUser } from '@back/entities/user'
 import { useGetUserAccessTokenQuery } from '@entities/user/api/useGetUserAccessTokenQuery'
-import type { User } from '@entities/user/type'
 import { useSelector } from '@shared/lib/redux'
 import type { ReactNode } from 'react'
 
 type Props = {
-  requiredRoles: User['roles']
+  requiredRoles: SelectUser['roles']
   children: ReactNode
 }
 

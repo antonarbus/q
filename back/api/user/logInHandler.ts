@@ -1,4 +1,8 @@
-import { getUserFromAccessTokenOrNull, usersTable } from '@back/entities/user'
+import {
+  getUserFromAccessTokenOrNull,
+  usersTable,
+  type SelectUser,
+} from '@back/entities/user'
 import { userRole } from '@back/shared/const/userRole'
 import { setNoTraceMode, setRefreshTokenCookie } from '@back/shared/headers'
 import {
@@ -8,7 +12,6 @@ import {
   verifyRefreshToken,
 } from '@back/shared/lib/json-webtoken'
 import { sendEmail } from '@back/shared/lib/mailersend'
-import type { User } from '@entities/user/type'
 import bcrypt from 'bcryptjs'
 import { runtimeConfig } from '@root/config/runtime'
 import { db } from '@back/shared/lib/drizzle/db'
@@ -24,15 +27,15 @@ type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
 
 export type ReqBody = {
-  email: User['email']
-  password: User['password']
+  email: SelectUser['email']
+  password: SelectUser['password']
 }
 
 export type ResBody = {
   accessJwtToken: string
   accessJwtTokenExpiresOn: string
-  email: User['email']
-  roles: User['roles']
+  email: SelectUser['email']
+  roles: SelectUser['roles']
   jwtRefreshTokenExpirationDays: number
   message: 'good password' | 'super-admin on behalf of user'
 }
