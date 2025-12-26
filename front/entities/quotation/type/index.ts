@@ -10,11 +10,11 @@ type Common = {
   category: string
   desc: string
   info: string
+  createdAt: string
+  updatedAt: string
   width?: number
   height?: number
   isFroala?: boolean
-  createdAt: string
-  updatedAt: string
   preview?: string
 }
 
