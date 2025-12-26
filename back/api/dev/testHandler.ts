@@ -1,7 +1,7 @@
 import { getUserFromRefreshTokenOrJohn, usersTable } from '@back/entities/user'
 import { HttpError } from '@back/shared/errors/HttpError'
-import type { ErrorCodeCommon } from '@back/shared/const/errorCodeCommon'
-import { httpStatusCode } from '@back/shared/const/httpStatusCode'
+import type { ErrorCode } from '@back/shared/const/errorCode'
+import { httpStatusCode } from '@back/shared/const/httpCode'
 import { userRole } from '@back/shared/const/userRole'
 import type { NextFunction, Request, Response } from 'express'
 import { db } from '@back/shared/lib/drizzle/db'
@@ -17,7 +17,7 @@ type ResBody = unknown
 
 type ErrorResBody = {
   message: string
-  errorCode: ErrorCodeCommon | 'FORBIDDEN'
+  errorCode: ErrorCode | 'FORBIDDEN'
 }
 
 type RouterHandler = (

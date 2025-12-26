@@ -4,7 +4,7 @@ import {
   getUserFromAccessTokenOrThrowUnauthorized,
   usersTable,
 } from '@back/entities/user'
-import { httpStatusCode } from '@back/shared/const/httpStatusCode'
+import { httpStatusCode } from '@back/shared/const/httpCode'
 import { userRole } from '@back/shared/const/userRole'
 import { db } from '@back/shared/lib/drizzle/db'
 // import { bucket, getFolderPath } from '@back/shared/services/storage'
@@ -12,7 +12,7 @@ import type { User } from '@entities/user/type'
 import { eq } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
 import { HttpError } from '@back/shared/errors/HttpError'
-import type { ErrorCodeCommon } from '@back/shared/const/errorCodeCommon'
+import type { ErrorCode } from '@back/shared/const/errorCode'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
 
@@ -29,7 +29,7 @@ export type ResBody = {
 
 export type ErrorResBody = {
   message: string
-  errorCode: ErrorCodeCommon | 'NOT_ALLOWED'
+  errorCode: ErrorCode | 'NOT_ALLOWED'
 }
 
 type RouterHandler = (

@@ -1,4 +1,4 @@
-import type { HttpStatusCode } from '@back/shared/const/httpStatusCode'
+import type { HttpStatusCode } from '@back/shared/const/httpCode'
 
 type HttpErrorParams<ErrorCode extends string> = {
   errorCode: ErrorCode

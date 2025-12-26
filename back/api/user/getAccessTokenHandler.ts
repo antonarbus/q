@@ -9,10 +9,10 @@ import { usersTable, getUserFromRefreshTokenOrNull } from '@back/entities/user'
 import { db } from '@back/shared/lib/drizzle/db'
 import { and, eq } from 'drizzle-orm'
 import { HttpError } from '@back/shared/errors/HttpError'
-import type { ErrorCodeCommon } from '@back/shared/const/errorCodeCommon'
+import type { ErrorCode } from '@back/shared/const/errorCode'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
-import { httpStatusCode } from '@back/shared/const/httpStatusCode'
+import { httpStatusCode } from '@back/shared/const/httpCode'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
@@ -28,7 +28,7 @@ export type ResBody = {
 
 export type ErrorResBody = {
   message: string
-  errorCode: ErrorCodeCommon | 'NOT_LOGGED_IN'
+  errorCode: ErrorCode | 'NOT_LOGGED_IN'
 }
 
 type RouterHandler = (

@@ -3,13 +3,13 @@ import {
   usersTable,
   type SelectUser,
 } from '@back/entities/user'
-import { httpStatusCode } from '@back/shared/const/httpStatusCode'
+import { httpStatusCode } from '@back/shared/const/httpCode'
 import { userRole } from '@back/shared/const/userRole'
 import type { NextFunction, Request, Response } from 'express'
 import { db } from '@back/shared/lib/drizzle/db'
 import { desc } from 'drizzle-orm'
 import { HttpError } from '@back/shared/errors/HttpError'
-import type { ErrorCodeCommon } from '@back/shared/const/errorCodeCommon'
+import type { ErrorCode } from '@back/shared/const/errorCode'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
 
@@ -28,7 +28,7 @@ export type ResBody = {
 
 export type ErrorResBody = {
   message: string
-  errorCode: ErrorCodeCommon | 'NO_PERMISSION'
+  errorCode: ErrorCode | 'NO_PERMISSION'
 }
 
 type RouterHandler = (

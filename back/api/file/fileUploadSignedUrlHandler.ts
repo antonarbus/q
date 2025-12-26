@@ -1,7 +1,7 @@
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { HttpError } from '@back/shared/errors/HttpError'
-import type { ErrorCodeCommon } from '@back/shared/const/errorCodeCommon'
-import { httpStatusCode } from '@back/shared/const/httpStatusCode'
+import type { ErrorCode } from '@back/shared/const/errorCode'
+import { httpStatusCode } from '@back/shared/const/httpCode'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import { generateId } from '@back/shared/lib/nanoid'
 import type { NextFunction, Request, Response } from 'express'
@@ -20,7 +20,7 @@ export type ResBody = {
 
 type ErrorResBody = {
   message: string
-  errorCode: ErrorCodeCommon | 'SIGNED_URL_GENERATION_FAILED'
+  errorCode: ErrorCode | 'SIGNED_URL_GENERATION_FAILED'
 }
 
 type RouterHandler = (

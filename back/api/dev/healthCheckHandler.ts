@@ -1,6 +1,6 @@
 import { HttpError } from '@back/shared/errors/HttpError'
-import type { ErrorCodeCommon } from '@back/shared/const/errorCodeCommon'
-import { httpStatusCode } from '@back/shared/const/httpStatusCode'
+import type { ErrorCode } from '@back/shared/const/errorCode'
+import { httpStatusCode } from '@back/shared/const/httpCode'
 import { db } from '@back/shared/lib/drizzle/db'
 import { runtimeConfig } from '@root/config/runtime'
 import { sql } from 'drizzle-orm'
@@ -19,7 +19,7 @@ export type ResBody = {
 
 export type ErrorResBody = {
   message: string
-  errorCode: ErrorCodeCommon | 'DB_CONNECTION_FAILED'
+  errorCode: ErrorCode | 'DB_CONNECTION_FAILED'
 }
 
 type RouterHandler = (

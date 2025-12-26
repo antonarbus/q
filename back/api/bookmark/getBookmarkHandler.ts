@@ -1,6 +1,6 @@
 import { type SelectBookmark, bookmarksTable } from '@back/entities/bookmark'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
-import { httpStatusCode } from '@back/shared/const/httpStatusCode'
+import { httpStatusCode } from '@back/shared/const/httpCode'
 import { db } from '@back/shared/lib/drizzle/db'
 import { and, eq } from 'drizzle-orm'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
@@ -8,7 +8,7 @@ import { jsonParseSafe } from '@back/shared/util/jsonParseSafe'
 import type { Item } from '@entities/quotation/type'
 import type { NextFunction, Request, Response } from 'express'
 import { HttpError } from '@back/shared/errors/HttpError'
-import type { ErrorCodeCommon } from '@back/shared/const/errorCodeCommon'
+import type { ErrorCode } from '@back/shared/const/errorCode'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
 
@@ -25,7 +25,7 @@ export type ResBody = {
 
 export type ErrorResBody = {
   message: string
-  errorCode: ErrorCodeCommon | 'NOT_FOUND'
+  errorCode: ErrorCode | 'NOT_FOUND'
 }
 
 type RouterHandler = (

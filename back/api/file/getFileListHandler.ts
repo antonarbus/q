@@ -1,10 +1,10 @@
 import { filesTable, type SelectFile } from '@back/entities/file'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
-import { httpStatusCode } from '@back/shared/const/httpStatusCode'
+import { httpStatusCode } from '@back/shared/const/httpCode'
 import { db } from '@back/shared/lib/drizzle/db'
 import { eq } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
-import type { ErrorCodeCommon } from '@back/shared/const/errorCodeCommon'
+import type { ErrorCode } from '@back/shared/const/errorCode'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
 
@@ -22,7 +22,7 @@ export type ResBody = {
 
 export type ErrorResBody = {
   message: string
-  errorCode: ErrorCodeCommon
+  errorCode: ErrorCode
 }
 
 type RouterHandler = (

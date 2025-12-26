@@ -1,5 +1,5 @@
 import { usersTable } from '@back/entities/user'
-import { httpStatusCode } from '@back/shared/const/httpStatusCode'
+import { httpStatusCode } from '@back/shared/const/httpCode'
 import { sendEmail } from '@back/shared/lib/mailersend'
 import { generateId } from '@back/shared/lib/nanoid'
 import type { User } from '@entities/user/type'
@@ -8,7 +8,7 @@ import { runtimeConfig } from '@root/config/runtime'
 import { db } from '@back/shared/lib/drizzle/db'
 import { eq } from 'drizzle-orm'
 import { HttpError } from '@back/shared/errors/HttpError'
-import type { ErrorCodeCommon } from '@back/shared/const/errorCodeCommon'
+import type { ErrorCode } from '@back/shared/const/errorCode'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
 
@@ -24,7 +24,7 @@ export type ResBody = undefined
 export type ErrorResBody = {
   message: string
   errorCode:
-    | ErrorCodeCommon
+    | ErrorCode
     | 'USER_NOT_FOUND'
     | 'ACCOUNT_NOT_ACTIVATED'
     | 'RESET_KEY_NOT_ISSUED'

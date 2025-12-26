@@ -1,4 +1,4 @@
-import { httpStatusCode } from '@back/shared/const/httpStatusCode'
+import { httpStatusCode } from '@back/shared/const/httpCode'
 import { HttpError } from '@back/shared/errors/HttpError'
 import { headerName } from '@back/shared/headers'
 import { verifyAccessToken } from '@back/shared/lib/json-webtoken'

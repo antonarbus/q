@@ -1,5 +1,5 @@
 import { usersTable } from '@back/entities/user'
-import { httpStatusCode } from '@back/shared/const/httpStatusCode'
+import { httpStatusCode } from '@back/shared/const/httpCode'
 import { setRefreshTokenCookie } from '@back/shared/headers'
 import {
   generateAccessToken,
@@ -11,7 +11,7 @@ import type { NextFunction, Request, Response } from 'express'
 import { db } from '@back/shared/lib/drizzle/db'
 import { and, eq } from 'drizzle-orm'
 import { HttpError } from '@back/shared/errors/HttpError'
-import type { ErrorCodeCommon } from '@back/shared/const/errorCodeCommon'
+import type { ErrorCode } from '@back/shared/const/errorCode'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
 
@@ -33,7 +33,7 @@ export type ResBody = {
 
 export type ErrorResBody = {
   message: string
-  errorCode: ErrorCodeCommon | 'INCORRECT_RESET_KEY' | 'NOT_ACTIVATED'
+  errorCode: ErrorCode | 'INCORRECT_RESET_KEY' | 'NOT_ACTIVATED'
 }
 
 type RouterHandler = (

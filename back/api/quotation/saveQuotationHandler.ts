@@ -1,7 +1,7 @@
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { HttpError } from '@back/shared/errors/HttpError'
-import type { ErrorCodeCommon } from '@back/shared/const/errorCodeCommon'
-import { httpStatusCode } from '@back/shared/const/httpStatusCode'
+import type { ErrorCode } from '@back/shared/const/errorCode'
+import { httpStatusCode } from '@back/shared/const/httpCode'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import { generateId } from '@back/shared/lib/nanoid'
 import type { Quotation } from '@entities/quotation/type'
@@ -26,7 +26,7 @@ export type ResBody = {
 
 export type ErrorResBody = {
   message: string
-  errorCode: ErrorCodeCommon | 'QUOTATION_NOT_SAVED' | 'ID_NOT_PROVIDED'
+  errorCode: ErrorCode | 'QUOTATION_NOT_SAVED' | 'ID_NOT_PROVIDED'
 }
 
 type RouterHandler = (

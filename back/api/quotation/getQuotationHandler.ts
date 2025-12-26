@@ -1,7 +1,7 @@
 import { getUserFromAccessTokenOrNull } from '@back/entities/user'
 import { HttpError } from '@back/shared/errors/HttpError'
-import type { ErrorCodeCommon } from '@back/shared/const/errorCodeCommon'
-import { httpStatusCode } from '@back/shared/const/httpStatusCode'
+import type { ErrorCode } from '@back/shared/const/errorCode'
+import { httpStatusCode } from '@back/shared/const/httpCode'
 import { userRole } from '@back/shared/const/userRole'
 import { getShouldNotTrace } from '@back/shared/headers'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
@@ -27,10 +27,7 @@ export type ResBody = {
 
 export type ErrorResBody = {
   message: string
-  errorCode:
-    | ErrorCodeCommon
-    | 'QUOTATION_NOT_FOUND'
-    | 'FILE_NOT_FOUND_IN_BUCKET'
+  errorCode: ErrorCode | 'QUOTATION_NOT_FOUND' | 'FILE_NOT_FOUND_IN_BUCKET'
 }
 
 type RouterHandler = (

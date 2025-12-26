@@ -1,8 +1,8 @@
 import { filesTable, type SelectFile } from '@back/entities/file'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { HttpError } from '@back/shared/errors/HttpError'
-import type { ErrorCodeCommon } from '@back/shared/const/errorCodeCommon'
-import { httpStatusCode } from '@back/shared/const/httpStatusCode'
+import type { ErrorCode } from '@back/shared/const/errorCode'
+import { httpStatusCode } from '@back/shared/const/httpCode'
 import { db } from '@back/shared/lib/drizzle/db'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import { and, eq } from 'drizzle-orm'
@@ -22,7 +22,7 @@ export type ResBody = undefined
 export type ErrorResBody = {
   message: string
   errorCode:
-    | ErrorCodeCommon
+    | ErrorCode
     | 'FILE_DELETE_FAILED'
     | 'FILE_NOT_OWNED'
     | 'FILE_NOT_FOUND'

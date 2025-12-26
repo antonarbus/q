@@ -1,7 +1,7 @@
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { HttpError } from '@back/shared/errors/HttpError'
-import type { ErrorCodeCommon } from '@back/shared/const/errorCodeCommon'
-import { httpStatusCode } from '@back/shared/const/httpStatusCode'
+import type { ErrorCode } from '@back/shared/const/errorCode'
+import { httpStatusCode } from '@back/shared/const/httpCode'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import type { NextFunction, Request, Response } from 'express'
 import { quotationsTable, type SelectQuotation } from '@back/entities/quotation'
@@ -21,7 +21,7 @@ export type ResBody = undefined
 
 export type ErrorResBody = {
   message: string
-  errorCode: ErrorCodeCommon | 'QUOTATION_NOT_FOUND' | 'QUOTATION_NOT_DELETED'
+  errorCode: ErrorCode | 'QUOTATION_NOT_FOUND' | 'QUOTATION_NOT_DELETED'
 }
 
 type RouterHandler = (

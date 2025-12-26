@@ -1,6 +1,6 @@
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
-import type { ErrorCodeCommon } from '@back/shared/const/errorCodeCommon'
-import { httpStatusCode } from '@back/shared/const/httpStatusCode'
+import type { ErrorCode } from '@back/shared/const/errorCode'
+import { httpStatusCode } from '@back/shared/const/httpCode'
 import type { NextFunction, Request, Response } from 'express'
 import { db } from '@back/shared/lib/drizzle/db'
 import { eq } from 'drizzle-orm'
@@ -18,7 +18,7 @@ export type ResBody = {
 
 export type ErrorResBody = {
   message: string
-  errorCode: ErrorCodeCommon
+  errorCode: ErrorCode
 }
 
 type RouterHandler = (

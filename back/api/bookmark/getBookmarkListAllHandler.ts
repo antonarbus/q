@@ -1,13 +1,13 @@
 import { bookmarksTable, type SelectBookmark } from '@back/entities/bookmark'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
-import { httpStatusCode } from '@back/shared/const/httpStatusCode'
+import { httpStatusCode } from '@back/shared/const/httpCode'
 import { db } from '@back/shared/lib/drizzle/db'
 import { userRole } from '@back/shared/const/userRole'
 import { and, asc, count, desc, ilike } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
 import { z } from 'zod'
 import { HttpError } from '@back/shared/errors/HttpError'
-import type { ErrorCodeCommon } from '@back/shared/const/errorCodeCommon'
+import type { ErrorCode } from '@back/shared/const/errorCode'
 import type { ParamsDictionary } from 'express-serve-static-core'
 
 type UrlParam = ParamsDictionary
@@ -27,7 +27,7 @@ export type ResBody = {
 
 type ErrorResBody = {
   message: string
-  errorCode: ErrorCodeCommon | 'NO_PERMISSION' | 'UNHANDLED_ERROR'
+  errorCode: ErrorCode | 'NO_PERMISSION' | 'UNHANDLED_ERROR'
 }
 
 type RouterHandler = (

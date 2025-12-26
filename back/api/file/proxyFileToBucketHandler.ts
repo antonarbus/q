@@ -1,7 +1,7 @@
 import { filesTable, type SelectFile } from '@back/entities/file'
 import { HttpError } from '@back/shared/errors/HttpError'
-import type { ErrorCodeCommon } from '@back/shared/const/errorCodeCommon'
-import { httpStatusCode } from '@back/shared/const/httpStatusCode'
+import type { ErrorCode } from '@back/shared/const/errorCode'
+import { httpStatusCode } from '@back/shared/const/httpCode'
 import { db } from '@back/shared/lib/drizzle/db'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import { eq } from 'drizzle-orm'
@@ -17,7 +17,7 @@ type ResBody = string
 
 type ErrorResBody = {
   message: string
-  errorCode: ErrorCodeCommon | 'FILE_NOT_FOUND' | 'SIGNED_URL_GENERATION_FAILED'
+  errorCode: ErrorCode | 'FILE_NOT_FOUND' | 'SIGNED_URL_GENERATION_FAILED'
 }
 
 type RouterHandler = (

@@ -1,7 +1,7 @@
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { HttpError } from '@back/shared/errors/HttpError'
-import type { ErrorCodeCommon } from '@back/shared/const/errorCodeCommon'
-import { httpStatusCode } from '@back/shared/const/httpStatusCode'
+import type { ErrorCode } from '@back/shared/const/errorCode'
+import { httpStatusCode } from '@back/shared/const/httpCode'
 import { userRole } from '@back/shared/const/userRole'
 import type { NextFunction, Request, Response } from 'express'
 import { quotationsTable, type SelectQuotation } from '@back/entities/quotation'
@@ -37,7 +37,7 @@ export type ResBody = {
 
 type ErrorResBody = {
   message: string
-  errorCode: ErrorCodeCommon | 'NO_PERMISSION_TO_VIEW' | 'UNHANDLED_ERROR'
+  errorCode: ErrorCode | 'NO_PERMISSION_TO_VIEW' | 'UNHANDLED_ERROR'
 }
 
 type RouterHandler = (

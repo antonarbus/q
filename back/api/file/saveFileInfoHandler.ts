@@ -1,8 +1,8 @@
 import { type InsertFile, filesTable } from '@back/entities/file'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { HttpError } from '@back/shared/errors/HttpError'
-import type { ErrorCodeCommon } from '@back/shared/const/errorCodeCommon'
-import { httpStatusCode } from '@back/shared/const/httpStatusCode'
+import type { ErrorCode } from '@back/shared/const/errorCode'
+import { httpStatusCode } from '@back/shared/const/httpCode'
 import { db } from '@back/shared/lib/drizzle/db'
 import type { NextFunction, Request, Response } from 'express'
 import type { ParamsDictionary } from 'express-serve-static-core'
@@ -19,7 +19,7 @@ export type ResBody = {
 
 type ErrorResBody = {
   message: string
-  errorCode: ErrorCodeCommon | 'FILE_SAVE_FAILED'
+  errorCode: ErrorCode | 'FILE_SAVE_FAILED'
 }
 
 type RouterHandler = (

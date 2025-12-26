@@ -1,7 +1,7 @@
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { NextFunction, Request, Response } from 'express'
-import { httpStatusCode } from '../shared/const/httpStatusCode'
-import { errorCodeCommon } from '@back/shared/const/errorCodeCommon'
+import { httpStatusCode } from '../shared/const/httpCode'
+import { errorCode } from '@back/shared/const/errorCode'
 
 type ErrorResBody = {
   errorCode: string
@@ -35,7 +35,7 @@ export const errorHandlerMiddleware: RouterHandler = (
 
   // Handle unknown errors
   res.status(httpStatusCode.serverError500).json({
-    errorCode: errorCodeCommon.internalError,
+    errorCode: errorCode.internalError,
     message: 'Internal error',
   })
 }
