@@ -63,7 +63,7 @@ export type RowEditorRefs = {
   price: FroalaEditorRef
 }[]
 
-// block
+// boq block
 export type Boq = Common & {
   type: typeof itemType.boq
   boq: {
@@ -73,6 +73,7 @@ export type Boq = Common & {
   }
 }
 
+// text block
 export type Text = Common & {
   type: typeof itemType.text
   text: {
@@ -81,6 +82,7 @@ export type Text = Common & {
   }
 }
 
+// price block
 export type Price = Common & {
   type: typeof itemType.price
   title: {
@@ -93,6 +95,7 @@ export type Price = Common & {
   }
 }
 
+// paste block
 export type Paste = Common & {
   type: typeof itemType.paste
 }
@@ -101,8 +104,6 @@ export type Item = Boq | Paste | Text | Price | Row
 
 export type Quotation = Common & {
   type: 'quotation'
-  createdAt?: string
-  updatedAt?: string
   openedAt?: string | null
   viewedAt?: string | null
   access: {
