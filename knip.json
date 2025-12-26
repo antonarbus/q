@@ -1,20 +1,7 @@
 {
-  "workspaces": {
-    "front": {
-      "entry": ["index.tsx"],
-      "project": ["**/*.{ts,tsx}"]
-    },
-    "back": {
-      "entry": ["index.ts"],
-      "project": ["**/*.{ts,tsx}"]
-    }
-  },
   "ignore": [
     "back/shared/lib/drizzle/schema.ts",
     "front/shared/lib/ag-grid/colDef/getNumberColDef.tsx",
-    "front/features/quotation/download-quotation-as-excel/excelWorker.ts",
-    "front/features/quotation/download-quotation-as-pdf/pdfWorker.ts",
-    "front/shared/util/stripHtmlWithBreaksPreserve.ts",
     "tests/setup/auth.setup.ts",
     "shared/const/permissionLevel.ts"
   ],
