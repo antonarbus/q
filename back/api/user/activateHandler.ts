@@ -20,13 +20,17 @@ export type ReqBody = {
   activationKey: NonNullable<SelectUser['activationKey']>
 }
 
-export type ResBody = {
-  accessJwtToken?: string
-  accessJwtTokenExpiresOn?: string
-  email?: SelectUser['email']
-  roles?: SelectUser['roles']
-  message: 'Already activated' | 'Activated'
-}
+export type ResBody =
+  | {
+      accessJwtToken: string
+      accessJwtTokenExpiresOn: string
+      email: SelectUser['email']
+      roles: SelectUser['roles']
+      message: 'Activated'
+    }
+  | {
+      message: 'Already activated'
+    }
 
 export type ErrorResBody = {
   message: string

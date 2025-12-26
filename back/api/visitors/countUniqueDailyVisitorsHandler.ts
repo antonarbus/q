@@ -15,9 +15,7 @@ export type ReqBody = {
   isNew: boolean
 }
 
-export type ResBody = {
-  message: 'visitor counted'
-}
+export type ResBody = undefined
 
 export type ErrorResBody = {
   message: string
@@ -55,5 +53,5 @@ export const countUniqueDailyVisitorsHandler: RouterHandler = async (
       },
     })
 
-  res.status(httpStatusCode.success200).json({ message: 'visitor counted' })
+  res.status(httpStatusCode.success200)
 }

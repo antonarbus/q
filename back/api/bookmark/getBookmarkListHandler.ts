@@ -10,11 +10,10 @@ import type { ParsedQs } from 'qs'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
-type ReqBody = unknown
+type ReqBody = undefined
 
 export type ResBody = {
   bookmarkList: SelectBookmark[]
-  message: 'Found' | 'No content'
 }
 
 export type ErrorResBody = {
@@ -39,9 +38,7 @@ export const getBookmarkListHandler: RouterHandler = async (req, res) => {
     .from(bookmarksTable)
     .where(eq(bookmarksTable.email, userFromAccessToken.email))
 
-  const message = bookmarkListSelected.length === 0 ? 'No content' : 'Found'
-
   res
     .status(httpStatusCode.success200)
-    .json({ message, bookmarkList: bookmarkListSelected })
+    .json({ bookmarkList: bookmarkListSelected })
 }

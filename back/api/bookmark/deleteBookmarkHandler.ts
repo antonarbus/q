@@ -17,9 +17,7 @@ export type ReqBody = {
   bookmarkId: SelectBookmark['id']
 }
 
-export type ResBody = {
-  message: 'deleted'
-}
+export type ResBody = undefined
 
 export type ErrorResBody = {
   message: string
@@ -59,7 +57,7 @@ export const deleteBookmarkHandler: RouterHandler = async (req, res) => {
   const [{ statusCode }] = await bucket.file(fileInfo.path).delete()
 
   if (statusCode === 204) {
-    res.status(httpStatusCode.success200).json({ message: 'deleted' })
+    res.status(httpStatusCode.success200).json()
 
     return
   }

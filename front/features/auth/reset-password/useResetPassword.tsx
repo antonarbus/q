@@ -34,48 +34,44 @@ export const useResetPassword = ({ passwordSignal, slideOut }: Props): Res => {
 
   useUpdateEffect(() => {
     if (resetUserPasswordMutation.isSuccess === true) {
-      if (resetUserPasswordMutation.data.message === 'password was reset') {
-        toast('Password was reset')
+      toast('Password was reset')
 
-        if (resetUserPasswordMutation.data.accessJwtToken === undefined) {
-          return
-        }
-
-        if (resetUserPasswordMutation.data.email === undefined) {
-          return
-        }
-
-        dispatch(
-          userSlice.actions.setAccessToken({
-            accessToken: resetUserPasswordMutation.data.accessJwtToken,
-          }),
-        )
-
-        dispatch(
-          userSlice.actions.rememberLoggedUser({
-            email: resetUserPasswordMutation.data.email,
-            roles: resetUserPasswordMutation.data.roles ?? [userRole.user],
-          }),
-        )
-
-        dispatch(
-          navSlice.actions.hideNavItems({ navItemIds: [navItemId.login] }),
-        )
-
-        dispatch(
-          navSlice.actions.showNavItems({
-            navItemIds: [navItemId.profile],
-          }),
-        )
-
-        const slideOutAndChangeUrl = async (): Promise<void> => {
-          await asyncDelay(1000)
-          await slideOut()
-          void navigate('..')
-        }
-
-        void slideOutAndChangeUrl()
+      if (resetUserPasswordMutation.data.accessJwtToken === undefined) {
+        return
       }
+
+      if (resetUserPasswordMutation.data.email === undefined) {
+        return
+      }
+
+      dispatch(
+        userSlice.actions.setAccessToken({
+          accessToken: resetUserPasswordMutation.data.accessJwtToken,
+        }),
+      )
+
+      dispatch(
+        userSlice.actions.rememberLoggedUser({
+          email: resetUserPasswordMutation.data.email,
+          roles: resetUserPasswordMutation.data.roles ?? [userRole.user],
+        }),
+      )
+
+      dispatch(navSlice.actions.hideNavItems({ navItemIds: [navItemId.login] }))
+
+      dispatch(
+        navSlice.actions.showNavItems({
+          navItemIds: [navItemId.profile],
+        }),
+      )
+
+      const slideOutAndChangeUrl = async (): Promise<void> => {
+        await asyncDelay(1000)
+        await slideOut()
+        void navigate('..')
+      }
+
+      void slideOutAndChangeUrl()
     }
   }, [resetUserPasswordMutation.isSuccess])
 

@@ -37,19 +37,20 @@ export const useRegister = ({
 
   useUpdateEffect(() => {
     if (registerUserMutation.isSuccess === true) {
-      if (registerUserMutation.data.message === 'activation link sent') {
-        toast.info('Check your inbox or spam')
-      }
-
-      const { accessJwtToken, email, roles } = registerUserMutation.data
+      toast.info('Check your inbox or spam')
 
       dispatch(
         userSlice.actions.setAccessToken({
-          accessToken: accessJwtToken,
+          accessToken: registerUserMutation.data.accessJwtToken,
         }),
       )
 
-      dispatch(userSlice.actions.rememberLoggedUser({ email, roles }))
+      dispatch(
+        userSlice.actions.rememberLoggedUser({
+          email: registerUserMutation.data.email,
+          roles: registerUserMutation.data.roles,
+        }),
+      )
 
       dispatch(navSlice.actions.hideNavItems({ navItemIds: [navItemId.login] }))
 

@@ -33,7 +33,6 @@ type ReqBody = {
 export type ResBody = {
   fileList: SelectFile[]
   fileListTotalCount: number
-  message: 'Found'
 }
 
 type ErrorResBody = {
@@ -145,7 +144,6 @@ export const getFileListAllHandler: RouterHandler = async (req, res) => {
   }
 
   res.status(httpStatusCode.success200).json({
-    message: 'Found',
     fileList: fileListResponse.value,
     fileListTotalCount: fileListTotalCountResponse.value,
   })

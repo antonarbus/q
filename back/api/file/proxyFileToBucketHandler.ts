@@ -12,7 +12,7 @@ type SearchQuery = ParsedQs
 type UrlParam = {
   fileId: SelectFile['id']
 }
-type ReqBody = unknown
+type ReqBody = undefined
 type ResBody = string
 
 type ErrorResBody = {

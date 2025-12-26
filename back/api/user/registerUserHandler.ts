@@ -35,7 +35,6 @@ export type ResBody = {
   accessJwtTokenExpiresOn: string
   email: SelectUser['email']
   roles: SelectUser['roles']
-  message: 'activation link sent'
 }
 
 export type ErrorResBody = {
@@ -53,7 +52,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const registerUserHandler: RouterHandler = async (req, res, _next) => {
+export const registerUserHandler: RouterHandler = async (req, res) => {
   const emailFromInput = req.body.email.toLowerCase()
   const passwordFromInput = req.body.password
 
@@ -75,8 +74,8 @@ export const registerUserHandler: RouterHandler = async (req, res, _next) => {
     })
   }
 
-  const saltRounds = 10
-  const passwordEncrypted = await bcrypt.hash(passwordFromInput, saltRounds)
+  const SALT_ROUNDS = 10
+  const passwordEncrypted = await bcrypt.hash(passwordFromInput, SALT_ROUNDS)
   const activationKey = generateId()
 
   const refreshToken = generateRefreshToken({
@@ -129,7 +128,6 @@ export const registerUserHandler: RouterHandler = async (req, res, _next) => {
   // https://developers.mailersend.com/general.html#api-response
   if (emailRes.statusCode === 202) {
     res.status(httpStatusCode.created201).json({
-      message: 'activation link sent',
       email: emailFromInput,
       roles: [userRole.user],
       accessJwtToken: accessToken.value,

@@ -10,11 +10,10 @@ import type { ParsedQs } from 'qs'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
-type ReqBody = unknown
+type ReqBody = undefined
 
 export type ResBody = {
   distinctQuotationList: SelectQuotation['category'][]
-  message: 'Found'
 }
 
 export type ErrorResBody = {
@@ -52,5 +51,5 @@ export const getQuotationCategoriesHandler: RouterHandler = async (
 
   res
     .status(httpStatusCode.success200)
-    .json({ message: 'Found', distinctQuotationList: distinctCategoryList })
+    .json({ distinctQuotationList: distinctCategoryList })
 }

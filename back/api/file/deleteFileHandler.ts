@@ -17,9 +17,7 @@ export type ReqBody = {
   fileId: SelectFile['id']
 }
 
-export type ResBody = {
-  message: 'deleted'
-}
+export type ResBody = undefined
 
 export type ErrorResBody = {
   message: string
@@ -103,6 +101,6 @@ export const deleteFileHandler: RouterHandler = async (req, res) => {
       })
     }
 
-    res.status(httpStatusCode.success200).json({ message: 'deleted' })
+    res.status(httpStatusCode.noContent204)
   }
 }

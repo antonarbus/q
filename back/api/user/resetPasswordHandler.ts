@@ -29,7 +29,6 @@ export type ResBody = {
   accessJwtTokenExpiresOn?: string
   email?: User['email']
   roles?: User['roles']
-  message: 'password was reset'
 }
 
 export type ErrorResBody = {
@@ -43,7 +42,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const resetPasswordHandler: RouterHandler = async (req, res, _next) => {
+export const resetPasswordHandler: RouterHandler = async (req, res) => {
   const emailFromInput = req.body.email.toLowerCase()
   const passwordFromInput = req.body.password
   const resetPasswordKeyFromInput = req.body.resetPasswordKey
@@ -106,7 +105,6 @@ export const resetPasswordHandler: RouterHandler = async (req, res, _next) => {
     .returning()
 
   res.status(httpStatusCode.created201).json({
-    message: 'password was reset',
     accessJwtToken: accessToken.value,
     accessJwtTokenExpiresOn: accessToken.expiresOn,
     email: userUpdated?.email,

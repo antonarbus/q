@@ -5,7 +5,6 @@ import {
 } from '@back/entities/user'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { userRole } from '@back/shared/const/userRole'
-import type { Pretty } from '@shared/lib/typescript/Pretty'
 import type { NextFunction, Request, Response } from 'express'
 import { db } from '@back/shared/lib/drizzle/db'
 import { desc } from 'drizzle-orm'
@@ -16,17 +15,16 @@ import type { ParsedQs } from 'qs'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
-type ReqBody = unknown
+type ReqBody = undefined
 
 export type UserPicked = Pick<
   SelectUser,
   'email' | 'isActivated' | 'loggedAt' | 'registeredAt'
 >
 
-export type ResBody = Pretty<{
+export type ResBody = {
   userList: UserPicked[]
-  message: 'users data'
-}>
+}
 
 export type ErrorResBody = {
   message: string
@@ -39,7 +37,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const getUserListHandler: RouterHandler = async (req, res, _next) => {
+export const getUserListHandler: RouterHandler = async (req, res) => {
   const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({
     req,
     res,
@@ -63,7 +61,5 @@ export const getUserListHandler: RouterHandler = async (req, res, _next) => {
     .from(usersTable)
     .orderBy(desc(usersTable.loggedAt))
 
-  res
-    .status(httpStatusCode.success200)
-    .json({ message: 'users data', userList: usersListSelected })
+  res.status(httpStatusCode.success200).json({ userList: usersListSelected })
 }

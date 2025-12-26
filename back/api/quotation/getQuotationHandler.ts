@@ -23,7 +23,6 @@ export type ReqBody = {
 
 export type ResBody = {
   quotation: Quotation
-  message: 'found'
 }
 
 export type ErrorResBody = {
@@ -120,7 +119,6 @@ export const getQuotationHandler: RouterHandler = async (req, res) => {
 
   if (permissionLevel === 'Forbidden') {
     res.status(httpStatusCode.success200).json({
-      message: 'found',
       quotation: { ...emptyQuotation, permissionLevel },
     })
 
@@ -215,7 +213,6 @@ export const getQuotationHandler: RouterHandler = async (req, res) => {
   }
 
   res.status(httpStatusCode.success200).json({
-    message: 'found',
     quotation: { ...quotationSelected, ...quotationParsed, permissionLevel },
   })
 }

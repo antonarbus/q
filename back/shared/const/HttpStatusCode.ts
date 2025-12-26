@@ -6,7 +6,9 @@
   - 401 - requires user authentication
   - 403 - no permission to access the resource
   - 404 - requested URL is not available on the server
-  - 500 - generic error indicating that something went wrong on the server-side,
+  - 409 - conflict with current state, often used when update fails due to concurrent modification
+  - 422 - request is well-formed but semantically incorrect, good for validation errors
+  - 500 - generic error indicating that something went wrong on the server-side
 */
 export const httpStatusCode = {
   /** 200 - fulfilled */
@@ -23,7 +25,11 @@ export const httpStatusCode = {
   forbidden403: 403,
   /** 404 - requested URL is not available on the server */
   notFound404: 404,
-  /** 500 - generic error indicating that something went wrong on the server-side, */
+  /** 409 - conflict with current state, often used when update fails due to concurrent modification */
+  conflict409: 409,
+  /** 422 - request is well-formed but semantically incorrect, good for validation errors */
+  unprocessableEntity422: 422,
+  /** 500 - generic error indicating that something went wrong on the server-side */
   serverError500: 500,
 } as const
 
@@ -35,7 +41,9 @@ export const httpStatusCode = {
   - 401 - requires user authentication
   - 403 - no permission to access the resource
   - 404 - requested URL is not available on the server
-  - 500 - generic error indicating that something went wrong on the server-side,
+  - 409 - conflict with current state, often used when update fails due to concurrent modification
+  - 422 - request is well-formed but semantically incorrect, good for validation errors
+  - 500 - generic error indicating that something went wrong on the server-side
 */
 export type HttpStatusCode =
   (typeof httpStatusCode)[keyof typeof httpStatusCode]

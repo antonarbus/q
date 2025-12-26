@@ -29,11 +29,11 @@ export type ReqBody = {
 }
 
 export type ResBody = {
-  accessJwtToken?: string
-  accessJwtTokenExpiresOn?: string
-  email?: User['email']
-  roles?: User['roles']
-  jwtRefreshTokenExpirationDays?: number
+  accessJwtToken: string
+  accessJwtTokenExpiresOn: string
+  email: User['email']
+  roles: User['roles']
+  jwtRefreshTokenExpirationDays: number
   message: 'good password' | 'super-admin on behalf of user'
 }
 

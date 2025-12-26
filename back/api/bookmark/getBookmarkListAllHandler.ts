@@ -11,7 +11,7 @@ import type { ErrorCodeCommon } from '@back/shared/const/errorCodeCommon'
 import type { ParamsDictionary } from 'express-serve-static-core'
 
 type UrlParam = ParamsDictionary
-type ReqBody = unknown
+type ReqBody = undefined
 
 type SearchQuery = {
   startRow: string
@@ -23,7 +23,6 @@ type SearchQuery = {
 export type ResBody = {
   bookmarkList: SelectBookmark[]
   bookmarkListTotalCount: number
-  message: 'Found'
 }
 
 type ErrorResBody = {
@@ -175,7 +174,6 @@ export const getBookmarkListAllHandler: RouterHandler = async (req, res) => {
   }
 
   res.status(httpStatusCode.success200).json({
-    message: 'Found',
     bookmarkList: bookmarkListResponse.value,
     bookmarkListTotalCount: bookmarkListTotalCountResponse.value,
   })

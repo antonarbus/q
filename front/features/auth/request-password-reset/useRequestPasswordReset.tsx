@@ -29,17 +29,15 @@ export const useRequestPasswordReset = ({
 
   useUpdateEffect(() => {
     if (requestUserPasswordResetMutation.isSuccess === true) {
-      if (requestUserPasswordResetMutation.data.message === 'reset link sent') {
-        toast.info('Check your inbox or spam')
+      toast.info('Check your inbox or spam')
 
-        const slideOutAndChangeUrl = async (): Promise<void> => {
-          await asyncDelay(1000)
-          await slideOut()
-          void navigate('..')
-        }
-
-        void slideOutAndChangeUrl()
+      const slideOutAndChangeUrl = async (): Promise<void> => {
+        await asyncDelay(1000)
+        await slideOut()
+        void navigate('..')
       }
+
+      void slideOutAndChangeUrl()
     }
   }, [requestUserPasswordResetMutation.isSuccess])
 

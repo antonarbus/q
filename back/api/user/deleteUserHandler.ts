@@ -25,7 +25,6 @@ export type ReqBody = {
 
 export type ResBody = {
   statistics: string[]
-  message: 'deleted'
 }
 
 export type ErrorResBody = {
@@ -199,5 +198,5 @@ export const deleteUserHandler: RouterHandler = async (req, res, _next) => {
   
   */
 
-  res.status(httpStatusCode.success200).json({ message: 'deleted', statistics })
+  res.status(httpStatusCode.success200).json({ statistics })
 }

@@ -16,13 +16,11 @@ export const useCountUniqueDailyVisitor = (): void => {
         return
       }
 
-      const res = await countUniqueDailyVisitorsMutation.mutateAsync({
+      await countUniqueDailyVisitorsMutation.mutateAsync({
         isNew: lastVisitDate === null,
       })
 
-      if (res.message === 'visitor counted') {
-        localStorage.setItem(NAME_AT_LOCAL_STORAGE, today)
-      }
+      localStorage.setItem(NAME_AT_LOCAL_STORAGE, today)
     }
 
     void countVisitor()

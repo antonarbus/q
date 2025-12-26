@@ -10,11 +10,10 @@ import type { ParsedQs } from 'qs'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
-type ReqBody = unknown
+type ReqBody = undefined
 
 export type ResBody = {
   distinctCategoryList: SelectBookmark['category'][]
-  message: 'Found'
 }
 
 export type ErrorResBody = {
@@ -47,7 +46,5 @@ export const getBookmarkCategoriesHandler: RouterHandler = async (req, res) => {
 
   const distinctCategoryList = bookmarkListSelected.map((row) => row.category)
 
-  res
-    .status(httpStatusCode.success200)
-    .json({ message: 'Found', distinctCategoryList })
+  res.status(httpStatusCode.success200).json({ distinctCategoryList })
 }

@@ -13,7 +13,9 @@ type UrlParam = ParamsDictionary
 
 export type ReqBody = Required<Pick<InsertFile, 'id' | 'name' | 'size'>>
 
-export type ResBody = InsertFile
+export type ResBody = {
+  fileInfo: InsertFile
+}
 
 type ErrorResBody = {
   message: string
@@ -51,5 +53,5 @@ export const saveFileInfoHandler: RouterHandler = async (req, res) => {
     })
   }
 
-  res.status(httpStatusCode.success200).json(fileInserted)
+  res.status(httpStatusCode.success200).json({ fileInfo: fileInserted })
 }

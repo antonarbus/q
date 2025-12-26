@@ -33,7 +33,6 @@ type ReqBody = {
 export type ResBody = {
   quotationList: SelectQuotation[]
   quotationListTotalCount: number
-  message: 'Found'
 }
 
 type ErrorResBody = {
@@ -148,7 +147,6 @@ export const getQuotationListAllHandler: RouterHandler = async (req, res) => {
   }
 
   res.status(httpStatusCode.success200).json({
-    message: 'Found',
     quotationList: quotationListResponse.value,
     quotationListTotalCount: quotationListTotalCountResponse.value,
   })

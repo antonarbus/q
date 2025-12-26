@@ -21,7 +21,6 @@ export type ReqBody = {
 
 export type ResBody = {
   bookmark: Item
-  message: 'found'
 }
 
 export type ErrorResBody = {
@@ -77,7 +76,6 @@ export const getBookmarkHandler: RouterHandler = async (req, res) => {
   }
 
   res.status(httpStatusCode.success200).json({
-    message: 'found',
     bookmark: bookmarkFileData,
   })
 }

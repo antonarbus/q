@@ -10,7 +10,7 @@ import type { ParsedQs } from 'qs'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
-type ReqBody = unknown
+type ReqBody = undefined
 
 export type ResBody = {
   fileList: {
@@ -18,7 +18,6 @@ export type ResBody = {
     name: SelectFile['name']
     size: SelectFile['size']
   }[]
-  message: 'file stats'
 }
 
 export type ErrorResBody = {
@@ -43,7 +42,5 @@ export const getFileListHandler: RouterHandler = async (req, res) => {
     .from(filesTable)
     .where(eq(filesTable.email, userFromAccessToken.email))
 
-  res
-    .status(httpStatusCode.success200)
-    .json({ message: 'file stats', fileList: fileListSelected })
+  res.status(httpStatusCode.success200).json({ fileList: fileListSelected })
 }

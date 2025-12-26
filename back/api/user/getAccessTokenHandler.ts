@@ -16,14 +16,13 @@ import type { ParsedQs } from 'qs'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
-type ReqBody = unknown
+type ReqBody = undefined
 
 export type ResBody = {
-  message: 'issued access token'
-  email?: User['email']
-  accessJwtToken?: string
-  accessJwtTokenExpiresOn?: string
-  roles?: User['roles']
+  email: User['email']
+  accessJwtToken: string
+  accessJwtTokenExpiresOn: string
+  roles: User['roles']
   jwtRefreshTokenExpirationDays: number
 }
 
@@ -105,7 +104,6 @@ export const getAccessTokenHandler: RouterHandler = async (req, res, _next) => {
   })
 
   res.status(httpStatusCode.success200).json({
-    message: 'issued access token',
     accessJwtToken: accessToken.value,
     accessJwtTokenExpiresOn: accessToken.expiresOn,
     roles: userFromRefreshToken.roles,

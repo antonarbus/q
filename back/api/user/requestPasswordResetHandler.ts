@@ -19,9 +19,7 @@ export type ReqBody = {
   email: User['email']
 }
 
-export type ResBody = {
-  message: 'reset link sent'
-}
+export type ResBody = undefined
 
 export type ErrorResBody = {
   message: string
@@ -39,11 +37,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const requestPasswordResetHandler: RouterHandler = async (
-  req,
-  res,
-  _next,
-) => {
+export const requestPasswordResetHandler: RouterHandler = async (req, res) => {
   const emailFromInput = req.body.email.toLowerCase()
 
   const [userSelected] = await db
@@ -102,7 +96,7 @@ export const requestPasswordResetHandler: RouterHandler = async (
 
   // https://developers.mailersend.com/general.html#api-response
   if (emailRes.statusCode === 202) {
-    res.status(httpStatusCode.created201).json({ message: 'reset link sent' })
+    res.status(httpStatusCode.created201)
 
     return
   }

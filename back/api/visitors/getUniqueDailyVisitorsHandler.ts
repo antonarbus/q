@@ -16,11 +16,10 @@ export type SearchQuery = {
   endDate: string
 }
 
-type ReqBody = unknown
+type ReqBody = undefined
 
 export type ResBody = {
   visitorList: SelectVisitors[]
-  message: 'ok'
 }
 
 export type ErrorResBody = {
@@ -37,7 +36,6 @@ type RouterHandler = (
 export const getUniqueDailyVisitorsHandler: RouterHandler = async (
   req,
   res,
-  _next,
 ) => {
   const userFromAccessToken = getUserFromAccessTokenOrNull({ req })
   const roles = userFromAccessToken?.roles ?? []
@@ -62,5 +60,5 @@ export const getUniqueDailyVisitorsHandler: RouterHandler = async (
 
   res
     .status(httpStatusCode.success200)
-    .json({ visitorList: visitorListSelected, message: 'ok' })
+    .json({ visitorList: visitorListSelected })
 }
