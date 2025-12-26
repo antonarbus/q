@@ -898,6 +898,73 @@ The backend main file (`/back/index.ts`) is minimal and clean, but consider addi
 6. **Graceful shutdown** - Handle SIGTERM/SIGINT for clean shutdowns (close DB connections, finish requests)
 7. **Process error handlers** - Global handlers for `uncaughtException` and `unhandledRejection`
 
+### Schema Versioning & Migration System
+
+Implement robust schema versioning for documents stored in GCS to prevent breaking changes when data structures evolve:
+
+**Why needed:**
+- Current code blindly trusts JSON shape from bucket (`jsonParseSafe<Quotation>`)
+- No validation that stored data matches TypeScript types
+- App will break when `Quotation` type evolves and old documents don't match new structure
+- Need backwards compatibility for users opening old documents after app upgrades
+
+**Implementation plan:**
+
+1. **Add schema versioning to documents**
+   - Add `schemaVersion` field to all document types (Quotation, Bookmark, etc.)
+   - Start with version 1, increment on breaking changes
+   - Always save new documents with latest version
+
+2. **Create Zod schemas for validation**
+   - Define Zod schema for each version (QuotationV1Schema, QuotationV2Schema, etc.)
+   - Replace unsafe `jsonParseSafe<T>` type casting with actual runtime validation
+   - Ensure type safety at runtime, not just compile time
+
+3. **Build migration registry**
+   ```typescript
+   // Schema registry
+   const schemas = {
+     1: QuotationV1Schema,
+     2: QuotationV2Schema,
+     // ... up to current version
+   }
+
+   // Migration registry - each version knows how to upgrade to next
+   const migrations = {
+     1: (v1: QuotationV1): QuotationV2 => ({ ...v1, schemaVersion: 2, newField: 'default' }),
+     2: (v2: QuotationV2): QuotationV3 => ({ ...v2, schemaVersion: 3, /* transform */ }),
+     // ...
+   }
+
+   // Generic migration runner - O(n) where n = versions to jump
+   function migrateToLatest(data: unknown): QuotationLatest {
+     let version = data.schemaVersion ?? 1
+     let current = data
+     while (version < CURRENT_VERSION) {
+       current = migrations[version](current)
+       version++
+     }
+     return current
+   }
+   ```
+
+4. **Migration strategy**
+   - **On read**: Parse JSON → Validate → Migrate to latest → Use in app
+   - **On write**: Always save in latest version (documents naturally upgrade over time)
+   - Chain migrations run in series (V1→V2→V3→...→V10) - cost is negligible (< 1ms even for 10 migrations)
+
+5. **Graceful handling**
+   - Use Zod transforms to provide sensible defaults for missing fields
+   - Make non-critical new fields optional
+   - Log validation errors for monitoring
+
+**Benefits:**
+- ✅ Type-safe at runtime, not just compile time
+- ✅ Backwards compatible with old documents
+- ✅ Easy to add new features without breaking old data
+- ✅ Self-documenting schema evolution history
+- ✅ Fast (object transformations are microseconds in JavaScript)
+
 ---
 
 ## Notes
