@@ -86,7 +86,6 @@ export const saveQuotationHandler: RouterHandler = async (req, res) => {
         name: req.body.quotation.name,
         category: req.body.quotation.category,
         desc: req.body.quotation.desc,
-        info: req.body.quotation.info,
         access: req.body.quotation.access,
         updatedAt: new Date().toISOString(),
         createdAt: new Date().toISOString(),
@@ -135,7 +134,6 @@ export const saveQuotationHandler: RouterHandler = async (req, res) => {
         name: req.body.quotation.name,
         category: req.body.quotation.category,
         desc: req.body.quotation.desc,
-        info: req.body.quotation.info,
         access: req.body.quotation.access,
         updatedAt: new Date().toISOString(),
       })
@@ -192,7 +190,6 @@ export const saveQuotationHandler: RouterHandler = async (req, res) => {
         name: req.body.quotation.name,
         category: req.body.quotation.category,
         desc: req.body.quotation.desc,
-        info: req.body.quotation.info,
         access: req.body.quotation.access,
         updatedAt: new Date().toISOString(),
         createdAt: new Date().toISOString(),
