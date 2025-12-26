@@ -5,7 +5,7 @@ import { db } from '@back/shared/lib/drizzle/db'
 import { and, eq } from 'drizzle-orm'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import { jsonParseSafe } from '@back/shared/util/jsonParseSafe'
-import type { Item } from '@entities/quotation/type'
+import type { Boq, Price, Row, Text } from '@entities/quotation/type'
 import type { NextFunction, Request, Response } from 'express'
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
@@ -20,7 +20,7 @@ export type ReqBody = {
 }
 
 export type ResBody = {
-  bookmark: Item
+  bookmark: Boq | Text | Price | Row
 }
 
 export type ErrorResBody = {
@@ -65,7 +65,10 @@ export const getBookmarkHandler: RouterHandler = async (req, res) => {
     .download()
 
   const bookmarkFileAsString = bookmarkFileBuffer.toString()
-  const bookmarkFileData = jsonParseSafe<Item>(bookmarkFileAsString)
+
+  // todo: not good, zod is better but what if shape will change
+  const bookmarkFileData =
+    jsonParseSafe<ResBody['bookmark']>(bookmarkFileAsString)
 
   if (bookmarkFileData === undefined) {
     throw new HttpError<ErrorResBody['errorCode']>({
