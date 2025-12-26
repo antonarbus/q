@@ -1,4 +1,4 @@
-import type { AccessFormValuesSignal } from '@entities/quotation/type'
+import type { AccessFormValuesSignal } from '@entities/quotation/form/types'
 import { Button, InputAdornment, TextField } from '@mui/material'
 import type { Signal } from '@preact/signals-react'
 import uniq from 'lodash.uniq'

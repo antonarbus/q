@@ -1,4 +1,4 @@
-import type { AccessFormValuesSignal } from '@entities/quotation/type'
+import type { AccessFormValuesSignal } from '@entities/quotation/form/types'
 import { useSignal } from '@preact/signals-react'
 import { type JSX, useEffect } from 'react'
 import { z } from 'zod'

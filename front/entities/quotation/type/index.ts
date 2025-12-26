@@ -1,4 +1,3 @@
-import type { Signal } from '@preact/signals-react'
 import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import type { BoqColumnKey } from '../const/boqColumnKey'
 import type { itemType } from '../const/itemType'
@@ -128,20 +127,4 @@ export type Quotation = Common & {
     | 'Super admin on behalf of a user'
     | 'Forbidden'
   blocks: Item[]
-}
-
-export type SaveQuotationFormValues = {
-  nameSignal: Signal<string>
-  categorySignal: Signal<string>
-  descSignal: Signal<string>
-  infoSignal: Signal<string>
-}
-
-export type AccessFormValuesSignal = Signal<Quotation['access']>
-
-export type InfoFormValues = {
-  nameSignal: Signal<string>
-  categorySignal: Signal<string>
-  descSignal: Signal<string>
-  infoSignal: Signal<string>
 }

@@ -1,4 +1,4 @@
-import type { SaveQuotationFormValues } from '@entities/quotation/type'
+import type { SaveQuotationFormValues } from '@entities/quotation/form/types'
 import { useSignal } from '@preact/signals-react'
 
 type Res = {

@@ -1,5 +1,5 @@
 import { getFromStore } from '@entities/quotation/redux/getter/getFromStore'
-import type { InfoFormValues } from '@entities/quotation/type'
+import type { InfoFormValues } from '@entities/quotation/form/types'
 import { useSelector } from '@shared/lib/redux'
 import { useParams } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'

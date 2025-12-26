@@ -5,10 +5,8 @@ import { useGetQuotationCategoryListQuery } from '@entities/quotation/api/useGet
 import { useGetQuotationListQuery } from '@entities/quotation/api/useGetQuotationListQuery'
 import { useSaveQuotationMutation } from '@entities/quotation/api/useSaveQuotationMutation'
 import { quotationSlice } from '@entities/quotation/redux/quotationSlice'
-import type {
-  Quotation,
-  SaveQuotationFormValues,
-} from '@entities/quotation/type'
+import type { Quotation } from '@entities/quotation/type'
+import type { SaveQuotationFormValues } from '@entities/quotation/form/types'
 import { route } from '@shared/lib/react-router-dom/route'
 import { dispatch, getState } from '@shared/lib/redux'
 import { asyncDelay } from '@shared/util/asyncDelay'

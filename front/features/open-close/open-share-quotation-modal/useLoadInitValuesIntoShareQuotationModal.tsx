@@ -1,4 +1,4 @@
-import type { AccessFormValuesSignal } from '@entities/quotation/type'
+import type { AccessFormValuesSignal } from '@entities/quotation/form/types'
 import { getState } from '@shared/lib/redux'
 import { useEffectOnce } from 'react-use'
 

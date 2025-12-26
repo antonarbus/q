@@ -4,10 +4,8 @@ import { createLoadingMenuIconMachine } from '@entities/nav/state-machine/create
 import { useGetQuotationListQuery } from '@entities/quotation/api/useGetQuotationListQuery'
 import { useSaveQuotationMutation } from '@entities/quotation/api/useSaveQuotationMutation'
 import { quotationSlice } from '@entities/quotation/redux/quotationSlice'
-import type {
-  AccessFormValuesSignal,
-  Quotation,
-} from '@entities/quotation/type'
+import type { Quotation } from '@entities/quotation/type'
+import type { AccessFormValuesSignal } from '@entities/quotation/form/types'
 import { generateId } from '@shared/lib/nanoid'
 import { route } from '@shared/lib/react-router-dom/route'
 import { dispatch, getState } from '@shared/lib/redux'
