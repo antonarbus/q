@@ -903,6 +903,7 @@ The backend main file (`/back/index.ts`) is minimal and clean, but consider addi
 Implement robust schema versioning for documents stored in GCS to prevent breaking changes when data structures evolve:
 
 **Why needed:**
+
 - Current code blindly trusts JSON shape from bucket (`jsonParseSafe<Quotation>`)
 - No validation that stored data matches TypeScript types
 - App will break when `Quotation` type evolves and old documents don't match new structure
@@ -921,6 +922,7 @@ Implement robust schema versioning for documents stored in GCS to prevent breaki
    - Ensure type safety at runtime, not just compile time
 
 3. **Build migration registry**
+
    ```typescript
    // Schema registry
    const schemas = {
@@ -931,8 +933,15 @@ Implement robust schema versioning for documents stored in GCS to prevent breaki
 
    // Migration registry - each version knows how to upgrade to next
    const migrations = {
-     1: (v1: QuotationV1): QuotationV2 => ({ ...v1, schemaVersion: 2, newField: 'default' }),
-     2: (v2: QuotationV2): QuotationV3 => ({ ...v2, schemaVersion: 3, /* transform */ }),
+     1: (v1: QuotationV1): QuotationV2 => ({
+       ...v1,
+       schemaVersion: 2,
+       newField: 'default',
+     }),
+     2: (v2: QuotationV2): QuotationV3 => ({
+       ...v2,
+       schemaVersion: 3 /* transform */,
+     }),
      // ...
    }
 
@@ -959,6 +968,7 @@ Implement robust schema versioning for documents stored in GCS to prevent breaki
    - Log validation errors for monitoring
 
 **Benefits:**
+
 - ✅ Type-safe at runtime, not just compile time
 - ✅ Backwards compatible with old documents
 - ✅ Easy to add new features without breaking old data
