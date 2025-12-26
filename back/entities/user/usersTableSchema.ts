@@ -21,8 +21,12 @@ export const usersTable = pgTable(
     refreshJwtToken: varchar({ length: 500 })
       .notNull()
       .default('incorrect token'),
-    registeredAt: timestamp({ mode: 'string', withTimezone: true }).notNull().defaultNow(),
-    loggedAt: timestamp({ mode: 'string', withTimezone: true }).notNull().defaultNow(),
+    registeredAt: timestamp({ mode: 'string', withTimezone: true })
+      .notNull()
+      .defaultNow(),
+    loggedAt: timestamp({ mode: 'string', withTimezone: true })
+      .notNull()
+      .defaultNow(),
   },
   (table) => [index('users_email_idx').on(table.email)],
 )
