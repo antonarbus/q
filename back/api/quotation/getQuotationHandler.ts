@@ -13,6 +13,7 @@ import { db } from '@back/shared/lib/drizzle/db'
 import { eq } from 'drizzle-orm'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
+import { permissionLevel } from '@root-shared/const/permissionLevel'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
@@ -50,7 +51,7 @@ export const getQuotationHandler: RouterHandler = async (req, res) => {
     openedAt: null,
     viewedAt: null,
     email: 'unknown@gmail.com',
-    permissionLevel: 'OWNER',
+    permissionLevel: permissionLevel.new,
     access: {
       level: 'nobody',
       userList: [],
@@ -80,7 +81,7 @@ export const getQuotationHandler: RouterHandler = async (req, res) => {
     const isOwner = isLoggedUser && emailFromToken === quotationSelected.email
 
     if (isOwner === true) {
-      return 'OWNER'
+      return permissionLevel.owner
     }
 
     const isSharedWithYou =
@@ -89,46 +90,47 @@ export const getQuotationHandler: RouterHandler = async (req, res) => {
       quotationSelected.access.userList.includes(emailFromToken)
 
     if (isSharedWithYou === true) {
-      return 'SHARED'
+      return permissionLevel.shared
     }
 
     const isSharedWithEveryone = quotationSelected.access.level === 'everyone'
 
     if (isSharedWithEveryone === true) {
-      return 'PUBLIC'
+      return permissionLevel.public
     }
 
     const isSuperAdminOnBehalfOfUser = isLoggedUser && shouldNotTrace
 
     if (isSuperAdminOnBehalfOfUser === true) {
-      return 'SUPER_ADMIN_ON_BEHALF_OF_A_USER'
+      return permissionLevel.superAdminOnBehalfOfAUser
     }
 
     const isSuperAdmin =
       isLoggedUser && userFromAccessToken.roles.includes(userRole.superAdmin)
 
     if (isSuperAdmin === true) {
-      return 'SUPER_ADMIN'
+      return permissionLevel.superAdmin
     }
 
-    return 'FORBIDDEN'
+    return permissionLevel.forbidden
   }
 
-  const permissionLevel = getPermissionLevel()
+  const permissionLevelValue = getPermissionLevel()
 
-  if (permissionLevel === 'FORBIDDEN') {
+  if (permissionLevelValue === permissionLevel.forbidden) {
     res.status(httpStatusCode.success200).json({
-      quotation: { ...emptyQuotation, permissionLevel },
+      quotation: { ...emptyQuotation, permissionLevel: permissionLevelValue },
     })
 
     return
   }
 
   const publicOrSharedWithYou =
-    permissionLevel === 'SHARED' || permissionLevel === 'PUBLIC'
+    permissionLevelValue === permissionLevel.shared ||
+    permissionLevelValue === permissionLevel.public
 
   if (shouldNotTrace === false) {
-    if (permissionLevel === 'OWNER') {
+    if (permissionLevelValue === permissionLevel.owner) {
       await db
         .update(quotationsTable)
         .set({
@@ -212,6 +214,10 @@ export const getQuotationHandler: RouterHandler = async (req, res) => {
   }
 
   res.status(httpStatusCode.success200).json({
-    quotation: { ...quotationParsed, ...quotationSelected, permissionLevel },
+    quotation: {
+      ...quotationParsed,
+      ...quotationSelected,
+      permissionLevel: permissionLevelValue,
+    },
   })
 }

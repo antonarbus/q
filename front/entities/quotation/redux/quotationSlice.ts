@@ -1,5 +1,6 @@
 import { createSlice, type Reducer } from '@reduxjs/toolkit'
 import type { Quotation } from '../types/Quotation'
+import { permissionLevel } from '@root-shared/const/permissionLevel'
 
 // Delete operations
 import { deleteBlockReducer } from './reducer/delete/deleteBlockReducer'
@@ -60,7 +61,7 @@ const initialState: Quotation = {
   openedAt: null,
   viewedAt: null,
   email: 'unknown@gmail.com',
-  permissionLevel: 'OWNER',
+  permissionLevel: permissionLevel.new,
   access: {
     level: 'nobody',
     userList: [],

@@ -1,5 +1,6 @@
 import type { SelectQuotation } from '@back/entities/quotation'
 import type { BlockItem } from './BlockItem'
+import type { PermissionLevel } from '@root-shared/const/permissionLevel'
 
 type QuotationMetaData = SelectQuotation
 
@@ -9,13 +10,7 @@ type QuotationDataInBucket = {
 }
 
 type QuotationPermission = {
-  permissionLevel:
-    | 'PUBLIC'
-    | 'SHARED'
-    | 'OWNER'
-    | 'SUPER_ADMIN'
-    | 'SUPER_ADMIN_ON_BEHALF_OF_A_USER'
-    | 'FORBIDDEN'
+  permissionLevel: PermissionLevel
 }
 
 export type Quotation = QuotationMetaData &

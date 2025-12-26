@@ -11,6 +11,7 @@ import { dispatch, getState } from '@shared/lib/redux'
 import type { AxiosError } from 'axios'
 import { toast } from 'sonner'
 import { createActor } from 'xstate'
+import { permissionLevel } from '@root-shared/const/permissionLevel'
 
 const loadingMenuIconMachine = createLoadingMenuIconMachine({
   navItemId: navItemId.save,
@@ -33,8 +34,8 @@ export const saveExistingQuotation = async (): Promise<void> => {
   }
 
   const isAbleToSave =
-    getState().quotation.permissionLevel === 'PUBLIC' ||
-    getState().quotation.permissionLevel === 'SHARED'
+    getState().quotation.permissionLevel === permissionLevel.public ||
+    getState().quotation.permissionLevel === permissionLevel.shared
 
   if (isAbleToSave === true) {
     void router.navigate(`./${route.save}`)

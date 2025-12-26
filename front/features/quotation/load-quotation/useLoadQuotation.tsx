@@ -11,6 +11,7 @@ import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
+import { permissionLevel } from '@root-shared/const/permissionLevel'
 
 export const useLoadQuotation = (): void => {
   const { quotationId } = useParams()
@@ -222,7 +223,7 @@ export const useLoadQuotation = (): void => {
 
       dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
 
-      if (quotation.permissionLevel === 'FORBIDDEN') {
+      if (quotation.permissionLevel === permissionLevel.forbidden) {
         dispatch(
           quotationSlice.actions.loadQuotationReducer({
             quotation: getQuotationMutation.data.quotation,

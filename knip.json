@@ -15,7 +15,8 @@
     "front/features/quotation/download-quotation-as-excel/excelWorker.ts",
     "front/features/quotation/download-quotation-as-pdf/pdfWorker.ts",
     "front/shared/util/stripHtmlWithBreaksPreserve.ts",
-    "tests/setup/auth.setup.ts"
+    "tests/setup/auth.setup.ts",
+    "shared/const/permissionLevel.ts"
   ],
   "ignoreDependencies": [
     "@preact/signals-react-transform",
