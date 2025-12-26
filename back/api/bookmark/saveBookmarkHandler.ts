@@ -1,8 +1,4 @@
-import {
-  bookmarksTable,
-  type InsertBookmark,
-  type SelectBookmark,
-} from '@back/entities/bookmark'
+import { bookmarksTable, type SelectBookmark } from '@back/entities/bookmark'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { httpStatusCode } from '@back/shared/const/httpCode'
 import { db } from '@back/shared/lib/drizzle/db'
@@ -12,14 +8,13 @@ import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
+import type { Item } from '@entities/quotation/type'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
 
 export type ReqBody = {
-  bookmark: Required<
-    Pick<InsertBookmark, 'id' | 'type' | 'name' | 'category' | 'desc'>
-  >
+  bookmark: Item
 }
 
 export type ResBody = {
@@ -78,7 +73,7 @@ export const saveBookmarkHandler: RouterHandler = async (req, res) => {
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'FAILED_TO_SAVE',
       statusCode: httpStatusCode.serverError500,
-      message: 'Failed to save bookmark',
+      message: 'Failed to save bookmark meta data',
     })
   }
 
@@ -86,12 +81,18 @@ export const saveBookmarkHandler: RouterHandler = async (req, res) => {
   const bookmarkFile = bucket.file(fileInfo.path)
 
   const contents = JSON.stringify(
-    { ...bookmarkInserted, ...req.body.bookmark },
+    { ...req.body.bookmark, ...bookmarkInserted },
     null,
     2,
   )
 
-  await bookmarkFile.save(contents)
+  await bookmarkFile.save(contents).catch(() => {
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'FAILED_TO_SAVE',
+      statusCode: httpStatusCode.serverError500,
+      message: 'Failed to save bookmark in bucket',
+    })
+  })
 
   const isNew = bookmarkInserted.createdAt === bookmarkInserted.updatedAt
 

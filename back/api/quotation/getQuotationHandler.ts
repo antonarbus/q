@@ -210,6 +210,6 @@ export const getQuotationHandler: RouterHandler = async (req, res) => {
   }
 
   res.status(httpStatusCode.success200).json({
-    quotation: { ...quotationSelected, ...quotationParsed, permissionLevel },
+    quotation: { ...quotationParsed, ...quotationSelected, permissionLevel },
   })
 }

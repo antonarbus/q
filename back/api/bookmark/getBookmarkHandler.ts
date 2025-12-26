@@ -63,6 +63,13 @@ export const getBookmarkHandler: RouterHandler = async (req, res) => {
   const [bookmarkFileBuffer] = await bucket
     .file(bookmarkFileInfo.path)
     .download()
+    .catch(() => {
+      throw new HttpError<ErrorResBody['errorCode']>({
+        errorCode: 'NOT_FOUND',
+        statusCode: httpStatusCode.notFound404,
+        message: 'Bookmark not found in bucket',
+      })
+    })
 
   const bookmarkFileAsString = bookmarkFileBuffer.toString()
 
@@ -73,8 +80,8 @@ export const getBookmarkHandler: RouterHandler = async (req, res) => {
   if (bookmarkFileData === undefined) {
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'NOT_FOUND',
-      statusCode: httpStatusCode.notFound404,
-      message: 'Bookmark file not found',
+      statusCode: httpStatusCode.serverError500,
+      message: 'Failed to parse file data',
     })
   }
 

@@ -26,7 +26,7 @@ export type ResBody = {
 
 export type ErrorResBody = {
   message: string
-  errorCode: ErrorCode | 'QUOTATION_NOT_SAVED' | 'ID_NOT_PROVIDED'
+  errorCode: ErrorCode | 'FAILED_TO_SAVE' | 'ID_NOT_PROVIDED'
 }
 
 type RouterHandler = (
@@ -91,15 +91,14 @@ export const saveQuotationHandler: RouterHandler = async (req, res) => {
         updatedAt: new Date().toISOString(),
         createdAt: new Date().toISOString(),
         openedAt: new Date().toISOString(),
-        // blocks: 'too big to keep in db, find it in the bucket under same id',
       })
       .returning()
 
     if (quotationInserted === undefined) {
       throw new HttpError<ErrorResBody['errorCode']>({
-        errorCode: 'QUOTATION_NOT_SAVED',
+        errorCode: 'FAILED_TO_SAVE',
         statusCode: httpStatusCode.serverError500,
-        message: 'Failed to save new quotation',
+        message: 'Failed to save quotation meta data',
       })
     }
 
@@ -107,13 +106,19 @@ export const saveQuotationHandler: RouterHandler = async (req, res) => {
     const quotationFile = bucket.file(fileInfo.path)
 
     const fullQuotation = {
+      ...req.body.quotation,
       ...quotationInserted,
-      blocks: req.body.quotation.blocks,
     }
 
     const quotationJson = JSON.stringify(fullQuotation, null, 2)
 
-    await quotationFile.save(quotationJson)
+    await quotationFile.save(quotationJson).catch(() => {
+      throw new HttpError<ErrorResBody['errorCode']>({
+        errorCode: 'FAILED_TO_SAVE',
+        statusCode: httpStatusCode.serverError500,
+        message: 'Failed to save quotation in bucket',
+      })
+    })
 
     res.status(httpStatusCode.success200).json({
       message: 'saved',
@@ -133,7 +138,6 @@ export const saveQuotationHandler: RouterHandler = async (req, res) => {
         info: req.body.quotation.info,
         access: req.body.quotation.access,
         updatedAt: new Date().toISOString(),
-        // blocks: 'too big to keep in db, find it in the bucket under same id',
       })
       .where(
         and(
@@ -145,7 +149,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res) => {
 
     if (quotationUpdated === undefined) {
       throw new HttpError<ErrorResBody['errorCode']>({
-        errorCode: 'QUOTATION_NOT_SAVED',
+        errorCode: 'FAILED_TO_SAVE',
         statusCode: httpStatusCode.serverError500,
         message: 'Failed to update existing quotation',
       })
@@ -155,12 +159,19 @@ export const saveQuotationHandler: RouterHandler = async (req, res) => {
     const file = bucket.file(fileInfo.path)
 
     const fullQuotation = {
+      ...req.body.quotation,
       ...quotationUpdated,
-      blocks: req.body.quotation.blocks,
     }
 
     const quotationJson = JSON.stringify(fullQuotation, null, 2)
-    await file.save(quotationJson)
+
+    await file.save(quotationJson).catch(() => {
+      throw new HttpError<ErrorResBody['errorCode']>({
+        errorCode: 'FAILED_TO_SAVE',
+        statusCode: httpStatusCode.serverError500,
+        message: 'Failed to save quotation in bucket',
+      })
+    })
 
     res.status(httpStatusCode.success200).json({
       message: 'updated',
@@ -186,13 +197,12 @@ export const saveQuotationHandler: RouterHandler = async (req, res) => {
         updatedAt: new Date().toISOString(),
         createdAt: new Date().toISOString(),
         openedAt: new Date().toISOString(),
-        // blocks: 'too big to keep in db, find it in the bucket under same id',
       })
       .returning()
 
     if (quotationInserted === undefined) {
       throw new HttpError<ErrorResBody['errorCode']>({
-        errorCode: 'QUOTATION_NOT_SAVED',
+        errorCode: 'FAILED_TO_SAVE',
         statusCode: httpStatusCode.serverError500,
         message: 'Failed to copy and save quotation',
       })
@@ -203,13 +213,19 @@ export const saveQuotationHandler: RouterHandler = async (req, res) => {
     const quotationFile = bucket.file(fileInfo.path)
 
     const fullQuotation = {
+      ...req.body.quotation,
       ...quotationInserted,
-      blocks: req.body.quotation.blocks,
     }
 
     const quotationJson = JSON.stringify(fullQuotation, null, 2)
 
-    await quotationFile.save(quotationJson)
+    await quotationFile.save(quotationJson).catch(() => {
+      throw new HttpError<ErrorResBody['errorCode']>({
+        errorCode: 'FAILED_TO_SAVE',
+        statusCode: httpStatusCode.serverError500,
+        message: 'Failed to save quotation in bucket',
+      })
+    })
 
     res.status(httpStatusCode.success200).json({
       message: 'copied and saved',

@@ -15,7 +15,12 @@ type RouterHandler = (
   next: NextFunction,
 ) => void
 
-export const errorHandlerMiddleware: RouterHandler = (error, _req, res) => {
+export const errorHandlerMiddleware: RouterHandler = (
+  error,
+  _req,
+  res,
+  _next,
+) => {
   console.error(error)
 
   // Handle our custom AppError
