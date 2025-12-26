@@ -7,14 +7,16 @@ import { sql } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
+import { getUserFromRefreshTokenOrNull } from '@back/entities/user'
+import { userRole } from '@back/shared/const/userRole'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
 type ReqBody = undefined
 
 export type ResBody = {
-  message: 'connected to db'
-  runtimeConfig: typeof runtimeConfig
+  message: string
+  runtimeConfig?: typeof runtimeConfig
 }
 
 export type ErrorResBody = {
@@ -28,16 +30,13 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const healthCheckHandler: RouterHandler = async (_req, res) => {
-  try {
-    // Simple query to verify Postgres / Drizzle connectivity
-    await db.execute(sql`select 1`)
+export const healthCheckHandler: RouterHandler = async (req, res) => {
+  const userFromAccessToken = getUserFromRefreshTokenOrNull({ req })
 
-    res.status(httpStatusCode.success200).json({
-      message: 'connected to db',
-      runtimeConfig,
-    })
-  } catch (error) {
+  const isSuperAdmin = userFromAccessToken?.roles.includes(userRole.superAdmin)
+
+  // Simple query to verify Postgres / Drizzle connectivity
+  await db.execute(sql`select 1`).catch((error: unknown) => {
     console.error('health check database error', error)
 
     throw new HttpError<ErrorResBody['errorCode']>({
@@ -45,5 +44,10 @@ export const healthCheckHandler: RouterHandler = async (_req, res) => {
       statusCode: httpStatusCode.serverError500,
       message: 'Database connection failed',
     })
-  }
+  })
+
+  res.status(httpStatusCode.success200).json({
+    message: 'connected to db',
+    runtimeConfig: isSuperAdmin === true ? runtimeConfig : undefined,
+  })
 }
