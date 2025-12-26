@@ -37,7 +37,7 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
     type: itemType.boq,
-    email: 'john@mail.com',
+    email: 'unknown@gmail.com',
     width: 600,
     height: 279,
     isFroala: true,
@@ -89,7 +89,7 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString(),
           type: rowTypeKey.row,
-          email: 'john@mail.com',
+          email: 'unknown@gmail.com',
           height: 0,
           width: 0,
           description: {
@@ -134,7 +134,7 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString(),
           type: rowTypeKey.row,
-          email: 'john@mail.com',
+          email: 'unknown@gmail.com',
           height: 0,
           width: 0,
           description: {
@@ -179,7 +179,7 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString(),
           type: rowTypeKey.row,
-          email: 'john@mail.com',
+          email: 'unknown@gmail.com',
           height: 0,
           width: 0,
           description: {

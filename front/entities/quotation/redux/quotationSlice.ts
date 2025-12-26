@@ -58,7 +58,7 @@ const initialState: Quotation = {
   createdAt: new Date().toISOString(),
   updatedAt: new Date().toISOString(),
   type: 'quotation',
-  email: 'john@mail.com',
+  email: 'unknown@gmail.com',
   permissionLevel: undefined,
   access: {
     level: 'nobody',

@@ -76,7 +76,7 @@ export const logInHandler: RouterHandler = async (req, res, next) => {
 
   const userFromAccessToken = getUserFromAccessTokenOrNull({ req })
   const rolesFromAccessToken = userFromAccessToken?.roles ?? []
-  const emailFromAccessToken = userFromAccessToken?.email ?? 'john@gmail.com'
+  const emailFromAccessToken = userFromAccessToken?.email ?? 'unknown@gmail.com'
 
   const isSuperAdminOnBehalfOfUser =
     rolesFromAccessToken.includes(userRole.superAdmin) &&

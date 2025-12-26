@@ -18,7 +18,7 @@ export const insertTextBlock = (event?: MouseEvent): void => {
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
     type: itemType.text,
-    email: 'john@mail.com',
+    email: 'unknown@gmail.com',
     width: 600,
     height: 59.2,
     isFroala: true,

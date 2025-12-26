@@ -19,7 +19,7 @@ export const insertPriceBlock = (event?: MouseEvent): void => {
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
     type: itemType.price,
-    email: 'john@mail.com',
+    email: 'unknown@gmail.com',
     width: 150,
     height: 90,
     isFroala: true,

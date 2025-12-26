@@ -22,7 +22,7 @@ const pasteText: Row = {
   createdAt: new Date().toISOString(),
   updatedAt: new Date().toISOString(),
   type: rowTypeKey.paste,
-  email: 'john@mail.com',
+  email: 'unknown@gmail.com',
   height: 0,
   width: 0,
   description: defaultCellValues,

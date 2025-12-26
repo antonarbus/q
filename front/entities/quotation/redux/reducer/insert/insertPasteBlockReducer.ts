@@ -33,7 +33,7 @@ export const insertPasteBlockReducer = (
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
     type: itemType.paste,
-    email: 'john@mail.com',
+    email: 'unknown@gmail.com',
     height: 0,
     width: 0,
     isFroala: true,

@@ -48,7 +48,7 @@ export const getQuotationHandler: RouterHandler = async (req, res) => {
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
     type: 'quotation',
-    email: 'john@gmail.com',
+    email: 'unknown@gmail.com',
     access: {
       level: 'nobody',
       userList: [],
@@ -177,7 +177,7 @@ export const getQuotationHandler: RouterHandler = async (req, res) => {
 
   if (publicOrSharedWithYou === true) {
     // remove sensitive data from quotation
-    // quotation.email = 'john@mail.com'
+    // quotation.email = 'unknown@gmail.com'
     quotationParsed.name = 'private'
     quotationParsed.category = 'private'
     quotationParsed.desc = 'private'
@@ -187,7 +187,7 @@ export const getQuotationHandler: RouterHandler = async (req, res) => {
     quotationParsed.openedAt = new Date().toISOString()
 
     quotationParsed.blocks.forEach((block) => {
-      // block.email = 'john@mail.com'
+      // block.email = 'unknown@gmail.com'
       block.name = 'private'
       block.category = 'private'
       block.desc = 'private'
@@ -197,7 +197,7 @@ export const getQuotationHandler: RouterHandler = async (req, res) => {
 
       if (block.type === 'boq') {
         block.boq.rows.forEach((row) => {
-          // row.email = 'john@mail.com'
+          // row.email = 'unknown@gmail.com'
           row.name = 'private'
           row.category = 'private'
           row.desc = 'private'

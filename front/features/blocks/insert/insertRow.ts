@@ -21,7 +21,7 @@ export const insertRow = (event?: MouseEvent): void => {
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
     type: rowTypeKey.row,
-    email: 'john@mail.com',
+    email: 'unknown@gmail.com',
     height: 55,
     width: 570,
     preview: rowPreviewHtml,
