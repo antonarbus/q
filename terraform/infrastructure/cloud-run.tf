@@ -63,6 +63,22 @@ resource "google_cloud_run_v2_service" "frontend" {
         period_seconds        = 10
         failure_threshold     = 3
       }
+
+      # Environment variables for frontend
+      env {
+        name  = "NODE_ENV"
+        value = "production"
+      }
+
+      env {
+        name  = "ENVIRONMENT"
+        value = var.environment
+      }
+
+      env {
+        name  = "BACKEND_URL"
+        value = "https://${var.domain_backend}"
+      }
     }
 
     service_account = data.google_service_account.cloud_run_service.email
@@ -151,6 +167,11 @@ resource "google_cloud_run_v2_service" "backend" {
       env {
         name  = "ENVIRONMENT"
         value = var.environment
+      }
+
+      env {
+        name  = "BACKEND_URL"
+        value = "https://${var.domain_backend}"
       }
     }
 
