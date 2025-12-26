@@ -37,7 +37,7 @@ export const newQuotationTemplate: Quotation = {
   openedAt: null,
   viewedAt: null,
   email: 'unknown@gmail.com',
-  permissionLevel: undefined,
+  permissionLevel: 'OWNER',
   access: {
     level: 'nobody',
     userList: [],

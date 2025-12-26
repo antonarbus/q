@@ -100,7 +100,7 @@ export const useLogIn = ({
         void getBookmarkListQuery.refetch()
       }
 
-      if (getState().quotation.permissionLevel === 'Forbidden') {
+      if (getState().quotation.permissionLevel === 'FORBIDDEN') {
         dispatch(
           appSlice.actions.setShouldLoadQuotation({
             yesOrNo: 'yes',

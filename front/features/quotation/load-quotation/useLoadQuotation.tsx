@@ -222,7 +222,7 @@ export const useLoadQuotation = (): void => {
 
       dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
 
-      if (quotation.permissionLevel === 'Forbidden') {
+      if (quotation.permissionLevel === 'FORBIDDEN') {
         dispatch(
           quotationSlice.actions.loadQuotationReducer({
             quotation: getQuotationMutation.data.quotation,

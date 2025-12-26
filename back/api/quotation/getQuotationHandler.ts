@@ -50,6 +50,7 @@ export const getQuotationHandler: RouterHandler = async (req, res) => {
     openedAt: null,
     viewedAt: null,
     email: 'unknown@gmail.com',
+    permissionLevel: 'OWNER',
     access: {
       level: 'nobody',
       userList: [],
@@ -79,7 +80,7 @@ export const getQuotationHandler: RouterHandler = async (req, res) => {
     const isOwner = isLoggedUser && emailFromToken === quotationSelected.email
 
     if (isOwner === true) {
-      return 'Owner'
+      return 'OWNER'
     }
 
     const isSharedWithYou =
@@ -88,34 +89,34 @@ export const getQuotationHandler: RouterHandler = async (req, res) => {
       quotationSelected.access.userList.includes(emailFromToken)
 
     if (isSharedWithYou === true) {
-      return 'Shared with you'
+      return 'SHARED'
     }
 
     const isSharedWithEveryone = quotationSelected.access.level === 'everyone'
 
     if (isSharedWithEveryone === true) {
-      return 'Public'
+      return 'PUBLIC'
     }
 
     const isSuperAdminOnBehalfOfUser = isLoggedUser && shouldNotTrace
 
     if (isSuperAdminOnBehalfOfUser === true) {
-      return 'Super admin on behalf of a user'
+      return 'SUPER_ADMIN_ON_BEHALF_OF_A_USER'
     }
 
     const isSuperAdmin =
       isLoggedUser && userFromAccessToken.roles.includes(userRole.superAdmin)
 
     if (isSuperAdmin === true) {
-      return 'Super admin'
+      return 'SUPER_ADMIN'
     }
 
-    return 'Forbidden'
+    return 'FORBIDDEN'
   }
 
   const permissionLevel = getPermissionLevel()
 
-  if (permissionLevel === 'Forbidden') {
+  if (permissionLevel === 'FORBIDDEN') {
     res.status(httpStatusCode.success200).json({
       quotation: { ...emptyQuotation, permissionLevel },
     })
@@ -124,10 +125,10 @@ export const getQuotationHandler: RouterHandler = async (req, res) => {
   }
 
   const publicOrSharedWithYou =
-    permissionLevel === 'Shared with you' || permissionLevel === 'Public'
+    permissionLevel === 'SHARED' || permissionLevel === 'PUBLIC'
 
   if (shouldNotTrace === false) {
-    if (permissionLevel === 'Owner') {
+    if (permissionLevel === 'OWNER') {
       await db
         .update(quotationsTable)
         .set({

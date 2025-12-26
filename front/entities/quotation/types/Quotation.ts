@@ -9,13 +9,13 @@ type QuotationDataInBucket = {
 }
 
 type QuotationPermission = {
-  permissionLevel?:
-    | 'Public'
-    | 'Shared with you'
-    | 'Owner'
-    | 'Super admin'
-    | 'Super admin on behalf of a user'
-    | 'Forbidden'
+  permissionLevel:
+    | 'PUBLIC'
+    | 'SHARED'
+    | 'OWNER'
+    | 'SUPER_ADMIN'
+    | 'SUPER_ADMIN_ON_BEHALF_OF_A_USER'
+    | 'FORBIDDEN'
 }
 
 export type Quotation = QuotationMetaData &
