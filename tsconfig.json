@@ -46,8 +46,7 @@
       "@shared/*": ["./front/shared/*"],
       "@front/*": ["./front/*"],
       "@back/*": ["./back/*"],
-      "@root/*": ["./*"],
-      "@root-shared/*": ["./shared/*"]
+      "@root/*": ["./*"]
     }
   }
 }

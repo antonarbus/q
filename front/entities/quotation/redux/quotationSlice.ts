@@ -1,6 +1,6 @@
 import { createSlice, type Reducer } from '@reduxjs/toolkit'
 import type { Quotation } from '../types/Quotation'
-import { permissionLevel } from '@root-shared/const/permissionLevel'
+import { permissionLevel } from '@root/shared/const/permissionLevel'
 
 // Delete operations
 import { deleteBlockReducer } from './reducer/delete/deleteBlockReducer'

@@ -13,7 +13,7 @@ import { db } from '@back/shared/lib/drizzle/db'
 import { eq } from 'drizzle-orm'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
-import { permissionLevel } from '@root-shared/const/permissionLevel'
+import { permissionLevel } from '@root/shared/const/permissionLevel'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary

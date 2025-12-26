@@ -11,7 +11,7 @@ import { dispatch, getState } from '@shared/lib/redux'
 import type { AxiosError } from 'axios'
 import { toast } from 'sonner'
 import { createActor } from 'xstate'
-import { permissionLevel } from '@root-shared/const/permissionLevel'
+import { permissionLevel } from '@root/shared/const/permissionLevel'
 
 const loadingMenuIconMachine = createLoadingMenuIconMachine({
   navItemId: navItemId.save,

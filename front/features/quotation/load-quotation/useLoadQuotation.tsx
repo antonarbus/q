@@ -11,7 +11,7 @@ import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
-import { permissionLevel } from '@root-shared/const/permissionLevel'
+import { permissionLevel } from '@root/shared/const/permissionLevel'
 
 export const useLoadQuotation = (): void => {
   const { quotationId } = useParams()

@@ -15,7 +15,7 @@ import type { FormEvent } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
-import { permissionLevel } from '@root-shared/const/permissionLevel'
+import { permissionLevel } from '@root/shared/const/permissionLevel'
 
 type Props = {
   emailSignal: Signal<string>
