@@ -100,7 +100,7 @@ export type Paste = Common & {
   type: typeof itemType.paste
 }
 
-export type Item = Boq | Paste | Text | Price | Row
+export type BlockItem = Boq | Paste | Text | Price | Row
 
 export type Quotation = Common & {
   type: 'quotation'
@@ -117,5 +117,5 @@ export type Quotation = Common & {
     | 'Super admin'
     | 'Super admin on behalf of a user'
     | 'Forbidden'
-  blocks: Item[]
+  blocks: BlockItem[]
 }

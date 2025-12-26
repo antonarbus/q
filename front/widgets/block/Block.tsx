@@ -1,6 +1,6 @@
 import { itemType } from '@entities/quotation/const/itemType'
 import { BlockProvider } from '@entities/quotation/provider/BlockProvider'
-import type { Item } from '@entities/quotation/type'
+import type { BlockItem } from '@entities/quotation/type'
 import type { ReactNode } from 'react'
 import { BookmarkedRowBlock } from './bookmarked-row-block'
 import { BoqBlock } from './boq-block'
@@ -9,7 +9,7 @@ import { PriceBlock } from './price-block'
 import { TextBlock } from './text-block'
 
 type Props = {
-  block: Item
+  block: BlockItem
   blockIndex: number
 }
 

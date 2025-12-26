@@ -1,9 +1,9 @@
 import { itemType } from '../const/itemType'
-import type { Item } from '../type'
+import type { BlockItem } from '../type'
 
 type Props = {
   blockIndex: number
-  blocks: Item[]
+  blocks: BlockItem[]
 }
 
 export const getTotalPriceAbove = ({ blockIndex, blocks }: Props): number => {

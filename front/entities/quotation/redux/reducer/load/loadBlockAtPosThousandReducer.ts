@@ -1,9 +1,9 @@
 import { BOOKMARK_POS_AT_BLOCKS } from '@entities/quotation/const/bookmarkPosAtBlocks'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { Item, Quotation } from '../../../type'
+import type { BlockItem, Quotation } from '../../../type'
 
 type Payload = {
-  block: Item
+  block: BlockItem
 }
 
 type Reducer = (state: Quotation, action: PayloadAction<Payload>) => void

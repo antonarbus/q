@@ -2,7 +2,7 @@ import type { CopyPlace } from '@entities/copy/types'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { generateId } from '@shared/lib/nanoid'
 import { itemType } from '../../../const/itemType'
-import type { Item, Paste, Quotation } from '../../../type'
+import type { BlockItem, Paste, Quotation } from '../../../type'
 
 export const insertPasteBlockReducer = (
   state: Quotation,
@@ -10,7 +10,7 @@ export const insertPasteBlockReducer = (
 ): void => {
   const { pastePos, id } = action.payload
 
-  const blocksWithoutPasteText: Item[] = state.blocks.filter(
+  const blocksWithoutPasteText: BlockItem[] = state.blocks.filter(
     (block) => block.type !== itemType.paste,
   )
 

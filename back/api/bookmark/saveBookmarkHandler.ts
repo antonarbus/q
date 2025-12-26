@@ -8,13 +8,13 @@ import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
-import type { Item } from '@entities/quotation/type'
+import type { Bookmark } from '@entities/bookmark/type'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
 
 export type ReqBody = {
-  bookmark: Item
+  bookmark: Bookmark
 }
 
 export type ResBody = {

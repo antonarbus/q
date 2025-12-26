@@ -5,7 +5,7 @@ import { db } from '@back/shared/lib/drizzle/db'
 import { and, eq } from 'drizzle-orm'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import { jsonParseSafe } from '@back/shared/util/jsonParseSafe'
-import type { Boq, Price, Row, Text } from '@entities/quotation/type'
+import type { Bookmark } from '@entities/bookmark/type'
 import type { NextFunction, Request, Response } from 'express'
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
@@ -20,7 +20,7 @@ export type ReqBody = {
 }
 
 export type ResBody = {
-  bookmark: Boq | Text | Price | Row
+  bookmark: Bookmark
 }
 
 export type ErrorResBody = {

@@ -1,5 +1,5 @@
 import { BOOKMARK_POS_AT_BLOCKS } from '@entities/quotation/const/bookmarkPosAtBlocks'
-import type { Item } from '@entities/quotation/type'
+import type { BlockItem } from '@entities/quotation/type'
 import { OpenInsertMenuButton } from '@features/open-close/open-insert-menu'
 import { AnimatePresence } from 'motion/react'
 import type { ReactNode } from 'react'
@@ -8,7 +8,7 @@ import { BlocksSortableContext } from './BlocksSortableContext'
 import { FadeInOnInitLoad } from './FadeInOnInitLoad'
 
 type Props = {
-  blocks: (Item | null)[]
+  blocks: (BlockItem | null)[]
 }
 
 export const BlockMany = ({ blocks }: Props): ReactNode => {

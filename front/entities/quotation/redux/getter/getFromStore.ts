@@ -1,11 +1,13 @@
 import { getState } from '@shared/lib/redux'
-import type { Item, Quotation } from '../../type'
+import type { BlockItem, Quotation } from '../../type'
 
 type Props = {
   id: string
 }
 
-export const getFromStore = ({ id }: Props): Item | Quotation | undefined => {
+export const getFromStore = ({
+  id,
+}: Props): BlockItem | Quotation | undefined => {
   const { quotation } = getState()
 
   if (quotation.id === id) {

@@ -6,11 +6,11 @@ import {
   useContext,
   useMemo,
 } from 'react'
-import type { Item } from '../type'
+import type { BlockItem } from '../type'
 
 type Res = {
   index: number
-  item: Item
+  item: BlockItem
 }
 
 type Props = Res & {

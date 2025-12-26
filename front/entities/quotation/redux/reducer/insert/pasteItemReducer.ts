@@ -3,7 +3,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import { generateId } from '@shared/lib/nanoid'
 import { itemType } from '../../../const/itemType'
 import { rowTypeKey } from '../../../const/rowTypeKey'
-import type { Item, Quotation, Row } from '../../../type'
+import type { BlockItem, Quotation, Row } from '../../../type'
 
 type SpliceSettings = {
   insertAtIndex: number
@@ -34,8 +34,11 @@ const calculateSpliceSettings = (
   }
 }
 
-const prepareItemForPasting = (item: Item, newItemId: string): Item => {
-  const clonedItem: Item = { ...structuredClone(item), id: newItemId }
+const prepareItemForPasting = (
+  item: BlockItem,
+  newItemId: string,
+): BlockItem => {
+  const clonedItem: BlockItem = { ...structuredClone(item), id: newItemId }
 
   if (clonedItem.type === itemType.boq) {
     clonedItem.boq.rows.forEach((row) => {
@@ -46,7 +49,7 @@ const prepareItemForPasting = (item: Item, newItemId: string): Item => {
   return clonedItem
 }
 
-const isBlockType = (item: Item): boolean => {
+const isBlockType = (item: BlockItem): boolean => {
   const isBoq = item.type === itemType.boq
   const isText = item.type === itemType.text
   const isPrice = item.type === itemType.price
@@ -59,7 +62,7 @@ const pasteBlock = (
   state: Quotation,
   id: string,
   pastePos: PastePos,
-  itemToPaste: Item,
+  itemToPaste: BlockItem,
 ): void => {
   const hoveredItemIndex = state.blocks.findIndex((block) => block.id === id)
   const spliceSettings = calculateSpliceSettings(hoveredItemIndex, pastePos)
@@ -115,7 +118,7 @@ export const pasteItemReducer = (
     id: string
     newItemId: string
     pastePos: PastePos
-    item: Item
+    item: BlockItem
   }>,
 ): void => {
   const { id, newItemId, pastePos, item } = action.payload

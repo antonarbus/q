@@ -1,4 +1,4 @@
-import type { Item, Quotation } from '../../type'
+import type { BlockItem, Quotation } from '../../type'
 
 type Props = {
   id: string
@@ -8,7 +8,7 @@ type Props = {
 export const getFromState = ({
   id,
   state,
-}: Props): Item | Quotation | undefined => {
+}: Props): BlockItem | Quotation | undefined => {
   if (state.id === id) {
     return state
   }

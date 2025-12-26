@@ -1,4 +1,4 @@
-import type { Item } from '@entities/quotation/type'
+import type { BlockItem } from '@entities/quotation/type'
 import {
   createSlice,
   type PayloadAction,
@@ -10,7 +10,7 @@ import type { CopyPlace } from './types'
 type InitState = {
   isVisible: boolean
   initCords: { x: number; y: number }
-  items: Item[]
+  items: BlockItem[]
   previews: string[]
   place: CopyPlace
   isCopying: boolean
@@ -53,7 +53,7 @@ export const copySlice = createSlice({
     addItem: (
       state: WritableDraft<InitState>,
       action: PayloadAction<{
-        item: Item
+        item: BlockItem
       }>,
     ) => {
       state.isCopying = true
