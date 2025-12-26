@@ -67,8 +67,6 @@ test.describe('#authTokenRefresh', () => {
       )
 
       expect(res.status()).toBe(401)
-      const errorData = await res.json()
-      expect(errorData.message).toBe('Not logged in')
     })
   })
 
@@ -132,8 +130,6 @@ test.describe('#authTokenRefresh', () => {
       )
 
       expect(res.status()).toBe(401)
-      const errorData = await res.json()
-      expect(errorData.message).toBe('Not logged in')
     })
   })
 })

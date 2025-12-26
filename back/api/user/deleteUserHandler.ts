@@ -38,7 +38,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const deleteUserHandler: RouterHandler = async (req, res, _next) => {
+export const deleteUserHandler: RouterHandler = async (req, res) => {
   const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({
     req,
     res,

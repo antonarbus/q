@@ -31,9 +31,10 @@ type RouterHandler = (
 export const countUniqueDailyVisitorsHandler: RouterHandler = async (
   req,
   res,
-  _next,
 ) => {
   // Do not distort statistics by e2e tests
+  console.log('🚀 ~ runtimeConfig:', runtimeConfig)
+
   if (runtimeConfig.e2eTest === true) {
     return
   }

@@ -43,7 +43,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const activateHandler: RouterHandler = async (req, res, _next) => {
+export const activateHandler: RouterHandler = async (req, res) => {
   const [userSelected] = await db
     .select()
     .from(usersTable)
