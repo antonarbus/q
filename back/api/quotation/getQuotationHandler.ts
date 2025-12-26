@@ -47,6 +47,8 @@ export const getQuotationHandler: RouterHandler = async (req, res) => {
     info: '',
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
+    openedAt: null,
+    viewedAt: null,
     type: 'quotation',
     email: 'unknown@gmail.com',
     access: {

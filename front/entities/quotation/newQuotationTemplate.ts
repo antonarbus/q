@@ -34,6 +34,8 @@ export const newQuotationTemplate: Quotation = {
   info: '',
   createdAt: new Date().toISOString(),
   updatedAt: new Date().toISOString(),
+  openedAt: null,
+  viewedAt: null,
   type: 'quotation',
   email: 'unknown@gmail.com',
   permissionLevel: undefined,
@@ -41,7 +43,6 @@ export const newQuotationTemplate: Quotation = {
     level: 'nobody',
     userList: [],
   },
-  preview: '',
   blocks: [
     {
       id: generateId(),

@@ -27,8 +27,6 @@ export const enableFroalaReducer = (
   }
 
   // enable all froalas
-  quotation.isFroala = true
-
   quotation.blocks.forEach((block) => {
     block.isFroala = true
   })
