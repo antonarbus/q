@@ -1,3 +1,4 @@
+import { headerName } from '@back/shared/headers'
 import { defineConfig, devices } from '@playwright/test'
 import { runtimeConfig } from '@root/config/runtime'
 import { userFilePath } from '@root/tests/setup/userFilePath'
@@ -13,6 +14,9 @@ export default defineConfig({
   globalSetup: './tests/setup/global.setup.ts',
   use: {
     trace: 'on-first-retry',
+    extraHTTPHeaders: {
+      [headerName.e2eTest]: 'true',
+    },
   },
   projects: [
     // https://playwright.dev/docs/auth#authenticate-with-api-request

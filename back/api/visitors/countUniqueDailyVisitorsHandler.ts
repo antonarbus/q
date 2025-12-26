@@ -7,6 +7,7 @@ import type { NextFunction, Request, Response } from 'express'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
+import { headerName } from '@back/shared/headers'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
@@ -32,10 +33,10 @@ export const countUniqueDailyVisitorsHandler: RouterHandler = async (
   req,
   res,
 ) => {
-  // Do not distort statistics by e2e tests
-  console.log('🚀 ~ runtimeConfig:', runtimeConfig)
+  const isE2ETest = req.headers[headerName.e2eTest] === 'true'
 
-  if (runtimeConfig.e2eTest === true) {
+  // Do not distort statistics by e2e tests
+  if (isE2ETest === true) {
     return
   }
 

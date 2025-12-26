@@ -4,4 +4,5 @@
  */
 export const headerName = {
   accessJwtToken: 'access-jwt-token',
+  e2eTest: 'x-e2e-test',
 } as const

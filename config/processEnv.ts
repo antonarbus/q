@@ -13,12 +13,6 @@ const processEnvSchema = z.object({
     .string()
     .optional()
     .transform((val) => val === 'true'),
-  // E2E_TEST=true is set by e2e test scripts to skip side effects during testing
-  E2E_TEST: z
-    .string()
-    .optional()
-    .default('false')
-    .transform((val) => val === 'true'),
   // ENVIRONMENT indicates the runtime environment context
   // See config/environment.ts for detailed explanation of each value
   // ENVIRONMENT=unknown - Build time (Docker images)
@@ -32,7 +26,6 @@ export const processEnv =
     ? {
         NODE_ENV: 'development' as const,
         CI: false,
-        E2E_TEST: false,
         ENVIRONMENT: 'unknown' as const,
       }
     : processEnvSchema.parse(process.env)
