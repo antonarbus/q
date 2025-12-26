@@ -8,7 +8,7 @@ import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
-import type { Bookmark } from '@entities/bookmark/type'
+import type { Bookmark } from '@entities/bookmark/type/Bookmark'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary

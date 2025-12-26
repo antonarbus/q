@@ -1,6 +1,5 @@
 import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import type { BoqColumnKey } from '../const/boqColumnKey'
-import type { itemType } from '../const/itemType'
 import type { RowTypeKey } from '../const/rowTypeKey'
 import type { SelectBookmark } from '@back/entities/bookmark'
 
@@ -67,7 +66,7 @@ export type RowEditorRefs = {
 export type BoqBlock = BlockMetaData &
   BlockDataInBucket &
   BlockDataRuntime & {
-    type: typeof itemType.boq
+    type: 'boq'
     boq: {
       header: Header
       column: Record<BoqColumnKey, Column>
@@ -78,7 +77,7 @@ export type BoqBlock = BlockMetaData &
 export type TextBlock = BlockMetaData &
   BlockDataInBucket &
   BlockDataRuntime & {
-    type: typeof itemType.text
+    type: 'text'
     text: {
       html: string
       value: null
@@ -88,7 +87,7 @@ export type TextBlock = BlockMetaData &
 export type PriceBlock = BlockMetaData &
   BlockDataInBucket &
   BlockDataRuntime & {
-    type: typeof itemType.price
+    type: 'price'
     title: {
       html: string
       value: null
@@ -103,7 +102,7 @@ export type PriceBlock = BlockMetaData &
 export type PasteBlock = BlockMetaData &
   BlockDataInBucket &
   BlockDataRuntime & {
-    type: typeof itemType.paste
+    type: 'paste'
   }
 
 export type BlockItem =
