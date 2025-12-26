@@ -49,7 +49,7 @@
     "db-check": "bun drizzle-kit check",
     "db-generate": "bun drizzle-kit generate",
     "db-migrate": "bun drizzle-kit migrate",
-    "db-push": "bun drizzle-kit push",
+    "db-push-dev": "bun drizzle-kit push",
     "db-push-test": "ENVIRONMENT=test bun drizzle-kit push",
     "db-push-prod": "ENVIRONMENT=prod bun drizzle-kit push",
     "db-studio": "bun drizzle-kit studio"
