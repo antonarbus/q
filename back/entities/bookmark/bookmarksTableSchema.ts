@@ -26,4 +26,4 @@ export const bookmarksTable = pgTable(
 )
 
 export type SelectBookmark = typeof bookmarksTable.$inferSelect
-export type InsertBookmark = typeof bookmarksTable.$inferInsert
+// export type InsertBookmark = typeof bookmarksTable.$inferInsert

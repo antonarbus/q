@@ -1,5 +1,5 @@
 export {
   bookmarksTable,
   type SelectBookmark,
-  type InsertBookmark,
+  // type InsertBookmark,
 } from './bookmarksTableSchema'
