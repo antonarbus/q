@@ -12,10 +12,10 @@ export const quotationsTable = pgTable(
     category: varchar({ length: 100 }).notNull().default(''),
     desc: varchar({ length: 2000 }).notNull().default(''),
     info: varchar({ length: 2000 }).notNull().default(''),
-    createdAt: timestamp({ mode: 'string' }).notNull().defaultNow(),
-    updatedAt: timestamp({ mode: 'string' }).notNull().defaultNow(),
-    openedAt: timestamp({ mode: 'string' }),
-    viewedAt: timestamp({ mode: 'string' }),
+    createdAt: timestamp({ mode: 'string', withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp({ mode: 'string', withTimezone: true }).notNull().defaultNow(),
+    openedAt: timestamp({ mode: 'string', withTimezone: true }),
+    viewedAt: timestamp({ mode: 'string', withTimezone: true }),
     access: jsonb()
       .notNull()
       .$type<{

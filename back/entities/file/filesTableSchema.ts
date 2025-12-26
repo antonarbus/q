@@ -14,7 +14,7 @@ export const filesTable = pgTable(
       .primaryKey()
       .$defaultFn(() => generateId()),
     email: varchar({ length: 320 }).notNull(),
-    uploadedAt: timestamp({ mode: 'string' }).notNull().defaultNow(),
+    uploadedAt: timestamp({ mode: 'string', withTimezone: true }).notNull().defaultNow(),
     name: varchar({ length: 255 }).notNull(),
     size: integer().notNull().default(0),
   },
