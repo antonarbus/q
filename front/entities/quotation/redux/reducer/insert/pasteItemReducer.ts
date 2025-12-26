@@ -3,7 +3,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import { generateId } from '@shared/lib/nanoid'
 import { itemType } from '../../../const/itemType'
 import { rowTypeKey } from '../../../const/rowTypeKey'
-import type { BlockItem, Row } from '../../../types/BlockItem'
+import type { BlockItem, RowBlock } from '../../../types/BlockItem'
 import type { Quotation } from '../../../types/Quotation'
 
 type SpliceSettings = {
@@ -85,7 +85,7 @@ const pasteRow = (
   state: Quotation,
   id: string,
   pastePos: PastePos,
-  itemToPaste: Row,
+  itemToPaste: RowBlock,
 ): void => {
   const boqBlocks = state.blocks.filter((block) => block.type === itemType.boq)
 

@@ -1,7 +1,7 @@
 import { cellKey } from '@entities/quotation/const/cellKey'
 import { getRowFromStore } from '@entities/quotation/redux/getter/getRowFromStore'
 import { getRowsFromStore } from '@entities/quotation/redux/getter/getRowsFromStore'
-import type { Row } from '@entities/quotation/types/BlockItem'
+import type { RowBlock } from '@entities/quotation/types/BlockItem'
 import { isRowPriceValid } from '@entities/quotation/util/isRowPriceValid'
 import { updateCellWithValue } from '@entities/quotation/util/updateCellWithValue'
 import { updateSubTotalPriceWithValue } from '@entities/quotation/util/updateSubTotalPriceWithValue'
@@ -60,7 +60,7 @@ export const validatePrice = ({
     }
 
     const subTotalPriceValueNew: number = rows.reduce(
-      (accumulator: number, _row: Row) => {
+      (accumulator: number, _row: RowBlock) => {
         const price = _row.price.value
 
         return accumulator + price

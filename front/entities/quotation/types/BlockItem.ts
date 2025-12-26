@@ -2,20 +2,19 @@ import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import type { BoqColumnKey } from '../const/boqColumnKey'
 import type { itemType } from '../const/itemType'
 import type { RowTypeKey } from '../const/rowTypeKey'
+import type { SelectBookmark } from '@back/entities/bookmark'
 
-type Common = {
-  id: 'new' | (string & {})
-  email: string
-  name: string
-  category: string
-  desc: string
+type BlockMetaData = Omit<SelectBookmark, 'type'>
+
+type BlockDataInBucket = {
   info: string
-  createdAt: string
-  updatedAt: string
-  width?: number
-  height?: number
-  isFroala?: boolean
-  preview?: string
+  preview: string
+  width: number
+  height: number
+}
+
+type BlockDataRuntime = {
+  isFroala: boolean
 }
 
 // boq
@@ -30,13 +29,15 @@ export type Cell = {
   pin: CellPin
 }
 
-export type Row = Common & {
-  type: RowTypeKey
-  description: Cell
-  itemPrice: Cell
-  qty: Cell
-  price: Cell
-}
+export type RowBlock = BlockMetaData &
+  BlockDataInBucket &
+  BlockDataRuntime & {
+    type: RowTypeKey
+    description: Cell
+    itemPrice: Cell
+    qty: Cell
+    price: Cell
+  }
 
 export type Column = {
   html: string
@@ -63,41 +64,51 @@ export type RowEditorRefs = {
   price: FroalaEditorRef
 }[]
 
-// boq block
-export type Boq = Common & {
-  type: typeof itemType.boq
-  boq: {
-    header: Header
-    column: Record<BoqColumnKey, Column>
-    rows: Row[]
+export type BoqBlock = BlockMetaData &
+  BlockDataInBucket &
+  BlockDataRuntime & {
+    type: typeof itemType.boq
+    boq: {
+      header: Header
+      column: Record<BoqColumnKey, Column>
+      rows: RowBlock[]
+    }
   }
-}
 
-// text block
-export type Text = Common & {
-  type: typeof itemType.text
-  text: {
-    html: string
-    value: null
+export type TextBlock = BlockMetaData &
+  BlockDataInBucket &
+  BlockDataRuntime & {
+    type: typeof itemType.text
+    text: {
+      html: string
+      value: null
+    }
   }
-}
 
-// price block
-export type Price = Common & {
-  type: typeof itemType.price
-  title: {
-    html: string
-    value: null
+export type PriceBlock = BlockMetaData &
+  BlockDataInBucket &
+  BlockDataRuntime & {
+    type: typeof itemType.price
+    title: {
+      html: string
+      value: null
+    }
+    price: {
+      html: string
+      value: number
+    }
   }
-  price: {
-    html: string
-    value: number
+
+/** Maintain same shape for paste block for dev convenience */
+export type PasteBlock = BlockMetaData &
+  BlockDataInBucket &
+  BlockDataRuntime & {
+    type: typeof itemType.paste
   }
-}
 
-// paste block
-export type Paste = Common & {
-  type: typeof itemType.paste
-}
-
-export type BlockItem = Boq | Paste | Text | Price | Row
+export type BlockItem =
+  | BoqBlock
+  | TextBlock
+  | PriceBlock
+  | RowBlock
+  | PasteBlock

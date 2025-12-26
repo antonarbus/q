@@ -5,14 +5,14 @@ import rowItemPriceHtml from '@entities/quotation/templates/rowItemPrice.html?ra
 import rowPreviewHtml from '@entities/quotation/templates/rowPreview.html?raw'
 import rowPriceHtml from '@entities/quotation/templates/rowPrice.html?raw'
 import rowQtyHtml from '@entities/quotation/templates/rowQty.html?raw'
-import type { Row } from '@entities/quotation/types/BlockItem'
+import type { RowBlock } from '@entities/quotation/types/BlockItem'
 import { textSlice } from '@shared/lib/froala/textSlice'
 import { generateId } from '@shared/lib/nanoid'
 import { dispatch, getState } from '@shared/lib/redux'
 import type { MouseEvent } from 'react'
 
 export const insertRow = (event?: MouseEvent): void => {
-  const row: Row = {
+  const row: RowBlock = {
     id: generateId(),
     name: '',
     category: '',
@@ -24,6 +24,7 @@ export const insertRow = (event?: MouseEvent): void => {
     email: 'unknown@gmail.com',
     height: 55,
     width: 570,
+    isFroala: true,
     preview: rowPreviewHtml,
     description: {
       html: rowDescriptionHtml,

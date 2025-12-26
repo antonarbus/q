@@ -1,3 +1,8 @@
-import type { Boq, Text, Price, Row } from '@entities/quotation/types/BlockItem'
+import type {
+  BoqBlock,
+  TextBlock,
+  PriceBlock,
+  RowBlock,
+} from '@entities/quotation/types/BlockItem'
 
-export type Bookmark = Boq | Text | Price | Row
+export type Bookmark = BoqBlock | TextBlock | PriceBlock | RowBlock

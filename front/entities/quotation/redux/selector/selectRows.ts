@@ -1,5 +1,5 @@
 import type { RootState } from '@shared/lib/redux'
-import type { Row } from '../../types/BlockItem'
+import type { RowBlock } from '../../types/BlockItem'
 import { getRowsFromStore } from '../getter/getRowsFromStore'
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
 
 export const selectRows =
   ({ blockIndex }: Props) =>
-  (_state: RootState): Row[] => {
+  (_state: RootState): RowBlock[] => {
     const rows = getRowsFromStore({ blockIndex })
 
     if (rows === undefined) {

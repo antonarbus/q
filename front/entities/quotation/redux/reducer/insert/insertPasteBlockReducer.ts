@@ -3,7 +3,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import { generateId } from '@shared/lib/nanoid'
 import { itemType } from '../../../const/itemType'
 import type { Quotation } from '../../../types/Quotation'
-import type { BlockItem, Paste } from '../../../types/BlockItem'
+import type { BlockItem, PasteBlock } from '../../../types/BlockItem'
 
 export const insertPasteBlockReducer = (
   state: Quotation,
@@ -25,7 +25,7 @@ export const insertPasteBlockReducer = (
     blocksWithoutPasteText.findIndex((block) => block.id === id) +
     (pastePos === 'bottom' ? 1 : 0)
 
-  const pasteBlock: Paste = {
+  const pasteBlock: PasteBlock = {
     id: generateId(),
     name: '',
     category: '',
@@ -37,6 +37,7 @@ export const insertPasteBlockReducer = (
     email: 'unknown@gmail.com',
     height: 0,
     width: 0,
+    preview: '',
     isFroala: true,
   }
 

@@ -21,14 +21,14 @@ import rowTwoDescriptionHtml from '@entities/quotation/templates/rowTwoDescripti
 import rowTwoItemPriceHtml from '@entities/quotation/templates/rowTwoItemPrice.html?raw'
 import rowTwoPriceHtml from '@entities/quotation/templates/rowTwoPrice.html?raw'
 import rowTwoQtyHtml from '@entities/quotation/templates/rowTwoQty.html?raw'
-import type { Boq } from '@entities/quotation/types/BlockItem'
+import type { BoqBlock } from '@entities/quotation/types/BlockItem'
 import { textSlice } from '@shared/lib/froala/textSlice'
 import { generateId } from '@shared/lib/nanoid'
 import { dispatch, getState } from '@shared/lib/redux'
 import type { MouseEvent } from 'react'
 
 export const insertBoqBlock = (event?: MouseEvent): void => {
-  const boqBlock: Boq = {
+  const boqBlock: BoqBlock = {
     id: generateId(),
     name: '',
     category: '',
@@ -92,6 +92,8 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
           email: 'unknown@gmail.com',
           height: 0,
           width: 0,
+          isFroala: true,
+          preview: '',
           description: {
             html: rowOneDescriptionHtml,
             value: 0,
@@ -137,6 +139,8 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
           email: 'unknown@gmail.com',
           height: 0,
           width: 0,
+          isFroala: true,
+          preview: '',
           description: {
             html: rowTwoDescriptionHtml,
             value: 0,
@@ -182,6 +186,8 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
           email: 'unknown@gmail.com',
           height: 0,
           width: 0,
+          isFroala: true,
+          preview: '',
           description: {
             html: rowThreeDescriptionHtml,
             value: 0,

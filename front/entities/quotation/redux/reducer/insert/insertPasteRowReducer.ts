@@ -2,7 +2,7 @@ import type { CopyPlace } from '@entities/copy/types'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { rowTypeKey } from '../../../const/rowTypeKey'
 import type { Quotation } from '../../../types/Quotation'
-import type { Cell, Row } from '../../../types/BlockItem'
+import type { Cell, RowBlock } from '../../../types/BlockItem'
 import { getBoqBlockFromState } from '../../getter/getBoqBlockFromState'
 
 const defaultCellValues: Cell = {
@@ -14,7 +14,7 @@ const defaultCellValues: Cell = {
   },
 }
 
-const pasteText: Row = {
+const pasteText: RowBlock = {
   id: 'id of boq row paste',
   name: '',
   category: '',
@@ -26,6 +26,8 @@ const pasteText: Row = {
   email: 'unknown@gmail.com',
   height: 0,
   width: 0,
+  isFroala: true,
+  preview: '',
   description: defaultCellValues,
   itemPrice: defaultCellValues,
   qty: defaultCellValues,

@@ -1,6 +1,6 @@
 import { getState } from '@shared/lib/redux'
 import { itemType } from '../../const/itemType'
-import type { Boq } from '../../types/BlockItem'
+import type { BoqBlock } from '../../types/BlockItem'
 
 type Props = {
   blockIndex: number
@@ -8,7 +8,7 @@ type Props = {
 
 export const getBoqBlockFromStore = ({
   blockIndex,
-}: Props): Boq | undefined => {
+}: Props): BoqBlock | undefined => {
   const block = getState().quotation.blocks[blockIndex]
 
   if (block?.type !== itemType.boq) {

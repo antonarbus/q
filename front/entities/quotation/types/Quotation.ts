@@ -3,7 +3,7 @@ import type { BlockItem } from './BlockItem'
 
 type QuotationMetaData = SelectQuotation
 
-type QuotationFromBucket = {
+type QuotationDataInBucket = {
   info: string
   blocks: BlockItem[]
 }
@@ -19,5 +19,5 @@ type QuotationPermission = {
 }
 
 export type Quotation = QuotationMetaData &
-  QuotationFromBucket &
+  QuotationDataInBucket &
   QuotationPermission

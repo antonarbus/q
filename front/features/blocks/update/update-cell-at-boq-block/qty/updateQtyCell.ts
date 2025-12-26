@@ -2,7 +2,7 @@ import { cellKey } from '@entities/quotation/const/cellKey'
 import { getRowFromStore } from '@entities/quotation/redux/getter/getRowFromStore'
 import { getRowsFromStore } from '@entities/quotation/redux/getter/getRowsFromStore'
 import { updateCellAtStore } from '@entities/quotation/redux/updater/updateCellAtStore'
-import type { Row } from '@entities/quotation/types/BlockItem'
+import type { RowBlock } from '@entities/quotation/types/BlockItem'
 import { didCellContentChange } from '@entities/quotation/util/didCellContentChange'
 import { updateCellWithValue } from '@entities/quotation/util/updateCellWithValue'
 import { updateSubTotalPriceWithValue } from '@entities/quotation/util/updateSubTotalPriceWithValue'
@@ -70,7 +70,7 @@ export const updateQtyCell = ({
   }
 
   const subTotalPriceValueNew: number = rows.reduce(
-    (accumulator: number, boqRow: Row) => {
+    (accumulator: number, boqRow: RowBlock) => {
       const price = boqRow.price.value
 
       return accumulator + price

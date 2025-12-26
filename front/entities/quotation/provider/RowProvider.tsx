@@ -7,12 +7,12 @@ import {
   useContext,
   useMemo,
 } from 'react'
-import type { Row } from '../types/BlockItem'
+import type { RowBlock } from '../types/BlockItem'
 import { useBoq } from './BoqBlockProvider'
 
 type Props = {
   index: number
-  item: Row
+  item: RowBlock
   children: ReactNode
 }
 
