@@ -13,6 +13,7 @@ export default {
     typescript({
       tsconfig: './back/tsconfig.json',
       exclude: ['**/node_modules/**', 'front/**', '**/front/**'],
+      outputToFilesystem: false,
     }), // emit TypeScript → JavaScript
   ],
 }
