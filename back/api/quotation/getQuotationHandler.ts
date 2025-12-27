@@ -24,6 +24,7 @@ export type ReqBody = {
 
 export type ResBody = {
   quotation: Quotation
+  message: string
 }
 
 export type ErrorResBody = {
@@ -39,6 +40,8 @@ type RouterHandler = (
 
 export const getQuotationHandler: RouterHandler = async (req, res) => {
   const userFromAccessToken = getUserFromAccessTokenOrNull({ req })
+
+  const messageList: string[] = []
 
   const emptyQuotation: Quotation = {
     id: req.body.id,
@@ -65,10 +68,12 @@ export const getQuotationHandler: RouterHandler = async (req, res) => {
     .where(eq(quotationsTable.id, req.body.id))
 
   if (quotationSelected === undefined) {
+    messageList.push('Quotation not found in database')
+
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'QUOTATION_NOT_FOUND',
       statusCode: httpStatusCode.notFound404,
-      message: 'Quotation not found',
+      message: messageList.join(' | '),
     })
   }
 
@@ -81,6 +86,8 @@ export const getQuotationHandler: RouterHandler = async (req, res) => {
     const isOwner = isLoggedUser && emailFromToken === quotationSelected.email
 
     if (isOwner === true) {
+      messageList.push('Owner')
+
       return permissionLevel.owner
     }
 
@@ -90,18 +97,24 @@ export const getQuotationHandler: RouterHandler = async (req, res) => {
       quotationSelected.access.userList.includes(emailFromToken)
 
     if (isSharedWithYou === true) {
+      messageList.push('Shared')
+
       return permissionLevel.shared
     }
 
     const isSharedWithEveryone = quotationSelected.access.level === 'everyone'
 
     if (isSharedWithEveryone === true) {
+      messageList.push('Public')
+
       return permissionLevel.public
     }
 
     const isSuperAdminOnBehalfOfUser = isLoggedUser && shouldNotTrace
 
     if (isSuperAdminOnBehalfOfUser === true) {
+      messageList.push('Super-admin on behalf of user')
+
       return permissionLevel.superAdminOnBehalfOfAUser
     }
 
@@ -109,8 +122,12 @@ export const getQuotationHandler: RouterHandler = async (req, res) => {
       isLoggedUser && userFromAccessToken.roles.includes(userRole.superAdmin)
 
     if (isSuperAdmin === true) {
+      messageList.push('Super-admin')
+
       return permissionLevel.superAdmin
     }
+
+    messageList.push('Forbidden')
 
     return permissionLevel.forbidden
   }
@@ -120,6 +137,7 @@ export const getQuotationHandler: RouterHandler = async (req, res) => {
   if (permissionLevelValue === permissionLevel.forbidden) {
     res.status(httpStatusCode.success200).json({
       quotation: { ...emptyQuotation, permissionLevel: permissionLevelValue },
+      message: messageList.join(' | '),
     })
 
     return
@@ -131,27 +149,37 @@ export const getQuotationHandler: RouterHandler = async (req, res) => {
 
   if (shouldNotTrace === false) {
     if (permissionLevelValue === permissionLevel.owner) {
-      await db
+      const updateResponse = await db
         .update(quotationsTable)
         .set({
           openedAt: new Date().toISOString(),
         })
         .where(eq(quotationsTable.id, req.body.id))
         .catch((error: unknown) => {
-          console.error('failed to update openedAt field', error)
+          messageList.push('Failed to update "openedAt" field')
+          console.error('failed to update "openedAt" field', error)
         })
+
+      if (updateResponse !== undefined && updateResponse.rowCount > 0) {
+        messageList.push('Updated "openedAt" field')
+      }
     }
 
     if (publicOrSharedWithYou === true) {
-      await db
+      const updateResponse = await db
         .update(quotationsTable)
         .set({
           viewedAt: new Date().toISOString(),
         })
         .where(eq(quotationsTable.id, req.body.id))
         .catch((error: unknown) => {
+          messageList.push('Failed to update "viewedAt" field')
           console.error('failed to update viewedAt field', error)
         })
+
+      if (updateResponse !== undefined && updateResponse.rowCount > 0) {
+        messageList.push('Updated "viewedAt" field')
+      }
     }
   }
 
@@ -161,10 +189,12 @@ export const getQuotationHandler: RouterHandler = async (req, res) => {
     .file(fileInfo.path)
     .download()
     .catch(() => {
+      messageList.push('Quotation data not found in storage')
+
       throw new HttpError<ErrorResBody['errorCode']>({
         errorCode: 'FILE_NOT_FOUND_IN_BUCKET',
         statusCode: httpStatusCode.serverError500,
-        message: 'Quotation data not found in storage',
+        message: messageList.join(' | '),
       })
     })
 
@@ -172,10 +202,12 @@ export const getQuotationHandler: RouterHandler = async (req, res) => {
   const quotationParsed = jsonParseSafe<Quotation>(quotationJson)
 
   if (quotationParsed === undefined) {
+    messageList.push('Quotation data from storage not parsed')
+
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'QUOTATION_NOT_FOUND',
       statusCode: httpStatusCode.notFound404,
-      message: 'Quotation not parsed',
+      message: messageList.join(' | '),
     })
   }
 
@@ -211,6 +243,8 @@ export const getQuotationHandler: RouterHandler = async (req, res) => {
         })
       }
     })
+
+    messageList.push('Private data is hidden')
   }
 
   res.status(httpStatusCode.success200).json({
@@ -219,5 +253,6 @@ export const getQuotationHandler: RouterHandler = async (req, res) => {
       ...quotationSelected,
       permissionLevel: permissionLevelValue,
     },
+    message: messageList.join(' | '),
   })
 }
