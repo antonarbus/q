@@ -57,7 +57,7 @@ export const deleteQuotationHandler: RouterHandler = async (req, res) => {
   const [{ statusCode }] = await bucket.file(fileInfo.path).delete()
 
   if (statusCode === 204) {
-    res.status(httpStatusCode.noContent204)
+    res.status(httpStatusCode.noContent204).send()
 
     return
   }

@@ -54,5 +54,5 @@ export const countUniqueDailyVisitorsHandler: RouterHandler = async (
       },
     })
 
-  res.status(httpStatusCode.success200)
+  res.status(httpStatusCode.success200).send()
 }

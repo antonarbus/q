@@ -101,6 +101,6 @@ export const deleteFileHandler: RouterHandler = async (req, res) => {
       })
     }
 
-    res.status(httpStatusCode.noContent204)
+    res.status(httpStatusCode.noContent204).send()
   }
 }

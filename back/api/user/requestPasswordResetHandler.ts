@@ -95,7 +95,7 @@ export const requestPasswordResetHandler: RouterHandler = async (req, res) => {
 
   // https://developers.mailersend.com/general.html#api-response
   if (emailRes.statusCode === 202) {
-    res.status(httpStatusCode.created201)
+    res.status(httpStatusCode.created201).send()
 
     return
   }
