@@ -5,40 +5,38 @@ type Props = {
   accessFormValuesSignal: AccessFormValuesSignal
 }
 
-export const useIsButtonDisabled = ({
-  accessFormValuesSignal,
-}: Props): boolean => {
-  const { access } = getState().quotation
-  const currentAccess = accessFormValuesSignal.value
+export const useIsButtonDisabled = (props: Props): boolean => {
+  const state = getState()
 
   const sameNobodyAccessLevel =
-    access.level === 'nobody' && currentAccess.level === 'nobody'
+    state.quotation.access.level === 'nobody' &&
+    props.accessFormValuesSignal.value.level === 'nobody'
 
   if (sameNobodyAccessLevel === true) {
     return true
   }
 
   const sameEveryoneAccessLevel =
-    access.level === 'everyone' && currentAccess.level === 'everyone'
+    state.quotation.access.level === 'everyone' &&
+    props.accessFormValuesSignal.value.level === 'everyone'
 
   if (sameEveryoneAccessLevel === true) {
     return true
   }
 
-  if (accessFormValuesSignal.value.level === 'custom') {
-    const forgotToAddPerson = accessFormValuesSignal.value.userList.length === 0
+  if (props.accessFormValuesSignal.value.level === 'custom') {
+    const forgotToAddPerson =
+      props.accessFormValuesSignal.value.userList.length === 0
 
     if (forgotToAddPerson === true) {
       return true
     }
   }
 
-  if (accessFormValuesSignal.value.level === 'custom') {
-    const sharedUserList = getState()
-      .quotation.access.userList.toSorted()
-      .toString()
+  if (props.accessFormValuesSignal.value.level === 'custom') {
+    const sharedUserList = state.quotation.access.userList.toSorted().toString()
 
-    const currentSharedUserList = accessFormValuesSignal.value.userList
+    const currentSharedUserList = props.accessFormValuesSignal.value.userList
       .toSorted()
       .toString()
 

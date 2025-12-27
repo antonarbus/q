@@ -42,28 +42,6 @@ resource "google_cloud_run_v2_service" "frontend" {
         container_port = var.container_port_frontend
       }
 
-      startup_probe {
-        http_get {
-          path = "/"
-          port = var.container_port_frontend
-        }
-        initial_delay_seconds = 10
-        timeout_seconds       = 3
-        period_seconds        = 5
-        failure_threshold     = 3
-      }
-
-      liveness_probe {
-        http_get {
-          path = "/"
-          port = var.container_port_frontend
-        }
-        initial_delay_seconds = 30
-        timeout_seconds       = 1
-        period_seconds        = 10
-        failure_threshold     = 3
-      }
-
       # Environment variables for frontend
       env {
         name  = "NODE_ENV"
@@ -132,28 +110,6 @@ resource "google_cloud_run_v2_service" "backend" {
 
       ports {
         container_port = var.container_port_backend
-      }
-
-      startup_probe {
-        http_get {
-          path = "/api/health-check" # Backend health check endpoint
-          port = var.container_port_backend
-        }
-        initial_delay_seconds = 10
-        timeout_seconds       = 3
-        period_seconds        = 5
-        failure_threshold     = 3
-      }
-
-      liveness_probe {
-        http_get {
-          path = "/api/health-check"
-          port = var.container_port_backend
-        }
-        initial_delay_seconds = 30
-        timeout_seconds       = 1
-        period_seconds        = 10
-        failure_threshold     = 3
       }
 
       # Environment variables for backend

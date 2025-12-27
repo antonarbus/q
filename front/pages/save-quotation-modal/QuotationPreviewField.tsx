@@ -4,11 +4,9 @@ import type { ReactNode } from 'react'
 import { Layout } from './Layout'
 
 export const QuotationPreviewField = (): ReactNode => {
-  const { blocks } = getState().quotation
-
   return (
     <Layout>
-      <BlockMany blocks={blocks} />
+      <BlockMany blocks={getState().quotation.blocks} />
     </Layout>
   )
 }

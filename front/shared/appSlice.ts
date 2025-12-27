@@ -48,24 +48,21 @@ export const appSlice = createSlice({
         from: InitState['shouldLoadQuotation']['from']
       }>,
     ) => {
-      const { yesOrNo, from } = action.payload
-      state.shouldLoadQuotation.yesOrNo = yesOrNo
-      state.shouldLoadQuotation.from = from
+      state.shouldLoadQuotation.yesOrNo = action.payload.yesOrNo
+      state.shouldLoadQuotation.from = action.payload.from
     },
     setBackgroundMessage: (
       state: WritableDraft<InitState>,
       action: PayloadAction<{ message: InitState['backgroundMessage'] }>,
     ) => {
-      const { message } = action.payload
-      state.backgroundMessage = message
+      state.backgroundMessage = action.payload.message
     },
     showLoadingOverlay: (
       state: WritableDraft<InitState>,
       action: PayloadAction<InitState['loadingOverlay']>,
     ) => {
-      const { shouldShowLoader, text } = action.payload
-      state.loadingOverlay.shouldShowLoader = shouldShowLoader
-      state.loadingOverlay.text = text
+      state.loadingOverlay.shouldShowLoader = action.payload.shouldShowLoader
+      state.loadingOverlay.text = action.payload.text
     },
     hideLoadingOverlay: (state: WritableDraft<InitState>) => {
       state.loadingOverlay.shouldShowLoader = false
@@ -75,14 +72,12 @@ export const appSlice = createSlice({
       state: WritableDraft<InitState>,
       action: PayloadAction<InitState['navigateState']>,
     ) => {
-      const { to, shouldSlide } = action.payload
-
-      if (to !== undefined) {
-        state.navigateState.to = to
+      if (action.payload.to !== undefined) {
+        state.navigateState.to = action.payload.to
       }
 
-      if (shouldSlide !== undefined) {
-        state.navigateState.shouldSlide = shouldSlide
+      if (action.payload.shouldSlide !== undefined) {
+        state.navigateState.shouldSlide = action.payload.shouldSlide
       }
     },
     resetNavigateState: (state: WritableDraft<InitState>) => {
