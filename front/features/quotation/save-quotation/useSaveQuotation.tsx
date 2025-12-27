@@ -58,21 +58,19 @@ export const useSaveQuotation = ({
     }
 
     if (saveQuotationMutation.isSuccess === true) {
-      if (saveQuotationMutation.data.message === 'saved') {
+      if (saveQuotationMutation.data.status === 'SAVED') {
         toast.success(
           `Saved under id ${saveQuotationMutation.data.quotation.id}`,
         )
       }
 
-      // ths should not be a use case in main page, but we still may open /id/save route directly
-      // this may be a use case in quotations page
-      if (saveQuotationMutation.data.message === 'updated') {
+      if (saveQuotationMutation.data.status === 'UPDATED') {
         toast.info('Updated')
       }
 
       // this should not be a use case in main page, but we still may open /id/save route directly
       // this may be a use case in quotations page
-      if (saveQuotationMutation.data.message === 'copied and saved') {
+      if (saveQuotationMutation.data.status === 'COPIED') {
         toast.success(
           `Shared quotation was copied and saved under id ${saveQuotationMutation.data.quotation.id}`,
           {
@@ -101,8 +99,12 @@ export const useSaveQuotation = ({
       const slideOutAndChangeUrl = async (): Promise<void> => {
         await asyncDelay(1000)
         await slideOut()
-        const id = saveQuotationMutation.data.quotation?.id
-        const navigateTo = isQuotationsPage === true ? '..' : `/${id}`
+
+        const navigateTo =
+          isQuotationsPage === true
+            ? '..'
+            : `/${saveQuotationMutation.data.quotation.id}`
+
         void navigate(navigateTo, { replace: true })
       }
 

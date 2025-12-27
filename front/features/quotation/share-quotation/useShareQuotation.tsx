@@ -59,16 +59,16 @@ export const useShareQuotation = ({
 
     if (saveQuotationMutation.isSuccess === true) {
       // may save new quotation by sharing the link, strange, but maybe nice
-      if (saveQuotationMutation.data.message === 'saved') {
+      if (saveQuotationMutation.data.status === 'SAVED') {
         toast.success(`Saved under id ${quotation.id}`)
       }
 
       // usual case
-      if (saveQuotationMutation.data.message === 'updated') {
+      if (saveQuotationMutation.data.status === 'UPDATED') {
         toast.info('Updated')
       }
 
-      if (saveQuotationMutation.data.message === 'copied and saved') {
+      if (saveQuotationMutation.data.status === 'COPIED') {
         toast.success('Shared quotation was copied, saved and shared', {
           duration: 5000,
         })
@@ -91,8 +91,12 @@ export const useShareQuotation = ({
       const slideOutAndChangeUrl = async (): Promise<void> => {
         await asyncDelay(1000)
         await slideOut()
-        const id = saveQuotationMutation.data.quotation?.id
-        const navigateTo = isQuotationsPage === true ? '..' : `/${id}`
+
+        const navigateTo =
+          isQuotationsPage === true
+            ? '..'
+            : `/${saveQuotationMutation.data.quotation.id}`
+
         void navigate(navigateTo, { replace: true })
       }
 

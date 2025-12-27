@@ -19,6 +19,7 @@ export type ReqBody = {
 
 export type ResBody = {
   bookmark: SelectBookmark
+  isNew: boolean
   message: string
 }
 
@@ -115,5 +116,6 @@ export const saveBookmarkHandler: RouterHandler = async (req, res) => {
   res.status(httpStatusCode.success200).json({
     message: messageList.join(' | '),
     bookmark: bookmarkInserted,
+    isNew,
   })
 }

@@ -102,18 +102,6 @@ export const verifyDeployment = async (props: Props): Promise<void> => {
       logger.success(
         `Backend is live and responding (HTTP ${healthCheckResponse.status})`,
       )
-
-      try {
-        logger.info('  Checking health check message...')
-
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-        if (healthCheckResponse.data.message === 'connected to db') {
-          logger.success('     Health check message correct: "connected"')
-        }
-      } catch {
-        logger.error('     Failed to parse JSON response')
-        backendFailures = backendFailures + 1
-      }
     } else {
       logger.error(
         `Backend health check returned HTTP ${healthCheckResponse.status}`,

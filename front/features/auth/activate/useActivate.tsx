@@ -26,28 +26,24 @@ export const useActivate = (): Res => {
 
   useUpdateEffect(() => {
     if (activateUserMutation.isSuccess === true) {
-      if (activateUserMutation.data.message === 'Activated') {
-        dispatch(
-          userSlice.actions.setAccessToken({
-            accessToken: activateUserMutation.data.accessJwtToken,
-          }),
-        )
+      dispatch(
+        userSlice.actions.setAccessToken({
+          accessToken: activateUserMutation.data.accessJwtToken,
+        }),
+      )
 
-        dispatch(
-          userSlice.actions.rememberLoggedUser({
-            email: activateUserMutation.data.email,
-            roles: activateUserMutation.data.roles,
-          }),
-        )
+      dispatch(
+        userSlice.actions.rememberLoggedUser({
+          email: activateUserMutation.data.email,
+          roles: activateUserMutation.data.roles,
+        }),
+      )
 
-        dispatch(
-          navSlice.actions.hideNavItems({ navItemIds: [navItemId.login] }),
-        )
+      dispatch(navSlice.actions.hideNavItems({ navItemIds: [navItemId.login] }))
 
-        dispatch(
-          navSlice.actions.showNavItems({ navItemIds: [navItemId.profile] }),
-        )
-      }
+      dispatch(
+        navSlice.actions.showNavItems({ navItemIds: [navItemId.profile] }),
+      )
     }
   }, [activateUserMutation.isSuccess])
 

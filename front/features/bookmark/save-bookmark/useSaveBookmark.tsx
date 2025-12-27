@@ -38,9 +38,9 @@ export const useSaveBookmark = ({
 
   useUpdateEffect(() => {
     if (saveBookmarkMutation.isSuccess === true) {
-      if (saveBookmarkMutation.data.message === 'saved') {
+      if (saveBookmarkMutation.data.isNew === true) {
         toast.success('Saved')
-      } else if (saveBookmarkMutation.data.message === 'updated') {
+      } else {
         toast.info('Updated')
       }
 

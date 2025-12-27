@@ -21,6 +21,7 @@ export type ReqBody = {
 
 export type ResBody = {
   message: string
+  status: 'SAVED' | 'UPDATED' | 'COPIED'
   quotation: SelectQuotation
 }
 
@@ -136,6 +137,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res) => {
     res.status(httpStatusCode.success200).json({
       message: messageList.join(' | '),
       quotation: quotationInserted,
+      status: 'SAVED',
     })
 
     return
@@ -198,6 +200,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res) => {
     res.status(httpStatusCode.success200).json({
       message: messageList.join(' | '),
       quotation: quotationUpdated,
+      status: 'UPDATED',
     })
 
     return
@@ -261,6 +264,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res) => {
     res.status(httpStatusCode.success200).json({
       message: messageList.join(' | '),
       quotation: quotationInserted,
+      status: 'COPIED',
     })
   }
 }

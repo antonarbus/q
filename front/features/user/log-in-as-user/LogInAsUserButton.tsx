@@ -75,10 +75,6 @@ export const LogInAsUserButton = ({ email }: Payload): ReactNode => {
       if (isBookmarkListPage === true) {
         void getBookmarkListQuery.refetch()
       }
-
-      if (logInUserMutation.data.message === 'super-admin on behalf of user') {
-        toast.success(`Logged as ${logInUserMutation.data.email}`)
-      }
     }
   }, [logInUserMutation.isSuccess])
 
