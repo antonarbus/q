@@ -21,8 +21,6 @@ export const errorHandlerMiddleware: RouterHandler = (
   res,
   _next,
 ) => {
-  console.error(error)
-
   // Handle our custom AppError
   if (error instanceof HttpError) {
     res.status(error.statusCode).json({
@@ -34,6 +32,8 @@ export const errorHandlerMiddleware: RouterHandler = (
   }
 
   // Handle unknown errors
+  console.error(error)
+
   res.status(httpStatusCode.serverError500).json({
     errorCode: errorCode.internalError,
     message: 'Internal error',
