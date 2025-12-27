@@ -45,8 +45,8 @@ test.describe('#activateRouter', () => {
       },
     })
 
-    // Assert: Should return "already activated"
-    expect(res.ok()).toBeTruthy()
-    expect(await res.json()).toMatchObject({ message: 'Already activated' })
+    // Assert: Should return 409
+    expect(res.ok()).toBeFalsy()
+    expect(res.status()).toBe(409)
   })
 })
