@@ -9,7 +9,7 @@ type Res = {
 }
 
 export const useLoadInitValuesIntoInfoModal = (): Res => {
-  const { quotationId, bookmarkId } = useParams()
+  const urlParams = useParams()
 
   const infoFormValues = {
     nameSignal: useSignal(''),
@@ -19,13 +19,15 @@ export const useLoadInitValuesIntoInfoModal = (): Res => {
   }
 
   useEffectOnce(() => {
-    const item = getFromStore({ id: bookmarkId ?? quotationId ?? 'new' })
+    const item = getFromStore({
+      id: urlParams.bookmarkId ?? urlParams.quotationId ?? 'new',
+    })
 
     if (item !== undefined) {
-      infoFormValues.nameSignal.value = item.name ?? ''
-      infoFormValues.categorySignal.value = item.category ?? ''
-      infoFormValues.descSignal.value = item.desc ?? ''
-      infoFormValues.infoSignal.value = item.info ?? ''
+      infoFormValues.nameSignal.value = item.name
+      infoFormValues.categorySignal.value = item.category
+      infoFormValues.descSignal.value = item.desc
+      infoFormValues.infoSignal.value = item.info
     }
   })
 

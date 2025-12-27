@@ -15,7 +15,9 @@ export type ReqBody = {
   isNew: boolean
 }
 
-export type ResBody = undefined
+export type ResBody = {
+  message: string
+}
 
 export type ErrorResBody = {
   message: string
@@ -32,10 +34,18 @@ export const countUniqueDailyVisitorsHandler: RouterHandler = async (
   req,
   res,
 ) => {
+  const messageList: string[] = []
+
   const isE2ETest = req.headers[headerName.e2eTest] === 'true'
 
   // Do not distort statistics by e2e tests
   if (isE2ETest === true) {
+    messageList.push('E2E test - skipping visitor count')
+
+    res.status(httpStatusCode.success200).json({
+      message: messageList.join(' | '),
+    })
+
     return
   }
 
@@ -54,5 +64,13 @@ export const countUniqueDailyVisitorsHandler: RouterHandler = async (
       },
     })
 
-  res.status(httpStatusCode.success200).send()
+  if (req.body.isNew === true) {
+    messageList.push('New visitor counted')
+  } else {
+    messageList.push('Returning visitor counted')
+  }
+
+  res.status(httpStatusCode.success200).json({
+    message: messageList.join(' | '),
+  })
 }

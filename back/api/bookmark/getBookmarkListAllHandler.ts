@@ -23,6 +23,7 @@ type SearchQuery = {
 export type ResBody = {
   bookmarkList: SelectBookmark[]
   bookmarkListTotalCount: number
+  message: string
 }
 
 type ErrorResBody = {
@@ -42,13 +43,19 @@ export const getBookmarkListAllHandler: RouterHandler = async (req, res) => {
     res,
   })
 
+  const messageList: string[] = []
+
   if (userFromAccessToken.roles.includes(userRole.superAdmin) === false) {
+    messageList.push('No permission to view all bookmarks')
+
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'NO_PERMISSION',
       statusCode: httpStatusCode.forbidden403,
-      message: 'No permission to view all bookmarks',
+      message: messageList.join(' | '),
     })
   }
+
+  messageList.push('Super-admin access granted')
 
   const sortModelSchema = z.array(
     z.object({
@@ -166,15 +173,25 @@ export const getBookmarkListAllHandler: RouterHandler = async (req, res) => {
     bookmarkListTotalCountResponse.status === 'fulfilled'
 
   if (fulfilled === false) {
+    messageList.push('Failed to fetch bookmarks from database')
+
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'UNHANDLED_ERROR',
       statusCode: httpStatusCode.serverError500,
-      message: 'Failed to fetch bookmarks',
+      message: messageList.join(' | '),
     })
   }
+
+  messageList.push(
+    `Found ${bookmarkListTotalCountResponse.value} total bookmarks`,
+  )
+  messageList.push(
+    `Returned ${bookmarkListResponse.value.length} bookmarks for current page`,
+  )
 
   res.status(httpStatusCode.success200).json({
     bookmarkList: bookmarkListResponse.value,
     bookmarkListTotalCount: bookmarkListTotalCountResponse.value,
+    message: messageList.join(' | '),
   })
 }

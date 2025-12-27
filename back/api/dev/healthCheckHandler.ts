@@ -33,21 +33,31 @@ type RouterHandler = (
 export const healthCheckHandler: RouterHandler = async (req, res) => {
   const userFromAccessToken = getUserFromRefreshTokenOrNull({ req })
 
+  const messageList: string[] = []
+
   const isSuperAdmin = userFromAccessToken?.roles.includes(userRole.superAdmin)
 
   // Simple query to verify Postgres / Drizzle connectivity
   await db.execute(sql`select 1`).catch((error: unknown) => {
     console.error('health check database error', error)
 
+    messageList.push('Database connection failed')
+
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'DB_CONNECTION_FAILED',
       statusCode: httpStatusCode.serverError500,
-      message: 'Database connection failed',
+      message: messageList.join(' | '),
     })
   })
 
+  messageList.push('Database connection successful')
+
+  if (isSuperAdmin === true) {
+    messageList.push('Super-admin runtime config included')
+  }
+
   res.status(httpStatusCode.success200).json({
-    message: 'connected to db',
+    message: messageList.join(' | '),
     runtimeConfig: isSuperAdmin === true ? runtimeConfig : undefined,
   })
 }

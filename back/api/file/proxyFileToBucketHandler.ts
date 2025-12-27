@@ -34,12 +34,16 @@ const CLIENT_CACHE_MAX_AGE = SIGNED_URL_TTL_MS / 1000 // 5 min in seconds
 export const proxyFileToBucketHandler: RouterHandler = async (req, res) => {
   // const user = getUserFromAccessTokenOrNull({ req })
 
+  const messageList: string[] = []
+
   const cached = signedUrlCache.get(req.params.fileId)
 
   const cacheIsNotExpired =
     cached !== undefined && cached.expiresAt > Date.now()
 
   if (cacheIsNotExpired === true) {
+    messageList.push('Serving cached signed URL')
+
     res.set(
       'Cache-Control',
       `public, max-age=${CLIENT_CACHE_MAX_AGE}, immutable`,
@@ -56,12 +60,16 @@ export const proxyFileToBucketHandler: RouterHandler = async (req, res) => {
     .where(eq(filesTable.id, req.params.fileId))
 
   if (fileSelected === undefined) {
+    messageList.push('File not found in database')
+
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'FILE_NOT_FOUND',
       statusCode: httpStatusCode.notFound404,
-      message: 'File not found',
+      message: messageList.join(' | '),
     })
   }
+
+  messageList.push('File found in database')
 
   try {
     const fileInfo = getFileInfo({ id: req.params.fileId })
@@ -82,6 +90,8 @@ export const proxyFileToBucketHandler: RouterHandler = async (req, res) => {
       expiresAt: Date.now() + SIGNED_URL_TTL_MS, // should be slightly less, but let it be like this for now
     })
 
+    messageList.push('Generated new signed URL and cached it')
+
     res.set(
       'Cache-Control',
       `public, max-age=${CLIENT_CACHE_MAX_AGE}, immutable`,
@@ -91,10 +101,12 @@ export const proxyFileToBucketHandler: RouterHandler = async (req, res) => {
   } catch (error) {
     console.error('Error generating signed URL:', error)
 
+    messageList.push('Failed to generate signed URL')
+
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'SIGNED_URL_GENERATION_FAILED',
       statusCode: httpStatusCode.serverError500,
-      message: 'Failed to generate file link',
+      message: messageList.join(' | '),
     })
   }
 }

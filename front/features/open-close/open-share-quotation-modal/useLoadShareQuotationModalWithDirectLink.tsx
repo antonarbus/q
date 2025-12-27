@@ -12,15 +12,16 @@ type Props = {
 export const useLoadShareQuotationModalWithDirectLink = ({
   accessFormValuesSignal,
 }: Props): void => {
-  const { quotationId } = useParams()
+  const urlParams = useParams()
   const getQuotationMutation = useGetQuotationMutation()
 
   useEffectOnce(() => {
-    if (quotationId !== undefined) {
-      const quotationIsAlreadyLoaded = getState().quotation.id === quotationId
+    if (urlParams.quotationId !== undefined) {
+      const quotationIsAlreadyLoaded =
+        getState().quotation.id === urlParams.quotationId
 
       if (quotationIsAlreadyLoaded === false) {
-        getQuotationMutation.mutate({ id: quotationId })
+        getQuotationMutation.mutate({ id: urlParams.quotationId })
       }
     }
   })

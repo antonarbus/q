@@ -14,7 +14,7 @@ import { toast } from 'sonner'
 import { permissionLevel } from '@root/shared/const/permissionLevel'
 
 export const useLoadQuotation = (): void => {
-  const { quotationId } = useParams()
+  const urlParams = useParams()
 
   const shouldLoadQuotation = useSelector(
     (state) => state.app.shouldLoadQuotation,
@@ -36,7 +36,7 @@ export const useLoadQuotation = (): void => {
     }
 
     const shouldAutoDetectFromWhereToLoadQuotation =
-      quotationId === undefined || quotationId === 'new'
+      urlParams.quotationId === undefined || urlParams.quotationId === 'new'
 
     if (shouldAutoDetectFromWhereToLoadQuotation === true) {
       return 'template'
@@ -175,12 +175,12 @@ export const useLoadQuotation = (): void => {
           dispatch(
             appSlice.actions.showLoadingOverlay({
               shouldShowLoader: true,
-              text: `Loading ${quotationId}...`,
+              text: `Loading ${urlParams.quotationId}...`,
             }),
           )
 
-          if (quotationId !== undefined) {
-            getQuotationMutation.mutate({ id: quotationId })
+          if (urlParams.quotationId !== undefined) {
+            getQuotationMutation.mutate({ id: urlParams.quotationId })
           }
 
           dispatch(
@@ -232,7 +232,7 @@ export const useLoadQuotation = (): void => {
 
         dispatch(
           appSlice.actions.setBackgroundMessage({
-            message: `Forbidden to view quotation ${quotationId}`,
+            message: `Forbidden to view quotation ${urlParams.quotationId}`,
           }),
         )
       }
@@ -263,7 +263,7 @@ export const useLoadQuotation = (): void => {
       ) {
         dispatch(
           appSlice.actions.setBackgroundMessage({
-            message: `Quotation ${quotationId} not found`,
+            message: `Quotation ${urlParams.quotationId} not found`,
           }),
         )
       }
@@ -274,7 +274,7 @@ export const useLoadQuotation = (): void => {
       ) {
         dispatch(
           appSlice.actions.setBackgroundMessage({
-            message: `Quotation ${quotationId} not found, probably deleted`,
+            message: `Quotation ${urlParams.quotationId} not found, probably deleted`,
           }),
         )
       }

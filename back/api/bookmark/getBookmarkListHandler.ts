@@ -14,6 +14,7 @@ type ReqBody = undefined
 
 export type ResBody = {
   bookmarkList: SelectBookmark[]
+  message: string
 }
 
 export type ErrorResBody = {
@@ -33,12 +34,17 @@ export const getBookmarkListHandler: RouterHandler = async (req, res) => {
     res,
   })
 
+  const messageList: string[] = []
+
   const bookmarkListSelected = await db
     .select()
     .from(bookmarksTable)
     .where(eq(bookmarksTable.email, userFromAccessToken.email))
 
-  res
-    .status(httpStatusCode.success200)
-    .json({ bookmarkList: bookmarkListSelected })
+  messageList.push(`Found ${bookmarkListSelected.length} bookmarks`)
+
+  res.status(httpStatusCode.success200).json({
+    bookmarkList: bookmarkListSelected,
+    message: messageList.join(' | '),
+  })
 }

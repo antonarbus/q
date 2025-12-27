@@ -14,6 +14,7 @@ type ReqBody = undefined
 
 export type ResBody = {
   distinctCategoryList: SelectBookmark['category'][]
+  message: string
 }
 
 export type ErrorResBody = {
@@ -33,6 +34,8 @@ export const getBookmarkCategoriesHandler: RouterHandler = async (req, res) => {
     res,
   })
 
+  const messageList: string[] = []
+
   const bookmarkListSelected = await db
     .selectDistinct({ category: bookmarksTable.category })
     .from(bookmarksTable)
@@ -46,5 +49,10 @@ export const getBookmarkCategoriesHandler: RouterHandler = async (req, res) => {
 
   const distinctCategoryList = bookmarkListSelected.map((row) => row.category)
 
-  res.status(httpStatusCode.success200).json({ distinctCategoryList })
+  messageList.push(`Found ${distinctCategoryList.length} distinct categories`)
+
+  res.status(httpStatusCode.success200).json({
+    distinctCategoryList,
+    message: messageList.join(' | '),
+  })
 }

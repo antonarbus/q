@@ -17,7 +17,9 @@ export type ReqBody = {
   bookmarkId: SelectBookmark['id']
 }
 
-export type ResBody = undefined
+export type ResBody = {
+  message: string
+}
 
 export type ErrorResBody = {
   message: string
@@ -36,6 +38,8 @@ export const deleteBookmarkHandler: RouterHandler = async (req, res) => {
     res,
   })
 
+  const messageList: string[] = []
+
   const deleteResponse = await db
     .delete(bookmarksTable)
     .where(
@@ -46,25 +50,35 @@ export const deleteBookmarkHandler: RouterHandler = async (req, res) => {
     )
 
   if (deleteResponse.rowCount === 0) {
+    messageList.push('Bookmark not found in database')
+
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'NOT_FOUND',
       statusCode: httpStatusCode.notFound404,
-      message: 'Bookmark not found',
+      message: messageList.join(' | '),
     })
   }
+
+  messageList.push('Bookmark deleted from database')
 
   const fileInfo = getFileInfo({ id: req.body.bookmarkId })
   const [{ statusCode }] = await bucket.file(fileInfo.path).delete()
 
   if (statusCode === 204) {
-    res.status(httpStatusCode.success200).json()
+    messageList.push('Bookmark deleted from storage')
+
+    res.status(httpStatusCode.success200).json({
+      message: messageList.join(' | '),
+    })
 
     return
   }
 
+  messageList.push('Failed to delete bookmark from storage')
+
   throw new HttpError<ErrorResBody['errorCode']>({
     errorCode: 'NO_ITEM_IN_BUCKET',
     statusCode: httpStatusCode.notFound404,
-    message: 'No item in bucket',
+    message: messageList.join(' | '),
   })
 }

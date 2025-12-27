@@ -12,16 +12,18 @@ export const useLoadInfoModalOpenedWithDirectLink = ({
   infoFormValues,
 }: Props): void => {
   const quotation = useSelector((state) => state.quotation)
-  const { quotationId, bookmarkId } = useParams()
+  const urlParams = useParams()
 
   useUpdateEffect(() => {
-    const item = getFromStore({ id: bookmarkId ?? quotationId ?? 'new' })
+    const item = getFromStore({
+      id: urlParams.bookmarkId ?? urlParams.quotationId ?? 'new',
+    })
 
     if (item !== undefined) {
-      infoFormValues.nameSignal.value = item.name ?? ''
-      infoFormValues.categorySignal.value = item.category ?? ''
-      infoFormValues.descSignal.value = item.desc ?? ''
-      infoFormValues.infoSignal.value = item.info ?? ''
+      infoFormValues.nameSignal.value = item.name
+      infoFormValues.categorySignal.value = item.category
+      infoFormValues.descSignal.value = item.desc
+      infoFormValues.infoSignal.value = item.info
     }
   }, [quotation])
 }

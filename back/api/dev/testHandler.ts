@@ -29,18 +29,26 @@ type RouterHandler = (
 export const testHandler: RouterHandler = async (req, res) => {
   const userFromRefreshToken = getUserFromRefreshTokenOrJohn({ req })
 
+  const messageList: string[] = []
+
   if (userFromRefreshToken.roles.includes(userRole.superAdmin) === false) {
+    messageList.push('Forbidden - super admin access required')
+
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'FORBIDDEN',
       statusCode: httpStatusCode.forbidden403,
-      message: 'Forbidden - super admin access required',
+      message: messageList.join(' | '),
     })
   }
+
+  messageList.push('Super admin access verified')
 
   const userListSelected = await db
     .select()
     .from(usersTable)
     .where(eq(usersTable.email, 'some random guy'))
 
-  res.status(200).json({ dbRes: userListSelected })
+  messageList.push('Test query executed successfully')
+
+  res.status(200).json({ dbRes: userListSelected, message: messageList.join(' | ') })
 }

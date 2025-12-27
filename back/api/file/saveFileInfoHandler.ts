@@ -15,6 +15,7 @@ export type ReqBody = Required<Pick<InsertFile, 'id' | 'name' | 'size'>>
 
 export type ResBody = {
   fileInfo: InsertFile
+  message: string
 }
 
 type ErrorResBody = {
@@ -34,6 +35,8 @@ export const saveFileInfoHandler: RouterHandler = async (req, res) => {
     res,
   })
 
+  const messageList: string[] = []
+
   const [fileInserted] = await db
     .insert(filesTable)
     .values({
@@ -46,12 +49,19 @@ export const saveFileInfoHandler: RouterHandler = async (req, res) => {
     .returning()
 
   if (fileInserted === undefined) {
+    messageList.push('Failed to save file information to database')
+
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'FILE_SAVE_FAILED',
       statusCode: httpStatusCode.serverError500,
-      message: 'Failed to save file information',
+      message: messageList.join(' | '),
     })
   }
 
-  res.status(httpStatusCode.success200).json({ fileInfo: fileInserted })
+  messageList.push('File information saved to database')
+
+  res.status(httpStatusCode.success200).json({
+    fileInfo: fileInserted,
+    message: messageList.join(' | '),
+  })
 }

@@ -15,7 +15,7 @@ type Props = {
 export const useLoadBookmarkModalOpenedWithDirectLink = ({
   bookmarkFromValues,
 }: Props): void => {
-  const { bookmarkId } = useParams()
+  const urlParams = useParams()
   const navigate = useNavigate()
 
   const getBookmarkMutation = useGetBookmarkMutation()
@@ -28,11 +28,11 @@ export const useLoadBookmarkModalOpenedWithDirectLink = ({
       return
     }
 
-    if (bookmarkId === undefined) {
+    if (urlParams.bookmarkId === undefined) {
       return
     }
 
-    getBookmarkMutation.mutate({ bookmarkId })
+    getBookmarkMutation.mutate({ bookmarkId: urlParams.bookmarkId })
   })
 
   useUpdateEffect(() => {

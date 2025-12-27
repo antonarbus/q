@@ -16,6 +16,7 @@ export type ResBody = {
   signedUrl: string
   url: string
   fileId: string
+  message: string
 }
 
 type ErrorResBody = {
@@ -32,9 +33,13 @@ type RouterHandler = (
 export const fileUploadSignedUrlHandler: RouterHandler = async (req, res) => {
   getUserFromAccessTokenOrThrowUnauthorized({ req, res })
 
+  const messageList: string[] = []
+
   const fileId = generateId()
   const fileInfo = getFileInfo({ id: fileId })
   const file = bucket.file(fileInfo.path)
+
+  messageList.push('Generated new file ID')
 
   try {
     const [signedUrl] = await file.getSignedUrl({
@@ -46,16 +51,21 @@ export const fileUploadSignedUrlHandler: RouterHandler = async (req, res) => {
       },
     })
 
+    messageList.push('Generated signed URL for file upload')
+
     res.status(httpStatusCode.success200).json({
       signedUrl,
       url: fileInfo.url,
       fileId,
+      message: messageList.join(' | '),
     })
   } catch {
+    messageList.push('Failed to generate signed URL')
+
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'SIGNED_URL_GENERATION_FAILED',
       statusCode: httpStatusCode.serverError500,
-      message: 'Failed to generate signed URL for file upload',
+      message: messageList.join(' | '),
     })
   }
 }

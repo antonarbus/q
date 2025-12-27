@@ -18,6 +18,7 @@ export type ResBody = {
     name: SelectFile['name']
     size: SelectFile['size']
   }[]
+  message: string
 }
 
 export type ErrorResBody = {
@@ -37,10 +38,17 @@ export const getFileListHandler: RouterHandler = async (req, res) => {
     res,
   })
 
+  const messageList: string[] = []
+
   const fileListSelected = await db
     .select()
     .from(filesTable)
     .where(eq(filesTable.email, userFromAccessToken.email))
 
-  res.status(httpStatusCode.success200).json({ fileList: fileListSelected })
+  messageList.push(`Found ${fileListSelected.length} files`)
+
+  res.status(httpStatusCode.success200).json({
+    fileList: fileListSelected,
+    message: messageList.join(' | '),
+  })
 }

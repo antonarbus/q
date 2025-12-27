@@ -33,6 +33,7 @@ type ReqBody = {
 export type ResBody = {
   quotationList: SelectQuotation[]
   quotationListTotalCount: number
+  message: string
 }
 
 type ErrorResBody = {
@@ -52,13 +53,19 @@ export const getQuotationListAllHandler: RouterHandler = async (req, res) => {
     res,
   })
 
+  const messageList: string[] = []
+
   if (userFromAccessToken.roles.includes(userRole.superAdmin) === false) {
+    messageList.push('No permission to view all quotations')
+
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'NO_PERMISSION_TO_VIEW',
       statusCode: httpStatusCode.forbidden403,
-      message: 'No permission to view all quotations',
+      message: messageList.join(' | '),
     })
   }
+
+  messageList.push('Super-admin access granted')
 
   const sortConditions = req.body.sortModel
     .map((item) => {
@@ -139,15 +146,25 @@ export const getQuotationListAllHandler: RouterHandler = async (req, res) => {
     quotationListTotalCountResponse.status === 'fulfilled'
 
   if (fulfilled === false) {
+    messageList.push('Failed to fetch quotations from database')
+
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'UNHANDLED_ERROR',
       statusCode: httpStatusCode.notFound404,
-      message: 'Failed to fetch quotation list',
+      message: messageList.join(' | '),
     })
   }
+
+  messageList.push(
+    `Found ${quotationListTotalCountResponse.value} total quotations`,
+  )
+  messageList.push(
+    `Returned ${quotationListResponse.value.length} quotations for current page`,
+  )
 
   res.status(httpStatusCode.success200).json({
     quotationList: quotationListResponse.value,
     quotationListTotalCount: quotationListTotalCountResponse.value,
+    message: messageList.join(' | '),
   })
 }

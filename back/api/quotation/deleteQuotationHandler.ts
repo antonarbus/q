@@ -17,7 +17,9 @@ export type ReqBody = {
   quotationId: SelectQuotation['id']
 }
 
-export type ResBody = undefined
+export type ResBody = {
+  message: string
+}
 
 export type ErrorResBody = {
   message: string
@@ -36,6 +38,8 @@ export const deleteQuotationHandler: RouterHandler = async (req, res) => {
     res,
   })
 
+  const messageList: string[] = []
+
   const deleteResponse = await db
     .delete(quotationsTable)
     .where(
@@ -46,25 +50,35 @@ export const deleteQuotationHandler: RouterHandler = async (req, res) => {
     )
 
   if (deleteResponse.rowCount === 0) {
+    messageList.push('Quotation not found in database')
+
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'QUOTATION_NOT_FOUND',
       statusCode: httpStatusCode.notFound404,
-      message: 'Quotation not found',
+      message: messageList.join(' | '),
     })
   }
+
+  messageList.push('Quotation deleted from database')
 
   const fileInfo = getFileInfo({ id: req.body.quotationId })
   const [{ statusCode }] = await bucket.file(fileInfo.path).delete()
 
   if (statusCode === 204) {
-    res.status(httpStatusCode.noContent204).send()
+    messageList.push('Quotation deleted from storage')
+
+    res.status(httpStatusCode.success200).json({
+      message: messageList.join(' | '),
+    })
 
     return
   }
 
+  messageList.push('Failed to delete quotation from storage')
+
   throw new HttpError<ErrorResBody['errorCode']>({
     errorCode: 'QUOTATION_NOT_DELETED',
     statusCode: httpStatusCode.notFound404,
-    message: 'Quotation not deleted from storage',
+    message: messageList.join(' | '),
   })
 }

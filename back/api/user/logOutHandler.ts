@@ -13,7 +13,7 @@ type UrlParam = ParamsDictionary
 type ReqBody = undefined
 
 export type ResBody = {
-  message: 'logged out'
+  message: string
 }
 
 export type ErrorResBody = {
@@ -28,7 +28,14 @@ type RouterHandler = (
 ) => void
 
 export const logOutHandler: RouterHandler = (_req, res) => {
+  const messageList: string[] = []
+
   removeNoTraceMode({ res })
   removeRefreshTokenCookie({ res })
-  res.status(httpStatusCode.success200).json({ message: 'logged out' })
+
+  messageList.push('User logged out successfully')
+
+  res.status(httpStatusCode.success200).json({
+    message: messageList.join(' | '),
+  })
 }

@@ -27,6 +27,7 @@ export type ResBody = {
   accessJwtTokenExpiresOn: string
   roles: SelectUser['roles']
   jwtRefreshTokenExpirationDays: number
+  message: string
 }
 
 export type ErrorResBody = {
@@ -41,20 +42,28 @@ type RouterHandler = (
 ) => Promise<void>
 
 export const getAccessTokenHandler: RouterHandler = async (req, res) => {
+  const messageList: string[] = []
+
   // User perviously logged in
   const userFromRefreshToken = getUserFromRefreshTokenOrNull({ req })
 
   if (userFromRefreshToken === null) {
+    messageList.push('No refresh token found')
+
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'NOT_LOGGED_IN',
       statusCode: httpStatusCode.unauthorized401,
-      message: 'Not logged in',
+      message: messageList.join(' | '),
     })
   }
+
+  messageList.push('Refresh token validated')
 
   const shouldNotTrace = getShouldNotTrace({ req })
 
   if (shouldNotTrace === true) {
+    messageList.push('Should not trace - skipping loggedAt update')
+
     // Just select without updating
     const [userSelected] = await db
       .select()
@@ -67,15 +76,20 @@ export const getAccessTokenHandler: RouterHandler = async (req, res) => {
       )
 
     if (userSelected === undefined) {
+      messageList.push('User not found in database')
       removeRefreshTokenCookie({ res })
 
       throw new HttpError<ErrorResBody['errorCode']>({
         errorCode: 'NOT_LOGGED_IN',
         statusCode: httpStatusCode.unauthorized401,
-        message: 'Not logged in',
+        message: messageList.join(' | '),
       })
     }
+
+    messageList.push('User verified without trace')
   } else {
+    messageList.push('Updating loggedAt timestamp')
+
     // Update loggedAt and return the updated user
     const [userUpdated] = await db
       .update(usersTable)
@@ -91,20 +105,25 @@ export const getAccessTokenHandler: RouterHandler = async (req, res) => {
       .returning()
 
     if (userUpdated === undefined) {
+      messageList.push('User not found in database')
       removeRefreshTokenCookie({ res })
 
       throw new HttpError<ErrorResBody['errorCode']>({
         errorCode: 'NOT_LOGGED_IN',
         statusCode: httpStatusCode.unauthorized401,
-        message: 'Not logged in',
+        message: messageList.join(' | '),
       })
     }
+
+    messageList.push('loggedAt updated')
   }
 
   const accessToken = generateAccessToken({
     email: userFromRefreshToken.email,
     roles: userFromRefreshToken.roles,
   })
+
+  messageList.push('Access token generated')
 
   res.status(httpStatusCode.success200).json({
     accessJwtToken: accessToken.value,
@@ -113,5 +132,6 @@ export const getAccessTokenHandler: RouterHandler = async (req, res) => {
     email: userFromRefreshToken.email,
     jwtRefreshTokenExpirationDays:
       userFromRefreshToken.jwtRefreshTokenExpirationDays,
+    message: messageList.join(' | '),
   })
 }

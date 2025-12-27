@@ -20,7 +20,7 @@ export type ReqBody = {
 }
 
 export type ResBody = {
-  message: 'saved' | 'updated' | 'copied and saved'
+  message: string
   quotation: SelectQuotation
 }
 
@@ -41,11 +41,15 @@ export const saveQuotationHandler: RouterHandler = async (req, res) => {
     res,
   })
 
+  const messageList: string[] = []
+
   if (req.body.quotation.id === '') {
+    messageList.push('Quotation ID is not provided')
+
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'ID_NOT_PROVIDED',
       statusCode: httpStatusCode.forbidden403,
-      message: 'Quotation ID is not provided',
+      message: messageList.join(' | '),
     })
   }
 
@@ -76,6 +80,8 @@ export const saveQuotationHandler: RouterHandler = async (req, res) => {
   const quotationOwnership = await getQuotationOwnership()
 
   if (quotationOwnership === 'your new') {
+    messageList.push('Creating new quotation')
+
     const quotationId = generateId()
 
     const [quotationInserted] = await db
@@ -94,12 +100,16 @@ export const saveQuotationHandler: RouterHandler = async (req, res) => {
       .returning()
 
     if (quotationInserted === undefined) {
+      messageList.push('Failed to save quotation to database')
+
       throw new HttpError<ErrorResBody['errorCode']>({
         errorCode: 'FAILED_TO_SAVE',
         statusCode: httpStatusCode.serverError500,
-        message: 'Failed to save quotation meta data',
+        message: messageList.join(' | '),
       })
     }
+
+    messageList.push('Quotation saved to database')
 
     const fileInfo = getFileInfo({ id: quotationId })
     const quotationFile = bucket.file(fileInfo.path)
@@ -112,15 +122,19 @@ export const saveQuotationHandler: RouterHandler = async (req, res) => {
     const quotationJson = JSON.stringify(fullQuotation, null, 2)
 
     await quotationFile.save(quotationJson).catch(() => {
+      messageList.push('Failed to save quotation to storage')
+
       throw new HttpError<ErrorResBody['errorCode']>({
         errorCode: 'FAILED_TO_SAVE',
         statusCode: httpStatusCode.serverError500,
-        message: 'Failed to save quotation in bucket',
+        message: messageList.join(' | '),
       })
     })
 
+    messageList.push('Quotation saved to storage')
+
     res.status(httpStatusCode.success200).json({
-      message: 'saved',
+      message: messageList.join(' | '),
       quotation: quotationInserted,
     })
 
@@ -128,6 +142,8 @@ export const saveQuotationHandler: RouterHandler = async (req, res) => {
   }
 
   if (quotationOwnership === 'your existing') {
+    messageList.push('Updating existing quotation')
+
     const [quotationUpdated] = await db
       .update(quotationsTable)
       .set({
@@ -146,12 +162,16 @@ export const saveQuotationHandler: RouterHandler = async (req, res) => {
       .returning()
 
     if (quotationUpdated === undefined) {
+      messageList.push('Failed to update quotation in database')
+
       throw new HttpError<ErrorResBody['errorCode']>({
         errorCode: 'FAILED_TO_SAVE',
         statusCode: httpStatusCode.serverError500,
-        message: 'Failed to update existing quotation',
+        message: messageList.join(' | '),
       })
     }
+
+    messageList.push('Quotation updated in database')
 
     const fileInfo = getFileInfo({ id: req.body.quotation.id })
     const file = bucket.file(fileInfo.path)
@@ -164,15 +184,19 @@ export const saveQuotationHandler: RouterHandler = async (req, res) => {
     const quotationJson = JSON.stringify(fullQuotation, null, 2)
 
     await file.save(quotationJson).catch(() => {
+      messageList.push('Failed to save quotation to storage')
+
       throw new HttpError<ErrorResBody['errorCode']>({
         errorCode: 'FAILED_TO_SAVE',
         statusCode: httpStatusCode.serverError500,
-        message: 'Failed to save quotation in bucket',
+        message: messageList.join(' | '),
       })
     })
 
+    messageList.push('Quotation saved to storage')
+
     res.status(httpStatusCode.success200).json({
-      message: 'updated',
+      message: messageList.join(' | '),
       quotation: quotationUpdated,
     })
 
@@ -180,6 +204,8 @@ export const saveQuotationHandler: RouterHandler = async (req, res) => {
   }
 
   if (quotationOwnership === 'foreign existing') {
+    messageList.push('Copying foreign quotation as new')
+
     const newQuotationId = generateId()
 
     const [quotationInserted] = await db
@@ -198,12 +224,16 @@ export const saveQuotationHandler: RouterHandler = async (req, res) => {
       .returning()
 
     if (quotationInserted === undefined) {
+      messageList.push('Failed to save copied quotation to database')
+
       throw new HttpError<ErrorResBody['errorCode']>({
         errorCode: 'FAILED_TO_SAVE',
         statusCode: httpStatusCode.serverError500,
-        message: 'Failed to copy and save quotation',
+        message: messageList.join(' | '),
       })
     }
+
+    messageList.push('Copied quotation saved to database')
 
     // const quotationDataFromDb = createResponse.toObject()
     const fileInfo = getFileInfo({ id: newQuotationId })
@@ -217,15 +247,19 @@ export const saveQuotationHandler: RouterHandler = async (req, res) => {
     const quotationJson = JSON.stringify(fullQuotation, null, 2)
 
     await quotationFile.save(quotationJson).catch(() => {
+      messageList.push('Failed to save copied quotation to storage')
+
       throw new HttpError<ErrorResBody['errorCode']>({
         errorCode: 'FAILED_TO_SAVE',
         statusCode: httpStatusCode.serverError500,
-        message: 'Failed to save quotation in bucket',
+        message: messageList.join(' | '),
       })
     })
 
+    messageList.push('Copied quotation saved to storage')
+
     res.status(httpStatusCode.success200).json({
-      message: 'copied and saved',
+      message: messageList.join(' | '),
       quotation: quotationInserted,
     })
   }

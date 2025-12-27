@@ -35,6 +35,7 @@ export type ResBody = {
   accessJwtTokenExpiresOn: string
   email: SelectUser['email']
   roles: SelectUser['roles']
+  message: string
 }
 
 export type ErrorResBody = {
@@ -56,6 +57,8 @@ export const registerUserHandler: RouterHandler = async (req, res) => {
   const emailFromInput = req.body.email.toLowerCase()
   const passwordFromInput = req.body.password
 
+  const messageList: string[] = []
+
   const [userSelected] = await db
     .select()
     .from(usersTable)
@@ -67,12 +70,16 @@ export const registerUserHandler: RouterHandler = async (req, res) => {
     )
 
   if (userSelected !== undefined) {
+    messageList.push('User already exists')
+
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'ALREADY_EXISTS',
       statusCode: httpStatusCode.forbidden403,
-      message: 'User already exists',
+      message: messageList.join(' | '),
     })
   }
+
+  messageList.push('Email available for registration')
 
   const SALT_ROUNDS = 10
   const passwordEncrypted = await bcrypt.hash(passwordFromInput, SALT_ROUNDS)
@@ -96,12 +103,16 @@ export const registerUserHandler: RouterHandler = async (req, res) => {
     .returning()
 
   if (userInserted === undefined) {
+    messageList.push('Failed to create user in database')
+
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'INTERNAL_ERROR',
       statusCode: httpStatusCode.serverError500,
-      message: 'Failed to register user',
+      message: messageList.join(' | '),
     })
   }
+
+  messageList.push('User created in database')
 
   const emailRes = await sendEmail({
     to: emailFromInput,
@@ -127,19 +138,24 @@ export const registerUserHandler: RouterHandler = async (req, res) => {
 
   // https://developers.mailersend.com/general.html#api-response
   if (emailRes.statusCode === 202) {
+    messageList.push('Activation email sent successfully')
+
     res.status(httpStatusCode.created201).json({
       email: emailFromInput,
       roles: [userRole.user],
       accessJwtToken: accessToken.value,
       accessJwtTokenExpiresOn: accessToken.expiresOn,
+      message: messageList.join(' | '),
     })
 
     return
   }
 
+  messageList.push('Failed to send activation email')
+
   throw new HttpError<ErrorResBody['errorCode']>({
     errorCode: 'ACTIVATION_LINK_NOT_SENT',
     statusCode: httpStatusCode.serverError500,
-    message: 'Failed to send activation link',
+    message: messageList.join(' | '),
   })
 }

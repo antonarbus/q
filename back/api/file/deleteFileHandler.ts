@@ -17,7 +17,9 @@ export type ReqBody = {
   fileId: SelectFile['id']
 }
 
-export type ResBody = undefined
+export type ResBody = {
+  message: string
+}
 
 export type ErrorResBody = {
   message: string
@@ -39,6 +41,8 @@ export const deleteFileHandler: RouterHandler = async (req, res) => {
     req,
     res,
   })
+
+  const messageList: string[] = []
 
   type FileOwnerShip = 'file not found' | 'owner' | 'not owner'
 
@@ -62,22 +66,28 @@ export const deleteFileHandler: RouterHandler = async (req, res) => {
   const fileOwnerShip = await getFileOwnerShip()
 
   if (fileOwnerShip === 'file not found') {
+    messageList.push('File not found in database')
+
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'FILE_NOT_FOUND',
       statusCode: httpStatusCode.notFound404,
-      message: 'File not found',
+      message: messageList.join(' | '),
     })
   }
 
   if (fileOwnerShip === 'not owner') {
+    messageList.push('File not owned by user')
+
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'FILE_NOT_OWNED',
       statusCode: httpStatusCode.notFound404,
-      message: 'You did not upload this file',
+      message: messageList.join(' | '),
     })
   }
 
   if (fileOwnerShip === 'owner') {
+    messageList.push('File ownership verified')
+
     const fileInfo = getFileInfo({ id: req.body.fileId })
 
     try {
@@ -93,14 +103,20 @@ export const deleteFileHandler: RouterHandler = async (req, res) => {
         )
 
       await Promise.all([deleteFromBucketPromise, deleteFromDatabasePromise])
+
+      messageList.push('File deleted from storage and database')
     } catch {
+      messageList.push('Failed to delete file')
+
       throw new HttpError<ErrorResBody['errorCode']>({
         errorCode: 'FILE_DELETE_FAILED',
         statusCode: httpStatusCode.notFound404,
-        message: 'Failed to delete file',
+        message: messageList.join(' | '),
       })
     }
 
-    res.status(httpStatusCode.noContent204).send()
+    res.status(httpStatusCode.success200).json({
+      message: messageList.join(' | '),
+    })
   }
 }

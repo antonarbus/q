@@ -14,6 +14,7 @@ type ReqBody = undefined
 
 export type ResBody = {
   quotationList: SelectQuotation[]
+  message: string
 }
 
 export type ErrorResBody = {
@@ -33,12 +34,17 @@ export const getQuotationListHandler: RouterHandler = async (req, res) => {
     res,
   })
 
+  const messageList: string[] = []
+
   const quotationListSelected = await db
     .select()
     .from(quotationsTable)
     .where(eq(quotationsTable.email, userFromAccessToken.email))
 
-  res
-    .status(httpStatusCode.success200)
-    .json({ quotationList: quotationListSelected })
+  messageList.push(`Found ${quotationListSelected.length} quotations`)
+
+  res.status(httpStatusCode.success200).json({
+    quotationList: quotationListSelected,
+    message: messageList.join(' | '),
+  })
 }

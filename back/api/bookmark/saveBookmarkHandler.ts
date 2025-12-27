@@ -19,7 +19,7 @@ export type ReqBody = {
 
 export type ResBody = {
   bookmark: SelectBookmark
-  message: 'saved' | 'updated'
+  message: string
 }
 
 export type ErrorResBody = {
@@ -39,11 +39,15 @@ export const saveBookmarkHandler: RouterHandler = async (req, res) => {
     res,
   })
 
+  const messageList: string[] = []
+
   if (req.body.bookmark.id === '') {
+    messageList.push('Bookmark ID is required')
+
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'ID_NOT_PROVIDED',
       statusCode: httpStatusCode.badRequest400,
-      message: 'Bookmark ID is required',
+      message: messageList.join(' | '),
     })
   }
 
@@ -70,11 +74,21 @@ export const saveBookmarkHandler: RouterHandler = async (req, res) => {
     .returning()
 
   if (bookmarkInserted === undefined) {
+    messageList.push('Failed to save bookmark meta data')
+
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'FAILED_TO_SAVE',
       statusCode: httpStatusCode.serverError500,
-      message: 'Failed to save bookmark meta data',
+      message: messageList.join(' | '),
     })
+  }
+
+  const isNew = bookmarkInserted.createdAt === bookmarkInserted.updatedAt
+
+  if (isNew === true) {
+    messageList.push('Bookmark created in database')
+  } else {
+    messageList.push('Bookmark updated in database')
   }
 
   const fileInfo = getFileInfo({ id: req.body.bookmark.id })
@@ -87,17 +101,19 @@ export const saveBookmarkHandler: RouterHandler = async (req, res) => {
   )
 
   await bookmarkFile.save(contents).catch(() => {
+    messageList.push('Failed to save bookmark in bucket')
+
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'FAILED_TO_SAVE',
       statusCode: httpStatusCode.serverError500,
-      message: 'Failed to save bookmark in bucket',
+      message: messageList.join(' | '),
     })
   })
 
-  const isNew = bookmarkInserted.createdAt === bookmarkInserted.updatedAt
+  messageList.push('Bookmark saved in storage')
 
   res.status(httpStatusCode.success200).json({
-    message: isNew === true ? 'saved' : 'updated',
+    message: messageList.join(' | '),
     bookmark: bookmarkInserted,
   })
 }

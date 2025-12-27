@@ -15,40 +15,30 @@ type Res = {
 }
 
 export const useActivate = (): Res => {
-  const { activationKey } = useParams()
-
+  const urlParams = useParams()
   const activateUserMutation = useActivateUserMutation()
 
   useEffectOnce(() => {
-    if (activationKey !== undefined) {
-      activateUserMutation.mutate({ activationKey })
+    if (urlParams.activationKey !== undefined) {
+      activateUserMutation.mutate({ activationKey: urlParams.activationKey })
     }
   })
 
   useUpdateEffect(() => {
     if (activateUserMutation.isSuccess === true) {
       if (activateUserMutation.data.message === 'Activated') {
-        const { accessJwtToken, email, roles } = activateUserMutation.data
-
-        if (accessJwtToken === undefined) {
-          return
-        }
-
-        if (email === undefined) {
-          return
-        }
-
-        if (roles === undefined) {
-          return
-        }
-
         dispatch(
           userSlice.actions.setAccessToken({
-            accessToken: accessJwtToken,
+            accessToken: activateUserMutation.data.accessJwtToken,
           }),
         )
 
-        dispatch(userSlice.actions.rememberLoggedUser({ email, roles }))
+        dispatch(
+          userSlice.actions.rememberLoggedUser({
+            email: activateUserMutation.data.email,
+            roles: activateUserMutation.data.roles,
+          }),
+        )
 
         dispatch(
           navSlice.actions.hideNavItems({ navItemIds: [navItemId.login] }),
@@ -57,10 +47,6 @@ export const useActivate = (): Res => {
         dispatch(
           navSlice.actions.showNavItems({ navItemIds: [navItemId.profile] }),
         )
-      }
-
-      if (activateUserMutation.data.message === 'Already activated') {
-        toast.info('Already activated')
       }
     }
   }, [activateUserMutation.isSuccess])
@@ -71,6 +57,15 @@ export const useActivate = (): Res => {
         activateUserMutation.error.response?.data.errorCode === 'KEY_NOT_FOUND'
       ) {
         toast.warning('Activation key not found')
+
+        return
+      }
+
+      if (
+        activateUserMutation.error.response?.data.errorCode ===
+        'ALREADY_ACTIVATED'
+      ) {
+        toast.info('Already activated')
 
         return
       }

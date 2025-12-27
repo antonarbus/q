@@ -14,6 +14,7 @@ type ReqBody = undefined
 
 export type ResBody = {
   distinctQuotationList: SelectQuotation['category'][]
+  message: string
 }
 
 export type ErrorResBody = {
@@ -36,6 +37,8 @@ export const getQuotationCategoriesHandler: RouterHandler = async (
     res,
   })
 
+  const messageList: string[] = []
+
   const quotationListSelected = await db
     .selectDistinct({ category: quotationsTable.category })
     .from(quotationsTable)
@@ -49,7 +52,10 @@ export const getQuotationCategoriesHandler: RouterHandler = async (
 
   const distinctCategoryList = quotationListSelected.map((row) => row.category)
 
-  res
-    .status(httpStatusCode.success200)
-    .json({ distinctQuotationList: distinctCategoryList })
+  messageList.push(`Found ${distinctCategoryList.length} distinct categories`)
+
+  res.status(httpStatusCode.success200).json({
+    distinctQuotationList: distinctCategoryList,
+    message: messageList.join(' | '),
+  })
 }

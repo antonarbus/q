@@ -20,21 +20,17 @@ export type ReqBody = {
   activationKey: NonNullable<SelectUser['activationKey']>
 }
 
-export type ResBody =
-  | {
-      accessJwtToken: string
-      accessJwtTokenExpiresOn: string
-      email: SelectUser['email']
-      roles: SelectUser['roles']
-      message: 'Activated'
-    }
-  | {
-      message: 'Already activated'
-    }
+export type ResBody = {
+  accessJwtToken: string
+  accessJwtTokenExpiresOn: string
+  email: SelectUser['email']
+  roles: SelectUser['roles']
+  message: string
+}
 
 export type ErrorResBody = {
   message: string
-  errorCode: ErrorCode | 'KEY_NOT_FOUND' | 'FAILED'
+  errorCode: ErrorCode | 'KEY_NOT_FOUND' | 'FAILED' | 'ALREADY_ACTIVATED'
 }
 
 type RouterHandler = (
@@ -44,21 +40,33 @@ type RouterHandler = (
 ) => Promise<void>
 
 export const activateHandler: RouterHandler = async (req, res) => {
+  const messageList: string[] = []
+
   const [userSelected] = await db
     .select()
     .from(usersTable)
     .where(eq(usersTable.activationKey, req.body.activationKey))
 
   if (userSelected === undefined) {
+    messageList.push('Activation key not found')
+
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'KEY_NOT_FOUND',
       statusCode: httpStatusCode.badRequest400,
-      message: 'Activation key not found',
+      message: messageList.join(' | '),
     })
   }
 
+  messageList.push('Activation key valid')
+
   if (userSelected.isActivated === true) {
-    res.status(httpStatusCode.success200).json({ message: 'Already activated' })
+    messageList.push('Account already activated')
+
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'ALREADY_ACTIVATED',
+      statusCode: httpStatusCode.conflict409,
+      message: messageList.join(' | '),
+    })
 
     return
   }
@@ -86,12 +94,16 @@ export const activateHandler: RouterHandler = async (req, res) => {
     .returning()
 
   if (userUpdated === undefined) {
+    messageList.push('Failed to activate account in database')
+
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'FAILED',
       statusCode: httpStatusCode.serverError500,
-      message: 'Failed to activate',
+      message: messageList.join(' | '),
     })
   }
+
+  messageList.push('Account activated')
 
   const accessToken = generateAccessToken({
     email: userUpdated.email,
@@ -99,7 +111,7 @@ export const activateHandler: RouterHandler = async (req, res) => {
   })
 
   res.status(httpStatusCode.success200).json({
-    message: 'Activated',
+    message: messageList.join(' | '),
     accessJwtToken: accessToken.value,
     accessJwtTokenExpiresOn: accessToken.expiresOn,
     email: userUpdated.email,

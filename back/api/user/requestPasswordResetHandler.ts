@@ -18,7 +18,9 @@ export type ReqBody = {
   email: SelectUser['email']
 }
 
-export type ResBody = undefined
+export type ResBody = {
+  message: string
+}
 
 export type ErrorResBody = {
   message: string
@@ -37,6 +39,8 @@ type RouterHandler = (
 ) => Promise<void>
 
 export const requestPasswordResetHandler: RouterHandler = async (req, res) => {
+  const messageList: string[] = []
+
   const emailFromInput = req.body.email.toLowerCase()
 
   const [userSelected] = await db
@@ -45,20 +49,28 @@ export const requestPasswordResetHandler: RouterHandler = async (req, res) => {
     .where(eq(usersTable.email, emailFromInput))
 
   if (userSelected === undefined) {
+    messageList.push('User not found')
+
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'USER_NOT_FOUND',
       statusCode: httpStatusCode.forbidden403,
-      message: 'User not found',
+      message: messageList.join(' | '),
     })
   }
 
+  messageList.push('User found')
+
   if (userSelected.isActivated === false) {
+    messageList.push('Account not activated')
+
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'ACCOUNT_NOT_ACTIVATED',
       statusCode: httpStatusCode.forbidden403,
-      message: 'Account not activated',
+      message: messageList.join(' | '),
     })
   }
+
+  messageList.push('Account activation verified')
 
   const resetPasswordKey = generateId()
 
@@ -69,12 +81,16 @@ export const requestPasswordResetHandler: RouterHandler = async (req, res) => {
     .returning()
 
   if (userUpdated === undefined) {
+    messageList.push('Failed to issue reset key')
+
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'RESET_KEY_NOT_ISSUED',
       statusCode: httpStatusCode.serverError500,
-      message: 'Failed to issue reset key',
+      message: messageList.join(' | '),
     })
   }
+
+  messageList.push('Reset key generated')
 
   const emailRes = await sendEmail({
     to: emailFromInput,
@@ -95,14 +111,20 @@ export const requestPasswordResetHandler: RouterHandler = async (req, res) => {
 
   // https://developers.mailersend.com/general.html#api-response
   if (emailRes.statusCode === 202) {
-    res.status(httpStatusCode.created201).send()
+    messageList.push('Reset email sent successfully')
+
+    res.status(httpStatusCode.created201).json({
+      message: messageList.join(' | '),
+    })
 
     return
   }
 
+  messageList.push('Failed to send reset email')
+
   throw new HttpError<ErrorResBody['errorCode']>({
     errorCode: 'RESET_LINK_NOT_SENT',
     statusCode: httpStatusCode.serverError500,
-    message: 'Failed to send reset link',
+    message: messageList.join(' | '),
   })
 }

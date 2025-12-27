@@ -10,16 +10,16 @@ import { router } from '@shared/lib/react-router-dom/router'
 import { type ReactNode, useRef } from 'react'
 import { BsInfo } from 'react-icons/bs'
 import { useParams } from 'react-router-dom'
-import { useCategories } from './useCategories'
+import { useDistinctCategories } from './useDistinctCategories'
 
 export const InfoModal = (): ReactNode => {
-  const { quotationId, bookmarkId } = useParams()
+  const urlParams = useParams()
   const modalRef = useRef<HTMLDivElement>(null)
   const { infoFormValues } = useLoadInitValuesIntoInfoModal()
   useLoadInfoModalOpenedWithDirectLink({ infoFormValues })
-  const id = bookmarkId ?? quotationId ?? 'new'
+  const id = urlParams.bookmarkId ?? urlParams.quotationId ?? 'new'
   useUpdateItemInfo({ id, infoFormValues })
-  const { categories } = useCategories()
+  const distinctCategories = useDistinctCategories()
 
   const navigateUp = (): void => {
     void router.navigate('..')
@@ -40,7 +40,7 @@ export const InfoModal = (): ReactNode => {
       <NameField nameSignal={infoFormValues.nameSignal} />
       <CategoryField
         categorySignal={infoFormValues.categorySignal}
-        options={categories}
+        options={distinctCategories}
       />
       <DescriptionField descSignal={infoFormValues.descSignal} />
       <InfoField infoSignal={infoFormValues.infoSignal} />

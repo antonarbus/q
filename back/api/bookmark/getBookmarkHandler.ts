@@ -21,6 +21,7 @@ export type ReqBody = {
 
 export type ResBody = {
   bookmark: Bookmark
+  message: string
 }
 
 export type ErrorResBody = {
@@ -40,6 +41,8 @@ export const getBookmarkHandler: RouterHandler = async (req, res) => {
     res,
   })
 
+  const messageList: string[] = []
+
   const [bookmarkSelected] = await db
     .select()
     .from(bookmarksTable)
@@ -51,12 +54,16 @@ export const getBookmarkHandler: RouterHandler = async (req, res) => {
     )
 
   if (bookmarkSelected === undefined) {
+    messageList.push('Bookmark not found in database')
+
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'NOT_FOUND',
       statusCode: httpStatusCode.notFound404,
-      message: 'Bookmark not found',
+      message: messageList.join(' | '),
     })
   }
+
+  messageList.push('Bookmark found in database')
 
   const bookmarkFileInfo = getFileInfo({ id: req.body.bookmarkId })
 
@@ -64,12 +71,16 @@ export const getBookmarkHandler: RouterHandler = async (req, res) => {
     .file(bookmarkFileInfo.path)
     .download()
     .catch(() => {
+      messageList.push('Bookmark not found in storage')
+
       throw new HttpError<ErrorResBody['errorCode']>({
         errorCode: 'NOT_FOUND',
         statusCode: httpStatusCode.notFound404,
-        message: 'Bookmark not found in bucket',
+        message: messageList.join(' | '),
       })
     })
+
+  messageList.push('Bookmark loaded from storage')
 
   const bookmarkFileAsString = bookmarkFileBuffer.toString()
 
@@ -78,14 +89,17 @@ export const getBookmarkHandler: RouterHandler = async (req, res) => {
     jsonParseSafe<ResBody['bookmark']>(bookmarkFileAsString)
 
   if (bookmarkFileData === undefined) {
+    messageList.push('Failed to parse bookmark data')
+
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'NOT_FOUND',
       statusCode: httpStatusCode.serverError500,
-      message: 'Failed to parse file data',
+      message: messageList.join(' | '),
     })
   }
 
   res.status(httpStatusCode.success200).json({
     bookmark: bookmarkFileData,
+    message: messageList.join(' | '),
   })
 }

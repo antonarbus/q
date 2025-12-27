@@ -20,6 +20,7 @@ type ReqBody = undefined
 
 export type ResBody = {
   visitorList: SelectVisitors[]
+  message: string
 }
 
 export type ErrorResBody = {
@@ -37,16 +38,22 @@ export const getUniqueDailyVisitorsHandler: RouterHandler = async (
   req,
   res,
 ) => {
+  const messageList: string[] = []
+
   const userFromAccessToken = getUserFromAccessTokenOrNull({ req })
   const roles = userFromAccessToken?.roles ?? []
 
   if (roles.includes(userRole.superAdmin) === false) {
+    messageList.push('User is not super admin')
+
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'FORBIDDEN',
       statusCode: httpStatusCode.forbidden403,
-      message: 'Forbidden - super admin access required',
+      message: messageList.join(' | '),
     })
   }
+
+  messageList.push('Super admin access verified')
 
   const visitorListSelected = await db
     .select()
@@ -59,7 +66,12 @@ export const getUniqueDailyVisitorsHandler: RouterHandler = async (
     )
     .orderBy(asc(visitorsTable.visitedAt))
 
-  res
-    .status(httpStatusCode.success200)
-    .json({ visitorList: visitorListSelected })
+  messageList.push(
+    `Retrieved ${visitorListSelected.length} visitor records from ${req.query.startDate} to ${req.query.endDate}`,
+  )
+
+  res.status(httpStatusCode.success200).json({
+    visitorList: visitorListSelected,
+    message: messageList.join(' | '),
+  })
 }

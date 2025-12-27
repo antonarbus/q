@@ -28,6 +28,7 @@ export type ResBody = {
   accessJwtTokenExpiresOn?: string
   email: SelectUser['email']
   roles: SelectUser['roles']
+  message: string
 }
 
 export type ErrorResBody = {
@@ -42,6 +43,8 @@ type RouterHandler = (
 ) => Promise<void>
 
 export const resetPasswordHandler: RouterHandler = async (req, res) => {
+  const messageList: string[] = []
+
   const emailFromInput = req.body.email.toLowerCase()
   const passwordFromInput = req.body.password
   const resetPasswordKeyFromInput = req.body.resetPasswordKey
@@ -57,23 +60,33 @@ export const resetPasswordHandler: RouterHandler = async (req, res) => {
     )
 
   if (userSelected === undefined) {
+    messageList.push('User not found or incorrect reset key')
+
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'INCORRECT_RESET_KEY',
       statusCode: httpStatusCode.forbidden403,
-      message: 'Incorrect reset key',
+      message: messageList.join(' | '),
     })
   }
 
+  messageList.push('Reset key validated')
+
   if (userSelected.isActivated === false) {
+    messageList.push('Account not activated')
+
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'NOT_ACTIVATED',
       statusCode: httpStatusCode.forbidden403,
-      message: 'Account not activated',
+      message: messageList.join(' | '),
     })
   }
 
+  messageList.push('Account activation verified')
+
   const saltRounds = 10
   const passwordEncrypted = await bcrypt.hash(passwordFromInput, saltRounds)
+
+  messageList.push('Password encrypted')
 
   const accessToken = generateAccessToken({
     email: emailFromInput,
@@ -84,6 +97,8 @@ export const resetPasswordHandler: RouterHandler = async (req, res) => {
     email: emailFromInput,
     roles: userSelected.roles,
   })
+
+  messageList.push('Tokens generated')
 
   setRefreshTokenCookie({ res, refreshJwtToken: refreshToken.value })
 
@@ -104,17 +119,22 @@ export const resetPasswordHandler: RouterHandler = async (req, res) => {
     .returning()
 
   if (userUpdated === undefined) {
+    messageList.push('Failed to update user in database')
+
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'INTERNAL_ERROR',
       statusCode: httpStatusCode.serverError500,
-      message: 'Failed to update the user in db',
+      message: messageList.join(' | '),
     })
   }
+
+  messageList.push('Password reset successful')
 
   res.status(httpStatusCode.created201).json({
     accessJwtToken: accessToken.value,
     accessJwtTokenExpiresOn: accessToken.expiresOn,
     email: userUpdated.email,
     roles: userUpdated.roles,
+    message: messageList.join(' | '),
   })
 }

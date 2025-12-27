@@ -33,6 +33,7 @@ type ReqBody = {
 export type ResBody = {
   fileList: SelectFile[]
   fileListTotalCount: number
+  message: string
 }
 
 type ErrorResBody = {
@@ -52,13 +53,19 @@ export const getFileListAllHandler: RouterHandler = async (req, res) => {
     res,
   })
 
+  const messageList: string[] = []
+
   if (userFromAccessToken.roles.includes(userRole.superAdmin) === false) {
+    messageList.push('No permission to view all files')
+
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'NO_PERMISSION_TO_VIEW',
       statusCode: httpStatusCode.forbidden403,
-      message: 'No permission to view all files',
+      message: messageList.join(' | '),
     })
   }
+
+  messageList.push('Super-admin access granted')
 
   const sortConditions = req.body.sortModel
     .map((item) => {
@@ -136,15 +143,23 @@ export const getFileListAllHandler: RouterHandler = async (req, res) => {
     fileListTotalCountResponse.status === 'fulfilled'
 
   if (fulfilled === false) {
+    messageList.push('Failed to fetch files from database')
+
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'UNHANDLED_ERROR',
       statusCode: httpStatusCode.notFound404,
-      message: 'Failed to fetch file list',
+      message: messageList.join(' | '),
     })
   }
+
+  messageList.push(`Found ${fileListTotalCountResponse.value} total files`)
+  messageList.push(
+    `Returned ${fileListResponse.value.length} files for current page`,
+  )
 
   res.status(httpStatusCode.success200).json({
     fileList: fileListResponse.value,
     fileListTotalCount: fileListTotalCountResponse.value,
+    message: messageList.join(' | '),
   })
 }

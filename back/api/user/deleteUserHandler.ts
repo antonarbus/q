@@ -25,6 +25,7 @@ export type ReqBody = {
 
 export type ResBody = {
   statistics: string[]
+  message: string
 }
 
 export type ErrorResBody = {
@@ -39,6 +40,8 @@ type RouterHandler = (
 ) => Promise<void>
 
 export const deleteUserHandler: RouterHandler = async (req, res) => {
+  const messageList: string[] = []
+
   const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({
     req,
     res,
@@ -50,11 +53,19 @@ export const deleteUserHandler: RouterHandler = async (req, res) => {
   const notAllowed = isOwner === false && isSuperAdmin === false
 
   if (notAllowed === true) {
+    messageList.push('Not allowed to delete this user')
+
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'NOT_ALLOWED',
       statusCode: httpStatusCode.forbidden403,
-      message: 'Not allowed to delete this user',
+      message: messageList.join(' | '),
     })
+  }
+
+  if (isOwner === true) {
+    messageList.push('Owner deleting own account')
+  } else if (isSuperAdmin === true) {
+    messageList.push('Super admin deleting user account')
   }
 
   const statistics = []
@@ -198,5 +209,10 @@ export const deleteUserHandler: RouterHandler = async (req, res) => {
   
   */
 
-  res.status(httpStatusCode.success200).json({ statistics })
+  messageList.push('User deletion completed')
+
+  res.status(httpStatusCode.success200).json({
+    statistics,
+    message: messageList.join(' | '),
+  })
 }

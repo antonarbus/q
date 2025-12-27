@@ -20,7 +20,7 @@ import { fileUploadSignedUrlHandler } from '@back/api/file/fileUploadSignedUrlHa
 import { getFileListHandler } from '@back/api/file/getFileListHandler'
 import { saveFileInfoHandler } from '@back/api/file/saveFileInfoHandler'
 import { deleteQuotationHandler } from '@back/api/quotation/deleteQuotationHandler'
-import { getQuotationCategoriesHandler } from '@back/api/quotation/getQuotationCategories'
+import { getQuotationCategoriesHandler } from '@back/api/quotation/getQuotationCategoriesHandler'
 import { getQuotationHandler } from '@back/api/quotation/getQuotationHandler'
 import { getQuotationListHandler } from '@back/api/quotation/getQuotationListHandler'
 import { saveQuotationHandler } from '@back/api/quotation/saveQuotationHandler'

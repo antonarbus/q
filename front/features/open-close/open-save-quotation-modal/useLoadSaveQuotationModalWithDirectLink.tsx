@@ -12,18 +12,19 @@ type Props = {
 export const useLoadSaveQuotationModalWithDirectLink = ({
   saveQuotationFormValues,
 }: Props): void => {
-  const { quotationId } = useParams()
+  const urlParams = useParams()
   const getQuotationMutation = useGetQuotationMutation()
 
   useEffectOnce(() => {
-    if (quotationId !== undefined) {
-      const quotationIsAlreadyLoaded = getState().quotation.id === quotationId
+    if (urlParams.quotationId !== undefined) {
+      const quotationIsAlreadyLoaded =
+        getState().quotation.id === urlParams.quotationId
 
       if (quotationIsAlreadyLoaded === true) {
         return
       }
 
-      getQuotationMutation.mutate({ id: quotationId })
+      getQuotationMutation.mutate({ id: urlParams.quotationId })
     }
   })
 
@@ -36,9 +37,9 @@ export const useLoadSaveQuotationModalWithDirectLink = ({
 
     dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
 
-    saveQuotationFormValues.nameSignal.value = quotation.name ?? ''
-    saveQuotationFormValues.categorySignal.value = quotation.category ?? ''
-    saveQuotationFormValues.descSignal.value = quotation.desc ?? ''
-    saveQuotationFormValues.infoSignal.value = quotation.info ?? ''
+    saveQuotationFormValues.nameSignal.value = quotation.name
+    saveQuotationFormValues.categorySignal.value = quotation.category
+    saveQuotationFormValues.descSignal.value = quotation.desc
+    saveQuotationFormValues.infoSignal.value = quotation.info
   }, [getQuotationMutation.isSuccess])
 }

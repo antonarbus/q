@@ -15,9 +15,9 @@ import { useParams } from 'react-router-dom'
 
 export const ResetPasswordModal = (): ReactNode => {
   const { ref: modalRef, slideOut } = useSlide()
-  const { email } = useParams()
+  const urlParams = useParams()
   const inputRef = useRef<HTMLDivElement>(null)
-  const emailSignal = useSignal(email ?? 'email is missing')
+  const emailSignal = useSignal(urlParams.email ?? 'email is missing')
   const passwordSignal = useSignal('')
   const isEmailOkSignal = useSignal(true)
   const isConfirmPasswordOkSignal = useSignal(false)

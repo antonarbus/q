@@ -28,7 +28,7 @@ type Res = {
 
 export const useResetPassword = ({ passwordSignal, slideOut }: Props): Res => {
   const navigate = useNavigate()
-  const { email, resetPasswordKey } = useParams()
+  const urlParams = useParams()
 
   const resetUserPasswordMutation = useResetUserPasswordMutation()
 
@@ -104,8 +104,9 @@ export const useResetPassword = ({ passwordSignal, slideOut }: Props): Res => {
 
     resetUserPasswordMutation.mutate({
       password: passwordSignal.value,
-      email: email ?? 'email is missing',
-      resetPasswordKey: resetPasswordKey ?? 'resetPasswordKey is missing',
+      email: urlParams.email ?? 'email is missing',
+      resetPasswordKey:
+        urlParams.resetPasswordKey ?? 'resetPasswordKey is missing',
     })
   }
 

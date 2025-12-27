@@ -24,6 +24,7 @@ type UserPicked = Pick<
 
 export type ResBody = {
   userList: UserPicked[]
+  message: string
 }
 
 export type ErrorResBody = {
@@ -38,18 +39,24 @@ type RouterHandler = (
 ) => Promise<void>
 
 export const getUserListHandler: RouterHandler = async (req, res) => {
+  const messageList: string[] = []
+
   const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({
     req,
     res,
   })
 
   if (userFromAccessToken.roles.includes(userRole.superAdmin) === false) {
+    messageList.push('User is not super admin')
+
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'NO_PERMISSION',
       statusCode: httpStatusCode.forbidden403,
-      message: 'No permission to view users',
+      message: messageList.join(' | '),
     })
   }
+
+  messageList.push('Super admin access verified')
 
   const usersListSelected = await db
     .select({
@@ -61,5 +68,10 @@ export const getUserListHandler: RouterHandler = async (req, res) => {
     .from(usersTable)
     .orderBy(desc(usersTable.loggedAt))
 
-  res.status(httpStatusCode.success200).json({ userList: usersListSelected })
+  messageList.push(`Retrieved ${usersListSelected.length} users`)
+
+  res.status(httpStatusCode.success200).json({
+    userList: usersListSelected,
+    message: messageList.join(' | '),
+  })
 }
