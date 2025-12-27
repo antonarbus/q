@@ -4,7 +4,8 @@
     "front/shared/lib/ag-grid/colDef/getNumberColDef.tsx",
     "tests/setup/auth.setup.ts",
     "shared/const/permissionLevel.ts",
-    "shared/types/*"
+    "shared/types/*",
+    "front/entities/quotation/const/rowTypeKey.ts"
   ],
   "ignoreDependencies": [
     "@preact/signals-react-transform",
