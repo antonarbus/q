@@ -3,7 +3,8 @@
     "back/shared/lib/drizzle/schema.ts",
     "front/shared/lib/ag-grid/colDef/getNumberColDef.tsx",
     "tests/setup/auth.setup.ts",
-    "shared/const/permissionLevel.ts"
+    "shared/const/permissionLevel.ts",
+    "shared/types/*"
   ],
   "ignoreDependencies": [
     "@preact/signals-react-transform",
