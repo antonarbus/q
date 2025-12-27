@@ -14,10 +14,10 @@ export const useKeysForMenuNavigation = (): void => {
     const controller = new AbortController()
 
     const navKeyboardHandler = (event: KeyboardEvent): void => {
-      const { currentMenuNavItemId } = getState().nav
+      const state = getState()
 
       const { navItem: currentNavItem } = getNavItem({
-        navItemId: currentMenuNavItemId,
+        navItemId: state.nav.currentMenuNavItemId,
       })
 
       // +1 for "Close" or "Back" item before currentMenuItems
@@ -27,13 +27,11 @@ export const useKeysForMenuNavigation = (): void => {
 
       const menuItemsQty = navItems.length // 3
 
-      const { hoverIndex } = getState().nav // -1
-
-      const isNestedMenu = getState().nav.idsToCurrentMenuItems.length > 2
+      const isNestedMenu = state.nav.idsToCurrentMenuItems.length > 2
 
       if (event.key === 'ArrowDown') {
         event.preventDefault()
-        const isLastMenuItem = hoverIndex === menuItemsQty
+        const isLastMenuItem = state.nav.hoverIndex === menuItemsQty
 
         if (isLastMenuItem === true) {
           dispatch(
@@ -45,7 +43,7 @@ export const useKeysForMenuNavigation = (): void => {
 
         dispatch(
           navSlice.actions.setMenuItemHoverIndex({
-            menuItemHoverIndex: hoverIndex + 1,
+            menuItemHoverIndex: state.nav.hoverIndex + 1,
           }),
         )
 
@@ -54,7 +52,7 @@ export const useKeysForMenuNavigation = (): void => {
 
       if (event.key === 'ArrowUp') {
         event.preventDefault()
-        const isTopMenuItem = hoverIndex < 1
+        const isTopMenuItem = state.nav.hoverIndex < 1
 
         if (isTopMenuItem === true) {
           dispatch(
@@ -68,7 +66,7 @@ export const useKeysForMenuNavigation = (): void => {
 
         dispatch(
           navSlice.actions.setMenuItemHoverIndex({
-            menuItemHoverIndex: hoverIndex - 1,
+            menuItemHoverIndex: state.nav.hoverIndex - 1,
           }),
         )
 
@@ -102,7 +100,7 @@ export const useKeysForMenuNavigation = (): void => {
       }
 
       if (event.key === 'Enter') {
-        const isBackMenuItem = hoverIndex === 0 && isNestedMenu
+        const isBackMenuItem = state.nav.hoverIndex === 0 && isNestedMenu
 
         if (isBackMenuItem === true) {
           dispatch(
@@ -114,7 +112,8 @@ export const useKeysForMenuNavigation = (): void => {
           return
         }
 
-        const isCloseMenuItem = hoverIndex === 0 && isNestedMenu === false
+        const isCloseMenuItem =
+          state.nav.hoverIndex === 0 && isNestedMenu === false
 
         if (isCloseMenuItem === true) {
           dispatch(navSlice.actions.closeMenu())
@@ -122,7 +121,7 @@ export const useKeysForMenuNavigation = (): void => {
           return
         }
 
-        const navItemId = navItems[hoverIndex - 1]?.id
+        const navItemId = navItems[state.nav.hoverIndex - 1]?.id
 
         if (navItemId === undefined) {
           return
@@ -207,7 +206,7 @@ export const useKeysForMenuNavigation = (): void => {
             return false
           }
 
-          if (navIndex + 2 > hoverIndex) {
+          if (navIndex + 2 > state.nav.hoverIndex) {
             return true
           }
 

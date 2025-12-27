@@ -19,14 +19,16 @@ export const clickOnNavItem = (props: Props): void => {
 
   document.activeElement.blur() // to prevent open an active navItem link on Enter key
 
-  const { link, funcId } = props.navItem
-  const func = funcId === undefined ? undefined : functionRegistry[funcId]
+  const func =
+    props.navItem.funcId === undefined
+      ? undefined
+      : functionRegistry[props.navItem.funcId]
 
   if (props.disabled === true) {
     return
   }
 
-  if (link !== undefined) {
+  if (props.navItem.link !== undefined) {
     // just follow the link natively and call the func
     func?.(props.event)
 

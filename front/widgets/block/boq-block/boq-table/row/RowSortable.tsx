@@ -11,17 +11,17 @@ type Props = {
 export const RowSortable = ({ children }: Props): JSX.Element => {
   const row = useRow()
 
-  const { setNodeRef, transform, transition, isDragging } = useSortable({
+  const sortable = useSortable({
     id: row.item.id,
   })
 
   return (
     <div
-      ref={setNodeRef}
+      ref={sortable.setNodeRef}
       style={{
-        transform: CSS.Translate.toString(transform),
-        transition,
-        zIndex: isDragging === true ? 1000 : 0,
+        transform: CSS.Translate.toString(sortable.transform),
+        transition: sortable.transition,
+        zIndex: sortable.isDragging === true ? 1000 : 0,
       }}
     >
       {children}

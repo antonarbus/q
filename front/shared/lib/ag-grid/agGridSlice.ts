@@ -31,8 +31,7 @@ export const agGridSlice = createSlice({
         count: number
       }>,
     ) => {
-      const { count } = action.payload
-      state.displayedRowsCount = count
+      state.displayedRowsCount = action.payload.count
     },
     showLoadingOverlay: (
       state: WritableDraft<InitState>,
@@ -41,9 +40,8 @@ export const agGridSlice = createSlice({
         text: string
       }>,
     ) => {
-      const { showLoader, text } = action.payload
-      state.loadingOverlay.showLoader = showLoader
-      state.loadingOverlay.text = text
+      state.loadingOverlay.showLoader = action.payload.showLoader
+      state.loadingOverlay.text = action.payload.text
     },
     hideLoadingOverlay: (state: WritableDraft<InitState>) => {
       state.loadingOverlay.showLoader = false

@@ -110,29 +110,25 @@ export const Search = (): JSX.Element => {
 
               isAutocompleteOpen.value = false
 
-              if (data.bookmark !== undefined) {
-                const { bookmark: item } = data
+              // Save scroll position before setNotEditable
+              const persistedScrollX = window.scrollX
+              const persistedScrollY = window.scrollY
 
-                // Save scroll position before setNotEditable
-                const { scrollX } = window
-                const { scrollY } = window
+              dispatch(textSlice.actions.setNotEditable())
 
-                dispatch(textSlice.actions.setNotEditable())
+              // Restore scroll position after React renders
+              requestAnimationFrame(() => {
+                window.scrollTo(persistedScrollX, persistedScrollY)
+              })
 
-                // Restore scroll position after React renders
-                requestAnimationFrame(() => {
-                  window.scrollTo(scrollX, scrollY)
-                })
+              dispatch(copySlice.actions.addItem({ item: data.bookmark }))
+              dispatch(copySlice.actions.allowToPaste())
 
-                dispatch(copySlice.actions.addItem({ item }))
-                dispatch(copySlice.actions.allowToPaste())
-
-                dispatch(
-                  copySlice.actions.showCopyModal({
-                    initCursorPos: { x: event.clientX, y: event.clientY },
-                  }),
-                )
-              }
+              dispatch(
+                copySlice.actions.showCopyModal({
+                  initCursorPos: { x: event.clientX, y: event.clientY },
+                }),
+              )
             }}
           >
             <OptionItemName

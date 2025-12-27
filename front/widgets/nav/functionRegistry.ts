@@ -19,6 +19,7 @@ import { downloadPdf } from '@features/quotation/download-quotation-as-pdf'
 import { saveExistingQuotation } from '@features/quotation/save-quotation'
 import { getState } from '@shared/lib/redux'
 
+/** Required to avoid storing non-serializable values in Redux store */
 export const functionRegistry = {
   openQuotationPageAndLoadPrev,
   openQuotationPageAndLoadNew,
