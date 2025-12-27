@@ -153,6 +153,7 @@ export const getFileListAllHandler: RouterHandler = async (req, res) => {
   }
 
   messageList.push(`Found ${fileListTotalCountResponse.value} total files`)
+
   messageList.push(
     `Returned ${fileListResponse.value.length} files for current page`,
   )

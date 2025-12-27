@@ -158,6 +158,7 @@ export const getQuotationListAllHandler: RouterHandler = async (req, res) => {
   messageList.push(
     `Found ${quotationListTotalCountResponse.value} total quotations`,
   )
+
   messageList.push(
     `Returned ${quotationListResponse.value.length} quotations for current page`,
   )

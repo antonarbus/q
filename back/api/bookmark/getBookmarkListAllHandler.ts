@@ -185,6 +185,7 @@ export const getBookmarkListAllHandler: RouterHandler = async (req, res) => {
   messageList.push(
     `Found ${bookmarkListTotalCountResponse.value} total bookmarks`,
   )
+
   messageList.push(
     `Returned ${bookmarkListResponse.value.length} bookmarks for current page`,
   )
