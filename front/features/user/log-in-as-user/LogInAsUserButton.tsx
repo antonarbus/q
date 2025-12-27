@@ -24,14 +24,6 @@ export const LogInAsUserButton = ({ email }: Payload): ReactNode => {
 
   useUpdateEffect(() => {
     if (logInUserMutation.isSuccess === true) {
-      if (logInUserMutation.data.accessJwtToken === undefined) {
-        return
-      }
-
-      if (logInUserMutation.data.email === undefined) {
-        return
-      }
-
       dispatch(
         userSlice.actions.setAccessToken({
           accessToken: logInUserMutation.data.accessJwtToken,
@@ -41,7 +33,7 @@ export const LogInAsUserButton = ({ email }: Payload): ReactNode => {
       dispatch(
         userSlice.actions.rememberLoggedUser({
           email: logInUserMutation.data.email,
-          roles: logInUserMutation.data.roles ?? [userRole.user],
+          roles: logInUserMutation.data.roles,
         }),
       )
 
@@ -54,7 +46,7 @@ export const LogInAsUserButton = ({ email }: Payload): ReactNode => {
       )
 
       const isSuperAdmin =
-        logInUserMutation.data.roles?.includes(userRole.superAdmin) === true
+        logInUserMutation.data.roles.includes(userRole.superAdmin) === true
 
       if (isSuperAdmin === true) {
         dispatch(navSlice.actions.showNavItems({ navItemIds: ['admin'] }))
