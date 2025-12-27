@@ -34,14 +34,14 @@ export const insertPriceBlock = (event?: MouseEvent): void => {
     },
   }
 
-  // Save scroll position before setNotEditable
-  const { scrollX, scrollY } = window
+  const persistedScrollX = window.scrollX
+  const persistedScrollY = window.scrollY
 
   dispatch(textSlice.actions.setNotEditable())
 
   // Restore scroll position after React renders
   requestAnimationFrame(() => {
-    window.scrollTo(scrollX, scrollY)
+    window.scrollTo(persistedScrollX, persistedScrollY)
   })
 
   dispatch(copySlice.actions.addItem({ item: block }))

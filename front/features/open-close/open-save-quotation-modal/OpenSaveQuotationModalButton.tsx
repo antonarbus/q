@@ -21,14 +21,14 @@ export const OpenSaveQuotationModalButton = (props: ReqBody): JSX.Element => {
 
   useUpdateEffect(() => {
     if (quotationMutation.isSuccess === true) {
-      // Save scroll position before setNotEditable
-      const { scrollX, scrollY } = window
+      const persistedScrollX = window.scrollX
+      const persistedScrollY = window.scrollY
 
       dispatch(textSlice.actions.setNotEditable())
 
       // Restore scroll position after React renders
       requestAnimationFrame(() => {
-        window.scrollTo(scrollX, scrollY)
+        window.scrollTo(persistedScrollX, persistedScrollY)
       })
 
       dispatch(

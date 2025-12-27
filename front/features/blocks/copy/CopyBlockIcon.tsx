@@ -44,14 +44,14 @@ export const CopyBlockIcon = (): JSX.Element => {
 
             const html = getClosestPaperElementHtml(event)
 
-            // Save scroll position before setNotEditable
-            const { scrollX, scrollY } = window
+            const persistedScrollX = window.scrollX
+            const persistedScrollY = window.scrollY
 
             dispatch(textSlice.actions.setNotEditable())
 
             // Restore scroll position after React renders
             requestAnimationFrame(() => {
-              window.scrollTo(scrollX, scrollY)
+              window.scrollTo(persistedScrollX, persistedScrollY)
             })
 
             const blockCloned = structuredClone(blockToCopy)
