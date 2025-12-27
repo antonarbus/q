@@ -50,5 +50,7 @@ export const testHandler: RouterHandler = async (req, res) => {
 
   messageList.push('Test query executed successfully')
 
-  res.status(200).json({ dbRes: userListSelected, message: messageList.join(' | ') })
+  res
+    .status(200)
+    .json({ dbRes: userListSelected, message: messageList.join(' | ') })
 }
