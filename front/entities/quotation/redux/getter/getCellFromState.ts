@@ -1,6 +1,6 @@
 import type { CellKey } from '@entities/quotation/const/cellKey'
-import type { Quotation } from '../../types/Quotation'
-import type { Cell } from '../../types/BlockItem'
+import type { Quotation } from '@root/shared/types/Quotation'
+import type { Cell } from '@root/shared/types/BlockItem'
 import { getRowFromState } from './getRowFromState'
 
 type Props = {

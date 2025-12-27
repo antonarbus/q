@@ -1,7 +1,7 @@
 import { useBlock } from '@entities/quotation/provider/BlockProvider'
 import { useBoq } from '@entities/quotation/provider/BoqBlockProvider'
 import { getRowsFromStore } from '@entities/quotation/redux/getter/getRowsFromStore'
-import type { RowBlock } from '@entities/quotation/types/BlockItem'
+import type { RowBlock } from '@root/shared/types/BlockItem'
 import { updateSubTotalPriceWithValue } from '@entities/quotation/util/updateSubTotalPriceWithValue'
 import { useSelector } from '@shared/lib/redux'
 import { useUpdateEffect } from 'react-use'

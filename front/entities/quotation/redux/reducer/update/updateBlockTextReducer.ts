@@ -1,6 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { itemType } from '../../../const/itemType'
-import type { Quotation } from '../../../types/Quotation'
+import type { Quotation } from '@root/shared/types/Quotation'
 
 export const updateBlockTextReducer = (
   state: Quotation,

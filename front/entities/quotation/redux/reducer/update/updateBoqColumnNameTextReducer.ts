@@ -1,7 +1,7 @@
 import type { BoqColumnKey } from '@entities/quotation/const/boqColumnKey'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { itemType } from '../../../const/itemType'
-import type { Quotation } from '../../../types/Quotation'
+import type { Quotation } from '@root/shared/types/Quotation'
 
 export const updateBoqColumnNameTextReducer = (
   state: Quotation,

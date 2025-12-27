@@ -1,5 +1,5 @@
 import type { RootState } from '@shared/lib/redux'
-import type { RowBlock } from '../../types/BlockItem'
+import type { RowBlock } from '@root/shared/types/BlockItem'
 import { getRowsFromStore } from '../getter/getRowsFromStore'
 
 type Props = {

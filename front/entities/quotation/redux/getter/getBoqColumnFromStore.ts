@@ -1,7 +1,7 @@
 import type { BoqColumnKey } from '@entities/quotation/const/boqColumnKey'
 import { getState } from '@shared/lib/redux'
 import { itemType } from '../../const/itemType'
-import type { Column } from '../../types/BlockItem'
+import type { Column } from '@root/shared/types/BlockItem'
 
 type Props = {
   blockIndex: number

@@ -1,6 +1,6 @@
-import type { SelectQuotation } from '@back/entities/quotation'
-import type { BlockItem } from './BlockItem'
+import type { SelectQuotation } from '@root/back/entities/quotation'
 import type { PermissionLevel } from '@root/shared/const/permissionLevel'
+import type { BlockItem } from './BlockItem'
 
 type QuotationMetaData = SelectQuotation
 

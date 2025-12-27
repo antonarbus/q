@@ -1,6 +1,6 @@
 import type { FroalaEditorRef } from '@shared/lib/froala/froala'
-import type { BoqColumnKey } from '../const/boqColumnKey'
-import type { RowTypeKey } from '../const/rowTypeKey'
+import type { BoqColumnKey } from '@front/entities/quotation/const/boqColumnKey'
+import type { RowTypeKey } from '@front/entities/quotation/const/rowTypeKey'
 import type { SelectBookmark } from '@back/entities/bookmark'
 
 type BlockMetaData = Omit<SelectBookmark, 'type'>

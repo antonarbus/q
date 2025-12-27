@@ -1,5 +1,5 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { Quotation } from '../../../types/Quotation'
+import type { Quotation } from '@root/shared/types/Quotation'
 
 export const updateBlockWidthReducer = (
   state: Quotation,

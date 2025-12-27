@@ -3,10 +3,7 @@ import { getBoqHeaderFromStore } from '@entities/quotation/redux/getter/getBoqHe
 import { getRowFromStore } from '@entities/quotation/redux/getter/getRowFromStore'
 import { getRowsFromStore } from '@entities/quotation/redux/getter/getRowsFromStore'
 import { updateBoqHeaderAtStore } from '@entities/quotation/redux/updater/updateBoqHeaderAtStore'
-import type {
-  RowBlock,
-  RowEditorRefs,
-} from '@entities/quotation/types/BlockItem'
+import type { RowBlock, RowEditorRefs } from '@root/shared/types/BlockItem'
 import { didBoqHeaderContentChange } from '@entities/quotation/util/didBoqHeaderContentChange'
 import { updateCellWithValue } from '@entities/quotation/util/updateCellWithValue'
 import { updateSubTotalPriceWithValue } from '@entities/quotation/util/updateSubTotalPriceWithValue'

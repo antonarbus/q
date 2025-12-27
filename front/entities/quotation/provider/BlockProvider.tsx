@@ -6,7 +6,7 @@ import {
   useContext,
   useMemo,
 } from 'react'
-import type { BlockItem } from '../types/BlockItem'
+import type { BlockItem } from '@root/shared/types/BlockItem'
 
 type Res = {
   index: number

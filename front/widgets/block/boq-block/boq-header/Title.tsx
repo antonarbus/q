@@ -1,7 +1,7 @@
 import { useBlock } from '@entities/quotation/provider/BlockProvider'
 import { getBoqHeaderHtmlFromStore } from '@entities/quotation/redux/getter/getBoqHeaderHtmlFromStore'
 import { titleCellStyle } from '@entities/quotation/style/titleCellStyle'
-import type { HeaderKey } from '@entities/quotation/types/BlockItem'
+import type { HeaderKey } from '@root/shared/types/BlockItem'
 import { Froala } from '@entities/quotation/ui/froala/Froala'
 import { updateTitle } from '@features/blocks/update'
 import type { FroalaEditor } from '@shared/lib/froala/froala'

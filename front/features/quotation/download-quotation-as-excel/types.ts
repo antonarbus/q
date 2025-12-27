@@ -1,5 +1,4 @@
-import type { Quotation } from '@entities/quotation/types/Quotation'
-
+import type { Quotation } from '@root/shared/types/Quotation'
 export type WorkerResponseMessage = {
   excelBlob: Blob
 }

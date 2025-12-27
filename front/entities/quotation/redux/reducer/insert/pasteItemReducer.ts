@@ -3,8 +3,8 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import { generateId } from '@shared/lib/nanoid'
 import { itemType } from '../../../const/itemType'
 import { rowTypeKey } from '../../../const/rowTypeKey'
-import type { BlockItem, RowBlock } from '../../../types/BlockItem'
-import type { Quotation } from '../../../types/Quotation'
+import type { BlockItem, RowBlock } from '@root/shared/types/BlockItem'
+import type { Quotation } from '@root/shared/types/Quotation'
 
 type SpliceSettings = {
   insertAtIndex: number

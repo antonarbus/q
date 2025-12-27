@@ -12,7 +12,8 @@
     "back/**/*",
     "tests/**/*",
     "config/**/*",
-    "deploy-scripts/**/*"
+    "deploy-scripts/**/*",
+    "shared/**/*"
   ],
   "exclude": ["**/node_modules", "**/build", "**/fr.js", "**/froalaPkg.js"],
   "compilerOptions": {

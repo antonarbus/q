@@ -1,4 +1,4 @@
-import type { BlockItem } from '@entities/quotation/types/BlockItem'
+import type { BlockItem } from '@root/shared/types/BlockItem'
 import {
   createSlice,
   type PayloadAction,

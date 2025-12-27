@@ -1,5 +1,5 @@
-import type { BlockItem } from '../../types/BlockItem'
-import type { Quotation } from '../../types/Quotation'
+import type { BlockItem } from '@root/shared/types/BlockItem'
+import type { Quotation } from '@root/shared/types/Quotation'
 
 type Props = {
   id: string
