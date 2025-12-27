@@ -28,7 +28,7 @@ export const Search = (): JSX.Element => {
     if (email !== null) {
       void getBookmarkListQuery.refetch()
     }
-  }, [email, getBookmarkListQuery])
+  }, [email])
 
   const isAutocompleteOpen = useSignal(false)
   const isCopyModalVisible = useIsCopyModalVisible()
