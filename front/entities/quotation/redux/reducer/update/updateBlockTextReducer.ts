@@ -9,8 +9,7 @@ export const updateBlockTextReducer = (
     html: string
   }>,
 ): void => {
-  const { blockIndex, html } = action.payload
-  const block = state.blocks[blockIndex]
+  const block = state.blocks[action.payload.blockIndex]
 
   if (block === undefined) {
     return
@@ -20,5 +19,5 @@ export const updateBlockTextReducer = (
     return
   }
 
-  block.text.html = html
+  block.text.html = action.payload.html
 }

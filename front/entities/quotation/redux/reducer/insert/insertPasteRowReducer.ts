@@ -37,8 +37,6 @@ const pasteText: RowBlock = {
 type Type = (state: Quotation, action: PayloadAction<CopyPlace>) => Quotation
 
 export const insertPasteRowReducer: Type = (state, action) => {
-  const { pastePos, id } = action.payload
-
   for (
     let blockIndex = 0;
     blockIndex < state.blocks.length;
@@ -53,12 +51,16 @@ export const insertPasteRowReducer: Type = (state, action) => {
 
       boqBlock.boq.rows = rowsWithoutPasteText
 
-      const rowIndex = rowsWithoutPasteText.findIndex((row) => row.id === id)
+      const rowIndex = rowsWithoutPasteText.findIndex(
+        (row) => row.id === action.payload.id,
+      )
 
-      const notInMiddle = rowIndex !== -1 && pastePos !== 'middle'
+      const notInMiddle =
+        rowIndex !== -1 && action.payload.pastePos !== 'middle'
 
       if (notInMiddle === true) {
-        const insertAtIndex = rowIndex + (pastePos === 'bottom' ? 1 : 0)
+        const insertAtIndex =
+          rowIndex + (action.payload.pastePos === 'bottom' ? 1 : 0)
 
         const rowsWithPasteText = rowsWithoutPasteText.toSpliced(
           insertAtIndex,

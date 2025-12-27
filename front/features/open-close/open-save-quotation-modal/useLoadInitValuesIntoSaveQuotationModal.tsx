@@ -10,11 +10,11 @@ export const useLoadInitValuesIntoSaveQuotationModal = ({
   saveQuotationFormValues,
 }: Props): void => {
   useEffectOnce(() => {
-    const { quotation } = getState()
+    const state = getState()
 
-    saveQuotationFormValues.nameSignal.value = quotation.name ?? ''
-    saveQuotationFormValues.categorySignal.value = quotation.category ?? ''
-    saveQuotationFormValues.descSignal.value = quotation.desc ?? ''
-    saveQuotationFormValues.infoSignal.value = quotation.info ?? ''
+    saveQuotationFormValues.nameSignal.value = state.quotation.name
+    saveQuotationFormValues.categorySignal.value = state.quotation.category
+    saveQuotationFormValues.descSignal.value = state.quotation.desc
+    saveQuotationFormValues.infoSignal.value = state.quotation.info
   })
 }

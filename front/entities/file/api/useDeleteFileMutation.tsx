@@ -15,13 +15,13 @@ export const useDeleteFileMutation = (): Res => {
   const mutation = useMutation<ResBody, AxiosError<ErrorResBody>, Payload>({
     mutationKey: [queryKey.deleteFile],
     mutationFn: async (payload: Payload) => {
-      const { data } = await axiosWithAuth<ResBody>({
+      const response = await axiosWithAuth<ResBody>({
         url: route.deleteFile.url,
         method: route.deleteFile.method,
         data: payload,
       })
 
-      return data
+      return response.data
     },
   })
 

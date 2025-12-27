@@ -19,25 +19,23 @@ export const OpenBookmarkModalButton = ({
 
   useUpdateEffect(() => {
     if (getBookmarkMutation.isSuccess === true) {
-      const { bookmark: block } = getBookmarkMutation.data
+      // Save scroll position before setNotEditable
+      const { scrollX, scrollY } = window
 
-      if (block !== undefined) {
-        // Save scroll position before setNotEditable
-        const { scrollX, scrollY } = window
+      dispatch(textSlice.actions.setNotEditable())
 
-        dispatch(textSlice.actions.setNotEditable())
+      // Restore scroll position after React renders
+      requestAnimationFrame(() => {
+        window.scrollTo(scrollX, scrollY)
+      })
 
-        // Restore scroll position after React renders
-        requestAnimationFrame(() => {
-          window.scrollTo(scrollX, scrollY)
-        })
+      dispatch(
+        quotationSlice.actions.loadBlockAtPosThousandReducer({
+          block: getBookmarkMutation.data.bookmark,
+        }),
+      )
 
-        dispatch(
-          quotationSlice.actions.loadBlockAtPosThousandReducer({ block }),
-        )
-
-        void navigate(`./${id}`)
-      }
+      void navigate(`./${id}`)
     }
   }, [getBookmarkMutation.isSuccess])
 

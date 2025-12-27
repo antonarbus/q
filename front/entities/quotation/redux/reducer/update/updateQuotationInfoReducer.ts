@@ -10,9 +10,8 @@ export const updateQuotationInfoReducer = (
     info: string
   }>,
 ): void => {
-  const { name, category, desc, info } = action.payload
-  state.name = name
-  state.category = category
-  state.desc = desc
-  state.info = info
+  state.name = action.payload.name
+  state.category = action.payload.category
+  state.desc = action.payload.desc
+  state.info = action.payload.info
 }

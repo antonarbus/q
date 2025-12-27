@@ -39,16 +39,16 @@ export const formatCellNumber = ({
     }
   }
 
-  const { value, html } = row[cellKey]
+  const cell = row[cellKey]
 
-  const roundedValue = roundTo(value, 2)
+  const roundedValue = roundTo(cell.value, 2)
 
   const newHtml = getStringWithNewFormattedNumber({
-    string: html,
-    newNumber: roundToTwoDecimals === true ? roundedValue : value,
+    string: cell.html,
+    newNumber: roundToTwoDecimals === true ? roundedValue : cell.value,
   })
 
-  if (html === newHtml) {
+  if (cell.html === newHtml) {
     return {
       didUpdate: false,
     }
@@ -59,7 +59,7 @@ export const formatCellNumber = ({
       blockIndex,
       rowIndex,
       html: newHtml,
-      value: roundToTwoDecimals === true ? roundedValue : value,
+      value: roundToTwoDecimals === true ? roundedValue : cell.value,
       cellKey,
     }),
   )

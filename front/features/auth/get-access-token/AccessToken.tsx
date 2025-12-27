@@ -38,9 +38,7 @@ export const AccessToken = (): ReactNode => {
 
   // get initial access token on app load
   useEffectOnce(() => {
-    const { accessToken } = getState().user
-
-    if (accessToken === null) {
+    if (getState().user.accessToken === null) {
       void getUserAccessTokenQuery.refetch()
     }
   })
@@ -61,15 +59,9 @@ export const AccessToken = (): ReactNode => {
 
   useUpdateEffect(() => {
     if (getUserAccessTokenQuery.isSuccess === true) {
-      if (getUserAccessTokenQuery.data.accessJwtToken === undefined) {
-        return
-      }
-
       const jwtPayload = jwtDecode<JwtPayloadExtended>(
         getUserAccessTokenQuery.data.accessJwtToken,
       )
-
-      const { email, roles } = jwtPayload
 
       dispatch(
         userSlice.actions.setAccessToken({
@@ -86,8 +78,8 @@ export const AccessToken = (): ReactNode => {
 
       dispatch(
         userSlice.actions.rememberLoggedUser({
-          email,
-          roles: getUserAccessTokenQuery.data.roles ?? [userRole.user],
+          email: jwtPayload.email,
+          roles: getUserAccessTokenQuery.data.roles,
         }),
       )
 
@@ -99,7 +91,7 @@ export const AccessToken = (): ReactNode => {
         }),
       )
 
-      const isSuperAdmin = roles.includes(userRole.superAdmin)
+      const isSuperAdmin = jwtPayload.roles.includes(userRole.superAdmin)
 
       if (isSuperAdmin === true) {
         dispatch(navSlice.actions.showNavItems({ navItemIds: ['admin'] }))

@@ -7,8 +7,7 @@ export const disableFroalaReducer = (
     blockIndex: number
   }>,
 ): void => {
-  const { blockIndex } = action.payload
-  const block = state.blocks[blockIndex]
+  const block = state.blocks[action.payload.blockIndex]
 
   if (block === undefined) {
     return

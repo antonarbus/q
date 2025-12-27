@@ -16,7 +16,7 @@ export const selectColumnWidth =
       return 0
     }
 
-    const { width } = boqBlock.boq.column[boqColumnKey]
+    const column = boqBlock.boq.column[boqColumnKey]
 
-    return width
+    return column.width
   }

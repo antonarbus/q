@@ -9,21 +9,20 @@ export const insertPasteBlockReducer = (
   state: Quotation,
   action: PayloadAction<CopyPlace>,
 ): void => {
-  const { pastePos, id } = action.payload
-
   const blocksWithoutPasteText: BlockItem[] = state.blocks.filter(
     (block) => block.type !== itemType.paste,
   )
 
-  if (pastePos === 'middle') {
+  if (action.payload.pastePos === 'middle') {
     state.blocks = blocksWithoutPasteText
 
     return
   }
 
   const insertAtIndex =
-    blocksWithoutPasteText.findIndex((block) => block.id === id) +
-    (pastePos === 'bottom' ? 1 : 0)
+    blocksWithoutPasteText.findIndex(
+      (block) => block.id === action.payload.id,
+    ) + (action.payload.pastePos === 'bottom' ? 1 : 0)
 
   const pasteBlock: PasteBlock = {
     id: generateId(),

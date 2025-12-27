@@ -10,7 +10,7 @@ export const DragRowIcon = (): JSX.Element => {
   const disabled = useIsRowsSortDisabled()
   const row = useRow()
 
-  const { listeners } = useSortable({
+  const sortable = useSortable({
     id: row.item.id,
     disabled,
   })
@@ -24,7 +24,7 @@ export const DragRowIcon = (): JSX.Element => {
     >
       <span className={cls.actionIconContainer}>
         <MdDragIndicator
-          {...listeners}
+          {...sortable.listeners}
           className={cls.actionIcon}
           style={{
             cursor: 'move',

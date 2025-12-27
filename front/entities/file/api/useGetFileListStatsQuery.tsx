@@ -17,13 +17,13 @@ export const useGetFileListStatsQuery = (): Res => {
     retry: 0,
     enabled: true,
     queryFn: async () => {
-      const { data } = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
+      const response = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
         url: route.getFileList.url,
         method: route.getFileList.method,
         withCredentials: true,
       })
 
-      return data
+      return response.data
     },
   })
 

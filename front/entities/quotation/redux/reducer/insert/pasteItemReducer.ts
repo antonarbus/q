@@ -122,12 +122,15 @@ export const pasteItemReducer = (
     item: BlockItem
   }>,
 ): void => {
-  const { id, newItemId, pastePos, item } = action.payload
-  const itemToPaste = prepareItemForPasting(item, newItemId)
+  const itemToPaste = prepareItemForPasting(
+    action.payload.item,
+    action.payload.newItemId,
+  )
+
   const isBlock = isBlockType(itemToPaste)
 
   if (isBlock === true) {
-    pasteBlock(state, id, pastePos, itemToPaste)
+    pasteBlock(state, action.payload.id, action.payload.pastePos, itemToPaste)
 
     return
   }
@@ -135,6 +138,6 @@ export const pasteItemReducer = (
   const isRow = itemToPaste.type === itemType.row
 
   if (isRow === true) {
-    pasteRow(state, id, pastePos, itemToPaste)
+    pasteRow(state, action.payload.id, action.payload.pastePos, itemToPaste)
   }
 }

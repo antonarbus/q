@@ -219,11 +219,16 @@ export const useLoadQuotation = (): void => {
   // above we triggered quotation loading, now we handle the response
   useUpdateEffect(() => {
     if (getQuotationMutation.isSuccess === true) {
-      const { quotation } = getQuotationMutation.data
+      dispatch(
+        quotationSlice.actions.loadQuotationReducer({
+          quotation: getQuotationMutation.data.quotation,
+        }),
+      )
 
-      dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
-
-      if (quotation.permissionLevel === permissionLevel.forbidden) {
+      if (
+        getQuotationMutation.data.quotation.permissionLevel ===
+        permissionLevel.forbidden
+      ) {
         dispatch(
           quotationSlice.actions.loadQuotationReducer({
             quotation: getQuotationMutation.data.quotation,

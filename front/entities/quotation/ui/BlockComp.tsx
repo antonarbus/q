@@ -38,22 +38,22 @@ export const BlockComp = ({
 }: Props): JSX.Element => {
   const block = useBlock()
 
-  const { setNodeRef, transform, transition, isDragging } = useSortable({
+  const sortable = useSortable({
     id: block.item.id,
   })
 
   return (
     <div
-      ref={setNodeRef}
+      ref={sortable.setNodeRef}
       style={{
-        transform: CSS.Translate.toString(transform),
-        transition,
-        zIndex: isDragging === true ? 1000 : 0,
+        transform: CSS.Translate.toString(sortable.transform),
+        transition: sortable.transition,
+        zIndex: sortable.isDragging === true ? 1000 : 0,
       }}
     >
       <BlockAnimate
         autoWidth={autoWidth}
-        blockHeight={block.item.height ?? 0}
+        blockHeight={block.item.height}
         className={className}
         disableResize={disableResize}
         id={block.item.id}

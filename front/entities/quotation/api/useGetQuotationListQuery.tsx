@@ -20,13 +20,13 @@ export const useGetQuotationListQuery = (): Res => {
     retry: 0,
     enabled: false,
     queryFn: async ({ signal }) => {
-      const { data } = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
+      const response = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
         url: route.getQuotationList.url,
         method: route.getQuotationList.method,
         signal,
       })
 
-      return data
+      return response.data
     },
   })
 

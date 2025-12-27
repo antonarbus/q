@@ -10,13 +10,12 @@ export const updatePriceReducer = (
     value: number
   }>,
 ): void => {
-  const { blockIndex, html, value } = action.payload
-  const block = state.blocks[blockIndex]
+  const block = state.blocks[action.payload.blockIndex]
 
   if (block?.type !== itemType.price) {
     return
   }
 
-  block.price.html = html
-  block.price.value = value
+  block.price.html = action.payload.html
+  block.price.value = action.payload.value
 }

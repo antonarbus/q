@@ -34,7 +34,7 @@ export const useQuotationListAllDatasource = (): Res => {
             setIsFetching(true)
           }
 
-          const { data } = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>(
+          const response = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>(
             {
               url: route.getQuotationListAll.url,
               method: route.getQuotationListAll.method,
@@ -49,7 +49,7 @@ export const useQuotationListAllDatasource = (): Res => {
           )
 
           const getLastRow = (): number => {
-            const quotationListCount = data.quotationList.length
+            const quotationListCount = response.data.quotationList.length
 
             const didReachEndOfTheList =
               quotationListCount >= params.endRow - params.startRow
@@ -61,13 +61,13 @@ export const useQuotationListAllDatasource = (): Res => {
             }
 
             // reached the end of the list
-            const lastRow = data.quotationListTotalCount
+            const lastRow = response.data.quotationListTotalCount
 
             return lastRow
           }
 
           const lastRow = getLastRow()
-          params.successCallback(data.quotationList, lastRow)
+          params.successCallback(response.data.quotationList, lastRow)
         } catch {
           params.failCallback()
         } finally {

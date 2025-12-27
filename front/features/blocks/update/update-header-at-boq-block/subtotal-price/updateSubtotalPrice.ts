@@ -82,15 +82,16 @@ export const updateSubtotalPrice = ({
   }[]
 
   const prices: Prices = rows.map((row, index) => {
-    const { value: oldValue } = row.price
-    const { isPinned } = row.price.pin
-
-    const newValue = oldValue * (unpinnedPricesSumTarget / unpinnedPricesSum)
+    const newValue =
+      row.price.value * (unpinnedPricesSumTarget / unpinnedPricesSum)
 
     return {
-      oldValue,
-      isPinned,
-      newValue: isPinned === true ? oldValue : roundTo(newValue, 2),
+      oldValue: row.price.value,
+      isPinned: row.price.pin.isPinned,
+      newValue:
+        row.price.pin.isPinned === true
+          ? row.price.value
+          : roundTo(newValue, 2),
       editor: rowEditorRefs.at(index)?.price.current ?? null,
     }
   })

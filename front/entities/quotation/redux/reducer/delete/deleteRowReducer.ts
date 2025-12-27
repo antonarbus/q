@@ -9,14 +9,20 @@ export const deleteRowReducer = (
     rowIndex: number
   }>,
 ): Quotation => {
-  const { blockIndex, rowIndex } = action.payload
-  const boqBlock = getBoqBlockFromState({ blockIndex, state })
+  const boqBlock = getBoqBlockFromState({
+    blockIndex: action.payload.blockIndex,
+    state,
+  })
 
   if (boqBlock === undefined) {
     return state
   }
 
-  const rowsWithoutDeletedRow = boqBlock.boq.rows.toSpliced(rowIndex, 1)
+  const rowsWithoutDeletedRow = boqBlock.boq.rows.toSpliced(
+    action.payload.rowIndex,
+    1,
+  )
+
   boqBlock.boq.rows = rowsWithoutDeletedRow
 
   return state

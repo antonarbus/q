@@ -34,7 +34,7 @@ export const useFileListAllDatasource = (): Res => {
             setIsFetching(true)
           }
 
-          const { data } = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>(
+          const response = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>(
             {
               url: route.getFileListAll.url,
               method: route.getFileListAll.method,
@@ -49,7 +49,7 @@ export const useFileListAllDatasource = (): Res => {
           )
 
           const getLastRow = (): number => {
-            const fileListCount = data.fileList.length
+            const fileListCount = response.data.fileList.length
 
             const didReachEndOfTheList =
               fileListCount >= params.endRow - params.startRow
@@ -61,13 +61,13 @@ export const useFileListAllDatasource = (): Res => {
             }
 
             // reached the end of the list
-            const lastRow = data.fileListTotalCount
+            const lastRow = response.data.fileListTotalCount
 
             return lastRow
           }
 
           const lastRow = getLastRow()
-          params.successCallback(data.fileList, lastRow)
+          params.successCallback(response.data.fileList, lastRow)
         } catch {
           params.failCallback()
         } finally {

@@ -26,11 +26,11 @@ export const downloadExcel = (): void => {
 
   worker.postMessage(workerRequestMessage)
 
-  worker.onmessage = (event: MessageEvent<WorkerResponseMessage>): void => {
-    const { excelBlob } = event.data
-
+  worker.onmessage = (
+    messageEvent: MessageEvent<WorkerResponseMessage>,
+  ): void => {
     downloadBlobAsFile({
-      blob: excelBlob,
+      blob: messageEvent.data.excelBlob,
       fileName: `quotation - ${getState().quotation.id}.xlsx`,
     })
 

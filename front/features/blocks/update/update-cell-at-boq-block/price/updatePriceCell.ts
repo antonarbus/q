@@ -29,14 +29,14 @@ export const updatePriceCell = ({
     return
   }
 
-  const { didUpdate } = updateCellAtStore({
+  const updateCellRes = updateCellAtStore({
     html: priceCellEditorRef.current.html.get(),
     blockIndex,
     rowIndex,
     cellKey: cellKey.price,
   })
 
-  if (didUpdate === false) {
+  if (updateCellRes.didUpdate === false) {
     return
   }
 

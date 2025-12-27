@@ -40,7 +40,7 @@ export const downloadPdf = async (): Promise<void> => {
       return maxWidth
     }, 0) + 40
 
-  const { domToJpeg } = await import('modern-screenshot')
+  const modernScreenshotModule = await import('modern-screenshot')
 
   // Calculate height after button removal by temporarily cloning and measuring
   const tempClone = blocksContainerElement.cloneNode(true)
@@ -79,47 +79,50 @@ export const downloadPdf = async (): Promise<void> => {
 
   document.body.removeChild(tempClone)
 
-  const quotationScreenshot = await domToJpeg(blocksContainerElement, {
-    width: maxPaperWidth,
-    height: correctedHeight,
-    backgroundColor: 'grey',
-    quality: 1,
-    scale: 1.5,
-    onCloneNode: (blocksElement) => {
-      if (blocksElement instanceof HTMLElement === false) {
-        return
-      }
-
-      blocksElement.style.display = 'inline-flex'
-
-      // remove '+' button at the bottom
-      const openInsertMenuButtonElement = blocksElement.querySelector(
-        `.${cls.openInsertMenuButton}`,
-      )
-
-      if (openInsertMenuButtonElement !== null) {
-        openInsertMenuButtonElement.remove()
-      }
-
-      // remove buttons to the right and to the left from item block and row
-      const actionElements = blocksElement.querySelectorAll(
-        `.${cls.actionsContainer}`,
-      )
-
-      actionElements.forEach((element) => {
-        element.remove()
-      })
-
-      const paperElementList = blocksElement.querySelectorAll(`.${cls.paper}`)
-
-      // Remove liquid glass from .pdf
-      paperElementList.forEach((paperElement) => {
-        if (paperElement instanceof HTMLElement === true) {
-          paperElement.style.backgroundColor = 'white'
+  const quotationScreenshot = await modernScreenshotModule.domToJpeg(
+    blocksContainerElement,
+    {
+      width: maxPaperWidth,
+      height: correctedHeight,
+      backgroundColor: 'grey',
+      quality: 1,
+      scale: 1.5,
+      onCloneNode: (blocksElement) => {
+        if (blocksElement instanceof HTMLElement === false) {
+          return
         }
-      })
+
+        blocksElement.style.display = 'inline-flex'
+
+        // remove '+' button at the bottom
+        const openInsertMenuButtonElement = blocksElement.querySelector(
+          `.${cls.openInsertMenuButton}`,
+        )
+
+        if (openInsertMenuButtonElement !== null) {
+          openInsertMenuButtonElement.remove()
+        }
+
+        // remove buttons to the right and to the left from item block and row
+        const actionElements = blocksElement.querySelectorAll(
+          `.${cls.actionsContainer}`,
+        )
+
+        actionElements.forEach((element) => {
+          element.remove()
+        })
+
+        const paperElementList = blocksElement.querySelectorAll(`.${cls.paper}`)
+
+        // Remove liquid glass from .pdf
+        paperElementList.forEach((paperElement) => {
+          if (paperElement instanceof HTMLElement === true) {
+            paperElement.style.backgroundColor = 'white'
+          }
+        })
+      },
     },
-  })
+  )
 
   const linkElements =
     blocksContainerElement.querySelectorAll('.editable-html a')
@@ -151,11 +154,11 @@ export const downloadPdf = async (): Promise<void> => {
 
   worker.postMessage(workerRequestMessage)
 
-  worker.onmessage = (event: MessageEvent<WorkerResponseMessage>): void => {
-    const { pdfBlob } = event.data
-
+  worker.onmessage = (
+    messageEvent: MessageEvent<WorkerResponseMessage>,
+  ): void => {
     downloadBlobAsFile({
-      blob: pdfBlob,
+      blob: messageEvent.data.pdfBlob,
       fileName: `quotation - ${getState().quotation.id}.pdf`,
     })
 

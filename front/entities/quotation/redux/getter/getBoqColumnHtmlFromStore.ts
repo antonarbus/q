@@ -17,7 +17,7 @@ export const getBoqColumnHtmlFromStore = ({
     return ''
   }
 
-  const { html } = block.boq.column[boqColumnKey]
+  const columnName = block.boq.column[boqColumnKey]
 
-  return html
+  return columnName.html
 }

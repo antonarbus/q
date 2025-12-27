@@ -13,20 +13,18 @@ export const updateCellReducer = (
     cellKey: CellKey
   }>,
 ): void => {
-  const { blockIndex, rowIndex, html, value, cellKey } = action.payload
-
-  const block = state.blocks[blockIndex]
+  const block = state.blocks[action.payload.blockIndex]
 
   if (block?.type !== itemType.boq) {
     return
   }
 
-  const row = block.boq.rows[rowIndex]
+  const row = block.boq.rows[action.payload.rowIndex]
 
   if (row === undefined) {
     return
   }
 
-  row[cellKey].html = html
-  row[cellKey].value = value
+  row[action.payload.cellKey].html = action.payload.html
+  row[action.payload.cellKey].value = action.payload.value
 }

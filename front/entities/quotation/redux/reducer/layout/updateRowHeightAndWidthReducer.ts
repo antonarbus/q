@@ -11,13 +11,16 @@ export const updateRowHeightAndWidthReducer = (
     width: number
   }>,
 ): void => {
-  const { blockIndex, rowIndex, height, width } = action.payload
-  const row = getRowFromState({ blockIndex, rowIndex, state })
+  const row = getRowFromState({
+    blockIndex: action.payload.blockIndex,
+    rowIndex: action.payload.rowIndex,
+    state,
+  })
 
   if (row === undefined) {
     return
   }
 
-  row.height = height
-  row.width = width
+  row.height = action.payload.height
+  row.width = action.payload.width
 }

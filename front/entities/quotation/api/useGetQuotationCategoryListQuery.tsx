@@ -19,12 +19,12 @@ export const useGetQuotationCategoryListQuery = (): Res => {
     staleTime: 0,
     retry: 0,
     queryFn: async () => {
-      const { data } = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
+      const response = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
         url: route.getUniqueQuotationCategoryList.url,
         method: route.getUniqueQuotationCategoryList.method,
       })
 
-      return data
+      return response.data
     },
   })
 

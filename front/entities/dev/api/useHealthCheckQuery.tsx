@@ -12,14 +12,14 @@ export const useHealthCheckQuery = (): Res => {
     retry: 1,
     retryDelay: 3000,
     queryFn: async () => {
-      const { data } = await axios<ResBody, AxiosResponse<ResBody>>({
+      const response = await axios<ResBody, AxiosResponse<ResBody>>({
         url: route.health.url,
         method: route.health.method,
         withCredentials: true,
         timeout: 30000,
       })
 
-      return data
+      return response.data
     },
   })
 

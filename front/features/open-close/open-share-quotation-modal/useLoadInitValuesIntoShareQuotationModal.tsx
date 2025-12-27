@@ -10,7 +10,7 @@ export const useLoadInitValuesIntoShareQuotationModal = ({
   accessFormValuesSignal,
 }: Props): void => {
   useEffectOnce(() => {
-    const { quotation } = getState()
-    accessFormValuesSignal.value = quotation.access
+    const state = getState()
+    accessFormValuesSignal.value = state.quotation.access
   })
 }

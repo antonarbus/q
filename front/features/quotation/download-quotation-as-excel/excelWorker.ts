@@ -3,20 +3,20 @@ import striptags from 'striptags'
 import type { WorkerRequestMessage, WorkerResponseMessage } from './types'
 
 self.onmessage = async (
-  event: MessageEvent<WorkerRequestMessage>,
+  messageEvent: MessageEvent<WorkerRequestMessage>,
 ): Promise<void> => {
-  const { quotation } = event.data
-
   // www.npmjs.com/package/exceljs#contents
   const ExcelJS = await import('exceljs')
   const workbook = new ExcelJS.Workbook()
 
-  const worksheet = workbook.addWorksheet(`Quotation ${quotation.id}`)
+  const worksheet = workbook.addWorksheet(
+    `Quotation ${messageEvent.data.quotation.id}`,
+  )
 
   let excelRowNumber = 1
   let rowBlockNumber = 1
 
-  for (const block of quotation.blocks) {
+  for (const block of messageEvent.data.quotation.blocks) {
     if (block.type === 'text') {
       const text = stripHtmlWithBreaksPreserve(block.text.html)
       // Split text into lines and write each line to a new row

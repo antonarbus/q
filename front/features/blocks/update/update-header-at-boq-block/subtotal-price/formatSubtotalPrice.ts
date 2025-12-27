@@ -24,16 +24,16 @@ export const formatSubtotalPrice = ({
     return
   }
 
-  const { value, html } = boqBlock.boq.header.subTotalPrice
+  const { subTotalPrice } = boqBlock.boq.header
 
-  const roundedValue = roundTo(value, 2)
+  const roundedValue = roundTo(subTotalPrice.value, 2)
 
   const newHtml = getStringWithNewFormattedNumber({
-    string: html,
+    string: subTotalPrice.html,
     newNumber: roundedValue,
   })
 
-  if (html === newHtml) {
+  if (subTotalPrice.html === newHtml) {
     return
   }
 

@@ -34,7 +34,7 @@ export const useBookmarkListAllDatasource = (): Res => {
             setIsFetching(true)
           }
 
-          const { data } = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>(
+          const response = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>(
             {
               url: route.getBookmarkListAll.url,
               method: route.getBookmarkListAll.method,
@@ -48,7 +48,7 @@ export const useBookmarkListAllDatasource = (): Res => {
           )
 
           const getLastRow = (): number => {
-            const bookmarkListCount = data.bookmarkList.length
+            const bookmarkListCount = response.data.bookmarkList.length
 
             const didReachEndOfTheList =
               bookmarkListCount >= params.endRow - params.startRow
@@ -60,13 +60,13 @@ export const useBookmarkListAllDatasource = (): Res => {
             }
 
             // reached the end of the list
-            const lastRow = data.bookmarkListTotalCount
+            const lastRow = response.data.bookmarkListTotalCount
 
             return lastRow
           }
 
           const lastRow = getLastRow()
-          params.successCallback(data.bookmarkList, lastRow)
+          params.successCallback(response.data.bookmarkList, lastRow)
         } catch {
           params.failCallback()
         } finally {

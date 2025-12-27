@@ -12,10 +12,8 @@ const startServer = (): void => {
   app.use(express.json({ limit: '50mb' })) // parses the JSON payload and adds it into'body' prop
   app.use(cookieParser()) // parses Cookie header and adds to req.cookies
 
-  Object.entries(api).forEach(([_key, apiData]) => {
-    const { method, url, handler } = apiData
-
-    // register express route
+  // register express routes
+  Object.entries(api).forEach(([_key, { method, url, handler }]) => {
     app[method](url, asyncHandler(handler))
   })
 

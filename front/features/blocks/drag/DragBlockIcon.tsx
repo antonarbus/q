@@ -17,7 +17,7 @@ export const DragBlockIcon = (): JSX.Element => {
 
   const dragTooltipTextSignal = useSignal<'Drag' | 'Drop'>('Drag')
 
-  const { listeners, attributes, isDragging } = useSortable({
+  const sortable = useSortable({
     id: block.item.id,
     disabled,
   })
@@ -44,14 +44,14 @@ export const DragBlockIcon = (): JSX.Element => {
         />
       </Tooltip>
       <MdDragIndicator
-        {...attributes}
-        {...listeners}
+        {...sortable.attributes}
+        {...sortable.listeners}
         className={cls.actionIcon}
         onPointerDown={(event) => {
           dragTooltipTextSignal.value = 'Drop'
 
           setTimeout(() => {
-            listeners?.onPointerDown?.(event)
+            sortable.listeners?.onPointerDown?.(event)
           })
         }}
         onPointerEnter={(event) => {
@@ -65,13 +65,14 @@ export const DragBlockIcon = (): JSX.Element => {
           }, 500)
         }}
         onPointerLeave={(event) => {
-          if (isDragging === false) {
+          if (sortable.isDragging === false) {
             setOpenTooltip(false)
             isOverDragIcon.current = false
           }
         }}
         onPointerMove={() => {
-          const mayDrop = isDragging && dragTooltipTextSignal.value === 'Drag'
+          const mayDrop =
+            sortable.isDragging && dragTooltipTextSignal.value === 'Drag'
 
           if (mayDrop === true) {
             dragTooltipTextSignal.value = 'Drop'

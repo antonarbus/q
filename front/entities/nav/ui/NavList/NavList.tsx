@@ -6,9 +6,9 @@ import { NavItem } from './NavItem'
 
 export const NavList = (): JSX.Element => {
   const navStructure = useSelector((state) => state.nav.navStructure)
-  const { width } = useWindowSize()
+  const windowSize = useWindowSize()
 
-  const isMobile = width < navMediaQuery.widthWhenNothingFits
+  const isMobile = windowSize.width < navMediaQuery.widthWhenNothingFits
 
   const navStructureToLoad =
     isMobile === true ? navStructure : navStructure[0]?.navItems

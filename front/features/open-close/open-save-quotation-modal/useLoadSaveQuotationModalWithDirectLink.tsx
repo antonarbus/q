@@ -33,13 +33,22 @@ export const useLoadSaveQuotationModalWithDirectLink = ({
       return
     }
 
-    const { quotation } = getQuotationMutation.data
+    dispatch(
+      quotationSlice.actions.loadQuotationReducer({
+        quotation: getQuotationMutation.data.quotation,
+      }),
+    )
 
-    dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
+    saveQuotationFormValues.nameSignal.value =
+      getQuotationMutation.data.quotation.name
 
-    saveQuotationFormValues.nameSignal.value = quotation.name
-    saveQuotationFormValues.categorySignal.value = quotation.category
-    saveQuotationFormValues.descSignal.value = quotation.desc
-    saveQuotationFormValues.infoSignal.value = quotation.info
+    saveQuotationFormValues.categorySignal.value =
+      getQuotationMutation.data.quotation.category
+
+    saveQuotationFormValues.descSignal.value =
+      getQuotationMutation.data.quotation.desc
+
+    saveQuotationFormValues.infoSignal.value =
+      getQuotationMutation.data.quotation.info
   }, [getQuotationMutation.isSuccess])
 }

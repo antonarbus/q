@@ -18,7 +18,7 @@ export const getBookmarkedRowCellHtmlFromStore = ({
 
   const row = block
 
-  const { html } = row[cellKey]
+  const cell = row[cellKey]
 
-  return html
+  return cell.html
 }

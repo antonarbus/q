@@ -16,12 +16,14 @@ export const deleteFromQuotationListCache = ({ id }: Props): void => {
           return
         }
 
-        const { quotationList: quotations } = draft
-        const index = quotations.findIndex((quotation) => quotation.id === id)
+        const index = draft.quotationList.findIndex(
+          (quotation) => quotation.id === id,
+        )
+
         const foundInCache = index !== -1
 
         if (foundInCache === true) {
-          quotations.splice(index, 1)
+          draft.quotationList.splice(index, 1)
         }
       })
 

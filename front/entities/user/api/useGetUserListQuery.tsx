@@ -17,13 +17,13 @@ export const useGetUserListQuery = (): Res => {
     retry: 0,
     // enabled: false,
     queryFn: async ({ signal }) => {
-      const { data } = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
+      const response = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
         url: route.getUserList.url,
         method: route.getUserList.method,
         signal,
       })
 
-      return data
+      return response.data
     },
   })
 

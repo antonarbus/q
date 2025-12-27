@@ -31,9 +31,7 @@ export const getUserFromRefreshTokenOrNull = ({ req }: Props): Res => {
     return null
   }
 
-  const { email, roles } = jwtPayload
-
-  if (typeof email !== 'string') {
+  if (typeof jwtPayload.email !== 'string') {
     return null
   }
 
@@ -41,5 +39,10 @@ export const getUserFromRefreshTokenOrNull = ({ req }: Props): Res => {
     token: refreshJwtToken,
   })
 
-  return { email, roles, refreshJwtToken, jwtRefreshTokenExpirationDays }
+  return {
+    email: jwtPayload.email,
+    roles: jwtPayload.roles,
+    refreshJwtToken,
+    jwtRefreshTokenExpirationDays,
+  }
 }

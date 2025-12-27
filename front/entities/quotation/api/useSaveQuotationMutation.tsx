@@ -12,7 +12,7 @@ import type { AxiosError, AxiosResponse } from 'axios'
 export const saveQuotationMutationFn = async ({
   quotation,
 }: Payload): Promise<ResBody> => {
-  const { data } = await axiosWithAuth<
+  const response = await axiosWithAuth<
     ResBody,
     AxiosResponse<ResBody>,
     Payload
@@ -22,7 +22,7 @@ export const saveQuotationMutationFn = async ({
     data: { quotation },
   })
 
-  return data
+  return response.data
 }
 
 type Res = UseMutationResult<ResBody, AxiosError<ErrorResBody>, Payload>

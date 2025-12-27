@@ -38,9 +38,7 @@ export const BookmarkBlockIcon = (): ReactNode => {
               return
             }
 
-            const { email } = getState().user
-
-            if (email === null) {
+            if (getState().user.email === null) {
               toast.warning('Not logged in')
               void navigate(`./${route.login}`)
 

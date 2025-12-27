@@ -67,9 +67,7 @@ export const useSaveBookmark = ({
   const onSubmit = useCallback((event: FormEvent) => {
     event.preventDefault()
 
-    const { email } = getState().user
-
-    if (email === null) {
+    if (getState().user.email === null) {
       toast.warning('Not logged in')
 
       return

@@ -10,12 +10,12 @@ export const useLogOutUserMutation = (): Res => {
   const query = useMutation<ResBody, AxiosError<ErrorResBody>>({
     mutationKey: [queryKey.logOut],
     mutationFn: async () => {
-      const { data } = await axios<ResBody>({
+      const response = await axios<ResBody>({
         url: route.logOut.url,
         method: route.logOut.method,
       })
 
-      return data
+      return response.data
     },
   })
 

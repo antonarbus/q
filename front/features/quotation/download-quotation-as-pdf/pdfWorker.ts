@@ -5,10 +5,10 @@ self.onmessage = async (
 ): Promise<void> => {
   const { imageData, width, height, links } = event.data
 
-  const { jsPDF } = await import('jspdf')
+  const jspdfModule = await import('jspdf')
 
   // eslint-disable-next-line new-cap
-  const pdf = new jsPDF({
+  const pdf = new jspdfModule.jsPDF({
     orientation: width > height ? 'landscape' : 'portrait',
     unit: 'px',
     format: [width, height],

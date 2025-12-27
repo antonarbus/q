@@ -11,8 +11,7 @@ export const updateBoqColumnNameTextReducer = (
     boqColumnKey: BoqColumnKey
   }>,
 ): void => {
-  const { blockIndex, html, boqColumnKey } = action.payload
-  const block = state.blocks[blockIndex]
+  const block = state.blocks[action.payload.blockIndex]
 
   if (block === undefined) {
     return
@@ -22,5 +21,5 @@ export const updateBoqColumnNameTextReducer = (
     return
   }
 
-  block.boq.column[boqColumnKey].html = html
+  block.boq.column[action.payload.boqColumnKey].html = action.payload.html
 }

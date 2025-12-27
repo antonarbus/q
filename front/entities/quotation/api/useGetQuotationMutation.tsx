@@ -15,7 +15,7 @@ export const useGetQuotationMutation = (): Res => {
   const mutation = useMutation<ResBody, AxiosError<ErrorResBody>, Payload>({
     mutationKey: [queryKey.getQuotation],
     mutationFn: async ({ id }: Payload) => {
-      const { data } = await axiosWithAuth<
+      const response = await axiosWithAuth<
         ResBody,
         AxiosResponse<ResBody>,
         Payload
@@ -25,7 +25,7 @@ export const useGetQuotationMutation = (): Res => {
         data: { id },
       })
 
-      return data
+      return response.data
     },
   })
 

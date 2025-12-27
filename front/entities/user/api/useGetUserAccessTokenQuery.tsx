@@ -19,14 +19,14 @@ export const useGetUserAccessTokenQuery = (): Res => {
     retry: 1,
     enabled: false,
     queryFn: async () => {
-      const { data } = await axios<ResBody, AxiosResponse<ResBody>>({
+      const response = await axios<ResBody, AxiosResponse<ResBody>>({
         url: route.getAccessToken.url,
         method: route.getAccessToken.method,
         withCredentials: true,
         timeout: 10000,
       })
 
-      return data
+      return response.data
     },
   })
 

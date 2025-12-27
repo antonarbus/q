@@ -8,6 +8,5 @@ export const reOrderBlocksReducer = (
     reOrderedItems: BlockItem[]
   }>,
 ): void => {
-  const { reOrderedItems } = action.payload
-  state.blocks = reOrderedItems
+  state.blocks = action.payload.reOrderedItems
 }

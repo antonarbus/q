@@ -11,8 +11,7 @@ export const updateColWidthReducer = (
     boqColumnKey: BoqColumnKey
   }>,
 ): void => {
-  const { blockIndex, width, boqColumnKey } = action.payload
-  const block = state.blocks[blockIndex]
+  const block = state.blocks[action.payload.blockIndex]
 
   if (block === undefined) {
     return
@@ -22,5 +21,5 @@ export const updateColWidthReducer = (
     return
   }
 
-  block.boq.column[boqColumnKey].width = width
+  block.boq.column[action.payload.boqColumnKey].width = action.payload.width
 }

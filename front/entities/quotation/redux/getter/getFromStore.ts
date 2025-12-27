@@ -9,13 +9,13 @@ type Props = {
 export const getFromStore = ({
   id,
 }: Props): BlockItem | Quotation | undefined => {
-  const { quotation } = getState()
+  const state = getState()
 
-  if (quotation.id === id) {
-    return quotation
+  if (state.quotation.id === id) {
+    return state.quotation
   }
 
-  const blockWithSameId = quotation.blocks.find((block) => {
+  const blockWithSameId = state.quotation.blocks.find((block) => {
     return block.id === id
   })
 
@@ -23,7 +23,7 @@ export const getFromStore = ({
     return blockWithSameId
   }
 
-  for (const block of quotation.blocks) {
+  for (const block of state.quotation.blocks) {
     if (block.type === 'boq') {
       for (const row of block.boq.rows) {
         if (row.id === id) {

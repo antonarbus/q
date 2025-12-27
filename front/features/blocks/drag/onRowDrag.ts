@@ -13,22 +13,20 @@ export const onRowDragStart =
 
 export const onRowDragEnd =
   ({ blockIndex, rowIds }: { blockIndex: number; rowIds: string[] }) =>
-  (event: DragEndEvent): void => {
-    const { active, over } = event
-
+  (dragEndEvent: DragEndEvent): void => {
     dispatch(quotationSlice.actions.enableFroalaReducer({ blockIndex }))
     document.body.style.removeProperty('cursor')
 
-    if (over === null) {
+    if (dragEndEvent.over === null) {
       return
     }
 
-    if (active.id === over.id) {
+    if (dragEndEvent.active.id === dragEndEvent.over.id) {
       return
     }
 
-    const oldIndex = rowIds.indexOf(String(active.id))
-    const newIndex = rowIds.indexOf(String(over.id))
+    const oldIndex = rowIds.indexOf(String(dragEndEvent.active.id))
+    const newIndex = rowIds.indexOf(String(dragEndEvent.over.id))
     const rows = getRowsFromStore({ blockIndex })
 
     if (rows === undefined) {

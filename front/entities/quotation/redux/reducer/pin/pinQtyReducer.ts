@@ -10,11 +10,9 @@ export const pinQtyReducer = (
     rowIndex: number
   }>,
 ): void => {
-  const { blockIndex, rowIndex } = action.payload
-
   const itemPriceCell = getCellFromState({
-    blockIndex,
-    rowIndex,
+    blockIndex: action.payload.blockIndex,
+    rowIndex: action.payload.rowIndex,
     cellKey: cellKey.itemPrice,
     state,
   })
@@ -26,8 +24,8 @@ export const pinQtyReducer = (
   itemPriceCell.pin.isPinned = false
 
   const qtyCell = getCellFromState({
-    blockIndex,
-    rowIndex,
+    blockIndex: action.payload.blockIndex,
+    rowIndex: action.payload.rowIndex,
     cellKey: cellKey.qty,
     state,
   })

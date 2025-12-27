@@ -10,11 +10,9 @@ export const pinItemPriceReducer = (
     rowIndex: number
   }>,
 ): void => {
-  const { blockIndex, rowIndex } = action.payload
-
   const itemPriceCell = getCellFromState({
-    blockIndex,
-    rowIndex,
+    blockIndex: action.payload.blockIndex,
+    rowIndex: action.payload.rowIndex,
     cellKey: cellKey.itemPrice,
     state,
   })

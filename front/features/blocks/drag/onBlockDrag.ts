@@ -10,9 +10,7 @@ export const onBlockDragStart = (_event: DragStartEvent): void => {
 
 export const onBlockDragEnd =
   ({ itemIds }: { itemIds: string[] }) =>
-  (event: DragEndEvent): void => {
-    const { active, over } = event
-
+  (dragEndEvent: DragEndEvent): void => {
     // Save scroll position before setNotEditable
     const { scrollX, scrollY } = window
 
@@ -32,17 +30,22 @@ export const onBlockDragEnd =
 
     document.body.style.removeProperty('cursor')
 
-    if (over === null) {
+    if (dragEndEvent.over === null) {
       return
     }
 
-    if (active.id === over.id) {
+    if (dragEndEvent.active.id === dragEndEvent.over.id) {
       return
     }
 
-    const oldIndex = itemIds.indexOf(String(active.id))
-    const newIndex = itemIds.indexOf(String(over.id))
-    const { blocks } = getState().quotation
-    const reOrderedItems = arrayMoveImmutable(blocks, oldIndex, newIndex)
+    const oldIndex = itemIds.indexOf(String(dragEndEvent.active.id))
+    const newIndex = itemIds.indexOf(String(dragEndEvent.over.id))
+
+    const reOrderedItems = arrayMoveImmutable(
+      getState().quotation.blocks,
+      oldIndex,
+      newIndex,
+    )
+
     dispatch(quotationSlice.actions.reOrderBlocksReducer({ reOrderedItems }))
   }

@@ -15,13 +15,13 @@ export const useDeleteQuotationMutation = (): Res => {
   const mutation = useMutation<ResBody, AxiosError<ErrorResBody>, Payload>({
     mutationKey: [queryKey.deleteQuotation],
     mutationFn: async (payload: Payload) => {
-      const { data } = await axiosWithAuth<ResBody>({
+      const response = await axiosWithAuth<ResBody>({
         url: route.deleteQuotation.url,
         method: route.deleteQuotation.method,
         data: payload,
       })
 
-      return data
+      return response.data
     },
   })
 

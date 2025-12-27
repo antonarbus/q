@@ -14,13 +14,13 @@ export const useResetUserPasswordMutation = (): Res => {
   const query = useMutation<ResBody, AxiosError<ErrorResBody>, Payload>({
     mutationKey: [queryKey.resetPassword],
     mutationFn: async ({ resetPasswordKey, email, password }: Payload) => {
-      const { data } = await axios<ResBody>({
+      const response = await axios<ResBody>({
         url: route.resetPassword.url,
         method: route.resetPassword.method,
         data: { resetPasswordKey, email, password },
       })
 
-      return data
+      return response.data
     },
   })
 

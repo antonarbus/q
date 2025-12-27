@@ -14,7 +14,7 @@ export const useCountUniqueDailyVisitorsMutation = (): Res => {
   const query = useMutation<ResBody, AxiosError<ErrorResBody>, Payload>({
     mutationKey: [queryKey.countUniqueDailyVisitors],
     mutationFn: async (payload: Payload) => {
-      const { data } = await axios<ResBody>({
+      const response = await axios<ResBody>({
         url: route.countUniqueDailyVisitors.url,
         method: route.countUniqueDailyVisitors.method,
         data: {
@@ -22,7 +22,7 @@ export const useCountUniqueDailyVisitorsMutation = (): Res => {
         },
       })
 
-      return data
+      return response.data
     },
   })
 

@@ -28,9 +28,13 @@ export const useLoadShareQuotationModalWithDirectLink = ({
 
   useUpdateEffect(() => {
     if (getQuotationMutation.data?.quotation !== undefined) {
-      const { quotation } = getQuotationMutation.data
-      dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
-      accessFormValuesSignal.value = quotation.access
+      dispatch(
+        quotationSlice.actions.loadQuotationReducer({
+          quotation: getQuotationMutation.data.quotation,
+        }),
+      )
+
+      accessFormValuesSignal.value = getQuotationMutation.data.quotation.access
     }
   }, [getQuotationMutation.isSuccess])
 }

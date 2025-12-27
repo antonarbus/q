@@ -11,10 +11,10 @@ export const getPastePlace = ({
   event,
   distanceToEdge,
 }: Props): CopyPlace => {
-  const { height, top } = hoveredElement.getBoundingClientRect()
-  const yWithinElement = event.clientY - top
+  const elementRect = hoveredElement.getBoundingClientRect()
+  const yWithinElement = event.clientY - elementRect.top
   const distToTop = yWithinElement
-  const distToBottom = height - yWithinElement
+  const distToBottom = elementRect.height - yWithinElement
 
   if (distToTop < distanceToEdge) {
     return {

@@ -12,7 +12,5 @@ export const getPriceBlockHtmlFromStore = ({ blockIndex }: Props): string => {
     return ''
   }
 
-  const { html } = block.price
-
-  return html
+  return block.price.html
 }

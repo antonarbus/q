@@ -25,7 +25,7 @@ export const getCellHtmlFromStore = ({
     return ''
   }
 
-  const { html } = row[cellKey]
+  const cell = row[cellKey]
 
-  return html
+  return cell.html
 }

@@ -12,8 +12,6 @@ export const updateBookmarkedRowCellReducer = (
     cellKey: CellKey
   }>,
 ): void => {
-  const { html, value, cellKey } = action.payload
-
   const block = state.blocks[BOOKMARK_POS_AT_BLOCKS]
 
   if (block === undefined) {
@@ -23,7 +21,7 @@ export const updateBookmarkedRowCellReducer = (
   if (block.type === itemType.row) {
     const row = block
 
-    row[cellKey].html = html
-    row[cellKey].value = value
+    row[action.payload.cellKey].html = action.payload.html
+    row[action.payload.cellKey].value = action.payload.value
   }
 }

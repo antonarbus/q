@@ -92,22 +92,10 @@ export const beforeUpload: BeforeUpload = async (props) => {
 
   const toastId = toast.loading(`Uploading 0%...`)
 
-  const { data: signedUrlRes } = await axiosWithAuth<ResBodyGetSignedUrl>({
+  const signUrlResponse = await axiosWithAuth<ResBodyGetSignedUrl>({
     url: route.fileUploadSignedUrl.url,
     method: route.fileUploadSignedUrl.method,
   })
-
-  if (signedUrlRes.signedUrl === null) {
-    toast.error('Failed', { id: toastId })
-
-    return
-  }
-
-  if (signedUrlRes.url === null) {
-    toast.error('Failed', { id: toastId })
-
-    return
-  }
 
   let eventCount = 0
 
@@ -117,7 +105,7 @@ export const beforeUpload: BeforeUpload = async (props) => {
   } = Promise.withResolvers()
 
   const uploadResponse = await axios<unknown>({
-    url: signedUrlRes.signedUrl,
+    url: signUrlResponse.data.signedUrl,
     method: 'put',
     data: file,
     headers: {
@@ -201,7 +189,7 @@ export const beforeUpload: BeforeUpload = async (props) => {
     url: route.saveFileInfo.url,
     method: route.saveFileInfo.method,
     data: {
-      id: signedUrlRes.fileId,
+      id: signUrlResponse.data.fileId,
       name: file.name,
       size: file.size,
     },
@@ -214,14 +202,18 @@ export const beforeUpload: BeforeUpload = async (props) => {
   }
 
   if (props.type === 'file') {
-    props.editor.file.insert(`/uploads/${signedUrlRes.fileId}`, file.name, {
-      link: `/uploads/${signedUrlRes.fileId}`,
-    })
+    props.editor.file.insert(
+      `/uploads/${signUrlResponse.data.fileId}`,
+      file.name,
+      {
+        link: `/uploads/${signUrlResponse.data.fileId}`,
+      },
+    )
   }
 
   if (props.type === 'image') {
     props.editor.image.insert(
-      `/uploads/${signedUrlRes.fileId}`,
+      `/uploads/${signUrlResponse.data.fileId}`,
       true,
       {
         name: file.name,

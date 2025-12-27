@@ -15,13 +15,13 @@ export const useLogInUserMutation = (): Res => {
   const query = useMutation<ResBody, AxiosError<ErrorResBody>, Payload>({
     mutationKey: [queryKey.logIn],
     mutationFn: async ({ email, password }: Payload) => {
-      const { data } = await axiosWithAuth<ResBody>({
+      const response = await axiosWithAuth<ResBody>({
         url: route.logIn.url,
         method: route.logIn.method,
         data: { email, password },
       })
 
-      return data
+      return response.data
     },
   })
 

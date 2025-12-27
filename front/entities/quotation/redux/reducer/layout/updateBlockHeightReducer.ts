@@ -8,12 +8,11 @@ export const updateBlockHeightReducer = (
     height: number
   }>,
 ): void => {
-  const { blockIndex, height } = action.payload
-  const block = state.blocks[blockIndex]
+  const block = state.blocks[action.payload.blockIndex]
 
   if (block === undefined) {
     return
   }
 
-  block.height = height
+  block.height = action.payload.height
 }

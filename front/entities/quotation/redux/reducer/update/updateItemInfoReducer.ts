@@ -12,16 +12,14 @@ export const updateItemInfoReducer = (
     info: string
   }>,
 ): void => {
-  const { id, name, category, desc, info } = action.payload
-
-  const item = getFromState({ id, state })
+  const item = getFromState({ id: action.payload.id, state })
 
   if (item === undefined) {
     return
   }
 
-  item.name = name
-  item.category = category
-  item.desc = desc
-  item.info = info
+  item.name = action.payload.name
+  item.category = action.payload.category
+  item.desc = action.payload.desc
+  item.info = action.payload.info
 }

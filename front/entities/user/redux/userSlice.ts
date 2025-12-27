@@ -30,17 +30,18 @@ export const userSlice = createSlice({
         roles: SelectUser['roles']
       }>,
     ) => {
-      const { email, roles } = action.payload
-
-      return { ...state, email, roles }
+      return {
+        ...state,
+        email: action.payload.email,
+        roles: action.payload.roles,
+      }
     },
     forgetLoggedUser: () => initialState,
     setAccessToken: (
       state: WritableDraft<InitState>,
       action: PayloadAction<{ accessToken: string | null }>,
     ) => {
-      const { accessToken } = action.payload
-      state.accessToken = accessToken
+      state.accessToken = action.payload.accessToken
     },
   },
 })

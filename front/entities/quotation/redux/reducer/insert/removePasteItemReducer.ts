@@ -16,12 +16,12 @@ export const removePasteItemReducer = (state: Quotation): void => {
       return
     }
 
-    const { rows } = block.boq
-
-    const pasteRowIndex = rows.findIndex((row) => row.type === rowTypeKey.paste)
+    const pasteRowIndex = block.boq.rows.findIndex(
+      (row) => row.type === rowTypeKey.paste,
+    )
 
     if (pasteRowIndex >= 0) {
-      rows.splice(pasteRowIndex, 1)
+      block.boq.rows.splice(pasteRowIndex, 1)
     }
   })
 }

@@ -18,12 +18,12 @@ export const useGetUniqueDailyVisitorCountQuery = ({
   const query = useQuery<ResBody, AxiosError<ErrorResBody>>({
     queryKey: [queryKey.getUniqueDailyVisitors, { startDate, endDate }],
     queryFn: async () => {
-      const { data } = await axiosWithAuth<ResBody>({
+      const response = await axiosWithAuth<ResBody>({
         url: `${route.getUniqueDailyVisitors.url}?startDate=${startDate}&endDate=${endDate}`,
         method: route.getUniqueDailyVisitors.method,
       })
 
-      return data
+      return response.data
     },
     staleTime: Infinity,
   })

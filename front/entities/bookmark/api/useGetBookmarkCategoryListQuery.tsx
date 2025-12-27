@@ -19,12 +19,12 @@ export const useGetBookmarkCategoryListQuery = (): Res => {
     staleTime: 0,
     retry: 0,
     queryFn: async () => {
-      const { data } = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
+      const response = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
         url: route.getUniqueBookmarkCategoryList.url,
         method: route.getUniqueBookmarkCategoryList.method,
       })
 
-      return data
+      return response.data
     },
   })
 

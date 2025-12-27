@@ -11,12 +11,10 @@ export const showCellPinReducer = (
     cellKey: CellKey
   }>,
 ): void => {
-  const { blockIndex, rowIndex, cellKey } = action.payload
-
   const cell = getCellFromState({
-    blockIndex,
-    rowIndex,
-    cellKey,
+    blockIndex: action.payload.blockIndex,
+    rowIndex: action.payload.rowIndex,
+    cellKey: action.payload.cellKey,
     state,
   })
 

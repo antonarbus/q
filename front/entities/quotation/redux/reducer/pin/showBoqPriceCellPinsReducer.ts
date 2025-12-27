@@ -8,8 +8,10 @@ export const showBoqPriceCellPinsReducer = (
     blockIndex: number
   }>,
 ): void => {
-  const { blockIndex } = action.payload
-  const rows = getRowsFromState({ blockIndex, state })
+  const rows = getRowsFromState({
+    blockIndex: action.payload.blockIndex,
+    state,
+  })
 
   if (rows === undefined) {
     return

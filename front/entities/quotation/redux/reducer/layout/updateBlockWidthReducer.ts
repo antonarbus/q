@@ -8,12 +8,11 @@ export const updateBlockWidthReducer = (
     width: number
   }>,
 ): void => {
-  const { blockIndex, width } = action.payload
-  const block = state.blocks[blockIndex]
+  const block = state.blocks[action.payload.blockIndex]
 
   if (block === undefined) {
     return
   }
 
-  block.width = width
+  block.width = action.payload.width
 }
