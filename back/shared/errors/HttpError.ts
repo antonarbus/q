@@ -1,12 +1,12 @@
 import type { HttpStatusCode } from '@back/shared/const/httpCode'
 
-type HttpErrorParams<ErrorCode extends string> = {
+type HttpErrorParams<ErrorCode extends string = string> = {
   errorCode: ErrorCode
   statusCode: HttpStatusCode
   message: string
 }
 
-export class HttpError<ErrorCode extends string> extends Error {
+export class HttpError<ErrorCode extends string = string> extends Error {
   public readonly errorCode: ErrorCode
 
   public readonly statusCode: HttpStatusCode

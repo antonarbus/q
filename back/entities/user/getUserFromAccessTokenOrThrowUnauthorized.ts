@@ -23,7 +23,7 @@ export const getUserFromAccessTokenOrThrowUnauthorized = ({
   const accessJwtToken = req.headers[headerName.accessJwtToken]
 
   if (typeof accessJwtToken !== 'string') {
-    throw new HttpError<'UNAUTHORIZED'>({
+    throw new HttpError({
       errorCode: 'UNAUTHORIZED',
       statusCode: httpStatusCode.unauthorized401,
       message: 'Not logged in',
@@ -33,7 +33,7 @@ export const getUserFromAccessTokenOrThrowUnauthorized = ({
   const jwtPayload = verifyAccessToken(accessJwtToken)
 
   if (jwtPayload === undefined) {
-    throw new HttpError<'UNAUTHORIZED'>({
+    throw new HttpError({
       errorCode: 'UNAUTHORIZED',
       statusCode: httpStatusCode.unauthorized401,
       message: 'Not logged in',
