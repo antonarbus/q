@@ -26,7 +26,7 @@ export const InfoLeft = (): ReactNode => {
           userSelect: 'none',
         }}
       >
-        {permissionLevel ?? ''}
+        {permissionLevel === 'NEW' ? '' : permissionLevel}
       </Box>
     </Box>
   )
