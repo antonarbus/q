@@ -23,7 +23,7 @@ export type ResBody = {
 
 export type ErrorResBody = {
   message: string
-  errorCode: ErrorCode | 'QUOTATION_NOT_FOUND' | 'QUOTATION_NOT_DELETED'
+  errorCode: ErrorCode | 'QUOTATION_NOT_FOUND'
 }
 
 type RouterHandler = (
@@ -62,23 +62,17 @@ export const deleteQuotationHandler: RouterHandler = async (req, res) => {
   messageList.push('Quotation deleted from database')
 
   const fileInfo = getFileInfo({ id: req.body.quotationId })
-  const [{ statusCode }] = await bucket.file(fileInfo.path).delete()
 
-  if (statusCode === 204) {
-    messageList.push('Quotation deleted from storage')
-
-    res.status(httpStatusCode.success200).json({
-      message: messageList.join(' | '),
+  await bucket
+    .file(fileInfo.path)
+    .delete()
+    .catch(() => {
+      messageList.push('Failed to delete quotation from storage')
     })
 
-    return
-  }
+  messageList.push('Quotation deleted from storage')
 
-  messageList.push('Failed to delete quotation from storage')
-
-  throw new HttpError<ErrorResBody['errorCode']>({
-    errorCode: 'QUOTATION_NOT_DELETED',
-    statusCode: httpStatusCode.notFound404,
+  res.status(httpStatusCode.noContent204).json({
     message: messageList.join(' | '),
   })
 }

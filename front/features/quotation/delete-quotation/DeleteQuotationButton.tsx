@@ -21,7 +21,13 @@ export const DeleteQuotationButton = ({
 
   useUpdateEffect(() => {
     if (deleteQuotationMutation.isError === true) {
-      toast.error(deleteQuotationMutation.error.response?.data.message)
+      if (
+        deleteQuotationMutation.error.response?.data.errorCode ===
+        'INTERNAL_ERROR'
+      ) {
+        toast.error('Failed to delete')
+      }
+
       deleteFromQuotationListCache({ id })
     }
   }, [deleteQuotationMutation.isError])
