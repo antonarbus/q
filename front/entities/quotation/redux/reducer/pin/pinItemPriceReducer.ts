@@ -24,8 +24,8 @@ export const pinItemPriceReducer = (
   itemPriceCell.pin.isPinned = true
 
   const qtyCell = getCellFromState({
-    blockIndex,
-    rowIndex,
+    blockIndex: action.payload.blockIndex,
+    rowIndex: action.payload.rowIndex,
     cellKey: cellKey.qty,
     state,
   })
