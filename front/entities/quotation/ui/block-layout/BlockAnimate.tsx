@@ -26,24 +26,11 @@ type Props = {
   className?: string
 }
 
-export const BlockAnimate = ({
-  children,
-  blockHeight,
-  id,
-  leftItemActionButtons,
-  rightItemActionButtons,
-  disableResize,
-  autoWidth,
-  minWidth,
-  onItemResizeStart,
-  onItemResize,
-  onItemResizeStop,
-  className,
-}: Props): JSX.Element => {
+export const BlockAnimate = (props: Props): JSX.Element => {
   return (
     <motion.div
       animate={{
-        height: blockHeight, // height is being stored on copy/cut icon click
+        height: props.blockHeight, // height is being stored on copy/cut icon click
         marginBottom: 20,
         opacity: 1,
         y: 0,
@@ -52,7 +39,7 @@ export const BlockAnimate = ({
           overflow: 'visible',
         },
       }}
-      className={cls.block + (className === undefined ? '' : ` ${className}`)}
+      className={cls.block + (props.className === undefined ? '' : ` ${props.className}`)}
       exit={{
         height: 0,
         marginBottom: 0,
@@ -60,7 +47,7 @@ export const BlockAnimate = ({
         x: '110vw',
         overflow: 'hidden',
       }}
-      id={id}
+      id={props.id}
       initial={{
         height: 0,
         marginBottom: 0,
@@ -79,21 +66,21 @@ export const BlockAnimate = ({
         duration: theme.block.animationDuration,
       }}
     >
-      {Boolean(leftItemActionButtons) && (
-        <Box style={{ paddingTop: '5px' }}>{leftItemActionButtons}</Box>
+      {Boolean(props.leftItemActionButtons) && (
+        <Box style={{ paddingTop: '5px' }}>{props.leftItemActionButtons}</Box>
       )}
       <ResizableBlockPaper
-        autoWidth={autoWidth}
-        disableResize={disableResize}
-        minWidth={minWidth}
-        onItemResize={onItemResize}
-        onItemResizeStart={onItemResizeStart}
-        onItemResizeStop={onItemResizeStop}
+        autoWidth={props.autoWidth}
+        disableResize={props.disableResize}
+        minWidth={props.minWidth}
+        onItemResize={props.onItemResize}
+        onItemResizeStart={props.onItemResizeStart}
+        onItemResizeStop={props.onItemResizeStop}
       >
-        {children}
+        {props.children}
       </ResizableBlockPaper>
-      {Boolean(rightItemActionButtons) && (
-        <Box style={{ paddingTop: '5px' }}>{rightItemActionButtons}</Box>
+      {Boolean(props.rightItemActionButtons) && (
+        <Box style={{ paddingTop: '5px' }}>{props.rightItemActionButtons}</Box>
       )}
     </motion.div>
   )

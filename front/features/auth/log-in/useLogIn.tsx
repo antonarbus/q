@@ -30,11 +30,7 @@ type Res = {
   isError: UseMutationResult['isError']
 }
 
-export const useLogIn = ({
-  emailSignal,
-  passwordSignal,
-  slideOut,
-}: Props): Res => {
+export const useLogIn = (props: Props): Res => {
   const navigate = useNavigate()
 
   const logInUserMutation = useLogInUserMutation()
@@ -100,7 +96,7 @@ export const useLogIn = ({
 
       const slideOutAndChangeUrl = async (): Promise<void> => {
         await asyncDelay(1000)
-        await slideOut()
+        await props.slideOut()
 
         const navigateTo = getState().app.navigateState.to
 
@@ -152,8 +148,8 @@ export const useLogIn = ({
     event.preventDefault()
 
     logInUserMutation.mutate({
-      email: emailSignal.value,
-      password: passwordSignal.value,
+      email: props.emailSignal.value,
+      password: props.passwordSignal.value,
     })
   }
 

@@ -19,10 +19,7 @@ type Res = {
   isError: UseMutationResult['isError']
 }
 
-export const useRequestPasswordReset = ({
-  emailSignal,
-  slideOut,
-}: Props): Res => {
+export const useRequestPasswordReset = (props: Props): Res => {
   const navigate = useNavigate()
 
   const requestUserPasswordResetMutation = useRequestUserPasswordResetMutation()
@@ -33,7 +30,7 @@ export const useRequestPasswordReset = ({
 
       const slideOutAndChangeUrl = async (): Promise<void> => {
         await asyncDelay(1000)
-        await slideOut()
+        await props.slideOut()
         void navigate('..')
       }
 
@@ -86,7 +83,7 @@ export const useRequestPasswordReset = ({
   const handleSubmit = (event: FormEvent): void => {
     event.preventDefault()
 
-    requestUserPasswordResetMutation.mutate({ email: emailSignal.value })
+    requestUserPasswordResetMutation.mutate({ email: props.emailSignal.value })
   }
 
   return {

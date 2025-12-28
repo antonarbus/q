@@ -7,21 +7,17 @@ type Props = {
   editorRef: FroalaEditorRef
 }
 
-export const placeCaretAtTheEndIfToolbarIsNotShown = ({
-  event,
-  froalaElementRef,
-  editorRef,
-}: Props): void => {
-  if (froalaElementRef.current === null) {
+export const placeCaretAtTheEndIfToolbarIsNotShown = (props: Props): void => {
+  if (props.froalaElementRef.current === null) {
     return
   }
 
-  if (editorRef.current === null) {
+  if (props.editorRef.current === null) {
     return
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-  const toolbarElement = editorRef.current.$tb['0']
+  const toolbarElement = props.editorRef.current.$tb['0']
 
   if (toolbarElement instanceof HTMLElement === false) {
     return
@@ -33,7 +29,7 @@ export const placeCaretAtTheEndIfToolbarIsNotShown = ({
     return
   }
 
-  const clickedElement = event.target
+  const clickedElement = props.event.target
 
   if (clickedElement instanceof HTMLElement === false) {
     return
@@ -46,19 +42,19 @@ export const placeCaretAtTheEndIfToolbarIsNotShown = ({
 
   if (insideFroala === true) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
-    const contentEditableElement = editorRef.current.$el.get(0)
+    const contentEditableElement = props.editorRef.current.$el.get(0)
 
     if (contentEditableElement instanceof HTMLElement === false) {
       return
     }
 
-    editorRef.current.selection.setAtEnd(contentEditableElement)
+    props.editorRef.current.selection.setAtEnd(contentEditableElement)
 
     // @ts-expect-error Froala does not provide types for this
-    const isCaret = editorRef.current.selection.get().type === 'Caret'
+    const isCaret = props.editorRef.current.selection.get().type === 'Caret'
 
     if (isCaret === true) {
-      editorRef.current.selection.restore()
+      props.editorRef.current.selection.restore()
     }
   }
 }

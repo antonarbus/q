@@ -7,14 +7,11 @@ type Props = {
   rowIndex: number
 }
 
-export const tabFromDescriptionCell = ({
-  event,
-  itemPriceCellEditorRef,
-}: Props): void => {
-  const isTabKey = event.key === 'Tab'
+export const tabFromDescriptionCell = (props: Props): void => {
+  const isTabKey = props.event.key === 'Tab'
 
   if (isTabKey === true) {
-    event.preventDefault()
-    itemPriceCellEditorRef.current?.commands.selectAll()
+    props.event.preventDefault()
+    props.itemPriceCellEditorRef.current?.commands.selectAll()
   }
 }

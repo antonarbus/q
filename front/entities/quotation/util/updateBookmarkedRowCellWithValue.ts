@@ -15,12 +15,8 @@ type Props = {
   value: number
 }
 
-export const updateBookmarkedRowCellWithValue = ({
-  editor,
-  cellKey,
-  value,
-}: Props): void => {
-  if (editor === null) {
+export const updateBookmarkedRowCellWithValue = (props: Props): void => {
+  if (props.editor === null) {
     return
   }
 
@@ -33,7 +29,7 @@ export const updateBookmarkedRowCellWithValue = ({
   const row = block
 
   const priceTextContent = getTextContentFromHtml({
-    html: row[cellKey].html,
+    html: row[props.cellKey].html,
   })
 
   const priceValueFromHtml = getNumberFromString({
@@ -41,19 +37,19 @@ export const updateBookmarkedRowCellWithValue = ({
   })
 
   const updatedHtml = getStringWithNewFormattedNumber({
-    string: row[cellKey].html,
-    newNumber: value,
+    string: row[props.cellKey].html,
+    newNumber: props.value,
   })
 
   updateBookmarkedRowCellAtStore({
-    cellKey,
+    cellKey: props.cellKey,
     html: updatedHtml,
   })
 
   updateNumberAtHtmlIncrementally({
     oldNumber: priceValueFromHtml,
-    newNumber: value,
-    editor,
-    html: row[cellKey].html,
+    newNumber: props.value,
+    editor: props.editor,
+    html: row[props.cellKey].html,
   })
 }

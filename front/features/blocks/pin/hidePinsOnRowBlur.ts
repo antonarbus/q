@@ -11,19 +11,15 @@ type Props = {
   rowIndex: number
 }
 
-export const hidePinsOnRowBlur = ({
-  event,
-  blockIndex,
-  rowIndex,
-}: Props): void => {
-  const elementReceivedFocus = event.relatedTarget
+export const hidePinsOnRowBlur = (props: Props): void => {
+  const elementReceivedFocus = props.event.relatedTarget
   const pinClicked = elementReceivedFocus?.classList.contains(cls.pin)
 
   if (pinClicked === true) {
     return
   }
 
-  const row = getRowFromStore({ blockIndex, rowIndex })
+  const row = getRowFromStore({ blockIndex: props.blockIndex, rowIndex: props.rowIndex })
 
   if (row === undefined) {
     return
@@ -34,8 +30,8 @@ export const hidePinsOnRowBlur = ({
   if (isItemPricePinShown === true) {
     dispatch(
       quotationSlice.actions.hideCellPinReducer({
-        blockIndex,
-        rowIndex,
+        blockIndex: props.blockIndex,
+        rowIndex: props.rowIndex,
         cellKey: cellKey.itemPrice,
       }),
     )
@@ -46,8 +42,8 @@ export const hidePinsOnRowBlur = ({
   if (isQtyPinShown === true) {
     dispatch(
       quotationSlice.actions.hideCellPinReducer({
-        blockIndex,
-        rowIndex,
+        blockIndex: props.blockIndex,
+        rowIndex: props.rowIndex,
         cellKey: cellKey.qty,
       }),
     )

@@ -10,23 +10,19 @@ type Props = {
   boqColumnKey: BoqColumnKey
 }
 
-export const updateColumnCellAtStore = ({
-  editorRef,
-  blockIndex,
-  boqColumnKey,
-}: Props): void => {
-  if (editorRef.current === null) {
+export const updateColumnCellAtStore = (props: Props): void => {
+  if (props.editorRef.current === null) {
     return
   }
 
-  const boqBlock = getBoqBlockFromStore({ blockIndex })
+  const boqBlock = getBoqBlockFromStore({ blockIndex: props.blockIndex })
 
   if (boqBlock === undefined) {
     return
   }
 
-  const prevHtml = boqBlock.boq.column[boqColumnKey].html
-  const html = editorRef.current.html.get()
+  const prevHtml = boqBlock.boq.column[props.boqColumnKey].html
+  const html = props.editorRef.current.html.get()
   const didTextChange = prevHtml !== html
 
   if (didTextChange === false) {
@@ -35,9 +31,9 @@ export const updateColumnCellAtStore = ({
 
   dispatch(
     quotationSlice.actions.updateBoqColumnNameTextReducer({
-      blockIndex,
+      blockIndex: props.blockIndex,
       html,
-      boqColumnKey,
+      boqColumnKey: props.boqColumnKey,
     }),
   )
 }

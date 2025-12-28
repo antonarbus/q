@@ -17,19 +17,14 @@ type Res = {
   didChange: boolean
 }
 
-export const updateSubTotalPriceWithValue = ({
-  blockIndex,
-  subTotalPriceEditor,
-  value,
-  incrementally,
-}: Props): Res => {
-  if (subTotalPriceEditor === null) {
+export const updateSubTotalPriceWithValue = (props: Props): Res => {
+  if (props.subTotalPriceEditor === null) {
     return {
       didChange: false,
     }
   }
 
-  const boqBlock = getBoqBlockFromStore({ blockIndex })
+  const boqBlock = getBoqBlockFromStore({ blockIndex: props.blockIndex })
 
   if (boqBlock === undefined) {
     return {
@@ -39,7 +34,7 @@ export const updateSubTotalPriceWithValue = ({
 
   const subTotalPriceValueCurrent = boqBlock.boq.header.subTotalPrice.value
 
-  const didValueChange = value !== subTotalPriceValueCurrent
+  const didValueChange = props.value !== subTotalPriceValueCurrent
 
   if (didValueChange === false) {
     return {
@@ -49,28 +44,28 @@ export const updateSubTotalPriceWithValue = ({
 
   const updatedHtml = getStringWithNewFormattedNumber({
     string: boqBlock.boq.header.subTotalPrice.html,
-    newNumber: value,
+    newNumber: props.value,
   })
 
   dispatch(
     quotationSlice.actions.updateSubTotalPriceReducer({
-      blockIndex,
+      blockIndex: props.blockIndex,
       html: updatedHtml,
-      value,
+      value: props.value,
     }),
   )
 
-  if (incrementally === true) {
+  if (props.incrementally === true) {
     updateNumberAtHtmlIncrementally({
       oldNumber: subTotalPriceValueCurrent,
-      newNumber: value,
-      editor: subTotalPriceEditor,
+      newNumber: props.value,
+      editor: props.subTotalPriceEditor,
       html: boqBlock.boq.header.subTotalPrice.html,
     })
   } else {
     updateNumberAtHtml({
-      newNumber: value,
-      editor: subTotalPriceEditor,
+      newNumber: props.value,
+      editor: props.subTotalPriceEditor,
       html: boqBlock.boq.header.subTotalPrice.html,
     })
   }

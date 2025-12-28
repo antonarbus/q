@@ -6,12 +6,7 @@ import type {
 } from '@shared/lib/re-resizable/resizablePaper'
 import { dispatch, getState } from '@shared/lib/redux'
 
-export const onTextBlockResizeStart: OnBlockResizeStart = ({
-  blockIndex,
-  event,
-  dir,
-  elementRef,
-}) => {
+export const onTextBlockResizeStart: OnBlockResizeStart = (props) => {
   // nothing yet
 }
 
@@ -25,22 +20,16 @@ export const onTextBlockResizeStart: OnBlockResizeStart = ({
 //   // nothing yet
 // }
 
-export const onTextBlockResizeStop: OnBlockResizeStop = ({
-  blockIndex,
-  event,
-  direction,
-  elementRef,
-  delta,
-}) => {
-  const width = parseInt(elementRef.style.width)
-  const prevItemWidth = getState().quotation.blocks[blockIndex]?.width
-  dispatch(quotationSlice.actions.enableFroalaReducer({ blockIndex }))
+export const onTextBlockResizeStop: OnBlockResizeStop = (props) => {
+  const width = parseInt(props.elementRef.style.width)
+  const prevItemWidth = getState().quotation.blocks[props.blockIndex]?.width
+  dispatch(quotationSlice.actions.enableFroalaReducer({ blockIndex: props.blockIndex }))
 
   if (width === prevItemWidth) {
     return
   }
 
   dispatch(
-    quotationSlice.actions.updateBlockWidthReducer({ blockIndex, width }),
+    quotationSlice.actions.updateBlockWidthReducer({ blockIndex: props.blockIndex, width }),
   )
 }

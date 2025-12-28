@@ -16,13 +16,8 @@ type Res = {
   didUpdate: boolean
 }
 
-export const updateCellAtStore = ({
-  html,
-  blockIndex,
-  rowIndex,
-  cellKey,
-}: Props): Res => {
-  const row = getRowFromStore({ blockIndex, rowIndex })
+export const updateCellAtStore = (props: Props): Res => {
+  const row = getRowFromStore({ blockIndex: props.blockIndex, rowIndex: props.rowIndex })
 
   if (row === undefined) {
     return {
@@ -30,8 +25,8 @@ export const updateCellAtStore = ({
     }
   }
 
-  const prevHtml = row[cellKey].html
-  const didTextChange = prevHtml !== html
+  const prevHtml = row[props.cellKey].html
+  const didTextChange = prevHtml !== props.html
 
   if (didTextChange === false) {
     return {
@@ -39,7 +34,7 @@ export const updateCellAtStore = ({
     }
   }
 
-  const cellTextContent = getTextContentFromHtml({ html })
+  const cellTextContent = getTextContentFromHtml({ html: props.html })
 
   const cellValueFromHtml = getNumberFromString({
     string: cellTextContent,
@@ -47,11 +42,11 @@ export const updateCellAtStore = ({
 
   dispatch(
     quotationSlice.actions.updateCellReducer({
-      blockIndex,
-      rowIndex,
-      html,
+      blockIndex: props.blockIndex,
+      rowIndex: props.rowIndex,
+      html: props.html,
       value: cellValueFromHtml,
-      cellKey,
+      cellKey: props.cellKey,
     }),
   )
 

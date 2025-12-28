@@ -17,12 +17,8 @@ type Res = {
   didUpdate: boolean
 }
 
-export const formatBookmarkedRowCellNumber = ({
-  cellKey,
-  editorRef,
-  roundToTwoDecimals,
-}: Props): Res => {
-  if (editorRef.current === null) {
+export const formatBookmarkedRowCellNumber = (props: Props): Res => {
+  if (props.editorRef.current === null) {
     return {
       didUpdate: false,
     }
@@ -38,13 +34,13 @@ export const formatBookmarkedRowCellNumber = ({
 
   const row = block
 
-  const cell = row[cellKey]
+  const cell = row[props.cellKey]
 
   const roundedValue = roundTo(cell.value, 2)
 
   const newHtml = getStringWithNewFormattedNumber({
     string: cell.html,
-    newNumber: roundToTwoDecimals === true ? roundedValue : cell.value,
+    newNumber: props.roundToTwoDecimals === true ? roundedValue : cell.value,
   })
 
   if (cell.html === newHtml) {
@@ -56,12 +52,12 @@ export const formatBookmarkedRowCellNumber = ({
   dispatch(
     quotationSlice.actions.updateBookmarkedRowCellReducer({
       html: newHtml,
-      value: roundToTwoDecimals === true ? roundedValue : cell.value,
-      cellKey,
+      value: props.roundToTwoDecimals === true ? roundedValue : cell.value,
+      cellKey: props.cellKey,
     }),
   )
 
-  editorRef.current.html.set(newHtml)
+  props.editorRef.current.html.set(newHtml)
 
   return {
     didUpdate: true,

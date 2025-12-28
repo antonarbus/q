@@ -16,23 +16,19 @@ type Res = {
   didUpdate: boolean
 }
 
-export const updateBoqHeaderAtStore = ({
-  editorRef,
-  blockIndex,
-  boqHeaderKey,
-}: Props): Res => {
-  if (editorRef.current === null) {
+export const updateBoqHeaderAtStore = (props: Props): Res => {
+  if (props.editorRef.current === null) {
     return { didUpdate: false }
   }
 
-  const boqBlock = getBoqBlockFromStore({ blockIndex })
+  const boqBlock = getBoqBlockFromStore({ blockIndex: props.blockIndex })
 
   if (boqBlock === undefined) {
     return { didUpdate: false }
   }
 
-  const prevHtml = boqBlock.boq.header[boqHeaderKey].html
-  const html = editorRef.current.html.get()
+  const prevHtml = boqBlock.boq.header[props.boqHeaderKey].html
+  const html = props.editorRef.current.html.get()
   const didTextChange = prevHtml !== html
 
   if (didTextChange === false) {
@@ -47,10 +43,10 @@ export const updateBoqHeaderAtStore = ({
 
   dispatch(
     quotationSlice.actions.updateBoqHeaderTextReducer({
-      blockIndex,
+      blockIndex: props.blockIndex,
       html,
       value: cellValueFromHtml,
-      boqHeaderKey,
+      boqHeaderKey: props.boqHeaderKey,
     }),
   )
 

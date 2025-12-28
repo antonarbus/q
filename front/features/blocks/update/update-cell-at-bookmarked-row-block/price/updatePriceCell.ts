@@ -12,17 +12,14 @@ type Props = {
   priceCellEditorRef: FroalaEditorRef
 }
 
-export const updatePriceCell = ({
-  itemPriceCellEditorRef,
-  priceCellEditorRef,
-}: Props): void => {
-  if (priceCellEditorRef.current === null) {
+export const updatePriceCell = (props: Props): void => {
+  if (props.priceCellEditorRef.current === null) {
     return
   }
 
   updateBookmarkedRowCellAtStore({
     cellKey: cellKey.price,
-    html: priceCellEditorRef.current.html.get(),
+    html: props.priceCellEditorRef.current.html.get(),
   })
 
   const block = getState().quotation.blocks[BOOKMARK_POS_AT_BLOCKS]
@@ -41,7 +38,7 @@ export const updatePriceCell = ({
   const newItemPriceValueRounded = roundTo(newItemPriceValue, 2)
 
   updateBookmarkedRowCellWithValue({
-    editor: itemPriceCellEditorRef.current,
+    editor: props.itemPriceCellEditorRef.current,
     cellKey: cellKey.itemPrice,
     value: newItemPriceValueRounded,
   })

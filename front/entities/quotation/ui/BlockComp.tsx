@@ -24,18 +24,7 @@ type Props = {
   className?: string
 }
 
-export const BlockComp = ({
-  children,
-  disableResize,
-  onBlockResizeStart,
-  onBlockResize,
-  onBlockResizeStop,
-  autoWidth,
-  minWidth,
-  leftBlockActionButtons,
-  rightBlockActionButtons,
-  className,
-}: Props): JSX.Element => {
+export const BlockComp = (props: Props): JSX.Element => {
   const block = useBlock()
 
   const sortable = useSortable({
@@ -52,19 +41,19 @@ export const BlockComp = ({
       }}
     >
       <BlockAnimate
-        autoWidth={autoWidth}
+        autoWidth={props.autoWidth}
         blockHeight={block.item.height}
-        className={className}
-        disableResize={disableResize}
+        className={props.className}
+        disableResize={props.disableResize}
         id={block.item.id}
-        leftItemActionButtons={leftBlockActionButtons}
-        minWidth={minWidth}
-        onItemResize={onBlockResize}
-        onItemResizeStart={onBlockResizeStart}
-        onItemResizeStop={onBlockResizeStop}
-        rightItemActionButtons={rightBlockActionButtons}
+        leftItemActionButtons={props.leftBlockActionButtons}
+        minWidth={props.minWidth}
+        onItemResize={props.onBlockResize}
+        onItemResizeStart={props.onBlockResizeStart}
+        onItemResizeStop={props.onBlockResizeStop}
+        rightItemActionButtons={props.rightBlockActionButtons}
       >
-        <PasteBlockTextOverlay>{children}</PasteBlockTextOverlay>
+        <PasteBlockTextOverlay>{props.children}</PasteBlockTextOverlay>
       </BlockAnimate>
     </div>
   )

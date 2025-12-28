@@ -9,12 +9,8 @@ type Props = {
   html: string
 }
 
-export const isRowPriceValid = ({
-  blockIndex,
-  rowIndex,
-  html,
-}: Props): boolean => {
-  const row = getRowFromStore({ blockIndex, rowIndex })
+export const isRowPriceValid = (props: Props): boolean => {
+  const row = getRowFromStore({ blockIndex: props.blockIndex, rowIndex: props.rowIndex })
 
   if (row === undefined) {
     return true
@@ -29,7 +25,7 @@ export const isRowPriceValid = ({
     return false
   }
 
-  const cellTextContent = getTextContentFromHtml({ html })
+  const cellTextContent = getTextContentFromHtml({ html: props.html })
 
   const cellValueFromHtml = getNumberFromString({
     string: cellTextContent,

@@ -10,17 +10,12 @@ type Props = {
   isInitClickRef: RefObject<boolean>
 }
 
-export const showHidePricePins = ({
-  event,
-  blockIndex,
-  hidePinsClickHandlerRef,
-  isInitClickRef,
-}: Props): void => {
-  dispatch(quotationSlice.actions.showBoqPriceCellPinsReducer({ blockIndex }))
+export const showHidePricePins = (props: Props): void => {
+  dispatch(quotationSlice.actions.showBoqPriceCellPinsReducer({ blockIndex: props.blockIndex }))
 
   const clickHandler = (mouseEvent: MouseEvent): void => {
-    if (isInitClickRef.current) {
-      isInitClickRef.current = false
+    if (props.isInitClickRef.current) {
+      props.isInitClickRef.current = false
 
       return
     }
@@ -34,16 +29,16 @@ export const showHidePricePins = ({
         return
       }
 
-      document.removeEventListener('click', hidePinsClickHandlerRef.current)
+      document.removeEventListener('click', props.hidePinsClickHandlerRef.current)
     }
 
-    dispatch(quotationSlice.actions.hideBoqPriceCellPinsReducer({ blockIndex }))
-    document.removeEventListener('click', hidePinsClickHandlerRef.current)
-    isInitClickRef.current = true
+    dispatch(quotationSlice.actions.hideBoqPriceCellPinsReducer({ blockIndex: props.blockIndex }))
+    document.removeEventListener('click', props.hidePinsClickHandlerRef.current)
+    props.isInitClickRef.current = true
   }
 
-  document.removeEventListener('click', hidePinsClickHandlerRef.current)
-  isInitClickRef.current = true
-  hidePinsClickHandlerRef.current = clickHandler
-  document.addEventListener('click', hidePinsClickHandlerRef.current)
+  document.removeEventListener('click', props.hidePinsClickHandlerRef.current)
+  props.isInitClickRef.current = true
+  props.hidePinsClickHandlerRef.current = clickHandler
+  document.addEventListener('click', props.hidePinsClickHandlerRef.current)
 }

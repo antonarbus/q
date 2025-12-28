@@ -26,11 +26,7 @@ type Res = {
   isError: UseMutationResult['isError']
 }
 
-export const useRegister = ({
-  emailSignal,
-  passwordSignal,
-  slideOut,
-}: Props): Res => {
+export const useRegister = (props: Props): Res => {
   const navigate = useNavigate()
 
   const registerUserMutation = useRegisterUserMutation()
@@ -60,7 +56,7 @@ export const useRegister = ({
 
       const slideOutAndChangeUrl = async (): Promise<void> => {
         await asyncDelay(1000)
-        await slideOut()
+        await props.slideOut()
 
         const navigateTo = getState().app.navigateState.to
 
@@ -114,8 +110,8 @@ export const useRegister = ({
     event.preventDefault()
 
     registerUserMutation.mutate({
-      email: emailSignal.value,
-      password: passwordSignal.value,
+      email: props.emailSignal.value,
+      password: props.passwordSignal.value,
     })
 
     trackSignUpEventAtGoogleTagManager()

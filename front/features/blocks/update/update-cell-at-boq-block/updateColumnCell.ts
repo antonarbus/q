@@ -8,10 +8,6 @@ type Props = {
   boqColumnKey: BoqColumnKey
 }
 
-export const updateColumnCell = ({
-  editorRef,
-  blockIndex,
-  boqColumnKey,
-}: Props): void => {
-  updateColumnCellAtStore({ editorRef, blockIndex, boqColumnKey })
+export const updateColumnCell = (props: Props): void => {
+  updateColumnCellAtStore({ editorRef: props.editorRef, blockIndex: props.blockIndex, boqColumnKey: props.boqColumnKey })
 }

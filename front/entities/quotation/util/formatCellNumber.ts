@@ -18,20 +18,14 @@ type Res = {
   didUpdate: boolean
 }
 
-export const formatCellNumber = ({
-  blockIndex,
-  rowIndex,
-  cellKey,
-  editorRef,
-  roundToTwoDecimals,
-}: Props): Res => {
-  if (editorRef.current === null) {
+export const formatCellNumber = (props: Props): Res => {
+  if (props.editorRef.current === null) {
     return {
       didUpdate: false,
     }
   }
 
-  const row = getRowFromStore({ blockIndex, rowIndex })
+  const row = getRowFromStore({ blockIndex: props.blockIndex, rowIndex: props.rowIndex })
 
   if (row === undefined) {
     return {
@@ -39,13 +33,13 @@ export const formatCellNumber = ({
     }
   }
 
-  const cell = row[cellKey]
+  const cell = row[props.cellKey]
 
   const roundedValue = roundTo(cell.value, 2)
 
   const newHtml = getStringWithNewFormattedNumber({
     string: cell.html,
-    newNumber: roundToTwoDecimals === true ? roundedValue : cell.value,
+    newNumber: props.roundToTwoDecimals === true ? roundedValue : cell.value,
   })
 
   if (cell.html === newHtml) {
@@ -56,15 +50,15 @@ export const formatCellNumber = ({
 
   dispatch(
     quotationSlice.actions.updateCellReducer({
-      blockIndex,
-      rowIndex,
+      blockIndex: props.blockIndex,
+      rowIndex: props.rowIndex,
       html: newHtml,
-      value: roundToTwoDecimals === true ? roundedValue : cell.value,
-      cellKey,
+      value: props.roundToTwoDecimals === true ? roundedValue : cell.value,
+      cellKey: props.cellKey,
     }),
   )
 
-  editorRef.current.html.set(newHtml)
+  props.editorRef.current.html.set(newHtml)
 
   return {
     didUpdate: true,

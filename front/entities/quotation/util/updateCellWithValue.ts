@@ -15,25 +15,19 @@ type Props = {
   value: number
 }
 
-export const updateCellWithValue = ({
-  blockIndex,
-  rowIndex,
-  editor,
-  cellKey,
-  value,
-}: Props): void => {
-  if (editor === null) {
+export const updateCellWithValue = (props: Props): void => {
+  if (props.editor === null) {
     return
   }
 
-  const row = getRowFromStore({ blockIndex, rowIndex })
+  const row = getRowFromStore({ blockIndex: props.blockIndex, rowIndex: props.rowIndex })
 
   if (row === undefined) {
     return
   }
 
   const priceTextContent = getTextContentFromHtml({
-    html: row[cellKey].html,
+    html: row[props.cellKey].html,
   })
 
   const priceValueFromHtml = getNumberFromString({
@@ -41,21 +35,21 @@ export const updateCellWithValue = ({
   })
 
   const updatedHtml = getStringWithNewFormattedNumber({
-    string: row[cellKey].html,
-    newNumber: value,
+    string: row[props.cellKey].html,
+    newNumber: props.value,
   })
 
   updateCellAtStore({
-    blockIndex,
-    rowIndex,
-    cellKey,
+    blockIndex: props.blockIndex,
+    rowIndex: props.rowIndex,
+    cellKey: props.cellKey,
     html: updatedHtml,
   })
 
   updateNumberAtHtmlIncrementally({
     oldNumber: priceValueFromHtml,
-    newNumber: value,
-    editor,
-    html: row[cellKey].html,
+    newNumber: props.value,
+    editor: props.editor,
+    html: row[props.cellKey].html,
   })
 }

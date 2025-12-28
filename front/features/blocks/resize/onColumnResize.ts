@@ -10,33 +10,25 @@ type Props = {
   boqColumnKey: BoqColumnKey
 }
 
-export const onColumnResizeStart = ({
-  headerColumnElement,
-  blockIndex,
-  boqColumnKey,
-}: Props): void => {
-  const width = headerColumnElement.clientWidth
+export const onColumnResizeStart = (props: Props): void => {
+  const width = props.headerColumnElement.clientWidth
 
-  dispatch(quotationSlice.actions.disableFroalaReducer({ blockIndex }))
+  dispatch(quotationSlice.actions.disableFroalaReducer({ blockIndex: props.blockIndex }))
 
   dispatch(
     quotationSlice.actions.updateColWidthReducer({
-      blockIndex,
+      blockIndex: props.blockIndex,
       width,
-      boqColumnKey,
+      boqColumnKey: props.boqColumnKey,
     }),
   )
 
-  dispatch(quotationSlice.actions.hideBoqItemPinsReducer({ blockIndex }))
+  dispatch(quotationSlice.actions.hideBoqItemPinsReducer({ blockIndex: props.blockIndex }))
 }
 
-export const onColumnResize = ({
-  headerColumnElement,
-  blockIndex,
-  boqColumnKey,
-}: Props): void => {
-  const width = headerColumnElement.clientWidth
-  const column = getBoqColumnFromStore({ blockIndex, boqColumnKey })
+export const onColumnResize = (props: Props): void => {
+  const width = props.headerColumnElement.clientWidth
+  const column = getBoqColumnFromStore({ blockIndex: props.blockIndex, boqColumnKey: props.boqColumnKey })
 
   if (column === undefined) {
     return
@@ -50,36 +42,32 @@ export const onColumnResize = ({
 
   dispatch(
     quotationSlice.actions.updateColWidthReducer({
-      blockIndex,
+      blockIndex: props.blockIndex,
       width,
-      boqColumnKey,
+      boqColumnKey: props.boqColumnKey,
     }),
   )
 }
 
-export const onColumnResizeStop = ({
-  headerColumnElement,
-  blockIndex,
-  boqColumnKey,
-}: Props): void => {
-  const columnWidth = headerColumnElement.clientWidth
+export const onColumnResizeStop = (props: Props): void => {
+  const columnWidth = props.headerColumnElement.clientWidth
 
   dispatch(
     quotationSlice.actions.updateColWidthReducer({
-      blockIndex,
+      blockIndex: props.blockIndex,
       width: columnWidth,
-      boqColumnKey,
+      boqColumnKey: props.boqColumnKey,
     }),
   )
 
-  const itemWidth = headerColumnElement.closest(`.${cls.paper}`)?.clientWidth
+  const itemWidth = props.headerColumnElement.closest(`.${cls.paper}`)?.clientWidth
 
   dispatch(
     quotationSlice.actions.updateBlockWidthReducer({
-      blockIndex,
+      blockIndex: props.blockIndex,
       width: itemWidth ?? 0,
     }),
   )
 
-  dispatch(quotationSlice.actions.enableFroalaReducer({ blockIndex }))
+  dispatch(quotationSlice.actions.enableFroalaReducer({ blockIndex: props.blockIndex }))
 }
