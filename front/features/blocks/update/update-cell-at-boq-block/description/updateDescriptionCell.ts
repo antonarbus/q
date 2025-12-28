@@ -10,21 +10,16 @@ type Props = {
   cellKey: CellKey
 }
 
-export const updateDescriptionCell = ({
-  editorRef,
-  blockIndex,
-  rowIndex,
-  cellKey,
-}: Props): void => {
-  if (editorRef.current === null) {
+export const updateDescriptionCell = (props: Props): void => {
+  if (props.editorRef.current === null) {
     return
   }
 
   const didContentChange = didCellContentChange({
-    editor: editorRef.current,
-    blockIndex,
-    rowIndex,
-    cellKey,
+    editor: props.editorRef.current,
+    blockIndex: props.blockIndex,
+    rowIndex: props.rowIndex,
+    cellKey: props.cellKey,
   })
 
   if (didContentChange === false) {
@@ -32,9 +27,9 @@ export const updateDescriptionCell = ({
   }
 
   updateCellAtStore({
-    blockIndex,
-    rowIndex,
-    cellKey,
-    html: editorRef.current.html.get(),
+    blockIndex: props.blockIndex,
+    rowIndex: props.rowIndex,
+    cellKey: props.cellKey,
+    html: props.editorRef.current.html.get(),
   })
 }

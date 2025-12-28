@@ -9,9 +9,9 @@ type Props = {
   saveQuotationFormValues: SaveQuotationFormValues
 }
 
-export const useLoadSaveQuotationModalWithDirectLink = ({
-  saveQuotationFormValues,
-}: Props): void => {
+export const useLoadSaveQuotationModalWithDirectLink = (
+  props: Props,
+): void => {
   const urlParams = useParams()
   const getQuotationMutation = useGetQuotationMutation()
 
@@ -39,16 +39,16 @@ export const useLoadSaveQuotationModalWithDirectLink = ({
       }),
     )
 
-    saveQuotationFormValues.nameSignal.value =
+    props.saveQuotationFormValues.nameSignal.value =
       getQuotationMutation.data.quotation.name
 
-    saveQuotationFormValues.categorySignal.value =
+    props.saveQuotationFormValues.categorySignal.value =
       getQuotationMutation.data.quotation.category
 
-    saveQuotationFormValues.descSignal.value =
+    props.saveQuotationFormValues.descSignal.value =
       getQuotationMutation.data.quotation.desc
 
-    saveQuotationFormValues.infoSignal.value =
+    props.saveQuotationFormValues.infoSignal.value =
       getQuotationMutation.data.quotation.info
   }, [getQuotationMutation.isSuccess])
 }

@@ -6,15 +6,15 @@ type Props = {
   saveQuotationFormValues: SaveQuotationFormValues
 }
 
-export const useLoadInitValuesIntoSaveQuotationModal = ({
-  saveQuotationFormValues,
-}: Props): void => {
+export const useLoadInitValuesIntoSaveQuotationModal = (
+  props: Props,
+): void => {
   useEffectOnce(() => {
     const state = getState()
 
-    saveQuotationFormValues.nameSignal.value = state.quotation.name
-    saveQuotationFormValues.categorySignal.value = state.quotation.category
-    saveQuotationFormValues.descSignal.value = state.quotation.desc
-    saveQuotationFormValues.infoSignal.value = state.quotation.info
+    props.saveQuotationFormValues.nameSignal.value = state.quotation.name
+    props.saveQuotationFormValues.categorySignal.value = state.quotation.category
+    props.saveQuotationFormValues.descSignal.value = state.quotation.desc
+    props.saveQuotationFormValues.infoSignal.value = state.quotation.info
   })
 }

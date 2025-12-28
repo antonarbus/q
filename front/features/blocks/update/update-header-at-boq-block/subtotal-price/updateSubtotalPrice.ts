@@ -17,18 +17,14 @@ type Props = {
   rowEditorRefs: RowEditorRefs
 }
 
-export const updateSubtotalPrice = ({
-  subTotalPriceEditorRef,
-  blockIndex,
-  rowEditorRefs,
-}: Props): void => {
-  if (subTotalPriceEditorRef.current === null) {
+export const updateSubtotalPrice = (props: Props): void => {
+  if (props.subTotalPriceEditorRef.current === null) {
     return
   }
 
   const didContentChange = didBoqHeaderContentChange({
-    editor: subTotalPriceEditorRef.current,
-    blockIndex,
+    editor: props.subTotalPriceEditorRef.current,
+    blockIndex: props.blockIndex,
     boqHeaderKey: 'subTotalPrice',
   })
 
@@ -36,15 +32,15 @@ export const updateSubtotalPrice = ({
     return
   }
 
-  const rows = getRowsFromStore({ blockIndex })
+  const rows = getRowsFromStore({ blockIndex: props.blockIndex })
 
   if (rows === undefined) {
     return
   }
 
   updateBoqHeaderAtStore({
-    editorRef: subTotalPriceEditorRef,
-    blockIndex,
+    editorRef: props.subTotalPriceEditorRef,
+    blockIndex: props.blockIndex,
     boqHeaderKey: 'subTotalPrice',
   })
 
@@ -61,7 +57,7 @@ export const updateSubtotalPrice = ({
   }, 0)
 
   const subTotalPriceFromStore = getBoqHeaderFromStore({
-    blockIndex,
+    blockIndex: props.blockIndex,
     boqHeaderKey: 'subTotalPrice',
   })
 
@@ -92,7 +88,7 @@ export const updateSubtotalPrice = ({
         row.price.pin.isPinned === true
           ? row.price.value
           : roundTo(newValue, 2),
-      editor: rowEditorRefs.at(index)?.price.current ?? null,
+      editor: props.rowEditorRefs.at(index)?.price.current ?? null,
     }
   })
 
@@ -102,8 +98,8 @@ export const updateSubtotalPrice = ({
     toast.info(`Can't be changed. All row prices are pinned.`)
 
     updateSubTotalPriceWithValue({
-      blockIndex,
-      subTotalPriceEditor: subTotalPriceEditorRef.current,
+      blockIndex: props.blockIndex,
+      subTotalPriceEditor: props.subTotalPriceEditorRef.current,
       value: prevSubTotalPriceValue,
       incrementally: true,
     })
@@ -115,8 +111,8 @@ export const updateSubtotalPrice = ({
     )
 
     updateSubTotalPriceWithValue({
-      blockIndex,
-      subTotalPriceEditor: subTotalPriceEditorRef.current,
+      blockIndex: props.blockIndex,
+      subTotalPriceEditor: props.subTotalPriceEditorRef.current,
       value: prevSubTotalPriceValue,
       incrementally: true,
     })
@@ -125,13 +121,13 @@ export const updateSubtotalPrice = ({
   prices.forEach((price, rowIndex) => {
     updateCellWithValue({
       cellKey: cellKey.price,
-      editor: rowEditorRefs.at(rowIndex)?.price.current ?? null,
-      blockIndex,
+      editor: props.rowEditorRefs.at(rowIndex)?.price.current ?? null,
+      blockIndex: props.blockIndex,
       rowIndex,
       value: price.newValue,
     })
 
-    const row = getRowFromStore({ blockIndex, rowIndex })
+    const row = getRowFromStore({ blockIndex: props.blockIndex, rowIndex })
 
     const isItemPricePinned = row?.itemPrice.pin.isPinned
 
@@ -144,8 +140,8 @@ export const updateSubtotalPrice = ({
       const newQtyValueRounded = roundTo(newQtyValue, 3)
 
       updateCellWithValue({
-        editor: rowEditorRefs.at(rowIndex)?.qty.current ?? null,
-        blockIndex,
+        editor: props.rowEditorRefs.at(rowIndex)?.qty.current ?? null,
+        blockIndex: props.blockIndex,
         rowIndex,
         cellKey: cellKey.qty,
         value: newQtyValueRounded,
@@ -163,8 +159,8 @@ export const updateSubtotalPrice = ({
       const newItemPriceValueRounded = roundTo(newItemPriceValue, 2)
 
       updateCellWithValue({
-        editor: rowEditorRefs.at(rowIndex)?.itemPrice.current ?? null,
-        blockIndex,
+        editor: props.rowEditorRefs.at(rowIndex)?.itemPrice.current ?? null,
+        blockIndex: props.blockIndex,
         rowIndex,
         cellKey: cellKey.itemPrice,
         value: newItemPriceValueRounded,
@@ -172,7 +168,7 @@ export const updateSubtotalPrice = ({
     }
   })
 
-  const rowsUpdated = getRowsFromStore({ blockIndex })
+  const rowsUpdated = getRowsFromStore({ blockIndex: props.blockIndex })
 
   if (rowsUpdated === undefined) {
     return
@@ -190,8 +186,8 @@ export const updateSubtotalPrice = ({
   const subTotalPriceValueNewRounded = roundTo(subTotalPriceValueNew, 2)
 
   updateSubTotalPriceWithValue({
-    blockIndex,
-    subTotalPriceEditor: subTotalPriceEditorRef.current,
+    blockIndex: props.blockIndex,
+    subTotalPriceEditor: props.subTotalPriceEditorRef.current,
     value: subTotalPriceValueNewRounded,
     incrementally: true,
   })

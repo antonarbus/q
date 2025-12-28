@@ -8,19 +8,19 @@ import { RotatingLoaderIcon } from './RotatingLoaderIcon'
 type Props = ButtonProps & {
   isButtonDisabled?: boolean
   isButtonLoading?: boolean
-  isButtonPending?: boolean
   isButtonSuccess?: boolean
   isButtonError?: boolean
 }
 
-export const ButtonCustom = ({
-  isButtonDisabled,
-  isButtonLoading,
-  isButtonPending,
-  isButtonSuccess,
-  isButtonError,
-  ...restProps
-}: Props): JSX.Element => {
+export const ButtonCustom = (props: Props): JSX.Element => {
+  const {
+    isButtonDisabled,
+    isButtonLoading,
+    isButtonSuccess,
+    isButtonError,
+    ...restProps
+  } = props
+
   const showSuccessIcon = useSignal(false)
   const showErrorIcon = useSignal(false)
 

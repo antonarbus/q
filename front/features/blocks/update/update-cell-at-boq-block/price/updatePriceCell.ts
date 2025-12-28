@@ -17,22 +17,15 @@ type Props = {
   rowIndex: number
 }
 
-export const updatePriceCell = ({
-  qtyCellEditorRef,
-  itemPriceCellEditorRef,
-  priceCellEditorRef,
-  subTotalPriceEditorRef,
-  blockIndex,
-  rowIndex,
-}: Props): void => {
-  if (priceCellEditorRef.current === null) {
+export const updatePriceCell = (props: Props): void => {
+  if (props.priceCellEditorRef.current === null) {
     return
   }
 
   const updateCellRes = updateCellAtStore({
-    html: priceCellEditorRef.current.html.get(),
-    blockIndex,
-    rowIndex,
+    html: props.priceCellEditorRef.current.html.get(),
+    blockIndex: props.blockIndex,
+    rowIndex: props.rowIndex,
     cellKey: cellKey.price,
   })
 
@@ -40,7 +33,7 @@ export const updatePriceCell = ({
     return
   }
 
-  const row = getRowFromStore({ blockIndex, rowIndex })
+  const row = getRowFromStore({ blockIndex: props.blockIndex, rowIndex: props.rowIndex })
 
   const isItemPricePinned = row?.itemPrice.pin.isPinned
 
@@ -53,9 +46,9 @@ export const updatePriceCell = ({
     const newQtyValueRounded = roundTo(newQtyValue, 5)
 
     updateCellWithValue({
-      editor: qtyCellEditorRef.current,
-      blockIndex,
-      rowIndex,
+      editor: props.qtyCellEditorRef.current,
+      blockIndex: props.blockIndex,
+      rowIndex: props.rowIndex,
       cellKey: cellKey.qty,
       value: newQtyValueRounded,
     })
@@ -72,16 +65,16 @@ export const updatePriceCell = ({
     const newItemPriceValueRounded = roundTo(newItemPriceValue, 2)
 
     updateCellWithValue({
-      editor: itemPriceCellEditorRef.current,
-      blockIndex,
-      rowIndex,
+      editor: props.itemPriceCellEditorRef.current,
+      blockIndex: props.blockIndex,
+      rowIndex: props.rowIndex,
       cellKey: cellKey.itemPrice,
       value: newItemPriceValueRounded,
     })
   }
 
   // update subTotalPrice
-  const rows = getRowsFromStore({ blockIndex })
+  const rows = getRowsFromStore({ blockIndex: props.blockIndex })
 
   if (rows === undefined) {
     return
@@ -99,8 +92,8 @@ export const updatePriceCell = ({
   const subTotalPriceValueNewRounded = roundTo(subTotalPriceValueNew, 2)
 
   updateSubTotalPriceWithValue({
-    blockIndex,
-    subTotalPriceEditor: subTotalPriceEditorRef.current,
+    blockIndex: props.blockIndex,
+    subTotalPriceEditor: props.subTotalPriceEditorRef.current,
     value: subTotalPriceValueNewRounded,
     incrementally: true,
   })

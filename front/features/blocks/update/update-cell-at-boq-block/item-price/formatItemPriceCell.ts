@@ -8,16 +8,12 @@ type Props = {
   rowIndex: number
 }
 
-export const formatItemPriceCell = ({
-  itemPriceCellEditorRef,
-  blockIndex,
-  rowIndex,
-}: Props): void => {
+export const formatItemPriceCell = (props: Props): void => {
   formatCellNumber({
-    blockIndex,
-    rowIndex,
+    blockIndex: props.blockIndex,
+    rowIndex: props.rowIndex,
     cellKey: cellKey.itemPrice,
-    editorRef: itemPriceCellEditorRef,
+    editorRef: props.itemPriceCellEditorRef,
     roundToTwoDecimals: true,
   })
 }

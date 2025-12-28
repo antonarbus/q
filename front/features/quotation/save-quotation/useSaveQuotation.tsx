@@ -36,10 +36,7 @@ const loadingMenuIconMachine = createLoadingMenuIconMachine({
 
 const loadingIconActor = createActor(loadingMenuIconMachine).start()
 
-export const useSaveQuotation = ({
-  saveQuotationFormValues,
-  slideOut,
-}: Props): Res => {
+export const useSaveQuotation = (props: Props): Res => {
   const navigate = useNavigate()
   const isQuotationsPage = useLocation().pathname.includes(route.quotationList)
   const saveQuotationMutation = useSaveQuotationMutation()
@@ -98,7 +95,7 @@ export const useSaveQuotation = ({
 
       const slideOutAndChangeUrl = async (): Promise<void> => {
         await asyncDelay(1000)
-        await slideOut()
+        await props.slideOut()
 
         const navigateTo =
           isQuotationsPage === true
@@ -131,10 +128,10 @@ export const useSaveQuotation = ({
 
     const quotation: Quotation = {
       ...getState().quotation,
-      name: saveQuotationFormValues.nameSignal.value,
-      category: saveQuotationFormValues.categorySignal.value,
-      desc: saveQuotationFormValues.descSignal.value,
-      info: saveQuotationFormValues.infoSignal.value,
+      name: props.saveQuotationFormValues.nameSignal.value,
+      category: props.saveQuotationFormValues.categorySignal.value,
+      desc: props.saveQuotationFormValues.descSignal.value,
+      info: props.saveQuotationFormValues.infoSignal.value,
       blocks: getState().quotation.blocks,
     }
 

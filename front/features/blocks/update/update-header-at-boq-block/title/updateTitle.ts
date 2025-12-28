@@ -8,14 +8,10 @@ type Props = {
   boqHeaderKey: HeaderKey
 }
 
-export const updateTitle = ({
-  editorRef,
-  blockIndex,
-  boqHeaderKey,
-}: Props): void => {
+export const updateTitle = (props: Props): void => {
   updateBoqHeaderAtStore({
-    editorRef,
-    blockIndex,
-    boqHeaderKey,
+    editorRef: props.editorRef,
+    blockIndex: props.blockIndex,
+    boqHeaderKey: props.boqHeaderKey,
   })
 }

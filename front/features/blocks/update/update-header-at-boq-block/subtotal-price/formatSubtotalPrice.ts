@@ -10,15 +10,12 @@ type Props = {
   subTotalPriceEditorRef: FroalaEditorRef
 }
 
-export const formatSubtotalPrice = ({
-  blockIndex,
-  subTotalPriceEditorRef,
-}: Props): void => {
-  if (subTotalPriceEditorRef.current === null) {
+export const formatSubtotalPrice = (props: Props): void => {
+  if (props.subTotalPriceEditorRef.current === null) {
     return
   }
 
-  const boqBlock = getBoqBlockFromStore({ blockIndex })
+  const boqBlock = getBoqBlockFromStore({ blockIndex: props.blockIndex })
 
   if (boqBlock === undefined) {
     return
@@ -37,11 +34,11 @@ export const formatSubtotalPrice = ({
 
   dispatch(
     quotationSlice.actions.updateSubTotalPriceReducer({
-      blockIndex,
+      blockIndex: props.blockIndex,
       html: newHtml,
       value: roundedValue,
     }),
   )
 
-  subTotalPriceEditorRef.current.html.set(newHtml)
+  props.subTotalPriceEditorRef.current.html.set(newHtml)
 }

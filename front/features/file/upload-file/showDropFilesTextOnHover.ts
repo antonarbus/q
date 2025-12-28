@@ -4,10 +4,8 @@ type Props = {
   dropFilesTextRef: RefObject<ComponentRef<'div'> | null>
 }
 
-export const showDropFilesTextOnMouseEnter = ({
-  dropFilesTextRef,
-}: Props): void => {
-  const textElement = dropFilesTextRef.current
+export const showDropFilesTextOnMouseEnter = (props: Props): void => {
+  const textElement = props.dropFilesTextRef.current
 
   if (textElement === null) {
     return
@@ -17,10 +15,8 @@ export const showDropFilesTextOnMouseEnter = ({
   textElement.style.pointerEvents = 'auto'
 }
 
-export const showDropFilesTextOnMouseLeave = ({
-  dropFilesTextRef,
-}: Props): void => {
-  const textElement = dropFilesTextRef.current
+export const showDropFilesTextOnMouseLeave = (props: Props): void => {
+  const textElement = props.dropFilesTextRef.current
 
   if (textElement === null) {
     return

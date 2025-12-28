@@ -6,11 +6,11 @@ type Props = {
   accessFormValuesSignal: AccessFormValuesSignal
 }
 
-export const useLoadInitValuesIntoShareQuotationModal = ({
-  accessFormValuesSignal,
-}: Props): void => {
+export const useLoadInitValuesIntoShareQuotationModal = (
+  props: Props,
+): void => {
   useEffectOnce(() => {
     const state = getState()
-    accessFormValuesSignal.value = state.quotation.access
+    props.accessFormValuesSignal.value = state.quotation.access
   })
 }

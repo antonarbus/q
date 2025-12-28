@@ -35,10 +35,7 @@ const loadingMenuIconMachine = createLoadingMenuIconMachine({
 
 const loadingIconActor = createActor(loadingMenuIconMachine).start()
 
-export const useShareQuotation = ({
-  accessFormValuesSignal,
-  slideOut,
-}: Props): Res => {
+export const useShareQuotation = (props: Props): Res => {
   const navigate = useNavigate()
   const isQuotationsPage = useLocation().pathname.includes(route.quotationList)
   const saveQuotationMutation = useSaveQuotationMutation()
@@ -90,7 +87,7 @@ export const useShareQuotation = ({
 
       const slideOutAndChangeUrl = async (): Promise<void> => {
         await asyncDelay(1000)
-        await slideOut()
+        await props.slideOut()
 
         const navigateTo =
           isQuotationsPage === true
@@ -124,18 +121,18 @@ export const useShareQuotation = ({
     const existingId = getState().quotation.id
     const id = existingId === 'new' ? generateId() : existingId
 
-    if (accessFormValuesSignal.value.level === 'everyone') {
-      accessFormValuesSignal.value.userList = []
+    if (props.accessFormValuesSignal.value.level === 'everyone') {
+      props.accessFormValuesSignal.value.userList = []
     }
 
-    if (accessFormValuesSignal.value.level === 'nobody') {
-      accessFormValuesSignal.value.userList = []
+    if (props.accessFormValuesSignal.value.level === 'nobody') {
+      props.accessFormValuesSignal.value.userList = []
     }
 
     const quotation: Quotation = {
       ...getState().quotation,
       id,
-      access: accessFormValuesSignal.value,
+      access: props.accessFormValuesSignal.value,
     }
 
     saveQuotationMutation.mutate({ quotation })

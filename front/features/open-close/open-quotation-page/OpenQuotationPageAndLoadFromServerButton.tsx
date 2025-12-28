@@ -7,9 +7,9 @@ type Props = {
   id: string
 }
 
-export const OpenQuotationPageAndLoadFromServerButton = ({
-  id,
-}: Props): ReactNode => {
+export const OpenQuotationPageAndLoadFromServerButton = (
+  props: Props,
+): ReactNode => {
   return (
     <Tooltip
       enterDelay={500}
@@ -17,7 +17,7 @@ export const OpenQuotationPageAndLoadFromServerButton = ({
       placement='bottom'
       title='Open'
     >
-      <Link to={`/${id}`}>
+      <Link to={`/${props.id}`}>
         <IconButton size='small'>
           <AiOutlineFolderOpen />
         </IconButton>

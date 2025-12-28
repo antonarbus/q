@@ -11,9 +11,7 @@ import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
 
-export const OpenBookmarkModalButton = ({
-  bookmarkId,
-}: ReqBody): JSX.Element => {
+export const OpenBookmarkModalButton = (props: ReqBody): JSX.Element => {
   const navigate = useNavigate()
   const getBookmarkMutation = useGetBookmarkMutation()
 
@@ -35,7 +33,7 @@ export const OpenBookmarkModalButton = ({
         }),
       )
 
-      void navigate(`./${bookmarkId}`)
+      void navigate(`./${props.bookmarkId}`)
     }
   }, [getBookmarkMutation.isSuccess])
 
@@ -54,7 +52,7 @@ export const OpenBookmarkModalButton = ({
     >
       <IconButton
         onClick={() => {
-          getBookmarkMutation.mutate({ bookmarkId })
+          getBookmarkMutation.mutate({ bookmarkId: props.bookmarkId })
         }}
         size='small'
         sx={{

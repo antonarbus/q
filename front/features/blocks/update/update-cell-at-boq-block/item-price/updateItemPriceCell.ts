@@ -18,21 +18,15 @@ type Props = {
   rowIndex: number
 }
 
-export const updateItemPriceCell = ({
-  itemPriceCellEditorRef,
-  priceCellEditorRef,
-  subTotalPriceEditorRef,
-  blockIndex,
-  rowIndex,
-}: Props): void => {
-  if (itemPriceCellEditorRef.current === null) {
+export const updateItemPriceCell = (props: Props): void => {
+  if (props.itemPriceCellEditorRef.current === null) {
     return
   }
 
   const didContentChange = didCellContentChange({
-    editor: itemPriceCellEditorRef.current,
-    blockIndex,
-    rowIndex,
+    editor: props.itemPriceCellEditorRef.current,
+    blockIndex: props.blockIndex,
+    rowIndex: props.rowIndex,
     cellKey: cellKey.itemPrice,
   })
 
@@ -41,13 +35,13 @@ export const updateItemPriceCell = ({
   }
 
   updateCellAtStore({
-    blockIndex,
-    rowIndex,
+    blockIndex: props.blockIndex,
+    rowIndex: props.rowIndex,
     cellKey: cellKey.itemPrice,
-    html: itemPriceCellEditorRef.current.html.get(),
+    html: props.itemPriceCellEditorRef.current.html.get(),
   })
 
-  const row = getRowFromStore({ blockIndex, rowIndex })
+  const row = getRowFromStore({ blockIndex: props.blockIndex, rowIndex: props.rowIndex })
 
   if (row === undefined) {
     return
@@ -58,13 +52,13 @@ export const updateItemPriceCell = ({
 
   updateCellWithValue({
     cellKey: cellKey.price,
-    editor: priceCellEditorRef.current,
-    blockIndex,
-    rowIndex,
+    editor: props.priceCellEditorRef.current,
+    blockIndex: props.blockIndex,
+    rowIndex: props.rowIndex,
     value: newPriceValueRounded,
   })
 
-  const rows = getRowsFromStore({ blockIndex })
+  const rows = getRowsFromStore({ blockIndex: props.blockIndex })
 
   if (rows === undefined) {
     return
@@ -82,8 +76,8 @@ export const updateItemPriceCell = ({
   const subTotalPriceValueNewRounded = roundTo(subTotalPriceValueNew, 2)
 
   updateSubTotalPriceWithValue({
-    blockIndex,
-    subTotalPriceEditor: subTotalPriceEditorRef.current,
+    blockIndex: props.blockIndex,
+    subTotalPriceEditor: props.subTotalPriceEditorRef.current,
     value: subTotalPriceValueNewRounded,
     incrementally: true,
   })

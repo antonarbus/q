@@ -8,14 +8,10 @@ type Props = {
   boqHeaderKey: HeaderKey
 }
 
-export const updateSubtotalText = ({
-  editorRef,
-  blockIndex,
-  boqHeaderKey,
-}: Props): void => {
+export const updateSubtotalText = (props: Props): void => {
   updateBoqHeaderAtStore({
-    editorRef,
-    blockIndex,
-    boqHeaderKey,
+    editorRef: props.editorRef,
+    blockIndex: props.blockIndex,
+    boqHeaderKey: props.boqHeaderKey,
   })
 }

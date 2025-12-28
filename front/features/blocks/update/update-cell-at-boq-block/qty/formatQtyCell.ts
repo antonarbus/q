@@ -8,16 +8,12 @@ type Props = {
   rowIndex: number
 }
 
-export const formatQtyCell = ({
-  qtyCellEditorRef,
-  blockIndex,
-  rowIndex,
-}: Props): void => {
+export const formatQtyCell = (props: Props): void => {
   formatCellNumber({
-    blockIndex,
-    rowIndex,
+    blockIndex: props.blockIndex,
+    rowIndex: props.rowIndex,
     cellKey: cellKey.qty,
-    editorRef: qtyCellEditorRef,
+    editorRef: props.qtyCellEditorRef,
     roundToTwoDecimals: false,
   })
 }

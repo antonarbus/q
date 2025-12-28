@@ -11,13 +11,7 @@ type Props = {
   shouldUnmountOnEsc?: boolean
 }
 
-export const BackdropWithSlidableModal = ({
-  children,
-  onMount,
-  onUnmount,
-  shouldUnmountOnClickAway,
-  shouldUnmountOnEsc,
-}: Props): JSX.Element => {
+export const BackdropWithSlidableModal = (props: Props): JSX.Element => {
   const animatedElement = useAnimatedElement()
 
   const scrollTopPositionBeforeModalOpen = useRef(
@@ -28,30 +22,30 @@ export const BackdropWithSlidableModal = ({
     if (getState().app.navigateState.shouldSlide === true) {
       const slideInAndSomeAction = async (): Promise<void> => {
         await animatedElement.slideIn()
-        onMount?.()
+        props.onMount?.()
       }
 
       void slideInAndSomeAction()
     } else {
-      onMount?.()
+      props.onMount?.()
     }
   })
 
   useEffectOnce(() => {
     const closeModalOnEsc = (event: KeyboardEvent): void => {
       const shouldCloseModalOnEsc =
-        shouldUnmountOnEsc === true && event.key === 'Escape'
+        props.shouldUnmountOnEsc === true && event.key === 'Escape'
 
       if (shouldCloseModalOnEsc === true) {
         if (getState().app.navigateState.shouldSlide === true) {
           const slideOutAndSomeAction = async (): Promise<void> => {
             await animatedElement.slideOut()
-            onUnmount?.()
+            props.onUnmount?.()
           }
 
           void slideOutAndSomeAction()
         } else {
-          onUnmount?.()
+          props.onUnmount?.()
         }
       }
     }
@@ -95,16 +89,16 @@ export const BackdropWithSlidableModal = ({
   })
 
   const unmountOnClickAway = (): void => {
-    if (shouldUnmountOnClickAway === true) {
+    if (props.shouldUnmountOnClickAway === true) {
       if (getState().app.navigateState.shouldSlide === true) {
         const slideOutAndSomeAction = async (): Promise<void> => {
           await animatedElement.slideOut()
-          onUnmount?.()
+          props.onUnmount?.()
         }
 
         void slideOutAndSomeAction()
       } else {
-        onUnmount?.()
+        props.onUnmount?.()
       }
     }
   }
@@ -124,7 +118,7 @@ export const BackdropWithSlidableModal = ({
         zIndex: 1000,
       }}
     >
-      <div ref={animatedElement.ref}>{children}</div>
+      <div ref={animatedElement.ref}>{props.children}</div>
     </div>
   )
 }

@@ -27,10 +27,7 @@ type Res = {
   isError: UseMutationResult['isError']
 }
 
-export const useSaveBookmark = ({
-  bookmarkFormValues,
-  slideOut,
-}: Props): Res => {
+export const useSaveBookmark = (props: Props): Res => {
   const navigate = useNavigate()
   const saveBookmarkMutation = useSaveBookmarkMutation()
   const getBookmarkCategoryListQuery = useGetBookmarkCategoryListQuery()
@@ -49,7 +46,7 @@ export const useSaveBookmark = ({
 
       const slideOutAndChangeUrl = async (): Promise<void> => {
         await asyncDelay(1000)
-        await slideOut()
+        await props.slideOut()
         void navigate('..')
       }
 
@@ -117,10 +114,10 @@ export const useSaveBookmark = ({
 
     const item = {
       ...itemWithUpdatedPreview,
-      name: bookmarkFormValues.nameSignal.value,
-      category: bookmarkFormValues.categorySignal.value,
-      desc: bookmarkFormValues.descSignal.value,
-      info: bookmarkFormValues.infoSignal.value,
+      name: props.bookmarkFormValues.nameSignal.value,
+      category: props.bookmarkFormValues.categorySignal.value,
+      desc: props.bookmarkFormValues.descSignal.value,
+      info: props.bookmarkFormValues.infoSignal.value,
     }
 
     saveBookmarkMutation.mutate({ bookmark: item })

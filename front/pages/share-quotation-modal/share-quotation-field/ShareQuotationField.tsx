@@ -11,9 +11,7 @@ type Props = {
   accessFormValuesSignal: AccessFormValuesSignal
 }
 
-export const ShareQuotationField = ({
-  accessFormValuesSignal,
-}: Props): JSX.Element => {
+export const ShareQuotationField = (props: Props): JSX.Element => {
   const emailSignal = useSignal('')
   const isButtonDisabledSignal = useSignal(true)
 
@@ -27,17 +25,17 @@ export const ShareQuotationField = ({
     <Layout
       sharedWithEmailInputField={
         <SharedWithEmailInputField
-          accessFormValuesSignal={accessFormValuesSignal}
+          accessFormValuesSignal={props.accessFormValuesSignal}
           emailSignal={emailSignal}
           isButtonDisabledSignal={isButtonDisabledSignal}
         />
       }
       sharedWithEmailList={
-        <SharedWithEmailList accessFormValuesSignal={accessFormValuesSignal} />
+        <SharedWithEmailList accessFormValuesSignal={props.accessFormValuesSignal} />
       }
       sharedWithRadioButtons={
         <SharedWithRadioButtons
-          accessFormValuesSignal={accessFormValuesSignal}
+          accessFormValuesSignal={props.accessFormValuesSignal}
         />
       }
     />

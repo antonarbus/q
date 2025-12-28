@@ -14,12 +14,8 @@ type Props = {
   rowEditorRefs: RowEditorRefs
 }
 
-export const validatePrices = ({
-  blockIndex,
-  rowEditorRefs,
-  subTotalPriceEditorRef,
-}: Props): void => {
-  const rows = getRowsFromStore({ blockIndex })
+export const validatePrices = (props: Props): void => {
+  const rows = getRowsFromStore({ blockIndex: props.blockIndex })
 
   if (rows === undefined) {
     return
@@ -28,7 +24,7 @@ export const validatePrices = ({
   let didNotifyAboutInvalidPriceOnes = false
 
   rows.forEach((row, rowIndex) => {
-    const priceCellEditorRef = rowEditorRefs.at(rowIndex)
+    const priceCellEditorRef = props.rowEditorRefs.at(rowIndex)
 
     if (priceCellEditorRef === undefined) {
       return
@@ -40,7 +36,7 @@ export const validatePrices = ({
 
     const isPriceValid = isRowPriceValid({
       html: priceCellEditorRef.price.current.html.get(),
-      blockIndex,
+      blockIndex: props.blockIndex,
       rowIndex,
     })
 
@@ -59,12 +55,12 @@ export const validatePrices = ({
       updateCellWithValue({
         cellKey: cellKey.price,
         editor: priceCellEditorRef.price.current,
-        blockIndex,
+        blockIndex: props.blockIndex,
         rowIndex,
         value: newPriceValueRounded,
       })
 
-      const boqRows = getRowsFromStore({ blockIndex })
+      const boqRows = getRowsFromStore({ blockIndex: props.blockIndex })
 
       if (boqRows === undefined) {
         return
@@ -82,8 +78,8 @@ export const validatePrices = ({
       const subTotalPriceValueNewRounded = roundTo(subTotalPriceValueNew, 2)
 
       updateSubTotalPriceWithValue({
-        blockIndex,
-        subTotalPriceEditor: subTotalPriceEditorRef.current,
+        blockIndex: props.blockIndex,
+        subTotalPriceEditor: props.subTotalPriceEditorRef.current,
         value: subTotalPriceValueNewRounded,
         incrementally: false,
       })

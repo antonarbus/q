@@ -8,9 +8,7 @@ type Props = {
   infoFormValues: InfoFormValues
 }
 
-export const useLoadInfoModalOpenedWithDirectLink = ({
-  infoFormValues,
-}: Props): void => {
+export const useLoadInfoModalOpenedWithDirectLink = (props: Props): void => {
   const quotation = useSelector((state) => state.quotation)
   const urlParams = useParams()
 
@@ -20,10 +18,10 @@ export const useLoadInfoModalOpenedWithDirectLink = ({
     })
 
     if (item !== undefined) {
-      infoFormValues.nameSignal.value = item.name
-      infoFormValues.categorySignal.value = item.category
-      infoFormValues.descSignal.value = item.desc
-      infoFormValues.infoSignal.value = item.info
+      props.infoFormValues.nameSignal.value = item.name
+      props.infoFormValues.categorySignal.value = item.category
+      props.infoFormValues.descSignal.value = item.desc
+      props.infoFormValues.infoSignal.value = item.info
     }
   }, [quotation])
 }

@@ -17,21 +17,15 @@ type Props = {
   rowIndex: number
 }
 
-export const updateQtyCell = ({
-  qtyCellEditorRef,
-  priceCellEditorRef,
-  subTotalPriceEditorRef,
-  blockIndex,
-  rowIndex,
-}: Props): void => {
-  if (qtyCellEditorRef.current === null) {
+export const updateQtyCell = (props: Props): void => {
+  if (props.qtyCellEditorRef.current === null) {
     return
   }
 
   const didContentChange = didCellContentChange({
-    editor: qtyCellEditorRef.current,
-    blockIndex,
-    rowIndex,
+    editor: props.qtyCellEditorRef.current,
+    blockIndex: props.blockIndex,
+    rowIndex: props.rowIndex,
     cellKey: cellKey.qty,
   })
 
@@ -40,13 +34,13 @@ export const updateQtyCell = ({
   }
 
   updateCellAtStore({
-    blockIndex,
-    rowIndex,
+    blockIndex: props.blockIndex,
+    rowIndex: props.rowIndex,
     cellKey: cellKey.qty,
-    html: qtyCellEditorRef.current.html.get(),
+    html: props.qtyCellEditorRef.current.html.get(),
   })
 
-  const row = getRowFromStore({ blockIndex, rowIndex })
+  const row = getRowFromStore({ blockIndex: props.blockIndex, rowIndex: props.rowIndex })
 
   if (row === undefined) {
     return
@@ -57,13 +51,13 @@ export const updateQtyCell = ({
 
   updateCellWithValue({
     cellKey: cellKey.price,
-    editor: priceCellEditorRef.current,
-    blockIndex,
-    rowIndex,
+    editor: props.priceCellEditorRef.current,
+    blockIndex: props.blockIndex,
+    rowIndex: props.rowIndex,
     value: newPriceValueRounded,
   })
 
-  const rows = getRowsFromStore({ blockIndex })
+  const rows = getRowsFromStore({ blockIndex: props.blockIndex })
 
   if (rows === undefined) {
     return
@@ -81,8 +75,8 @@ export const updateQtyCell = ({
   const subTotalPriceValueNewRounded = roundTo(subTotalPriceValueNew, 2)
 
   updateSubTotalPriceWithValue({
-    blockIndex,
-    subTotalPriceEditor: subTotalPriceEditorRef.current,
+    blockIndex: props.blockIndex,
+    subTotalPriceEditor: props.subTotalPriceEditorRef.current,
     value: subTotalPriceValueNewRounded,
     incrementally: true,
   })
