@@ -13,7 +13,7 @@ type Res = {
   isFetched: boolean
 }
 
-export const useFileListAllDatasource = (): Res => {
+export const useFileListAll = (): Res => {
   const [isLoading, setIsLoading] = useState(false)
   const [isFetching, setIsFetching] = useState(false)
   const [isFetched, setIsFetched] = useState(false)

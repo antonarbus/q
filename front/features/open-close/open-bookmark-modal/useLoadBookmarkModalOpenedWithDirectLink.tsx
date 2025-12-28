@@ -9,15 +9,14 @@ import { useEffectOnce, useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
 
 type Props = {
-  bookmarkFromValues: BookmarkFormValues
+  bookmarkFormValues: BookmarkFormValues
 }
 
-export const useLoadBookmarkModalOpenedWithDirectLink = ({
-  bookmarkFromValues,
-}: Props): void => {
+export const useLoadBookmarkModalOpenedWithDirectLink = (
+  props: Props,
+): void => {
   const urlParams = useParams()
   const navigate = useNavigate()
-
   const getBookmarkMutation = useGetBookmarkMutation()
 
   useEffectOnce(() => {
@@ -50,10 +49,10 @@ export const useLoadBookmarkModalOpenedWithDirectLink = ({
       const block = getState().quotation.blocks.at(BOOKMARK_POS_AT_BLOCKS)
 
       if (block !== undefined) {
-        bookmarkFromValues.nameSignal.value = block.name
-        bookmarkFromValues.categorySignal.value = block.category
-        bookmarkFromValues.descSignal.value = block.desc
-        bookmarkFromValues.infoSignal.value = block.info
+        props.bookmarkFormValues.nameSignal.value = block.name
+        props.bookmarkFormValues.categorySignal.value = block.category
+        props.bookmarkFormValues.descSignal.value = block.desc
+        props.bookmarkFormValues.infoSignal.value = block.info
       }
     }
   }, [getBookmarkMutation.isSuccess])

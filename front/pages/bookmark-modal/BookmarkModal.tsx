@@ -3,7 +3,7 @@ import { quotationSlice } from '@entities/quotation/redux/quotationSlice'
 import { useSaveBookmark } from '@features/bookmark/save-bookmark'
 import {
   useLoadBookmarkModalOpenedWithDirectLink,
-  useLoadInitValuesIntoBookmarkModal,
+  useBookmarkFormValues,
 } from '@features/open-close/open-bookmark-modal'
 import { FormModal } from '@shared/component/FormModal'
 import { CategoryField } from '@shared/component/input-field/CategoryField'
@@ -20,12 +20,12 @@ import { BookmarkField } from './BookmarkField'
 
 export const BookmarkModal = (): JSX.Element => {
   const animatedElement = useAnimatedElement()
-  const { bookmarkFromValues } = useLoadInitValuesIntoBookmarkModal()
-  useLoadBookmarkModalOpenedWithDirectLink({ bookmarkFromValues })
+  const bookmarkFormValues = useBookmarkFormValues()
+  useLoadBookmarkModalOpenedWithDirectLink({ bookmarkFormValues })
 
   const { onSubmit, isPending, isSuccess, isError } = useSaveBookmark({
     slideOut: animatedElement.slideOut,
-    bookmarkFromValues,
+    bookmarkFormValues,
   })
 
   useUnmount(() => {
@@ -57,13 +57,13 @@ export const BookmarkModal = (): JSX.Element => {
       shouldUnmountOnEsc
       width='500px'
     >
-      <NameField nameSignal={bookmarkFromValues.nameSignal} />
+      <NameField nameSignal={bookmarkFormValues.nameSignal} />
       <CategoryField
-        categorySignal={bookmarkFromValues.categorySignal}
+        categorySignal={bookmarkFormValues.categorySignal}
         options={distinctCategoryList}
       />
-      <DescriptionField descSignal={bookmarkFromValues.descSignal} />
-      <InfoField infoSignal={bookmarkFromValues.infoSignal} />
+      <DescriptionField descSignal={bookmarkFormValues.descSignal} />
+      <InfoField infoSignal={bookmarkFormValues.infoSignal} />
       <BookmarkField />
     </FormModal>
   )

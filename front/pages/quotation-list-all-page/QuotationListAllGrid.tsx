@@ -1,5 +1,5 @@
 import type { ResBody } from '@back/api/quotation/getQuotationListAllHandler'
-import { useQuotationListAllDatasource } from '@entities/quotation/api/useQuotationListAllDatasource'
+import { useQuotationListAll } from '@entities/quotation/api/useQuotationListAll'
 import { LoadingTableOverlay } from '@shared/component/LoadingTableOverlay'
 import { useDisableLoadingOverlayWhenItemsAreFetched } from '@shared/component/loading-dots-overlay'
 import { agGridSlice } from '@shared/lib/ag-grid/agGridSlice'
@@ -27,21 +27,21 @@ ModuleRegistry.registerModules([AllCommunityModule])
 
 export const QuotationListAllGrid = (): JSX.Element => {
   const gridContainerRef = useRef<ComponentRef<'div'> | null>(null)
+  const quotationListAll = useQuotationListAll()
+  useShowLoadingJumpingDots({ isLoading: quotationListAll.isLoading })
 
-  const { datasource, isLoading, isFetching, isFetched } =
-    useQuotationListAllDatasource()
-
-  useShowLoadingJumpingDots({ isLoading })
-  useDisableLoadingOverlayWhenItemsAreFetched({ isFetched })
+  useDisableLoadingOverlayWhenItemsAreFetched({
+    isFetched: quotationListAll.isFetched,
+  })
 
   return (
     <GridLayout gridContainerRef={gridContainerRef}>
       <AgGridStyles />
       <DisplayedRowsCount />
-      <ProgressGridBar isShown={isFetching} />
+      <ProgressGridBar isShown={quotationListAll.isFetching} />
       <AgGridReact<ResBody['quotationList'][number]>
         columnDefs={columnDefs}
-        datasource={datasource}
+        datasource={quotationListAll.datasource}
         defaultColDef={getDefaultColDef()}
         enableCellTextSelection
         getRowId={(params) => params.data.id}

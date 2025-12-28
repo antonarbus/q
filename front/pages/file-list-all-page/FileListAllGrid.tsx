@@ -1,5 +1,5 @@
 import type { ResBody } from '@back/api/file/getFileListAllHandler'
-import { useFileListAllDatasource } from '@entities/file/api/useFileListAllDatasource'
+import { useFileListAll } from '@entities/file/api/useFileListAll'
 import { LoadingTableOverlay } from '@shared/component/LoadingTableOverlay'
 import { useDisableLoadingOverlayWhenItemsAreFetched } from '@shared/component/loading-dots-overlay'
 import { agGridSlice } from '@shared/lib/ag-grid/agGridSlice'
@@ -27,21 +27,21 @@ ModuleRegistry.registerModules([AllCommunityModule])
 
 export const FileListAllGrid = (): JSX.Element => {
   const gridContainerRef = useRef<ComponentRef<'div'> | null>(null)
+  const fileListAll = useFileListAll()
+  useShowLoadingJumpingDots({ isLoading: fileListAll.isLoading })
 
-  const { datasource, isLoading, isFetching, isFetched } =
-    useFileListAllDatasource()
-
-  useShowLoadingJumpingDots({ isLoading })
-  useDisableLoadingOverlayWhenItemsAreFetched({ isFetched })
+  useDisableLoadingOverlayWhenItemsAreFetched({
+    isFetched: fileListAll.isFetched,
+  })
 
   return (
     <GridLayout gridContainerRef={gridContainerRef}>
       <AgGridStyles />
       <DisplayedRowsCount />
-      <ProgressGridBar isShown={isFetching} />
+      <ProgressGridBar isShown={fileListAll.isFetching} />
       <AgGridReact<ResBody['fileList'][number]>
         columnDefs={columnDefs}
-        datasource={datasource}
+        datasource={fileListAll.datasource}
         defaultColDef={getDefaultColDef()}
         enableCellTextSelection
         getRowId={(params) => params.data.id}

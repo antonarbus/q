@@ -21,7 +21,7 @@ export const ShareQuotationModal = (): JSX.Element => {
   const isButtonDisabled = useIsButtonDisabled({ accessFormValuesSignal })
   const isNewQuotation = getState().quotation.id === 'new'
 
-  const { onSubmit, isPending, isSuccess, isError } = useShareQuotation({
+  const shareQuotation = useShareQuotation({
     accessFormValuesSignal,
     slideOut: animatedElement.slideOut,
   })
@@ -36,12 +36,12 @@ export const ShareQuotationModal = (): JSX.Element => {
       headerIcon={<ImLink />}
       headerText='Share'
       isButtonDisabled={isButtonDisabled}
-      isButtonError={isError}
-      isButtonLoading={isPending}
-      isButtonSuccess={isSuccess}
+      isButtonError={shareQuotation.isError}
+      isButtonLoading={shareQuotation.isPending}
+      isButtonSuccess={shareQuotation.isSuccess}
       modalRef={animatedElement.ref}
       onCloseClick={navigateUp}
-      onSubmit={onSubmit}
+      onSubmit={shareQuotation.handleSubmit}
       onUnmount={navigateUp}
       shouldUnmountOnClickAway
       shouldUnmountOnEsc

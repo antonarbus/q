@@ -16,7 +16,7 @@ import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
 
 type Props = {
-  bookmarkFromValues: BookmarkFormValues
+  bookmarkFormValues: BookmarkFormValues
   slideOut: () => Promise<void>
 }
 
@@ -28,7 +28,7 @@ type Res = {
 }
 
 export const useSaveBookmark = ({
-  bookmarkFromValues,
+  bookmarkFormValues,
   slideOut,
 }: Props): Res => {
   const navigate = useNavigate()
@@ -117,10 +117,10 @@ export const useSaveBookmark = ({
 
     const item = {
       ...itemWithUpdatedPreview,
-      name: bookmarkFromValues.nameSignal.value,
-      category: bookmarkFromValues.categorySignal.value,
-      desc: bookmarkFromValues.descSignal.value,
-      info: bookmarkFromValues.infoSignal.value,
+      name: bookmarkFormValues.nameSignal.value,
+      category: bookmarkFormValues.categorySignal.value,
+      desc: bookmarkFormValues.descSignal.value,
+      info: bookmarkFormValues.infoSignal.value,
     }
 
     saveBookmarkMutation.mutate({ bookmark: item })

@@ -1,5 +1,5 @@
 import type { ResBody } from '@back/api/bookmark/getBookmarkListAllHandler'
-import { useBookmarkListAllDatasource } from '@entities/bookmark/api/useBookmarkListAllDatasource'
+import { useBookmarkListAll } from '@entities/bookmark/api/useBookmarkListAll'
 import { LoadingTableOverlay } from '@shared/component/LoadingTableOverlay'
 import { useDisableLoadingOverlayWhenItemsAreFetched } from '@shared/component/loading-dots-overlay'
 import { agGridSlice } from '@shared/lib/ag-grid/agGridSlice'
@@ -27,21 +27,21 @@ ModuleRegistry.registerModules([AllCommunityModule])
 
 export const BookmarkListAllGrid = (): JSX.Element => {
   const gridContainerRef = useRef<ComponentRef<'div'> | null>(null)
+  const bookmarkListAll = useBookmarkListAll()
+  useShowLoadingJumpingDots({ isLoading: bookmarkListAll.isLoading })
 
-  const { datasource, isLoading, isFetching, isFetched } =
-    useBookmarkListAllDatasource()
-
-  useShowLoadingJumpingDots({ isLoading })
-  useDisableLoadingOverlayWhenItemsAreFetched({ isFetched })
+  useDisableLoadingOverlayWhenItemsAreFetched({
+    isFetched: bookmarkListAll.isFetched,
+  })
 
   return (
     <GridLayout gridContainerRef={gridContainerRef}>
       <AgGridStyles />
       <DisplayedRowsCount />
-      <ProgressGridBar isShown={isFetching} />
+      <ProgressGridBar isShown={bookmarkListAll.isFetching} />
       <AgGridReact<ResBody['bookmarkList'][number]>
         columnDefs={columnDefs}
-        datasource={datasource}
+        datasource={bookmarkListAll.datasource}
         defaultColDef={getDefaultColDef()}
         enableCellTextSelection
         getRowId={(params) => params.data.id}

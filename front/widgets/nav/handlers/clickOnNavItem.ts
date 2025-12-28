@@ -49,11 +49,11 @@ export const clickOnNavItem = (props: Props): void => {
   }
 
   // if click on NavItem for which Menu is opened, then close it, otherwise it closes and opens immediately
-  const { currentMenuNavItemId } = getState().nav
+  const state = getState()
 
   const isMenuOpenedUnderThisNavItem =
-    currentMenuNavItemId === props.navItem.id &&
-    currentMenuNavItemId !== navItemId.burger
+    state.nav.currentMenuNavItemId === props.navItem.id &&
+    state.nav.currentMenuNavItemId !== navItemId.burger
 
   if (isMenuOpenedUnderThisNavItem === true) {
     dispatch(navSlice.actions.closeMenu())

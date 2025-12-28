@@ -23,7 +23,7 @@ type Props = {
 }
 
 type Res = {
-  onSubmit: (e: FormEvent) => void
+  handleSubmit: (e: FormEvent) => void
   isPending: UseMutationResult['isPending']
   isSuccess: UseMutationResult['isSuccess']
   isError: UseMutationResult['isError']
@@ -120,7 +120,7 @@ export const useSaveQuotation = ({
     }
   }, [saveQuotationMutation.isError])
 
-  const onSubmit = (event: FormEvent): void => {
+  const handleSubmit = (event: FormEvent): void => {
     event.preventDefault()
 
     if (getState().user.email === null) {
@@ -142,7 +142,7 @@ export const useSaveQuotation = ({
   }
 
   return {
-    onSubmit,
+    handleSubmit,
     isPending: saveQuotationMutation.isPending,
     isSuccess: saveQuotationMutation.isSuccess,
     isError: saveQuotationMutation.isError,

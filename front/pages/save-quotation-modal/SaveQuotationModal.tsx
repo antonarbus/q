@@ -25,7 +25,7 @@ export const SaveQuotationModal = (): JSX.Element => {
   useLoadInitValuesIntoSaveQuotationModal({ saveQuotationFormValues })
   useLoadSaveQuotationModalWithDirectLink({ saveQuotationFormValues })
 
-  const { onSubmit, isPending, isSuccess, isError } = useSaveQuotation({
+  const saveQuotation = useSaveQuotation({
     saveQuotationFormValues,
     slideOut: animatedElement.slideOut,
   })
@@ -44,12 +44,12 @@ export const SaveQuotationModal = (): JSX.Element => {
       buttonText={isQuotationsPage === true ? 'Update' : 'Save'}
       headerIcon={<MdSaveAlt />}
       headerText={isQuotationsPage === true ? 'Quick edit' : 'Save quotation'}
-      isButtonError={isError}
-      isButtonLoading={isPending}
-      isButtonSuccess={isSuccess}
+      isButtonError={saveQuotation.isError}
+      isButtonLoading={saveQuotation.isPending}
+      isButtonSuccess={saveQuotation.isSuccess}
       modalRef={animatedElement.ref}
       onCloseClick={navigateUp}
-      onSubmit={onSubmit}
+      onSubmit={saveQuotation.handleSubmit}
       onUnmount={navigateUp}
       shouldUnmountOnClickAway
       shouldUnmountOnEsc

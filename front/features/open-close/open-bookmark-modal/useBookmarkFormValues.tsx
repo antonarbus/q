@@ -5,11 +5,7 @@ import { useSignal } from '@preact/signals-react'
 import { getState } from '@shared/lib/redux'
 import { useEffectOnce } from 'react-use'
 
-type Res = {
-  bookmarkFromValues: BookmarkFormValues
-}
-
-export const useLoadInitValuesIntoBookmarkModal = (): Res => {
+export const useBookmarkFormValues = (): BookmarkFormValues => {
   const bookmarkFromValues = {
     nameSignal: useSignal(''),
     categorySignal: useSignal(''),
@@ -21,12 +17,12 @@ export const useLoadInitValuesIntoBookmarkModal = (): Res => {
     const bookmark = getState().quotation.blocks.at(BOOKMARK_POS_AT_BLOCKS)
 
     if (bookmark !== undefined) {
-      bookmarkFromValues.nameSignal.value = bookmark.name ?? ''
-      bookmarkFromValues.categorySignal.value = bookmark.category ?? ''
-      bookmarkFromValues.descSignal.value = bookmark.desc ?? ''
-      bookmarkFromValues.infoSignal.value = bookmark.info ?? ''
+      bookmarkFromValues.nameSignal.value = bookmark.name
+      bookmarkFromValues.categorySignal.value = bookmark.category
+      bookmarkFromValues.descSignal.value = bookmark.desc
+      bookmarkFromValues.infoSignal.value = bookmark.info
     }
   })
 
-  return { bookmarkFromValues }
+  return bookmarkFromValues
 }
