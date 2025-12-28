@@ -1,1 +1,1 @@
-export { useInstantiateChart } from './useInstantiateChart'
+export { useChart } from './useChart'

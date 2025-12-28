@@ -15,7 +15,7 @@ export const RequestPasswordResetModal = (): JSX.Element => {
   const emailSignal = useSignal('')
   const isEmailOkSignal = useSignal(false)
 
-  const { onSubmit, isPending, isSuccess, isError } = useRequestPasswordReset({
+  const requestPasswordReset = useRequestPasswordReset({
     emailSignal,
     slideOut: animatedElement.slideOut,
   })
@@ -30,12 +30,12 @@ export const RequestPasswordResetModal = (): JSX.Element => {
       headerIcon={<PiPassword />}
       headerText='Reset password'
       isButtonDisabled={isEmailOkSignal.value === false}
-      isButtonError={isError}
-      isButtonLoading={isPending}
-      isButtonSuccess={isSuccess}
+      isButtonError={requestPasswordReset.isError}
+      isButtonLoading={requestPasswordReset.isPending}
+      isButtonSuccess={requestPasswordReset.isSuccess}
       modalRef={animatedElement.ref}
       onCloseClick={navigateUp}
-      onSubmit={onSubmit}
+      onSubmit={requestPasswordReset.handleSubmit}
       onUnmount={navigateUp}
       paddingContent='50px 40px 10px 40px'
       shouldUnmountOnClickAway

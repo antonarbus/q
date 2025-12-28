@@ -3,15 +3,14 @@ import { Box } from '@mui/material'
 import { DatePicker } from '@mui/x-date-pickers'
 import { format, subDays } from 'date-fns'
 import { type JSX, useState } from 'react'
-import { useInstantiateChart } from '@shared/lib/chart-js'
+import { useChart } from '@shared/lib/chart-js'
 import { useUpdateChart } from '@features/visitors/update-chart-acc-to-date-range'
 
 const today = new Date()
 const thirtyDaysAgo = subDays(today, 30)
 
 export const VisitorListPage = (): JSX.Element => {
-  const { canvasRef, chartInstanceRef } = useInstantiateChart()
-
+  const chart = useChart()
   const [startDate, setStartDate] = useState(thirtyDaysAgo)
   const [endDate, setEndDate] = useState(today)
 
@@ -21,7 +20,7 @@ export const VisitorListPage = (): JSX.Element => {
   })
 
   useUpdateChart({
-    chartInstanceRef,
+    chartInstanceRef: chart.chartInstanceRef,
     visitorList: getUniqueDailyVisitorCountQuery.data?.visitorList ?? [],
   })
 
@@ -35,7 +34,7 @@ export const VisitorListPage = (): JSX.Element => {
       }}
     >
       <Box sx={{ width: '800px' }}>
-        <canvas ref={canvasRef} />
+        <canvas ref={chart.canvasRef} />
       </Box>
       <Box sx={{ height: '20px' }}>
         {getUniqueDailyVisitorCountQuery.isLoading === true

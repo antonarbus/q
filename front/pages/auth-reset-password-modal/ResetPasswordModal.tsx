@@ -23,7 +23,7 @@ export const ResetPasswordModal = (): ReactNode => {
   const isConfirmPasswordOkSignal = useSignal(false)
   const isButtonDisabledSignal = useSignal(false)
 
-  const { onSubmit, isPending, isSuccess, isError } = useResetPassword({
+  const resetPassword = useResetPassword({
     passwordSignal,
     modalRef: animatedElement.ref,
     slideOut: animatedElement.slideOut,
@@ -43,12 +43,12 @@ export const ResetPasswordModal = (): ReactNode => {
       headerIcon={<MdPassword />}
       headerText='Reset password'
       isButtonDisabled={isButtonDisabledSignal.value}
-      isButtonError={isError}
-      isButtonLoading={isPending}
-      isButtonSuccess={isSuccess}
+      isButtonError={resetPassword.isError}
+      isButtonLoading={resetPassword.isPending}
+      isButtonSuccess={resetPassword.isSuccess}
       modalRef={animatedElement.ref}
       onCloseClick={navigateUp}
-      onSubmit={onSubmit}
+      onSubmit={resetPassword.handleSubmit}
       onUnmount={navigateUp}
       paddingContent='50px 40px 10px 40px'
       shouldUnmountOnClickAway

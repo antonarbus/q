@@ -20,7 +20,7 @@ type Props = {
 }
 
 type Res = {
-  onSubmit: (e: FormEvent) => void
+  handleSubmit: (e: FormEvent) => void
   isPending: UseMutationResult['isPending']
   isSuccess: UseMutationResult['isSuccess']
   isError: UseMutationResult['isError']
@@ -99,7 +99,7 @@ export const useResetPassword = ({ passwordSignal, slideOut }: Props): Res => {
     }
   }, [resetUserPasswordMutation.isError])
 
-  const onSubmit = (event: FormEvent): void => {
+  const handleSubmit = (event: FormEvent): void => {
     event.preventDefault()
 
     resetUserPasswordMutation.mutate({
@@ -111,7 +111,7 @@ export const useResetPassword = ({ passwordSignal, slideOut }: Props): Res => {
   }
 
   return {
-    onSubmit,
+    handleSubmit,
     isPending: resetUserPasswordMutation.isPending,
     isSuccess: resetUserPasswordMutation.isSuccess,
     isError: resetUserPasswordMutation.isError,

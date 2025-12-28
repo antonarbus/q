@@ -24,7 +24,7 @@ type Props = {
 }
 
 type Res = {
-  onSubmit: (e: FormEvent) => void
+  handleSubmit: (e: FormEvent) => void
   isPending: UseMutationResult['isPending']
   isSuccess: UseMutationResult['isSuccess']
   isError: UseMutationResult['isError']
@@ -148,7 +148,7 @@ export const useLogIn = ({
     }
   }, [logInUserMutation.isError])
 
-  const onSubmit = (event: FormEvent): void => {
+  const handleSubmit = (event: FormEvent): void => {
     event.preventDefault()
 
     logInUserMutation.mutate({
@@ -158,7 +158,7 @@ export const useLogIn = ({
   }
 
   return {
-    onSubmit,
+    handleSubmit,
     isPending: logInUserMutation.isPending,
     isSuccess: logInUserMutation.isSuccess,
     isError: logInUserMutation.isError,

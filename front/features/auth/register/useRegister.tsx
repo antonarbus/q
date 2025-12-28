@@ -20,7 +20,7 @@ type Props = {
 }
 
 type Res = {
-  onSubmit: (e: FormEvent) => void
+  handleSubmit: (e: FormEvent) => void
   isPending: UseMutationResult['isPending']
   isSuccess: UseMutationResult['isSuccess']
   isError: UseMutationResult['isError']
@@ -110,7 +110,7 @@ export const useRegister = ({
     }
   }, [registerUserMutation.isError])
 
-  const onSubmit = (event: FormEvent): void => {
+  const handleSubmit = (event: FormEvent): void => {
     event.preventDefault()
 
     registerUserMutation.mutate({
@@ -122,7 +122,7 @@ export const useRegister = ({
   }
 
   return {
-    onSubmit,
+    handleSubmit,
     isPending: registerUserMutation.isPending,
     isSuccess: registerUserMutation.isSuccess,
     isError: registerUserMutation.isError,

@@ -13,7 +13,7 @@ type Props = {
 }
 
 type Res = {
-  onSubmit: (e: FormEvent) => void
+  handleSubmit: (e: FormEvent) => void
   isPending: UseMutationResult['isPending']
   isSuccess: UseMutationResult['isSuccess']
   isError: UseMutationResult['isError']
@@ -83,14 +83,14 @@ export const useRequestPasswordReset = ({
     }
   }, [requestUserPasswordResetMutation.isError])
 
-  const onSubmit = (event: FormEvent): void => {
+  const handleSubmit = (event: FormEvent): void => {
     event.preventDefault()
 
     requestUserPasswordResetMutation.mutate({ email: emailSignal.value })
   }
 
   return {
-    onSubmit,
+    handleSubmit,
     isPending: requestUserPasswordResetMutation.isPending,
     isSuccess: requestUserPasswordResetMutation.isSuccess,
     isError: requestUserPasswordResetMutation.isError,

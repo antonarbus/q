@@ -29,7 +29,7 @@ type Res = {
   chartInstanceRef: RefObject<Chart | null>
 }
 
-export const useInstantiateChart = (): Res => {
+export const useChart = (): Res => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const chartInstanceRef = useRef<Chart | null>(null)
 

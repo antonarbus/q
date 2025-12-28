@@ -18,14 +18,16 @@ export const LoginModal = (): JSX.Element => {
   const passwordSignal = useSignal('')
   const isEmailOkSignal = useSignal(false)
 
-  const { isPending, isSuccess, isError, onSubmit } = useLogIn({
+  const logIn = useLogIn({
     emailSignal,
     passwordSignal,
     slideOut: animatedElement.slideOut,
   })
 
   const isButtonDisabled =
-    isEmailOkSignal.value === false || passwordSignal.value === '' || isPending
+    isEmailOkSignal.value === false ||
+    passwordSignal.value === '' ||
+    logIn.isPending
 
   const navigateUp = (): void => {
     void router.navigate('..')
@@ -37,12 +39,12 @@ export const LoginModal = (): JSX.Element => {
       headerIcon={<FiLogIn />}
       headerText='Log in'
       isButtonDisabled={isButtonDisabled}
-      isButtonError={isError}
-      isButtonLoading={isPending}
-      isButtonSuccess={isSuccess}
+      isButtonError={logIn.isError}
+      isButtonLoading={logIn.isPending}
+      isButtonSuccess={logIn.isSuccess}
       modalRef={animatedElement.ref}
       onCloseClick={navigateUp}
-      onSubmit={onSubmit}
+      onSubmit={logIn.handleSubmit}
       onUnmount={navigateUp}
       paddingContent='50px 40px 10px 40px'
       shouldUnmountOnClickAway

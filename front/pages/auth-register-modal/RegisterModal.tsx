@@ -20,7 +20,7 @@ export const RegisterModal = (): JSX.Element => {
   const isConfirmPasswordOkSignal = useSignal(false)
   const isButtonDisabledSignal = useSignal(false)
 
-  const { onSubmit, isSuccess, isPending, isError } = useRegister({
+  const register = useRegister({
     emailSignal,
     passwordSignal,
     slideOut: animatedElement.slideOut,
@@ -41,12 +41,12 @@ export const RegisterModal = (): JSX.Element => {
       headerIcon={<MdLockOutline />}
       headerText='Register'
       isButtonDisabled={isButtonDisabledSignal.value}
-      isButtonError={isError}
-      isButtonLoading={isPending}
-      isButtonSuccess={isSuccess}
+      isButtonError={register.isError}
+      isButtonLoading={register.isPending}
+      isButtonSuccess={register.isSuccess}
       modalRef={animatedElement.ref}
       onCloseClick={navigateUp}
-      onSubmit={onSubmit}
+      onSubmit={register.handleSubmit}
       onUnmount={navigateUp}
       paddingContent='50px 40px 10px 40px'
       shouldUnmountOnClickAway
