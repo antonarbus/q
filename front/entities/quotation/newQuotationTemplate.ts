@@ -1,4 +1,4 @@
-import { generateId } from '@shared/lib/nanoid'
+import { generateId } from '@root/shared/lib/nanoid'
 import { itemType } from './const/itemType'
 import { rowTypeKey } from './const/rowTypeKey'
 import { permissionLevel } from '@root/shared/const/permissionLevel'

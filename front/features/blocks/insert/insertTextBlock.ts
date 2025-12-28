@@ -4,7 +4,7 @@ import textBlockContentHtml from '@entities/quotation/templates/textBlockContent
 import textBlockPreviewHtml from '@entities/quotation/templates/textBlockPreview.html?raw'
 import type { TextBlock } from '@root/shared/types/BlockItem'
 import { textSlice } from '@shared/lib/froala/textSlice'
-import { generateId } from '@shared/lib/nanoid'
+import { generateId } from '@root/shared/lib/nanoid'
 import { dispatch, getState } from '@shared/lib/redux'
 import type { MouseEvent } from 'react'
 

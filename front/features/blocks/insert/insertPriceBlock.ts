@@ -5,7 +5,7 @@ import priceBlockTitleHtml from '@entities/quotation/templates/priceBlockTitle.h
 import priceBlockValueHtml from '@entities/quotation/templates/priceBlockValue.html?raw'
 import type { PriceBlock } from '@root/shared/types/BlockItem'
 import { textSlice } from '@shared/lib/froala/textSlice'
-import { generateId } from '@shared/lib/nanoid'
+import { generateId } from '@root/shared/lib/nanoid'
 import { dispatch, getState } from '@shared/lib/redux'
 import type { MouseEvent } from 'react'
 

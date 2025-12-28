@@ -46,6 +46,7 @@
         "kill-port": "^2.0.1",
         "knip": "^5.65.0",
         "madge": "^8.0.0",
+        "nanoid": "^5.1.6",
         "prettier": "^3.7.4",
         "rollup": "^4.52.4",
         "typescript": "^5.9.3",

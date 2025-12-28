@@ -6,7 +6,7 @@ import { useSaveQuotationMutation } from '@entities/quotation/api/useSaveQuotati
 import { quotationSlice } from '@entities/quotation/redux/quotationSlice'
 import type { Quotation } from '@root/shared/types/Quotation'
 import type { AccessFormValuesSignal } from '@entities/quotation/form/types'
-import { generateId } from '@shared/lib/nanoid'
+import { generateId } from '@root/shared/lib/nanoid'
 import { route } from '@shared/lib/react-router-dom/route'
 import { dispatch, getState } from '@shared/lib/redux'
 import { asyncDelay } from '@shared/util/asyncDelay'

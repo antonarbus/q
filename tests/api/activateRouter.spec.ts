@@ -3,7 +3,7 @@ import { usersTable } from '@back/entities/user'
 import { db } from '@back/shared/lib/drizzle/db'
 import { expect, test } from '@playwright/test'
 import { runtimeConfig } from '@root/config/runtime'
-import { generateId } from '@back/shared/lib/nanoid'
+import { generateId } from '@root/shared/lib/nanoid'
 import { userRole } from '@back/shared/const/userRole'
 
 test.describe.configure({ mode: 'serial' })
