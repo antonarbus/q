@@ -7,15 +7,12 @@ type Props = {
   onBlur: (e: FocusEvent<HTMLDivElement>) => void
 }
 
-export const BookmarkedRowLayout = ({
-  children,
-  onBlur,
-}: Props): JSX.Element => {
+export const BookmarkedRowLayout = (props: Props): JSX.Element => {
   return (
     <Box
       className={cls.row}
       onBlur={(event) => {
-        onBlur(event)
+        props.onBlur(event)
       }}
       style={{
         display: 'flex',
@@ -24,7 +21,7 @@ export const BookmarkedRowLayout = ({
         borderBottom: '1px solid #e8e8e8',
       }}
     >
-      {children}
+      {props.children}
     </Box>
   )
 }

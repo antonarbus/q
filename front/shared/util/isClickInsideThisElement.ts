@@ -3,11 +3,8 @@ type Props = {
   thisElement: HTMLElement
 }
 
-export const didClickInsideThisElement = ({
-  clickedElement,
-  thisElement,
-}: Props): boolean => {
-  const didClickInside = thisElement.contains(clickedElement)
+export const didClickInsideThisElement = (props: Props): boolean => {
+  const didClickInside = props.thisElement.contains(props.clickedElement)
 
   return didClickInside
 }

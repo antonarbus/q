@@ -16,19 +16,14 @@ type Props = {
   minWidth: number
 }
 
-export const ResizableColumn = ({
-  children,
-  className,
-  boqColumnKey,
-  minWidth,
-}: Props): JSX.Element => {
+export const ResizableColumn = (props: Props): JSX.Element => {
   const colWidth = useSelector(
-    selectColumnWidth({ blockIndex: 0, boqColumnKey }),
+    selectColumnWidth({ blockIndex: 0, boqColumnKey: props.boqColumnKey }),
   )
 
   return (
     <Resizable
-      className={className}
+      className={props.className}
       css={{
         flexShrink: '1 !important',
       }}
@@ -44,26 +39,26 @@ export const ResizableColumn = ({
           zIndex: 1,
         },
       }}
-      minWidth={minWidth}
+      minWidth={props.minWidth}
       onResize={(_event, _direction, element, _delta): void => {
         onColumnResize({
           headerColumnElement: element,
           blockIndex: 0,
-          boqColumnKey,
+          boqColumnKey: props.boqColumnKey,
         })
       }}
       onResizeStart={(_event, _direction, element): void => {
         onColumnResizeStart({
           headerColumnElement: element,
           blockIndex: 0,
-          boqColumnKey,
+          boqColumnKey: props.boqColumnKey,
         })
       }}
       onResizeStop={(_event, _direction, element): void => {
         onColumnResizeStop({
           headerColumnElement: element,
           blockIndex: 0,
-          boqColumnKey,
+          boqColumnKey: props.boqColumnKey,
         })
       }}
       size={{
@@ -77,7 +72,7 @@ export const ResizableColumn = ({
         maxWidth: colWidth,
       }}
     >
-      {children}
+      {props.children}
     </Resizable>
   )
 }
