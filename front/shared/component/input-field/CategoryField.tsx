@@ -13,11 +13,9 @@ type Props = {
   options: string[]
 } & TextFieldProps
 
-export const CategoryField = ({
-  categorySignal,
-  options,
-  ...rest
-}: Props): JSX.Element => {
+export const CategoryField = (props: Props): JSX.Element => {
+  const { categorySignal, options, ...rest } = props
+
   return (
     <div style={{ position: 'relative' }}>
       <Autocomplete

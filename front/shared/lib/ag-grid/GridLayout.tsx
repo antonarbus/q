@@ -6,14 +6,11 @@ type Props = {
   gridContainerRef: RefObject<ComponentRef<'div'> | null>
 }
 
-export const GridLayout = ({
-  children,
-  gridContainerRef,
-}: Props): JSX.Element => {
+export const GridLayout = (props: Props): JSX.Element => {
   return (
     <Box
       className='q-table'
-      ref={gridContainerRef}
+      ref={props.gridContainerRef}
       sx={{
         flexGrow: 1,
         position: 'relative',
@@ -22,7 +19,7 @@ export const GridLayout = ({
         mt: '10px',
       }}
     >
-      {children}
+      {props.children}
     </Box>
   )
 }

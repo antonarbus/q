@@ -7,10 +7,9 @@ type Props = {
   descSignal: Signal<string | undefined>
 } & TextFieldProps
 
-export const DescriptionField = ({
-  descSignal,
-  ...props
-}: Props): JSX.Element => {
+export const DescriptionField = (props: Props): JSX.Element => {
+  const { descSignal, ...restProps } = props
+
   return (
     <div style={{ position: 'relative' }}>
       <TextField
@@ -21,7 +20,7 @@ export const DescriptionField = ({
         name='description'
         placeholder='Short description'
         rows={2}
-        {...props}
+        {...restProps}
         onChange={(event): void => {
           descSignal.value = event.target.value
         }}

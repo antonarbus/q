@@ -13,25 +13,19 @@ type Props = {
   autoFocus?: boolean
 }
 
-export const PasswordField = ({
-  passwordSignal,
-  onBlur,
-  label,
-  isLabelRed,
-  autoFocus,
-}: Props): JSX.Element => {
+export const PasswordField = (props: Props): JSX.Element => {
   const showPassword = useSignal(false)
 
   return (
     <TextField
       autoComplete='current-password'
-      autoFocus={autoFocus}
+      autoFocus={props.autoFocus}
       fullWidth
-      label={label ?? 'Password'}
+      label={props.label ?? 'Password'}
       name='password'
-      onBlur={onBlur}
+      onBlur={props.onBlur}
       onChange={(event): void => {
-        passwordSignal.value = event.target.value
+        props.passwordSignal.value = event.target.value
       }}
       placeholder='Password'
       slotProps={{
@@ -57,14 +51,14 @@ export const PasswordField = ({
       }}
       sx={{
         '& .MuiInputLabel-shrink': {
-          color: isLabelRed === true ? theme.colors.red : '',
+          color: props.isLabelRed === true ? theme.colors.red : '',
         },
         '.MuiInputBase-root': {
           background: 'white',
         },
       }}
       type={showPassword.value ? 'text' : 'password'}
-      value={passwordSignal.value}
+      value={props.passwordSignal.value}
     />
   )
 }

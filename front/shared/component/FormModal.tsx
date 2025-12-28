@@ -43,46 +43,28 @@ type Props = {
   shouldUnmountOnEsc: boolean
 }
 
-export const FormModal = ({
-  width,
-  sx,
-  headerIcon,
-  headerText,
-  children,
-  onUnmount,
-  onSubmit,
-  onCloseClick,
-  buttonText,
-  isButtonDisabled,
-  isButtonLoading,
-  isButtonSuccess,
-  isButtonError,
-  modalRef,
-  paddingContent,
-  shouldUnmountOnClickAway,
-  shouldUnmountOnEsc,
-}: Props): JSX.Element => {
+export const FormModal = (props: Props): JSX.Element => {
   const FORM_ID = 'form-id'
 
   return (
     <BackdropWithSlidableModal
-      onUnmount={onUnmount}
-      shouldUnmountOnClickAway={shouldUnmountOnClickAway}
-      shouldUnmountOnEsc={shouldUnmountOnEsc}
+      onUnmount={props.onUnmount}
+      shouldUnmountOnClickAway={props.shouldUnmountOnClickAway}
+      shouldUnmountOnEsc={props.shouldUnmountOnEsc}
     >
       <Box
         className={cls.formModal}
         onMouseDown={(event: MouseEvent): void => {
           event.stopPropagation()
         }}
-        ref={modalRef}
+        ref={props.modalRef}
         sx={{
           display: 'flex',
           flexDirection: 'column',
           maxHeight: 'calc(100vh - 80px)',
           maxWidth: 'calc(100vw - 64px)',
           minWidth: '300px',
-          width: width ?? '500px',
+          width: props.width ?? '500px',
           background: 'rgba(255, 255, 255, 0.7)',
           color: 'rgba(0, 0, 0, 0.87)',
           borderRadius: '12px',
@@ -96,7 +78,7 @@ export const FormModal = ({
             boxShadow:
               '0 8px 32px 0 rgba(0, 0, 0, 0.5), inset 0 1px 1px 0 rgba(255, 255, 255, 0.1)',
           },
-          ...sx,
+          ...props.sx,
         }}
       >
         <Box
@@ -114,13 +96,13 @@ export const FormModal = ({
           }}
         >
           <Avatar sx={{ bgcolor: theme.colors.darkBackground }}>
-            {headerIcon}
+            {props.headerIcon}
           </Avatar>
           <Typography component='h1' variant='h6'>
-            {headerText}
+            {props.headerText}
           </Typography>
           <IconButton
-            onClick={onCloseClick}
+            onClick={props.onCloseClick}
             sx={{
               position: 'absolute',
               top: '-35px',
@@ -150,7 +132,7 @@ export const FormModal = ({
           css={{
             display: 'flex',
             flexDirection: 'column',
-            padding: paddingContent ?? '40px 50px',
+            padding: props.paddingContent ?? '40px 50px',
             backgroundColor: 'rgba(255, 255, 255, 0.05)',
             overflowY: 'auto',
             '> *': {
@@ -161,10 +143,10 @@ export const FormModal = ({
             },
           }}
           id={FORM_ID}
-          onSubmit={onSubmit}
+          onSubmit={props.onSubmit}
         >
           <AnimatePresence initial={false}>
-            {Children.map(children, (child, index) => {
+            {Children.map(props.children, (child, index) => {
               if (child === null) {
                 return null
               }
@@ -194,7 +176,7 @@ export const FormModal = ({
             })}
           </AnimatePresence>
         </Box>
-        {buttonText !== undefined && (
+        {props.buttonText !== undefined && (
           <Box
             className='card-footer'
             sx={{
@@ -209,14 +191,14 @@ export const FormModal = ({
             <ButtonCustom
               form={FORM_ID}
               isButtonDisabled={
-                Boolean(isButtonDisabled) || Boolean(isButtonLoading)
+                Boolean(props.isButtonDisabled) || Boolean(props.isButtonLoading)
               }
-              isButtonError={isButtonError}
-              isButtonLoading={isButtonLoading}
-              isButtonSuccess={isButtonSuccess}
+              isButtonError={props.isButtonError}
+              isButtonLoading={props.isButtonLoading}
+              isButtonSuccess={props.isButtonSuccess}
               sx={{ width: '200px' }}
             >
-              {buttonText}
+              {props.buttonText}
             </ButtonCustom>
           </Box>
         )}

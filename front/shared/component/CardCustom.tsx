@@ -9,18 +9,12 @@ type Props = {
   logo?: ReactNode
 }
 
-export const CardCustom = ({
-  children,
-  sx,
-  reference,
-  title,
-  logo,
-}: Props): JSX.Element => (
+export const CardCustom = (props: Props): JSX.Element => (
   <Box
     onMouseDown={(event: MouseEvent): void => {
       event.stopPropagation()
     }}
-    ref={reference}
+    ref={props.reference}
     sx={{
       display: 'flex',
       flexDirection: 'column',
@@ -44,19 +38,19 @@ export const CardCustom = ({
         boxShadow:
           '0 8px 32px 0 rgba(0, 0, 0, 0.5), inset 0 1px 1px 0 rgba(255, 255, 255, 0.1)',
       },
-      ...sx,
+      ...props.sx,
     }}
   >
-    {Boolean(logo) && <div style={{ alignSelf: 'center' }}>{logo}</div>}
-    {Boolean(title) && (
+    {Boolean(props.logo) && <div style={{ alignSelf: 'center' }}>{props.logo}</div>}
+    {Boolean(props.title) && (
       <Typography
         component='h1'
         sx={{ alignSelf: 'center', marginBottom: '30px' }}
         variant='h6'
       >
-        {title}
+        {props.title}
       </Typography>
     )}
-    {children}
+    {props.children}
   </Box>
 )

@@ -22,27 +22,19 @@ type Suggestion = {
   full: string
 }
 
-export const EmailField = ({
-  emailSignal,
-  isEmailOkSignal,
-  inputRef,
-  disabled,
-  onClickAway,
-  label,
-  autoFocus,
-}: Props): JSX.Element => {
+export const EmailField = (props: Props): JSX.Element => {
   const emailSuggestionSignal = useSignal('')
-  const initEmailLabel = label ?? 'Email'
+  const initEmailLabel = props.label ?? 'Email'
   const emailLabelSignal = useSignal(initEmailLabel)
   const inputFocusedOutOnesSignal = useSignal(false)
 
   useSignalEffect(() => {
-    isEmailOkSignal.value = z.email().safeParse(emailSignal.value).success
+    props.isEmailOkSignal.value = z.email().safeParse(props.emailSignal.value).success
 
     const isMailPatternOk =
       inputFocusedOutOnesSignal.value &&
-      emailSignal.value !== '' &&
-      isEmailOkSignal.value === false
+      props.emailSignal.value !== '' &&
+      props.isEmailOkSignal.value === false
 
     emailLabelSignal.value =
       isMailPatternOk === true ? 'Check email pattern' : initEmailLabel
@@ -64,19 +56,19 @@ export const EmailField = ({
     <div style={{ position: 'relative' }}>
       <TextField
         autoComplete='email'
-        autoFocus={autoFocus}
-        disabled={disabled}
+        autoFocus={props.autoFocus}
+        disabled={props.disabled}
         fullWidth
-        inputRef={inputRef}
+        inputRef={props.inputRef}
         label={emailLabelSignal.value}
         name='email'
         onBlur={(): void => {
           inputFocusedOutOnesSignal.value = true
-          suggestEmail(emailSignal.value)
-          onClickAway?.()
+          suggestEmail(props.emailSignal.value)
+          props.onClickAway?.()
         }}
         onChange={(event): void => {
-          emailSignal.value = event.target.value
+          props.emailSignal.value = event.target.value
         }}
         placeholder='Email'
         slotProps={{
@@ -98,7 +90,7 @@ export const EmailField = ({
           },
         }}
         type='email'
-        value={emailSignal.value}
+        value={props.emailSignal.value}
       />
       {Boolean(emailSuggestionSignal.value) && (
         <div
@@ -114,7 +106,7 @@ export const EmailField = ({
           <a
             onClick={(event): void => {
               event.preventDefault()
-              emailSignal.value = emailSuggestionSignal.value
+              props.emailSignal.value = emailSuggestionSignal.value
               suggestEmail(emailSuggestionSignal.value)
             }}
             style={{ textDecoration: 'underline' }}
