@@ -15,18 +15,15 @@ export const clickOnMenuItem = (
   disabled: boolean,
   menuNavigation: MenuNavigation,
 ): void => {
-  const { current: navItem } = getNavItem({ navItemId })
-
-  const nextMenuItems = navItem?.nestedItemList ?? []
-
+  const navItem = getNavItem({ navItemId })
+  const nextMenuItems = navItem.current?.nestedItemList ?? []
   const isNestedMenuAvailable = Boolean(nextMenuItems.length)
 
-  const { current: currentMenuNavItem } = getNavItem({
+  const menuNavItem = getNavItem({
     navItemId: getState().nav.currentMenuNavItemId,
   })
 
-  const menuItems = currentMenuNavItem?.nestedItemList ?? []
-
+  const menuItems = menuNavItem.current?.nestedItemList ?? []
   const menuItem = menuItems.find((item) => item.id === navItemId)
   const link = menuItem?.link
   const funcId = menuItem?.funcId
