@@ -12,7 +12,7 @@ import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
 
 export const OpenBookmarkModalButton = ({
-  bookmarkId: id,
+  bookmarkId,
 }: ReqBody): JSX.Element => {
   const navigate = useNavigate()
   const getBookmarkMutation = useGetBookmarkMutation()
@@ -35,7 +35,7 @@ export const OpenBookmarkModalButton = ({
         }),
       )
 
-      void navigate(`./${id}`)
+      void navigate(`./${bookmarkId}`)
     }
   }, [getBookmarkMutation.isSuccess])
 
@@ -54,7 +54,7 @@ export const OpenBookmarkModalButton = ({
     >
       <IconButton
         onClick={() => {
-          getBookmarkMutation.mutate({ bookmarkId: id })
+          getBookmarkMutation.mutate({ bookmarkId })
         }}
         size='small'
         sx={{

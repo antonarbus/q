@@ -8,14 +8,12 @@ import { MdDeleteOutline } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
 
-export const DeleteQuotationButton = ({
-  quotationId: id,
-}: Payload): ReactNode => {
+export const DeleteQuotationButton = ({ quotationId }: Payload): ReactNode => {
   const deleteQuotationMutation = useDeleteQuotationMutation()
 
   useUpdateEffect(() => {
     if (deleteQuotationMutation.isSuccess === true) {
-      deleteFromQuotationListCache({ id })
+      deleteFromQuotationListCache({ id: quotationId })
     }
   }, [deleteQuotationMutation.isSuccess])
 
@@ -28,7 +26,7 @@ export const DeleteQuotationButton = ({
         toast.error('Failed to delete')
       }
 
-      deleteFromQuotationListCache({ id })
+      deleteFromQuotationListCache({ id: quotationId })
     }
   }, [deleteQuotationMutation.isError])
 
@@ -51,7 +49,7 @@ export const DeleteQuotationButton = ({
             return
           }
 
-          deleteQuotationMutation.mutate({ quotationId: id })
+          deleteQuotationMutation.mutate({ quotationId })
         }}
         size='small'
       >

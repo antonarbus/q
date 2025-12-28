@@ -8,21 +8,19 @@ import { MdDeleteOutline } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
 
-export const DeleteBookmarkButton = ({
-  bookmarkId: id,
-}: ReqBody): JSX.Element => {
+export const DeleteBookmarkButton = ({ bookmarkId }: ReqBody): JSX.Element => {
   const deleteBookmarkMutation = useDeleteBookmarkMutation()
 
   useUpdateEffect(() => {
     if (deleteBookmarkMutation.isSuccess === true) {
-      deleteFromBookmarkListCache({ id })
+      deleteFromBookmarkListCache({ id: bookmarkId })
     }
   }, [deleteBookmarkMutation.isSuccess])
 
   useUpdateEffect(() => {
     if (deleteBookmarkMutation.isError === true) {
       toast.error(deleteBookmarkMutation.error.response?.data.message)
-      deleteFromBookmarkListCache({ id })
+      deleteFromBookmarkListCache({ id: bookmarkId })
     }
   }, [deleteBookmarkMutation.isError])
 
@@ -45,7 +43,7 @@ export const DeleteBookmarkButton = ({
             return
           }
 
-          deleteBookmarkMutation.mutate({ bookmarkId: id })
+          deleteBookmarkMutation.mutate({ bookmarkId })
         }}
         size='small'
       >
