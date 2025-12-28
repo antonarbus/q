@@ -17,7 +17,6 @@ export const PriceColumn = (): JSX.Element => {
     <ResizableColumn
       boqColumnKey={boqColumnKey.price}
       className={`th ${boqColumnKey.price} resizable`}
-      flexGrow={0}
       minWidth={columnMinWidth.price}
     >
       <Froala

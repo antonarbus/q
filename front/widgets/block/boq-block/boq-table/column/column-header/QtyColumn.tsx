@@ -17,7 +17,6 @@ export const QtyColumn = (): JSX.Element => {
     <ResizableColumn
       boqColumnKey={boqColumnKey.qty}
       className={`th ${boqColumnKey.qty} resizable`}
-      flexGrow={0}
       minWidth={columnMinWidth.qty}
     >
       <Froala
