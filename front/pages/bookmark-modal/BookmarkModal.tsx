@@ -23,7 +23,7 @@ export const BookmarkModal = (): JSX.Element => {
   const bookmarkFormValues = useBookmarkFormValues()
   useLoadBookmarkModalOpenedWithDirectLink({ bookmarkFormValues })
 
-  const { onSubmit, isPending, isSuccess, isError } = useSaveBookmark({
+  const saveBookmark = useSaveBookmark({
     slideOut: animatedElement.slideOut,
     bookmarkFormValues,
   })
@@ -46,12 +46,12 @@ export const BookmarkModal = (): JSX.Element => {
       buttonText='SAVE'
       headerIcon={<FiEdit3 />}
       headerText='Save bookmark'
-      isButtonError={isError}
-      isButtonLoading={isPending}
-      isButtonSuccess={isSuccess}
+      isButtonError={saveBookmark.isError}
+      isButtonLoading={saveBookmark.isPending}
+      isButtonSuccess={saveBookmark.isSuccess}
       modalRef={animatedElement.ref}
       onCloseClick={navigateUp}
-      onSubmit={onSubmit}
+      onSubmit={saveBookmark.handleSubmit}
       onUnmount={navigateUp}
       shouldUnmountOnClickAway
       shouldUnmountOnEsc

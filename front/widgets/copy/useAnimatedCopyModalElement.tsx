@@ -7,24 +7,16 @@ import { useFirstMountState } from 'react-use'
 import { containerPadding, containerWidth } from './const'
 
 type Res = {
-  copyModalRef: AnimationScope<HTMLDivElement>
+  ref: AnimationScope<HTMLDivElement>
 }
 
-export const useCopyModalAnimation = (): Res => {
+export const useAnimatedCopyModalElement = (): Res => {
   const [scope, animate] = useAnimate<HTMLDivElement>()
   const isFirstMount = useFirstMountState()
   const items = useSelector((state) => state.copy.items)
 
   useEffect(() => {
     const newHeight = items.reduce((accumulator, item) => {
-      if (item.width === undefined) {
-        return 0
-      }
-
-      if (item.height === undefined) {
-        return 0
-      }
-
       const scaleFactor = (containerWidth - 2 * containerPadding) / item.width
 
       return accumulator + scaleFactor * item.height + 5
@@ -64,6 +56,6 @@ export const useCopyModalAnimation = (): Res => {
   }, [items.length])
 
   return {
-    copyModalRef: scope,
+    ref: scope,
   }
 }

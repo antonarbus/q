@@ -21,7 +21,7 @@ import { useQuotationSaveFormValues } from './useQuotationSaveFormValues'
 export const SaveQuotationModal = (): JSX.Element => {
   const isQuotationsPage = useLocation().pathname.includes(route.quotationList)
   const animatedElement = useAnimatedElement()
-  const { saveQuotationFormValues } = useQuotationSaveFormValues()
+  const saveQuotationFormValues = useQuotationSaveFormValues()
   useLoadInitValuesIntoSaveQuotationModal({ saveQuotationFormValues })
   useLoadSaveQuotationModalWithDirectLink({ saveQuotationFormValues })
 

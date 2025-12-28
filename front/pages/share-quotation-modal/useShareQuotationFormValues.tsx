@@ -1,9 +1,7 @@
 import type { AccessFormValuesSignal } from '@entities/quotation/form/types'
 import { useSignal } from '@preact/signals-react'
 
-type Res = {
-  accessFormValuesSignal: AccessFormValuesSignal
-}
+type Res = AccessFormValuesSignal
 
 export const useShareQuotationFormValues = (): Res => {
   const accessFormValuesSignal: AccessFormValuesSignal = useSignal({
@@ -11,5 +9,5 @@ export const useShareQuotationFormValues = (): Res => {
     userList: [],
   })
 
-  return { accessFormValuesSignal }
+  return accessFormValuesSignal
 }

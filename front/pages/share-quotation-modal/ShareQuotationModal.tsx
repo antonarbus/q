@@ -15,7 +15,7 @@ import { useShareQuotationFormValues } from './useShareQuotationFormValues'
 
 export const ShareQuotationModal = (): JSX.Element => {
   const animatedElement = useAnimatedElement()
-  const { accessFormValuesSignal } = useShareQuotationFormValues()
+  const accessFormValuesSignal = useShareQuotationFormValues()
   useLoadInitValuesIntoShareQuotationModal({ accessFormValuesSignal })
   useLoadShareQuotationModalWithDirectLink({ accessFormValuesSignal })
   const isButtonDisabled = useIsButtonDisabled({ accessFormValuesSignal })

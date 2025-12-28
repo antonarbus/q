@@ -1,9 +1,7 @@
 import type { SaveQuotationFormValues } from '@entities/quotation/form/types'
 import { useSignal } from '@preact/signals-react'
 
-type Res = {
-  saveQuotationFormValues: SaveQuotationFormValues
-}
+type Res = SaveQuotationFormValues
 
 export const useQuotationSaveFormValues = (): Res => {
   const saveQuotationFormValues: SaveQuotationFormValues = {
@@ -13,5 +11,5 @@ export const useQuotationSaveFormValues = (): Res => {
     infoSignal: useSignal(''),
   }
 
-  return { saveQuotationFormValues }
+  return saveQuotationFormValues
 }

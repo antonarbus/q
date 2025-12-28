@@ -21,7 +21,7 @@ type Props = {
 }
 
 type Res = {
-  onSubmit: (e: FormEvent) => void
+  handleSubmit: (e: FormEvent) => void
   isPending: UseMutationResult['isPending']
   isSuccess: UseMutationResult['isSuccess']
   isError: UseMutationResult['isError']
@@ -64,7 +64,7 @@ export const useSaveBookmark = ({
     }
   }, [saveBookmarkMutation.isError])
 
-  const onSubmit = useCallback((event: FormEvent) => {
+  const handleSubmit = useCallback((event: FormEvent) => {
     event.preventDefault()
 
     if (getState().user.email === null) {
@@ -127,7 +127,7 @@ export const useSaveBookmark = ({
   }, [])
 
   return {
-    onSubmit,
+    handleSubmit,
     isPending: saveBookmarkMutation.isPending,
     isSuccess: saveBookmarkMutation.isSuccess,
     isError: saveBookmarkMutation.isError,

@@ -1,5 +1,5 @@
 import { useUpdateItemInfo } from '@features/info/update-info'
-import { useLoadInitValuesIntoInfoModal } from '@features/open-close/open-info-modal'
+import { useInfoFormValues } from '@features/open-close/open-info-modal'
 import { useLoadInfoModalOpenedWithDirectLink } from '@features/open-close/open-info-modal/useLoadInfoModalOpenedWithDirectLink'
 import { FormModal } from '@shared/component/FormModal'
 import { CategoryField } from '@shared/component/input-field/CategoryField'
@@ -15,7 +15,7 @@ import { useDistinctCategories } from './useDistinctCategories'
 export const InfoModal = (): ReactNode => {
   const urlParams = useParams()
   const modalRef = useRef<HTMLDivElement>(null)
-  const { infoFormValues } = useLoadInitValuesIntoInfoModal()
+  const infoFormValues = useInfoFormValues()
   useLoadInfoModalOpenedWithDirectLink({ infoFormValues })
   const id = urlParams.bookmarkId ?? urlParams.quotationId ?? 'new'
   useUpdateItemInfo({ id, infoFormValues })

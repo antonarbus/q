@@ -7,20 +7,20 @@ import type { JSX } from 'react'
 import { CopyModalLayout } from './CopyModalLayout'
 import { FirstCopiedItem } from './FirstCopiedItem'
 import { RestOfCopiedItems } from './RestOfCopiedItems'
-import { useCopyModalAnimation } from './useCopyModalAnimation'
+import { useAnimatedCopyModalElement } from './useAnimatedCopyModalElement'
 import { useCursorPos } from './useCursorPos'
 import { useDisableNavItemsOnCopyModal } from './useDisableNavItemsOnCopyModal'
 
 export const CopyModal = (): JSX.Element => {
-  const { copyModalRef } = useCopyModalAnimation()
-  useCursorPos({ copyModalRef })
+  const copyModalElement = useAnimatedCopyModalElement()
+  useCursorPos({ copyModalRef: copyModalElement.ref })
   useMovePasteText()
   usePasteClick()
   useDisableNavItemsOnCopyModal()
   useEnableFroalasOnCloseCopyModal()
 
   return (
-    <CopyModalLayout ref={copyModalRef}>
+    <CopyModalLayout ref={copyModalElement.ref}>
       <PressEscIcon />
       <FirstCopiedItem />
       <RestOfCopiedItems />

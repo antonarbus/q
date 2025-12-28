@@ -4,11 +4,9 @@ import { useSignal } from '@preact/signals-react'
 import { useParams } from 'react-router-dom'
 import { useEffectOnce } from 'react-use'
 
-type Res = {
-  infoFormValues: InfoFormValues
-}
+type Res = InfoFormValues
 
-export const useLoadInitValuesIntoInfoModal = (): Res => {
+export const useInfoFormValues = (): Res => {
   const urlParams = useParams()
 
   const infoFormValues = {
@@ -31,5 +29,5 @@ export const useLoadInitValuesIntoInfoModal = (): Res => {
     }
   })
 
-  return { infoFormValues }
+  return infoFormValues
 }
