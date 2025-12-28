@@ -13,7 +13,6 @@ import type { JSX, ReactNode } from 'react'
 type Props = {
   children: ReactNode
   className: string
-  flexGrow?: number
   boqColumnKey: BoqColumnKey
   minWidth: number
 }
@@ -22,7 +21,10 @@ export const ResizableColumn = (props: Props): JSX.Element => {
   const block = useBlock()
 
   const colWidth = useSelector(
-    selectColumnWidth({ blockIndex: block.index, boqColumnKey: props.boqColumnKey }),
+    selectColumnWidth({
+      blockIndex: block.index,
+      boqColumnKey: props.boqColumnKey,
+    }),
   )
 
   return (

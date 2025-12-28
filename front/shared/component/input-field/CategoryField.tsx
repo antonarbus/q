@@ -60,10 +60,10 @@ export const CategoryField = (props: Props): JSX.Element => {
             />
           )
         }}
-        renderOption={(props, option, { selected, index, inputValue }) => {
+        renderOption={(params, option, { selected, index, inputValue }) => {
           return (
             <li
-              {...props}
+              {...params}
               css={{
                 borderRadius: '6px',
                 paddingBlock: '10px !important',
