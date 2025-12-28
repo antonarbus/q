@@ -1,24 +1,34 @@
 import type { WorkerRequestMessage, WorkerResponseMessage } from './types'
 
 self.onmessage = async (
-  event: MessageEvent<WorkerRequestMessage>,
+  messageEvent: MessageEvent<WorkerRequestMessage>,
 ): Promise<void> => {
-  const { imageData, width, height, links } = event.data
-
   const jspdfModule = await import('jspdf')
 
   // eslint-disable-next-line new-cap
   const pdf = new jspdfModule.jsPDF({
-    orientation: width > height ? 'landscape' : 'portrait',
+    orientation:
+      messageEvent.data.width > messageEvent.data.height
+        ? 'landscape'
+        : 'portrait',
     unit: 'px',
-    format: [width, height],
+    format: [messageEvent.data.width, messageEvent.data.height],
   })
 
   // add quotation as image
-  pdf.addImage(imageData, 'PNG', 0, 0, width, height, undefined, 'FAST')
+  pdf.addImage(
+    messageEvent.data.imageData,
+    'PNG',
+    0,
+    0,
+    messageEvent.data.width,
+    messageEvent.data.height,
+    undefined,
+    'FAST',
+  )
 
   // add real links on top of image
-  links.forEach((link) => {
+  messageEvent.data.links.forEach((link) => {
     // border around links for dev purpose
     // pdf.setDrawColor(255, 0, 0) // Red border
     // pdf.setLineWidth(1)

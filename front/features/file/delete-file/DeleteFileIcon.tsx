@@ -3,16 +3,16 @@ import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import { theme } from '@shared/theme'
 import type { JSX } from 'react'
 import { MdDeleteOutline } from 'react-icons/md'
-import { useFileDelete } from './useFileDelete'
+import { useDeleteFile } from './useDeleteFile'
 
 type Props = {
   fileId: string
 }
 
 export const DeleteFileIcon = ({ fileId }: Props): JSX.Element => {
-  const { isPending, onDeleteClick } = useFileDelete({ fileId })
+  const deleteFile = useDeleteFile({ fileId })
 
-  if (isPending === true) {
+  if (deleteFile.isPending === true) {
     return <RotatingLoaderIcon style={{ marginRight: '5px' }} />
   }
 
@@ -29,7 +29,7 @@ export const DeleteFileIcon = ({ fileId }: Props): JSX.Element => {
             color: theme.colors.red,
           },
         }}
-        onClick={onDeleteClick}
+        onClick={deleteFile.handleClick}
       />
     </Tooltip>
   )

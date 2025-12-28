@@ -23,10 +23,8 @@ const movePasteTextItem = (event: MouseEvent): void => {
     return
   }
 
-  const { isPasteTextShown } = getState().copy
-
   const removePasteIfNeeded = (): void => {
-    if (isPasteTextShown === true) {
+    if (getState().copy.isPasteTextShown === true) {
       dispatch(copySlice.actions.hidePasteText())
     }
 
@@ -79,9 +77,7 @@ const movePasteTextItem = (event: MouseEvent): void => {
     return
   }
 
-  const { isPastable } = getState().copy
-
-  if (isPastable === false) {
+  if (getState().copy.isPastable === false) {
     removePasteIfNeeded()
 
     return
@@ -96,7 +92,7 @@ const movePasteTextItem = (event: MouseEvent): void => {
   const isNarrowGapUnderNav = event.clientY > 100
 
   const isCursorAboveUnderNavDuringCopy =
-    isNarrowGapUnderNav && isPasteTextShown === false
+    isNarrowGapUnderNav && getState().copy.isPasteTextShown === false
 
   if (isCursorAboveUnderNavDuringCopy === true) {
     const [firstBlock] = getState().quotation.blocks
@@ -129,7 +125,7 @@ const movePasteTextItem = (event: MouseEvent): void => {
   })
 
   const stillMayPasteToTheSamePlace =
-    isEqual(pastePlace, prevPlace) && isPasteTextShown
+    isEqual(pastePlace, prevPlace) && getState().copy.isPasteTextShown
 
   if (stillMayPasteToTheSamePlace === true) {
     return
@@ -162,7 +158,6 @@ const movePasteTextRow = (event: MouseEvent): void => {
   }
 
   const prevPlace = getState().copy.place
-  const { isPasteTextShown } = getState().copy
   const rowsElement = event.target.closest(`.${cls.rows}`)
 
   const isBoqPasteRow = getState()
@@ -171,7 +166,7 @@ const movePasteTextRow = (event: MouseEvent): void => {
     .some((row) => row.type === rowTypeKey.paste)
 
   const removePasteIfNeeded = (): void => {
-    if (isPasteTextShown === true) {
+    if (getState().copy.isPasteTextShown === true) {
       dispatch(copySlice.actions.hidePasteText())
     }
 
@@ -198,9 +193,7 @@ const movePasteTextRow = (event: MouseEvent): void => {
     return
   }
 
-  const { isPastable } = getState().copy
-
-  if (isPastable === false) {
+  if (getState().copy.isPastable === false) {
     removePasteIfNeeded()
 
     return
@@ -219,7 +212,7 @@ const movePasteTextRow = (event: MouseEvent): void => {
   })
 
   const shouldPasteToSamePlace =
-    isEqual(pastePlace, prevPlace) && isPasteTextShown
+    isEqual(pastePlace, prevPlace) && getState().copy.isPasteTextShown
 
   if (shouldPasteToSamePlace === true) {
     return

@@ -2,7 +2,7 @@ import { route } from '@back/api/route'
 import type { ResBody } from '@back/api/user/getAccessTokenHandler'
 import { headerName } from '@back/shared/headers'
 import { userSlice } from '@entities/user/redux/userSlice'
-import { initAccessTokenFetchingPromise } from '@features/auth/get-access-token/AccessToken'
+import { getAccessTokenDeferred } from '@features/auth/get-access-token/AccessToken'
 import { instantiateAxiosWithAuth } from '@shared/lib/axios/axiosWithAuth'
 import { dispatch, getState } from '@shared/lib/redux'
 import axios, { AxiosError, type AxiosRequestConfig } from 'axios'
@@ -11,7 +11,7 @@ const axiosWithAuth = axios.create({ withCredentials: true })
 
 axiosWithAuth.interceptors.request.use(async (config) => {
   // wait until initial access token if fetched, otherwise token is null and another immediate duplicate request for access token will be sent
-  await initAccessTokenFetchingPromise
+  await getAccessTokenDeferred.promise
   config.headers[headerName.accessJwtToken] = getState().user.accessToken
 
   return config

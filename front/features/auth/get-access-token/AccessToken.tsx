@@ -22,10 +22,9 @@ if (typeof Promise.withResolvers !== 'function') {
   throw new Error('old browser, please update')
 }
 
-export const {
-  promise: initAccessTokenFetchingPromise,
-  resolve: resolveInitAccessTokenFetching,
-} = Promise.withResolvers<'fetched' | 'failed'>()
+export const getAccessTokenDeferred = Promise.withResolvers<
+  'fetched' | 'failed'
+>()
 
 const loadingMenuIconMachine = createLoadingMenuIconMachine({
   navItemId: navItemId.login,
@@ -108,7 +107,7 @@ export const AccessToken = (): ReactNode => {
       )
 
       loadingIconActor.send({ type: 'show success icon' })
-      resolveInitAccessTokenFetching('fetched')
+      getAccessTokenDeferred.resolve('fetched')
     }
   }, [getUserAccessTokenQuery.isSuccess])
 
@@ -138,7 +137,7 @@ export const AccessToken = (): ReactNode => {
       )
 
       // loadingIconActor.send({ type: 'show error icon' })
-      resolveInitAccessTokenFetching('failed')
+      getAccessTokenDeferred.resolve('failed')
     }
   }, [getUserAccessTokenQuery.isError])
 

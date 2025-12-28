@@ -10,12 +10,12 @@ type Props = {
 }
 
 type Res = {
-  onDeleteClick: (e: MouseEvent) => void
+  handleClick: (e: MouseEvent) => void
   isSuccess: boolean
   isPending: boolean
 }
 
-export const useFileDelete = ({ fileId }: Props): Res => {
+export const useDeleteFile = ({ fileId }: Props): Res => {
   const deleteFileMutation = useDeleteFileMutation()
 
   useUpdateEffect(() => {
@@ -32,7 +32,7 @@ export const useFileDelete = ({ fileId }: Props): Res => {
     }
   }, [deleteFileMutation.isError])
 
-  const onDeleteClick = useCallback((event: MouseEvent): void => {
+  const handleClick = useCallback((event: MouseEvent): void => {
     event.preventDefault()
     event.stopPropagation()
 
@@ -46,7 +46,7 @@ export const useFileDelete = ({ fileId }: Props): Res => {
   }, [])
 
   return {
-    onDeleteClick,
+    handleClick,
     isPending: deleteFileMutation.isPending,
     isSuccess: deleteFileMutation.isSuccess,
   }

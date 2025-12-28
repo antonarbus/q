@@ -27,29 +27,25 @@ const pasteItemOnClick = (): void => {
     return
   }
 
-  const { isPasteTextShown } = getState().copy
-
-  if (isPasteTextShown === false) {
+  if (getState().copy.isPasteTextShown === false) {
     return
   }
 
   dispatch(copySlice.actions.hidePasteText())
 
-  const { isPastable } = getState().copy
-
-  if (isPastable === false) {
+  if (getState().copy.isPastable === false) {
     return
   }
 
-  const { id, pastePos } = getState().copy.place
-  const [topItemInCopyModal] = getState().copy.items
+  const state = getState()
+  const [topItemInCopyModal] = state.copy.items
 
   if (topItemInCopyModal === undefined) {
     return
   }
 
-  if (pastePos === 'middle') {
-    const elementToBeReplaced = document.getElementById(id)
+  if (state.copy.place.pastePos === 'middle') {
+    const elementToBeReplaced = document.getElementById(state.copy.place.id)
 
     if (elementToBeReplaced !== null) {
       const paperElement = elementToBeReplaced.querySelector(`.${cls.paper}`)
@@ -66,9 +62,9 @@ const pasteItemOnClick = (): void => {
   dispatch(
     quotationSlice.actions.pasteItemReducer({
       item: topItemInCopyModal,
-      id,
+      id: state.copy.place.id,
       newItemId,
-      pastePos,
+      pastePos: state.copy.place.pastePos,
     }),
   )
 
