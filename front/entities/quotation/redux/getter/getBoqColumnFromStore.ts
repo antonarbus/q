@@ -8,17 +8,14 @@ type Props = {
   boqColumnKey: BoqColumnKey
 }
 
-export const getBoqColumnFromStore = ({
-  blockIndex,
-  boqColumnKey,
-}: Props): Column | undefined => {
-  const block = getState().quotation.blocks[blockIndex]
+export const getBoqColumnFromStore = (props: Props): Column | undefined => {
+  const block = getState().quotation.blocks[props.blockIndex]
 
   if (block?.type !== itemType.boq) {
     return
   }
 
-  const column = block.boq.column[boqColumnKey]
+  const column = block.boq.column[props.boqColumnKey]
 
   return column
 }

@@ -7,15 +7,12 @@ type Props = {
   boqHeaderKey: HeaderKey
 }
 
-export const getBoqHeaderHtmlFromStore = ({
-  blockIndex,
-  boqHeaderKey,
-}: Props): string => {
-  const block = getState().quotation.blocks[blockIndex]
+export const getBoqHeaderHtmlFromStore = (props: Props): string => {
+  const block = getState().quotation.blocks[props.blockIndex]
 
   if (block?.type !== itemType.boq) {
     return ''
   }
 
-  return block.boq.header[boqHeaderKey].html
+  return block.boq.header[props.boqHeaderKey].html
 }

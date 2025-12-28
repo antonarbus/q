@@ -6,32 +6,28 @@ type Props = {
   distanceToEdge: number
 }
 
-export const getPastePlace = ({
-  hoveredElement,
-  event,
-  distanceToEdge,
-}: Props): CopyPlace => {
-  const elementRect = hoveredElement.getBoundingClientRect()
-  const yWithinElement = event.clientY - elementRect.top
+export const getPastePlace = (props: Props): CopyPlace => {
+  const elementRect = props.hoveredElement.getBoundingClientRect()
+  const yWithinElement = props.event.clientY - elementRect.top
   const distToTop = yWithinElement
   const distToBottom = elementRect.height - yWithinElement
 
-  if (distToTop < distanceToEdge) {
+  if (distToTop < props.distanceToEdge) {
     return {
       pastePos: 'top',
-      id: hoveredElement.id,
+      id: props.hoveredElement.id,
     }
   }
 
-  if (distToBottom < distanceToEdge) {
+  if (distToBottom < props.distanceToEdge) {
     return {
       pastePos: 'bottom',
-      id: hoveredElement.id,
+      id: props.hoveredElement.id,
     }
   }
 
   return {
     pastePos: 'middle',
-    id: hoveredElement.id,
+    id: props.hoveredElement.id,
   }
 }

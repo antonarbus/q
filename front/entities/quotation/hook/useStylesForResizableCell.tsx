@@ -11,13 +11,12 @@ type Props = {
 
 type Res = CSSProperties
 
-export const useStylesForResizableCell = ({
-  blockIndex,
-  boqColumnKey,
-  minWidth = '100px',
-}: Props): Res => {
+export const useStylesForResizableCell = (props: Props): Res => {
   const columnWidth = useSelector(
-    selectColumnWidth({ blockIndex, boqColumnKey }),
+    selectColumnWidth({
+      blockIndex: props.blockIndex,
+      boqColumnKey: props.boqColumnKey,
+    }),
   )
 
   const stylesForResizableCell: CSSProperties = {
@@ -26,7 +25,7 @@ export const useStylesForResizableCell = ({
     position: 'relative',
     width: columnWidth,
     maxWidth: columnWidth,
-    minWidth,
+    minWidth: props.minWidth ?? '100px',
     padding: '2px',
   }
 

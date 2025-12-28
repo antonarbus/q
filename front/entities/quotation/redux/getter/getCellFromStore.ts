@@ -8,18 +8,17 @@ type Props = {
   cellKey: CellKey
 }
 
-export const getCellFromStore = ({
-  blockIndex,
-  rowIndex,
-  cellKey,
-}: Props): Cell | undefined => {
-  const row = getRowFromStore({ blockIndex, rowIndex })
+export const getCellFromStore = (props: Props): Cell | undefined => {
+  const row = getRowFromStore({
+    blockIndex: props.blockIndex,
+    rowIndex: props.rowIndex,
+  })
 
   if (row === undefined) {
     return
   }
 
-  const cell = row[cellKey]
+  const cell = row[props.cellKey]
 
   return cell
 }

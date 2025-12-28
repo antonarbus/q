@@ -1,13 +1,13 @@
 import { jsonParseSafe } from '@back/shared/util/jsonParseSafe'
 import type { JwtPayload } from 'jsonwebtoken'
 
-export const getJwtExpirationInDays = ({
-  token,
-}: {
+type Props = {
   token: string
-}): number => {
+}
+
+export const getJwtExpirationInDays = (props: Props): number => {
   // Split the token into three parts: header, payload, and signature
-  const parts = token.split('.')
+  const parts = props.token.split('.')
 
   if (parts.length !== 3) {
     throw new Error('Invalid JWT token format')

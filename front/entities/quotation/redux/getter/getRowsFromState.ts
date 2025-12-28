@@ -7,11 +7,11 @@ type Props = {
   state: Quotation
 }
 
-export const getRowsFromState = ({
-  blockIndex,
-  state,
-}: Props): RowBlock[] | undefined => {
-  const boqBlock = getBoqBlockFromState({ blockIndex, state })
+export const getRowsFromState = (props: Props): RowBlock[] | undefined => {
+  const boqBlock = getBoqBlockFromState({
+    blockIndex: props.blockIndex,
+    state: props.state,
+  })
 
   if (boqBlock === undefined) {
     return

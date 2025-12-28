@@ -8,24 +8,20 @@ type Props = {
   cellKey: CellKey
 }
 
-export const getCellHtmlFromStore = ({
-  blockIndex,
-  rowIndex,
-  cellKey,
-}: Props): string => {
-  const block = getState().quotation.blocks[blockIndex]
+export const getCellHtmlFromStore = (props: Props): string => {
+  const block = getState().quotation.blocks[props.blockIndex]
 
   if (block?.type !== itemType.boq) {
     return ''
   }
 
-  const row = block.boq.rows[rowIndex]
+  const row = block.boq.rows[props.rowIndex]
 
   if (row === undefined) {
     return ''
   }
 
-  const cell = row[cellKey]
+  const cell = row[props.cellKey]
 
   return cell.html
 }

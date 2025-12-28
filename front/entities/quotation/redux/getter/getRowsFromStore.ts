@@ -5,10 +5,8 @@ type Props = {
   blockIndex: number
 }
 
-export const getRowsFromStore = ({
-  blockIndex,
-}: Props): RowBlock[] | undefined => {
-  const boqBlock = getBoqBlockFromStore({ blockIndex })
+export const getRowsFromStore = (props: Props): RowBlock[] | undefined => {
+  const boqBlock = getBoqBlockFromStore({ blockIndex: props.blockIndex })
 
   if (boqBlock === undefined) {
     return

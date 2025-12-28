@@ -10,19 +10,18 @@ type Props = {
   state: Quotation
 }
 
-export const getCellFromState = ({
-  blockIndex,
-  rowIndex,
-  cellKey,
-  state,
-}: Props): Cell | undefined => {
-  const row = getRowFromState({ blockIndex, rowIndex, state })
+export const getCellFromState = (props: Props): Cell | undefined => {
+  const row = getRowFromState({
+    blockIndex: props.blockIndex,
+    rowIndex: props.rowIndex,
+    state: props.state,
+  })
 
   if (row === undefined) {
     return
   }
 
-  const cell = row[cellKey]
+  const cell = row[props.cellKey]
 
   return cell
 }

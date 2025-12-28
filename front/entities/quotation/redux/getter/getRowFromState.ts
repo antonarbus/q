@@ -8,18 +8,17 @@ type Props = {
   state: Quotation
 }
 
-export const getRowFromState = ({
-  blockIndex,
-  rowIndex,
-  state,
-}: Props): RowBlock | undefined => {
-  const boqBlock = getBoqBlockFromState({ blockIndex, state })
+export const getRowFromState = (props: Props): RowBlock | undefined => {
+  const boqBlock = getBoqBlockFromState({
+    blockIndex: props.blockIndex,
+    state: props.state,
+  })
 
   if (boqBlock === undefined) {
     return
   }
 
-  const row = boqBlock.boq.rows[rowIndex]
+  const row = boqBlock.boq.rows[props.rowIndex]
 
   return row
 }

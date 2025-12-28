@@ -7,11 +7,8 @@ type Props = {
   state: Quotation
 }
 
-export const getBoqBlockFromState = ({
-  blockIndex,
-  state,
-}: Props): BoqBlock | undefined => {
-  const block = state.blocks[blockIndex]
+export const getBoqBlockFromState = (props: Props): BoqBlock | undefined => {
+  const block = props.state.blocks[props.blockIndex]
 
   if (block?.type !== itemType.boq) {
     return

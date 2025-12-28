@@ -11,10 +11,8 @@ type Props = {
   req: RequestWithCookies
 }
 
-export const getRefreshTokenFromCookie = ({
-  req,
-}: Props): string | undefined => {
-  const refreshJwtToken = req.cookies[cookieName.refreshJwtToken]
+export const getRefreshTokenFromCookie = (props: Props): string | undefined => {
+  const refreshJwtToken = props.req.cookies[cookieName.refreshJwtToken]
 
   return refreshJwtToken
 }

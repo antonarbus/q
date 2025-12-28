@@ -15,10 +15,7 @@ type Res = {
   didUpdate: boolean
 }
 
-export const updateBookmarkedRowCellAtStore = ({
-  html,
-  cellKey,
-}: Props): Res => {
+export const updateBookmarkedRowCellAtStore = (props: Props): Res => {
   const block = getState().quotation.blocks[BOOKMARK_POS_AT_BLOCKS]
 
   if (block?.type !== itemType.row) {
@@ -27,8 +24,8 @@ export const updateBookmarkedRowCellAtStore = ({
     }
   }
 
-  const prevHtml = block[cellKey].html
-  const didTextChange = prevHtml !== html
+  const prevHtml = block[props.cellKey].html
+  const didTextChange = prevHtml !== props.html
 
   if (didTextChange === false) {
     return {
@@ -36,7 +33,7 @@ export const updateBookmarkedRowCellAtStore = ({
     }
   }
 
-  const cellTextContent = getTextContentFromHtml({ html })
+  const cellTextContent = getTextContentFromHtml({ html: props.html })
 
   const cellValueFromHtml = getNumberFromString({
     string: cellTextContent,
@@ -44,9 +41,9 @@ export const updateBookmarkedRowCellAtStore = ({
 
   dispatch(
     quotationSlice.actions.updateBookmarkedRowCellReducer({
-      html,
+      html: props.html,
       value: cellValueFromHtml,
-      cellKey,
+      cellKey: props.cellKey,
     }),
   )
 
