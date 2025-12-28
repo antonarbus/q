@@ -8,41 +8,53 @@ type Props = {
 }
 
 type Res = {
-  navItem: NavItem | null
-  parentNavItem: NavItem | null
+  current: NavItem | null
+  parent: NavItem | null
 }
 
 export const getNavItem = (props: Props): Res => {
   const recursivelySearchForNavItemByNavItemId = (navItem: NavItem): Res => {
     if (navItem.id === props.navItemId) {
-      return { navItem, parentNavItem: navItem }
+      return {
+        current: navItem,
+        parent: navItem,
+      }
     }
 
-    for (const item of navItem.navItems ?? []) {
+    for (const item of navItem.nestedItemList ?? []) {
       if (item.id === props.navItemId) {
-        return { navItem: item, parentNavItem: navItem }
+        return {
+          current: item,
+          parent: navItem,
+        }
       }
 
-      if (item.navItems !== undefined) {
+      if (item.nestedItemList !== undefined) {
         const found = recursivelySearchForNavItemByNavItemId(item)
 
-        if (found.navItem !== null) {
+        if (found.current !== null) {
           return {
-            navItem: found.navItem,
-            parentNavItem: item,
+            current: found.current,
+            parent: item,
           }
         }
       }
     }
 
-    return { navItem: null, parentNavItem: null }
+    return {
+      current: null,
+      parent: null,
+    }
   }
 
   const navLevel =
     props.navState?.navStructure.at(0) ?? getState().nav.navStructure.at(0)
 
   if (navLevel === undefined) {
-    return { navItem: null, parentNavItem: null }
+    return {
+      current: null,
+      parent: null,
+    }
   }
 
   const data = recursivelySearchForNavItemByNavItemId(navLevel)

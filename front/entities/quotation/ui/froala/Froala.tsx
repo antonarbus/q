@@ -15,13 +15,13 @@ import { placeCaretAtTheEndIfToolbarIsNotShown } from './placeCaretAtTheEndIfToo
 import { StaticHtml } from './StaticHtml'
 import { StaticHtmlBackgroundToFixBlinkIssue } from './StaticHtmlBackgroundToFixBlinkIssue'
 import type { FroalaProps } from './types'
-import { useFixedHeightForAnimation } from './useFixedHeightForAnimation'
+import { useFixedHeightRefForAnimation } from './useFixedHeightRefForAnimation'
 
 export const Froala = (props: FroalaProps): JSX.Element => {
   const dropFilesTextRef = useRef<ComponentRef<'div'> | null>(null)
   const froalaElementRef = useRef<ComponentRef<'div'> | null>(null)
   const block = useBlock()
-  const { froalaHeightRef } = useFixedHeightForAnimation({ froalaElementRef })
+  const fixedHeightRef = useFixedHeightRefForAnimation({ froalaElementRef })
 
   const isBlockFroala = useSelector(
     (state) => state.quotation.blocks[block.index]?.isFroala ?? true,
@@ -36,7 +36,7 @@ export const Froala = (props: FroalaProps): JSX.Element => {
       beforeUpload={props.beforeUpload}
       editorRef={props.editorRef}
       froalaElementRef={froalaElementRef}
-      froalaHeightRef={froalaHeightRef}
+      fixedHeightRef={fixedHeightRef}
       htmlGetter={props.htmlGetter}
       onBlur={props.onBlur}
       onClick={props.onClick}

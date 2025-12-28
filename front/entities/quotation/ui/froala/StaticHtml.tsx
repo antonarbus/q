@@ -27,7 +27,7 @@ export const StaticHtml = (props: Props): JSX.Element => {
   // save height after loading content
   useEffect(() => {
     if (staticHtmlRef.current?.clientHeight !== undefined) {
-      froala.froalaHeightRef.current =
+      froala.fixedHeightRef.current =
         staticHtmlRef.current.getBoundingClientRect().height
     }
   })

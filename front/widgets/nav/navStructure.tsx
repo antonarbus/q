@@ -9,7 +9,7 @@ export const navStructure: NavItem[] = [
     name: 'burger',
     iconId: 'burger',
     isHidden: false,
-    navItems: [
+    nestedItemList: [
       {
         id: navItemId.back,
         iconId: 'back',
@@ -46,7 +46,7 @@ export const navStructure: NavItem[] = [
         name: 'Share',
         disabled: false,
         tooltip: 'Share quotation',
-        navItems: [
+        nestedItemList: [
           {
             id: navItemId.link,
             iconId: 'link',
@@ -82,7 +82,7 @@ export const navStructure: NavItem[] = [
         isHidden: false,
         name: 'Insert',
         disabled: true,
-        navItems: [
+        nestedItemList: [
           {
             id: navItemId.boqItem,
             name: 'Items',
@@ -142,7 +142,7 @@ export const navStructure: NavItem[] = [
         isHidden: false,
         name: 'Blog',
         tooltip: 'Guides and resources',
-        navItems: [
+        nestedItemList: [
           {
             id: navItemId.blogHowToCreate,
             name: 'How to Create Quotations',
@@ -180,7 +180,7 @@ export const navStructure: NavItem[] = [
         iconId: 'profile',
         name: 'Profile',
         isHidden: true,
-        navItems: [
+        nestedItemList: [
           {
             id: navItemId.settings,
             iconId: 'settings',
@@ -195,7 +195,7 @@ export const navStructure: NavItem[] = [
             isHidden: false,
             name: 'Admin',
             tooltip: 'Admin links',
-            navItems: [
+            nestedItemList: [
               {
                 id: navItemId.quotationListAll,
                 iconId: 'quotationList',

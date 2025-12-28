@@ -12,7 +12,7 @@ import type { FroalaProps } from '../ui/froala/types'
 
 type Context = FroalaProps & {
   froalaElementRef: RefObject<HTMLDivElement | null>
-  froalaHeightRef: RefObject<number>
+  fixedHeightRef: RefObject<number>
 }
 
 type Props = Context & {
@@ -36,7 +36,7 @@ export const FroalaProvider = (props: Props): JSX.Element => {
       onKeydown: props.onKeydown,
       onInitialized: props.onInitialized,
       froalaElementRef: props.froalaElementRef,
-      froalaHeightRef: props.froalaHeightRef,
+      fixedHeightRef: props.fixedHeightRef,
       beforeUpload: props.beforeUpload,
     }
   }, [props])

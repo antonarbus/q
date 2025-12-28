@@ -4,12 +4,10 @@ type Props = {
   froalaElementRef: RefObject<HTMLElement | null>
 }
 
-type Res = {
-  froalaHeightRef: RefObject<number>
-}
+type Res = RefObject<number>
 
-export const useFixedHeightForAnimation = (props: Props): Res => {
-  const froalaHeightRef = useRef(0)
+export const useFixedHeightRefForAnimation = (props: Props): Res => {
+  const fixedHeightRef = useRef(0)
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -23,5 +21,5 @@ export const useFixedHeightForAnimation = (props: Props): Res => {
     }
   })
 
-  return { froalaHeightRef }
+  return fixedHeightRef
 }

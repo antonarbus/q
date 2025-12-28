@@ -20,9 +20,9 @@ export const getMenuItemPropValue = <K extends keyof NavItem>(
       return el[props.prop]
     }
 
-    if (el.navItems !== undefined) {
+    if (el.nestedItemList !== undefined) {
       const value = getMenuItemPropValue({
-        menu: el.navItems,
+        menu: el.nestedItemList,
         navItemId: props.navItemId,
         prop: props.prop,
       })

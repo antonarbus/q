@@ -29,7 +29,7 @@ export const MenuItem = (props: Props): JSX.Element => {
     (state) => state.nav.hoverIndex === props.hoverIndex,
   )
 
-  const isNextMenuAvailable = Boolean(props.navItem.navItems)
+  const isNextMenuAvailable = Boolean(props.navItem.nestedItemList)
   const link = props.navItem.link ?? ''
 
   const fixedLink = `${location.pathname}/${link}`

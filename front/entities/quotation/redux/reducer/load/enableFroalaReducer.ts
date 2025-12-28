@@ -10,7 +10,7 @@ export const enableFroalaReducer = (
     | undefined
   >,
 ): void => {
-  const { blockIndex } = action.payload ?? {}
+  const blockIndex = action.payload?.blockIndex
   const quotation = state
   const enableSpecificFroalas = blockIndex !== undefined
 

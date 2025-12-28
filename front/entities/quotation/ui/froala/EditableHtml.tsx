@@ -12,7 +12,7 @@ export const EditableHtml = (): JSX.Element => {
       className='editable-html'
       ref={froala.froalaElementRef}
       style={{
-        height: froala.froalaHeightRef.current, // needed for animation, height will be removed after froala is initialized
+        height: froala.fixedHeightRef.current, // needed for animation, height will be removed after froala is initialized
         wordBreak: 'break-word',
         ...froala.style,
       }}

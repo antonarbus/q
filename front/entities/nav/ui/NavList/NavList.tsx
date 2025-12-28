@@ -11,7 +11,7 @@ export const NavList = (): JSX.Element => {
   const isMobile = windowSize.width < navMediaQuery.widthWhenNothingFits
 
   const navStructureToLoad =
-    isMobile === true ? navStructure : navStructure[0]?.navItems
+    isMobile === true ? navStructure : navStructure[0]?.nestedItemList
 
   const nonHiddenNavItems = navStructureToLoad
     ?.filter((navItem) => navItem.isHidden === false)

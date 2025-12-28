@@ -96,8 +96,8 @@ export const navSlice = createSlice({
           navState: state,
         })
 
-        if (navItem.parentNavItem !== null) {
-          state.currentMenuNavItemId = navItem.parentNavItem.id
+        if (navItem.parent !== null) {
+          state.currentMenuNavItemId = navItem.parent.id
         }
       }
     },
@@ -114,8 +114,8 @@ export const navSlice = createSlice({
           navState: state,
         })
 
-        if (navItem.parentNavItem !== null) {
-          state.nextMenuNavItemId = navItem.parentNavItem.id
+        if (navItem.parent !== null) {
+          state.nextMenuNavItemId = navItem.parent.id
         }
       }
     },
@@ -238,19 +238,20 @@ export const navSlice = createSlice({
         | undefined
       >,
     ) => {
-      const { exceptNavItemIds = [] } = action.payload ?? {}
       const [topLevelNavMenu] = state.navStructure
 
       if (topLevelNavMenu === undefined) {
         return
       }
 
-      const topNavItemsIds = (topLevelNavMenu.navItems ?? []).map(
+      const topNavItemsIds = (topLevelNavMenu.nestedItemList ?? []).map(
         (navItem) => navItem.id,
       )
 
       topNavItemsIds.forEach((id) => {
-        const didPressExcludedNavItem = exceptNavItemIds.includes(id)
+        const didPressExcludedNavItem = (
+          action.payload?.exceptNavItemIds ?? []
+        ).includes(id)
 
         if (didPressExcludedNavItem === true) {
           return
@@ -273,19 +274,20 @@ export const navSlice = createSlice({
         | undefined
       >,
     ) => {
-      const { exceptNavItemIds = [] } = action.payload ?? {}
       const [topLevelNavMenu] = state.navStructure
 
       if (topLevelNavMenu === undefined) {
         return
       }
 
-      const topNavItemsIds = (topLevelNavMenu.navItems ?? []).map(
+      const topNavItemsIds = (topLevelNavMenu.nestedItemList ?? []).map(
         (navItem) => navItem.id,
       )
 
       topNavItemsIds.forEach((id) => {
-        const didPressExcludedNavItem = exceptNavItemIds.includes(id)
+        const didPressExcludedNavItem = (
+          action.payload?.exceptNavItemIds ?? []
+        ).includes(id)
 
         if (didPressExcludedNavItem === true) {
           return
@@ -366,7 +368,7 @@ export const navSlice = createSlice({
         return
       }
 
-      const topNavItemsIds = (topLevelNavMenu.navItems ?? []).map(
+      const topNavItemsIds = (topLevelNavMenu.nestedItemList ?? []).map(
         (navItem) => navItem.id,
       )
 

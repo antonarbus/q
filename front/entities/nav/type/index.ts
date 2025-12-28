@@ -10,7 +10,7 @@ export type NavItem = {
   externalLink?: string
   funcId?: FunctionId
   shortcut?: string[]
-  navItems?: NavItem[]
+  nestedItemList?: NavItem[]
   isHidden: boolean
   disabled?: boolean
   isLoading?: boolean

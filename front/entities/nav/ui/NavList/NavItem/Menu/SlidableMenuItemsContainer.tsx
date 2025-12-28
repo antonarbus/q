@@ -14,11 +14,11 @@ export const SlidableMenuItemsContainer = (props: Props): ReactNode => {
     return null
   }
 
-  const { navItem } = getNavItem({ navItemId: props.menuNavItemId })
+  const navItem = getNavItem({ navItemId: props.menuNavItemId })
 
   return (
     <div className={props.className} ref={props.reference}>
-      {navItem?.navItems
+      {navItem.current?.nestedItemList
         ?.filter((item) => item.isHidden === false)
         .map((item, index) => (
           <MenuItem hoverIndex={index + 1} key={item.id} navItem={item} />

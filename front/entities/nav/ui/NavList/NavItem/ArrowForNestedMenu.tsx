@@ -9,7 +9,7 @@ type Props = {
 }
 
 export const ArrowForNestedMenu = (props: Props): ReactNode => {
-  const isNestedMenu = Boolean(props.navItem?.navItems)
+  const isNestedMenu = Boolean(props.navItem?.nestedItemList)
   const disabled = Boolean(props.navItem?.disabled)
 
   const isMobile = window.innerWidth < navMediaQuery.widthWhenNothingFits

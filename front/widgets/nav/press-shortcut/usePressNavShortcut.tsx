@@ -46,8 +46,8 @@ const searchForShortcutsInNavStructure = (props: Props): void => {
   })
 
   arrForNavStructureIteration.forEach((navItem) => {
-    if (navItem.navItems !== undefined) {
-      arrForNavStructureIteration = navItem.navItems
+    if (navItem.nestedItemList !== undefined) {
+      arrForNavStructureIteration = navItem.nestedItemList
 
       searchForShortcutsInNavStructure({
         navStructure: arrForNavStructureIteration,

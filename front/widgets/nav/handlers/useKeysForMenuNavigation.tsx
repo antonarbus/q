@@ -16,12 +16,12 @@ export const useKeysForMenuNavigation = (): void => {
     const navKeyboardHandler = (event: KeyboardEvent): void => {
       const state = getState()
 
-      const { navItem: currentNavItem } = getNavItem({
+      const { current: currentNavItem } = getNavItem({
         navItemId: state.nav.currentMenuNavItemId,
       })
 
       // +1 for "Close" or "Back" item before currentMenuItems
-      const navItems = (currentNavItem?.navItems ?? []).filter(
+      const navItems = (currentNavItem?.nestedItemList ?? []).filter(
         (item) => item.isHidden === false,
       ) // 3 items without first "close" or "Back"
 
@@ -127,7 +127,7 @@ export const useKeysForMenuNavigation = (): void => {
           return
         }
 
-        const { navItem } = getNavItem({ navItemId })
+        const { current: navItem } = getNavItem({ navItemId })
 
         const externalLink = navItem?.externalLink
 
@@ -158,7 +158,7 @@ export const useKeysForMenuNavigation = (): void => {
           return
         }
 
-        const isNestedMenuAvailable = Boolean(navItem?.navItems)
+        const isNestedMenuAvailable = Boolean(navItem?.nestedItemList)
 
         dispatch(
           navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
