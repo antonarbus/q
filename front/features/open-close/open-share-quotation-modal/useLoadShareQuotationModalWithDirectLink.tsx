@@ -9,7 +9,9 @@ type Props = {
   accessFormValuesSignal: AccessFormValuesSignal
 }
 
-export const useLoadShareQuotationModalWithDirectLink = (props: Props): void => {
+export const useLoadShareQuotationModalWithDirectLink = (
+  props: Props,
+): void => {
   const urlParams = useParams()
   const getQuotationMutation = useGetQuotationMutation()
 
@@ -32,7 +34,8 @@ export const useLoadShareQuotationModalWithDirectLink = (props: Props): void => 
         }),
       )
 
-      props.accessFormValuesSignal.value = getQuotationMutation.data.quotation.access
+      props.accessFormValuesSignal.value =
+        getQuotationMutation.data.quotation.access
     }
   }, [getQuotationMutation.isSuccess])
 }

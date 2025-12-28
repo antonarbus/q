@@ -41,7 +41,10 @@ export const updateItemPriceCell = (props: Props): void => {
     html: props.itemPriceCellEditorRef.current.html.get(),
   })
 
-  const row = getRowFromStore({ blockIndex: props.blockIndex, rowIndex: props.rowIndex })
+  const row = getRowFromStore({
+    blockIndex: props.blockIndex,
+    rowIndex: props.rowIndex,
+  })
 
   if (row === undefined) {
     return

@@ -19,7 +19,10 @@ export const hidePinsOnRowBlur = (props: Props): void => {
     return
   }
 
-  const row = getRowFromStore({ blockIndex: props.blockIndex, rowIndex: props.rowIndex })
+  const row = getRowFromStore({
+    blockIndex: props.blockIndex,
+    rowIndex: props.rowIndex,
+  })
 
   if (row === undefined) {
     return

@@ -33,7 +33,10 @@ export const updatePriceCell = (props: Props): void => {
     return
   }
 
-  const row = getRowFromStore({ blockIndex: props.blockIndex, rowIndex: props.rowIndex })
+  const row = getRowFromStore({
+    blockIndex: props.blockIndex,
+    rowIndex: props.rowIndex,
+  })
 
   const isItemPricePinned = row?.itemPrice.pin.isPinned
 

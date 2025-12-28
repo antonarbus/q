@@ -31,7 +31,9 @@ export const ShareQuotationField = (props: Props): JSX.Element => {
         />
       }
       sharedWithEmailList={
-        <SharedWithEmailList accessFormValuesSignal={props.accessFormValuesSignal} />
+        <SharedWithEmailList
+          accessFormValuesSignal={props.accessFormValuesSignal}
+        />
       }
       sharedWithRadioButtons={
         <SharedWithRadioButtons

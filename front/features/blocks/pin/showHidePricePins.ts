@@ -11,7 +11,11 @@ type Props = {
 }
 
 export const showHidePricePins = (props: Props): void => {
-  dispatch(quotationSlice.actions.showBoqPriceCellPinsReducer({ blockIndex: props.blockIndex }))
+  dispatch(
+    quotationSlice.actions.showBoqPriceCellPinsReducer({
+      blockIndex: props.blockIndex,
+    }),
+  )
 
   const clickHandler = (mouseEvent: MouseEvent): void => {
     if (props.isInitClickRef.current) {
@@ -29,10 +33,18 @@ export const showHidePricePins = (props: Props): void => {
         return
       }
 
-      document.removeEventListener('click', props.hidePinsClickHandlerRef.current)
+      document.removeEventListener(
+        'click',
+        props.hidePinsClickHandlerRef.current,
+      )
     }
 
-    dispatch(quotationSlice.actions.hideBoqPriceCellPinsReducer({ blockIndex: props.blockIndex }))
+    dispatch(
+      quotationSlice.actions.hideBoqPriceCellPinsReducer({
+        blockIndex: props.blockIndex,
+      }),
+    )
+
     document.removeEventListener('click', props.hidePinsClickHandlerRef.current)
     props.isInitClickRef.current = true
   }

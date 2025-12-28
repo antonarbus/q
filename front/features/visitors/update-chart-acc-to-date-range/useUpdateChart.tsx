@@ -17,7 +17,9 @@ export const useUpdateChart = (props: Props): void => {
 
       const totalCount = props.visitorList.map((item) => item.totalCount)
       const newCount = props.visitorList.map((item) => item.newCount)
-      const labels = props.visitorList.map((item) => format(item.visitedAt, 'MMM dd'))
+      const labels = props.visitorList.map((item) =>
+        format(item.visitedAt, 'MMM dd'),
+      )
 
       props.chartInstanceRef.current.data.labels = labels
 

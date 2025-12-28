@@ -29,7 +29,9 @@ export const EmailField = (props: Props): JSX.Element => {
   const inputFocusedOutOnesSignal = useSignal(false)
 
   useSignalEffect(() => {
-    props.isEmailOkSignal.value = z.email().safeParse(props.emailSignal.value).success
+    props.isEmailOkSignal.value = z
+      .email()
+      .safeParse(props.emailSignal.value).success
 
     const isMailPatternOk =
       inputFocusedOutOnesSignal.value &&

@@ -9,5 +9,9 @@ type Props = {
 }
 
 export const updateColumnCell = (props: Props): void => {
-  updateColumnCellAtStore({ editorRef: props.editorRef, blockIndex: props.blockIndex, boqColumnKey: props.boqColumnKey })
+  updateColumnCellAtStore({
+    editorRef: props.editorRef,
+    blockIndex: props.blockIndex,
+    boqColumnKey: props.boqColumnKey,
+  })
 }

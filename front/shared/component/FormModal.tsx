@@ -191,7 +191,8 @@ export const FormModal = (props: Props): JSX.Element => {
             <ButtonCustom
               form={FORM_ID}
               isButtonDisabled={
-                Boolean(props.isButtonDisabled) || Boolean(props.isButtonLoading)
+                Boolean(props.isButtonDisabled) ||
+                Boolean(props.isButtonLoading)
               }
               isButtonError={props.isButtonError}
               isButtonLoading={props.isButtonLoading}

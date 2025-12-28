@@ -13,7 +13,11 @@ type Props = {
 export const onColumnResizeStart = (props: Props): void => {
   const width = props.headerColumnElement.clientWidth
 
-  dispatch(quotationSlice.actions.disableFroalaReducer({ blockIndex: props.blockIndex }))
+  dispatch(
+    quotationSlice.actions.disableFroalaReducer({
+      blockIndex: props.blockIndex,
+    }),
+  )
 
   dispatch(
     quotationSlice.actions.updateColWidthReducer({
@@ -23,12 +27,20 @@ export const onColumnResizeStart = (props: Props): void => {
     }),
   )
 
-  dispatch(quotationSlice.actions.hideBoqItemPinsReducer({ blockIndex: props.blockIndex }))
+  dispatch(
+    quotationSlice.actions.hideBoqItemPinsReducer({
+      blockIndex: props.blockIndex,
+    }),
+  )
 }
 
 export const onColumnResize = (props: Props): void => {
   const width = props.headerColumnElement.clientWidth
-  const column = getBoqColumnFromStore({ blockIndex: props.blockIndex, boqColumnKey: props.boqColumnKey })
+
+  const column = getBoqColumnFromStore({
+    blockIndex: props.blockIndex,
+    boqColumnKey: props.boqColumnKey,
+  })
 
   if (column === undefined) {
     return
@@ -60,7 +72,9 @@ export const onColumnResizeStop = (props: Props): void => {
     }),
   )
 
-  const itemWidth = props.headerColumnElement.closest(`.${cls.paper}`)?.clientWidth
+  const itemWidth = props.headerColumnElement.closest(
+    `.${cls.paper}`,
+  )?.clientWidth
 
   dispatch(
     quotationSlice.actions.updateBlockWidthReducer({
@@ -69,5 +83,9 @@ export const onColumnResizeStop = (props: Props): void => {
     }),
   )
 
-  dispatch(quotationSlice.actions.enableFroalaReducer({ blockIndex: props.blockIndex }))
+  dispatch(
+    quotationSlice.actions.enableFroalaReducer({
+      blockIndex: props.blockIndex,
+    }),
+  )
 }

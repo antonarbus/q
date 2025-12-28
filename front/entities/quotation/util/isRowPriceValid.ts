@@ -10,7 +10,10 @@ type Props = {
 }
 
 export const isRowPriceValid = (props: Props): boolean => {
-  const row = getRowFromStore({ blockIndex: props.blockIndex, rowIndex: props.rowIndex })
+  const row = getRowFromStore({
+    blockIndex: props.blockIndex,
+    rowIndex: props.rowIndex,
+  })
 
   if (row === undefined) {
     return true

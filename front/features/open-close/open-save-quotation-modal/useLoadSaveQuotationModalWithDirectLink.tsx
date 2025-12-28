@@ -9,9 +9,7 @@ type Props = {
   saveQuotationFormValues: SaveQuotationFormValues
 }
 
-export const useLoadSaveQuotationModalWithDirectLink = (
-  props: Props,
-): void => {
+export const useLoadSaveQuotationModalWithDirectLink = (props: Props): void => {
   const urlParams = useParams()
   const getQuotationMutation = useGetQuotationMutation()
 

@@ -41,7 +41,9 @@ export const CardCustom = (props: Props): JSX.Element => (
       ...props.sx,
     }}
   >
-    {Boolean(props.logo) && <div style={{ alignSelf: 'center' }}>{props.logo}</div>}
+    {Boolean(props.logo) && (
+      <div style={{ alignSelf: 'center' }}>{props.logo}</div>
+    )}
     {Boolean(props.title) && (
       <Typography
         component='h1'
