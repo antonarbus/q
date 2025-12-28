@@ -16,12 +16,12 @@ export const useKeysForMenuNavigation = (): void => {
     const navKeyboardHandler = (event: KeyboardEvent): void => {
       const state = getState()
 
-      const { current: currentNavItem } = getNavItem({
+      const navItem = getNavItem({
         navItemId: state.nav.currentMenuNavItemId,
       })
 
       // +1 for "Close" or "Back" item before currentMenuItems
-      const navItems = (currentNavItem?.nestedItemList ?? []).filter(
+      const navItems = (navItem.current?.nestedItemList ?? []).filter(
         (item) => item.isHidden === false,
       ) // 3 items without first "close" or "Back"
 
@@ -121,15 +121,15 @@ export const useKeysForMenuNavigation = (): void => {
           return
         }
 
-        const navItemId = navItems[state.nav.hoverIndex - 1]?.id
+        const navItemIdHovered = navItems[state.nav.hoverIndex - 1]?.id
 
-        if (navItemId === undefined) {
+        if (navItemIdHovered === undefined) {
           return
         }
 
-        const { current: navItem } = getNavItem({ navItemId })
+        const navItemHovered = getNavItem({ navItemId: navItemIdHovered })
 
-        const externalLink = navItem?.externalLink
+        const externalLink = navItemHovered.current?.externalLink
 
         if (externalLink !== undefined) {
           window.open(externalLink, '_blank', 'noopener,noreferrer')
@@ -138,7 +138,7 @@ export const useKeysForMenuNavigation = (): void => {
           return
         }
 
-        const link = navItem?.link
+        const link = navItemHovered.current?.link
 
         if (link !== undefined) {
           void navigate(link)
@@ -147,7 +147,7 @@ export const useKeysForMenuNavigation = (): void => {
           return
         }
 
-        const funcId = navItem?.funcId
+        const funcId = navItemHovered.current?.funcId
 
         const func = funcId === undefined ? undefined : functionRegistry[funcId]
 
@@ -158,14 +158,16 @@ export const useKeysForMenuNavigation = (): void => {
           return
         }
 
-        const isNestedMenuAvailable = Boolean(navItem?.nestedItemList)
+        const isNestedMenuAvailable = Boolean(
+          navItemHovered.current?.nestedItemList,
+        )
 
         dispatch(
           navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
         )
 
         if (isNestedMenuAvailable === true) {
-          void menuNavigation.goDown({ navItemId })
+          void menuNavigation.goDown({ navItemId: navItemIdHovered })
 
           return
         }
@@ -197,8 +199,8 @@ export const useKeysForMenuNavigation = (): void => {
         }
 
         // jump to item by letter
-        const index = navItems.findIndex((navItem, navIndex) => {
-          const isiKeySameAsFirstItemLetter = navItem.name
+        const indexToJump = navItems.findIndex((item, index) => {
+          const isiKeySameAsFirstItemLetter = item.name
             .toLowerCase()
             .startsWith(event.key)
 
@@ -206,25 +208,25 @@ export const useKeysForMenuNavigation = (): void => {
             return false
           }
 
-          if (navIndex + 2 > state.nav.hoverIndex) {
+          if (index + 2 > state.nav.hoverIndex) {
             return true
           }
 
           return false
         })
 
-        if (index > -1) {
+        if (indexToJump > -1) {
           dispatch(
             navSlice.actions.setMenuItemHoverIndex({
-              menuItemHoverIndex: index + 1,
+              menuItemHoverIndex: indexToJump + 1,
             }),
           )
         }
 
         // if no found below hovered item, do it again from the top
-        if (index === -1) {
-          const newIndex = navItems.findIndex((navItem) => {
-            const isiKeySameAsFirstItemLetter = navItem.name
+        if (indexToJump === -1) {
+          const newIndex = navItems.findIndex((item) => {
+            const isiKeySameAsFirstItemLetter = item.name
               .toLowerCase()
               .startsWith(event.key)
 
