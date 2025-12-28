@@ -10,19 +10,19 @@ type Props = {
   blockIndex: number
 }
 
-export const updatePriceValue = ({ editorRef, blockIndex }: Props): void => {
-  if (editorRef.current === null) {
+export const updatePriceValue = (props: Props): void => {
+  if (props.editorRef.current === null) {
     return
   }
 
-  const priceBlock = getState().quotation.blocks[blockIndex]
+  const priceBlock = getState().quotation.blocks[props.blockIndex]
 
   if (priceBlock?.type !== itemType.price) {
     return
   }
 
   const prevHtml = priceBlock.price.html
-  const html = editorRef.current.html.get()
+  const html = props.editorRef.current.html.get()
   const didHtmlChange = prevHtml !== html
 
   if (didHtmlChange === false) {
@@ -34,7 +34,7 @@ export const updatePriceValue = ({ editorRef, blockIndex }: Props): void => {
 
   dispatch(
     quotationSlice.actions.updatePriceReducer({
-      blockIndex,
+      blockIndex: props.blockIndex,
       html,
       value: cellValueFromHtml,
     }),

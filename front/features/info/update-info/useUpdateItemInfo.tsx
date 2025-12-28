@@ -8,15 +8,15 @@ type Props = {
   infoFormValues: InfoFormValues
 }
 
-export const useUpdateItemInfo = ({ id, infoFormValues }: Props): void => {
+export const useUpdateItemInfo = (props: Props): void => {
   useSignalEffect(() => {
     dispatch(
       quotationSlice.actions.updateItemInfoReducer({
-        id,
-        name: infoFormValues.nameSignal.value,
-        category: infoFormValues.categorySignal.value,
-        desc: infoFormValues.descSignal.value,
-        info: infoFormValues.infoSignal.value,
+        id: props.id,
+        name: props.infoFormValues.nameSignal.value,
+        category: props.infoFormValues.categorySignal.value,
+        desc: props.infoFormValues.descSignal.value,
+        info: props.infoFormValues.infoSignal.value,
       }),
     )
   })

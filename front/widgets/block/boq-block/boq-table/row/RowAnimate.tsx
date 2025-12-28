@@ -6,7 +6,7 @@ type Props = {
   children: ReactNode
 }
 
-export const RowAnimate = ({ children }: Props): JSX.Element => {
+export const RowAnimate = (props: Props): JSX.Element => {
   return (
     <motion.div
       className='boq-row-animate'
@@ -32,7 +32,7 @@ export const RowAnimate = ({ children }: Props): JSX.Element => {
         duration: theme.block.animationDuration,
       }}
     >
-      {children}
+      {props.children}
     </motion.div>
   )
 }

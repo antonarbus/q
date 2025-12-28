@@ -15,7 +15,7 @@ type Res = {
   isPending: boolean
 }
 
-export const useDeleteFile = ({ fileId }: Props): Res => {
+export const useDeleteFile = (props: Props): Res => {
   const deleteFileMutation = useDeleteFileMutation()
 
   useUpdateEffect(() => {
@@ -42,7 +42,7 @@ export const useDeleteFile = ({ fileId }: Props): Res => {
       return
     }
 
-    deleteFileMutation.mutate({ fileId })
+    deleteFileMutation.mutate({ fileId: props.fileId })
   }, [])
 
   return {

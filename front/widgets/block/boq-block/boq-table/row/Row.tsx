@@ -17,9 +17,9 @@ type Props = {
   onBlur: (e: FocusEvent<HTMLDivElement>) => void
 }
 
-export const Row = ({ onBlur }: Props): JSX.Element => {
+export const Row = (props: Props): JSX.Element => {
   return (
-    <RowLayout onBlur={onBlur}>
+    <RowLayout onBlur={props.onBlur}>
       <RowActionButtonsLayout style={{ left: '-33px' }}>
         <DragRowIcon />
         <CopyRowIcon />

@@ -5,7 +5,7 @@ type Props = {
   children: ReactNode
 }
 
-export const BoqTableLayout = ({ children }: Props): JSX.Element => {
+export const BoqTableLayout = (props: Props): JSX.Element => {
   return (
     <Box
       className='boq-table-container-with-paddings'
@@ -19,7 +19,7 @@ export const BoqTableLayout = ({ children }: Props): JSX.Element => {
           padding: '5px',
         }}
       >
-        {children}
+        {props.children}
       </Box>
     </Box>
   )

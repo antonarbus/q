@@ -17,7 +17,7 @@ type Props = {
   children: ReactNode
 }
 
-export const RowsSortableContext = ({ children }: Props): JSX.Element => {
+export const RowsSortableContext = (props: Props): JSX.Element => {
   const block = useBlock()
 
   const rows = useSelector(
@@ -37,7 +37,7 @@ export const RowsSortableContext = ({ children }: Props): JSX.Element => {
       sensors={sensors}
     >
       <SortableContext items={rowIds} strategy={verticalListSortingStrategy}>
-        {children}
+        {props.children}
       </SortableContext>
     </DndContext>
   )

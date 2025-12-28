@@ -16,7 +16,7 @@ import { useLocation } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
 
-export const LogInAsUserButton = ({ email }: Payload): ReactNode => {
+export const LogInAsUserButton = (props: Payload): ReactNode => {
   const logInUserMutation = useLogInUserMutation()
   const location = useLocation()
   const getQuotationListQuery = useGetQuotationListQuery()
@@ -86,7 +86,7 @@ export const LogInAsUserButton = ({ email }: Payload): ReactNode => {
       <IconButton
         onClick={() => {
           logInUserMutation.mutate({
-            email,
+            email: props.email,
             password: 'no password',
           })
         }}

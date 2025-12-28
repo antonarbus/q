@@ -13,23 +13,23 @@ type Props = {
   blockIndex: number
 }
 
-export const validateTotalPrice = ({ editorRef, blockIndex }: Props): void => {
-  if (editorRef.current === null) {
+export const validateTotalPrice = (props: Props): void => {
+  if (props.editorRef.current === null) {
     return
   }
 
-  const priceBlock = getState().quotation.blocks[blockIndex]
+  const priceBlock = getState().quotation.blocks[props.blockIndex]
 
   if (priceBlock?.type !== itemType.price) {
     return
   }
 
-  const currentHtml = editorRef.current.html.get()
+  const currentHtml = props.editorRef.current.html.get()
   const cellTextContent = getTextContentFromHtml({ html: currentHtml })
   const cellValueFromHtml = getNumberFromString({ string: cellTextContent })
 
   const price = getTotalPriceAbove({
-    blockIndex,
+    blockIndex: props.blockIndex,
     blocks: getState().quotation.blocks,
   })
 
@@ -46,7 +46,7 @@ export const validateTotalPrice = ({ editorRef, blockIndex }: Props): void => {
 
   dispatch(
     quotationSlice.actions.updatePriceReducer({
-      blockIndex,
+      blockIndex: props.blockIndex,
       html: updatedHtml,
       value: price,
     }),
@@ -55,7 +55,7 @@ export const validateTotalPrice = ({ editorRef, blockIndex }: Props): void => {
   updateNumberAtHtmlIncrementally({
     oldNumber: priceBlock.price.value,
     newNumber: price,
-    editor: editorRef.current,
+    editor: props.editorRef.current,
     html: priceBlock.price.html,
   })
 }

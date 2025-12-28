@@ -8,7 +8,7 @@ type Props = {
   slideOut: () => Promise<void>
 }
 
-export const OpenLoginModalLink = ({ slideOut }: Props): JSX.Element => {
+export const OpenLoginModalLink = (props: Props): JSX.Element => {
   const navigate = useNavigate()
 
   return (
@@ -17,7 +17,7 @@ export const OpenLoginModalLink = ({ slideOut }: Props): JSX.Element => {
         event.preventDefault()
 
         const slideAndNavigate = async (): Promise<void> => {
-          await slideOut()
+          await props.slideOut()
           dispatch(appSlice.actions.setNavigateState({ shouldSlide: true }))
           void navigate(`../${route.login}`)
         }

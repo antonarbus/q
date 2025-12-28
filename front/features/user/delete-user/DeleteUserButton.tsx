@@ -9,7 +9,7 @@ import { MdDeleteOutline } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
 
-export const DeleteUserButton = ({ email }: Payload): ReactNode => {
+export const DeleteUserButton = (props: Payload): ReactNode => {
   const deleteUserMutation = useDeleteUserMutation()
 
   useUpdateEffect(() => {
@@ -70,7 +70,7 @@ export const DeleteUserButton = ({ email }: Payload): ReactNode => {
             return
           }
 
-          deleteUserMutation.mutate({ email })
+          deleteUserMutation.mutate({ email: props.email })
         }}
         size='small'
       >

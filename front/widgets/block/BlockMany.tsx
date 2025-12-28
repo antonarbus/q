@@ -11,13 +11,13 @@ type Props = {
   blocks: (BlockItem | null)[]
 }
 
-export const BlockMany = ({ blocks }: Props): ReactNode => {
-  if (blocks.length === 0) {
+export const BlockMany = (props: Props): ReactNode => {
+  if (props.blocks.length === 0) {
     return null
   }
 
   // clean blocks from a bookmark at blocks[1000] which we use to show in in modal view
-  const blocksCloned = structuredClone(blocks)
+  const blocksCloned = structuredClone(props.blocks)
 
   blocksCloned[BOOKMARK_POS_AT_BLOCKS] = null
 

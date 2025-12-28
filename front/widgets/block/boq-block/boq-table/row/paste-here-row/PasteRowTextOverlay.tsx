@@ -6,7 +6,7 @@ type Props = {
   children: ReactNode
 }
 
-export const PasteRowTextOverlay = ({ children }: Props): JSX.Element => {
+export const PasteRowTextOverlay = (props: Props): JSX.Element => {
   const isPasteHere = useIsPasteHere()
 
   return (
@@ -19,7 +19,7 @@ export const PasteRowTextOverlay = ({ children }: Props): JSX.Element => {
           opacity: isPasteHere === true ? 0.2 : 1,
         }}
       >
-        {children}
+        {props.children}
       </div>
       {isPasteHere === true ? (
         <div

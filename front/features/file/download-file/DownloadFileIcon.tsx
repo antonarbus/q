@@ -7,9 +7,9 @@ type Props = {
   fileSize: number
 }
 
-export const DownloadFileIcon = ({ fileSize }: Props): JSX.Element => {
-  const fileSizeFormatted = format(fileSize, {
-    unit: fileSize < 1_048_576 ? 'kb' : 'mb',
+export const DownloadFileIcon = (props: Props): JSX.Element => {
+  const fileSizeFormatted = format(props.fileSize, {
+    unit: props.fileSize < 1_048_576 ? 'kb' : 'mb',
     thousandsSeparator: ' ',
     unitSeparator: ' ',
   })

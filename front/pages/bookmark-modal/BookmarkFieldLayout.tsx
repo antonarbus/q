@@ -7,7 +7,7 @@ type Props = {
   children: ReactNode
 }
 
-export const BookmarkFieldLayout = ({ children }: Props): JSX.Element => {
+export const BookmarkFieldLayout = (props: Props): JSX.Element => {
   return (
     <OutlinedDivWithLabel label='Item'>
       <Box
@@ -48,7 +48,7 @@ export const BookmarkFieldLayout = ({ children }: Props): JSX.Element => {
             width: '2000px',
           }}
         >
-          {children}
+          {props.children}
         </Box>
       </Box>
     </OutlinedDivWithLabel>

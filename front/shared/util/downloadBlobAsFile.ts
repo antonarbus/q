@@ -3,11 +3,11 @@ type Props = {
   fileName: string
 }
 
-export const downloadBlobAsFile = ({ blob, fileName }: Props): void => {
-  const fileUrl = URL.createObjectURL(blob)
+export const downloadBlobAsFile = (props: Props): void => {
+  const fileUrl = URL.createObjectURL(props.blob)
   const link = document.createElement('a')
   link.href = fileUrl
-  link.download = fileName
+  link.download = props.fileName
   document.body.appendChild(link)
   link.click()
   document.body.removeChild(link)

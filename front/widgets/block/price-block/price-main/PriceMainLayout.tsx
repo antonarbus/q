@@ -5,7 +5,7 @@ type Props = {
   main: JSX.Element
 }
 
-export const PriceMainLayout = ({ main }: Props): JSX.Element => {
+export const PriceMainLayout = (props: Props): JSX.Element => {
   return (
     <Box
       className='layout price-value'
@@ -14,7 +14,7 @@ export const PriceMainLayout = ({ main }: Props): JSX.Element => {
         minHeight: '40px',
       }}
     >
-      {main}
+      {props.main}
     </Box>
   )
 }

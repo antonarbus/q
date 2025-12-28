@@ -5,7 +5,7 @@ type Props = {
   children: ReactNode
 }
 
-export const InfoAndSearchLayout = ({ children }: Props): JSX.Element => {
+export const InfoAndSearchLayout = (props: Props): JSX.Element => {
   return (
     <Box
       sx={{
@@ -16,7 +16,7 @@ export const InfoAndSearchLayout = ({ children }: Props): JSX.Element => {
         paddingInline: '5px',
       }}
     >
-      {children}
+      {props.children}
     </Box>
   )
 }

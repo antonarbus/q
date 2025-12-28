@@ -6,12 +6,12 @@ type Props = {
   refetch: () => Promise<QueryObserverResult>
 }
 
-export const useRefetchDataOnEmailChange = ({ refetch }: Props): void => {
+export const useRefetchDataOnEmailChange = (props: Props): void => {
   const email = useSelector((state) => state.user.email)
 
   useEffect(() => {
     if (email !== null) {
-      void refetch()
+      void props.refetch()
     }
   }, [email])
 }

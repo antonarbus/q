@@ -2,16 +2,16 @@ type Props = {
   string: string | null
 }
 
-export const getNumberFromString = ({ string }: Props): number => {
-  if (string === null) {
+export const getNumberFromString = (props: Props): number => {
+  if (props.string === null) {
     return 0
   }
 
-  if (string.trim() === '') {
+  if (props.string.trim() === '') {
     return 0
   }
 
-  const stringWithNumbersOnly = string
+  const stringWithNumbersOnly = props.string
     .replace(/[^-0-9,.]/gu, '')
     .replace(/,/gu, '.')
 

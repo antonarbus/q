@@ -2,12 +2,12 @@ type Props = {
   file?: File
 }
 
-export const getFileSizeInMb = ({ file }: Props): number => {
-  if (file === undefined) {
+export const getFileSizeInMb = (props: Props): number => {
+  if (props.file === undefined) {
     return 0
   }
 
-  const sizeInMb = file.size / 1024 / 1024
+  const sizeInMb = props.file.size / 1024 / 1024
   const firstTwoDecimalsRegExp = /^-?\d*\.?0*\d{0,2}/u
 
   const firstTwoDecimals = firstTwoDecimalsRegExp

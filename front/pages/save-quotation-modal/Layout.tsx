@@ -10,7 +10,7 @@ type Props = {
   children: ReactNode
 }
 
-export const Layout = ({ children }: Props): JSX.Element => {
+export const Layout = (props: Props): JSX.Element => {
   useEffectOnce(() => {
     dispatch(textSlice.actions.setEditable())
   })
@@ -48,7 +48,7 @@ export const Layout = ({ children }: Props): JSX.Element => {
             width: `${maxBlockWidth + 200}px`,
           }}
         >
-          {children}
+          {props.children}
         </Box>
       </Box>
     </OutlinedDivWithLabel>

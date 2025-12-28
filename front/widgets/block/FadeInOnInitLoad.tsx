@@ -6,7 +6,7 @@ type Props = {
   children: ReactNode
 }
 
-export const FadeInOnInitLoad = ({ children }: Props): JSX.Element => {
+export const FadeInOnInitLoad = (props: Props): JSX.Element => {
   return (
     <motion.div
       animate={{
@@ -28,7 +28,7 @@ export const FadeInOnInitLoad = ({ children }: Props): JSX.Element => {
         delay: 0.7, // to show "Q" logo on init load to avoid some jumps
       }}
     >
-      {children}
+      {props.children}
     </motion.div>
   )
 }

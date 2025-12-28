@@ -10,9 +10,9 @@ type Props = {
   onBlur: (e: FocusEvent<HTMLDivElement>) => void
 }
 
-export const BookmarkedRow = ({ onBlur }: Props): JSX.Element => {
+export const BookmarkedRow = (props: Props): JSX.Element => {
   return (
-    <BookmarkedRowLayout onBlur={onBlur}>
+    <BookmarkedRowLayout onBlur={props.onBlur}>
       <NumberCell />
       <DescriptionCell />
       <ItemPriceCell />

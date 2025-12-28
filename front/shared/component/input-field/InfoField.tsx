@@ -7,7 +7,9 @@ type Props = {
   infoSignal: Signal<string | undefined>
 } & TextFieldProps
 
-export const InfoField = ({ infoSignal, ...props }: Props): JSX.Element => {
+export const InfoField = (props: Props): JSX.Element => {
+  const { infoSignal, ...restProps } = props
+
   return (
     <div style={{ position: 'relative' }}>
       <TextField
@@ -18,7 +20,7 @@ export const InfoField = ({ infoSignal, ...props }: Props): JSX.Element => {
         name='info'
         placeholder='Internal info'
         rows={4}
-        {...props}
+        {...restProps}
         onChange={(event): void => {
           infoSignal.value = event.target.value
         }}

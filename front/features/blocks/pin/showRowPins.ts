@@ -23,8 +23,8 @@ export const showRowPins = (props: Props): void => {
   if (isItemPricePinShown === false) {
     dispatch(
       quotationSlice.actions.showCellPinReducer({
-        blockIndex,
-        rowIndex,
+        blockIndex: props.blockIndex,
+        rowIndex: props.rowIndex,
         cellKey: cellKey.itemPrice,
       }),
     )
@@ -35,8 +35,8 @@ export const showRowPins = (props: Props): void => {
   if (isQtyPinShown === false) {
     dispatch(
       quotationSlice.actions.showCellPinReducer({
-        blockIndex,
-        rowIndex,
+        blockIndex: props.blockIndex,
+        rowIndex: props.rowIndex,
         cellKey: cellKey.qty,
       }),
     )

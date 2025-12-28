@@ -5,7 +5,7 @@ type Props = {
   children: ReactNode
 }
 
-export const RowsLayout = ({ children }: Props): JSX.Element => {
+export const RowsLayout = (props: Props): JSX.Element => {
   return (
     <div
       className={cls.rows}
@@ -14,7 +14,7 @@ export const RowsLayout = ({ children }: Props): JSX.Element => {
         flexDirection: 'column',
       }}
     >
-      {children}
+      {props.children}
     </div>
   )
 }

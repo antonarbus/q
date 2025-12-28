@@ -6,7 +6,7 @@ type Props = {
   children: ReactNode
 }
 
-export const GridPageLayout = ({ children }: Props): JSX.Element => {
+export const GridPageLayout = (props: Props): JSX.Element => {
   return (
     <Box
       sx={{
@@ -14,7 +14,7 @@ export const GridPageLayout = ({ children }: Props): JSX.Element => {
         height: `calc(100vh - ${String(theme.nav.height + theme.footer.height + 60)}px)`,
       }}
     >
-      {children}
+      {props.children}
     </Box>
   )
 }

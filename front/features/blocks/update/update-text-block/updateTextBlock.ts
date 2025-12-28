@@ -8,24 +8,29 @@ type Props = {
   blockIndex: number
 }
 
-export const updateTextBlock = ({ editorRef, blockIndex }: Props): void => {
-  if (editorRef.current === null) {
+export const updateTextBlock = (props: Props): void => {
+  if (props.editorRef.current === null) {
     return
   }
 
-  const block = getState().quotation.blocks[blockIndex]
+  const block = getState().quotation.blocks[props.blockIndex]
 
   if (block?.type !== itemType.text) {
     return
   }
 
   const prevHtml = block.text.html
-  const html = editorRef.current.html.get()
+  const html = props.editorRef.current.html.get()
   const didTextChange = prevHtml !== html
 
   if (didTextChange === false) {
     return
   }
 
-  dispatch(quotationSlice.actions.updateBlockTextReducer({ blockIndex, html }))
+  dispatch(
+    quotationSlice.actions.updateBlockTextReducer({
+      blockIndex: props.blockIndex,
+      html,
+    }),
+  )
 }

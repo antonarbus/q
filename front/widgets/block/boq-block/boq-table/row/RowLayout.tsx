@@ -9,7 +9,7 @@ type Props = {
   onBlur: (e: FocusEvent<HTMLDivElement>) => void
 }
 
-export const RowLayout = ({ children, onBlur }: Props): JSX.Element => {
+export const RowLayout = (props: Props): JSX.Element => {
   const row = useRow()
 
   return (
@@ -17,7 +17,7 @@ export const RowLayout = ({ children, onBlur }: Props): JSX.Element => {
       className={cls.row}
       id={row.item.id}
       onBlur={(event) => {
-        onBlur(event)
+        props.onBlur(event)
       }}
       style={{
         // https://stackoverflow.com/questions/8468066/child-inside-parent-with-min-height-100-not-inheriting-height
@@ -29,7 +29,7 @@ export const RowLayout = ({ children, onBlur }: Props): JSX.Element => {
         position: 'relative',
       }}
     >
-      <PasteRowTextOverlay>{children}</PasteRowTextOverlay>
+      <PasteRowTextOverlay>{props.children}</PasteRowTextOverlay>
     </Box>
   )
 }

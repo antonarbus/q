@@ -13,14 +13,14 @@ type Props = {
   blockIndex: number
 }
 
-export const Block = ({ block, blockIndex }: Props): ReactNode => {
+export const Block = (props: Props): ReactNode => {
   return (
-    <BlockProvider item={block} index={blockIndex}>
-      {block.type === itemType.text && <TextBlock />}
-      {block.type === itemType.boq && <BoqBlock />}
-      {block.type === itemType.price && <PriceBlock />}
-      {block.type === itemType.row && <BookmarkedRowBlock />}
-      {block.type === itemType.paste && <PasteItemBlock />}
+    <BlockProvider item={props.block} index={props.blockIndex}>
+      {props.block.type === itemType.text && <TextBlock />}
+      {props.block.type === itemType.boq && <BoqBlock />}
+      {props.block.type === itemType.price && <PriceBlock />}
+      {props.block.type === itemType.row && <BookmarkedRowBlock />}
+      {props.block.type === itemType.paste && <PasteItemBlock />}
     </BlockProvider>
   )
 }

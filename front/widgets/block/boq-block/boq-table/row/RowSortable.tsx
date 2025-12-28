@@ -8,7 +8,7 @@ type Props = {
   children: ReactNode
 }
 
-export const RowSortable = ({ children }: Props): JSX.Element => {
+export const RowSortable = (props: Props): JSX.Element => {
   const row = useRow()
 
   const sortable = useSortable({
@@ -24,7 +24,7 @@ export const RowSortable = ({ children }: Props): JSX.Element => {
         zIndex: sortable.isDragging === true ? 1000 : 0,
       }}
     >
-      {children}
+      {props.children}
     </div>
   )
 }

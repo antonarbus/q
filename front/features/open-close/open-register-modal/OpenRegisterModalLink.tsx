@@ -7,14 +7,14 @@ type Props = {
   slideOut: () => Promise<void>
 }
 
-export const OpenRegisterModalLink = ({ slideOut }: Props): JSX.Element => {
+export const OpenRegisterModalLink = (props: Props): JSX.Element => {
   return (
     <Link
       onClick={(event: MouseEvent): void => {
         event.preventDefault()
 
         const slideAndNavigate = async (): Promise<void> => {
-          await slideOut()
+          await props.slideOut()
           openRegisterModal()
         }
 
