@@ -31,7 +31,7 @@ type RouterHandler = (
 ) => Promise<void>
 
 export const fileUploadSignedUrlHandler: RouterHandler = async (req, res) => {
-  getUserFromAccessTokenOrThrowUnauthorized({ req, res })
+  getUserFromAccessTokenOrThrowUnauthorized({ req })
 
   const messageList: string[] = []
 

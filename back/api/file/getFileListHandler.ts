@@ -33,10 +33,7 @@ type RouterHandler = (
 ) => Promise<void>
 
 export const getFileListHandler: RouterHandler = async (req, res) => {
-  const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({
-    req,
-    res,
-  })
+  const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({ req })
 
   const messageList: string[] = []
 

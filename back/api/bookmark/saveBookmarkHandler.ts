@@ -35,10 +35,7 @@ type RouterHandler = (
 ) => Promise<void>
 
 export const saveBookmarkHandler: RouterHandler = async (req, res) => {
-  const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({
-    req,
-    res,
-  })
+  const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({ req })
 
   const messageList: string[] = []
 

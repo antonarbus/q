@@ -37,10 +37,7 @@ type RouterHandler = (
 ) => Promise<void>
 
 export const saveQuotationHandler: RouterHandler = async (req, res) => {
-  const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({
-    req,
-    res,
-  })
+  const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({ req })
 
   const messageList: string[] = []
 
