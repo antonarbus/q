@@ -18,8 +18,8 @@ type Props = {
  *
  * We set the 'no-trace': true cookie to the header
  */
-export const getShouldNotTrace = ({ req }: Props): boolean => {
-  const noTraceCookie = req.cookies[cookieName.noTrace]
+export const getShouldNotTrace = (props: Props): boolean => {
+  const noTraceCookie = props.req.cookies[cookieName.noTrace]
 
   if (noTraceCookie === undefined) {
     return false

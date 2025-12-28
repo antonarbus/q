@@ -40,10 +40,10 @@ type Res = {
   url: string
 }
 
-export const getFileInfo = ({ id }: Props): Res => {
+export const getFileInfo = (props: Props): Res => {
   const fileInfo = {
-    path: id,
-    url: `${STORAGE_BASE_URL}/${id}`,
+    path: props.id,
+    url: `${STORAGE_BASE_URL}/${props.id}`,
   }
 
   return fileInfo

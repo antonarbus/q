@@ -5,10 +5,11 @@ type Props = {
   blockIndex: number
 }
 
-export const getNumberOfBoqBlocksAbove = ({ blockIndex }: Props): number => {
+export const getNumberOfBoqBlocksAbove = (props: Props): number => {
   const numberOfBoqBlocksAbove = getState().quotation.blocks.reduce(
     (accumulator, block, index) => {
-      const isNotLastBoq = block.type === itemType.boq && index < blockIndex
+      const isNotLastBoq =
+        block.type === itemType.boq && index < props.blockIndex
 
       if (isNotLastBoq === true) {
         return accumulator + 1

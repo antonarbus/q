@@ -5,8 +5,8 @@ type Props = {
   blockIndex: number
 }
 
-export const getPriceBlockHtmlFromStore = ({ blockIndex }: Props): string => {
-  const block = getState().quotation.blocks[blockIndex]
+export const getPriceBlockHtmlFromStore = (props: Props): string => {
+  const block = getState().quotation.blocks[props.blockIndex]
 
   if (block?.type !== itemType.price) {
     return ''

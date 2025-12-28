@@ -18,8 +18,8 @@ type Res = {
 } | null
 
 /** Used only to get short lived access token. */
-export const getUserFromRefreshTokenOrNull = ({ req }: Props): Res => {
-  const refreshJwtToken = getRefreshTokenFromCookie({ req })
+export const getUserFromRefreshTokenOrNull = (props: Props): Res => {
+  const refreshJwtToken = getRefreshTokenFromCookie({ req: props.req })
 
   if (refreshJwtToken === undefined) {
     return null

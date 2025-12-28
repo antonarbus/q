@@ -6,6 +6,11 @@ type Props = {
   rowIndex: number
 }
 
-export const pinPriceCell = ({ blockIndex, rowIndex }: Props): void => {
-  dispatch(quotationSlice.actions.pinPriceReducer({ blockIndex, rowIndex }))
+export const pinPriceCell = (props: Props): void => {
+  dispatch(
+    quotationSlice.actions.pinPriceReducer({
+      blockIndex: props.blockIndex,
+      rowIndex: props.rowIndex,
+    }),
+  )
 }

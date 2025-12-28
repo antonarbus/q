@@ -8,10 +8,10 @@ type Props = {
   rowIndex: number
 }
 
-export const pinItemPriceCell = ({ blockIndex, rowIndex }: Props): void => {
+export const pinItemPriceCell = (props: Props): void => {
   const itemPrice = getCellFromStore({
-    blockIndex,
-    rowIndex,
+    blockIndex: props.blockIndex,
+    rowIndex: props.rowIndex,
     cellKey: cellKey.itemPrice,
   })
 
@@ -21,5 +21,10 @@ export const pinItemPriceCell = ({ blockIndex, rowIndex }: Props): void => {
     return
   }
 
-  dispatch(quotationSlice.actions.pinItemPriceReducer({ blockIndex, rowIndex }))
+  dispatch(
+    quotationSlice.actions.pinItemPriceReducer({
+      blockIndex: props.blockIndex,
+      rowIndex: props.rowIndex,
+    }),
+  )
 }

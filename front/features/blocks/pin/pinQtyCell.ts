@@ -8,10 +8,10 @@ type Props = {
   rowIndex: number
 }
 
-export const pinQtyCell = ({ blockIndex, rowIndex }: Props): void => {
+export const pinQtyCell = (props: Props): void => {
   const itemPrice = getCellFromStore({
-    blockIndex,
-    rowIndex,
+    blockIndex: props.blockIndex,
+    rowIndex: props.rowIndex,
     cellKey: cellKey.qty,
   })
 

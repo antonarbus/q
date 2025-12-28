@@ -5,6 +5,6 @@ type Props = {
   res: Response
 }
 
-export const removeRefreshTokenCookie = ({ res }: Props): void => {
-  res.clearCookie(cookieName.refreshJwtToken)
+export const removeRefreshTokenCookie = (props: Props): void => {
+  props.res.clearCookie(cookieName.refreshJwtToken)
 }

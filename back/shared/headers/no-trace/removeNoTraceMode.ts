@@ -12,6 +12,6 @@ type Props = {
  *
  * We set the 'no-trace': true cookie to the header
  */
-export const removeNoTraceMode = ({ res }: Props): void => {
-  res.clearCookie(cookieName.noTrace)
+export const removeNoTraceMode = (props: Props): void => {
+  props.res.clearCookie(cookieName.noTrace)
 }

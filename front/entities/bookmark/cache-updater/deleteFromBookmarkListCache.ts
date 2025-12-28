@@ -7,7 +7,7 @@ type Props = {
   id: string
 }
 
-export const deleteFromBookmarkListCache = ({ id }: Props): void => {
+export const deleteFromBookmarkListCache = (props: Props): void => {
   instance.queryClient.setQueriesData<ResBody>(
     { queryKey: [queryKey.getBookmarkList] },
     (cacheData) => {
@@ -17,7 +17,7 @@ export const deleteFromBookmarkListCache = ({ id }: Props): void => {
         }
 
         const items = draft.bookmarkList
-        const index = items.findIndex((item) => item.id === id)
+        const index = items.findIndex((item) => item.id === props.id)
         const foundInCache = index !== -1
 
         if (foundInCache === true) {

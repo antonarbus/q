@@ -6,13 +6,13 @@ type Props = {
   editorRef: FroalaEditorRef
 }
 
-export const updateDescriptionCell = ({ editorRef }: Props): void => {
-  if (editorRef.current === null) {
+export const updateDescriptionCell = (props: Props): void => {
+  if (props.editorRef.current === null) {
     return
   }
 
   updateBookmarkedRowCellAtStore({
     cellKey: boqColumnKey.description,
-    html: editorRef.current.html.get(),
+    html: props.editorRef.current.html.get(),
   })
 }

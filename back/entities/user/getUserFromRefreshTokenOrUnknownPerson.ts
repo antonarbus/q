@@ -21,8 +21,8 @@ type Res = {
  * https://sendmequotation.today/api/set-bucket-cors
  * https://sendmequotation.today/api/get-bucket-cor
  */
-export const getUserFromRefreshTokenOrUnknownPerson = ({ req }: Props): Res => {
-  const refreshJwtToken = getRefreshTokenFromCookie({ req })
+export const getUserFromRefreshTokenOrUnknownPerson = (props: Props): Res => {
+  const refreshJwtToken = getRefreshTokenFromCookie({ req: props.req })
 
   const unknownPerson = {
     email: 'unknown@gmail.com',

@@ -8,12 +8,12 @@ type Props = {
   children: ReactNode
 }
 
-export const RequireRoles = ({ requiredRoles, children }: Props): ReactNode => {
+export const RequireRoles = (props: Props): ReactNode => {
   const getUserAccessTokenQuery = useGetUserAccessTokenQuery()
 
   const userRoles = useSelector((state) => state.user.roles)
 
-  const haveRequiredRole = requiredRoles.some((role) =>
+  const haveRequiredRole = props.requiredRoles.some((role) =>
     userRoles.includes(role),
   )
 
@@ -51,5 +51,5 @@ export const RequireRoles = ({ requiredRoles, children }: Props): ReactNode => {
     )
   }
 
-  return children
+  return props.children
 }

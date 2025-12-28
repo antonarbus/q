@@ -6,10 +6,10 @@ type Props = {
   priceCellEditorRef: FroalaEditorRef
 }
 
-export const formatPriceCell = ({ priceCellEditorRef }: Props): void => {
+export const formatPriceCell = (props: Props): void => {
   formatBookmarkedRowCellNumber({
     cellKey: cellKey.price,
-    editorRef: priceCellEditorRef,
+    editorRef: props.priceCellEditorRef,
     roundToTwoDecimals: true,
   })
 }

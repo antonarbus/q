@@ -6,9 +6,9 @@ type Props = {
   blockIndex: number
 }
 
-export const saveBlockHeightByIndex = ({ blockIndex }: Props): void => {
+export const saveBlockHeightByIndex = (props: Props): void => {
   const paperElements = document.querySelectorAll(`.${cls.paper}`)
-  const paperElement = paperElements[blockIndex]
+  const paperElement = paperElements[props.blockIndex]
 
   if (paperElement === undefined) {
     return
@@ -16,7 +16,7 @@ export const saveBlockHeightByIndex = ({ blockIndex }: Props): void => {
 
   dispatch(
     quotationSlice.actions.updateBlockHeightReducer({
-      blockIndex,
+      blockIndex: props.blockIndex,
       height: paperElement.clientHeight,
     }),
   )

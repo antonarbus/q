@@ -8,8 +8,11 @@ type Props = {
   rowIndex: number
 }
 
-export const showRowPins = ({ blockIndex, rowIndex }: Props): void => {
-  const row = getRowFromStore({ blockIndex, rowIndex })
+export const showRowPins = (props: Props): void => {
+  const row = getRowFromStore({
+    blockIndex: props.blockIndex,
+    rowIndex: props.rowIndex,
+  })
 
   if (row === undefined) {
     return

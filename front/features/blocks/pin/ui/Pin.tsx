@@ -13,7 +13,7 @@ type Props = {
   onClick: (e: MouseEvent) => void
 }
 
-export const Pin = ({ cellKey, onClick }: Props): ReactNode => {
+export const Pin = (props: Props): ReactNode => {
   const block = useBlock()
   const row = useRow()
 
@@ -21,7 +21,7 @@ export const Pin = ({ cellKey, onClick }: Props): ReactNode => {
     selectCellPin({
       blockIndex: block.index,
       rowIndex: row.index,
-      cellKey,
+      cellKey: props.cellKey,
     }),
   )
 
@@ -39,7 +39,7 @@ export const Pin = ({ cellKey, onClick }: Props): ReactNode => {
       component='button' // to make it focusable to understand if we click within same row on pins and not hide them at Row onBlur callback // https://stackoverflow.com/a/42764495/7239778
       // use onMouseDown instead of click because in Safari it does not work for some reason
       onMouseDown={(event): void => {
-        onClick(event)
+        props.onClick(event)
       }}
       sx={{
         all: 'unset',

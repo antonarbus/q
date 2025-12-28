@@ -6,10 +6,10 @@ type Props = {
   qtyCellEditorRef: FroalaEditorRef
 }
 
-export const formatQtyCell = ({ qtyCellEditorRef }: Props): void => {
+export const formatQtyCell = (props: Props): void => {
   formatBookmarkedRowCellNumber({
     cellKey: cellKey.qty,
-    editorRef: qtyCellEditorRef,
+    editorRef: props.qtyCellEditorRef,
     roundToTwoDecimals: false,
   })
 }

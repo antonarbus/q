@@ -13,8 +13,8 @@ type Props = {
  *
  * We set the 'no-trace': true cookie to the header
  */
-export const setNoTraceMode = ({ res }: Props): void => {
-  res.cookie(cookieName.noTrace, true, {
+export const setNoTraceMode = (props: Props): void => {
+  props.res.cookie(cookieName.noTrace, true, {
     httpOnly: true,
     secure: runtimeConfig.nodeEnv === 'production',
     maxAge: 3 * 24 * 60 * 60 * 1000, // 3 days in ms,

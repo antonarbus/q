@@ -5,8 +5,8 @@ type Props = {
   blockIndex: number
 }
 
-export const getTextBlockHtmlFromStore = ({ blockIndex }: Props): string => {
-  const block = getState().quotation.blocks[blockIndex]
+export const getTextBlockHtmlFromStore = (props: Props): string => {
+  const block = getState().quotation.blocks[props.blockIndex]
 
   if (block === undefined) {
     return ''

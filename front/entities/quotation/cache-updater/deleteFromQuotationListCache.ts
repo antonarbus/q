@@ -7,7 +7,7 @@ type Props = {
   id: string
 }
 
-export const deleteFromQuotationListCache = ({ id }: Props): void => {
+export const deleteFromQuotationListCache = (props: Props): void => {
   instance.queryClient.setQueriesData<ResBody>(
     { queryKey: [queryKey.getQuotationList] },
     (cacheData) => {
@@ -17,7 +17,7 @@ export const deleteFromQuotationListCache = ({ id }: Props): void => {
         }
 
         const index = draft.quotationList.findIndex(
-          (quotation) => quotation.id === id,
+          (quotation) => quotation.id === props.id,
         )
 
         const foundInCache = index !== -1
