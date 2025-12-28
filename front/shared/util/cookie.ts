@@ -12,17 +12,15 @@ type Props = {
   path?: string
 }
 
-export const removeCookie = ({
-  name,
-  domain = 'sendmequotation.today',
-  path = '/',
-}: Props): void => {
+export const removeCookie = (props: Props): void => {
+  const DOMAIN = 'sendmequotation.today'
+
   // Set the cookie expiration to a date in the past
-  let cookieString = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${path};`
+  let cookieString = `${props.name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${props.path ?? '/'};`
 
   // If a domain is provided, add it to the cookie string
-  if (domain !== '') {
-    cookieString += ` domain=${domain};`
+  if (props.domain !== '') {
+    cookieString += ` domain=${props.domain ?? DOMAIN};`
   }
 
   // Set the cookie, which effectively removes it

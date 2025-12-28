@@ -11,7 +11,6 @@ import { useBlock } from '../../provider/BlockProvider'
 
 type Props = {
   children: ReactNode
-  disableResize?: boolean
   autoWidth?: boolean
   minWidth?: ResizableProps['minWidth']
   onItemResizeStart?: OnBlockResizeStart
@@ -19,15 +18,7 @@ type Props = {
   onItemResizeStop?: OnBlockResizeStop
 }
 
-export const ResizableBlockPaper = ({
-  children,
-  disableResize = false,
-  autoWidth = false,
-  onItemResizeStart,
-  onItemResize,
-  onItemResizeStop,
-  minWidth,
-}: Props): JSX.Element => {
+export const ResizableBlockPaper = (props: Props): JSX.Element => {
   const block = useBlock()
 
   const width = useSelector(
@@ -35,7 +26,8 @@ export const ResizableBlockPaper = ({
   )
 
   const isWidthSetManually = width !== undefined
-  const isAutoWidth = isWidthSetManually === false || disableResize || autoWidth
+
+  const isAutoWidth = isWidthSetManually === false || (props.autoWidth ?? false)
 
   return (
     <Resizable
@@ -45,18 +37,15 @@ export const ResizableBlockPaper = ({
         width: isAutoWidth === true ? 'auto' : width,
         height: 'auto',
       }}
-      enable={{
-        right: disableResize === false,
-        left: disableResize === false,
-      }}
+      enable={{}}
       handleClasses={{
         left: 'left-resize-handle',
         right: 'right-resize-handle',
       }}
       maxWidth='100%'
-      minWidth={minWidth ?? '150px'}
+      minWidth={props.minWidth ?? '150px'}
       onResize={(event, direction, elementRef, delta): void => {
-        onItemResize?.bind(null, {
+        props.onItemResize?.bind(null, {
           event,
           direction,
           elementRef,
@@ -65,7 +54,7 @@ export const ResizableBlockPaper = ({
         })()
       }}
       onResizeStart={(event, dir, elementRef): void => {
-        onItemResizeStart?.bind(null, {
+        props.onItemResizeStart?.bind(null, {
           event,
           dir,
           elementRef,
@@ -73,7 +62,7 @@ export const ResizableBlockPaper = ({
         })()
       }}
       onResizeStop={(event, direction, elementRef, delta): void => {
-        onItemResizeStop?.bind(null, {
+        props.onItemResizeStop?.bind(null, {
           event,
           direction,
           elementRef,
@@ -97,7 +86,7 @@ export const ResizableBlockPaper = ({
       }}
       // grid={[20, 0]}
     >
-      {children}
+      {props.children}
     </Resizable>
   )
 }

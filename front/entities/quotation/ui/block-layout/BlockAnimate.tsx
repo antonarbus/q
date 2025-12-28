@@ -17,7 +17,6 @@ type Props = {
   id: string
   leftItemActionButtons?: ReactNode
   rightItemActionButtons?: ReactNode
-  disableResize?: boolean
   autoWidth?: boolean
   minWidth?: ResizableProps['minWidth']
   onItemResizeStart?: OnBlockResizeStart
@@ -39,7 +38,9 @@ export const BlockAnimate = (props: Props): JSX.Element => {
           overflow: 'visible',
         },
       }}
-      className={cls.block + (props.className === undefined ? '' : ` ${props.className}`)}
+      className={
+        cls.block + (props.className === undefined ? '' : ` ${props.className}`)
+      }
       exit={{
         height: 0,
         marginBottom: 0,
@@ -71,7 +72,6 @@ export const BlockAnimate = (props: Props): JSX.Element => {
       )}
       <ResizableBlockPaper
         autoWidth={props.autoWidth}
-        disableResize={props.disableResize}
         minWidth={props.minWidth}
         onItemResize={props.onItemResize}
         onItemResizeStart={props.onItemResizeStart}

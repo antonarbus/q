@@ -13,7 +13,6 @@ import { PasteBlockTextOverlay } from './paste-block-overlay-text'
 
 type Props = {
   children: ReactNode
-  disableResize?: boolean
   onBlockResizeStart?: OnBlockResizeStart
   onBlockResize?: OnBlockResize
   onBlockResizeStop?: OnBlockResizeStop
@@ -44,7 +43,6 @@ export const BlockComp = (props: Props): JSX.Element => {
         autoWidth={props.autoWidth}
         blockHeight={block.item.height}
         className={props.className}
-        disableResize={props.disableResize}
         id={block.item.id}
         leftItemActionButtons={props.leftBlockActionButtons}
         minWidth={props.minWidth}

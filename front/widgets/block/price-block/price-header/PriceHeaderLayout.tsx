@@ -8,22 +8,19 @@ type Props = {
   outlinedForDevPurposes?: boolean
 }
 
-export const PriceHeaderLayout = ({
-  title,
-  hideContentForDevPurposes = false,
-  outlinedForDevPurposes = false,
-}: Props): JSX.Element => {
+export const PriceHeaderLayout = (props: Props): JSX.Element => {
   return (
     <Box
       sx={{
         '& .layout': {
           boxShadow:
-            outlinedForDevPurposes === true
+            props.outlinedForDevPurposes === true
               ? '0 0 1px 1px #cf5757c3 inset'
               : 'none',
         },
         '& :where(.content)': {
-          visibility: hideContentForDevPurposes === true ? 'hidden' : 'visible',
+          visibility:
+            props.hideContentForDevPurposes === true ? 'hidden' : 'visible',
         },
       }}
     >
@@ -38,7 +35,7 @@ export const PriceHeaderLayout = ({
           minHeight: '50px',
         }}
       >
-        {title}
+        {props.title}
       </Box>
     </Box>
   )

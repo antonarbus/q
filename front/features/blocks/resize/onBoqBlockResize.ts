@@ -23,16 +23,20 @@ let itemPriceColumnDeltaWidth = 0
 let qtyColumnDeltaWidth = 0
 let priceColumnDeltaWidth = 0
 
-export const onBoqBlockResizeStart: OnBlockResizeStart = ({
-  blockIndex,
-  event,
-  dir,
-  elementRef: itemElement,
-}) => {
-  dispatch(quotationSlice.actions.disableFroalaReducer({ blockIndex }))
-  dispatch(quotationSlice.actions.hideBoqItemPinsReducer({ blockIndex }))
+export const onBoqBlockResizeStart: OnBlockResizeStart = (props) => {
+  dispatch(
+    quotationSlice.actions.disableFroalaReducer({
+      blockIndex: props.blockIndex,
+    }),
+  )
 
-  const block = getState().quotation.blocks[blockIndex]
+  dispatch(
+    quotationSlice.actions.hideBoqItemPinsReducer({
+      blockIndex: props.blockIndex,
+    }),
+  )
+
+  const block = getState().quotation.blocks[props.blockIndex]
 
   if (block?.type !== itemType.boq) {
     return
@@ -56,19 +60,13 @@ export const onBoqBlockResizeStart: OnBlockResizeStart = ({
  * then 'qty', then 'itemPrice', then 'qty', then 'price'
  * On block width expand make 'description' column wider
  */
-export const onBoqBlockResize: OnBlockResize = ({
-  blockIndex,
-  event,
-  direction,
-  elementRef,
-  delta,
-}) => {
-  const isShrinking = delta.width < 0
+export const onBoqBlockResize: OnBlockResize = (props) => {
+  const isShrinking = props.delta.width < 0
 
   // description column
 
   const descriptionColumn = getBoqColumnFromStore({
-    blockIndex,
+    blockIndex: props.blockIndex,
     boqColumnKey: boqColumnKey.description,
   })
 
@@ -78,14 +76,14 @@ export const onBoqBlockResize: OnBlockResize = ({
 
   if (isShrinking === true) {
     if (descriptionColumn.width > columnMinWidth.description) {
-      descriptionColumnDeltaWidth = delta.width
+      descriptionColumnDeltaWidth = props.delta.width
 
       const descriptionColumnWidth =
         initDescriptionColumnWidth + descriptionColumnDeltaWidth
 
       dispatch(
         quotationSlice.actions.updateColWidthReducer({
-          blockIndex,
+          blockIndex: props.blockIndex,
           boqColumnKey: boqColumnKey.description,
           width: descriptionColumnWidth,
         }),
@@ -97,7 +95,7 @@ export const onBoqBlockResize: OnBlockResize = ({
     // number column
 
     const numberColumn = getBoqColumnFromStore({
-      blockIndex,
+      blockIndex: props.blockIndex,
       boqColumnKey: boqColumnKey.number,
     })
 
@@ -106,13 +104,13 @@ export const onBoqBlockResize: OnBlockResize = ({
     }
 
     if (numberColumn.width > columnMinWidth.number) {
-      numberColumnDeltaWidth = delta.width - descriptionColumnDeltaWidth
+      numberColumnDeltaWidth = props.delta.width - descriptionColumnDeltaWidth
 
       const numberColumnWidth = initNumberColumnWidth + numberColumnDeltaWidth
 
       dispatch(
         quotationSlice.actions.updateColWidthReducer({
-          blockIndex,
+          blockIndex: props.blockIndex,
           boqColumnKey: boqColumnKey.number,
           width: numberColumnWidth,
         }),
@@ -124,7 +122,7 @@ export const onBoqBlockResize: OnBlockResize = ({
     // itemPrice column
 
     const itemPriceColumn = getBoqColumnFromStore({
-      blockIndex,
+      blockIndex: props.blockIndex,
       boqColumnKey: boqColumnKey.itemPrice,
     })
 
@@ -134,14 +132,14 @@ export const onBoqBlockResize: OnBlockResize = ({
 
     if (itemPriceColumn.width > columnMinWidth.itemPrice) {
       itemPriceColumnDeltaWidth =
-        delta.width - numberColumnDeltaWidth - descriptionColumnDeltaWidth
+        props.delta.width - numberColumnDeltaWidth - descriptionColumnDeltaWidth
 
       const itemPriceColumnWidth =
         initItemPriceColumnWidth + itemPriceColumnDeltaWidth
 
       dispatch(
         quotationSlice.actions.updateColWidthReducer({
-          blockIndex,
+          blockIndex: props.blockIndex,
           boqColumnKey: boqColumnKey.itemPrice,
           width: itemPriceColumnWidth,
         }),
@@ -153,7 +151,7 @@ export const onBoqBlockResize: OnBlockResize = ({
     // qty column
 
     const qtyColumn = getBoqColumnFromStore({
-      blockIndex,
+      blockIndex: props.blockIndex,
       boqColumnKey: boqColumnKey.qty,
     })
 
@@ -163,7 +161,7 @@ export const onBoqBlockResize: OnBlockResize = ({
 
     if (qtyColumn.width > columnMinWidth.qty) {
       qtyColumnDeltaWidth =
-        delta.width -
+        props.delta.width -
         numberColumnDeltaWidth -
         descriptionColumnDeltaWidth -
         itemPriceColumnDeltaWidth
@@ -172,7 +170,7 @@ export const onBoqBlockResize: OnBlockResize = ({
 
       dispatch(
         quotationSlice.actions.updateColWidthReducer({
-          blockIndex,
+          blockIndex: props.blockIndex,
           boqColumnKey: boqColumnKey.qty,
           width: qtyColumnWidth,
         }),
@@ -184,7 +182,7 @@ export const onBoqBlockResize: OnBlockResize = ({
     // price column
 
     const priceColumn = getBoqColumnFromStore({
-      blockIndex,
+      blockIndex: props.blockIndex,
       boqColumnKey: boqColumnKey.price,
     })
 
@@ -194,7 +192,7 @@ export const onBoqBlockResize: OnBlockResize = ({
 
     if (priceColumn.width > columnMinWidth.price) {
       priceColumnDeltaWidth =
-        delta.width -
+        props.delta.width -
         numberColumnDeltaWidth -
         descriptionColumnDeltaWidth -
         itemPriceColumnDeltaWidth -
@@ -204,7 +202,7 @@ export const onBoqBlockResize: OnBlockResize = ({
 
       dispatch(
         quotationSlice.actions.updateColWidthReducer({
-          blockIndex,
+          blockIndex: props.blockIndex,
           boqColumnKey: boqColumnKey.price,
           width: priceColumnWidth,
         }),
@@ -214,17 +212,17 @@ export const onBoqBlockResize: OnBlockResize = ({
     return
   }
 
-  const isExpanding = delta.width > 0
+  const isExpanding = props.delta.width > 0
 
   if (isExpanding === true) {
-    descriptionColumnDeltaWidth = delta.width
+    descriptionColumnDeltaWidth = props.delta.width
 
     const descriptionColumnWidth =
       initDescriptionColumnWidth + descriptionColumnDeltaWidth
 
     dispatch(
       quotationSlice.actions.updateColWidthReducer({
-        blockIndex,
+        blockIndex: props.blockIndex,
         boqColumnKey: boqColumnKey.description,
         width: descriptionColumnWidth,
       }),
@@ -232,14 +230,9 @@ export const onBoqBlockResize: OnBlockResize = ({
   }
 }
 
-export const onBoqBlockResizeStop: OnBlockResizeStop = ({
-  blockIndex,
-  event,
-  direction,
-  elementRef: itemElement,
-  delta,
-}) => {
-  const descriptionHeaderElement = itemElement.querySelector('.th.description')
+export const onBoqBlockResizeStop: OnBlockResizeStop = (props) => {
+  const descriptionHeaderElement =
+    props.elementRef.querySelector('.th.description')
 
   if (descriptionHeaderElement instanceof HTMLElement === false) {
     return
@@ -249,21 +242,25 @@ export const onBoqBlockResizeStop: OnBlockResizeStop = ({
 
   dispatch(
     quotationSlice.actions.updateColWidthReducer({
-      blockIndex,
+      blockIndex: props.blockIndex,
       boqColumnKey: boqColumnKey.description,
       width,
     }),
   )
 
-  dispatch(quotationSlice.actions.enableFroalaReducer({ blockIndex }))
+  dispatch(
+    quotationSlice.actions.enableFroalaReducer({
+      blockIndex: props.blockIndex,
+    }),
+  )
 
-  const itemWidth = itemElement.clientWidth
-  const prevItemWidth = getState().quotation.blocks[blockIndex]?.width
+  const itemWidth = props.elementRef.clientWidth
+  const prevItemWidth = getState().quotation.blocks[props.blockIndex]?.width
 
   if (itemWidth !== prevItemWidth) {
     dispatch(
       quotationSlice.actions.updateBlockWidthReducer({
-        blockIndex,
+        blockIndex: props.blockIndex,
         width: itemWidth,
       }),
     )

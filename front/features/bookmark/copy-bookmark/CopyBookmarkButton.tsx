@@ -10,9 +10,7 @@ import { MdCopyAll } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
 
-export const CopyBookmarkButton = ({
-  bookmarkId: id,
-}: ReqBody): JSX.Element => {
+export const CopyBookmarkButton = (props: ReqBody): JSX.Element => {
   const getBookmarkMutation = useGetBookmarkMutation()
 
   useUpdateEffect(() => {
@@ -30,7 +28,9 @@ export const CopyBookmarkButton = ({
     >
       <IconButton
         onClick={async (event: React.MouseEvent) => {
-          const data = await getBookmarkMutation.mutateAsync({ bookmarkId: id })
+          const data = await getBookmarkMutation.mutateAsync({
+            bookmarkId: props.bookmarkId,
+          })
 
           if (data !== undefined) {
             const persistedScrollX = window.scrollX

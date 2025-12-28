@@ -10,24 +10,19 @@ type Props = {
   outlinedForDevPurposes?: boolean
 }
 
-export const BoqHeaderLayout = ({
-  title,
-  subtotalText,
-  subTotalPrice,
-  hideContentForDevPurposes = false,
-  outlinedForDevPurposes = false,
-}: Props): JSX.Element => {
+export const BoqHeaderLayout = (props: Props): JSX.Element => {
   return (
     <Box
       sx={{
         '& .layout': {
           boxShadow:
-            outlinedForDevPurposes === true
+            props.outlinedForDevPurposes === true
               ? '0 0 1px 1px #cf5757c3 inset'
               : 'none',
         },
         '& :where(.content)': {
-          visibility: hideContentForDevPurposes === true ? 'hidden' : 'visible',
+          visibility:
+            props.hideContentForDevPurposes === true ? 'hidden' : 'visible',
         },
       }}
     >
@@ -51,7 +46,7 @@ export const BoqHeaderLayout = ({
             flexGrow: 1,
           }}
         >
-          {title}
+          {props.title}
         </Box>
         <Box
           className='layout subtotal-container'
@@ -70,7 +65,7 @@ export const BoqHeaderLayout = ({
               textAlign: 'right',
             }}
           >
-            {subtotalText}
+            {props.subtotalText}
           </Box>
           <Box
             className='layout price'
@@ -90,7 +85,7 @@ export const BoqHeaderLayout = ({
                 minWidth: '60px',
               }}
             >
-              {subTotalPrice}
+              {props.subTotalPrice}
             </Box>
           </Box>
         </Box>
