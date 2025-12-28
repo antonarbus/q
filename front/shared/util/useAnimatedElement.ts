@@ -8,7 +8,7 @@ type Res = {
   slideOut: () => Promise<void>
 }
 
-export const useSlide = (): Res => {
+export const useAnimatedElement = (): Res => {
   const [ref, animate] = useAnimate()
   const isAnimationPreventedRef = useRef(false)
 

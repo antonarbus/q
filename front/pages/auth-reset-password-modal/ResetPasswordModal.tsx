@@ -8,13 +8,13 @@ import { FormModal } from '@shared/component/FormModal'
 import { EmailField } from '@shared/component/input-field/EmailField'
 import { PasswordField } from '@shared/component/input-field/PasswordField'
 import { router } from '@shared/lib/react-router-dom/router'
-import { useSlide } from '@shared/util/useSlide'
+import { useAnimatedElement } from '@shared/util/useAnimatedElement'
 import { type ReactNode, useRef } from 'react'
 import { MdPassword } from 'react-icons/md'
 import { useParams } from 'react-router-dom'
 
 export const ResetPasswordModal = (): ReactNode => {
-  const { ref: modalRef, slideOut } = useSlide()
+  const animatedElement = useAnimatedElement()
   const urlParams = useParams()
   const inputRef = useRef<HTMLDivElement>(null)
   const emailSignal = useSignal(urlParams.email ?? 'email is missing')
@@ -25,8 +25,8 @@ export const ResetPasswordModal = (): ReactNode => {
 
   const { onSubmit, isPending, isSuccess, isError } = useResetPassword({
     passwordSignal,
-    modalRef,
-    slideOut,
+    modalRef: animatedElement.ref,
+    slideOut: animatedElement.slideOut,
   })
 
   useSignalEffect(() => {
@@ -46,7 +46,7 @@ export const ResetPasswordModal = (): ReactNode => {
       isButtonError={isError}
       isButtonLoading={isPending}
       isButtonSuccess={isSuccess}
-      modalRef={modalRef}
+      modalRef={animatedElement.ref}
       onCloseClick={navigateUp}
       onSubmit={onSubmit}
       onUnmount={navigateUp}
@@ -72,8 +72,8 @@ export const ResetPasswordModal = (): ReactNode => {
           justifyContent: 'space-between',
         }}
       >
-        <OpenRegisterModalLink slideOut={slideOut} />
-        <OpenLoginModalLink slideOut={slideOut} />
+        <OpenRegisterModalLink slideOut={animatedElement.slideOut} />
+        <OpenLoginModalLink slideOut={animatedElement.slideOut} />
       </Box>
     </FormModal>
   )

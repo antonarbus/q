@@ -6,7 +6,7 @@ import { useShareQuotation } from '@features/quotation/share-quotation'
 import { FormModal } from '@shared/component/FormModal'
 import { router } from '@shared/lib/react-router-dom/router'
 import { getState } from '@shared/lib/redux'
-import { useSlide } from '@shared/util/useSlide'
+import { useAnimatedElement } from '@shared/util/useAnimatedElement'
 import type { JSX } from 'react'
 import { ImLink } from 'react-icons/im'
 import { ShareQuotationField } from './share-quotation-field'
@@ -14,7 +14,7 @@ import { useIsButtonDisabled } from './useIsButtonDisabled'
 import { useShareQuotationFormValues } from './useShareQuotationFormValues'
 
 export const ShareQuotationModal = (): JSX.Element => {
-  const { ref: modalRef, slideOut } = useSlide()
+  const animatedElement = useAnimatedElement()
   const { accessFormValuesSignal } = useShareQuotationFormValues()
   useLoadInitValuesIntoShareQuotationModal({ accessFormValuesSignal })
   useLoadShareQuotationModalWithDirectLink({ accessFormValuesSignal })
@@ -23,7 +23,7 @@ export const ShareQuotationModal = (): JSX.Element => {
 
   const { onSubmit, isPending, isSuccess, isError } = useShareQuotation({
     accessFormValuesSignal,
-    slideOut,
+    slideOut: animatedElement.slideOut,
   })
 
   const navigateUp = (): void => {
@@ -39,7 +39,7 @@ export const ShareQuotationModal = (): JSX.Element => {
       isButtonError={isError}
       isButtonLoading={isPending}
       isButtonSuccess={isSuccess}
-      modalRef={modalRef}
+      modalRef={animatedElement.ref}
       onCloseClick={navigateUp}
       onSubmit={onSubmit}
       onUnmount={navigateUp}

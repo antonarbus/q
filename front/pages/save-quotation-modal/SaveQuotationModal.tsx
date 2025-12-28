@@ -11,7 +11,7 @@ import { InfoField } from '@shared/component/input-field/InfoField'
 import { NameField } from '@shared/component/input-field/NameField'
 import { route } from '@shared/lib/react-router-dom/route'
 import { router } from '@shared/lib/react-router-dom/router'
-import { useSlide } from '@shared/util/useSlide'
+import { useAnimatedElement } from '@shared/util/useAnimatedElement'
 import type { JSX } from 'react'
 import { MdSaveAlt } from 'react-icons/md'
 import { useLocation } from 'react-router-dom'
@@ -20,14 +20,14 @@ import { useQuotationSaveFormValues } from './useQuotationSaveFormValues'
 
 export const SaveQuotationModal = (): JSX.Element => {
   const isQuotationsPage = useLocation().pathname.includes(route.quotationList)
-  const { ref: modalRef, slideOut } = useSlide()
+  const animatedElement = useAnimatedElement()
   const { saveQuotationFormValues } = useQuotationSaveFormValues()
   useLoadInitValuesIntoSaveQuotationModal({ saveQuotationFormValues })
   useLoadSaveQuotationModalWithDirectLink({ saveQuotationFormValues })
 
   const { onSubmit, isPending, isSuccess, isError } = useSaveQuotation({
     saveQuotationFormValues,
-    slideOut,
+    slideOut: animatedElement.slideOut,
   })
 
   const navigateUp = (): void => {
@@ -36,11 +36,8 @@ export const SaveQuotationModal = (): JSX.Element => {
 
   const getQuotationCategoryListQuery = useGetQuotationCategoryListQuery()
 
-  const options = (
+  const distinctCategoryList =
     getQuotationCategoryListQuery.data?.distinctQuotationList ?? []
-  )
-    .filter((cat) => cat !== undefined)
-    .filter((cat) => cat !== '')
 
   return (
     <FormModal
@@ -50,7 +47,7 @@ export const SaveQuotationModal = (): JSX.Element => {
       isButtonError={isError}
       isButtonLoading={isPending}
       isButtonSuccess={isSuccess}
-      modalRef={modalRef}
+      modalRef={animatedElement.ref}
       onCloseClick={navigateUp}
       onSubmit={onSubmit}
       onUnmount={navigateUp}
@@ -61,7 +58,7 @@ export const SaveQuotationModal = (): JSX.Element => {
       <NameField nameSignal={saveQuotationFormValues.nameSignal} />
       <CategoryField
         categorySignal={saveQuotationFormValues.categorySignal}
-        options={options}
+        options={distinctCategoryList}
       />
       <DescriptionField descSignal={saveQuotationFormValues.descSignal} />
       <InfoField infoSignal={saveQuotationFormValues.infoSignal} />

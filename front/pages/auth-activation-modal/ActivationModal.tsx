@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom'
 export const ActivationModal = (): JSX.Element => {
   const cardRef = useRef<HTMLDivElement>(null)
   const navigate = useNavigate()
-  const { isSuccess, isPending, isError } = useActivate()
+  const activate = useActivate()
 
   return (
     <BackdropWithSlidableModal
@@ -40,7 +40,7 @@ export const ActivationModal = (): JSX.Element => {
             gap: '5px',
           }}
         >
-          {isPending === true ? (
+          {activate.isPending === true ? (
             <>
               <RotatingLoaderIcon
                 style={{
@@ -51,7 +51,7 @@ export const ActivationModal = (): JSX.Element => {
               <Box>Please wait...</Box>
             </>
           ) : null}
-          {isSuccess === true ? (
+          {activate.isSuccess === true ? (
             <>
               <PiSmileyBold
                 style={{
@@ -62,7 +62,7 @@ export const ActivationModal = (): JSX.Element => {
               <Box>Activated</Box>
             </>
           ) : null}
-          {isError === true ? (
+          {activate.isError === true ? (
             <>
               <PiSmileySadBold
                 style={{

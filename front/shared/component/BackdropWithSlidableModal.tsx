@@ -1,7 +1,7 @@
 import { getState } from '@shared/lib/redux'
 import { type JSX, type ReactNode, useRef } from 'react'
 import { useEffectOnce } from 'react-use'
-import { useSlide } from '../util/useSlide'
+import { useAnimatedElement } from '../util/useAnimatedElement'
 
 type Props = {
   children: ReactNode
@@ -18,7 +18,7 @@ export const BackdropWithSlidableModal = ({
   shouldUnmountOnClickAway,
   shouldUnmountOnEsc,
 }: Props): JSX.Element => {
-  const { ref: contentRef, slideIn, slideOut } = useSlide()
+  const animatedElement = useAnimatedElement()
 
   const scrollTopPositionBeforeModalOpen = useRef(
     document.documentElement.scrollTop,
@@ -27,7 +27,7 @@ export const BackdropWithSlidableModal = ({
   useEffectOnce(() => {
     if (getState().app.navigateState.shouldSlide === true) {
       const slideInAndSomeAction = async (): Promise<void> => {
-        await slideIn()
+        await animatedElement.slideIn()
         onMount?.()
       }
 
@@ -45,7 +45,7 @@ export const BackdropWithSlidableModal = ({
       if (shouldCloseModalOnEsc === true) {
         if (getState().app.navigateState.shouldSlide === true) {
           const slideOutAndSomeAction = async (): Promise<void> => {
-            await slideOut()
+            await animatedElement.slideOut()
             onUnmount?.()
           }
 
@@ -98,7 +98,7 @@ export const BackdropWithSlidableModal = ({
     if (shouldUnmountOnClickAway === true) {
       if (getState().app.navigateState.shouldSlide === true) {
         const slideOutAndSomeAction = async (): Promise<void> => {
-          await slideOut()
+          await animatedElement.slideOut()
           onUnmount?.()
         }
 
@@ -124,7 +124,7 @@ export const BackdropWithSlidableModal = ({
         zIndex: 1000,
       }}
     >
-      <div ref={contentRef}>{children}</div>
+      <div ref={animatedElement.ref}>{children}</div>
     </div>
   )
 }

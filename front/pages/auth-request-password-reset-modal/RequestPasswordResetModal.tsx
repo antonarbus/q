@@ -5,19 +5,19 @@ import { useSignal } from '@preact/signals-react'
 import { FormModal } from '@shared/component/FormModal'
 import { EmailField } from '@shared/component/input-field/EmailField'
 import { router } from '@shared/lib/react-router-dom/router'
-import { useSlide } from '@shared/util/useSlide'
+import { useAnimatedElement } from '@shared/util/useAnimatedElement'
 import { type JSX, useRef } from 'react'
 import { PiPassword } from 'react-icons/pi'
 
 export const RequestPasswordResetModal = (): JSX.Element => {
-  const { ref: modalRef, slideOut } = useSlide()
+  const animatedElement = useAnimatedElement()
   const inputRef = useRef<HTMLDivElement>(null)
   const emailSignal = useSignal('')
   const isEmailOkSignal = useSignal(false)
 
   const { onSubmit, isPending, isSuccess, isError } = useRequestPasswordReset({
     emailSignal,
-    slideOut,
+    slideOut: animatedElement.slideOut,
   })
 
   const navigateUp = (): void => {
@@ -33,7 +33,7 @@ export const RequestPasswordResetModal = (): JSX.Element => {
       isButtonError={isError}
       isButtonLoading={isPending}
       isButtonSuccess={isSuccess}
-      modalRef={modalRef}
+      modalRef={animatedElement.ref}
       onCloseClick={navigateUp}
       onSubmit={onSubmit}
       onUnmount={navigateUp}
@@ -55,7 +55,7 @@ export const RequestPasswordResetModal = (): JSX.Element => {
           justifyContent: 'space-between',
         }}
       >
-        <OpenLoginModalLink slideOut={slideOut} />
+        <OpenLoginModalLink slideOut={animatedElement.slideOut} />
       </Box>
     </FormModal>
   )

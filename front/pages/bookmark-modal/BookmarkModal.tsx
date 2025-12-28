@@ -12,19 +12,19 @@ import { InfoField } from '@shared/component/input-field/InfoField'
 import { NameField } from '@shared/component/input-field/NameField'
 import { router } from '@shared/lib/react-router-dom/router'
 import { dispatch } from '@shared/lib/redux'
-import { useSlide } from '@shared/util/useSlide'
+import { useAnimatedElement } from '@shared/util/useAnimatedElement'
 import type { JSX } from 'react'
 import { FiEdit3 } from 'react-icons/fi'
 import { useUnmount } from 'react-use'
 import { BookmarkField } from './BookmarkField'
 
 export const BookmarkModal = (): JSX.Element => {
-  const { ref: modalRef, slideOut } = useSlide()
+  const animatedElement = useAnimatedElement()
   const { bookmarkFromValues } = useLoadInitValuesIntoBookmarkModal()
   useLoadBookmarkModalOpenedWithDirectLink({ bookmarkFromValues })
 
   const { onSubmit, isPending, isSuccess, isError } = useSaveBookmark({
-    slideOut,
+    slideOut: animatedElement.slideOut,
     bookmarkFromValues,
   })
 
@@ -38,9 +38,8 @@ export const BookmarkModal = (): JSX.Element => {
 
   const getBookmarkCategoryListQuery = useGetBookmarkCategoryListQuery()
 
-  const categories = (
+  const distinctCategoryList =
     getBookmarkCategoryListQuery.data?.distinctCategoryList ?? []
-  ).filter((cat) => cat !== undefined)
 
   return (
     <FormModal
@@ -50,7 +49,7 @@ export const BookmarkModal = (): JSX.Element => {
       isButtonError={isError}
       isButtonLoading={isPending}
       isButtonSuccess={isSuccess}
-      modalRef={modalRef}
+      modalRef={animatedElement.ref}
       onCloseClick={navigateUp}
       onSubmit={onSubmit}
       onUnmount={navigateUp}
@@ -61,7 +60,7 @@ export const BookmarkModal = (): JSX.Element => {
       <NameField nameSignal={bookmarkFromValues.nameSignal} />
       <CategoryField
         categorySignal={bookmarkFromValues.categorySignal}
-        options={categories}
+        options={distinctCategoryList}
       />
       <DescriptionField descSignal={bookmarkFromValues.descSignal} />
       <InfoField infoSignal={bookmarkFromValues.infoSignal} />
