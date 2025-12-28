@@ -37,7 +37,10 @@ export const ResizableBlockPaper = (props: Props): JSX.Element => {
         width: isAutoWidth === true ? 'auto' : width,
         height: 'auto',
       }}
-      enable={{}}
+      enable={{
+        right: true,
+        left: true,
+      }}
       handleClasses={{
         left: 'left-resize-handle',
         right: 'right-resize-handle',
