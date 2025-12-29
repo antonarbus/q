@@ -7,76 +7,34 @@ import { logger } from '../lib/output/logger'
 
 type Props = {
   environment: DeployedEnvironment
-  service: 'frontend' | 'backend' | 'both'
 }
 
 export const deployCloudRun = async (props: Props): Promise<void> => {
   // Use environment name as the docker image tag
   const dockerImageTag = props.environment
 
-  // Deploy frontend
-  const shouldDeployFrontend =
-    props.service === 'frontend' || props.service === 'both'
+  logger.info('=== Deploying Application (Unified Container) ===')
+  const imageUrl = `${infraConfig[props.environment].region}-docker.pkg.dev/${infraConfig[props.environment].projectId}/${infraConfig[props.environment].artifactRegistryName}/${infraConfig[props.environment].dockerImageName}:${dockerImageTag}`
 
-  if (shouldDeployFrontend === true) {
-    logger.info('=== Deploying Frontend ===')
-    const imageUrl = `${infraConfig[props.environment].region}-docker.pkg.dev/${infraConfig[props.environment].projectId}/${infraConfig[props.environment].artifactRegistryName}/${infraConfig[props.environment].dockerImageNameFrontend}:${dockerImageTag}`
+  logger.info('Capturing current image for rollback capability...')
 
-    logger.info('Capturing current frontend image for rollback capability...')
+  const previousImageBackend = await getCurrentCloudRunImage({
+    cloudRunServiceName: infraConfig[props.environment].cloudRunServiceName,
+    region: infraConfig[props.environment].region,
+    projectId: infraConfig[props.environment].projectId,
+  })
 
-    const previousImageFrontend = await getCurrentCloudRunImage({
-      cloudRunServiceName:
-        infraConfig[props.environment].cloudRunServiceNameFrontend,
-      region: infraConfig[props.environment].region,
-      projectId: infraConfig[props.environment].projectId,
-    })
+  logger.info(`  Previous image: ${previousImageBackend ?? 'none'}`)
 
-    logger.info(`  Previous image: ${previousImageFrontend ?? 'none'}`)
+  logToGithubOutput({ previousImageBackend: previousImageBackend ?? '' })
 
-    logToGithubOutput({ previousImageFrontend: previousImageFrontend ?? '' })
-
-    await updateCloudRunService({
-      cloudRunServiceName:
-        infraConfig[props.environment].cloudRunServiceNameFrontend,
-      imageUrl,
-      region: infraConfig[props.environment].region,
-      projectId: infraConfig[props.environment].projectId,
-      environment: props.environment,
-      backendUrl: `https://${infraConfig[props.environment].domainBackend}`,
-    })
-  }
-
-  // Deploy backend
-  const shouldDeployBackend =
-    props.service === 'backend' || props.service === 'both'
-
-  if (shouldDeployBackend === true) {
-    logger.info('=== Deploying Backend ===')
-    const imageUrl = `${infraConfig[props.environment].region}-docker.pkg.dev/${infraConfig[props.environment].projectId}/${infraConfig[props.environment].artifactRegistryName}/${infraConfig[props.environment].dockerImageNameBackend}:${dockerImageTag}`
-
-    logger.info('Capturing current backend image for rollback capability...')
-
-    const previousImageBackend = await getCurrentCloudRunImage({
-      cloudRunServiceName:
-        infraConfig[props.environment].cloudRunServiceNameBackend,
-      region: infraConfig[props.environment].region,
-      projectId: infraConfig[props.environment].projectId,
-    })
-
-    logger.info(`  Previous image: ${previousImageBackend ?? 'none'}`)
-
-    logToGithubOutput({ previousImageBackend: previousImageBackend ?? '' })
-
-    await updateCloudRunService({
-      cloudRunServiceName:
-        infraConfig[props.environment].cloudRunServiceNameBackend,
-      imageUrl,
-      region: infraConfig[props.environment].region,
-      projectId: infraConfig[props.environment].projectId,
-      environment: props.environment,
-      backendUrl: `https://${infraConfig[props.environment].domainBackend}`,
-    })
-  }
+  await updateCloudRunService({
+    cloudRunServiceName: infraConfig[props.environment].cloudRunServiceName,
+    imageUrl,
+    region: infraConfig[props.environment].region,
+    projectId: infraConfig[props.environment].projectId,
+    environment: props.environment,
+  })
 
   logger.success('Deployment completed successfully!')
 }

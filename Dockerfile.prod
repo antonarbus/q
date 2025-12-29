@@ -13,7 +13,8 @@ RUN bun run install-ci
 # Copy rest of the code (this invalidates cache only when code changes)
 COPY . .
 
-# Build
+# Build both frontend and backend
+RUN bun run build-front
 RUN bun run build-back
 
 FROM oven/bun:1-alpine
@@ -23,18 +24,23 @@ WORKDIR /app
 # Copy built backend code
 COPY --from=builder /app/back/build ./back/build
 
+# Copy built frontend code
+COPY --from=builder /app/front/build ./front/build
+
 # Copy package files for production install
 COPY --from=builder /app/package.json ./
 COPY --from=builder /app/bun.lock ./
-COPY --from=builder /app/front/package.json ./front/
 COPY --from=builder /app/back/package.json ./back/
 COPY --from=builder /app/config/secrets.ts ./config/secrets.ts
+# Note: Not copying front/package.json - frontend is already built into static files
 
-# Install production dependencies (workspaces aware)
-RUN bun run install-prod
+# Install backend production dependencies only
+# Backend package.json includes all its runtime deps (express, compression, etc.)
+RUN cd /app/back && bun install --frozen-lockfile --production
 
 WORKDIR /app/back/build
 
-EXPOSE 4000
+# Port 8080 is the standard for containerized apps and Cloud Run default
+EXPOSE 8080
 ENV NODE_ENV=production
 CMD ["bun", "run", "index.js"]

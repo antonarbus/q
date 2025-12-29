@@ -21,8 +21,7 @@ export const sharedInfraConfig = {
 
   // Artifact Registry (Docker images)
   artifactRegistryName: 'docker-images',
-  dockerImageNameFrontend: 'web-app-frontend',
-  dockerImageNameBackend: 'web-app-backend',
+  dockerImageName: 'web-app',
 
   // Service Accounts
   githubActionsSaName: 'github-actions-sa',
@@ -43,19 +42,13 @@ export const sharedInfraConfig = {
     '*',
   ],
 
-  // Cloud Run Configuration - Frontend
-  minInstancesFrontend: '0',
-  maxInstancesFrontend: '5',
-  cpuLimitFrontend: '1',
-  memoryLimitFrontend: '512Mi',
-  containerPortFrontend: '80',
-
-  // Cloud Run Configuration - Backend
-  minInstancesBackend: '0',
-  maxInstancesBackend: '5',
-  cpuLimitBackend: '1',
-  memoryLimitBackend: '512Mi',
-  containerPortBackend: '4000',
+  // Cloud Run Configuration
+  // Cloud Run will set PORT env var to this value automatically
+  minInstances: '0',
+  maxInstances: '5',
+  cpuLimit: '1',
+  memoryLimit: '512Mi',
+  containerPort: '8080',
 
   // Neon PostgreSQL Database
   // NOTE: One shared project across all environments
@@ -73,10 +66,8 @@ export const sharedInfraConfig = {
 type InfraConfig = Record<
   DeployedEnvironment,
   typeof sharedInfraConfig & {
-    cloudRunServiceNameFrontend: string
-    cloudRunServiceNameBackend: string
-    domainFrontend: string
-    domainBackend: string
+    cloudRunServiceName: string
+    domain: string
     neonDatabaseName: string
     environment: string
   }
@@ -86,37 +77,29 @@ type InfraConfig = Record<
 export const infraConfig = {
   prod: {
     ...sharedInfraConfig,
-    cloudRunServiceNameFrontend: `web-app-frontend-prod`,
-    cloudRunServiceNameBackend: `web-app-backend-prod`,
-    domainFrontend: DOMAIN,
-    domainBackend: `api.${DOMAIN}`,
+    cloudRunServiceName: `web-app-prod`,
+    domain: DOMAIN,
     neonDatabaseName: 'prod', // Production database
     environment: 'prod',
   },
   pilot: {
     ...sharedInfraConfig,
-    cloudRunServiceNameFrontend: `web-app-frontend-pilot`,
-    cloudRunServiceNameBackend: `web-app-backend-pilot`,
-    domainFrontend: `pilot.${DOMAIN}`,
-    domainBackend: `api-pilot.${DOMAIN}`,
+    cloudRunServiceName: `web-app-pilot`,
+    domain: `pilot.${DOMAIN}`,
     neonDatabaseName: 'prod', // Shares production database
     environment: 'pilot',
   },
   test: {
     ...sharedInfraConfig,
-    cloudRunServiceNameFrontend: `web-app-frontend-test`,
-    cloudRunServiceNameBackend: `web-app-backend-test`,
-    domainFrontend: `test.${DOMAIN}`,
-    domainBackend: `api-test.${DOMAIN}`,
+    cloudRunServiceName: `web-app-test`,
+    domain: `test.${DOMAIN}`,
     neonDatabaseName: 'test', // Test database
     environment: 'test',
   },
   dev: {
     ...sharedInfraConfig,
-    cloudRunServiceNameFrontend: `web-app-frontend-dev`,
-    cloudRunServiceNameBackend: `web-app-backend-dev`,
-    domainFrontend: `dev.${DOMAIN}`,
-    domainBackend: `api-dev.${DOMAIN}`,
+    cloudRunServiceName: `web-app-dev`,
+    domain: `dev.${DOMAIN}`,
     neonDatabaseName: 'dev', // Development database
     environment: 'dev',
   },

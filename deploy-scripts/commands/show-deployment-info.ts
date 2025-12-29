@@ -118,7 +118,6 @@ const showServiceInfo = async (props: ShowServiceInfoProps): Promise<void> => {
 
 type Props = {
   environment: DeployedEnvironment
-  service?: 'frontend' | 'backend' | 'both'
 }
 
 /**
@@ -126,44 +125,18 @@ type Props = {
  * Displays git commit SHA and message for currently deployed image
  */
 export const showDeploymentInfo = async (props: Props): Promise<void> => {
-  const service = props.service ?? 'both'
-
   // Print section header
   logger.warning(props.environment.toUpperCase())
   logger.emptyLine()
 
-  // Show Frontend
-  const shouldShowInfoAboutFrontend =
-    service === 'frontend' || service === 'both'
+  logger.info('=== Application Service ===')
 
-  if (shouldShowInfoAboutFrontend === true) {
-    logger.info('=== Frontend Service ===')
+  await showServiceInfo({
+    serviceName: 'Application',
+    cloudRunServiceName: infraConfig[props.environment].cloudRunServiceName,
+    region: infraConfig[props.environment].region,
+    projectId: infraConfig[props.environment].projectId,
+  })
 
-    await showServiceInfo({
-      serviceName: 'Frontend',
-      cloudRunServiceName:
-        infraConfig[props.environment].cloudRunServiceNameFrontend,
-      region: infraConfig[props.environment].region,
-      projectId: infraConfig[props.environment].projectId,
-    })
-
-    logger.emptyLine()
-  }
-
-  // Show Backend
-  const shouldShowInfoAboutBackend = service === 'backend' || service === 'both'
-
-  if (shouldShowInfoAboutBackend === true) {
-    logger.info('=== Backend Service ===')
-
-    await showServiceInfo({
-      serviceName: 'Backend',
-      cloudRunServiceName:
-        infraConfig[props.environment].cloudRunServiceNameBackend,
-      region: infraConfig[props.environment].region,
-      projectId: infraConfig[props.environment].projectId,
-    })
-
-    logger.emptyLine()
-  }
+  logger.emptyLine()
 }

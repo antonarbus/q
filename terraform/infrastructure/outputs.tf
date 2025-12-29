@@ -10,19 +10,13 @@
 #   terraform output
 
 # ==============================================================================
-# CLOUD RUN SERVICE URLS
+# CLOUD RUN SERVICE URL
 # ==============================================================================
 
-output "cloud_run_frontend_url_output" {
-  description = "The public URL where your frontend Cloud Run service is accessible"
-  value       = google_cloud_run_v2_service.frontend.uri
-  # Example: https://q-frontend-dev-abc123-uc.a.run.app
-}
-
-output "cloud_run_backend_url_output" {
-  description = "The public URL where your backend Cloud Run service is accessible"
-  value       = google_cloud_run_v2_service.backend.uri
-  # Example: https://q-backend-dev-abc123-uc.a.run.app
+output "cloud_run_app_url_output" {
+  description = "The public URL where your Cloud Run service is accessible"
+  value       = google_cloud_run_v2_service.app.uri
+  # Example: https://web-app-dev-abc123-uc.a.run.app
 }
 
 # ==============================================================================
@@ -58,36 +52,23 @@ output "cloud_run_service_account_email_output" {
 }
 
 # ==============================================================================
-# DOCKER IMAGE PATHS
+# DOCKER IMAGE PATH
 # ==============================================================================
 
-output "docker_image_frontend_path_output" {
-  description = "Full path for pushing/pulling frontend Docker images"
-  value       = "${var.region}-docker.pkg.dev/${var.project_id}/${var.artifact_registry_name}/${var.docker_image_name_frontend}"
-  # Example: us-central1-docker.pkg.dev/PROJECT_ID/docker-images/q-frontend
-}
-
-output "docker_image_backend_path_output" {
-  description = "Full path for pushing/pulling backend Docker images"
-  value       = "${var.region}-docker.pkg.dev/${var.project_id}/${var.artifact_registry_name}/${var.docker_image_name_backend}"
-  # Example: us-central1-docker.pkg.dev/PROJECT_ID/docker-images/q-backend
+output "docker_image_path_output" {
+  description = "Full path for pushing/pulling Docker images"
+  value       = "${var.region}-docker.pkg.dev/${var.project_id}/${var.artifact_registry_name}/${var.docker_image_name}"
+  # Example: us-central1-docker.pkg.dev/PROJECT_ID/docker-images/web-app
 }
 
 # ==============================================================================
 # CUSTOM DOMAIN
 # ==============================================================================
 
-output "domain_frontend_output" {
-  description = "Custom domain mapped to your frontend Cloud Run service"
-  value       = google_cloud_run_domain_mapping.frontend.name
+output "domain_app_output" {
+  description = "Custom domain mapped to your Cloud Run service"
+  value       = google_cloud_run_domain_mapping.app.name
   # Example: sendmequotation.today or dev.sendmequotation.today
-  # The DNS records should be configured at your domain registrar
-}
-
-output "domain_backend_output" {
-  description = "Custom domain mapped to your backend Cloud Run service"
-  value       = google_cloud_run_domain_mapping.backend.name
-  # Example: api.sendmequotation.today or api-dev.sendmequotation.today
   # The DNS records should be configured at your domain registrar
 }
 

@@ -10,7 +10,6 @@ import type { DeployedEnvironment } from '@root/config/environment'
 
 type Props = {
   environment: DeployedEnvironment
-  previousImageFrontend: string
   previousImageBackend: string
 }
 
@@ -20,30 +19,32 @@ export const verifyDeployment = async (props: Props): Promise<void> => {
     await Bun.sleep(10000)
 
     logger.emptyLine()
-    logger.info('=== Verifying Frontend ===')
 
-    // Get frontend URL
-    const frontendUrl = await getCloudRunServiceUrl({
-      cloudRunServiceName:
-        infraConfig[props.environment].cloudRunServiceNameFrontend,
+    logger.info(
+      '=== Verifying Unified Application (Backend serves Frontend) ===',
+    )
+
+    // Get backend URL (now serves both frontend and API)
+    const appUrl = await getCloudRunServiceUrl({
+      cloudRunServiceName: infraConfig[props.environment].cloudRunServiceName,
       region: infraConfig[props.environment].region,
       projectId: infraConfig[props.environment].projectId,
     })
 
-    logger.info(`Testing Frontend URL: ${frontendUrl}`)
+    let totalFailures = 0
 
-    // Test frontend
-    let frontendFailures = 0
+    // Test 1: Frontend (HTML) at root path
+    logger.info(`Testing Frontend at: ${appUrl}`)
 
     const frontendResponse = await axios<string>({
-      url: frontendUrl,
+      url: appUrl,
       method: 'get',
       responseType: 'text',
     })
 
     if (frontendResponse.status === 200) {
       logger.success(
-        `Frontend is live and responding (HTTP ${frontendResponse.status})`,
+        `  Frontend is live and responding (HTTP ${frontendResponse.status})`,
       )
 
       // Check for HTML content
@@ -57,7 +58,7 @@ export const verifyDeployment = async (props: Props): Promise<void> => {
         logger.success('     HTML content detected')
       } else {
         logger.error('     No HTML content found')
-        frontendFailures = frontendFailures + 1
+        totalFailures = totalFailures + 1
       }
 
       // Check response size
@@ -71,89 +72,61 @@ export const verifyDeployment = async (props: Props): Promise<void> => {
           `     Response too small: ${responseSize} bytes (expected > 100)`,
         )
 
-        frontendFailures = frontendFailures + 1
+        totalFailures = totalFailures + 1
       }
     } else {
       logger.error(`Frontend returned HTTP ${frontendResponse.status}`)
-      frontendFailures = frontendFailures + 1
+      totalFailures = totalFailures + 1
     }
 
     logger.emptyLine()
-    logger.info('=== Verifying Backend ===')
 
-    // Get backend URL
-    const backendUrl = await getCloudRunServiceUrl({
-      cloudRunServiceName:
-        infraConfig[props.environment].cloudRunServiceNameBackend,
-      region: infraConfig[props.environment].region,
-      projectId: infraConfig[props.environment].projectId,
-    })
-
-    logger.info(`Testing Backend URL: ${backendUrl}/api/health-check`)
-
-    let backendFailures = 0
+    // Test 2: Backend API health check
+    logger.info(`Testing API at: ${appUrl}/api/health-check`)
 
     const healthCheckResponse = await axios<ResBody, AxiosResponse<ResBody>>({
-      url: `${backendUrl}${route.health.url}`,
+      url: `${appUrl}${route.health.url}`,
       method: 'get',
     })
 
     if (healthCheckResponse.status === 200) {
       logger.success(
-        `Backend is live and responding (HTTP ${healthCheckResponse.status})`,
+        `  API is live and responding (HTTP ${healthCheckResponse.status})`,
       )
     } else {
       logger.error(
-        `Backend health check returned HTTP ${healthCheckResponse.status}`,
+        `API health check returned HTTP ${healthCheckResponse.status}`,
       )
 
-      backendFailures = backendFailures + 1
+      totalFailures = totalFailures + 1
     }
 
     logger.emptyLine()
 
     // Summary
-    const totalFailures = frontendFailures + backendFailures
-
     if (totalFailures === 0) {
       logger.success('All verification tests passed')
-      logger.plain(`🌐 Frontend URL: ${frontendUrl}`)
-      logger.plain(`🔧 Backend URL: ${backendUrl}`)
+      logger.plain(`🌐 Application URL: ${appUrl}`)
+      logger.plain(`🔧 API URL: ${appUrl}/api`)
       logger.emptyLine()
       exit(0)
     } else {
       logger.error(`${totalFailures} verification test(s) failed`)
-      logger.warning('Services may not be functioning correctly')
-      logger.plain(`🌐 Frontend URL: ${frontendUrl}`)
-      logger.plain(`🔧 Backend URL: ${backendUrl}`)
+      logger.warning('Service may not be functioning correctly')
+      logger.plain(`🌐 Application URL: ${appUrl}`)
+      logger.plain(`🔧 API URL: ${appUrl}/api`)
       logger.emptyLine()
 
-      // Rollback frontend if needed
-      const shouldRollbackFrontend =
-        frontendFailures > 0 && Boolean(props.previousImageFrontend)
+      // Rollback if needed
+      const shouldRollback =
+        totalFailures > 0 && Boolean(props.previousImageBackend)
 
-      if (shouldRollbackFrontend === true) {
-        logger.info('Rolling back frontend...')
-
-        await rollbackCloudRunService({
-          cloudRunServiceName:
-            infraConfig[props.environment].cloudRunServiceNameFrontend,
-          previousImage: props.previousImageFrontend,
-          region: infraConfig[props.environment].region,
-          projectId: infraConfig[props.environment].projectId,
-        })
-      }
-
-      // Rollback backend if needed
-      const shouldRollbackBackend =
-        backendFailures > 0 && Boolean(props.previousImageBackend)
-
-      if (shouldRollbackBackend === true) {
-        logger.info('Rolling back backend...')
+      if (shouldRollback === true) {
+        logger.info('Rolling back application...')
 
         await rollbackCloudRunService({
           cloudRunServiceName:
-            infraConfig[props.environment].cloudRunServiceNameBackend,
+            infraConfig[props.environment].cloudRunServiceName,
           previousImage: props.previousImageBackend,
           region: infraConfig[props.environment].region,
           projectId: infraConfig[props.environment].projectId,

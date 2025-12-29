@@ -56,41 +56,21 @@ variable "artifact_registry_name" {
 }
 
 # ==============================================================================
-# CLOUD RUN - FRONTEND
+# CLOUD RUN - UNIFIED APPLICATION
 # ==============================================================================
 
-variable "cloud_run_service_name_frontend" {
-  description = "Name of the Cloud Run service for frontend"
+variable "cloud_run_service_name" {
+  description = "Name of the Cloud Run service"
   type        = string
-  # This is the name of your frontend running application
+  # This is the name of your running application
   # Will appear in Google Cloud Console and URLs
   # Value provided by config/*.tfvars file
 }
 
-variable "docker_image_name_frontend" {
-  description = "Name of the Docker image in Artifact Registry for frontend"
+variable "docker_image_name" {
+  description = "Name of the Docker image in Artifact Registry"
   type        = string
-  # The name for your frontend Docker image
-  # Full path will be: REGION-docker.pkg.dev/PROJECT/REGISTRY/IMAGE:TAG
-  # Value provided by config/*.tfvars file
-}
-
-# ==============================================================================
-# CLOUD RUN - BACKEND
-# ==============================================================================
-
-variable "cloud_run_service_name_backend" {
-  description = "Name of the Cloud Run service for backend"
-  type        = string
-  # This is the name of your backend running application
-  # Will appear in Google Cloud Console and URLs
-  # Value provided by config/*.tfvars file
-}
-
-variable "docker_image_name_backend" {
-  description = "Name of the Docker image in Artifact Registry for backend"
-  type        = string
-  # The name for your backend Docker image
+  # The name for your Docker image
   # Full path will be: REGION-docker.pkg.dev/PROJECT/REGISTRY/IMAGE:TAG
   # Value provided by config/*.tfvars file
 }
@@ -118,89 +98,42 @@ variable "cloud_run_sa_name" {
 }
 
 # ==============================================================================
-# SCALING & PERFORMANCE - FRONTEND
+# SCALING & PERFORMANCE
 # ==============================================================================
 
-variable "min_instances_frontend" {
-  description = "Minimum number of Cloud Run instances to keep running for frontend"
+variable "min_instances" {
+  description = "Minimum number of Cloud Run instances to keep running"
   type        = number
   # 0 = Scale to zero when idle (saves money, but first request is slower)
   # 1+ = Keep instances warm (faster response, but costs money even when idle)
-  # For production with traffic: consider 1-2 min instances
   # Value provided by config/*.tfvars file
 }
 
-variable "max_instances_frontend" {
-  description = "Maximum number of Cloud Run instances allowed for frontend"
+variable "max_instances" {
+  description = "Maximum number of Cloud Run instances allowed"
   type        = number
   # Prevents runaway costs if you get sudden traffic spike
-  # Each instance handles ~80 concurrent requests by default
-  # Adjust based on expected traffic
   # Value provided by config/*.tfvars file
 }
 
-variable "cpu_limit_frontend" {
-  description = "CPU limit for each Cloud Run container for frontend"
+variable "cpu_limit" {
+  description = "CPU limit for each Cloud Run container"
   type        = string
-  # Options: "1" (1 CPU), "2" (2 CPUs), "4" (4 CPUs), "8" (8 CPUs)
-  # More CPU = faster processing but higher cost
-  # 1 CPU is good for most web apps
-  # Pricing: https://cloud.google.com/run/pricing
+  # Options: "1" (1 CPU), "2" (2 CPUs), "4", "8"
   # Value provided by config/*.tfvars file
 }
 
-variable "memory_limit_frontend" {
-  description = "Memory limit for each Cloud Run container for frontend"
+variable "memory_limit" {
+  description = "Memory limit for each Cloud Run container"
   type        = string
   # Options: 128Mi, 256Mi, 512Mi, 1Gi, 2Gi, 4Gi, 8Gi, 16Gi, 32Gi
-  # Mi = Mebibytes, Gi = Gibibytes
-  # More memory = can handle larger requests but higher cost
-  # 512Mi is good for small/medium apps
-  # Monitor actual usage in Cloud Console to optimize
   # Value provided by config/*.tfvars file
 }
 
-variable "container_port_frontend" {
-  description = "Port that the frontend container listens on for HTTP requests"
+variable "container_port" {
+  description = "Port that the container listens on for HTTP requests"
   type        = number
-  # Your application must listen on this port
-  # Cloud Run forwards HTTP/HTTPS traffic to this port
-  # Common values: 8080, 3000, 8000
   # Must match the port your app uses (check your Dockerfile)
-  # Value provided by config/*.tfvars file
-}
-
-# ==============================================================================
-# SCALING & PERFORMANCE - BACKEND
-# ==============================================================================
-
-variable "min_instances_backend" {
-  description = "Minimum number of Cloud Run instances to keep running for backend"
-  type        = number
-  # Value provided by config/*.tfvars file
-}
-
-variable "max_instances_backend" {
-  description = "Maximum number of Cloud Run instances allowed for backend"
-  type        = number
-  # Value provided by config/*.tfvars file
-}
-
-variable "cpu_limit_backend" {
-  description = "CPU limit for each Cloud Run container for backend"
-  type        = string
-  # Value provided by config/*.tfvars file
-}
-
-variable "memory_limit_backend" {
-  description = "Memory limit for each Cloud Run container for backend"
-  type        = string
-  # Value provided by config/*.tfvars file
-}
-
-variable "container_port_backend" {
-  description = "Port that the backend container listens on for HTTP requests"
-  type        = number
   # Value provided by config/*.tfvars file
 }
 
@@ -208,21 +141,10 @@ variable "container_port_backend" {
 # CUSTOM DOMAIN
 # ==============================================================================
 
-variable "domain_frontend" {
-  description = "Custom domain name to map to the frontend Cloud Run service"
+variable "domain" {
+  description = "Custom domain name to map to the Cloud Run service"
   type        = string
   # Your domain name (without www or https://)
-  # After Terraform creates the mapping, you need to:
-  # 1. Go to Cloud Run > Manage custom domains in Google Cloud Console
-  # 2. Copy the DNS records shown
-  # 3. Add them to your domain registrar (GoDaddy, Namecheap, etc.)
-  # Value provided by config/*.tfvars file
-}
-
-variable "domain_backend" {
-  description = "Custom domain name to map to the backend Cloud Run service"
-  type        = string
-  # Your API domain name (without www or https://)
   # After Terraform creates the mapping, you need to:
   # 1. Go to Cloud Run > Manage custom domains in Google Cloud Console
   # 2. Copy the DNS records shown

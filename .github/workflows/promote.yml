@@ -155,8 +155,8 @@ jobs:
       - name: 'Configure gcloud'
         run: gcloud config set project '${{ steps.config.outputs.projectId }}'
 
-  promote-backend:
-    name: 'Promote and Deploy Backend'
+  promote:
+    name: 'Promote and Deploy Application'
     needs: setup-promotion
     if: ${{ !cancelled() && needs.setup-promotion.result == 'success' }}
     runs-on: ubuntu-latest
@@ -187,58 +187,18 @@ jobs:
           workload_identity_provider: 'projects/${{ needs.setup-promotion.outputs.projectNumber }}/locations/global/workloadIdentityPools/github-pool/providers/github-provider'
           service_account: 'github-actions-sa@${{ needs.setup-promotion.outputs.projectId }}.iam.gserviceaccount.com'
 
-      - name: 'Promote Backend Docker Image'
+      - name: 'Promote Application Docker Image'
         id: promote
-        run: bun deploy-scripts/cli.ts promote-image --source-env "${{ github.event.inputs.source-env }}" --target-env "${{ github.event.inputs.target-env }}" --service backend >> $GITHUB_OUTPUT
+        run: bun deploy-scripts/cli.ts promote-image --source-env "${{ github.event.inputs.source-env }}" --target-env "${{ github.event.inputs.target-env }}" >> $GITHUB_OUTPUT
 
-      - name: 'Deploy Backend to Cloud Run'
+      - name: 'Deploy Application to Cloud Run'
         id: deploy
-        run: bun deploy-scripts/cli.ts deploy-cloudrun --env "${{ github.event.inputs.target-env }}" --service backend >> $GITHUB_OUTPUT
-
-  promote-frontend:
-    name: 'Promote and Deploy Frontend'
-    needs: setup-promotion
-    if: ${{ !cancelled() && needs.setup-promotion.result == 'success' }}
-    runs-on: ubuntu-latest
-
-    permissions:
-      contents: read
-      id-token: write
-
-    outputs:
-      previousImageFrontend: ${{ steps.deploy.outputs.previousImageFrontend }}
-      frontendSourceImageDigest: ${{ steps.promote.outputs.frontendSourceImageDigest }}
-
-    steps:
-      - name: 'Checkout repository'
-        uses: actions/checkout@v4
-
-      - name: 'Setup Bun'
-        uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: latest
-
-      - name: 'Install dependencies'
-        run: bun run install-ci
-
-      - name: 'Authenticate to Google Cloud'
-        uses: 'google-github-actions/auth@v3'
-        with:
-          workload_identity_provider: 'projects/${{ needs.setup-promotion.outputs.projectNumber }}/locations/global/workloadIdentityPools/github-pool/providers/github-provider'
-          service_account: 'github-actions-sa@${{ needs.setup-promotion.outputs.projectId }}.iam.gserviceaccount.com'
-
-      - name: 'Promote Frontend Docker Image'
-        id: promote
-        run: bun deploy-scripts/cli.ts promote-image --source-env "${{ github.event.inputs.source-env }}" --target-env "${{ github.event.inputs.target-env }}" --service frontend >> $GITHUB_OUTPUT
-
-      - name: 'Deploy Frontend to Cloud Run'
-        id: deploy
-        run: bun deploy-scripts/cli.ts deploy-cloudrun --env "${{ github.event.inputs.target-env }}" --service frontend >> $GITHUB_OUTPUT
+        run: bun deploy-scripts/cli.ts deploy-cloudrun --env "${{ github.event.inputs.target-env }}" >> $GITHUB_OUTPUT
 
   verify-promotion:
     name: 'Verify Promoted Deployment'
-    needs: [setup-promotion, promote-backend, promote-frontend]
-    if: ${{ !cancelled() && needs.setup-promotion.result == 'success' && needs.promote-backend.result == 'success' && needs.promote-frontend.result == 'success' }}
+    needs: [setup-promotion, promote]
+    if: ${{ !cancelled() && needs.setup-promotion.result == 'success' && needs.promote.result == 'success' }}
     runs-on: ubuntu-latest
 
     permissions:
@@ -264,11 +224,11 @@ jobs:
           service_account: 'github-actions-sa@${{ needs.setup-promotion.outputs.projectId }}.iam.gserviceaccount.com'
 
       - name: 'Verify Deployment'
-        run: bun deploy-scripts/cli.ts verify-deployment --env "${{ github.event.inputs.target-env }}" --previous-image-frontend "${{ needs.promote-frontend.outputs.previousImageFrontend }}" --previous-image-backend "${{ needs.promote-backend.outputs.previousImageBackend }}"
+        run: bun deploy-scripts/cli.ts verify-deployment --env "${{ github.event.inputs.target-env }}" --previous-image-backend "${{ needs.promote.outputs.previousImageBackend }}"
 
   summary:
     name: 'Promotion Summary'
-    needs: [promote-backend, promote-frontend, verify-promotion]
+    needs: [promote, verify-promotion]
     runs-on: ubuntu-latest
     if: always()
 
@@ -279,12 +239,10 @@ jobs:
           echo "" >> "$GITHUB_STEP_SUMMARY"
           echo "**Source**: ${{ github.event.inputs.source-env }}" >> "$GITHUB_STEP_SUMMARY"
           echo "**Target**: ${{ github.event.inputs.target-env }}" >> "$GITHUB_STEP_SUMMARY"
-          echo "**Backend Digest**: \`${{ needs.promote-backend.outputs.backendSourceImageDigest }}\`" >> "$GITHUB_STEP_SUMMARY"
-          echo "**Frontend Digest**: \`${{ needs.promote-frontend.outputs.frontendSourceImageDigest }}\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "**Application Digest**: \`${{ needs.promote.outputs.backendSourceImageDigest }}\`" >> "$GITHUB_STEP_SUMMARY"
           echo "**Promoted by**: ${{ github.actor }}" >> "$GITHUB_STEP_SUMMARY"
           echo "**Timestamp**: $(date -u +"%Y-%m-%d %H:%M:%S UTC")" >> "$GITHUB_STEP_SUMMARY"
           echo "" >> "$GITHUB_STEP_SUMMARY"
           echo "### Job Status" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Backend Promotion: ${{ needs.promote-backend.result }}" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Frontend Promotion: ${{ needs.promote-frontend.result }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Application Promotion: ${{ needs.promote.result }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- Verification: ${{ needs.verify-promotion.result }}" >> "$GITHUB_STEP_SUMMARY"

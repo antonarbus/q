@@ -1,17 +1,16 @@
 # ==============================================================================
-# CLOUD RUN SERVICES - FRONTEND & BACKEND
+# CLOUD RUN SERVICE - UNIFIED APPLICATION
 # ==============================================================================
-# Two separate Cloud Run services for the quotation app
-# Frontend: Serves the React UI (Nginx)
-# Backend: API server (Express/Bun)
+# Single Cloud Run service serving both frontend (static files) and backend (API)
+# Express server serves React static files AND API endpoints
 # Cloud Run automatically scales up/down based on traffic (even to zero!)
 
 # ==============================================================================
-# FRONTEND SERVICE
+# APPLICATION SERVICE
 # ==============================================================================
 
-resource "google_cloud_run_v2_service" "frontend" {
-  name     = var.cloud_run_service_name_frontend
+resource "google_cloud_run_v2_service" "app" {
+  name     = var.cloud_run_service_name
   location = var.region
   ingress  = "INGRESS_TRAFFIC_ALL" # Accept traffic from internet
 
@@ -19,12 +18,12 @@ resource "google_cloud_run_v2_service" "frontend" {
     labels = {
       managed-by  = "terraform"
       environment = var.environment
-      service     = "frontend"
+      service     = "app"
     }
 
     scaling {
-      min_instance_count = var.min_instances_frontend
-      max_instance_count = var.max_instances_frontend
+      min_instance_count = var.min_instances
+      max_instance_count = var.max_instances
     }
 
     containers {
@@ -33,87 +32,16 @@ resource "google_cloud_run_v2_service" "frontend" {
 
       resources {
         limits = {
-          cpu    = var.cpu_limit_frontend
-          memory = var.memory_limit_frontend
+          cpu    = var.cpu_limit
+          memory = var.memory_limit
         }
       }
 
       ports {
-        container_port = var.container_port_frontend
+        container_port = var.container_port
       }
 
-      # Environment variables for frontend
-      env {
-        name  = "NODE_ENV"
-        value = "production"
-      }
-
-      env {
-        name  = "ENVIRONMENT"
-        value = var.environment
-      }
-
-      env {
-        name  = "BACKEND_URL"
-        value = "https://${var.domain_backend}"
-      }
-    }
-
-    service_account = data.google_service_account.cloud_run_service.email
-  }
-
-  traffic {
-    type    = "TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST"
-    percent = 100
-  }
-
-  lifecycle {
-    ignore_changes = [
-      client,
-      client_version,
-      template[0].containers[0].image,
-    ]
-  }
-}
-
-# ==============================================================================
-# BACKEND SERVICE
-# ==============================================================================
-
-resource "google_cloud_run_v2_service" "backend" {
-  name     = var.cloud_run_service_name_backend
-  location = var.region
-  ingress  = "INGRESS_TRAFFIC_ALL" # Accept traffic from internet
-
-  template {
-    labels = {
-      managed-by  = "terraform"
-      environment = var.environment
-      service     = "backend"
-    }
-
-    scaling {
-      min_instance_count = var.min_instances_backend
-      max_instance_count = var.max_instances_backend
-    }
-
-    containers {
-      # Placeholder image - actual image deployed by GitHub Actions
-      image = "us-docker.pkg.dev/cloudrun/container/hello"
-
-      resources {
-        limits = {
-          cpu    = var.cpu_limit_backend
-          memory = var.memory_limit_backend
-        }
-      }
-
-      ports {
-        container_port = var.container_port_backend
-      }
-
-      # Environment variables for backend
-      # Add MongoDB connection string, API keys, etc. via secrets
+      # Environment variables
       # Note: PORT is automatically set by Cloud Run based on container_port
       env {
         name  = "NODE_ENV"
@@ -124,11 +52,6 @@ resource "google_cloud_run_v2_service" "backend" {
         name  = "ENVIRONMENT"
         value = var.environment
       }
-
-      env {
-        name  = "BACKEND_URL"
-        value = "https://${var.domain_backend}"
-      }
     }
 
     service_account = data.google_service_account.cloud_run_service.email
@@ -149,23 +72,12 @@ resource "google_cloud_run_v2_service" "backend" {
 }
 
 # ==============================================================================
-# PUBLIC ACCESS CONFIGURATION - FRONTEND
+# PUBLIC ACCESS CONFIGURATION
 # ==============================================================================
 
-resource "google_cloud_run_v2_service_iam_member" "frontend_public_access" {
-  name     = google_cloud_run_v2_service.frontend.name
-  location = google_cloud_run_v2_service.frontend.location
-  role     = "roles/run.invoker"
-  member   = "allUsers"
-}
-
-# ==============================================================================
-# PUBLIC ACCESS CONFIGURATION - BACKEND
-# ==============================================================================
-
-resource "google_cloud_run_v2_service_iam_member" "backend_public_access" {
-  name     = google_cloud_run_v2_service.backend.name
-  location = google_cloud_run_v2_service.backend.location
+resource "google_cloud_run_v2_service_iam_member" "app_public_access" {
+  name     = google_cloud_run_v2_service.app.name
+  location = google_cloud_run_v2_service.app.location
   role     = "roles/run.invoker"
   member   = "allUsers"
 }

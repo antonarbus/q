@@ -2,20 +2,10 @@
 # docker-compose -f docker-compose.prod.yml build --no-cache
 # docker-compose -f docker-compose.prod.yml up
 services:
-  backend:
+  app:
     build:
-      dockerfile: ./Dockerfile.prod.back
+      dockerfile: ./Dockerfile.prod
     ports:
-      - '4000:4000'
+      - '8080:8080'
     environment:
       - ENVIRONMENT=local
-
-  frontend:
-    build:
-      dockerfile: ./Dockerfile.prod.front
-    ports:
-      - '80:80'
-    environment:
-      - BACKEND_URL=http://backend:4000
-    depends_on:
-      - backend

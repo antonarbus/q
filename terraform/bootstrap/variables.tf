@@ -107,13 +107,7 @@ variable "container_port" {
   default     = null
 }
 
-variable "domain_frontend" {
-  description = "Not used in bootstrap module"
-  type        = string
-  default     = null
-}
-
-variable "domain_backend" {
+variable "domain" {
   description = "Not used in bootstrap module"
   type        = string
   default     = null

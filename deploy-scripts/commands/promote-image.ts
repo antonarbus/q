@@ -72,46 +72,22 @@ const promoteServiceImage = async (
 type Props = {
   sourceEnvironment: DeployedEnvironment
   targetEnvironment: DeployedEnvironment
-  service: 'frontend' | 'backend' | 'both'
 }
 
 export const promoteImage = async (props: Props): Promise<void> => {
-  logger.info('Promoting Docker images...')
+  logger.info('Promoting Docker image...')
   logger.info(`  Registry: ${sharedInfraConfig.artifactRegistryName}`)
   logger.info(`  Source tag: ${props.sourceEnvironment}`)
   logger.info(`  Target tag: ${props.targetEnvironment}`)
-  logger.info(`  Service: ${props.service}`)
   logger.emptyLine()
 
-  // Promote Frontend
-  const shouldPromoteFrontend =
-    props.service === 'frontend' || props.service === 'both'
-
-  if (shouldPromoteFrontend === true) {
-    await promoteServiceImage({
-      serviceName: 'Frontend',
-      dockerImageName: sharedInfraConfig.dockerImageNameFrontend,
-      region: sharedInfraConfig.region,
-      projectId: sharedInfraConfig.projectId,
-      artifactRegistryName: sharedInfraConfig.artifactRegistryName,
-      sourceEnvironment: props.sourceEnvironment,
-      targetEnvironment: props.targetEnvironment,
-    })
-  }
-
-  // Promote Backend
-  const shouldPromoteBackend =
-    props.service === 'backend' || props.service === 'both'
-
-  if (shouldPromoteBackend === true) {
-    await promoteServiceImage({
-      serviceName: 'Backend',
-      dockerImageName: sharedInfraConfig.dockerImageNameBackend,
-      region: sharedInfraConfig.region,
-      projectId: sharedInfraConfig.projectId,
-      artifactRegistryName: sharedInfraConfig.artifactRegistryName,
-      sourceEnvironment: props.sourceEnvironment,
-      targetEnvironment: props.targetEnvironment,
-    })
-  }
+  await promoteServiceImage({
+    serviceName: 'Application',
+    dockerImageName: sharedInfraConfig.dockerImageName,
+    region: sharedInfraConfig.region,
+    projectId: sharedInfraConfig.projectId,
+    artifactRegistryName: sharedInfraConfig.artifactRegistryName,
+    sourceEnvironment: props.sourceEnvironment,
+    targetEnvironment: props.targetEnvironment,
+  })
 }

@@ -14,8 +14,6 @@ import { validatePromotion } from './commands/validate-promotion'
 import { verifyDeployment } from './commands/verify-deployment'
 import { runInteractiveMode } from './lib/interactive'
 import { deployedEnvironmentSchema } from '@root/config/environment'
-// eslint-disable-next-line id-length
-import z from 'zod'
 
 const noArgumentsProvided = process.argv.length === 2
 
@@ -119,24 +117,16 @@ program
 
 program
   .command('deploy-cloudrun')
-  .description('Deploy Docker image to Cloud Run')
+  .description('Deploy unified application to Cloud Run')
   .requiredOption(
     '--env <environment>',
     'Environment name (dev, test, pilot, prod)',
   )
-  .requiredOption(
-    '--service <service>',
-    'Service to deploy (frontend, backend, or both)',
-  )
-  .action(async (options: { env: string; service: string }) => {
+  .action(async (options: { env: string }) => {
     const validatedEnvironment = deployedEnvironmentSchema.parse(options.env)
-
-    const serviceSchema = z.enum(['frontend', 'backend', 'both'])
-    const validatedService = serviceSchema.parse(options.service)
 
     await deployCloudRun({
       environment: validatedEnvironment,
-      service: validatedService,
     })
   })
 
@@ -148,28 +138,17 @@ program
     'Environment name (dev, test, pilot, prod)',
   )
   .requiredOption(
-    '--previous-image-frontend <image>',
-    'Previous frontend image URL for rollback',
-  )
-  .requiredOption(
     '--previous-image-backend <image>',
     'Previous backend image URL for rollback',
   )
-  .action(
-    async (options: {
-      env: string
-      previousImageFrontend: string
-      previousImageBackend: string
-    }) => {
-      const validatedEnvironment = deployedEnvironmentSchema.parse(options.env)
+  .action(async (options: { env: string; previousImageBackend: string }) => {
+    const validatedEnvironment = deployedEnvironmentSchema.parse(options.env)
 
-      await verifyDeployment({
-        environment: validatedEnvironment,
-        previousImageFrontend: options.previousImageFrontend,
-        previousImageBackend: options.previousImageBackend,
-      })
-    },
-  )
+    await verifyDeployment({
+      environment: validatedEnvironment,
+      previousImageBackend: options.previousImageBackend,
+    })
+  })
 
 program
   .command('validate-promotion')
@@ -196,33 +175,19 @@ program
   .description('Promote Docker image from source to target environment')
   .requiredOption('--source-env <environment>', 'Source environment name')
   .requiredOption('--target-env <environment>', 'Target environment name')
-  .requiredOption(
-    '--service <service>',
-    'Service to promote (frontend, backend, or both)',
-  )
-  .action(
-    async (options: {
-      sourceEnv: string
-      targetEnv: string
-      service: string
-    }) => {
-      const validatedSourceEnvironment = deployedEnvironmentSchema.parse(
-        options.sourceEnv,
-      )
+  .action(async (options: { sourceEnv: string; targetEnv: string }) => {
+    const validatedSourceEnvironment = deployedEnvironmentSchema.parse(
+      options.sourceEnv,
+    )
 
-      const validatedTargetEnvironment = deployedEnvironmentSchema.parse(
-        options.targetEnv,
-      )
+    const validatedTargetEnvironment = deployedEnvironmentSchema.parse(
+      options.targetEnv,
+    )
 
-      const serviceSchema = z.enum(['frontend', 'backend', 'both'])
-      const validatedService = serviceSchema.parse(options.service)
-
-      await promoteImage({
-        sourceEnvironment: validatedSourceEnvironment,
-        targetEnvironment: validatedTargetEnvironment,
-        service: validatedService,
-      })
-    },
-  )
+    await promoteImage({
+      sourceEnvironment: validatedSourceEnvironment,
+      targetEnvironment: validatedTargetEnvironment,
+    })
+  })
 
 program.parse()

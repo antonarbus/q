@@ -23,14 +23,14 @@
 # ==============================================================================
 # CUSTOM DOMAIN MAPPING
 # ==============================================================================
-# Maps your custom domain to the Cloud Run service
+# Maps your custom domain to the unified Cloud Run service
 # Automatically provisions SSL certificate
 
 # Cloud Run domain mapping (v1 API)
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/cloud_run_domain_mapping
-resource "google_cloud_run_domain_mapping" "frontend" {
-  name     = var.domain_frontend # Custom domain from config (e.g., "sendmequotation.today", "dev.sendmequotation.today")
-  location = var.region          # Same region as Cloud Run service
+resource "google_cloud_run_domain_mapping" "app" {
+  name     = var.domain # Custom domain from config (e.g., "sendmequotation.today", "dev.sendmequotation.today")
+  location = var.region # Same region as Cloud Run service
 
   # Project namespace
   metadata {
@@ -39,21 +39,6 @@ resource "google_cloud_run_domain_mapping" "frontend" {
 
   # Which Cloud Run service this domain points to
   spec {
-    route_name = google_cloud_run_v2_service.frontend.name
-  }
-}
-
-resource "google_cloud_run_domain_mapping" "backend" {
-  name     = var.domain_backend # Custom domain from config (e.g., "api.sendmequotation.today", "api-dev.sendmequotation.today")
-  location = var.region         # Same region as Cloud Run service
-
-  # Project namespace
-  metadata {
-    namespace = var.project_id
-  }
-
-  # Which Cloud Run service this domain points to
-  spec {
-    route_name = google_cloud_run_v2_service.backend.name
+    route_name = google_cloud_run_v2_service.app.name
   }
 }

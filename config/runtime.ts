@@ -43,7 +43,7 @@ export const runtimeConfig = {
       // Fallback for unknown environment (build time)
       return 'localhost'
     },
-    port: 4000,
+    port: 8080,
     get baseUrl() {
       if (runtimeConfig.environment === 'local') {
         return `${this.protocol}://${this.hostname}:${this.port}` as const
