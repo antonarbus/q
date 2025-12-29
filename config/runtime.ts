@@ -25,19 +25,19 @@ export const runtimeConfig = {
       }
 
       if (runtimeConfig.environment === 'dev') {
-        return `api-dev.${DOMAIN}`
+        return `dev.${DOMAIN}`
       }
 
       if (runtimeConfig.environment === 'test') {
-        return `api-test.${DOMAIN}`
+        return `test.${DOMAIN}`
       }
 
       if (runtimeConfig.environment === 'pilot') {
-        return `api-pilot.${DOMAIN}`
+        return `pilot.${DOMAIN}`
       }
 
       if (runtimeConfig.environment === 'prod') {
-        return `api.${DOMAIN}`
+        return DOMAIN
       }
 
       // Fallback for unknown environment (build time)
