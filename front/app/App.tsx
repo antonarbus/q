@@ -19,6 +19,8 @@ import { GlobalStyles } from './GlobalStyles'
 import { QueryDevtoolsProductionHidden } from './QueryDevtoolsProductionHidden'
 
 export const App = (): JSX.Element => {
+  console.info('render app')
+
   return (
     <Provider store={store}>
       <QueryClientProvider client={instance.queryClient}>
