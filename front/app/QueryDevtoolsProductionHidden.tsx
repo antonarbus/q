@@ -18,7 +18,6 @@ export const QueryDevtoolsProductionHidden = (): JSX.Element | null => {
   const controller = new AbortController()
 
   const [showDevtools, setShowDevtools] = useState(false)
-  console.info('QueryDevtoolsProductionHidden rendered, showDevtools:', showDevtools)
 
   let keysPressed: string[] = []
 
