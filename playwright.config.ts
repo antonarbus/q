@@ -47,7 +47,7 @@ export default defineConfig({
     runtimeConfig.environment === 'local'
       ? [
           {
-            command: 'bun run start-back',
+            command: 'bun run dev-back',
             url: runtimeConfig.back.baseUrl,
             ignoreHTTPSErrors: true,
             reuseExistingServer: runtimeConfig.ci === false,
@@ -55,7 +55,7 @@ export default defineConfig({
             stderr: 'ignore',
           },
           {
-            command: 'bun run start-front',
+            command: 'bun run dev-front',
             url: runtimeConfig.front.baseUrl,
             ignoreHTTPSErrors: true,
             reuseExistingServer: runtimeConfig.ci === false,
