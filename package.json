@@ -8,10 +8,10 @@
     "back"
   ],
   "scripts": {
-    "start": "concurrently \"bun run start-back\" \"bun run start-front\"",
-    "stop": "kill-port 3000 8080",
-    "start-front": "vite",
-    "start-back": "bun --watch back/index.ts",
+    "dev": "concurrently \"bun run dev-back\" \"bun run dev-front\"",
+    "dev-front": "vite",
+    "dev-back": "bun --watch back/index.ts",
+    "stop-dev": "kill-port 3000 8080",
     "build-front": "vite build",
     "build-back": "rollup -c rollup.config.js",
     "build-all": "concurrently \"bun run build-front\" \"bun run build-back\"",

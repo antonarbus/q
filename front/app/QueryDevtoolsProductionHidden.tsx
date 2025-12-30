@@ -5,7 +5,9 @@ const QueryDevtoolsProduction = lazy(async () => {
   const moduleObject =
     await import('@tanstack/react-query-devtools/build/modern/production.js')
 
-  const res = { default: moduleObject.ReactQueryDevtools }
+  const res = {
+    default: moduleObject.ReactQueryDevtools,
+  }
 
   return res
 })

@@ -30,8 +30,8 @@ export const App = (): JSX.Element => {
           >
             <RouterProvider router={router} />
           </LocalizationProvider>
-          <ReactQueryDevtools />
-          <QueryDevtoolsProductionHidden />
+          {import.meta.env.DEV ? <ReactQueryDevtools /> : null}
+          {import.meta.env.PROD ? <QueryDevtoolsProductionHidden /> : null}
         </ThemeProvider>
       </QueryClientProvider>
     </Provider>
