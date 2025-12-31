@@ -99,7 +99,7 @@ export const beforeUpload: BeforeUpload = async (props) => {
 
   let eventCount = 0
 
-  const uploadDeferred = Promise.withResolvers()
+  const uploadCompletionDeferred = Promise.withResolvers()
 
   const uploadResponse = await axios<unknown>({
     url: signUrlResponse.data.signedUrl,
@@ -164,7 +164,7 @@ export const beforeUpload: BeforeUpload = async (props) => {
         }
 
         if (percentCompleted === 100) {
-          uploadDeferred.resolve('done')
+          uploadCompletionDeferred.resolve('done')
         }
       }
 
@@ -219,7 +219,7 @@ export const beforeUpload: BeforeUpload = async (props) => {
     )
   }
 
-  await uploadDeferred.promise
+  await uploadCompletionDeferred.promise
   await asyncDelay(50)
 
   toast.success(`Uploaded 100%`, { id: toastId })
