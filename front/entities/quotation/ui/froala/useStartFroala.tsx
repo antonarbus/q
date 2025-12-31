@@ -24,6 +24,22 @@ export const useStartFroala = (): void => {
       await import('./froalaPkg')
       await import('./froalaPkg.css')
 
+      // Wait for element to have ownerDocument before initializing Froala
+      // This prevents "Cannot use 'in' operator" error during React Router navigation
+      await new Promise<void>((resolve) => {
+        const checkElement = (): void => {
+          const element = froala.froalaElementRef.current
+
+          if (element?.ownerDocument && element?.isConnected) {
+            resolve()
+          } else {
+            requestAnimationFrame(checkElement)
+          }
+        }
+
+        checkElement()
+      })
+
       //@ts-ignore
       const froalaInstance = new FroalaEditor(froala.froalaElementRef.current, {
         ...froalaDefaultOptions,
