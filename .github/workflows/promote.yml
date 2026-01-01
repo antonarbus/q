@@ -1,5 +1,5 @@
 name: 'Promote Release'
-run-name: 'Promote ${{ inputs.source-env }} → ${{ inputs.target-env }} by ${{ github.actor }}'
+run-name: 'Promote ${{ inputs.source-env }} → ${{ inputs.target-env }}${{ inputs.skip-validation == ''SKIP'' && '' (validation skipped)'' || '''' }} by ${{ github.actor }}'
 
 # Promotes a tested Docker image from one environment to another
 # Instead of rebuilding, copies the exact same image that was tested
@@ -26,6 +26,11 @@ on:
           - test
           - pilot
           - prod
+      skip-validation:
+        description: 'Skip promotion path validation? Type "SKIP" to confirm (for dev→prod hotfixes)'
+        required: false
+        type: string
+        default: ''
 
 jobs:
   validate:
@@ -55,7 +60,12 @@ jobs:
         run: bun deploy-scripts/cli.ts generate-tfvars
 
       - name: 'Check promotion path'
+        if: ${{ github.event.inputs.skip-validation != 'SKIP' }}
         run: bun deploy-scripts/cli.ts validate-promotion --source-env "${{ github.event.inputs.source-env }}" --target-env "${{ github.event.inputs.target-env }}"
+
+      - name: 'Skip validation (override enabled)'
+        if: ${{ github.event.inputs.skip-validation == 'SKIP' }}
+        run: echo "⚠️ Skipping promotion path validation as requested. Allowing ${{ github.event.inputs.source-env }} → ${{ github.event.inputs.target-env }}"
 
       - name: 'Load source environment config'
         id: source-config
