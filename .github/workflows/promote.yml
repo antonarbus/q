@@ -1,5 +1,5 @@
 name: 'Promote Release'
-run-name: 'Promote ${{ inputs.source-env }} → ${{ inputs.target-env }}${{ inputs.skip-validation == ''SKIP'' && '' (validation skipped)'' || '''' }} by ${{ github.actor }}'
+run-name: "Promote ${{ inputs.source-env }} → ${{ inputs.target-env }}${{ inputs.skip-validation == 'SKIP' && ' (validation skipped)' || '' }} by ${{ github.actor }}"
 
 # Promotes a tested Docker image from one environment to another
 # Instead of rebuilding, copies the exact same image that was tested
