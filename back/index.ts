@@ -7,18 +7,49 @@ import { runtimeConfig } from '@root/config/runtime'
 import { api } from '@back/api'
 import { errorHandlerMiddleware } from '@back/middleware/errorHandlerMiddleware'
 import { asyncHandler } from '@back/shared/lib/express'
+import blog404Html from './static/blog-404.html' with { type: 'text' }
 
 const startServer = (): void => {
   const app = express()
+
   app.use(compression()) // gzip compression for responses
   app.use(morgan('dev')) // http logs in terminal
-  app.use(express.json({ limit: '50mb' })) // parses the JSON payload and adds it into'body' prop
+  app.use(express.json({ limit: '50mb' })) // parses JSON payload and adds it to req.body
   app.use(cookieParser()) // parses Cookie header and adds to req.cookies
 
   // Serve static files in production (JS, CSS, images, etc.)
   if (runtimeConfig.nodeEnv === 'production') {
     const frontendBuildPath = path.join(__dirname, '../../front/build')
-    app.use(express.static(frontendBuildPath, { maxAge: '1y' }))
+
+    app.use(
+      express.static(frontendBuildPath, {
+        maxAge: '1y', // Cache hashed assets (JS, CSS, images) for 1 year
+        setHeaders: (res, filepath) => {
+          // Overwrite cache settings for files that should NOT be cached (no hash in filename)
+          const noCacheFiles = [
+            'index.html', // Entry point - references change on every deploy
+            'styles.css', // Global CSS without content hash
+            'sitemap.xml', // Updates when site structure changes
+            'robots.txt', // Updates when site structure changes
+          ]
+
+          // Don't cache files without content hashes OR blog files
+          const shouldNotCache =
+            noCacheFiles.some((file) => filepath.endsWith(file)) ||
+            filepath.includes('/blog/')
+
+          if (shouldNotCache === true) {
+            res.setHeader(
+              'Cache-Control',
+              'no-cache, no-store, must-revalidate',
+            )
+
+            res.setHeader('Pragma', 'no-cache') // HTTP 1.0 compatibility
+            res.setHeader('Expires', '0') // Proxies
+          }
+        },
+      }),
+    )
   }
 
   // Register API routes + /uploads
@@ -28,7 +59,7 @@ const startServer = (): void => {
 
   // Blog routes (static HTML blog, separate from React SPA)
   if (runtimeConfig.nodeEnv === 'production') {
-    // Redirect /blog to /blog/ for consistent URLs
+    // Redirect /blog to /blog/ for consistent URLs, otherwise React tries to render it
     app.get('/blog', (_req, res) => {
       res.redirect(301, '/blog/')
     })
@@ -37,7 +68,7 @@ const startServer = (): void => {
     // This prevents non-existent blog pages from falling through to React SPA
     // Express v5 requires regex syntax for wildcards
     app.get(/^\/blog\/.*/u, (_req, res) => {
-      res.status(404).send('Blog page not found')
+      res.status(404).send(blog404Html)
     })
   }
 
@@ -47,6 +78,10 @@ const startServer = (): void => {
     const indexHtmlPath = path.join(__dirname, '../../front/build/index.html')
 
     app.get(/.*/u, (_req, res): void => {
+      // Don't cache index.html (same reason as above in express.static)
+      res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate')
+      res.setHeader('Pragma', 'no-cache')
+      res.setHeader('Expires', '0')
       res.sendFile(indexHtmlPath)
     })
   }
