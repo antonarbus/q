@@ -4,7 +4,6 @@ import { useRegisterUserMutation } from '@entities/user/api/useRegisterUserMutat
 import { userSlice } from '@entities/user/redux/userSlice'
 import type { Signal } from '@preact/signals-react'
 import { appSlice } from '@shared/appSlice'
-import { trackSignUpEventAtGoogleTagManager } from '@shared/lib/google-tag-manager/trackSignUpEventAtGoogleTagManager'
 import { dispatch, getState } from '@shared/lib/redux'
 import { asyncDelay } from '@shared/util/asyncDelay'
 import type { UseMutationResult } from '@tanstack/react-query'
@@ -113,8 +112,6 @@ export const useRegister = (props: Props): Res => {
       email: props.emailSignal.value,
       password: props.passwordSignal.value,
     })
-
-    trackSignUpEventAtGoogleTagManager()
   }
 
   return {
