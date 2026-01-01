@@ -10,8 +10,13 @@ import { errorHandlerMiddleware } from '@back/middleware/errorHandlerMiddleware'
 import { asyncHandler } from '@back/shared/lib/express'
 
 // Load blog 404 HTML at startup (works with any bundler)
-// Note: __dirname is /back/build/ after rollup build, so we go up one level
-const blog404HtmlPath = path.join(__dirname, '../static/blog-404.html')
+// Development: __dirname = /back/ → ./static/blog-404.html
+// Production: __dirname = /back/build/ → ../static/blog-404.html
+const blog404HtmlPath =
+  runtimeConfig.nodeEnv === 'production'
+    ? path.join(__dirname, '../static/blog-404.html')
+    : path.join(__dirname, './static/blog-404.html')
+
 const blog404Html = fs.readFileSync(blog404HtmlPath, 'utf-8')
 
 const startServer = (): void => {
