@@ -43,6 +43,15 @@ export const runtimeConfig = {
       // Fallback for unknown environment (build time)
       return 'localhost'
     },
+    get host() {
+      // Cloud Run requires listening on 0.0.0.0 (all interfaces)
+      // Local development can use localhost
+      if (runtimeConfig.environment === 'local') {
+        return 'localhost'
+      }
+
+      return '0.0.0.0'
+    },
     port: 8080,
     get baseUrl() {
       if (runtimeConfig.environment === 'local') {

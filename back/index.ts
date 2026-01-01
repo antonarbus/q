@@ -88,10 +88,11 @@ const startServer = (): void => {
 
   app.use(errorHandlerMiddleware)
 
-  app.listen(runtimeConfig.back.port, () => {
+  app.listen(runtimeConfig.back.port, runtimeConfig.back.host, () => {
     console.info(`
       Backend server started 🚀
       URL: ${runtimeConfig.back.baseUrl}
+      Listening on: ${runtimeConfig.back.host}:${runtimeConfig.back.port}
       NODE_ENV: ${runtimeConfig.nodeEnv}
       Environment: ${runtimeConfig.environment}
       CI/CD pipeline: ${runtimeConfig.ci}
