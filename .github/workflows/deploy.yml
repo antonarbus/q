@@ -107,9 +107,6 @@ jobs:
       - name: 'Run ESLint'
         run: bun run lint-check-quiet
 
-      - name: 'Verify backend build'
-        run: bun run build-back
-
       - name: 'Verify frontend build'
         run: bun run build-front
 

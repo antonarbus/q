@@ -12,4 +12,3 @@ tests/setup/authenticated_user.json
 tsconfig.tsbuildinfo
 .tsbuildinfo-back
 .tsbuildinfo-front
-.rollup.cache

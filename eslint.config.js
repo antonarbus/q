@@ -13,7 +13,6 @@ export default [
       '**/froalaPkg.js',
       '**/coverage/',
       '**/node_modules/',
-      '.rollup.cache/',
     ],
   },
   {

@@ -1,23 +1,13 @@
 import compression from 'compression'
 import cookieParser from 'cookie-parser'
 import express from 'express'
-import fs from 'fs'
 import morgan from 'morgan'
 import path from 'path'
 import { runtimeConfig } from '@root/config/runtime'
 import { api } from '@back/api'
 import { errorHandlerMiddleware } from '@back/middleware/errorHandlerMiddleware'
 import { asyncHandler } from '@back/shared/lib/express'
-
-// Load blog 404 HTML at startup (works with any bundler)
-// Development: __dirname = /back/ → ./static/blog-404.html
-// Production: __dirname = /back/build/ → ../static/blog-404.html
-const blog404HtmlPath =
-  runtimeConfig.nodeEnv === 'production'
-    ? path.join(__dirname, '../static/blog-404.html')
-    : path.join(__dirname, './static/blog-404.html')
-
-const blog404Html = fs.readFileSync(blog404HtmlPath, 'utf-8')
+import blog404Html from './static/blog-404.html' with { type: 'text' }
 
 const startServer = (): void => {
   const app = express()
