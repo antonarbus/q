@@ -24,6 +24,9 @@ WORKDIR /app
 # Copy built backend code
 COPY --from=builder /app/back/build ./back/build
 
+# Copy backend static files (blog 404, etc.)
+COPY --from=builder /app/back/static ./back/static
+
 # Copy built frontend code
 COPY --from=builder /app/front/build ./front/build
 
