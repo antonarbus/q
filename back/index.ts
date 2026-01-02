@@ -19,7 +19,8 @@ const startServer = (): void => {
 
   // Serve static files in production (JS, CSS, images, etc.)
   if (runtimeConfig.nodeEnv === 'production') {
-    const frontendBuildPath = path.join(__dirname, '../../front/build')
+    // Running from TS: __dirname = /app/back → ../front/build = /app/front/build
+    const frontendBuildPath = path.join(__dirname, '../front/build')
 
     app.use(
       express.static(frontendBuildPath, {
@@ -75,7 +76,8 @@ const startServer = (): void => {
   // SPA fallback: serve index.html for any route not matched above
   // Express v5 requires regex for catch-all routes instead of '*'
   if (runtimeConfig.nodeEnv === 'production') {
-    const indexHtmlPath = path.join(__dirname, '../../front/build/index.html')
+    // Running from TS: __dirname = /app/back → ../front/build/index.html
+    const indexHtmlPath = path.join(__dirname, '../front/build/index.html')
 
     app.get(/.*/u, (_req, res): void => {
       // Don't cache index.html (same reason as above in express.static)
