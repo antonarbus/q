@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from 'express'
 import {
   type HttpResponse,
-  httpResponse,
+  httpJsonResponse,
 } from '@back/shared/lib/express/httpResponse'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 
@@ -14,7 +14,7 @@ type RouterHandler = (
 ) => HttpResponse<ResBody>
 
 export const rootHandler: RouterHandler = (req, res, next) => {
-  return httpResponse({
+  return httpJsonResponse({
     statusCode: httpStatusCode.success200,
     body: `I am Express JS running on Bun version ${Bun.version}. Who are you?`,
   })

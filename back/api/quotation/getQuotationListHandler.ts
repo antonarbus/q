@@ -9,7 +9,7 @@ import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
 import {
   type HttpResponse,
-  httpResponse,
+  httpJsonResponse,
 } from '@back/shared/lib/express/httpResponse'
 
 type SearchQuery = ParsedQs
@@ -48,7 +48,7 @@ export const getQuotationListHandler: RouterHandler = async (
 
   messageList.push(`Found ${quotationListSelected.length} quotations`)
 
-  return httpResponse({
+  return httpJsonResponse({
     statusCode: httpStatusCode.success200,
     body: {
       quotationList: quotationListSelected,

@@ -11,7 +11,7 @@ type HttpHandler = (
 /**
  * - Gets sync or async http handler and returns async version, passing error to the next middleware
  * - We can nicely use sync and async http handlers and TS will not complain
- * - Standardizes the HTTP response (statusCode + body)
+ * - Standardizes the HTTP response (statusCode + body for JSON, or statusCode + redirectUrl for redirects)
  */
 export const httpHandler = (
   fn: HttpHandler,
@@ -23,7 +23,15 @@ export const httpHandler = (
   ): void => {
     Promise.resolve(fn(req, res, next))
       .then((response) => {
-        res.status(response.statusCode).json(response.body)
+        if (response.type === 'json') {
+          res.status(response.statusCode).json(response.body)
+
+          return
+        }
+
+        if (response.type === 'redirect') {
+          res.redirect(response.statusCode, response.redirectUrl)
+        }
       })
       .catch(next)
   }

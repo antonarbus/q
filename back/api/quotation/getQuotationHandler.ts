@@ -16,7 +16,7 @@ import type { ParsedQs } from 'qs'
 import { permissionLevel } from '@root/shared/const/permissionLevel'
 import {
   type HttpResponse,
-  httpResponse,
+  httpJsonResponse,
 } from '@back/shared/lib/express/httpResponse'
 
 type SearchQuery = ParsedQs
@@ -139,7 +139,7 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
   const permissionLevelValue = getPermissionLevel()
 
   if (permissionLevelValue === permissionLevel.forbidden) {
-    return httpResponse({
+    return httpJsonResponse({
       statusCode: httpStatusCode.success200,
       body: {
         quotation: { ...emptyQuotation, permissionLevel: permissionLevelValue },
@@ -252,7 +252,7 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
     messageList.push('Private data is hidden')
   }
 
-  return httpResponse({
+  return httpJsonResponse({
     statusCode: httpStatusCode.success200,
     body: {
       quotation: {

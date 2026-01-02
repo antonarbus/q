@@ -12,7 +12,7 @@ import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
 import {
   type HttpResponse,
-  httpResponse,
+  httpJsonResponse,
 } from '@back/shared/lib/express/httpResponse'
 
 type SearchQuery = ParsedQs
@@ -121,7 +121,7 @@ export const requestPasswordResetHandler: RouterHandler = async (
   if (emailRes.statusCode === 202) {
     messageList.push('Reset email sent successfully')
 
-    return httpResponse({
+    return httpJsonResponse({
       statusCode: httpStatusCode.created201,
       body: {
         message: messageList.join(' | '),

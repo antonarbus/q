@@ -11,7 +11,7 @@ import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
 import {
   type HttpResponse,
-  httpResponse,
+  httpJsonResponse,
 } from '@back/shared/lib/express/httpResponse'
 
 type SearchQuery = ParsedQs
@@ -73,7 +73,7 @@ export const deleteQuotationHandler: RouterHandler = async (req, res, next) => {
 
   messageList.push('Quotation deleted from storage')
 
-  return httpResponse({
+  return httpJsonResponse({
     statusCode: httpStatusCode.noContent204,
     body: {
       message: messageList.join(' | '),

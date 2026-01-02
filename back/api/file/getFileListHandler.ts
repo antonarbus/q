@@ -4,7 +4,7 @@ import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { db } from '@back/shared/lib/drizzle/db'
 import {
   type HttpResponse,
-  httpResponse,
+  httpJsonResponse,
 } from '@back/shared/lib/express/httpResponse'
 import { eq } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
@@ -48,7 +48,7 @@ export const getFileListHandler: RouterHandler = async (req, res, next) => {
 
   messageList.push(`Found ${fileListSelected.length} files`)
 
-  return httpResponse({
+  return httpJsonResponse({
     statusCode: httpStatusCode.success200,
     body: {
       fileList: fileListSelected,

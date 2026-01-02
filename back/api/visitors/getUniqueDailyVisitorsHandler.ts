@@ -10,7 +10,7 @@ import type { NextFunction, Request, Response } from 'express'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import {
   type HttpResponse,
-  httpResponse,
+  httpJsonResponse,
 } from '@back/shared/lib/express/httpResponse'
 
 type UrlParam = ParamsDictionary
@@ -75,7 +75,7 @@ export const getUniqueDailyVisitorsHandler: RouterHandler = async (
     `Retrieved ${visitorListSelected.length} visitor records from ${req.query.startDate} to ${req.query.endDate}`,
   )
 
-  return httpResponse({
+  return httpJsonResponse({
     statusCode: httpStatusCode.success200,
     body: {
       visitorList: visitorListSelected,

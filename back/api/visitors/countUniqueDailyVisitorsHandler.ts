@@ -9,7 +9,7 @@ import type { ParsedQs } from 'qs'
 import { headerName } from '@back/shared/headers'
 import {
   type HttpResponse,
-  httpResponse,
+  httpJsonResponse,
 } from '@back/shared/lib/express/httpResponse'
 
 type SearchQuery = ParsedQs
@@ -47,7 +47,7 @@ export const countUniqueDailyVisitorsHandler: RouterHandler = async (
   if (isE2ETest === true) {
     messageList.push('E2E test - skipping visitor count')
 
-    return httpResponse({
+    return httpJsonResponse({
       statusCode: httpStatusCode.success200,
       body: {
         message: messageList.join(' | '),
@@ -76,7 +76,7 @@ export const countUniqueDailyVisitorsHandler: RouterHandler = async (
     messageList.push('Returning visitor counted')
   }
 
-  return httpResponse({
+  return httpJsonResponse({
     statusCode: httpStatusCode.success200,
     body: {
       message: messageList.join(' | '),

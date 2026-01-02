@@ -11,7 +11,7 @@ import { getUserFromRefreshTokenOrNull } from '@back/entities/user'
 import { userRole } from '@back/shared/const/userRole'
 import {
   type HttpResponse,
-  httpResponse,
+  httpJsonResponse,
 } from '@back/shared/lib/express/httpResponse'
 
 type SearchQuery = ParsedQs
@@ -60,7 +60,7 @@ export const healthCheckHandler: RouterHandler = async (req, res, next) => {
     messageList.push('Super-admin runtime config included')
   }
 
-  return httpResponse({
+  return httpJsonResponse({
     statusCode: httpStatusCode.success200,
     body: {
       message: messageList.join(' | '),

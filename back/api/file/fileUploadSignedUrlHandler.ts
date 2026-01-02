@@ -5,7 +5,7 @@ import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import {
   type HttpResponse,
-  httpResponse,
+  httpJsonResponse,
 } from '@back/shared/lib/express/httpResponse'
 import { generateId } from '@root/shared/lib/nanoid'
 import type { NextFunction, Request, Response } from 'express'
@@ -61,7 +61,7 @@ export const fileUploadSignedUrlHandler: RouterHandler = async (
 
     messageList.push('Generated signed URL for file upload')
 
-    return httpResponse({
+    return httpJsonResponse({
       statusCode: httpStatusCode.success200,
       body: {
         signedUrl,

@@ -6,7 +6,7 @@ import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { db } from '@back/shared/lib/drizzle/db'
 import {
   type HttpResponse,
-  httpResponse,
+  httpJsonResponse,
 } from '@back/shared/lib/express/httpResponse'
 import type { NextFunction, Request, Response } from 'express'
 import type { ParamsDictionary } from 'express-serve-static-core'
@@ -61,7 +61,7 @@ export const saveFileInfoHandler: RouterHandler = async (req, res, next) => {
 
   messageList.push('File information saved to database')
 
-  return httpResponse({
+  return httpJsonResponse({
     statusCode: httpStatusCode.success200,
     body: {
       fileInfo: fileInserted,

@@ -6,7 +6,7 @@ import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { db } from '@back/shared/lib/drizzle/db'
 import {
   type HttpResponse,
-  httpResponse,
+  httpJsonResponse,
 } from '@back/shared/lib/express/httpResponse'
 import { userRole } from '@back/shared/const/userRole'
 import { and, asc, count, desc, ilike } from 'drizzle-orm'
@@ -159,7 +159,7 @@ export const getFileListAllHandler: RouterHandler = async (req, res, next) => {
     `Returned ${fileListResponse.value.length} files for current page`,
   )
 
-  return httpResponse({
+  return httpJsonResponse({
     statusCode: httpStatusCode.success200,
     body: {
       fileList: fileListResponse.value,

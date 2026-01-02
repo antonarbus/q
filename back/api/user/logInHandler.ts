@@ -24,7 +24,7 @@ import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
 import {
   type HttpResponse,
-  httpResponse,
+  httpJsonResponse,
 } from '@back/shared/lib/express/httpResponse'
 
 type SearchQuery = ParsedQs
@@ -131,7 +131,7 @@ export const logInHandler: RouterHandler = async (req, res, next) => {
 
     messageList.push('No-trace mode enabled')
 
-    return httpResponse({
+    return httpJsonResponse({
       statusCode: httpStatusCode.success200,
       body: {
         message: messageList.join(' | '),
@@ -270,7 +270,7 @@ export const logInHandler: RouterHandler = async (req, res, next) => {
     roles: userSelected.roles,
   })
 
-  return httpResponse({
+  return httpJsonResponse({
     statusCode: httpStatusCode.success200,
     body: {
       message: messageList.join(' | '),

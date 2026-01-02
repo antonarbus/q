@@ -11,7 +11,7 @@ import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
 import {
   type HttpResponse,
-  httpResponse,
+  httpJsonResponse,
 } from '@back/shared/lib/express/httpResponse'
 
 type SearchQuery = ParsedQs
@@ -68,7 +68,7 @@ export const deleteBookmarkHandler: RouterHandler = async (req, res, next) => {
   if (statusCode === 204) {
     messageList.push('Bookmark deleted from storage')
 
-    return httpResponse({
+    return httpJsonResponse({
       statusCode: httpStatusCode.success200,
       body: {
         message: messageList.join(' | '),

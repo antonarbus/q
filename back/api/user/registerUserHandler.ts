@@ -23,7 +23,7 @@ import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
 import {
   type HttpResponse,
-  httpResponse,
+  httpJsonResponse,
 } from '@back/shared/lib/express/httpResponse'
 
 type SearchQuery = ParsedQs
@@ -144,7 +144,7 @@ export const registerUserHandler: RouterHandler = async (req, res, next) => {
   if (emailRes.statusCode === 202) {
     messageList.push('Activation email sent successfully')
 
-    return httpResponse({
+    return httpJsonResponse({
       statusCode: httpStatusCode.created201,
       body: {
         email: emailFromInput,

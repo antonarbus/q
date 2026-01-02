@@ -11,7 +11,7 @@ import type { ErrorCode } from '@back/shared/const/errorCode'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import {
   type HttpResponse,
-  httpResponse,
+  httpJsonResponse,
 } from '@back/shared/lib/express/httpResponse'
 
 type UrlParam = ParamsDictionary
@@ -195,7 +195,7 @@ export const getBookmarkListAllHandler: RouterHandler = async (
     `Returned ${bookmarkListResponse.value.length} bookmarks for current page`,
   )
 
-  return httpResponse({
+  return httpJsonResponse({
     statusCode: httpStatusCode.success200,
     body: {
       bookmarkList: bookmarkListResponse.value,

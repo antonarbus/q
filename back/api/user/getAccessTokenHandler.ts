@@ -18,7 +18,7 @@ import type { ParsedQs } from 'qs'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import {
   type HttpResponse,
-  httpResponse,
+  httpJsonResponse,
 } from '@back/shared/lib/express/httpResponse'
 
 type SearchQuery = ParsedQs
@@ -130,7 +130,7 @@ export const getAccessTokenHandler: RouterHandler = async (req, res, next) => {
 
   messageList.push('Access token generated')
 
-  return httpResponse({
+  return httpJsonResponse({
     statusCode: httpStatusCode.success200,
     body: {
       accessJwtToken: accessToken.value,

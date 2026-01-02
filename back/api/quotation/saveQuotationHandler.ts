@@ -13,7 +13,7 @@ import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
 import {
   type HttpResponse,
-  httpResponse,
+  httpJsonResponse,
 } from '@back/shared/lib/express/httpResponse'
 
 type SearchQuery = ParsedQs
@@ -135,7 +135,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
 
     messageList.push('Quotation saved to storage')
 
-    return httpResponse({
+    return httpJsonResponse({
       statusCode: httpStatusCode.success200,
       body: {
         message: messageList.join(' | '),
@@ -199,7 +199,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
 
     messageList.push('Quotation saved to storage')
 
-    return httpResponse({
+    return httpJsonResponse({
       statusCode: httpStatusCode.success200,
       body: {
         message: messageList.join(' | '),
@@ -264,7 +264,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
 
     messageList.push('Copied quotation saved to storage')
 
-    return httpResponse({
+    return httpJsonResponse({
       statusCode: httpStatusCode.success200,
       body: {
         message: messageList.join(' | '),

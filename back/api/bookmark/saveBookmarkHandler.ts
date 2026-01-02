@@ -11,7 +11,7 @@ import type { ParsedQs } from 'qs'
 import type { Bookmark } from '@root/shared/types/Bookmark'
 import {
   type HttpResponse,
-  httpResponse,
+  httpJsonResponse,
 } from '@back/shared/lib/express/httpResponse'
 
 type SearchQuery = ParsedQs
@@ -114,7 +114,7 @@ export const saveBookmarkHandler: RouterHandler = async (req, res, next) => {
 
   messageList.push('Bookmark saved in storage')
 
-  return httpResponse({
+  return httpJsonResponse({
     statusCode: httpStatusCode.success200,
     body: {
       message: messageList.join(' | '),

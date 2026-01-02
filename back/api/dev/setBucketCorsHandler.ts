@@ -11,7 +11,7 @@ import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
 import {
   type HttpResponse,
-  httpResponse,
+  httpJsonResponse,
 } from '@back/shared/lib/express/httpResponse'
 
 // https://cloud.google.com/storage/docs/samples/storage-cors-configuration#storage_cors_configuration-nodejs
@@ -65,7 +65,7 @@ export const setBucketCorsHandler: RouterHandler = async (req, res, next) => {
 
   console.info(`Bucket ${secret.BUCKET_NAME} CORS were updated`)
 
-  return httpResponse({
+  return httpJsonResponse({
     statusCode: httpStatusCode.success200,
     body: corsUpdateRes.at(0)?.cors,
   })

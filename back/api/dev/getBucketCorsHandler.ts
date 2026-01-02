@@ -9,7 +9,7 @@ import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
 import {
   type HttpResponse,
-  httpResponse,
+  httpJsonResponse,
 } from '@back/shared/lib/express/httpResponse'
 
 // https://cloud.google.com/storage/docs/using-cors#storage-get-bucket-metadata-nodejs
@@ -44,7 +44,7 @@ export const getBucketCorsHandler: RouterHandler = async (req, res, next) => {
   const [metadata] = await bucket.getMetadata()
   console.info(JSON.stringify(metadata, null, 2))
 
-  return httpResponse({
+  return httpJsonResponse({
     statusCode: httpStatusCode.success200,
     body: metadata.cors,
   })

@@ -7,7 +7,7 @@ import { db } from '@back/shared/lib/drizzle/db'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import {
   type HttpResponse,
-  httpResponse,
+  httpJsonResponse,
 } from '@back/shared/lib/express/httpResponse'
 import { and, eq } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
@@ -117,7 +117,7 @@ export const deleteFileHandler: RouterHandler = async (req, res, next) => {
       })
     }
 
-    return httpResponse({
+    return httpJsonResponse({
       statusCode: httpStatusCode.success200,
       body: {
         message: messageList.join(' | '),
