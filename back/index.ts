@@ -6,7 +6,7 @@ import path from 'path'
 import { runtimeConfig } from '@root/config/runtime'
 import { api } from '@back/api'
 import { errorHandlerMiddleware } from '@back/middleware/errorHandlerMiddleware'
-import { asyncHandler } from '@back/shared/lib/express'
+import { httpHandler } from '@back/shared/lib/express/httpHandler'
 import blog404Html from './static/blog-404.html' with { type: 'text' }
 
 const startServer = (): void => {
@@ -17,9 +17,8 @@ const startServer = (): void => {
   app.use(express.json({ limit: '50mb' })) // parses JSON payload and adds it to req.body
   app.use(cookieParser()) // parses Cookie header and adds to req.cookies
 
-  // Serve static files in production (JS, CSS, images, etc.)
+  // Serve bundled React static files in production (JS, CSS, images, etc.)
   if (runtimeConfig.nodeEnv === 'production') {
-    // Running from TS: __dirname = /app/back → ../front/build = /app/front/build
     const frontendBuildPath = path.join(__dirname, '../front/build')
 
     app.use(
@@ -27,16 +26,16 @@ const startServer = (): void => {
         maxAge: '1y', // Cache hashed assets (JS, CSS, images) for 1 year
         setHeaders: (res, filepath) => {
           // Overwrite cache settings for files that should NOT be cached (no hash in filename)
-          const noCacheFiles = [
+          const noCacheFileList = [
             'index.html', // Entry point - references change on every deploy
             'styles.css', // Global CSS without content hash
             'sitemap.xml', // Updates when site structure changes
             'robots.txt', // Updates when site structure changes
           ]
 
-          // Don't cache files without content hashes OR blog files
+          // Don't cache files without hashes at file names added by bundler OR blog files
           const shouldNotCache =
-            noCacheFiles.some((file) => filepath.endsWith(file)) ||
+            noCacheFileList.some((file) => filepath.endsWith(file)) ||
             filepath.includes('/blog/')
 
           if (shouldNotCache === true) {
@@ -53,9 +52,11 @@ const startServer = (): void => {
     )
   }
 
-  // Register API routes + /uploads
-  Object.entries(api).forEach(([_key, { method, url, handler }]) => {
-    app[method](url, asyncHandler(handler))
+  const apiList = Object.entries(api)
+
+  // Register API routes
+  apiList.forEach(([_key, item]) => {
+    app[item.method](item.url, httpHandler(item.handler))
   })
 
   // Blog routes (static HTML blog, separate from React SPA)
@@ -67,16 +68,13 @@ const startServer = (): void => {
 
     // Any /blog/* route that wasn't served by express.static should return 404
     // This prevents non-existent blog pages from falling through to React SPA
-    // Express v5 requires regex syntax for wildcards
     app.get(/^\/blog\/.*/u, (_req, res) => {
       res.status(404).send(blog404Html)
     })
   }
 
   // SPA fallback: serve index.html for any route not matched above
-  // Express v5 requires regex for catch-all routes instead of '*'
   if (runtimeConfig.nodeEnv === 'production') {
-    // Running from TS: __dirname = /app/back → ../front/build/index.html
     const indexHtmlPath = path.join(__dirname, '../front/build/index.html')
 
     app.get(/.*/u, (_req, res): void => {

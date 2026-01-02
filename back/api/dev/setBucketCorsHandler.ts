@@ -9,6 +9,10 @@ import { secret } from '@root/config/secrets'
 import { DOMAIN } from '@root/config/infrastructure'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
+import {
+  type HttpResponse,
+  httpResponse,
+} from '@back/shared/lib/express/httpResponse'
 
 // https://cloud.google.com/storage/docs/samples/storage-cors-configuration#storage_cors_configuration-nodejs
 
@@ -27,9 +31,9 @@ type RouterHandler = (
   req: Request<UrlParam, ResBody, ReqBody, SearchQuery>,
   res: Response<ResBody>,
   next: NextFunction,
-) => Promise<void>
+) => Promise<HttpResponse<ResBody>>
 
-export const setBucketCorsHandler: RouterHandler = async (req, res) => {
+export const setBucketCorsHandler: RouterHandler = async (req, res, next) => {
   const userFromRefreshToken = getUserFromRefreshTokenOrJohn({ req })
 
   if (userFromRefreshToken.roles.includes(userRole.superAdmin) === false) {
@@ -61,5 +65,8 @@ export const setBucketCorsHandler: RouterHandler = async (req, res) => {
 
   console.info(`Bucket ${secret.BUCKET_NAME} CORS were updated`)
 
-  res.json(corsUpdateRes.at(0)?.cors)
+  return httpResponse({
+    statusCode: httpStatusCode.success200,
+    body: corsUpdateRes.at(0)?.cors,
+  })
 }

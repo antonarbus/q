@@ -21,6 +21,10 @@ import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
+import {
+  type HttpResponse,
+  httpResponse,
+} from '@back/shared/lib/express/httpResponse'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
@@ -51,9 +55,9 @@ type RouterHandler = (
   req: Request<UrlParam, ResBody, ReqBody, SearchQuery>,
   res: Response<ResBody>,
   next: NextFunction,
-) => Promise<void>
+) => Promise<HttpResponse<ResBody>>
 
-export const registerUserHandler: RouterHandler = async (req, res) => {
+export const registerUserHandler: RouterHandler = async (req, res, next) => {
   const emailFromInput = req.body.email.toLowerCase()
   const passwordFromInput = req.body.password
 
@@ -140,15 +144,16 @@ export const registerUserHandler: RouterHandler = async (req, res) => {
   if (emailRes.statusCode === 202) {
     messageList.push('Activation email sent successfully')
 
-    res.status(httpStatusCode.created201).json({
-      email: emailFromInput,
-      roles: [userRole.user],
-      accessJwtToken: accessToken.value,
-      accessJwtTokenExpiresOn: accessToken.expiresOn,
-      message: messageList.join(' | '),
+    return httpResponse({
+      statusCode: httpStatusCode.created201,
+      body: {
+        email: emailFromInput,
+        roles: [userRole.user],
+        accessJwtToken: accessToken.value,
+        accessJwtTokenExpiresOn: accessToken.expiresOn,
+        message: messageList.join(' | '),
+      },
     })
-
-    return
   }
 
   messageList.push('Failed to send activation email')

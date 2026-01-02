@@ -13,6 +13,10 @@ import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
+import {
+  type HttpResponse,
+  httpResponse,
+} from '@back/shared/lib/express/httpResponse'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
@@ -40,9 +44,9 @@ type RouterHandler = (
   req: Request<UrlParam, ResBody, ReqBody, SearchQuery>,
   res: Response<ResBody>,
   next: NextFunction,
-) => Promise<void>
+) => Promise<HttpResponse<ResBody>>
 
-export const resetPasswordHandler: RouterHandler = async (req, res) => {
+export const resetPasswordHandler: RouterHandler = async (req, res, next) => {
   const messageList: string[] = []
 
   const emailFromInput = req.body.email.toLowerCase()
@@ -130,11 +134,14 @@ export const resetPasswordHandler: RouterHandler = async (req, res) => {
 
   messageList.push('Password reset successful')
 
-  res.status(httpStatusCode.created201).json({
-    accessJwtToken: accessToken.value,
-    accessJwtTokenExpiresOn: accessToken.expiresOn,
-    email: userUpdated.email,
-    roles: userUpdated.roles,
-    message: messageList.join(' | '),
+  return httpResponse({
+    statusCode: httpStatusCode.created201,
+    body: {
+      accessJwtToken: accessToken.value,
+      accessJwtTokenExpiresOn: accessToken.expiresOn,
+      email: userUpdated.email,
+      roles: userUpdated.roles,
+      message: messageList.join(' | '),
+    },
   })
 }

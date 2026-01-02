@@ -16,6 +16,10 @@ import type { ErrorCode } from '@back/shared/const/errorCode'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
 import { httpStatusCode } from '@back/shared/const/httpCode'
+import {
+  type HttpResponse,
+  httpResponse,
+} from '@back/shared/lib/express/httpResponse'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
@@ -39,9 +43,9 @@ type RouterHandler = (
   req: Request<UrlParam, ResBody, ReqBody, SearchQuery>,
   res: Response<ResBody>,
   next: NextFunction,
-) => Promise<void>
+) => Promise<HttpResponse<ResBody>>
 
-export const getAccessTokenHandler: RouterHandler = async (req, res) => {
+export const getAccessTokenHandler: RouterHandler = async (req, res, next) => {
   const messageList: string[] = []
 
   // User perviously logged in
@@ -77,6 +81,7 @@ export const getAccessTokenHandler: RouterHandler = async (req, res) => {
 
     if (userSelected === undefined) {
       messageList.push('User not found in database')
+
       removeRefreshTokenCookie({ res })
 
       throw new HttpError<ErrorResBody['errorCode']>({
@@ -125,13 +130,16 @@ export const getAccessTokenHandler: RouterHandler = async (req, res) => {
 
   messageList.push('Access token generated')
 
-  res.status(httpStatusCode.success200).json({
-    accessJwtToken: accessToken.value,
-    accessJwtTokenExpiresOn: accessToken.expiresOn,
-    roles: userFromRefreshToken.roles,
-    email: userFromRefreshToken.email,
-    jwtRefreshTokenExpirationDays:
-      userFromRefreshToken.jwtRefreshTokenExpirationDays,
-    message: messageList.join(' | '),
+  return httpResponse({
+    statusCode: httpStatusCode.success200,
+    body: {
+      accessJwtToken: accessToken.value,
+      accessJwtTokenExpiresOn: accessToken.expiresOn,
+      roles: userFromRefreshToken.roles,
+      email: userFromRefreshToken.email,
+      jwtRefreshTokenExpirationDays:
+        userFromRefreshToken.jwtRefreshTokenExpirationDays,
+      message: messageList.join(' | '),
+    },
   })
 }

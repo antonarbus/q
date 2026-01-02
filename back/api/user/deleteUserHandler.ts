@@ -15,6 +15,10 @@ import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
+import {
+  type HttpResponse,
+  httpResponse,
+} from '@back/shared/lib/express/httpResponse'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
@@ -37,9 +41,9 @@ type RouterHandler = (
   req: Request<UrlParam, ResBody, ReqBody, SearchQuery>,
   res: Response<ResBody>,
   next: NextFunction,
-) => Promise<void>
+) => Promise<HttpResponse<ResBody>>
 
-export const deleteUserHandler: RouterHandler = async (req, res) => {
+export const deleteUserHandler: RouterHandler = async (req, res, next) => {
   const messageList: string[] = []
 
   const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({ req })
@@ -208,8 +212,11 @@ export const deleteUserHandler: RouterHandler = async (req, res) => {
 
   messageList.push('User deletion completed')
 
-  res.status(httpStatusCode.success200).json({
-    statistics,
-    message: messageList.join(' | '),
+  return httpResponse({
+    statusCode: httpStatusCode.success200,
+    body: {
+      statistics,
+      message: messageList.join(' | '),
+    },
   })
 }

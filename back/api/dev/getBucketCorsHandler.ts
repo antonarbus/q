@@ -7,6 +7,10 @@ import { bucket } from '@back/shared/lib/google-cloud-storage'
 import type { NextFunction, Request, Response } from 'express'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
+import {
+  type HttpResponse,
+  httpResponse,
+} from '@back/shared/lib/express/httpResponse'
 
 // https://cloud.google.com/storage/docs/using-cors#storage-get-bucket-metadata-nodejs
 
@@ -24,9 +28,9 @@ type RouterHandler = (
   req: Request<UrlParam, ResBody, ReqBody, SearchQuery>,
   res: Response<ResBody>,
   next: NextFunction,
-) => Promise<void>
+) => Promise<HttpResponse<ResBody>>
 
-export const getBucketCorsHandler: RouterHandler = async (req, res) => {
+export const getBucketCorsHandler: RouterHandler = async (req, res, next) => {
   const userFromRefreshToken = getUserFromRefreshTokenOrJohn({ req })
 
   if (userFromRefreshToken.roles.includes(userRole.superAdmin) === false) {
@@ -39,5 +43,9 @@ export const getBucketCorsHandler: RouterHandler = async (req, res) => {
 
   const [metadata] = await bucket.getMetadata()
   console.info(JSON.stringify(metadata, null, 2))
-  res.json(metadata.cors)
+
+  return httpResponse({
+    statusCode: httpStatusCode.success200,
+    body: metadata.cors,
+  })
 }

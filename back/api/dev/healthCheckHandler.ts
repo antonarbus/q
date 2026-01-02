@@ -9,6 +9,10 @@ import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
 import { getUserFromRefreshTokenOrNull } from '@back/entities/user'
 import { userRole } from '@back/shared/const/userRole'
+import {
+  type HttpResponse,
+  httpResponse,
+} from '@back/shared/lib/express/httpResponse'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
@@ -28,9 +32,9 @@ type RouterHandler = (
   req: Request<UrlParam, ResBody, ReqBody, SearchQuery>,
   res: Response<ResBody>,
   next: NextFunction,
-) => Promise<void>
+) => Promise<HttpResponse<ResBody>>
 
-export const healthCheckHandler: RouterHandler = async (req, res) => {
+export const healthCheckHandler: RouterHandler = async (req, res, next) => {
   const userFromAccessToken = getUserFromRefreshTokenOrNull({ req })
 
   const messageList: string[] = []
@@ -56,8 +60,11 @@ export const healthCheckHandler: RouterHandler = async (req, res) => {
     messageList.push('Super-admin runtime config included')
   }
 
-  res.status(httpStatusCode.success200).json({
-    message: messageList.join(' | '),
-    runtimeConfig: isSuperAdmin === true ? runtimeConfig : undefined,
+  return httpResponse({
+    statusCode: httpStatusCode.success200,
+    body: {
+      message: messageList.join(' | '),
+      runtimeConfig: isSuperAdmin === true ? runtimeConfig : undefined,
+    },
   })
 }

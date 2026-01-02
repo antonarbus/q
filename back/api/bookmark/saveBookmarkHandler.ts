@@ -9,6 +9,10 @@ import type { ErrorCode } from '@back/shared/const/errorCode'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
 import type { Bookmark } from '@root/shared/types/Bookmark'
+import {
+  type HttpResponse,
+  httpResponse,
+} from '@back/shared/lib/express/httpResponse'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
@@ -32,9 +36,9 @@ type RouterHandler = (
   req: Request<UrlParam, ResBody, ReqBody, SearchQuery>,
   res: Response<ResBody>,
   next: NextFunction,
-) => Promise<void>
+) => Promise<HttpResponse<ResBody>>
 
-export const saveBookmarkHandler: RouterHandler = async (req, res) => {
+export const saveBookmarkHandler: RouterHandler = async (req, res, next) => {
   const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({ req })
 
   const messageList: string[] = []
@@ -110,9 +114,12 @@ export const saveBookmarkHandler: RouterHandler = async (req, res) => {
 
   messageList.push('Bookmark saved in storage')
 
-  res.status(httpStatusCode.success200).json({
-    message: messageList.join(' | '),
-    bookmark: bookmarkInserted,
-    isNew,
+  return httpResponse({
+    statusCode: httpStatusCode.success200,
+    body: {
+      message: messageList.join(' | '),
+      bookmark: bookmarkInserted,
+      isNew,
+    },
   })
 }

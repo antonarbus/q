@@ -81,11 +81,11 @@ export default [
           message:
             'Avoid negating expressions directly in if statements. Assign to a variable first.',
         },
-        {
-          selector: 'ReturnStatement > CallExpression',
-          message:
-            'Do not return expressions directly. Assign them to a variable first.',
-        },
+        // {
+        //   selector: 'ReturnStatement > CallExpression',
+        //   message:
+        //     'Do not return expressions directly. Assign them to a variable first.',
+        // },
         {
           selector: 'UnaryExpression[operator="!"]',
           message: 'Avoid using negation (!condition).',

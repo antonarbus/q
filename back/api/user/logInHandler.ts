@@ -22,6 +22,10 @@ import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
+import {
+  type HttpResponse,
+  httpResponse,
+} from '@back/shared/lib/express/httpResponse'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
@@ -55,7 +59,7 @@ type RouterHandler = (
   req: Request<UrlParam, ResBody, ReqBody, SearchQuery>,
   res: Response<ResBody>,
   next: NextFunction,
-) => Promise<void>
+) => Promise<HttpResponse<ResBody>>
 
 export const logInHandler: RouterHandler = async (req, res, next) => {
   const passwordFromInput = req.body.password
@@ -127,16 +131,17 @@ export const logInHandler: RouterHandler = async (req, res, next) => {
 
     messageList.push('No-trace mode enabled')
 
-    res.status(httpStatusCode.success200).json({
-      message: messageList.join(' | '),
-      accessJwtToken: accessToken.value,
-      accessJwtTokenExpiresOn: accessToken.expiresOn,
-      email: userSelected.email,
-      roles: userSelected.roles,
-      jwtRefreshTokenExpirationDays,
+    return httpResponse({
+      statusCode: httpStatusCode.success200,
+      body: {
+        message: messageList.join(' | '),
+        accessJwtToken: accessToken.value,
+        accessJwtTokenExpiresOn: accessToken.expiresOn,
+        email: userSelected.email,
+        roles: userSelected.roles,
+        jwtRefreshTokenExpirationDays,
+      },
     })
-
-    return
   }
 
   // normal login process
@@ -265,12 +270,15 @@ export const logInHandler: RouterHandler = async (req, res, next) => {
     roles: userSelected.roles,
   })
 
-  res.status(httpStatusCode.success200).json({
-    message: messageList.join(' | '),
-    accessJwtToken: accessToken.value,
-    accessJwtTokenExpiresOn: accessToken.expiresOn,
-    email: userUpdated.email,
-    roles: userUpdated.roles,
-    jwtRefreshTokenExpirationDays,
+  return httpResponse({
+    statusCode: httpStatusCode.success200,
+    body: {
+      message: messageList.join(' | '),
+      accessJwtToken: accessToken.value,
+      accessJwtTokenExpiresOn: accessToken.expiresOn,
+      email: userUpdated.email,
+      roles: userUpdated.roles,
+      jwtRefreshTokenExpirationDays,
+    },
   })
 }

@@ -35,6 +35,7 @@ import { getFileListAllHandler } from './file/getFileListAllHandler'
 import { proxyFileToBucketHandler } from './file/proxyFileToBucketHandler'
 import { getQuotationListAllHandler } from './quotation/getQuotationListAllHandler'
 import { route } from './route'
+import type { HttpResponse } from '@back/shared/lib/express/httpResponse'
 
 type Api = {
   url: string
@@ -45,7 +46,7 @@ type Api = {
     req: Request<any, any, any, any>,
     res: Response,
     next: NextFunction,
-  ) => void | Promise<void>
+  ) => HttpResponse<unknown> | Promise<HttpResponse<unknown>>
 }
 
 //* Routes metadata is kept separately at apiRoutes for proper code splitting,

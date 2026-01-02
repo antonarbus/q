@@ -9,6 +9,10 @@ import { db } from '@back/shared/lib/drizzle/db'
 import { and, eq } from 'drizzle-orm'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
+import {
+  type HttpResponse,
+  httpResponse,
+} from '@back/shared/lib/express/httpResponse'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
@@ -30,9 +34,9 @@ type RouterHandler = (
   req: Request<UrlParam, ResBody, ReqBody, SearchQuery>,
   res: Response<ResBody>,
   next: NextFunction,
-) => Promise<void>
+) => Promise<HttpResponse<ResBody>>
 
-export const deleteQuotationHandler: RouterHandler = async (req, res) => {
+export const deleteQuotationHandler: RouterHandler = async (req, res, next) => {
   const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({ req })
 
   const messageList: string[] = []
@@ -69,7 +73,10 @@ export const deleteQuotationHandler: RouterHandler = async (req, res) => {
 
   messageList.push('Quotation deleted from storage')
 
-  res.status(httpStatusCode.noContent204).json({
-    message: messageList.join(' | '),
+  return httpResponse({
+    statusCode: httpStatusCode.noContent204,
+    body: {
+      message: messageList.join(' | '),
+    },
   })
 }

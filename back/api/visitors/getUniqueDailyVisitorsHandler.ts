@@ -8,6 +8,10 @@ import { userRole } from '@back/shared/const/userRole'
 import { and, asc, gte, lte } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
 import type { ParamsDictionary } from 'express-serve-static-core'
+import {
+  type HttpResponse,
+  httpResponse,
+} from '@back/shared/lib/express/httpResponse'
 
 type UrlParam = ParamsDictionary
 
@@ -32,11 +36,12 @@ type RouterHandler = (
   req: Request<UrlParam, ResBody, ReqBody, SearchQuery>,
   res: Response<ResBody>,
   next: NextFunction,
-) => Promise<void>
+) => Promise<HttpResponse<ResBody>>
 
 export const getUniqueDailyVisitorsHandler: RouterHandler = async (
   req,
   res,
+  next,
 ) => {
   const messageList: string[] = []
 
@@ -70,8 +75,11 @@ export const getUniqueDailyVisitorsHandler: RouterHandler = async (
     `Retrieved ${visitorListSelected.length} visitor records from ${req.query.startDate} to ${req.query.endDate}`,
   )
 
-  res.status(httpStatusCode.success200).json({
-    visitorList: visitorListSelected,
-    message: messageList.join(' | '),
+  return httpResponse({
+    statusCode: httpStatusCode.success200,
+    body: {
+      visitorList: visitorListSelected,
+      message: messageList.join(' | '),
+    },
   })
 }

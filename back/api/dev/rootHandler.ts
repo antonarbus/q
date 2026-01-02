@@ -1,9 +1,21 @@
 import type { NextFunction, Request, Response } from 'express'
+import {
+  type HttpResponse,
+  httpResponse,
+} from '@back/shared/lib/express/httpResponse'
+import { httpStatusCode } from '@back/shared/const/httpCode'
 
-type RouterHandler = (req: Request, res: Response, next: NextFunction) => void
+type ResBody = string
 
-export const rootHandler: RouterHandler = (_req, res) => {
-  res.send(
-    `I am Express JS running on Bun version ${Bun.version}. Who are you?`,
-  )
+type RouterHandler = (
+  req: Request,
+  res: Response<ResBody>,
+  next: NextFunction,
+) => HttpResponse<ResBody>
+
+export const rootHandler: RouterHandler = (req, res, next) => {
+  return httpResponse({
+    statusCode: httpStatusCode.success200,
+    body: `I am Express JS running on Bun version ${Bun.version}. Who are you?`,
+  })
 }

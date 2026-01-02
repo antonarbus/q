@@ -7,6 +7,10 @@ import { eq } from 'drizzle-orm'
 import { type SelectQuotation, quotationsTable } from '@back/entities/quotation'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
+import {
+  type HttpResponse,
+  httpResponse,
+} from '@back/shared/lib/express/httpResponse'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
@@ -26,9 +30,13 @@ type RouterHandler = (
   req: Request<UrlParam, ResBody, ReqBody, SearchQuery>,
   res: Response<ResBody>,
   next: NextFunction,
-) => Promise<void>
+) => Promise<HttpResponse<ResBody>>
 
-export const getQuotationListHandler: RouterHandler = async (req, res) => {
+export const getQuotationListHandler: RouterHandler = async (
+  req,
+  res,
+  next,
+) => {
   const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({ req })
 
   const messageList: string[] = []
@@ -40,8 +48,11 @@ export const getQuotationListHandler: RouterHandler = async (req, res) => {
 
   messageList.push(`Found ${quotationListSelected.length} quotations`)
 
-  res.status(httpStatusCode.success200).json({
-    quotationList: quotationListSelected,
-    message: messageList.join(' | '),
+  return httpResponse({
+    statusCode: httpStatusCode.success200,
+    body: {
+      quotationList: quotationListSelected,
+      message: messageList.join(' | '),
+    },
   })
 }

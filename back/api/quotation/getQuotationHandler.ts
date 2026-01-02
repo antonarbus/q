@@ -14,6 +14,10 @@ import { eq } from 'drizzle-orm'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
 import { permissionLevel } from '@root/shared/const/permissionLevel'
+import {
+  type HttpResponse,
+  httpResponse,
+} from '@back/shared/lib/express/httpResponse'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
@@ -36,9 +40,9 @@ type RouterHandler = (
   req: Request<UrlParam, ResBody, ReqBody, SearchQuery>,
   res: Response<ResBody>,
   next: NextFunction,
-) => Promise<void>
+) => Promise<HttpResponse<ResBody>>
 
-export const getQuotationHandler: RouterHandler = async (req, res) => {
+export const getQuotationHandler: RouterHandler = async (req, res, next) => {
   const userFromAccessToken = getUserFromAccessTokenOrNull({ req })
 
   const messageList: string[] = []
@@ -135,12 +139,13 @@ export const getQuotationHandler: RouterHandler = async (req, res) => {
   const permissionLevelValue = getPermissionLevel()
 
   if (permissionLevelValue === permissionLevel.forbidden) {
-    res.status(httpStatusCode.success200).json({
-      quotation: { ...emptyQuotation, permissionLevel: permissionLevelValue },
-      message: messageList.join(' | '),
+    return httpResponse({
+      statusCode: httpStatusCode.success200,
+      body: {
+        quotation: { ...emptyQuotation, permissionLevel: permissionLevelValue },
+        message: messageList.join(' | '),
+      },
     })
-
-    return
   }
 
   const publicOrSharedWithYou =
@@ -247,12 +252,15 @@ export const getQuotationHandler: RouterHandler = async (req, res) => {
     messageList.push('Private data is hidden')
   }
 
-  res.status(httpStatusCode.success200).json({
-    quotation: {
-      ...quotationParsed,
-      ...quotationSelected,
-      permissionLevel: permissionLevelValue,
+  return httpResponse({
+    statusCode: httpStatusCode.success200,
+    body: {
+      quotation: {
+        ...quotationParsed,
+        ...quotationSelected,
+        permissionLevel: permissionLevelValue,
+      },
+      message: messageList.join(' | '),
     },
-    message: messageList.join(' | '),
   })
 }

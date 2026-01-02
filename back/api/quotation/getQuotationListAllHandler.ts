@@ -9,6 +9,10 @@ import { db } from '@back/shared/lib/drizzle/db'
 import { and, asc, count, desc, ilike } from 'drizzle-orm'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
+import {
+  type HttpResponse,
+  httpResponse,
+} from '@back/shared/lib/express/httpResponse'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
@@ -45,9 +49,13 @@ type RouterHandler = (
   req: Request<UrlParam, ResBody, ReqBody, SearchQuery>,
   res: Response<ResBody>,
   next: NextFunction,
-) => Promise<void>
+) => Promise<HttpResponse<ResBody>>
 
-export const getQuotationListAllHandler: RouterHandler = async (req, res) => {
+export const getQuotationListAllHandler: RouterHandler = async (
+  req,
+  res,
+  next,
+) => {
   const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({ req })
 
   const messageList: string[] = []
@@ -160,9 +168,12 @@ export const getQuotationListAllHandler: RouterHandler = async (req, res) => {
     `Returned ${quotationListResponse.value.length} quotations for current page`,
   )
 
-  res.status(httpStatusCode.success200).json({
-    quotationList: quotationListResponse.value,
-    quotationListTotalCount: quotationListTotalCountResponse.value,
-    message: messageList.join(' | '),
+  return httpResponse({
+    statusCode: httpStatusCode.success200,
+    body: {
+      quotationList: quotationListResponse.value,
+      quotationListTotalCount: quotationListTotalCountResponse.value,
+      message: messageList.join(' | '),
+    },
   })
 }

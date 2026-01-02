@@ -7,11 +7,14 @@ import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import { eq } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
 import type { ParsedQs } from 'qs'
+import type { HttpResponse } from '@back/shared/lib/express/httpResponse'
 
 type SearchQuery = ParsedQs
+
 type UrlParam = {
   fileId: SelectFile['id']
 }
+
 type ReqBody = undefined
 type ResBody = string
 
@@ -24,16 +27,16 @@ type RouterHandler = (
   req: Request<UrlParam, ResBody, ReqBody, SearchQuery>,
   res: Response<ResBody>,
   next: NextFunction,
-) => Promise<void>
+) => Promise<HttpResponse<ResBody>>
 
 const signedUrlCache = new Map<string, { url: string; expiresAt: number }>()
 
 const SIGNED_URL_TTL_MS = 5 * 60 * 1000 // 5 minutes
 const CLIENT_CACHE_MAX_AGE = SIGNED_URL_TTL_MS / 1000 // 5 min in seconds
 
+// @ts-expect-error: handler expects return httpResponse(), but here we do a redirect.
+// todo: httpHandler & httpResponse to be adapted to automatically send redirect response for 302 status code
 export const proxyFileToBucketHandler: RouterHandler = async (req, res) => {
-  // const user = getUserFromAccessTokenOrNull({ req })
-
   const messageList: string[] = []
 
   const cached = signedUrlCache.get(req.params.fileId)
@@ -50,8 +53,6 @@ export const proxyFileToBucketHandler: RouterHandler = async (req, res) => {
     )
 
     res.redirect(cached.url)
-
-    return
   }
 
   const [fileSelected] = await db

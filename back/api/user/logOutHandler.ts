@@ -7,6 +7,10 @@ import type { NextFunction, Request, Response } from 'express'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
+import {
+  type HttpResponse,
+  httpResponse,
+} from '@back/shared/lib/express/httpResponse'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
@@ -25,7 +29,7 @@ type RouterHandler = (
   req: Request<UrlParam, ResBody, ReqBody, SearchQuery>,
   res: Response<ResBody>,
   next: NextFunction,
-) => void
+) => HttpResponse<ResBody>
 
 export const logOutHandler: RouterHandler = (_req, res) => {
   const messageList: string[] = []
@@ -35,7 +39,10 @@ export const logOutHandler: RouterHandler = (_req, res) => {
 
   messageList.push('User logged out successfully')
 
-  res.status(httpStatusCode.success200).json({
-    message: messageList.join(' | '),
+  return httpResponse({
+    statusCode: httpStatusCode.success200,
+    body: {
+      message: messageList.join(' | '),
+    },
   })
 }

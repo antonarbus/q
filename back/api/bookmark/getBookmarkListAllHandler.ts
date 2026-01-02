@@ -9,6 +9,10 @@ import { z } from 'zod'
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import type { ParamsDictionary } from 'express-serve-static-core'
+import {
+  type HttpResponse,
+  httpResponse,
+} from '@back/shared/lib/express/httpResponse'
 
 type UrlParam = ParamsDictionary
 type ReqBody = undefined
@@ -35,9 +39,13 @@ type RouterHandler = (
   req: Request<UrlParam, ResBody, ReqBody, SearchQuery>,
   res: Response<ResBody>,
   next: NextFunction,
-) => Promise<void>
+) => Promise<HttpResponse<ResBody>>
 
-export const getBookmarkListAllHandler: RouterHandler = async (req, res) => {
+export const getBookmarkListAllHandler: RouterHandler = async (
+  req,
+  res,
+  next,
+) => {
   const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({ req })
 
   const messageList: string[] = []
@@ -187,9 +195,12 @@ export const getBookmarkListAllHandler: RouterHandler = async (req, res) => {
     `Returned ${bookmarkListResponse.value.length} bookmarks for current page`,
   )
 
-  res.status(httpStatusCode.success200).json({
-    bookmarkList: bookmarkListResponse.value,
-    bookmarkListTotalCount: bookmarkListTotalCountResponse.value,
-    message: messageList.join(' | '),
+  return httpResponse({
+    statusCode: httpStatusCode.success200,
+    body: {
+      bookmarkList: bookmarkListResponse.value,
+      bookmarkListTotalCount: bookmarkListTotalCountResponse.value,
+      message: messageList.join(' | '),
+    },
   })
 }

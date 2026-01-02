@@ -7,6 +7,10 @@ import type { ErrorCode } from '@back/shared/const/errorCode'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
 import { headerName } from '@back/shared/headers'
+import {
+  type HttpResponse,
+  httpResponse,
+} from '@back/shared/lib/express/httpResponse'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
@@ -28,11 +32,12 @@ type RouterHandler = (
   req: Request<UrlParam, ResBody, ReqBody, SearchQuery>,
   res: Response<ResBody>,
   next: NextFunction,
-) => Promise<void>
+) => Promise<HttpResponse<ResBody>>
 
 export const countUniqueDailyVisitorsHandler: RouterHandler = async (
   req,
   res,
+  next,
 ) => {
   const messageList: string[] = []
 
@@ -42,11 +47,12 @@ export const countUniqueDailyVisitorsHandler: RouterHandler = async (
   if (isE2ETest === true) {
     messageList.push('E2E test - skipping visitor count')
 
-    res.status(httpStatusCode.success200).json({
-      message: messageList.join(' | '),
+    return httpResponse({
+      statusCode: httpStatusCode.success200,
+      body: {
+        message: messageList.join(' | '),
+      },
     })
-
-    return
   }
 
   await db
@@ -70,7 +76,10 @@ export const countUniqueDailyVisitorsHandler: RouterHandler = async (
     messageList.push('Returning visitor counted')
   }
 
-  res.status(httpStatusCode.success200).json({
-    message: messageList.join(' | '),
+  return httpResponse({
+    statusCode: httpStatusCode.success200,
+    body: {
+      message: messageList.join(' | '),
+    },
   })
 }

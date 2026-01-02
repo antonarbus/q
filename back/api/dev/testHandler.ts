@@ -8,6 +8,10 @@ import { db } from '@back/shared/lib/drizzle/db'
 import { eq } from 'drizzle-orm'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
+import {
+  type HttpResponse,
+  httpResponse,
+} from '@back/shared/lib/express/httpResponse'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
@@ -24,9 +28,9 @@ type RouterHandler = (
   req: Request<UrlParam, ResBody, ReqBody, SearchQuery>,
   res: Response<ResBody>,
   next: NextFunction,
-) => Promise<void>
+) => Promise<HttpResponse<ResBody>>
 
-export const testHandler: RouterHandler = async (req, res) => {
+export const testHandler: RouterHandler = async (req, res, next) => {
   const userFromRefreshToken = getUserFromRefreshTokenOrJohn({ req })
 
   const messageList: string[] = []
@@ -50,7 +54,11 @@ export const testHandler: RouterHandler = async (req, res) => {
 
   messageList.push('Test query executed successfully')
 
-  res
-    .status(200)
-    .json({ dbRes: userListSelected, message: messageList.join(' | ') })
+  return httpResponse({
+    statusCode: httpStatusCode.success200,
+    body: {
+      dbRes: userListSelected,
+      message: messageList.join(' | '),
+    },
+  })
 }

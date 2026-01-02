@@ -11,6 +11,10 @@ import { db } from '@back/shared/lib/drizzle/db'
 import { and, eq } from 'drizzle-orm'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
+import {
+  type HttpResponse,
+  httpResponse,
+} from '@back/shared/lib/express/httpResponse'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
@@ -27,16 +31,16 @@ export type ResBody = {
 
 export type ErrorResBody = {
   message: string
-  errorCode: ErrorCode | 'FAILED_TO_SAVE' | 'ID_NOT_PROVIDED'
+  errorCode: ErrorCode | 'FAILED_TO_SAVE' | 'ID_NOT_PROVIDED' | 'UNHANDLED_CASE'
 }
 
 type RouterHandler = (
   req: Request<UrlParam, ResBody, ReqBody, SearchQuery>,
   res: Response<ResBody>,
   next: NextFunction,
-) => Promise<void>
+) => Promise<HttpResponse<ResBody>>
 
-export const saveQuotationHandler: RouterHandler = async (req, res) => {
+export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
   const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({ req })
 
   const messageList: string[] = []
@@ -131,13 +135,14 @@ export const saveQuotationHandler: RouterHandler = async (req, res) => {
 
     messageList.push('Quotation saved to storage')
 
-    res.status(httpStatusCode.success200).json({
-      message: messageList.join(' | '),
-      quotation: quotationInserted,
-      status: 'SAVED',
+    return httpResponse({
+      statusCode: httpStatusCode.success200,
+      body: {
+        message: messageList.join(' | '),
+        quotation: quotationInserted,
+        status: 'SAVED',
+      },
     })
-
-    return
   }
 
   if (quotationOwnership === 'your existing') {
@@ -194,13 +199,14 @@ export const saveQuotationHandler: RouterHandler = async (req, res) => {
 
     messageList.push('Quotation saved to storage')
 
-    res.status(httpStatusCode.success200).json({
-      message: messageList.join(' | '),
-      quotation: quotationUpdated,
-      status: 'UPDATED',
+    return httpResponse({
+      statusCode: httpStatusCode.success200,
+      body: {
+        message: messageList.join(' | '),
+        quotation: quotationUpdated,
+        status: 'UPDATED',
+      },
     })
-
-    return
   }
 
   if (quotationOwnership === 'foreign existing') {
@@ -258,10 +264,21 @@ export const saveQuotationHandler: RouterHandler = async (req, res) => {
 
     messageList.push('Copied quotation saved to storage')
 
-    res.status(httpStatusCode.success200).json({
-      message: messageList.join(' | '),
-      quotation: quotationInserted,
-      status: 'COPIED',
+    return httpResponse({
+      statusCode: httpStatusCode.success200,
+      body: {
+        message: messageList.join(' | '),
+        quotation: quotationInserted,
+        status: 'COPIED',
+      },
     })
   }
+
+  messageList.push('Unhandled case at the end')
+
+  throw new HttpError<ErrorResBody['errorCode']>({
+    errorCode: 'UNHANDLED_CASE',
+    statusCode: httpStatusCode.serverError500,
+    message: messageList.join(' | '),
+  })
 }

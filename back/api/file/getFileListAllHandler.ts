@@ -4,6 +4,10 @@ import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpStatusCode } from '@back/shared/const/httpCode'
 import { db } from '@back/shared/lib/drizzle/db'
+import {
+  type HttpResponse,
+  httpResponse,
+} from '@back/shared/lib/express/httpResponse'
 import { userRole } from '@back/shared/const/userRole'
 import { and, asc, count, desc, ilike } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
@@ -45,9 +49,9 @@ type RouterHandler = (
   req: Request<UrlParam, ResBody, ReqBody, SearchQuery>,
   res: Response<ResBody>,
   next: NextFunction,
-) => Promise<void>
+) => Promise<HttpResponse<ResBody>>
 
-export const getFileListAllHandler: RouterHandler = async (req, res) => {
+export const getFileListAllHandler: RouterHandler = async (req, res, next) => {
   const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({ req })
 
   const messageList: string[] = []
@@ -155,9 +159,12 @@ export const getFileListAllHandler: RouterHandler = async (req, res) => {
     `Returned ${fileListResponse.value.length} files for current page`,
   )
 
-  res.status(httpStatusCode.success200).json({
-    fileList: fileListResponse.value,
-    fileListTotalCount: fileListTotalCountResponse.value,
-    message: messageList.join(' | '),
+  return httpResponse({
+    statusCode: httpStatusCode.success200,
+    body: {
+      fileList: fileListResponse.value,
+      fileListTotalCount: fileListTotalCountResponse.value,
+      message: messageList.join(' | '),
+    },
   })
 }

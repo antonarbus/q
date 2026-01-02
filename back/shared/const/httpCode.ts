@@ -2,6 +2,7 @@
   - 200 - fulfilled
   - 201 - fulfilled, and a new resource has been created, good for POST requests
   - 204 - fulfilled, but there is no content to return, good for DELETE or PUT requests
+  - 302 - redirect
   - 400 - malformed syntax or invalid parameters from the client
   - 401 - requires user authentication
   - 403 - no permission to access the resource
@@ -17,6 +18,8 @@ export const httpStatusCode = {
   created201: 201,
   /** 204 - fulfilled, but there is no content to return, good for DELETE or PUT requests */
   noContent204: 204,
+  /** 302 - redirect */
+  reDirect302: 302,
   /** 400 - malformed syntax or invalid parameters from the client */
   badRequest400: 400,
   /** 401 - requires user authentication */
@@ -37,6 +40,7 @@ export const httpStatusCode = {
   - 200 - fulfilled
   - 201 - fulfilled, and a new resource has been created, good for POST requests
   - 204 - fulfilled, but there is no content to return, good for DELETE or PUT requests
+  - 302 - redirect
   - 400 - malformed syntax or invalid parameters from the client
   - 401 - requires user authentication
   - 403 - no permission to access the resource

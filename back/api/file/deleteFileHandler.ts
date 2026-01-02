@@ -5,6 +5,10 @@ import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpStatusCode } from '@back/shared/const/httpCode'
 import { db } from '@back/shared/lib/drizzle/db'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
+import {
+  type HttpResponse,
+  httpResponse,
+} from '@back/shared/lib/express/httpResponse'
 import { and, eq } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
 import type { ParamsDictionary } from 'express-serve-static-core'
@@ -28,15 +32,16 @@ export type ErrorResBody = {
     | 'FILE_DELETE_FAILED'
     | 'FILE_NOT_OWNED'
     | 'FILE_NOT_FOUND'
+    | 'UNHANDLED_CASE'
 }
 
 type RouterHandler = (
   req: Request<UrlParam, ResBody, ReqBody, SearchQuery>,
   res: Response<ResBody>,
   next: NextFunction,
-) => Promise<void>
+) => Promise<HttpResponse<ResBody>>
 
-export const deleteFileHandler: RouterHandler = async (req, res) => {
+export const deleteFileHandler: RouterHandler = async (req, res, next) => {
   const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({ req })
 
   const messageList: string[] = []
@@ -112,8 +117,19 @@ export const deleteFileHandler: RouterHandler = async (req, res) => {
       })
     }
 
-    res.status(httpStatusCode.success200).json({
-      message: messageList.join(' | '),
+    return httpResponse({
+      statusCode: httpStatusCode.success200,
+      body: {
+        message: messageList.join(' | '),
+      },
     })
   }
+
+  messageList.push('Unhandled case at the end')
+
+  throw new HttpError<ErrorResBody['errorCode']>({
+    errorCode: 'UNHANDLED_CASE',
+    statusCode: httpStatusCode.serverError500,
+    message: messageList.join(' | '),
+  })
 }
