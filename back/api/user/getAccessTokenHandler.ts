@@ -15,7 +15,7 @@ import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
-import { httpStatusCode } from '@back/shared/const/httpCode'
+import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import {
   type HttpResponse,
   httpResponse,

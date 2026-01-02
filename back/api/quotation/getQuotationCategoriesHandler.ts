@@ -1,5 +1,5 @@
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
-import { httpStatusCode } from '@back/shared/const/httpCode'
+import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import type { NextFunction, Request, Response } from 'express'
 import { quotationsTable, type SelectQuotation } from '@back/entities/quotation'
 import { db } from '@back/shared/lib/drizzle/db'

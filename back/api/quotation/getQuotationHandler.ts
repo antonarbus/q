@@ -1,7 +1,7 @@
 import { getUserFromAccessTokenOrNull } from '@back/entities/user'
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
-import { httpStatusCode } from '@back/shared/const/httpCode'
+import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { userRole } from '@back/shared/const/userRole'
 import { getShouldNotTrace } from '@back/shared/headers'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'

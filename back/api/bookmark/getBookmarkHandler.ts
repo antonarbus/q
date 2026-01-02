@@ -1,6 +1,6 @@
 import { type SelectBookmark, bookmarksTable } from '@back/entities/bookmark'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
-import { httpStatusCode } from '@back/shared/const/httpCode'
+import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { db } from '@back/shared/lib/drizzle/db'
 import { and, eq } from 'drizzle-orm'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'

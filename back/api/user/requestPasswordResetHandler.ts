@@ -1,5 +1,5 @@
 import { usersTable, type SelectUser } from '@back/entities/user'
-import { httpStatusCode } from '@back/shared/const/httpCode'
+import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { sendEmail } from '@back/shared/lib/mailersend'
 import { generateId } from '@root/shared/lib/nanoid'
 import type { NextFunction, Request, Response } from 'express'

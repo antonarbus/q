@@ -1,6 +1,6 @@
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import type { ErrorCode } from '@back/shared/const/errorCode'
-import { httpStatusCode } from '@back/shared/const/httpCode'
+import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import type { NextFunction, Request, Response } from 'express'
 import { db } from '@back/shared/lib/drizzle/db'
 import { eq } from 'drizzle-orm'

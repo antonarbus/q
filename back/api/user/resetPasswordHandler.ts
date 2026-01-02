@@ -1,5 +1,5 @@
 import { usersTable, type SelectUser } from '@back/entities/user'
-import { httpStatusCode } from '@back/shared/const/httpCode'
+import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { setRefreshTokenCookie } from '@back/shared/headers'
 import {
   generateAccessToken,

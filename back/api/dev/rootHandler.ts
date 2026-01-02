@@ -3,7 +3,7 @@ import {
   type HttpResponse,
   httpResponse,
 } from '@back/shared/lib/express/httpResponse'
-import { httpStatusCode } from '@back/shared/const/httpCode'
+import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 
 type ResBody = string
 

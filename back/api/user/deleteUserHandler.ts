@@ -5,7 +5,7 @@ import {
   getUserFromAccessTokenOrThrowUnauthorized,
   usersTable,
 } from '@back/entities/user'
-import { httpStatusCode } from '@back/shared/const/httpCode'
+import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { userRole } from '@back/shared/const/userRole'
 import { db } from '@back/shared/lib/drizzle/db'
 // import { bucket, getFolderPath } from '@back/shared/services/storage'

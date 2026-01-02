@@ -1,4 +1,4 @@
-import { httpStatusCode } from '@back/shared/const/httpCode'
+import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import {
   removeNoTraceMode,
   removeRefreshTokenCookie,

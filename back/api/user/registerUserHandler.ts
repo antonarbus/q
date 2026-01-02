@@ -1,4 +1,4 @@
-import { httpStatusCode } from '@back/shared/const/httpCode'
+import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { userRole } from '@back/shared/const/userRole'
 import { setRefreshTokenCookie } from '@back/shared/headers'
 import {

@@ -2,7 +2,7 @@ import { type InsertFile, filesTable } from '@back/entities/file'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
-import { httpStatusCode } from '@back/shared/const/httpCode'
+import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { db } from '@back/shared/lib/drizzle/db'
 import {
   type HttpResponse,
