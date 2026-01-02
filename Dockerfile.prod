@@ -23,6 +23,9 @@ WORKDIR /app
 # Copy backend TypeScript source (no build needed!)
 COPY --from=builder /app/back ./back
 
+# Copy shared utilities (used by backend)
+COPY --from=builder /app/shared ./shared
+
 # Copy built frontend code
 COPY --from=builder /app/front/build ./front/build
 
