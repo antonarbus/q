@@ -2,7 +2,6 @@ import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
-import { userRole } from '@back/shared/const/userRole'
 import type { NextFunction, Request, Response } from 'express'
 import { quotationsTable, type SelectQuotation } from '@back/entities/quotation'
 import { db } from '@back/shared/lib/drizzle/db'
@@ -60,7 +59,7 @@ export const getQuotationListAllHandler: RouterHandler = async (
 
   const messageList: string[] = []
 
-  if (userFromAccessToken.roles.includes(userRole.superAdmin) === false) {
+  if (userFromAccessToken.roles.includes('super-admin') === false) {
     messageList.push('No permission to view all quotations')
 
     throw new HttpError<ErrorResBody['errorCode']>({

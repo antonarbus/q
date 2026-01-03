@@ -1,5 +1,4 @@
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
-import { userRole } from '@back/shared/const/userRole'
 import { setRefreshTokenCookie } from '@back/shared/headers'
 import {
   generateAccessToken,
@@ -91,7 +90,7 @@ export const registerUserHandler: RouterHandler = async (req, res, next) => {
 
   const refreshToken = generateRefreshToken({
     email: emailFromInput,
-    roles: [userRole.user],
+    roles: ['user'],
   })
 
   setRefreshTokenCookie({ res, refreshJwtToken: refreshToken.value })
@@ -137,7 +136,7 @@ export const registerUserHandler: RouterHandler = async (req, res, next) => {
 
   const accessToken = generateAccessToken({
     email: emailFromInput,
-    roles: [userRole.user],
+    roles: ['user'],
   })
 
   // https://developers.mailersend.com/general.html#api-response
@@ -148,7 +147,7 @@ export const registerUserHandler: RouterHandler = async (req, res, next) => {
       statusCode: httpStatusCode.created201,
       body: {
         email: emailFromInput,
-        roles: [userRole.user],
+        roles: ['user'],
         accessJwtToken: accessToken.value,
         accessJwtTokenExpiresOn: accessToken.expiresOn,
         message: messageList.join(' | '),

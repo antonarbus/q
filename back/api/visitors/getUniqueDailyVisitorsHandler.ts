@@ -4,7 +4,6 @@ import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { db } from '@back/shared/lib/drizzle/db'
-import { userRole } from '@back/shared/const/userRole'
 import { and, asc, gte, lte } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
 import type { ParamsDictionary } from 'express-serve-static-core'
@@ -48,7 +47,7 @@ export const getUniqueDailyVisitorsHandler: RouterHandler = async (
   const userFromAccessToken = getUserFromAccessTokenOrNull({ req })
   const roles = userFromAccessToken?.roles ?? []
 
-  if (roles.includes(userRole.superAdmin) === false) {
+  if (roles.includes('super-admin') === false) {
     messageList.push('User is not super admin')
 
     throw new HttpError<ErrorResBody['errorCode']>({

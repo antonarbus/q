@@ -2,7 +2,6 @@ import { bookmarksTable, type SelectBookmark } from '@back/entities/bookmark'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { db } from '@back/shared/lib/drizzle/db'
-import { userRole } from '@back/shared/const/userRole'
 import { and, asc, count, desc, ilike } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
 import { z } from 'zod'
@@ -50,7 +49,7 @@ export const getBookmarkListAllHandler: RouterHandler = async (
 
   const messageList: string[] = []
 
-  if (userFromAccessToken.roles.includes(userRole.superAdmin) === false) {
+  if (userFromAccessToken.roles.includes('super-admin') === false) {
     messageList.push('No permission to view all bookmarks')
 
     throw new HttpError<ErrorResBody['errorCode']>({

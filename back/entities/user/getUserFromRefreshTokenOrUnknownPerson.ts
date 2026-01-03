@@ -1,4 +1,3 @@
-import { userRole } from '@back/shared/const/userRole'
 import { getRefreshTokenFromCookie } from '@back/shared/headers/token/getRefreshTokenFromCookie'
 import { verifyRefreshToken } from '@back/shared/lib/json-webtoken'
 import type { Request } from 'express'
@@ -26,7 +25,7 @@ export const getUserFromRefreshTokenOrUnknownPerson = (props: Props): Res => {
 
   const unknownPerson = {
     email: 'unknown@gmail.com',
-    roles: [userRole.user],
+    roles: ['user'] as ['user'],
   }
 
   if (refreshJwtToken === undefined) {

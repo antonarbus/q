@@ -4,7 +4,6 @@ import {
   type Reducer,
   type WritableDraft,
 } from '@reduxjs/toolkit'
-import { userRole } from '../const/userRole'
 import type { SelectUser } from '@back/entities/user'
 
 type InitState = {
@@ -15,7 +14,7 @@ type InitState = {
 
 const initialState: InitState = {
   email: null,
-  roles: [userRole.user],
+  roles: ['user'],
   accessToken: null,
 }
 

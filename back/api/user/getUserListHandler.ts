@@ -4,7 +4,6 @@ import {
   type SelectUser,
 } from '@back/entities/user'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
-import { userRole } from '@back/shared/const/userRole'
 import type { NextFunction, Request, Response } from 'express'
 import { db } from '@back/shared/lib/drizzle/db'
 import { desc } from 'drizzle-orm'
@@ -47,7 +46,7 @@ export const getUserListHandler: RouterHandler = async (req, res, next) => {
 
   const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({ req })
 
-  if (userFromAccessToken.roles.includes(userRole.superAdmin) === false) {
+  if (userFromAccessToken.roles.includes('super-admin') === false) {
     messageList.push('User is not super admin')
 
     throw new HttpError<ErrorResBody['errorCode']>({

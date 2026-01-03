@@ -2,7 +2,6 @@ import { getUserFromRefreshTokenOrJohn } from '@back/entities/user'
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
-import { userRole } from '@back/shared/const/userRole'
 import { bucket } from '@back/shared/lib/google-cloud-storage'
 import type { NextFunction, Request, Response } from 'express'
 import { secret } from '@root/config/secrets'
@@ -36,7 +35,7 @@ type RouterHandler = (
 export const setBucketCorsHandler: RouterHandler = async (req, res, next) => {
   const userFromRefreshToken = getUserFromRefreshTokenOrJohn({ req })
 
-  if (userFromRefreshToken.roles.includes(userRole.superAdmin) === false) {
+  if (userFromRefreshToken.roles.includes('super-admin') === false) {
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'FORBIDDEN',
       statusCode: httpStatusCode.forbidden403,

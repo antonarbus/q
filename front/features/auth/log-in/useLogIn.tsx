@@ -3,7 +3,6 @@ import { navItemId } from '@entities/nav/navItemId'
 import { navSlice } from '@entities/nav/navSlice'
 import { useGetQuotationListQuery } from '@entities/quotation/api/useGetQuotationListQuery'
 import { useLogInUserMutation } from '@entities/user/api/useLogInUserMutation'
-import { userRole } from '@entities/user/const/userRole'
 import { userSlice } from '@entities/user/redux/userSlice'
 import type { Signal } from '@preact/signals-react'
 import { appSlice } from '@shared/appSlice'
@@ -60,7 +59,7 @@ export const useLogIn = (props: Props): Res => {
       )
 
       const isSuperAdmin =
-        logInUserMutation.data.roles.includes(userRole.superAdmin) === true
+        logInUserMutation.data.roles.includes('super-admin') === true
 
       if (isSuperAdmin === true) {
         dispatch(navSlice.actions.showNavItems({ navItemIds: ['admin'] }))

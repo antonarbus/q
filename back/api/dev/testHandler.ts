@@ -2,7 +2,6 @@ import { getUserFromRefreshTokenOrJohn, usersTable } from '@back/entities/user'
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
-import { userRole } from '@back/shared/const/userRole'
 import type { NextFunction, Request, Response } from 'express'
 import { db } from '@back/shared/lib/drizzle/db'
 import { eq } from 'drizzle-orm'
@@ -35,7 +34,7 @@ export const testHandler: RouterHandler = async (req, res, next) => {
 
   const messageList: string[] = []
 
-  if (userFromRefreshToken.roles.includes(userRole.superAdmin) === false) {
+  if (userFromRefreshToken.roles.includes('super-admin') === false) {
     messageList.push('Forbidden - super admin access required')
 
     throw new HttpError<ErrorResBody['errorCode']>({

@@ -1,7 +1,6 @@
 import { navItemId } from '@entities/nav/navItemId'
 import { navSlice } from '@entities/nav/navSlice'
 import { useResetUserPasswordMutation } from '@entities/user/api/useResetUserPasswordMutation'
-import { userRole } from '@entities/user/const/userRole'
 import { userSlice } from '@entities/user/redux/userSlice'
 import type { Signal } from '@preact/signals-react'
 import { dispatch } from '@shared/lib/redux'
@@ -53,7 +52,7 @@ export const useResetPassword = (props: Props): Res => {
       dispatch(
         userSlice.actions.rememberLoggedUser({
           email: resetUserPasswordMutation.data.email,
-          roles: resetUserPasswordMutation.data.roles ?? [userRole.user],
+          roles: resetUserPasswordMutation.data.roles ?? ['user'],
         }),
       )
 

@@ -8,7 +8,6 @@ import type { NextFunction, Request, Response } from 'express'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
 import { getUserFromRefreshTokenOrNull } from '@back/entities/user'
-import { userRole } from '@back/shared/const/userRole'
 import {
   type HttpResponse,
   httpJsonResponse,
@@ -39,7 +38,7 @@ export const healthCheckHandler: RouterHandler = async (req, res, next) => {
 
   const messageList: string[] = []
 
-  const isSuperAdmin = userFromAccessToken?.roles.includes(userRole.superAdmin)
+  const isSuperAdmin = userFromAccessToken?.roles.includes('super-admin')
 
   // Simple query to verify Postgres / Drizzle connectivity
   await db.execute(sql`select 1`).catch((error: unknown) => {

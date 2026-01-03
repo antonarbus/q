@@ -8,7 +8,6 @@ import {
   type HttpResponse,
   httpJsonResponse,
 } from '@back/shared/lib/express/httpResponse'
-import { userRole } from '@back/shared/const/userRole'
 import { and, asc, count, desc, ilike } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
 import type { ParamsDictionary } from 'express-serve-static-core'
@@ -56,7 +55,7 @@ export const getFileListAllHandler: RouterHandler = async (req, res, next) => {
 
   const messageList: string[] = []
 
-  if (userFromAccessToken.roles.includes(userRole.superAdmin) === false) {
+  if (userFromAccessToken.roles.includes('super-admin') === false) {
     messageList.push('No permission to view all files')
 
     throw new HttpError<ErrorResBody['errorCode']>({

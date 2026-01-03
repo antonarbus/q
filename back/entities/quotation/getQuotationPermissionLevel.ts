@@ -1,4 +1,3 @@
-import { userRole } from '@entities/user/const/userRole'
 import type { SelectUser } from '../user'
 import type { Quotation } from './quotationSchema'
 import type { SelectQuotation } from './quotationsTableSchema'
@@ -45,8 +44,7 @@ export const getQuotationPermissionLevel = (
     return 'SUPER_ADMIN_ON_BEHALF_OF_A_USER'
   }
 
-  const isSuperAdmin =
-    isLoggedUser && props.user?.roles.includes(userRole.superAdmin)
+  const isSuperAdmin = isLoggedUser && props.user?.roles.includes('super-admin')
 
   if (isSuperAdmin === true) {
     return 'SUPER_ADMIN'

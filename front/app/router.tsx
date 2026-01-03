@@ -1,4 +1,3 @@
-import { userRole } from '@entities/user/const/userRole'
 import { RequireRoles } from '@features/auth/check-required-roles'
 import { AccessToken } from '@features/auth/get-access-token'
 import { Logout } from '@features/auth/log-out'
@@ -202,7 +201,7 @@ const router = createBrowserRouter([
           <Suspense
             fallback={<LoadingDotsOverlay shouldShowLoader text='Loading...' />}
           >
-            <RequireRoles requiredRoles={[userRole.superAdmin]}>
+            <RequireRoles requiredRoles={['super-admin']}>
               <UserListPageLazy />
             </RequireRoles>
           </Suspense>
@@ -214,7 +213,7 @@ const router = createBrowserRouter([
           <Suspense
             fallback={<LoadingDotsOverlay shouldShowLoader text='Loading...' />}
           >
-            <RequireRoles requiredRoles={[userRole.superAdmin]}>
+            <RequireRoles requiredRoles={['super-admin']}>
               <VisitorListPageLazy />
             </RequireRoles>
           </Suspense>
@@ -226,7 +225,7 @@ const router = createBrowserRouter([
           <Suspense
             fallback={<LoadingDotsOverlay shouldShowLoader text='Loading...' />}
           >
-            <RequireRoles requiredRoles={[userRole.superAdmin]}>
+            <RequireRoles requiredRoles={['super-admin']}>
               <QuotationListAllPageLazy />
             </RequireRoles>
           </Suspense>
@@ -238,7 +237,7 @@ const router = createBrowserRouter([
           <Suspense
             fallback={<LoadingDotsOverlay shouldShowLoader text='Loading...' />}
           >
-            <RequireRoles requiredRoles={[userRole.superAdmin]}>
+            <RequireRoles requiredRoles={['super-admin']}>
               <BookmarkListAllPageLazy />
             </RequireRoles>
           </Suspense>
@@ -250,7 +249,7 @@ const router = createBrowserRouter([
           <Suspense
             fallback={<LoadingDotsOverlay shouldShowLoader text='Loading...' />}
           >
-            <RequireRoles requiredRoles={[userRole.superAdmin]}>
+            <RequireRoles requiredRoles={['super-admin']}>
               <FileListAllPageLazy />
             </RequireRoles>
           </Suspense>
@@ -259,7 +258,7 @@ const router = createBrowserRouter([
       {
         path: 'test',
         element: (
-          <RequireRoles requiredRoles={[userRole.superAdmin]}>
+          <RequireRoles requiredRoles={['super-admin']}>
             <TestPage />
           </RequireRoles>
         ),

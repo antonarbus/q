@@ -6,9 +6,7 @@ import {
   usersTable,
 } from '@back/entities/user'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
-import { userRole } from '@back/shared/const/userRole'
 import { db } from '@back/shared/lib/drizzle/db'
-// import { bucket, getFolderPath } from '@back/shared/services/storage'
 import { eq } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
 import { HttpError } from '@back/shared/errors/HttpError'
@@ -49,7 +47,7 @@ export const deleteUserHandler: RouterHandler = async (req, res, next) => {
   const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({ req })
 
   const isOwner = userFromAccessToken.email === req.body.email
-  const isSuperAdmin = userFromAccessToken.roles.includes(userRole.superAdmin)
+  const isSuperAdmin = userFromAccessToken.roles.includes('super-admin')
 
   const notAllowed = isOwner === false && isSuperAdmin === false
 

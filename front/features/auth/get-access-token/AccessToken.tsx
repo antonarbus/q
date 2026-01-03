@@ -3,7 +3,6 @@ import { navItemId } from '@entities/nav/navItemId'
 import { navSlice } from '@entities/nav/navSlice'
 import { createLoadingMenuIconMachine } from '@entities/nav/state-machine/createLoadingMenuIconMachine'
 import { useGetUserAccessTokenQuery } from '@entities/user/api/useGetUserAccessTokenQuery'
-import { userRole } from '@entities/user/const/userRole'
 import { userSlice } from '@entities/user/redux/userSlice'
 import { agGridSlice } from '@shared/lib/ag-grid/agGridSlice'
 import { dispatch, getState } from '@shared/lib/redux'
@@ -90,7 +89,7 @@ export const AccessToken = (): ReactNode => {
         }),
       )
 
-      const isSuperAdmin = jwtPayload.roles.includes(userRole.superAdmin)
+      const isSuperAdmin = jwtPayload.roles.includes('super-admin')
 
       if (isSuperAdmin === true) {
         dispatch(navSlice.actions.showNavItems({ navItemIds: ['admin'] }))

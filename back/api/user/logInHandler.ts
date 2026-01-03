@@ -3,7 +3,6 @@ import {
   usersTable,
   type SelectUser,
 } from '@back/entities/user'
-import { userRole } from '@back/shared/const/userRole'
 import { setNoTraceMode, setRefreshTokenCookie } from '@back/shared/headers'
 import {
   generateAccessToken,
@@ -89,7 +88,7 @@ export const logInHandler: RouterHandler = async (req, res, next) => {
   const emailFromAccessToken = userFromAccessToken?.email ?? 'unknown@gmail.com'
 
   const isSuperAdminOnBehalfOfUser =
-    rolesFromAccessToken.includes(userRole.superAdmin) &&
+    rolesFromAccessToken.includes('super-admin') &&
     emailFromInput !== emailFromAccessToken
 
   if (isSuperAdminOnBehalfOfUser === true) {
