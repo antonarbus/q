@@ -1,5 +1,4 @@
 import { useIsCopyModalVisible } from '@entities/copy/useIsCopyModalVisible'
-import { rowTypeKey } from '@entities/quotation/const/rowTypeKey'
 import { useBlock } from '@entities/quotation/provider/BlockProvider'
 import { useRow } from '@entities/quotation/provider/RowProvider'
 import { getRowFromStore } from '@entities/quotation/redux/getter/getRowFromStore'
@@ -39,10 +38,6 @@ export const OpenInfoRowModalIcon = (): ReactNode => {
             })
 
             if (rowFromStore === undefined) {
-              return
-            }
-
-            if (rowFromStore.type === rowTypeKey.paste) {
               return
             }
 

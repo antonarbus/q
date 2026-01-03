@@ -3,13 +3,14 @@ import { getBoqHeaderFromStore } from '@entities/quotation/redux/getter/getBoqHe
 import { getRowFromStore } from '@entities/quotation/redux/getter/getRowFromStore'
 import { getRowsFromStore } from '@entities/quotation/redux/getter/getRowsFromStore'
 import { updateBoqHeaderAtStore } from '@entities/quotation/redux/updater/updateBoqHeaderAtStore'
-import type { RowBlock, RowEditorRefs } from '@root/shared/types/BlockItem'
+import type { RowBlock } from '@back/entities/quotation/quotationSchema'
 import { didBoqHeaderContentChange } from '@entities/quotation/util/didBoqHeaderContentChange'
 import { updateCellWithValue } from '@entities/quotation/util/updateCellWithValue'
 import { updateSubTotalPriceWithValue } from '@entities/quotation/util/updateSubTotalPriceWithValue'
 import type { FroalaEditor, FroalaEditorRef } from '@shared/lib/froala/froala'
 import { roundTo } from 'round-to'
 import { toast } from 'sonner'
+import type { RowEditorRefs } from '@entities/quotation/ref/rowEditorRefs'
 
 type Props = {
   blockIndex: number

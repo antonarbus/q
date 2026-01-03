@@ -1,6 +1,8 @@
 import { getState } from '@shared/lib/redux'
-import type { BlockItem } from '@root/shared/types/BlockItem'
-import type { Quotation } from '@root/shared/types/Quotation'
+import type {
+  BlockItem,
+  Quotation,
+} from '@back/entities/quotation/quotationSchema'
 
 type Props = {
   id: string

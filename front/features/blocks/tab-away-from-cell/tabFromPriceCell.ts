@@ -1,4 +1,4 @@
-import type { RowEditorRefs } from '@root/shared/types/BlockItem'
+import type { RowEditorRefs } from '@entities/quotation/ref/rowEditorRefs'
 import type { KeyboardEvent } from 'react'
 
 type Props = {

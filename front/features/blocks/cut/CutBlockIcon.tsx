@@ -1,5 +1,4 @@
 import { copySlice } from '@entities/copy/copySlice'
-import { itemType } from '@entities/quotation/const/itemType'
 import { useBlock } from '@entities/quotation/provider/BlockProvider'
 import { quotationSlice } from '@entities/quotation/redux/quotationSlice'
 import { selectIsLastBlock } from '@entities/quotation/redux/selector/selectIsLastBlock'
@@ -35,10 +34,6 @@ export const CutBlockIcon = (): JSX.Element => {
             const blockToCut = getState().quotation.blocks[block.index]
 
             if (blockToCut === undefined) {
-              return
-            }
-
-            if (blockToCut.type === itemType.paste) {
               return
             }
 

@@ -4,7 +4,10 @@ import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import { generateId } from '@root/shared/lib/nanoid'
-import type { Quotation } from '@root/shared/types/Quotation'
+import {
+  type Quotation,
+  quotationSchema,
+} from '@back/entities/quotation/quotationSchema'
 import type { NextFunction, Request, Response } from 'express'
 import { quotationsTable, type SelectQuotation } from '@back/entities/quotation'
 import { db } from '@back/shared/lib/drizzle/db'
@@ -15,6 +18,7 @@ import {
   type HttpResponse,
   httpJsonResponse,
 } from '@back/shared/lib/express/httpResponse'
+import { z } from 'zod'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
@@ -31,7 +35,12 @@ export type ResBody = {
 
 export type ErrorResBody = {
   message: string
-  errorCode: ErrorCode | 'FAILED_TO_SAVE' | 'ID_NOT_PROVIDED' | 'UNHANDLED_CASE'
+  errorCode:
+    | ErrorCode
+    | 'FAILED_TO_SAVE'
+    | 'ID_NOT_PROVIDED'
+    | 'UNHANDLED_CASE'
+    | 'INVALID_STRUCTURE'
 }
 
 type RouterHandler = (
@@ -44,6 +53,25 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
   const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({ req })
 
   const messageList: string[] = []
+
+  const quotationValidationResult = quotationSchema.safeParse(
+    req.body.quotation,
+  )
+
+  if (quotationValidationResult.success === false) {
+    messageList.push('Invalid structure')
+    const treeifiedError = z.treeifyError(quotationValidationResult.error)
+    console.error('Validation failed:', treeifiedError)
+    messageList.push(`Zod error: ${JSON.stringify(treeifiedError)}`)
+
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'INVALID_STRUCTURE',
+      statusCode: httpStatusCode.badRequest400,
+      message: messageList.join(' | '),
+    })
+  }
+
+  messageList.push('Quotation structure validated')
 
   if (req.body.quotation.id === '') {
     messageList.push('Quotation ID is not provided')
@@ -116,12 +144,14 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
     const fileInfo = getFileInfo({ id: quotationId })
     const quotationFile = bucket.file(fileInfo.path)
 
-    const fullQuotation = {
-      ...req.body.quotation,
-      ...quotationInserted,
+    // Save ONLY bucket data (heavy data), not DB metadata
+    // DB is the source of truth for metadata (id, email, name, etc.)
+    const bucketData = {
+      info: req.body.quotation.info,
+      blocks: req.body.quotation.blocks,
     }
 
-    const quotationJson = JSON.stringify(fullQuotation, null, 2)
+    const quotationJson = JSON.stringify(bucketData, null, 2)
 
     await quotationFile.save(quotationJson).catch(() => {
       messageList.push('Failed to save quotation to storage')
@@ -180,12 +210,14 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
     const fileInfo = getFileInfo({ id: req.body.quotation.id })
     const file = bucket.file(fileInfo.path)
 
-    const fullQuotation = {
-      ...req.body.quotation,
-      ...quotationUpdated,
+    // Save ONLY bucket data (heavy data), not DB metadata
+    // DB is the source of truth for metadata (id, email, name, etc.)
+    const bucketData = {
+      info: req.body.quotation.info,
+      blocks: req.body.quotation.blocks,
     }
 
-    const quotationJson = JSON.stringify(fullQuotation, null, 2)
+    const quotationJson = JSON.stringify(bucketData, null, 2)
 
     await file.save(quotationJson).catch(() => {
       messageList.push('Failed to save quotation to storage')
@@ -245,12 +277,14 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
     const fileInfo = getFileInfo({ id: newQuotationId })
     const quotationFile = bucket.file(fileInfo.path)
 
-    const fullQuotation = {
-      ...req.body.quotation,
-      ...quotationInserted,
+    // Save ONLY bucket data (heavy data), not DB metadata
+    // DB is the source of truth for metadata (id, email, name, etc.)
+    const bucketData = {
+      info: req.body.quotation.info,
+      blocks: req.body.quotation.blocks,
     }
 
-    const quotationJson = JSON.stringify(fullQuotation, null, 2)
+    const quotationJson = JSON.stringify(bucketData, null, 2)
 
     await quotationFile.save(quotationJson).catch(() => {
       messageList.push('Failed to save copied quotation to storage')

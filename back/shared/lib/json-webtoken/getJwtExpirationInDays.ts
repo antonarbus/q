@@ -1,4 +1,4 @@
-import { jsonParseSafe } from '@back/shared/util/jsonParseSafe'
+import { jsonParseOrNull } from '@back/shared/util/jsonParseOrNull'
 import type { JwtPayload } from 'jsonwebtoken'
 
 type Props = {
@@ -23,9 +23,9 @@ export const getJwtExpirationInDays = (props: Props): number => {
   const payloadString = atob(payloadPart)
 
   // Parse the payload JSON
-  const payload = jsonParseSafe<JwtPayload>(payloadString)
+  const payload = jsonParseOrNull<JwtPayload>(payloadString)
 
-  if (payload === undefined) {
+  if (payload === null) {
     throw new Error('Token does not have an expiration (exp) claim')
   }
 

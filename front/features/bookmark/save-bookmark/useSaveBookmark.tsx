@@ -100,12 +100,6 @@ export const useSaveBookmark = (props: Props): Res => {
       return
     }
 
-    if (bookmarkBlock.type === 'paste') {
-      toast.error('Paste blocks cannot be saved as bookmarks')
-
-      return
-    }
-
     const html = getPaperElementHtmlAtModal()
 
     const itemWithUpdatedPreview = structuredClone(bookmarkBlock)

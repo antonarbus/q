@@ -1,11 +1,8 @@
-import { useBlock } from '@entities/quotation/provider/BlockProvider'
 import { theme } from '@shared/theme'
 import { motion } from 'motion/react'
 import type { JSX } from 'react'
 
 export const PasteItemBlock = (): JSX.Element => {
-  const block = useBlock()
-
   return (
     <motion.div
       animate={{
@@ -18,7 +15,6 @@ export const PasteItemBlock = (): JSX.Element => {
         marginBottom: 0,
         opacity: 0,
       }}
-      id={block.item.id}
       initial={{
         height: 0,
         marginBottom: 0,

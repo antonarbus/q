@@ -1,5 +1,4 @@
 import { useIsCopyModalVisible } from '@entities/copy/useIsCopyModalVisible'
-import { itemType } from '@entities/quotation/const/itemType'
 import { useBlock } from '@entities/quotation/provider/BlockProvider'
 import { getBlockFromStore } from '@entities/quotation/redux/getter/getBlockFromStore'
 import { quotationSlice } from '@entities/quotation/redux/quotationSlice'
@@ -50,10 +49,6 @@ export const BookmarkBlockIcon = (): ReactNode => {
             })
 
             if (blockFromStore === undefined) {
-              return
-            }
-
-            if (blockFromStore.type === itemType.paste) {
               return
             }
 

@@ -8,11 +8,15 @@ import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
-import type { Bookmark } from '@root/shared/types/Bookmark'
 import {
   type HttpResponse,
   httpJsonResponse,
 } from '@back/shared/lib/express/httpResponse'
+import {
+  bookmarkSchema,
+  type Bookmark,
+} from '@back/entities/bookmark/bookmarkSchema'
+import { z } from 'zod'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
@@ -29,7 +33,11 @@ export type ResBody = {
 
 export type ErrorResBody = {
   message: string
-  errorCode: ErrorCode | 'ID_NOT_PROVIDED' | 'FAILED_TO_SAVE'
+  errorCode:
+    | ErrorCode
+    | 'ID_NOT_PROVIDED'
+    | 'FAILED_TO_SAVE'
+    | 'INVALID_STRUCTURE'
 }
 
 type RouterHandler = (
@@ -43,6 +51,23 @@ export const saveBookmarkHandler: RouterHandler = async (req, res, next) => {
 
   const messageList: string[] = []
 
+  const bookmarkValidationResult = bookmarkSchema.safeParse(req.body.bookmark)
+
+  if (bookmarkValidationResult.success === false) {
+    messageList.push('Invalid bookmark structure in request')
+    const treeifiedError = z.treeifyError(bookmarkValidationResult.error)
+    console.error('Validation failed:', treeifiedError)
+    messageList.push(`Zod error: ${JSON.stringify(treeifiedError)}`)
+
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'INVALID_STRUCTURE',
+      statusCode: httpStatusCode.badRequest400,
+      message: messageList.join(' | '),
+    })
+  }
+
+  messageList.push('Bookmark structure validated')
+
   if (req.body.bookmark.id === '') {
     messageList.push('Bookmark ID is required')
 
@@ -53,23 +78,25 @@ export const saveBookmarkHandler: RouterHandler = async (req, res, next) => {
     })
   }
 
+  const { id, type, name, category, desc, ...bucketData } = req.body.bookmark
+
   const [bookmarkInserted] = await db
     .insert(bookmarksTable)
     .values({
-      id: req.body.bookmark.id,
+      id,
       email: userFromAccessToken.email,
-      type: req.body.bookmark.type,
-      name: req.body.bookmark.name,
-      category: req.body.bookmark.category,
-      desc: req.body.bookmark.desc,
+      type,
+      name,
+      category,
+      desc,
     })
     .onConflictDoUpdate({
       target: bookmarksTable.id,
       set: {
-        type: req.body.bookmark.type,
-        name: req.body.bookmark.name,
-        category: req.body.bookmark.category,
-        desc: req.body.bookmark.desc,
+        type,
+        name,
+        category,
+        desc,
         updatedAt: new Date().toISOString(),
       },
     })
@@ -87,20 +114,16 @@ export const saveBookmarkHandler: RouterHandler = async (req, res, next) => {
 
   const isNew = bookmarkInserted.createdAt === bookmarkInserted.updatedAt
 
-  if (isNew === true) {
-    messageList.push('Bookmark created in database')
-  } else {
-    messageList.push('Bookmark updated in database')
-  }
+  messageList.push(
+    isNew === true
+      ? 'Bookmark created in database'
+      : 'Bookmark updated in database',
+  )
 
   const fileInfo = getFileInfo({ id: req.body.bookmark.id })
   const bookmarkFile = bucket.file(fileInfo.path)
 
-  const contents = JSON.stringify(
-    { ...req.body.bookmark, ...bookmarkInserted },
-    null,
-    2,
-  )
+  const contents = JSON.stringify(bucketData, null, 2)
 
   await bookmarkFile.save(contents).catch(() => {
     messageList.push('Failed to save bookmark in bucket')

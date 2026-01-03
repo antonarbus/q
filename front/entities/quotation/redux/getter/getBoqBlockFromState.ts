@@ -1,6 +1,8 @@
 import { itemType } from '../../const/itemType'
-import type { BoqBlock } from '@root/shared/types/BlockItem'
-import type { Quotation } from '@root/shared/types/Quotation'
+import type {
+  BoqBlock,
+  Quotation,
+} from '@back/entities/quotation/quotationSchema'
 
 type Props = {
   blockIndex: number

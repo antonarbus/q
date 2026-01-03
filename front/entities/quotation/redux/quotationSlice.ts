@@ -1,16 +1,12 @@
 import { createSlice, type Reducer } from '@reduxjs/toolkit'
-import type { Quotation } from '@root/shared/types/Quotation'
-import { permissionLevel } from '@root/shared/const/permissionLevel'
+import type { Quotation } from '@back/entities/quotation/quotationSchema'
 
 // Delete operations
 import { deleteBlockReducer } from './reducer/delete/deleteBlockReducer'
 import { deleteRowReducer } from './reducer/delete/deleteRowReducer'
 
 // Insert/paste operations
-import { insertPasteBlockReducer } from './reducer/insert/insertPasteBlockReducer'
-import { insertPasteRowReducer } from './reducer/insert/insertPasteRowReducer'
 import { pasteItemReducer } from './reducer/insert/pasteItemReducer'
-import { removePasteItemReducer } from './reducer/insert/removePasteItemReducer'
 import { reOrderBlocksReducer } from './reducer/insert/reOrderItemsReducer'
 import { reOrderRowsReducer } from './reducer/insert/reOrderRowsReducer'
 
@@ -61,7 +57,7 @@ const initialState: Quotation = {
   openedAt: null,
   viewedAt: null,
   email: 'unknown@gmail.com',
-  permissionLevel: permissionLevel.new,
+  permissionLevel: 'NEW',
   access: {
     level: 'nobody',
     userList: [],
@@ -83,13 +79,10 @@ export const quotationSlice = createSlice({
     enableFroalaReducer,
     hideBoqItemPinsReducer,
     hideCellPinReducer,
-    insertPasteRowReducer,
-    insertPasteBlockReducer,
     pasteItemReducer,
     pinItemPriceReducer,
     pinQtyReducer,
     pinPriceReducer,
-    removePasteItemReducer,
     reOrderRowsReducer,
     reOrderBlocksReducer,
     showCellPinReducer,

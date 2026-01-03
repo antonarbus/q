@@ -1,5 +1,4 @@
 import { copySlice } from '@entities/copy/copySlice'
-import { quotationSlice } from '@entities/quotation/redux/quotationSlice'
 
 import { textSlice } from '@shared/lib/froala/textSlice'
 import { dispatch } from '@shared/lib/redux'
@@ -12,7 +11,6 @@ export const useExitCopyOnEsc = (): void => {
     }
 
     dispatch(copySlice.actions.hideCopyModal())
-    dispatch(quotationSlice.actions.removePasteItemReducer())
 
     setTimeout(() => {
       dispatch(textSlice.actions.setEditable())

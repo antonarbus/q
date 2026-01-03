@@ -2,9 +2,11 @@ import type { PastePos } from '@entities/copy/types'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { generateId } from '@root/shared/lib/nanoid'
 import { itemType } from '../../../const/itemType'
-import { rowTypeKey } from '../../../const/rowTypeKey'
-import type { BlockItem, RowBlock } from '@root/shared/types/BlockItem'
-import type { Quotation } from '@root/shared/types/Quotation'
+import type {
+  BlockItem,
+  Quotation,
+  RowBlock,
+} from '@back/entities/quotation/quotationSchema'
 
 type SpliceSettings = {
   insertAtIndex: number
@@ -17,7 +19,7 @@ const calculateSpliceSettings = (
 ): SpliceSettings => {
   if (pastePos === 'top') {
     return {
-      insertAtIndex: baseIndex - 1,
+      insertAtIndex: baseIndex,
       deleteCount: 0,
     }
   }
@@ -29,9 +31,10 @@ const calculateSpliceSettings = (
     }
   }
 
+  // Middle position - insert at the same index without deleting
   return {
     insertAtIndex: baseIndex,
-    deleteCount: 1,
+    deleteCount: 0,
   }
 }
 
@@ -68,17 +71,11 @@ const pasteBlock = (
   const hoveredItemIndex = state.blocks.findIndex((block) => block.id === id)
   const spliceSettings = calculateSpliceSettings(hoveredItemIndex, pastePos)
 
-  const blocksWithoutPaste = state.blocks.filter(
-    (block) => block.type !== itemType.paste,
-  )
-
-  blocksWithoutPaste.splice(
+  state.blocks.splice(
     spliceSettings.insertAtIndex,
     spliceSettings.deleteCount,
     itemToPaste,
   )
-
-  state.blocks = blocksWithoutPaste
 }
 
 const pasteRow = (
@@ -96,17 +93,11 @@ const pasteRow = (
     if (rowFound === true) {
       const spliceSettings = calculateSpliceSettings(rowIndex, pastePos)
 
-      const rowsWithoutPaste = block.boq.rows.filter(
-        (row) => row.type !== rowTypeKey.paste,
-      )
-
-      rowsWithoutPaste.splice(
+      block.boq.rows.splice(
         spliceSettings.insertAtIndex,
         spliceSettings.deleteCount,
         itemToPaste,
       )
-
-      block.boq.rows = rowsWithoutPaste
 
       return
     }

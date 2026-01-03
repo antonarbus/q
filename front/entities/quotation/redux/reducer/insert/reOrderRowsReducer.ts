@@ -1,6 +1,8 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { Quotation } from '@root/shared/types/Quotation'
-import type { RowBlock } from '@root/shared/types/BlockItem'
+import type {
+  Quotation,
+  RowBlock,
+} from '@back/entities/quotation/quotationSchema'
 import { getBoqBlockFromState } from '../../getter/getBoqBlockFromState'
 
 export const reOrderRowsReducer = (

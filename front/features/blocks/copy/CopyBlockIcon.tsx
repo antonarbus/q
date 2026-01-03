@@ -1,5 +1,4 @@
 import { copySlice } from '@entities/copy/copySlice'
-import { itemType } from '@entities/quotation/const/itemType'
 import { useBlock } from '@entities/quotation/provider/BlockProvider'
 import { saveBlockHeightByIndex } from '@entities/quotation/util/saveBlockHeightByIndex'
 import { Tooltip } from '@mui/material'
@@ -35,10 +34,6 @@ export const CopyBlockIcon = (): JSX.Element => {
             const blockToCopy = getState().quotation.blocks[block.index]
 
             if (blockToCopy === undefined) {
-              return
-            }
-
-            if (blockToCopy.type === itemType.paste) {
               return
             }
 

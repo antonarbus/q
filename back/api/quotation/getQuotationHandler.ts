@@ -2,22 +2,27 @@ import { getUserFromAccessTokenOrNull } from '@back/entities/user'
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
-import { userRole } from '@back/shared/const/userRole'
-import { getShouldNotTrace } from '@back/shared/headers'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
-import { jsonParseSafe } from '@back/shared/util/jsonParseSafe'
-import type { Quotation } from '@root/shared/types/Quotation'
+import { jsonParseOrNull } from '@back/shared/util/jsonParseOrNull'
 import type { NextFunction, Request, Response } from 'express'
 import { quotationsTable, type SelectQuotation } from '@back/entities/quotation'
 import { db } from '@back/shared/lib/drizzle/db'
 import { eq } from 'drizzle-orm'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
-import { permissionLevel } from '@root/shared/const/permissionLevel'
 import {
   type HttpResponse,
   httpJsonResponse,
 } from '@back/shared/lib/express/httpResponse'
+import {
+  quotationBucketDataSchema,
+  type Quotation,
+} from '@back/entities/quotation/quotationSchema'
+import { z } from 'zod'
+import { getEmptyQuotation } from '@back/entities/quotation/emptyQuotation'
+import { getQuotationPermissionLevel } from '@back/entities/quotation/getQuotationPermissionLevel'
+import { getShouldTrace } from '@back/shared/headers/no-trace/getShouldTrace'
+import { hideQuotationPrivateData } from '@back/entities/quotation/hideQuotationPrivateData'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
@@ -33,7 +38,12 @@ export type ResBody = {
 
 export type ErrorResBody = {
   message: string
-  errorCode: ErrorCode | 'QUOTATION_NOT_FOUND' | 'FILE_NOT_FOUND_IN_BUCKET'
+  errorCode:
+    | ErrorCode
+    | 'QUOTATION_NOT_FOUND'
+    | 'FILE_NOT_FOUND_IN_BUCKET'
+    | 'INVALID_JSON'
+    | 'INVALID_STRUCTURE'
 }
 
 type RouterHandler = (
@@ -46,25 +56,6 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
   const userFromAccessToken = getUserFromAccessTokenOrNull({ req })
 
   const messageList: string[] = []
-
-  const emptyQuotation: Quotation = {
-    id: req.body.id,
-    name: '',
-    category: '',
-    desc: '',
-    info: '',
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-    openedAt: null,
-    viewedAt: null,
-    email: 'unknown@gmail.com',
-    permissionLevel: permissionLevel.new,
-    access: {
-      level: 'nobody',
-      userList: [],
-    },
-    blocks: [],
-  }
 
   const [quotationSelected] = await db
     .select()
@@ -81,79 +72,37 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
     })
   }
 
-  const shouldNotTrace = getShouldNotTrace({ req })
+  const shouldTrace = getShouldTrace({ req })
 
-  const getPermissionLevel = (): Quotation['permissionLevel'] => {
-    const isLoggedUser = userFromAccessToken !== null
-    const emailFromToken = userFromAccessToken?.email
+  messageList.push(`Should trace: ${shouldTrace}`)
 
-    const isOwner = isLoggedUser && emailFromToken === quotationSelected.email
+  const quotationPermissionLevel = getQuotationPermissionLevel({
+    user: userFromAccessToken,
+    quotation: quotationSelected,
+    shouldTrace,
+  })
 
-    if (isOwner === true) {
-      messageList.push('Owner')
+  messageList.push(`Permission level: ${quotationPermissionLevel}`)
 
-      return permissionLevel.owner
-    }
-
-    const isSharedWithYou =
-      emailFromToken !== undefined &&
-      quotationSelected.access.level === 'custom' &&
-      quotationSelected.access.userList.includes(emailFromToken)
-
-    if (isSharedWithYou === true) {
-      messageList.push('Shared')
-
-      return permissionLevel.shared
-    }
-
-    const isSharedWithEveryone = quotationSelected.access.level === 'everyone'
-
-    if (isSharedWithEveryone === true) {
-      messageList.push('Public')
-
-      return permissionLevel.public
-    }
-
-    const isSuperAdminOnBehalfOfUser = isLoggedUser && shouldNotTrace
-
-    if (isSuperAdminOnBehalfOfUser === true) {
-      messageList.push('Super-admin on behalf of user')
-
-      return permissionLevel.superAdminOnBehalfOfAUser
-    }
-
-    const isSuperAdmin =
-      isLoggedUser && userFromAccessToken.roles.includes(userRole.superAdmin)
-
-    if (isSuperAdmin === true) {
-      messageList.push('Super-admin')
-
-      return permissionLevel.superAdmin
-    }
-
-    messageList.push('Forbidden')
-
-    return permissionLevel.forbidden
-  }
-
-  const permissionLevelValue = getPermissionLevel()
-
-  if (permissionLevelValue === permissionLevel.forbidden) {
+  if (quotationPermissionLevel === 'FORBIDDEN') {
     return httpJsonResponse({
       statusCode: httpStatusCode.success200,
       body: {
-        quotation: { ...emptyQuotation, permissionLevel: permissionLevelValue },
+        quotation: {
+          ...getEmptyQuotation({ id: req.body.id }),
+          permissionLevel: quotationPermissionLevel,
+        },
         message: messageList.join(' | '),
       },
     })
   }
 
   const publicOrSharedWithYou =
-    permissionLevelValue === permissionLevel.shared ||
-    permissionLevelValue === permissionLevel.public
+    quotationPermissionLevel === 'SHARED' ||
+    quotationPermissionLevel === 'PUBLIC'
 
-  if (shouldNotTrace === false) {
-    if (permissionLevelValue === permissionLevel.owner) {
+  if (shouldTrace === true) {
+    if (quotationPermissionLevel === 'OWNER') {
       const updateResponse = await db
         .update(quotationsTable)
         .set({
@@ -204,62 +153,51 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
     })
 
   const quotationJson = fileBuffer.toString()
-  const quotationParsed = jsonParseSafe<Quotation>(quotationJson)
+  const quotationJsonParsed = jsonParseOrNull<Quotation>(quotationJson)
 
-  if (quotationParsed === undefined) {
-    messageList.push('Quotation data from storage not parsed')
+  if (quotationJsonParsed === null) {
+    messageList.push('Invalid JSON')
 
     throw new HttpError<ErrorResBody['errorCode']>({
-      errorCode: 'QUOTATION_NOT_FOUND',
+      errorCode: 'INVALID_JSON',
       statusCode: httpStatusCode.notFound404,
       message: messageList.join(' | '),
     })
   }
 
-  if (publicOrSharedWithYou === true) {
-    // remove sensitive data from quotation
-    // quotation.email = 'unknown@gmail.com'
-    quotationParsed.name = 'private'
-    quotationParsed.category = 'private'
-    quotationParsed.desc = 'private'
-    quotationParsed.info = 'private'
-    quotationParsed.createdAt = new Date().toISOString()
-    quotationParsed.updatedAt = new Date().toISOString()
-    quotationParsed.openedAt = new Date().toISOString()
+  const quotationValidationResult =
+    quotationBucketDataSchema.safeParse(quotationJsonParsed)
 
-    quotationParsed.blocks.forEach((block) => {
-      // block.email = 'unknown@gmail.com'
-      block.name = 'private'
-      block.category = 'private'
-      block.desc = 'private'
-      block.info = 'private'
-      block.createdAt = new Date().toISOString()
-      block.updatedAt = new Date().toISOString()
+  if (quotationValidationResult.success === false) {
+    messageList.push('Invalid structure')
+    const treeifiedError = z.treeifyError(quotationValidationResult.error)
+    console.error('Validation failed:', treeifiedError)
+    messageList.push(`Zod error: ${JSON.stringify(treeifiedError)}`)
 
-      if (block.type === 'boq') {
-        block.boq.rows.forEach((row) => {
-          // row.email = 'unknown@gmail.com'
-          row.name = 'private'
-          row.category = 'private'
-          row.desc = 'private'
-          row.info = 'private'
-          row.createdAt = new Date().toISOString()
-          row.updatedAt = new Date().toISOString()
-        })
-      }
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'INVALID_STRUCTURE',
+      statusCode: httpStatusCode.badRequest400,
+      message: messageList.join(' | '),
     })
+  }
 
+  const quotationBucketData = quotationValidationResult.data
+
+  const quotation: Quotation = {
+    ...quotationSelected,
+    ...quotationBucketData,
+    permissionLevel: quotationPermissionLevel,
+  }
+
+  if (publicOrSharedWithYou === true) {
+    hideQuotationPrivateData({ quotation })
     messageList.push('Private data is hidden')
   }
 
   return httpJsonResponse({
     statusCode: httpStatusCode.success200,
     body: {
-      quotation: {
-        ...quotationParsed,
-        ...quotationSelected,
-        permissionLevel: permissionLevelValue,
-      },
+      quotation,
       message: messageList.join(' | '),
     },
   })

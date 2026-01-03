@@ -1,7 +1,7 @@
-export const jsonParseSafe = <T>(str: unknown): T | undefined => {
+export const jsonParseOrNull = <T = unknown>(str: unknown): T | null => {
   try {
     if (typeof str !== 'string') {
-      return undefined
+      return null
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
@@ -9,6 +9,6 @@ export const jsonParseSafe = <T>(str: unknown): T | undefined => {
 
     return parsedJson
   } catch {
-    return undefined
+    return null
   }
 }

@@ -15,7 +15,6 @@ import type { FormEvent } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
-import { permissionLevel } from '@root/shared/const/permissionLevel'
 
 type Props = {
   emailSignal: Signal<string>
@@ -85,7 +84,7 @@ export const useLogIn = (props: Props): Res => {
         void getBookmarkListQuery.refetch()
       }
 
-      if (getState().quotation.permissionLevel === permissionLevel.forbidden) {
+      if (getState().quotation.permissionLevel === 'FORBIDDEN') {
         dispatch(
           appSlice.actions.setShouldLoadQuotation({
             yesOrNo: 'yes',

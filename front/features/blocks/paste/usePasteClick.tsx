@@ -79,7 +79,6 @@ const pasteItemOnClick = (): void => {
 
   if (itemsInCopyModal.length === 0) {
     dispatch(copySlice.actions.hideCopyModal())
-    dispatch(quotationSlice.actions.removePasteItemReducer())
 
     setTimeout(
       () => {

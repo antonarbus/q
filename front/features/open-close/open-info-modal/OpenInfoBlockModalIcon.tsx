@@ -1,5 +1,4 @@
 import { useIsCopyModalVisible } from '@entities/copy/useIsCopyModalVisible'
-import { itemType } from '@entities/quotation/const/itemType'
 import { useBlock } from '@entities/quotation/provider/BlockProvider'
 import { getBlockFromStore } from '@entities/quotation/redux/getter/getBlockFromStore'
 
@@ -35,10 +34,6 @@ export const OpenInfoBlockModalIcon = (): ReactNode => {
             const item = getBlockFromStore({ blockIndex: block.index })
 
             if (item === undefined) {
-              return
-            }
-
-            if (item.type === itemType.paste) {
               return
             }
 

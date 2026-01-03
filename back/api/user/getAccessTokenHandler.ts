@@ -1,7 +1,4 @@
-import {
-  getShouldNotTrace,
-  removeRefreshTokenCookie,
-} from '@back/shared/headers'
+import { getShouldTrace, removeRefreshTokenCookie } from '@back/shared/headers'
 import { generateAccessToken } from '@back/shared/lib/json-webtoken'
 import type { NextFunction, Request, Response } from 'express'
 import {
@@ -63,9 +60,9 @@ export const getAccessTokenHandler: RouterHandler = async (req, res, next) => {
 
   messageList.push('Refresh token validated')
 
-  const shouldNotTrace = getShouldNotTrace({ req })
+  const shouldTrace = getShouldTrace({ req })
 
-  if (shouldNotTrace === true) {
+  if (shouldTrace === false) {
     messageList.push('Should not trace - skipping loggedAt update')
 
     // Just select without updating

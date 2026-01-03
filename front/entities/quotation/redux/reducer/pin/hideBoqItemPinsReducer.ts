@@ -1,5 +1,5 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { Quotation } from '@root/shared/types/Quotation'
+import type { Quotation } from '@back/entities/quotation/quotationSchema'
 import { getRowsFromState } from '../../getter/getRowsFromState'
 
 export const hideBoqItemPinsReducer = (

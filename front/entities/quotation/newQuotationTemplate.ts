@@ -1,7 +1,6 @@
 import { generateId } from '@root/shared/lib/nanoid'
 import { itemType } from './const/itemType'
 import { rowTypeKey } from './const/rowTypeKey'
-import { permissionLevel } from '@root/shared/const/permissionLevel'
 import boqHeaderDescriptionHtml from './templates/boqHeaderDescription.html?raw' // assets can be imported as strings using the ?raw suffix
 import boqHeaderItemPriceHtml from './templates/boqHeaderItemPrice.html?raw'
 import boqHeaderPriceHtml from './templates/boqHeaderPrice.html?raw'
@@ -25,7 +24,7 @@ import termsAndConditionsHtml from './templates/termsAndConditions.html?raw'
 import totalPriceTitleHtml from './templates/totalPriceTitle.html?raw'
 import totalPriceValueHtml from './templates/totalPriceValue.html?raw'
 import welcomeTextHtml from './templates/welcomeText.html?raw'
-import type { Quotation } from '@root/shared/types/Quotation'
+import type { Quotation } from '@back/entities/quotation/quotationSchema'
 
 export const newQuotationTemplate: Quotation = {
   id: 'new',
@@ -38,7 +37,7 @@ export const newQuotationTemplate: Quotation = {
   openedAt: null,
   viewedAt: null,
   email: 'unknown@gmail.com',
-  permissionLevel: permissionLevel.new,
+  permissionLevel: 'NEW',
   access: {
     level: 'nobody',
     userList: [],

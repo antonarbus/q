@@ -3,7 +3,6 @@ import { getPastePlace } from '@entities/copy/getPastePlace'
 import type { CopyPlace } from '@entities/copy/types'
 import { itemType } from '@entities/quotation/const/itemType'
 import { rowTypeKey } from '@entities/quotation/const/rowTypeKey'
-import { quotationSlice } from '@entities/quotation/redux/quotationSlice'
 import { cls } from '@shared/cls'
 import { route } from '@shared/lib/react-router-dom/route'
 import { dispatch, getState, useSelector } from '@shared/lib/redux'
@@ -26,14 +25,6 @@ const movePasteTextItem = (event: MouseEvent): void => {
   const removePasteIfNeeded = (): void => {
     if (getState().copy.isPasteTextShown === true) {
       dispatch(copySlice.actions.hidePasteText())
-    }
-
-    const isPasteBlock = getState().quotation.blocks.some(
-      (block) => block.type === itemType.paste,
-    )
-
-    if (isPasteBlock === true) {
-      dispatch(quotationSlice.actions.removePasteItemReducer())
     }
   }
 
@@ -105,8 +96,6 @@ const movePasteTextItem = (event: MouseEvent): void => {
     dispatch(copySlice.actions.updatePastePos(pastePlace))
     dispatch(copySlice.actions.showPasteText())
 
-    dispatch(quotationSlice.actions.insertPasteBlockReducer(pastePlace))
-
     return
   }
 
@@ -131,25 +120,8 @@ const movePasteTextItem = (event: MouseEvent): void => {
     return
   }
 
-  // dispatch(quotationSlice.actions.removePasteItemReducer())
   dispatch(copySlice.actions.updatePastePos(pastePlace))
   dispatch(copySlice.actions.showPasteText())
-
-  const movedUpBetweenItems =
-    prevPlace.pastePos === 'bottom' && pastePlace.pastePos === 'top'
-
-  if (movedUpBetweenItems === true) {
-    return
-  }
-
-  const movedDownBetweenItems =
-    prevPlace.pastePos === 'top' && pastePlace.pastePos === 'bottom'
-
-  if (movedDownBetweenItems === true) {
-    return
-  }
-
-  dispatch(quotationSlice.actions.insertPasteBlockReducer(pastePlace))
 }
 
 const movePasteTextRow = (event: MouseEvent): void => {
@@ -160,18 +132,9 @@ const movePasteTextRow = (event: MouseEvent): void => {
   const prevPlace = getState().copy.place
   const rowsElement = event.target.closest(`.${cls.rows}`)
 
-  const isBoqPasteRow = getState()
-    .quotation.blocks.filter((block) => block.type === itemType.boq)
-    .flatMap((block) => block.boq.rows)
-    .some((row) => row.type === rowTypeKey.paste)
-
   const removePasteIfNeeded = (): void => {
     if (getState().copy.isPasteTextShown === true) {
       dispatch(copySlice.actions.hidePasteText())
-    }
-
-    if (isBoqPasteRow === true) {
-      dispatch(quotationSlice.actions.removePasteItemReducer())
     }
   }
 
@@ -220,7 +183,6 @@ const movePasteTextRow = (event: MouseEvent): void => {
 
   dispatch(copySlice.actions.updatePastePos(pastePlace))
   dispatch(copySlice.actions.showPasteText())
-  dispatch(quotationSlice.actions.insertPasteRowReducer(pastePlace))
 }
 
 export const useMovePasteText = (): void => {

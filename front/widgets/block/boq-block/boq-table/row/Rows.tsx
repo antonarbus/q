@@ -1,9 +1,7 @@
-import { rowTypeKey } from '@entities/quotation/const/rowTypeKey'
 import { useBlock } from '@entities/quotation/provider/BlockProvider'
 import { RowProvider } from '@entities/quotation/provider/RowProvider'
 import { selectRows } from '@entities/quotation/redux/selector/selectRows'
 import { hidePinsOnRowBlur } from '@features/blocks/pin'
-import { generateId } from '@root/shared/lib/nanoid'
 import { useSelector } from '@shared/lib/redux'
 import { arrayShapesEqualityFn } from '@shared/util/arrayShapesEqualityFn'
 import { AnimatePresence } from 'motion/react'
@@ -17,6 +15,8 @@ import { RowsSortableContext } from './RowsSortableContext'
 
 export const Rows = (): JSX.Element => {
   const block = useBlock()
+  const copyPlace = useSelector((state) => state.copy.place)
+  const isPasteTextShown = useSelector((state) => state.copy.isPasteTextShown)
 
   const rows = useSelector(
     selectRows({ blockIndex: block.index }),
@@ -28,8 +28,23 @@ export const Rows = (): JSX.Element => {
       <RowsSortableContext>
         <AnimatePresence initial={false}>
           {rows.map((row, rowIndex) => {
-            if (row.type === rowTypeKey.row) {
-              return (
+            const shouldShowPasteBefore =
+              isPasteTextShown &&
+              copyPlace.id === row.id &&
+              copyPlace.pastePos === 'top'
+
+            const shouldShowPasteAfter =
+              isPasteTextShown &&
+              copyPlace.id === row.id &&
+              copyPlace.pastePos === 'bottom'
+
+            return (
+              <div key={`row-container-${row.id}`}>
+                <AnimatePresence>
+                  {shouldShowPasteBefore === true && (
+                    <PasteRowTextOverlay key={`paste-before-${row.id}`} />
+                  )}
+                </AnimatePresence>
                 <RowProvider key={row.id} item={row} index={rowIndex}>
                   <RowAnimate>
                     <RowSortable>
@@ -45,11 +60,13 @@ export const Rows = (): JSX.Element => {
                     </RowSortable>
                   </RowAnimate>
                 </RowProvider>
-              )
-            }
-
-            // row.type = 'paste'
-            return <PasteRowTextOverlay key={generateId()} />
+                <AnimatePresence>
+                  {shouldShowPasteAfter === true && (
+                    <PasteRowTextOverlay key={`paste-after-${row.id}`} />
+                  )}
+                </AnimatePresence>
+              </div>
+            )
           })}
         </AnimatePresence>
       </RowsSortableContext>

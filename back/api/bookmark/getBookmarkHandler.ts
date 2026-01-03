@@ -4,8 +4,7 @@ import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { db } from '@back/shared/lib/drizzle/db'
 import { and, eq } from 'drizzle-orm'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
-import { jsonParseSafe } from '@back/shared/util/jsonParseSafe'
-import type { Bookmark } from '@root/shared/types/Bookmark'
+import { jsonParseOrNull } from '@back/shared/util/jsonParseOrNull'
 import type { NextFunction, Request, Response } from 'express'
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
@@ -15,6 +14,11 @@ import {
   type HttpResponse,
   httpJsonResponse,
 } from '@back/shared/lib/express/httpResponse'
+import {
+  bookmarkBucketDataSchema,
+  type Bookmark,
+} from '@back/entities/bookmark/bookmarkSchema'
+import { z } from 'zod'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
@@ -30,7 +34,7 @@ export type ResBody = {
 
 export type ErrorResBody = {
   message: string
-  errorCode: ErrorCode | 'NOT_FOUND'
+  errorCode: ErrorCode | 'NOT_FOUND' | 'INVALID_JSON' | 'INVALID_STRUCTURE'
 }
 
 type RouterHandler = (
@@ -84,25 +88,45 @@ export const getBookmarkHandler: RouterHandler = async (req, res, next) => {
   messageList.push('Bookmark loaded from storage')
 
   const bookmarkFileAsString = bookmarkFileBuffer.toString()
+  const bookmarkJsonParsed = jsonParseOrNull<Bookmark>(bookmarkFileAsString)
 
-  // todo: not good, zod is better but what if shape will change
-  const bookmarkFileData =
-    jsonParseSafe<ResBody['bookmark']>(bookmarkFileAsString)
-
-  if (bookmarkFileData === undefined) {
-    messageList.push('Failed to parse bookmark data')
+  if (bookmarkJsonParsed === null) {
+    messageList.push('Bookmark data from storage is not valid JSON')
 
     throw new HttpError<ErrorResBody['errorCode']>({
-      errorCode: 'NOT_FOUND',
-      statusCode: httpStatusCode.serverError500,
+      errorCode: 'INVALID_JSON',
+      statusCode: httpStatusCode.notFound404,
       message: messageList.join(' | '),
     })
+  }
+
+  const bookmarkValidationResult =
+    bookmarkBucketDataSchema.safeParse(bookmarkJsonParsed)
+
+  if (bookmarkValidationResult.success === false) {
+    messageList.push('Invalid bookmark structure')
+    const treeifiedError = z.treeifyError(bookmarkValidationResult.error)
+    console.error('Validation failed:', treeifiedError)
+    messageList.push(`Zod error: ${JSON.stringify(treeifiedError)}`)
+
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'INVALID_STRUCTURE',
+      statusCode: httpStatusCode.badRequest400,
+      message: messageList.join(' | '),
+    })
+  }
+
+  const bookmarkBucketData = bookmarkValidationResult.data
+
+  const bookmark: Bookmark = {
+    ...bookmarkSelected,
+    ...bookmarkBucketData,
   }
 
   return httpJsonResponse({
     statusCode: httpStatusCode.success200,
     body: {
-      bookmark: bookmarkFileData,
+      bookmark,
       message: messageList.join(' | '),
     },
   })

@@ -1,6 +1,8 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { Quotation } from '@root/shared/types/Quotation'
-import type { BlockItem } from '@root/shared/types/BlockItem'
+import type {
+  Quotation,
+  BlockItem,
+} from '@back/entities/quotation/quotationSchema'
 
 export const reOrderBlocksReducer = (
   state: Quotation,

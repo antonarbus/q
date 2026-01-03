@@ -1,4 +1,3 @@
-import type { BlockItem } from '@root/shared/types/BlockItem'
 import {
   createSlice,
   type PayloadAction,
@@ -6,6 +5,7 @@ import {
   type WritableDraft,
 } from '@reduxjs/toolkit'
 import type { CopyPlace } from './types'
+import type { BlockItem } from '@back/entities/quotation/quotationSchema'
 
 type InitState = {
   isVisible: boolean

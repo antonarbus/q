@@ -4,14 +4,13 @@ import { navSlice } from '@entities/nav/navSlice'
 import { createLoadingMenuIconMachine } from '@entities/nav/state-machine/createLoadingMenuIconMachine'
 import { saveQuotationMutationFn } from '@entities/quotation/api/useSaveQuotationMutation'
 import { quotationSlice } from '@entities/quotation/redux/quotationSlice'
-import type { Quotation } from '@root/shared/types/Quotation'
+import type { Quotation } from '@back/entities/quotation/quotationSchema'
 import { route } from '@shared/lib/react-router-dom/route'
 import { router } from '@shared/lib/react-router-dom/router'
 import { dispatch, getState } from '@shared/lib/redux'
 import type { AxiosError } from 'axios'
 import { toast } from 'sonner'
 import { createActor } from 'xstate'
-import { permissionLevel } from '@root/shared/const/permissionLevel'
 
 const loadingMenuIconMachine = createLoadingMenuIconMachine({
   navItemId: navItemId.save,
@@ -34,8 +33,8 @@ export const saveExistingQuotation = async (): Promise<void> => {
   }
 
   const isAbleToSave =
-    getState().quotation.permissionLevel === permissionLevel.public ||
-    getState().quotation.permissionLevel === permissionLevel.shared
+    getState().quotation.permissionLevel === 'PUBLIC' ||
+    getState().quotation.permissionLevel === 'SHARED'
 
   if (isAbleToSave === true) {
     void router.navigate(`./${route.save}`)
