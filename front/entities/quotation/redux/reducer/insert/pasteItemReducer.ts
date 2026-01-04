@@ -31,10 +31,10 @@ const calculateSpliceSettings = (
     }
   }
 
-  // Middle position - insert at the same index without deleting
+  // Middle position - replace the item at this index
   return {
     insertAtIndex: baseIndex,
-    deleteCount: 0,
+    deleteCount: 1,
   }
 }
 
