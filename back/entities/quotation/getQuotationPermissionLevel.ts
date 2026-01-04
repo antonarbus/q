@@ -16,7 +16,7 @@ type Props = {
 
 export const getQuotationPermissionLevel = (
   props: Props,
-): Quotation['permission']['permissionLevel'] => {
+): Quotation['permissionLevel'] => {
   const isLoggedUser = props.user !== null
   const emailFromToken = props.user?.email
 

@@ -19,7 +19,7 @@ import {
   type Quotation,
 } from '@back/entities/quotation/quotationSchema'
 import { z } from 'zod'
-import { getEmptyQuotation } from '@back/entities/quotation/emptyQuotation'
+import { createEmptyQuotation } from '@back/entities/quotation/createEmptyQuotation'
 import { getQuotationPermissionLevel } from '@back/entities/quotation/getQuotationPermissionLevel'
 import { getShouldTrace } from '@back/shared/headers/no-trace/getShouldTrace'
 import { hideQuotationPrivateData } from '@back/entities/quotation/hideQuotationPrivateData'
@@ -78,7 +78,8 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
 
   const quotationPermissionLevel = getQuotationPermissionLevel({
     user: userFromAccessToken,
-    quotation: quotationSelected,
+    quotationEmail: quotationSelected.email,
+    quotationAccess: quotationSelected.access,
     shouldTrace,
   })
 
@@ -89,7 +90,7 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
       statusCode: httpStatusCode.success200,
       body: {
         quotation: {
-          ...getEmptyQuotation({ id: req.body.id }),
+          ...createEmptyQuotation({ id: req.body.id }),
           permissionLevel: quotationPermissionLevel,
         },
         message: messageList.join(' | '),

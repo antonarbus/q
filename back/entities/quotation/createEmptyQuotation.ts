@@ -5,26 +5,20 @@ type Props = {
 }
 
 export const createEmptyQuotation = (props: Props): Quotation => ({
-  meta: {
-    id: props.id,
-    email: 'unknown@gmail.com',
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-    openedAt: null,
-    viewedAt: null,
-    access: {
-      level: 'nobody',
-      userList: [],
-    },
+  id: props.id,
+  email: 'unknown@gmail.com',
+  createdAt: new Date().toISOString(),
+  updatedAt: new Date().toISOString(),
+  openedAt: null,
+  viewedAt: null,
+  access: {
+    level: 'nobody',
+    userList: [],
   },
-  data: {
-    name: '',
-    category: '',
-    desc: '',
-    info: '',
-    blocks: [],
-  },
-  permission: {
-    permissionLevel: 'NEW',
-  },
+  name: '',
+  category: '',
+  desc: '',
+  info: '',
+  blocks: [],
+  permissionLevel: 'NEW',
 })
