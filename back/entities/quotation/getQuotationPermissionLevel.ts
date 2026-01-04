@@ -1,23 +1,26 @@
 import type { SelectUser } from '../user'
 import type { Quotation } from './quotationSchema'
-import type { SelectQuotation } from './quotationsTableSchema'
 
 type Props = {
   user: {
     email: SelectUser['email']
     roles: SelectUser['roles']
   } | null
-  quotation: SelectQuotation
+  quotationEmail: string
+  quotationAccess: {
+    level: 'everyone' | 'nobody' | 'custom'
+    userList: string[]
+  }
   shouldTrace: boolean
 }
 
 export const getQuotationPermissionLevel = (
   props: Props,
-): Quotation['permissionLevel'] => {
+): Quotation['permission']['permissionLevel'] => {
   const isLoggedUser = props.user !== null
   const emailFromToken = props.user?.email
 
-  const isOwner = isLoggedUser && emailFromToken === props.quotation.email
+  const isOwner = isLoggedUser && emailFromToken === props.quotationEmail
 
   if (isOwner === true) {
     return 'OWNER'
@@ -25,14 +28,14 @@ export const getQuotationPermissionLevel = (
 
   const isSharedWithYou =
     emailFromToken !== undefined &&
-    props.quotation.access.level === 'custom' &&
-    props.quotation.access.userList.includes(emailFromToken)
+    props.quotationAccess.level === 'custom' &&
+    props.quotationAccess.userList.includes(emailFromToken)
 
   if (isSharedWithYou === true) {
     return 'SHARED'
   }
 
-  const isSharedWithEveryone = props.quotation.access.level === 'everyone'
+  const isSharedWithEveryone = props.quotationAccess.level === 'everyone'
 
   if (isSharedWithEveryone === true) {
     return 'PUBLIC'
