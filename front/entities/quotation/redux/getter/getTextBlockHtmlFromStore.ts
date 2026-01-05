@@ -1,5 +1,4 @@
 import { getState } from '@shared/lib/redux'
-import { itemType } from '../../const/itemType'
 
 type Props = {
   blockIndex: number
@@ -12,7 +11,7 @@ export const getTextBlockHtmlFromStore = (props: Props): string => {
     return ''
   }
 
-  if (block.type !== itemType.text) {
+  if (block.type !== 'text') {
     return ''
   }
 

@@ -1,6 +1,4 @@
 import { copySlice } from '@entities/copy/copySlice'
-import { itemType } from '@entities/quotation/const/itemType'
-import { rowTypeKey } from '@entities/quotation/const/rowTypeKey'
 import boqBlockPreviewHtml from '@entities/quotation/templates/boqBlockPreview.html?raw' // assets can be imported as strings using the ?raw suffix
 import boqHeaderDescriptionHtml from '@entities/quotation/templates/boqHeaderDescription.html?raw'
 import boqHeaderItemPriceHtml from '@entities/quotation/templates/boqHeaderItemPrice.html?raw'
@@ -36,7 +34,7 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
     info: '',
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
-    type: itemType.boq,
+    type: 'boq',
     email: 'unknown@gmail.com',
     width: 600,
     height: 279,
@@ -88,7 +86,7 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
           info: '',
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString(),
-          type: rowTypeKey.row,
+          type: 'row',
           email: 'unknown@gmail.com',
           height: 0,
           width: 0,
@@ -135,7 +133,7 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
           info: '',
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString(),
-          type: rowTypeKey.row,
+          type: 'row',
           email: 'unknown@gmail.com',
           height: 0,
           width: 0,
@@ -182,7 +180,7 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
           info: '',
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString(),
-          type: rowTypeKey.row,
+          type: 'row',
           email: 'unknown@gmail.com',
           height: 0,
           width: 0,

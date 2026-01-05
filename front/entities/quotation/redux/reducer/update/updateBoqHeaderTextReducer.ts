@@ -1,5 +1,4 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { itemType } from '../../../const/itemType'
 import type {
   HeaderKey,
   Quotation,
@@ -20,7 +19,7 @@ export const updateBoqHeaderTextReducer = (
     return
   }
 
-  if (block.type !== itemType.boq) {
+  if (block.type !== 'boq') {
     return
   }
 

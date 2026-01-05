@@ -1,7 +1,8 @@
-import type { CellKey } from '@entities/quotation/const/cellKey'
+import type {
+  CellKey,
+  Quotation,
+} from '@back/entities/quotation/quotationSchema'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { itemType } from '../../../const/itemType'
-import type { Quotation } from '@back/entities/quotation/quotationSchema'
 
 export const updateCellReducer = (
   state: Quotation,
@@ -15,7 +16,7 @@ export const updateCellReducer = (
 ): void => {
   const block = state.blocks[action.payload.blockIndex]
 
-  if (block?.type !== itemType.boq) {
+  if (block?.type !== 'boq') {
     return
   }
 

@@ -1,7 +1,8 @@
-import type { BoqColumnKey } from '@entities/quotation/const/boqColumnKey'
+import type {
+  BoqColumnKey,
+  Column,
+} from '@back/entities/quotation/quotationSchema'
 import { getState } from '@shared/lib/redux'
-import { itemType } from '../../const/itemType'
-import type { Column } from '@back/entities/quotation/quotationSchema'
 
 type Props = {
   blockIndex: number
@@ -11,7 +12,7 @@ type Props = {
 export const getBoqColumnFromStore = (props: Props): Column | undefined => {
   const block = getState().quotation.blocks[props.blockIndex]
 
-  if (block?.type !== itemType.boq) {
+  if (block?.type !== 'boq') {
     return
   }
 

@@ -5,8 +5,7 @@ import { getNumberFromString } from '@shared/util/getNumberFromString'
 import { getStringWithNewFormattedNumber } from '@shared/util/getStringWithNewFormattedNumber'
 import { getTextContentFromHtml } from '@shared/util/getTextContentFromHtml'
 import { BOOKMARK_POS_AT_BLOCKS } from '../const/bookmarkPosAtBlocks'
-import type { CellKey } from '../const/cellKey'
-import { itemType } from '../const/itemType'
+import type { CellKey } from '@back/entities/quotation/quotationSchema'
 import { updateBookmarkedRowCellAtStore } from '../redux/updater/updateBookmarkedRowCellAtStore'
 
 type Props = {
@@ -22,7 +21,7 @@ export const updateBookmarkedRowCellWithValue = (props: Props): void => {
 
   const block = getState().quotation.blocks[BOOKMARK_POS_AT_BLOCKS]
 
-  if (block?.type !== itemType.row) {
+  if (block?.type !== 'row') {
     return
   }
 

@@ -1,4 +1,3 @@
-import { cellKey } from '@entities/quotation/const/cellKey'
 import { formatCellNumber } from '@entities/quotation/util/formatCellNumber'
 import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 
@@ -12,7 +11,7 @@ export const formatPriceCell = (props: Props): void => {
   formatCellNumber({
     blockIndex: props.blockIndex,
     rowIndex: props.rowIndex,
-    cellKey: cellKey.price,
+    cellKey: 'price',
     editorRef: props.priceCellEditorRef,
     roundToTwoDecimals: true,
   })

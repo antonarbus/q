@@ -1,4 +1,3 @@
-import { boqColumnKey } from '@entities/quotation/const/boqColumnKey'
 import { columnMinWidth } from '@entities/quotation/const/columnMinWidth'
 import { columnHeaderStyle } from '@entities/quotation/style/columnHeaderStyle'
 import { Box } from '@mui/material'
@@ -8,8 +7,8 @@ import { ResizableColumn } from '../ResizableColumn'
 export const PriceColumn = (): JSX.Element => {
   return (
     <ResizableColumn
-      boqColumnKey={boqColumnKey.price}
-      className={`th ${boqColumnKey.price} resizable`}
+      boqColumnKey='price'
+      className='th price resizable'
       minWidth={columnMinWidth.price}
     >
       <Box style={columnHeaderStyle}>

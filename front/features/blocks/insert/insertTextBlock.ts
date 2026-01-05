@@ -1,5 +1,4 @@
 import { copySlice } from '@entities/copy/copySlice'
-import { itemType } from '@entities/quotation/const/itemType'
 import textBlockContentHtml from '@entities/quotation/templates/textBlockContent.html?raw' // assets can be imported as strings using the ?raw suffix
 import textBlockPreviewHtml from '@entities/quotation/templates/textBlockPreview.html?raw'
 import type { TextBlock } from '@back/entities/quotation/quotationSchema'
@@ -17,7 +16,7 @@ export const insertTextBlock = (event?: MouseEvent): void => {
     info: '',
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
-    type: itemType.text,
+    type: 'text',
     email: 'unknown@gmail.com',
     width: 600,
     height: 59.2,

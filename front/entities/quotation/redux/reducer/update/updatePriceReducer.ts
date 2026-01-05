@@ -1,5 +1,4 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { itemType } from '../../../const/itemType'
 import type { Quotation } from '@back/entities/quotation/quotationSchema'
 
 export const updatePriceReducer = (
@@ -12,7 +11,7 @@ export const updatePriceReducer = (
 ): void => {
   const block = state.blocks[action.payload.blockIndex]
 
-  if (block?.type !== itemType.price) {
+  if (block?.type !== 'price') {
     return
   }
 

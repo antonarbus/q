@@ -1,4 +1,3 @@
-import { itemType } from '../../const/itemType'
 import type {
   BoqBlock,
   Quotation,
@@ -12,7 +11,7 @@ type Props = {
 export const getBoqBlockFromState = (props: Props): BoqBlock | undefined => {
   const block = props.state.blocks[props.blockIndex]
 
-  if (block?.type !== itemType.boq) {
+  if (block?.type !== 'boq') {
     return
   }
 

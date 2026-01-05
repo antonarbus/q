@@ -1,4 +1,4 @@
-export const jsonParseOrNull = <T = unknown>(str: unknown): T | null => {
+export const jsonParseOrNull = <T = never>(str: unknown): T | null => {
   try {
     if (typeof str !== 'string') {
       return null

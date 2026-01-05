@@ -1,4 +1,3 @@
-import { itemType } from '@entities/quotation/const/itemType'
 import { useBlock } from '@entities/quotation/provider/BlockProvider'
 import { Froala } from '@entities/quotation/ui/froala/Froala'
 import { updatePriceTitle } from '@features/blocks/update'
@@ -16,7 +15,7 @@ export const PriceTitle = (): JSX.Element => {
       htmlGetter={() => {
         const priceBlock = getState().quotation.blocks[block.index]
 
-        if (priceBlock?.type !== itemType.price) {
+        if (priceBlock?.type !== 'price') {
           return ''
         }
 

@@ -6,6 +6,7 @@ export const createMockQuotation = (
   overrides: MockQuotationOverrides = {},
 ): Quotation => ({
   id: 'test-id-123',
+  type: 'quotation',
   email: 'owner@example.com',
   createdAt: '2024-01-01T00:00:00Z',
   updatedAt: '2024-01-01T00:00:00Z',

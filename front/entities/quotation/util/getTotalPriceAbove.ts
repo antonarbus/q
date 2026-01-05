@@ -1,4 +1,3 @@
-import { itemType } from '../const/itemType'
 import type { BlockItem } from '@back/entities/quotation/quotationSchema'
 
 type Props = {
@@ -14,13 +13,13 @@ export const getTotalPriceAbove = (props: Props): number => {
       break
     }
 
-    const isPriceItem = props.blocks.at(index)?.type === itemType.price
+    const isPriceItem = props.blocks.at(index)?.type === 'price'
 
     if (isPriceItem === true) {
       break
     }
 
-    const isBoqItem = props.blocks.at(index)?.type === itemType.boq
+    const isBoqItem = props.blocks.at(index)?.type === 'boq'
 
     if (isBoqItem === true) {
       const boqItem = props.blocks.at(index)

@@ -1,4 +1,3 @@
-import { cellKey } from '@entities/quotation/const/cellKey'
 import { getRowsFromStore } from '@entities/quotation/redux/getter/getRowsFromStore'
 import type { RowBlock } from '@back/entities/quotation/quotationSchema'
 import { isRowPriceValid } from '@entities/quotation/util/isRowPriceValid'
@@ -54,7 +53,7 @@ export const validatePrices = (props: Props): void => {
       const newPriceValueRounded = roundTo(newPriceValue, 2)
 
       updateCellWithValue({
-        cellKey: cellKey.price,
+        cellKey: 'price',
         editor: priceCellEditorRef.price.current,
         blockIndex: props.blockIndex,
         rowIndex,

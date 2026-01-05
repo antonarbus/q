@@ -8,7 +8,15 @@ type Props = {
   state: Quotation
 }
 
-export const getFromState = (props: Props): BlockItem | undefined => {
+export const getFromState = (
+  props: Props,
+): Quotation | BlockItem | undefined => {
+  const quotationWithSameId = props.state.id === props.id
+
+  if (quotationWithSameId === true) {
+    return props.state
+  }
+
   const blockWithSameId = props.state.blocks.find((block) => {
     return block.id === props.id
   })

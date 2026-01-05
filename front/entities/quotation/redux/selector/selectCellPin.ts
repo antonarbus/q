@@ -1,6 +1,5 @@
-import type { CellKey } from '@entities/quotation/const/cellKey'
+import type { CellKey, CellPin } from '@back/entities/quotation/quotationSchema'
 import type { RootState } from '@shared/lib/redux'
-import type { CellPin } from '@back/entities/quotation/quotationSchema'
 import { getRowFromStore } from '../getter/getRowFromStore'
 
 type Props = {

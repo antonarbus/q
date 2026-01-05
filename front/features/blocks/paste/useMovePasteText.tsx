@@ -1,8 +1,6 @@
 import { copySlice } from '@entities/copy/copySlice'
 import { getPastePlace } from '@entities/copy/getPastePlace'
 import type { CopyPlace } from '@entities/copy/types'
-import { itemType } from '@entities/quotation/const/itemType'
-import { rowTypeKey } from '@entities/quotation/const/rowTypeKey'
 import { cls } from '@shared/cls'
 import { route } from '@shared/lib/react-router-dom/route'
 import { dispatch, getState, useSelector } from '@shared/lib/redux'
@@ -191,11 +189,11 @@ export const useMovePasteText = (): void => {
   )
 
   const isBlock =
-    typeOfNextPasteItem === itemType.boq ||
-    typeOfNextPasteItem === itemType.text ||
-    typeOfNextPasteItem === itemType.price
+    typeOfNextPasteItem === 'boq' ||
+    typeOfNextPasteItem === 'text' ||
+    typeOfNextPasteItem === 'price'
 
-  const isRow = typeOfNextPasteItem === rowTypeKey.row
+  const isRow = typeOfNextPasteItem === 'row'
 
   useEffect(() => {
     const controller = new AbortController()

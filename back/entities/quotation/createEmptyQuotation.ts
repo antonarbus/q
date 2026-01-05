@@ -1,11 +1,11 @@
+import { nanoid } from 'nanoid'
 import type { Quotation } from './quotationSchema'
 
-type Props = {
-  id: string
-}
-
-export const createEmptyQuotation = (props: Props): Quotation => ({
-  id: props.id,
+export const createEmptyQuotation = (
+  overrides: Partial<Quotation>,
+): Quotation => ({
+  id: nanoid(),
+  type: 'quotation',
   email: 'unknown@gmail.com',
   createdAt: new Date().toISOString(),
   updatedAt: new Date().toISOString(),
@@ -21,4 +21,5 @@ export const createEmptyQuotation = (props: Props): Quotation => ({
   info: '',
   blocks: [],
   permissionLevel: 'NEW',
+  ...overrides,
 })

@@ -1,4 +1,4 @@
-import type { BoqColumnKey } from '@entities/quotation/const/boqColumnKey'
+import type { BoqColumnKey } from '@back/entities/quotation/quotationSchema'
 import { selectColumnWidth } from '@entities/quotation/redux/selector/selectColumnWidth'
 import {
   onColumnResize,

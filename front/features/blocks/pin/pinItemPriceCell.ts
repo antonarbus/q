@@ -1,4 +1,3 @@
-import { cellKey } from '@entities/quotation/const/cellKey'
 import { getCellFromStore } from '@entities/quotation/redux/getter/getCellFromStore'
 import { quotationSlice } from '@entities/quotation/redux/quotationSlice'
 import { dispatch } from '@shared/lib/redux'
@@ -12,7 +11,7 @@ export const pinItemPriceCell = (props: Props): void => {
   const itemPrice = getCellFromStore({
     blockIndex: props.blockIndex,
     rowIndex: props.rowIndex,
-    cellKey: cellKey.itemPrice,
+    cellKey: 'itemPrice',
   })
 
   const isPinned = itemPrice?.pin.isPinned

@@ -1,5 +1,4 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { itemType } from '../../../const/itemType'
 import type { Quotation } from '@back/entities/quotation/quotationSchema'
 
 export const updateBlockTextReducer = (
@@ -15,7 +14,7 @@ export const updateBlockTextReducer = (
     return
   }
 
-  if (block.type !== itemType.text) {
+  if (block.type !== 'text') {
     return
   }
 

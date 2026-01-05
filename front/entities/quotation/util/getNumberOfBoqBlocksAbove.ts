@@ -1,5 +1,4 @@
 import { getState } from '@shared/lib/redux'
-import { itemType } from '../const/itemType'
 
 type Props = {
   blockIndex: number
@@ -8,8 +7,7 @@ type Props = {
 export const getNumberOfBoqBlocksAbove = (props: Props): number => {
   const numberOfBoqBlocksAbove = getState().quotation.blocks.reduce(
     (accumulator, block, index) => {
-      const isNotLastBoq =
-        block.type === itemType.boq && index < props.blockIndex
+      const isNotLastBoq = block.type === 'boq' && index < props.blockIndex
 
       if (isNotLastBoq === true) {
         return accumulator + 1

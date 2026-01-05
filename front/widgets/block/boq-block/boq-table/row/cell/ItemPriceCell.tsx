@@ -1,5 +1,3 @@
-import { boqColumnKey } from '@entities/quotation/const/boqColumnKey'
-import { cellKey } from '@entities/quotation/const/cellKey'
 import { columnMinWidth } from '@entities/quotation/const/columnMinWidth'
 import { useStylesForResizableCell } from '@entities/quotation/hook/useStylesForResizableCell'
 import { useBlock } from '@entities/quotation/provider/BlockProvider'
@@ -24,19 +22,19 @@ export const ItemPriceCell = (): JSX.Element => {
 
   const stylesForResizableCell = useStylesForResizableCell({
     blockIndex: block.index,
-    boqColumnKey: boqColumnKey.itemPrice,
+    boqColumnKey: 'itemPrice',
     minWidth: `${columnMinWidth.itemPrice}px`,
   })
 
   return (
     <Box sx={{ display: 'flex', position: 'relative' }}>
       <Froala
-        className={`td ${cellKey.itemPrice}`}
+        className='td itemPrice'
         editorRef={row.itemPriceCellEditorRef}
         htmlGetter={() =>
           getCellHtmlFromStore({
             blockIndex: block.index,
-            cellKey: cellKey.itemPrice,
+            cellKey: 'itemPrice',
             rowIndex: row.index,
           })
         }
@@ -69,7 +67,7 @@ export const ItemPriceCell = (): JSX.Element => {
         wrapperStyles={stylesForResizableCell}
       />
       <Pin
-        cellKey={cellKey.itemPrice}
+        cellKey='itemPrice'
         onClick={(event: MouseEvent) => {
           event.preventDefault() // otherwise form is submitted (no idea why)
 

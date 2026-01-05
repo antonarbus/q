@@ -1,7 +1,6 @@
 import type { PastePos } from '@entities/copy/types'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { generateId } from '@root/shared/lib/nanoid'
-import { itemType } from '../../../const/itemType'
 import type {
   BlockItem,
   Quotation,
@@ -44,7 +43,7 @@ const prepareItemForPasting = (
 ): BlockItem => {
   const clonedItem: BlockItem = { ...structuredClone(item), id: newItemId }
 
-  if (clonedItem.type === itemType.boq) {
+  if (clonedItem.type === 'boq') {
     clonedItem.boq.rows.forEach((row) => {
       row.id = generateId()
     })
@@ -54,9 +53,9 @@ const prepareItemForPasting = (
 }
 
 const isBlockType = (item: BlockItem): boolean => {
-  const isBoq = item.type === itemType.boq
-  const isText = item.type === itemType.text
-  const isPrice = item.type === itemType.price
+  const isBoq = item.type === 'boq'
+  const isText = item.type === 'text'
+  const isPrice = item.type === 'price'
   const isBlock = isBoq || isText || isPrice
 
   return isBlock
@@ -84,7 +83,7 @@ const pasteRow = (
   pastePos: PastePos,
   itemToPaste: RowBlock,
 ): void => {
-  const boqBlocks = state.blocks.filter((block) => block.type === itemType.boq)
+  const boqBlocks = state.blocks.filter((block) => block.type === 'boq')
 
   for (const block of boqBlocks) {
     const rowIndex = block.boq.rows.findIndex((row) => row.id === id)
@@ -126,7 +125,7 @@ export const pasteItemReducer = (
     return
   }
 
-  const isRow = itemToPaste.type === itemType.row
+  const isRow = itemToPaste.type === 'row'
 
   if (isRow === true) {
     pasteRow(state, action.payload.id, action.payload.pastePos, itemToPaste)

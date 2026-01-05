@@ -1,5 +1,4 @@
 import { getState } from '@shared/lib/redux'
-import { itemType } from '../../const/itemType'
 import type {
   HeaderKey,
   HeaderValue,
@@ -15,7 +14,7 @@ export const getBoqHeaderFromStore = (
 ): HeaderValue | undefined => {
   const block = getState().quotation.blocks[props.blockIndex]
 
-  if (block?.type !== itemType.boq) {
+  if (block?.type !== 'boq') {
     return
   }
 

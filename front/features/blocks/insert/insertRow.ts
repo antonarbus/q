@@ -1,5 +1,4 @@
 import { copySlice } from '@entities/copy/copySlice'
-import { rowTypeKey } from '@entities/quotation/const/rowTypeKey'
 import rowDescriptionHtml from '@entities/quotation/templates/rowDescription.html?raw' // assets can be imported as strings using the ?raw suffix
 import rowItemPriceHtml from '@entities/quotation/templates/rowItemPrice.html?raw'
 import rowPreviewHtml from '@entities/quotation/templates/rowPreview.html?raw'
@@ -20,7 +19,7 @@ export const insertRow = (event?: MouseEvent): void => {
     info: '',
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
-    type: rowTypeKey.row,
+    type: 'row',
     email: 'unknown@gmail.com',
     height: 55,
     width: 570,

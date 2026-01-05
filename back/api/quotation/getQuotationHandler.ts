@@ -15,7 +15,7 @@ import {
   httpJsonResponse,
 } from '@back/shared/lib/express/httpResponse'
 import {
-  quotationBucketDataSchema,
+  quotationSchema,
   type Quotation,
 } from '@back/entities/quotation/quotationSchema'
 import { z } from 'zod'
@@ -89,10 +89,10 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
     return httpJsonResponse({
       statusCode: httpStatusCode.success200,
       body: {
-        quotation: {
-          ...createEmptyQuotation({ id: req.body.id }),
-          permissionLevel: quotationPermissionLevel,
-        },
+        quotation: createEmptyQuotation({
+          id: req.body.id,
+          permissionLevel: 'FORBIDDEN',
+        }),
         message: messageList.join(' | '),
       },
     })
@@ -102,6 +102,8 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
     quotationPermissionLevel === 'SHARED' ||
     quotationPermissionLevel === 'PUBLIC'
 
+  let quotationUpdated: SelectQuotation | undefined = undefined
+
   if (shouldTrace === true) {
     if (quotationPermissionLevel === 'OWNER') {
       const updateResponse = await db
@@ -110,12 +112,17 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
           openedAt: new Date().toISOString(),
         })
         .where(eq(quotationsTable.id, req.body.id))
+        .returning()
         .catch((error: unknown) => {
           messageList.push('Failed to update "openedAt" field')
           console.error('failed to update "openedAt" field', error)
+
+          return []
         })
 
-      if (updateResponse !== undefined && updateResponse.rowCount > 0) {
+      quotationUpdated = updateResponse.at(0)
+
+      if (quotationUpdated !== undefined) {
         messageList.push('Updated "openedAt" field')
       }
     }
@@ -127,12 +134,17 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
           viewedAt: new Date().toISOString(),
         })
         .where(eq(quotationsTable.id, req.body.id))
+        .returning()
         .catch((error: unknown) => {
           messageList.push('Failed to update "viewedAt" field')
           console.error('failed to update viewedAt field', error)
+
+          return []
         })
 
-      if (updateResponse !== undefined && updateResponse.rowCount > 0) {
+      quotationUpdated = updateResponse.at(0)
+
+      if (quotationUpdated !== undefined) {
         messageList.push('Updated "viewedAt" field')
       }
     }
@@ -167,7 +179,7 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
   }
 
   const quotationValidationResult =
-    quotationBucketDataSchema.safeParse(quotationJsonParsed)
+    quotationSchema.safeParse(quotationJsonParsed)
 
   if (quotationValidationResult.success === false) {
     messageList.push('Invalid structure')
@@ -182,11 +194,16 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
     })
   }
 
-  const quotationBucketData = quotationValidationResult.data
-
   const quotation: Quotation = {
-    ...quotationSelected,
-    ...quotationBucketData,
+    ...quotationValidationResult.data,
+    viewedAt:
+      quotationUpdated === undefined
+        ? quotationValidationResult.data.viewedAt
+        : quotationUpdated.viewedAt,
+    openedAt:
+      quotationUpdated === undefined
+        ? quotationValidationResult.data.openedAt
+        : quotationUpdated.openedAt,
     permissionLevel: quotationPermissionLevel,
   }
 

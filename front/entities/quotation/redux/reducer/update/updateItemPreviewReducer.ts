@@ -15,5 +15,9 @@ export const updateItemPreviewReducer = (
     return
   }
 
+  if (item.type === 'quotation') {
+    return
+  }
+
   item.preview = action.payload.preview
 }

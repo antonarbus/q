@@ -1,4 +1,3 @@
-import { cellKey } from '@entities/quotation/const/cellKey'
 import { getRowFromStore } from '@entities/quotation/redux/getter/getRowFromStore'
 import { getRowsFromStore } from '@entities/quotation/redux/getter/getRowsFromStore'
 import { updateCellAtStore } from '@entities/quotation/redux/updater/updateCellAtStore'
@@ -27,7 +26,7 @@ export const updateItemPriceCell = (props: Props): void => {
     editor: props.itemPriceCellEditorRef.current,
     blockIndex: props.blockIndex,
     rowIndex: props.rowIndex,
-    cellKey: cellKey.itemPrice,
+    cellKey: 'itemPrice',
   })
 
   if (didContentChange === false) {
@@ -37,7 +36,7 @@ export const updateItemPriceCell = (props: Props): void => {
   updateCellAtStore({
     blockIndex: props.blockIndex,
     rowIndex: props.rowIndex,
-    cellKey: cellKey.itemPrice,
+    cellKey: 'itemPrice',
     html: props.itemPriceCellEditorRef.current.html.get(),
   })
 
@@ -54,7 +53,7 @@ export const updateItemPriceCell = (props: Props): void => {
   const newPriceValueRounded = roundTo(newPriceValue, 2)
 
   updateCellWithValue({
-    cellKey: cellKey.price,
+    cellKey: 'price',
     editor: props.priceCellEditorRef.current,
     blockIndex: props.blockIndex,
     rowIndex: props.rowIndex,

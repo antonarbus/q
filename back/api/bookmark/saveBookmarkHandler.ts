@@ -78,25 +78,25 @@ export const saveBookmarkHandler: RouterHandler = async (req, res, next) => {
     })
   }
 
-  const { id, type, name, category, desc, ...bucketData } = req.body.bookmark
+  // const { id, type, name, category, desc, ...bucketData } = req.body.bookmark
 
   const [bookmarkInserted] = await db
     .insert(bookmarksTable)
     .values({
-      id,
+      id: req.body.bookmark.id,
       email: userFromAccessToken.email,
-      type,
-      name,
-      category,
-      desc,
+      type: req.body.bookmark.type,
+      name: req.body.bookmark.name,
+      category: req.body.bookmark.category,
+      desc: req.body.bookmark.desc,
     })
     .onConflictDoUpdate({
       target: bookmarksTable.id,
       set: {
-        type,
-        name,
-        category,
-        desc,
+        type: req.body.bookmark.type,
+        name: req.body.bookmark.name,
+        category: req.body.bookmark.category,
+        desc: req.body.bookmark.desc,
         updatedAt: new Date().toISOString(),
       },
     })
@@ -123,7 +123,13 @@ export const saveBookmarkHandler: RouterHandler = async (req, res, next) => {
   const fileInfo = getFileInfo({ id: req.body.bookmark.id })
   const bookmarkFile = bucket.file(fileInfo.path)
 
-  const contents = JSON.stringify(bucketData, null, 2)
+  const bookmarkWithUpdatedTimestamps: Bookmark = {
+    ...req.body.bookmark,
+    createdAt: bookmarkInserted.createdAt,
+    updatedAt: bookmarkInserted.updatedAt,
+  }
+
+  const contents = JSON.stringify(bookmarkWithUpdatedTimestamps, null, 2)
 
   await bookmarkFile.save(contents).catch(() => {
     messageList.push('Failed to save bookmark in bucket')
@@ -141,7 +147,7 @@ export const saveBookmarkHandler: RouterHandler = async (req, res, next) => {
     statusCode: httpStatusCode.success200,
     body: {
       message: messageList.join(' | '),
-      bookmark: bookmarkInserted,
+      bookmark: bookmarkWithUpdatedTimestamps,
       isNew,
     },
   })

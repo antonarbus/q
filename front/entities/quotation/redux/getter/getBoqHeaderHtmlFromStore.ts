@@ -1,5 +1,4 @@
 import { getState } from '@shared/lib/redux'
-import { itemType } from '../../const/itemType'
 import type { HeaderKey } from '@back/entities/quotation/quotationSchema'
 
 type Props = {
@@ -10,7 +9,7 @@ type Props = {
 export const getBoqHeaderHtmlFromStore = (props: Props): string => {
   const block = getState().quotation.blocks[props.blockIndex]
 
-  if (block?.type !== itemType.boq) {
+  if (block?.type !== 'boq') {
     return ''
   }
 

@@ -1,5 +1,3 @@
-import { boqColumnKey } from '@entities/quotation/const/boqColumnKey'
-import { cellKey } from '@entities/quotation/const/cellKey'
 import { columnMinWidth } from '@entities/quotation/const/columnMinWidth'
 import { useStylesForResizableCell } from '@entities/quotation/hook/useStylesForResizableCell'
 import { useBlock } from '@entities/quotation/provider/BlockProvider'
@@ -18,27 +16,27 @@ export const DescriptionCell = (): JSX.Element => {
 
   const stylesForResizableCell = useStylesForResizableCell({
     blockIndex: block.index,
-    boqColumnKey: boqColumnKey.description,
+    boqColumnKey: 'description',
     minWidth: `${columnMinWidth.description}px`,
   })
 
   return (
     <Froala
       beforeUpload={beforeUpload}
-      className={`td ${cellKey.description}`}
+      className='td description'
       droppable
       editorRef={row.descriptionCellEditorRef}
       htmlGetter={() =>
         getCellHtmlFromStore({
           blockIndex: block.index,
-          cellKey: cellKey.description,
+          cellKey: 'description',
           rowIndex: row.index,
         })
       }
       onContentChange={() => {
         updateDescriptionCell({
           blockIndex: block.index,
-          cellKey: cellKey.description,
+          cellKey: 'description',
           editorRef: row.descriptionCellEditorRef,
           rowIndex: row.index,
         })

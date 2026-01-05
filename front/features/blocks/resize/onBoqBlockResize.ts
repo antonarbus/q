@@ -1,6 +1,4 @@
-import { boqColumnKey } from '@entities/quotation/const/boqColumnKey'
 import { columnMinWidth } from '@entities/quotation/const/columnMinWidth'
-import { itemType } from '@entities/quotation/const/itemType'
 import { getBoqColumnFromStore } from '@entities/quotation/redux/getter/getBoqColumnFromStore'
 import { quotationSlice } from '@entities/quotation/redux/quotationSlice'
 import type {
@@ -38,7 +36,7 @@ export const onBoqBlockResizeStart: OnBlockResizeStart = (props) => {
 
   const block = getState().quotation.blocks[props.blockIndex]
 
-  if (block?.type !== itemType.boq) {
+  if (block?.type !== 'boq') {
     return
   }
 
@@ -67,7 +65,7 @@ export const onBoqBlockResize: OnBlockResize = (props) => {
 
   const descriptionColumn = getBoqColumnFromStore({
     blockIndex: props.blockIndex,
-    boqColumnKey: boqColumnKey.description,
+    boqColumnKey: 'description',
   })
 
   if (descriptionColumn === undefined) {
@@ -84,7 +82,7 @@ export const onBoqBlockResize: OnBlockResize = (props) => {
       dispatch(
         quotationSlice.actions.updateColWidthReducer({
           blockIndex: props.blockIndex,
-          boqColumnKey: boqColumnKey.description,
+          boqColumnKey: 'description',
           width: descriptionColumnWidth,
         }),
       )
@@ -96,7 +94,7 @@ export const onBoqBlockResize: OnBlockResize = (props) => {
 
     const numberColumn = getBoqColumnFromStore({
       blockIndex: props.blockIndex,
-      boqColumnKey: boqColumnKey.number,
+      boqColumnKey: 'number',
     })
 
     if (numberColumn === undefined) {
@@ -111,7 +109,7 @@ export const onBoqBlockResize: OnBlockResize = (props) => {
       dispatch(
         quotationSlice.actions.updateColWidthReducer({
           blockIndex: props.blockIndex,
-          boqColumnKey: boqColumnKey.number,
+          boqColumnKey: 'number',
           width: numberColumnWidth,
         }),
       )
@@ -123,7 +121,7 @@ export const onBoqBlockResize: OnBlockResize = (props) => {
 
     const itemPriceColumn = getBoqColumnFromStore({
       blockIndex: props.blockIndex,
-      boqColumnKey: boqColumnKey.itemPrice,
+      boqColumnKey: 'itemPrice',
     })
 
     if (itemPriceColumn === undefined) {
@@ -140,7 +138,7 @@ export const onBoqBlockResize: OnBlockResize = (props) => {
       dispatch(
         quotationSlice.actions.updateColWidthReducer({
           blockIndex: props.blockIndex,
-          boqColumnKey: boqColumnKey.itemPrice,
+          boqColumnKey: 'itemPrice',
           width: itemPriceColumnWidth,
         }),
       )
@@ -152,7 +150,7 @@ export const onBoqBlockResize: OnBlockResize = (props) => {
 
     const qtyColumn = getBoqColumnFromStore({
       blockIndex: props.blockIndex,
-      boqColumnKey: boqColumnKey.qty,
+      boqColumnKey: 'qty',
     })
 
     if (qtyColumn === undefined) {
@@ -171,7 +169,7 @@ export const onBoqBlockResize: OnBlockResize = (props) => {
       dispatch(
         quotationSlice.actions.updateColWidthReducer({
           blockIndex: props.blockIndex,
-          boqColumnKey: boqColumnKey.qty,
+          boqColumnKey: 'qty',
           width: qtyColumnWidth,
         }),
       )
@@ -183,7 +181,7 @@ export const onBoqBlockResize: OnBlockResize = (props) => {
 
     const priceColumn = getBoqColumnFromStore({
       blockIndex: props.blockIndex,
-      boqColumnKey: boqColumnKey.price,
+      boqColumnKey: 'price',
     })
 
     if (priceColumn === undefined) {
@@ -203,7 +201,7 @@ export const onBoqBlockResize: OnBlockResize = (props) => {
       dispatch(
         quotationSlice.actions.updateColWidthReducer({
           blockIndex: props.blockIndex,
-          boqColumnKey: boqColumnKey.price,
+          boqColumnKey: 'price',
           width: priceColumnWidth,
         }),
       )
@@ -223,7 +221,7 @@ export const onBoqBlockResize: OnBlockResize = (props) => {
     dispatch(
       quotationSlice.actions.updateColWidthReducer({
         blockIndex: props.blockIndex,
-        boqColumnKey: boqColumnKey.description,
+        boqColumnKey: 'description',
         width: descriptionColumnWidth,
       }),
     )
@@ -243,7 +241,7 @@ export const onBoqBlockResizeStop: OnBlockResizeStop = (props) => {
   dispatch(
     quotationSlice.actions.updateColWidthReducer({
       blockIndex: props.blockIndex,
-      boqColumnKey: boqColumnKey.description,
+      boqColumnKey: 'description',
       width,
     }),
   )

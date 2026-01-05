@@ -1,5 +1,8 @@
-import type { CellKey } from '@entities/quotation/const/cellKey'
-import type { Quotation, Cell } from '@back/entities/quotation/quotationSchema'
+import type {
+  Quotation,
+  Cell,
+  CellKey,
+} from '@back/entities/quotation/quotationSchema'
 import { getRowFromState } from './getRowFromState'
 
 type Props = {

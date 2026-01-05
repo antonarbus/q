@@ -40,6 +40,7 @@ export default [
   {
     rules: {
       // adjust JS rules
+      'no-undef-init': 'off', // do not like it, sometimes it is nice to define a value explicitly to 'undefined'
       'arrow-body-style': 'off', // blocks with explicit return are good
       'capitalized-comments': 'off', // commented code gets capitalized automatically
       'consistent-return': 'off', // arrow function expects no return keyword

@@ -1,8 +1,9 @@
 import { BOOKMARK_POS_AT_BLOCKS } from '@entities/quotation/const/bookmarkPosAtBlocks'
-import type { CellKey } from '@entities/quotation/const/cellKey'
+import type {
+  CellKey,
+  Quotation,
+} from '@back/entities/quotation/quotationSchema'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { itemType } from '../../../const/itemType'
-import type { Quotation } from '@back/entities/quotation/quotationSchema'
 
 export const updateBookmarkedRowCellReducer = (
   state: Quotation,
@@ -18,7 +19,7 @@ export const updateBookmarkedRowCellReducer = (
     return
   }
 
-  if (block.type === itemType.row) {
+  if (block.type === 'row') {
     const row = block
 
     row[action.payload.cellKey].html = action.payload.html

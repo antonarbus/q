@@ -119,10 +119,10 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
       .values({
         id: quotationId,
         email: userFromAccessToken.email,
-        name: req.body.quotation.name,
-        category: req.body.quotation.category,
-        desc: req.body.quotation.desc,
-        access: req.body.quotation.access,
+        name: quotationValidationResult.data.name,
+        category: quotationValidationResult.data.category,
+        desc: quotationValidationResult.data.desc,
+        access: quotationValidationResult.data.access,
         updatedAt: new Date().toISOString(),
         createdAt: new Date().toISOString(),
         openedAt: new Date().toISOString(),
@@ -144,14 +144,15 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
     const fileInfo = getFileInfo({ id: quotationId })
     const quotationFile = bucket.file(fileInfo.path)
 
-    // Save ONLY bucket data (heavy data), not DB metadata
-    // DB is the source of truth for metadata (id, email, name, etc.)
-    const bucketData = {
-      info: req.body.quotation.info,
-      blocks: req.body.quotation.blocks,
+    const quotation: Quotation = {
+      ...quotationValidationResult.data,
+      id: quotationId,
+      updatedAt: quotationInserted.updatedAt,
+      createdAt: quotationInserted.createdAt,
+      openedAt: quotationInserted.openedAt,
     }
 
-    const quotationJson = JSON.stringify(bucketData, null, 2)
+    const quotationJson = JSON.stringify(quotation, null, 2)
 
     await quotationFile.save(quotationJson).catch(() => {
       messageList.push('Failed to save quotation to storage')
@@ -168,9 +169,9 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
     return httpJsonResponse({
       statusCode: httpStatusCode.success200,
       body: {
-        message: messageList.join(' | '),
-        quotation: quotationInserted,
+        quotation,
         status: 'SAVED',
+        message: messageList.join(' | '),
       },
     })
   }
@@ -181,15 +182,15 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
     const [quotationUpdated] = await db
       .update(quotationsTable)
       .set({
-        name: req.body.quotation.name,
-        category: req.body.quotation.category,
-        desc: req.body.quotation.desc,
-        access: req.body.quotation.access,
+        name: quotationValidationResult.data.name,
+        category: quotationValidationResult.data.category,
+        desc: quotationValidationResult.data.desc,
+        access: quotationValidationResult.data.access,
         updatedAt: new Date().toISOString(),
       })
       .where(
         and(
-          eq(quotationsTable.id, req.body.quotation.id),
+          eq(quotationsTable.id, quotationValidationResult.data.id),
           eq(quotationsTable.email, userFromAccessToken.email),
         ),
       )
@@ -207,17 +208,16 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
 
     messageList.push('Quotation updated in database')
 
-    const fileInfo = getFileInfo({ id: req.body.quotation.id })
+    const fileInfo = getFileInfo({ id: quotationValidationResult.data.id })
     const file = bucket.file(fileInfo.path)
 
-    // Save ONLY bucket data (heavy data), not DB metadata
-    // DB is the source of truth for metadata (id, email, name, etc.)
-    const bucketData = {
-      info: req.body.quotation.info,
-      blocks: req.body.quotation.blocks,
+    const quotation: Quotation = {
+      ...quotationValidationResult.data,
+      id: quotationUpdated.id,
+      updatedAt: quotationUpdated.updatedAt,
     }
 
-    const quotationJson = JSON.stringify(bucketData, null, 2)
+    const quotationJson = JSON.stringify(quotation, null, 2)
 
     await file.save(quotationJson).catch(() => {
       messageList.push('Failed to save quotation to storage')
@@ -234,9 +234,9 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
     return httpJsonResponse({
       statusCode: httpStatusCode.success200,
       body: {
-        message: messageList.join(' | '),
-        quotation: quotationUpdated,
+        quotation,
         status: 'UPDATED',
+        message: messageList.join(' | '),
       },
     })
   }
@@ -273,18 +273,18 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
 
     messageList.push('Copied quotation saved to database')
 
-    // const quotationDataFromDb = createResponse.toObject()
     const fileInfo = getFileInfo({ id: newQuotationId })
     const quotationFile = bucket.file(fileInfo.path)
 
-    // Save ONLY bucket data (heavy data), not DB metadata
-    // DB is the source of truth for metadata (id, email, name, etc.)
-    const bucketData = {
-      info: req.body.quotation.info,
-      blocks: req.body.quotation.blocks,
+    const quotation: Quotation = {
+      ...quotationValidationResult.data,
+      id: quotationInserted.id,
+      updatedAt: quotationInserted.updatedAt,
+      createdAt: quotationInserted.createdAt,
+      openedAt: quotationInserted.openedAt,
     }
 
-    const quotationJson = JSON.stringify(bucketData, null, 2)
+    const quotationJson = JSON.stringify(quotation, null, 2)
 
     await quotationFile.save(quotationJson).catch(() => {
       messageList.push('Failed to save copied quotation to storage')
@@ -301,9 +301,9 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
     return httpJsonResponse({
       statusCode: httpStatusCode.success200,
       body: {
-        message: messageList.join(' | '),
-        quotation: quotationInserted,
+        quotation,
         status: 'COPIED',
+        message: messageList.join(' | '),
       },
     })
   }

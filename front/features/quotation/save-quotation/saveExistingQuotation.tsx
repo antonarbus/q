@@ -48,11 +48,11 @@ export const saveExistingQuotation = async (): Promise<void> => {
     const data = await saveQuotationMutationFn({ quotation })
 
     if (data.quotation !== undefined) {
-      if (data.message === 'updated') {
+      if (data.status === 'UPDATED') {
         toast.info('Updated')
       }
 
-      if (data.message === 'copied and saved') {
+      if (data.status === 'COPIED') {
         toast.success(
           `Shared quotation was copied and saved under id ${data.quotation.id}`,
           {

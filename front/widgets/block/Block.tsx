@@ -1,4 +1,3 @@
-import { itemType } from '@entities/quotation/const/itemType'
 import { BlockProvider } from '@entities/quotation/provider/BlockProvider'
 import type { BlockItem } from '@back/entities/quotation/quotationSchema'
 import type { ReactNode } from 'react'
@@ -36,10 +35,10 @@ export const Block = (props: Props): ReactNode => {
           <PasteItemBlock key='paste-before' />
         )}
       </AnimatePresence>
-      {props.block.type === itemType.text && <TextBlock />}
-      {props.block.type === itemType.boq && <BoqBlock />}
-      {props.block.type === itemType.price && <PriceBlock />}
-      {props.block.type === itemType.row && <BookmarkedRowBlock />}
+      {props.block.type === 'text' && <TextBlock />}
+      {props.block.type === 'boq' && <BoqBlock />}
+      {props.block.type === 'price' && <PriceBlock />}
+      {props.block.type === 'row' && <BookmarkedRowBlock />}
       <AnimatePresence>
         {shouldShowPasteAfter === true && <PasteItemBlock key='paste-after' />}
       </AnimatePresence>

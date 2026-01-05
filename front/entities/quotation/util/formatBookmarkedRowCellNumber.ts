@@ -3,8 +3,7 @@ import { dispatch, getState } from '@shared/lib/redux'
 import { getStringWithNewFormattedNumber } from '@shared/util/getStringWithNewFormattedNumber'
 import { roundTo } from 'round-to'
 import { BOOKMARK_POS_AT_BLOCKS } from '../const/bookmarkPosAtBlocks'
-import type { CellKey } from '../const/cellKey'
-import { itemType } from '../const/itemType'
+import type { CellKey } from '@back/entities/quotation/quotationSchema'
 import { quotationSlice } from '../redux/quotationSlice'
 
 type Props = {
@@ -26,7 +25,7 @@ export const formatBookmarkedRowCellNumber = (props: Props): Res => {
 
   const block = getState().quotation.blocks[BOOKMARK_POS_AT_BLOCKS]
 
-  if (block?.type !== itemType.row) {
+  if (block?.type !== 'row') {
     return {
       didUpdate: false,
     }

@@ -1,4 +1,4 @@
-import type { CellKey } from '@entities/quotation/const/cellKey'
+import type { CellKey } from '@back/entities/quotation/quotationSchema'
 import { updateCellAtStore } from '@entities/quotation/redux/updater/updateCellAtStore'
 import { didCellContentChange } from '@entities/quotation/util/didCellContentChange'
 import type { FroalaEditorRef } from '@shared/lib/froala/froala'

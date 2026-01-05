@@ -1,4 +1,3 @@
-import { itemType } from '@entities/quotation/const/itemType'
 import { quotationSlice } from '@entities/quotation/redux/quotationSlice'
 import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import { dispatch, getState } from '@shared/lib/redux'
@@ -15,7 +14,7 @@ export const updatePriceTitle = (props: Props): void => {
 
   const priceBlock = getState().quotation.blocks[props.blockIndex]
 
-  if (priceBlock?.type !== itemType.price) {
+  if (priceBlock?.type !== 'price') {
     return
   }
 

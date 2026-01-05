@@ -1,6 +1,5 @@
-import type { CellKey } from '@entities/quotation/const/cellKey'
+import type { CellKey } from '@back/entities/quotation/quotationSchema'
 import { getState } from '@shared/lib/redux'
-import { itemType } from '../../const/itemType'
 
 type Props = {
   blockIndex: number
@@ -11,7 +10,7 @@ type Props = {
 export const getCellHtmlFromStore = (props: Props): string => {
   const block = getState().quotation.blocks[props.blockIndex]
 
-  if (block?.type !== itemType.boq) {
+  if (block?.type !== 'boq') {
     return ''
   }
 

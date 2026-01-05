@@ -15,7 +15,7 @@ import {
   httpJsonResponse,
 } from '@back/shared/lib/express/httpResponse'
 import {
-  bookmarkBucketDataSchema,
+  bookmarkSchema,
   type Bookmark,
 } from '@back/entities/bookmark/bookmarkSchema'
 import { z } from 'zod'
@@ -100,8 +100,7 @@ export const getBookmarkHandler: RouterHandler = async (req, res, next) => {
     })
   }
 
-  const bookmarkValidationResult =
-    bookmarkBucketDataSchema.safeParse(bookmarkJsonParsed)
+  const bookmarkValidationResult = bookmarkSchema.safeParse(bookmarkJsonParsed)
 
   if (bookmarkValidationResult.success === false) {
     messageList.push('Invalid bookmark structure')
@@ -116,17 +115,10 @@ export const getBookmarkHandler: RouterHandler = async (req, res, next) => {
     })
   }
 
-  const bookmarkBucketData = bookmarkValidationResult.data
-
-  const bookmark: Bookmark = {
-    ...bookmarkSelected,
-    ...bookmarkBucketData,
-  }
-
   return httpJsonResponse({
     statusCode: httpStatusCode.success200,
     body: {
-      bookmark,
+      bookmark: bookmarkValidationResult.data,
       message: messageList.join(' | '),
     },
   })

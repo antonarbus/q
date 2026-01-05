@@ -1,4 +1,3 @@
-import { boqColumnKey } from '@entities/quotation/const/boqColumnKey'
 import { columnMinWidth } from '@entities/quotation/const/columnMinWidth'
 import { useBlock } from '@entities/quotation/provider/BlockProvider'
 import { getBoqColumnHtmlFromStore } from '@entities/quotation/redux/getter/getBoqColumnHtmlFromStore'
@@ -15,8 +14,8 @@ export const ItemPriceColumn = (): JSX.Element => {
 
   return (
     <ResizableColumn
-      boqColumnKey={boqColumnKey.itemPrice}
-      className={`th ${boqColumnKey.itemPrice} resizable`}
+      boqColumnKey='itemPrice'
+      className='th itemPrice resizable'
       minWidth={columnMinWidth.itemPrice}
     >
       <Froala
@@ -24,14 +23,14 @@ export const ItemPriceColumn = (): JSX.Element => {
         htmlGetter={() =>
           getBoqColumnHtmlFromStore({
             blockIndex: block.index,
-            boqColumnKey: boqColumnKey.itemPrice,
+            boqColumnKey: 'itemPrice',
           })
         }
         onContentChange={() => {
           updateColumnCell({
             editorRef,
             blockIndex: block.index,
-            boqColumnKey: boqColumnKey.itemPrice,
+            boqColumnKey: 'itemPrice',
           })
         }}
         placeholder='Item...'

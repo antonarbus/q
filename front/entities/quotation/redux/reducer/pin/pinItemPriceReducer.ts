@@ -1,5 +1,4 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { cellKey } from '../../../const/cellKey'
 import type { Quotation } from '@back/entities/quotation/quotationSchema'
 import { getCellFromState } from '../../getter/getCellFromState'
 
@@ -13,7 +12,7 @@ export const pinItemPriceReducer = (
   const itemPriceCell = getCellFromState({
     blockIndex: action.payload.blockIndex,
     rowIndex: action.payload.rowIndex,
-    cellKey: cellKey.itemPrice,
+    cellKey: 'itemPrice',
     state,
   })
 
@@ -26,7 +25,7 @@ export const pinItemPriceReducer = (
   const qtyCell = getCellFromState({
     blockIndex: action.payload.blockIndex,
     rowIndex: action.payload.rowIndex,
-    cellKey: cellKey.qty,
+    cellKey: 'qty',
     state,
   })
 

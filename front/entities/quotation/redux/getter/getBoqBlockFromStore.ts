@@ -1,5 +1,4 @@
 import { getState } from '@shared/lib/redux'
-import { itemType } from '../../const/itemType'
 import type { BoqBlock } from '@back/entities/quotation/quotationSchema'
 
 type Props = {
@@ -9,7 +8,7 @@ type Props = {
 export const getBoqBlockFromStore = (props: Props): BoqBlock | undefined => {
   const block = getState().quotation.blocks[props.blockIndex]
 
-  if (block?.type !== itemType.boq) {
+  if (block?.type !== 'boq') {
     return
   }
 

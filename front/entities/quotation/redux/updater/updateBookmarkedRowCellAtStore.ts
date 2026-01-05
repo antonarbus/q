@@ -1,10 +1,9 @@
 import { BOOKMARK_POS_AT_BLOCKS } from '@entities/quotation/const/bookmarkPosAtBlocks'
-import type { CellKey } from '@entities/quotation/const/cellKey'
-import { itemType } from '@entities/quotation/const/itemType'
 import { dispatch, getState } from '@shared/lib/redux'
 import { getNumberFromString } from '@shared/util/getNumberFromString'
 import { getTextContentFromHtml } from '@shared/util/getTextContentFromHtml'
 import { quotationSlice } from '../quotationSlice'
+import type { CellKey } from '@back/entities/quotation/quotationSchema'
 
 type Props = {
   html: string
@@ -18,7 +17,7 @@ type Res = {
 export const updateBookmarkedRowCellAtStore = (props: Props): Res => {
   const block = getState().quotation.blocks[BOOKMARK_POS_AT_BLOCKS]
 
-  if (block?.type !== itemType.row) {
+  if (block?.type !== 'row') {
     return {
       didUpdate: false,
     }

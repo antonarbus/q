@@ -1,6 +1,4 @@
 import { generateId } from '@root/shared/lib/nanoid'
-import { itemType } from './const/itemType'
-import { rowTypeKey } from './const/rowTypeKey'
 import boqHeaderDescriptionHtml from './templates/boqHeaderDescription.html?raw' // assets can be imported as strings using the ?raw suffix
 import boqHeaderItemPriceHtml from './templates/boqHeaderItemPrice.html?raw'
 import boqHeaderPriceHtml from './templates/boqHeaderPrice.html?raw'
@@ -28,6 +26,7 @@ import type { Quotation } from '@back/entities/quotation/quotationSchema'
 
 export const newQuotationTemplate: Quotation = {
   id: 'new',
+  type: 'quotation',
   name: '',
   category: '',
   desc: '',
@@ -51,7 +50,7 @@ export const newQuotationTemplate: Quotation = {
       info: '',
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
-      type: itemType.text,
+      type: 'text',
       email: 'unknown@gmail.com',
       width: 600,
       height: 0,
@@ -70,7 +69,7 @@ export const newQuotationTemplate: Quotation = {
       info: '',
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
-      type: itemType.boq,
+      type: 'boq',
       email: 'unknown@gmail.com',
       width: 600,
       height: 0,
@@ -122,7 +121,7 @@ export const newQuotationTemplate: Quotation = {
             info: '',
             createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString(),
-            type: rowTypeKey.row,
+            type: 'row',
             email: 'unknown@gmail.com',
             height: 0,
             width: 0,
@@ -169,7 +168,7 @@ export const newQuotationTemplate: Quotation = {
             info: '',
             createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString(),
-            type: rowTypeKey.row,
+            type: 'row',
             email: 'unknown@gmail.com',
             height: 0,
             width: 0,
@@ -216,7 +215,7 @@ export const newQuotationTemplate: Quotation = {
             info: '',
             createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString(),
-            type: rowTypeKey.row,
+            type: 'row',
             email: 'unknown@gmail.com',
             height: 0,
             width: 0,
@@ -266,7 +265,7 @@ export const newQuotationTemplate: Quotation = {
       info: '',
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
-      type: itemType.price,
+      type: 'price',
       email: 'unknown@gmail.com',
       width: 150,
       height: 0,
@@ -289,7 +288,7 @@ export const newQuotationTemplate: Quotation = {
       info: '',
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
-      type: itemType.text,
+      type: 'text',
       email: 'unknown@gmail.com',
       width: 600,
       height: 0,

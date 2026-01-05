@@ -1,5 +1,4 @@
 import { copySlice } from '@entities/copy/copySlice'
-import { itemType } from '@entities/quotation/const/itemType'
 import priceBlockPreviewHtml from '@entities/quotation/templates/priceBlockPreview.html?raw' // assets can be imported as strings using the ?raw suffix
 import priceBlockTitleHtml from '@entities/quotation/templates/priceBlockTitle.html?raw'
 import priceBlockValueHtml from '@entities/quotation/templates/priceBlockValue.html?raw'
@@ -18,7 +17,7 @@ export const insertPriceBlock = (event?: MouseEvent): void => {
     info: '',
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
-    type: itemType.price,
+    type: 'price',
     email: 'unknown@gmail.com',
     width: 150,
     height: 90,

@@ -1,6 +1,4 @@
 import { BOOKMARK_POS_AT_BLOCKS } from '@entities/quotation/const/bookmarkPosAtBlocks'
-import { boqColumnKey } from '@entities/quotation/const/boqColumnKey'
-import { cellKey } from '@entities/quotation/const/cellKey'
 import { columnMinWidth } from '@entities/quotation/const/columnMinWidth'
 import { useStylesForResizableCell } from '@entities/quotation/hook/useStylesForResizableCell'
 import { useRow } from '@entities/quotation/provider/RowProvider'
@@ -16,17 +14,17 @@ export const DescriptionCell = (): JSX.Element => {
 
   const stylesForResizableCell = useStylesForResizableCell({
     blockIndex: BOOKMARK_POS_AT_BLOCKS,
-    boqColumnKey: boqColumnKey.description,
+    boqColumnKey: 'description',
     minWidth: columnMinWidth.description,
   })
 
   return (
     <Froala
       beforeUpload={beforeUpload}
-      className={`td ${cellKey.description}`}
+      className='td description'
       editorRef={row.descriptionCellEditorRef}
       htmlGetter={() =>
-        getBookmarkedRowCellHtmlFromStore({ cellKey: cellKey.description })
+        getBookmarkedRowCellHtmlFromStore({ cellKey: 'description' })
       }
       onContentChange={() => {
         updateDescriptionCell({

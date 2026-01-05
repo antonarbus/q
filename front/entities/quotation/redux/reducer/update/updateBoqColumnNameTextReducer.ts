@@ -1,7 +1,8 @@
-import type { BoqColumnKey } from '@entities/quotation/const/boqColumnKey'
+import type {
+  BoqColumnKey,
+  Quotation,
+} from '@back/entities/quotation/quotationSchema'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { itemType } from '../../../const/itemType'
-import type { Quotation } from '@back/entities/quotation/quotationSchema'
 
 export const updateBoqColumnNameTextReducer = (
   state: Quotation,
@@ -17,7 +18,7 @@ export const updateBoqColumnNameTextReducer = (
     return
   }
 
-  if (block.type !== itemType.boq) {
+  if (block.type !== 'boq') {
     return
   }
 

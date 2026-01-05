@@ -1,4 +1,3 @@
-import { cellKey } from '@entities/quotation/const/cellKey'
 import { getBoqHeaderFromStore } from '@entities/quotation/redux/getter/getBoqHeaderFromStore'
 import { getRowFromStore } from '@entities/quotation/redux/getter/getRowFromStore'
 import { getRowsFromStore } from '@entities/quotation/redux/getter/getRowsFromStore'
@@ -121,7 +120,7 @@ export const updateSubtotalPrice = (props: Props): void => {
 
   prices.forEach((price, rowIndex) => {
     updateCellWithValue({
-      cellKey: cellKey.price,
+      cellKey: 'price',
       editor: props.rowEditorRefs.at(rowIndex)?.price.current ?? null,
       blockIndex: props.blockIndex,
       rowIndex,
@@ -144,7 +143,7 @@ export const updateSubtotalPrice = (props: Props): void => {
         editor: props.rowEditorRefs.at(rowIndex)?.qty.current ?? null,
         blockIndex: props.blockIndex,
         rowIndex,
-        cellKey: cellKey.qty,
+        cellKey: 'qty',
         value: newQtyValueRounded,
       })
     }
@@ -163,7 +162,7 @@ export const updateSubtotalPrice = (props: Props): void => {
         editor: props.rowEditorRefs.at(rowIndex)?.itemPrice.current ?? null,
         blockIndex: props.blockIndex,
         rowIndex,
-        cellKey: cellKey.itemPrice,
+        cellKey: 'itemPrice',
         value: newItemPriceValueRounded,
       })
     }

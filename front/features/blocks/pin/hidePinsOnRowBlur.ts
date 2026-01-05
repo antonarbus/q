@@ -1,4 +1,3 @@
-import { cellKey } from '@entities/quotation/const/cellKey'
 import { getRowFromStore } from '@entities/quotation/redux/getter/getRowFromStore'
 import { quotationSlice } from '@entities/quotation/redux/quotationSlice'
 import { cls } from '@shared/cls'
@@ -35,7 +34,7 @@ export const hidePinsOnRowBlur = (props: Props): void => {
       quotationSlice.actions.hideCellPinReducer({
         blockIndex: props.blockIndex,
         rowIndex: props.rowIndex,
-        cellKey: cellKey.itemPrice,
+        cellKey: 'itemPrice',
       }),
     )
   }
@@ -47,7 +46,7 @@ export const hidePinsOnRowBlur = (props: Props): void => {
       quotationSlice.actions.hideCellPinReducer({
         blockIndex: props.blockIndex,
         rowIndex: props.rowIndex,
-        cellKey: cellKey.qty,
+        cellKey: 'qty',
       }),
     )
   }
