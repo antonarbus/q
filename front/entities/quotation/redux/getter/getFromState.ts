@@ -1,7 +1,4 @@
-import type {
-  BlockItem,
-  Quotation,
-} from '@back/entities/quotation/quotationSchema'
+import type { BlockItem, Quotation } from '@back/entities/quotation/schemas'
 
 type Props = {
   id: string

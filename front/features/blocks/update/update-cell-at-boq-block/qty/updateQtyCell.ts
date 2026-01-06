@@ -1,7 +1,7 @@
 import { getRowFromStore } from '@entities/quotation/redux/getter/getRowFromStore'
 import { getRowsFromStore } from '@entities/quotation/redux/getter/getRowsFromStore'
 import { updateCellAtStore } from '@entities/quotation/redux/updater/updateCellAtStore'
-import type { RowBlock } from '@back/entities/quotation/quotationSchema'
+import type { RowBlock } from '@back/entities/quotation/schemas'
 import { didCellContentChange } from '@entities/quotation/util/didCellContentChange'
 import { updateCellWithValue } from '@entities/quotation/util/updateCellWithValue'
 import { updateSubTotalPriceWithValue } from '@entities/quotation/util/updateSubTotalPriceWithValue'

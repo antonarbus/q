@@ -1,4 +1,4 @@
-import { getUserFromRefreshTokenOrJohn, usersTable } from '@back/entities/user'
+import { usersTable } from '@back/entities/user/usersTableSchema'
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
@@ -11,6 +11,7 @@ import {
   type HttpResponse,
   httpJsonResponse,
 } from '@back/shared/lib/express/httpResponse'
+import { getUserFromRefreshTokenOrUnknownPerson } from '@back/entities/user/getUserFromRefreshTokenOrUnknownPerson'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
@@ -30,7 +31,7 @@ type RouterHandler = (
 ) => Promise<HttpResponse<ResBody>>
 
 export const testHandler: RouterHandler = async (req, res, next) => {
-  const userFromRefreshToken = getUserFromRefreshTokenOrJohn({ req })
+  const userFromRefreshToken = getUserFromRefreshTokenOrUnknownPerson({ req })
 
   const messageList: string[] = []
 

@@ -6,7 +6,7 @@ import {
   useContext,
   useMemo,
 } from 'react'
-import type { BlockItem } from '@back/entities/quotation/quotationSchema'
+import type { BlockItem } from '@back/entities/quotation/schemas'
 
 type Res = {
   index: number

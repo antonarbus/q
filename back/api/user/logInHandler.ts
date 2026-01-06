@@ -1,8 +1,7 @@
 import {
-  getUserFromAccessTokenOrNull,
   usersTable,
   type SelectUser,
-} from '@back/entities/user'
+} from '@back/entities/user/usersTableSchema'
 import { setNoTraceMode, setRefreshTokenCookie } from '@back/shared/headers'
 import {
   generateAccessToken,
@@ -25,6 +24,7 @@ import {
   type HttpResponse,
   httpJsonResponse,
 } from '@back/shared/lib/express/httpResponse'
+import { getUserFromAccessTokenOrNull } from '@back/entities/user/getUserFromAccessTokenOrNull'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary

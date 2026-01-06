@@ -1,11 +1,10 @@
-import { getUserFromAccessTokenOrNull } from '@back/entities/user'
+import { getUserFromAccessTokenOrNull } from '@back/entities/user/getUserFromAccessTokenOrNull'
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import { jsonParseOrNull } from '@back/shared/util/jsonParseOrNull'
 import type { NextFunction, Request, Response } from 'express'
-import { quotationsTable, type SelectQuotation } from '@back/entities/quotation'
 import { db } from '@back/shared/lib/drizzle/db'
 import { eq } from 'drizzle-orm'
 import type { ParamsDictionary } from 'express-serve-static-core'
@@ -15,14 +14,15 @@ import {
   httpJsonResponse,
 } from '@back/shared/lib/express/httpResponse'
 import {
-  quotationSchema,
-  type Quotation,
-} from '@back/entities/quotation/quotationSchema'
-import { z } from 'zod'
+  quotationsTable,
+  type SelectQuotation,
+} from '@back/entities/quotation/quotationsTableSchema'
+import type { Quotation } from '@back/entities/quotation/schemas'
 import { createEmptyQuotation } from '@back/entities/quotation/createEmptyQuotation'
 import { getQuotationPermissionLevel } from '@back/entities/quotation/getQuotationPermissionLevel'
 import { getShouldTrace } from '@back/shared/headers/no-trace/getShouldTrace'
 import { hideQuotationPrivateData } from '@back/entities/quotation/hideQuotationPrivateData'
+import { validateQuotation } from '@back/entities/quotation/validateQuotation'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
@@ -86,13 +86,15 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
   messageList.push(`Permission level: ${quotationPermissionLevel}`)
 
   if (quotationPermissionLevel === 'FORBIDDEN') {
+    const emptyQuotation = createEmptyQuotation({
+      id: req.body.id,
+      permissionLevel: 'FORBIDDEN',
+    })
+
     return httpJsonResponse({
       statusCode: httpStatusCode.success200,
       body: {
-        quotation: createEmptyQuotation({
-          id: req.body.id,
-          permissionLevel: 'FORBIDDEN',
-        }),
+        quotation: emptyQuotation,
         message: messageList.join(' | '),
       },
     })
@@ -178,15 +180,13 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
     })
   }
 
-  const quotationValidationResult =
-    quotationSchema.safeParse(quotationJsonParsed)
+  const quotationValidationResult = validateQuotation({
+    document: quotationJsonParsed,
+  })
 
-  if (quotationValidationResult.success === false) {
-    messageList.push('Invalid structure')
-    const treeifiedError = z.treeifyError(quotationValidationResult.error)
-    console.error('Validation failed:', treeifiedError)
-    messageList.push(`Zod error: ${JSON.stringify(treeifiedError)}`)
+  messageList.push(quotationValidationResult.message)
 
+  if (quotationValidationResult.status === 'ERROR') {
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'INVALID_STRUCTURE',
       statusCode: httpStatusCode.badRequest400,

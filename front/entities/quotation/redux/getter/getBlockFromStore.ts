@@ -1,5 +1,5 @@
 import { getState } from '@shared/lib/redux'
-import type { BlockItem } from '@back/entities/quotation/quotationSchema'
+import type { BlockItem } from '@back/entities/quotation/schemas'
 
 type Props = {
   blockIndex: number

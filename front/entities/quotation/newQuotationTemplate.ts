@@ -22,10 +22,11 @@ import termsAndConditionsHtml from './templates/termsAndConditions.html?raw'
 import totalPriceTitleHtml from './templates/totalPriceTitle.html?raw'
 import totalPriceValueHtml from './templates/totalPriceValue.html?raw'
 import welcomeTextHtml from './templates/welcomeText.html?raw'
-import type { Quotation } from '@back/entities/quotation/quotationSchema'
+import type { Quotation } from '@back/entities/quotation/schemas'
 
 export const newQuotationTemplate: Quotation = {
   id: 'new',
+  schemaVersion: 2,
   type: 'quotation',
   name: '',
   category: '',

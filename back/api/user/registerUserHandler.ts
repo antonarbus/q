@@ -13,7 +13,7 @@ import {
   usersTable,
   type InsertUser,
   type SelectUser,
-} from '@back/entities/user'
+} from '@back/entities/user/usersTableSchema'
 import { db } from '@back/shared/lib/drizzle/db'
 import { and, eq } from 'drizzle-orm'
 import { HttpError } from '@back/shared/errors/HttpError'

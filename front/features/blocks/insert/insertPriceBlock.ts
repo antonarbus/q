@@ -2,7 +2,7 @@ import { copySlice } from '@entities/copy/copySlice'
 import priceBlockPreviewHtml from '@entities/quotation/templates/priceBlockPreview.html?raw' // assets can be imported as strings using the ?raw suffix
 import priceBlockTitleHtml from '@entities/quotation/templates/priceBlockTitle.html?raw'
 import priceBlockValueHtml from '@entities/quotation/templates/priceBlockValue.html?raw'
-import type { PriceBlock } from '@back/entities/quotation/quotationSchema'
+import type { PriceBlock } from '@back/entities/quotation/schemas'
 import { textSlice } from '@shared/lib/froala/textSlice'
 import { generateId } from '@root/shared/lib/nanoid'
 import { dispatch, getState } from '@shared/lib/redux'

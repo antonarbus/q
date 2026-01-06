@@ -1,5 +1,8 @@
-import { bookmarksTable, type SelectBookmark } from '@back/entities/bookmark'
-import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
+import {
+  bookmarksTable,
+  type SelectBookmark,
+} from '@back/entities/bookmark/bookmarksTableSchema'
+import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user/getUserFromAccessTokenOrThrowUnauthorized'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { db } from '@back/shared/lib/drizzle/db'
 import { and, asc, count, desc, ilike } from 'drizzle-orm'

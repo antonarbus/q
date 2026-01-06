@@ -1,4 +1,4 @@
-import { getUserFromRefreshTokenOrJohn } from '@back/entities/user'
+import { getUserFromRefreshTokenOrUnknownPerson } from '@back/entities/user/getUserFromRefreshTokenOrUnknownPerson'
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
@@ -30,7 +30,7 @@ type RouterHandler = (
 ) => Promise<HttpResponse<ResBody>>
 
 export const getBucketCorsHandler: RouterHandler = async (req, res, next) => {
-  const userFromRefreshToken = getUserFromRefreshTokenOrJohn({ req })
+  const userFromRefreshToken = getUserFromRefreshTokenOrUnknownPerson({ req })
 
   if (userFromRefreshToken.roles.includes('super-admin') === false) {
     throw new HttpError<ErrorResBody['errorCode']>({

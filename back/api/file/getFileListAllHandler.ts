@@ -1,5 +1,8 @@
-import { filesTable, type SelectFile } from '@back/entities/file'
-import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
+import {
+  filesTable,
+  type SelectFile,
+} from '@back/entities/file/filesTableSchema'
+import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user/getUserFromAccessTokenOrThrowUnauthorized'
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'

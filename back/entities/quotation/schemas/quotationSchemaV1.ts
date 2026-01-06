@@ -94,7 +94,6 @@ const blockItemSchema = z.discriminatedUnion('type', [
 
 export const quotationSchema = z.object({
   id: z.string(),
-  type: z.literal('quotation'),
   email: z.string(),
   name: z.string(),
   category: z.string(),
@@ -119,21 +118,3 @@ export const quotationSchema = z.object({
     'FORBIDDEN',
   ]),
 })
-
-// Types
-
-export type Cell = z.infer<typeof cellSchema>
-export type CellPin = z.infer<typeof cellSchema.shape.pin>
-export type Column = z.infer<typeof columnSchema>
-export type HeaderValue = z.infer<typeof headerValueSchema>
-export type HeaderKey = keyof z.infer<typeof headerSchema>
-export type BoqColumnKey = keyof z.infer<
-  typeof boqBlockSchema.shape.boq.shape.column
->
-export type CellKey = Exclude<BoqColumnKey, 'number'>
-export type RowBlock = z.infer<typeof rowBlockSchema>
-export type BoqBlock = z.infer<typeof boqBlockSchema>
-export type TextBlock = z.infer<typeof textBlockSchema>
-export type PriceBlock = z.infer<typeof priceBlockSchema>
-export type BlockItem = z.infer<typeof blockItemSchema>
-export type Quotation = z.infer<typeof quotationSchema>

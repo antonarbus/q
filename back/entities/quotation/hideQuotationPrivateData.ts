@@ -1,4 +1,4 @@
-import type { Quotation } from './quotationSchema'
+import type { Quotation } from './schemas'
 
 type Props = {
   quotation: Quotation

@@ -1,5 +1,5 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { Quotation } from '@back/entities/quotation/quotationSchema'
+import type { Quotation } from '@back/entities/quotation/schemas'
 import { getCellFromState } from '../../getter/getCellFromState'
 
 export const pinQtyReducer = (

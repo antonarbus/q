@@ -1,5 +1,8 @@
-import { filesTable, type SelectFile } from '@back/entities/file'
-import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
+import {
+  filesTable,
+  type SelectFile,
+} from '@back/entities/file/filesTableSchema'
+import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user/getUserFromAccessTokenOrThrowUnauthorized'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { db } from '@back/shared/lib/drizzle/db'
 import {

@@ -1,5 +1,5 @@
 import { BOOKMARK_POS_AT_BLOCKS } from '@entities/quotation/const/bookmarkPosAtBlocks'
-import type { Quotation } from '@back/entities/quotation/quotationSchema'
+import type { Quotation } from '@back/entities/quotation/schemas'
 
 type Reducer = (state: Quotation) => void
 

@@ -1,5 +1,8 @@
-import { getUserFromAccessTokenOrNull } from '@back/entities/user'
-import { type SelectVisitors, visitorsTable } from '@back/entities/visitor'
+import { getUserFromAccessTokenOrNull } from '@back/entities/user/getUserFromAccessTokenOrNull'
+import {
+  type SelectVisitors,
+  visitorsTable,
+} from '@back/entities/visitor/visitorsTableSchema'
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'

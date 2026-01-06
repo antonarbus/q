@@ -1,7 +1,4 @@
-import type {
-  BoqBlock,
-  Quotation,
-} from '@back/entities/quotation/quotationSchema'
+import type { BoqBlock, Quotation } from '@back/entities/quotation/schemas'
 
 type Props = {
   blockIndex: number

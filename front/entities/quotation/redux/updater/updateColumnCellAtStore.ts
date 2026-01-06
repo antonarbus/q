@@ -1,4 +1,4 @@
-import type { BoqColumnKey } from '@back/entities/quotation/quotationSchema'
+import type { BoqColumnKey } from '@back/entities/quotation/schemas'
 import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import { dispatch } from '@shared/lib/redux'
 import { getBoqBlockFromStore } from '../getter/getBoqBlockFromStore'

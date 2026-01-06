@@ -3,9 +3,8 @@ import { generateAccessToken } from '@back/shared/lib/json-webtoken'
 import type { NextFunction, Request, Response } from 'express'
 import {
   usersTable,
-  getUserFromRefreshTokenOrNull,
   type SelectUser,
-} from '@back/entities/user'
+} from '@back/entities/user/usersTableSchema'
 import { db } from '@back/shared/lib/drizzle/db'
 import { and, eq } from 'drizzle-orm'
 import { HttpError } from '@back/shared/errors/HttpError'
@@ -17,6 +16,7 @@ import {
   type HttpResponse,
   httpJsonResponse,
 } from '@back/shared/lib/express/httpResponse'
+import { getUserFromRefreshTokenOrNull } from '@back/entities/user/getUserFromRefreshTokenOrNull'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary

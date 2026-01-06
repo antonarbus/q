@@ -1,5 +1,5 @@
 import type { FroalaEditor } from '@shared/lib/froala/froala'
-import type { CellKey } from '@back/entities/quotation/quotationSchema'
+import type { CellKey } from '@back/entities/quotation/schemas'
 import { getCellFromStore } from '../redux/getter/getCellFromStore'
 
 type Props = {

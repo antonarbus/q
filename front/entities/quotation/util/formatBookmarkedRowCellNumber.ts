@@ -3,7 +3,7 @@ import { dispatch, getState } from '@shared/lib/redux'
 import { getStringWithNewFormattedNumber } from '@shared/util/getStringWithNewFormattedNumber'
 import { roundTo } from 'round-to'
 import { BOOKMARK_POS_AT_BLOCKS } from '../const/bookmarkPosAtBlocks'
-import type { CellKey } from '@back/entities/quotation/quotationSchema'
+import type { CellKey } from '@back/entities/quotation/schemas'
 import { quotationSlice } from '../redux/quotationSlice'
 
 type Props = {

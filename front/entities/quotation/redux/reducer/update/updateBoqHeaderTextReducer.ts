@@ -1,8 +1,5 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type {
-  HeaderKey,
-  Quotation,
-} from '@back/entities/quotation/quotationSchema'
+import type { HeaderKey, Quotation } from '@back/entities/quotation/schemas'
 
 export const updateBoqHeaderTextReducer = (
   state: Quotation,

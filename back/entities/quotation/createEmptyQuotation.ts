@@ -1,10 +1,11 @@
 import { nanoid } from 'nanoid'
-import type { Quotation } from './quotationSchema'
+import type { Quotation } from './schemas'
 
 export const createEmptyQuotation = (
   overrides: Partial<Quotation>,
 ): Quotation => ({
   id: nanoid(),
+  schemaVersion: 2,
   type: 'quotation',
   email: 'unknown@gmail.com',
   createdAt: new Date().toISOString(),

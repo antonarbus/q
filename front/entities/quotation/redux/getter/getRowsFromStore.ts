@@ -1,4 +1,4 @@
-import type { RowBlock } from '@back/entities/quotation/quotationSchema'
+import type { RowBlock } from '@back/entities/quotation/schemas'
 import { getBoqBlockFromStore } from './getBoqBlockFromStore'
 
 type Props = {

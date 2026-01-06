@@ -1,8 +1,7 @@
 import {
-  getUserFromAccessTokenOrThrowUnauthorized,
   usersTable,
   type SelectUser,
-} from '@back/entities/user'
+} from '@back/entities/user/usersTableSchema'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import type { NextFunction, Request, Response } from 'express'
 import { db } from '@back/shared/lib/drizzle/db'
@@ -15,6 +14,7 @@ import {
   type HttpResponse,
   httpJsonResponse,
 } from '@back/shared/lib/express/httpResponse'
+import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user/getUserFromAccessTokenOrThrowUnauthorized'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary

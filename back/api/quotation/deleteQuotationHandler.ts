@@ -1,10 +1,13 @@
-import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
+import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user/getUserFromAccessTokenOrThrowUnauthorized'
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import type { NextFunction, Request, Response } from 'express'
-import { quotationsTable, type SelectQuotation } from '@back/entities/quotation'
+import {
+  quotationsTable,
+  type SelectQuotation,
+} from '@back/entities/quotation/quotationsTableSchema'
 import { db } from '@back/shared/lib/drizzle/db'
 import { and, eq } from 'drizzle-orm'
 import type { ParamsDictionary } from 'express-serve-static-core'

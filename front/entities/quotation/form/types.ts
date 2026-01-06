@@ -1,4 +1,4 @@
-import type { SelectQuotation } from '@back/entities/quotation'
+import type { SelectQuotation } from '@back/entities/quotation/quotationsTableSchema'
 import type { Signal } from '@preact/signals-react'
 
 export type InfoFormValues = {

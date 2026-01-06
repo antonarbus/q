@@ -1,4 +1,4 @@
-import type { SelectUser } from '@back/entities/user'
+import type { SelectUser } from '@back/entities/user/usersTableSchema'
 import type { JwtPayload } from 'jsonwebtoken'
 
 export type JwtPayloadExtended = JwtPayload & {

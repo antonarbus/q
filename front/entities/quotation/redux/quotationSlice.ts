@@ -1,5 +1,5 @@
 import { createSlice, type Reducer } from '@reduxjs/toolkit'
-import type { Quotation } from '@back/entities/quotation/quotationSchema'
+import type { Quotation } from '@back/entities/quotation/schemas'
 
 // Delete operations
 import { deleteBlockReducer } from './reducer/delete/deleteBlockReducer'
@@ -48,6 +48,7 @@ import { updateSubTotalPriceReducer } from './reducer/update/updateSubTotalPrice
 
 const initialState: Quotation = {
   id: '',
+  schemaVersion: 2,
   type: 'quotation',
   name: '',
   category: '',

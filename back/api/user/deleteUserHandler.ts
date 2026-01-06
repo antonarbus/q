@@ -1,10 +1,9 @@
-import { bookmarksTable } from '@back/entities/bookmark'
-import { quotationsTable } from '@back/entities/quotation'
+import { bookmarksTable } from '@back/entities/bookmark/bookmarksTableSchema'
+import { quotationsTable } from '@back/entities/quotation/quotationsTableSchema'
 import {
   type SelectUser,
-  getUserFromAccessTokenOrThrowUnauthorized,
   usersTable,
-} from '@back/entities/user'
+} from '@back/entities/user/usersTableSchema'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { db } from '@back/shared/lib/drizzle/db'
 import { eq } from 'drizzle-orm'
@@ -17,6 +16,7 @@ import {
   type HttpResponse,
   httpJsonResponse,
 } from '@back/shared/lib/express/httpResponse'
+import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user/getUserFromAccessTokenOrThrowUnauthorized'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary

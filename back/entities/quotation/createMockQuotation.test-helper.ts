@@ -1,4 +1,4 @@
-import type { Quotation } from './quotationSchema'
+import type { Quotation } from './schemas'
 
 type MockQuotationOverrides = Partial<Quotation>
 
@@ -6,6 +6,7 @@ export const createMockQuotation = (
   overrides: MockQuotationOverrides = {},
 ): Quotation => ({
   id: 'test-id-123',
+  schemaVersion: 2,
   type: 'quotation',
   email: 'owner@example.com',
   createdAt: '2024-01-01T00:00:00Z',

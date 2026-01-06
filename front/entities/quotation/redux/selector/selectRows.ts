@@ -1,5 +1,5 @@
 import type { RootState } from '@shared/lib/redux'
-import type { RowBlock } from '@back/entities/quotation/quotationSchema'
+import type { RowBlock } from '@back/entities/quotation/schemas'
 import { getRowsFromStore } from '../getter/getRowsFromStore'
 
 type Props = {

@@ -3,7 +3,7 @@ import { updateNumberAtHtmlIncrementally } from '@shared/lib/froala/updateNumber
 import { getNumberFromString } from '@shared/util/getNumberFromString'
 import { getStringWithNewFormattedNumber } from '@shared/util/getStringWithNewFormattedNumber'
 import { getTextContentFromHtml } from '@shared/util/getTextContentFromHtml'
-import type { CellKey } from '@back/entities/quotation/quotationSchema'
+import type { CellKey } from '@back/entities/quotation/schemas'
 import { getRowFromStore } from '../redux/getter/getRowFromStore'
 import { updateCellAtStore } from '../redux/updater/updateCellAtStore'
 

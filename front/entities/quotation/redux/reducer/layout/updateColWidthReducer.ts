@@ -1,7 +1,4 @@
-import type {
-  BoqColumnKey,
-  Quotation,
-} from '@back/entities/quotation/quotationSchema'
+import type { BoqColumnKey, Quotation } from '@back/entities/quotation/schemas'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
 export const updateColWidthReducer = (
