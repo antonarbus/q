@@ -1,4 +1,4 @@
-import type { CellKey } from '@back/entities/quotation/schema'
+import type { CellKey } from '@back/entity/quotation/schema'
 import { dispatch } from '@shared/lib/redux'
 import { getNumberFromString } from '@shared/util/getNumberFromString'
 import { getTextContentFromHtml } from '@shared/util/getTextContentFromHtml'

@@ -1,4 +1,4 @@
-import type { CellKey } from '@back/entities/quotation/schema'
+import type { CellKey } from '@back/entity/quotation/schema'
 import { getState } from '@shared/lib/redux'
 
 type Props = {

@@ -1,4 +1,4 @@
-import type { CellKey, CellPin } from '@back/entities/quotation/schema'
+import type { CellKey, CellPin } from '@back/entity/quotation/schema'
 import type { RootState } from '@shared/lib/redux'
 import { getRowFromStore } from '../getter/getRowFromStore'
 

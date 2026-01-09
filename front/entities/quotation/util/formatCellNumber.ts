@@ -2,7 +2,7 @@ import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import { dispatch } from '@shared/lib/redux'
 import { getStringWithNewFormattedNumber } from '@shared/util/getStringWithNewFormattedNumber'
 import { roundTo } from 'round-to'
-import type { CellKey } from '@back/entities/quotation/schema'
+import type { CellKey } from '@back/entity/quotation/schema'
 import { getRowFromStore } from '../redux/getter/getRowFromStore'
 import { quotationSlice } from '../redux/quotationSlice'
 

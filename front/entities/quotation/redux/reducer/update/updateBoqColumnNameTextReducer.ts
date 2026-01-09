@@ -1,4 +1,4 @@
-import type { BoqColumnKey, Quotation } from '@back/entities/quotation/schema'
+import type { BoqColumnKey, Quotation } from '@back/entity/quotation/schema'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
 export const updateBoqColumnNameTextReducer = (

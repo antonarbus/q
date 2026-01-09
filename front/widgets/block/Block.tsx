@@ -1,5 +1,5 @@
 import { BlockProvider } from '@entities/quotation/provider/BlockProvider'
-import type { BlockItem } from '@back/entities/quotation/schema'
+import type { BlockItem } from '@back/entity/quotation/schema'
 import type { ReactNode } from 'react'
 import { BookmarkedRowBlock } from './bookmarked-row-block'
 import { BoqBlock } from './boq-block'

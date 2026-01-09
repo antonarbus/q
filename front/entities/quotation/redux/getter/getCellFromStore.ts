@@ -1,4 +1,4 @@
-import type { CellKey, Cell } from '@back/entities/quotation/schema'
+import type { CellKey, Cell } from '@back/entity/quotation/schema'
 import { getRowFromStore } from './getRowFromStore'
 
 type Props = {

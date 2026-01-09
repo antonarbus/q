@@ -1,6 +1,6 @@
 import type { FroalaEditor } from '@shared/lib/froala/froala'
 import { getBoqBlockFromStore } from '../redux/getter/getBoqBlockFromStore'
-import type { HeaderKey } from '@back/entities/quotation/schema'
+import type { HeaderKey } from '@back/entity/quotation/schema'
 
 type Props = {
   editor: FroalaEditor

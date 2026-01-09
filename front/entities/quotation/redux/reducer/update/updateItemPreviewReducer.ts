@@ -1,5 +1,5 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { Quotation } from '@back/entities/quotation/schema'
+import type { Quotation } from '@back/entity/quotation/schema'
 import { getFromState } from '../../getter/getFromState'
 
 export const updateItemPreviewReducer = (

@@ -3,7 +3,7 @@ import { dispatch, getState } from '@shared/lib/redux'
 import { getNumberFromString } from '@shared/util/getNumberFromString'
 import { getTextContentFromHtml } from '@shared/util/getTextContentFromHtml'
 import { quotationSlice } from '../quotationSlice'
-import type { CellKey } from '@back/entities/quotation/schema'
+import type { CellKey } from '@back/entity/quotation/schema'
 
 type Props = {
   html: string

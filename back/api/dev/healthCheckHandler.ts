@@ -7,7 +7,7 @@ import { sql } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
-import { getUserFromRefreshTokenOrNull } from '@back/entities/user/getUserFromRefreshTokenOrNull'
+import { getUserFromRefreshTokenOrNull } from '@back/entity/user/getUserFromRefreshTokenOrNull'
 import {
   type HttpResponse,
   httpJsonResponse,

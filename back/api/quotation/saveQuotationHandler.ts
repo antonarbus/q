@@ -1,4 +1,4 @@
-import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user/getUserFromAccessTokenOrThrowUnauthorized'
+import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entity/user/getUserFromAccessTokenOrThrowUnauthorized'
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
@@ -7,11 +7,8 @@ import { generateId } from '@root/shared/lib/nanoid'
 import {
   quotationsTable,
   type SelectQuotation,
-} from '@back/entities/quotation/db/quotationsTableSchema'
-import {
-  type Quotation,
-  quotationSchema,
-} from '@back/entities/quotation/schema'
+} from '@back/entity/quotation/db/quotationsTableSchema'
+import { type Quotation, quotationSchema } from '@back/entity/quotation/schema'
 import type { NextFunction, Request, Response } from 'express'
 import { db } from '@back/shared/lib/drizzle/db'
 import { and, eq } from 'drizzle-orm'

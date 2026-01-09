@@ -2,7 +2,7 @@ import { useBlock } from '@entities/quotation/provider/BlockProvider'
 import { useBoq } from '@entities/quotation/provider/BoqBlockProvider'
 import { getBoqHeaderHtmlFromStore } from '@entities/quotation/redux/getter/getBoqHeaderHtmlFromStore'
 import { subTotalPriceCellStyle } from '@entities/quotation/style/subTotalPriceCellStyle'
-import type { HeaderKey } from '@back/entities/quotation/schema'
+import type { HeaderKey } from '@back/entity/quotation/schema'
 import { Froala } from '@entities/quotation/ui/froala/Froala'
 import { showHidePricePins } from '@features/blocks/pin'
 import {

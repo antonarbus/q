@@ -1,5 +1,5 @@
 import { BOOKMARK_POS_AT_BLOCKS } from '@entities/quotation/const/bookmarkPosAtBlocks'
-import type { BlockItem } from '@back/entities/quotation/schema'
+import type { BlockItem } from '@back/entity/quotation/schema'
 import { OpenInsertMenuButton } from '@features/open-close/open-insert-menu'
 import { AnimatePresence } from 'motion/react'
 import type { ReactNode } from 'react'

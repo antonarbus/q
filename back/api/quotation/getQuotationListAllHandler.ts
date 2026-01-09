@@ -1,4 +1,4 @@
-import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user/getUserFromAccessTokenOrThrowUnauthorized'
+import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entity/user/getUserFromAccessTokenOrThrowUnauthorized'
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
@@ -6,7 +6,7 @@ import type { NextFunction, Request, Response } from 'express'
 import {
   quotationsTable,
   type SelectQuotation,
-} from '@back/entities/quotation/db/quotationsTableSchema'
+} from '@back/entity/quotation/db/quotationsTableSchema'
 import { db } from '@back/shared/lib/drizzle/db'
 import { and, asc, count, desc, ilike } from 'drizzle-orm'
 import type { ParamsDictionary } from 'express-serve-static-core'

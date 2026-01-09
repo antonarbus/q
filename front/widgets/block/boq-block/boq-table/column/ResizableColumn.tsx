@@ -1,4 +1,4 @@
-import type { BoqColumnKey } from '@back/entities/quotation/schema'
+import type { BoqColumnKey } from '@back/entity/quotation/schema'
 import { useBlock } from '@entities/quotation/provider/BlockProvider'
 import { selectColumnWidth } from '@entities/quotation/redux/selector/selectColumnWidth'
 import {

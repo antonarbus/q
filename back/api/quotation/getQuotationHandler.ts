@@ -1,4 +1,4 @@
-import { getUserFromAccessTokenOrNull } from '@back/entities/user/getUserFromAccessTokenOrNull'
+import { getUserFromAccessTokenOrNull } from '@back/entity/user/getUserFromAccessTokenOrNull'
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
@@ -16,13 +16,13 @@ import {
 import {
   quotationsTable,
   type SelectQuotation,
-} from '@back/entities/quotation/db/quotationsTableSchema'
-import type { Quotation } from '@back/entities/quotation/schema'
-import { createEmptyQuotation } from '@back/entities/quotation/createEmptyQuotation'
-import { getQuotationPermissionLevel } from '@back/entities/quotation/getQuotationPermissionLevel'
+} from '@back/entity/quotation/db/quotationsTableSchema'
+import type { Quotation } from '@back/entity/quotation/schema'
+import { createEmptyQuotation } from '@back/entity/quotation/createEmptyQuotation'
+import { getQuotationPermissionLevel } from '@back/entity/quotation/getQuotationPermissionLevel'
 import { getShouldTrace } from '@back/shared/headers/no-trace/getShouldTrace'
-import { hideQuotationPrivateData } from '@back/entities/quotation/hideQuotationPrivateData'
-import { validateQuotation } from '@back/entities/quotation/validateQuotation'
+import { hideQuotationPrivateData } from '@back/entity/quotation/hideQuotationPrivateData'
+import { validateQuotation } from '@back/entity/quotation/validateQuotation'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary

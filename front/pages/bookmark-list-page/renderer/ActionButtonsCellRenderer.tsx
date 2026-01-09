@@ -1,4 +1,4 @@
-import type { Quotation } from '@back/entities/quotation/schema'
+import type { Quotation } from '@back/entity/quotation/schema'
 import { CopyBookmarkButton } from '@features/bookmark/copy-bookmark'
 import { DeleteBookmarkButton } from '@features/bookmark/delete-bookmark'
 import { OpenBookmarkModalButton } from '@features/open-close/open-bookmark-modal'

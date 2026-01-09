@@ -1,4 +1,4 @@
-import type { SelectUser } from '@back/entities/user/db/usersTableSchema'
+import type { SelectUser } from '@back/entity/user/db/usersTableSchema'
 import { useGetUserAccessTokenQuery } from '@entities/user/api/useGetUserAccessTokenQuery'
 import { useSelector } from '@shared/lib/redux'
 import type { ReactNode } from 'react'

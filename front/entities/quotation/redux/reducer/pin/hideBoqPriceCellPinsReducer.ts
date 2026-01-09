@@ -1,5 +1,5 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { Quotation } from '@back/entities/quotation/schema'
+import type { Quotation } from '@back/entity/quotation/schema'
 import { getRowsFromState } from '../../getter/getRowsFromState'
 
 export const hideBoqPriceCellPinsReducer = (

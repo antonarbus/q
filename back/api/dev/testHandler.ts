@@ -1,4 +1,4 @@
-import { usersTable } from '@back/entities/user/db/usersTableSchema'
+import { usersTable } from '@back/entity/user/db/usersTableSchema'
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
@@ -11,7 +11,7 @@ import {
   type HttpResponse,
   httpJsonResponse,
 } from '@back/shared/lib/express/httpResponse'
-import { getUserFromRefreshTokenOrUnknownPerson } from '@back/entities/user/getUserFromRefreshTokenOrUnknownPerson'
+import { getUserFromRefreshTokenOrUnknownPerson } from '@back/entity/user/getUserFromRefreshTokenOrUnknownPerson'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary

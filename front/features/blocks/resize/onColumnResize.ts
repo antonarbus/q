@@ -1,4 +1,4 @@
-import type { BoqColumnKey } from '@back/entities/quotation/schema'
+import type { BoqColumnKey } from '@back/entity/quotation/schema'
 import { getBoqColumnFromStore } from '@entities/quotation/redux/getter/getBoqColumnFromStore'
 import { quotationSlice } from '@entities/quotation/redux/quotationSlice'
 import { cls } from '@shared/cls'

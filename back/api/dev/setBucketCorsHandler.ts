@@ -1,4 +1,4 @@
-import { getUserFromRefreshTokenOrUnknownPerson } from '@back/entities/user/getUserFromRefreshTokenOrUnknownPerson'
+import { getUserFromRefreshTokenOrUnknownPerson } from '@back/entity/user/getUserFromRefreshTokenOrUnknownPerson'
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'

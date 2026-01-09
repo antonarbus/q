@@ -5,7 +5,7 @@ import {
   type WritableDraft,
 } from '@reduxjs/toolkit'
 import type { CopyPlace } from './types'
-import type { BlockItem } from '@back/entities/quotation/schema'
+import type { BlockItem } from '@back/entity/quotation/schema'
 
 type InitState = {
   isVisible: boolean

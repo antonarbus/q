@@ -1,4 +1,4 @@
-import type { CellKey, Quotation } from '@back/entities/quotation/schema'
+import type { CellKey, Quotation } from '@back/entity/quotation/schema'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { getCellFromState } from '../../getter/getCellFromState'
 

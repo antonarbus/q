@@ -7,7 +7,7 @@ import {
   useContext,
   useMemo,
 } from 'react'
-import type { RowBlock } from '@back/entities/quotation/schema'
+import type { RowBlock } from '@back/entity/quotation/schema'
 import { useBoq } from './BoqBlockProvider'
 
 type Props = {

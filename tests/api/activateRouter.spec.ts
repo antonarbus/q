@@ -1,5 +1,5 @@
 import { route } from '@back/api/route'
-import { usersTable } from '@back/entities/user/db/usersTableSchema'
+import { usersTable } from '@back/entity/user/db/usersTableSchema'
 import { db } from '@back/shared/lib/drizzle/db'
 import { expect, test } from '@playwright/test'
 import { runtimeConfig } from '@root/config/runtime'
