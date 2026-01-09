@@ -1,5 +1,4 @@
 import { z } from 'zod'
-import { produce } from 'immer'
 import { quotationSchema as quotationSchemaV1 } from './quotationSchemaV1' //* <-- V1
 import {
   quotationSchema as quotationSchemaV2, //* <-- V2
@@ -55,18 +54,21 @@ export const migrateQuotationSchemaFromV1ToV2 = (props: Props): Res => {
     }
   }
 
-  const newDocument = produce(
-    oldDocumentValidationResult.data,
-    // hack! draft has type QuotationV1, but we use QuotationV2 to let us set new target values
-    (draft: QuotationV2) => {
-      draft.quotationSchemaVersion = MIGRATE_TO //* <-- TO BE IN EVERY MIGRATION FUNCTION
-      draft.type = 'quotation'
+  // ======== ↓ MIGRATION ↓ ========
 
-      draft.blocks.forEach((block) => {
-        block.bookmarkSchemaVersion = 2
-      })
-    },
-  )
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+  const newDocument = structuredClone(
+    oldDocumentValidationResult.data,
+  ) as QuotationV2 // <-- hack! cast QuotationV2 type for actual QuotationV1 to let us set new values
+
+  newDocument.quotationSchemaVersion = MIGRATE_TO //* <-- TO BE IN EVERY MIGRATION FUNCTION
+  newDocument.type = 'quotation'
+
+  newDocument.blocks.forEach((block) => {
+    block.bookmarkSchemaVersion = 2
+  })
+
+  // ======== ↑ MIGRATION ↑ ========
 
   const newDocumentValidationResult = quotationSchemaV2.safeParse(newDocument)
 

@@ -1,5 +1,4 @@
 import { z } from 'zod'
-import { produce } from 'immer'
 import { bookmarkSchema as bookmarkSchemaV1 } from './bookmarkSchemaV1' //* <-- V1
 import {
   bookmarkSchema as bookmarkSchemaV2, //* <-- V2
@@ -57,13 +56,16 @@ export const migrateBookmarkSchemaFromV1ToV2 = (props: Props): Res => {
     }
   }
 
-  const newDocument = produce(
+  // ======== ↓ MIGRATION ↓ ========
+
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+  const newDocument = structuredClone(
     oldDocumentValidationResult.data,
-    // hack! draft has type BookmarkV1, but we use BookmarkV2 to let us set new target values
-    (draft: BookmarkV2) => {
-      draft.bookmarkSchemaVersion = MIGRATE_TO //* <-- TO BE IN EVERY MIGRATION FUNCTION
-    },
-  )
+  ) as BookmarkV2 // <-- hack! cast QuotationV2 type for actual QuotationV1 to let us set new values
+
+  newDocument.bookmarkSchemaVersion = MIGRATE_TO //* <-- TO BE IN EVERY MIGRATION FUNCTION
+
+  // ======== ↑ MIGRATION ↑ ========
 
   const newDocumentValidationResult = bookmarkSchemaV2.safeParse(newDocument)
 
