@@ -5,7 +5,7 @@ export const createEmptyQuotation = (
   overrides: Partial<Quotation>,
 ): Quotation => ({
   id: nanoid(),
-  schemaVersion: 2,
+  quotationSchemaVersion: 2,
   type: 'quotation',
   email: 'unknown@gmail.com',
   createdAt: new Date().toISOString(),

@@ -13,6 +13,7 @@ import type { MouseEvent } from 'react'
 export const insertRow = (event?: MouseEvent): void => {
   const row: RowBlock = {
     id: generateId(),
+    bookmarkSchemaVersion: 2,
     name: '',
     category: '',
     desc: '',

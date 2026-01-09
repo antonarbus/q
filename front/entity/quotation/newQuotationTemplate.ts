@@ -26,7 +26,7 @@ import type { Quotation } from '@back/entity/quotation/schema'
 
 export const newQuotationTemplate: Quotation = {
   id: 'new',
-  schemaVersion: 2,
+  quotationSchemaVersion: 2,
   type: 'quotation',
   name: '',
   category: '',
@@ -45,6 +45,7 @@ export const newQuotationTemplate: Quotation = {
   blocks: [
     {
       id: generateId(),
+      bookmarkSchemaVersion: 2,
       name: '',
       category: '',
       desc: '',
@@ -64,6 +65,7 @@ export const newQuotationTemplate: Quotation = {
     },
     {
       id: generateId(),
+      bookmarkSchemaVersion: 2,
       name: '',
       category: '',
       desc: '',
@@ -116,6 +118,7 @@ export const newQuotationTemplate: Quotation = {
         rows: [
           {
             id: generateId(),
+            bookmarkSchemaVersion: 2,
             name: '',
             category: '',
             desc: '',
@@ -163,6 +166,7 @@ export const newQuotationTemplate: Quotation = {
           },
           {
             id: generateId(),
+            bookmarkSchemaVersion: 2,
             name: '',
             category: '',
             desc: '',
@@ -210,6 +214,7 @@ export const newQuotationTemplate: Quotation = {
           },
           {
             id: generateId(),
+            bookmarkSchemaVersion: 2,
             name: '',
             category: '',
             desc: '',
@@ -260,6 +265,7 @@ export const newQuotationTemplate: Quotation = {
     },
     {
       id: generateId(),
+      bookmarkSchemaVersion: 2,
       name: '',
       category: '',
       desc: '',
@@ -283,6 +289,7 @@ export const newQuotationTemplate: Quotation = {
     },
     {
       id: generateId(),
+      bookmarkSchemaVersion: 2,
       name: '',
       category: '',
       desc: '',

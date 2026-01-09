@@ -15,10 +15,7 @@ import {
   type HttpResponse,
   httpJsonResponse,
 } from '@back/shared/lib/express/httpResponse'
-import {
-  bookmarkSchema,
-  type Bookmark,
-} from '@back/entity/bookmark/bookmarkSchema'
+import { bookmarkSchema, type Bookmark } from '@back/entity/bookmark/schema'
 import { z } from 'zod'
 
 type SearchQuery = ParsedQs

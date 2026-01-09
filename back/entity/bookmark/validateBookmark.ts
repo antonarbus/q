@@ -1,10 +1,10 @@
-import { migrateQuotationSchemaFromV1ToV2 } from './schema/migrateQuotationSchemaFromV1ToV2'
-import { type Quotation, quotationSchema } from './schema'
+import { migrateBookmarkSchemaFromV1ToV2 } from './schema/migrateBookmarkSchemaFromV1ToV2'
+import { type Bookmark, bookmarkSchema } from './schema'
 
-const migrateQuotationSchemaList = [
-  migrateQuotationSchemaFromV1ToV2,
-  // migrateQuotationSchemaFromV2ToV3,
-  // migrateQuotationSchemaFromV3ToV4,
+const migrateBookmarkSchemaList = [
+  migrateBookmarkSchemaFromV1ToV2,
+  // migrateBookmarkSchemaFromV2ToV3,
+  // migrateBookmarkSchemaFromV3ToV4,
 ]
 
 type Props = {
@@ -14,7 +14,7 @@ type Props = {
 type Res =
   | {
       status: 'VALIDATED'
-      data: Quotation
+      data: Bookmark
       message: string
     }
   | {
@@ -23,13 +23,9 @@ type Res =
       message: string
     }
 
-/**
- * If document from the bucket has the latest schema it is just validated
- * If schema version is outdated, document structure is progressively updated and validated
- */
-export const validateQuotation = (props: Props): Res => {
+export const validateBookmark = (props: Props): Res => {
   // Fast path: Try validating as latest version first
-  const latestVersionValidation = quotationSchema.safeParse(props.document)
+  const latestVersionValidation = bookmarkSchema.safeParse(props.document)
 
   // Already at latest version!
   if (latestVersionValidation.success) {
@@ -51,7 +47,7 @@ export const validateQuotation = (props: Props): Res => {
   const messageList: string[] = []
 
   // Go though the list of migration steps and update document structure
-  for (const migrate of migrateQuotationSchemaList) {
+  for (const migrate of migrateBookmarkSchemaList) {
     const migrationResult = migrate({
       document: currentDocument,
       documentSchemaVersion: currentVersion,
@@ -77,7 +73,7 @@ export const validateQuotation = (props: Props): Res => {
 
   // Validate as the latest version after migration
   const migratedDocumentValidationResult =
-    quotationSchema.safeParse(currentDocument)
+    bookmarkSchema.safeParse(currentDocument)
 
   if (migratedDocumentValidationResult.success !== true) {
     console.error(

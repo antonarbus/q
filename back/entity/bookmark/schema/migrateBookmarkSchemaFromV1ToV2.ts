@@ -1,10 +1,10 @@
 import { z } from 'zod'
 import { produce } from 'immer'
-import { quotationSchema as quotationSchemaV1 } from './quotationSchemaV1' //* <-- V1
+import { bookmarkSchema as bookmarkSchemaV1 } from './bookmarkSchemaV1' //* <-- V1
 import {
-  quotationSchema as quotationSchemaV2, //* <-- V2
-  type Quotation as QuotationV2, //* <-- V2
-} from './quotationSchemaV2' //* <-- V2
+  bookmarkSchema as bookmarkSchemaV2, //* <-- V2
+  type Bookmark as BookmarkV2, //* <-- V2
+} from './bookmarkSchemaV2' //* <-- V2
 
 const MIGRATE_FROM = 1
 const MIGRATE_TO = 2
@@ -17,7 +17,7 @@ type Props = {
 type Res =
   | {
       status: 'MIGRATED'
-      data: QuotationV2
+      data: BookmarkV2
       message: string
     }
   | {
@@ -31,7 +31,11 @@ type Res =
       message: string
     }
 
-export const migrateQuotationSchemaFromV1ToV2 = (props: Props): Res => {
+/**
+ * If document from the bucket has the latest schema it is just validated
+ * If schema version is outdated, document structure is progressively updated and validated
+ */
+export const migrateBookmarkSchemaFromV1ToV2 = (props: Props): Res => {
   // Run migration only for specific version
   if (props.documentSchemaVersion !== MIGRATE_FROM) {
     return {
@@ -41,9 +45,7 @@ export const migrateQuotationSchemaFromV1ToV2 = (props: Props): Res => {
     }
   }
 
-  const oldDocumentValidationResult = quotationSchemaV1.safeParse(
-    props.document,
-  )
+  const oldDocumentValidationResult = bookmarkSchemaV1.safeParse(props.document)
 
   if (oldDocumentValidationResult.success === false) {
     const treeifiedError = z.treeifyError(oldDocumentValidationResult.error)
@@ -57,18 +59,13 @@ export const migrateQuotationSchemaFromV1ToV2 = (props: Props): Res => {
 
   const newDocument = produce(
     oldDocumentValidationResult.data,
-    // hack! draft has type QuotationV1, but we use QuotationV2 to let us set new target values
-    (draft: QuotationV2) => {
-      draft.quotationSchemaVersion = MIGRATE_TO //* <-- TO BE IN EVERY MIGRATION FUNCTION
-      draft.type = 'quotation'
-
-      draft.blocks.forEach((block) => {
-        block.bookmarkSchemaVersion = 2
-      })
+    // hack! draft has type BookmarkV1, but we use BookmarkV2 to let us set new target values
+    (draft: BookmarkV2) => {
+      draft.bookmarkSchemaVersion = MIGRATE_TO //* <-- TO BE IN EVERY MIGRATION FUNCTION
     },
   )
 
-  const newDocumentValidationResult = quotationSchemaV2.safeParse(newDocument)
+  const newDocumentValidationResult = bookmarkSchemaV2.safeParse(newDocument)
 
   if (newDocumentValidationResult.success === false) {
     const treeifiedError = z.treeifyError(newDocumentValidationResult.error)

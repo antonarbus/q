@@ -1,6 +1,7 @@
 import { z } from 'zod'
 
-const CURRENT_VERSION = 2
+const CURRENT_QUOTATION_SCHEMA_VERSION = 2
+const CURRENT_BOOKMARK_SCHEMA_VERSION = 2
 
 // Schemas
 
@@ -31,6 +32,7 @@ const headerSchema = z.object({
 
 const blockCommonSchema = z.object({
   id: z.string(),
+  bookmarkSchemaVersion: z.literal(CURRENT_BOOKMARK_SCHEMA_VERSION),
   email: z.string(),
   name: z.string(),
   category: z.string(),
@@ -87,6 +89,7 @@ const priceBlockSchema = blockCommonSchema.extend({
   }),
 })
 
+// Same as bookmark
 const blockItemSchema = z.discriminatedUnion('type', [
   boqBlockSchema,
   textBlockSchema,
@@ -95,7 +98,7 @@ const blockItemSchema = z.discriminatedUnion('type', [
 ])
 
 export const quotationSchema = z.object({
-  schemaVersion: z.literal(CURRENT_VERSION),
+  quotationSchemaVersion: z.literal(CURRENT_QUOTATION_SCHEMA_VERSION),
   id: z.string(),
   type: z.literal('quotation'),
   email: z.string(),

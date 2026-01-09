@@ -11,6 +11,7 @@ import type { MouseEvent } from 'react'
 export const insertPriceBlock = (event?: MouseEvent): void => {
   const block: PriceBlock = {
     id: generateId(),
+    bookmarkSchemaVersion: 2,
     name: '',
     category: '',
     desc: '',

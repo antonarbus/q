@@ -10,6 +10,7 @@ import type { MouseEvent } from 'react'
 export const insertTextBlock = (event?: MouseEvent): void => {
   const block: TextBlock = {
     id: generateId(),
+    bookmarkSchemaVersion: 2,
     name: '',
     category: '',
     desc: '',

@@ -28,6 +28,7 @@ import type { MouseEvent } from 'react'
 export const insertBoqBlock = (event?: MouseEvent): void => {
   const boqBlock: BoqBlock = {
     id: generateId(),
+    bookmarkSchemaVersion: 2,
     name: '',
     category: '',
     desc: '',
@@ -80,6 +81,7 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
       rows: [
         {
           id: generateId(),
+          bookmarkSchemaVersion: 2,
           name: '',
           category: '',
           desc: '',
@@ -127,6 +129,7 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
         },
         {
           id: generateId(),
+          bookmarkSchemaVersion: 2,
           name: '',
           category: '',
           desc: '',
@@ -174,6 +177,7 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
         },
         {
           id: generateId(),
+          bookmarkSchemaVersion: 2,
           name: '',
           category: '',
           desc: '',

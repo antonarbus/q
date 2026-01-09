@@ -17,11 +17,8 @@ import {
   type HttpResponse,
   httpJsonResponse,
 } from '@back/shared/lib/express/httpResponse'
-import {
-  bookmarkSchema,
-  type Bookmark,
-} from '@back/entity/bookmark/bookmarkSchema'
-import { z } from 'zod'
+import type { Bookmark } from '@back/entity/bookmark/schema'
+import { validateBookmark } from '@back/entity/bookmark/validateBookmark'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
@@ -103,14 +100,13 @@ export const getBookmarkHandler: RouterHandler = async (req, res, next) => {
     })
   }
 
-  const bookmarkValidationResult = bookmarkSchema.safeParse(bookmarkJsonParsed)
+  const bookmarkValidationResult = validateBookmark({
+    document: bookmarkJsonParsed,
+  })
 
-  if (bookmarkValidationResult.success === false) {
-    messageList.push('Invalid bookmark structure')
-    const treeifiedError = z.treeifyError(bookmarkValidationResult.error)
-    console.error('Validation failed:', treeifiedError)
-    messageList.push(`Zod error: ${JSON.stringify(treeifiedError)}`)
+  messageList.push(bookmarkValidationResult.message)
 
+  if (bookmarkValidationResult.status === 'ERROR') {
     throw new HttpError<ErrorResBody['errorCode']>({
       errorCode: 'INVALID_STRUCTURE',
       statusCode: httpStatusCode.badRequest400,
