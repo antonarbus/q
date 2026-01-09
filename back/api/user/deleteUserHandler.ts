@@ -1,9 +1,9 @@
-import { bookmarksTable } from '@back/entities/bookmark/bookmarksTableSchema'
-import { quotationsTable } from '@back/entities/quotation/quotationsTableSchema'
+import { bookmarksTable } from '@back/entities/bookmark/db/bookmarksTableSchema'
+import { quotationsTable } from '@back/entities/quotation/db/quotationsTableSchema'
 import {
   type SelectUser,
   usersTable,
-} from '@back/entities/user/usersTableSchema'
+} from '@back/entities/user/db/usersTableSchema'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { db } from '@back/shared/lib/drizzle/db'
 import { eq } from 'drizzle-orm'

@@ -1,7 +1,7 @@
 import { getRefreshTokenFromCookie } from '@back/shared/headers/token/getRefreshTokenFromCookie'
 import { verifyRefreshToken } from '@back/shared/lib/json-webtoken'
 import type { Request } from 'express'
-import type { SelectUser } from './usersTableSchema'
+import type { SelectUser } from './db/usersTableSchema'
 
 type Props = {
   req: Request

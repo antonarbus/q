@@ -1,7 +1,7 @@
 import {
   filesTable,
   type SelectFile,
-} from '@back/entities/file/filesTableSchema'
+} from '@back/entities/file/db/filesTableSchema'
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'

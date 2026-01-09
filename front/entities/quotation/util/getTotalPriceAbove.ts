@@ -1,4 +1,4 @@
-import type { BlockItem } from '@back/entities/quotation/schemas'
+import type { BlockItem } from '@back/entities/quotation/schema'
 
 type Props = {
   blockIndex: number

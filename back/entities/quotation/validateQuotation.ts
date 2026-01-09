@@ -1,5 +1,5 @@
-import { migrateQuotationSchemaFromV1ToV2 } from './schemas/migrateQuotationSchemaFromV1ToV2'
-import { type Quotation, quotationSchema } from './schemas'
+import { migrateQuotationSchemaFromV1ToV2 } from './schema/migrateQuotationSchemaFromV1ToV2'
+import { type Quotation, quotationSchema } from './schema'
 
 const migrateQuotationSchemaList = [
   migrateQuotationSchemaFromV1ToV2,

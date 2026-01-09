@@ -1,5 +1,5 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { Quotation } from '@back/entities/quotation/schemas'
+import type { Quotation } from '@back/entities/quotation/schema'
 
 type Payload = {
   quotation: Quotation

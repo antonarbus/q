@@ -5,7 +5,7 @@ import type {
   BlockItem,
   Quotation,
   RowBlock,
-} from '@back/entities/quotation/schemas'
+} from '@back/entities/quotation/schema'
 
 type SpliceSettings = {
   insertAtIndex: number

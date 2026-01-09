@@ -1,7 +1,7 @@
 import {
   usersTable,
   type SelectUser,
-} from '@back/entities/user/usersTableSchema'
+} from '@back/entities/user/db/usersTableSchema'
 import { setNoTraceMode, setRefreshTokenCookie } from '@back/shared/headers'
 import {
   generateAccessToken,

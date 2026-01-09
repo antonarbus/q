@@ -1,4 +1,4 @@
-import type { BoqColumnKey } from '@back/entities/quotation/schemas'
+import type { BoqColumnKey } from '@back/entities/quotation/schema'
 import { getState } from '@shared/lib/redux'
 
 type Props = {

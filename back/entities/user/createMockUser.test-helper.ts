@@ -1,4 +1,4 @@
-import type { SelectUser } from './usersTableSchema'
+import type { SelectUser } from './db/usersTableSchema'
 
 export const createMockUser = (
   overrides: Partial<Pick<SelectUser, 'email' | 'roles'>> = {},

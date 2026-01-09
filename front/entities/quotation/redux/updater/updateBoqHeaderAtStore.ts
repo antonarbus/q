@@ -2,7 +2,7 @@ import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import { dispatch } from '@shared/lib/redux'
 import { getNumberFromString } from '@shared/util/getNumberFromString'
 import { getTextContentFromHtml } from '@shared/util/getTextContentFromHtml'
-import type { HeaderKey } from '@back/entities/quotation/schemas'
+import type { HeaderKey } from '@back/entities/quotation/schema'
 import { getBoqBlockFromStore } from '../getter/getBoqBlockFromStore'
 import { quotationSlice } from '../quotationSlice'
 

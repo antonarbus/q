@@ -1,7 +1,7 @@
 import {
   type SelectBookmark,
   bookmarksTable,
-} from '@back/entities/bookmark/bookmarksTableSchema'
+} from '@back/entities/bookmark/db/bookmarksTableSchema'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user/getUserFromAccessTokenOrThrowUnauthorized'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { db } from '@back/shared/lib/drizzle/db'

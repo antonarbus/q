@@ -7,11 +7,11 @@ import { generateId } from '@root/shared/lib/nanoid'
 import {
   quotationsTable,
   type SelectQuotation,
-} from '@back/entities/quotation/quotationsTableSchema'
+} from '@back/entities/quotation/db/quotationsTableSchema'
 import {
   type Quotation,
   quotationSchema,
-} from '@back/entities/quotation/schemas'
+} from '@back/entities/quotation/schema'
 import type { NextFunction, Request, Response } from 'express'
 import { db } from '@back/shared/lib/drizzle/db'
 import { and, eq } from 'drizzle-orm'

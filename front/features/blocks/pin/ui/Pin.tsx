@@ -1,4 +1,4 @@
-import type { CellKey } from '@back/entities/quotation/schemas'
+import type { CellKey } from '@back/entities/quotation/schema'
 import { useBlock } from '@entities/quotation/provider/BlockProvider'
 import { useRow } from '@entities/quotation/provider/RowProvider'
 import { selectCellPin } from '@entities/quotation/redux/selector/selectCellPin'

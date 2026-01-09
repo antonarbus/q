@@ -1,4 +1,4 @@
-import type { Quotation } from '@back/entities/quotation/schemas'
+import type { Quotation } from '@back/entities/quotation/schema'
 export type WorkerResponseMessage = {
   excelBlob: Blob
 }

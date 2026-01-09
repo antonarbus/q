@@ -1,5 +1,5 @@
-import type { SelectUser } from '../user/usersTableSchema'
-import type { Quotation } from './schemas'
+import type { SelectUser } from '../user/db/usersTableSchema'
+import type { Quotation } from './schema'
 
 type Props = {
   user: {

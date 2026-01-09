@@ -1,7 +1,7 @@
 import {
   usersTable,
   type SelectUser,
-} from '@back/entities/user/usersTableSchema'
+} from '@back/entities/user/db/usersTableSchema'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import type { NextFunction, Request, Response } from 'express'
 import { db } from '@back/shared/lib/drizzle/db'

@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid'
-import type { Quotation } from './schemas'
+import type { Quotation } from './schema'
 
 export const createEmptyQuotation = (
   overrides: Partial<Quotation>,

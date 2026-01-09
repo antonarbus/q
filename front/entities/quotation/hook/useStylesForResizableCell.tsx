@@ -1,7 +1,7 @@
 import { useSelector } from '@shared/lib/redux'
 import type { CSSProperties } from 'react'
 import { selectColumnWidth } from '../redux/selector/selectColumnWidth'
-import type { BoqColumnKey } from '@back/entities/quotation/schemas'
+import type { BoqColumnKey } from '@back/entities/quotation/schema'
 
 type Props = {
   blockIndex: number

@@ -1,4 +1,4 @@
-import { usersTable } from '@back/entities/user/usersTableSchema'
+import { usersTable } from '@back/entities/user/db/usersTableSchema'
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'

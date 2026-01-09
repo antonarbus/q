@@ -4,7 +4,7 @@ import {
   type Reducer,
   type WritableDraft,
 } from '@reduxjs/toolkit'
-import type { SelectUser } from '@back/entities/user/usersTableSchema'
+import type { SelectUser } from '@back/entities/user/db/usersTableSchema'
 
 type InitState = {
   email: string | null

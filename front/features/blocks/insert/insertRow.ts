@@ -4,7 +4,7 @@ import rowItemPriceHtml from '@entities/quotation/templates/rowItemPrice.html?ra
 import rowPreviewHtml from '@entities/quotation/templates/rowPreview.html?raw'
 import rowPriceHtml from '@entities/quotation/templates/rowPrice.html?raw'
 import rowQtyHtml from '@entities/quotation/templates/rowQty.html?raw'
-import type { RowBlock } from '@back/entities/quotation/schemas'
+import type { RowBlock } from '@back/entities/quotation/schema'
 import { textSlice } from '@shared/lib/froala/textSlice'
 import { generateId } from '@root/shared/lib/nanoid'
 import { dispatch, getState } from '@shared/lib/redux'

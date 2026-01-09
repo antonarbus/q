@@ -7,7 +7,7 @@ import type { NextFunction, Request, Response } from 'express'
 import {
   quotationsTable,
   type SelectQuotation,
-} from '@back/entities/quotation/quotationsTableSchema'
+} from '@back/entities/quotation/db/quotationsTableSchema'
 import { db } from '@back/shared/lib/drizzle/db'
 import { and, eq } from 'drizzle-orm'
 import type { ParamsDictionary } from 'express-serve-static-core'

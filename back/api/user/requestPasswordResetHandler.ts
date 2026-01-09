@@ -1,7 +1,7 @@
 import {
   usersTable,
   type SelectUser,
-} from '@back/entities/user/usersTableSchema'
+} from '@back/entities/user/db/usersTableSchema'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { sendEmail } from '@back/shared/lib/mailersend'
 import { generateId } from '@root/shared/lib/nanoid'

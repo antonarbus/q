@@ -16,8 +16,8 @@ import {
 import {
   quotationsTable,
   type SelectQuotation,
-} from '@back/entities/quotation/quotationsTableSchema'
-import type { Quotation } from '@back/entities/quotation/schemas'
+} from '@back/entities/quotation/db/quotationsTableSchema'
+import type { Quotation } from '@back/entities/quotation/schema'
 import { createEmptyQuotation } from '@back/entities/quotation/createEmptyQuotation'
 import { getQuotationPermissionLevel } from '@back/entities/quotation/getQuotationPermissionLevel'
 import { getShouldTrace } from '@back/shared/headers/no-trace/getShouldTrace'

@@ -1,7 +1,7 @@
 import {
   filesTable,
   type SelectFile,
-} from '@back/entities/file/filesTableSchema'
+} from '@back/entities/file/db/filesTableSchema'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user/getUserFromAccessTokenOrThrowUnauthorized'
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'

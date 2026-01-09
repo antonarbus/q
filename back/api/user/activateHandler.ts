@@ -6,7 +6,7 @@ import {
 import {
   usersTable,
   type SelectUser,
-} from '@back/entities/user/usersTableSchema'
+} from '@back/entities/user/db/usersTableSchema'
 import { db } from '@back/shared/lib/drizzle/db'
 import { and, eq } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'

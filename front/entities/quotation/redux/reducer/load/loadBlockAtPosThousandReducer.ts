@@ -1,6 +1,6 @@
 import { BOOKMARK_POS_AT_BLOCKS } from '@entities/quotation/const/bookmarkPosAtBlocks'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { BlockItem, Quotation } from '@back/entities/quotation/schemas'
+import type { BlockItem, Quotation } from '@back/entities/quotation/schema'
 
 type Payload = {
   block: BlockItem

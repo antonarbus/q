@@ -3,8 +3,8 @@
  * Drizzle Kit requires a single entry point that exports all database table schemas so it can:
  * Generate migration, push schema changes
  */
-export { bookmarksTable } from '@back/entities/bookmark/bookmarksTableSchema'
-export { filesTable } from '@back/entities/file/filesTableSchema'
-export { quotationsTable } from '@back/entities/quotation/quotationsTableSchema'
-export { usersTable } from '@back/entities/user/usersTableSchema'
-export { visitorsTable } from '@back/entities/visitor/visitorsTableSchema'
+export { bookmarksTable } from '@back/entities/bookmark/db/bookmarksTableSchema'
+export { filesTable } from '@back/entities/file/db/filesTableSchema'
+export { quotationsTable } from '@back/entities/quotation/db/quotationsTableSchema'
+export { usersTable } from '@back/entities/user/db/usersTableSchema'
+export { visitorsTable } from '@back/entities/visitor/db/visitorsTableSchema'

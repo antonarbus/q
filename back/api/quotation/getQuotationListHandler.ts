@@ -7,7 +7,7 @@ import { eq } from 'drizzle-orm'
 import {
   type SelectQuotation,
   quotationsTable,
-} from '@back/entities/quotation/quotationsTableSchema'
+} from '@back/entities/quotation/db/quotationsTableSchema'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
 import {

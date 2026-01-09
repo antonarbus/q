@@ -1,7 +1,7 @@
 import { copySlice } from '@entities/copy/copySlice'
 import textBlockContentHtml from '@entities/quotation/templates/textBlockContent.html?raw' // assets can be imported as strings using the ?raw suffix
 import textBlockPreviewHtml from '@entities/quotation/templates/textBlockPreview.html?raw'
-import type { TextBlock } from '@back/entities/quotation/schemas'
+import type { TextBlock } from '@back/entities/quotation/schema'
 import { textSlice } from '@shared/lib/froala/textSlice'
 import { generateId } from '@root/shared/lib/nanoid'
 import { dispatch, getState } from '@shared/lib/redux'

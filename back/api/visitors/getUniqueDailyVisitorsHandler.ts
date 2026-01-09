@@ -2,7 +2,7 @@ import { getUserFromAccessTokenOrNull } from '@back/entities/user/getUserFromAcc
 import {
   type SelectVisitors,
   visitorsTable,
-} from '@back/entities/visitor/visitorsTableSchema'
+} from '@back/entities/visitor/db/visitorsTableSchema'
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'

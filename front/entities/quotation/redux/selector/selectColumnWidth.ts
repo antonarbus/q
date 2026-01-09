@@ -1,4 +1,4 @@
-import type { BoqColumnKey } from '@back/entities/quotation/schemas'
+import type { BoqColumnKey } from '@back/entities/quotation/schema'
 import type { RootState } from '@shared/lib/redux'
 import { getBoqBlockFromStore } from '../getter/getBoqBlockFromStore'
 

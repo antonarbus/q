@@ -4,7 +4,7 @@ import type { NextFunction, Request, Response } from 'express'
 import {
   usersTable,
   type SelectUser,
-} from '@back/entities/user/usersTableSchema'
+} from '@back/entities/user/db/usersTableSchema'
 import { db } from '@back/shared/lib/drizzle/db'
 import { and, eq } from 'drizzle-orm'
 import { HttpError } from '@back/shared/errors/HttpError'
