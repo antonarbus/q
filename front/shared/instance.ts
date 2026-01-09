@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/member-ordering */
 import type { QueryClientType } from '@app/queryClient'
-import type { NavItem } from '@entities/nav/type'
+import type { NavItem } from '@entity/nav/type'
 
 class Instance {
   #queryClientInstance: QueryClientType | null = null

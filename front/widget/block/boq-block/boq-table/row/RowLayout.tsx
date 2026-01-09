@@ -1,0 +1,35 @@
+import { useRow } from '@entity/quotation/provider/RowProvider'
+import { Box } from '@mui/material'
+import { cls } from '@shared/cls'
+import type { FocusEvent, JSX, ReactNode } from 'react'
+import { PasteRowTextOverlay } from './paste-here-row'
+
+type Props = {
+  children: ReactNode
+  onBlur: (e: FocusEvent<HTMLDivElement>) => void
+}
+
+export const RowLayout = (props: Props): JSX.Element => {
+  const row = useRow()
+
+  return (
+    <Box
+      className={cls.row}
+      id={row.item.id}
+      onBlur={(event) => {
+        props.onBlur(event)
+      }}
+      style={{
+        // https://stackoverflow.com/questions/8468066/child-inside-parent-with-min-height-100-not-inheriting-height
+        // background: 'red',
+        borderBottom: '1px solid #e8e8e8',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-end',
+        position: 'relative',
+      }}
+    >
+      <PasteRowTextOverlay>{props.children}</PasteRowTextOverlay>
+    </Box>
+  )
+}

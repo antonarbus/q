@@ -1,0 +1,74 @@
+import { useFroala } from '@entity/quotation/provider/FroalaProvider'
+import { Box } from '@mui/material'
+import { cls } from '@shared/cls'
+import { theme } from '@shared/theme'
+import type { ComponentRef, JSX, RefObject } from 'react'
+
+type Props = {
+  dropFilesTextRef: RefObject<ComponentRef<'div'> | null>
+}
+
+export const DropFilesOrImagesText = (props: Props): JSX.Element => {
+  const froala = useFroala()
+
+  return (
+    <Box
+      className={cls.dropFilesText}
+      ref={props.dropFilesTextRef}
+      style={{
+        position: 'absolute',
+        top: '2px',
+        right: '5px',
+        fontSize: '8px',
+        opacity: 0,
+        pointerEvents: 'none',
+        transition: 'opacity 0.3s ease-in-out 0.8s',
+        userSelect: 'none',
+        zIndex: 10,
+      }}
+    >
+      Drop{' '}
+      <span
+        onClick={(event) => {
+          if (froala.editorRef.current !== null) {
+            froala.editorRef.current.file.showInsertPopup()
+
+            froala.editorRef.current.popups.show(
+              'file.insert',
+              event.pageX,
+              event.pageY,
+            )
+          }
+        }}
+        style={{
+          cursor: 'pointer',
+          color: theme.colors.blue,
+          fontWeight: 400,
+        }}
+      >
+        files
+      </span>{' '}
+      or{' '}
+      <span
+        onClick={(event) => {
+          if (froala.editorRef.current !== null) {
+            froala.editorRef.current.image.showInsertPopup()
+
+            froala.editorRef.current.popups.show(
+              'image.insert',
+              event.pageX,
+              event.pageY,
+            )
+          }
+        }}
+        style={{
+          cursor: 'pointer',
+          color: theme.colors.blue,
+          fontWeight: 400,
+        }}
+      >
+        images
+      </span>
+    </Box>
+  )
+}

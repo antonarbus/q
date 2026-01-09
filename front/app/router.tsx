@@ -1,75 +1,75 @@
-import { RequireRoles } from '@features/auth/check-required-roles'
-import { AccessToken } from '@features/auth/get-access-token'
-import { Logout } from '@features/auth/log-out'
-import { LoadQuotation } from '@features/quotation/load-quotation'
-import { ActivationModal } from '@pages/auth-activation-modal'
-import { LoginModal } from '@pages/auth-login-modal'
-import { RegisterModal } from '@pages/auth-register-modal'
-import { RequestPasswordResetModal } from '@pages/auth-request-password-reset-modal'
-import { ResetPasswordModal } from '@pages/auth-reset-password-modal'
-import { BookmarkModal } from '@pages/bookmark-modal'
-import { ErrorPage } from '@pages/error-page'
-import { InfoModal } from '@pages/info-modal'
-import { SaveQuotationModal } from '@pages/save-quotation-modal'
-import { SettingsModal } from '@pages/settings-modal'
-import { ShareQuotationModal } from '@pages/share-quotation-modal'
-import { TestPage } from '@pages/test-page'
+import { RequireRoles } from '@feature/auth/check-required-roles'
+import { AccessToken } from '@feature/auth/get-access-token'
+import { Logout } from '@feature/auth/log-out'
+import { LoadQuotation } from '@feature/quotation/load-quotation'
+import { ActivationModal } from '@page/auth-activation-modal'
+import { LoginModal } from '@page/auth-login-modal'
+import { RegisterModal } from '@page/auth-register-modal'
+import { RequestPasswordResetModal } from '@page/auth-request-password-reset-modal'
+import { ResetPasswordModal } from '@page/auth-reset-password-modal'
+import { BookmarkModal } from '@page/bookmark-modal'
+import { ErrorPage } from '@page/error-page'
+import { InfoModal } from '@page/info-modal'
+import { SaveQuotationModal } from '@page/save-quotation-modal'
+import { SettingsModal } from '@page/settings-modal'
+import { ShareQuotationModal } from '@page/share-quotation-modal'
+import { TestPage } from '@page/test-page'
 import { LoadingDotsOverlay } from '@shared/component/loading-dots-overlay'
 import { Main } from '@shared/layout/Main'
 import { route } from '@shared/lib/react-router-dom/route'
 import { instantiateRouter } from '@shared/lib/react-router-dom/router'
-import { Copy } from '@widgets/copy'
-import { Footer } from '@widgets/footer'
-import { Nav } from '@widgets/nav'
+import { Copy } from '@widget/copy'
+import { Footer } from '@widget/footer'
+import { Nav } from '@widget/nav'
 import { lazy, Suspense } from 'react'
 import { createBrowserRouter, type RouteObject } from 'react-router-dom'
 import { Toaster } from 'sonner'
 import { OnInitLoad } from './OnInitLoad'
 
 const QuotationPageLazy = lazy(async () => {
-  const module = await import('@pages/quotation-page')
+  const module = await import('@page/quotation-page')
 
   return module
 })
 
 const QuotationListPageLazy = lazy(async () => {
-  const module = await import('@pages/quotation-list-page')
+  const module = await import('@page/quotation-list-page')
 
   return module
 })
 
 const BookmarkListPageLazy = lazy(async () => {
-  const module = await import('@pages/bookmark-list-page')
+  const module = await import('@page/bookmark-list-page')
 
   return module
 })
 
 const QuotationListAllPageLazy = lazy(async () => {
-  const module = await import('@pages/quotation-list-all-page')
+  const module = await import('@page/quotation-list-all-page')
 
   return module
 })
 
 const BookmarkListAllPageLazy = lazy(async () => {
-  const module = await import('@pages/bookmark-list-all-page')
+  const module = await import('@page/bookmark-list-all-page')
 
   return module
 })
 
 const UserListPageLazy = lazy(async () => {
-  const module = await import('@pages/user-list-page')
+  const module = await import('@page/user-list-page')
 
   return module
 })
 
 const VisitorListPageLazy = lazy(async () => {
-  const module = await import('@pages/visitor-list-page')
+  const module = await import('@page/visitor-list-page')
 
   return module
 })
 
 const FileListAllPageLazy = lazy(async () => {
-  const module = await import('@pages/file-list-all-page')
+  const module = await import('@page/file-list-all-page')
 
   return module
 })

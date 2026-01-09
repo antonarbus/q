@@ -1,0 +1,110 @@
+import { copySlice } from '@entity/copy/copySlice'
+import { useBlock } from '@entity/quotation/provider/BlockProvider'
+import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
+import { selectIsLastBlock } from '@entity/quotation/redux/selector/selectIsLastBlock'
+import { saveBlockHeightByIndex } from '@entity/quotation/util/saveBlockHeightByIndex'
+import { Tooltip } from '@mui/material'
+import { cls } from '@shared/cls'
+import { textSlice } from '@shared/lib/froala/textSlice'
+import { dispatch, getState, useSelector } from '@shared/lib/redux'
+import { theme } from '@shared/theme'
+import { fixElementDimensionStyle } from '@shared/util/fixElementDimensionStyle'
+import { getClosestPaperElementHtml } from '@shared/util/html-getter/getClosestPaperElementHtml'
+import type { JSX, MouseEvent } from 'react'
+import { TbCut } from 'react-icons/tb'
+
+export const CutBlockIcon = (): JSX.Element => {
+  const block = useBlock()
+  const isBlockAlone = useSelector(selectIsLastBlock)
+  const isCuttable = useSelector((state) => state.copy.isCuttable)
+  const disabled = isBlockAlone || isCuttable === false
+
+  return (
+    <Tooltip enterDelay={500} enterNextDelay={500} placement='left' title='Cut'>
+      <span className={cls.actionIconContainer}>
+        <TbCut
+          className={cls.actionIcon}
+          onClick={(event: MouseEvent): void => {
+            if (disabled === true) {
+              return
+            }
+
+            saveBlockHeightByIndex({ blockIndex: block.index })
+
+            const blockToCut = getState().quotation.blocks[block.index]
+
+            if (blockToCut === undefined) {
+              return
+            }
+
+            const clickedIconElement = event.target
+
+            if (clickedIconElement instanceof Element === false) {
+              return
+            }
+
+            const blockElement = clickedIconElement.closest(`.${cls.block}`)
+
+            if (blockElement instanceof Element === false) {
+              return
+            }
+
+            const paperElement = blockElement.querySelector(`.${cls.paper}`)
+
+            if (paperElement instanceof HTMLElement === false) {
+              return
+            }
+
+            // width of animated element is changed for unknown reason, can't explain the issue, so let's fix it for animation purpose
+            fixElementDimensionStyle({ element: paperElement })
+
+            const html = getClosestPaperElementHtml(event)
+
+            const persistedScrollX = window.scrollX
+            const persistedScrollY = window.scrollY
+
+            dispatch(textSlice.actions.setNotEditable())
+
+            // Restore scroll position after React renders
+            requestAnimationFrame(() => {
+              window.scrollTo(persistedScrollX, persistedScrollY)
+            })
+
+            const blockCloned = structuredClone(blockToCut)
+            blockCloned.preview = html
+
+            dispatch(copySlice.actions.addItem({ item: blockCloned }))
+
+            dispatch(
+              quotationSlice.actions.deleteBlockReducer({ id: blockToCut.id }),
+            )
+
+            dispatch(copySlice.actions.forbidAllActions())
+
+            const isCopyModalVisible = getState().copy.isVisible
+
+            if (isCopyModalVisible === false) {
+              dispatch(
+                copySlice.actions.showCopyModal({
+                  initCursorPos: { x: event.clientX, y: event.clientY },
+                }),
+              )
+            }
+
+            setTimeout(
+              () => {
+                dispatch(copySlice.actions.allowAllActions())
+              },
+              1000 * theme.block.animationDuration + 500,
+            )
+          }}
+          style={{
+            color: disabled === true ? '#acacac' : '#000',
+            cursor: disabled === true ? 'default' : 'pointer',
+          }}
+          tabIndex={-1}
+        />
+      </span>
+    </Tooltip>
+  )
+}
