@@ -29,7 +29,7 @@ describe('#migrateQuotationSchemaFromV1ToV2', () => {
     }
   })
 
-  test('Skips migration when document is not V1', async () => {
+  test('Skips migration when document version is not for migration', async () => {
     const mockQuotationV2 = await import('../fixture/mockQuotationV2.json')
 
     const result = migrateQuotationSchemaFromV1ToV2({
@@ -39,7 +39,7 @@ describe('#migrateQuotationSchemaFromV1ToV2', () => {
     expect(result.status).toBe('SKIPPED')
   })
 
-  test('Fails migration when V1 document has invalid structure', () => {
+  test('Fails migration when document has invalid structure', () => {
     const invalidQuotation = {}
 
     const result = migrateQuotationSchemaFromV1ToV2({
@@ -49,10 +49,11 @@ describe('#migrateQuotationSchemaFromV1ToV2', () => {
     expect(result.status).toBe('CORRUPTED')
   })
 
-  test('Returns error when migration has a bug and produces invalid V2 document', async () => {
+  test('Returns error when migration happened, but it has a bug and produces invalid document', async () => {
     const mockQuotationV1 = await import('../fixture/mockQuotationV1.json')
 
     // Mock the V2 schema validation to fail (simulating a migration bug)
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-type-assertion
     vi.spyOn(quotationSchema, 'safeParse').mockReturnValue({
       success: false,
       error: new z.ZodError([
@@ -63,7 +64,8 @@ describe('#migrateQuotationSchemaFromV1ToV2', () => {
           message: 'Required field missing after migration',
         },
       ]),
-    })
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any)
 
     const result = migrateQuotationSchemaFromV1ToV2({
       document: mockQuotationV1,
