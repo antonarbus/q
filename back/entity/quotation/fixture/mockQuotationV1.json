@@ -1,0 +1,276 @@
+{
+  "id": "ppag836y",
+  "email": "unknown@gmail.com",
+  "name": "default template",
+  "category": "",
+  "desc": "",
+  "createdAt": "2026-01-10 19:44:20.278+00",
+  "updatedAt": "2026-01-10 19:44:20.278+00",
+  "openedAt": "2026-01-10 19:44:35.942+00",
+  "viewedAt": null,
+  "access": {
+    "level": "nobody",
+    "userList": []
+  },
+  "info": "",
+  "blocks": [
+    {
+      "id": "vtPbUBCz",
+      "email": "unknown@gmail.com",
+      "name": "",
+      "category": "",
+      "desc": "",
+      "createdAt": "2026-01-10T19:43:31.780Z",
+      "updatedAt": "2026-01-10T19:43:31.780Z",
+      "info": "",
+      "preview": "",
+      "width": 600,
+      "height": 0,
+      "isFroala": true,
+      "type": "text",
+      "text": {
+        "html": "<p style=\"text-align: center; font-size: 24px\">Commercial quotation</p>\n<p>\n  <br />\n</p>\n<p style=\"text-align: center\">\n  <span>Here goes any technical and commercial information.</span>\n</p>\n<p>\n  <br />\n</p>\n<p style=\"text-align: center\">\n  <span>You may...</span>\n</p>\n<p>\n  <br />\n</p>\n<ul>\n  <li>\n    write, select and <span style=\"color: rgb(226, 80, 65)\">format</span>\n    text\n  </li>\n  <li>\n    insert tables, drop\n    <a href=\"/911.pdf\" rel=\"noopener noreferrer\" target=\"_blank\">files</a>,\n    images, attach videos\n  </li>\n  <li>copy, cut, delete, insert, sort, resize blocks and rows</li>\n  <li>calculate prices</li>\n  <li>store and share quotation as link or .pdf file</li>\n  <li>review, track and update quotation</li>\n  <li>save and search through bookmarked portfolio</li>\n  <li>copy and paste items from other quotations</li>\n</ul>\n",
+        "value": null
+      }
+    },
+    {
+      "id": "k92c9s9W",
+      "email": "unknown@gmail.com",
+      "name": "",
+      "category": "",
+      "desc": "",
+      "createdAt": "2026-01-10T19:43:31.780Z",
+      "updatedAt": "2026-01-10T19:43:31.780Z",
+      "info": "",
+      "preview": "",
+      "width": 600,
+      "height": 0,
+      "isFroala": true,
+      "type": "boq",
+      "boq": {
+        "header": {
+          "title": {
+            "html": "<p>\n  <strong>Title 1</strong>\n</p>\n",
+            "value": 0
+          },
+          "subtotalText": {
+            "html": "<div>Subtotal</div>\n",
+            "value": 0
+          },
+          "subTotalPrice": {
+            "html": "<p>\n  <strong>140</strong>\n</p>\n",
+            "value": 140
+          }
+        },
+        "column": {
+          "number": {
+            "html": "",
+            "width": 30
+          },
+          "description": {
+            "html": "<p>\n  <strong>Description</strong>\n</p>\n",
+            "width": 240
+          },
+          "itemPrice": {
+            "html": "<p>\n  <strong>Item price</strong>\n</p>\n",
+            "width": 100
+          },
+          "qty": {
+            "html": "<p>\n  <strong>Qty</strong>\n</p>\n",
+            "width": 100
+          },
+          "price": {
+            "html": "<p>\n  <strong>Price</strong>\n</p>\n",
+            "width": 100
+          }
+        },
+        "rows": [
+          {
+            "id": "3fqrFRVP",
+            "email": "unknown@gmail.com",
+            "name": "",
+            "category": "",
+            "desc": "",
+            "createdAt": "2026-01-10T19:43:31.780Z",
+            "updatedAt": "2026-01-10T19:43:31.780Z",
+            "info": "",
+            "preview": "",
+            "width": 0,
+            "height": 0,
+            "isFroala": true,
+            "type": "row",
+            "description": {
+              "html": "<p>item 1</p>\n",
+              "value": 0,
+              "pin": {
+                "isPinned": false,
+                "isShown": false
+              }
+            },
+            "itemPrice": {
+              "html": "<p>10 <span style=\"font-size: 16px; color: #41a85f\">$</span></p>\n",
+              "value": 10,
+              "pin": {
+                "isPinned": false,
+                "isShown": false
+              }
+            },
+            "qty": {
+              "html": "<p>1 <span style=\"font-size: 12px; color: #3d8eb9\">pcs</span></p>\n",
+              "value": 1,
+              "pin": {
+                "isPinned": true,
+                "isShown": false
+              }
+            },
+            "price": {
+              "html": "<p>10 <span style=\"font-size: 16px; color: #41a85f\">$</span></p>\n",
+              "value": 10,
+              "pin": {
+                "isPinned": false,
+                "isShown": false
+              }
+            }
+          },
+          {
+            "id": "bkdcx2PE",
+            "email": "unknown@gmail.com",
+            "name": "",
+            "category": "",
+            "desc": "",
+            "createdAt": "2026-01-10T19:43:31.780Z",
+            "updatedAt": "2026-01-10T19:43:31.780Z",
+            "info": "",
+            "preview": "",
+            "width": 0,
+            "height": 0,
+            "isFroala": true,
+            "type": "row",
+            "description": {
+              "html": "<p>item 2</p>\n",
+              "value": 0,
+              "pin": {
+                "isPinned": false,
+                "isShown": false
+              }
+            },
+            "itemPrice": {
+              "html": "<p>20 <span style=\"font-size: 16px; color: #41a85f\">$</span></p>\n",
+              "value": 20,
+              "pin": {
+                "isPinned": false,
+                "isShown": false
+              }
+            },
+            "qty": {
+              "html": "<p>2 <span style=\"font-size: 12px; color: #3d8eb9\">pcs</span></p>\n",
+              "value": 2,
+              "pin": {
+                "isPinned": true,
+                "isShown": false
+              }
+            },
+            "price": {
+              "html": "<p>40 <span style=\"font-size: 16px; color: #41a85f\">$</span></p>\n",
+              "value": 40,
+              "pin": {
+                "isPinned": false,
+                "isShown": false
+              }
+            }
+          },
+          {
+            "id": "anPKCJZN",
+            "email": "unknown@gmail.com",
+            "name": "",
+            "category": "",
+            "desc": "",
+            "createdAt": "2026-01-10T19:43:31.780Z",
+            "updatedAt": "2026-01-10T19:43:31.780Z",
+            "info": "",
+            "preview": "",
+            "width": 0,
+            "height": 0,
+            "isFroala": true,
+            "type": "row",
+            "description": {
+              "html": "<p>item 3</p>\n",
+              "value": 0,
+              "pin": {
+                "isPinned": false,
+                "isShown": false
+              }
+            },
+            "itemPrice": {
+              "html": "<p>30 <span style=\"font-size: 16px; color: #41a85f\">$</span></p>\n",
+              "value": 30,
+              "pin": {
+                "isPinned": false,
+                "isShown": false
+              }
+            },
+            "qty": {
+              "html": "<p>3 <span style=\"font-size: 12px; color: #3d8eb9\">pcs</span></p>\n",
+              "value": 3,
+              "pin": {
+                "isPinned": true,
+                "isShown": false
+              }
+            },
+            "price": {
+              "html": "<p>90 <span style=\"font-size: 16px; color: #41a85f\">$</span></p>\n",
+              "value": 90,
+              "pin": {
+                "isPinned": false,
+                "isShown": false
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "UaCU2nhz",
+      "email": "unknown@gmail.com",
+      "name": "",
+      "category": "",
+      "desc": "",
+      "createdAt": "2026-01-10T19:43:31.780Z",
+      "updatedAt": "2026-01-10T19:43:31.780Z",
+      "info": "",
+      "preview": "",
+      "width": 150,
+      "height": 0,
+      "isFroala": true,
+      "type": "price",
+      "title": {
+        "html": "<p style=\"text-align: center\">\n  <strong>Total price</strong>\n</p>\n",
+        "value": null
+      },
+      "price": {
+        "html": "<p style=\"text-align: center\">140 <span>USD</span></p>\n",
+        "value": 140
+      }
+    },
+    {
+      "id": "X9PfdH5X",
+      "email": "unknown@gmail.com",
+      "name": "",
+      "category": "",
+      "desc": "",
+      "createdAt": "2026-01-10T19:43:31.780Z",
+      "updatedAt": "2026-01-10T19:43:31.780Z",
+      "info": "",
+      "preview": "",
+      "width": 600,
+      "height": 0,
+      "isFroala": true,
+      "type": "text",
+      "text": {
+        "html": "<p style=\"font-size: 24px; text-align: center\">Terms &amp; Conditions</p>\n<p>\n  <br />\n</p>\n<p>\n  <strong>Parties.</strong>\n  The \"Seller\" refers to [Seller Name], and the \"Buyer\" refers to [Buyer Name].\n</p>\n<p>\n  <br />\n</p>\n<p>\n  <strong>Validity.</strong>\n  This quotation is valid for 14 days from the date of issuance.\n</p>\n<p>\n  <br />\n</p>\n<p>\n  <strong>Payment.</strong>\n  Payment is due within 30 days of the invoice date. Late payments may incur\n  penalties.\n</p>\n<p>\n  <br />\n</p>\n<p>\n  <strong>Delivery.</strong>\n  Delivery times are estimated at 2-4 weeks from order confirmation.\n</p>\n<p>\n  <br />\n</p>\n<p>\n  <strong>Cancellation.</strong>\n  Orders may be canceled within 48 hours of placement without penalty.\n  Cancellations after this period may incur fees.\n</p>\n<p>\n  <br />\n</p>\n<p>\n  <strong>Ownership.</strong>\n  Ownership of goods remains with Seller until full payment is received.\n</p>\n<p>\n  <br />\n</p>\n<p>\n  <strong>Warranty.</strong>\n  Products are covered by a 12 months warranty against defects in materials and\n  workmanship.\n</p>\n<p>\n  <br />\n</p>\n<p>\n  <strong>Returns.</strong>\n  Returns or exchanges are accepted within 14 days of receipt, subject to terms\n  outlined in our returns policy.\n</p>\n<p>\n  <br />\n</p>\n<p>\n  <strong>Variations.</strong>\n  Any changes to the quotation must be agreed upon in writing.\n</p>\n<p>\n  <br />\n</p>\n<p>\n  <strong>Liability.</strong>\n  Seller is not liable for damages occurring during transportation.\n</p>\n<p>\n  <br />\n</p>\n<p>\n  <strong>Governing Law.</strong>\n  This quotation shall be governed by and construed in accordance with the laws\n  of Seller jurisdiction.\n</p>\n<p>\n  <br />\n</p>\n<p>\n  <strong>Confidentiality.</strong>\n  Both parties agree to keep all information exchanged in relation to this\n  quotation confidential.\n</p>\n<p>\n  <br />\n</p>\n<p>\n  <strong>Intellectual Property.</strong>\n  All intellectual property rights related to the quotation and any associated\n  materials remain with Seller.\n</p>\n<p>\n  <br />\n</p>\n<p>\n  <strong>Force Majeure.</strong>\n  Neither party shall be liable for any failure to perform their obligations\n  under this quotation due to unforeseen circumstances beyond their control.\n</p>\n<p>\n  <br />\n</p>\n<p>\n  <strong>Indemnity.</strong>\n  The Buyer agrees to indemnify and hold Seller harmless from any claims arising\n  from the use of the products or services provided under this quotation.\n</p>\n<p>\n  <br />\n</p>\n<p>\n  <strong>Notices.</strong>\n  Any notices or communications regarding this quotation shall be sent to the\n  addresses provided by each party.\n</p>\n<p>\n  <br />\n</p>\n",
+        "value": null
+      }
+    }
+  ],
+  "permissionLevel": "OWNER"
+}

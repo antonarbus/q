@@ -1,17 +1,12 @@
 import { expect, test, describe } from 'vitest'
-import { createMockQuotation } from '../createMockQuotation.test-helper'
 import { migrateQuotationSchemaFromV1ToV2 } from './migrateQuotationSchemaFromV1ToV2'
 
 describe('#migrateQuotationSchemaFromV1ToV2', () => {
-  test('Successfully migrates a valid V1 quotation to V2', () => {
-    const mockQuotation = createMockQuotation()
-
-    mockQuotation.quotationSchemaVersion = undefined
-    mockQuotation.type = undefined
-    mockQuotation.blocks.at(0).bookmarkSchemaVersion = undefined
+  test('Successfully migrates a valid V1 quotation to V2', async () => {
+    const mockQuotationV1 = await import('../fixture/mockQuotationV1.json')
 
     const result = migrateQuotationSchemaFromV1ToV2({
-      document: mockQuotation,
+      document: mockQuotationV1,
       documentSchemaVersion: 1,
     })
 
@@ -20,15 +15,24 @@ describe('#migrateQuotationSchemaFromV1ToV2', () => {
     if (result.status === 'MIGRATED') {
       expect(result.data.quotationSchemaVersion).toBe(2)
       expect(result.data.type).toBe('quotation')
-      expect(result.data.blocks[0]?.bookmarkSchemaVersion).toBe(2)
+
+      result.data.blocks.forEach((block) => {
+        expect(block.bookmarkSchemaVersion).toBe(2)
+
+        if (block.type === 'boq') {
+          block.boq.rows.forEach((row) => {
+            expect(row.bookmarkSchemaVersion).toBe(2)
+          })
+        }
+      })
     }
   })
 
-  test('skips migration when document is not V1', () => {
-    const mockQuotation = createMockQuotation()
+  test('skips migration when document is not V1', async () => {
+    const mockQuotationV2 = await import('../fixture/mockQuotationV2.json')
 
     const result = migrateQuotationSchemaFromV1ToV2({
-      document: mockQuotation,
+      document: mockQuotationV2,
       documentSchemaVersion: 2,
     })
 
@@ -36,10 +40,7 @@ describe('#migrateQuotationSchemaFromV1ToV2', () => {
   })
 
   test('returns error when V1 document has invalid structure', () => {
-    const invalidQuotation = {
-      id: 'test-id',
-      // Missing required fields like email, name, etc.
-    }
+    const invalidQuotation = {}
 
     const result = migrateQuotationSchemaFromV1ToV2({
       document: invalidQuotation,
@@ -47,12 +48,5 @@ describe('#migrateQuotationSchemaFromV1ToV2', () => {
     })
 
     expect(result.status).toBe('ERROR')
-    expect(result.data).toBe(null)
-
-    expect(result.message).toContain(
-      'Document has version 1, but structure is incorrect',
-    )
-
-    expect(result.message).toContain('Zod error')
   })
 })

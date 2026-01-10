@@ -66,6 +66,12 @@ export const migrateQuotationSchemaFromV1ToV2 = (props: Props): Res => {
 
   newDocument.blocks.forEach((block) => {
     block.bookmarkSchemaVersion = 2
+
+    if (block.type === 'boq') {
+      block.boq.rows.forEach((row) => {
+        row.bookmarkSchemaVersion = 2
+      })
+    }
   })
 
   // ======== ↑ MIGRATION ↑ ========

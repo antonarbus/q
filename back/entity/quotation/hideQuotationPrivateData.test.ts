@@ -1,10 +1,10 @@
 import { expect, test, describe } from 'vitest'
 import { hideQuotationPrivateData } from './hideQuotationPrivateData'
-import { createMockQuotation } from './createMockQuotation.test-helper'
+import { createMockQuotationOfLatestVersion } from './fixture/createMockQuotationOfLatestVersion'
 
 describe('#hideQuotationPrivateData', () => {
   test('ensure original quotation has been mutated and private data got removed', () => {
-    const quotation = createMockQuotation()
+    const quotation = createMockQuotationOfLatestVersion()
     expect(quotation.name).toBe('quotation name')
 
     hideQuotationPrivateData({ quotation })
