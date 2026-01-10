@@ -2,12 +2,11 @@ import { expect, test, describe } from 'vitest'
 import { migrateQuotationSchemaFromV1ToV2 } from './migrateQuotationSchemaFromV1ToV2'
 
 describe('#migrateQuotationSchemaFromV1ToV2', () => {
-  test('Successfully migrates a valid V1 quotation to V2', async () => {
+  test('Migrates a valid V1 quotation to V2', async () => {
     const mockQuotationV1 = await import('../fixture/mockQuotationV1.json')
 
     const result = migrateQuotationSchemaFromV1ToV2({
       document: mockQuotationV1,
-      documentSchemaVersion: 1,
     })
 
     expect(result.status).toBe('MIGRATED')
@@ -28,25 +27,23 @@ describe('#migrateQuotationSchemaFromV1ToV2', () => {
     }
   })
 
-  test('skips migration when document is not V1', async () => {
+  test('Skips migration when document is not V1', async () => {
     const mockQuotationV2 = await import('../fixture/mockQuotationV2.json')
 
     const result = migrateQuotationSchemaFromV1ToV2({
       document: mockQuotationV2,
-      documentSchemaVersion: 2,
     })
 
     expect(result.status).toBe('SKIPPED')
   })
 
-  test('returns error when V1 document has invalid structure', () => {
+  test('Returns error with CORRUPTED status when V1 document has invalid structure', () => {
     const invalidQuotation = {}
 
     const result = migrateQuotationSchemaFromV1ToV2({
       document: invalidQuotation,
-      documentSchemaVersion: 1,
     })
 
-    expect(result.status).toBe('ERROR')
+    expect(result.status).toBe('CORRUPTED')
   })
 })

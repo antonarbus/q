@@ -10,7 +10,6 @@ const MIGRATE_TO = 2
 
 type Props = {
   document: Record<string, unknown>
-  documentSchemaVersion: number
 }
 
 type Res =
@@ -25,14 +24,22 @@ type Res =
       message: string
     }
   | {
+      status: 'CORRUPTED'
+      data: null
+      message: string
+    }
+  | {
       status: 'ERROR'
       data: null
       message: string
     }
 
 export const migrateQuotationSchemaFromV1ToV2 = (props: Props): Res => {
-  // Run migration only for specific version
-  if (props.documentSchemaVersion !== MIGRATE_FROM) {
+  const shouldSkipMigrationForUnsupportedSchemaVersion =
+    'quotationSchemaVersion' in props.document &&
+    props.document.quotationSchemaVersion !== MIGRATE_FROM
+
+  if (shouldSkipMigrationForUnsupportedSchemaVersion === true) {
     return {
       status: 'SKIPPED',
       data: props.document,
@@ -48,7 +55,7 @@ export const migrateQuotationSchemaFromV1ToV2 = (props: Props): Res => {
     const treeifiedError = z.treeifyError(oldDocumentValidationResult.error)
 
     return {
-      status: 'ERROR',
+      status: 'CORRUPTED',
       data: null,
       message: `Document has version ${MIGRATE_FROM}, but structure is incorrect. Will not apply migration. Zod error: ${JSON.stringify(treeifiedError)}`,
     }

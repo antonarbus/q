@@ -52,11 +52,7 @@ export const validateQuotation = (props: Props): Res => {
 
   // Go though the list of migration steps and update document structure
   for (const migrate of migrateQuotationSchemaList) {
-    const migrationResult = migrate({
-      document: currentDocument,
-      documentSchemaVersion: currentVersion,
-    })
-
+    const migrationResult = migrate({ document: currentDocument })
     messageList.push(migrationResult.message)
 
     if (migrationResult.status === 'ERROR') {
