@@ -18,7 +18,7 @@
     "install-prod": "bun install --frozen-lockfile --production",
     "preview-front": "vite preview",
     "preview": "NODE_ENV=production ENVIRONMENT=local bun back/index.ts & sleep 5 && open http://localhost:8080",
-    "unit-test": "NODE_ENV=test bun --bun vitest run",
+    "unit-test": "NODE_ENV=test vitest run",
     "unit-test-ui": "NODE_ENV=test vitest --ui",
     "e2e-test": "bunx playwright install && bunx playwright test",
     "e2e-test-ui": "bunx playwright install && bunx playwright test --ui",
