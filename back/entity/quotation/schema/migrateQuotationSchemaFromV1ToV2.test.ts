@@ -1,5 +1,7 @@
-import { expect, test, describe } from 'vitest'
+import { expect, test, describe, vi } from 'vitest'
 import { migrateQuotationSchemaFromV1ToV2 } from './migrateQuotationSchemaFromV1ToV2'
+import { z } from 'zod'
+import { quotationSchema } from './quotationSchemaV2'
 
 describe('#migrateQuotationSchemaFromV1ToV2', () => {
   test('Migrates a valid V1 quotation to V2', async () => {
@@ -37,7 +39,7 @@ describe('#migrateQuotationSchemaFromV1ToV2', () => {
     expect(result.status).toBe('SKIPPED')
   })
 
-  test('Returns error with CORRUPTED status when V1 document has invalid structure', () => {
+  test('Fails migration when V1 document has invalid structure', () => {
     const invalidQuotation = {}
 
     const result = migrateQuotationSchemaFromV1ToV2({
@@ -45,5 +47,29 @@ describe('#migrateQuotationSchemaFromV1ToV2', () => {
     })
 
     expect(result.status).toBe('CORRUPTED')
+  })
+
+  test('Returns error when migration has a bug and produces invalid V2 document', async () => {
+    const mockQuotationV1 = await import('../fixture/mockQuotationV1.json')
+
+    // Mock the V2 schema validation to fail (simulating a migration bug)
+    vi.spyOn(quotationSchema, 'safeParse').mockReturnValue({
+      success: false,
+      error: new z.ZodError([
+        {
+          code: 'invalid_type',
+          expected: 'string',
+          path: ['someRequiredField'],
+          message: 'Required field missing after migration',
+        },
+      ]),
+    })
+
+    const result = migrateQuotationSchemaFromV1ToV2({
+      document: mockQuotationV1,
+    })
+
+    expect(result.status).toBe('ERROR')
+    expect(result.message).toContain('Failed to migrate from V1 to V2')
   })
 })
