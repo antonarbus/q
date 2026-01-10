@@ -42,3 +42,19 @@ resource "google_cloud_run_domain_mapping" "app" {
     route_name = google_cloud_run_v2_service.app.name
   }
 }
+
+# WWW subdomain mapping (production only)
+# Maps www.sendmequotation.today to the production Cloud Run service
+resource "google_cloud_run_domain_mapping" "app_www" {
+  count    = var.environment == "prod" ? 1 : 0
+  name     = "www.${var.domain}"
+  location = var.region
+
+  metadata {
+    namespace = var.project_id
+  }
+
+  spec {
+    route_name = google_cloud_run_v2_service.app.name
+  }
+}
