@@ -29,7 +29,7 @@ type Res =
       message: string
     }
   | {
-      status: 'ERROR'
+      status: 'MIGRATION_BUG'
       data: null
       message: string
     }
@@ -89,9 +89,9 @@ export const migrateQuotationSchemaFromV1ToV2 = (props: Props): Res => {
     const treeifiedError = z.treeifyError(newDocumentValidationResult.error)
 
     return {
-      status: 'ERROR',
+      status: 'MIGRATION_BUG',
       data: null,
-      message: `Failed to migrate from V${MIGRATE_FROM} to V${MIGRATE_TO}. Document has version ${MIGRATE_FROM}, but structure is incorrect. Will not apply migration. Zod error: ${JSON.stringify(treeifiedError)}`,
+      message: `Migration logic problem. Failed to migrate from V${MIGRATE_FROM} to V${MIGRATE_TO}. Document has version ${MIGRATE_FROM}, but structure is incorrect. Will not apply migration. Zod error: ${JSON.stringify(treeifiedError)}`,
     }
   }
 

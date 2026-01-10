@@ -18,7 +18,12 @@ type Res =
       message: string
     }
   | {
-      status: 'ERROR'
+      status: 'MIGRATION_BUG'
+      data: null
+      message: string
+    }
+  | {
+      status: 'CORRUPTED'
       data: null
       message: string
     }
@@ -28,6 +33,8 @@ type Res =
  * If schema version is outdated, document structure is progressively updated and validated
  */
 export const validateQuotation = (props: Props): Res => {
+  const messageList: string[] = []
+
   // Fast path: Try validating as latest version first
   const latestVersionValidation = quotationSchema.safeParse(props.document)
 
@@ -43,32 +50,34 @@ export const validateQuotation = (props: Props): Res => {
   // Slow path: Document needs migration
   let currentDocument: Record<string, unknown> = props.document
 
-  let currentVersion =
-    typeof props.document.schemaVersion === 'number' // In initial version "schemaVersion" field did not exist
-      ? props.document.schemaVersion
-      : 1
-
-  const messageList: string[] = []
-
   // Go though the list of migration steps and update document structure
   for (const migrate of migrateQuotationSchemaList) {
     const migrationResult = migrate({ document: currentDocument })
-    messageList.push(migrationResult.message)
 
-    if (migrationResult.status === 'ERROR') {
+    if (migrationResult.status === 'MIGRATION_BUG') {
+      messageList.push('Migration logic problem')
+      messageList.push(migrationResult.message)
+
       return {
-        status: 'ERROR',
+        status: 'MIGRATION_BUG',
         data: null,
         message: messageList.join(' | '),
       }
     }
 
-    currentDocument = migrationResult.data
+    if (migrationResult.status === 'CORRUPTED') {
+      messageList.push('Corrupted document')
+      messageList.push(migrationResult.message)
 
-    currentVersion =
-      typeof currentDocument.schemaVersion === 'number'
-        ? currentDocument.schemaVersion
-        : currentVersion
+      return {
+        status: 'CORRUPTED',
+        data: null,
+        message: messageList.join(' | '),
+      }
+    }
+
+    // Assign migrated document to the currentDocument and go to next migration
+    currentDocument = migrationResult.data
   }
 
   // Validate as the latest version after migration
@@ -77,15 +86,15 @@ export const validateQuotation = (props: Props): Res => {
 
   if (migratedDocumentValidationResult.success !== true) {
     console.error(
-      `Document has the latest version ${currentVersion} schema, but validation failed 🤷‍♂️`,
+      `Document has the latest schema version, but validation failed 🤷‍♂️`,
     )
 
     messageList.push(
-      `Document has the latest version ${currentVersion} schema, but validation failed 🤷‍♂️`,
+      `Document has the latest schema version, but validation failed 🤷‍♂️`,
     )
 
     return {
-      status: 'ERROR',
+      status: 'MIGRATION_BUG',
       data: null,
       message: messageList.join(' | '),
     }

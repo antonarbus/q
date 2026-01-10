@@ -43,7 +43,8 @@ export type ErrorResBody = {
     | 'QUOTATION_NOT_FOUND'
     | 'FILE_NOT_FOUND_IN_BUCKET'
     | 'INVALID_JSON'
-    | 'INVALID_STRUCTURE'
+    | 'MIGRATION_BUG'
+    | 'CORRUPTED'
 }
 
 type RouterHandler = (
@@ -186,9 +187,17 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
 
   messageList.push(quotationValidationResult.message)
 
-  if (quotationValidationResult.status === 'ERROR') {
+  if (quotationValidationResult.status === 'CORRUPTED') {
     throw new HttpError<ErrorResBody['errorCode']>({
-      errorCode: 'INVALID_STRUCTURE',
+      errorCode: 'CORRUPTED',
+      statusCode: httpStatusCode.badRequest400,
+      message: messageList.join(' | '),
+    })
+  }
+
+  if (quotationValidationResult.status === 'MIGRATION_BUG') {
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'MIGRATION_BUG',
       statusCode: httpStatusCode.badRequest400,
       message: messageList.join(' | '),
     })

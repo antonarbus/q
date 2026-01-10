@@ -71,7 +71,7 @@ describe('#migrateQuotationSchemaFromV1ToV2', () => {
       document: mockQuotationV1,
     })
 
-    expect(result.status).toBe('ERROR')
+    expect(result.status).toBe('MIGRATION_BUG')
     expect(result.message).toContain('Failed to migrate from V1 to V2')
   })
 })
