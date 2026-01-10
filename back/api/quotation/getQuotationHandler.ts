@@ -42,9 +42,7 @@ export type ErrorResBody = {
     | ErrorCode
     | 'QUOTATION_NOT_FOUND'
     | 'FILE_NOT_FOUND_IN_BUCKET'
-    | 'INVALID_JSON'
-    | 'MIGRATION_BUG'
-    | 'CORRUPTED'
+    | 'VALIDATION_ERROR'
 }
 
 type RouterHandler = (
@@ -171,33 +169,15 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
   const quotationJson = fileBuffer.toString()
   const quotationJsonParsed = jsonParseOrNull<Quotation>(quotationJson)
 
-  if (quotationJsonParsed === null) {
-    messageList.push('Invalid JSON')
-
-    throw new HttpError<ErrorResBody['errorCode']>({
-      errorCode: 'INVALID_JSON',
-      statusCode: httpStatusCode.notFound404,
-      message: messageList.join(' | '),
-    })
-  }
-
   const quotationValidationResult = validateQuotation({
-    document: quotationJsonParsed,
+    document: quotationJsonParsed ?? {},
   })
 
   messageList.push(quotationValidationResult.message)
 
-  if (quotationValidationResult.status === 'CORRUPTED') {
+  if (quotationValidationResult.status === 'ERROR') {
     throw new HttpError<ErrorResBody['errorCode']>({
-      errorCode: 'CORRUPTED',
-      statusCode: httpStatusCode.badRequest400,
-      message: messageList.join(' | '),
-    })
-  }
-
-  if (quotationValidationResult.status === 'MIGRATION_BUG') {
-    throw new HttpError<ErrorResBody['errorCode']>({
-      errorCode: 'MIGRATION_BUG',
+      errorCode: 'VALIDATION_ERROR',
       statusCode: httpStatusCode.badRequest400,
       message: messageList.join(' | '),
     })

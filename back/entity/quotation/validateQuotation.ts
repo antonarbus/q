@@ -18,18 +18,13 @@ type Res =
       message: string
     }
   | {
-      status: 'MIGRATION_BUG'
-      data: null
-      message: string
-    }
-  | {
-      status: 'CORRUPTED'
+      status: 'ERROR'
       data: null
       message: string
     }
 
 /**
- * If document from the bucket has the latest schema it is just validated
+ * If document from the bucket has the latest schema it is validated
  * If schema version is outdated, document structure is progressively updated and validated
  */
 export const validateQuotation = (props: Props): Res => {
@@ -54,30 +49,27 @@ export const validateQuotation = (props: Props): Res => {
   for (const migrate of migrateQuotationSchemaList) {
     const migrationResult = migrate({ document: currentDocument })
 
-    if (migrationResult.status === 'MIGRATION_BUG') {
+    if (
+      migrationResult.status === 'MIGRATION_BUG' ||
+      migrationResult.status === 'CORRUPTED'
+    ) {
       messageList.push('Migration logic problem')
       messageList.push(migrationResult.message)
 
       return {
-        status: 'MIGRATION_BUG',
+        status: 'ERROR',
         data: null,
         message: messageList.join(' | '),
       }
     }
 
-    if (migrationResult.status === 'CORRUPTED') {
-      messageList.push('Corrupted document')
-      messageList.push(migrationResult.message)
-
-      return {
-        status: 'CORRUPTED',
-        data: null,
-        message: messageList.join(' | '),
-      }
+    if (
+      migrationResult.status === 'SKIPPED' ||
+      migrationResult.status === 'MIGRATED'
+    ) {
+      // Assign migrated document to the currentDocument and go to next migration
+      currentDocument = migrationResult.data
     }
-
-    // Assign migrated document to the currentDocument and go to next migration
-    currentDocument = migrationResult.data
   }
 
   // Validate as the latest version after migration
@@ -85,16 +77,12 @@ export const validateQuotation = (props: Props): Res => {
     quotationSchema.safeParse(currentDocument)
 
   if (migratedDocumentValidationResult.success !== true) {
-    console.error(
-      `Document has the latest schema version, but validation failed 🤷‍♂️`,
-    )
-
-    messageList.push(
-      `Document has the latest schema version, but validation failed 🤷‍♂️`,
-    )
+    const msg = `Document has the latest schema version, but validation failed for some unknown reason 🤷‍♂️`
+    console.error(msg)
+    messageList.push(msg)
 
     return {
-      status: 'MIGRATION_BUG',
+      status: 'ERROR',
       data: null,
       message: messageList.join(' | '),
     }
