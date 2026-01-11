@@ -23,7 +23,13 @@ type Res =
       message: string
     }
 
+/**
+ * If document from the bucket has the latest schema it is validated
+ * If schema version is outdated, document structure is progressively updated and validated
+ */
 export const validateBookmark = (props: Props): Res => {
+  const messageList: string[] = []
+
   // Fast path: Try validating as latest version first
   const latestVersionValidation = bookmarkSchema.safeParse(props.document)
 
@@ -39,23 +45,17 @@ export const validateBookmark = (props: Props): Res => {
   // Slow path: Document needs migration
   let currentDocument: Record<string, unknown> = props.document
 
-  let currentVersion =
-    typeof props.document.schemaVersion === 'number' // In initial version "schemaVersion" field did not exist
-      ? props.document.schemaVersion
-      : 1
-
-  const messageList: string[] = []
-
   // Go though the list of migration steps and update document structure
   for (const migrate of migrateBookmarkSchemaList) {
-    const migrationResult = migrate({
-      document: currentDocument,
-      documentSchemaVersion: currentVersion,
-    })
+    const migrationResult = migrate({ document: currentDocument })
 
-    messageList.push(migrationResult.message)
+    if (
+      migrationResult.status === 'MIGRATION_BUG' ||
+      migrationResult.status === 'CORRUPTED'
+    ) {
+      messageList.push('Migration logic problem')
+      messageList.push(migrationResult.message)
 
-    if (migrationResult.status === 'ERROR') {
       return {
         status: 'ERROR',
         data: null,
@@ -63,12 +63,13 @@ export const validateBookmark = (props: Props): Res => {
       }
     }
 
-    currentDocument = migrationResult.data
-
-    currentVersion =
-      typeof currentDocument.schemaVersion === 'number'
-        ? currentDocument.schemaVersion
-        : currentVersion
+    if (
+      migrationResult.status === 'SKIPPED' ||
+      migrationResult.status === 'MIGRATED'
+    ) {
+      // Assign migrated document to the currentDocument and go to next migration
+      currentDocument = migrationResult.data
+    }
   }
 
   // Validate as the latest version after migration
@@ -76,13 +77,9 @@ export const validateBookmark = (props: Props): Res => {
     bookmarkSchema.safeParse(currentDocument)
 
   if (migratedDocumentValidationResult.success !== true) {
-    console.error(
-      `Document has the latest version ${currentVersion} schema, but validation failed 🤷‍♂️`,
-    )
-
-    messageList.push(
-      `Document has the latest version ${currentVersion} schema, but validation failed 🤷‍♂️`,
-    )
+    const msg = `Document has the latest schema version, but validation failed for some unknown reason 🤷‍♂️`
+    console.error(msg)
+    messageList.push(msg)
 
     return {
       status: 'ERROR',

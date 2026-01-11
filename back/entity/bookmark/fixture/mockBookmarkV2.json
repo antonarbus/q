@@ -1,0 +1,20 @@
+{
+  "id": "vtPbUBCz",
+  "bookmarkSchemaVersion": 2,
+  "email": "unknown@gmail.com",
+  "name": "Test Bookmark",
+  "category": "test-category",
+  "desc": "Test description",
+  "createdAt": "2026-01-10T19:43:31.780Z",
+  "updatedAt": "2026-01-10T19:43:31.780Z",
+  "info": "",
+  "preview": "",
+  "width": 600,
+  "height": 0,
+  "isFroala": true,
+  "type": "text",
+  "text": {
+    "html": "<p>Test bookmark content</p>",
+    "value": null
+  }
+}

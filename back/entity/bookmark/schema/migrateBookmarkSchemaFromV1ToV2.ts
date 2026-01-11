@@ -10,7 +10,6 @@ const MIGRATE_TO = 2
 
 type Props = {
   document: Record<string, unknown>
-  documentSchemaVersion: number
 }
 
 type Res =
@@ -25,18 +24,22 @@ type Res =
       message: string
     }
   | {
-      status: 'ERROR'
+      status: 'CORRUPTED'
+      data: null
+      message: string
+    }
+  | {
+      status: 'MIGRATION_BUG'
       data: null
       message: string
     }
 
-/**
- * If document from the bucket has the latest schema it is just validated
- * If schema version is outdated, document structure is progressively updated and validated
- */
 export const migrateBookmarkSchemaFromV1ToV2 = (props: Props): Res => {
-  // Run migration only for specific version
-  if (props.documentSchemaVersion !== MIGRATE_FROM) {
+  const shouldSkipMigrationForUnsupportedSchemaVersion =
+    'bookmarkSchemaVersion' in props.document &&
+    props.document.bookmarkSchemaVersion !== MIGRATE_FROM
+
+  if (shouldSkipMigrationForUnsupportedSchemaVersion === true) {
     return {
       status: 'SKIPPED',
       data: props.document,
@@ -50,7 +53,7 @@ export const migrateBookmarkSchemaFromV1ToV2 = (props: Props): Res => {
     const treeifiedError = z.treeifyError(oldDocumentValidationResult.error)
 
     return {
-      status: 'ERROR',
+      status: 'CORRUPTED',
       data: null,
       message: `Document has version ${MIGRATE_FROM}, but structure is incorrect. Will not apply migration. Zod error: ${JSON.stringify(treeifiedError)}`,
     }
@@ -73,9 +76,9 @@ export const migrateBookmarkSchemaFromV1ToV2 = (props: Props): Res => {
     const treeifiedError = z.treeifyError(newDocumentValidationResult.error)
 
     return {
-      status: 'ERROR',
+      status: 'MIGRATION_BUG',
       data: null,
-      message: `Failed to migrate from V${MIGRATE_FROM} to V${MIGRATE_TO}. Document has version ${MIGRATE_FROM}, but structure is incorrect. Will not apply migration. Zod error: ${JSON.stringify(treeifiedError)}`,
+      message: `Migration logic problem. Failed to migrate from V${MIGRATE_FROM} to V${MIGRATE_TO}. Document has version ${MIGRATE_FROM}, but structure is incorrect. Will not apply migration. Zod error: ${JSON.stringify(treeifiedError)}`,
     }
   }
 
