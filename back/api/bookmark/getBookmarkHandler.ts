@@ -34,7 +34,11 @@ export type ResBody = {
 
 export type ErrorResBody = {
   message: string
-  errorCode: ErrorCode | 'NOT_FOUND' | 'INVALID_JSON' | 'INVALID_STRUCTURE'
+  errorCode:
+    | ErrorCode
+    | 'BOOKMARK_NOT_FOUND'
+    | 'FILE_NOT_FOUND_IN_BUCKET'
+    | 'VALIDATION_ERROR'
 }
 
 type RouterHandler = (
@@ -62,7 +66,7 @@ export const getBookmarkHandler: RouterHandler = async (req, res, next) => {
     messageList.push('Bookmark not found in database')
 
     throw new HttpError<ErrorResBody['errorCode']>({
-      errorCode: 'NOT_FOUND',
+      errorCode: 'BOOKMARK_NOT_FOUND',
       statusCode: httpStatusCode.notFound404,
       message: messageList.join(' | '),
     })
@@ -79,7 +83,7 @@ export const getBookmarkHandler: RouterHandler = async (req, res, next) => {
       messageList.push('Bookmark not found in storage')
 
       throw new HttpError<ErrorResBody['errorCode']>({
-        errorCode: 'NOT_FOUND',
+        errorCode: 'FILE_NOT_FOUND_IN_BUCKET',
         statusCode: httpStatusCode.notFound404,
         message: messageList.join(' | '),
       })
@@ -90,25 +94,15 @@ export const getBookmarkHandler: RouterHandler = async (req, res, next) => {
   const bookmarkFileAsString = bookmarkFileBuffer.toString()
   const bookmarkJsonParsed = jsonParseOrNull<Bookmark>(bookmarkFileAsString)
 
-  if (bookmarkJsonParsed === null) {
-    messageList.push('Bookmark data from storage is not valid JSON')
-
-    throw new HttpError<ErrorResBody['errorCode']>({
-      errorCode: 'INVALID_JSON',
-      statusCode: httpStatusCode.notFound404,
-      message: messageList.join(' | '),
-    })
-  }
-
   const bookmarkValidationResult = validateBookmark({
-    document: bookmarkJsonParsed,
+    document: bookmarkJsonParsed ?? {},
   })
 
   messageList.push(bookmarkValidationResult.message)
 
   if (bookmarkValidationResult.status === 'ERROR') {
     throw new HttpError<ErrorResBody['errorCode']>({
-      errorCode: 'INVALID_STRUCTURE',
+      errorCode: 'VALIDATION_ERROR',
       statusCode: httpStatusCode.badRequest400,
       message: messageList.join(' | '),
     })

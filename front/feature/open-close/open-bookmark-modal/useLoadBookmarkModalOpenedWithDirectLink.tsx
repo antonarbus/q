@@ -59,10 +59,27 @@ export const useLoadBookmarkModalOpenedWithDirectLink = (
 
   useUpdateEffect(() => {
     if (getBookmarkMutation.isError === true) {
-      if (getBookmarkMutation.error.response?.data.errorCode === 'NOT_FOUND') {
+      if (
+        getBookmarkMutation.error.response?.data.errorCode ===
+        'BOOKMARK_NOT_FOUND'
+      ) {
         toast.warning('Bookmark not found')
-        void navigate('..')
       }
+
+      if (
+        getBookmarkMutation.error.response?.data.errorCode ===
+        'FILE_NOT_FOUND_IN_BUCKET'
+      ) {
+        toast.warning('Bookmark not found, probably deleted')
+      }
+
+      if (
+        getBookmarkMutation.error.response?.data.errorCode === 'INTERNAL_ERROR'
+      ) {
+        toast.warning('Internal error')
+      }
+
+      void navigate('..')
     }
   }, [getBookmarkMutation.isError])
 }

@@ -166,8 +166,10 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
       })
     })
 
-  const quotationJson = fileBuffer.toString()
-  const quotationJsonParsed = jsonParseOrNull<Quotation>(quotationJson)
+  messageList.push('Quotation loaded from storage')
+
+  const quotationFileAsString = fileBuffer.toString()
+  const quotationJsonParsed = jsonParseOrNull<Quotation>(quotationFileAsString)
 
   const quotationValidationResult = validateQuotation({
     document: quotationJsonParsed ?? {},
