@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { expect, test, describe, vi } from 'vitest'
 import { migrateQuotationSchemaFromV1ToV2 } from './migrateQuotationSchemaFromV1ToV2'
 import { z } from 'zod'
@@ -53,7 +56,6 @@ describe('#migrateQuotationSchemaFromV1ToV2', () => {
     const mockQuotationV1 = await import('../fixture/mockQuotationV1.json')
 
     // Mock the V2 schema validation to fail (simulating a migration bug)
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-type-assertion
     vi.spyOn(quotationSchema, 'safeParse').mockReturnValue({
       success: false,
       error: new z.ZodError([
@@ -64,7 +66,6 @@ describe('#migrateQuotationSchemaFromV1ToV2', () => {
           message: 'Required field missing after migration',
         },
       ]),
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } as any)
 
     const result = migrateQuotationSchemaFromV1ToV2({

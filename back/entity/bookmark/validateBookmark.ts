@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unnecessary-condition */
+/* eslint-disable no-restricted-syntax */
 import { migrateBookmarkSchemaFromV1ToV2 } from './schema/migrateBookmarkSchemaFromV1ToV2'
 import { type Bookmark, bookmarkSchema } from './schema'
 
@@ -78,6 +80,7 @@ export const validateBookmark = (props: Props): Res => {
 
   if (migratedDocumentValidationResult.success !== true) {
     const msg = `Document has the latest schema version, but validation failed for some unknown reason 🤷‍♂️`
+
     console.error(msg)
     messageList.push(msg)
 

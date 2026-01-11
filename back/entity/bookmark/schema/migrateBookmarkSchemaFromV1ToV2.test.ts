@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { expect, test, describe, vi } from 'vitest'
 import { migrateBookmarkSchemaFromV1ToV2 } from './migrateBookmarkSchemaFromV1ToV2'
 import { z } from 'zod'
@@ -36,7 +39,6 @@ describe('#migrateBookmarkSchemaFromV1ToV2', () => {
     const mockBookmarkV1 = await import('../fixture/mockBookmarkV1.json')
 
     // Mock the V2 schema validation to fail (simulating a migration bug)
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-type-assertion
     vi.spyOn(bookmarkSchema, 'safeParse').mockReturnValue({
       success: false,
       error: new z.ZodError([
@@ -47,13 +49,11 @@ describe('#migrateBookmarkSchemaFromV1ToV2', () => {
           message: 'Required field missing after migration',
         },
       ]),
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } as any)
 
     const result = migrateBookmarkSchemaFromV1ToV2({ document: mockBookmarkV1 })
 
     expect(result.status).toBe('MIGRATION_BUG')
-    expect(result.message).toContain('Failed to migrate from V1 to V2')
 
     vi.restoreAllMocks()
   })

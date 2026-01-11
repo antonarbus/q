@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unnecessary-condition */
+/* eslint-disable no-restricted-syntax */
 import { migrateQuotationSchemaFromV1ToV2 } from './schema/migrateQuotationSchemaFromV1ToV2'
 import { type Quotation, quotationSchema } from './schema'
 
@@ -78,6 +80,7 @@ export const validateQuotation = (props: Props): Res => {
 
   if (migratedDocumentValidationResult.success !== true) {
     const msg = `Document has the latest schema version, but validation failed for some unknown reason 🤷‍♂️`
+
     console.error(msg)
     messageList.push(msg)
 
