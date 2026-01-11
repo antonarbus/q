@@ -118,5 +118,3 @@ export const quotationSchema = z.object({
     'FORBIDDEN',
   ]),
 })
-
-export type Quotation = z.infer<typeof quotationSchema>
