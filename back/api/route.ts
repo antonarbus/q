@@ -89,7 +89,7 @@ export const route = {
     description: 'Create or update quotation',
   },
   getQuotation: {
-    url: '/api/quotations/:id',
+    url: '/api/quotations/:id', // ! fixed
     method: 'get',
     description: 'Get single quotation by ID',
   },

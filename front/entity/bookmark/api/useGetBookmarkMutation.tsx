@@ -14,7 +14,7 @@ type Res = UseMutationResult<ResBody, AxiosError<ErrorResBody>, Payload>
 export const useGetBookmarkMutation = (): Res => {
   const mutation = useMutation<ResBody, AxiosError<ErrorResBody>, Payload>({
     mutationKey: [queryKey.getBookmark],
-    mutationFn: async ({ bookmarkId: id }: Payload) => {
+    mutationFn: async (payload: Payload) => {
       const response = await axiosWithAuth<
         ResBody,
         AxiosResponse<ResBody>,
@@ -22,7 +22,9 @@ export const useGetBookmarkMutation = (): Res => {
       >({
         url: route.getBookmark.url,
         method: route.getBookmark.method,
-        data: { bookmarkId: id },
+        data: {
+          bookmarkId: payload.bookmarkId,
+        },
       })
 
       return response.data

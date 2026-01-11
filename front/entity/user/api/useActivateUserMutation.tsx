@@ -13,11 +13,13 @@ type Res = UseMutationResult<ResBody, AxiosError<ErrorResBody>, Payload>
 export const useActivateUserMutation = (): Res => {
   const query = useMutation<ResBody, AxiosError<ErrorResBody>, Payload>({
     mutationKey: [queryKey.activate],
-    mutationFn: async ({ activationKey }: Payload) => {
+    mutationFn: async (payload: Payload) => {
       const response = await axios<ResBody>({
         url: route.activate.url,
         method: route.activate.method,
-        data: { activationKey },
+        data: {
+          activationKey: payload.activationKey,
+        },
       })
 
       return response.data

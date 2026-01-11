@@ -14,15 +14,15 @@ type Res = UseMutationResult<ResBody, AxiosError<ErrorResBody>, Payload>
 export const useGetQuotationMutation = (): Res => {
   const mutation = useMutation<ResBody, AxiosError<ErrorResBody>, Payload>({
     mutationKey: [queryKey.getQuotation],
-    mutationFn: async ({ id }: Payload) => {
+    mutationFn: async (payload: Payload) => {
       const response = await axiosWithAuth<
         ResBody,
-        AxiosResponse<ResBody>,
-        Payload
+        AxiosResponse<ResBody>
+        // Payload
       >({
-        url: route.getQuotation.url,
+        url: route.getQuotation.url.replace(':id', payload.id),
         method: route.getQuotation.method,
-        data: { id },
+        // data: {id},
       })
 
       return response.data

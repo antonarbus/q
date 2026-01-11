@@ -14,11 +14,14 @@ type Res = UseMutationResult<ResBody, AxiosError<ErrorResBody>, Payload>
 export const useLogInUserMutation = (): Res => {
   const query = useMutation<ResBody, AxiosError<ErrorResBody>, Payload>({
     mutationKey: [queryKey.logIn],
-    mutationFn: async ({ email, password }: Payload) => {
+    mutationFn: async (payload: Payload) => {
       const response = await axiosWithAuth<ResBody>({
         url: route.logIn.url,
         method: route.logIn.method,
-        data: { email, password },
+        data: {
+          email: payload.email,
+          password: payload.password,
+        },
       })
 
       return response.data
