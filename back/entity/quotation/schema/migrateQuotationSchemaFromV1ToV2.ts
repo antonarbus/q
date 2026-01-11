@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
 import { z } from 'zod'
 import { quotationSchema as quotationSchemaV1 } from './quotationSchemaV1' //* <-- V1
 import {
@@ -63,7 +64,6 @@ export const migrateQuotationSchemaFromV1ToV2 = (props: Props): Res => {
 
   // ======== ↓ MIGRATION ↓ ========
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   const newDocument = structuredClone(
     oldDocumentValidationResult.data,
   ) as QuotationV2 // <-- hack! cast QuotationV2 type for actual QuotationV1 to let us set new values

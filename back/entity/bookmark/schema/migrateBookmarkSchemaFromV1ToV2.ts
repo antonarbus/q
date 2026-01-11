@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
 import { z } from 'zod'
 import { bookmarkSchema as bookmarkSchemaV1 } from './bookmarkSchemaV1' //* <-- V1
 import {
@@ -61,7 +62,6 @@ export const migrateBookmarkSchemaFromV1ToV2 = (props: Props): Res => {
 
   // ======== ↓ MIGRATION ↓ ========
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   const newDocument = structuredClone(
     oldDocumentValidationResult.data,
   ) as BookmarkV2 // <-- hack! cast QuotationV2 type for actual QuotationV1 to let us set new values
