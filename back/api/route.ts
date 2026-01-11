@@ -9,208 +9,181 @@ export const route = {
   root: {
     url: '/',
     method: 'get',
-    description: `
-      Root endpoint, no real purpose, good to show some info for dev purpose
-    `,
+    description: 'Root endpoint for dev info',
   },
   rootApi: {
     url: '/api',
     method: 'get',
-    description: `
-      Root api endpoint, no real purpose, good to show some info for dev purpose
-    `,
+    description: 'Root api endpoint for dev info',
   },
   health: {
-    url: '/api/health-check',
+    url: '/api/health',
     method: 'get',
-    description: `
-      Google Cloud Run checks this endpoint to see if the app is alive.
-      It checks if ExpressJS and DB connection are OK.
-    `,
+    description: 'Google Cloud Run health check endpoint',
   },
   test: {
-    url: '/api/test',
+    url: '/api/dev/test',
     method: 'get',
     description: 'Test playground for dev purpose',
   },
-  setBucketCors: {
-    url: '/api/set-bucket-cors',
-    method: 'get',
-    description: 'Set CORS for bucket & visit the endpoint to apply',
-  },
   getBucketCors: {
-    url: '/api/get-bucket-cors',
+    url: '/api/dev/bucket-cors',
     method: 'get',
-    description: 'Get CORS for bucket. Visit the endpoint to apply.',
+    description: 'Get CORS configuration for bucket',
   },
-  // user
+  setBucketCors: {
+    url: '/api/dev/bucket-cors',
+    method: 'patch',
+    description: 'Update CORS configuration for bucket',
+  },
+  // users
   registerUser: {
-    url: '/api/register-user',
+    url: '/api/users',
     method: 'post',
-    description: 'When user clicks on register button',
+    description: 'Register new user',
   },
   logIn: {
-    url: '/api/login',
+    url: '/api/users/sessions',
     method: 'post',
-    description: 'When user clicks on login button',
+    description: 'User login (create session)',
   },
   logOut: {
-    url: '/api/logout',
-    method: 'get',
-    description: 'When user clicks on logout button',
+    url: '/api/users/sessions',
+    method: 'delete',
+    description: 'User logout (delete session)',
   },
   activate: {
-    url: '/api/activate',
+    url: '/api/users/activate',
     method: 'post',
-    description: 'When user clicks on activate link in email',
+    description: 'Activate user account via email link',
   },
   getAccessToken: {
-    url: '/api/get-access-token',
+    url: '/api/users/access-token',
     method: 'get',
-    description: `
-      Calls initially on app load (<AccessToken />) to get access token
-      and puts it into memory (state.user.accessToken).
-      Then for every protected request we add this token to the request header ("access-jwt-token").
-      If access token is expired, backend responds with 401 and we
-      a) save initial request config to resend it later
-      b) call this endpoint to get new access token and save it in memory
-      c) resend initial request with new access token
-      d) if access token is still invalid, we log out user
-    `,
+    description: 'Get new access token using refresh token',
   },
   requestPasswordReset: {
-    url: '/api/request-password-reset',
+    url: '/api/users/password-reset-requests',
     method: 'post',
-    description: `
-      When user clicks on forgot password link to get an email with reset link
-    `,
+    description: 'Request password reset email',
   },
   resetPassword: {
-    url: '/api/reset-password',
+    url: '/api/users/password-resets',
     method: 'post',
-    description: 'When user clicks on reset password link in email',
+    description: 'Reset password via email link',
   },
-  // user
   getUserList: {
-    url: '/api/get-user-list',
+    url: '/api/users',
     method: 'get',
-    description: 'Users list for admin page',
+    description: 'Get users list (admin only)',
   },
   deleteUser: {
-    url: '/api/delete-user',
+    url: '/api/users/:id',
     method: 'delete',
-    description: 'When admin deletes a user with button in table',
+    description: 'Delete user (admin only)',
   },
-  // quotation
+  // quotations
   saveQuotation: {
-    url: '/api/save-quotation',
+    url: '/api/quotations',
     method: 'post',
-    description: 'When user clicks on save button in the modal',
+    description: 'Create or update quotation',
   },
   getQuotation: {
-    url: '/api/get-quotation',
-    method: 'post',
-    description: 'When user opens the quotation page',
+    url: '/api/quotations/:id',
+    method: 'get',
+    description: 'Get single quotation by ID',
   },
   getQuotationList: {
-    url: '/api/get-quotation-list',
+    url: '/api/quotations',
     method: 'get',
-    description: 'User quotations table',
+    description: 'Get user quotations list',
   },
   getQuotationListAll: {
-    url: '/api/get-quotation-list-all',
-    method: 'post', // idiomatically not correct, here "post" is used instead of "get" to send data in body which is automatically stringified and parsed
-    description: 'All quotations table',
+    url: '/api/quotations/all',
+    method: 'get',
+    description: 'Get all quotations (admin only)',
   },
   getUniqueQuotationCategoryList: {
-    url: '/api/get-unique-quotation-category-list',
+    url: '/api/quotations/categories',
     method: 'get',
-    description: 'For the category field on save quotation modal',
+    description: 'Get unique quotation categories',
   },
   deleteQuotation: {
-    url: '/api/delete-quotation',
+    url: '/api/quotations/:id',
     method: 'delete',
-    description: 'When user clicks on delete button in quotations table',
+    description: 'Delete quotation',
   },
-  // bookmark
+  // bookmarks
   saveBookmark: {
-    url: '/api/save-bookmark',
+    url: '/api/bookmarks',
     method: 'post',
-    description: 'When user clicks on save button in the modal',
+    description: 'Create or update bookmark',
   },
   getBookmark: {
-    url: '/api/get-bookmark',
-    method: 'post',
-    description: 'When user clicks on bookmark in search or on bookmarks page',
+    url: '/api/bookmarks/:id',
+    method: 'get',
+    description: 'Get single bookmark by ID',
   },
   getBookmarkList: {
-    url: '/api/get-bookmark-list',
+    url: '/api/bookmarks',
     method: 'get',
-    description: 'User bookmarks table',
+    description: 'Get user bookmarks list',
   },
   getBookmarkListAll: {
-    url: '/api/get-bookmark-list-all',
+    url: '/api/bookmarks/all',
     method: 'get',
-    description: 'All bookmarks table',
+    description: 'Get all bookmarks (admin only)',
   },
   getUniqueBookmarkCategoryList: {
-    url: '/api/get-unique-bookmark-category-list',
+    url: '/api/bookmarks/categories',
     method: 'get',
-    description: 'For the category field on save bookmark modal',
+    description: 'Get unique bookmark categories',
   },
   deleteBookmark: {
-    url: '/api/delete-bookmark',
+    url: '/api/bookmarks/:id',
     method: 'delete',
-    description: 'When user clicks on delete button in bookmarks table',
+    description: 'Delete bookmark',
   },
   // files
   proxyFileToBucket: {
-    url: '/uploads/:fileId', // <-- not under /api
+    url: '/uploads/:fileId',
     method: 'get',
-    description: `
-      Get file data from db, generate 5 min singed url
-      to Google Cloud Storage and redirect request.
-    `,
+    description: 'Proxy file from Google Cloud Storage with signed URL',
   },
   fileUploadSignedUrl: {
-    url: '/api/file-upload-signed-url',
-    method: 'get',
-    description: `
-      On file upload we send light request for Google Cloud Storage url
-      where file is uploaded on client side
-    `,
+    url: '/api/files/upload-urls',
+    method: 'post',
+    description: 'Create signed URL for direct file upload to storage',
   },
   saveFileInfo: {
-    url: '/api/save-file-info',
+    url: '/api/files/:id',
     method: 'patch',
-    description:
-      'After file is uploaded we make it public and add info into File db',
+    description: 'Update file info after upload',
   },
   getFileList: {
-    url: '/api/get-file-list',
+    url: '/api/files',
     method: 'get',
-    description: 'Get file list for settings modal',
+    description: 'Get user files list',
   },
   getFileListAll: {
-    url: '/api/get-file-list-all',
-    method: 'post', // idiomatically not correct, here "post" is used instead of "get" to send data in body which is automatically stringified and parsed
-    description: 'All files table',
+    url: '/api/files/all',
+    method: 'get',
+    description: 'Get all files (admin only)',
   },
   deleteFile: {
-    url: '/api/delete-file',
+    url: '/api/files/:id',
     method: 'delete',
-    description:
-      'Delete file from the bucket + from quotations db + from quotation json',
+    description: 'Delete file from storage and database',
   },
   // visitors
   countUniqueDailyVisitors: {
-    url: '/api/count-unique-daily-visitors',
+    url: '/api/visitors/daily',
     method: 'post',
-    description: 'Records unique daily visitors per day',
+    description: 'Record unique daily visitor',
   },
   getUniqueDailyVisitors: {
-    url: '/api/get-unique-daily-visitors',
+    url: '/api/visitors/daily',
     method: 'get',
-    description: 'Gets unique daily visitors for admin page',
+    description: 'Get unique daily visitors stats (admin only)',
   },
 } as const satisfies Record<string, Route>
