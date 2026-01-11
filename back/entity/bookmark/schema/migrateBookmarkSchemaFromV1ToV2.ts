@@ -36,15 +36,19 @@ type Res =
     }
 
 export const migrateBookmarkSchemaFromV1ToV2 = (props: Props): Res => {
+  const messageList: string[] = []
+
   const shouldSkipMigrationForUnsupportedSchemaVersion =
     'bookmarkSchemaVersion' in props.document &&
     props.document.bookmarkSchemaVersion !== MIGRATE_FROM
 
   if (shouldSkipMigrationForUnsupportedSchemaVersion === true) {
+    messageList.push('Document has latest version, migration is not required')
+
     return {
       status: 'SKIPPED',
       data: props.document,
-      message: 'Skipped',
+      message: messageList.join(' | '),
     }
   }
 
@@ -53,10 +57,14 @@ export const migrateBookmarkSchemaFromV1ToV2 = (props: Props): Res => {
   if (oldDocumentValidationResult.success === false) {
     const treeifiedError = z.treeifyError(oldDocumentValidationResult.error)
 
+    messageList.push(
+      `Document has version ${MIGRATE_FROM}, but structure is incorrect. Will not apply migration. Zod error: ${JSON.stringify(treeifiedError)}`,
+    )
+
     return {
       status: 'CORRUPTED',
       data: null,
-      message: `Document has version ${MIGRATE_FROM}, but structure is incorrect. Will not apply migration. Zod error: ${JSON.stringify(treeifiedError)}`,
+      message: messageList.join(' | '),
     }
   }
 
@@ -75,16 +83,22 @@ export const migrateBookmarkSchemaFromV1ToV2 = (props: Props): Res => {
   if (newDocumentValidationResult.success === false) {
     const treeifiedError = z.treeifyError(newDocumentValidationResult.error)
 
+    messageList.push(
+      `Migration logic problem. Failed to migrate from V${MIGRATE_FROM} to V${MIGRATE_TO}. Document has version ${MIGRATE_FROM}, but structure is incorrect. Will not apply migration. Zod error: ${JSON.stringify(treeifiedError)}`,
+    )
+
     return {
       status: 'MIGRATION_BUG',
       data: null,
-      message: `Migration logic problem. Failed to migrate from V${MIGRATE_FROM} to V${MIGRATE_TO}. Document has version ${MIGRATE_FROM}, but structure is incorrect. Will not apply migration. Zod error: ${JSON.stringify(treeifiedError)}`,
+      message: messageList.join(' | '),
     }
   }
+
+  messageList.push(`Migrated from V${MIGRATE_FROM} to V${MIGRATE_TO}`)
 
   return {
     status: 'MIGRATED',
     data: newDocumentValidationResult.data,
-    message: `Migrated from V${MIGRATE_FROM} to V${MIGRATE_TO}`,
+    message: messageList.join(' | '),
   }
 }

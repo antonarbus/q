@@ -43,7 +43,7 @@ export const migrateQuotationSchemaFromV1ToV2 = (props: Props): Res => {
     props.document.quotationSchemaVersion !== MIGRATE_FROM
 
   if (shouldSkipMigrationForUnsupportedSchemaVersion === true) {
-    messageList.push('Document has latest version. migration is not required')
+    messageList.push('Document has latest version, migration is not required')
 
     return {
       status: 'SKIPPED',

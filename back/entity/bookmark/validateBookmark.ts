@@ -37,10 +37,12 @@ export const validateBookmark = (props: Props): Res => {
 
   // Already at latest version!
   if (latestVersionValidation.success) {
+    messageList.push('Schema has valid latest version')
+
     return {
       status: 'VALIDATED',
       data: latestVersionValidation.data,
-      message: 'Schema has valid latest version',
+      message: messageList.join(' | '),
     }
   }
 
@@ -71,6 +73,7 @@ export const validateBookmark = (props: Props): Res => {
     ) {
       // Assign migrated document to the currentDocument and go to next migration
       currentDocument = migrationResult.data
+      messageList.push(migrationResult.message)
     }
   }
 
