@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { activateHandler } from '@back/api/user/activateHandler'
 import { getAccessTokenHandler } from '@back/api/user/getAccessTokenHandler'
 import { logInHandler } from '@back/api/user/logInHandler'
@@ -38,11 +39,11 @@ import { route } from './route'
 import type { HttpResponse } from '@back/shared/lib/express/httpResponse'
 
 type Api = {
-  url: string
+  path: string
+  url: string | ((id: string) => string)
   method: 'get' | 'post' | 'put' | 'delete' | 'patch'
   description: string
   handler: (
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     req: Request<any, any, any, any>,
     res: Response,
     next: NextFunction,

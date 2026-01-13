@@ -1,7 +1,7 @@
 import { route } from '@back/api/route'
 import type {
   ErrorResBody,
-  ReqBody as Payload,
+  UrlParam as Payload,
   ResBody,
 } from '@back/api/quotation/getQuotationHandler'
 import { axiosWithAuth } from '@shared/lib/axios'
@@ -15,14 +15,9 @@ export const useGetQuotationMutation = (): Res => {
   const mutation = useMutation<ResBody, AxiosError<ErrorResBody>, Payload>({
     mutationKey: [queryKey.getQuotation],
     mutationFn: async (payload: Payload) => {
-      const response = await axiosWithAuth<
-        ResBody,
-        AxiosResponse<ResBody>
-        // Payload
-      >({
-        url: route.getQuotation.url.replace(':id', payload.id),
+      const response = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
+        url: route.getQuotation.url(payload.id),
         method: route.getQuotation.method,
-        // data: {id},
       })
 
       return response.data

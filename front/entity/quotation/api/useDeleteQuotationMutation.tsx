@@ -1,7 +1,7 @@
 import { route } from '@back/api/route'
 import type {
   ErrorResBody,
-  ReqBody as Payload,
+  UrlParam as Payload,
   ResBody,
 } from '@back/api/quotation/deleteQuotationHandler'
 import { axiosWithAuth } from '@shared/lib/axios'
@@ -16,9 +16,8 @@ export const useDeleteQuotationMutation = (): Res => {
     mutationKey: [queryKey.deleteQuotation],
     mutationFn: async (payload: Payload) => {
       const response = await axiosWithAuth<ResBody>({
-        url: route.deleteQuotation.url,
+        url: route.deleteQuotation.url(payload.id),
         method: route.deleteQuotation.method,
-        data: payload,
       })
 
       return response.data

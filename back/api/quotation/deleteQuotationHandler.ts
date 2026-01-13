@@ -10,7 +10,6 @@ import {
 } from '@back/entity/quotation/db/quotationsTableSchema'
 import { db } from '@back/shared/lib/drizzle/db'
 import { and, eq } from 'drizzle-orm'
-import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
 import {
   type HttpResponse,
@@ -18,11 +17,12 @@ import {
 } from '@back/shared/lib/express/httpResponse'
 
 type SearchQuery = ParsedQs
-type UrlParam = ParamsDictionary
 
-export type ReqBody = {
-  quotationId: SelectQuotation['id']
+export type UrlParam = {
+  id: SelectQuotation['id']
 }
+
+export type ReqBody = undefined
 
 export type ResBody = {
   message: string
@@ -49,7 +49,7 @@ export const deleteQuotationHandler: RouterHandler = async (req, res, next) => {
     .where(
       and(
         eq(quotationsTable.email, userFromAccessToken.email),
-        eq(quotationsTable.id, req.body.quotationId),
+        eq(quotationsTable.id, req.params.id),
       ),
     )
 
@@ -65,7 +65,7 @@ export const deleteQuotationHandler: RouterHandler = async (req, res, next) => {
 
   messageList.push('Quotation deleted from database')
 
-  const fileInfo = getFileInfo({ id: req.body.quotationId })
+  const fileInfo = getFileInfo({ id: req.params.id })
 
   await bucket
     .file(fileInfo.path)

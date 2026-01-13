@@ -1,4 +1,4 @@
-import type { ReqBody as Payload } from '@back/api/quotation/deleteQuotationHandler'
+import type { UrlParam as Payload } from '@back/api/quotation/deleteQuotationHandler'
 import { useDeleteQuotationMutation } from '@entity/quotation/api/useDeleteQuotationMutation'
 import { deleteFromQuotationListCache } from '@entity/quotation/cache-updater/deleteFromQuotationListCache'
 import { IconButton, Tooltip } from '@mui/material'
@@ -13,7 +13,7 @@ export const DeleteQuotationButton = (props: Payload): ReactNode => {
 
   useUpdateEffect(() => {
     if (deleteQuotationMutation.isSuccess === true) {
-      deleteFromQuotationListCache({ id: props.quotationId })
+      deleteFromQuotationListCache({ id: props.id })
     }
   }, [deleteQuotationMutation.isSuccess])
 
@@ -26,7 +26,7 @@ export const DeleteQuotationButton = (props: Payload): ReactNode => {
         toast.error('Failed to delete')
       }
 
-      deleteFromQuotationListCache({ id: props.quotationId })
+      deleteFromQuotationListCache({ id: props.id })
     }
   }, [deleteQuotationMutation.isError])
 
@@ -49,7 +49,7 @@ export const DeleteQuotationButton = (props: Payload): ReactNode => {
             return
           }
 
-          deleteQuotationMutation.mutate({ quotationId: props.quotationId })
+          deleteQuotationMutation.mutate({ id: props.id })
         }}
         size='small'
       >

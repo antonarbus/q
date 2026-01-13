@@ -56,7 +56,7 @@ const startServer = (): void => {
 
   // Register API routes
   apiList.forEach(([_key, item]) => {
-    app[item.method](item.url, httpHandler(item.handler))
+    app[item.method](item.path, httpHandler(item.handler))
   })
 
   // Blog routes (static HTML blog, separate from React SPA)

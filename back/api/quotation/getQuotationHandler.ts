@@ -7,7 +7,6 @@ import { jsonParseOrNull } from '@back/shared/util/jsonParseOrNull'
 import type { NextFunction, Request, Response } from 'express'
 import { db } from '@back/shared/lib/drizzle/db'
 import { eq } from 'drizzle-orm'
-import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
 import {
   type HttpResponse,
@@ -25,11 +24,12 @@ import { hideQuotationPrivateData } from '@back/entity/quotation/hideQuotationPr
 import { validateQuotation } from '@back/entity/quotation/validateQuotation'
 
 type SearchQuery = ParsedQs
-type UrlParam = ParamsDictionary
 
-export type ReqBody = {
+export type UrlParam = {
   id: SelectQuotation['id']
 }
+
+export type ReqBody = undefined
 
 export type ResBody = {
   quotation: Quotation
@@ -59,7 +59,7 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
   const [quotationSelected] = await db
     .select()
     .from(quotationsTable)
-    .where(eq(quotationsTable.id, req.body.id))
+    .where(eq(quotationsTable.id, req.params.id))
 
   if (quotationSelected === undefined) {
     messageList.push('Quotation not found in database')
@@ -86,7 +86,7 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
 
   if (quotationPermissionLevel === 'FORBIDDEN') {
     const emptyQuotation = createEmptyQuotation({
-      id: req.body.id,
+      id: req.params.id,
       permissionLevel: 'FORBIDDEN',
     })
 
@@ -112,7 +112,7 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
         .set({
           openedAt: new Date().toISOString(),
         })
-        .where(eq(quotationsTable.id, req.body.id))
+        .where(eq(quotationsTable.id, req.params.id))
         .returning()
         .catch((error: unknown) => {
           messageList.push('Failed to update "openedAt" field')
@@ -134,7 +134,7 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
         .set({
           viewedAt: new Date().toISOString(),
         })
-        .where(eq(quotationsTable.id, req.body.id))
+        .where(eq(quotationsTable.id, req.params.id))
         .returning()
         .catch((error: unknown) => {
           messageList.push('Failed to update "viewedAt" field')
@@ -151,7 +151,7 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
     }
   }
 
-  const fileInfo = getFileInfo({ id: req.body.id })
+  const fileInfo = getFileInfo({ id: req.params.id })
 
   const [fileBuffer] = await bucket
     .file(fileInfo.path)
