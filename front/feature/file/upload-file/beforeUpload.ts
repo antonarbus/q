@@ -183,10 +183,9 @@ export const beforeUpload: BeforeUpload = async (props) => {
     AxiosError<ResBodyMakeFilePublic>,
     Payload
   >({
-    url: route.saveFileInfo.url,
+    url: route.saveFileInfo.url(signUrlResponse.data.fileId),
     method: route.saveFileInfo.method,
     data: {
-      id: signUrlResponse.data.fileId,
       name: file.name,
       size: file.size,
     },

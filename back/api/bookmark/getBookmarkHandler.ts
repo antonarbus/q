@@ -11,7 +11,6 @@ import { jsonParseOrNull } from '@back/shared/util/jsonParseOrNull'
 import type { NextFunction, Request, Response } from 'express'
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
-import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
 import {
   type HttpResponse,
@@ -21,11 +20,12 @@ import type { Bookmark } from '@back/entity/bookmark/schema'
 import { validateBookmark } from '@back/entity/bookmark/validateBookmark'
 
 type SearchQuery = ParsedQs
-type UrlParam = ParamsDictionary
 
-export type ReqBody = {
-  bookmarkId: SelectBookmark['id']
+export type UrlParam = {
+  id: SelectBookmark['id']
 }
+
+type ReqBody = undefined
 
 export type ResBody = {
   bookmark: Bookmark
@@ -58,7 +58,7 @@ export const getBookmarkHandler: RouterHandler = async (req, res, next) => {
     .where(
       and(
         eq(bookmarksTable.email, userFromAccessToken.email),
-        eq(bookmarksTable.id, req.body.bookmarkId),
+        eq(bookmarksTable.id, req.params.id),
       ),
     )
 
@@ -74,7 +74,7 @@ export const getBookmarkHandler: RouterHandler = async (req, res, next) => {
 
   messageList.push('Bookmark found in database')
 
-  const bookmarkFileInfo = getFileInfo({ id: req.body.bookmarkId })
+  const bookmarkFileInfo = getFileInfo({ id: req.params.id })
 
   const [bookmarkFileBuffer] = await bucket
     .file(bookmarkFileInfo.path)

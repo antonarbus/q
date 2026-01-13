@@ -1,4 +1,4 @@
-import type { ReqBody } from '@back/api/bookmark/getBookmarkHandler'
+import type { UrlParam } from '@back/api/bookmark/getBookmarkHandler'
 import { useGetBookmarkMutation } from '@entity/bookmark/api/useGetBookmarkMutation'
 import { copySlice } from '@entity/copy/copySlice'
 import { IconButton, Tooltip } from '@mui/material'
@@ -10,7 +10,7 @@ import { MdCopyAll } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
 
-export const CopyBookmarkButton = (props: ReqBody): JSX.Element => {
+export const CopyBookmarkButton = (props: UrlParam): JSX.Element => {
   const getBookmarkMutation = useGetBookmarkMutation()
 
   useUpdateEffect(() => {
@@ -28,9 +28,7 @@ export const CopyBookmarkButton = (props: ReqBody): JSX.Element => {
     >
       <IconButton
         onClick={async (event: React.MouseEvent) => {
-          const data = await getBookmarkMutation.mutateAsync({
-            bookmarkId: props.bookmarkId,
-          })
+          const data = await getBookmarkMutation.mutateAsync({ id: props.id })
 
           if (data !== undefined) {
             const persistedScrollX = window.scrollX

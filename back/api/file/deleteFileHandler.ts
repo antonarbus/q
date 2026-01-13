@@ -14,15 +14,15 @@ import {
 } from '@back/shared/lib/express/httpResponse'
 import { and, eq } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
-import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
 
 type SearchQuery = ParsedQs
-type UrlParam = ParamsDictionary
 
-export type ReqBody = {
-  fileId: SelectFile['id']
+export type UrlParam = {
+  id: SelectFile['id']
 }
+
+type ReqBody = undefined
 
 export type ResBody = {
   message: string
@@ -55,7 +55,7 @@ export const deleteFileHandler: RouterHandler = async (req, res, next) => {
     const [fileSelected] = await db
       .select()
       .from(filesTable)
-      .where(eq(filesTable.id, req.body.fileId))
+      .where(eq(filesTable.id, req.params.id))
 
     if (fileSelected === undefined) {
       return 'file not found'
@@ -93,7 +93,7 @@ export const deleteFileHandler: RouterHandler = async (req, res, next) => {
   if (fileOwnerShip === 'owner') {
     messageList.push('File ownership verified')
 
-    const fileInfo = getFileInfo({ id: req.body.fileId })
+    const fileInfo = getFileInfo({ id: req.params.id })
 
     try {
       const deleteFromBucketPromise = bucket.file(fileInfo.path).delete()
@@ -103,7 +103,7 @@ export const deleteFileHandler: RouterHandler = async (req, res, next) => {
         .where(
           and(
             eq(filesTable.email, userFromAccessToken.email),
-            eq(filesTable.id, req.body.fileId),
+            eq(filesTable.id, req.params.id),
           ),
         )
 

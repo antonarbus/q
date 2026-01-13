@@ -1,4 +1,4 @@
-import type { ReqBody as Payload } from '@back/api/user/deleteUserHandler'
+import type { UrlParam } from '@back/api/user/deleteUserHandler'
 import { useDeleteUserMutation } from '@entity/user/api/useDeleteUserMutation'
 import { IconButton, Tooltip } from '@mui/material'
 import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
@@ -9,7 +9,7 @@ import { MdDeleteOutline } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
 
-export const DeleteUserButton = (props: Payload): ReactNode => {
+export const DeleteUserButton = (props: UrlParam): ReactNode => {
   const deleteUserMutation = useDeleteUserMutation()
 
   useUpdateEffect(() => {
@@ -70,7 +70,7 @@ export const DeleteUserButton = (props: Payload): ReactNode => {
             return
           }
 
-          deleteUserMutation.mutate({ email: props.email })
+          deleteUserMutation.mutate({ id: props.id })
         }}
         size='small'
       >

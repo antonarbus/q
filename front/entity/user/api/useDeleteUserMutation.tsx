@@ -1,7 +1,7 @@
 import { route } from '@back/api/route'
 import type {
   ErrorResBody,
-  ReqBody as Payload,
+  UrlParam as Payload,
   ResBody,
 } from '@back/api/user/deleteUserHandler'
 import { axiosWithAuth } from '@shared/lib/axios'
@@ -16,9 +16,8 @@ export const useDeleteUserMutation = (): Res => {
     mutationKey: [queryKey.deleteUser],
     mutationFn: async (payload: Payload) => {
       const response = await axiosWithAuth<ResBody>({
-        url: route.deleteUser.url,
+        url: route.deleteUser.url(payload.id),
         method: route.deleteUser.method,
-        data: payload,
       })
 
       return response.data

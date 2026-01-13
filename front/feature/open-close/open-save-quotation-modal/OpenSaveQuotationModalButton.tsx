@@ -1,4 +1,4 @@
-import type { ReqBody } from '@back/api/bookmark/deleteBookmarkHandler'
+import type { UrlParam } from '@back/api/bookmark/deleteBookmarkHandler'
 import { useGetQuotationMutation } from '@entity/quotation/api/useGetQuotationMutation'
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 
@@ -14,7 +14,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
 
-export const OpenSaveQuotationModalButton = (props: ReqBody): JSX.Element => {
+export const OpenSaveQuotationModalButton = (props: UrlParam): JSX.Element => {
   const navigate = useNavigate()
 
   const quotationMutation = useGetQuotationMutation()
@@ -44,7 +44,7 @@ export const OpenSaveQuotationModalButton = (props: ReqBody): JSX.Element => {
         }),
       )
 
-      void navigate(`./${props.bookmarkId}`)
+      void navigate(`./${props.id}`)
     }
   }, [quotationMutation.isSuccess])
 
@@ -64,9 +64,9 @@ export const OpenSaveQuotationModalButton = (props: ReqBody): JSX.Element => {
       <Link
         onClick={(event) => {
           event.preventDefault()
-          quotationMutation.mutate({ id: props.bookmarkId })
+          quotationMutation.mutate({ id: props.id })
         }}
-        to={`./${props.bookmarkId}`}
+        to={`./${props.id}`}
       >
         <IconButton
           size='small'

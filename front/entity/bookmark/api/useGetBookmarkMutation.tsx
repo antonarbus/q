@@ -1,7 +1,7 @@
 import { route } from '@back/api/route'
 import type {
   ErrorResBody,
-  ReqBody as Payload,
+  UrlParam as Payload,
   ResBody,
 } from '@back/api/bookmark/getBookmarkHandler'
 import { axiosWithAuth } from '@shared/lib/axios'
@@ -20,11 +20,8 @@ export const useGetBookmarkMutation = (): Res => {
         AxiosResponse<ResBody>,
         Payload
       >({
-        url: route.getBookmark.url,
+        url: route.getBookmark.url(payload.id),
         method: route.getBookmark.method,
-        data: {
-          bookmarkId: payload.bookmarkId,
-        },
       })
 
       return response.data

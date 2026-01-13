@@ -1,7 +1,7 @@
 import { route } from '@back/api/route'
 import type {
   ErrorResBody,
-  ReqBody as Payload,
+  UrlParam as Payload,
   ResBody,
 } from '@back/api/bookmark/deleteBookmarkHandler'
 import { axiosWithAuth } from '@shared/lib/axios'
@@ -16,7 +16,7 @@ export const useDeleteBookmarkMutation = (): Res => {
     mutationKey: [queryKey.deleteBookmark],
     mutationFn: async (payload: Payload) => {
       const response = await axiosWithAuth<ResBody>({
-        url: route.deleteBookmark.url,
+        url: route.deleteBookmark.url(payload.id),
         method: route.deleteBookmark.method,
         data: payload,
       })

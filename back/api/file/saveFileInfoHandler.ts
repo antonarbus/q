@@ -12,13 +12,15 @@ import {
   httpJsonResponse,
 } from '@back/shared/lib/express/httpResponse'
 import type { NextFunction, Request, Response } from 'express'
-import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
 
 type SearchQuery = ParsedQs
-type UrlParam = ParamsDictionary
 
-export type ReqBody = Required<Pick<InsertFile, 'id' | 'name' | 'size'>>
+type UrlParam = {
+  id: InsertFile['id']
+}
+
+export type ReqBody = Required<Pick<InsertFile, 'name' | 'size'>>
 
 export type ResBody = {
   fileInfo: InsertFile
@@ -44,7 +46,7 @@ export const saveFileInfoHandler: RouterHandler = async (req, res, next) => {
   const [fileInserted] = await db
     .insert(filesTable)
     .values({
-      id: req.body.id,
+      id: req.params.id,
       email: userFromAccessToken.email,
       name: req.body.name,
       size: req.body.size,

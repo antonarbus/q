@@ -10,7 +10,6 @@ import { and, eq } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
-import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
 import {
   type HttpResponse,
@@ -18,11 +17,12 @@ import {
 } from '@back/shared/lib/express/httpResponse'
 
 type SearchQuery = ParsedQs
-type UrlParam = ParamsDictionary
 
-export type ReqBody = {
-  bookmarkId: SelectBookmark['id']
+export type UrlParam = {
+  id: SelectBookmark['id']
 }
+
+type ReqBody = undefined
 
 export type ResBody = {
   message: string
@@ -49,7 +49,7 @@ export const deleteBookmarkHandler: RouterHandler = async (req, res, next) => {
     .where(
       and(
         eq(bookmarksTable.email, userFromAccessToken.email),
-        eq(bookmarksTable.id, req.body.bookmarkId),
+        eq(bookmarksTable.id, req.params.id),
       ),
     )
 
@@ -65,7 +65,7 @@ export const deleteBookmarkHandler: RouterHandler = async (req, res, next) => {
 
   messageList.push('Bookmark deleted from database')
 
-  const fileInfo = getFileInfo({ id: req.body.bookmarkId })
+  const fileInfo = getFileInfo({ id: req.params.id })
   const [{ statusCode }] = await bucket.file(fileInfo.path).delete()
 
   if (statusCode === 204) {

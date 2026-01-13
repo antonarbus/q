@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { HttpError } from '@back/shared/errors/HttpError'
 import { headerName } from '@back/shared/headers'
@@ -6,7 +7,7 @@ import type { Request } from 'express'
 import type { SelectUser } from './db/usersTableSchema'
 
 type Props = {
-  req: Request
+  req: Request<any, any, any, any>
 }
 
 type Res = {

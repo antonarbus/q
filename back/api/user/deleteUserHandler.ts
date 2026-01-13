@@ -10,7 +10,6 @@ import { eq } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
-import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
 import {
   type HttpResponse,
@@ -19,11 +18,12 @@ import {
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entity/user/getUserFromAccessTokenOrThrowUnauthorized'
 
 type SearchQuery = ParsedQs
-type UrlParam = ParamsDictionary
 
-export type ReqBody = {
-  email: SelectUser['email']
+export type UrlParam = {
+  id: SelectUser['email']
 }
+
+type ReqBody = undefined
 
 export type ResBody = {
   statistics: string[]
@@ -46,7 +46,7 @@ export const deleteUserHandler: RouterHandler = async (req, res, next) => {
 
   const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({ req })
 
-  const isOwner = userFromAccessToken.email === req.body.email
+  const isOwner = userFromAccessToken.email === req.params.id
   const isSuperAdmin = userFromAccessToken.roles.includes('super-admin')
 
   const notAllowed = isOwner === false && isSuperAdmin === false
@@ -73,17 +73,17 @@ export const deleteUserHandler: RouterHandler = async (req, res, next) => {
 
   const deleteUserResponse = await db
     .delete(usersTable)
-    .where(eq(usersTable.email, req.body.email))
+    .where(eq(usersTable.email, req.params.id))
 
   if (deleteUserResponse.rowCount === 0) {
-    statistics.push(`${req.body.email} was not found in database ❌`)
+    statistics.push(`${req.params.id} was not found in database ❌`)
   } else {
-    statistics.push(`${req.body.email} was deleted from database ✅`)
+    statistics.push(`${req.params.id} was deleted from database ✅`)
   }
 
   const deleteQuotationsResult = await db
     .delete(quotationsTable)
-    .where(eq(quotationsTable.email, req.body.email))
+    .where(eq(quotationsTable.email, req.params.id))
 
   if (deleteQuotationsResult.rowCount === 0) {
     statistics.push(`quotations were not found in database ❌`)

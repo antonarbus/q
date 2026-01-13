@@ -1,4 +1,4 @@
-import type { ReqBody } from '@back/api/bookmark/deleteBookmarkHandler'
+import type { UrlParam } from '@back/api/bookmark/deleteBookmarkHandler'
 import { useDeleteBookmarkMutation } from '@entity/bookmark/api/useDeleteBookmarkMutation'
 import { deleteFromBookmarkListCache } from '@entity/bookmark/cache-updater/deleteFromBookmarkListCache'
 import { IconButton, Tooltip } from '@mui/material'
@@ -8,19 +8,19 @@ import { MdDeleteOutline } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
 
-export const DeleteBookmarkButton = (props: ReqBody): JSX.Element => {
+export const DeleteBookmarkButton = (props: UrlParam): JSX.Element => {
   const deleteBookmarkMutation = useDeleteBookmarkMutation()
 
   useUpdateEffect(() => {
     if (deleteBookmarkMutation.isSuccess === true) {
-      deleteFromBookmarkListCache({ id: props.bookmarkId })
+      deleteFromBookmarkListCache({ id: props.id })
     }
   }, [deleteBookmarkMutation.isSuccess])
 
   useUpdateEffect(() => {
     if (deleteBookmarkMutation.isError === true) {
       toast.error(deleteBookmarkMutation.error.response?.data.message)
-      deleteFromBookmarkListCache({ id: props.bookmarkId })
+      deleteFromBookmarkListCache({ id: props.id })
     }
   }, [deleteBookmarkMutation.isError])
 
@@ -43,7 +43,7 @@ export const DeleteBookmarkButton = (props: ReqBody): JSX.Element => {
             return
           }
 
-          deleteBookmarkMutation.mutate({ bookmarkId: props.bookmarkId })
+          deleteBookmarkMutation.mutate({ id: props.id })
         }}
         size='small'
       >

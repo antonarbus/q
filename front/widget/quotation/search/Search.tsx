@@ -105,7 +105,7 @@ export const Search = (): JSX.Element => {
             key={option.id}
             onClick={async (event: React.MouseEvent) => {
               const data = await getBookmarkMutation.mutateAsync({
-                bookmarkId: option.id,
+                id: option.id,
               })
 
               isAutocompleteOpen.value = false
@@ -147,7 +147,7 @@ export const Search = (): JSX.Element => {
             />
 
             {getBookmarkMutation.isPending &&
-            option.id === getBookmarkMutation.variables.bookmarkId ? (
+            option.id === getBookmarkMutation.variables.id ? (
               <Box
                 sx={{
                   position: 'absolute',

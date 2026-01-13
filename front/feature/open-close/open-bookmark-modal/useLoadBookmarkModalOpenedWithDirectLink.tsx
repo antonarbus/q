@@ -31,7 +31,7 @@ export const useLoadBookmarkModalOpenedWithDirectLink = (
       return
     }
 
-    getBookmarkMutation.mutate({ bookmarkId: urlParams.bookmarkId })
+    getBookmarkMutation.mutate({ id: urlParams.bookmarkId })
   })
 
   useUpdateEffect(() => {

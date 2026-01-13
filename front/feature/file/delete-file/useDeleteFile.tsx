@@ -42,7 +42,7 @@ export const useDeleteFile = (props: Props): Res => {
       return
     }
 
-    deleteFileMutation.mutate({ fileId: props.fileId })
+    deleteFileMutation.mutate({ id: props.fileId })
   }, [])
 
   return {

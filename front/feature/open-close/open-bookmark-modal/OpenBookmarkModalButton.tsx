@@ -1,4 +1,4 @@
-import type { ReqBody } from '@back/api/bookmark/getBookmarkHandler'
+import type { UrlParam } from '@back/api/bookmark/getBookmarkHandler'
 import { useGetBookmarkMutation } from '@entity/bookmark/api/useGetBookmarkMutation'
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { IconButton, Tooltip } from '@mui/material'
@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
 
-export const OpenBookmarkModalButton = (props: ReqBody): JSX.Element => {
+export const OpenBookmarkModalButton = (props: UrlParam): JSX.Element => {
   const navigate = useNavigate()
   const getBookmarkMutation = useGetBookmarkMutation()
 
@@ -33,7 +33,7 @@ export const OpenBookmarkModalButton = (props: ReqBody): JSX.Element => {
         }),
       )
 
-      void navigate(`./${props.bookmarkId}`)
+      void navigate(`./${props.id}`)
     }
   }, [getBookmarkMutation.isSuccess])
 
@@ -52,7 +52,7 @@ export const OpenBookmarkModalButton = (props: ReqBody): JSX.Element => {
     >
       <IconButton
         onClick={() => {
-          getBookmarkMutation.mutate({ bookmarkId: props.bookmarkId })
+          getBookmarkMutation.mutate({ id: props.id })
         }}
         size='small'
         sx={{

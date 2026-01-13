@@ -14,8 +14,8 @@ export const ActionButtonsCellRenderer = (params: Params): ReactNode => {
 
   return (
     <Box sx={{ display: 'flex', gap: '5px' }}>
-      <LogInAsUserButton email={params.data.email} />
-      <DeleteUserButton email={params.data.email} />
+      <LogInAsUserButton id={params.data.email} />
+      <DeleteUserButton id={params.data.email} />
     </Box>
   )
 }

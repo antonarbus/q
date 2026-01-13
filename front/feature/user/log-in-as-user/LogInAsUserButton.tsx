@@ -1,4 +1,4 @@
-import type { ReqBody as Payload } from '@back/api/user/deleteUserHandler'
+import type { UrlParam } from '@back/api/user/deleteUserHandler'
 import { useGetBookmarkListQuery } from '@entity/bookmark/api/useGetBookmarkListQuery'
 import { navItemId } from '@entity/nav/navItemId'
 import { navSlice } from '@entity/nav/navSlice'
@@ -15,7 +15,7 @@ import { useLocation } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
 
-export const LogInAsUserButton = (props: Payload): ReactNode => {
+export const LogInAsUserButton = (props: UrlParam): ReactNode => {
   const logInUserMutation = useLogInUserMutation()
   const location = useLocation()
   const getQuotationListQuery = useGetQuotationListQuery()
@@ -85,7 +85,7 @@ export const LogInAsUserButton = (props: Payload): ReactNode => {
       <IconButton
         onClick={() => {
           logInUserMutation.mutate({
-            email: props.email,
+            email: props.id,
             password: 'no password',
           })
         }}
