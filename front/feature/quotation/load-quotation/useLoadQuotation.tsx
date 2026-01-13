@@ -271,7 +271,7 @@ export const useLoadQuotation = (): void => {
 
       if (
         getQuotationMutation.error.response?.data.errorCode ===
-        'FILE_NOT_FOUND_IN_BUCKET'
+        'QUOTATION_STORAGE_NOT_FOUND'
       ) {
         dispatch(
           appSlice.actions.setBackgroundMessage({

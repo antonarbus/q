@@ -68,7 +68,7 @@ export const useLoadBookmarkModalOpenedWithDirectLink = (
 
       if (
         getBookmarkMutation.error.response?.data.errorCode ===
-        'FILE_NOT_FOUND_IN_BUCKET'
+        'BOOKMARK_STORAGE_NOT_FOUND'
       ) {
         toast.warning('Bookmark not found, probably deleted')
       }
