@@ -37,8 +37,8 @@ export type ErrorResBody = {
   errorCode:
     | ErrorCode
     | 'BOOKMARK_NOT_FOUND'
-    | 'FILE_NOT_FOUND_IN_BUCKET'
-    | 'VALIDATION_ERROR'
+    | 'BOOKMARK_STORAGE_NOT_FOUND'
+    | 'BOOKMARK_VALIDATION_ERROR'
 }
 
 type RouterHandler = (
@@ -83,7 +83,7 @@ export const getBookmarkHandler: RouterHandler = async (req, res, next) => {
       messageList.push('Bookmark not found in storage')
 
       throw new HttpError<ErrorResBody['errorCode']>({
-        errorCode: 'FILE_NOT_FOUND_IN_BUCKET',
+        errorCode: 'BOOKMARK_STORAGE_NOT_FOUND',
         statusCode: httpStatusCode.notFound404,
         message: messageList.join(' | '),
       })
@@ -102,7 +102,7 @@ export const getBookmarkHandler: RouterHandler = async (req, res, next) => {
 
   if (bookmarkValidationResult.status === 'ERROR') {
     throw new HttpError<ErrorResBody['errorCode']>({
-      errorCode: 'VALIDATION_ERROR',
+      errorCode: 'BOOKMARK_VALIDATION_ERROR',
       statusCode: httpStatusCode.badRequest400,
       message: messageList.join(' | '),
     })

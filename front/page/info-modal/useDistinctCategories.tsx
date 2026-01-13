@@ -10,7 +10,7 @@ export const useDistinctCategories = (): Res => {
   const getBookmarkCategoryListQuery = useGetBookmarkCategoryListQuery()
 
   const quotationCategories =
-    getQuotationCategoryListQuery.data?.distinctQuotationList ?? []
+    getQuotationCategoryListQuery.data?.distinctQuotationCategoryList ?? []
 
   const bookmarkCategories =
     getBookmarkCategoryListQuery.data?.distinctCategoryList ?? []

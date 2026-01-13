@@ -16,18 +16,18 @@ import type { ParsedQs } from 'qs'
 
 type SearchQuery = ParsedQs
 
-type UrlParam = {
+export type UrlParam = {
   id: InsertFile['id']
 }
 
 export type ReqBody = Required<Pick<InsertFile, 'name' | 'size'>>
 
 export type ResBody = {
-  fileInfo: InsertFile
+  file: InsertFile
   message: string
 }
 
-type ErrorResBody = {
+export type ErrorResBody = {
   message: string
   errorCode: ErrorCode | 'FILE_SAVE_FAILED'
 }
@@ -69,7 +69,7 @@ export const saveFileInfoHandler: RouterHandler = async (req, res, next) => {
   return httpJsonResponse({
     statusCode: httpStatusCode.success200,
     body: {
-      fileInfo: fileInserted,
+      file: fileInserted,
       message: messageList.join(' | '),
     },
   })

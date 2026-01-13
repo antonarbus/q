@@ -37,7 +37,7 @@ export const SaveQuotationModal = (): JSX.Element => {
   const getQuotationCategoryListQuery = useGetQuotationCategoryListQuery()
 
   const distinctCategoryList =
-    getQuotationCategoryListQuery.data?.distinctQuotationList ?? []
+    getQuotationCategoryListQuery.data?.distinctQuotationCategoryList ?? []
 
   return (
     <FormModal

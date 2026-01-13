@@ -23,9 +23,9 @@ export type ResBody = {
   message: string
 }
 
-type ErrorResBody = {
+export type ErrorResBody = {
   message: string
-  errorCode: ErrorCode | 'SIGNED_URL_GENERATION_FAILED'
+  errorCode: ErrorCode | 'FILE_SIGNED_URL_GENERATION_FAILED'
 }
 
 type RouterHandler = (
@@ -74,7 +74,7 @@ export const fileUploadSignedUrlHandler: RouterHandler = async (
     messageList.push('Failed to generate signed URL')
 
     throw new HttpError<ErrorResBody['errorCode']>({
-      errorCode: 'SIGNED_URL_GENERATION_FAILED',
+      errorCode: 'FILE_SIGNED_URL_GENERATION_FAILED',
       statusCode: httpStatusCode.serverError500,
       message: messageList.join(' | '),
     })

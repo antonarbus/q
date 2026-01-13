@@ -30,7 +30,7 @@ export type ResBody = {
 
 export type ErrorResBody = {
   message: string
-  errorCode: ErrorCode | 'NOT_FOUND' | 'NO_ITEM_IN_BUCKET'
+  errorCode: ErrorCode | 'BOOKMARK_NOT_FOUND' | 'BOOKMARK_STORAGE_DELETE_FAILED'
 }
 
 type RouterHandler = (
@@ -57,7 +57,7 @@ export const deleteBookmarkHandler: RouterHandler = async (req, res, next) => {
     messageList.push('Bookmark not found in database')
 
     throw new HttpError<ErrorResBody['errorCode']>({
-      errorCode: 'NOT_FOUND',
+      errorCode: 'BOOKMARK_NOT_FOUND',
       statusCode: httpStatusCode.notFound404,
       message: messageList.join(' | '),
     })
@@ -82,7 +82,7 @@ export const deleteBookmarkHandler: RouterHandler = async (req, res, next) => {
   messageList.push('Failed to delete bookmark from storage')
 
   throw new HttpError<ErrorResBody['errorCode']>({
-    errorCode: 'NO_ITEM_IN_BUCKET',
+    errorCode: 'BOOKMARK_STORAGE_DELETE_FAILED',
     statusCode: httpStatusCode.notFound404,
     message: messageList.join(' | '),
   })

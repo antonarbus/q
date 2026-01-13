@@ -20,7 +20,7 @@ type UrlParam = ParamsDictionary
 type ReqBody = undefined
 
 export type ResBody = {
-  distinctQuotationList: SelectQuotation['category'][]
+  distinctQuotationCategoryList: SelectQuotation['category'][]
   message: string
 }
 
@@ -62,7 +62,7 @@ export const getQuotationCategoriesHandler: RouterHandler = async (
   return httpJsonResponse({
     statusCode: httpStatusCode.success200,
     body: {
-      distinctQuotationList: distinctCategoryList,
+      distinctQuotationCategoryList: distinctCategoryList,
       message: messageList.join(' | '),
     },
   })

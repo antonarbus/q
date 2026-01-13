@@ -17,16 +17,16 @@ import {
 
 type SearchQuery = ParsedQs
 
-type UrlParam = {
-  fileId: SelectFile['id']
+export type UrlParam = {
+  id: SelectFile['id']
 }
 
 type ReqBody = undefined
 type ResBody = string
 
-type ErrorResBody = {
+export type ErrorResBody = {
   message: string
-  errorCode: ErrorCode | 'FILE_NOT_FOUND' | 'SIGNED_URL_GENERATION_FAILED'
+  errorCode: ErrorCode | 'FILE_NOT_FOUND' | 'FILE_SIGNED_URL_GENERATION_FAILED'
 }
 
 type RouterHandler = (
@@ -43,7 +43,7 @@ const CLIENT_CACHE_MAX_AGE = SIGNED_URL_TTL_MS / 1000 // 5 min in seconds
 export const proxyFileToBucketHandler: RouterHandler = async (req, res) => {
   const messageList: string[] = []
 
-  const cached = signedUrlCache.get(req.params.fileId)
+  const cached = signedUrlCache.get(req.params.id)
 
   const cacheIsNotExpired =
     cached !== undefined && cached.expiresAt > Date.now()
@@ -65,7 +65,7 @@ export const proxyFileToBucketHandler: RouterHandler = async (req, res) => {
   const [fileSelected] = await db
     .select()
     .from(filesTable)
-    .where(eq(filesTable.id, req.params.fileId))
+    .where(eq(filesTable.id, req.params.id))
 
   if (fileSelected === undefined) {
     messageList.push('File not found in database')
@@ -80,7 +80,7 @@ export const proxyFileToBucketHandler: RouterHandler = async (req, res) => {
   messageList.push('File found in database')
 
   try {
-    const fileInfo = getFileInfo({ id: req.params.fileId })
+    const fileInfo = getFileInfo({ id: req.params.id })
     const file = bucket.file(fileInfo.path) // Get reference to the file in the bucket
 
     const [signedUrl] = await file.getSignedUrl({
@@ -93,7 +93,7 @@ export const proxyFileToBucketHandler: RouterHandler = async (req, res) => {
 
     await file.setMetadata({ cacheControl: 'public, max-age=300' })
 
-    signedUrlCache.set(req.params.fileId, {
+    signedUrlCache.set(req.params.id, {
       url: signedUrl,
       expiresAt: Date.now() + SIGNED_URL_TTL_MS, // should be slightly less, but let it be like this for now
     })
@@ -115,7 +115,7 @@ export const proxyFileToBucketHandler: RouterHandler = async (req, res) => {
     messageList.push('Failed to generate signed URL')
 
     throw new HttpError<ErrorResBody['errorCode']>({
-      errorCode: 'SIGNED_URL_GENERATION_FAILED',
+      errorCode: 'FILE_SIGNED_URL_GENERATION_FAILED',
       statusCode: httpStatusCode.serverError500,
       message: messageList.join(' | '),
     })

@@ -35,9 +35,9 @@ export type ErrorResBody = {
   message: string
   errorCode:
     | ErrorCode
-    | 'ID_NOT_PROVIDED'
-    | 'FAILED_TO_SAVE'
-    | 'INVALID_STRUCTURE'
+    | 'BOOKMARK_ID_NOT_PROVIDED'
+    | 'BOOKMARK_SAVE_FAILED'
+    | 'BOOKMARK_INVALID_STRUCTURE'
 }
 
 type RouterHandler = (
@@ -60,7 +60,7 @@ export const saveBookmarkHandler: RouterHandler = async (req, res, next) => {
     messageList.push(`Zod error: ${JSON.stringify(treeifiedError)}`)
 
     throw new HttpError<ErrorResBody['errorCode']>({
-      errorCode: 'INVALID_STRUCTURE',
+      errorCode: 'BOOKMARK_INVALID_STRUCTURE',
       statusCode: httpStatusCode.badRequest400,
       message: messageList.join(' | '),
     })
@@ -72,7 +72,7 @@ export const saveBookmarkHandler: RouterHandler = async (req, res, next) => {
     messageList.push('Bookmark ID is required')
 
     throw new HttpError<ErrorResBody['errorCode']>({
-      errorCode: 'ID_NOT_PROVIDED',
+      errorCode: 'BOOKMARK_ID_NOT_PROVIDED',
       statusCode: httpStatusCode.badRequest400,
       message: messageList.join(' | '),
     })
@@ -106,7 +106,7 @@ export const saveBookmarkHandler: RouterHandler = async (req, res, next) => {
     messageList.push('Failed to save bookmark meta data')
 
     throw new HttpError<ErrorResBody['errorCode']>({
-      errorCode: 'FAILED_TO_SAVE',
+      errorCode: 'BOOKMARK_SAVE_FAILED',
       statusCode: httpStatusCode.serverError500,
       message: messageList.join(' | '),
     })
@@ -135,7 +135,7 @@ export const saveBookmarkHandler: RouterHandler = async (req, res, next) => {
     messageList.push('Failed to save bookmark in bucket')
 
     throw new HttpError<ErrorResBody['errorCode']>({
-      errorCode: 'FAILED_TO_SAVE',
+      errorCode: 'BOOKMARK_SAVE_FAILED',
       statusCode: httpStatusCode.serverError500,
       message: messageList.join(' | '),
     })

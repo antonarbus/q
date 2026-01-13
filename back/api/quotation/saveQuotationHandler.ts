@@ -37,10 +37,10 @@ export type ErrorResBody = {
   message: string
   errorCode:
     | ErrorCode
-    | 'FAILED_TO_SAVE'
-    | 'ID_NOT_PROVIDED'
-    | 'UNHANDLED_CASE'
-    | 'INVALID_STRUCTURE'
+    | 'QUOTATION_SAVE_FAILED'
+    | 'QUOTATION_ID_NOT_PROVIDED'
+    | 'QUOTATION_UNHANDLED_CASE'
+    | 'QUOTATION_INVALID_STRUCTURE'
 }
 
 type RouterHandler = (
@@ -65,7 +65,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
     messageList.push(`Zod error: ${JSON.stringify(treeifiedError)}`)
 
     throw new HttpError<ErrorResBody['errorCode']>({
-      errorCode: 'INVALID_STRUCTURE',
+      errorCode: 'QUOTATION_INVALID_STRUCTURE',
       statusCode: httpStatusCode.badRequest400,
       message: messageList.join(' | '),
     })
@@ -77,7 +77,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
     messageList.push('Quotation ID is not provided')
 
     throw new HttpError<ErrorResBody['errorCode']>({
-      errorCode: 'ID_NOT_PROVIDED',
+      errorCode: 'QUOTATION_ID_NOT_PROVIDED',
       statusCode: httpStatusCode.forbidden403,
       message: messageList.join(' | '),
     })
@@ -133,7 +133,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
       messageList.push('Failed to save quotation to database')
 
       throw new HttpError<ErrorResBody['errorCode']>({
-        errorCode: 'FAILED_TO_SAVE',
+        errorCode: 'QUOTATION_SAVE_FAILED',
         statusCode: httpStatusCode.serverError500,
         message: messageList.join(' | '),
       })
@@ -158,7 +158,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
       messageList.push('Failed to save quotation to storage')
 
       throw new HttpError<ErrorResBody['errorCode']>({
-        errorCode: 'FAILED_TO_SAVE',
+        errorCode: 'QUOTATION_SAVE_FAILED',
         statusCode: httpStatusCode.serverError500,
         message: messageList.join(' | '),
       })
@@ -200,7 +200,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
       messageList.push('Failed to update quotation in database')
 
       throw new HttpError<ErrorResBody['errorCode']>({
-        errorCode: 'FAILED_TO_SAVE',
+        errorCode: 'QUOTATION_SAVE_FAILED',
         statusCode: httpStatusCode.serverError500,
         message: messageList.join(' | '),
       })
@@ -223,7 +223,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
       messageList.push('Failed to save quotation to storage')
 
       throw new HttpError<ErrorResBody['errorCode']>({
-        errorCode: 'FAILED_TO_SAVE',
+        errorCode: 'QUOTATION_SAVE_FAILED',
         statusCode: httpStatusCode.serverError500,
         message: messageList.join(' | '),
       })
@@ -265,7 +265,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
       messageList.push('Failed to save copied quotation to database')
 
       throw new HttpError<ErrorResBody['errorCode']>({
-        errorCode: 'FAILED_TO_SAVE',
+        errorCode: 'QUOTATION_SAVE_FAILED',
         statusCode: httpStatusCode.serverError500,
         message: messageList.join(' | '),
       })
@@ -290,7 +290,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
       messageList.push('Failed to save copied quotation to storage')
 
       throw new HttpError<ErrorResBody['errorCode']>({
-        errorCode: 'FAILED_TO_SAVE',
+        errorCode: 'QUOTATION_SAVE_FAILED',
         statusCode: httpStatusCode.serverError500,
         message: messageList.join(' | '),
       })
@@ -311,7 +311,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
   messageList.push('Unhandled case at the end')
 
   throw new HttpError<ErrorResBody['errorCode']>({
-    errorCode: 'UNHANDLED_CASE',
+    errorCode: 'QUOTATION_UNHANDLED_CASE',
     statusCode: httpStatusCode.serverError500,
     message: messageList.join(' | '),
   })

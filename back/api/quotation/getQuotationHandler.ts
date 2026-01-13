@@ -41,8 +41,8 @@ export type ErrorResBody = {
   errorCode:
     | ErrorCode
     | 'QUOTATION_NOT_FOUND'
-    | 'FILE_NOT_FOUND_IN_BUCKET'
-    | 'VALIDATION_ERROR'
+    | 'QUOTATION_STORAGE_NOT_FOUND'
+    | 'QUOTATION_VALIDATION_ERROR'
 }
 
 type RouterHandler = (
@@ -160,7 +160,7 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
       messageList.push('Quotation data not found in storage')
 
       throw new HttpError<ErrorResBody['errorCode']>({
-        errorCode: 'FILE_NOT_FOUND_IN_BUCKET',
+        errorCode: 'QUOTATION_STORAGE_NOT_FOUND',
         statusCode: httpStatusCode.serverError500,
         message: messageList.join(' | '),
       })
@@ -179,7 +179,7 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
 
   if (quotationValidationResult.status === 'ERROR') {
     throw new HttpError<ErrorResBody['errorCode']>({
-      errorCode: 'VALIDATION_ERROR',
+      errorCode: 'QUOTATION_VALIDATION_ERROR',
       statusCode: httpStatusCode.badRequest400,
       message: messageList.join(' | '),
     })

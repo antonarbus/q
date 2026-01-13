@@ -174,8 +174,8 @@ export const route = {
   },
   // files
   proxyFileToBucket: {
-    path: '/uploads/:fileId',
-    url: '/uploads/:fileId',
+    path: '/uploads/:id',
+    url: (id: string) => `/uploads/${id}`,
     method: 'get',
     description: 'Proxy file from Google Cloud Storage with signed URL',
   },
