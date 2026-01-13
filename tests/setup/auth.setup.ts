@@ -1,6 +1,7 @@
 import { request, test } from '@playwright/test'
 import { userFilePath } from './userFilePath'
 import { runtimeConfig } from '@root/config/runtime'
+import { route } from '@back/api/route'
 
 test.describe('authenticate for all further tests', () => {
   test.use({ baseURL: runtimeConfig.front.baseUrl })
@@ -10,7 +11,7 @@ test.describe('authenticate for all further tests', () => {
       ignoreHTTPSErrors: true, // This line ignores certificate errors
     })
 
-    const response = await context.post('/api/login', {
+    const response = await context.post(route.logIn.url, {
       data: {
         email: 'test-user@sendmequotation.today',
         password: 'xxx',
