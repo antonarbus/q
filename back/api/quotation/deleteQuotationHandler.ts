@@ -22,7 +22,7 @@ export type UrlParam = {
   id: SelectQuotation['id']
 }
 
-export type ReqBody = undefined
+type ReqBody = undefined
 
 export type ResBody = {
   message: string

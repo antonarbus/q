@@ -16,7 +16,7 @@ import type { ParsedQs } from 'qs'
 
 type SearchQuery = ParsedQs
 
-export type UrlParam = {
+type UrlParam = {
   id: InsertFile['id']
 }
 
@@ -27,7 +27,7 @@ export type ResBody = {
   message: string
 }
 
-export type ErrorResBody = {
+type ErrorResBody = {
   message: string
   errorCode: ErrorCode | 'FILE_SAVE_FAILED'
 }

@@ -17,14 +17,14 @@ import {
 
 type SearchQuery = ParsedQs
 
-export type UrlParam = {
+type UrlParam = {
   id: SelectFile['id']
 }
 
 type ReqBody = undefined
 type ResBody = string
 
-export type ErrorResBody = {
+type ErrorResBody = {
   message: string
   errorCode: ErrorCode | 'FILE_NOT_FOUND' | 'FILE_SIGNED_URL_GENERATION_FAILED'
 }

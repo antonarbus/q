@@ -23,7 +23,7 @@ export type ResBody = {
   message: string
 }
 
-export type ErrorResBody = {
+type ErrorResBody = {
   message: string
   errorCode: ErrorCode | 'FILE_SIGNED_URL_GENERATION_FAILED'
 }
