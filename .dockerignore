@@ -1,3 +1,63 @@
+# Development files
 node_modules
-build
+.git
+.github
 .vscode
+.claude
+
+# Cache files
+.eslintcache
+.prettiercache
+.tsbuildinfo-back
+.tsbuildinfo-front
+tsconfig.tsbuildinfo
+
+# Test files and coverage
+coverage
+test-results
+playwright-report
+blob-report
+playwright/.cache
+*.test.ts
+*.test.tsx
+**/__tests__
+
+# Config files not needed in container
+eslint.config.js
+prettier.config.json
+.prettierrc.json
+.prettierignore
+vitest.config.ts
+playwright.config.ts
+knip.json
+.nvmrc
+vite-env.d.ts
+Q.code-workspace
+madge.json
+
+# Documentation and assets
+README.md
+fsd.png
+*.docx
+
+
+# Deployment scripts (not needed for build)
+/deploy-scripts
+
+# Test directory
+/tests
+
+# Terraform
+/terraform
+
+# Environment files (secrets handled via Cloud Run)
+.env
+.env.*
+
+# Drizzle
+/drizzle
+drizzle.config.ts
+
+# Build artifacts we don't need
+/front/build/**/*.map
+
