@@ -12,5 +12,5 @@
     "@emotion/babel-plugin",
     "nanoid"
   ],
-  "ignoreBinaries": ["gcloud", "terraform", "sleep", "open"]
+  "ignoreBinaries": ["gcloud", "terraform", "open"]
 }
