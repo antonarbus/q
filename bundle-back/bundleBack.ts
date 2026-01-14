@@ -15,7 +15,7 @@ const nodeModulesDirPath = path.join(rootPathAbsolute, 'back', 'node_modules')
 
 console.info('\n🧹 Cleaning build directory...')
 
-fs.rmdirSync(outDirPath, { recursive: true })
+fs.rmSync(outDirPath, { recursive: true, force: true })
 
 console.info('\n✅ Cleaned!')
 
