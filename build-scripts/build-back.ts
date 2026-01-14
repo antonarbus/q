@@ -1,109 +1,71 @@
 import esbuild from 'esbuild'
-import { existsSync, statSync } from 'node:fs'
+import { readFileSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { pathAliasPlugin } from './pathAliasPlugin'
+import { z } from 'zod'
 
-const dirname = path.dirname(fileURLToPath(import.meta.url))
-console.log('🚀 ~ dirname:', dirname)
-const rootDir = path.resolve(dirname, '..')
+const thisDirPathAbsolute = path.dirname(fileURLToPath(import.meta.url))
+const rootPathAbsolute = path.resolve(thisDirPathAbsolute, '..')
 
-// Helper to resolve file with possible extensions
-const resolveWithExtensions = (basePath: string): string | null => {
-  const extensions = ['.ts', '.tsx', '.js', '.jsx']
+console.info('\nBundling backend...')
 
-  // Try exact path first
-  if (existsSync(basePath)) {
-    const stats = statSync(basePath)
-    if (stats.isFile()) return basePath
+// Read package.json to get all dependencies
+const backPackageJsonRaw: unknown = JSON.parse(
+  readFileSync(path.resolve(rootPathAbsolute, 'back/package.json'), 'utf8'),
+)
 
-    // If directory, try index files
-    for (const ext of extensions) {
-      const indexPath = path.join(basePath, `index${ext}`)
-      if (existsSync(indexPath)) return indexPath
-    }
-  }
+const packageJsonSchema = z.looseObject({
+  dependencies: z.record(z.string(), z.any()),
+})
 
-  // Try with extensions
-  for (const ext of extensions) {
-    const withExt = `${basePath}${ext}`
-    if (existsSync(withExt)) return withExt
-  }
+const backPackageJsonRawParsedResult =
+  packageJsonSchema.safeParse(backPackageJsonRaw)
 
-  return null
+if (backPackageJsonRawParsedResult.success === false) {
+  throw new Error('package.json is broken')
 }
 
-// Plugin to resolve path aliases (@root/*, @back/*) from tsconfig.json
-const pathAliasPlugin: esbuild.Plugin = {
-  name: 'path-alias',
-  setup(build) {
-    build.onResolve({ filter: /^@root\// }, (args) => {
-      const newPath = args.path.replace(/^@root\//, '')
-      const resolved = resolveWithExtensions(path.resolve(rootDir, newPath))
-      if (resolved) return { path: resolved }
+const packageDependencyList = Object.keys(
+  backPackageJsonRawParsedResult.data.dependencies,
+)
 
-      return null
-    })
+// Create a temporary entry file
+// Export all dependencies so esbuild creates a shared chunk for all deps
+// Using export ensures esbuild doesn't tree-shake them away
+const reExportDependenciesContent = packageDependencyList
+  .map((dep, index) => `export * as dep${index} from '${dep}';`)
+  .join('\n')
 
-    build.onResolve({ filter: /^@back\// }, (args) => {
-      const newPath = args.path.replace(/^@back\//, '')
+const dependenciesEntryPath = path.resolve(
+  rootPathAbsolute,
+  'back/.deps-entry.js',
+)
 
-      const resolved = resolveWithExtensions(
-        path.resolve(rootDir, 'back', newPath),
-      )
+writeFileSync(dependenciesEntryPath, reExportDependenciesContent)
 
-      if (resolved) return { path: resolved }
+const indexTsPath = path.resolve(rootPathAbsolute, 'back/index.ts')
+const outDirPath = path.resolve(rootPathAbsolute, 'back/build')
 
-      return null
-    })
+await esbuild.build({
+  entryPoints: [
+    indexTsPath,
+    dependenciesEntryPath, // Forces deps into shared chunk
+  ],
+  bundle: true,
+  platform: 'node',
+  target: 'node22',
+  format: 'esm',
+  outdir: outDirPath,
+  splitting: true,
+  chunkNames: '[name]-[hash]',
+  sourcemap: false,
+  minify: false,
+  treeShaking: true,
+  loader: {
+    '.html': 'text',
   },
-}
-
-console.info('Bundling backend...')
-
-try {
-  const result = await esbuild.build({
-    entryPoints: [path.resolve(rootDir, 'back/index.ts')],
-    bundle: true,
-    platform: 'node',
-    target: 'node20', // Match Bun's Node.js compatibility
-    format: 'esm',
-    outfile: path.resolve(rootDir, 'back/build/index.js'),
-    sourcemap: false,
-    minify: false,
-    treeShaking: true,
-    loader: {
-      '.html': 'text', // Use esbuild's built-in text loader for HTML files
-    },
-    plugins: [pathAliasPlugin],
-    // Bundle everything (no externals)
-    logLevel: 'info',
-    metafile: true, // Generate build metadata
-  })
-
-  console.info(`📦 Output: back/build/index.js`)
-
-  // Analyze bundle size
-  console.info('\n📊 Top 20 largest dependencies:')
-  const outputs = result.metafile.outputs['back/build/index.js']
-
-  if (outputs?.inputs !== undefined) {
-    const sizes = Object.entries(outputs.inputs)
-      .map(([file, info]) => ({
-        file: file.replace(`${rootDir}/`, ''),
-        bytes: info.bytesInOutput,
-      }))
-      .sort((fileA, fileB) => fileB.bytes - fileA.bytes)
-      .slice(0, 20)
-
-    sizes.forEach(({ file, bytes }) => {
-      const mb = (bytes / 1024 / 1024).toFixed(2)
-      const kb = (bytes / 1024).toFixed(0)
-      const size = bytes > 1024 * 100 ? `${mb}MB` : `${kb}KB`
-
-      console.info(`  ${size.padStart(8)} - ${file}`)
-    })
-  }
-} catch (error) {
-  console.error('❌ Backend build failed:', error)
-  process.exit(1)
-}
+  plugins: [pathAliasPlugin],
+  logLevel: 'info',
+  metafile: true,
+})

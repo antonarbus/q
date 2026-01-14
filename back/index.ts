@@ -2,12 +2,16 @@ import compression from 'compression'
 import cookieParser from 'cookie-parser'
 import express from 'express'
 import morgan from 'morgan'
-import path from 'path'
+import path from 'node:path'
+import url from 'node:url'
 import { runtimeConfig } from '@root/config/runtime'
 import { api } from '@back/api'
 import { errorHandlerMiddleware } from '@back/middleware/errorHandlerMiddleware'
 import { httpHandler } from '@back/shared/lib/express/httpHandler'
-import blog404Html from './static/blog-404.html' with { type: 'text' }
+import blog404Html from './static/blog-404.html'
+
+const thisFilePathAbsolute = url.fileURLToPath(import.meta.url)
+const rootPathAbsolute = path.resolve(thisFilePathAbsolute, '..')
 
 const startServer = (): void => {
   const app = express()
@@ -19,7 +23,7 @@ const startServer = (): void => {
 
   // Serve bundled React static files in production (JS, CSS, images, etc.)
   if (runtimeConfig.nodeEnv === 'production') {
-    const frontendBuildPath = path.join(__dirname, '../front/build')
+    const frontendBuildPath = path.join(rootPathAbsolute, 'front', 'build')
 
     app.use(
       express.static(frontendBuildPath, {
@@ -75,7 +79,12 @@ const startServer = (): void => {
 
   // SPA fallback: serve index.html for any route not matched above
   if (runtimeConfig.nodeEnv === 'production') {
-    const indexHtmlPath = path.join(__dirname, '../front/build/index.html')
+    const indexHtmlPath = path.join(
+      rootPathAbsolute,
+      'front',
+      'build',
+      'index.html',
+    )
 
     app.get(/.*/u, (_req, res): void => {
       // Don't cache index.html (same reason as above in express.static)
