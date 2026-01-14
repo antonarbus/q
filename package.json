@@ -13,7 +13,7 @@
     "dev-back": "NODE_ENV=development ENVIRONMENT=local bun --watch back/index.ts",
     "stop-dev": "kill-port 3000 8080",
     "build-front": "NODE_ENV=production vite build",
-    "build-back": "bun run build-scripts/build-back.ts",
+    "build-back": "bun run bundle-back/bundleBack.ts",
     "build": "bun run build-front && bun run build-back",
     "install-all": "bun install",
     "install-ci": "bun install --frozen-lockfile",

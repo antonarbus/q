@@ -39,12 +39,13 @@ const reExportDependenciesContent = packageDependencyList
 
 const dependenciesEntryPath = path.resolve(
   rootPathAbsolute,
-  'back/.deps-entry.js',
+  'back',
+  '.deps-entry.js',
 )
 
 writeFileSync(dependenciesEntryPath, reExportDependenciesContent)
 
-const indexTsPath = path.resolve(rootPathAbsolute, 'back/index.ts')
+const indexTsPath = path.resolve(rootPathAbsolute, 'back', 'index.ts')
 const outDirPath = path.resolve(rootPathAbsolute, 'back/build')
 
 await esbuild.build({
