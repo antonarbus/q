@@ -13,6 +13,12 @@ const indexTsPath = path.join(rootPathAbsolute, 'back', 'index.ts')
 const outDirPath = path.join(rootPathAbsolute, 'back', 'build')
 const nodeModulesDirPath = path.join(rootPathAbsolute, 'back', 'node_modules')
 
+console.info('\n🧹 Cleaning build directory...')
+
+fs.rmdirSync(outDirPath, { recursive: true })
+
+console.info('\n✅ Cleaned!')
+
 console.info('\n🗣️  Bundling backend...')
 
 // Read package.json to get all dependencies
@@ -45,8 +51,8 @@ fs.writeFileSync(dependenciesEntryPath, reExportFileContent)
 
 await esbuild.build({
   entryPoints: [
-    indexTsPath,
-    dependenciesEntryPath, // Forces deps into shared chunk
+    { in: indexTsPath, out: 'index' },
+    { in: dependenciesEntryPath, out: '.deps-entry' }, // Forces deps into shared chunk
   ],
   bundle: true,
   nodePaths: [nodeModulesDirPath],
