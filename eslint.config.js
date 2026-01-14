@@ -10,10 +10,10 @@ export default [
   {
     ignores: [
       '**/build/',
-      // '**/build-scripts/',
       '**/froalaPkg.js',
       '**/coverage/',
       '**/node_modules/',
+      'bundle-back/.deps-entry.js',
     ],
   },
   {

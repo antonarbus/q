@@ -12,6 +12,7 @@
     "back/**/*",
     "tests/**/*",
     "config/**/*",
+    "bundle-back/**/*",
     "deploy-scripts/**/*",
     "shared/**/*"
   ],
