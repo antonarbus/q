@@ -1,52 +1,47 @@
 import esbuild from 'esbuild'
-import { readFileSync, writeFileSync } from 'node:fs'
+import fs from 'node:fs'
 import path from 'node:path'
-import { fileURLToPath } from 'node:url'
+import url from 'node:url'
 import { pathAliasPlugin } from './pathAliasPlugin'
 import { z } from 'zod'
 
-const thisDirPathAbsolute = path.dirname(fileURLToPath(import.meta.url))
+const thisDirPathAbsolute = path.dirname(url.fileURLToPath(import.meta.url))
 const rootPathAbsolute = path.resolve(thisDirPathAbsolute, '..')
+const packageJsonFilePath = path.join(rootPathAbsolute, 'back', 'package.json')
+const dependenciesEntryPath = path.join(thisDirPathAbsolute, '.deps-entry.js')
+const indexTsPath = path.join(rootPathAbsolute, 'back', 'index.ts')
+const outDirPath = path.join(rootPathAbsolute, 'back', 'build')
+const nodeModulesDirPath = path.join(rootPathAbsolute, 'back', 'node_modules')
 
-console.info('\nBundling backend...')
+console.info('\n🗣️  Bundling backend...')
 
 // Read package.json to get all dependencies
-const backPackageJsonRaw: unknown = JSON.parse(
-  readFileSync(path.resolve(rootPathAbsolute, 'back/package.json'), 'utf8'),
-)
+const packageJsonAsText = fs.readFileSync(packageJsonFilePath, 'utf8')
+const packageJsonRaw: unknown = JSON.parse(packageJsonAsText)
 
 const packageJsonSchema = z.looseObject({
   dependencies: z.record(z.string(), z.any()),
 })
 
-const backPackageJsonRawParsedResult =
-  packageJsonSchema.safeParse(backPackageJsonRaw)
+const packageJsonRawParsedResult = packageJsonSchema.safeParse(packageJsonRaw)
 
-if (backPackageJsonRawParsedResult.success === false) {
+if (packageJsonRawParsedResult.success === false) {
   throw new Error('package.json is broken')
 }
 
 const packageDependencyList = Object.keys(
-  backPackageJsonRawParsedResult.data.dependencies,
+  packageJsonRawParsedResult.data.dependencies,
 )
 
-// Create a temporary entry file
-// Export all dependencies so esbuild creates a shared chunk for all deps
+console.info('\n🗣️  Compiling dependencies into separate chunk...')
+
+// Export all dependencies via temporary entry file to let esbuild create a shared chunk for all deps
 // Using export ensures esbuild doesn't tree-shake them away
-const reExportDependenciesContent = packageDependencyList
+const reExportFileContent = packageDependencyList
   .map((dep, index) => `export * as dep${index} from '${dep}';`)
   .join('\n')
 
-const dependenciesEntryPath = path.resolve(
-  rootPathAbsolute,
-  'back',
-  '.deps-entry.js',
-)
-
-writeFileSync(dependenciesEntryPath, reExportDependenciesContent)
-
-const indexTsPath = path.resolve(rootPathAbsolute, 'back', 'index.ts')
-const outDirPath = path.resolve(rootPathAbsolute, 'back/build')
+fs.writeFileSync(dependenciesEntryPath, reExportFileContent)
 
 await esbuild.build({
   entryPoints: [
@@ -54,6 +49,7 @@ await esbuild.build({
     dependenciesEntryPath, // Forces deps into shared chunk
   ],
   bundle: true,
+  nodePaths: [nodeModulesDirPath],
   platform: 'node',
   target: 'node22',
   format: 'esm',

@@ -1,9 +1,8 @@
 node_modules
 coverage
-/build/
 /front/build/
 /back/build/
-.DS_Store
+.deps-entry.js
 /test-results/
 /playwright-report/
 /blob-report/
@@ -14,3 +13,4 @@ tests/setup/authenticated_user.json
 tsconfig.tsbuildinfo
 .tsbuildinfo-back
 .tsbuildinfo-front
+.DS_Store
