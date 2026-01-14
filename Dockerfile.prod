@@ -13,34 +13,26 @@ RUN bun run install-ci
 # Copy rest of the code (this invalidates cache only when code changes)
 COPY . .
 
-# Build frontend only (backend runs from TypeScript directly!)
+# Build frontend
 RUN bun run build-front
+
+# Build backend (bundles everything into single file)
+RUN bun run build-back
 
 FROM oven/bun:1-alpine
 
 WORKDIR /app
 
-# Copy backend TypeScript source (no build needed!)
-COPY --from=builder /app/back ./back
+# Copy bundled backend code
+COPY --from=builder /app/back/build ./back/build
 
-# Copy shared utilities (used by backend)
-COPY --from=builder /app/shared ./shared
-
-# Copy built frontend code
+# Copy built frontend static assets
 COPY --from=builder /app/front/build ./front/build
 
-# Copy config and package files
-COPY --from=builder /app/package.json ./
-COPY --from=builder /app/bun.lock ./
-COPY --from=builder /app/config ./config
-COPY --from=builder /app/tsconfig.json ./
-
-# Install backend production dependencies only
-RUN cd /app/back && bun install --frozen-lockfile --production
 
 WORKDIR /app
 
 # Port 8080 is the standard for containerized apps and Cloud Run default
 EXPOSE 8080
 ENV NODE_ENV=production
-CMD ["bun", "run", "back/index.ts"]
+CMD ["bun", "run", "back/build/index.js"]
