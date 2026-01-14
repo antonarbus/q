@@ -1,13 +1,13 @@
-import { dirname } from 'node:path'
-import { fileURLToPath } from 'node:url'
+import path from 'node:path'
+import url from 'node:url'
 import basicSsl from '@vitejs/plugin-basic-ssl'
 import react from '@vitejs/plugin-react'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import { runtimeConfig } from './config/runtime' // relative imports, otherwise some scripts break
 import type { Plugin } from 'vite'
 
-const thisFilePath: string = fileURLToPath(import.meta.url)
-const thisDirPath: string = dirname(thisFilePath)
+const thisFilePath: string = url.fileURLToPath(import.meta.url)
+const thisDirPath: string = path.dirname(thisFilePath)
 
 /**
  * API routes are now properly separated:
