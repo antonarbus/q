@@ -7,7 +7,7 @@
 
 # Skip bucket creation for pilot (it uses prod's bucket which prod manages)
 resource "google_storage_bucket" "app_bucket" {
-  count = var.environment == "pilot" ? 0 : 1
+  count    = var.environment == "pilot" ? 0 : 1
   name     = var.storage_bucket_name
   location = var.storage_bucket_location
   project  = var.project_id
