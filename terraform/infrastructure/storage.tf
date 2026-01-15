@@ -2,9 +2,12 @@
 # GOOGLE CLOUD STORAGE - APPLICATION BUCKETS
 # ==============================================================================
 # Storage buckets for user-uploaded files (quotations, bookmarks, files)
-# Separate bucket per environment: dev, test, prod (pilot shares prod)
+# Separate bucket per environment: dev, test, prod (pilot shares prod's bucket)
+# Pilot skips bucket creation - prod manages the shared bucket
 
+# Skip bucket creation for pilot (it uses prod's bucket which prod manages)
 resource "google_storage_bucket" "app_bucket" {
+  count = var.environment == "pilot" ? 0 : 1
   name     = var.storage_bucket_name
   location = var.storage_bucket_location
   project  = var.project_id
@@ -61,21 +64,24 @@ resource "google_storage_bucket" "app_bucket" {
 
 # Allow Cloud Run to read files
 resource "google_storage_bucket_iam_member" "app_bucket_object_viewer" {
-  bucket = google_storage_bucket.app_bucket.name
+  count  = var.environment == "pilot" ? 0 : 1
+  bucket = google_storage_bucket.app_bucket[0].name
   role   = "roles/storage.objectViewer"
   member = "serviceAccount:${data.google_service_account.cloud_run_service.email}"
 }
 
 # Allow Cloud Run to create and update files
 resource "google_storage_bucket_iam_member" "app_bucket_object_creator" {
-  bucket = google_storage_bucket.app_bucket.name
+  count  = var.environment == "pilot" ? 0 : 1
+  bucket = google_storage_bucket.app_bucket[0].name
   role   = "roles/storage.objectCreator"
   member = "serviceAccount:${data.google_service_account.cloud_run_service.email}"
 }
 
 # Allow Cloud Run to delete files
 resource "google_storage_bucket_iam_member" "app_bucket_object_admin" {
-  bucket = google_storage_bucket.app_bucket.name
+  count  = var.environment == "pilot" ? 0 : 1
+  bucket = google_storage_bucket.app_bucket[0].name
   role   = "roles/storage.objectAdmin"
   member = "serviceAccount:${data.google_service_account.cloud_run_service.email}"
 }
@@ -87,7 +93,8 @@ resource "google_storage_bucket_iam_member" "app_bucket_object_admin" {
 # This allows Terraform to read and manage the bucket during CI/CD
 
 resource "google_storage_bucket_iam_member" "github_actions_bucket_viewer" {
-  bucket = google_storage_bucket.app_bucket.name
+  count  = var.environment == "pilot" ? 0 : 1
+  bucket = google_storage_bucket.app_bucket[0].name
   role   = "roles/storage.legacyBucketReader"
   member = "serviceAccount:${data.google_service_account.github_actions.email}"
 }

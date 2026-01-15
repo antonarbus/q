@@ -78,7 +78,8 @@ output "domain_app_output" {
 
 output "storage_bucket_name_output" {
   description = "GCS bucket for this environment"
-  value       = google_storage_bucket.app_bucket.name
+  # Pilot shares prod's bucket, so use var directly (bucket not managed by pilot state)
+  value = var.environment == "pilot" ? var.storage_bucket_name : google_storage_bucket.app_bucket[0].name
 }
 
 # Note: No database outputs as currently using MongoDB (external)
