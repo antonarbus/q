@@ -205,8 +205,12 @@ variable "github_repository" {
 # ==============================================================================
 # STORAGE BUCKETS
 # ==============================================================================
-# Bucket names are hardcoded in storage.tf (dev, test, prod)
-# Only location and CORS origins are configurable via tfvars
+
+variable "storage_bucket_name" {
+  description = "Name of the GCS storage bucket for this environment"
+  type        = string
+  # Value provided by config/*.tfvars file (from infraConfig.*.storageBucketName)
+}
 
 variable "storage_bucket_location" {
   description = "Location for the storage bucket (e.g., US, EU, us-central1)"

@@ -73,22 +73,12 @@ output "domain_app_output" {
 }
 
 # ==============================================================================
-# STORAGE BUCKETS
+# STORAGE BUCKET
 # ==============================================================================
 
-output "storage_bucket_dev_output" {
-  description = "GCS bucket for dev environment"
-  value       = google_storage_bucket.app_bucket["dev"].name
-}
-
-output "storage_bucket_test_output" {
-  description = "GCS bucket for test environment"
-  value       = google_storage_bucket.app_bucket["test"].name
-}
-
-output "storage_bucket_prod_output" {
-  description = "GCS bucket for prod environment (also used by pilot)"
-  value       = google_storage_bucket.app_bucket["prod"].name
+output "storage_bucket_name_output" {
+  description = "GCS bucket for this environment"
+  value       = google_storage_bucket.app_bucket.name
 }
 
 # Note: No database outputs as currently using MongoDB (external)

@@ -68,6 +68,7 @@ type InfraConfig = Record<
     cloudRunServiceName: string
     domain: string
     neonDatabaseName: string
+    storageBucketName: string
     environment: string
   }
 >
@@ -79,6 +80,7 @@ export const infraConfig = {
     cloudRunServiceName: `web-app-prod`,
     domain: DOMAIN,
     neonDatabaseName: 'prod', // Production database
+    storageBucketName: 'quotation-app-prod', // Also used by pilot
     environment: 'prod',
   },
   pilot: {
@@ -86,6 +88,7 @@ export const infraConfig = {
     cloudRunServiceName: `web-app-pilot`,
     domain: `pilot.${DOMAIN}`,
     neonDatabaseName: 'prod', // Shares production database
+    storageBucketName: 'quotation-app-prod', // Shares production bucket
     environment: 'pilot',
   },
   test: {
@@ -93,6 +96,7 @@ export const infraConfig = {
     cloudRunServiceName: `web-app-test`,
     domain: `test.${DOMAIN}`,
     neonDatabaseName: 'test', // Test database
+    storageBucketName: 'quotation-app-test',
     environment: 'test',
   },
   dev: {
@@ -100,6 +104,7 @@ export const infraConfig = {
     cloudRunServiceName: `web-app-dev`,
     domain: `dev.${DOMAIN}`,
     neonDatabaseName: 'dev', // Development database
+    storageBucketName: 'quotation-app-dev', // Also used by local and unknown
     environment: 'dev',
   },
 } as const satisfies InfraConfig

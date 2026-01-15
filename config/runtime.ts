@@ -1,4 +1,4 @@
-import { DOMAIN } from './infrastructure'
+import { DOMAIN, infraConfig } from './infrastructure'
 import { processEnv } from './processEnv'
 import { secret } from './secrets'
 
@@ -115,20 +115,20 @@ export const runtimeConfig = {
   storage: {
     get bucketName() {
       if (runtimeConfig.environment === 'prod') {
-        return 'app-prod'
+        return infraConfig.prod.storageBucketName
       }
 
       // same as in prod
       if (runtimeConfig.environment === 'pilot') {
-        return 'app-prod'
+        return infraConfig.pilot.storageBucketName
       }
 
       if (runtimeConfig.environment === 'test') {
-        return 'app-test'
+        return infraConfig.test.storageBucketName
       }
 
       // dev | local | unknown
-      return 'app-dev'
+      return infraConfig.dev.storageBucketName
     },
   },
 } as const
