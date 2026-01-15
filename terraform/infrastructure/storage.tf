@@ -5,13 +5,17 @@
 # Separate bucket per environment: dev, test, prod (pilot shares prod)
 
 locals {
-  bucket_environments = ["dev", "test", "prod"]
+  bucket_names = {
+    dev  = "app-dev"
+    test = "app-test"
+    prod = "app-prod"
+  }
 }
 
 resource "google_storage_bucket" "app_bucket" {
-  for_each = toset(local.bucket_environments)
+  for_each = local.bucket_names
 
-  name     = each.key
+  name     = each.value
   location = var.storage_bucket_location
   project  = var.project_id
 
@@ -67,7 +71,7 @@ resource "google_storage_bucket" "app_bucket" {
 
 # Allow Cloud Run to read files
 resource "google_storage_bucket_iam_member" "app_bucket_object_viewer" {
-  for_each = toset(local.bucket_environments)
+  for_each = local.bucket_names
 
   bucket = google_storage_bucket.app_bucket[each.key].name
   role   = "roles/storage.objectViewer"
@@ -76,7 +80,7 @@ resource "google_storage_bucket_iam_member" "app_bucket_object_viewer" {
 
 # Allow Cloud Run to create and update files
 resource "google_storage_bucket_iam_member" "app_bucket_object_creator" {
-  for_each = toset(local.bucket_environments)
+  for_each = local.bucket_names
 
   bucket = google_storage_bucket.app_bucket[each.key].name
   role   = "roles/storage.objectCreator"
@@ -85,7 +89,7 @@ resource "google_storage_bucket_iam_member" "app_bucket_object_creator" {
 
 # Allow Cloud Run to delete files
 resource "google_storage_bucket_iam_member" "app_bucket_object_admin" {
-  for_each = toset(local.bucket_environments)
+  for_each = local.bucket_names
 
   bucket = google_storage_bucket.app_bucket[each.key].name
   role   = "roles/storage.objectAdmin"
@@ -99,7 +103,7 @@ resource "google_storage_bucket_iam_member" "app_bucket_object_admin" {
 # This allows Terraform to read and manage the buckets during CI/CD
 
 resource "google_storage_bucket_iam_member" "github_actions_bucket_viewer" {
-  for_each = toset(local.bucket_environments)
+  for_each = local.bucket_names
 
   bucket = google_storage_bucket.app_bucket[each.key].name
   role   = "roles/storage.legacyBucketReader"

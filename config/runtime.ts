@@ -115,20 +115,20 @@ export const runtimeConfig = {
   storage: {
     get bucketName() {
       if (runtimeConfig.environment === 'prod') {
-        return 'prod'
+        return 'app-prod'
       }
 
       // same as in prod
       if (runtimeConfig.environment === 'pilot') {
-        return 'prod'
+        return 'app-prod'
       }
 
       if (runtimeConfig.environment === 'test') {
-        return 'test'
+        return 'app-test'
       }
 
       // dev | local | unknown
-      return 'dev'
+      return 'app-dev'
     },
   },
 } as const
