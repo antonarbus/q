@@ -4,8 +4,8 @@ import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { bucket } from '@back/shared/lib/google-cloud-storage'
 import type { NextFunction, Request, Response } from 'express'
-import { secret } from '@root/config/secrets'
 import { DOMAIN } from '@root/config/infrastructure'
+import { runtimeConfig } from '@root/config/runtime'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
 import {
@@ -62,7 +62,7 @@ export const setBucketCorsHandler: RouterHandler = async (req, res, next) => {
     },
   ])
 
-  console.info(`Bucket ${secret.BUCKET_NAME} CORS were updated`)
+  console.info(`Bucket ${runtimeConfig.storage.bucketName} CORS were updated`)
 
   return httpJsonResponse({
     statusCode: httpStatusCode.success200,

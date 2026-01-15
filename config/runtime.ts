@@ -112,4 +112,23 @@ export const runtimeConfig = {
       return secret.NEON_DATABASE_URL_DEV
     },
   },
+  storage: {
+    get bucketName() {
+      if (runtimeConfig.environment === 'prod') {
+        return 'prod'
+      }
+
+      // same as in prod
+      if (runtimeConfig.environment === 'pilot') {
+        return 'prod'
+      }
+
+      if (runtimeConfig.environment === 'test') {
+        return 'test'
+      }
+
+      // dev | local | unknown
+      return 'dev'
+    },
+  },
 } as const

@@ -73,15 +73,22 @@ output "domain_app_output" {
 }
 
 # ==============================================================================
-# STORAGE BUCKET
+# STORAGE BUCKETS
 # ==============================================================================
 
-output "storage_bucket_name_output" {
-  description = "Name of the GCS bucket for application file storage (shared across all environments)"
-  value       = google_storage_bucket.app_bucket.name
-  # Example: quotation-app-bucket
-  # This bucket is shared across all environments (dev, test, pilot, prod)
-  # Used for user-uploaded files, quotations, bookmarks, etc.
+output "storage_bucket_dev_output" {
+  description = "GCS bucket for dev environment"
+  value       = google_storage_bucket.app_bucket["dev"].name
+}
+
+output "storage_bucket_test_output" {
+  description = "GCS bucket for test environment"
+  value       = google_storage_bucket.app_bucket["test"].name
+}
+
+output "storage_bucket_prod_output" {
+  description = "GCS bucket for prod environment (also used by pilot)"
+  value       = google_storage_bucket.app_bucket["prod"].name
 }
 
 # Note: No database outputs as currently using MongoDB (external)

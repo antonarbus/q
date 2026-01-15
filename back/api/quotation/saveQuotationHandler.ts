@@ -3,6 +3,7 @@ import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
+import { runtimeConfig } from '@root/config/runtime'
 import { generateId } from '@root/shared/lib/nanoid'
 import {
   quotationsTable,
@@ -154,15 +155,26 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
 
     const quotationJson = JSON.stringify(quotation, null, 2)
 
-    await quotationFile.save(quotationJson).catch(() => {
-      messageList.push('Failed to save quotation to storage')
-
-      throw new HttpError<ErrorResBody['errorCode']>({
-        errorCode: 'QUOTATION_SAVE_FAILED',
-        statusCode: httpStatusCode.serverError500,
-        message: messageList.join(' | '),
+    await quotationFile
+      .save(quotationJson, {
+        metadata: {
+          contentType: 'application/json',
+          metadata: {
+            'entity-type': 'quotation',
+            'uploaded-by': userFromAccessToken.email,
+            environment: runtimeConfig.environment,
+          },
+        },
       })
-    })
+      .catch(() => {
+        messageList.push('Failed to save quotation to storage')
+
+        throw new HttpError<ErrorResBody['errorCode']>({
+          errorCode: 'QUOTATION_SAVE_FAILED',
+          statusCode: httpStatusCode.serverError500,
+          message: messageList.join(' | '),
+        })
+      })
 
     messageList.push('Quotation saved to storage')
 
@@ -219,15 +231,26 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
 
     const quotationJson = JSON.stringify(quotation, null, 2)
 
-    await file.save(quotationJson).catch(() => {
-      messageList.push('Failed to save quotation to storage')
-
-      throw new HttpError<ErrorResBody['errorCode']>({
-        errorCode: 'QUOTATION_SAVE_FAILED',
-        statusCode: httpStatusCode.serverError500,
-        message: messageList.join(' | '),
+    await file
+      .save(quotationJson, {
+        metadata: {
+          contentType: 'application/json',
+          metadata: {
+            'entity-type': 'quotation',
+            'uploaded-by': userFromAccessToken.email,
+            environment: runtimeConfig.environment,
+          },
+        },
       })
-    })
+      .catch(() => {
+        messageList.push('Failed to save quotation to storage')
+
+        throw new HttpError<ErrorResBody['errorCode']>({
+          errorCode: 'QUOTATION_SAVE_FAILED',
+          statusCode: httpStatusCode.serverError500,
+          message: messageList.join(' | '),
+        })
+      })
 
     messageList.push('Quotation saved to storage')
 
@@ -286,15 +309,26 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
 
     const quotationJson = JSON.stringify(quotation, null, 2)
 
-    await quotationFile.save(quotationJson).catch(() => {
-      messageList.push('Failed to save copied quotation to storage')
-
-      throw new HttpError<ErrorResBody['errorCode']>({
-        errorCode: 'QUOTATION_SAVE_FAILED',
-        statusCode: httpStatusCode.serverError500,
-        message: messageList.join(' | '),
+    await quotationFile
+      .save(quotationJson, {
+        metadata: {
+          contentType: 'application/json',
+          metadata: {
+            'entity-type': 'quotation',
+            'uploaded-by': userFromAccessToken.email,
+            environment: runtimeConfig.environment,
+          },
+        },
       })
-    })
+      .catch(() => {
+        messageList.push('Failed to save copied quotation to storage')
+
+        throw new HttpError<ErrorResBody['errorCode']>({
+          errorCode: 'QUOTATION_SAVE_FAILED',
+          statusCode: httpStatusCode.serverError500,
+          message: messageList.join(' | '),
+        })
+      })
 
     messageList.push('Copied quotation saved to storage')
 

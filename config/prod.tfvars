@@ -9,7 +9,6 @@ artifact_registry_name = "docker-images"
 docker_image_name = "web-app"
 github_actions_sa_name = "github-actions-sa"
 cloud_run_sa_name = "cloud-run-sa"
-storage_bucket_name = "quotation-app-bucket"
 storage_bucket_location = "US"
 storage_bucket_cors_origins = ["https://sendmequotation.today", "http://sendmequotation.today", "https://*.sendmequotation.today", "http://*.sendmequotation.today", "http://local.sendmequotation.today:3000", "https://local.sendmequotation.today:3000", "http://localhost:3000", "https://localhost:3000", "*"]
 min_instances = "0"

@@ -27,8 +27,7 @@ export const sharedInfraConfig = {
   githubActionsSaName: 'github-actions-sa',
   cloudRunSaName: 'cloud-run-sa',
 
-  // Storage Bucket (shared across all environments)
-  storageBucketName: 'quotation-app-bucket',
+  // Storage Bucket
   storageBucketLocation: 'US',
   storageBucketCorsOrigins: [
     'https://sendmequotation.today',

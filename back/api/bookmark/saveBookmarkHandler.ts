@@ -6,6 +6,7 @@ import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entity/user/get
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { db } from '@back/shared/lib/drizzle/db'
 import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
+import { runtimeConfig } from '@root/config/runtime'
 import type { NextFunction, Request, Response } from 'express'
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
@@ -131,15 +132,26 @@ export const saveBookmarkHandler: RouterHandler = async (req, res, next) => {
 
   const contents = JSON.stringify(bookmarkWithUpdatedTimestamps, null, 2)
 
-  await bookmarkFile.save(contents).catch(() => {
-    messageList.push('Failed to save bookmark in bucket')
-
-    throw new HttpError<ErrorResBody['errorCode']>({
-      errorCode: 'BOOKMARK_SAVE_FAILED',
-      statusCode: httpStatusCode.serverError500,
-      message: messageList.join(' | '),
+  await bookmarkFile
+    .save(contents, {
+      metadata: {
+        contentType: 'application/json',
+        metadata: {
+          'entity-type': 'bookmark',
+          'uploaded-by': userFromAccessToken.email,
+          environment: runtimeConfig.environment,
+        },
+      },
     })
-  })
+    .catch(() => {
+      messageList.push('Failed to save bookmark in bucket')
+
+      throw new HttpError<ErrorResBody['errorCode']>({
+        errorCode: 'BOOKMARK_SAVE_FAILED',
+        statusCode: httpStatusCode.serverError500,
+        message: messageList.join(' | '),
+      })
+    })
 
   messageList.push('Bookmark saved in storage')
 

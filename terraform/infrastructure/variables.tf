@@ -203,16 +203,10 @@ variable "github_repository" {
 }
 
 # ==============================================================================
-# STORAGE BUCKET
+# STORAGE BUCKETS
 # ==============================================================================
-
-variable "storage_bucket_name" {
-  description = "Name of the GCS bucket for application file storage"
-  type        = string
-  # This is a SHARED bucket across all environments
-  # The bucket stores user-uploaded files (quotations, bookmarks, etc.)
-  # Value provided by config/*.tfvars file
-}
+# Bucket names are hardcoded in storage.tf (dev, test, prod)
+# Only location and CORS origins are configurable via tfvars
 
 variable "storage_bucket_location" {
   description = "Location for the storage bucket (e.g., US, EU, us-central1)"

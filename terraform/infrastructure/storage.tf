@@ -1,12 +1,17 @@
 # ==============================================================================
-# GOOGLE CLOUD STORAGE - APPLICATION BUCKET
+# GOOGLE CLOUD STORAGE - APPLICATION BUCKETS
 # ==============================================================================
-# Storage bucket for user-uploaded files (quotations, bookmarks, etc.)
-# This is a SHARED bucket across all environments (dev, test, pilot, prod)
-# File isolation is handled at the application level, not infrastructure level
+# Storage buckets for user-uploaded files (quotations, bookmarks, files)
+# Separate bucket per environment: dev, test, prod (pilot shares prod)
+
+locals {
+  bucket_environments = ["dev", "test", "prod"]
+}
 
 resource "google_storage_bucket" "app_bucket" {
-  name     = var.storage_bucket_name
+  for_each = toset(local.bucket_environments)
+
+  name     = each.key
   location = var.storage_bucket_location
   project  = var.project_id
 
@@ -49,34 +54,40 @@ resource "google_storage_bucket" "app_bucket" {
   }
 
   labels = {
-    managed-by = "terraform"
-    purpose    = "application-storage"
-    shared     = "true" # Shared across all environments
+    managed-by  = "terraform"
+    purpose     = "application-storage"
+    environment = each.key
   }
 }
 
 # ==============================================================================
 # IAM PERMISSIONS - CLOUD RUN SERVICE ACCOUNT
 # ==============================================================================
-# Grant the Cloud Run service account permissions to manage files in the bucket
+# Grant the Cloud Run service account permissions to manage files in all buckets
 
 # Allow Cloud Run to read files
 resource "google_storage_bucket_iam_member" "app_bucket_object_viewer" {
-  bucket = google_storage_bucket.app_bucket.name
+  for_each = toset(local.bucket_environments)
+
+  bucket = google_storage_bucket.app_bucket[each.key].name
   role   = "roles/storage.objectViewer"
   member = "serviceAccount:${data.google_service_account.cloud_run_service.email}"
 }
 
 # Allow Cloud Run to create and update files
 resource "google_storage_bucket_iam_member" "app_bucket_object_creator" {
-  bucket = google_storage_bucket.app_bucket.name
+  for_each = toset(local.bucket_environments)
+
+  bucket = google_storage_bucket.app_bucket[each.key].name
   role   = "roles/storage.objectCreator"
   member = "serviceAccount:${data.google_service_account.cloud_run_service.email}"
 }
 
 # Allow Cloud Run to delete files
 resource "google_storage_bucket_iam_member" "app_bucket_object_admin" {
-  bucket = google_storage_bucket.app_bucket.name
+  for_each = toset(local.bucket_environments)
+
+  bucket = google_storage_bucket.app_bucket[each.key].name
   role   = "roles/storage.objectAdmin"
   member = "serviceAccount:${data.google_service_account.cloud_run_service.email}"
 }
@@ -85,10 +96,12 @@ resource "google_storage_bucket_iam_member" "app_bucket_object_admin" {
 # IAM PERMISSIONS - GITHUB ACTIONS SERVICE ACCOUNT
 # ==============================================================================
 # Grant GitHub Actions permission to view bucket configuration
-# This allows Terraform to read and manage the bucket during CI/CD
+# This allows Terraform to read and manage the buckets during CI/CD
 
 resource "google_storage_bucket_iam_member" "github_actions_bucket_viewer" {
-  bucket = google_storage_bucket.app_bucket.name
+  for_each = toset(local.bucket_environments)
+
+  bucket = google_storage_bucket.app_bucket[each.key].name
   role   = "roles/storage.legacyBucketReader"
   member = "serviceAccount:${data.google_service_account.github_actions.email}"
 }

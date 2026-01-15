@@ -1,8 +1,9 @@
 /* eslint-disable camelcase */
 import { Storage } from '@google-cloud/storage'
+import { runtimeConfig } from '@root/config/runtime'
 import { secret } from '@root/config/secrets'
 
-//* https://console.cloud.google.com/storage/browser/quotation-app-bucket
+//* https://console.cloud.google.com/storage/browser
 //* https://cloud.google.com/nodejs/docs/reference/storage/latest
 
 // Google Auth Library expects snake_case properties in the credentials object
@@ -29,21 +30,19 @@ const credentials: ServiceAccountCredentials = {
 
 const storageInstance = new Storage({ credentials })
 
-export const bucket = storageInstance.bucket(secret.BUCKET_NAME)
+export const bucket = storageInstance.bucket(runtimeConfig.storage.bucketName)
 
-const STORAGE_BASE_URL = `https://storage.googleapis.com/${secret.BUCKET_NAME}`
+type GetFileInfoProps = { id: string }
 
-type Props = { id: string }
-
-type Res = {
+type GetFileInfoRes = {
   path: string
   url: string
 }
 
-export const getFileInfo = (props: Props): Res => {
+export const getFileInfo = (props: GetFileInfoProps): GetFileInfoRes => {
   const fileInfo = {
     path: props.id,
-    url: `${STORAGE_BASE_URL}/${props.id}`,
+    url: `https://storage.googleapis.com/${runtimeConfig.storage.bucketName}/${props.id}`,
   }
 
   return fileInfo
