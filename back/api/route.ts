@@ -118,8 +118,8 @@ export const route = {
     description: 'Get user quotations list',
   },
   getQuotationListAll: {
-    path: '/api/quotations/all',
-    url: '/api/quotations/all',
+    path: '/api/admin/quotations',
+    url: '/api/admin/quotations',
     method: 'get',
     description: 'Get all quotations (admin only)',
   },
@@ -130,7 +130,7 @@ export const route = {
     description: 'Get unique quotation categories',
   },
   deleteQuotation: {
-    path: '/api/quotations/:id', // ! fixed
+    path: '/api/quotations/:id',
     url: (id: string) => `/api/quotations/${id}`,
     method: 'delete',
     description: 'Delete quotation',
@@ -155,8 +155,8 @@ export const route = {
     description: 'Get user bookmarks list',
   },
   getBookmarkListAll: {
-    path: '/api/bookmarks/all',
-    url: '/api/bookmarks/all',
+    path: '/api/admin/bookmarks',
+    url: '/api/admin/bookmarks',
     method: 'get',
     description: 'Get all bookmarks (admin only)',
   },
@@ -198,8 +198,8 @@ export const route = {
     description: 'Get user files list',
   },
   getFileListAll: {
-    path: '/api/files/all',
-    url: '/api/files/all',
+    path: '/api/admin/files',
+    url: '/api/admin/files',
     method: 'get',
     description: 'Get all files (admin only)',
   },
@@ -217,8 +217,8 @@ export const route = {
     description: 'Record unique daily visitor',
   },
   getUniqueDailyVisitors: {
-    path: '/api/visitors/daily',
-    url: '/api/visitors/daily',
+    path: '/api/admin/visitors/daily',
+    url: '/api/admin/visitors/daily',
     method: 'get',
     description: 'Get unique daily visitors stats (admin only)',
   },
