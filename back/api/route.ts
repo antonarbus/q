@@ -87,13 +87,13 @@ export const route = {
     description: 'Reset password via email link',
   },
   getUserList: {
-    path: '/api/users',
-    url: '/api/users',
+    path: '/api/admin/users',
+    url: '/api/admin/users',
     method: 'get',
     description: 'Get users list (admin only)',
   },
   deleteUser: {
-    path: '/api/users/:id',
+    path: '/api/admin/users/:id',
     url: (id: string) => `/api/users/${id}`,
     method: 'delete',
     description: 'Delete user (admin only)',

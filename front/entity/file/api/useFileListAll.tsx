@@ -38,12 +38,11 @@ export const useFileListAll = (): Res => {
             {
               url: route.getFileListAll.url,
               method: route.getFileListAll.method,
-              data: {
+              params: {
                 startRow: params.startRow,
                 endRow: params.endRow,
-                sortModel: params.sortModel,
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                filterModel: params.filterModel,
+                sortModel: JSON.stringify(params.sortModel),
+                filterModel: JSON.stringify(params.filterModel),
               },
             },
           )

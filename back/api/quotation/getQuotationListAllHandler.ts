@@ -10,30 +10,20 @@ import {
 import { db } from '@back/shared/lib/drizzle/db'
 import { and, asc, count, desc, ilike } from 'drizzle-orm'
 import type { ParamsDictionary } from 'express-serve-static-core'
-import type { ParsedQs } from 'qs'
 import {
   type HttpResponse,
   httpJsonResponse,
 } from '@back/shared/lib/express/httpResponse'
+import { z } from 'zod'
 
-type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
+type ReqBody = undefined
 
-type ReqBody = {
-  startRow: number
-  endRow: number
-  sortModel: {
-    colId: string
-    sort: 'asc' | 'desc'
-  }[]
-  filterModel: Record<
-    string,
-    {
-      filterType: string
-      type: string
-      filter: string
-    }
-  >
+type SearchQuery = {
+  startRow: string
+  endRow: string
+  sortModel: string
+  filterModel: string
 }
 
 export type ResBody = {
@@ -44,7 +34,7 @@ export type ResBody = {
 
 type ErrorResBody = {
   message: string
-  errorCode: ErrorCode | 'NO_PERMISSION_TO_VIEW' | 'UNHANDLED_ERROR'
+  errorCode: ErrorCode | 'NO_PERMISSION' | 'UNHANDLED_ERROR'
 }
 
 type RouterHandler = (
@@ -66,7 +56,7 @@ export const getQuotationListAllHandler: RouterHandler = async (
     messageList.push('No permission to view all quotations')
 
     throw new HttpError<ErrorResBody['errorCode']>({
-      errorCode: 'NO_PERMISSION_TO_VIEW',
+      errorCode: 'NO_PERMISSION',
       statusCode: httpStatusCode.forbidden403,
       message: messageList.join(' | '),
     })
@@ -74,7 +64,22 @@ export const getQuotationListAllHandler: RouterHandler = async (
 
   messageList.push('Super-admin access granted')
 
-  const sortConditions = req.body.sortModel
+  const sortModelSchema = z.array(
+    z.object({
+      colId: z.string(),
+      sort: z.enum(['asc', 'desc']),
+    }),
+  )
+
+  const sortModelParsed = sortModelSchema.safeParse(
+    JSON.parse(req.query.sortModel),
+  )
+
+  if (sortModelParsed.success === false) {
+    throw new Error('Invalid sortModel format', sortModelParsed.error)
+  }
+
+  const sortConditions = sortModelParsed.data
     .map((item) => {
       // eslint-disable-next-line
       const column = quotationsTable[item.colId as keyof typeof quotationsTable]
@@ -94,7 +99,24 @@ export const getQuotationListAllHandler: RouterHandler = async (
       Boolean(condition),
     )
 
-  const filterConditions = Object.entries(req.body.filterModel)
+  const filterModelSchema = z.record(
+    z.string(),
+    z.object({
+      filterType: z.string(),
+      type: z.string(),
+      filter: z.string(),
+    }),
+  )
+
+  const filterModelParsed = filterModelSchema.safeParse(
+    JSON.parse(req.query.filterModel),
+  )
+
+  if (filterModelParsed.success === false) {
+    throw new Error('Invalid filterModel format', filterModelParsed.error)
+  }
+
+  const filterConditions = Object.entries(filterModelParsed.data)
     .map(([field, filterDef]) => {
       // eslint-disable-next-line
       const column = quotationsTable[field as keyof typeof quotationsTable]
@@ -128,8 +150,8 @@ export const getQuotationListAllHandler: RouterHandler = async (
       : queryWithFilters
 
   const quotationListPromise = queryWithSort
-    .offset(req.body.startRow)
-    .limit(req.body.endRow - req.body.startRow)
+    .offset(Number(req.query.startRow))
+    .limit(Number(req.query.endRow) - Number(req.query.startRow))
 
   const baseCountQuery = db.select({ count: count() }).from(quotationsTable)
 

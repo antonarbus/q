@@ -71,11 +71,6 @@ export const getBookmarkListAllHandler: RouterHandler = async (
     }),
   )
 
-  // ? maybe it is not a good idea to pass parameters in search query params, coz they are strings
-  // ? to type we need to have parse it with schema, dah...
-  // ? body params via axios are easier, but this probably more semantic
-  // * but it is a good example how to do it
-
   const sortModelParsed = sortModelSchema.safeParse(
     JSON.parse(req.query.sortModel),
   )
