@@ -1,59 +1,51 @@
-import { asyncDelay } from '@shared/util/asyncDelay'
-import { type ComponentRef, type JSX, useRef } from 'react'
+import type { JSX } from 'react'
+import { TiptapExample } from './tiptap-example/TiptapExample'
+import { PlateExample } from './plate-example/PlateExample'
 
-const MIN_SPINNER_TIME = 400
-const SPINNER_DELAY = 200
-
-const sayHelloAfterDelay = async (): Promise<'Hello'> => {
-  await asyncDelay(300)
-
-  return 'Hello'
+const containerStyle: React.CSSProperties = {
+  maxWidth: 1200,
+  margin: '40px auto',
+  padding: '0 20px',
 }
 
-const checkWetherToShowSpinnerOrNot = async (): Promise<'show spinner'> => {
-  await asyncDelay(SPINNER_DELAY)
-
-  return 'show spinner'
+const gridStyle: React.CSSProperties = {
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
+  gap: 32,
 }
 
-const onClick = async (): Promise<void> => {
-  const res = await Promise.race([
-    checkWetherToShowSpinnerOrNot(),
-    sayHelloAfterDelay(),
-  ])
+const cardStyle: React.CSSProperties = {
+  padding: 20,
+  backgroundColor: '#fff',
+  borderRadius: 12,
+  boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+}
 
-  if (res !== 'show spinner') {
-    console.info('✅ Fast response, no spinner')
-    console.info(res)
-
-    return
-  }
-
-  if (res === 'show spinner') {
-    console.info('⏳ Show spinner')
-
-    const spinnerStart = Date.now()
-    const finalRes = await sayHelloAfterDelay()
-    const spinnerTime = Date.now() - spinnerStart
-    const remaining = MIN_SPINNER_TIME - spinnerTime
-
-    if (remaining > 0) {
-      console.info('⏳ Extend spinner a bit')
-      await asyncDelay(remaining) // ensure spinner is visible for min time
-    }
-
-    console.info('✅ Done:', finalRes)
-  }
+const titleStyle: React.CSSProperties = {
+  fontSize: 18,
+  fontWeight: 600,
+  marginBottom: 16,
+  color: '#374151',
 }
 
 export const TestPage = (): JSX.Element => {
-  const ref = useRef<ComponentRef<'div'>>(null)
-
   return (
-    <div ref={ref}>
-      <button onClick={onClick} type='button'>
-        Click me
-      </button>
+    <div style={containerStyle}>
+      <h1 style={{ fontSize: 24, fontWeight: 700, marginBottom: 32, color: '#111827' }}>
+        Editor Comparison
+      </h1>
+
+      <div style={gridStyle}>
+        <div style={cardStyle}>
+          <h2 style={titleStyle}>Tiptap (ProseMirror)</h2>
+          <TiptapExample />
+        </div>
+
+        <div style={cardStyle}>
+          <h2 style={titleStyle}>Plate (Slate)</h2>
+          <PlateExample />
+        </div>
+      </div>
     </div>
   )
 }
