@@ -6,7 +6,7 @@ services:
     build:
       dockerfile: ./Dockerfile.prod
     ports:
-      - "8080:8080"
+      - '8080:8080'
     volumes:
       # Mount local gcloud credentials for Secret Manager access during local testing
 
