@@ -232,13 +232,6 @@ variable "storage_bucket_cors_origins" {
 # NEON POSTGRESQL DATABASE
 # ==============================================================================
 
-variable "neon_api_key" {
-  description = "Neon API key for authentication"
-  type        = string
-  sensitive   = true
-  # Value provided by config/*.tfvars file (from secrets.ts)
-}
-
 variable "neon_project_id" {
   description = "Neon project ID (existing shared project across all environments)"
   type        = string

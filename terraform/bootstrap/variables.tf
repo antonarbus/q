@@ -203,12 +203,6 @@ variable "neon_database_name" {
   default     = null
 }
 
-variable "neon_api_key" {
-  description = "Not used in bootstrap but prevents warnings"
-  type        = string
-  default     = null
-}
-
 variable "storage_bucket_name" {
   description = "Not used in bootstrap but prevents warnings"
   type        = string

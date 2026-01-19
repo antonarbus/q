@@ -194,6 +194,13 @@ resource "google_secret_manager_secret_iam_member" "neon_api_key" {
   member    = "serviceAccount:${google_service_account.cloud_run_service.email}"
 }
 
+# GitHub Actions SA needs access to NEON_API_KEY for Terraform to configure Neon provider
+resource "google_secret_manager_secret_iam_member" "neon_api_key_github_actions" {
+  secret_id = google_secret_manager_secret.neon_api_key.id
+  role      = "roles/secretmanager.secretAccessor"
+  member    = "serviceAccount:${google_service_account.github_actions.email}"
+}
+
 resource "google_secret_manager_secret_iam_member" "neon_database_url_dev" {
   secret_id = google_secret_manager_secret.neon_database_url_dev.id
   role      = "roles/secretmanager.secretAccessor"
