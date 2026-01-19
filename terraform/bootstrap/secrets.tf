@@ -201,6 +201,12 @@ resource "google_secret_manager_secret_iam_member" "neon_api_key_github_actions"
   member    = "serviceAccount:${google_service_account.github_actions.email}"
 }
 
+resource "google_secret_manager_secret_iam_member" "neon_api_key_github_actions_viewer" {
+  secret_id = google_secret_manager_secret.neon_api_key.id
+  role      = "roles/secretmanager.viewer"
+  member    = "serviceAccount:${google_service_account.github_actions.email}"
+}
+
 resource "google_secret_manager_secret_iam_member" "neon_database_url_dev" {
   secret_id = google_secret_manager_secret.neon_database_url_dev.id
   role      = "roles/secretmanager.secretAccessor"
