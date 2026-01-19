@@ -44,7 +44,9 @@ type RouterHandler = (
 export const deleteUserHandler: RouterHandler = async (req, res, next) => {
   const messageList: string[] = []
 
-  const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({ req })
+  const userFromAccessToken = await getUserFromAccessTokenOrThrowUnauthorized({
+    req,
+  })
 
   const isOwner = userFromAccessToken.email === req.params.id
   const isSuperAdmin = userFromAccessToken.roles.includes('super-admin')

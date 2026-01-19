@@ -83,7 +83,7 @@ export const logInHandler: RouterHandler = async (req, res, next) => {
 
   messageList.push('User found in database')
 
-  const userFromAccessToken = getUserFromAccessTokenOrNull({ req })
+  const userFromAccessToken = await getUserFromAccessTokenOrNull({ req })
   const rolesFromAccessToken = userFromAccessToken?.roles ?? []
   const emailFromAccessToken = userFromAccessToken?.email ?? 'unknown@gmail.com'
 
@@ -101,12 +101,12 @@ export const logInHandler: RouterHandler = async (req, res, next) => {
       verifyRefreshToken(userSelected.refreshJwtToken),
     )
 
-    const getRefreshToken = (): string => {
+    const getRefreshToken = async (): Promise<string> => {
       if (isExistingRefreshJwtTokenValid === true) {
         return userSelected.refreshJwtToken
       }
 
-      const refreshToken = generateRefreshToken({
+      const refreshToken = await generateRefreshToken({
         email: emailFromInput,
         roles: userSelected.roles,
       })
@@ -114,13 +114,13 @@ export const logInHandler: RouterHandler = async (req, res, next) => {
       return refreshToken.value
     }
 
-    const refreshJwtToken = getRefreshToken()
+    const refreshJwtToken = await getRefreshToken()
 
     const jwtRefreshTokenExpirationDays = getJwtExpirationInDays({
       token: refreshJwtToken,
     })
 
-    const accessToken = generateAccessToken({
+    const accessToken = await generateAccessToken({
       email: emailFromInput,
       roles: userSelected.roles,
     })
@@ -220,12 +220,12 @@ export const logInHandler: RouterHandler = async (req, res, next) => {
     verifyRefreshToken(userSelected.refreshJwtToken),
   )
 
-  const getRefreshToken = (): string => {
+  const getRefreshToken = async (): Promise<string> => {
     if (isExistingRefreshJwtToken === true) {
       return userSelected.refreshJwtToken
     }
 
-    const refreshToken = generateRefreshToken({
+    const refreshToken = await generateRefreshToken({
       email: emailFromInput,
       roles: userSelected.roles,
     })
@@ -233,7 +233,7 @@ export const logInHandler: RouterHandler = async (req, res, next) => {
     return refreshToken.value
   }
 
-  const refreshJwtToken = getRefreshToken()
+  const refreshJwtToken = await getRefreshToken()
 
   const jwtRefreshTokenExpirationDays = getJwtExpirationInDays({
     token: refreshJwtToken,
@@ -264,7 +264,7 @@ export const logInHandler: RouterHandler = async (req, res, next) => {
 
   messageList.push('User logged in successfully')
 
-  const accessToken = generateAccessToken({
+  const accessToken = await generateAccessToken({
     email: emailFromInput,
     roles: userSelected.roles,
   })

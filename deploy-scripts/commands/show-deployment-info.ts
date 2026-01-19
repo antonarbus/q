@@ -1,6 +1,6 @@
 /* eslint-disable max-depth */
 import { $ } from 'bun'
-import { infraConfig } from '@root/config/infrastructure'
+import { infraConfig } from '@back/config/infrastructure'
 import { logger } from '../lib/output/logger'
 import type { DeployedEnvironment } from '@root/config/environment'
 

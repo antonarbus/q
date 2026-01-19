@@ -95,12 +95,12 @@ export const resetPasswordHandler: RouterHandler = async (req, res, next) => {
 
   messageList.push('Password encrypted')
 
-  const accessToken = generateAccessToken({
+  const accessToken = await generateAccessToken({
     email: emailFromInput,
     roles: userSelected.roles,
   })
 
-  const refreshToken = generateRefreshToken({
+  const refreshToken = await generateRefreshToken({
     email: emailFromInput,
     roles: userSelected.roles,
   })

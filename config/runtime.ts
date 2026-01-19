@@ -1,6 +1,5 @@
-import { DOMAIN, infraConfig } from './infrastructure'
+import { DOMAIN } from './domain'
 import { processEnv } from './processEnv'
-import { secret } from './secrets'
 
 export const runtimeConfig = {
   nodeEnv: processEnv.NODE_ENV,
@@ -91,44 +90,6 @@ export const runtimeConfig = {
     },
     get baseUrlPreview() {
       return `${this.protocol}://${this.hostname}:${this.portPreview}` as const
-    },
-  },
-  database: {
-    get url() {
-      if (runtimeConfig.environment === 'prod') {
-        return secret.NEON_DATABASE_URL_PROD
-      }
-
-      // same as in prod
-      if (runtimeConfig.environment === 'pilot') {
-        return secret.NEON_DATABASE_URL_PROD
-      }
-
-      if (runtimeConfig.environment === 'test') {
-        return secret.NEON_DATABASE_URL_TEST
-      }
-
-      // dev | local | unknown
-      return secret.NEON_DATABASE_URL_DEV
-    },
-  },
-  storage: {
-    get bucketName() {
-      if (runtimeConfig.environment === 'prod') {
-        return infraConfig.prod.storageBucketName
-      }
-
-      // same as in prod
-      if (runtimeConfig.environment === 'pilot') {
-        return infraConfig.pilot.storageBucketName
-      }
-
-      if (runtimeConfig.environment === 'test') {
-        return infraConfig.test.storageBucketName
-      }
-
-      // dev | local | unknown
-      return infraConfig.dev.storageBucketName
     },
   },
 } as const

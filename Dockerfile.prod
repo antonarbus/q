@@ -16,21 +16,23 @@ COPY . .
 # Build frontend
 RUN bun run build-front
 
-# Build backend (bundles everything into single file)
+# Build backend (bundles custom code, dependencies are external)
 RUN bun run build-back
 
 FROM oven/bun:1-alpine
 
 WORKDIR /app
 
+# Install backend production dependencies only
+COPY back/package.json ./
+
+RUN bun install --production
+
 # Copy bundled backend code
 COPY --from=builder /app/back/build ./back/build
 
 # Copy built frontend static assets
 COPY --from=builder /app/front/build ./front/build
-
-
-WORKDIR /app
 
 # Port 8080 is the standard for containerized apps and Cloud Run default
 EXPOSE 8080

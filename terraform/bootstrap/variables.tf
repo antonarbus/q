@@ -130,3 +130,94 @@ variable "environment" {
   type        = string
   default     = null
 }
+
+variable "gcp_service_account_type" {
+  description = "GCP service account type - not used in bootstrap but prevents warnings"
+  type        = string
+  default     = null
+}
+
+variable "gcp_service_account_client_email" {
+  description = "GCP service account client email - not used in bootstrap but prevents warnings"
+  type        = string
+  default     = null
+}
+
+variable "gcp_service_account_client_id" {
+  description = "GCP service account client ID - not used in bootstrap but prevents warnings"
+  type        = string
+  default     = null
+}
+
+variable "gcp_service_account_token_url" {
+  description = "GCP service account token URL - not used in bootstrap but prevents warnings"
+  type        = string
+  default     = null
+}
+
+variable "neon_org_id" {
+  description = "Not used in bootstrap but prevents warnings"
+  type        = string
+  default     = null
+}
+
+variable "neon_project_id" {
+  description = "Not used in bootstrap but prevents warnings"
+  type        = string
+  default     = null
+}
+
+variable "neon_project_name" {
+  description = "Not used in bootstrap but prevents warnings"
+  type        = string
+  default     = null
+}
+
+variable "neon_region" {
+  description = "Not used in bootstrap but prevents warnings"
+  type        = string
+  default     = null
+}
+
+variable "neon_pg_version" {
+  description = "Not used in bootstrap but prevents warnings"
+  type        = string
+  default     = null
+}
+
+variable "neon_min_cu" {
+  description = "Not used in bootstrap but prevents warnings"
+  type        = string
+  default     = null
+}
+
+variable "neon_max_cu" {
+  description = "Not used in bootstrap but prevents warnings"
+  type        = string
+  default     = null
+}
+
+variable "neon_database_name" {
+  description = "Not used in bootstrap but prevents warnings"
+  type        = string
+  default     = null
+}
+
+variable "storage_bucket_name" {
+  description = "Not used in bootstrap but prevents warnings"
+  type        = string
+  default     = null
+}
+
+variable "storage_bucket_location" {
+  description = "Not used in bootstrap but prevents warnings"
+  type        = string
+  default     = null
+}
+
+variable "storage_bucket_cors_origins" {
+  description = "Not used in bootstrap but prevents warnings"
+  type        = list(string)
+  default     = null
+}
+

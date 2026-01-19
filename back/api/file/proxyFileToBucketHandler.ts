@@ -6,7 +6,7 @@ import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { db } from '@back/shared/lib/drizzle/db'
-import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
+import { getBucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import { runtimeConfig } from '@root/config/runtime'
 import { eq } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
@@ -81,6 +81,7 @@ export const proxyFileToBucketHandler: RouterHandler = async (req, res) => {
   messageList.push('File found in database')
 
   try {
+    const bucket = await getBucket()
     const fileInfo = getFileInfo({ id: req.params.id })
     const file = bucket.file(fileInfo.path) // Get reference to the file in the bucket
 

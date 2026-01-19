@@ -46,7 +46,7 @@ export const getAccessTokenHandler: RouterHandler = async (req, res, next) => {
   const messageList: string[] = []
 
   // User perviously logged in
-  const userFromRefreshToken = getUserFromRefreshTokenOrNull({ req })
+  const userFromRefreshToken = await getUserFromRefreshTokenOrNull({ req })
 
   if (userFromRefreshToken === null) {
     messageList.push('No refresh token found')
@@ -120,7 +120,7 @@ export const getAccessTokenHandler: RouterHandler = async (req, res, next) => {
     messageList.push('loggedAt updated')
   }
 
-  const accessToken = generateAccessToken({
+  const accessToken = await generateAccessToken({
     email: userFromRefreshToken.email,
     roles: userFromRefreshToken.roles,
   })

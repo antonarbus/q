@@ -1,0 +1,52 @@
+import { SecretManagerServiceClient } from '@google-cloud/secret-manager'
+import { sharedInfraConfig } from '@back/config/infrastructure'
+
+type SecretName =
+  | 'JWT_ACCESS_SECRET'
+  | 'JWT_REFRESH_SECRET'
+  | 'MAILERSEND_API_KEY'
+  | 'NEON_API_KEY'
+  | 'NEON_DATABASE_URL_DEV'
+  | 'NEON_DATABASE_URL_TEST'
+  | 'NEON_DATABASE_URL_PROD'
+  | 'GOOGLE_CLOUD_PROJECT_PRIVATE_KEY_ID'
+  | 'GOOGLE_CLOUD_PROJECT_PRIVATE_KEY'
+
+const cachedSecrets: Record<SecretName, string | null> = {
+  JWT_ACCESS_SECRET: null,
+  JWT_REFRESH_SECRET: null,
+  MAILERSEND_API_KEY: null,
+  NEON_API_KEY: null,
+  NEON_DATABASE_URL_DEV: null,
+  NEON_DATABASE_URL_TEST: null,
+  NEON_DATABASE_URL_PROD: null,
+  GOOGLE_CLOUD_PROJECT_PRIVATE_KEY_ID: null,
+  GOOGLE_CLOUD_PROJECT_PRIVATE_KEY: null,
+}
+
+export const getSecret = async (secretName: SecretName): Promise<string> => {
+  if (cachedSecrets[secretName] !== null) {
+    return cachedSecrets[secretName]
+  }
+
+  const client = new SecretManagerServiceClient()
+
+  const [accessResponse] = await client.accessSecretVersion({
+    name: `projects/${sharedInfraConfig.projectId}/secrets/${secretName}/versions/latest`,
+  })
+
+  if (
+    // eslint-disable-next-line no-restricted-syntax
+    accessResponse.payload?.data === undefined ||
+    accessResponse.payload.data === null
+  ) {
+    throw new Error('Secrete not found')
+  }
+
+  const secreteValue = accessResponse.payload.data.toString('utf8')
+
+  // eslint-disable-next-line require-atomic-updates
+  cachedSecrets[secretName] = secreteValue
+
+  return secreteValue
+}

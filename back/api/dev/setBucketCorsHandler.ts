@@ -2,16 +2,16 @@ import { getUserFromRefreshTokenOrUnknownPerson } from '@back/entity/user/getUse
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
-import { bucket } from '@back/shared/lib/google-cloud-storage'
+import { getBucket } from '@back/shared/lib/google-cloud-storage'
 import type { NextFunction, Request, Response } from 'express'
-import { DOMAIN } from '@root/config/infrastructure'
-import { runtimeConfig } from '@root/config/runtime'
+import { storageConfig } from '@back/config/storage'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
 import {
   type HttpResponse,
   httpJsonResponse,
 } from '@back/shared/lib/express/httpResponse'
+import { DOMAIN } from '@root/config/domain'
 
 // https://cloud.google.com/storage/docs/samples/storage-cors-configuration#storage_cors_configuration-nodejs
 
@@ -33,7 +33,9 @@ type RouterHandler = (
 ) => Promise<HttpResponse<ResBody>>
 
 export const setBucketCorsHandler: RouterHandler = async (req, res, next) => {
-  const userFromRefreshToken = getUserFromRefreshTokenOrUnknownPerson({ req })
+  const userFromRefreshToken = await getUserFromRefreshTokenOrUnknownPerson({
+    req,
+  })
 
   if (userFromRefreshToken.roles.includes('super-admin') === false) {
     throw new HttpError<ErrorResBody['errorCode']>({
@@ -42,6 +44,8 @@ export const setBucketCorsHandler: RouterHandler = async (req, res, next) => {
       message: 'Forbidden - super admin access required',
     })
   }
+
+  const bucket = await getBucket()
 
   const corsUpdateRes = await bucket.setCorsConfiguration([
     {
@@ -62,7 +66,7 @@ export const setBucketCorsHandler: RouterHandler = async (req, res, next) => {
     },
   ])
 
-  console.info(`Bucket ${runtimeConfig.storage.bucketName} CORS were updated`)
+  console.info(`Bucket ${storageConfig.bucketName} CORS were updated`)
 
   return httpJsonResponse({
     statusCode: httpStatusCode.success200,

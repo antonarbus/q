@@ -2,12 +2,12 @@ import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entity/user/get
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
-import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
+import { getBucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import {
   type HttpResponse,
   httpJsonResponse,
 } from '@back/shared/lib/express/httpResponse'
-import { generateId } from '@root/shared/lib/nanoid'
+import { generateId } from '@back/shared/lib/nanoid'
 import type { NextFunction, Request, Response } from 'express'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
@@ -39,10 +39,11 @@ export const fileUploadSignedUrlHandler: RouterHandler = async (
   res,
   next,
 ) => {
-  getUserFromAccessTokenOrThrowUnauthorized({ req })
+  await getUserFromAccessTokenOrThrowUnauthorized({ req })
 
   const messageList: string[] = []
 
+  const bucket = await getBucket()
   const fileId = generateId()
   const fileInfo = getFileInfo({ id: fileId })
   const file = bucket.file(fileInfo.path)

@@ -5,7 +5,7 @@ import {
   timestamp,
   varchar,
 } from 'drizzle-orm/pg-core'
-import { generateId } from '@root/shared/lib/nanoid'
+import { generateId } from '@back/shared/lib/nanoid'
 
 export const filesTable = pgTable(
   'files',

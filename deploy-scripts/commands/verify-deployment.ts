@@ -1,5 +1,5 @@
 import { exit } from 'process'
-import { infraConfig } from '@root/config/infrastructure'
+import { infraConfig } from '@back/config/infrastructure'
 import { getCloudRunServiceUrl } from '../lib/gcloud/getCloudRunServiceUrl'
 import { rollbackCloudRunService } from '../lib/gcloud/rollbackCloudRunService'
 import { logger } from '../lib/output/logger'

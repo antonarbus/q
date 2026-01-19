@@ -44,7 +44,9 @@ type RouterHandler = (
 ) => Promise<HttpResponse<ResBody>>
 
 export const getFileListAllHandler: RouterHandler = async (req, res, next) => {
-  const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({ req })
+  const userFromAccessToken = await getUserFromAccessTokenOrThrowUnauthorized({
+    req,
+  })
 
   const messageList: string[] = []
 

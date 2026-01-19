@@ -1,15 +1,19 @@
 import jwt from 'jsonwebtoken'
-import { secret } from '@root/config/secrets'
 import { FIFTEEN_MIN_IN_SEC } from './const'
 import type { JwtPayloadExtended } from './types'
+import { getSecret } from '../secret-manager/getSecret'
 
 type Res = {
   value: string
   expiresOn: string
 }
 
-export const generateAccessToken = (payload: JwtPayloadExtended): Res => {
-  const value = jwt.sign(payload, secret.JWT_ACCESS_SECRET, {
+export const generateAccessToken = async (
+  payload: JwtPayloadExtended,
+): Promise<Res> => {
+  const JWT_ACCESS_SECRET = await getSecret('JWT_ACCESS_SECRET')
+
+  const value = jwt.sign(payload, JWT_ACCESS_SECRET, {
     expiresIn: FIFTEEN_MIN_IN_SEC,
   })
 

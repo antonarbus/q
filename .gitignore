@@ -14,3 +14,4 @@ tsconfig.tsbuildinfo
 .tsbuildinfo-back
 .tsbuildinfo-front
 .DS_Store
+terraform.tfvars

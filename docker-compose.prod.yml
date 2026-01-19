@@ -7,5 +7,31 @@ services:
       dockerfile: ./Dockerfile.prod
     ports:
       - '8080:8080'
+    volumes:
+      # Mount local gcloud credentials for Secret Manager access during local testing
+
+      # At local development (bun run dev)
+      # You've run gcloud auth application-default login at some point
+      # This saves credentials to ~/.config/gcloud/application_default_credentials.json
+      # Google client libraries automatically find this file and use it
+      #
+      # At Cloud Run (production)
+      #
+      # Google infrastructure provides credentials automatically via metadata server
+      # When you deploy, you assign a service account to the Cloud Run service
+      # The Google client libraries detect they're running on GCP and fetch credentials from http://metadata.google.internal/...
+      # No files needed - it just works
+      #
+      # The flow in Google client libraries:
+      # Check GOOGLE_APPLICATION_CREDENTIALS env var for cred file path, if no
+      # Check ~/.config/gcloud/application_default_credentials.json, if no
+      # Check GCP metadata server (only works on GCP infrastructure)
+      #
+      # Docker volume mount syntax: host_path:container_path:options
+      #
+      # ~/.config/gcloud - path on your Mac (source)
+      # /root/.config/gcloud - path inside container (destination)
+      # ro - read-only (container can't modify your credentials)
+      - ~/.config/gcloud:/root/.config/gcloud:ro
     environment:
       - ENVIRONMENT=local

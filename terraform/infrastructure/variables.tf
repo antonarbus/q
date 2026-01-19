@@ -232,13 +232,6 @@ variable "storage_bucket_cors_origins" {
 # NEON POSTGRESQL DATABASE
 # ==============================================================================
 
-variable "neon_api_key" {
-  description = "Neon API key for authentication"
-  type        = string
-  sensitive   = true
-  # Value provided by config/*.tfvars file (from secrets.ts)
-}
-
 variable "neon_project_id" {
   description = "Neon project ID (existing shared project across all environments)"
   type        = string
@@ -308,4 +301,34 @@ variable "neon_max_cu" {
   # Production: 2-4 CU or higher based on load
   # Value provided by config/*.tfvars file
   default = 1
+}
+
+# ==============================================================================
+# UNUSED VARIABLES (from shared config)
+# ==============================================================================
+# These variables exist in the shared config/*.tfvars files but are not used
+# in the infrastructure module. Declaring them here prevents Terraform warnings.
+
+variable "gcp_service_account_type" {
+  description = "GCP service account type - not used in infrastructure, only by app"
+  type        = string
+  default     = null
+}
+
+variable "gcp_service_account_client_email" {
+  description = "GCP service account client email - not used in infrastructure, only by app"
+  type        = string
+  default     = null
+}
+
+variable "gcp_service_account_client_id" {
+  description = "GCP service account client ID - not used in infrastructure, only by app"
+  type        = string
+  default     = null
+}
+
+variable "gcp_service_account_token_url" {
+  description = "GCP service account token URL - not used in infrastructure, only by app"
+  type        = string
+  default     = null
 }

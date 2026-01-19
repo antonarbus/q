@@ -2,7 +2,7 @@ import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entity/user/get
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
-import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
+import { getBucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import type { NextFunction, Request, Response } from 'express'
 import {
   quotationsTable,
@@ -40,7 +40,9 @@ type RouterHandler = (
 ) => Promise<HttpResponse<ResBody>>
 
 export const deleteQuotationHandler: RouterHandler = async (req, res, next) => {
-  const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({ req })
+  const userFromAccessToken = await getUserFromAccessTokenOrThrowUnauthorized({
+    req,
+  })
 
   const messageList: string[] = []
 
@@ -65,6 +67,7 @@ export const deleteQuotationHandler: RouterHandler = async (req, res, next) => {
 
   messageList.push('Quotation deleted from database')
 
+  const bucket = await getBucket()
   const fileInfo = getFileInfo({ id: req.params.id })
 
   await bucket

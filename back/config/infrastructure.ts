@@ -1,10 +1,7 @@
 // eslint-disable-next-line id-length
 import z from 'zod'
-import type { DeployedEnvironment } from './environment'
-import { secret } from './secrets'
-
-//* MODIFY
-export const DOMAIN = 'sendmequotation.today'
+import type { DeployedEnvironment } from '@root/config/environment'
+import { DOMAIN } from '@root/config/domain'
 
 //* MODIFY
 export const sharedInfraConfig = {
@@ -12,6 +9,13 @@ export const sharedInfraConfig = {
   projectId: 'quotationapp-8014c',
   projectNumber: '665701178658',
   region: 'us-central1',
+
+  // Google Cloud Service Account (non-sensitive, secrets in secrets.ts)
+  gcpServiceAccountType: 'service_account',
+  gcpServiceAccountClientEmail:
+    'cloud-storage-service-account@quotationapp-8014c.iam.gserviceaccount.com',
+  gcpServiceAccountClientId: '106875911907528867969',
+  gcpServiceAccountTokenUrl: 'https://oauth2.googleapis.com/token',
 
   // GitHub
   githubRepository: 'antonarbus/q',
@@ -52,7 +56,7 @@ export const sharedInfraConfig = {
   // Neon PostgreSQL Database
   // NOTE: One shared project across all environments
   // Each environment has its own database within the shared project
-  neonApiKey: secret.NEON_API_KEY, // API key from secrets.ts
+  // neonApiKey is in secrets.ts (not exposed to frontend)
   neonProjectId: 'noisy-water-33471538', // Shared project ID
   neonOrgId: 'org-winter-tree-49001956', // Organization ID
   neonProjectName: 'q', // Project name (for reference)

@@ -4,7 +4,7 @@ import {
 } from '@back/entity/user/db/usersTableSchema'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { sendEmail } from '@back/shared/lib/mailersend'
-import { generateId } from '@root/shared/lib/nanoid'
+import { generateId } from '@back/shared/lib/nanoid'
 import type { NextFunction, Request, Response } from 'express'
 import { runtimeConfig } from '@root/config/runtime'
 import { db } from '@back/shared/lib/drizzle/db'

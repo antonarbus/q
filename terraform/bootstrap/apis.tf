@@ -15,6 +15,7 @@ resource "google_project_service" "required_services" {
     "run.googleapis.com",              # Required for Cloud Run services
     "logging.googleapis.com",          # Required for Cloud Run logs
     "monitoring.googleapis.com",       # Required for Cloud Run metrics
+    "secretmanager.googleapis.com",    # Required for Secret Manager
   ])
 
   project            = var.project_id

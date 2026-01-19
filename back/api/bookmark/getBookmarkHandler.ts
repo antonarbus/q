@@ -6,7 +6,7 @@ import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entity/user/get
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { db } from '@back/shared/lib/drizzle/db'
 import { and, eq } from 'drizzle-orm'
-import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
+import { getBucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import { jsonParseOrNull } from '@back/shared/util/jsonParseOrNull'
 import type { NextFunction, Request, Response } from 'express'
 import { HttpError } from '@back/shared/errors/HttpError'
@@ -48,7 +48,9 @@ type RouterHandler = (
 ) => Promise<HttpResponse<ResBody>>
 
 export const getBookmarkHandler: RouterHandler = async (req, res, next) => {
-  const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({ req })
+  const userFromAccessToken = await getUserFromAccessTokenOrThrowUnauthorized({
+    req,
+  })
 
   const messageList: string[] = []
 
@@ -74,6 +76,7 @@ export const getBookmarkHandler: RouterHandler = async (req, res, next) => {
 
   messageList.push('Bookmark found in database')
 
+  const bucket = await getBucket()
   const bookmarkFileInfo = getFileInfo({ id: req.params.id })
 
   const [bookmarkFileBuffer] = await bucket

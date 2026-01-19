@@ -16,9 +16,9 @@ type Res = {
 }
 
 /** Used to get a user details for all protected routes where a user should be logged in */
-export const getUserFromAccessTokenOrThrowUnauthorized = (
+export const getUserFromAccessTokenOrThrowUnauthorized = async (
   props: Props,
-): Res => {
+): Promise<Res> => {
   const accessJwtToken = props.req.headers[headerName.accessJwtToken]
 
   if (typeof accessJwtToken !== 'string') {
@@ -29,7 +29,7 @@ export const getUserFromAccessTokenOrThrowUnauthorized = (
     })
   }
 
-  const jwtPayload = verifyAccessToken(accessJwtToken)
+  const jwtPayload = await verifyAccessToken(accessJwtToken)
 
   if (jwtPayload === undefined) {
     throw new HttpError({

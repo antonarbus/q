@@ -7,7 +7,7 @@ import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { db } from '@back/shared/lib/drizzle/db'
-import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
+import { getBucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import {
   type HttpResponse,
   httpJsonResponse,
@@ -45,7 +45,9 @@ type RouterHandler = (
 ) => Promise<HttpResponse<ResBody>>
 
 export const deleteFileHandler: RouterHandler = async (req, res, next) => {
-  const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({ req })
+  const userFromAccessToken = await getUserFromAccessTokenOrThrowUnauthorized({
+    req,
+  })
 
   const messageList: string[] = []
 
@@ -96,6 +98,7 @@ export const deleteFileHandler: RouterHandler = async (req, res, next) => {
     const fileInfo = getFileInfo({ id: req.params.id })
 
     try {
+      const bucket = await getBucket()
       const deleteFromBucketPromise = bucket.file(fileInfo.path).delete()
 
       const deleteFromDatabasePromise = db

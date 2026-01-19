@@ -6,7 +6,7 @@ import rowPriceHtml from '@entity/quotation/templates/rowPrice.html?raw'
 import rowQtyHtml from '@entity/quotation/templates/rowQty.html?raw'
 import type { RowBlock } from '@back/entity/quotation/schema'
 import { textSlice } from '@shared/lib/froala/textSlice'
-import { generateId } from '@root/shared/lib/nanoid'
+import { generateId } from '@front/shared/lib/nanoid'
 import { dispatch, getState } from '@shared/lib/redux'
 import type { MouseEvent } from 'react'
 

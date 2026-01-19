@@ -57,8 +57,15 @@ provider "google" {
 # ==============================================================================
 # Configure the Neon provider for PostgreSQL database
 # https://registry.terraform.io/providers/kislerdm/neon/latest/docs
+
+# Read Neon API key from GCP Secret Manager
+data "google_secret_manager_secret_version" "neon_api_key" {
+  secret  = "NEON_API_KEY"
+  project = var.project_id
+}
+
 provider "neon" {
-  api_key = var.neon_api_key # API key from config/*.tfvars (sourced from secrets.ts)
+  api_key = data.google_secret_manager_secret_version.neon_api_key.secret_data
 }
 
 # ==============================================================================

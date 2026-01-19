@@ -47,7 +47,7 @@ export const getUniqueDailyVisitorsHandler: RouterHandler = async (
 ) => {
   const messageList: string[] = []
 
-  const userFromAccessToken = getUserFromAccessTokenOrNull({ req })
+  const userFromAccessToken = await getUserFromAccessTokenOrNull({ req })
   const roles = userFromAccessToken?.roles ?? []
 
   if (roles.includes('super-admin') === false) {

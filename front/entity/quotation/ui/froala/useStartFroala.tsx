@@ -1,6 +1,6 @@
 /* eslint-disable */
 import type { FroalaEditorRef } from '@shared/lib/froala/froala'
-import { generateId } from '@root/shared/lib/nanoid'
+import { generateId } from '@front/shared/lib/nanoid'
 import type { KeyboardEvent, MouseEvent } from 'react'
 import { useEffectOnce } from 'react-use'
 import { useFroala } from '../../provider/FroalaProvider'

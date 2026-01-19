@@ -76,7 +76,7 @@ export const activateHandler: RouterHandler = async (req, res, next) => {
     })
   }
 
-  const refreshToken = generateRefreshToken({
+  const refreshToken = await generateRefreshToken({
     email: userSelected.email,
     roles: userSelected.roles,
   })
@@ -110,7 +110,7 @@ export const activateHandler: RouterHandler = async (req, res, next) => {
 
   messageList.push('Account activated')
 
-  const accessToken = generateAccessToken({
+  const accessToken = await generateAccessToken({
     email: userUpdated.email,
     roles: userUpdated.roles,
   })

@@ -1,6 +1,7 @@
 dist
 build
 node_modules
+gha-creds-*.json
 .terraform
 coverage
 *.min.js

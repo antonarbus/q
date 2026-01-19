@@ -2,7 +2,7 @@ import { getUserFromAccessTokenOrNull } from '@back/entity/user/getUserFromAcces
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
-import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
+import { getBucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import { jsonParseOrNull } from '@back/shared/util/jsonParseOrNull'
 import type { NextFunction, Request, Response } from 'express'
 import { db } from '@back/shared/lib/drizzle/db'
@@ -52,7 +52,7 @@ type RouterHandler = (
 ) => Promise<HttpResponse<ResBody>>
 
 export const getQuotationHandler: RouterHandler = async (req, res, next) => {
-  const userFromAccessToken = getUserFromAccessTokenOrNull({ req })
+  const userFromAccessToken = await getUserFromAccessTokenOrNull({ req })
 
   const messageList: string[] = []
 
@@ -151,6 +151,7 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
     }
   }
 
+  const bucket = await getBucket()
   const fileInfo = getFileInfo({ id: req.params.id })
 
   const [fileBuffer] = await bucket

@@ -3,7 +3,7 @@ import {
   type AllowedPromotionPath,
   allowedPromotionPath,
   allowedPromotionPathSchema,
-} from '@root/config/infrastructure'
+} from '@back/config/infrastructure'
 import type { DeployedEnvironment } from '@root/config/environment'
 
 type Props = {

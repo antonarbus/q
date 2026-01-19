@@ -1,3 +1,5 @@
+import { DOMAIN } from '@root/config/domain'
+
 /**
  * Removes a cookie by name, domain, and path.
  *
@@ -13,8 +15,6 @@ type Props = {
 }
 
 export const removeCookie = (props: Props): void => {
-  const DOMAIN = 'sendmequotation.today'
-
   // Set the cookie expiration to a date in the past
   let cookieString = `${props.name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${props.path ?? '/'};`
 
