@@ -2,7 +2,7 @@ import { getUserFromRefreshTokenOrUnknownPerson } from '@back/entity/user/getUse
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
-import { bucket } from '@back/shared/lib/google-cloud-storage'
+import { getBucket } from '@back/shared/lib/google-cloud-storage'
 import type { NextFunction, Request, Response } from 'express'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
@@ -30,7 +30,9 @@ type RouterHandler = (
 ) => Promise<HttpResponse<ResBody>>
 
 export const getBucketCorsHandler: RouterHandler = async (req, res, next) => {
-  const userFromRefreshToken = getUserFromRefreshTokenOrUnknownPerson({ req })
+  const userFromRefreshToken = await getUserFromRefreshTokenOrUnknownPerson({
+    req,
+  })
 
   if (userFromRefreshToken.roles.includes('super-admin') === false) {
     throw new HttpError<ErrorResBody['errorCode']>({
@@ -39,6 +41,8 @@ export const getBucketCorsHandler: RouterHandler = async (req, res, next) => {
       message: 'Forbidden - super admin access required',
     })
   }
+
+  const bucket = await getBucket()
 
   const [metadata] = await bucket.getMetadata()
   console.info(JSON.stringify(metadata, null, 2))

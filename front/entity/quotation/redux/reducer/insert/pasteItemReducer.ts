@@ -1,6 +1,6 @@
 import type { PastePos } from '@entity/copy/types'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { generateId } from '@root/shared/lib/nanoid'
+import { generateId } from '@front/shared/lib/nanoid'
 import type {
   BlockItem,
   Quotation,

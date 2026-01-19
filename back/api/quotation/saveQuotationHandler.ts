@@ -2,9 +2,9 @@ import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entity/user/get
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
-import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
+import { getBucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import { runtimeConfig } from '@root/config/runtime'
-import { generateId } from '@root/shared/lib/nanoid'
+import { generateId } from '@back/shared/lib/nanoid'
 import {
   quotationsTable,
   type SelectQuotation,
@@ -51,7 +51,9 @@ type RouterHandler = (
 ) => Promise<HttpResponse<ResBody>>
 
 export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
-  const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({ req })
+  const userFromAccessToken = await getUserFromAccessTokenOrThrowUnauthorized({
+    req,
+  })
 
   const messageList: string[] = []
 
@@ -142,6 +144,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
 
     messageList.push('Quotation saved to database')
 
+    const bucket = await getBucket()
     const fileInfo = getFileInfo({ id: quotationId })
     const quotationFile = bucket.file(fileInfo.path)
 
@@ -220,6 +223,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
 
     messageList.push('Quotation updated in database')
 
+    const bucket = await getBucket()
     const fileInfo = getFileInfo({ id: quotationValidationResult.data.id })
     const file = bucket.file(fileInfo.path)
 
@@ -296,6 +300,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
 
     messageList.push('Copied quotation saved to database')
 
+    const bucket = await getBucket()
     const fileInfo = getFileInfo({ id: newQuotationId })
     const quotationFile = bucket.file(fileInfo.path)
 

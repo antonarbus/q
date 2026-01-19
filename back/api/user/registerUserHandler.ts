@@ -5,7 +5,7 @@ import {
   generateRefreshToken,
 } from '@back/shared/lib/json-webtoken'
 import { sendEmail } from '@back/shared/lib/mailersend'
-import { generateId } from '@root/shared/lib/nanoid'
+import { generateId } from '@back/shared/lib/nanoid'
 import bcrypt from 'bcryptjs'
 import type { NextFunction, Request, Response } from 'express'
 import { runtimeConfig } from '@root/config/runtime'
@@ -88,7 +88,7 @@ export const registerUserHandler: RouterHandler = async (req, res, next) => {
   const passwordEncrypted = await bcrypt.hash(passwordFromInput, SALT_ROUNDS)
   const activationKey = generateId()
 
-  const refreshToken = generateRefreshToken({
+  const refreshToken = await generateRefreshToken({
     email: emailFromInput,
     roles: ['user'],
   })
@@ -134,7 +134,7 @@ export const registerUserHandler: RouterHandler = async (req, res, next) => {
       `,
   })
 
-  const accessToken = generateAccessToken({
+  const accessToken = await generateAccessToken({
     email: emailFromInput,
     roles: ['user'],
   })

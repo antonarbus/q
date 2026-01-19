@@ -48,7 +48,9 @@ export const getQuotationListAllHandler: RouterHandler = async (
   res,
   next,
 ) => {
-  const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({ req })
+  const userFromAccessToken = await getUserFromAccessTokenOrThrowUnauthorized({
+    req,
+  })
 
   const messageList: string[] = []
 

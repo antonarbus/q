@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken'
-import { secret } from '@root/config/secrets'
 import { THREE_MONTHS_IN_SEC } from './const'
 import { getJwtExpirationInDays } from './getJwtExpirationInDays'
 import type { JwtPayloadExtended } from './types'
+import { getSecret } from '../secret-manager/getSecret'
 
 type Res = {
   value: string
@@ -10,8 +10,12 @@ type Res = {
   expiresInDays: number
 }
 
-export const generateRefreshToken = (payload: JwtPayloadExtended): Res => {
-  const value = jwt.sign(payload, secret.JWT_REFRESH_SECRET, {
+export const generateRefreshToken = async (
+  payload: JwtPayloadExtended,
+): Promise<Res> => {
+  const JWT_REFRESH_SECRET = await getSecret('JWT_REFRESH_SECRET')
+
+  const value = jwt.sign(payload, JWT_REFRESH_SECRET, {
     expiresIn: THREE_MONTHS_IN_SEC,
   })
 

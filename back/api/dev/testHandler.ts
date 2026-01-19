@@ -31,7 +31,9 @@ type RouterHandler = (
 ) => Promise<HttpResponse<ResBody>>
 
 export const testHandler: RouterHandler = async (req, res, next) => {
-  const userFromRefreshToken = getUserFromRefreshTokenOrUnknownPerson({ req })
+  const userFromRefreshToken = await getUserFromRefreshTokenOrUnknownPerson({
+    req,
+  })
 
   const messageList: string[] = []
 

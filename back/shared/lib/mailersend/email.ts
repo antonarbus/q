@@ -1,10 +1,6 @@
 import { EmailParams, MailerSend, Recipient, Sender } from 'mailersend'
 import type { APIResponse } from 'mailersend/lib/services/request.service'
-import { secret } from '@root/config/secrets'
-
-const mailerSend: MailerSend = new MailerSend({
-  apiKey: secret.MAILERSEND_API_KEY,
-})
+import { getSecret } from '../secret-manager/getSecret'
 
 type Props = {
   to: string
@@ -13,6 +9,12 @@ type Props = {
 }
 
 export const sendEmail = async (props: Props): Promise<APIResponse> => {
+  const MAILERSEND_API_KEY = await getSecret('MAILERSEND_API_KEY')
+
+  const mailerSend: MailerSend = new MailerSend({
+    apiKey: MAILERSEND_API_KEY,
+  })
+
   try {
     const sentFrom = new Sender('info@sendmequotation.today')
 

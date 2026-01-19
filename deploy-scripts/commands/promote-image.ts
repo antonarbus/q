@@ -1,6 +1,6 @@
 import { $ } from 'bun'
 import { exit } from 'process'
-import { sharedInfraConfig } from '@root/config/infrastructure'
+import { sharedInfraConfig } from '@back/config/infrastructure'
 import { logToGithubOutput } from '../lib/output/logToGithubOutput'
 import { logger } from '../lib/output/logger'
 import type { DeployedEnvironment } from '@root/config/environment'

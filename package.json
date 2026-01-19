@@ -53,9 +53,6 @@
     "db-push-prod": "ENVIRONMENT=prod bun drizzle-kit push",
     "db-studio": "bun drizzle-kit studio"
   },
-  "dependencies": {
-    "nanoid": "^5.1.6"
-  },
   "devDependencies": {
     "@emotion/babel-plugin": "^11.13.5",
     "@emotion/react": "^11.14.0",

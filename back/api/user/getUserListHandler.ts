@@ -44,7 +44,9 @@ type RouterHandler = (
 export const getUserListHandler: RouterHandler = async (req, res, next) => {
   const messageList: string[] = []
 
-  const userFromAccessToken = getUserFromAccessTokenOrThrowUnauthorized({ req })
+  const userFromAccessToken = await getUserFromAccessTokenOrThrowUnauthorized({
+    req,
+  })
 
   if (userFromAccessToken.roles.includes('super-admin') === false) {
     messageList.push('User is not super admin')

@@ -1,1 +1,1 @@
-export { bucket, getFileInfo } from './storage'
+export { getBucket, getFileInfo } from './storage'

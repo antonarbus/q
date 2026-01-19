@@ -3,7 +3,7 @@ import textBlockContentHtml from '@entity/quotation/templates/textBlockContent.h
 import textBlockPreviewHtml from '@entity/quotation/templates/textBlockPreview.html?raw'
 import type { TextBlock } from '@back/entity/quotation/schema'
 import { textSlice } from '@shared/lib/froala/textSlice'
-import { generateId } from '@root/shared/lib/nanoid'
+import { generateId } from '@front/shared/lib/nanoid'
 import { dispatch, getState } from '@shared/lib/redux'
 import type { MouseEvent } from 'react'
 
