@@ -207,6 +207,30 @@ resource "google_secret_manager_secret_iam_member" "neon_api_key_github_actions_
   member    = "serviceAccount:${google_service_account.github_actions.email}"
 }
 
+# ==============================================================================
+# IAM - GRANT GITHUB ACTIONS ACCESS TO SECRETS (FOR CI/CD)
+# ==============================================================================
+# GitHub Actions needs access to secrets for e2e tests and code quality checks
+# that load config files which trigger Secret Manager access
+
+resource "google_secret_manager_secret_iam_member" "neon_database_url_dev_github_actions" {
+  secret_id = google_secret_manager_secret.neon_database_url_dev.id
+  role      = "roles/secretmanager.secretAccessor"
+  member    = "serviceAccount:${google_service_account.github_actions.email}"
+}
+
+resource "google_secret_manager_secret_iam_member" "jwt_access_github_actions" {
+  secret_id = google_secret_manager_secret.jwt_access.id
+  role      = "roles/secretmanager.secretAccessor"
+  member    = "serviceAccount:${google_service_account.github_actions.email}"
+}
+
+resource "google_secret_manager_secret_iam_member" "jwt_refresh_github_actions" {
+  secret_id = google_secret_manager_secret.jwt_refresh.id
+  role      = "roles/secretmanager.secretAccessor"
+  member    = "serviceAccount:${google_service_account.github_actions.email}"
+}
+
 resource "google_secret_manager_secret_iam_member" "neon_database_url_dev" {
   secret_id = google_secret_manager_secret.neon_database_url_dev.id
   role      = "roles/secretmanager.secretAccessor"
