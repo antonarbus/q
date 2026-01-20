@@ -1,6 +1,5 @@
 import type { JSX } from 'react'
 import { TiptapExample } from './tiptap-example/TiptapExample'
-import { PlateExample } from './plate-example/PlateExample'
 
 const containerStyle: React.CSSProperties = {
   maxWidth: 1200,
@@ -31,20 +30,8 @@ const titleStyle: React.CSSProperties = {
 export const TestPage = (): JSX.Element => {
   return (
     <div style={containerStyle}>
-      <h1 style={{ fontSize: 24, fontWeight: 700, marginBottom: 32, color: '#111827' }}>
-        Editor Comparison
-      </h1>
-
       <div style={gridStyle}>
-        <div style={cardStyle}>
-          <h2 style={titleStyle}>Tiptap (ProseMirror)</h2>
-          <TiptapExample />
-        </div>
-
-        <div style={cardStyle}>
-          <h2 style={titleStyle}>Plate (Slate)</h2>
-          <PlateExample />
-        </div>
+        <TiptapExample />
       </div>
     </div>
   )
