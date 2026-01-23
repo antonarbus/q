@@ -37,9 +37,7 @@ export const PriceTitle = (): JSX.Element => {
           return ''
         }
 
-        const titleHtml = priceBlock.title.html
-
-        return titleHtml
+        return priceBlock.title.html
       })()}
     />
   )
