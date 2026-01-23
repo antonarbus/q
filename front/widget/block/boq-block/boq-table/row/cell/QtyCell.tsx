@@ -70,6 +70,10 @@ export const QtyCell = (): JSX.Element => {
           rowIndex: row.index,
           cellKey: 'qty',
         })}
+        onContentChange={(params) => {
+          const html = params.editor.getHTML()
+          console.log(html)
+        }}
       />
       <Pin
         cellKey='qty'

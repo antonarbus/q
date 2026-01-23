@@ -35,6 +35,10 @@ export const Title = (): JSX.Element => {
         blockIndex: block.index,
         boqHeaderKey,
       })}
+      onContentChange={(params) => {
+        const html = params.editor.getHTML()
+        console.log(html)
+      }}
     />
   )
 }

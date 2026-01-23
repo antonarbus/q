@@ -1,6 +1,6 @@
 import type { JSX } from 'react'
 import { useState } from 'react'
-import type { UseEditorOptions } from '@tiptap/react'
+import type { EditorEvents, UseEditorOptions } from '@tiptap/react'
 import { useEditor, EditorContent, Editor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Underline from '@tiptap/extension-underline'
@@ -18,6 +18,7 @@ import { getTextBlockHtmlFromStore } from '@entity/quotation/redux/getter/getTex
 
 type Props = {
   content: UseEditorOptions['content']
+  onContentChange: (props: EditorEvents['update']) => void
 }
 
 export const TiptapExample = (props: Props): JSX.Element => {
@@ -35,6 +36,7 @@ export const TiptapExample = (props: Props): JSX.Element => {
         Placeholder.configure({ placeholder: 'Start typing...' }),
       ],
       content: props.content,
+      onUpdate: props.onContentChange,
     },
     [],
   )

@@ -42,6 +42,10 @@ export const QtyColumn = (): JSX.Element => {
           blockIndex: block.index,
           boqColumnKey: 'qty',
         })}
+        onContentChange={(params) => {
+          const html = params.editor.getHTML()
+          console.log(html)
+        }}
       />
     </ResizableColumn>
   )

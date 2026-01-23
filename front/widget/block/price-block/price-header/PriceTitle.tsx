@@ -39,6 +39,10 @@ export const PriceTitle = (): JSX.Element => {
 
         return priceBlock.title.html
       })()}
+      onContentChange={(params) => {
+        const html = params.editor.getHTML()
+        console.log(html)
+      }}
     />
   )
 }

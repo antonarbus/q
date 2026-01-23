@@ -46,6 +46,10 @@ export const ItemPriceCell = (): JSX.Element => {
       /> */}
       <TiptapExample
         content={getBookmarkedRowCellHtmlFromStore({ cellKey: 'itemPrice' })}
+        onContentChange={(params) => {
+          const html = params.editor.getHTML()
+          console.log(html)
+        }}
       />
     </Box>
   )

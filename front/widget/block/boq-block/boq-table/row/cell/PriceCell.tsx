@@ -85,6 +85,10 @@ export const PriceCell = (): JSX.Element => {
           cellKey: 'price',
           rowIndex: row.index,
         })}
+        onContentChange={(params) => {
+          const html = params.editor.getHTML()
+          console.log(html)
+        }}
       />
       <Pin
         cellKey='price'

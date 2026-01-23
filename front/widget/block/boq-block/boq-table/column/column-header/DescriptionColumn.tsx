@@ -45,6 +45,10 @@ export const DescriptionColumn = (): ReactNode => {
           blockIndex: block.index,
           boqColumnKey: 'description',
         })}
+        onContentChange={(params) => {
+          const html = params.editor.getHTML()
+          console.log(html)
+        }}
       />
     </ResizableColumn>
   )

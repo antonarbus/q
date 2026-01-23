@@ -42,6 +42,10 @@ export const PriceColumn = (): JSX.Element => {
           blockIndex: block.index,
           boqColumnKey: 'price',
         })}
+        onContentChange={(params) => {
+          const html = params.editor.getHTML()
+          console.log(html)
+        }}
       />
     </ResizableColumn>
   )

@@ -84,6 +84,10 @@ export const ItemPriceCell = (): JSX.Element => {
           cellKey: 'itemPrice',
           rowIndex: row.index,
         })}
+        onContentChange={(params) => {
+          const html = params.editor.getHTML()
+          console.log(html)
+        }}
       />
     </Box>
   )

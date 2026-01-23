@@ -60,6 +60,10 @@ export const TextBlock = (): JSX.Element => {
       /> */}
       <TiptapExample
         content={getTextBlockHtmlFromStore({ blockIndex: block.index })}
+        onContentChange={(params) => {
+          const html = params.editor.getHTML()
+          console.log(html)
+        }}
       />
     </BlockComp>
   )

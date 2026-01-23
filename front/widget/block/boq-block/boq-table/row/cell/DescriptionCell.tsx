@@ -67,6 +67,10 @@ export const DescriptionCell = (): JSX.Element => {
         cellKey: 'description',
         rowIndex: row.index,
       })}
+      onContentChange={(params) => {
+        const html = params.editor.getHTML()
+        console.log(html)
+      }}
     />
   )
 }
