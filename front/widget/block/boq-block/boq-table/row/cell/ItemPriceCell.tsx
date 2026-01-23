@@ -13,6 +13,7 @@ import {
   updateItemPriceCell,
 } from '@feature/blocks/update'
 import { Box } from '@mui/material'
+import { TiptapExample } from '@page/test-page/tiptap-example/TiptapExample'
 import type { JSX, MouseEvent } from 'react'
 
 export const ItemPriceCell = (): JSX.Element => {
@@ -28,7 +29,7 @@ export const ItemPriceCell = (): JSX.Element => {
 
   return (
     <Box sx={{ display: 'flex', position: 'relative' }}>
-      <Froala
+      {/* <Froala
         className='td itemPrice'
         editorRef={row.itemPriceCellEditorRef}
         htmlGetter={() =>
@@ -76,6 +77,13 @@ export const ItemPriceCell = (): JSX.Element => {
             rowIndex: row.index,
           })
         }}
+      /> */}
+      <TiptapExample
+        content={getCellHtmlFromStore({
+          blockIndex: block.index,
+          cellKey: 'itemPrice',
+          rowIndex: row.index,
+        })}
       />
     </Box>
   )

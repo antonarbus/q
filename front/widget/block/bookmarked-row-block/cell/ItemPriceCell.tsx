@@ -8,6 +8,7 @@ import { Froala } from '@entity/quotation/ui/froala/Froala'
 import { formatItemPriceCell } from '@feature/blocks/update/update-cell-at-bookmarked-row-block/item-price/formatItemPriceCell'
 import { updateItemPriceCell } from '@feature/blocks/update/update-cell-at-bookmarked-row-block/item-price/updateItemPriceCell'
 import { Box } from '@mui/material'
+import { TiptapExample } from '@page/test-page/tiptap-example/TiptapExample'
 import type { JSX } from 'react'
 
 export const ItemPriceCell = (): JSX.Element => {
@@ -21,7 +22,7 @@ export const ItemPriceCell = (): JSX.Element => {
 
   return (
     <Box sx={{ display: 'flex', position: 'relative' }}>
-      <Froala
+      {/* <Froala
         className='td itemPrice'
         editorRef={row.itemPriceCellEditorRef}
         htmlGetter={() =>
@@ -42,6 +43,9 @@ export const ItemPriceCell = (): JSX.Element => {
         style={cellStyle}
         sx={cellSx}
         wrapperStyles={stylesForResizableCell}
+      /> */}
+      <TiptapExample
+        content={getBookmarkedRowCellHtmlFromStore({ cellKey: 'itemPrice' })}
       />
     </Box>
   )

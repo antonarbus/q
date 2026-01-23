@@ -8,6 +8,7 @@ import { Froala } from '@entity/quotation/ui/froala/Froala'
 import { formatQtyCell } from '@feature/blocks/update/update-cell-at-bookmarked-row-block/qty/formatQtyCell'
 import { updateQtyCell } from '@feature/blocks/update/update-cell-at-bookmarked-row-block/qty/updateQtyCell'
 import { Box } from '@mui/material'
+import { TiptapExample } from '@page/test-page/tiptap-example/TiptapExample'
 import type { JSX } from 'react'
 
 export const QtyCell = (): JSX.Element => {
@@ -21,7 +22,7 @@ export const QtyCell = (): JSX.Element => {
 
   return (
     <Box sx={{ display: 'flex', position: 'relative' }}>
-      <Froala
+      {/* <Froala
         className='td qty'
         editorRef={row.qtyCellEditorRef}
         htmlGetter={() => getBookmarkedRowCellHtmlFromStore({ cellKey: 'qty' })}
@@ -38,6 +39,9 @@ export const QtyCell = (): JSX.Element => {
         style={cellStyle}
         sx={cellSx}
         wrapperStyles={stylesForResizableCell}
+      /> */}
+      <TiptapExample
+        content={getBookmarkedRowCellHtmlFromStore({ cellKey: 'qty' })}
       />
     </Box>
   )

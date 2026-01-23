@@ -7,6 +7,7 @@ import { updateColumnCell } from '@feature/blocks/update'
 import type { FroalaEditor } from '@shared/lib/froala/froala'
 import { type JSX, useRef } from 'react'
 import { ResizableColumn } from '../ResizableColumn'
+import { TiptapExample } from '@page/test-page/tiptap-example/TiptapExample'
 
 export const PriceColumn = (): JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)
@@ -18,7 +19,7 @@ export const PriceColumn = (): JSX.Element => {
       className='th price resizable'
       minWidth={columnMinWidth.price}
     >
-      <Froala
+      {/* <Froala
         editorRef={editorRef}
         htmlGetter={() =>
           getBoqColumnHtmlFromStore({
@@ -35,6 +36,12 @@ export const PriceColumn = (): JSX.Element => {
         }}
         placeholder='Price...'
         style={columnHeaderStyle}
+      /> */}
+      <TiptapExample
+        content={getBoqColumnHtmlFromStore({
+          blockIndex: block.index,
+          boqColumnKey: 'price',
+        })}
       />
     </ResizableColumn>
   )

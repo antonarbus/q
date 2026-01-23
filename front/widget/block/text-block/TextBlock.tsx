@@ -58,7 +58,9 @@ export const TextBlock = (): JSX.Element => {
         placeholder='Add text, tables, drop images, files, links, select to format...'
         style={textItemCellStyle}
       /> */}
-      <TiptapExample />
+      <TiptapExample
+        content={getTextBlockHtmlFromStore({ blockIndex: block.index })}
+      />
     </BlockComp>
   )
 }

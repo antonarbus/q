@@ -31,7 +31,7 @@ export const TestPage = (): JSX.Element => {
   return (
     <div style={containerStyle}>
       <div style={gridStyle}>
-        <TiptapExample />
+        <TiptapExample content='hello world' />
       </div>
     </div>
   )

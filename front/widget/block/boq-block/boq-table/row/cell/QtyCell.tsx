@@ -10,6 +10,7 @@ import { Pin, pinQtyCell } from '@feature/blocks/pin'
 import { tabFromQtyCell } from '@feature/blocks/tab-away-from-cell'
 import { formatQtyCell, updateQtyCell } from '@feature/blocks/update'
 import { Box } from '@mui/material'
+import { TiptapExample } from '@page/test-page/tiptap-example/TiptapExample'
 import type { JSX, MouseEvent } from 'react'
 
 export const QtyCell = (): JSX.Element => {
@@ -25,7 +26,7 @@ export const QtyCell = (): JSX.Element => {
 
   return (
     <Box sx={{ display: 'flex', position: 'relative' }}>
-      <Froala
+      {/* <Froala
         className='td qty'
         editorRef={row.qtyCellEditorRef}
         htmlGetter={() =>
@@ -62,6 +63,13 @@ export const QtyCell = (): JSX.Element => {
         style={cellStyle}
         sx={cellSx}
         wrapperStyles={stylesForResizableCell}
+      /> */}
+      <TiptapExample
+        content={getCellHtmlFromStore({
+          blockIndex: block.index,
+          rowIndex: row.index,
+          cellKey: 'qty',
+        })}
       />
       <Pin
         cellKey='qty'

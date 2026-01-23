@@ -1,6 +1,7 @@
 import type { JSX } from 'react'
 import { useState } from 'react'
-import { useEditor, EditorContent } from '@tiptap/react'
+import type { UseEditorOptions } from '@tiptap/react'
+import { useEditor, EditorContent, Editor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Underline from '@tiptap/extension-underline'
 import TextAlign from '@tiptap/extension-text-align'
@@ -11,10 +12,15 @@ import Highlight from '@tiptap/extension-highlight'
 import Image from '@tiptap/extension-image'
 import Placeholder from '@tiptap/extension-placeholder'
 import { FloatingMenu } from './FloatingMenu'
+import { getTextBlockHtmlFromStore } from '@entity/quotation/redux/getter/getTextBlockHtmlFromStore'
 
-const initialContent = `<p>This is <strong>Tiptap</strong></p>`
+// const initialContent = `<p>This is <strong>Tiptap</strong></p>`
 
-export const TiptapExample = (): JSX.Element => {
+type Props = {
+  content: UseEditorOptions['content']
+}
+
+export const TiptapExample = (props: Props): JSX.Element => {
   const editor = useEditor(
     {
       extensions: [
@@ -28,36 +34,34 @@ export const TiptapExample = (): JSX.Element => {
         Image,
         Placeholder.configure({ placeholder: 'Start typing...' }),
       ],
-      content: initialContent,
+      content: props.content,
     },
     [],
   )
 
   return (
-    <div
-      style={{
-        border: '1px solid #e5e7eb',
-      }}
-    >
+    <>
       <FloatingMenu editor={editor} />
       <EditorContent editor={editor} />
-      <button
-        type='button'
-        onClick={() => {
-          const html = editor.getHTML()
-          alert(html)
-        }}
-      >
-        Get html
-      </button>
-      <button
-        type='button'
-        onClick={() => {
-          editor.commands.setContent('<span style="color: red;">Hello</span>')
-        }}
-      >
-        Set html
-      </button>
-    </div>
+      {/* <div style={{ position: 'absolute', bottom: 0, right: 0 }}>
+        <button
+          type='button'
+          onClick={() => {
+            const html = editor.getHTML()
+            alert(html)
+          }}
+        >
+          Get html
+        </button>
+        <button
+          type='button'
+          onClick={() => {
+            editor.commands.setContent('<span style="color: red;">Hello</span>')
+          }}
+        >
+          Set html
+        </button>
+      </div> */}
+    </>
   )
 }

@@ -8,6 +8,7 @@ import { Froala } from '@entity/quotation/ui/froala/Froala'
 import { tabFromDescriptionCell } from '@feature/blocks/tab-away-from-cell'
 import { updateDescriptionCell } from '@feature/blocks/update'
 import { beforeUpload } from '@feature/file/upload-file'
+import { TiptapExample } from '@page/test-page/tiptap-example/TiptapExample'
 import type { JSX, KeyboardEvent } from 'react'
 
 export const DescriptionCell = (): JSX.Element => {
@@ -21,44 +22,51 @@ export const DescriptionCell = (): JSX.Element => {
   })
 
   return (
-    <Froala
-      beforeUpload={beforeUpload}
-      className='td description'
-      droppable
-      editorRef={row.descriptionCellEditorRef}
-      htmlGetter={() =>
-        getCellHtmlFromStore({
-          blockIndex: block.index,
-          cellKey: 'description',
-          rowIndex: row.index,
-        })
-      }
-      onContentChange={() => {
-        updateDescriptionCell({
-          blockIndex: block.index,
-          cellKey: 'description',
-          editorRef: row.descriptionCellEditorRef,
-          rowIndex: row.index,
-        })
-      }}
-      onKeydown={(event: KeyboardEvent) => {
-        tabFromDescriptionCell({
-          event,
-          itemPriceCellEditorRef: row.itemPriceCellEditorRef,
-          rowIndex: row.index,
-        })
-      }}
-      placeholder='Description...'
-      style={{
-        ...cellStyle,
-        textAlign: 'left',
-      }}
-      sx={{
-        '.fr-placeholder': {
-          left: 0,
-        },
-      }}
-      wrapperStyles={stylesForResizableCell}
+    // <Froala
+    //   beforeUpload={beforeUpload}
+    //   className='td description'
+    //   droppable
+    //   editorRef={row.descriptionCellEditorRef}
+    //   htmlGetter={() =>
+    //     getCellHtmlFromStore({
+    //       blockIndex: block.index,
+    //       cellKey: 'description',
+    //       rowIndex: row.index,
+    //     })
+    //   }
+    //   onContentChange={() => {
+    //     updateDescriptionCell({
+    //       blockIndex: block.index,
+    //       cellKey: 'description',
+    //       editorRef: row.descriptionCellEditorRef,
+    //       rowIndex: row.index,
+    //     })
+    //   }}
+    //   onKeydown={(event: KeyboardEvent) => {
+    //     tabFromDescriptionCell({
+    //       event,
+    //       itemPriceCellEditorRef: row.itemPriceCellEditorRef,
+    //       rowIndex: row.index,
+    //     })
+    //   }}
+    //   placeholder='Description...'
+    //   style={{
+    //     ...cellStyle,
+    //     textAlign: 'left',
+    //   }}
+    //   sx={{
+    //     '.fr-placeholder': {
+    //       left: 0,
+    //     },
+    //   }}
+    //   wrapperStyles={stylesForResizableCell}
+    // />
+    <TiptapExample
+      content={getCellHtmlFromStore({
+        blockIndex: block.index,
+        cellKey: 'description',
+        rowIndex: row.index,
+      })}
     />
   )
 }

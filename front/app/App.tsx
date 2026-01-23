@@ -1,6 +1,6 @@
+import './router'
 import './redux'
 import './queryClient'
-import './router'
 import './axiosWithAuth'
 import { ThemeProvider } from '@mui/material/styles'
 import { LocalizationProvider } from '@mui/x-date-pickers'

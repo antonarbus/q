@@ -6,6 +6,7 @@ import { Froala } from '@entity/quotation/ui/froala/Froala'
 import { updateSubtotalText } from '@feature/blocks/update'
 import type { FroalaEditor } from '@shared/lib/froala/froala'
 import { type JSX, useRef } from 'react'
+import { TiptapExample } from '@page/test-page/tiptap-example/TiptapExample'
 
 const boqHeaderKey: HeaderKey = 'subtotalText'
 
@@ -14,20 +15,26 @@ export const SubtotalText = (): JSX.Element => {
   const block = useBlock()
 
   return (
-    <Froala
-      editorRef={editorRef}
-      htmlGetter={() =>
-        getBoqHeaderHtmlFromStore({ blockIndex: block.index, boqHeaderKey })
-      }
-      onContentChange={() => {
-        updateSubtotalText({
-          editorRef,
-          blockIndex: block.index,
-          boqHeaderKey,
-        })
-      }}
-      placeholder='Subtotal...'
-      style={subTotalTextCellStyle}
+    // <Froala
+    //   editorRef={editorRef}
+    //   htmlGetter={() =>
+    //     getBoqHeaderHtmlFromStore({ blockIndex: block.index, boqHeaderKey })
+    //   }
+    //   onContentChange={() => {
+    //     updateSubtotalText({
+    //       editorRef,
+    //       blockIndex: block.index,
+    //       boqHeaderKey,
+    //     })
+    //   }}
+    //   placeholder='Subtotal...'
+    //   style={subTotalTextCellStyle}
+    // />
+    <TiptapExample
+      content={getBoqHeaderHtmlFromStore({
+        blockIndex: block.index,
+        boqHeaderKey,
+      })}
     />
   )
 }

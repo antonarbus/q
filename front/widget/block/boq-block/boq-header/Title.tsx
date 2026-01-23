@@ -6,6 +6,7 @@ import { Froala } from '@entity/quotation/ui/froala/Froala'
 import { updateTitle } from '@feature/blocks/update'
 import type { FroalaEditor } from '@shared/lib/froala/froala'
 import { type JSX, useRef } from 'react'
+import { TiptapExample } from '@page/test-page/tiptap-example/TiptapExample'
 
 const boqHeaderKey: HeaderKey = 'title'
 
@@ -14,20 +15,26 @@ export const Title = (): JSX.Element => {
   const block = useBlock()
 
   return (
-    <Froala
-      editorRef={editorRef}
-      htmlGetter={() =>
-        getBoqHeaderHtmlFromStore({ blockIndex: block.index, boqHeaderKey })
-      }
-      onContentChange={() => {
-        updateTitle({
-          blockIndex: block.index,
-          boqHeaderKey,
-          editorRef,
-        })
-      }}
-      placeholder='Title...'
-      style={titleCellStyle}
+    // <Froala
+    //   editorRef={editorRef}
+    //   htmlGetter={() =>
+    //     getBoqHeaderHtmlFromStore({ blockIndex: block.index, boqHeaderKey })
+    //   }
+    //   onContentChange={() => {
+    //     updateTitle({
+    //       blockIndex: block.index,
+    //       boqHeaderKey,
+    //       editorRef,
+    //     })
+    //   }}
+    //   placeholder='Title...'
+    //   style={titleCellStyle}
+    // />
+    <TiptapExample
+      content={getBoqHeaderHtmlFromStore({
+        blockIndex: block.index,
+        boqHeaderKey,
+      })}
     />
   )
 }
