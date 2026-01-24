@@ -29,12 +29,12 @@ export const Tiptap = (props: Props): JSX.Element => {
     {
       extensions: [
         StarterKit,
-        Underline,
+        // Underline,
         TextStyle,
         Color,
         Highlight.configure({ multicolor: true }),
         TextAlign.configure({ types: ['heading', 'paragraph'] }),
-        Link.configure({ openOnClick: false }),
+        // Link.configure({ openOnClick: false }),
         Image,
         Placeholder.configure({ placeholder: 'Start typing...' }),
       ],

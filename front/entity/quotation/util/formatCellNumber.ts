@@ -61,7 +61,7 @@ export const formatCellNumber = (props: Props): Res => {
     }),
   )
 
-  props.editorRef.current.commands.setContent(newHtml)
+  props.editorRef.current.commands.setContent(newHtml, { emitUpdate: false })
 
   return {
     didUpdate: true,

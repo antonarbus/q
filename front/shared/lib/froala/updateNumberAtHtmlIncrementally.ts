@@ -35,7 +35,7 @@ export const updateNumberAtHtmlIncrementally = (props: Props): void => {
         })
 
         setTimeout(() => {
-          props.editor.commands.setContent(updatedHtml)
+          props.editor.commands.setContent(updatedHtml, { emitUpdate: false })
 
           if (index === steps) {
             resolve('done')
@@ -53,7 +53,7 @@ export const updateNumberAtHtmlIncrementally = (props: Props): void => {
       newNumber: props.newNumber,
     })
 
-    props.editor.commands.setContent(finalHtml)
+    props.editor.commands.setContent(finalHtml, { emitUpdate: false })
   }
 
   setTimeout(() => {
