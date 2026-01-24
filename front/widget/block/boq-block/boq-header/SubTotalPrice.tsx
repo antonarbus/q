@@ -12,7 +12,7 @@ import {
   validatePrices,
 } from '@feature/blocks/update'
 import { type JSX, type MouseEvent, useRef } from 'react'
-import { TiptapExample } from '@page/test-page/tiptap-example/TiptapExample'
+import { Tiptap } from '@page/test-page/tiptap-example/Tiptap'
 
 const boqHeaderKey: HeaderKey = 'subTotalPrice'
 
@@ -31,42 +31,44 @@ export const SubTotalPrice = (): JSX.Element => {
   useUpdateSubtotal()
 
   return (
-    // <Froala
-    //   editorRef={boq.subTotalPriceEditorRef}
-    //   htmlGetter={() =>
-    //     getBoqHeaderHtmlFromStore({ blockIndex: block.index, boqHeaderKey })
-    //   }
-    //   onBlur={() => {
-    //     formatSubtotalPrice({
-    //       blockIndex: block.index,
-    //       subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
-    //     })
+    /*
+    <Froala
+      editorRef={boq.subTotalPriceEditorRef}
+      htmlGetter={() =>
+        getBoqHeaderHtmlFromStore({ blockIndex: block.index, boqHeaderKey })
+      }
+      onBlur={() => {
+        formatSubtotalPrice({
+          blockIndex: block.index,
+          subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
+        })
 
-    //     validatePrices({
-    //       blockIndex: block.index,
-    //       rowEditorRefs: boq.rowEditorRefs,
-    //       subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
-    //     })
-    //   }}
-    //   onClick={(event: MouseEvent) => {
-    //     showHidePricePins({
-    //       blockIndex: block.index,
-    //       event: event.nativeEvent,
-    //       hidePinsClickHandlerRef,
-    //       isInitClickRef,
-    //     })
-    //   }}
-    //   onContentChange={() => {
-    //     updateSubtotalPrice({
-    //       blockIndex: block.index,
-    //       rowEditorRefs: boq.rowEditorRefs,
-    //       subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
-    //     })
-    //   }}
-    //   placeholder='Price...'
-    //   style={subTotalPriceCellStyle}
-    // />
-    <TiptapExample
+        validatePrices({
+          blockIndex: block.index,
+          rowEditorRefs: boq.rowEditorRefs,
+          subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
+        })
+      }}
+      onClick={(event: MouseEvent) => {
+        showHidePricePins({
+          blockIndex: block.index,
+          event: event.nativeEvent,
+          hidePinsClickHandlerRef,
+          isInitClickRef,
+        })
+      }}
+      onContentChange={() => {
+        updateSubtotalPrice({
+          blockIndex: block.index,
+          rowEditorRefs: boq.rowEditorRefs,
+          subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
+        })
+      }}
+      placeholder='Price...'
+      style={subTotalPriceCellStyle}
+    />
+    */
+    <Tiptap
       content={getBoqHeaderHtmlFromStore({
         blockIndex: block.index,
         boqHeaderKey,

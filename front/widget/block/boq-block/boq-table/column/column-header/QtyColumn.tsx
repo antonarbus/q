@@ -7,7 +7,7 @@ import { updateColumnCell } from '@feature/blocks/update'
 import type { FroalaEditor } from '@shared/lib/froala/froala'
 import { type JSX, useRef } from 'react'
 import { ResizableColumn } from '../ResizableColumn'
-import { TiptapExample } from '@page/test-page/tiptap-example/TiptapExample'
+import { Tiptap } from '@page/test-page/tiptap-example/Tiptap'
 
 export const QtyColumn = (): JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)
@@ -37,7 +37,7 @@ export const QtyColumn = (): JSX.Element => {
         placeholder='Qty...'
         style={columnHeaderStyle}
       /> */}
-      <TiptapExample
+      <Tiptap
         content={getBoqColumnHtmlFromStore({
           blockIndex: block.index,
           boqColumnKey: 'qty',

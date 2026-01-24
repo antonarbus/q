@@ -1,5 +1,5 @@
 import type { JSX } from 'react'
-import { TiptapExample } from './tiptap-example/TiptapExample'
+import { Tiptap } from './tiptap-example/Tiptap'
 
 const containerStyle: React.CSSProperties = {
   maxWidth: 1200,
@@ -31,7 +31,7 @@ export const TestPage = (): JSX.Element => {
   return (
     <div style={containerStyle}>
       <div style={gridStyle}>
-        <TiptapExample
+        <Tiptap
           content='hello world'
           onContentChange={(params) => {
             console.log(params.editor.getHTML())

@@ -6,7 +6,7 @@ import {
   useUpdateTotalPriceIfPricesAboveWereChanged,
   validateTotalPrice,
 } from '@feature/blocks/update'
-import { TiptapExample } from '@page/test-page/tiptap-example/TiptapExample'
+import { Tiptap } from '@page/test-page/tiptap-example/Tiptap'
 import type { FroalaEditor } from '@shared/lib/froala/froala'
 import { type JSX, useRef } from 'react'
 
@@ -20,21 +20,23 @@ export const PriceValue = (): JSX.Element => {
   })
 
   return (
-    // <Froala
-    //   editorRef={editorRef}
-    //   htmlGetter={() => getPriceBlockHtmlFromStore({ blockIndex: block.index })}
-    //   onBlur={() => {
-    //     validateTotalPrice({ editorRef, blockIndex: block.index })
-    //   }}
-    //   onContentChange={() => {
-    //     updatePriceValue({ editorRef, blockIndex: block.index })
-    //   }}
-    //   onInitialized={() => {
-    //     validateTotalPrice({ editorRef, blockIndex: block.index })
-    //   }}
-    //   placeholder='Total price...'
-    // />
-    <TiptapExample
+    /*
+    <Froala
+      editorRef={editorRef}
+      htmlGetter={() => getPriceBlockHtmlFromStore({ blockIndex: block.index })}
+      onBlur={() => {
+        validateTotalPrice({ editorRef, blockIndex: block.index })
+      }}
+      onContentChange={() => {
+        updatePriceValue({ editorRef, blockIndex: block.index })
+      }}
+      onInitialized={() => {
+        validateTotalPrice({ editorRef, blockIndex: block.index })
+      }}
+      placeholder='Total price...'
+    />
+    */
+    <Tiptap
       content={getPriceBlockHtmlFromStore({ blockIndex: block.index })}
       onContentChange={(params) => {
         const html = params.editor.getHTML()

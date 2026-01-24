@@ -10,7 +10,7 @@ import { Pin, pinQtyCell } from '@feature/blocks/pin'
 import { tabFromQtyCell } from '@feature/blocks/tab-away-from-cell'
 import { formatQtyCell, updateQtyCell } from '@feature/blocks/update'
 import { Box } from '@mui/material'
-import { TiptapExample } from '@page/test-page/tiptap-example/TiptapExample'
+import { Tiptap } from '@page/test-page/tiptap-example/Tiptap'
 import type { JSX, MouseEvent } from 'react'
 
 export const QtyCell = (): JSX.Element => {
@@ -64,7 +64,7 @@ export const QtyCell = (): JSX.Element => {
         sx={cellSx}
         wrapperStyles={stylesForResizableCell}
       /> */}
-      <TiptapExample
+      <Tiptap
         content={getCellHtmlFromStore({
           blockIndex: block.index,
           rowIndex: row.index,

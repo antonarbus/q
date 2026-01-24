@@ -21,7 +21,7 @@ type Props = {
   onContentChange: (props: EditorEvents['update']) => void
 }
 
-export const TiptapExample = (props: Props): JSX.Element => {
+export const Tiptap = (props: Props): JSX.Element => {
   const editor = useEditor(
     {
       extensions: [

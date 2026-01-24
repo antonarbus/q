@@ -13,7 +13,7 @@ import {
   updateItemPriceCell,
 } from '@feature/blocks/update'
 import { Box } from '@mui/material'
-import { TiptapExample } from '@page/test-page/tiptap-example/TiptapExample'
+import { Tiptap } from '@page/test-page/tiptap-example/Tiptap'
 import type { JSX, MouseEvent } from 'react'
 
 export const ItemPriceCell = (): JSX.Element => {
@@ -78,7 +78,7 @@ export const ItemPriceCell = (): JSX.Element => {
           })
         }}
       /> */}
-      <TiptapExample
+      <Tiptap
         content={getCellHtmlFromStore({
           blockIndex: block.index,
           cellKey: 'itemPrice',

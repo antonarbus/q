@@ -7,7 +7,7 @@ import { cellStyle } from '@entity/quotation/style/cellStyle'
 import { Froala } from '@entity/quotation/ui/froala/Froala'
 import { updateDescriptionCell } from '@feature/blocks/update/update-cell-at-bookmarked-row-block/description/updateDescriptionCell'
 import { beforeUpload } from '@feature/file/upload-file'
-import { TiptapExample } from '@page/test-page/tiptap-example/TiptapExample'
+import { Tiptap } from '@page/test-page/tiptap-example/Tiptap'
 import type { JSX } from 'react'
 
 export const DescriptionCell = (): JSX.Element => {
@@ -44,7 +44,7 @@ export const DescriptionCell = (): JSX.Element => {
       wrapperStyles={stylesForResizableCell}
     />
     */
-    <TiptapExample
+    <Tiptap
       content={getBookmarkedRowCellHtmlFromStore({ cellKey: 'description' })}
       onContentChange={(params) => {
         const html = params.editor.getHTML()

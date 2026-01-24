@@ -7,7 +7,7 @@ import { updateColumnCell } from '@feature/blocks/update'
 import type { FroalaEditor } from '@shared/lib/froala/froala'
 import { type ReactNode, useRef } from 'react'
 import { ResizableColumn } from '../ResizableColumn'
-import { TiptapExample } from '@page/test-page/tiptap-example/TiptapExample'
+import { Tiptap } from '@page/test-page/tiptap-example/Tiptap'
 
 export const DescriptionColumn = (): ReactNode => {
   const editorRef = useRef<FroalaEditor | null>(null)
@@ -19,7 +19,8 @@ export const DescriptionColumn = (): ReactNode => {
       className='th description resizable'
       minWidth={columnMinWidth.description}
     >
-      {/* <Froala
+      {/* 
+      <Froala
         editorRef={editorRef}
         htmlGetter={() =>
           getBoqColumnHtmlFromStore({
@@ -39,8 +40,9 @@ export const DescriptionColumn = (): ReactNode => {
           ...columnHeaderStyle,
           textAlign: 'left',
         }}
-      /> */}
-      <TiptapExample
+      /> 
+      */}
+      <Tiptap
         content={getBoqColumnHtmlFromStore({
           blockIndex: block.index,
           boqColumnKey: 'description',

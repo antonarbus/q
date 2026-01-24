@@ -15,7 +15,7 @@ import { updateTextBlock } from '@feature/blocks/update'
 import { beforeUpload } from '@feature/file/upload-file'
 import { BookmarkBlockIcon } from '@feature/open-close/open-bookmark-modal'
 import { OpenInfoBlockModalIcon } from '@feature/open-close/open-info-modal'
-import { TiptapExample } from '@page/test-page/tiptap-example/TiptapExample'
+import { Tiptap } from '@page/test-page/tiptap-example/Tiptap'
 import { cls } from '@shared/cls'
 import { ItemActionButtonsLayout } from '@shared/layout/ItemActionButtonsLayout'
 import type { FroalaEditor } from '@shared/lib/froala/froala'
@@ -58,7 +58,7 @@ export const TextBlock = (): JSX.Element => {
         placeholder='Add text, tables, drop images, files, links, select to format...'
         style={textItemCellStyle}
       /> */}
-      <TiptapExample
+      <Tiptap
         content={getTextBlockHtmlFromStore({ blockIndex: block.index })}
         onContentChange={(params) => {
           const html = params.editor.getHTML()
