@@ -1,14 +1,14 @@
 /* eslint-disable */
-import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import { generateId } from '@front/shared/lib/nanoid'
 import type { KeyboardEvent, MouseEvent } from 'react'
 import { useEffectOnce } from 'react-use'
 import { useFroala } from '../../provider/FroalaProvider'
 import { froalaDefaultOptions } from './froalaDefaultOptions'
+import { EditorRef } from '@shared/lib/tiptap/types'
 
 declare const window: Window &
   typeof globalThis & {
-    froalas: FroalaEditorRef[]
+    froalas: EditorRef[]
   }
 
 window.froalas = []

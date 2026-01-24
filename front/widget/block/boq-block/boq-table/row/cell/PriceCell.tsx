@@ -87,8 +87,14 @@ export const PriceCell = (): JSX.Element => {
           rowIndex: row.index,
         })}
         onContentChange={(params) => {
-          const html = params.editor.getHTML()
-          console.log(html)
+          updatePriceCell({
+            blockIndex: block.index,
+            itemPriceCellEditorRef: row.itemPriceCellEditorRef,
+            priceCellEditorRef: row.priceCellEditorRef,
+            qtyCellEditorRef: row.qtyCellEditorRef,
+            rowIndex: row.index,
+            subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
+          })
         }}
       />
       <Pin

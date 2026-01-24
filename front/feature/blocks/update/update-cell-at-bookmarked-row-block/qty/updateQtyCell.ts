@@ -1,13 +1,13 @@
 import { BOOKMARK_POS_AT_BLOCKS } from '@entity/quotation/const/bookmarkPosAtBlocks'
 import { updateBookmarkedRowCellAtStore } from '@entity/quotation/redux/updater/updateBookmarkedRowCellAtStore'
 import { updateBookmarkedRowCellWithValue } from '@entity/quotation/util/updateBookmarkedRowCellWithValue'
-import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import { getState } from '@shared/lib/redux'
+import type { EditorRef } from '@shared/lib/tiptap/types'
 import { roundTo } from 'round-to'
 
 type Props = {
-  qtyCellEditorRef: FroalaEditorRef
-  priceCellEditorRef: FroalaEditorRef
+  qtyCellEditorRef: EditorRef
+  priceCellEditorRef: EditorRef
 }
 
 export const updateQtyCell = (props: Props): void => {
@@ -17,7 +17,7 @@ export const updateQtyCell = (props: Props): void => {
 
   updateBookmarkedRowCellAtStore({
     cellKey: 'qty',
-    html: props.qtyCellEditorRef.current.html.get(),
+    html: props.qtyCellEditorRef.current.getHTML(),
   })
 
   const block = getState().quotation.blocks[BOOKMARK_POS_AT_BLOCKS]

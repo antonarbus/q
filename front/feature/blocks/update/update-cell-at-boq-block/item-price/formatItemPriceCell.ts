@@ -1,8 +1,8 @@
 import { formatCellNumber } from '@entity/quotation/util/formatCellNumber'
-import type { FroalaEditorRef } from '@shared/lib/froala/froala'
+import type { EditorRef } from '@shared/lib/tiptap/types'
 
 type Props = {
-  itemPriceCellEditorRef: FroalaEditorRef
+  itemPriceCellEditorRef: EditorRef
   blockIndex: number
   rowIndex: number
 }

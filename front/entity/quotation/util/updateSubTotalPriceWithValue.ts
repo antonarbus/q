@@ -1,4 +1,4 @@
-import type { FroalaEditor } from '@shared/lib/froala/froala'
+import type { Editor } from '@tiptap/react'
 import { updateNumberAtHtml } from '@shared/lib/froala/updateNumberAtHtml'
 import { updateNumberAtHtmlIncrementally } from '@shared/lib/froala/updateNumberAtHtmlIncrementally'
 import { dispatch } from '@shared/lib/redux'
@@ -8,7 +8,7 @@ import { quotationSlice } from '../redux/quotationSlice'
 
 type Props = {
   blockIndex: number
-  subTotalPriceEditor: FroalaEditor | null
+  subTotalPriceEditor: Editor | null
   value: number
   incrementally: boolean
 }

@@ -1,9 +1,9 @@
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
-import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import { dispatch, getState } from '@shared/lib/redux'
+import type { EditorRef } from '@shared/lib/tiptap/types'
 
 type Props = {
-  editorRef: FroalaEditorRef
+  editorRef: EditorRef
   blockIndex: number
 }
 
@@ -19,7 +19,7 @@ export const updatePriceTitle = (props: Props): void => {
   }
 
   const prevHtml = priceBlock.title.html
-  const html = props.editorRef.current.html.get()
+  const html = props.editorRef.current.getHTML()
   const didTextChange = prevHtml !== html
 
   if (didTextChange === false) {

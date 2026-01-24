@@ -1,9 +1,9 @@
-import type { FroalaEditor } from '@shared/lib/froala/froala'
+import type { Editor } from '@tiptap/react'
 import type { CellKey } from '@back/entity/quotation/schema'
 import { getCellFromStore } from '../redux/getter/getCellFromStore'
 
 type Props = {
-  editor: FroalaEditor
+  editor: Editor
   blockIndex: number
   rowIndex: number
   cellKey: CellKey
@@ -13,7 +13,7 @@ type Props = {
 // https://github.com/froala/wysiwyg-editor/issues/3022
 
 export const didCellContentChange = (props: Props): boolean => {
-  const htmlOnDisplay = props.editor.html.get()
+  const htmlOnDisplay = props.editor.getHTML()
 
   const htmlFromStore = getCellFromStore({
     blockIndex: props.blockIndex,

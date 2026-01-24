@@ -72,8 +72,13 @@ export const QtyCell = (): JSX.Element => {
           cellKey: 'qty',
         })}
         onContentChange={(params) => {
-          const html = params.editor.getHTML()
-          console.log(html)
+          updateQtyCell({
+            blockIndex: block.index,
+            priceCellEditorRef: row.priceCellEditorRef,
+            qtyCellEditorRef: row.qtyCellEditorRef,
+            rowIndex: row.index,
+            subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
+          })
         }}
       />
       <Pin

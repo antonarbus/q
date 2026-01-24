@@ -1,4 +1,4 @@
-import type { FroalaEditor } from '@shared/lib/froala/froala'
+import type { Editor } from '@tiptap/react'
 import { updateNumberAtHtmlIncrementally } from '@shared/lib/froala/updateNumberAtHtmlIncrementally'
 import { getState } from '@shared/lib/redux'
 import { getNumberFromString } from '@shared/util/getNumberFromString'
@@ -9,7 +9,7 @@ import type { CellKey } from '@back/entity/quotation/schema'
 import { updateBookmarkedRowCellAtStore } from '../redux/updater/updateBookmarkedRowCellAtStore'
 
 type Props = {
-  editor: FroalaEditor | null
+  editor: Editor | null
   cellKey: CellKey
   value: number
 }

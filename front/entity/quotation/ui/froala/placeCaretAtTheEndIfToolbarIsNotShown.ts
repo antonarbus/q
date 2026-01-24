@@ -1,10 +1,10 @@
-import type { FroalaEditorRef } from '@shared/lib/froala/froala'
+import type { EditorRef } from '@shared/lib/tiptap/types'
 import type { ComponentRef, MouseEvent, RefObject } from 'react'
 
 type Props = {
   event: MouseEvent
   froalaElementRef: RefObject<ComponentRef<'div'> | null>
-  editorRef: FroalaEditorRef
+  editorRef: EditorRef
 }
 
 export const placeCaretAtTheEndIfToolbarIsNotShown = (props: Props): void => {

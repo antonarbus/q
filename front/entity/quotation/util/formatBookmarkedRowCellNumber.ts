@@ -1,14 +1,14 @@
-import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import { dispatch, getState } from '@shared/lib/redux'
 import { getStringWithNewFormattedNumber } from '@shared/util/getStringWithNewFormattedNumber'
 import { roundTo } from 'round-to'
 import { BOOKMARK_POS_AT_BLOCKS } from '../const/bookmarkPosAtBlocks'
 import type { CellKey } from '@back/entity/quotation/schema'
 import { quotationSlice } from '../redux/quotationSlice'
+import type { EditorRef } from '@shared/lib/tiptap/types'
 
 type Props = {
   cellKey: CellKey
-  editorRef: FroalaEditorRef
+  editorRef: EditorRef
   roundToTwoDecimals: boolean
 }
 

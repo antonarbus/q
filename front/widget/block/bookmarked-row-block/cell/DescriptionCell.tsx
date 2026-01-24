@@ -48,11 +48,9 @@ export const DescriptionCell = (): JSX.Element => {
       editorRef={row.descriptionCellEditorRef}
       content={getBookmarkedRowCellHtmlFromStore({ cellKey: 'description' })}
       onContentChange={(params) => {
-        const html = params.editor.getHTML()
-
-        // updateDescriptionCell({
-        //   editorRef: row.descriptionCellEditorRef,
-        // })
+        updateDescriptionCell({
+          editorRef: row.descriptionCellEditorRef,
+        })
       }}
     />
   )

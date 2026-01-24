@@ -1,8 +1,6 @@
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
-import { Froala } from '@entity/quotation/ui/froala/Froala'
 import { updatePriceTitle } from '@feature/blocks/update'
 import { Tiptap } from '@page/test-page/tiptap-example/Tiptap'
-import type { FroalaEditor } from '@shared/lib/froala/froala'
 import { getState } from '@shared/lib/redux'
 import { type JSX, useRef } from 'react'
 import type { Editor } from '@tiptap/react'
@@ -44,8 +42,7 @@ export const PriceTitle = (): JSX.Element => {
         return priceBlock.title.html
       })()}
       onContentChange={(params) => {
-        const html = params.editor.getHTML()
-        console.log(html)
+        updatePriceTitle({ editorRef, blockIndex: block.index })
       }}
     />
   )

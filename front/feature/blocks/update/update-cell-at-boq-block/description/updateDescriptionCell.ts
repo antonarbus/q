@@ -1,10 +1,10 @@
 import type { CellKey } from '@back/entity/quotation/schema'
 import { updateCellAtStore } from '@entity/quotation/redux/updater/updateCellAtStore'
 import { didCellContentChange } from '@entity/quotation/util/didCellContentChange'
-import type { FroalaEditorRef } from '@shared/lib/froala/froala'
+import type { EditorRef } from '@shared/lib/tiptap/types'
 
 type Props = {
-  editorRef: FroalaEditorRef
+  editorRef: EditorRef
   blockIndex: number
   rowIndex: number
   cellKey: CellKey
@@ -30,6 +30,6 @@ export const updateDescriptionCell = (props: Props): void => {
     blockIndex: props.blockIndex,
     rowIndex: props.rowIndex,
     cellKey: props.cellKey,
-    html: props.editorRef.current.html.get(),
+    html: props.editorRef.current.getHTML(),
   })
 }

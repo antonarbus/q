@@ -75,8 +75,11 @@ export const SubTotalPrice = (): JSX.Element => {
         boqHeaderKey,
       })}
       onContentChange={(params) => {
-        const html = params.editor.getHTML()
-        console.log(html)
+        updateSubtotalPrice({
+          blockIndex: block.index,
+          rowEditorRefs: boq.rowEditorRefs,
+          subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
+        })
       }}
     />
   )

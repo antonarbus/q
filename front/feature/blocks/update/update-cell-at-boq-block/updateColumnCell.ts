@@ -1,9 +1,9 @@
 import type { BoqColumnKey } from '@back/entity/quotation/schema'
 import { updateColumnCellAtStore } from '@entity/quotation/redux/updater/updateColumnCellAtStore'
-import type { FroalaEditorRef } from '@shared/lib/froala/froala'
+import type { EditorRef } from '@shared/lib/tiptap/types'
 
 type Props = {
-  editorRef: FroalaEditorRef
+  editorRef: EditorRef
   blockIndex: number
   boqColumnKey: BoqColumnKey
 }

@@ -1,11 +1,11 @@
 import type { BoqColumnKey } from '@back/entity/quotation/schema'
-import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import { dispatch } from '@shared/lib/redux'
 import { getBoqBlockFromStore } from '../getter/getBoqBlockFromStore'
 import { quotationSlice } from '../quotationSlice'
+import type { EditorRef } from '@shared/lib/tiptap/types'
 
 type Props = {
-  editorRef: FroalaEditorRef
+  editorRef: EditorRef
   blockIndex: number
   boqColumnKey: BoqColumnKey
 }
@@ -22,7 +22,7 @@ export const updateColumnCellAtStore = (props: Props): void => {
   }
 
   const prevHtml = boqBlock.boq.column[props.boqColumnKey].html
-  const html = props.editorRef.current.html.get()
+  const html = props.editorRef.current.getHTML()
   const didTextChange = prevHtml !== html
 
   if (didTextChange === false) {

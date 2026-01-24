@@ -1,4 +1,3 @@
-import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import {
   type Context,
   createContext,

@@ -4,7 +4,6 @@ import { useStylesForResizableCell } from '@entity/quotation/hook/useStylesForRe
 import { useRow } from '@entity/quotation/provider/RowProvider'
 import { getBookmarkedRowCellHtmlFromStore } from '@entity/quotation/redux/getter/getBookmarkedRowCellHtmlFromStore'
 import { cellStyle, cellSx } from '@entity/quotation/style/cellStyle'
-import { Froala } from '@entity/quotation/ui/froala/Froala'
 import { formatItemPriceCell } from '@feature/blocks/update/update-cell-at-bookmarked-row-block/item-price/formatItemPriceCell'
 import { updateItemPriceCell } from '@feature/blocks/update/update-cell-at-bookmarked-row-block/item-price/updateItemPriceCell'
 import { Box } from '@mui/material'
@@ -48,8 +47,10 @@ export const ItemPriceCell = (): JSX.Element => {
         editorRef={row.itemPriceCellEditorRef}
         content={getBookmarkedRowCellHtmlFromStore({ cellKey: 'itemPrice' })}
         onContentChange={(params) => {
-          const html = params.editor.getHTML()
-          console.log(html)
+          updateItemPriceCell({
+            itemPriceCellEditorRef: row.itemPriceCellEditorRef,
+            priceCellEditorRef: row.priceCellEditorRef,
+          })
         }}
       />
     </Box>

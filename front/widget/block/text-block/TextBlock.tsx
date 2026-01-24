@@ -18,7 +18,6 @@ import { OpenInfoBlockModalIcon } from '@feature/open-close/open-info-modal'
 import { Tiptap } from '@page/test-page/tiptap-example/Tiptap'
 import { cls } from '@shared/cls'
 import { ItemActionButtonsLayout } from '@shared/layout/ItemActionButtonsLayout'
-import type { FroalaEditor } from '@shared/lib/froala/froala'
 import { type JSX, useRef } from 'react'
 import type { Editor } from '@tiptap/react'
 
@@ -63,8 +62,7 @@ export const TextBlock = (): JSX.Element => {
         editorRef={editorRef}
         content={getTextBlockHtmlFromStore({ blockIndex: block.index })}
         onContentChange={(params) => {
-          const html = params.editor.getHTML()
-          console.log(html)
+          updateTextBlock({ editorRef, blockIndex: block.index })
         }}
       />
     </BlockComp>

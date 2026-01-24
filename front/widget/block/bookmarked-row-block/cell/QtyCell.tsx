@@ -44,8 +44,10 @@ export const QtyCell = (): JSX.Element => {
         editorRef={row.qtyCellEditorRef}
         content={getBookmarkedRowCellHtmlFromStore({ cellKey: 'qty' })}
         onContentChange={(params) => {
-          const html = params.editor.getHTML()
-          console.log(html)
+          updateQtyCell({
+            priceCellEditorRef: row.priceCellEditorRef,
+            qtyCellEditorRef: row.qtyCellEditorRef,
+          })
         }}
       />
     </Box>

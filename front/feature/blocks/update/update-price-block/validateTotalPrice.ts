@@ -1,14 +1,14 @@
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { getTotalPriceAbove } from '@entity/quotation/util/getTotalPriceAbove'
-import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import { updateNumberAtHtmlIncrementally } from '@shared/lib/froala/updateNumberAtHtmlIncrementally'
 import { dispatch, getState } from '@shared/lib/redux'
+import type { EditorRef } from '@shared/lib/tiptap/types'
 import { getNumberFromString } from '@shared/util/getNumberFromString'
 import { getStringWithNewFormattedNumber } from '@shared/util/getStringWithNewFormattedNumber'
 import { getTextContentFromHtml } from '@shared/util/getTextContentFromHtml'
 
 type Props = {
-  editorRef: FroalaEditorRef
+  editorRef: EditorRef
   blockIndex: number
 }
 
@@ -23,7 +23,7 @@ export const validateTotalPrice = (props: Props): void => {
     return
   }
 
-  const currentHtml = props.editorRef.current.html.get()
+  const currentHtml = props.editorRef.current.getHTML()
   const cellTextContent = getTextContentFromHtml({ html: currentHtml })
   const cellValueFromHtml = getNumberFromString({ string: cellTextContent })
 

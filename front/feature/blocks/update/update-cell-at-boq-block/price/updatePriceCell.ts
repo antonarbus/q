@@ -4,14 +4,14 @@ import { updateCellAtStore } from '@entity/quotation/redux/updater/updateCellAtS
 import type { RowBlock } from '@back/entity/quotation/schema'
 import { updateCellWithValue } from '@entity/quotation/util/updateCellWithValue'
 import { updateSubTotalPriceWithValue } from '@entity/quotation/util/updateSubTotalPriceWithValue'
-import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import { roundTo } from 'round-to'
+import type { EditorRef } from '@shared/lib/tiptap/types'
 
 type Props = {
-  qtyCellEditorRef: FroalaEditorRef
-  itemPriceCellEditorRef: FroalaEditorRef
-  priceCellEditorRef: FroalaEditorRef
-  subTotalPriceEditorRef: FroalaEditorRef
+  qtyCellEditorRef: EditorRef
+  itemPriceCellEditorRef: EditorRef
+  priceCellEditorRef: EditorRef
+  subTotalPriceEditorRef: EditorRef
   blockIndex: number
   rowIndex: number
 }
@@ -22,7 +22,7 @@ export const updatePriceCell = (props: Props): void => {
   }
 
   const updateCellRes = updateCellAtStore({
-    html: props.priceCellEditorRef.current.html.get(),
+    html: props.priceCellEditorRef.current.getHTML(),
     blockIndex: props.blockIndex,
     rowIndex: props.rowIndex,
     cellKey: 'price',

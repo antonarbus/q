@@ -71,8 +71,12 @@ export const DescriptionCell = (): JSX.Element => {
         rowIndex: row.index,
       })}
       onContentChange={(params) => {
-        const html = params.editor.getHTML()
-        console.log(html)
+        updateDescriptionCell({
+          blockIndex: block.index,
+          cellKey: 'description',
+          editorRef: row.descriptionCellEditorRef,
+          rowIndex: row.index,
+        })
       }}
     />
   )

@@ -1,13 +1,13 @@
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { getTotalPriceAbove } from '@entity/quotation/util/getTotalPriceAbove'
-import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import { updateNumberAtHtmlIncrementally } from '@shared/lib/froala/updateNumberAtHtmlIncrementally'
 import { dispatch, getState, useSelector } from '@shared/lib/redux'
+import type { EditorRef } from '@shared/lib/tiptap/types'
 import { getStringWithNewFormattedNumber } from '@shared/util/getStringWithNewFormattedNumber'
 import { useUpdateEffect } from 'react-use'
 
 type Props = {
-  editorRef: FroalaEditorRef
+  editorRef: EditorRef
   blockIndex: number
 }
 

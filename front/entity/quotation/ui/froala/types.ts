@@ -1,10 +1,11 @@
 import type { SxProps } from '@mui/material'
-import type { FroalaEditor, FroalaEditorRef } from '@shared/lib/froala/froala'
 import type { CSSProperties, KeyboardEvent, MouseEvent } from 'react'
+import type { Editor } from '@tiptap/react'
+import type { EditorRef } from '@shared/lib/tiptap/types'
 
 export type FroalaProps = {
   htmlGetter: () => string
-  editorRef: FroalaEditorRef
+  editorRef: EditorRef
   placeholder?: string
   style?: CSSProperties
   sx?: SxProps
@@ -22,7 +23,7 @@ export type FroalaProps = {
     files,
     type,
   }: {
-    editor: FroalaEditor | null
+    editor: Editor | null
     files: File[]
     type: 'image' | 'file'
   }) => Promise<void>

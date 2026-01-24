@@ -4,7 +4,6 @@ import { getBoqColumnHtmlFromStore } from '@entity/quotation/redux/getter/getBoq
 import { columnHeaderStyle } from '@entity/quotation/style/columnHeaderStyle'
 import { Froala } from '@entity/quotation/ui/froala/Froala'
 import { updateColumnCell } from '@feature/blocks/update'
-import type { FroalaEditor } from '@shared/lib/froala/froala'
 import { type JSX, useRef } from 'react'
 import { ResizableColumn } from '../ResizableColumn'
 import { Tiptap } from '@page/test-page/tiptap-example/Tiptap'
@@ -46,8 +45,11 @@ export const ItemPriceColumn = (): JSX.Element => {
           boqColumnKey: 'itemPrice',
         })}
         onContentChange={(params) => {
-          const html = params.editor.getHTML()
-          console.log(html)
+          updateColumnCell({
+            editorRef,
+            blockIndex: block.index,
+            boqColumnKey: 'itemPrice',
+          })
         }}
       />
     </ResizableColumn>

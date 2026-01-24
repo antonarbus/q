@@ -3,14 +3,14 @@ import type { RowBlock } from '@back/entity/quotation/schema'
 import { isRowPriceValid } from '@entity/quotation/util/isRowPriceValid'
 import { updateCellWithValue } from '@entity/quotation/util/updateCellWithValue'
 import { updateSubTotalPriceWithValue } from '@entity/quotation/util/updateSubTotalPriceWithValue'
-import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import { roundTo } from 'round-to'
 import { toast } from 'sonner'
 import type { RowEditorRefs } from '@entity/quotation/ref/rowEditorRefs'
+import type { EditorRef } from '@shared/lib/tiptap/types'
 
 type Props = {
   blockIndex: number
-  subTotalPriceEditorRef: FroalaEditorRef
+  subTotalPriceEditorRef: EditorRef
   rowEditorRefs: RowEditorRefs
 }
 
@@ -35,7 +35,7 @@ export const validatePrices = (props: Props): void => {
     }
 
     const isPriceValid = isRowPriceValid({
-      html: priceCellEditorRef.price.current.html.get(),
+      html: priceCellEditorRef.price.current.getHTML(),
       blockIndex: props.blockIndex,
       rowIndex,
     })

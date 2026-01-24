@@ -1,13 +1,13 @@
 import { getBoqBlockFromStore } from '@entity/quotation/redux/getter/getBoqBlockFromStore'
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
-import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import { dispatch } from '@shared/lib/redux'
+import type { EditorRef } from '@shared/lib/tiptap/types'
 import { getStringWithNewFormattedNumber } from '@shared/util/getStringWithNewFormattedNumber'
 import { roundTo } from 'round-to'
 
 type Props = {
   blockIndex: number
-  subTotalPriceEditorRef: FroalaEditorRef
+  subTotalPriceEditorRef: EditorRef
 }
 
 export const formatSubtotalPrice = (props: Props): void => {

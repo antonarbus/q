@@ -1,9 +1,9 @@
-import type { FroalaEditor } from '@shared/lib/froala/froala'
+import type { Editor } from '@tiptap/react'
 import { getBoqBlockFromStore } from '../redux/getter/getBoqBlockFromStore'
 import type { HeaderKey } from '@back/entity/quotation/schema'
 
 type Props = {
-  editor: FroalaEditor
+  editor: Editor
   blockIndex: number
   boqHeaderKey: HeaderKey
 }
@@ -12,7 +12,7 @@ type Props = {
 // https://github.com/froala/wysiwyg-editor/issues/3022
 
 export const didBoqHeaderContentChange = (props: Props): boolean => {
-  const htmlOnDisplay = props.editor.html.get()
+  const htmlOnDisplay = props.editor.getHTML()
 
   const htmlFromStore = getBoqBlockFromStore({ blockIndex: props.blockIndex })
     ?.boq.header[props.boqHeaderKey].html

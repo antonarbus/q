@@ -5,13 +5,13 @@ import type { RowBlock } from '@back/entity/quotation/schema'
 import { didCellContentChange } from '@entity/quotation/util/didCellContentChange'
 import { updateCellWithValue } from '@entity/quotation/util/updateCellWithValue'
 import { updateSubTotalPriceWithValue } from '@entity/quotation/util/updateSubTotalPriceWithValue'
-import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import { roundTo } from 'round-to'
+import type { EditorRef } from '@shared/lib/tiptap/types'
 
 type Props = {
-  qtyCellEditorRef: FroalaEditorRef
-  priceCellEditorRef: FroalaEditorRef
-  subTotalPriceEditorRef: FroalaEditorRef
+  qtyCellEditorRef: EditorRef
+  priceCellEditorRef: EditorRef
+  subTotalPriceEditorRef: EditorRef
   blockIndex: number
   rowIndex: number
 }
@@ -36,7 +36,7 @@ export const updateQtyCell = (props: Props): void => {
     blockIndex: props.blockIndex,
     rowIndex: props.rowIndex,
     cellKey: 'qty',
-    html: props.qtyCellEditorRef.current.html.get(),
+    html: props.qtyCellEditorRef.current.getHTML(),
   })
 
   const row = getRowFromStore({

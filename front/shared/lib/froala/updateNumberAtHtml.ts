@@ -1,10 +1,10 @@
-import type { FroalaEditor } from '@shared/lib/froala/froala'
+import type { Editor } from '@tiptap/react'
 import { getStringWithNewFormattedNumber } from '../../util/getStringWithNewFormattedNumber'
 
 type Props = {
   newNumber: number
   html: string
-  editor: FroalaEditor
+  editor: Editor
 }
 
 export const updateNumberAtHtml = (props: Props): void => {

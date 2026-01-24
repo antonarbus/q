@@ -1,13 +1,11 @@
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { getPriceBlockHtmlFromStore } from '@entity/quotation/redux/getter/getPriceBlockHtmlFromStore'
-import { Froala } from '@entity/quotation/ui/froala/Froala'
 import {
   updatePriceValue,
   useUpdateTotalPriceIfPricesAboveWereChanged,
   validateTotalPrice,
 } from '@feature/blocks/update'
 import { Tiptap } from '@page/test-page/tiptap-example/Tiptap'
-import type { FroalaEditor } from '@shared/lib/froala/froala'
 import { type JSX, useRef } from 'react'
 import type { Editor } from '@tiptap/react'
 
@@ -41,8 +39,7 @@ export const PriceValue = (): JSX.Element => {
       editorRef={editorRef}
       content={getPriceBlockHtmlFromStore({ blockIndex: block.index })}
       onContentChange={(params) => {
-        const html = params.editor.getHTML()
-        console.log(html)
+        updatePriceValue({ editorRef, blockIndex: block.index })
       }}
     />
   )

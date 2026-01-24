@@ -1,9 +1,9 @@
-import type { FroalaEditorRef } from '@shared/lib/froala/froala'
+import type { EditorRef } from '@shared/lib/tiptap/types'
 import type { KeyboardEvent } from 'react'
 
 type Props = {
   event: KeyboardEvent
-  qtyCellEditorRef: FroalaEditorRef
+  qtyCellEditorRef: EditorRef
   rowIndex: number
 }
 

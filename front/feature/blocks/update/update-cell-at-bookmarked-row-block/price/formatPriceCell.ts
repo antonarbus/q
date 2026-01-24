@@ -1,8 +1,8 @@
 import { formatBookmarkedRowCellNumber } from '@entity/quotation/util/formatBookmarkedRowCellNumber'
-import type { FroalaEditorRef } from '@shared/lib/froala/froala'
+import type { EditorRef } from '@shared/lib/tiptap/types'
 
 type Props = {
-  priceCellEditorRef: FroalaEditorRef
+  priceCellEditorRef: EditorRef
 }
 
 export const formatPriceCell = (props: Props): void => {

@@ -1,8 +1,8 @@
 import { updateBookmarkedRowCellAtStore } from '@entity/quotation/redux/updater/updateBookmarkedRowCellAtStore'
-import type { FroalaEditorRef } from '@shared/lib/froala/froala'
+import type { EditorRef } from '@shared/lib/tiptap/types'
 
 type Props = {
-  editorRef: FroalaEditorRef
+  editorRef: EditorRef
 }
 
 export const updateDescriptionCell = (props: Props): void => {
@@ -12,6 +12,6 @@ export const updateDescriptionCell = (props: Props): void => {
 
   updateBookmarkedRowCellAtStore({
     cellKey: 'description',
-    html: props.editorRef.current.html.get(),
+    html: props.editorRef.current.getHTML(),
   })
 }

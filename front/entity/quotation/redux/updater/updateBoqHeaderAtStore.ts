@@ -1,13 +1,13 @@
-import type { FroalaEditorRef } from '@shared/lib/froala/froala'
 import { dispatch } from '@shared/lib/redux'
 import { getNumberFromString } from '@shared/util/getNumberFromString'
 import { getTextContentFromHtml } from '@shared/util/getTextContentFromHtml'
 import type { HeaderKey } from '@back/entity/quotation/schema'
 import { getBoqBlockFromStore } from '../getter/getBoqBlockFromStore'
 import { quotationSlice } from '../quotationSlice'
+import type { EditorRef } from '@shared/lib/tiptap/types'
 
 type Props = {
-  editorRef: FroalaEditorRef
+  editorRef: EditorRef
   blockIndex: number
   boqHeaderKey: HeaderKey
 }
@@ -28,7 +28,7 @@ export const updateBoqHeaderAtStore = (props: Props): Res => {
   }
 
   const prevHtml = boqBlock.boq.header[props.boqHeaderKey].html
-  const html = props.editorRef.current.html.get()
+  const html = props.editorRef.current.getHTML()
   const didTextChange = prevHtml !== html
 
   if (didTextChange === false) {
