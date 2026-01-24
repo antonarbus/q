@@ -1,7 +1,11 @@
-import type { JSX } from 'react'
-import { useEffect } from 'react'
-import type { EditorEvents, UseEditorOptions } from '@tiptap/react'
-import { useEditor, EditorContent, Editor } from '@tiptap/react'
+import { type JSX, useEffect } from 'react'
+import {
+  type EditorEvents,
+  type UseEditorOptions,
+  useEditor,
+  EditorContent,
+  // Editor,
+} from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Underline from '@tiptap/extension-underline'
 import TextAlign from '@tiptap/extension-text-align'
@@ -12,10 +16,7 @@ import Highlight from '@tiptap/extension-highlight'
 import Image from '@tiptap/extension-image'
 import Placeholder from '@tiptap/extension-placeholder'
 import { FloatingMenu } from './FloatingMenu'
-import { getTextBlockHtmlFromStore } from '@entity/quotation/redux/getter/getTextBlockHtmlFromStore'
 import type { EditorRef } from '@shared/lib/tiptap/types'
-
-// const initialContent = `<p>This is <strong>Tiptap</strong></p>`
 
 type Props = {
   editorRef: EditorRef

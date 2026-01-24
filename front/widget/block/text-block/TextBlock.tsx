@@ -1,8 +1,7 @@
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { getTextBlockHtmlFromStore } from '@entity/quotation/redux/getter/getTextBlockHtmlFromStore'
-import { textItemCellStyle } from '@entity/quotation/style/textItemCellStyle'
+// import { textItemCellStyle } from '@entity/quotation/style/textItemCellStyle'
 import { BlockComp } from '@entity/quotation/ui/BlockComp'
-import { Froala } from '@entity/quotation/ui/froala/Froala'
 import { CopyBlockIcon } from '@feature/blocks/copy'
 import { CutBlockIcon } from '@feature/blocks/cut'
 import { DeleteBlockIcon } from '@feature/blocks/delete'
@@ -12,7 +11,7 @@ import {
   onTextBlockResizeStop,
 } from '@feature/blocks/resize'
 import { updateTextBlock } from '@feature/blocks/update'
-import { beforeUpload } from '@feature/file/upload-file'
+// import { beforeUpload } from '@feature/file/upload-file'
 import { BookmarkBlockIcon } from '@feature/open-close/open-bookmark-modal'
 import { OpenInfoBlockModalIcon } from '@feature/open-close/open-info-modal'
 import { Tiptap } from '@page/test-page/tiptap-example/Tiptap'

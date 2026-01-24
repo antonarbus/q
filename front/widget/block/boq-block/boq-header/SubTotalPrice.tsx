@@ -1,17 +1,16 @@
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { useBoq } from '@entity/quotation/provider/BoqBlockProvider'
 import { getBoqHeaderHtmlFromStore } from '@entity/quotation/redux/getter/getBoqHeaderHtmlFromStore'
-import { subTotalPriceCellStyle } from '@entity/quotation/style/subTotalPriceCellStyle'
+// import { subTotalPriceCellStyle } from '@entity/quotation/style/subTotalPriceCellStyle'
 import type { HeaderKey } from '@back/entity/quotation/schema'
-import { Froala } from '@entity/quotation/ui/froala/Froala'
-import { showHidePricePins } from '@feature/blocks/pin'
+// import { showHidePricePins } from '@feature/blocks/pin'
 import {
-  formatSubtotalPrice,
+  // formatSubtotalPrice,
   updateSubtotalPrice,
   useUpdateSubtotal,
-  validatePrices,
+  // validatePrices,
 } from '@feature/blocks/update'
-import { type JSX, type MouseEvent, useRef } from 'react'
+import type { JSX } from 'react'
 import { Tiptap } from '@page/test-page/tiptap-example/Tiptap'
 
 const boqHeaderKey: HeaderKey = 'subTotalPrice'
@@ -20,13 +19,13 @@ export const SubTotalPrice = (): JSX.Element => {
   const boq = useBoq()
   const block = useBlock()
 
-  const hidePinsClickHandlerRef = useRef<(e: globalThis.MouseEvent) => void>(
-    (event) => {
-      console.warn('hidePinsClickHandlerRef')
-    },
-  )
+  // const hidePinsClickHandlerRef = useRef<(e: globalThis.MouseEvent) => void>(
+  //   (event) => {
+  //     console.warn('hidePinsClickHandlerRef')
+  //   },
+  // )
 
-  const isInitClickRef = useRef(true)
+  // const isInitClickRef = useRef(true)
 
   useUpdateSubtotal()
 
