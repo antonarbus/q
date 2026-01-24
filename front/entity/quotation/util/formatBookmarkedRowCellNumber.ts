@@ -56,7 +56,7 @@ export const formatBookmarkedRowCellNumber = (props: Props): Res => {
     }),
   )
 
-  props.editorRef.current.html.set(newHtml)
+  props.editorRef.current.commands.setContent(newHtml)
 
   return {
     didUpdate: true,

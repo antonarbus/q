@@ -13,5 +13,5 @@ export const updateNumberAtHtml = (props: Props): void => {
     newNumber: props.newNumber,
   })
 
-  props.editor.html.set(finalHtml)
+  props.editor.commands.setContent(finalHtml)
 }

@@ -40,5 +40,5 @@ export const formatSubtotalPrice = (props: Props): void => {
     }),
   )
 
-  props.subTotalPriceEditorRef.current.html.set(newHtml)
+  props.subTotalPriceEditorRef.current.commands.setContent(newHtml)
 }

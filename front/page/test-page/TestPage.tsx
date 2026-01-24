@@ -1,5 +1,6 @@
-import type { JSX } from 'react'
+import { useRef, type JSX } from 'react'
 import { Tiptap } from './tiptap-example/Tiptap'
+import type { Editor } from '@tiptap/react'
 
 const containerStyle: React.CSSProperties = {
   maxWidth: 1200,
@@ -28,10 +29,13 @@ const titleStyle: React.CSSProperties = {
 }
 
 export const TestPage = (): JSX.Element => {
+  const editorRef = useRef<Editor | null>(null)
+
   return (
     <div style={containerStyle}>
       <div style={gridStyle}>
         <Tiptap
+          editorRef={editorRef}
           content='hello world'
           onContentChange={(params) => {
             console.log(params.editor.getHTML())
