@@ -79,6 +79,7 @@ export const ItemPriceCell = (): JSX.Element => {
         }}
       /> */}
       <Tiptap
+        editorRef={row.itemPriceCellEditorRef}
         content={getCellHtmlFromStore({
           blockIndex: block.index,
           cellKey: 'itemPrice',

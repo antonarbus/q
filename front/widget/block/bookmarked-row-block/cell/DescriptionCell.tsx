@@ -45,10 +45,14 @@ export const DescriptionCell = (): JSX.Element => {
     />
     */
     <Tiptap
+      editorRef={row.descriptionCellEditorRef}
       content={getBookmarkedRowCellHtmlFromStore({ cellKey: 'description' })}
       onContentChange={(params) => {
         const html = params.editor.getHTML()
-        console.log(html)
+
+        // updateDescriptionCell({
+        //   editorRef: row.descriptionCellEditorRef,
+        // })
       }}
     />
   )

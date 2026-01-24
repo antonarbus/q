@@ -5,9 +5,10 @@ import { Tiptap } from '@page/test-page/tiptap-example/Tiptap'
 import type { FroalaEditor } from '@shared/lib/froala/froala'
 import { getState } from '@shared/lib/redux'
 import { type JSX, useRef } from 'react'
+import type { Editor } from '@tiptap/react'
 
 export const PriceTitle = (): JSX.Element => {
-  const editorRef = useRef<FroalaEditor | null>(null)
+  const editorRef = useRef<Editor | null>(null)
   const block = useBlock()
 
   return (
@@ -32,6 +33,7 @@ export const PriceTitle = (): JSX.Element => {
     />
     */
     <Tiptap
+      editorRef={editorRef}
       content={((): string => {
         const priceBlock = getState().quotation.blocks[block.index]
 

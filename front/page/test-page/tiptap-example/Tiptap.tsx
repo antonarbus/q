@@ -1,5 +1,5 @@
 import type { JSX } from 'react'
-import { useState } from 'react'
+import { useEffect } from 'react'
 import type { EditorEvents, UseEditorOptions } from '@tiptap/react'
 import { useEditor, EditorContent, Editor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
@@ -13,10 +13,12 @@ import Image from '@tiptap/extension-image'
 import Placeholder from '@tiptap/extension-placeholder'
 import { FloatingMenu } from './FloatingMenu'
 import { getTextBlockHtmlFromStore } from '@entity/quotation/redux/getter/getTextBlockHtmlFromStore'
+import type { EditorRef } from '@shared/lib/tiptap/types'
 
 // const initialContent = `<p>This is <strong>Tiptap</strong></p>`
 
 type Props = {
+  editorRef: EditorRef
   content: UseEditorOptions['content']
   onContentChange: (props: EditorEvents['update']) => void
 }
@@ -40,6 +42,10 @@ export const Tiptap = (props: Props): JSX.Element => {
     },
     [],
   )
+
+  useEffect(() => {
+    props.editorRef.current = editor
+  }, [editor, props.editorRef])
 
   return (
     <>

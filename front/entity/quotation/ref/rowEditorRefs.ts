@@ -1,8 +1,8 @@
-import type { FroalaEditorRef } from '@shared/lib/froala/froala'
+import type { EditorRef } from '@shared/lib/tiptap/types'
 
 export type RowEditorRefs = {
-  description: FroalaEditorRef
-  itemPrice: FroalaEditorRef
-  qty: FroalaEditorRef
-  price: FroalaEditorRef
+  description: EditorRef
+  itemPrice: EditorRef
+  qty: EditorRef
+  price: EditorRef
 }[]

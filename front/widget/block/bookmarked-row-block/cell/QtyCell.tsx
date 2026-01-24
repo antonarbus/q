@@ -41,6 +41,7 @@ export const QtyCell = (): JSX.Element => {
         wrapperStyles={stylesForResizableCell}
       /> */}
       <Tiptap
+        editorRef={row.qtyCellEditorRef}
         content={getBookmarkedRowCellHtmlFromStore({ cellKey: 'qty' })}
         onContentChange={(params) => {
           const html = params.editor.getHTML()

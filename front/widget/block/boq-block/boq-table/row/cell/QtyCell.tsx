@@ -65,6 +65,7 @@ export const QtyCell = (): JSX.Element => {
         wrapperStyles={stylesForResizableCell}
       /> */}
       <Tiptap
+        editorRef={row.qtyCellEditorRef}
         content={getCellHtmlFromStore({
           blockIndex: block.index,
           rowIndex: row.index,

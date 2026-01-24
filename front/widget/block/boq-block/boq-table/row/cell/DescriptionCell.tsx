@@ -64,6 +64,7 @@ export const DescriptionCell = (): JSX.Element => {
     />
     */
     <Tiptap
+      editorRef={row.descriptionCellEditorRef}
       content={getCellHtmlFromStore({
         blockIndex: block.index,
         cellKey: 'description',

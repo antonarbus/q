@@ -8,13 +8,14 @@ import {
   useMemo,
 } from 'react'
 import type { RowEditorRefs } from '../ref/rowEditorRefs'
+import type { EditorRef } from '@shared/lib/tiptap/types'
 
 type Props = {
   children: ReactNode
 }
 
 type Res = {
-  subTotalPriceEditorRef: FroalaEditorRef
+  subTotalPriceEditorRef: EditorRef
   rowEditorRefs: RowEditorRefs
 }
 

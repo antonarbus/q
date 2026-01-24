@@ -8,9 +8,10 @@ import type { FroalaEditor } from '@shared/lib/froala/froala'
 import { type ReactNode, useRef } from 'react'
 import { ResizableColumn } from '../ResizableColumn'
 import { Tiptap } from '@page/test-page/tiptap-example/Tiptap'
+import type { Editor } from '@tiptap/react'
 
 export const DescriptionColumn = (): ReactNode => {
-  const editorRef = useRef<FroalaEditor | null>(null)
+  const editorRef = useRef<Editor | null>(null)
   const block = useBlock()
 
   return (
@@ -43,6 +44,7 @@ export const DescriptionColumn = (): ReactNode => {
       /> 
       */}
       <Tiptap
+        editorRef={editorRef}
         content={getBoqColumnHtmlFromStore({
           blockIndex: block.index,
           boqColumnKey: 'description',

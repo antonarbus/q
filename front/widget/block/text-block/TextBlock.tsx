@@ -20,9 +20,10 @@ import { cls } from '@shared/cls'
 import { ItemActionButtonsLayout } from '@shared/layout/ItemActionButtonsLayout'
 import type { FroalaEditor } from '@shared/lib/froala/froala'
 import { type JSX, useRef } from 'react'
+import type { Editor } from '@tiptap/react'
 
 export const TextBlock = (): JSX.Element => {
-  const editorRef = useRef<FroalaEditor | null>(null)
+  const editorRef = useRef<Editor | null>(null)
   const block = useBlock()
 
   return (
@@ -59,6 +60,7 @@ export const TextBlock = (): JSX.Element => {
         style={textItemCellStyle}
       /> */}
       <Tiptap
+        editorRef={editorRef}
         content={getTextBlockHtmlFromStore({ blockIndex: block.index })}
         onContentChange={(params) => {
           const html = params.editor.getHTML()

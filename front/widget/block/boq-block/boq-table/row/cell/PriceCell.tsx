@@ -80,6 +80,7 @@ export const PriceCell = (): JSX.Element => {
         wrapperStyles={stylesForResizableCell}
       /> */}
       <Tiptap
+        editorRef={row.priceCellEditorRef}
         content={getCellHtmlFromStore({
           blockIndex: block.index,
           cellKey: 'price',

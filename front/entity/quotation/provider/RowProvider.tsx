@@ -9,6 +9,7 @@ import {
 } from 'react'
 import type { RowBlock } from '@back/entity/quotation/schema'
 import { useBoq } from './BoqBlockProvider'
+import type { EditorRef } from '@shared/lib/tiptap/types'
 
 type Props = {
   index: number
@@ -17,10 +18,10 @@ type Props = {
 }
 
 type Res = Omit<Props, 'children'> & {
-  descriptionCellEditorRef: FroalaEditorRef
-  itemPriceCellEditorRef: FroalaEditorRef
-  qtyCellEditorRef: FroalaEditorRef
-  priceCellEditorRef: FroalaEditorRef
+  descriptionCellEditorRef: EditorRef
+  itemPriceCellEditorRef: EditorRef
+  qtyCellEditorRef: EditorRef
+  priceCellEditorRef: EditorRef
 }
 
 const RowContext: Context<Res | null> = createContext<Res | null>(null)

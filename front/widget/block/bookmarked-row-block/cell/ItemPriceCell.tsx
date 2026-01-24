@@ -45,6 +45,7 @@ export const ItemPriceCell = (): JSX.Element => {
         wrapperStyles={stylesForResizableCell}
       /> */}
       <Tiptap
+        editorRef={row.itemPriceCellEditorRef}
         content={getBookmarkedRowCellHtmlFromStore({ cellKey: 'itemPrice' })}
         onContentChange={(params) => {
           const html = params.editor.getHTML()
