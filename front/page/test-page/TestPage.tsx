@@ -31,7 +31,12 @@ export const TestPage = (): JSX.Element => {
   return (
     <div style={containerStyle}>
       <div style={gridStyle}>
-        <TiptapExample content='hello world' />
+        <TiptapExample
+          content='hello world'
+          onContentChange={(params) => {
+            console.log(params.editor.getHTML())
+          }}
+        />
       </div>
     </div>
   )
