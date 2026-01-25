@@ -22,6 +22,7 @@ import { type CSSObject, Box } from '@mui/material'
 type Props = {
   editorRef: EditorRef
   className: string
+  placeholder: string
   sx: CSSObject
   content: UseEditorOptions['content']
   onContentChange: (props: EditorEvents['update']) => void
@@ -39,7 +40,7 @@ export const Tiptap = (props: Props): JSX.Element => {
         TextAlign.configure({ types: ['heading', 'paragraph'] }),
         // Link.configure({ openOnClick: false }),
         Image,
-        Placeholder.configure({ placeholder: 'Start typing...' }),
+        Placeholder.configure({ placeholder: props.placeholder }),
       ],
       content: props.content,
       onUpdate: props.onContentChange,

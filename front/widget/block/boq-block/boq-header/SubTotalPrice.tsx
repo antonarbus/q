@@ -70,6 +70,7 @@ export const SubTotalPrice = (): JSX.Element => {
     <Tiptap
       editorRef={boq.subTotalPriceEditorRef}
       className='sub-total-price'
+      placeholder='Price...'
       content={getBoqHeaderHtmlFromStore({
         blockIndex: block.index,
         boqHeaderKey,

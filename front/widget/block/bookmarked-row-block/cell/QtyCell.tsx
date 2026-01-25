@@ -34,7 +34,6 @@ export const QtyCell = (): JSX.Element => {
             qtyCellEditorRef: row.qtyCellEditorRef,
           })
         }}
-        placeholder='Qty...'
         style={cellStyle}
         sx={cellSx}
         wrapperStyles={stylesForResizableCell}
@@ -42,6 +41,7 @@ export const QtyCell = (): JSX.Element => {
       <Tiptap
         editorRef={row.qtyCellEditorRef}
         className='td qty'
+        placeholder='Qty...'
         content={getBookmarkedRowCellHtmlFromStore({ cellKey: 'qty' })}
         onContentChange={(params) => {
           updateQtyCell({

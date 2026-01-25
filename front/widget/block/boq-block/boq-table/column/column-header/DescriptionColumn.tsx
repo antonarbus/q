@@ -44,6 +44,7 @@ export const DescriptionColumn = (): ReactNode => {
       <Tiptap
         editorRef={editorRef}
         className='column-description'
+        placeholder='Description...'
         content={getBoqColumnHtmlFromStore({
           blockIndex: block.index,
           boqColumnKey: 'description',

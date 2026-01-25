@@ -46,6 +46,7 @@ export const DescriptionCell = (): JSX.Element => {
     <Tiptap
       editorRef={row.descriptionCellEditorRef}
       className='td description'
+      placeholder='Description...'
       content={getBookmarkedRowCellHtmlFromStore({ cellKey: 'description' })}
       onContentChange={(params) => {
         updateDescriptionCell({

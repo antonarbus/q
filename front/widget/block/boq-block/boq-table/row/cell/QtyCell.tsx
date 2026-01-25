@@ -69,6 +69,7 @@ export const QtyCell = (): JSX.Element => {
       <Tiptap
         editorRef={row.qtyCellEditorRef}
         className='td qty'
+        placeholder='Qty...'
         content={getCellHtmlFromStore({
           blockIndex: block.index,
           rowIndex: row.index,

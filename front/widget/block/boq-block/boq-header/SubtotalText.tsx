@@ -34,6 +34,7 @@ export const SubtotalText = (): JSX.Element => {
     <Tiptap
       editorRef={editorRef}
       className='sub-total-text'
+      placeholder='Subtotal...'
       content={getBoqHeaderHtmlFromStore({
         blockIndex: block.index,
         boqHeaderKey,

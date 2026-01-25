@@ -33,6 +33,7 @@ export const PriceTitle = (): JSX.Element => {
     <Tiptap
       editorRef={editorRef}
       className='price-title'
+      placeholder='Total price...'
       content={((): string => {
         const priceBlock = getState().quotation.blocks[block.index]
 

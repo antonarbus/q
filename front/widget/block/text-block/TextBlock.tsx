@@ -60,6 +60,7 @@ export const TextBlock = (): JSX.Element => {
       <Tiptap
         editorRef={editorRef}
         className='text'
+        placeholder='Add text, tables, drop images, files, links, select to format...'
         content={getTextBlockHtmlFromStore({ blockIndex: block.index })}
         onContentChange={(params) => {
           updateTextBlock({ editorRef, blockIndex: block.index })

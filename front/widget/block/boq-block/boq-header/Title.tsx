@@ -34,6 +34,7 @@ export const Title = (): JSX.Element => {
     <Tiptap
       editorRef={editorRef}
       className='title'
+      placeholder='Title...'
       content={getBoqHeaderHtmlFromStore({
         blockIndex: block.index,
         boqHeaderKey,
