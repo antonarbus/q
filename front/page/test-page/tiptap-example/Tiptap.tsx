@@ -42,9 +42,7 @@ export const Tiptap = (props: Props): JSX.Element => {
     >
       {showStaticBackground === true && (
         <Box
-          dangerouslySetInnerHTML={{
-            __html: props.content,
-          }}
+          dangerouslySetInnerHTML={{ __html: props.content }}
           sx={{
             ...props.sx,
             position: 'absolute',

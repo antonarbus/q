@@ -2,6 +2,8 @@ import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { useSelector } from '@shared/lib/redux'
 
 export const useIsEditorActive = (): boolean => {
+  // todo: whole logic to be based only on state.text.isEditable
+
   const block = useBlock()
 
   const isBlockFroala = useSelector(
