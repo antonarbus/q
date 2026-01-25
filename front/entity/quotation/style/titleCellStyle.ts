@@ -1,6 +1,6 @@
-import type { CSSProperties } from 'react'
+import type { CSSObject } from '@mui/material'
 
-export const titleCellStyle: CSSProperties = {
+export const titleCellStyle: CSSObject = {
   flexGrow: 1,
   minHeight: '24px',
 }

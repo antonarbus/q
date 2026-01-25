@@ -1,6 +1,6 @@
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { getTextBlockHtmlFromStore } from '@entity/quotation/redux/getter/getTextBlockHtmlFromStore'
-// import { textItemCellStyle } from '@entity/quotation/style/textItemCellStyle'
+import { textItemCellStyle } from '@entity/quotation/style/textItemCellStyle'
 import { BlockComp } from '@entity/quotation/ui/BlockComp'
 import { CopyBlockIcon } from '@feature/blocks/copy'
 import { CutBlockIcon } from '@feature/blocks/cut'
@@ -64,7 +64,7 @@ export const TextBlock = (): JSX.Element => {
         onContentChange={(params) => {
           updateTextBlock({ editorRef, blockIndex: block.index })
         }}
-        sx={{}}
+        sx={textItemCellStyle}
       />
     </BlockComp>
   )

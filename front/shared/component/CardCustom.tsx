@@ -1,9 +1,9 @@
-import { Box, type SxProps, Typography } from '@mui/material'
+import { Box, type CSSObject, Typography } from '@mui/material'
 import type { ComponentRef, JSX, MouseEvent, ReactNode, RefObject } from 'react'
 
 type Props = {
   children?: ReactNode
-  sx?: SxProps
+  sx?: CSSObject
   reference?: RefObject<ComponentRef<'div'> | null>
   title?: ReactNode
   logo?: ReactNode

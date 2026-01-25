@@ -1,10 +1,10 @@
-// import { columnMinWidth } from '@entity/quotation/const/columnMinWidth'
-// import { useStylesForResizableCell } from '@entity/quotation/hook/useStylesForResizableCell'
+import { columnMinWidth } from '@entity/quotation/const/columnMinWidth'
+import { useStylesForResizableCell } from '@entity/quotation/hook/useStylesForResizableCell'
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { useBoq } from '@entity/quotation/provider/BoqBlockProvider'
 import { useRow } from '@entity/quotation/provider/RowProvider'
 import { getCellHtmlFromStore } from '@entity/quotation/redux/getter/getCellHtmlFromStore'
-// import { cellStyle, cellSx } from '@entity/quotation/style/cellStyle'
+import { cellStyle, cellSx } from '@entity/quotation/style/cellStyle'
 // import { Pin, pinItemPriceCell } from '@feature/blocks/pin'
 // import { tabFromItemPriceCell } from '@feature/blocks/tab-away-from-cell'
 import {
@@ -23,11 +23,11 @@ export const ItemPriceCell = (): JSX.Element => {
   const boq = useBoq()
   const row = useRow()
 
-  // const stylesForResizableCell = useStylesForResizableCell({
-  //   blockIndex: block.index,
-  //   boqColumnKey: 'itemPrice',
-  //   minWidth: `${columnMinWidth.itemPrice}px`,
-  // })
+  const stylesForResizableCell = useStylesForResizableCell({
+    blockIndex: block.index,
+    boqColumnKey: 'itemPrice',
+    minWidth: `${columnMinWidth.itemPrice}px`,
+  })
 
   return (
     <Box sx={{ display: 'flex', position: 'relative' }}>
@@ -97,7 +97,11 @@ export const ItemPriceCell = (): JSX.Element => {
             subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
           })
         }}
-        sx={{}}
+        sx={{
+          ...cellStyle,
+          ...cellSx,
+          ...stylesForResizableCell,
+        }}
       />
     </Box>
   )

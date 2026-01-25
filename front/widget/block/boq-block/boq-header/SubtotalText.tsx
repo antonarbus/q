@@ -1,6 +1,6 @@
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { getBoqHeaderHtmlFromStore } from '@entity/quotation/redux/getter/getBoqHeaderHtmlFromStore'
-// import { subTotalTextCellStyle } from '@entity/quotation/style/subTotalTextCellStyle'
+import { subTotalTextCellStyle } from '@entity/quotation/style/subTotalTextCellStyle'
 import type { HeaderKey } from '@back/entity/quotation/schema'
 import { updateSubtotalText } from '@feature/blocks/update'
 import { type JSX, useRef } from 'react'
@@ -45,7 +45,7 @@ export const SubtotalText = (): JSX.Element => {
           boqHeaderKey,
         })
       }}
-      sx={{}}
+      sx={subTotalTextCellStyle}
     />
   )
 }

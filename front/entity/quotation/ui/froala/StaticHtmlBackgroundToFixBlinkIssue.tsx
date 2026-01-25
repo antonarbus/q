@@ -1,6 +1,7 @@
-import { type CSSProperties, type JSX, useState } from 'react'
+import { type JSX, useState } from 'react'
 import { useEffectOnce } from 'react-use'
 import { StaticHtml } from './StaticHtml'
+import type { CSSObject } from '@mui/material'
 
 // * needed to smoothen the froala blink effect on initiation
 // * it stays behind the real EditableHtml and
@@ -9,7 +10,7 @@ import { StaticHtml } from './StaticHtml'
 
 export const StaticHtmlBackgroundToFixBlinkIssue = (): JSX.Element => {
   const [visibility, setVisibility] =
-    useState<CSSProperties['visibility']>('visible')
+    useState<CSSObject['visibility']>('visible')
 
   useEffectOnce(() => {
     const timeoutId = setTimeout(() => {

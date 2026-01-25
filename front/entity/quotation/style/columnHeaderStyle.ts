@@ -1,6 +1,6 @@
-import type { CSSProperties } from 'react'
+import type { CSSObject } from '@mui/material'
 
-export const columnHeaderStyle: CSSProperties = {
+export const columnHeaderStyle: CSSObject = {
   flexGrow: 1,
   textAlign: 'center',
   minHeight: '24px',

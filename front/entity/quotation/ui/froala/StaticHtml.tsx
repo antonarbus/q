@@ -1,16 +1,10 @@
-import { Box } from '@mui/material'
-import {
-  type ComponentRef,
-  type CSSProperties,
-  type JSX,
-  useEffect,
-  useRef,
-} from 'react'
+import { type CSSObject, Box } from '@mui/material'
+import { type ComponentRef, type JSX, useEffect, useRef } from 'react'
 import { useEffectOnce } from 'react-use'
 import { useFroala } from '../../provider/FroalaProvider'
 
 type Props = {
-  styleAgainstFroalaBlinks?: CSSProperties
+  styleAgainstFroalaBlinks?: CSSObject
 }
 
 export const StaticHtml = (props: Props): JSX.Element => {

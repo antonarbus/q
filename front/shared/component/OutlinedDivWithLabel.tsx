@@ -1,4 +1,4 @@
-import { type SxProps, TextField } from '@mui/material'
+import { type CSSObject, TextField } from '@mui/material'
 import type { JSX, ReactNode, RefObject } from 'react'
 
 type InputComponentProps = Record<string, unknown> & {
@@ -25,7 +25,7 @@ const InputComponent = (props: InputComponentProps): JSX.Element => {
 type Props = {
   children: ReactNode
   label: string
-  sx?: SxProps
+  sx?: CSSObject
 }
 
 // eslint-disable-next-line react/no-multi-comp

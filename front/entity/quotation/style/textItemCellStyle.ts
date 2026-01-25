@@ -1,5 +1,5 @@
-import type { CSSProperties } from 'react'
+import type { CSSObject } from '@mui/material'
 
-export const textItemCellStyle: CSSProperties = {
+export const textItemCellStyle: CSSObject = {
   padding: '20px',
 }

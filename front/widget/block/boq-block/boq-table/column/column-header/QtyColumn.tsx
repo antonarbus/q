@@ -1,7 +1,7 @@
 import { columnMinWidth } from '@entity/quotation/const/columnMinWidth'
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { getBoqColumnHtmlFromStore } from '@entity/quotation/redux/getter/getBoqColumnHtmlFromStore'
-// import { columnHeaderStyle } from '@entity/quotation/style/columnHeaderStyle'
+import { columnHeaderStyle } from '@entity/quotation/style/columnHeaderStyle'
 import { updateColumnCell } from '@feature/blocks/update'
 import { type JSX, useRef } from 'react'
 import { ResizableColumn } from '../ResizableColumn'
@@ -50,7 +50,7 @@ export const QtyColumn = (): JSX.Element => {
             editorRef,
           })
         }}
-        sx={{}}
+        sx={columnHeaderStyle}
       />
     </ResizableColumn>
   )

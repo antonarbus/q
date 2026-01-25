@@ -1,14 +1,13 @@
-import type { SxProps } from '@mui/material'
+import type { CSSObject } from '@mui/material'
 import { theme } from '@shared/theme'
-import type { CSSProperties } from 'react'
 
-export const cellStyle: CSSProperties = {
+export const cellStyle: CSSObject = {
   textAlign: 'center',
   padding: theme.cell.padding,
   minHeight: '50px', // otherwise placeholder is misplaced on init
 }
 
-export const cellSx: SxProps = {
+export const cellSx: CSSObject = {
   '.fr-placeholder': {
     left: '15px',
   },

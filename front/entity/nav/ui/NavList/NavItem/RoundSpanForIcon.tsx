@@ -1,8 +1,9 @@
-import type { CSSProperties, JSX, ReactNode } from 'react'
+import type { CSSObject } from '@emotion/react'
+import type { JSX, ReactNode } from 'react'
 
 type Props = {
   children: ReactNode
-  css?: CSSProperties
+  css?: CSSObject
   className?: string
   disabled?: boolean
 }

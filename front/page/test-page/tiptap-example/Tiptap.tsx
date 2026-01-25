@@ -17,12 +17,12 @@ import Image from '@tiptap/extension-image'
 import Placeholder from '@tiptap/extension-placeholder'
 import { FloatingMenu } from './FloatingMenu'
 import type { EditorRef } from '@shared/lib/tiptap/types'
-import { type SxProps, Box } from '@mui/material'
+import { type CSSObject, Box } from '@mui/material'
 
 type Props = {
   editorRef: EditorRef
   className: string
-  sx: SxProps
+  sx: CSSObject
   content: UseEditorOptions['content']
   onContentChange: (props: EditorEvents['update']) => void
 }

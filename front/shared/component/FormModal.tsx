@@ -2,7 +2,7 @@ import {
   Avatar,
   Box,
   IconButton,
-  type SxProps,
+  type CSSObject,
   Typography,
 } from '@mui/material'
 import { cls } from '@shared/cls'
@@ -12,7 +12,6 @@ import { AnimatePresence, motion } from 'motion/react'
 import {
   Children,
   type ComponentRef,
-  type CSSProperties,
   type FormEvent,
   type JSX,
   type MouseEvent,
@@ -24,9 +23,9 @@ import { BackdropWithSlidableModal } from './BackdropWithSlidableModal'
 import { ButtonCustom } from './ButtonCustom'
 
 type Props = {
-  width?: CSSProperties['width']
-  paddingContent?: CSSProperties['width']
-  sx?: SxProps
+  width?: CSSObject['width']
+  paddingContent?: CSSObject['width']
+  sx?: CSSObject
   headerIcon: ReactNode
   headerText: string
   children: ReactNode

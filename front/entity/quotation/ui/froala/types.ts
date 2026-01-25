@@ -1,14 +1,13 @@
-import type { SxProps } from '@mui/material'
-import type { CSSProperties, KeyboardEvent, MouseEvent } from 'react'
+import type { CSSObject } from '@mui/material'
+import type { KeyboardEvent, MouseEvent } from 'react'
 import type { Editor } from '@tiptap/react'
-import type { EditorRef } from '@shared/lib/tiptap/types'
 
 export type FroalaProps = {
   // htmlGetter: () => string
   // editorRef: EditorRef
   placeholder?: string
-  style?: CSSProperties
-  sx?: SxProps
+  style?: CSSObject
+  sx?: CSSObject
   // onContentChange: () => void
   onFocus?: () => void
   onClick?: (e: MouseEvent) => void
@@ -17,7 +16,7 @@ export type FroalaProps = {
   onInitialized?: () => void
   // className?: string
   droppable?: boolean
-  wrapperStyles?: CSSProperties
+  wrapperStyles?: CSSObject
   beforeUpload?: ({
     editor,
     files,

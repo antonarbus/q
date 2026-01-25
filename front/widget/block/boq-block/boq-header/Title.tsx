@@ -1,6 +1,6 @@
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { getBoqHeaderHtmlFromStore } from '@entity/quotation/redux/getter/getBoqHeaderHtmlFromStore'
-// import { titleCellStyle } from '@entity/quotation/style/titleCellStyle'
+import { titleCellStyle } from '@entity/quotation/style/titleCellStyle'
 import type { HeaderKey } from '@back/entity/quotation/schema'
 import { updateTitle } from '@feature/blocks/update'
 import { type JSX, useRef } from 'react'
@@ -45,7 +45,7 @@ export const Title = (): JSX.Element => {
           editorRef,
         })
       }}
-      sx={{}}
+      sx={titleCellStyle}
     />
   )
 }

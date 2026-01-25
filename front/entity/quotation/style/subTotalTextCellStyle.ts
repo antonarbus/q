@@ -1,6 +1,6 @@
-import type { CSSProperties } from 'react'
+import type { CSSObject } from '@mui/material'
 
-export const subTotalTextCellStyle: CSSProperties = {
+export const subTotalTextCellStyle: CSSObject = {
   height: '100%',
   width: '100%',
   whiteSpace: 'nowrap',

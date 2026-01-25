@@ -1,7 +1,7 @@
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { useBoq } from '@entity/quotation/provider/BoqBlockProvider'
 import { getBoqHeaderHtmlFromStore } from '@entity/quotation/redux/getter/getBoqHeaderHtmlFromStore'
-// import { subTotalPriceCellStyle } from '@entity/quotation/style/subTotalPriceCellStyle'
+import { subTotalPriceCellStyle } from '@entity/quotation/style/subTotalPriceCellStyle'
 import type { HeaderKey } from '@back/entity/quotation/schema'
 // import { showHidePricePins } from '@feature/blocks/pin'
 import {
@@ -81,7 +81,7 @@ export const SubTotalPrice = (): JSX.Element => {
           subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
         })
       }}
-      sx={{}}
+      sx={subTotalPriceCellStyle}
     />
   )
 }
