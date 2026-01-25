@@ -40,11 +40,7 @@ export default {
   },
   worker: {
     format: 'es',
-    plugins: (): Plugin[] => [
-      tsconfigPaths({
-        root: thisDirPath,
-      }),
-    ],
+    plugins: (): Plugin[] => [tsconfigPaths({ root: thisDirPath })],
   },
   esbuild: {
     define: {
@@ -71,9 +67,7 @@ export default {
       },
     }),
     // https://github.com/aleclarson/vite-tsconfig-paths
-    tsconfigPaths({
-      root: thisDirPath,
-    }),
+    tsconfigPaths({ root: thisDirPath }),
     basicSsl(),
   ],
   // Path aliases are automatically loaded from tsconfig.json via tsconfigPaths() plugin
