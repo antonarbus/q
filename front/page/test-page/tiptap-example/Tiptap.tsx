@@ -56,6 +56,14 @@ export const Tiptap = (props: Props): JSX.Element => {
       className={props.className}
       sx={{
         position: 'relative',
+        // Placeholder styling
+        '& .tiptap p.is-editor-empty:first-child::before': {
+          color: '#adb5bd',
+          content: 'attr(data-placeholder)',
+          float: 'left',
+          height: 0,
+          pointerEvents: 'none',
+        },
         ...props.sx,
       }}
     >
