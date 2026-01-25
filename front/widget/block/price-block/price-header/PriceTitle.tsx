@@ -10,26 +10,6 @@ export const PriceTitle = (): JSX.Element => {
   const block = useBlock()
 
   return (
-    /*
-    <Froala
-      editorRef={editorRef}
-      htmlGetter={() => {
-        const priceBlock = getState().quotation.blocks[block.index]
-
-        if (priceBlock?.type !== 'price') {
-          return ''
-        }
-
-        const titleHtml = priceBlock.title.html
-
-        return titleHtml
-      }}
-      onContentChange={() => {
-        updatePriceTitle({ editorRef, blockIndex: block.index })
-      }}
-      placeholder='Total price...'
-    />
-    */
     <Tiptap
       editorRef={editorRef}
       className='price-title'

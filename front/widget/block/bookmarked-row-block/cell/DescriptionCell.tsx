@@ -22,25 +22,6 @@ export const DescriptionCell = (): JSX.Element => {
     /*
     <Froala
       beforeUpload={beforeUpload}
-      className='td description'
-      editorRef={row.descriptionCellEditorRef}
-      htmlGetter={() =>
-        getBookmarkedRowCellHtmlFromStore({ cellKey: 'description' })
-      }
-      onContentChange={() => {
-        updateDescriptionCell({
-          editorRef: row.descriptionCellEditorRef,
-        })
-      }}
-      placeholder='Description...'
-      style={{
-        ...cellStyle,
-        textAlign: 'left',
-      }}
-      sx={{
-        '.fr-placeholder': { left: 0 },
-      }}
-      wrapperStyles={stylesForResizableCell}
     />
     */
     <Tiptap

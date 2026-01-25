@@ -34,15 +34,6 @@ export const PriceCell = (): JSX.Element => {
   return (
     <Box sx={{ display: 'flex', position: 'relative' }}>
       {/* <Froala
-        className='td price'
-        editorRef={row.priceCellEditorRef}
-        htmlGetter={() =>
-          getCellHtmlFromStore({
-            blockIndex: block.index,
-            cellKey: 'price',
-            rowIndex: row.index,
-          })
-        }
         onBlur={() => {
           formatPriceCell({
             blockIndex: block.index,
@@ -57,16 +48,6 @@ export const PriceCell = (): JSX.Element => {
             subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
           })
         }}
-        onContentChange={() => {
-          updatePriceCell({
-            blockIndex: block.index,
-            itemPriceCellEditorRef: row.itemPriceCellEditorRef,
-            priceCellEditorRef: row.priceCellEditorRef,
-            qtyCellEditorRef: row.qtyCellEditorRef,
-            rowIndex: row.index,
-            subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
-          })
-        }}
         onFocus={() => {
           showRowPins({ blockIndex: block.index, rowIndex: row.index })
         }}
@@ -77,10 +58,6 @@ export const PriceCell = (): JSX.Element => {
             rowIndex: row.index,
           })
         }}
-        placeholder='Price...'
-        style={cellStyle}
-        sx={cellSx}
-        wrapperStyles={stylesForResizableCell}
       /> */}
       <Tiptap
         editorRef={row.priceCellEditorRef}

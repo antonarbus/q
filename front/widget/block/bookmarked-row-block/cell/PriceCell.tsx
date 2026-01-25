@@ -22,23 +22,9 @@ export const PriceCell = (): JSX.Element => {
   return (
     <Box sx={{ display: 'flex', position: 'relative' }}>
       {/* <Froala
-        className='td price'
-        editorRef={row.priceCellEditorRef}
-        htmlGetter={() =>
-          getBookmarkedRowCellHtmlFromStore({ cellKey: 'price' })
-        }
         onBlur={() => {
           formatPriceCell({ priceCellEditorRef: row.priceCellEditorRef })
         }}
-        onContentChange={() => {
-          updatePriceCell({
-            itemPriceCellEditorRef: row.itemPriceCellEditorRef,
-            priceCellEditorRef: row.priceCellEditorRef,
-          })
-        }}
-        style={cellStyle}
-        sx={cellSx}
-        wrapperStyles={stylesForResizableCell}
       /> */}
       <Tiptap
         editorRef={row.priceCellEditorRef}

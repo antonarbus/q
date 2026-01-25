@@ -18,29 +18,6 @@ export const DescriptionColumn = (): ReactNode => {
       className='th description resizable'
       minWidth={columnMinWidth.description}
     >
-      {/* 
-      <Froala
-        editorRef={editorRef}
-        htmlGetter={() =>
-          getBoqColumnHtmlFromStore({
-            blockIndex: block.index,
-            boqColumnKey: 'description',
-          })
-        }
-        onContentChange={() => {
-          updateColumnCell({
-            editorRef,
-            blockIndex: block.index,
-            boqColumnKey: 'description',
-          })
-        }}
-        placeholder='Description...'
-        style={{
-          ...columnHeaderStyle,
-          textAlign: 'left',
-        }}
-      /> 
-      */}
       <Tiptap
         editorRef={editorRef}
         className='column-description'

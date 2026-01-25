@@ -14,23 +14,6 @@ export const Title = (): JSX.Element => {
   const block = useBlock()
 
   return (
-    /*
-    <Froala
-      editorRef={editorRef}
-      htmlGetter={() =>
-        getBoqHeaderHtmlFromStore({ blockIndex: block.index, boqHeaderKey })
-      }
-      onContentChange={() => {
-        updateTitle({
-          blockIndex: block.index,
-          boqHeaderKey,
-          editorRef,
-        })
-      }}
-      placeholder='Title...'
-      style={titleCellStyle}
-    />
-    */
     <Tiptap
       editorRef={editorRef}
       className='title'

@@ -14,23 +14,6 @@ export const SubtotalText = (): JSX.Element => {
   const block = useBlock()
 
   return (
-    /*
-    <Froala
-      editorRef={editorRef}
-      htmlGetter={() =>
-        getBoqHeaderHtmlFromStore({ blockIndex: block.index, boqHeaderKey })
-      }
-      onContentChange={() => {
-        updateSubtotalText({
-          editorRef,
-          blockIndex: block.index,
-          boqHeaderKey,
-        })
-      }}
-      placeholder='Subtotal...'
-      style={subTotalTextCellStyle}
-    />
-    */
     <Tiptap
       editorRef={editorRef}
       className='sub-total-text'

@@ -18,24 +18,6 @@ export const QtyColumn = (): JSX.Element => {
       className='th qty resizable'
       minWidth={columnMinWidth.qty}
     >
-      {/* <Froala
-        editorRef={editorRef}
-        htmlGetter={() =>
-          getBoqColumnHtmlFromStore({
-            blockIndex: block.index,
-            boqColumnKey: 'qty',
-          })
-        }
-        onContentChange={() => {
-          updateColumnCell({
-            blockIndex: block.index,
-            boqColumnKey: 'qty',
-            editorRef,
-          })
-        }}
-        placeholder='Qty...'
-        style={columnHeaderStyle}
-      /> */}
       <Tiptap
         editorRef={editorRef}
         className='column-qty'

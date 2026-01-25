@@ -18,25 +18,6 @@ export const ItemPriceColumn = (): JSX.Element => {
       className='th itemPrice resizable'
       minWidth={columnMinWidth.itemPrice}
     >
-      {/* <Froala
-        editorRef={editorRef}
-        htmlGetter={() =>
-          getBoqColumnHtmlFromStore({
-            blockIndex: block.index,
-            boqColumnKey: 'itemPrice',
-          })
-        }
-        onContentChange={() => {
-          updateColumnCell({
-            editorRef,
-            blockIndex: block.index,
-            boqColumnKey: 'itemPrice',
-          })
-        }}
-        placeholder='Item...'
-        style={columnHeaderStyle}
-      /> */}
-
       <Tiptap
         editorRef={editorRef}
         className='column-item-price'

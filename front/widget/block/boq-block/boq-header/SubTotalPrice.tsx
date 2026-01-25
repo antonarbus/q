@@ -32,10 +32,6 @@ export const SubTotalPrice = (): JSX.Element => {
   return (
     /*
     <Froala
-      editorRef={boq.subTotalPriceEditorRef}
-      htmlGetter={() =>
-        getBoqHeaderHtmlFromStore({ blockIndex: block.index, boqHeaderKey })
-      }
       onBlur={() => {
         formatSubtotalPrice({
           blockIndex: block.index,
@@ -56,15 +52,6 @@ export const SubTotalPrice = (): JSX.Element => {
           isInitClickRef,
         })
       }}
-      onContentChange={() => {
-        updateSubtotalPrice({
-          blockIndex: block.index,
-          rowEditorRefs: boq.rowEditorRefs,
-          subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
-        })
-      }}
-      placeholder='Price...'
-      style={subTotalPriceCellStyle}
     />
     */
     <Tiptap

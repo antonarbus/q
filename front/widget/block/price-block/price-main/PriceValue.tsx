@@ -21,18 +21,12 @@ export const PriceValue = (): JSX.Element => {
   return (
     /*
     <Froala
-      editorRef={editorRef}
-      htmlGetter={() => getPriceBlockHtmlFromStore({ blockIndex: block.index })}
       onBlur={() => {
         validateTotalPrice({ editorRef, blockIndex: block.index })
-      }}
-      onContentChange={() => {
-        updatePriceValue({ editorRef, blockIndex: block.index })
       }}
       onInitialized={() => {
         validateTotalPrice({ editorRef, blockIndex: block.index })
       }}
-      placeholder='Total price...'
     />
     */
     <Tiptap

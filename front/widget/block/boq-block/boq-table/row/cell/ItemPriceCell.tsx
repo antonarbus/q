@@ -32,29 +32,11 @@ export const ItemPriceCell = (): JSX.Element => {
   return (
     <Box sx={{ display: 'flex', position: 'relative' }}>
       {/* <Froala
-        className='td itemPrice'
-        editorRef={row.itemPriceCellEditorRef}
-        htmlGetter={() =>
-          getCellHtmlFromStore({
-            blockIndex: block.index,
-            cellKey: 'itemPrice',
-            rowIndex: row.index,
-          })
-        }
         onBlur={() => {
           formatItemPriceCell({
             blockIndex: block.index,
             itemPriceCellEditorRef: row.itemPriceCellEditorRef,
             rowIndex: row.index,
-          })
-        }}
-        onContentChange={() => {
-          updateItemPriceCell({
-            blockIndex: block.index,
-            itemPriceCellEditorRef: row.itemPriceCellEditorRef,
-            priceCellEditorRef: row.priceCellEditorRef,
-            rowIndex: row.index,
-            subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
           })
         }}
         onKeydown={(event) => {
@@ -64,10 +46,6 @@ export const ItemPriceCell = (): JSX.Element => {
             rowIndex: row.index,
           })
         }}
-        placeholder='Item price...'
-        style={cellStyle}
-        sx={cellSx}
-        wrapperStyles={stylesForResizableCell}
       />
       <Pin
         cellKey='itemPrice'

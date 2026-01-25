@@ -47,15 +47,6 @@ export const TextBlock = (): JSX.Element => {
       {/* <Froala
         beforeUpload={beforeUpload}
         droppable
-        editorRef={editorRef}
-        htmlGetter={() =>
-          getTextBlockHtmlFromStore({ blockIndex: block.index })
-        }
-        onContentChange={() => {
-          updateTextBlock({ editorRef, blockIndex: block.index })
-        }}
-        placeholder='Add text, tables, drop images, files, links, select to format...'
-        style={textItemCellStyle}
       /> */}
       <Tiptap
         editorRef={editorRef}

@@ -24,24 +24,7 @@ export const DescriptionCell = (): JSX.Element => {
     /*
     <Froala
       beforeUpload={beforeUpload}
-      className='td description'
       droppable
-      editorRef={row.descriptionCellEditorRef}
-      htmlGetter={() =>
-        getCellHtmlFromStore({
-          blockIndex: block.index,
-          cellKey: 'description',
-          rowIndex: row.index,
-        })
-      }
-      onContentChange={() => {
-        updateDescriptionCell({
-          blockIndex: block.index,
-          cellKey: 'description',
-          editorRef: row.descriptionCellEditorRef,
-          rowIndex: row.index,
-        })
-      }}
       onKeydown={(event: KeyboardEvent) => {
         tabFromDescriptionCell({
           event,
@@ -49,17 +32,6 @@ export const DescriptionCell = (): JSX.Element => {
           rowIndex: row.index,
         })
       }}
-      placeholder='Description...'
-      style={{
-        ...cellStyle,
-        textAlign: 'left',
-      }}
-      sx={{
-        '.fr-placeholder': {
-          left: 0,
-        },
-      }}
-      wrapperStyles={stylesForResizableCell}
     />
     */
     <Tiptap

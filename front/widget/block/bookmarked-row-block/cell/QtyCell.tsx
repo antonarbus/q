@@ -22,21 +22,9 @@ export const QtyCell = (): JSX.Element => {
   return (
     <Box sx={{ display: 'flex', position: 'relative' }}>
       {/* <Froala
-        className='td qty'
-        editorRef={row.qtyCellEditorRef}
-        htmlGetter={() => getBookmarkedRowCellHtmlFromStore({ cellKey: 'qty' })}
         onBlur={() => {
           formatQtyCell({ qtyCellEditorRef: row.qtyCellEditorRef })
         }}
-        onContentChange={() => {
-          updateQtyCell({
-            priceCellEditorRef: row.priceCellEditorRef,
-            qtyCellEditorRef: row.qtyCellEditorRef,
-          })
-        }}
-        style={cellStyle}
-        sx={cellSx}
-        wrapperStyles={stylesForResizableCell}
       /> */}
       <Tiptap
         editorRef={row.qtyCellEditorRef}
