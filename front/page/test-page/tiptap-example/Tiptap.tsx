@@ -29,8 +29,6 @@ export const Tiptap = (props: Props): JSX.Element => {
     )
   }
 
-  const showStaticBackground = isEditorReady === false
-
   return (
     <Box
       className={props.className}
@@ -40,7 +38,7 @@ export const Tiptap = (props: Props): JSX.Element => {
         position: 'relative',
       }}
     >
-      {showStaticBackground === true && (
+      {isEditorReady === false && (
         <Box
           dangerouslySetInnerHTML={{ __html: props.content }}
           sx={{
