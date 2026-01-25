@@ -1,4 +1,4 @@
-import { type JSX, useEffect, useState } from 'react'
+import { type JSX, useEffect } from 'react'
 import {
   type EditorEvents,
   type UseEditorOptions,
@@ -14,21 +14,17 @@ import Image from '@tiptap/extension-image'
 import Placeholder from '@tiptap/extension-placeholder'
 import { FloatingMenu } from './FloatingMenu'
 import type { EditorRef } from '@shared/lib/tiptap/types'
-import { type CSSObject, Box } from '@mui/material'
-import { tiptapStyles } from './styles'
 
 type Props = {
   editorRef: EditorRef
-  className: string
   placeholder: string
-  sx: CSSObject
   content: UseEditorOptions['content']
   onUpdate: (props: EditorEvents['update']) => void
+  onReady: () => void
+  isReady: boolean
 }
 
 export const TiptapEditor = (props: Props): JSX.Element => {
-  const [isReady, setIsReady] = useState(false)
-
   const editor = useEditor(
     {
       extensions: [
@@ -43,7 +39,7 @@ export const TiptapEditor = (props: Props): JSX.Element => {
       content: props.content,
       onUpdate: props.onUpdate,
       onCreate: () => {
-        setIsReady(true)
+        props.onReady()
       },
     },
     [],
@@ -54,20 +50,16 @@ export const TiptapEditor = (props: Props): JSX.Element => {
   }, [editor, props.editorRef])
 
   return (
-    <Box
-      className={props.className}
-      sx={{
-        ...tiptapStyles,
-        ...props.sx,
-        visibility: isReady === true ? 'visible' : 'hidden',
-      }}
-    >
+    <>
       <FloatingMenu editor={editor} />
       <EditorContent
         editor={editor}
         className='tiptap-editor'
-        style={{ flexGrow: 1 }}
+        style={{
+          flexGrow: 1,
+          visibility: props.isReady === true ? 'visible' : 'hidden',
+        }}
       />
-    </Box>
+    </>
   )
 }

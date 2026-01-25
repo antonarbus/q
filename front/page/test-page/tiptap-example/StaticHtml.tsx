@@ -9,8 +9,6 @@ type Props = {
 }
 
 export const StaticHtml = (props: Props): JSX.Element => {
-  console.log(666)
-
   return (
     <Box
       className={props.className}
@@ -25,6 +23,7 @@ export const StaticHtml = (props: Props): JSX.Element => {
         sx={{
           opacity: 0.5,
           wordBreak: 'break-word',
+          flexGrow: 1,
         }}
       />
     </Box>
