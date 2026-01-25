@@ -52,9 +52,9 @@ export const PriceCell = (): JSX.Element => {
           })
         }}
         sx={{
-          ...cellStyle,
-          ...cellSx,
           ...stylesForResizableCell,
+          ...cellSx,
+          ...cellStyle,
         }}
       />
     </Box>

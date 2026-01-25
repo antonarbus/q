@@ -52,9 +52,19 @@ export const Tiptap = (props: Props): JSX.Element => {
   }, [editor, props.editorRef])
 
   return (
-    <Box className={props.className} sx={props.sx}>
+    <Box
+      className={props.className}
+      sx={{
+        position: 'relative',
+        ...props.sx,
+      }}
+    >
       <FloatingMenu editor={editor} />
-      <EditorContent editor={editor} />
+      <EditorContent
+        editor={editor}
+        className='tiptap-editor'
+        style={{ flexGrow: 1 }}
+      />
       {/* <div style={{ position: 'absolute', bottom: 0, right: 0 }}>
         <button
           type='button'

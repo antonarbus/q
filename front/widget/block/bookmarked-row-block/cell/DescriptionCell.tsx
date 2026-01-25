@@ -53,10 +53,10 @@ export const DescriptionCell = (): JSX.Element => {
         })
       }}
       sx={{
+        ...stylesForResizableCell,
         ...cellStyle,
         textAlign: 'left',
         '.fr-placeholder': { left: 0 },
-        ...stylesForResizableCell,
       }}
     />
   )

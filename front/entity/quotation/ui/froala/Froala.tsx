@@ -68,7 +68,6 @@ export const Froala = (props: FroalaProps): JSX.Element => {
         <Box
           className={props.droppable === true ? cls.droppable : ''}
           style={{
-            width: '100%',
             position: 'relative',
             borderRadius: '4px',
           }}

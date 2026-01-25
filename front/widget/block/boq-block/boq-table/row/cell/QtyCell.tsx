@@ -84,9 +84,9 @@ export const QtyCell = (): JSX.Element => {
           })
         }}
         sx={{
-          ...cellStyle,
-          ...cellSx,
           ...stylesForResizableCell,
+          ...cellSx,
+          ...cellStyle,
         }}
       />
       <Pin

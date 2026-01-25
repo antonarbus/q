@@ -50,9 +50,9 @@ export const QtyCell = (): JSX.Element => {
           })
         }}
         sx={{
+          ...stylesForResizableCell,
           ...cellStyle,
           ...cellSx,
-          ...stylesForResizableCell,
         }}
       />
     </Box>
