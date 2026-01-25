@@ -55,7 +55,10 @@ export const DescriptionColumn = (): ReactNode => {
             boqColumnKey: 'description',
           })
         }}
-        sx={columnHeaderStyle}
+        sx={{
+          ...columnHeaderStyle,
+          textAlign: 'left',
+        }}
       />
     </ResizableColumn>
   )
