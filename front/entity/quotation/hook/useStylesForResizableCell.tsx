@@ -2,6 +2,7 @@ import { useSelector } from '@shared/lib/redux'
 import type { CSSProperties } from 'react'
 import { selectColumnWidth } from '../redux/selector/selectColumnWidth'
 import type { BoqColumnKey } from '@back/entity/quotation/schema'
+import type { CSSObject } from '@mui/material'
 
 type Props = {
   blockIndex: number
@@ -9,9 +10,7 @@ type Props = {
   minWidth: CSSProperties['minWidth']
 }
 
-type Res = CSSProperties
-
-export const useStylesForResizableCell = (props: Props): Res => {
+export const useStylesForResizableCell = (props: Props): CSSObject => {
   const columnWidth = useSelector(
     selectColumnWidth({
       blockIndex: props.blockIndex,
@@ -19,7 +18,7 @@ export const useStylesForResizableCell = (props: Props): Res => {
     }),
   )
 
-  const stylesForResizableCell: CSSProperties = {
+  const stylesForResizableCell: CSSObject = {
     display: 'flex',
     alignItems: 'flex-end',
     position: 'relative',
