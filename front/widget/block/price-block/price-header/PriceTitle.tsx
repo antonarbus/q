@@ -46,7 +46,9 @@ export const PriceTitle = (): JSX.Element => {
       onContentChange={(params) => {
         updatePriceTitle({ editorRef, blockIndex: block.index })
       }}
-      sx={{}}
+      sx={{
+        textAlign: 'center',
+      }}
     />
   )
 }

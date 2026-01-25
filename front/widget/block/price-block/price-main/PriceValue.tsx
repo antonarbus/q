@@ -43,7 +43,9 @@ export const PriceValue = (): JSX.Element => {
       onContentChange={(params) => {
         updatePriceValue({ editorRef, blockIndex: block.index })
       }}
-      sx={{}}
+      sx={{
+        textAlign: 'center',
+      }}
     />
   )
 }
