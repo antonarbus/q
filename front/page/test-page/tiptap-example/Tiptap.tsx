@@ -18,6 +18,7 @@ import Placeholder from '@tiptap/extension-placeholder'
 import { FloatingMenu } from './FloatingMenu'
 import type { EditorRef } from '@shared/lib/tiptap/types'
 import { type CSSObject, Box } from '@mui/material'
+import { tiptapStyles } from './styles'
 
 type Props = {
   editorRef: EditorRef
@@ -25,7 +26,7 @@ type Props = {
   placeholder: string
   sx: CSSObject
   content: UseEditorOptions['content']
-  onContentChange: (props: EditorEvents['update']) => void
+  onUpdate: (props: EditorEvents['update']) => void
 }
 
 export const Tiptap = (props: Props): JSX.Element => {
@@ -43,7 +44,7 @@ export const Tiptap = (props: Props): JSX.Element => {
         Placeholder.configure({ placeholder: props.placeholder }),
       ],
       content: props.content,
-      onUpdate: props.onContentChange,
+      onUpdate: props.onUpdate,
     },
     [],
   )
@@ -56,16 +57,7 @@ export const Tiptap = (props: Props): JSX.Element => {
     <Box
       className={props.className}
       sx={{
-        position: 'relative',
-        // Remove default focus outline
-        '& .tiptap:focus': {
-          outline: 'none',
-        },
-        // Placeholder styling
-        '& .tiptap p.is-editor-empty:first-child::before': {
-          color: 'rgb(173, 181, 189)',
-          content: 'attr(data-placeholder)',
-        },
+        ...tiptapStyles,
         ...props.sx,
       }}
     >
@@ -75,25 +67,6 @@ export const Tiptap = (props: Props): JSX.Element => {
         className='tiptap-editor'
         style={{ flexGrow: 1 }}
       />
-      {/* <div style={{ position: 'absolute', bottom: 0, right: 0 }}>
-        <button
-          type='button'
-          onClick={() => {
-            const html = editor.getHTML()
-            alert(html)
-          }}
-        >
-          Get html
-        </button>
-        <button
-          type='button'
-          onClick={() => {
-            editor.commands.setContent('<span style="color: red;">Hello</span>')
-          }}
-        >
-          Set html
-        </button>
-      </div> */}
     </Box>
   )
 }

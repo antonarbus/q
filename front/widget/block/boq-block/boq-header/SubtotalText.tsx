@@ -22,7 +22,7 @@ export const SubtotalText = (): JSX.Element => {
         blockIndex: block.index,
         boqHeaderKey,
       })}
-      onContentChange={(params) => {
+      onUpdate={(params) => {
         updateSubtotalText({
           editorRef,
           blockIndex: block.index,

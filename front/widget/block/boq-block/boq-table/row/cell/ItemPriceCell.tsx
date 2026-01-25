@@ -67,7 +67,7 @@ export const ItemPriceCell = (): JSX.Element => {
           cellKey: 'itemPrice',
           rowIndex: row.index,
         })}
-        onContentChange={(params) => {
+        onUpdate={(params) => {
           updateItemPriceCell({
             blockIndex: block.index,
             itemPriceCellEditorRef: row.itemPriceCellEditorRef,

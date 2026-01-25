@@ -22,7 +22,7 @@ export const Title = (): JSX.Element => {
         blockIndex: block.index,
         boqHeaderKey,
       })}
-      onContentChange={(params) => {
+      onUpdate={(params) => {
         updateTitle({
           blockIndex: block.index,
           boqHeaderKey,

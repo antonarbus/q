@@ -43,7 +43,7 @@ export const DescriptionCell = (): JSX.Element => {
         cellKey: 'description',
         rowIndex: row.index,
       })}
-      onContentChange={(params) => {
+      onUpdate={(params) => {
         updateDescriptionCell({
           blockIndex: block.index,
           cellKey: 'description',

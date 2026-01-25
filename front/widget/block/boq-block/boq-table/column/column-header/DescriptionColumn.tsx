@@ -26,7 +26,7 @@ export const DescriptionColumn = (): ReactNode => {
           blockIndex: block.index,
           boqColumnKey: 'description',
         })}
-        onContentChange={(params) => {
+        onUpdate={(params) => {
           updateColumnCell({
             editorRef,
             blockIndex: block.index,

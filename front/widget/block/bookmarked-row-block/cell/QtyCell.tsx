@@ -31,7 +31,7 @@ export const QtyCell = (): JSX.Element => {
         className='td qty'
         placeholder='Qty...'
         content={getBookmarkedRowCellHtmlFromStore({ cellKey: 'qty' })}
-        onContentChange={(params) => {
+        onUpdate={(params) => {
           updateQtyCell({
             priceCellEditorRef: row.priceCellEditorRef,
             qtyCellEditorRef: row.qtyCellEditorRef,

@@ -23,7 +23,7 @@ export const PriceTitle = (): JSX.Element => {
 
         return priceBlock.title.html
       })()}
-      onContentChange={(params) => {
+      onUpdate={(params) => {
         updatePriceTitle({ editorRef, blockIndex: block.index })
       }}
       sx={{

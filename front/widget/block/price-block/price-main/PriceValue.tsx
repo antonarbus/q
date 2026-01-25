@@ -34,7 +34,7 @@ export const PriceValue = (): JSX.Element => {
       className='price-value'
       placeholder='Total price...'
       content={getPriceBlockHtmlFromStore({ blockIndex: block.index })}
-      onContentChange={(params) => {
+      onUpdate={(params) => {
         updatePriceValue({ editorRef, blockIndex: block.index })
       }}
       sx={{

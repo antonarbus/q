@@ -39,7 +39,7 @@ export const TestPage = (): JSX.Element => {
           editorRef={editorRef}
           className='tip-tap'
           content='hello world'
-          onContentChange={(params) => {
+          onUpdate={(params) => {
             console.log(params.editor.getHTML())
           }}
           sx={{}}

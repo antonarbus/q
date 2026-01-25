@@ -26,7 +26,7 @@ export const ItemPriceColumn = (): JSX.Element => {
           blockIndex: block.index,
           boqColumnKey: 'itemPrice',
         })}
-        onContentChange={(params) => {
+        onUpdate={(params) => {
           updateColumnCell({
             editorRef,
             blockIndex: block.index,

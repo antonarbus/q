@@ -53,7 +53,7 @@ export const TextBlock = (): JSX.Element => {
         className='text'
         placeholder='Add text, tables, drop images, files, links, select to format...'
         content={getTextBlockHtmlFromStore({ blockIndex: block.index })}
-        onContentChange={(params) => {
+        onUpdate={(params) => {
           updateTextBlock({ editorRef, blockIndex: block.index })
         }}
         sx={textItemCellStyle}
