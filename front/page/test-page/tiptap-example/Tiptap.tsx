@@ -1,5 +1,5 @@
 import { type JSX, useState } from 'react'
-import type { EditorEvents, UseEditorOptions } from '@tiptap/react'
+import type { EditorEvents } from '@tiptap/react'
 import type { EditorRef } from '@shared/lib/tiptap/types'
 import { type CSSObject, Box } from '@mui/material'
 import { StaticHtml } from './StaticHtml'
@@ -11,7 +11,7 @@ type Props = {
   className: string
   placeholder: string
   sx: CSSObject
-  content: UseEditorOptions['content']
+  content: string
   onUpdate: (props: EditorEvents['update']) => void
   isEditorActive: boolean
 }
@@ -43,16 +43,13 @@ export const Tiptap = (props: Props): JSX.Element => {
       {showStaticBackground === true && (
         <Box
           dangerouslySetInnerHTML={{
-            __html: typeof props.content === 'string' ? props.content : '',
+            __html: props.content,
           }}
           sx={{
             ...props.sx,
             position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
             wordBreak: 'break-word',
+            inset: 0,
             flexGrow: 1,
           }}
         />
