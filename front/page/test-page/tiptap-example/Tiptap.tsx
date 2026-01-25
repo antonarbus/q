@@ -57,6 +57,10 @@ export const Tiptap = (props: Props): JSX.Element => {
       className={props.className}
       sx={{
         position: 'relative',
+        // Remove default focus outline
+        '& .tiptap:focus': {
+          outline: 'none',
+        },
         // Placeholder styling
         '& .tiptap p.is-editor-empty:first-child::before': {
           color: 'rgb(173, 181, 189)',
