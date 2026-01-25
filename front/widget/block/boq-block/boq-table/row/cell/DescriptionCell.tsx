@@ -8,11 +8,13 @@ import { cellStyle } from '@entity/quotation/style/cellStyle'
 import { updateDescriptionCell } from '@feature/blocks/update'
 // import { beforeUpload } from '@feature/file/upload-file'
 import { Tiptap } from '@page/test-page/tiptap-example/Tiptap'
+import { useIsEditorActive } from '@page/test-page/tiptap-example/useIsEditorActive'
 import type { JSX } from 'react'
 
 export const DescriptionCell = (): JSX.Element => {
   const block = useBlock()
   const row = useRow()
+  const isEditorActive = useIsEditorActive()
 
   const stylesForResizableCell = useStylesForResizableCell({
     blockIndex: block.index,
@@ -59,6 +61,7 @@ export const DescriptionCell = (): JSX.Element => {
         ...cellStyle,
         textAlign: 'left',
       }}
+      isEditorActive={isEditorActive}
     />
   )
 }

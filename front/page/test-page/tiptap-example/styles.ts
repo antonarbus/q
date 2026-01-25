@@ -7,7 +7,7 @@ export const tiptapStyles: CSSObject = {
     outline: 'none',
   },
   // Placeholder styling
-  '& .tiptap p.is-editor-empty:first-child::before': {
+  '& .tiptap p.is-editor-empty:first-of-::before': {
     color: 'rgb(173, 181, 189)',
     content: 'attr(data-placeholder)',
   },

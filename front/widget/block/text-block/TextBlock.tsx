@@ -19,10 +19,12 @@ import { cls } from '@shared/cls'
 import { ItemActionButtonsLayout } from '@shared/layout/ItemActionButtonsLayout'
 import { type JSX, useRef } from 'react'
 import type { Editor } from '@tiptap/react'
+import { useIsEditorActive } from '@page/test-page/tiptap-example/useIsEditorActive'
 
 export const TextBlock = (): JSX.Element => {
   const editorRef = useRef<Editor | null>(null)
   const block = useBlock()
+  const isEditorActive = useIsEditorActive()
 
   return (
     <BlockComp
@@ -57,6 +59,7 @@ export const TextBlock = (): JSX.Element => {
           updateTextBlock({ editorRef, blockIndex: block.index })
         }}
         sx={textItemCellStyle}
+        isEditorActive={isEditorActive}
       />
     </BlockComp>
   )

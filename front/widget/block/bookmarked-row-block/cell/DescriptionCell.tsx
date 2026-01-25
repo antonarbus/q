@@ -7,10 +7,12 @@ import { cellStyle } from '@entity/quotation/style/cellStyle'
 import { updateDescriptionCell } from '@feature/blocks/update/update-cell-at-bookmarked-row-block/description/updateDescriptionCell'
 // import { beforeUpload } from '@feature/file/upload-file'
 import { Tiptap } from '@page/test-page/tiptap-example/Tiptap'
+import { useIsEditorActive } from '@page/test-page/tiptap-example/useIsEditorActive'
 import type { JSX } from 'react'
 
 export const DescriptionCell = (): JSX.Element => {
   const row = useRow()
+  const isEditorActive = useIsEditorActive()
 
   const stylesForResizableCell = useStylesForResizableCell({
     blockIndex: BOOKMARK_POS_AT_BLOCKS,
@@ -40,6 +42,7 @@ export const DescriptionCell = (): JSX.Element => {
         textAlign: 'left',
         '.fr-placeholder': { left: 0 },
       }}
+      isEditorActive={isEditorActive}
     />
   )
 }

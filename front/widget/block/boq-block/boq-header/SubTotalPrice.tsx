@@ -12,12 +12,14 @@ import {
 } from '@feature/blocks/update'
 import type { JSX } from 'react'
 import { Tiptap } from '@page/test-page/tiptap-example/Tiptap'
+import { useIsEditorActive } from '@page/test-page/tiptap-example/useIsEditorActive'
 
 const boqHeaderKey: HeaderKey = 'subTotalPrice'
 
 export const SubTotalPrice = (): JSX.Element => {
   const boq = useBoq()
   const block = useBlock()
+  const isEditorActive = useIsEditorActive()
 
   // const hidePinsClickHandlerRef = useRef<(e: globalThis.MouseEvent) => void>(
   //   (event) => {
@@ -70,6 +72,7 @@ export const SubTotalPrice = (): JSX.Element => {
         })
       }}
       sx={subTotalPriceCellStyle}
+      isEditorActive={isEditorActive}
     />
   )
 }

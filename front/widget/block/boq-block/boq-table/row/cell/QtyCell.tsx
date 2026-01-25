@@ -13,12 +13,14 @@ import {
 } from '@feature/blocks/update'
 import { Box } from '@mui/material'
 import { Tiptap } from '@page/test-page/tiptap-example/Tiptap'
+import { useIsEditorActive } from '@page/test-page/tiptap-example/useIsEditorActive'
 import type { JSX, MouseEvent } from 'react'
 
 export const QtyCell = (): JSX.Element => {
   const block = useBlock()
   const boq = useBoq()
   const row = useRow()
+  const isEditorActive = useIsEditorActive()
 
   const stylesForResizableCell = useStylesForResizableCell({
     blockIndex: block.index,
@@ -67,6 +69,7 @@ export const QtyCell = (): JSX.Element => {
           ...cellSx,
           ...cellStyle,
         }}
+        isEditorActive={isEditorActive}
       />
       <Pin
         cellKey='qty'

@@ -8,10 +8,12 @@ import { cellStyle, cellSx } from '@entity/quotation/style/cellStyle'
 import { updatePriceCell } from '@feature/blocks/update/update-cell-at-bookmarked-row-block/price/updatePriceCell'
 import { Box } from '@mui/material'
 import { Tiptap } from '@page/test-page/tiptap-example/Tiptap'
+import { useIsEditorActive } from '@page/test-page/tiptap-example/useIsEditorActive'
 import type { JSX } from 'react'
 
 export const PriceCell = (): JSX.Element => {
   const row = useRow()
+  const isEditorActive = useIsEditorActive()
 
   const stylesForResizableCell = useStylesForResizableCell({
     blockIndex: BOOKMARK_POS_AT_BLOCKS,
@@ -42,6 +44,7 @@ export const PriceCell = (): JSX.Element => {
           ...cellSx,
           ...cellStyle,
         }}
+        isEditorActive={isEditorActive}
       />
     </Box>
   )

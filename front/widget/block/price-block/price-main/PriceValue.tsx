@@ -8,10 +8,12 @@ import {
 import { Tiptap } from '@page/test-page/tiptap-example/Tiptap'
 import { type JSX, useRef } from 'react'
 import type { Editor } from '@tiptap/react'
+import { useIsEditorActive } from '@page/test-page/tiptap-example/useIsEditorActive'
 
 export const PriceValue = (): JSX.Element => {
   const editorRef = useRef<Editor | null>(null)
   const block = useBlock()
+  const isEditorActive = useIsEditorActive()
 
   useUpdateTotalPriceIfPricesAboveWereChanged({
     blockIndex: block.index,
@@ -40,6 +42,7 @@ export const PriceValue = (): JSX.Element => {
       sx={{
         textAlign: 'center',
       }}
+      isEditorActive={isEditorActive}
     />
   )
 }
