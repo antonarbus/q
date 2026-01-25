@@ -43,6 +43,7 @@ export const DescriptionColumn = (): ReactNode => {
       */}
       <Tiptap
         editorRef={editorRef}
+        className='column-description'
         content={getBoqColumnHtmlFromStore({
           blockIndex: block.index,
           boqColumnKey: 'description',
@@ -54,6 +55,7 @@ export const DescriptionColumn = (): ReactNode => {
             boqColumnKey: 'description',
           })
         }}
+        sx={{}}
       />
     </ResizableColumn>
   )

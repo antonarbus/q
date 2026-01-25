@@ -37,10 +37,12 @@ export const PriceValue = (): JSX.Element => {
     */
     <Tiptap
       editorRef={editorRef}
+      className='price-value'
       content={getPriceBlockHtmlFromStore({ blockIndex: block.index })}
       onContentChange={(params) => {
         updatePriceValue({ editorRef, blockIndex: block.index })
       }}
+      sx={{}}
     />
   )
 }

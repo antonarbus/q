@@ -84,6 +84,7 @@ export const PriceCell = (): JSX.Element => {
       /> */}
       <Tiptap
         editorRef={row.priceCellEditorRef}
+        className='td price'
         content={getCellHtmlFromStore({
           blockIndex: block.index,
           cellKey: 'price',
@@ -99,6 +100,7 @@ export const PriceCell = (): JSX.Element => {
             subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
           })
         }}
+        sx={{}}
       />
       <Pin
         cellKey='price'

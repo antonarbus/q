@@ -32,6 +32,7 @@ export const PriceTitle = (): JSX.Element => {
     */
     <Tiptap
       editorRef={editorRef}
+      className='price-title'
       content={((): string => {
         const priceBlock = getState().quotation.blocks[block.index]
 
@@ -44,6 +45,7 @@ export const PriceTitle = (): JSX.Element => {
       onContentChange={(params) => {
         updatePriceTitle({ editorRef, blockIndex: block.index })
       }}
+      sx={{}}
     />
   )
 }

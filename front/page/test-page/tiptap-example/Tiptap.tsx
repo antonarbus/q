@@ -17,9 +17,12 @@ import Image from '@tiptap/extension-image'
 import Placeholder from '@tiptap/extension-placeholder'
 import { FloatingMenu } from './FloatingMenu'
 import type { EditorRef } from '@shared/lib/tiptap/types'
+import { type SxProps, Box } from '@mui/material'
 
 type Props = {
   editorRef: EditorRef
+  className: string
+  sx: SxProps
   content: UseEditorOptions['content']
   onContentChange: (props: EditorEvents['update']) => void
 }
@@ -49,7 +52,7 @@ export const Tiptap = (props: Props): JSX.Element => {
   }, [editor, props.editorRef])
 
   return (
-    <>
+    <Box className={props.className} sx={props.sx}>
       <FloatingMenu editor={editor} />
       <EditorContent editor={editor} />
       {/* <div style={{ position: 'absolute', bottom: 0, right: 0 }}>
@@ -71,6 +74,6 @@ export const Tiptap = (props: Props): JSX.Element => {
           Set html
         </button>
       </div> */}
-    </>
+    </Box>
   )
 }

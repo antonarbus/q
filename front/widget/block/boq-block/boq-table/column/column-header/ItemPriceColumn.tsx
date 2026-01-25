@@ -39,6 +39,7 @@ export const ItemPriceColumn = (): JSX.Element => {
 
       <Tiptap
         editorRef={editorRef}
+        className='column-item-price'
         content={getBoqColumnHtmlFromStore({
           blockIndex: block.index,
           boqColumnKey: 'itemPrice',
@@ -50,6 +51,7 @@ export const ItemPriceColumn = (): JSX.Element => {
             boqColumnKey: 'itemPrice',
           })
         }}
+        sx={{}}
       />
     </ResizableColumn>
   )

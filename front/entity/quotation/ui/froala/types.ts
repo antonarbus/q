@@ -4,18 +4,18 @@ import type { Editor } from '@tiptap/react'
 import type { EditorRef } from '@shared/lib/tiptap/types'
 
 export type FroalaProps = {
-  htmlGetter: () => string
-  editorRef: EditorRef
+  // htmlGetter: () => string
+  // editorRef: EditorRef
   placeholder?: string
   style?: CSSProperties
   sx?: SxProps
-  onContentChange: () => void
+  // onContentChange: () => void
   onFocus?: () => void
   onClick?: (e: MouseEvent) => void
   onBlur?: (e: MouseEvent) => void
   onKeydown?: (e: KeyboardEvent) => void
   onInitialized?: () => void
-  className?: string
+  // className?: string
   droppable?: boolean
   wrapperStyles?: CSSProperties
   beforeUpload?: ({

@@ -59,10 +59,12 @@ export const TextBlock = (): JSX.Element => {
       /> */}
       <Tiptap
         editorRef={editorRef}
+        className='text'
         content={getTextBlockHtmlFromStore({ blockIndex: block.index })}
         onContentChange={(params) => {
           updateTextBlock({ editorRef, blockIndex: block.index })
         }}
+        sx={{}}
       />
     </BlockComp>
   )

@@ -34,13 +34,13 @@ export const Froala = (props: FroalaProps): JSX.Element => {
   return (
     <FroalaProvider
       beforeUpload={props.beforeUpload}
-      editorRef={props.editorRef}
+      // editorRef={props.editorRef}
       froalaElementRef={froalaElementRef}
       fixedHeightRef={fixedHeightRef}
-      htmlGetter={props.htmlGetter}
+      // htmlGetter={props.htmlGetter}
       onBlur={props.onBlur}
       onClick={props.onClick}
-      onContentChange={props.onContentChange}
+      // onContentChange={props.onContentChange}
       onFocus={props.onFocus}
       onInitialized={props.onInitialized}
       onKeydown={props.onKeydown}
@@ -49,7 +49,7 @@ export const Froala = (props: FroalaProps): JSX.Element => {
       sx={props.sx}
     >
       <Box
-        className={`froala-wrapper ${props.className ?? ''}`}
+        // className={`froala-wrapper ${props.className ?? ''}`}
         onClick={(event: MouseEvent) => {
           placeCaretAtTheEndIfToolbarIsNotShown({
             event,

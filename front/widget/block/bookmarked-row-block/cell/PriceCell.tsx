@@ -43,6 +43,7 @@ export const PriceCell = (): JSX.Element => {
       /> */}
       <Tiptap
         editorRef={row.priceCellEditorRef}
+        className='td price'
         content={getBookmarkedRowCellHtmlFromStore({ cellKey: 'price' })}
         onContentChange={(params) => {
           updatePriceCell({
@@ -50,6 +51,7 @@ export const PriceCell = (): JSX.Element => {
             priceCellEditorRef: row.priceCellEditorRef,
           })
         }}
+        sx={{}}
       />
     </Box>
   )
