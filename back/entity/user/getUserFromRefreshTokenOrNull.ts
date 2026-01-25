@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { getRefreshTokenFromCookie } from '@back/shared/headers/token/getRefreshTokenFromCookie'
 import {
   getJwtExpirationInDays,
@@ -7,7 +8,7 @@ import type { Request } from 'express'
 import type { SelectUser } from './db/usersTableSchema'
 
 type Props = {
-  req: Request
+  req: Request<any, any, any, any>
 }
 
 type Res = {

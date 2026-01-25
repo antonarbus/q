@@ -3,7 +3,7 @@ import { getPriceBlockHtmlFromStore } from '@entity/quotation/redux/getter/getPr
 import {
   updatePriceValue,
   useUpdateTotalPriceIfPricesAboveWereChanged,
-  validateTotalPrice,
+  // validateTotalPrice,
 } from '@feature/blocks/update'
 import { Tiptap } from '@page/test-page/tiptap-example/Tiptap'
 import { type JSX, useRef } from 'react'

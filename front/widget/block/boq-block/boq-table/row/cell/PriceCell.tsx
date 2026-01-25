@@ -1,17 +1,20 @@
-import { columnMinWidth } from '@entity/quotation/const/columnMinWidth'
-import { useStylesForResizableCell } from '@entity/quotation/hook/useStylesForResizableCell'
+// import { columnMinWidth } from '@entity/quotation/const/columnMinWidth'
+// import { useStylesForResizableCell } from '@entity/quotation/hook/useStylesForResizableCell'
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { useBoq } from '@entity/quotation/provider/BoqBlockProvider'
 import { useRow } from '@entity/quotation/provider/RowProvider'
 import { getCellHtmlFromStore } from '@entity/quotation/redux/getter/getCellHtmlFromStore'
-import { cellStyle, cellSx } from '@entity/quotation/style/cellStyle'
-import { Froala } from '@entity/quotation/ui/froala/Froala'
-import { Pin, pinPriceCell, showRowPins } from '@feature/blocks/pin'
-import { tabFromPriceCell } from '@feature/blocks/tab-away-from-cell'
+// import { cellStyle, cellSx } from '@entity/quotation/style/cellStyle'
 import {
-  formatPriceCell,
+  Pin,
+  pinPriceCell,
+  // showRowPins
+} from '@feature/blocks/pin'
+// import { tabFromPriceCell } from '@feature/blocks/tab-away-from-cell'
+import {
+  // formatPriceCell,
   updatePriceCell,
-  validatePrice,
+  // validatePrice,
 } from '@feature/blocks/update'
 import { Box } from '@mui/material'
 import { Tiptap } from '@page/test-page/tiptap-example/Tiptap'
@@ -22,11 +25,11 @@ export const PriceCell = (): JSX.Element => {
   const row = useRow()
   const boq = useBoq()
 
-  const stylesForResizableCell = useStylesForResizableCell({
-    blockIndex: block.index,
-    boqColumnKey: 'price',
-    minWidth: `${columnMinWidth.price}px`,
-  })
+  // const stylesForResizableCell = useStylesForResizableCell({
+  //   blockIndex: block.index,
+  //   boqColumnKey: 'price',
+  //   minWidth: `${columnMinWidth.price}px`,
+  // })
 
   return (
     <Box sx={{ display: 'flex', position: 'relative' }}>

@@ -79,59 +79,17 @@ export default {
   // Path aliases are automatically loaded from tsconfig.json via tsconfigPaths() plugin
   build: {
     outDir: './build',
+    chunkSizeWarningLimit: 1500, // in KB
     rollupOptions: {
       output: {
         // https://rollupjs.org/configuration-options/#output-manualchunks
         manualChunks: (id: string): string | undefined => {
-          const isFroala = id.includes('froala')
-
-          if (isFroala === true) {
-            return 'qwerty'
-          }
-
-          const isAgGrid = id.includes('ag-grid')
-
-          if (isAgGrid === true) {
-            return 'ag-grid'
-          }
-
-          const isMui = id.includes('@mui')
-
-          if (isMui === true) {
-            return '@mui'
-          }
-
-          const isTanstack = id.includes('@tanstack')
-
-          if (isTanstack === true) {
-            return '@tanstack'
-          }
-
-          const isRemix = id.includes('@remix')
-
-          if (isRemix === true) {
-            return '@remix'
-          }
-
-          const isJsPdf = id.includes('jspdf')
-
-          // Split jsPDF into its own chunk to enable dynamic imports without bundling issues
-          // This allows lazy loading of the PDF library only when needed
-
-          // Web Workers run in a different context and can't access Vite's
-          // module resolution system, so they can't find the transformed/renamed files
-          // By explicitly telling Vite to create separate chunks for these lib,
-          // we give it predictable, stable path that can be resolved even in worker contexts
-          if (isJsPdf === true) {
-            return 'jspdf'
-          }
-
-          const isExcelJs = id.includes('exceljs')
-
-          // Same here
-          if (isExcelJs === true) {
-            return 'exceljs'
-          }
+          if (id.includes('ag-grid')) return 'ag-grid'
+          if (id.includes('@mui')) return '@mui'
+          if (id.includes('@tanstack')) return '@tanstack'
+          if (id.includes('@remix')) return '@remix'
+          if (id.includes('jspdf')) return 'jspdf'
+          if (id.includes('exceljs')) return 'exceljs'
 
           return undefined
         },
