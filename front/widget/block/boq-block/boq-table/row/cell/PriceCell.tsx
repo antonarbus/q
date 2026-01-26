@@ -5,16 +5,12 @@ import { useBoq } from '@entity/quotation/provider/BoqBlockProvider'
 import { useRow } from '@entity/quotation/provider/RowProvider'
 import { getCellHtmlFromStore } from '@entity/quotation/redux/getter/getCellHtmlFromStore'
 import { cellStyle, cellSx } from '@entity/quotation/style/cellStyle'
+import { Pin, pinPriceCell, showRowPins } from '@feature/blocks/pin'
+import { tabFromPriceCell } from '@feature/blocks/tab-away-from-cell'
 import {
-  Pin,
-  pinPriceCell,
-  // showRowPins
-} from '@feature/blocks/pin'
-// import { tabFromPriceCell } from '@feature/blocks/tab-away-from-cell'
-import {
-  // formatPriceCell,
+  formatPriceCell,
   updatePriceCell,
-  // validatePrice,
+  validatePrice,
 } from '@feature/blocks/update'
 import { Box } from '@mui/material'
 import { Tiptap } from '@shared/lib/tiptap/Tiptap'
@@ -35,32 +31,6 @@ export const PriceCell = (): JSX.Element => {
 
   return (
     <Box sx={{ display: 'flex', position: 'relative' }}>
-      {/* <Froala
-        onBlur={() => {
-          formatPriceCell({
-            blockIndex: block.index,
-            priceCellEditorRef: row.priceCellEditorRef,
-            rowIndex: row.index,
-          })
-
-          validatePrice({
-            blockIndex: block.index,
-            priceCellEditorRef: row.priceCellEditorRef,
-            rowIndex: row.index,
-            subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
-          })
-        }}
-        onFocus={() => {
-          showRowPins({ blockIndex: block.index, rowIndex: row.index })
-        }}
-        onKeydown={(event) => {
-          tabFromPriceCell({
-            rowEditorRefs: boq.rowEditorRefs,
-            event,
-            rowIndex: row.index,
-          })
-        }}
-      /> */}
       <Tiptap
         editorRef={row.priceCellEditorRef}
         className='td price'
@@ -80,6 +50,30 @@ export const PriceCell = (): JSX.Element => {
             subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
           })
         }}
+        onBlur={() => {
+          formatPriceCell({
+            blockIndex: block.index,
+            priceCellEditorRef: row.priceCellEditorRef,
+            rowIndex: row.index,
+          })
+
+          validatePrice({
+            blockIndex: block.index,
+            priceCellEditorRef: row.priceCellEditorRef,
+            rowIndex: row.index,
+            subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
+          })
+        }}
+        onWrapperFocus={() => {
+          showRowPins({ blockIndex: block.index, rowIndex: row.index })
+        }}
+        onKeyDown={(_view, event) =>
+          tabFromPriceCell({
+            event,
+            rowEditorRefs: boq.rowEditorRefs,
+            rowIndex: row.index,
+          })
+        }
         sx={{
           ...stylesForResizableCell,
           ...cellSx,

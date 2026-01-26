@@ -11,7 +11,7 @@ export const NumberColumn = (): JSX.Element => {
       className='th number resizable'
       minWidth={columnMinWidth.number}
     >
-      <Box style={columnHeaderStyle} />
+      <Box sx={columnHeaderStyle} />
     </ResizableColumn>
   )
 }

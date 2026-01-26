@@ -3,14 +3,14 @@ import { useBoq } from '@entity/quotation/provider/BoqBlockProvider'
 import { getBoqHeaderHtmlFromStore } from '@entity/quotation/redux/getter/getBoqHeaderHtmlFromStore'
 import { subTotalPriceCellStyle } from '@entity/quotation/style/subTotalPriceCellStyle'
 import type { HeaderKey } from '@back/entity/quotation/schema'
-// import { showHidePricePins } from '@feature/blocks/pin'
+import { showHidePricePins } from '@feature/blocks/pin'
 import {
-  // formatSubtotalPrice,
+  formatSubtotalPrice,
   updateSubtotalPrice,
   useUpdateSubtotal,
-  // validatePrices,
+  validatePrices,
 } from '@feature/blocks/update'
-import type { JSX } from 'react'
+import { useRef, type JSX, type MouseEvent } from 'react'
 import { Tiptap } from '@shared/lib/tiptap/Tiptap'
 import { useSelector } from '@shared/lib/redux'
 
@@ -21,41 +21,17 @@ export const SubTotalPrice = (): JSX.Element => {
   const block = useBlock()
   const isEditorActive = useSelector((state) => state.text.isEditable)
 
-  // const hidePinsClickHandlerRef = useRef<(e: globalThis.MouseEvent) => void>(
-  //   (event) => {
-  //     console.warn('hidePinsClickHandlerRef')
-  //   },
-  // )
+  const hidePinsClickHandlerRef = useRef<(e: globalThis.MouseEvent) => void>(
+    (event) => {
+      console.warn('hidePinsClickHandlerRef')
+    },
+  )
 
-  // const isInitClickRef = useRef(true)
+  const isInitClickRef = useRef(true)
 
   useUpdateSubtotal()
 
   return (
-    /*
-    <Froala
-      onBlur={() => {
-        formatSubtotalPrice({
-          blockIndex: block.index,
-          subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
-        })
-
-        validatePrices({
-          blockIndex: block.index,
-          rowEditorRefs: boq.rowEditorRefs,
-          subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
-        })
-      }}
-      onClick={(event: MouseEvent) => {
-        showHidePricePins({
-          blockIndex: block.index,
-          event: event.nativeEvent,
-          hidePinsClickHandlerRef,
-          isInitClickRef,
-        })
-      }}
-    />
-    */
     <Tiptap
       editorRef={boq.subTotalPriceEditorRef}
       className='sub-total-price'
@@ -69,6 +45,26 @@ export const SubTotalPrice = (): JSX.Element => {
           blockIndex: block.index,
           rowEditorRefs: boq.rowEditorRefs,
           subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
+        })
+      }}
+      onBlur={() => {
+        formatSubtotalPrice({
+          blockIndex: block.index,
+          subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
+        })
+
+        validatePrices({
+          blockIndex: block.index,
+          rowEditorRefs: boq.rowEditorRefs,
+          subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
+        })
+      }}
+      onWrapperClick={(event: MouseEvent) => {
+        showHidePricePins({
+          blockIndex: block.index,
+          event: event.nativeEvent,
+          hidePinsClickHandlerRef,
+          isInitClickRef,
         })
       }}
       sx={subTotalPriceCellStyle}

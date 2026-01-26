@@ -4,7 +4,7 @@ import { useStylesForResizableCell } from '@entity/quotation/hook/useStylesForRe
 import { useRow } from '@entity/quotation/provider/RowProvider'
 import { getBookmarkedRowCellHtmlFromStore } from '@entity/quotation/redux/getter/getBookmarkedRowCellHtmlFromStore'
 import { cellStyle, cellSx } from '@entity/quotation/style/cellStyle'
-// import { formatPriceCell } from '@feature/blocks/update/update-cell-at-bookmarked-row-block/price/formatPriceCell'
+import { formatPriceCell } from '@feature/blocks/update/update-cell-at-bookmarked-row-block/price/formatPriceCell'
 import { updatePriceCell } from '@feature/blocks/update/update-cell-at-bookmarked-row-block/price/updatePriceCell'
 import { Box } from '@mui/material'
 import { Tiptap } from '@shared/lib/tiptap/Tiptap'
@@ -23,11 +23,6 @@ export const PriceCell = (): JSX.Element => {
 
   return (
     <Box sx={{ display: 'flex', position: 'relative' }}>
-      {/* <Froala
-        onBlur={() => {
-          formatPriceCell({ priceCellEditorRef: row.priceCellEditorRef })
-        }}
-      /> */}
       <Tiptap
         editorRef={row.priceCellEditorRef}
         className='td price'
@@ -38,6 +33,9 @@ export const PriceCell = (): JSX.Element => {
             itemPriceCellEditorRef: row.itemPriceCellEditorRef,
             priceCellEditorRef: row.priceCellEditorRef,
           })
+        }}
+        onBlur={() => {
+          formatPriceCell({ priceCellEditorRef: row.priceCellEditorRef })
         }}
         sx={{
           ...stylesForResizableCell,

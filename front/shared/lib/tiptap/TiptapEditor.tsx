@@ -5,6 +5,7 @@ import {
   useEditor,
   EditorContent,
 } from '@tiptap/react'
+import type { EditorView } from '@tiptap/pm/view'
 import StarterKit from '@tiptap/starter-kit'
 import TextAlign from '@tiptap/extension-text-align'
 import { TextStyle } from '@tiptap/extension-text-style'
@@ -22,6 +23,7 @@ type Props = {
   onUpdate: (props: EditorEvents['update']) => void
   onCreate?: (props: EditorEvents['create']) => void
   onBlur?: (props: EditorEvents['blur']) => void
+  onKeyDown?: (view: EditorView, event: KeyboardEvent) => boolean
 }
 
 export const TiptapEditor = (props: Props): JSX.Element => {
@@ -40,6 +42,17 @@ export const TiptapEditor = (props: Props): JSX.Element => {
       onCreate: props.onCreate,
       onUpdate: props.onUpdate,
       onBlur: props.onBlur,
+      editorProps: {
+        handleKeyDown: (view, event) => {
+          if (props.onKeyDown !== undefined) {
+            const shouldPreventDefault = props.onKeyDown(view, event)
+
+            return shouldPreventDefault
+          }
+
+          return false
+        },
+      },
     },
     [],
   )

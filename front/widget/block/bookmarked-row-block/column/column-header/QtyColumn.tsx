@@ -11,7 +11,7 @@ export const QtyColumn = (): JSX.Element => {
       className='th qty resizable'
       minWidth={columnMinWidth.qty}
     >
-      <Box style={columnHeaderStyle}>
+      <Box sx={columnHeaderStyle}>
         <b>Qty</b>
       </Box>
     </ResizableColumn>

@@ -4,7 +4,7 @@ import { useStylesForResizableCell } from '@entity/quotation/hook/useStylesForRe
 import { useRow } from '@entity/quotation/provider/RowProvider'
 import { getBookmarkedRowCellHtmlFromStore } from '@entity/quotation/redux/getter/getBookmarkedRowCellHtmlFromStore'
 import { cellStyle, cellSx } from '@entity/quotation/style/cellStyle'
-// import { formatQtyCell } from '@feature/blocks/update/update-cell-at-bookmarked-row-block/qty/formatQtyCell'
+import { formatQtyCell } from '@feature/blocks/update/update-cell-at-bookmarked-row-block/qty/formatQtyCell'
 import { updateQtyCell } from '@feature/blocks/update/update-cell-at-bookmarked-row-block/qty/updateQtyCell'
 import { Box } from '@mui/material'
 import { Tiptap } from '@shared/lib/tiptap/Tiptap'
@@ -23,11 +23,6 @@ export const QtyCell = (): JSX.Element => {
 
   return (
     <Box sx={{ display: 'flex', position: 'relative' }}>
-      {/* <Froala
-        onBlur={() => {
-          formatQtyCell({ qtyCellEditorRef: row.qtyCellEditorRef })
-        }}
-      /> */}
       <Tiptap
         editorRef={row.qtyCellEditorRef}
         className='td qty'
@@ -38,6 +33,9 @@ export const QtyCell = (): JSX.Element => {
             priceCellEditorRef: row.priceCellEditorRef,
             qtyCellEditorRef: row.qtyCellEditorRef,
           })
+        }}
+        onBlur={() => {
+          formatQtyCell({ qtyCellEditorRef: row.qtyCellEditorRef })
         }}
         sx={{
           ...stylesForResizableCell,

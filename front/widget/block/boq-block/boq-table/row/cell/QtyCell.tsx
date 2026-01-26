@@ -6,11 +6,8 @@ import { useRow } from '@entity/quotation/provider/RowProvider'
 import { getCellHtmlFromStore } from '@entity/quotation/redux/getter/getCellHtmlFromStore'
 import { cellStyle, cellSx } from '@entity/quotation/style/cellStyle'
 import { Pin, pinQtyCell } from '@feature/blocks/pin'
-// import { tabFromQtyCell } from '@feature/blocks/tab-away-from-cell'
-import {
-  // formatQtyCell,
-  updateQtyCell,
-} from '@feature/blocks/update'
+import { tabFromQtyCell } from '@feature/blocks/tab-away-from-cell'
+import { formatQtyCell, updateQtyCell } from '@feature/blocks/update'
 import { Box } from '@mui/material'
 import { Tiptap } from '@shared/lib/tiptap/Tiptap'
 import { useSelector } from '@shared/lib/redux'
@@ -30,22 +27,6 @@ export const QtyCell = (): JSX.Element => {
 
   return (
     <Box sx={{ display: 'flex', position: 'relative' }}>
-      {/* <Froala
-        onBlur={() => {
-          formatQtyCell({
-            blockIndex: block.index,
-            qtyCellEditorRef: row.qtyCellEditorRef,
-            rowIndex: row.index,
-          })
-        }}
-        onKeydown={(event) => {
-          tabFromQtyCell({
-            event,
-            rowIndex: row.index,
-            priceCellEditorRef: row.priceCellEditorRef,
-          })
-        }}
-      /> */}
       <Tiptap
         editorRef={row.qtyCellEditorRef}
         className='td qty'
@@ -64,6 +45,20 @@ export const QtyCell = (): JSX.Element => {
             subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
           })
         }}
+        onBlur={() => {
+          formatQtyCell({
+            blockIndex: block.index,
+            qtyCellEditorRef: row.qtyCellEditorRef,
+            rowIndex: row.index,
+          })
+        }}
+        onKeyDown={(_view, event) =>
+          tabFromQtyCell({
+            event,
+            rowIndex: row.index,
+            priceCellEditorRef: row.priceCellEditorRef,
+          })
+        }
         sx={{
           ...stylesForResizableCell,
           ...cellSx,

@@ -12,7 +12,7 @@ export const DescriptionColumn = (): ReactNode => {
       minWidth={columnMinWidth.description}
     >
       <Box
-        style={{
+        sx={{
           ...columnHeaderStyle,
           textAlign: 'left',
         }}

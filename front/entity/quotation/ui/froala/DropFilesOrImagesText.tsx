@@ -1,4 +1,4 @@
-import { useFroala } from '@entity/quotation/provider/FroalaProvider'
+// import { useFroala } from '@entity/quotation/provider/FroalaProvider'
 import { Box } from '@mui/material'
 import { cls } from '@shared/cls'
 import { theme } from '@shared/theme'
@@ -9,7 +9,7 @@ type Props = {
 }
 
 export const DropFilesOrImagesText = (props: Props): JSX.Element => {
-  const froala = useFroala()
+  // const froala = useFroala()
 
   return (
     <Box
@@ -29,17 +29,17 @@ export const DropFilesOrImagesText = (props: Props): JSX.Element => {
     >
       Drop{' '}
       <span
-        onClick={(event) => {
-          if (froala.editorRef.current !== null) {
-            froala.editorRef.current.file.showInsertPopup()
+        // onClick={(event) => {
+        //   if (froala.editorRef.current !== null) {
+        //     froala.editorRef.current.file.showInsertPopup()
 
-            froala.editorRef.current.popups.show(
-              'file.insert',
-              event.pageX,
-              event.pageY,
-            )
-          }
-        }}
+        //     froala.editorRef.current.popups.show(
+        //       'file.insert',
+        //       event.pageX,
+        //       event.pageY,
+        //     )
+        //   }
+        // }}
         style={{
           cursor: 'pointer',
           color: theme.colors.blue,
@@ -50,17 +50,17 @@ export const DropFilesOrImagesText = (props: Props): JSX.Element => {
       </span>{' '}
       or{' '}
       <span
-        onClick={(event) => {
-          if (froala.editorRef.current !== null) {
-            froala.editorRef.current.image.showInsertPopup()
+        // onClick={(event) => {
+        //   if (froala.editorRef.current !== null) {
+        //     froala.editorRef.current.image.showInsertPopup()
 
-            froala.editorRef.current.popups.show(
-              'image.insert',
-              event.pageX,
-              event.pageY,
-            )
-          }
-        }}
+        //     froala.editorRef.current.popups.show(
+        //       'image.insert',
+        //       event.pageX,
+        //       event.pageY,
+        //     )
+        //   }
+        // }}
         style={{
           cursor: 'pointer',
           color: theme.colors.blue,

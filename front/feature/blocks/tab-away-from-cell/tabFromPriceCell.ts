@@ -1,5 +1,4 @@
 import type { RowEditorRefs } from '@entity/quotation/ref/rowEditorRefs'
-import type { KeyboardEvent } from 'react'
 
 type Props = {
   event: KeyboardEvent
@@ -7,15 +6,14 @@ type Props = {
   rowIndex: number
 }
 
-export const tabFromPriceCell = (props: Props): void => {
+export const tabFromPriceCell = (props: Props): boolean => {
   const isTabKey = props.event.key === 'Tab'
 
   if (isTabKey === true) {
     const isLastRow = props.rowEditorRefs.length === props.rowIndex + 1
 
     if (isLastRow === true) {
-      // do nothing
-      // just use default tabbing to the next focusable area
+      return false
     }
 
     if (isLastRow === false) {
@@ -23,7 +21,16 @@ export const tabFromPriceCell = (props: Props): void => {
 
       props.rowEditorRefs
         .at(props.rowIndex + 1)
-        ?.description.current?.commands.selectAll()
+        ?.description.current?.chain()
+        .focus()
+        .selectAll()
+        .run()
+
+      return true
     }
+
+    return false
   }
+
+  return false
 }

@@ -1,5 +1,4 @@
 import type { EditorRef } from '@shared/lib/tiptap/types'
-import type { KeyboardEvent } from 'react'
 
 type Props = {
   event: KeyboardEvent
@@ -7,11 +6,15 @@ type Props = {
   rowIndex: number
 }
 
-export const tabFromDescriptionCell = (props: Props): void => {
+export const tabFromDescriptionCell = (props: Props): boolean => {
   const isTabKey = props.event.key === 'Tab'
 
   if (isTabKey === true) {
     props.event.preventDefault()
-    props.itemPriceCellEditorRef.current?.commands.selectAll()
+    props.itemPriceCellEditorRef.current?.chain().focus().selectAll().run()
+
+    return true
   }
+
+  return false
 }

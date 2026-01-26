@@ -11,7 +11,7 @@ export const PriceColumn = (): JSX.Element => {
       className='th price resizable'
       minWidth={columnMinWidth.price}
     >
-      <Box style={columnHeaderStyle}>
+      <Box sx={columnHeaderStyle}>
         <b>Price</b>
       </Box>
     </ResizableColumn>

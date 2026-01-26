@@ -19,7 +19,7 @@ export const NumberCell = (): JSX.Element => {
   return (
     <Box
       className='td number'
-      style={{
+      sx={{
         ...stylesForResizableCell,
         color: 'grey',
         fontSize: '10px',

@@ -1,59 +1,59 @@
-import {
-  createContext,
-  type JSX,
-  type ReactNode,
-  type RefObject,
-  useContext,
-  useMemo,
-} from 'react'
-import type { FroalaProps } from '../ui/froala/types'
+// import {
+//   createContext,
+//   type JSX,
+//   type ReactNode,
+//   type RefObject,
+//   useContext,
+//   useMemo,
+// } from 'react'
+// import type { FroalaProps } from '../ui/froala/types'
 
-// import type { FroalaProps } from '../ui/froala/Froala'
+// // import type { FroalaProps } from '../ui/froala/Froala'
 
-type Context = FroalaProps & {
-  froalaElementRef: RefObject<HTMLDivElement | null>
-  fixedHeightRef: RefObject<number>
-}
+// type Context = FroalaProps & {
+//   froalaElementRef: RefObject<HTMLDivElement | null>
+//   fixedHeightRef: RefObject<number>
+// }
 
-type Props = Context & {
-  children: ReactNode
-}
+// type Props = Context & {
+//   children: ReactNode
+// }
 
-const FroalaContext = createContext<Context | null>(null)
+// const FroalaContext = createContext<Context | null>(null)
 
-export const FroalaProvider = (props: Props): JSX.Element => {
-  const froalaContextValue = useMemo(() => {
-    return {
-      editorRef: props.editorRef,
-      placeholder: props.placeholder,
-      htmlGetter: props.htmlGetter,
-      style: props.style,
-      sx: props.sx,
-      onContentChange: props.onContentChange,
-      onFocus: props.onFocus,
-      onClick: props.onClick,
-      onBlur: props.onBlur,
-      onKeydown: props.onKeydown,
-      onInitialized: props.onInitialized,
-      froalaElementRef: props.froalaElementRef,
-      fixedHeightRef: props.fixedHeightRef,
-      beforeUpload: props.beforeUpload,
-    }
-  }, [props])
+// export const FroalaProvider = (props: Props): JSX.Element => {
+//   const froalaContextValue = useMemo(() => {
+//     return {
+//       editorRef: props.editorRef,
+//       placeholder: props.placeholder,
+//       htmlGetter: props.htmlGetter,
+//       style: props.style,
+//       sx: props.sx,
+//       onContentChange: props.onContentChange,
+//       onFocus: props.onFocus,
+//       onClick: props.onClick,
+//       onBlur: props.onBlur,
+//       onKeydown: props.onKeydown,
+//       onInitialized: props.onInitialized,
+//       froalaElementRef: props.froalaElementRef,
+//       fixedHeightRef: props.fixedHeightRef,
+//       beforeUpload: props.beforeUpload,
+//     }
+//   }, [props])
 
-  return (
-    <FroalaContext.Provider value={froalaContextValue}>
-      {props.children}
-    </FroalaContext.Provider>
-  )
-}
+//   return (
+//     <FroalaContext.Provider value={froalaContextValue}>
+//       {props.children}
+//     </FroalaContext.Provider>
+//   )
+// }
 
-export const useFroala = (): Context => {
-  const context = useContext(FroalaContext)
+// export const useFroala = (): Context => {
+//   const context = useContext(FroalaContext)
 
-  if (context === null) {
-    throw new Error('useFroala must be used within a FroalaProvider')
-  }
+//   if (context === null) {
+//     throw new Error('useFroala must be used within a FroalaProvider')
+//   }
 
-  return context
-}
+//   return context
+// }

@@ -4,7 +4,7 @@ import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { useRow } from '@entity/quotation/provider/RowProvider'
 import { getCellHtmlFromStore } from '@entity/quotation/redux/getter/getCellHtmlFromStore'
 import { cellStyle } from '@entity/quotation/style/cellStyle'
-// import { tabFromDescriptionCell } from '@feature/blocks/tab-away-from-cell'
+import { tabFromDescriptionCell } from '@feature/blocks/tab-away-from-cell'
 import { updateDescriptionCell } from '@feature/blocks/update'
 // import { beforeUpload } from '@feature/file/upload-file'
 import { Tiptap } from '@shared/lib/tiptap/Tiptap'
@@ -27,13 +27,6 @@ export const DescriptionCell = (): JSX.Element => {
     <Froala
       beforeUpload={beforeUpload}
       droppable
-      onKeydown={(event: KeyboardEvent) => {
-        tabFromDescriptionCell({
-          event,
-          itemPriceCellEditorRef: row.itemPriceCellEditorRef,
-          rowIndex: row.index,
-        })
-      }}
     />
     */
     <Tiptap
@@ -53,6 +46,13 @@ export const DescriptionCell = (): JSX.Element => {
           rowIndex: row.index,
         })
       }}
+      onKeyDown={(_view, event) =>
+        tabFromDescriptionCell({
+          event,
+          itemPriceCellEditorRef: row.itemPriceCellEditorRef,
+          rowIndex: row.index,
+        })
+      }
       sx={{
         '.fr-placeholder': {
           left: 0,

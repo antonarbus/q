@@ -1,167 +1,167 @@
-/* eslint-disable */
-import { generateId } from '@front/shared/lib/nanoid'
-import type { KeyboardEvent, MouseEvent } from 'react'
-import { useEffectOnce } from 'react-use'
-import { useFroala } from '../../provider/FroalaProvider'
-import { froalaDefaultOptions } from './froalaDefaultOptions'
-import { EditorRef } from '@shared/lib/tiptap/types'
+// /* eslint-disable */
+// import { generateId } from '@front/shared/lib/nanoid'
+// import type { KeyboardEvent, MouseEvent } from 'react'
+// import { useEffectOnce } from 'react-use'
+// import { useFroala } from '../../provider/FroalaProvider'
+// import { froalaDefaultOptions } from './froalaDefaultOptions'
+// import { EditorRef } from '@shared/lib/tiptap/types'
 
-declare const window: Window &
-  typeof globalThis & {
-    froalas: EditorRef[]
-  }
+// declare const window: Window &
+//   typeof globalThis & {
+//     froalas: EditorRef[]
+//   }
 
-window.froalas = []
+// window.froalas = []
 
-const PREVENT_DEFAULT_BEHAVIOR = false
+// const PREVENT_DEFAULT_BEHAVIOR = false
 
-export const useStartFroala = (): void => {
-  const froala = useFroala()
+// export const useStartFroala = (): void => {
+//   const froala = useFroala()
 
-  useEffectOnce(() => {
-    const initFroalaInstance = async (): Promise<void> => {
-      // Dynamically import Froala to reduce initial bundle size
-      await import('./froalaPkg')
-      await import('./froalaPkg.css')
+//   useEffectOnce(() => {
+//     const initFroalaInstance = async (): Promise<void> => {
+//       // Dynamically import Froala to reduce initial bundle size
+//       await import('./froalaPkg')
+//       await import('./froalaPkg.css')
 
-      // Wait for element to have ownerDocument before initializing Froala
-      // This prevents "Cannot use 'in' operator" error during React Router navigation
-      const domElementDeferred = Promise.withResolvers<void>()
+//       // Wait for element to have ownerDocument before initializing Froala
+//       // This prevents "Cannot use 'in' operator" error during React Router navigation
+//       const domElementDeferred = Promise.withResolvers<void>()
 
-      const checkElement = (): void => {
-        const element = froala.froalaElementRef.current
+//       const checkElement = (): void => {
+//         const element = froala.froalaElementRef.current
 
-        if (element?.ownerDocument && element?.isConnected) {
-          domElementDeferred.resolve()
-        } else {
-          requestAnimationFrame(checkElement)
-        }
-      }
+//         if (element?.ownerDocument && element?.isConnected) {
+//           domElementDeferred.resolve()
+//         } else {
+//           requestAnimationFrame(checkElement)
+//         }
+//       }
 
-      checkElement()
-      await domElementDeferred.promise
+//       checkElement()
+//       await domElementDeferred.promise
 
-      //@ts-ignore
-      const froalaInstance = new FroalaEditor(froala.froalaElementRef.current, {
-        ...froalaDefaultOptions,
-        placeholderText: froala.placeholder ?? 'Text...',
-        events: {
-          contentChanged: (): void => {
-            froala.onContentChange()
-          },
-          focus: (): void => {
-            froala.onFocus?.()
-          },
-          click: (e: MouseEvent): void => {
-            // close opened inline toolbar
-            // there is some bug in froala that it does not close initial toolbar on first 2...3 clicks
-            const toolbarElement = froalaInstance.$tb['0']
-            const isToolbarOpened = toolbarElement.style.display === 'block'
+//       //@ts-ignore
+//       const froalaInstance = new FroalaEditor(froala.froalaElementRef.current, {
+//         ...froalaDefaultOptions,
+//         placeholderText: froala.placeholder ?? 'Text...',
+//         events: {
+//           contentChanged: (): void => {
+//             froala.onContentChange()
+//           },
+//           focus: (): void => {
+//             froala.onFocus?.()
+//           },
+//           click: (e: MouseEvent): void => {
+//             // close opened inline toolbar
+//             // there is some bug in froala that it does not close initial toolbar on first 2...3 clicks
+//             const toolbarElement = froalaInstance.$tb['0']
+//             const isToolbarOpened = toolbarElement.style.display === 'block'
 
-            if (isToolbarOpened) {
-              froalaInstance.toolbar.hide()
-            }
+//             if (isToolbarOpened) {
+//               froalaInstance.toolbar.hide()
+//             }
 
-            froala.onClick?.(e)
-          },
-          keydown: (e: KeyboardEvent): void => {
-            froala.onKeydown?.(e)
-          },
-          blur: (e: MouseEvent): void => {
-            froala.onBlur?.(e)
-          },
-          'image.beforeUpload'(files: any): false | undefined {
-            froala.beforeUpload?.({
-              files,
-              editor: froala.editorRef.current,
-              type: 'image',
-            })
+//             froala.onClick?.(e)
+//           },
+//           keydown: (e: KeyboardEvent): void => {
+//             froala.onKeydown?.(e)
+//           },
+//           blur: (e: MouseEvent): void => {
+//             froala.onBlur?.(e)
+//           },
+//           'image.beforeUpload'(files: any): false | undefined {
+//             froala.beforeUpload?.({
+//               files,
+//               editor: froala.editorRef.current,
+//               type: 'image',
+//             })
 
-            return PREVENT_DEFAULT_BEHAVIOR
-          },
-          'file.beforeUpload': (files: any): false | undefined => {
-            froala.beforeUpload?.({
-              files,
-              editor: froala.editorRef.current,
-              type: 'file',
-            })
+//             return PREVENT_DEFAULT_BEHAVIOR
+//           },
+//           'file.beforeUpload': (files: any): false | undefined => {
+//             froala.beforeUpload?.({
+//               files,
+//               editor: froala.editorRef.current,
+//               type: 'file',
+//             })
 
-            return PREVENT_DEFAULT_BEHAVIOR
-          },
-          // 'image.inserted'(_response: any): void {
-          // },
-          // 'file.inserted'(response: any): void {
-          // },
-          // 'video.inserted'(response: any): void {
-          // },
-          'file.unlink'(link: { getAttribute: (arg0: string) => any }): void {
-            const href = link.getAttribute('href')
-            const isFileInBucket = href.includes('bucket')
+//             return PREVENT_DEFAULT_BEHAVIOR
+//           },
+//           // 'image.inserted'(_response: any): void {
+//           // },
+//           // 'file.inserted'(response: any): void {
+//           // },
+//           // 'video.inserted'(response: any): void {
+//           // },
+//           'file.unlink'(link: { getAttribute: (arg0: string) => any }): void {
+//             const href = link.getAttribute('href')
+//             const isFileInBucket = href.includes('bucket')
 
-            if (!isFileInBucket) {
-              return
-            }
+//             if (!isFileInBucket) {
+//               return
+//             }
 
-            const removeFile = confirm(`
-                Remove file from your profile?
-                ${href}
-              `)
+//             const removeFile = confirm(`
+//                 Remove file from your profile?
+//                 ${href}
+//               `)
 
-            if (removeFile) {
-              // todo: remove file from DB
-              // todo: check if any other offers or depend on the file
-            }
-          },
+//             if (removeFile) {
+//               // todo: remove file from DB
+//               // todo: check if any other offers or depend on the file
+//             }
+//           },
 
-          'image.removed'($img: any): void {
-            // console.log($img.attr('src'))
-          },
-          'image.loaded'(props: { '0': HTMLImageElement }): void {
-            const imageElement = props['0']
-            imageElement.style.aspectRatio = `${imageElement.clientWidth}/${imageElement.clientHeight}`
-            imageElement.id = `img-${generateId()}`
-            imageElement.classList.add('fr-rounded')
-          },
-          // 'commands.before'(cmd: string, param1, param2) {
-          //   if (cmd === 'linkOpen') {
-          //     const linkElement = froalaInstance.selection.element()
+//           'image.removed'($img: any): void {
+//             // console.log($img.attr('src'))
+//           },
+//           'image.loaded'(props: { '0': HTMLImageElement }): void {
+//             const imageElement = props['0']
+//             imageElement.style.aspectRatio = `${imageElement.clientWidth}/${imageElement.clientHeight}`
+//             imageElement.id = `img-${generateId()}`
+//             imageElement.classList.add('fr-rounded')
+//           },
+//           // 'commands.before'(cmd: string, param1, param2) {
+//           //   if (cmd === 'linkOpen') {
+//           //     const linkElement = froalaInstance.selection.element()
 
-          //     if (linkElement && linkElement.tagName === 'A') {
-          //       const url = linkElement.getAttribute('href')
-          //       const fileName = linkElement.textContent ?? 'file'
-          //     }
-          //   }
-          // },
-          initialized: (): void => {
-            window.froalas.push(froala.editorRef)
+//           //     if (linkElement && linkElement.tagName === 'A') {
+//           //       const url = linkElement.getAttribute('href')
+//           //       const fileName = linkElement.textContent ?? 'file'
+//           //     }
+//           //   }
+//           // },
+//           initialized: (): void => {
+//             window.froalas.push(froala.editorRef)
 
-            if (!froala.editorRef.current?.html) {
-              return
-            }
+//             if (!froala.editorRef.current?.html) {
+//               return
+//             }
 
-            froala.editorRef.current.html.set(froala.htmlGetter())
+//             froala.editorRef.current.html.set(froala.htmlGetter())
 
-            // froala.editorRef.current.undo.saveStep() // triggers contentChange // without it any first click on cell considered as a fresh value and "contentChanged" callback is fired // https://github.com/froala/wysiwyg-editor/issues/1578#issuecomment-256577412
-            window.froalas = window.froalas.filter(({ current }) =>
-              Boolean(current),
-            )
+//             // froala.editorRef.current.undo.saveStep() // triggers contentChange // without it any first click on cell considered as a fresh value and "contentChanged" callback is fired // https://github.com/froala/wysiwyg-editor/issues/1578#issuecomment-256577412
+//             window.froalas = window.froalas.filter(({ current }) =>
+//               Boolean(current),
+//             )
 
-            froala.onInitialized?.()
-            // console.log('💚 froalas qty after init: ', window.froalas.length)
-          },
-        },
-      })
+//             froala.onInitialized?.()
+//             // console.log('💚 froalas qty after init: ', window.froalas.length)
+//           },
+//         },
+//       })
 
-      froala.editorRef.current = froalaInstance
-    }
+//       froala.editorRef.current = froalaInstance
+//     }
 
-    initFroalaInstance()
+//     initFroalaInstance()
 
-    return (): void => {
-      froala.editorRef.current?.destroy()
-      froala.editorRef.current = null
-      window.froalas = window.froalas.filter(({ current }) => Boolean(current))
-      // console.log('💔 froalas qty after destroy: ', window.froalas.length)
-    }
-  })
-}
+//     return (): void => {
+//       froala.editorRef.current?.destroy()
+//       froala.editorRef.current = null
+//       window.froalas = window.froalas.filter(({ current }) => Boolean(current))
+//       // console.log('💔 froalas qty after destroy: ', window.froalas.length)
+//     }
+//   })
+// }
