@@ -17,15 +17,15 @@ import {
   // validatePrice,
 } from '@feature/blocks/update'
 import { Box } from '@mui/material'
-import { Tiptap } from '@page/test-page/tiptap-example/Tiptap'
-import { useIsEditorActive } from '@page/test-page/tiptap-example/useIsEditorActive'
+import { Tiptap } from '@shared/lib/tiptap/Tiptap'
+import { useSelector } from '@shared/lib/redux'
 import type { JSX, MouseEvent } from 'react'
 
 export const PriceCell = (): JSX.Element => {
   const block = useBlock()
   const row = useRow()
   const boq = useBoq()
-  const isEditorActive = useIsEditorActive()
+  const isEditorActive = useSelector((state) => state.text.isEditable)
 
   const stylesForResizableCell = useStylesForResizableCell({
     blockIndex: block.index,

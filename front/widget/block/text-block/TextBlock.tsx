@@ -14,17 +14,17 @@ import { updateTextBlock } from '@feature/blocks/update'
 // import { beforeUpload } from '@feature/file/upload-file'
 import { BookmarkBlockIcon } from '@feature/open-close/open-bookmark-modal'
 import { OpenInfoBlockModalIcon } from '@feature/open-close/open-info-modal'
-import { Tiptap } from '@page/test-page/tiptap-example/Tiptap'
+import { Tiptap } from '@shared/lib/tiptap/Tiptap'
 import { cls } from '@shared/cls'
 import { ItemActionButtonsLayout } from '@shared/layout/ItemActionButtonsLayout'
 import { type JSX, useRef } from 'react'
 import type { Editor } from '@tiptap/react'
-import { useIsEditorActive } from '@page/test-page/tiptap-example/useIsEditorActive'
+import { useSelector } from '@shared/lib/redux'
 
 export const TextBlock = (): JSX.Element => {
   const editorRef = useRef<Editor | null>(null)
   const block = useBlock()
-  const isEditorActive = useIsEditorActive()
+  const isEditorActive = useSelector((state) => state.text.isEditable)
 
   return (
     <BlockComp

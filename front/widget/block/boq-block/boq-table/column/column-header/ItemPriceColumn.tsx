@@ -5,14 +5,14 @@ import { columnHeaderStyle } from '@entity/quotation/style/columnHeaderStyle'
 import { updateColumnCell } from '@feature/blocks/update'
 import { type JSX, useRef } from 'react'
 import { ResizableColumn } from '../ResizableColumn'
-import { Tiptap } from '@page/test-page/tiptap-example/Tiptap'
+import { Tiptap } from '@shared/lib/tiptap/Tiptap'
 import type { Editor } from '@tiptap/react'
-import { useIsEditorActive } from '@page/test-page/tiptap-example/useIsEditorActive'
+import { useSelector } from '@shared/lib/redux'
 
 export const ItemPriceColumn = (): JSX.Element => {
   const editorRef = useRef<Editor | null>(null)
   const block = useBlock()
-  const isEditorActive = useIsEditorActive()
+  const isEditorActive = useSelector((state) => state.text.isEditable)
 
   return (
     <ResizableColumn

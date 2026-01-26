@@ -5,14 +5,14 @@ import { useRow } from '@entity/quotation/provider/RowProvider'
 import { getBookmarkedRowCellHtmlFromStore } from '@entity/quotation/redux/getter/getBookmarkedRowCellHtmlFromStore'
 import { cellStyle } from '@entity/quotation/style/cellStyle'
 import { updateDescriptionCell } from '@feature/blocks/update/update-cell-at-bookmarked-row-block/description/updateDescriptionCell'
+import { useSelector } from '@shared/lib/redux'
 // import { beforeUpload } from '@feature/file/upload-file'
-import { Tiptap } from '@page/test-page/tiptap-example/Tiptap'
-import { useIsEditorActive } from '@page/test-page/tiptap-example/useIsEditorActive'
+import { Tiptap } from '@shared/lib/tiptap/Tiptap'
 import type { JSX } from 'react'
 
 export const DescriptionCell = (): JSX.Element => {
   const row = useRow()
-  const isEditorActive = useIsEditorActive()
+  const isEditorActive = useSelector((state) => state.text.isEditable)
 
   const stylesForResizableCell = useStylesForResizableCell({
     blockIndex: BOOKMARK_POS_AT_BLOCKS,

@@ -7,14 +7,14 @@ import { cellStyle } from '@entity/quotation/style/cellStyle'
 // import { tabFromDescriptionCell } from '@feature/blocks/tab-away-from-cell'
 import { updateDescriptionCell } from '@feature/blocks/update'
 // import { beforeUpload } from '@feature/file/upload-file'
-import { Tiptap } from '@page/test-page/tiptap-example/Tiptap'
-import { useIsEditorActive } from '@page/test-page/tiptap-example/useIsEditorActive'
+import { Tiptap } from '@shared/lib/tiptap/Tiptap'
+import { useSelector } from '@shared/lib/redux'
 import type { JSX } from 'react'
 
 export const DescriptionCell = (): JSX.Element => {
   const block = useBlock()
   const row = useRow()
-  const isEditorActive = useIsEditorActive()
+  const isEditorActive = useSelector((state) => state.text.isEditable)
 
   const stylesForResizableCell = useStylesForResizableCell({
     blockIndex: block.index,

@@ -11,15 +11,15 @@ import {
   // validatePrices,
 } from '@feature/blocks/update'
 import type { JSX } from 'react'
-import { Tiptap } from '@page/test-page/tiptap-example/Tiptap'
-import { useIsEditorActive } from '@page/test-page/tiptap-example/useIsEditorActive'
+import { Tiptap } from '@shared/lib/tiptap/Tiptap'
+import { useSelector } from '@shared/lib/redux'
 
 const boqHeaderKey: HeaderKey = 'subTotalPrice'
 
 export const SubTotalPrice = (): JSX.Element => {
   const boq = useBoq()
   const block = useBlock()
-  const isEditorActive = useIsEditorActive()
+  const isEditorActive = useSelector((state) => state.text.isEditable)
 
   // const hidePinsClickHandlerRef = useRef<(e: globalThis.MouseEvent) => void>(
   //   (event) => {

@@ -1,15 +1,15 @@
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { updatePriceTitle } from '@feature/blocks/update'
-import { Tiptap } from '@page/test-page/tiptap-example/Tiptap'
+import { Tiptap } from '@shared/lib/tiptap/Tiptap'
 import { getState } from '@shared/lib/redux'
 import { type JSX, useRef } from 'react'
 import type { Editor } from '@tiptap/react'
-import { useIsEditorActive } from '@page/test-page/tiptap-example/useIsEditorActive'
+import { useSelector } from '@shared/lib/redux'
 
 export const PriceTitle = (): JSX.Element => {
   const editorRef = useRef<Editor | null>(null)
   const block = useBlock()
-  const isEditorActive = useIsEditorActive()
+  const isEditorActive = useSelector((state) => state.text.isEditable)
 
   return (
     <Tiptap

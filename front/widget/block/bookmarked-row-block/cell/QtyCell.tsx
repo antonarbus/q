@@ -7,13 +7,13 @@ import { cellStyle, cellSx } from '@entity/quotation/style/cellStyle'
 // import { formatQtyCell } from '@feature/blocks/update/update-cell-at-bookmarked-row-block/qty/formatQtyCell'
 import { updateQtyCell } from '@feature/blocks/update/update-cell-at-bookmarked-row-block/qty/updateQtyCell'
 import { Box } from '@mui/material'
-import { Tiptap } from '@page/test-page/tiptap-example/Tiptap'
-import { useIsEditorActive } from '@page/test-page/tiptap-example/useIsEditorActive'
+import { Tiptap } from '@shared/lib/tiptap/Tiptap'
+import { useSelector } from '@shared/lib/redux'
 import type { JSX } from 'react'
 
 export const QtyCell = (): JSX.Element => {
   const row = useRow()
-  const isEditorActive = useIsEditorActive()
+  const isEditorActive = useSelector((state) => state.text.isEditable)
 
   const stylesForResizableCell = useStylesForResizableCell({
     blockIndex: BOOKMARK_POS_AT_BLOCKS,
