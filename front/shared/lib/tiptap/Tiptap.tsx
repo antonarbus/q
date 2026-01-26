@@ -12,8 +12,9 @@ type Props = {
   placeholder: string
   sx: CSSObject
   content: string
-  onUpdate: (props: EditorEvents['update']) => void
   onCreate?: (props: EditorEvents['create']) => void
+  onUpdate: (props: EditorEvents['update']) => void
+  onBlur?: (props: EditorEvents['blur']) => void
   isEditorActive: boolean
 }
 
@@ -41,8 +42,9 @@ export const Tiptap = (props: Props): JSX.Element => {
         editorRef={props.editorRef}
         placeholder={props.placeholder}
         content={props.content}
-        onUpdate={props.onUpdate}
         onCreate={props.onCreate}
+        onUpdate={props.onUpdate}
+        onBlur={props.onBlur}
       />
     </Box>
   )

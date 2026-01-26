@@ -21,6 +21,7 @@ type Props = {
   content: UseEditorOptions['content']
   onUpdate: (props: EditorEvents['update']) => void
   onCreate?: (props: EditorEvents['create']) => void
+  onBlur?: (props: EditorEvents['blur']) => void
 }
 
 export const TiptapEditor = (props: Props): JSX.Element => {
@@ -36,8 +37,9 @@ export const TiptapEditor = (props: Props): JSX.Element => {
         Placeholder.configure({ placeholder: props.placeholder }),
       ],
       content: props.content,
-      onUpdate: props.onUpdate,
       onCreate: props.onCreate,
+      onUpdate: props.onUpdate,
+      onBlur: props.onBlur,
     },
     [],
   )

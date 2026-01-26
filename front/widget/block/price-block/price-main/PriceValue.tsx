@@ -21,16 +21,6 @@ export const PriceValue = (): JSX.Element => {
   })
 
   return (
-    /*
-    <Froala
-      onBlur={() => {
-        validateTotalPrice({ editorRef, blockIndex: block.index })
-      }}
-      onInitialized={() => {
-        validateTotalPrice({ editorRef, blockIndex: block.index })
-      }}
-    />
-    */
     <Tiptap
       editorRef={editorRef}
       className='price-value'
@@ -41,6 +31,9 @@ export const PriceValue = (): JSX.Element => {
       }}
       onUpdate={(params) => {
         updatePriceValue({ editorRef, blockIndex: block.index })
+      }}
+      onBlur={() => {
+        validateTotalPrice({ editorRef, blockIndex: block.index })
       }}
       sx={{
         textAlign: 'center',
