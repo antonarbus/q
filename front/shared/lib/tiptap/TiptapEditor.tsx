@@ -20,8 +20,6 @@ type Props = {
   placeholder: string
   content: UseEditorOptions['content']
   onUpdate: (props: EditorEvents['update']) => void
-  onReady: () => void
-  isReady: boolean
 }
 
 export const TiptapEditor = (props: Props): JSX.Element => {
@@ -38,9 +36,6 @@ export const TiptapEditor = (props: Props): JSX.Element => {
       ],
       content: props.content,
       onUpdate: props.onUpdate,
-      onCreate: () => {
-        props.onReady()
-      },
     },
     [],
   )
@@ -57,7 +52,6 @@ export const TiptapEditor = (props: Props): JSX.Element => {
         className='tiptap-editor'
         style={{
           flexGrow: 1,
-          visibility: props.isReady === true ? 'visible' : 'hidden',
         }}
       />
     </>

@@ -1,4 +1,4 @@
-import { type JSX, useState } from 'react'
+import type { JSX } from 'react'
 import type { EditorEvents } from '@tiptap/react'
 import type { EditorRef } from '@shared/lib/tiptap/types'
 import { type CSSObject, Box } from '@mui/material'
@@ -17,13 +17,11 @@ type Props = {
 }
 
 export const Tiptap = (props: Props): JSX.Element => {
-  const [isEditorReady, setIsEditorReady] = useState(false)
-
   if (props.isEditorActive === false) {
     return (
       <StaticHtml
         className={props.className}
-        content={typeof props.content === 'string' ? props.content : ''}
+        content={props.content}
         sx={props.sx}
       />
     )
@@ -38,28 +36,11 @@ export const Tiptap = (props: Props): JSX.Element => {
         position: 'relative',
       }}
     >
-      {isEditorReady === false && (
-        <Box
-          dangerouslySetInnerHTML={{ __html: props.content }}
-          sx={{
-            ...props.sx,
-            position: 'absolute',
-            wordBreak: 'break-word',
-            inset: 0,
-            flexGrow: 1,
-          }}
-        />
-      )}
-
       <TiptapEditor
         editorRef={props.editorRef}
         placeholder={props.placeholder}
         content={props.content}
         onUpdate={props.onUpdate}
-        onReady={() => {
-          setIsEditorReady(true)
-        }}
-        isReady={isEditorReady}
       />
     </Box>
   )
