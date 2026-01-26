@@ -50,6 +50,7 @@ export const Tiptap = (props: Props): JSX.Element => {
           }}
         />
       )}
+
       <TiptapEditor
         editorRef={props.editorRef}
         placeholder={props.placeholder}

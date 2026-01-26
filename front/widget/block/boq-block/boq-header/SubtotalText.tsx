@@ -3,19 +3,17 @@ import { getBoqHeaderHtmlFromStore } from '@entity/quotation/redux/getter/getBoq
 import { subTotalTextCellStyle } from '@entity/quotation/style/subTotalTextCellStyle'
 import type { HeaderKey } from '@back/entity/quotation/schema'
 import { updateSubtotalText } from '@feature/blocks/update'
-import { useSelector } from '@shared/lib/redux'
 import { type JSX, useRef } from 'react'
 import { Tiptap } from '@page/test-page/tiptap-example/Tiptap'
 import type { Editor } from '@tiptap/react'
+import { useIsEditorActive } from '@page/test-page/tiptap-example/useIsEditorActive'
 
 const boqHeaderKey: HeaderKey = 'subtotalText'
 
 export const SubtotalText = (): JSX.Element => {
   const editorRef = useRef<Editor | null>(null)
   const block = useBlock()
-  const isEditorActive = useSelector(
-    (state) => state.quotation.blocks[block.index]?.isFroala ?? true,
-  )
+  const isEditorActive = useIsEditorActive()
 
   return (
     <Tiptap

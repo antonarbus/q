@@ -1,16 +1,15 @@
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { updatePriceTitle } from '@feature/blocks/update'
 import { Tiptap } from '@page/test-page/tiptap-example/Tiptap'
-import { getState, useSelector } from '@shared/lib/redux'
+import { getState } from '@shared/lib/redux'
 import { type JSX, useRef } from 'react'
 import type { Editor } from '@tiptap/react'
+import { useIsEditorActive } from '@page/test-page/tiptap-example/useIsEditorActive'
 
 export const PriceTitle = (): JSX.Element => {
   const editorRef = useRef<Editor | null>(null)
   const block = useBlock()
-  const isEditorActive = useSelector(
-    (state) => state.quotation.blocks[block.index]?.isFroala ?? true,
-  )
+  const isEditorActive = useIsEditorActive()
 
   return (
     <Tiptap

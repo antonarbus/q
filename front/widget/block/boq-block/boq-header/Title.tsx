@@ -3,19 +3,17 @@ import { getBoqHeaderHtmlFromStore } from '@entity/quotation/redux/getter/getBoq
 import { titleCellStyle } from '@entity/quotation/style/titleCellStyle'
 import type { HeaderKey } from '@back/entity/quotation/schema'
 import { updateTitle } from '@feature/blocks/update'
-import { useSelector } from '@shared/lib/redux'
 import { type JSX, useRef } from 'react'
 import { Tiptap } from '@page/test-page/tiptap-example/Tiptap'
 import type { Editor } from '@tiptap/react'
+import { useIsEditorActive } from '@page/test-page/tiptap-example/useIsEditorActive'
 
 const boqHeaderKey: HeaderKey = 'title'
 
 export const Title = (): JSX.Element => {
   const editorRef = useRef<Editor | null>(null)
   const block = useBlock()
-  const isEditorActive = useSelector(
-    (state) => state.quotation.blocks[block.index]?.isFroala ?? true,
-  )
+  const isEditorActive = useIsEditorActive()
 
   return (
     <Tiptap
