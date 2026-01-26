@@ -46,6 +46,10 @@ export const TiptapEditor = (props: Props): JSX.Element => {
 
   useEffect(() => {
     props.editorRef.current = editor
+
+    return (): void => {
+      props.editorRef.current = null
+    }
   }, [editor, props.editorRef])
 
   return (
