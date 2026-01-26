@@ -20,6 +20,7 @@ type Props = {
   placeholder: string
   content: UseEditorOptions['content']
   onUpdate: (props: EditorEvents['update']) => void
+  onCreate?: (props: EditorEvents['create']) => void
 }
 
 export const TiptapEditor = (props: Props): JSX.Element => {
@@ -36,6 +37,7 @@ export const TiptapEditor = (props: Props): JSX.Element => {
       ],
       content: props.content,
       onUpdate: props.onUpdate,
+      onCreate: props.onCreate,
     },
     [],
   )

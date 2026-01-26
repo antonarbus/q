@@ -3,7 +3,7 @@ import { getPriceBlockHtmlFromStore } from '@entity/quotation/redux/getter/getPr
 import {
   updatePriceValue,
   useUpdateTotalPriceIfPricesAboveWereChanged,
-  // validateTotalPrice,
+  validateTotalPrice,
 } from '@feature/blocks/update'
 import { Tiptap } from '@shared/lib/tiptap/Tiptap'
 import { type JSX, useRef } from 'react'
@@ -36,6 +36,9 @@ export const PriceValue = (): JSX.Element => {
       className='price-value'
       placeholder='Total price...'
       content={getPriceBlockHtmlFromStore({ blockIndex: block.index })}
+      onCreate={(params) => {
+        validateTotalPrice({ editorRef, blockIndex: block.index })
+      }}
       onUpdate={(params) => {
         updatePriceValue({ editorRef, blockIndex: block.index })
       }}
