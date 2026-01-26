@@ -24,11 +24,11 @@ export const onTextBlockResizeStop: OnBlockResizeStop = (props) => {
   const width = parseInt(props.elementRef.style.width)
   const prevItemWidth = getState().quotation.blocks[props.blockIndex]?.width
 
-  dispatch(
-    quotationSlice.actions.enableFroalaReducer({
-      blockIndex: props.blockIndex,
-    }),
-  )
+  // dispatch(
+  //   quotationSlice.actions.enableFroalaReducer({
+  //     blockIndex: props.blockIndex,
+  //   }),
+  // )
 
   if (width === prevItemWidth) {
     return
