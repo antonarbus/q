@@ -6,6 +6,7 @@ import { arrayMoveImmutable } from 'array-move'
 
 export const onBlockDragStart = (_event: DragStartEvent): void => {
   document.body.style.cursor = 'move'
+  dispatch(textSlice.actions.setNotEditable())
 }
 
 export const onBlockDragEnd =
@@ -14,19 +15,12 @@ export const onBlockDragEnd =
     const persistedScrollX = window.scrollX
     const persistedScrollY = window.scrollY
 
-    // Basically we wish to disable edit on drag start, but drag positions of dnd-kit goes crazy
-    // Thus to re-render elements to let them take data from redux we switch edit, which causes blink
-    // But I did not find better workaround
-    dispatch(textSlice.actions.setNotEditable())
-
-    setTimeout(() => {
-      dispatch(textSlice.actions.setEditable())
-    })
-
     // Restore scroll position after React renders
     requestAnimationFrame(() => {
       window.scrollTo(persistedScrollX, persistedScrollY)
     })
+
+    dispatch(textSlice.actions.setEditable())
 
     document.body.style.removeProperty('cursor')
 
