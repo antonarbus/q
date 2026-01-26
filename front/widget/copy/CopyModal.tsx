@@ -1,7 +1,7 @@
 import { useMovePasteText, usePasteClick } from '@feature/blocks/paste'
 import {
   PressEscIcon,
-  useEnableFroalasOnCloseCopyModal,
+  useEnableEditorsOnCloseCopyModal,
 } from '@feature/open-close/close-copy-modal'
 import type { JSX } from 'react'
 import { CopyModalLayout } from './CopyModalLayout'
@@ -17,7 +17,7 @@ export const CopyModal = (): JSX.Element => {
   useMovePasteText()
   usePasteClick()
   useDisableNavItemsOnCopyModal()
-  useEnableFroalasOnCloseCopyModal()
+  useEnableEditorsOnCloseCopyModal()
 
   return (
     <CopyModalLayout ref={copyModalElement.ref}>

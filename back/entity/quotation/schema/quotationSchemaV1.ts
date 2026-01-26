@@ -39,7 +39,6 @@ const blockCommonSchema = z.object({
   preview: z.string(),
   width: z.number(),
   height: z.number(),
-  isFroala: z.boolean(),
 })
 
 const rowBlockSchema = blockCommonSchema.extend({

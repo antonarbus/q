@@ -24,7 +24,6 @@ export const insertRow = (event?: MouseEvent): void => {
     email: 'unknown@gmail.com',
     height: 55,
     width: 570,
-    isFroala: true,
     preview: rowPreviewHtml,
     description: {
       html: rowDescriptionHtml,

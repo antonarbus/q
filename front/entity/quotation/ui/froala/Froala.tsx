@@ -23,9 +23,9 @@ export const Froala = (props: FroalaProps): JSX.Element => {
   const block = useBlock()
   const fixedHeightRef = useFixedHeightRefForAnimation({ froalaElementRef })
 
-  const isBlockFroala = useSelector(
-    (state) => state.quotation.blocks[block.index]?.isFroala ?? true,
-  )
+  // const isBlockFroala = useSelector(
+  //   (state) => state.quotation.blocks[block.index]?.isFroala ?? true,
+  // )
 
   const isEditable = useSelector((state) => state.text.isEditable)
 

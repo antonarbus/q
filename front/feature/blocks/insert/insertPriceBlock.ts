@@ -22,7 +22,6 @@ export const insertPriceBlock = (event?: MouseEvent): void => {
     email: 'unknown@gmail.com',
     width: 150,
     height: 90,
-    isFroala: true,
     preview: priceBlockPreviewHtml,
     title: {
       html: priceBlockTitleHtml,

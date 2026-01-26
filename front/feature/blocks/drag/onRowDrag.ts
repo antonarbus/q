@@ -1,6 +1,7 @@
 import type { DragEndEvent, DragStartEvent } from '@dnd-kit/core'
 import { getRowsFromStore } from '@entity/quotation/redux/getter/getRowsFromStore'
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
+import { textSlice } from '@shared/lib/froala/textSlice'
 import { dispatch } from '@shared/lib/redux'
 import { arrayMoveImmutable } from 'array-move'
 
@@ -8,13 +9,14 @@ export const onRowDragStart =
   ({ blockIndex }: { blockIndex: number }) =>
   (_event: DragStartEvent): void => {
     document.body.style.cursor = 'move'
-    dispatch(quotationSlice.actions.disableFroalaReducer({ blockIndex }))
+    dispatch(textSlice.actions.setNotEditable())
   }
 
 export const onRowDragEnd =
   ({ blockIndex, rowIds }: { blockIndex: number; rowIds: string[] }) =>
   (dragEndEvent: DragEndEvent): void => {
-    dispatch(quotationSlice.actions.enableFroalaReducer({ blockIndex }))
+    dispatch(textSlice.actions.setEditable())
+
     document.body.style.removeProperty('cursor')
 
     if (dragEndEvent.over === null) {

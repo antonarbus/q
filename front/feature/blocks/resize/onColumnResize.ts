@@ -2,6 +2,7 @@ import type { BoqColumnKey } from '@back/entity/quotation/schema'
 import { getBoqColumnFromStore } from '@entity/quotation/redux/getter/getBoqColumnFromStore'
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { cls } from '@shared/cls'
+import { textSlice } from '@shared/lib/froala/textSlice'
 import { dispatch } from '@shared/lib/redux'
 
 type Props = {
@@ -13,11 +14,7 @@ type Props = {
 export const onColumnResizeStart = (props: Props): void => {
   const width = props.headerColumnElement.clientWidth
 
-  dispatch(
-    quotationSlice.actions.disableFroalaReducer({
-      blockIndex: props.blockIndex,
-    }),
-  )
+  dispatch(textSlice.actions.setNotEditable())
 
   dispatch(
     quotationSlice.actions.updateColWidthReducer({
@@ -83,9 +80,5 @@ export const onColumnResizeStop = (props: Props): void => {
     }),
   )
 
-  dispatch(
-    quotationSlice.actions.enableFroalaReducer({
-      blockIndex: props.blockIndex,
-    }),
-  )
+  dispatch(textSlice.actions.setEditable())
 }

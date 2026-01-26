@@ -57,7 +57,6 @@ export const newQuotationTemplate: Quotation = {
       width: 600,
       height: 0,
       preview: '',
-      isFroala: true,
       text: {
         html: welcomeTextHtml,
         value: null,
@@ -77,7 +76,6 @@ export const newQuotationTemplate: Quotation = {
       width: 600,
       height: 0,
       preview: '',
-      isFroala: true,
       boq: {
         header: {
           title: {
@@ -129,7 +127,6 @@ export const newQuotationTemplate: Quotation = {
             email: 'unknown@gmail.com',
             height: 0,
             width: 0,
-            isFroala: true,
             preview: '',
             description: {
               html: rowOneDescriptionHtml,
@@ -177,7 +174,6 @@ export const newQuotationTemplate: Quotation = {
             email: 'unknown@gmail.com',
             height: 0,
             width: 0,
-            isFroala: true,
             preview: '',
             description: {
               html: rowTwoDescriptionHtml,
@@ -226,7 +222,6 @@ export const newQuotationTemplate: Quotation = {
             height: 0,
             width: 0,
             preview: '',
-            isFroala: true,
             description: {
               html: rowThreeDescriptionHtml,
               value: 0,
@@ -277,7 +272,6 @@ export const newQuotationTemplate: Quotation = {
       width: 150,
       height: 0,
       preview: '',
-      isFroala: true,
       title: {
         html: totalPriceTitleHtml,
         value: null,
@@ -301,7 +295,6 @@ export const newQuotationTemplate: Quotation = {
       width: 600,
       height: 0,
       preview: '',
-      isFroala: true,
       text: {
         html: termsAndConditionsHtml,
         value: null,

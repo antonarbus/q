@@ -17,8 +17,6 @@ import { updateColWidthReducer } from './reducer/layout/updateColWidthReducer'
 import { updateRowHeightAndWidthReducer } from './reducer/layout/updateRowHeightAndWidthReducer'
 
 // Load operations
-import { disableFroalaReducer } from './reducer/load/disableFroalaReducer'
-import { enableFroalaReducer } from './reducer/load/enableFroalaReducer'
 import { loadBlockAtPosThousandReducer } from './reducer/load/loadBlockAtPosThousandReducer'
 import { loadQuotationReducer } from './reducer/load/loadItemsReducer'
 import { removeBlockFromPosThousandReducer } from './reducer/load/removeBlockFromPosThousandReducer'
@@ -77,8 +75,6 @@ export const quotationSlice = createSlice({
     resetQuotationReducer: () => initialState,
     deleteRowReducer,
     deleteBlockReducer,
-    disableFroalaReducer,
-    enableFroalaReducer,
     hideBoqItemPinsReducer,
     hideCellPinReducer,
     pasteItemReducer,

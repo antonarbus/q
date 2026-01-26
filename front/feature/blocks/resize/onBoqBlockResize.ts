@@ -1,6 +1,7 @@
 import { columnMinWidth } from '@entity/quotation/const/columnMinWidth'
 import { getBoqColumnFromStore } from '@entity/quotation/redux/getter/getBoqColumnFromStore'
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
+import { textSlice } from '@shared/lib/froala/textSlice'
 import type {
   OnBlockResize,
   OnBlockResizeStart,
@@ -22,11 +23,7 @@ let qtyColumnDeltaWidth = 0
 let priceColumnDeltaWidth = 0
 
 export const onBoqBlockResizeStart: OnBlockResizeStart = (props) => {
-  dispatch(
-    quotationSlice.actions.disableFroalaReducer({
-      blockIndex: props.blockIndex,
-    }),
-  )
+  dispatch(textSlice.actions.setNotEditable())
 
   dispatch(
     quotationSlice.actions.hideBoqItemPinsReducer({
@@ -246,11 +243,7 @@ export const onBoqBlockResizeStop: OnBlockResizeStop = (props) => {
     }),
   )
 
-  dispatch(
-    quotationSlice.actions.enableFroalaReducer({
-      blockIndex: props.blockIndex,
-    }),
-  )
+  dispatch(textSlice.actions.setEditable())
 
   const itemWidth = props.elementRef.clientWidth
   const prevItemWidth = getState().quotation.blocks[props.blockIndex]?.width

@@ -1,2 +1,2 @@
 export { PressEscIcon } from './PressEscIcon'
-export { useEnableFroalasOnCloseCopyModal } from './useEnableFroalasOnCloseCopyModal'
+export { useEnableEditorsOnCloseCopyModal } from './useEnableEditorsOnCloseCopyModal'

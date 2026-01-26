@@ -39,7 +39,6 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
     email: 'unknown@gmail.com',
     width: 600,
     height: 279,
-    isFroala: true,
     preview: boqBlockPreviewHtml,
     boq: {
       header: {
@@ -92,7 +91,6 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
           email: 'unknown@gmail.com',
           height: 0,
           width: 0,
-          isFroala: true,
           preview: '',
           description: {
             html: rowOneDescriptionHtml,
@@ -140,7 +138,6 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
           email: 'unknown@gmail.com',
           height: 0,
           width: 0,
-          isFroala: true,
           preview: '',
           description: {
             html: rowTwoDescriptionHtml,
@@ -188,7 +185,6 @@ export const insertBoqBlock = (event?: MouseEvent): void => {
           email: 'unknown@gmail.com',
           height: 0,
           width: 0,
-          isFroala: true,
           preview: '',
           description: {
             html: rowThreeDescriptionHtml,

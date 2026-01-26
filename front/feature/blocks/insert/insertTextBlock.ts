@@ -21,7 +21,6 @@ export const insertTextBlock = (event?: MouseEvent): void => {
     email: 'unknown@gmail.com',
     width: 600,
     height: 59.2,
-    isFroala: true,
     preview: textBlockPreviewHtml,
     text: {
       html: textBlockContentHtml,

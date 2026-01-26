@@ -36,7 +36,6 @@ export const createMockQuotationOfLatestVersion = <T = Quotation>(
       preview: 'preview',
       width: 100,
       height: 50,
-      isFroala: false,
       type: 'text',
       text: {
         html: '<p>Hello</p>',

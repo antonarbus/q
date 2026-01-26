@@ -11,18 +11,10 @@ export const useUpdateSubtotal = (): void => {
   const block = useBlock()
   const boq = useBoq()
 
-  const isBlockFroala = useSelector(
-    (state) => state.quotation.blocks[block.index]?.isFroala,
-  )
-
   const isEditable = useSelector((state) => state.text.isEditable)
 
   useUpdateEffect(() => {
     if (isEditable === false) {
-      return
-    }
-
-    if (isBlockFroala === undefined) {
       return
     }
 
@@ -51,5 +43,5 @@ export const useUpdateSubtotal = (): void => {
         incrementally: true,
       })
     }, 100) // froala needs time to initialize, better if we update some state in Froala, but do not see elegant way
-  }, [isBlockFroala, isEditable])
+  }, [isEditable])
 }

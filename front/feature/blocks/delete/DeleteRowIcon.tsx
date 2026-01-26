@@ -5,6 +5,7 @@ import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { selectIsLastRow } from '@entity/quotation/redux/selector/selectIsLastRow'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/cls'
+import { textSlice } from '@shared/lib/froala/textSlice'
 import { dispatch, getState, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import type { JSX } from 'react'
@@ -41,11 +42,7 @@ export const DeleteRowIcon = (): JSX.Element => {
             }
 
             flushSync(() => {
-              dispatch(
-                quotationSlice.actions.disableFroalaReducer({
-                  blockIndex: block.index,
-                }),
-              )
+              dispatch(textSlice.actions.setNotEditable())
             })
 
             dispatch(
@@ -66,11 +63,7 @@ export const DeleteRowIcon = (): JSX.Element => {
             if (isCopyModalVisible === false) {
               setTimeout(
                 () => {
-                  dispatch(
-                    quotationSlice.actions.enableFroalaReducer({
-                      blockIndex: block.index,
-                    }),
-                  )
+                  dispatch(textSlice.actions.setEditable())
                 },
                 1000 * theme.block.animationDuration + 500,
               )
