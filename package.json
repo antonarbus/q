@@ -15,6 +15,7 @@
     "build-front": "NODE_ENV=production vite build",
     "build-back": "bun run bundle-back/bundleBack.ts",
     "build": "bun run build-front && bun run build-back",
+    "bundle-size": "npx vite-bundle-visualizer",
     "install-all": "bun install",
     "install-ci": "bun install --frozen-lockfile",
     "install-prod": "bun install --frozen-lockfile --production",

@@ -78,12 +78,27 @@ export default {
       output: {
         // https://rollupjs.org/configuration-options/#output-manualchunks
         manualChunks: (id: string): string | undefined => {
-          if (id.includes('ag-grid')) return 'ag-grid'
-          if (id.includes('@mui')) return '@mui'
-          if (id.includes('@tanstack')) return '@tanstack'
-          if (id.includes('@remix')) return '@remix'
-          if (id.includes('jspdf')) return 'jspdf'
-          if (id.includes('exceljs')) return 'exceljs'
+          if (id.includes('/ag-grid')) return 'ag-grid'
+          if (id.includes('/@mui')) return '@mui'
+          if (id.includes('/@tanstack')) return '@tanstack'
+          if (id.includes('/@remix')) return '@remix'
+          if (id.includes('/jspdf')) return 'jspdf'
+          if (id.includes('/exceljs')) return 'exceljs'
+          if (id.includes('/chart.js')) return 'chart.js'
+          if (id.includes('/xstate')) return 'xstate'
+          if (id.includes('/@tiptap')) return '@tiptap'
+          if (id.includes('/react-router')) return 'react-router'
+          if (id.includes('/prosemirror')) return 'prosemirror'
+          if (id.includes('/motion-dom')) return 'motion-dom'
+          if (id.includes('/zod')) return 'zod'
+          if (id.includes('/react-icons')) return 'react-icons'
+          if (id.includes('/lodash')) return 'lodash'
+          if (id.includes('/re-resizable')) return 're-resizable'
+          if (id.includes('/react-dom')) return 'react-dom'
+          if (id.includes('/@dnd-kit')) return '@dnd-kit'
+          if (id.includes('/sonner')) return 'sonner'
+          if (id.includes('/immer')) return 'immer'
+          if (id.includes('/framer-motion')) return 'framer-motion'
 
           return undefined
         },
