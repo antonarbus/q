@@ -10,6 +10,16 @@ import { UploadButton } from './UploadButton'
 import { DropHereText } from './DropHereText'
 import { tiptapStyles } from './styles'
 
+// todo: check how image behaves on resize and then save, also resize by container
+// some code from Froala
+
+// 'image.loaded'(props: { '0': HTMLImageElement }): void {
+//   const imageElement = props['0']
+//   imageElement.style.aspectRatio = `${imageElement.clientWidth}/${imageElement.clientHeight}`
+//   imageElement.id = `img-${generateId()}`
+//   imageElement.classList.add('fr-rounded')
+// },
+
 type Props = {
   editorRef: EditorRef
   className: string
