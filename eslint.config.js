@@ -8,13 +8,7 @@ import stylistic from '@stylistic/eslint-plugin'
 
 export default [
   {
-    ignores: [
-      '**/build/',
-      '**/froalaPkg.js',
-      '**/coverage/',
-      '**/node_modules/',
-      'bundle-back/.deps-entry.js',
-    ],
+    ignores: ['**/build/', '**/coverage/', '**/node_modules/'],
   },
   {
     languageOptions: {

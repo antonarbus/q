@@ -2,7 +2,7 @@ import { copySlice } from '@entity/copy/copySlice'
 import textBlockContentHtml from '@entity/quotation/templates/textBlockContent.html?raw' // assets can be imported as strings using the ?raw suffix
 import textBlockPreviewHtml from '@entity/quotation/templates/textBlockPreview.html?raw'
 import type { TextBlock } from '@back/entity/quotation/schema'
-import { textSlice } from '@shared/lib/froala/textSlice'
+import { textSlice } from '@shared/lib/tiptap/textSlice'
 import { generateId } from '@front/shared/lib/nanoid'
 import { dispatch, getState } from '@shared/lib/redux'
 import type { MouseEvent } from 'react'

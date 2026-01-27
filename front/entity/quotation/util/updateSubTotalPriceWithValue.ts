@@ -1,6 +1,6 @@
 import type { Editor } from '@tiptap/react'
-import { updateNumberAtHtml } from '@shared/lib/froala/updateNumberAtHtml'
-import { updateNumberAtHtmlIncrementally } from '@shared/lib/froala/updateNumberAtHtmlIncrementally'
+import { updateNumberAtHtml } from '@shared/lib/tiptap/updateNumberAtHtml'
+import { updateNumberAtHtmlIncrementally } from '@shared/lib/tiptap/updateNumberAtHtmlIncrementally'
 import { dispatch } from '@shared/lib/redux'
 import { getStringWithNewFormattedNumber } from '@shared/util/getStringWithNewFormattedNumber'
 import { getBoqBlockFromStore } from '../redux/getter/getBoqBlockFromStore'

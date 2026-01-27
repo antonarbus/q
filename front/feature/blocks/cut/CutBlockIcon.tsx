@@ -5,7 +5,7 @@ import { selectIsLastBlock } from '@entity/quotation/redux/selector/selectIsLast
 import { saveBlockHeightByIndex } from '@entity/quotation/util/saveBlockHeightByIndex'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/cls'
-import { textSlice } from '@shared/lib/froala/textSlice'
+import { textSlice } from '@shared/lib/tiptap/textSlice'
 import { dispatch, getState, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import { fixElementDimensionStyle } from '@shared/util/fixElementDimensionStyle'

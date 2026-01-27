@@ -1,4 +1,4 @@
-import { textSlice } from '@shared/lib/froala/textSlice'
+import { textSlice } from '@shared/lib/tiptap/textSlice'
 import { dispatch } from '@shared/lib/redux'
 import { useUnmount } from 'react-use'
 

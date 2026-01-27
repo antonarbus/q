@@ -16,7 +16,7 @@
     "deploy-scripts/**/*",
     "shared/**/*"
   ],
-  "exclude": ["**/node_modules", "**/build", "**/fr.js", "**/froalaPkg.js"],
+  "exclude": ["**/node_modules", "**/build"],
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",

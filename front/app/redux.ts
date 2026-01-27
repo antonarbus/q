@@ -5,7 +5,7 @@ import { userReducer } from '@entity/user/redux/userSlice'
 import { configureStore } from '@reduxjs/toolkit'
 import { appReducer } from '@shared/appSlice'
 import { agGridReducer } from '@shared/lib/ag-grid/agGridSlice'
-import { textReducer } from '@shared/lib/froala/textSlice'
+import { textReducer } from '@shared/lib/tiptap/textSlice'
 import { instantiateStore } from '@shared/lib/redux/redux'
 import type { TypedUseSelectorHook } from 'react-redux'
 

@@ -1,6 +1,6 @@
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { getTotalPriceAbove } from '@entity/quotation/util/getTotalPriceAbove'
-import { updateNumberAtHtmlIncrementally } from '@shared/lib/froala/updateNumberAtHtmlIncrementally'
+import { updateNumberAtHtmlIncrementally } from '@shared/lib/tiptap/updateNumberAtHtmlIncrementally'
 import { dispatch, getState, useSelector } from '@shared/lib/redux'
 import type { EditorRef } from '@shared/lib/tiptap/types'
 import { getStringWithNewFormattedNumber } from '@shared/util/getStringWithNewFormattedNumber'

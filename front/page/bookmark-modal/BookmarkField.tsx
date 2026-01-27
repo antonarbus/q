@@ -1,5 +1,5 @@
 import { BOOKMARK_POS_AT_BLOCKS } from '@entity/quotation/const/bookmarkPosAtBlocks'
-import { textSlice } from '@shared/lib/froala/textSlice'
+import { textSlice } from '@shared/lib/tiptap/textSlice'
 import { dispatch, useSelector } from '@shared/lib/redux'
 import { Block } from '@widget/block/Block'
 import { AnimatePresence } from 'motion/react'

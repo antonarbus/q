@@ -1,7 +1,7 @@
 import { columnMinWidth } from '@entity/quotation/const/columnMinWidth'
 import { getBoqColumnFromStore } from '@entity/quotation/redux/getter/getBoqColumnFromStore'
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
-import { textSlice } from '@shared/lib/froala/textSlice'
+import { textSlice } from '@shared/lib/tiptap/textSlice'
 import type {
   OnBlockResize,
   OnBlockResizeStart,

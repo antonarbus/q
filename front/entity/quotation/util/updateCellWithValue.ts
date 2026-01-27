@@ -1,5 +1,5 @@
 import type { Editor } from '@tiptap/react'
-import { updateNumberAtHtmlIncrementally } from '@shared/lib/froala/updateNumberAtHtmlIncrementally'
+import { updateNumberAtHtmlIncrementally } from '@shared/lib/tiptap/updateNumberAtHtmlIncrementally'
 import { getNumberFromString } from '@shared/util/getNumberFromString'
 import { getStringWithNewFormattedNumber } from '@shared/util/getStringWithNewFormattedNumber'
 import { getTextContentFromHtml } from '@shared/util/getTextContentFromHtml'
