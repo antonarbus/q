@@ -13,7 +13,7 @@ import axios, { type AxiosError } from 'axios'
 import { toast } from 'sonner'
 import { hideDraggableArea } from './showDraggableArea'
 
-export type Upload = (props: {
+type Upload = (props: {
   type: 'image' | 'file'
   editor: Editor
   files: File[]
