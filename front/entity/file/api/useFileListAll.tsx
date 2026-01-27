@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/strict-void-return */
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { route } from '@back/api/route'
 import type { ResBody } from '@back/api/file/getFileListAllHandler'
 import { axiosWithAuth } from '@shared/lib/axios'
@@ -22,7 +24,6 @@ export const useFileListAll = (): Res => {
   const datasource = useMemo(() => {
     const ds: IDatasource = {
       rowCount: undefined,
-      // eslint-disable-next-line @typescript-eslint/no-misused-promises
       getRows: async (params) => {
         try {
           if (isFirstMount === true) {

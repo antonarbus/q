@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/strict-void-return */
 import type { ResBody } from '@back/api/bookmark/getBookmarkListHandler'
 import { useGetBookmarkListQuery } from '@entity/bookmark/api/useGetBookmarkListQuery'
 import { useGetBookmarkMutation } from '@entity/bookmark/api/useGetBookmarkMutation'
@@ -103,7 +104,7 @@ export const Search = (): JSX.Element => {
               }),
             }}
             key={option.id}
-            onClick={async (event: React.MouseEvent) => {
+            onClick={async (event: React.MouseEvent): Promise<void> => {
               const data = await getBookmarkMutation.mutateAsync({
                 id: option.id,
               })

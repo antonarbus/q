@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/strict-void-return */
 import type { UrlParam } from '@back/api/bookmark/getBookmarkHandler'
 import { useGetBookmarkMutation } from '@entity/bookmark/api/useGetBookmarkMutation'
 import { copySlice } from '@entity/copy/copySlice'
@@ -27,7 +28,7 @@ export const CopyBookmarkButton = (props: UrlParam): JSX.Element => {
       title='Copy'
     >
       <IconButton
-        onClick={async (event: React.MouseEvent) => {
+        onClick={async (event: React.MouseEvent): Promise<void> => {
           const data = await getBookmarkMutation.mutateAsync({ id: props.id })
 
           if (data !== undefined) {
