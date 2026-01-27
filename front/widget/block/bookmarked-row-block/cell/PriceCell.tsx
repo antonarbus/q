@@ -27,6 +27,7 @@ export const PriceCell = (): JSX.Element => {
         editorRef={row.priceCellEditorRef}
         className='td price'
         placeholder='Price...'
+        isEditorActive={isEditorActive}
         content={getBookmarkedRowCellHtmlFromStore({ cellKey: 'price' })}
         onUpdate={(params) => {
           updatePriceCell({
@@ -42,7 +43,6 @@ export const PriceCell = (): JSX.Element => {
           ...cellSx,
           ...cellStyle,
         }}
-        isEditorActive={isEditorActive}
       />
     </Box>
   )

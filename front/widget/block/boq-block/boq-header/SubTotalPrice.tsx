@@ -36,6 +36,7 @@ export const SubTotalPrice = (): JSX.Element => {
       editorRef={boq.subTotalPriceEditorRef}
       className='sub-total-price'
       placeholder='Price...'
+      isEditorActive={isEditorActive}
       content={getBoqHeaderHtmlFromStore({
         blockIndex: block.index,
         boqHeaderKey,
@@ -68,7 +69,6 @@ export const SubTotalPrice = (): JSX.Element => {
         })
       }}
       sx={subTotalPriceCellStyle}
-      isEditorActive={isEditorActive}
     />
   )
 }

@@ -27,6 +27,7 @@ export const QtyCell = (): JSX.Element => {
         editorRef={row.qtyCellEditorRef}
         className='td qty'
         placeholder='Qty...'
+        isEditorActive={isEditorActive}
         content={getBookmarkedRowCellHtmlFromStore({ cellKey: 'qty' })}
         onUpdate={(params) => {
           updateQtyCell({
@@ -42,7 +43,6 @@ export const QtyCell = (): JSX.Element => {
           ...cellStyle,
           ...cellSx,
         }}
-        isEditorActive={isEditorActive}
       />
     </Box>
   )

@@ -24,6 +24,7 @@ export const ItemPriceColumn = (): JSX.Element => {
         editorRef={editorRef}
         className='column-item-price'
         placeholder='Item...'
+        isEditorActive={isEditorActive}
         content={getBoqColumnHtmlFromStore({
           blockIndex: block.index,
           boqColumnKey: 'itemPrice',
@@ -36,7 +37,6 @@ export const ItemPriceColumn = (): JSX.Element => {
           })
         }}
         sx={columnHeaderStyle}
-        isEditorActive={isEditorActive}
       />
     </ResizableColumn>
   )

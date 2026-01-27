@@ -24,6 +24,7 @@ export const DescriptionColumn = (): ReactNode => {
         editorRef={editorRef}
         className='column-description'
         placeholder='Description...'
+        isEditorActive={isEditorActive}
         content={getBoqColumnHtmlFromStore({
           blockIndex: block.index,
           boqColumnKey: 'description',
@@ -39,7 +40,6 @@ export const DescriptionColumn = (): ReactNode => {
           ...columnHeaderStyle,
           textAlign: 'left',
         }}
-        isEditorActive={isEditorActive}
       />
     </ResizableColumn>
   )

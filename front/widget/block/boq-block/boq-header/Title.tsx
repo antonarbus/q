@@ -20,6 +20,7 @@ export const Title = (): JSX.Element => {
       editorRef={editorRef}
       className='title'
       placeholder='Title...'
+      isEditorActive={isEditorActive}
       content={getBoqHeaderHtmlFromStore({
         blockIndex: block.index,
         boqHeaderKey,
@@ -32,7 +33,6 @@ export const Title = (): JSX.Element => {
         })
       }}
       sx={titleCellStyle}
-      isEditorActive={isEditorActive}
     />
   )
 }

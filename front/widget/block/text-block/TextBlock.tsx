@@ -54,12 +54,12 @@ export const TextBlock = (): JSX.Element => {
         editorRef={editorRef}
         className='text'
         placeholder='Add text, tables, drop images, files, links, select to format...'
+        isEditorActive={isEditorActive}
         content={getTextBlockHtmlFromStore({ blockIndex: block.index })}
         onUpdate={(params) => {
           updateTextBlock({ editorRef, blockIndex: block.index })
         }}
         sx={textItemCellStyle}
-        isEditorActive={isEditorActive}
       />
     </BlockComp>
   )

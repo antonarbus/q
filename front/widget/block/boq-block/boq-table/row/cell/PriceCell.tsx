@@ -35,6 +35,7 @@ export const PriceCell = (): JSX.Element => {
         editorRef={row.priceCellEditorRef}
         className='td price'
         placeholder='Price...'
+        isEditorActive={isEditorActive}
         content={getCellHtmlFromStore({
           blockIndex: block.index,
           cellKey: 'price',
@@ -79,7 +80,6 @@ export const PriceCell = (): JSX.Element => {
           ...cellSx,
           ...cellStyle,
         }}
-        isEditorActive={isEditorActive}
       />
       <Pin
         cellKey='price'

@@ -20,6 +20,7 @@ export const SubtotalText = (): JSX.Element => {
       editorRef={editorRef}
       className='sub-total-text'
       placeholder='Subtotal...'
+      isEditorActive={isEditorActive}
       content={getBoqHeaderHtmlFromStore({
         blockIndex: block.index,
         boqHeaderKey,
@@ -32,7 +33,6 @@ export const SubtotalText = (): JSX.Element => {
         })
       }}
       sx={subTotalTextCellStyle}
-      isEditorActive={isEditorActive}
     />
   )
 }

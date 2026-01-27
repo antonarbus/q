@@ -31,6 +31,7 @@ export const QtyCell = (): JSX.Element => {
         editorRef={row.qtyCellEditorRef}
         className='td qty'
         placeholder='Qty...'
+        isEditorActive={isEditorActive}
         content={getCellHtmlFromStore({
           blockIndex: block.index,
           rowIndex: row.index,
@@ -64,7 +65,6 @@ export const QtyCell = (): JSX.Element => {
           ...cellSx,
           ...cellStyle,
         }}
-        isEditorActive={isEditorActive}
       />
       <Pin
         cellKey='qty'

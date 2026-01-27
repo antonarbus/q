@@ -15,6 +15,7 @@ export const PriceTitle = (): JSX.Element => {
       editorRef={editorRef}
       className='price-title'
       placeholder='Total price...'
+      isEditorActive={isEditorActive}
       content={((): string => {
         const priceBlock = getState().quotation.blocks[block.index]
 
@@ -30,7 +31,6 @@ export const PriceTitle = (): JSX.Element => {
       sx={{
         textAlign: 'center',
       }}
-      isEditorActive={isEditorActive}
     />
   )
 }

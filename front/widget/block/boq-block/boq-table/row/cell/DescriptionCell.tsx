@@ -33,6 +33,7 @@ export const DescriptionCell = (): JSX.Element => {
       editorRef={row.descriptionCellEditorRef}
       className='td description'
       placeholder='Description...'
+      isEditorActive={isEditorActive}
       content={getCellHtmlFromStore({
         blockIndex: block.index,
         cellKey: 'description',
@@ -61,7 +62,6 @@ export const DescriptionCell = (): JSX.Element => {
         ...cellStyle,
         textAlign: 'left',
       }}
-      isEditorActive={isEditorActive}
     />
   )
 }

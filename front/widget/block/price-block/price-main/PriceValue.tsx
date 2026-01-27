@@ -26,6 +26,7 @@ export const PriceValue = (): JSX.Element => {
       className='price-value'
       placeholder='Total price...'
       content={getPriceBlockHtmlFromStore({ blockIndex: block.index })}
+      isEditorActive={isEditorActive}
       onCreate={(params) => {
         validateTotalPrice({ editorRef, blockIndex: block.index })
       }}
@@ -38,7 +39,6 @@ export const PriceValue = (): JSX.Element => {
       sx={{
         textAlign: 'center',
       }}
-      isEditorActive={isEditorActive}
     />
   )
 }

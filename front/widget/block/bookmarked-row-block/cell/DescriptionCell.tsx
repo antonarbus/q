@@ -30,6 +30,7 @@ export const DescriptionCell = (): JSX.Element => {
       editorRef={row.descriptionCellEditorRef}
       className='td description'
       placeholder='Description...'
+      isEditorActive={isEditorActive}
       content={getBookmarkedRowCellHtmlFromStore({ cellKey: 'description' })}
       onUpdate={(params) => {
         updateDescriptionCell({
@@ -42,7 +43,6 @@ export const DescriptionCell = (): JSX.Element => {
         textAlign: 'left',
         '.fr-placeholder': { left: 0 },
       }}
-      isEditorActive={isEditorActive}
     />
   )
 }
