@@ -4,9 +4,8 @@ import type {
   ReqBody as Payload,
   ResBody as ResBodyMakeFilePublic,
 } from '@back/api/file/saveFileInfoHandler'
-import type { FroalaProps } from '@entity/quotation/ui/froala/types'
+import type { Editor } from '@tiptap/react'
 import { axiosWithAuth } from '@shared/lib/axios'
-import { removeLoadingBar } from '@shared/lib/froala/removeLoadingBar'
 import { getState } from '@shared/lib/redux'
 import { asyncDelay } from '@shared/util/asyncDelay'
 import { getFileSizeInMb } from '@shared/util/getFileSizeInMb'
@@ -14,23 +13,16 @@ import axios, { type AxiosError } from 'axios'
 import { toast } from 'sonner'
 import { hideDraggableArea } from './showDraggableArea'
 
-type BeforeUpload = NonNullable<FroalaProps['beforeUpload']>
+export type Upload = (props: {
+  type: 'image' | 'file'
+  editor: Editor
+  files: File[]
+}) => Promise<void>
 
-/**
- * This is async function, but we need to return false or undefined immediately
- * to suppress the default editor behavior with file upload popup with progress bar.
- * We run it without await and assume it will do the job
- */
-export const beforeUpload: BeforeUpload = async (props) => {
-  if (props.editor === null) {
-    throw new Error('Editor passed to beforeUpload method is null')
-  }
-
+export const upload: Upload = async (props) => {
   hideDraggableArea()
 
   // when user is not logged save files and images as base64 urls
-  // todo 1: check that quotation is not reloaded on save, otherwise we loose files
-  // todo 2: maybe save data inside html even for logged users and do not upload files into bucket
   if (getState().user.email === null) {
     const file = props.files['0']
 
@@ -47,23 +39,34 @@ export const beforeUpload: BeforeUpload = async (props) => {
         return
       }
 
-      if (props.editor === null) {
-        return
-      }
-
       if (props.type === 'image') {
-        props.editor.image.insert(
-          fileAsBase64String,
-          true,
-          {
-            name: file.name,
-          },
-          null,
-        )
+        props.editor
+          .chain()
+          .focus()
+          .setImage({
+            src: fileAsBase64String,
+            alt: file.name,
+          })
+          .run()
       }
 
       if (props.type === 'file') {
-        props.editor.file.insert(fileAsBase64String, file.name, {})
+        props.editor
+          .chain()
+          .focus()
+          .insertContent({
+            type: 'text',
+            text: file.name,
+            marks: [
+              {
+                type: 'link',
+                attrs: {
+                  href: fileAsBase64String,
+                },
+              },
+            ],
+          })
+          .run()
       }
     }
 
@@ -71,8 +74,6 @@ export const beforeUpload: BeforeUpload = async (props) => {
 
     return
   }
-
-  removeLoadingBar()
 
   const file = props.files['0']
 
@@ -197,25 +198,36 @@ export const beforeUpload: BeforeUpload = async (props) => {
     return
   }
 
+  const uploadUrl = `/uploads/${signUrlResponse.data.fileId}`
+
   if (props.type === 'file') {
-    props.editor.file.insert(
-      `/uploads/${signUrlResponse.data.fileId}`,
-      file.name,
-      {
-        link: `/uploads/${signUrlResponse.data.fileId}`,
-      },
-    )
+    props.editor
+      .chain()
+      .focus()
+      .insertContent({
+        type: 'text',
+        text: file.name,
+        marks: [
+          {
+            type: 'link',
+            attrs: {
+              href: uploadUrl,
+            },
+          },
+        ],
+      })
+      .run()
   }
 
   if (props.type === 'image') {
-    props.editor.image.insert(
-      `/uploads/${signUrlResponse.data.fileId}`,
-      true,
-      {
-        name: file.name,
-      },
-      null,
-    )
+    props.editor
+      .chain()
+      .focus()
+      .setImage({
+        src: uploadUrl,
+        alt: file.name,
+      })
+      .run()
   }
 
   await uploadCompletionDeferred.promise

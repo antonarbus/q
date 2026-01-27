@@ -6,7 +6,7 @@ import { getCellHtmlFromStore } from '@entity/quotation/redux/getter/getCellHtml
 import { cellStyle } from '@entity/quotation/style/cellStyle'
 import { tabFromDescriptionCell } from '@feature/blocks/tab-away-from-cell'
 import { updateDescriptionCell } from '@feature/blocks/update'
-// import { beforeUpload } from '@feature/file/upload-file'
+import { upload } from '@feature/file/upload-file'
 import { Tiptap } from '@shared/lib/tiptap/Tiptap'
 import { useSelector } from '@shared/lib/redux'
 import type { JSX } from 'react'
@@ -23,12 +23,6 @@ export const DescriptionCell = (): JSX.Element => {
   })
 
   return (
-    /*
-    <Froala
-      beforeUpload={beforeUpload}
-      droppable
-    />
-    */
     <Tiptap
       editorRef={row.descriptionCellEditorRef}
       className='td description'
@@ -47,6 +41,7 @@ export const DescriptionCell = (): JSX.Element => {
           rowIndex: row.index,
         })
       }}
+      onUpload={upload}
       onKeyDown={(_view, event) =>
         tabFromDescriptionCell({
           event,

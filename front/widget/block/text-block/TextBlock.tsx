@@ -11,7 +11,7 @@ import {
   onTextBlockResizeStop,
 } from '@feature/blocks/resize'
 import { updateTextBlock } from '@feature/blocks/update'
-// import { beforeUpload } from '@feature/file/upload-file'
+import { upload } from '@feature/file/upload-file'
 import { BookmarkBlockIcon } from '@feature/open-close/open-bookmark-modal'
 import { OpenInfoBlockModalIcon } from '@feature/open-close/open-info-modal'
 import { Tiptap } from '@shared/lib/tiptap/Tiptap'
@@ -46,10 +46,6 @@ export const TextBlock = (): JSX.Element => {
         </ItemActionButtonsLayout>
       }
     >
-      {/* <Froala
-        beforeUpload={beforeUpload}
-        droppable
-      /> */}
       <Tiptap
         editorRef={editorRef}
         className='text'
@@ -59,6 +55,7 @@ export const TextBlock = (): JSX.Element => {
         onUpdate={(params) => {
           updateTextBlock({ editorRef, blockIndex: block.index })
         }}
+        onUpload={upload}
         sx={textItemCellStyle}
       />
     </BlockComp>

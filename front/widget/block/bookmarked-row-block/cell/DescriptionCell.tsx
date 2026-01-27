@@ -6,7 +6,7 @@ import { getBookmarkedRowCellHtmlFromStore } from '@entity/quotation/redux/gette
 import { cellStyle } from '@entity/quotation/style/cellStyle'
 import { updateDescriptionCell } from '@feature/blocks/update/update-cell-at-bookmarked-row-block/description/updateDescriptionCell'
 import { useSelector } from '@shared/lib/redux'
-// import { beforeUpload } from '@feature/file/upload-file'
+import { upload } from '@feature/file/upload-file'
 import { Tiptap } from '@shared/lib/tiptap/Tiptap'
 import type { JSX } from 'react'
 
@@ -21,11 +21,6 @@ export const DescriptionCell = (): JSX.Element => {
   })
 
   return (
-    /*
-    <Froala
-      beforeUpload={beforeUpload}
-    />
-    */
     <Tiptap
       editorRef={row.descriptionCellEditorRef}
       className='td description'
@@ -37,6 +32,7 @@ export const DescriptionCell = (): JSX.Element => {
           editorRef: row.descriptionCellEditorRef,
         })
       }}
+      onUpload={upload}
       sx={{
         ...stylesForResizableCell,
         ...cellStyle,

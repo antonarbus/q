@@ -10,7 +10,14 @@ type Props = {
 
 export const FloatingMenu = (props: Props): JSX.Element => {
   return (
-    <BubbleMenu editor={props.editor}>
+    <BubbleMenu
+      editor={props.editor}
+      shouldShow={({ editor }) => {
+        if (editor.isActive('image') === true) return false
+
+        return editor.state.selection.content().size > 0
+      }}
+    >
       <div
         style={{
           display: 'flex',
@@ -23,28 +30,36 @@ export const FloatingMenu = (props: Props): JSX.Element => {
         }}
       >
         <MenuButton
-          onClick={() => props.editor.chain().focus().toggleBold().run()}
+          onClick={() => {
+            props.editor.chain().focus().toggleBold().run()
+          }}
           isActive={props.editor.isActive('bold')}
           title='Bold'
         >
           B
         </MenuButton>
         <MenuButton
-          onClick={() => props.editor.chain().focus().toggleItalic().run()}
+          onClick={() => {
+            props.editor.chain().focus().toggleItalic().run()
+          }}
           isActive={props.editor.isActive('italic')}
           title='Italic'
         >
           <em>I</em>
         </MenuButton>
         <MenuButton
-          onClick={() => props.editor.chain().focus().toggleUnderline().run()}
+          onClick={() => {
+            props.editor.chain().focus().toggleUnderline().run()
+          }}
           isActive={props.editor.isActive('underline')}
           title='Underline'
         >
           <u>U</u>
         </MenuButton>
         <MenuButton
-          onClick={() => props.editor.chain().focus().toggleStrike().run()}
+          onClick={() => {
+            props.editor.chain().focus().toggleStrike().run()
+          }}
           isActive={props.editor.isActive('strike')}
           title='Strikethrough'
         >
@@ -54,16 +69,18 @@ export const FloatingMenu = (props: Props): JSX.Element => {
         <Divider />
 
         <MenuButton
-          onClick={() =>
+          onClick={() => {
             props.editor.chain().focus().toggleHeading({ level: 2 }).run()
-          }
+          }}
           isActive={props.editor.isActive('heading', { level: 2 })}
           title='Heading'
         >
           H
         </MenuButton>
         <MenuButton
-          onClick={() => props.editor.chain().focus().toggleBulletList().run()}
+          onClick={() => {
+            props.editor.chain().focus().toggleBulletList().run()
+          }}
           isActive={props.editor.isActive('bulletList')}
           title='Bullet List'
         >
@@ -73,20 +90,88 @@ export const FloatingMenu = (props: Props): JSX.Element => {
         <Divider />
 
         <MenuButton
-          onClick={() => props.editor.chain().focus().setColor('#ef4444').run()}
+          onClick={() => {
+            props.editor.chain().focus().setTextAlign('left').run()
+          }}
+          isActive={props.editor.isActive({ textAlign: 'left' })}
+          title='Align left'
+        >
+          <svg
+            width='16'
+            height='16'
+            viewBox='0 0 24 24'
+            fill='none'
+            stroke='currentColor'
+            strokeWidth='2'
+          >
+            <line x1='17' y1='10' x2='3' y2='10' />
+            <line x1='21' y1='6' x2='3' y2='6' />
+            <line x1='21' y1='14' x2='3' y2='14' />
+            <line x1='17' y1='18' x2='3' y2='18' />
+          </svg>
+        </MenuButton>
+        <MenuButton
+          onClick={() => {
+            props.editor.chain().focus().setTextAlign('center').run()
+          }}
+          isActive={props.editor.isActive({ textAlign: 'center' })}
+          title='Align center'
+        >
+          <svg
+            width='16'
+            height='16'
+            viewBox='0 0 24 24'
+            fill='none'
+            stroke='currentColor'
+            strokeWidth='2'
+          >
+            <line x1='18' y1='10' x2='6' y2='10' />
+            <line x1='21' y1='6' x2='3' y2='6' />
+            <line x1='21' y1='14' x2='3' y2='14' />
+            <line x1='18' y1='18' x2='6' y2='18' />
+          </svg>
+        </MenuButton>
+        <MenuButton
+          onClick={() => {
+            props.editor.chain().focus().setTextAlign('right').run()
+          }}
+          isActive={props.editor.isActive({ textAlign: 'right' })}
+          title='Align right'
+        >
+          <svg
+            width='16'
+            height='16'
+            viewBox='0 0 24 24'
+            fill='none'
+            stroke='currentColor'
+            strokeWidth='2'
+          >
+            <line x1='21' y1='10' x2='7' y2='10' />
+            <line x1='21' y1='6' x2='3' y2='6' />
+            <line x1='21' y1='14' x2='3' y2='14' />
+            <line x1='21' y1='18' x2='7' y2='18' />
+          </svg>
+        </MenuButton>
+
+        <Divider />
+
+        <MenuButton
+          onClick={() => {
+            props.editor.chain().focus().setColor('#ef4444').run()
+          }}
           isActive={props.editor.isActive('textStyle', { color: '#ef4444' })}
           title='Red'
         >
           <span style={{ color: '#ef4444' }}>A</span>
         </MenuButton>
         <MenuButton
-          onClick={() =>
+          onClick={() => {
             props.editor
               .chain()
               .focus()
               .toggleHighlight({ color: '#fef08a' })
               .run()
-          }
+          }}
           isActive={props.editor.isActive('highlight')}
           title='Highlight'
         >
