@@ -37,7 +37,6 @@ export const DescriptionCell = (): JSX.Element => {
         ...stylesForResizableCell,
         ...cellStyle,
         textAlign: 'left',
-        '.fr-placeholder': { left: 0 },
       }}
     />
   )

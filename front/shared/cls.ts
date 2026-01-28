@@ -20,5 +20,5 @@ export const cls = {
   dropHereText: 'drop-here-text',
   openInsertMenuButton: 'open-insert-menu-button',
   cleanFromPaper:
-    '.fr-placeholder,.right-resize-handle,.left-resize-handle,.actions-container,#DndDescribedBy-1,#DndLiveRegion-0,.drop-files-text,.drop-here-text',
+    '.right-resize-handle,.left-resize-handle,.actions-container,#DndDescribedBy-1,#DndLiveRegion-0,.drop-files-text,.drop-here-text',
 } as const

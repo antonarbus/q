@@ -6,9 +6,3 @@ export const cellStyle: CSSObject = {
   padding: theme.cell.padding,
   minHeight: '50px', // otherwise placeholder is misplaced on init
 }
-
-export const cellSx: CSSObject = {
-  '.fr-placeholder': {
-    left: '15px',
-  },
-}

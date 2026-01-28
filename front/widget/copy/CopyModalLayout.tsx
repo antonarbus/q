@@ -19,7 +19,7 @@ export const CopyModalLayout = (props: Props): JSX.Element => {
         width: 0,
         maxHeight: 265,
         overflow: 'hidden',
-        '.static-html .fr-element.fr-view': {
+        '.static-html': {
           opacity: '1 !important',
         },
 

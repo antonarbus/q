@@ -35,13 +35,11 @@ export const useUpdateSubtotal = (): void => {
 
     const subTotalPriceValueNewRounded = roundTo(subTotalPriceValueNew, 2)
 
-    setTimeout(() => {
-      updateSubTotalPriceWithValue({
-        blockIndex: block.index,
-        subTotalPriceEditor: boq.subTotalPriceEditorRef.current,
-        value: subTotalPriceValueNewRounded,
-        incrementally: true,
-      })
-    }, 100) // froala needs time to initialize, better if we update some state in Froala, but do not see elegant way
+    updateSubTotalPriceWithValue({
+      blockIndex: block.index,
+      subTotalPriceEditor: boq.subTotalPriceEditorRef.current,
+      value: subTotalPriceValueNewRounded,
+      incrementally: true,
+    })
   }, [isEditable])
 }

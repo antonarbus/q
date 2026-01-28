@@ -3,7 +3,7 @@ import { columnMinWidth } from '@entity/quotation/const/columnMinWidth'
 import { useStylesForResizableCell } from '@entity/quotation/hook/useStylesForResizableCell'
 import { useRow } from '@entity/quotation/provider/RowProvider'
 import { getBookmarkedRowCellHtmlFromStore } from '@entity/quotation/redux/getter/getBookmarkedRowCellHtmlFromStore'
-import { cellStyle, cellSx } from '@entity/quotation/style/cellStyle'
+import { cellStyle } from '@entity/quotation/style/cellStyle'
 import { formatQtyCell } from '@feature/blocks/update/update-cell-at-bookmarked-row-block/qty/formatQtyCell'
 import { updateQtyCell } from '@feature/blocks/update/update-cell-at-bookmarked-row-block/qty/updateQtyCell'
 import { Box } from '@mui/material'
@@ -41,7 +41,6 @@ export const QtyCell = (): JSX.Element => {
         sx={{
           ...stylesForResizableCell,
           ...cellStyle,
-          ...cellSx,
         }}
       />
     </Box>

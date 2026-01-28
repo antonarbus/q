@@ -4,7 +4,7 @@ import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { useBoq } from '@entity/quotation/provider/BoqBlockProvider'
 import { useRow } from '@entity/quotation/provider/RowProvider'
 import { getCellHtmlFromStore } from '@entity/quotation/redux/getter/getCellHtmlFromStore'
-import { cellStyle, cellSx } from '@entity/quotation/style/cellStyle'
+import { cellStyle } from '@entity/quotation/style/cellStyle'
 import { Pin, pinPriceCell, showRowPins } from '@feature/blocks/pin'
 import { tabFromPriceCell } from '@feature/blocks/tab-away-from-cell'
 import {
@@ -77,7 +77,6 @@ export const PriceCell = (): JSX.Element => {
         }
         sx={{
           ...stylesForResizableCell,
-          ...cellSx,
           ...cellStyle,
         }}
       />
