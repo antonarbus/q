@@ -2,7 +2,6 @@ import { getRowFromStore } from '@entity/quotation/redux/getter/getRowFromStore'
 import { getRowsFromStore } from '@entity/quotation/redux/getter/getRowsFromStore'
 import { updateCellAtStore } from '@entity/quotation/redux/updater/updateCellAtStore'
 import type { RowBlock } from '@back/entity/quotation/schema'
-import { didCellContentChange } from '@entity/quotation/util/didCellContentChange'
 import { updateCellWithValue } from '@entity/quotation/util/updateCellWithValue'
 import { updateSubTotalPriceWithValue } from '@entity/quotation/util/updateSubTotalPriceWithValue'
 import { roundTo } from 'round-to'
@@ -18,17 +17,6 @@ type Props = {
 
 export const updateQtyCell = (props: Props): void => {
   if (props.qtyCellEditorRef.current === null) {
-    return
-  }
-
-  const didContentChange = didCellContentChange({
-    editor: props.qtyCellEditorRef.current,
-    blockIndex: props.blockIndex,
-    rowIndex: props.rowIndex,
-    cellKey: 'qty',
-  })
-
-  if (didContentChange === false) {
     return
   }
 

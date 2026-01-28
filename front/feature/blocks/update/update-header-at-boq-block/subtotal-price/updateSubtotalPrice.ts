@@ -3,7 +3,6 @@ import { getRowFromStore } from '@entity/quotation/redux/getter/getRowFromStore'
 import { getRowsFromStore } from '@entity/quotation/redux/getter/getRowsFromStore'
 import { updateBoqHeaderAtStore } from '@entity/quotation/redux/updater/updateBoqHeaderAtStore'
 import type { RowBlock } from '@back/entity/quotation/schema'
-import { didBoqHeaderContentChange } from '@entity/quotation/util/didBoqHeaderContentChange'
 import { updateCellWithValue } from '@entity/quotation/util/updateCellWithValue'
 import { updateSubTotalPriceWithValue } from '@entity/quotation/util/updateSubTotalPriceWithValue'
 import type { Editor } from '@tiptap/react'
@@ -20,16 +19,6 @@ type Props = {
 
 export const updateSubtotalPrice = (props: Props): void => {
   if (props.subTotalPriceEditorRef.current === null) {
-    return
-  }
-
-  const didContentChange = didBoqHeaderContentChange({
-    editor: props.subTotalPriceEditorRef.current,
-    blockIndex: props.blockIndex,
-    boqHeaderKey: 'subTotalPrice',
-  })
-
-  if (didContentChange === false) {
     return
   }
 
