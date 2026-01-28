@@ -11,5 +11,11 @@
     "@preact/signals-react-transform",
     "@emotion/babel-plugin"
   ],
-  "ignoreBinaries": ["gcloud", "terraform", "open", "vite-bundle-visualizer"]
+  "ignoreBinaries": [
+    "gcloud",
+    "terraform",
+    "open",
+    "vite-bundle-visualizer",
+    "back/build/index.js"
+  ]
 }
