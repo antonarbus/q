@@ -1,7 +1,6 @@
 import type { CSSObject } from '@mui/material'
 
 export const tiptapStyles: CSSObject = {
-  position: 'relative',
   // Remove default focus outline
   '& .tiptap:focus': {
     outline: 'none',
