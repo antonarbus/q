@@ -29,8 +29,6 @@ type Props = {
 }
 
 export const TiptapEditor = (props: Props): JSX.Element => {
-  console.log('🚀 ~ props.content:', props.content)
-
   const editor = useEditor(
     {
       extensions: [
