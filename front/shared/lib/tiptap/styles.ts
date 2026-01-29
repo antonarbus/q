@@ -25,11 +25,25 @@ export const tiptapStyles: CSSObject = {
   '& [data-resize-wrapper]:hover [data-resize-handle]': {
     opacity: 1,
   },
-  '& [data-resize-handle="top-left"], & [data-resize-handle="bottom-right"]': {
+  '& [data-resize-handle="top-left"]': {
     cursor: 'nwse-resize',
+    top: '-4px !important',
+    left: '-4px !important',
   },
-  '& [data-resize-handle="top-right"], & [data-resize-handle="bottom-left"]': {
+  '& [data-resize-handle="top-right"]': {
     cursor: 'nesw-resize',
+    top: '-4px !important',
+    right: '-4px !important',
+  },
+  '& [data-resize-handle="bottom-left"]': {
+    cursor: 'nesw-resize',
+    bottom: '0px !important',
+    left: '-4px !important',
+  },
+  '& [data-resize-handle="bottom-right"]': {
+    cursor: 'nwse-resize',
+    bottom: '0px !important',
+    right: '-4px !important',
   },
 
   // Prevent image stretching when container resizes
