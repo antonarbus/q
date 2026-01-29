@@ -2,7 +2,7 @@ import { type CSSObject, Box } from '@mui/material'
 import type { JSX } from 'react'
 import { useEditor, EditorContent } from '@tiptap/react'
 import { extensions } from './extensions'
-import { tiptapStyles } from './styles'
+import { tiptapStyles } from './tiptapStyles'
 
 type Props = {
   className: string
@@ -10,6 +10,11 @@ type Props = {
   sx: CSSObject
 }
 
+// todo: check if we need this StaticHtml and probably just may use 'editable: false' on original component
+
+/**
+ * Use same render flow as TipTap but without editable content to increase performance when dragging elements around
+ */
 export const StaticHtml = (props: Props): JSX.Element => {
   const editor = useEditor(
     {

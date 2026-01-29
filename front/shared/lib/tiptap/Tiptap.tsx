@@ -8,7 +8,7 @@ import { StaticHtml } from './StaticHtml'
 import { TiptapEditor } from './TiptapEditor'
 import { UploadButton } from './UploadButton'
 import { DropHereText } from './DropHereText'
-import { tiptapStyles } from './styles'
+import { tiptapStyles } from './tiptapStyles'
 
 // todo: check how image behaves on resize and then save, also resize by container
 // some code from Froala
