@@ -1,5 +1,7 @@
 import { type CSSObject, Box } from '@mui/material'
 import type { JSX } from 'react'
+import { useEditor, EditorContent } from '@tiptap/react'
+import { extensions } from './extensions'
 import { tiptapStyles } from './styles'
 
 type Props = {
@@ -9,6 +11,15 @@ type Props = {
 }
 
 export const StaticHtml = (props: Props): JSX.Element => {
+  const editor = useEditor(
+    {
+      extensions,
+      content: props.content,
+      editable: false,
+    },
+    [props.content],
+  )
+
   return (
     <Box
       className={props.className}
@@ -17,13 +28,10 @@ export const StaticHtml = (props: Props): JSX.Element => {
         ...props.sx,
       }}
     >
-      <Box
-        className='tiptap-static-html'
-        dangerouslySetInnerHTML={{ __html: props.content }}
-        sx={{
+      <EditorContent
+        editor={editor}
+        style={{
           opacity: 0.5,
-          wordBreak: 'break-word',
-          flexGrow: 1,
         }}
       />
     </Box>

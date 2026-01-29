@@ -47,4 +47,5 @@ export const tiptapStyles: CSSObject = {
     opacity: 1,
     pointerEvents: 'auto',
   },
+
 }

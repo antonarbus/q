@@ -7,16 +7,10 @@ import {
   EditorContent,
 } from '@tiptap/react'
 import type { EditorView } from '@tiptap/pm/view'
-import StarterKit from '@tiptap/starter-kit'
-import TextAlign from '@tiptap/extension-text-align'
-import { TextStyle } from '@tiptap/extension-text-style'
-import Color from '@tiptap/extension-color'
-import Highlight from '@tiptap/extension-highlight'
-import { ResizableImage } from './ResizableImage'
-import Link from '@tiptap/extension-link'
 import Placeholder from '@tiptap/extension-placeholder'
 import { FloatingMenu } from './FloatingMenu'
 import { ImageMenu } from './ImageMenu'
+import { extensions } from './extensions'
 import type { EditorRef } from '@shared/lib/tiptap/types'
 
 type Props = {
@@ -35,23 +29,12 @@ type Props = {
 }
 
 export const TiptapEditor = (props: Props): JSX.Element => {
+  console.log('🚀 ~ props.content:', props.content)
+
   const editor = useEditor(
     {
       extensions: [
-        StarterKit,
-        TextStyle,
-        Color,
-        Highlight.configure({ multicolor: true }),
-        TextAlign.configure({ types: ['heading', 'paragraph', 'image'] }),
-        ResizableImage.configure({
-          allowBase64: true,
-          resize: {
-            enabled: true,
-            directions: ['bottom-right', 'bottom-left'],
-            alwaysPreserveAspectRatio: true,
-          },
-        }),
-        Link.configure({ openOnClick: false }),
+        ...extensions,
         Placeholder.configure({ placeholder: props.placeholder }),
       ],
       content: props.content,
