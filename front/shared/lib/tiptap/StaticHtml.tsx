@@ -31,6 +31,7 @@ export const StaticHtml = (props: Props): JSX.Element => {
       <EditorContent
         editor={editor}
         style={{
+          flexGrow: 1,
           opacity: 0.5,
         }}
       />
