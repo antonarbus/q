@@ -17,7 +17,7 @@ export const extensions: AnyExtension[] = [
     allowBase64: true,
     resize: {
       enabled: true,
-      directions: ['bottom-right', 'bottom-left'],
+      directions: ['top-left', 'top-right', 'bottom-left', 'bottom-right'],
       alwaysPreserveAspectRatio: true,
     },
   }),
