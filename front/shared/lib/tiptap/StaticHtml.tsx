@@ -26,8 +26,6 @@ export const StaticHtml = (props: Props): JSX.Element => {
       sx={{
         ...tiptapStyles,
         ...props.sx,
-        position: 'relative',
-        zIndex: 0,
       }}
     >
       <EditorContent
