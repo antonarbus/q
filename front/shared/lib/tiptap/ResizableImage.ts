@@ -1,16 +1,6 @@
 import Image from '@tiptap/extension-image'
 import type { NodeView } from '@tiptap/pm/view'
 
-const applyAlignment = (dom: HTMLElement, textAlign: unknown): void => {
-  if (textAlign === 'center') {
-    dom.style.justifyContent = 'center'
-  } else if (textAlign === 'right') {
-    dom.style.justifyContent = 'flex-end'
-  } else {
-    dom.style.justifyContent = ''
-  }
-}
-
 export const ResizableImage = Image.extend({
   addNodeView() {
     const createNodeView = this.parent?.()
@@ -30,7 +20,13 @@ export const ResizableImage = Image.extend({
         throw new Error('Not an HTMLElement')
       }
 
-      applyAlignment(nodeView.dom, props.node.attrs.textAlign)
+      if (props.node.attrs.textAlign === 'center') {
+        nodeView.dom.style.justifyContent = 'center'
+      } else if (props.node.attrs.textAlign === 'right') {
+        nodeView.dom.style.justifyContent = 'flex-end'
+      } else {
+        nodeView.dom.style.justifyContent = ''
+      }
 
       const originalUpdate = nodeView.update?.bind(nodeView)
 
@@ -43,7 +39,13 @@ export const ResizableImage = Image.extend({
             throw new Error('Not an HTMLElement')
           }
 
-          applyAlignment(nodeView.dom, node.attrs.textAlign)
+          if (node.attrs.textAlign === 'center') {
+            nodeView.dom.style.justifyContent = 'center'
+          } else if (node.attrs.textAlign === 'right') {
+            nodeView.dom.style.justifyContent = 'flex-end'
+          } else {
+            nodeView.dom.style.justifyContent = ''
+          }
         }
 
         return result
