@@ -18,7 +18,7 @@ import { ImageMenu } from './ImageMenu'
 import { extensions } from './extensions'
 
 // todo: check how image behaves on resize and then save, also resize by container
-// some code from Froala
+// some code from Froala to maintain proportions
 
 // 'image.loaded'(props: { '0': HTMLImageElement }): void {
 //   const imageElement = props['0']
