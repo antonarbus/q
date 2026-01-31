@@ -1,10 +1,7 @@
 import Image from '@tiptap/extension-image'
 import type { NodeView } from '@tiptap/pm/view'
 
-const applyAlignment = (
-  dom: HTMLElement,
-  textAlign: unknown,
-): void => {
+const applyAlignment = (dom: HTMLElement, textAlign: unknown): void => {
   if (textAlign === 'center') {
     dom.style.justifyContent = 'center'
   } else if (textAlign === 'right') {
