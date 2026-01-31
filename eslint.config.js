@@ -62,11 +62,11 @@ export default [
       radix: ['error', 'as-needed'], // disallows providing the 10 radix --> parseInt(var, 10) no need to put 10
       'no-restricted-syntax': [
         'warn',
-        {
-          selector: 'IfStatement > CallExpression.test',
-          message:
-            'Do not call expressions directly in if statements. Assign the result to a variable first.',
-        },
+        // {
+        //   selector: 'IfStatement > CallExpression.test',
+        //   message:
+        //     'Do not call expressions directly in if statements. Assign the result to a variable first.',
+        // },
         {
           selector: 'IfStatement > LogicalExpression.test',
           message:
