@@ -1,14 +1,21 @@
-import type { JSX } from 'react'
-import type { Editor, EditorEvents } from '@tiptap/react'
+import { type JSX, useEffect } from 'react'
+import {
+  type Editor,
+  type EditorEvents,
+  useEditor,
+  EditorContent,
+} from '@tiptap/react'
 import type { EditorView } from '@tiptap/pm/view'
 import type { EditorRef } from '@shared/lib/tiptap/types'
 import { type CSSObject, Box } from '@mui/material'
 import { cls } from '@shared/cls'
-import { StaticHtml } from './StaticHtml'
-import { TiptapEditor } from './TiptapEditor'
 import { UploadButton } from './UploadButton'
 import { DropHereText } from './DropHereText'
 import { tiptapStyles } from './tiptapStyles'
+import Placeholder from '@tiptap/extension-placeholder'
+import { FloatingMenu } from './FloatingMenu'
+import { ImageMenu } from './ImageMenu'
+import { extensions } from './extensions'
 
 // todo: check how image behaves on resize and then save, also resize by container
 // some code from Froala
@@ -22,6 +29,7 @@ import { tiptapStyles } from './tiptapStyles'
 
 type Props = {
   editorRef: EditorRef
+  isEditorActive: boolean
   className: string
   placeholder: string
   sx: CSSObject
@@ -37,21 +45,104 @@ type Props = {
     type: 'image' | 'file'
     files: File[]
   }) => Promise<void>
-  isEditorActive: boolean
 }
 
 export const Tiptap = (props: Props): JSX.Element => {
   const hasUpload = props.onUpload !== undefined
 
-  if (props.isEditorActive === false) {
-    return (
-      <StaticHtml
-        className={props.className}
-        content={props.content}
-        sx={props.sx}
-      />
-    )
-  }
+  const editor = useEditor(
+    {
+      editable: props.isEditorActive,
+      extensions: [
+        ...extensions,
+        Placeholder.configure({ placeholder: props.placeholder }),
+      ],
+      content: props.content,
+      onCreate: props.onCreate,
+      onUpdate: props.onUpdate,
+      onBlur: props.onBlur,
+      editorProps: {
+        handleKeyDown: (view, event) => {
+          if (props.onKeyDown !== undefined) {
+            return props.onKeyDown(view, event)
+          }
+
+          return false
+        },
+        handleDrop: (_view, event, _slice, moved) => {
+          if (moved === true) {
+            return false
+          }
+
+          const droppedFiles = event.dataTransfer?.files
+
+          const hasFiles = droppedFiles !== undefined && droppedFiles.length > 0
+
+          if (hasFiles === false) {
+            return false
+          }
+
+          const editorInstance = props.editorRef.current
+
+          if (editorInstance === null) {
+            return false
+          }
+
+          event.preventDefault()
+
+          const [file] = droppedFiles
+
+          if (file === undefined) {
+            return false
+          }
+
+          void props.onUpload?.({
+            editor: editorInstance,
+            files: Array.from(droppedFiles),
+            type: file.type.startsWith('image/') ? 'image' : 'file',
+          })
+
+          return true
+        },
+        handlePaste: (_view, event) => {
+          const pastedFiles = event.clipboardData?.files
+
+          const hasFiles = pastedFiles !== undefined && pastedFiles.length > 0
+
+          if (hasFiles === false) {
+            return false
+          }
+
+          if (props.editorRef.current === null) {
+            return false
+          }
+
+          const [file] = pastedFiles
+
+          if (file === undefined) {
+            return false
+          }
+
+          void props.onUpload?.({
+            editor: props.editorRef.current,
+            files: Array.from(pastedFiles),
+            type: file.type.startsWith('image/') ? 'image' : 'file',
+          })
+
+          return true
+        },
+      },
+    },
+    [],
+  )
+
+  useEffect(() => {
+    props.editorRef.current = editor
+
+    return (): void => {
+      props.editorRef.current = null
+    }
+  }, [editor, props.editorRef])
 
   return (
     <Box
@@ -80,15 +171,15 @@ export const Tiptap = (props: Props): JSX.Element => {
         />
       )}
       {hasUpload === true && <DropHereText />}
-      <TiptapEditor
-        editorRef={props.editorRef}
-        placeholder={props.placeholder}
-        content={props.content}
-        onCreate={props.onCreate}
-        onUpdate={props.onUpdate}
-        onBlur={props.onBlur}
-        onKeyDown={props.onKeyDown}
-        onUpload={props.onUpload}
+      <FloatingMenu editor={editor} />
+      <ImageMenu editor={editor} />
+      <EditorContent
+        editor={editor}
+        className='tiptap-editor'
+        style={{
+          flexGrow: 1,
+          opacity: props.isEditorActive ? 1 : 0.5,
+        }}
       />
     </Box>
   )
