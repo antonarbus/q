@@ -41,7 +41,7 @@ type Props = {
   onWrapperClick?: (event: React.MouseEvent) => void
   onWrapperFocus?: (event: React.FocusEvent) => void
   onUpload?: (props: {
-    editor: Editor
+    editor: Editor | null
     type: 'image' | 'file'
     files: File[]
   }) => Promise<void>
@@ -158,12 +158,8 @@ export const Tiptap = (props: Props): JSX.Element => {
       {hasUpload === true && (
         <UploadButton
           onFileSelect={(files, type) => {
-            const editorInstance = props.editorRef.current
-
-            if (editorInstance === null) return
-
             void props.onUpload?.({
-              editor: editorInstance,
+              editor: props.editorRef.current,
               files,
               type,
             })

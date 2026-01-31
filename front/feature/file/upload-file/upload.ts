@@ -15,7 +15,7 @@ import { hideDraggableArea } from './showDraggableArea'
 
 type Upload = (props: {
   type: 'image' | 'file'
-  editor: Editor
+  editor: Editor | null
   files: File[]
 }) => Promise<void>
 
@@ -34,6 +34,10 @@ export const upload: Upload = async (props) => {
 
     reader.onload = (event): void => {
       const fileAsBase64String = event.target?.result
+
+      if (props.editor === null) {
+        return
+      }
 
       if (typeof fileAsBase64String !== 'string') {
         return
@@ -191,6 +195,10 @@ export const upload: Upload = async (props) => {
       size: file.size,
     },
   })
+
+  if (props.editor === null) {
+    return
+  }
 
   if (saveFileInfoResponse.status !== 200) {
     toast.error('Failed to make file public', { id: toastId })
