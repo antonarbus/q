@@ -3,12 +3,29 @@ import type { Editor } from '@tiptap/react'
 import { MenuButton } from './MenuButton'
 import type { JSX } from 'react'
 import { Divider } from './Divider'
+import {
+  RiBold,
+  RiItalic,
+  RiUnderline,
+  RiStrikethrough,
+  RiH2,
+  RiListUnordered,
+  RiAlignLeft,
+  RiAlignCenter,
+  RiAlignRight,
+  RiFontColor,
+  RiMarkPenLine,
+} from 'react-icons/ri'
+import { liquidGlassStyle } from './liquidGlassStyle'
+import { useAlignment } from './useAlignment'
 
 type Props = {
   editor: Editor
 }
 
 export const FloatingMenu = (props: Props): JSX.Element => {
+  const alignment = useAlignment({ editor: props.editor })
+
   return (
     <BubbleMenu
       editor={props.editor}
@@ -24,9 +41,7 @@ export const FloatingMenu = (props: Props): JSX.Element => {
           alignItems: 'center',
           gap: 2,
           padding: '6px 8px',
-          backgroundColor: '#1f2937',
-          borderRadius: 8,
-          boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+          ...liquidGlassStyle,
         }}
       >
         <MenuButton
@@ -36,7 +51,7 @@ export const FloatingMenu = (props: Props): JSX.Element => {
           isActive={props.editor.isActive('bold')}
           title='Bold'
         >
-          B
+          <RiBold size={16} />
         </MenuButton>
         <MenuButton
           onClick={() => {
@@ -45,7 +60,7 @@ export const FloatingMenu = (props: Props): JSX.Element => {
           isActive={props.editor.isActive('italic')}
           title='Italic'
         >
-          <em>I</em>
+          <RiItalic size={16} />
         </MenuButton>
         <MenuButton
           onClick={() => {
@@ -54,7 +69,7 @@ export const FloatingMenu = (props: Props): JSX.Element => {
           isActive={props.editor.isActive('underline')}
           title='Underline'
         >
-          <u>U</u>
+          <RiUnderline size={16} />
         </MenuButton>
         <MenuButton
           onClick={() => {
@@ -63,7 +78,7 @@ export const FloatingMenu = (props: Props): JSX.Element => {
           isActive={props.editor.isActive('strike')}
           title='Strikethrough'
         >
-          <s>S</s>
+          <RiStrikethrough size={16} />
         </MenuButton>
 
         <Divider />
@@ -75,7 +90,7 @@ export const FloatingMenu = (props: Props): JSX.Element => {
           isActive={props.editor.isActive('heading', { level: 2 })}
           title='Heading'
         >
-          H
+          <RiH2 size={16} />
         </MenuButton>
         <MenuButton
           onClick={() => {
@@ -84,7 +99,7 @@ export const FloatingMenu = (props: Props): JSX.Element => {
           isActive={props.editor.isActive('bulletList')}
           title='Bullet List'
         >
-          •
+          <RiListUnordered size={16} />
         </MenuButton>
 
         <Divider />
@@ -93,64 +108,28 @@ export const FloatingMenu = (props: Props): JSX.Element => {
           onClick={() => {
             props.editor.chain().focus().setTextAlign('left').run()
           }}
-          isActive={props.editor.isActive({ textAlign: 'left' })}
+          isActive={alignment.isActive('left')}
           title='Align left'
         >
-          <svg
-            width='16'
-            height='16'
-            viewBox='0 0 24 24'
-            fill='none'
-            stroke='currentColor'
-            strokeWidth='2'
-          >
-            <line x1='17' y1='10' x2='3' y2='10' />
-            <line x1='21' y1='6' x2='3' y2='6' />
-            <line x1='21' y1='14' x2='3' y2='14' />
-            <line x1='17' y1='18' x2='3' y2='18' />
-          </svg>
+          <RiAlignLeft size={16} />
         </MenuButton>
         <MenuButton
           onClick={() => {
             props.editor.chain().focus().setTextAlign('center').run()
           }}
-          isActive={props.editor.isActive({ textAlign: 'center' })}
+          isActive={alignment.isActive('center')}
           title='Align center'
         >
-          <svg
-            width='16'
-            height='16'
-            viewBox='0 0 24 24'
-            fill='none'
-            stroke='currentColor'
-            strokeWidth='2'
-          >
-            <line x1='18' y1='10' x2='6' y2='10' />
-            <line x1='21' y1='6' x2='3' y2='6' />
-            <line x1='21' y1='14' x2='3' y2='14' />
-            <line x1='18' y1='18' x2='6' y2='18' />
-          </svg>
+          <RiAlignCenter size={16} />
         </MenuButton>
         <MenuButton
           onClick={() => {
             props.editor.chain().focus().setTextAlign('right').run()
           }}
-          isActive={props.editor.isActive({ textAlign: 'right' })}
+          isActive={alignment.isActive('right')}
           title='Align right'
         >
-          <svg
-            width='16'
-            height='16'
-            viewBox='0 0 24 24'
-            fill='none'
-            stroke='currentColor'
-            strokeWidth='2'
-          >
-            <line x1='21' y1='10' x2='7' y2='10' />
-            <line x1='21' y1='6' x2='3' y2='6' />
-            <line x1='21' y1='14' x2='3' y2='14' />
-            <line x1='21' y1='18' x2='7' y2='18' />
-          </svg>
+          <RiAlignRight size={16} />
         </MenuButton>
 
         <Divider />
@@ -162,7 +141,7 @@ export const FloatingMenu = (props: Props): JSX.Element => {
           isActive={props.editor.isActive('textStyle', { color: '#ef4444' })}
           title='Red'
         >
-          <span style={{ color: '#ef4444' }}>A</span>
+          <RiFontColor size={16} color='#ef4444' />
         </MenuButton>
         <MenuButton
           onClick={() => {
@@ -175,9 +154,7 @@ export const FloatingMenu = (props: Props): JSX.Element => {
           isActive={props.editor.isActive('highlight')}
           title='Highlight'
         >
-          <span style={{ backgroundColor: '#fef08a', padding: '0 2px' }}>
-            H
-          </span>
+          <RiMarkPenLine size={16} color='#fef08a' />
         </MenuButton>
       </div>
     </BubbleMenu>

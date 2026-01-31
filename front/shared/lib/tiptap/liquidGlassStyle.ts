@@ -1,4 +1,4 @@
-import { type CSSProperties } from 'react'
+import type { CSSProperties } from 'react'
 
 export const liquidGlassStyle: CSSProperties = {
   background: 'rgba(0, 0, 0, 0.75)',
