@@ -18,9 +18,6 @@ export const ImageMenu = (props: Props): JSX.Element => {
       editor={props.editor}
       shouldShow={({ editor }) => editor.isActive('image')}
       updateDelay={0}
-      tippyOptions={{
-        duration: 100,
-      }}
     >
       <div
         style={{
@@ -32,29 +29,29 @@ export const ImageMenu = (props: Props): JSX.Element => {
         }}
       >
         <MenuButton
+          isActive={alignment === 'left'}
+          title='Align left'
           onClick={() => {
             props.editor.chain().focus().setTextAlign('left').run()
           }}
-          isActive={alignment.isActive('left')}
-          title='Align left'
         >
           <RiAlignLeft size={16} />
         </MenuButton>
         <MenuButton
+          isActive={alignment === 'center'}
+          title='Align center'
           onClick={() => {
             props.editor.chain().focus().setTextAlign('center').run()
           }}
-          isActive={alignment.isActive('center')}
-          title='Align center'
         >
           <RiAlignCenter size={16} />
         </MenuButton>
         <MenuButton
+          isActive={alignment === 'right'}
+          title='Align right'
           onClick={() => {
             props.editor.chain().focus().setTextAlign('right').run()
           }}
-          isActive={alignment.isActive('right')}
-          title='Align right'
         >
           <RiAlignRight size={16} />
         </MenuButton>
