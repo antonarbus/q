@@ -15,6 +15,14 @@ export const onRowDragStart =
 export const onRowDragEnd =
   ({ blockIndex, rowIds }: { blockIndex: number; rowIds: string[] }) =>
   (dragEndEvent: DragEndEvent): void => {
+    const persistedScrollX = window.scrollX
+    const persistedScrollY = window.scrollY
+
+    // Restore scroll position after React renders
+    requestAnimationFrame(() => {
+      window.scrollTo(persistedScrollX, persistedScrollY)
+    })
+
     dispatch(textSlice.actions.setEditable())
 
     document.body.style.removeProperty('cursor')
