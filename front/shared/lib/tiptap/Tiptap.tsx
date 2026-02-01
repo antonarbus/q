@@ -42,7 +42,7 @@ export const Tiptap = (props: Props): JSX.Element => {
 
   const editor = useEditor(
     {
-      editable: props.isEditorActive,
+      editable: true,
       extensions: [
         ...extensions,
         Placeholder.configure({ placeholder: props.placeholder }),
@@ -125,6 +125,14 @@ export const Tiptap = (props: Props): JSX.Element => {
     },
     [],
   )
+
+  useEffect(() => {
+    const shouldUpdateEditable = editor.isEditable !== props.isEditorActive
+
+    if (shouldUpdateEditable === true) {
+      editor.setEditable(props.isEditorActive, false)
+    }
+  }, [editor, props.isEditorActive])
 
   useEffect(() => {
     props.editorRef.current = editor
