@@ -1,5 +1,7 @@
 import type { CSSObject } from '@mui/material'
 
+type NestedCSSObject = CSSObject & Record<`&${string}`, CSSObject>
+
 // Custom SVG resize cursors for cross-browser compatibility (Safari lacks standard resize cursors)
 // cspell:disable-next-line
 const diagonalNwSe =
@@ -18,7 +20,7 @@ const diagonalNeSw =
 const resizeCursor = (svg: string): string =>
   `url("data:image/svg+xml,${encodeURIComponent(svg)}") 8 8, auto !important`
 
-export const tiptapStyles: CSSObject = {
+export const tiptapStyles: NestedCSSObject = {
   // Remove default focus outline
   '& .tiptap:focus': {
     outline: 'none',
@@ -29,7 +31,7 @@ export const tiptapStyles: CSSObject = {
     content: 'attr(data-placeholder)',
   },
 
-  img: {
+  '& img': {
     borderRadius: '4px',
   },
 
