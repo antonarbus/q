@@ -45,6 +45,15 @@ export const tiptapStyles: CSSObject = {
     right: '-4px !important',
   },
 
+  // Let clicks on the empty space of the container pass through to the editor
+  // so only clicking the actual image selects the image node
+  '& [data-resize-container]': {
+    pointerEvents: 'none',
+  },
+  '& [data-resize-wrapper]': {
+    pointerEvents: 'auto',
+  },
+
   // Prevent image stretching when container resizes
   '& [data-resize-container] img': {
     maxWidth: '100%',
