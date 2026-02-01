@@ -26,9 +26,12 @@ export const tiptapStyles: NestedCSSObject = {
     outline: 'none',
   },
   // Placeholder styling
-  '& .tiptap p.is-editor-empty:first-of-::before': {
+  '& .tiptap p.is-editor-empty:first-child::before': {
     color: 'rgb(173, 181, 189)',
     content: 'attr(data-placeholder)',
+    float: 'left',
+    height: 0,
+    pointerEvents: 'none',
   },
 
   '& img': {
