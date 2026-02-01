@@ -42,6 +42,8 @@ export const ImageMenu = (props: Props): JSX.Element => {
           alignItems: 'center',
           gap: 2,
           padding: '6px 8px',
+          position: 'relative',
+          zIndex: 50,
           ...liquidGlassStyle,
         }}
       >
