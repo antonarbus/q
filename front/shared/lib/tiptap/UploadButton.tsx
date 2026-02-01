@@ -23,7 +23,7 @@ export const UploadButton = (props: Props): JSX.Element => {
           right: 4,
           transition: 'opacity 0.2s ease-in-out',
           userSelect: 'none',
-          zIndex: 10,
+          // zIndex: 10,
           cursor: 'pointer',
           color: '#aaa',
           display: 'flex',
