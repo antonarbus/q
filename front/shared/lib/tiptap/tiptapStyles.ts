@@ -29,7 +29,7 @@ export const tiptapStyles: NestedCSSObject = {
   '& .tiptap p.is-editor-empty:first-child::before': {
     color: 'rgb(173, 181, 189)',
     content: 'attr(data-placeholder)',
-    float: 'left',
+    display: 'block',
     height: 0,
     pointerEvents: 'none',
   },
