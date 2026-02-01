@@ -1,4 +1,6 @@
+import { Box } from '@mui/material'
 import { type JSX, useRef } from 'react'
+import { RiAttachmentLine } from 'react-icons/ri'
 
 type Props = {
   onFileSelect: (files: File[], type: 'image' | 'file') => void
@@ -9,25 +11,34 @@ export const UploadButton = (props: Props): JSX.Element => {
 
   return (
     <>
-      <div
+      <Box
         className='tiptap-upload-button'
+        title='Upload file'
         onClick={() => {
           fileInputRef.current?.click()
         }}
-        style={{
+        sx={{
           position: 'absolute',
-          top: 2,
-          right: 5,
-          transition: 'opacity 0.3s ease-in-out 0.8s',
-          fontSize: 8,
+          top: 4,
+          right: 4,
+          transition: 'opacity 0.2s ease-in-out',
           userSelect: 'none',
           zIndex: 10,
           cursor: 'pointer',
-          color: '#999',
+          color: '#aaa',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: 24,
+          height: 24,
+          borderRadius: 4,
+          ':hover': {
+            color: 'black',
+          },
         }}
       >
-        Upload file
-      </div>
+        <RiAttachmentLine size={14} />
+      </Box>
       <input
         ref={fileInputRef}
         type='file'
