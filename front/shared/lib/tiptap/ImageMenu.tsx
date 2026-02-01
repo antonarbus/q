@@ -21,8 +21,9 @@ export const ImageMenu = (props: Props): JSX.Element => {
         return ctx.editor.isActive('image')
       }}
       getReferencedVirtualElement={() => {
-        const { selection } = props.editor.state
-        const node = props.editor.view.nodeDOM(selection.from)
+        const node = props.editor.view.nodeDOM(
+          props.editor.state.selection.from,
+        )
 
         if (node instanceof HTMLElement) {
           const img = node.querySelector('img')
