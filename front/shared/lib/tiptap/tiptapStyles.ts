@@ -29,6 +29,10 @@ export const tiptapStyles: CSSObject = {
     content: 'attr(data-placeholder)',
   },
 
+  img: {
+    borderRadius: '4px',
+  },
+
   // Image resize handles
   '& [data-resize-handle]': {
     width: 8,
