@@ -17,30 +17,30 @@ export const tiptapStyles: CSSObject = {
     height: 8,
     background: '#3b82f6',
     borderRadius: '50%',
-    zIndex: 1,
     opacity: 0,
     transition: 'opacity 0.2s',
+    pointerEvents: 'auto',
   },
   '& [data-resize-wrapper]:hover [data-resize-handle]': {
     opacity: 1,
   },
   '& [data-resize-handle="top-left"]': {
-    cursor: 'nwse-resize',
+    cursor: 'nw-resize !important',
     top: '-4px !important',
     left: '-4px !important',
   },
   '& [data-resize-handle="top-right"]': {
-    cursor: 'nesw-resize',
+    cursor: 'ne-resize !important',
     top: '-4px !important',
     right: '-4px !important',
   },
   '& [data-resize-handle="bottom-left"]': {
-    cursor: 'nesw-resize',
+    cursor: 'sw-resize !important',
     bottom: '0px !important',
     left: '-4px !important',
   },
   '& [data-resize-handle="bottom-right"]': {
-    cursor: 'nwse-resize',
+    cursor: 'se-resize !important',
     bottom: '0px !important',
     right: '-4px !important',
   },
@@ -52,12 +52,14 @@ export const tiptapStyles: CSSObject = {
   },
   '& [data-resize-wrapper]': {
     pointerEvents: 'auto',
+    minWidth: 30,
   },
 
   // Prevent image stretching when container resizes
   '& [data-resize-container] img': {
     maxWidth: '100%',
     height: 'auto !important',
+    minWidth: 30,
   },
 
   // Upload button: hidden by default, shown on hover
