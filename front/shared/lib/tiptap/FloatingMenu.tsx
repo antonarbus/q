@@ -29,6 +29,7 @@ export const FloatingMenu = (props: Props): JSX.Element => {
   return (
     <BubbleMenu
       editor={props.editor}
+      updateDelay={0}
       shouldShow={(ctx): boolean => {
         // ImageMenu is shown for image actions
         if (ctx.editor.isActive('image') === true) {
@@ -58,6 +59,7 @@ export const FloatingMenu = (props: Props): JSX.Element => {
         >
           <RiBold size={16} />
         </MenuButton>
+
         <MenuButton
           isActive={props.editor.isActive('italic')}
           title='Italic'
@@ -67,6 +69,7 @@ export const FloatingMenu = (props: Props): JSX.Element => {
         >
           <RiItalic size={16} />
         </MenuButton>
+
         <MenuButton
           isActive={props.editor.isActive('underline')}
           title='Underline'
@@ -76,6 +79,7 @@ export const FloatingMenu = (props: Props): JSX.Element => {
         >
           <RiUnderline size={16} />
         </MenuButton>
+
         <MenuButton
           isActive={props.editor.isActive('strike')}
           title='Strikethrough'
@@ -97,6 +101,7 @@ export const FloatingMenu = (props: Props): JSX.Element => {
         >
           <RiH2 size={16} />
         </MenuButton>
+
         <MenuButton
           isActive={props.editor.isActive('bulletList')}
           title='Bullet List'
@@ -118,6 +123,7 @@ export const FloatingMenu = (props: Props): JSX.Element => {
         >
           <RiAlignLeft size={16} />
         </MenuButton>
+
         <MenuButton
           isActive={alignment === 'center'}
           title='Align center'
@@ -127,6 +133,7 @@ export const FloatingMenu = (props: Props): JSX.Element => {
         >
           <RiAlignCenter size={16} />
         </MenuButton>
+
         <MenuButton
           isActive={alignment === 'right'}
           title='Align right'
@@ -148,6 +155,7 @@ export const FloatingMenu = (props: Props): JSX.Element => {
         >
           <RiFontColor size={16} color='#ef4444' />
         </MenuButton>
+
         <MenuButton
           isActive={props.editor.isActive('highlight')}
           title='Highlight'

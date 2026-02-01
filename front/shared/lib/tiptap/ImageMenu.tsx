@@ -16,8 +16,10 @@ export const ImageMenu = (props: Props): JSX.Element => {
   return (
     <BubbleMenu
       editor={props.editor}
-      shouldShow={({ editor }) => editor.isActive('image')}
       updateDelay={0}
+      shouldShow={(ctx): boolean => {
+        return ctx.editor.isActive('image')
+      }}
     >
       <div
         style={{
@@ -37,6 +39,7 @@ export const ImageMenu = (props: Props): JSX.Element => {
         >
           <RiAlignLeft size={16} />
         </MenuButton>
+
         <MenuButton
           isActive={alignment === 'center'}
           title='Align center'
@@ -46,6 +49,7 @@ export const ImageMenu = (props: Props): JSX.Element => {
         >
           <RiAlignCenter size={16} />
         </MenuButton>
+
         <MenuButton
           isActive={alignment === 'right'}
           title='Align right'
