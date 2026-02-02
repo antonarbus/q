@@ -35,6 +35,7 @@ resource "google_cloud_run_v2_service" "app" {
           cpu    = var.cpu_limit
           memory = var.memory_limit
         }
+        cpu_idle = true # Request-based billing: only pay CPU during requests  
       }
 
       ports {
