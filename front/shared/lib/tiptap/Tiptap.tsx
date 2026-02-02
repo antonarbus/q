@@ -49,9 +49,9 @@ export const Tiptap = (props: Props): JSX.Element => {
       onClick={props.onWrapperClick}
       onFocus={props.onWrapperFocus}
       sx={{
+        position: 'relative',
         ...tiptapStyles,
         ...props.sx,
-        position: 'relative',
       }}
     >
       {hasUpload === true && (
