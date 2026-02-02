@@ -31,8 +31,6 @@ type Props = {
 }
 
 export const Tiptap = (props: Props): JSX.Element => {
-  const hasUpload = props.onUpload !== undefined
-
   if (props.isEditorActive === false) {
     return (
       <StaticHtml
@@ -45,7 +43,7 @@ export const Tiptap = (props: Props): JSX.Element => {
 
   return (
     <Box
-      className={`${props.className} ${hasUpload === true ? cls.droppable : ''}`}
+      className={`${props.className} ${props.onUpload === undefined ? '' : cls.droppable}`}
       onClick={props.onWrapperClick}
       onFocus={props.onWrapperFocus}
       sx={{
@@ -54,7 +52,7 @@ export const Tiptap = (props: Props): JSX.Element => {
         ...props.sx,
       }}
     >
-      {hasUpload === true && (
+      {props.onUpload !== undefined && (
         <UploadButton
           onFileSelect={(files, type) => {
             void props.onUpload?.({
@@ -65,7 +63,7 @@ export const Tiptap = (props: Props): JSX.Element => {
           }}
         />
       )}
-      {hasUpload === true && <DropHereText />}
+      {props.onUpload !== undefined && <DropHereText />}
       <TiptapEditor
         editorRef={props.editorRef}
         placeholder={props.placeholder}
