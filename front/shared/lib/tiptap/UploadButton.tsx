@@ -1,4 +1,4 @@
-import { Box } from '@mui/material'
+import { Box, Tooltip } from '@mui/material'
 import { type JSX, useRef } from 'react'
 import { RiAttachmentLine } from 'react-icons/ri'
 
@@ -36,7 +36,14 @@ export const UploadButton = (props: Props): JSX.Element => {
           },
         }}
       >
-        <RiAttachmentLine size={14} />
+        <Tooltip
+          enterDelay={500}
+          enterNextDelay={500}
+          placement='top'
+          title='Upload file'
+        >
+          <RiAttachmentLine size={14} />
+        </Tooltip>
       </Box>
       <input
         ref={fileInputRef}
