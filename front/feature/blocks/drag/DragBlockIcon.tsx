@@ -2,11 +2,9 @@ import { useSortable } from '@dnd-kit/sortable'
 import { useIsCopyModalVisible } from '@entity/copy/useIsCopyModalVisible'
 import { useIsLastBlock } from '@entity/quotation/hook/useIsLastBlock'
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
-
 import { Tooltip } from '@mui/material'
-import { useSignal } from '@preact/signals-react'
 import { cls } from '@shared/cls'
-import { type JSX, useRef, useState } from 'react'
+import type { JSX } from 'react'
 import { MdDragIndicator } from 'react-icons/md'
 
 export const DragBlockIcon = (): JSX.Element => {
@@ -15,76 +13,30 @@ export const DragBlockIcon = (): JSX.Element => {
   const disabled = isLastBlock || isCopyModalVisible
   const block = useBlock()
 
-  const dragTooltipTextSignal = useSignal<'Drag' | 'Drop'>('Drag')
-
   const sortable = useSortable({
     id: block.item.id,
     disabled,
   })
 
-  const [openTooltip, setOpenTooltip] = useState(false)
-  const isOverDragIcon = useRef(false)
-
   return (
-    <span className={cls.actionIconContainer} style={{ position: 'relative' }}>
-      {/* if we wrap icon with tooltip dragging works strange, scroll is reset for no reason */}
-      <Tooltip
-        enterDelay={500}
-        enterNextDelay={500}
-        open={openTooltip}
-        placement='left'
-        title={dragTooltipTextSignal.value}
-      >
-        <span
+    <Tooltip
+      enterDelay={500}
+      enterNextDelay={500}
+      placement='left'
+      title={sortable.isDragging ? '' : 'Drag'}
+    >
+      <span className={cls.actionIconContainer}>
+        <MdDragIndicator
+          {...sortable.attributes}
+          {...sortable.listeners}
+          className={cls.actionIcon}
+          tabIndex={-1}
           style={{
-            position: 'absolute',
-            inset: 0,
-            zIndex: -1,
+            cursor: 'move',
+            color: disabled === true ? '#acacac' : '#000',
           }}
         />
-      </Tooltip>
-      <MdDragIndicator
-        {...sortable.attributes}
-        {...sortable.listeners}
-        className={cls.actionIcon}
-        onPointerDown={(event) => {
-          dragTooltipTextSignal.value = 'Drop'
-
-          setTimeout(() => {
-            sortable.listeners?.onPointerDown?.(event)
-          })
-        }}
-        onPointerEnter={(event) => {
-          isOverDragIcon.current = true
-
-          setTimeout(() => {
-            if (isOverDragIcon.current) {
-              dragTooltipTextSignal.value = 'Drag'
-              setOpenTooltip(true)
-            }
-          }, 500)
-        }}
-        onPointerLeave={(event) => {
-          if (sortable.isDragging === false) {
-            setOpenTooltip(false)
-            isOverDragIcon.current = false
-          }
-        }}
-        onPointerMove={() => {
-          const mayDrop =
-            sortable.isDragging && dragTooltipTextSignal.value === 'Drag'
-
-          if (mayDrop === true) {
-            dragTooltipTextSignal.value = 'Drop'
-          }
-        }}
-        style={{
-          color: disabled === true ? '#acacac' : '#000',
-          cursor: disabled === true ? 'default' : 'move',
-          touchAction: 'none',
-        }}
-        tabIndex={-1}
-      />
-    </span>
+      </span>
+    </Tooltip>
   )
 }

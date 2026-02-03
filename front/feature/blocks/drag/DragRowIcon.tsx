@@ -20,17 +20,17 @@ export const DragRowIcon = (): JSX.Element => {
       enterDelay={500}
       enterNextDelay={500}
       placement='left'
-      title='Drag'
+      title={sortable.isDragging ? '' : 'Drag'}
     >
       <span className={cls.actionIconContainer}>
         <MdDragIndicator
           {...sortable.listeners}
           className={cls.actionIcon}
+          tabIndex={-1}
           style={{
             cursor: 'move',
             color: disabled === true ? '#acacac' : '#000',
           }}
-          tabIndex={-1}
         />
       </span>
     </Tooltip>
