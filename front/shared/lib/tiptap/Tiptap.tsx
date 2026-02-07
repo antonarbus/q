@@ -36,6 +36,7 @@ export const Tiptap = (props: Props): JSX.Element => {
       <StaticHtml
         className={props.className}
         content={props.content}
+        placeholder={props.placeholder}
         sx={props.sx}
       />
     )

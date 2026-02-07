@@ -6,10 +6,9 @@ import {
   EditorContent,
 } from '@tiptap/react'
 import type { EditorView } from '@tiptap/pm/view'
-import Placeholder from '@tiptap/extension-placeholder'
 import { FloatingMenu } from './FloatingMenu'
 import { ImageMenu } from './ImageMenu'
-import { extensions } from './extensions'
+import { useExtensions } from './useExtensions'
 import type { EditorRef } from '@shared/lib/tiptap/types'
 
 type Props = {
@@ -28,12 +27,11 @@ type Props = {
 }
 
 export const TiptapEditor = (props: Props): JSX.Element => {
+  const extensions = useExtensions({ placeholder: props.placeholder })
+
   const editor = useEditor(
     {
-      extensions: [
-        ...extensions,
-        Placeholder.configure({ placeholder: props.placeholder }),
-      ],
+      extensions,
       content: props.content,
       onCreate: props.onCreate,
       onUpdate: props.onUpdate,

@@ -38,11 +38,10 @@ export const ResizableColumn = (props: Props): JSX.Element => {
       }}
       handleStyles={{
         right: {
-          background: '#ebe9e9',
+          background: '#c1c1c1',
           borderRadius: '3px',
           right: '-1px',
           width: '3px',
-          zIndex: 1,
         },
       }}
       minWidth={props.minWidth}

@@ -28,6 +28,7 @@ export const FloatingMenu = (props: Props): JSX.Element => {
 
   return (
     <BubbleMenu
+      style={{ zIndex: 1000 }}
       editor={props.editor}
       updateDelay={0}
       shouldShow={(ctx): boolean => {

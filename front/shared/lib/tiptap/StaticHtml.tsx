@@ -1,16 +1,19 @@
 import { type CSSObject, Box } from '@mui/material'
 import type { JSX } from 'react'
 import { useEditor, EditorContent } from '@tiptap/react'
-import { extensions } from './extensions'
+import { useExtensions } from './useExtensions'
 import { tiptapStyles } from './tiptapStyles'
 
 type Props = {
   className: string
   content: string
   sx: CSSObject
+  placeholder: string
 }
 
 export const StaticHtml = (props: Props): JSX.Element => {
+  const extensions = useExtensions({ placeholder: props.placeholder })
+
   const editor = useEditor(
     {
       extensions,
