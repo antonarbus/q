@@ -4,7 +4,6 @@ import TextAlign from '@tiptap/extension-text-align'
 import { TextStyle } from '@tiptap/extension-text-style'
 import Color from '@tiptap/extension-color'
 import Highlight from '@tiptap/extension-highlight'
-import Link from '@tiptap/extension-link'
 import { ResizableImage } from './ResizableImage'
 import { useMemo } from 'react'
 import Placeholder from '@tiptap/extension-placeholder'
@@ -21,7 +20,6 @@ export const useExtensions = (props: Props): AnyExtension[] => {
       Color,
       Highlight.configure({ multicolor: true }),
       TextAlign.configure({ types: ['heading', 'paragraph', 'image'] }),
-      Link.configure({ openOnClick: false }),
       Placeholder.configure({ placeholder: props.placeholder }),
       ResizableImage.configure({
         allowBase64: true,
