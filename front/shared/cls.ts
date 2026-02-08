@@ -1,4 +1,5 @@
 export const cls = {
+  notEditable: 'not-editable',
   droppable: 'droppable',
   waitForInitFilesToLoad: 'wait-for-init-files-to-load',
   blocks: 'blocks',

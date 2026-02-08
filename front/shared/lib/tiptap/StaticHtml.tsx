@@ -3,6 +3,7 @@ import type { JSX } from 'react'
 import { useEditor, EditorContent } from '@tiptap/react'
 import { useExtensions } from './useExtensions'
 import { tiptapStyles } from './tiptapStyles'
+import { cls } from '@shared/cls'
 
 type Props = {
   className: string
@@ -25,8 +26,9 @@ export const StaticHtml = (props: Props): JSX.Element => {
 
   return (
     <Box
-      className={props.className}
+      className={`${cls.notEditable} ${props.className}`}
       sx={{
+        opacity: 0.5,
         ...tiptapStyles,
         ...props.sx,
       }}
@@ -35,7 +37,6 @@ export const StaticHtml = (props: Props): JSX.Element => {
         editor={editor}
         style={{
           flexGrow: 1,
-          opacity: 0.5,
         }}
       />
     </Box>

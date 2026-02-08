@@ -1,6 +1,7 @@
 import { type AnimationScope, motion } from 'motion/react'
 import type { JSX, ReactNode } from 'react'
 import { useCursorPos } from './useCursorPos'
+import { cls } from '@shared/cls'
 
 type Props = {
   children: ReactNode
@@ -22,7 +23,7 @@ export const CopyModalLayout = (props: Props): JSX.Element => {
         width: 0,
         maxHeight: 265,
         overflow: 'hidden',
-        '.static-html': {
+        [`& .${cls.notEditable}`]: {
           opacity: '1 !important',
         },
 
