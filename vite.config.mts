@@ -111,8 +111,8 @@ export default {
             return 're-resizable'
           if (pathAbsolute.includes('/node_modules/.bun/react-dom'))
             return 'react-dom'
-          if (pathAbsolute.includes('/node_modules/.bun/@dnd-kit'))
-            return '@dnd-kit'
+          if (pathAbsolute.includes('/node_modules/.bun/@hello-pangea'))
+            return '@hello-pangea/dnd'
           if (pathAbsolute.includes('/node_modules/.bun/sonner'))
             return 'sonner'
           if (pathAbsolute.includes('/node_modules/.bun/immer')) return 'immer'

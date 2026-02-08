@@ -22,17 +22,19 @@ export const BlockMany = (props: Props): ReactNode => {
   blocksCloned[BOOKMARK_POS_AT_BLOCKS] = null
 
   return (
-    <BlocksSortableContext>
-      <FadeInOnInitLoad>
+    <FadeInOnInitLoad>
+      <BlocksSortableContext>
         <AnimatePresence initial={false}>
           {blocksCloned
             .filter((block) => block !== null)
-            .map((block, bockIndex) => (
-              <Block block={block} blockIndex={bockIndex} key={block.id} />
-            ))}
+            .map((block, bockIndex) => {
+              return (
+                <Block block={block} blockIndex={bockIndex} key={block.id} />
+              )
+            })}
           <OpenInsertMenuButton />
         </AnimatePresence>
-      </FadeInOnInitLoad>
-    </BlocksSortableContext>
+      </BlocksSortableContext>
+    </FadeInOnInitLoad>
   )
 }

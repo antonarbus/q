@@ -1,9 +1,8 @@
-import { useSortable } from '@dnd-kit/sortable'
 import { useIsCopyModalVisible } from '@entity/copy/useIsCopyModalVisible'
 import { useIsLastBlock } from '@entity/quotation/hook/useIsLastBlock'
-import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/cls'
+import { useDragHandleProps } from '@shared/lib/hello-pangea-dnd/DragHandleContext'
 import type { JSX } from 'react'
 import { MdDragIndicator } from 'react-icons/md'
 
@@ -11,12 +10,7 @@ export const DragBlockIcon = (): JSX.Element => {
   const isLastBlock = useIsLastBlock()
   const isCopyModalVisible = useIsCopyModalVisible()
   const disabled = isLastBlock || isCopyModalVisible
-  const block = useBlock()
-
-  const sortable = useSortable({
-    id: block.item.id,
-    disabled,
-  })
+  const dragHandleProps = useDragHandleProps()
 
   return (
     <Tooltip
@@ -25,14 +19,12 @@ export const DragBlockIcon = (): JSX.Element => {
       placement='left'
       title='Drag'
     >
-      <span className={cls.actionIconContainer}>
+      <span className={cls.actionIconContainer} {...dragHandleProps}>
         <MdDragIndicator
-          {...sortable.attributes}
-          {...sortable.listeners}
           className={cls.actionIcon}
           tabIndex={-1}
           style={{
-            cursor: 'move',
+            cursor: disabled === true ? 'default' : 'move',
             color: disabled === true ? '#acacac' : '#000',
           }}
         />

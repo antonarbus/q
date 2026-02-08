@@ -1,4 +1,4 @@
-import type { DragEndEvent, DragStartEvent } from '@dnd-kit/core'
+import type { DragStart, DropResult } from '@hello-pangea/dnd'
 import { getRowsFromStore } from '@entity/quotation/redux/getter/getRowsFromStore'
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { textSlice } from '@shared/lib/tiptap/textSlice'
@@ -7,44 +7,27 @@ import { arrayMoveImmutable } from 'array-move'
 
 export const onRowDragStart =
   ({ blockIndex }: { blockIndex: number }) =>
-  (_event: DragStartEvent): void => {
-    const persistedScrollX = window.scrollX
-    const persistedScrollY = window.scrollY
-
-    // Restore scroll position after dnd-kit resets it
-    requestAnimationFrame(() => {
-      window.scrollTo(persistedScrollX, persistedScrollY)
-    })
-
+  (_event: DragStart): void => {
     document.body.style.cursor = 'move'
     dispatch(textSlice.actions.setNotEditable())
   }
 
 export const onRowDragEnd =
   ({ blockIndex, rowIds }: { blockIndex: number; rowIds: string[] }) =>
-  (dragEndEvent: DragEndEvent): void => {
-    const persistedScrollX = window.scrollX
-    const persistedScrollY = window.scrollY
-
-    // Restore scroll position after React renders
-    requestAnimationFrame(() => {
-      window.scrollTo(persistedScrollX, persistedScrollY)
-    })
-
+  (dropResult: DropResult): void => {
     dispatch(textSlice.actions.setEditable())
-
     document.body.style.removeProperty('cursor')
 
-    if (dragEndEvent.over === null) {
+    if (dropResult.destination === null) {
       return
     }
 
-    if (dragEndEvent.active.id === dragEndEvent.over.id) {
+    if (dropResult.source.index === dropResult.destination.index) {
       return
     }
 
-    const oldIndex = rowIds.indexOf(String(dragEndEvent.active.id))
-    const newIndex = rowIds.indexOf(String(dragEndEvent.over.id))
+    const oldIndex = dropResult.source.index
+    const newIndex = dropResult.destination.index
     const rows = getRowsFromStore({ blockIndex })
 
     if (rows === undefined) {

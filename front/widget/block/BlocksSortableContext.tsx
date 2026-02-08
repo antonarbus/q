@@ -1,14 +1,4 @@
-import {
-  closestCenter,
-  DndContext,
-  PointerSensor,
-  // pointerWithin, // bad for large elements
-  // closestCorners, // bad for large elements
-  // rectIntersection, // bad for large elements
-  useSensor,
-  useSensors,
-} from '@dnd-kit/core'
-import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
+import { DragDropContext, Droppable } from '@hello-pangea/dnd'
 import { onBlockDragEnd, onBlockDragStart } from '@feature/blocks/drag'
 import { getState } from '@shared/lib/redux'
 import type { JSX, ReactNode } from 'react'
@@ -17,24 +7,24 @@ type Props = {
   children: ReactNode
 }
 
-// example
-// https://codesandbox.io/p/sandbox/dnd-kit-sortable-starter-template-22x1ix
-
 export const BlocksSortableContext = (props: Props): JSX.Element => {
   const blockIds = getState().quotation.blocks.map((block) => block.id)
-  const sensors = useSensors(useSensor(PointerSensor))
 
   return (
-    <DndContext
-      autoScroll={{ layoutShiftCompensation: false }}
-      collisionDetection={closestCenter}
+    <DragDropContext
       onDragEnd={onBlockDragEnd({ itemIds: blockIds })}
       onDragStart={onBlockDragStart}
-      sensors={sensors}
     >
-      <SortableContext items={blockIds} strategy={verticalListSortingStrategy}>
-        {props.children}
-      </SortableContext>
-    </DndContext>
+      <Droppable droppableId='blocks'>
+        {(provided) => {
+          return (
+            <div ref={provided.innerRef} {...provided.droppableProps}>
+              {props.children}
+              {provided.placeholder}
+            </div>
+          )
+        }}
+      </Droppable>
+    </DragDropContext>
   )
 }

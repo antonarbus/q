@@ -1,7 +1,7 @@
-import { useSortable } from '@dnd-kit/sortable'
-import { CSS } from '@dnd-kit/utilities'
+import { Draggable } from '@hello-pangea/dnd'
 import { useRow } from '@entity/quotation/provider/RowProvider'
-
+import { useIsRowsSortDisabled } from '@entity/quotation/hook/useIsRowsSortDisabled'
+import { DragHandleContext } from '@shared/lib/hello-pangea-dnd/DragHandleContext'
 import type { JSX, ReactNode } from 'react'
 
 type Props = {
@@ -10,21 +10,30 @@ type Props = {
 
 export const RowSortable = (props: Props): JSX.Element => {
   const row = useRow()
-
-  const sortable = useSortable({
-    id: row.item.id,
-  })
+  const isDragDisabled = useIsRowsSortDisabled()
 
   return (
-    <div
-      ref={sortable.setNodeRef}
-      style={{
-        transform: CSS.Translate.toString(sortable.transform),
-        transition: sortable.transition,
-        zIndex: sortable.isDragging === true ? 1000 : 0,
-      }}
+    <Draggable
+      draggableId={row.item.id}
+      index={row.index}
+      isDragDisabled={isDragDisabled}
     >
-      {props.children}
-    </div>
+      {(provided, snapshot) => {
+        return (
+          <div
+            ref={provided.innerRef}
+            {...provided.draggableProps}
+            style={{
+              ...provided.draggableProps.style,
+              zIndex: snapshot.isDragging ? 1000 : 0,
+            }}
+          >
+            <DragHandleContext.Provider value={provided.dragHandleProps}>
+              {props.children}
+            </DragHandleContext.Provider>
+          </div>
+        )
+      }}
+    </Draggable>
   )
 }

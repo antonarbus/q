@@ -1,11 +1,4 @@
-import {
-  closestCenter,
-  DndContext,
-  PointerSensor,
-  useSensor,
-  useSensors,
-} from '@dnd-kit/core'
-import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
+import { DragDropContext, Droppable } from '@hello-pangea/dnd'
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { selectRows } from '@entity/quotation/redux/selector/selectRows'
 import { onRowDragEnd, onRowDragStart } from '@feature/blocks/drag'
@@ -26,19 +19,22 @@ export const RowsSortableContext = (props: Props): JSX.Element => {
   )
 
   const rowIds = rows.map((row) => row.id)
-  const sensors = useSensors(useSensor(PointerSensor))
 
   return (
-    <DndContext
-      autoScroll={{ layoutShiftCompensation: false }}
-      collisionDetection={closestCenter}
+    <DragDropContext
       onDragEnd={onRowDragEnd({ blockIndex: block.index, rowIds })}
       onDragStart={onRowDragStart({ blockIndex: block.index })}
-      sensors={sensors}
     >
-      <SortableContext items={rowIds} strategy={verticalListSortingStrategy}>
-        {props.children}
-      </SortableContext>
-    </DndContext>
+      <Droppable droppableId={`rows-${block.item.id}`}>
+        {(provided) => {
+          return (
+            <div ref={provided.innerRef} {...provided.droppableProps}>
+              {props.children}
+              {provided.placeholder}
+            </div>
+          )
+        }}
+      </Droppable>
+    </DragDropContext>
   )
 }

@@ -1,19 +1,13 @@
-import { useSortable } from '@dnd-kit/sortable'
 import { useIsRowsSortDisabled } from '@entity/quotation/hook/useIsRowsSortDisabled'
-import { useRow } from '@entity/quotation/provider/RowProvider'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/cls'
+import { useDragHandleProps } from '@shared/lib/hello-pangea-dnd/DragHandleContext'
 import type { JSX } from 'react'
 import { MdDragIndicator } from 'react-icons/md'
 
 export const DragRowIcon = (): JSX.Element => {
   const disabled = useIsRowsSortDisabled()
-  const row = useRow()
-
-  const sortable = useSortable({
-    id: row.item.id,
-    disabled,
-  })
+  const dragHandleProps = useDragHandleProps()
 
   return (
     <Tooltip
@@ -22,13 +16,12 @@ export const DragRowIcon = (): JSX.Element => {
       placement='left'
       title='Drag'
     >
-      <span className={cls.actionIconContainer}>
+      <span className={cls.actionIconContainer} {...dragHandleProps}>
         <MdDragIndicator
-          {...sortable.listeners}
           className={cls.actionIcon}
           tabIndex={-1}
           style={{
-            cursor: 'move',
+            cursor: disabled === true ? 'default' : 'move',
             color: disabled === true ? '#acacac' : '#000',
           }}
         />

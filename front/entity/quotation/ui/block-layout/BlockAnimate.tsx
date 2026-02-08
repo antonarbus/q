@@ -30,7 +30,7 @@ export const BlockAnimate = (props: Props): JSX.Element => {
     <motion.div
       animate={{
         height: props.blockHeight, // height is being stored on copy/cut icon click
-        marginBottom: 20,
+        marginBottom: 0, // wrapper has 20px, so total = 20
         opacity: 1,
         y: 0,
         transitionEnd: {
@@ -43,7 +43,7 @@ export const BlockAnimate = (props: Props): JSX.Element => {
       }
       exit={{
         height: 0,
-        marginBottom: 0,
+        marginBottom: -20, // wrapper has 20px, so total = 0
         opacity: 0,
         x: '110vw',
         overflow: 'hidden',
@@ -51,7 +51,7 @@ export const BlockAnimate = (props: Props): JSX.Element => {
       id={props.id}
       initial={{
         height: 0,
-        marginBottom: 0,
+        marginBottom: -20, // wrapper has 20px, so total = 0
         opacity: 0,
         y: '100vh',
         overflow: 'hidden',
