@@ -33,7 +33,7 @@ test.describe('basic ui elements on front page', () => {
 
     const body = page.locator('body')
 
-    await expect(body).toHaveText(/Commercial quotation/u)
+    await expect(body).toHaveText(/COMMERCIAL QUOTATION/u)
     await expect(body).toHaveText(/Title/u)
     await expect(body).toHaveText(/Subtotal/u)
     await expect(body).toHaveText(/Description/u)
