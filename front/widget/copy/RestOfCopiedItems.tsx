@@ -84,10 +84,6 @@ export const RestOfCopiedItems = (): JSX.Element | null => {
     return null
   }
 
-  if (firstItem.height === undefined) {
-    return null
-  }
-
   return (
     <AnimatePresence custom={animationProps} mode='wait'>
       <motion.div
@@ -100,7 +96,7 @@ export const RestOfCopiedItems = (): JSX.Element | null => {
       >
         {items.map((item, index) => {
           const scaleFactor =
-            (containerWidth - 2 * containerPadding) / (item.width ?? 1)
+            (containerWidth - 2 * containerPadding) / item.width
 
           const preview = getState().copy.previews[index]
 
@@ -112,19 +108,15 @@ export const RestOfCopiedItems = (): JSX.Element | null => {
             <div
               key={`rest-of-copied-items-${items.length - index}`}
               style={{
-                background: 'white',
-                borderRadius: 4,
-                boxShadow: '#00000033 0px 0px 6px 2px',
-                height: (item.height ?? 0) * scaleFactor,
+                height: item.height * scaleFactor,
                 marginBottom: itemMarginBottom,
-                overflow: 'hidden',
-                width: (item.width ?? 0) * scaleFactor,
+                width: item.width * scaleFactor,
               }}
             >
               <ScaledCopyItem
                 html={preview ?? ''}
                 scaleFactor={String(scaleFactor)}
-                width={item.width ?? 0}
+                width={item.width}
               />
             </div>
           )

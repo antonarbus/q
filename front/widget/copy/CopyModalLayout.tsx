@@ -1,5 +1,6 @@
 import { type AnimationScope, motion } from 'motion/react'
 import type { JSX, ReactNode } from 'react'
+import { useCursorPos } from './useCursorPos'
 
 type Props = {
   children: ReactNode
@@ -7,14 +8,16 @@ type Props = {
 }
 
 export const CopyModalLayout = (props: Props): JSX.Element => {
+  useCursorPos({ copyModalRef: props.ref })
+
   return (
     <motion.div
       ref={props.ref}
       css={{
         position: 'fixed',
+        // top: '30px', //  <-- update on cursor move
+        // left: '30px', // <-- update on cursor move
         zIndex: 1001,
-        // top: 30px,  <-- update on cursor move
-        // left: 30px, <-- update on cursor move
         height: 0,
         width: 0,
         maxHeight: 265,
