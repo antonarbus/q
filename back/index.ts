@@ -32,6 +32,7 @@ if (runtimeConfig.nodeEnv === 'production') {
 
   app.use(
     express.static(frontendBuildPath, {
+      index: 'index.html', // Serve index.html for root '/' path
       maxAge: '1y', // Cache hashed assets (JS, CSS, images) for 1 year
       setHeaders: (res, filepath) => {
         // Overwrite cache settings for files that should NOT be cached (no hash in filename)
