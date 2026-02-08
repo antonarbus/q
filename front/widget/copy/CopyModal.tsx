@@ -8,12 +8,10 @@ import { CopyModalLayout } from './CopyModalLayout'
 import { FirstCopiedItem } from './FirstCopiedItem'
 import { RestOfCopiedItems } from './RestOfCopiedItems'
 import { useAnimatedCopyModalElement } from './useAnimatedCopyModalElement'
-import { useCursorPos } from './useCursorPos'
 import { useDisableNavItemsOnCopyModal } from './useDisableNavItemsOnCopyModal'
 
 export const CopyModal = (): JSX.Element => {
   const copyModalElement = useAnimatedCopyModalElement()
-  useCursorPos({ copyModalRef: copyModalElement.ref })
   useMovePasteText()
   usePasteClick()
   useDisableNavItemsOnCopyModal()
