@@ -8,6 +8,14 @@ import { arrayMoveImmutable } from 'array-move'
 export const onRowDragStart =
   ({ blockIndex }: { blockIndex: number }) =>
   (_event: DragStartEvent): void => {
+    const persistedScrollX = window.scrollX
+    const persistedScrollY = window.scrollY
+
+    // Restore scroll position after dnd-kit resets it
+    requestAnimationFrame(() => {
+      window.scrollTo(persistedScrollX, persistedScrollY)
+    })
+
     document.body.style.cursor = 'move'
     dispatch(textSlice.actions.setNotEditable())
   }

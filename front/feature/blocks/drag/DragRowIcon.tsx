@@ -19,14 +19,8 @@ export const DragRowIcon = (): JSX.Element => {
     <Tooltip
       enterDelay={500}
       enterNextDelay={500}
-      open={sortable.isDragging ? false : undefined}
       placement='left'
       title='Drag'
-      slotProps={{
-        popper: {
-          disablePortal: true,
-        },
-      }}
     >
       <span className={cls.actionIconContainer}>
         <MdDragIndicator

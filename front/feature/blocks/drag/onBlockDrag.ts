@@ -5,6 +5,14 @@ import { dispatch, getState } from '@shared/lib/redux'
 import { arrayMoveImmutable } from 'array-move'
 
 export const onBlockDragStart = (_event: DragStartEvent): void => {
+  const persistedScrollX = window.scrollX
+  const persistedScrollY = window.scrollY
+
+  // Restore scroll position after dnd-kit resets it
+  requestAnimationFrame(() => {
+    window.scrollTo(persistedScrollX, persistedScrollY)
+  })
+
   document.body.style.cursor = 'move'
   dispatch(textSlice.actions.setNotEditable())
 }
