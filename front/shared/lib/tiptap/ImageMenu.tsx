@@ -18,9 +18,17 @@ export const ImageMenu = (props: Props): JSX.Element => {
       editor={props.editor}
       updateDelay={0}
       shouldShow={(ctx): boolean => {
+        if (ctx.editor.isDestroyed === true) {
+          return false
+        }
+
         return ctx.editor.isActive('image')
       }}
       getReferencedVirtualElement={() => {
+        if (props.editor.isDestroyed === true) {
+          return null
+        }
+
         const node = props.editor.view.nodeDOM(
           props.editor.state.selection.from,
         )

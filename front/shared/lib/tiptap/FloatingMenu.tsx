@@ -32,6 +32,10 @@ export const FloatingMenu = (props: Props): JSX.Element => {
       editor={props.editor}
       updateDelay={0}
       shouldShow={(ctx): boolean => {
+        if (ctx.editor.isDestroyed === true) {
+          return false
+        }
+
         // ImageMenu is shown for image actions
         if (ctx.editor.isActive('image') === true) {
           return false
