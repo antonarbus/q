@@ -8,6 +8,14 @@ import { arrayMoveImmutable } from 'array-move'
 export const onRowDragStart =
   ({ blockIndex }: { blockIndex: number }) =>
   (_event: DragStart): void => {
+    const persistedScrollX = window.scrollX
+    const persistedScrollY = window.scrollY
+
+    // Restore scroll position after React renders
+    requestAnimationFrame(() => {
+      window.scrollTo(persistedScrollX, persistedScrollY)
+    })
+
     document.body.style.cursor = 'move'
     dispatch(textSlice.actions.setNotEditable())
   }
@@ -15,6 +23,14 @@ export const onRowDragStart =
 export const onRowDragEnd =
   ({ blockIndex, rowIds }: { blockIndex: number; rowIds: string[] }) =>
   (dropResult: DropResult): void => {
+    const persistedScrollX = window.scrollX
+    const persistedScrollY = window.scrollY
+
+    // Restore scroll position after React renders
+    requestAnimationFrame(() => {
+      window.scrollTo(persistedScrollX, persistedScrollY)
+    })
+
     dispatch(textSlice.actions.setEditable())
     document.body.style.removeProperty('cursor')
 
