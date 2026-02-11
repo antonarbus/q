@@ -41,6 +41,7 @@ export const FloatingMenu = (props: Props): JSX.Element => {
   const alignment = useAlignment({ editor: props.editor })
   const [linkInput, setLinkInput] = useState<string | null>(null)
 
+  //* Issue: menu for some nodes stopped showing and after never showed again for this editor
   // Must be memoized: BubbleMenu's React wrapper uses a hardcoded "bubbleMenu"
   // meta key shared by ALL BubbleMenu instances on the same editor (including ImageMenu).
   // An inline function here would create a new reference every render, triggering a
@@ -58,9 +59,7 @@ export const FloatingMenu = (props: Props): JSX.Element => {
     return ctx.editor.state.selection.empty === false
   }, [])
 
-  const editorRef = useRef(props.editor)
-  editorRef.current = props.editor
-
+  //* Issue: for row cells menu is randomly positioned
   // BubbleMenu calls updatePosition() before show(), so computePosition reads
   // the floating element's dimensions as 0 (detached from DOM). After show()
   // appends it, we force a re-position via the "updatePosition" meta.
@@ -68,10 +67,9 @@ export const FloatingMenu = (props: Props): JSX.Element => {
     () => ({
       onShow: (): void => {
         requestAnimationFrame(() => {
-          editorRef.current
-            .view.dispatch(
-              editorRef.current.state.tr.setMeta('bubbleMenu', 'updatePosition'),
-            )
+          props.editor.view.dispatch(
+            props.editor.state.tr.setMeta('bubbleMenu', 'updatePosition'),
+          )
         })
       },
     }),
