@@ -52,7 +52,7 @@ export const downloadPdf = async (): Promise<void> => {
   tempClone.style.position = 'absolute'
   tempClone.style.left = '-9999px'
   tempClone.style.visibility = 'hidden'
-  tempClone.style.width = `${blocksContainerElement.clientWidth}px`
+  tempClone.style.width = `${maxPaperWidth}px`
   document.body.appendChild(tempClone)
 
   // Remove button from temp clone to get correct height
@@ -74,6 +74,7 @@ export const downloadPdf = async (): Promise<void> => {
   })
 
   tempClone.style.display = 'inline-flex'
+  tempClone.style.justifyContent = 'flex-start'
 
   const correctedHeight = tempClone.clientHeight
 
@@ -93,6 +94,7 @@ export const downloadPdf = async (): Promise<void> => {
         }
 
         blocksElement.style.display = 'inline-flex'
+        blocksElement.style.justifyContent = 'flex-start'
 
         // remove '+' button at the bottom
         const openInsertMenuButtonElement = blocksElement.querySelector(
