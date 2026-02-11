@@ -61,9 +61,12 @@ export const FloatingMenu = (props: Props): JSX.Element => {
           return false
         }
 
-        const toBeShown = ctx.editor.state.selection.content().size > 0
+        console.log(
+          '🚀 ~ ctx.editor.state.selection.empty:',
+          ctx.editor.state.selection.empty,
+        )
 
-        return toBeShown
+        return ctx.editor.state.selection.empty === false
       }}
     >
       <div
