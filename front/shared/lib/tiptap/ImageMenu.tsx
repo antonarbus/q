@@ -1,7 +1,7 @@
 import { BubbleMenu } from '@tiptap/react/menus'
 import type { Editor } from '@tiptap/react'
 import { MenuButton } from './MenuButton'
-import { type JSX, useCallback, useRef } from 'react'
+import { type JSX, useCallback, useMemo, useRef } from 'react'
 import { RiAlignLeft, RiAlignCenter, RiAlignRight } from 'react-icons/ri'
 import { liquidGlassStyle } from './liquidGlassStyle'
 import { useAlignment } from './useAlignment'
@@ -49,6 +49,21 @@ export const ImageMenu = (props: Props): JSX.Element => {
     return null
   }, [])
 
+  // Same onShow fix as FloatingMenu — force re-position after DOM append.
+  const options = useMemo(
+    () => ({
+      onShow: (): void => {
+        requestAnimationFrame(() => {
+          editorRef.current
+            .view.dispatch(
+              editorRef.current.state.tr.setMeta('bubbleMenu', 'updatePosition'),
+            )
+        })
+      },
+    }),
+    [],
+  )
+
   return (
     <BubbleMenu
       ref={(element) => {
@@ -61,6 +76,7 @@ export const ImageMenu = (props: Props): JSX.Element => {
       updateDelay={0}
       shouldShow={shouldShow}
       getReferencedVirtualElement={getReferencedVirtualElement}
+      options={options}
     >
       <div
         style={{
