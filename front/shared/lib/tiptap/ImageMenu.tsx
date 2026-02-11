@@ -1,7 +1,7 @@
 import { BubbleMenu } from '@tiptap/react/menus'
 import type { Editor } from '@tiptap/react'
 import { MenuButton } from './MenuButton'
-import type { JSX } from 'react'
+import { type JSX, useRef } from 'react'
 import { RiAlignLeft, RiAlignCenter, RiAlignRight } from 'react-icons/ri'
 import { liquidGlassStyle } from './liquidGlassStyle'
 import { useAlignment } from './useAlignment'
@@ -11,10 +11,17 @@ type Props = {
 }
 
 export const ImageMenu = (props: Props): JSX.Element => {
+  const menuRef = useRef<HTMLDivElement | null>(null)
   const alignment = useAlignment({ editor: props.editor })
 
   return (
     <BubbleMenu
+      ref={(element) => {
+        if (element !== null) {
+          element.style.zIndex = '1000'
+          menuRef.current = element
+        }
+      }}
       editor={props.editor}
       updateDelay={0}
       shouldShow={(ctx): boolean => {
@@ -50,8 +57,6 @@ export const ImageMenu = (props: Props): JSX.Element => {
           alignItems: 'center',
           gap: 2,
           padding: '6px 8px',
-          position: 'relative',
-          zIndex: 50,
           ...liquidGlassStyle,
         }}
       >
