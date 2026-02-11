@@ -10,6 +10,7 @@ import { FloatingMenu } from './FloatingMenu'
 import { ImageMenu } from './ImageMenu'
 import { useExtensions } from './useExtensions'
 import type { EditorRef } from '@shared/lib/tiptap/types'
+import { cls } from '@shared/cls'
 
 type Props = {
   editorRef: EditorRef
@@ -125,7 +126,7 @@ export const TiptapEditor = (props: Props): JSX.Element => {
       <ImageMenu editor={editor} />
       <EditorContent
         editor={editor}
-        className='tiptap-editor'
+        className={cls.tipTapEditor}
         style={{
           flexGrow: 1,
         }}

@@ -1,6 +1,6 @@
 import { cls } from '@shared/cls'
 
-const DROP_ELEMENT_SELECTOR = `.${cls.droppable} .tiptap-editor`
+const DROP_ELEMENT_SELECTOR = `.${cls.droppable} .${cls.tipTapEditor}`
 const DROP_HERE_TEXT_SELECTOR = `.${cls.dropHereText}`
 
 export const showDraggableArea = (): void => {

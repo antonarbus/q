@@ -124,8 +124,9 @@ export const downloadPdf = async (): Promise<void> => {
     },
   )
 
-  const linkElements =
-    blocksContainerElement.querySelectorAll('.editable-html a')
+  const linkElements = blocksContainerElement.querySelectorAll(
+    `.${cls.tipTapEditor} a`,
+  )
 
   const links: WorkerRequestMessage['links'] = []
 

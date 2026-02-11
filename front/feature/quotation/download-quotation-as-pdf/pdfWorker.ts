@@ -30,9 +30,9 @@ self.onmessage = async (
   // add real links on top of image
   messageEvent.data.links.forEach((link) => {
     // border around links for dev purpose
-    // pdf.setDrawColor(255, 0, 0) // Red border
-    // pdf.setLineWidth(1)
-    // pdf.rect(link.x, link.y, link.width, link.height) // Draw rectangle
+    pdf.setDrawColor(255, 0, 0) // Red border
+    pdf.setLineWidth(1)
+    pdf.rect(link.x, link.y, link.width, link.height) // Draw rectangle
 
     // add real link on top of image
     pdf.link(link.x, link.y, link.width, link.height, { url: link.url })
