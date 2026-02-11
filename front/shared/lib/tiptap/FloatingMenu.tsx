@@ -1,7 +1,7 @@
 import { BubbleMenu } from '@tiptap/react/menus'
 import type { Editor } from '@tiptap/react'
 import { MenuButton } from './MenuButton'
-import { type JSX, useRef, useState } from 'react'
+import { type JSX, useCallback, useRef, useState } from 'react'
 import { Divider } from './Divider'
 import {
   RiBold,
@@ -41,6 +41,23 @@ export const FloatingMenu = (props: Props): JSX.Element => {
   const alignment = useAlignment({ editor: props.editor })
   const [linkInput, setLinkInput] = useState<string | null>(null)
 
+  // Must be memoized: BubbleMenu's React wrapper uses a hardcoded "bubbleMenu"
+  // meta key shared by ALL BubbleMenu instances on the same editor (including ImageMenu).
+  // An inline function here would create a new reference every render, triggering a
+  // meta transaction that overwrites OTHER BubbleMenu instances' shouldShow callbacks.
+  const shouldShow = useCallback((ctx: { editor: Editor }): boolean => {
+    if (ctx.editor.isDestroyed === true) {
+      return false
+    }
+
+    // ImageMenu is shown for image actions
+    if (ctx.editor.isActive('image') === true) {
+      return false
+    }
+
+    return ctx.editor.state.selection.empty === false
+  }, [])
+
   return (
     <BubbleMenu
       ref={(element) => {
@@ -51,23 +68,7 @@ export const FloatingMenu = (props: Props): JSX.Element => {
       }}
       editor={props.editor}
       updateDelay={0}
-      shouldShow={(ctx): boolean => {
-        if (ctx.editor.isDestroyed === true) {
-          return false
-        }
-
-        // ImageMenu is shown for image actions
-        if (ctx.editor.isActive('image') === true) {
-          return false
-        }
-
-        console.log(
-          '🚀 ~ ctx.editor.state.selection.empty:',
-          ctx.editor.state.selection.empty,
-        )
-
-        return ctx.editor.state.selection.empty === false
-      }}
+      shouldShow={shouldShow}
     >
       <div
         style={{
