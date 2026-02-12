@@ -7,7 +7,7 @@ import { dispatch } from '@shared/lib/redux'
 import { asyncDelay } from '@shared/util/asyncDelay'
 import type { UseMutationResult } from '@tanstack/react-query'
 import type { AnimationScope } from 'motion-dom'
-import type { FormEvent, RefObject } from 'react'
+import type { SubmitEvent, RefObject } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
@@ -19,7 +19,7 @@ type Props = {
 }
 
 type Res = {
-  handleSubmit: (e: FormEvent) => void
+  handleSubmit: (e: SubmitEvent) => void
   isPending: UseMutationResult['isPending']
   isSuccess: UseMutationResult['isSuccess']
   isError: UseMutationResult['isError']
@@ -98,7 +98,7 @@ export const useResetPassword = (props: Props): Res => {
     }
   }, [resetUserPasswordMutation.isError])
 
-  const handleSubmit = (event: FormEvent): void => {
+  const handleSubmit = (event: SubmitEvent): void => {
     event.preventDefault()
 
     resetUserPasswordMutation.mutate({

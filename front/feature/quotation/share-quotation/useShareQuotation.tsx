@@ -11,7 +11,7 @@ import { route } from '@shared/lib/react-router-dom/route'
 import { dispatch, getState } from '@shared/lib/redux'
 import { asyncDelay } from '@shared/util/asyncDelay'
 import type { UseMutationResult } from '@tanstack/react-query'
-import type { FormEvent } from 'react'
+import type { SubmitEvent } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
@@ -23,7 +23,7 @@ type Props = {
 }
 
 type Res = {
-  handleSubmit: (e: FormEvent) => void
+  handleSubmit: (e: SubmitEvent) => void
   isPending: UseMutationResult['isPending']
   isSuccess: UseMutationResult['isSuccess']
   isError: UseMutationResult['isError']
@@ -109,7 +109,7 @@ export const useShareQuotation = (props: Props): Res => {
     }
   }, [saveQuotationMutation.isError])
 
-  const handleSubmit = (event: FormEvent): void => {
+  const handleSubmit = (event: SubmitEvent): void => {
     event.preventDefault()
 
     if (getState().user.email === null) {

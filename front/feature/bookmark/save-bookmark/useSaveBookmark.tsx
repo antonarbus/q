@@ -10,7 +10,7 @@ import { dispatch, getState } from '@shared/lib/redux'
 import { asyncDelay } from '@shared/util/asyncDelay'
 import { getPaperElementHtmlAtModal } from '@shared/util/html-getter/getPaperElementHtmlAtModal'
 import type { UseMutationResult } from '@tanstack/react-query'
-import { type FormEvent, useCallback } from 'react'
+import { type SubmitEvent, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
@@ -21,7 +21,7 @@ type Props = {
 }
 
 type Res = {
-  handleSubmit: (e: FormEvent) => void
+  handleSubmit: (e: SubmitEvent) => void
   isPending: UseMutationResult['isPending']
   isSuccess: UseMutationResult['isSuccess']
   isError: UseMutationResult['isError']
@@ -61,7 +61,7 @@ export const useSaveBookmark = (props: Props): Res => {
     }
   }, [saveBookmarkMutation.isError])
 
-  const handleSubmit = useCallback((event: FormEvent) => {
+  const handleSubmit = useCallback((event: SubmitEvent) => {
     event.preventDefault()
 
     if (getState().user.email === null) {

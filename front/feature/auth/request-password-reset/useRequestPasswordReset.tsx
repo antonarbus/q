@@ -2,7 +2,7 @@ import { useRequestUserPasswordResetMutation } from '@entity/user/api/useRequest
 import type { Signal } from '@preact/signals-react'
 import { asyncDelay } from '@shared/util/asyncDelay'
 import type { UseMutationResult } from '@tanstack/react-query'
-import type { FormEvent } from 'react'
+import type { SubmitEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
@@ -13,7 +13,7 @@ type Props = {
 }
 
 type Res = {
-  handleSubmit: (e: FormEvent) => void
+  handleSubmit: (e: SubmitEvent) => void
   isPending: UseMutationResult['isPending']
   isSuccess: UseMutationResult['isSuccess']
   isError: UseMutationResult['isError']
@@ -80,7 +80,7 @@ export const useRequestPasswordReset = (props: Props): Res => {
     }
   }, [requestUserPasswordResetMutation.isError])
 
-  const handleSubmit = (event: FormEvent): void => {
+  const handleSubmit = (event: SubmitEvent): void => {
     event.preventDefault()
 
     requestUserPasswordResetMutation.mutate({ email: props.emailSignal.value })

@@ -12,7 +12,7 @@ import { AnimatePresence, motion } from 'motion/react'
 import {
   Children,
   type ComponentRef,
-  type FormEvent,
+  type SubmitEvent,
   type JSX,
   type MouseEvent,
   type ReactNode,
@@ -30,7 +30,7 @@ type Props = {
   headerText: string
   children: ReactNode
   onUnmount?: () => void
-  onSubmit?: (e: FormEvent) => void
+  onSubmit?: (e: SubmitEvent) => void
   onCloseClick?: (e: MouseEvent) => void
   buttonText?: string
   isButtonDisabled?: boolean
