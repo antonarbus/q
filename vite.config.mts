@@ -82,12 +82,6 @@ export default {
 
           if (pathAbsolute.includes('/node_modules/.bun/ag-grid'))
             return 'ag-grid'
-          if (pathAbsolute.includes('/node_modules/.bun/@mui+system'))
-            return '@mui+system'
-          if (pathAbsolute.includes('/node_modules/.bun/@mui+x-date-pickers'))
-            return '@mui+x-date-pickers'
-          if (pathAbsolute.includes('/node_modules/.bun/@mui+material'))
-            return '@mui+material'
           if (pathAbsolute.includes('/node_modules/.bun/@mui')) return '@mui'
           if (pathAbsolute.includes('/node_modules/.bun/@tanstack'))
             return '@tanstack'
