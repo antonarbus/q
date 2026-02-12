@@ -1,3 +1,4 @@
+/* eslint-disable require-unicode-regexp */
 import type esbuild from 'esbuild'
 import fs from 'node:fs'
 import path from 'node:path'
@@ -49,7 +50,7 @@ const addExtensionToPath = (basePath: string): string | null => {
 export const pathAliasPlugin: esbuild.Plugin = {
   name: 'path-alias',
   setup(build) {
-    build.onResolve({ filter: /^@root\//u }, (args) => {
+    build.onResolve({ filter: /^@root\// }, (args) => {
       const newPath = args.path.replace(/^@root\//u, '')
       const basePath = path.resolve(rootPathAbsolute, newPath)
       const pathWithExtensionAbsolute = addExtensionToPath(basePath)
@@ -63,7 +64,7 @@ export const pathAliasPlugin: esbuild.Plugin = {
       }
     })
 
-    build.onResolve({ filter: /^@back\//u }, (args) => {
+    build.onResolve({ filter: /^@back\// }, (args) => {
       const newPath = args.path.replace(/^@back\//u, '')
       const basePath = path.resolve(rootPathAbsolute, 'back', newPath)
       const pathWithExtensionAbsolute = addExtensionToPath(basePath)
