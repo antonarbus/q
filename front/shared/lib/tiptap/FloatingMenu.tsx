@@ -1,6 +1,6 @@
 import { BubbleMenu } from '@tiptap/react/menus'
 import type { Editor } from '@tiptap/react'
-import { MenuButton } from './MenuButton'
+import { MenuButton } from './menu-buttons/MenuButton'
 import { type JSX, useCallback, useMemo, useRef, useState } from 'react'
 import { Divider } from './Divider'
 import {
@@ -16,9 +16,6 @@ import {
   RiListCheck3,
   RiDoubleQuotesL,
   RiCodeBoxLine,
-  RiAlignLeft,
-  RiAlignCenter,
-  RiAlignRight,
   RiFontColor,
   RiMarkPenLine,
   RiLink,
@@ -30,7 +27,7 @@ import {
   RiSeparator,
 } from 'react-icons/ri'
 import { liquidGlassStyle } from './liquidGlassStyle'
-import { useAlignment } from './useAlignment'
+import { AlignButtons } from './menu-buttons/AlignButtons'
 
 type Props = {
   editor: Editor
@@ -38,7 +35,6 @@ type Props = {
 
 export const FloatingMenu = (props: Props): JSX.Element => {
   const menuRef = useRef<HTMLDivElement | null>(null)
-  const alignment = useAlignment({ editor: props.editor })
   const [linkInput, setLinkInput] = useState<string | null>(null)
 
   //* Issue: menu for some nodes stopped showing and after never showed again for this editor
@@ -286,35 +282,7 @@ export const FloatingMenu = (props: Props): JSX.Element => {
         <Divider />
 
         {/* Alignment */}
-        <MenuButton
-          isActive={alignment === 'left'}
-          title='Align left'
-          onClick={() => {
-            props.editor.chain().focus().setTextAlign('left').run()
-          }}
-        >
-          <RiAlignLeft size={16} />
-        </MenuButton>
-
-        <MenuButton
-          isActive={alignment === 'center'}
-          title='Align center'
-          onClick={() => {
-            props.editor.chain().focus().setTextAlign('center').run()
-          }}
-        >
-          <RiAlignCenter size={16} />
-        </MenuButton>
-
-        <MenuButton
-          isActive={alignment === 'right'}
-          title='Align right'
-          onClick={() => {
-            props.editor.chain().focus().setTextAlign('right').run()
-          }}
-        >
-          <RiAlignRight size={16} />
-        </MenuButton>
+        <AlignButtons editor={props.editor} />
 
         <Divider />
 

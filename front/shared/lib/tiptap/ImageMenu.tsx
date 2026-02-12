@@ -1,10 +1,8 @@
 import { BubbleMenu } from '@tiptap/react/menus'
 import type { Editor } from '@tiptap/react'
-import { MenuButton } from './MenuButton'
 import { type JSX, useCallback, useMemo, useRef } from 'react'
-import { RiAlignLeft, RiAlignCenter, RiAlignRight } from 'react-icons/ri'
+import { AlignButtons } from './menu-buttons/AlignButtons'
 import { liquidGlassStyle } from './liquidGlassStyle'
-import { useAlignment } from './useAlignment'
 
 type Props = {
   editor: Editor
@@ -12,7 +10,6 @@ type Props = {
 
 export const ImageMenu = (props: Props): JSX.Element => {
   const menuRef = useRef<HTMLDivElement | null>(null)
-  const alignment = useAlignment({ editor: props.editor })
 
   //* Issue: menu for some nodes stopped showing and after never showed again for this editor
   // Must be memoized: BubbleMenu's React wrapper uses a hardcoded "bubbleMenu"
@@ -84,35 +81,7 @@ export const ImageMenu = (props: Props): JSX.Element => {
           ...liquidGlassStyle,
         }}
       >
-        <MenuButton
-          isActive={alignment === 'left'}
-          title='Align left'
-          onClick={() => {
-            props.editor.chain().focus().setTextAlign('left').run()
-          }}
-        >
-          <RiAlignLeft size={16} />
-        </MenuButton>
-
-        <MenuButton
-          isActive={alignment === 'center'}
-          title='Align center'
-          onClick={() => {
-            props.editor.chain().focus().setTextAlign('center').run()
-          }}
-        >
-          <RiAlignCenter size={16} />
-        </MenuButton>
-
-        <MenuButton
-          isActive={alignment === 'right'}
-          title='Align right'
-          onClick={() => {
-            props.editor.chain().focus().setTextAlign('right').run()
-          }}
-        >
-          <RiAlignRight size={16} />
-        </MenuButton>
+        <AlignButtons editor={props.editor} />
       </div>
     </BubbleMenu>
   )
