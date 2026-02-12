@@ -81,7 +81,7 @@ export const useExtensions = (props: Props): AnyExtension[] => {
       Code,
       Underline,
       Link.configure({
-        openOnClick: false,
+        openOnClick: true,
         HTMLAttributes: { rel: 'noopener noreferrer', target: '_blank' },
       }),
       Subscript,
