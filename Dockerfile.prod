@@ -1,4 +1,4 @@
-FROM oven/bun:1-alpine AS builder
+FROM oven/bun:alpine AS builder
 
 WORKDIR /app
 
@@ -19,7 +19,7 @@ RUN bun run build-front
 # Build backend (bundles custom code, dependencies are external)
 RUN bun run build-back
 
-FROM oven/bun:1-alpine
+FROM oven/bun:alpine
 
 WORKDIR /app
 
