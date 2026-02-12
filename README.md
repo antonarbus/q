@@ -184,7 +184,7 @@ bun start                       # Start both frontend and backend locally
 bun run start-front             # Frontend only (port 3000)
 bun run start-back              # Backend only (port 4000)
 bun run build-all               # Build both for production
-bun run unit-test                    # Run unit tests
+bun run unit-test               # Run unit tests
 bun run e2e-test                # Run Playwright e2e tests
 bun deploy-scripts/cli.ts       # Interactive deployment CLI
 ```
