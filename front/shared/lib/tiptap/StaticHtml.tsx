@@ -9,11 +9,10 @@ type Props = {
   className: string
   content: string
   sx: CSSObject
-  placeholder: string
 }
 
 export const StaticHtml = (props: Props): JSX.Element => {
-  const extensions = useExtensions({ placeholder: props.placeholder })
+  const extensions = useExtensions()
 
   const editor = useEditor(
     {
