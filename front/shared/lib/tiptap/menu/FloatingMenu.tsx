@@ -23,8 +23,6 @@ import { TaskListButton } from './button/TaskListButton'
 import { BlockquoteButton } from './button/BlockquoteButton'
 import { CodeBlockButton } from './button/CodeBlockButton'
 import { HorizontalRuleButton } from './button/HorizontalRuleButton'
-// import { UndoButton } from './button/UndoButton'
-// import { RedoButton } from './button/RedoButton'
 import { LinkButtons } from './button/LinkButtons'
 import { RedColorButton } from './button/RedColorButton'
 import { HighlightButton } from './button/HighlightButton'
@@ -69,6 +67,9 @@ export const FloatingMenu = (): React.ReactNode => {
     >
       <Box
         sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '2px',
           padding: '6px 8px',
           // maxWidth: 520,
           ...liquidGlassStyle,
@@ -86,6 +87,7 @@ export const FloatingMenu = (): React.ReactNode => {
             sx={{
               display: 'flex',
               flexWrap: 'nowrap',
+              gap: '2px',
             }}
           >
             <BoldButton />
@@ -102,6 +104,20 @@ export const FloatingMenu = (): React.ReactNode => {
             sx={{
               display: 'flex',
               flexWrap: 'nowrap',
+              gap: '2px',
+            }}
+          >
+            <RedColorButton />
+            <HighlightButton />
+          </Box>
+
+          <Divider />
+
+          <Box
+            sx={{
+              display: 'flex',
+              flexWrap: 'nowrap',
+              gap: '2px',
             }}
           >
             <Heading1Button />
@@ -123,6 +139,7 @@ export const FloatingMenu = (): React.ReactNode => {
             sx={{
               display: 'flex',
               flexWrap: 'nowrap',
+              gap: '2px',
             }}
           >
             <BulletListButton />
@@ -136,6 +153,7 @@ export const FloatingMenu = (): React.ReactNode => {
             sx={{
               display: 'flex',
               flexWrap: 'nowrap',
+              gap: '2px',
             }}
           >
             <BlockquoteButton />
@@ -149,13 +167,12 @@ export const FloatingMenu = (): React.ReactNode => {
             sx={{
               display: 'flex',
               flexWrap: 'nowrap',
+              gap: '2px',
             }}
           >
             <AlignLeftButton />
             <AlignCenterButton />
             <AlignRightButton />
-            <Divider />
-            <LinkButtons />
           </Box>
 
           <Divider />
@@ -164,10 +181,10 @@ export const FloatingMenu = (): React.ReactNode => {
             sx={{
               display: 'flex',
               flexWrap: 'nowrap',
+              gap: '2px',
             }}
           >
-            <RedColorButton />
-            <HighlightButton />
+            <LinkButtons />
           </Box>
         </Box>
       </Box>

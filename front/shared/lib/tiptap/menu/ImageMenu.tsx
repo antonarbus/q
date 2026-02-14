@@ -1,6 +1,8 @@
 import { BubbleMenu } from '@tiptap/react/menus'
 import { useRef } from 'react'
-import { AlignButtons } from './button/AlignButtons'
+import { AlignLeftButton } from './button/AlignLeftButton'
+import { AlignCenterButton } from './button/AlignCenterButton'
+import { AlignRightButton } from './button/AlignRightButton'
 import { liquidGlassStyle } from '../style/liquidGlassStyle'
 import { useTiptap } from '@tiptap/react'
 
@@ -63,7 +65,9 @@ export const ImageMenu = (): React.ReactNode => {
           ...liquidGlassStyle,
         }}
       >
-        <AlignButtons />
+        <AlignLeftButton />
+        <AlignCenterButton />
+        <AlignRightButton />
       </div>
     </BubbleMenu>
   )

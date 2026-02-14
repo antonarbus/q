@@ -14,10 +14,10 @@ export const HighlightButton = (): React.JSX.Element => {
       isActive={isActive}
       title='Highlight'
       onClick={() => {
-        editor.chain().focus().toggleHighlight({ color: '#fef08a' }).run()
+        editor.chain().focus().toggleHighlight({ color: '#f8d38d' }).run()
       }}
     >
-      <RiMarkPenLine color='#fef08a' />
+      <RiMarkPenLine color='#f8d38d' />
     </MenuButton>
   )
 }

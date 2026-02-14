@@ -6,7 +6,7 @@ export const RedColorButton = (): React.JSX.Element => {
   const { editor } = useTiptap()
 
   const isActive = useTiptapState((ctx) => {
-    return ctx.editor.isActive('textStyle', { color: '#ef4444' })
+    return ctx.editor.isActive('textStyle', { color: '#f05959' })
   })
 
   return (
@@ -14,10 +14,10 @@ export const RedColorButton = (): React.JSX.Element => {
       isActive={isActive}
       title='Red'
       onClick={() => {
-        editor.chain().focus().setColor('#ef4444').run()
+        editor.chain().focus().setColor('#f05959').run()
       }}
     >
-      <RiFontColor color='#ef4444' />
+      <RiFontColor color='#f05959' />
     </MenuButton>
   )
 }
