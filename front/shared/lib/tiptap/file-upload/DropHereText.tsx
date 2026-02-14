@@ -1,7 +1,13 @@
-import type { JSX } from 'react'
 import { cls } from '@shared/cls'
+import { useTiptap } from '../provider/TiptapProvider'
 
-export const DropHereText = (): JSX.Element => {
+export const DropHereText = (): React.ReactNode => {
+  const ctx = useTiptap()
+
+  if (ctx.onUpload === undefined) {
+    return null
+  }
+
   return (
     <div
       className={cls.dropHereText}

@@ -1,11 +1,15 @@
 import { Box, Tooltip } from '@mui/material'
-import { type JSX, useRef } from 'react'
+import { useRef } from 'react'
 import { RiAttachmentLine } from 'react-icons/ri'
 import { useTiptap } from '../provider/TiptapProvider'
 
-export const UploadButton = (): JSX.Element => {
+export const UploadButton = (): React.ReactNode => {
   const fileInputRef = useRef<HTMLInputElement | null>(null)
   const ctx = useTiptap()
+
+  if (ctx.onUpload === undefined) {
+    return null
+  }
 
   return (
     <>

@@ -59,9 +59,9 @@ export const Tiptap = (props: Props): JSX.Element => {
           ...props.sx,
         }}
       >
-        {props.onUpload !== undefined && <UploadButton />}
+        <UploadButton />
         <TiptapEditor />
-        {props.onUpload !== undefined && <DropHereText />}
+        <DropHereText />
       </Box>
     </TiptapProvider>
   )
