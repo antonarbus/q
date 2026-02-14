@@ -24,20 +24,7 @@ type Props = {
 
 export const TextEditor = (props: Props): JSX.Element => {
   return (
-    <TiptapProvider
-      editorRef={props.editorRef}
-      placeholder={props.placeholder}
-      className={props.className}
-      sx={props.sx}
-      content={props.content}
-      onCreate={props.onCreate}
-      onUpdate={props.onUpdate}
-      onBlur={props.onBlur}
-      onKeyDown={props.onKeyDown}
-      onWrapperClick={props.onWrapperClick}
-      onWrapperFocus={props.onWrapperFocus}
-      onUpload={props.onUpload}
-    >
+    <TiptapProvider {...props}>
       <EditorNotStatic />
       <EditorStatic />
     </TiptapProvider>
