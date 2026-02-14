@@ -1,7 +1,7 @@
 import { BubbleMenu } from '@tiptap/react/menus'
 import type { Editor } from '@tiptap/react'
 import { MenuButton } from './button/MenuButton'
-import { type JSX, useCallback, useMemo, useRef, useState } from 'react'
+import { type JSX, useRef, useState } from 'react'
 import { Divider } from './button/Divider'
 import {
   RiBold,
@@ -37,41 +37,6 @@ export const FloatingMenu = (props: Props): JSX.Element => {
   const menuRef = useRef<HTMLDivElement | null>(null)
   const [linkInput, setLinkInput] = useState<string | null>(null)
 
-  //* Issue: menu for some nodes stopped showing and after never showed again for this editor
-  // Must be memoized: BubbleMenu's React wrapper uses a hardcoded "bubbleMenu"
-  // meta key shared by ALL BubbleMenu instances on the same editor (including ImageMenu).
-  // An inline function here would create a new reference every render, triggering a
-  // meta transaction that overwrites OTHER BubbleMenu instances' shouldShow callbacks.
-  const shouldShow = useCallback((ctx: { editor: Editor }): boolean => {
-    if (ctx.editor.isDestroyed === true) {
-      return false
-    }
-
-    // ImageMenu is shown for image actions
-    if (ctx.editor.isActive('image') === true) {
-      return false
-    }
-
-    return ctx.editor.state.selection.empty === false
-  }, [])
-
-  //* Issue: for row cells menu is randomly positioned
-  // BubbleMenu calls updatePosition() before show(), so computePosition reads
-  // the floating element's dimensions as 0 (detached from DOM). After show()
-  // appends it, we force a re-position via the "updatePosition" meta.
-  const options = useMemo(
-    () => ({
-      onShow: (): void => {
-        requestAnimationFrame(() => {
-          props.editor.view.dispatch(
-            props.editor.state.tr.setMeta('bubbleMenu', 'updatePosition'),
-          )
-        })
-      },
-    }),
-    [],
-  )
-
   return (
     <BubbleMenu
       ref={(element) => {
@@ -81,9 +46,29 @@ export const FloatingMenu = (props: Props): JSX.Element => {
         }
       }}
       editor={props.editor}
-      updateDelay={200}
-      shouldShow={shouldShow}
-      options={options}
+      updateDelay={100}
+      shouldShow={(ctx) => {
+        if (ctx.editor.isDestroyed === true) {
+          return false
+        }
+
+        // ImageMenu is shown for image actions
+        if (ctx.editor.isActive('image') === true) {
+          return false
+        }
+
+        return ctx.editor.state.selection.empty === false
+      }}
+      options={{
+        onShow: (): void => {
+          //* Issue: for row cells menu is randomly positioned
+          requestAnimationFrame(() => {
+            props.editor.view.dispatch(
+              props.editor.state.tr.setMeta('bubbleMenu', 'updatePosition'),
+            )
+          })
+        },
+      }}
     >
       <div
         style={{
