@@ -40,18 +40,22 @@ export const TiptapEditor = (): JSX.Element => {
     [],
   )
 
+  const { editorRef, setEditor } = ctx
+
   useEffect(() => {
-    ctx.editorRef.current = editor
+    editorRef.current = editor
+    setEditor(editor)
 
     return (): void => {
-      ctx.editorRef.current = null
+      editorRef.current = null
+      setEditor(null)
     }
-  }, [editor, ctx.editorRef])
+  }, [editor, editorRef, setEditor])
 
   return (
     <>
-      <FloatingMenu editor={editor} />
-      <ImageMenu editor={editor} />
+      <FloatingMenu />
+      <ImageMenu />
       <EditorContent
         editor={editor}
         className={cls.tipTapEditor}

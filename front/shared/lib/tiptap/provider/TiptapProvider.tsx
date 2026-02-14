@@ -1,12 +1,15 @@
 import {
   type Context,
   createContext,
+  type Dispatch,
   type JSX,
   type ReactNode,
+  type SetStateAction,
   useContext,
   useMemo,
+  useState,
 } from 'react'
-import type { EditorEvents } from '@tiptap/react'
+import type { Editor, EditorEvents } from '@tiptap/react'
 import type { EditorView } from '@tiptap/pm/view'
 import type { EditorRef, OnUpload } from '../types'
 import { useSelector } from '@shared/lib/redux'
@@ -30,17 +33,22 @@ type Props = {
 
 type Res = Omit<Props, 'children'> & {
   isEditorActive: boolean
+  editor: Editor | null
+  setEditor: Dispatch<SetStateAction<Editor | null>>
 }
 
 const TiptapContext: Context<Res | null> = createContext<Res | null>(null)
 
 export const TiptapProvider = (props: Props): JSX.Element => {
   const isEditorActive = useSelector((state) => state.text.isEditable)
+  const [editor, setEditor] = useState<Editor | null>(null)
 
   const value = useMemo(() => {
     return {
       editorRef: props.editorRef,
       isEditorActive,
+      editor,
+      setEditor,
       placeholder: props.placeholder,
       content: props.content,
       className: props.className,
@@ -56,6 +64,7 @@ export const TiptapProvider = (props: Props): JSX.Element => {
   }, [
     props.editorRef,
     isEditorActive,
+    editor,
     props.placeholder,
     props.content,
     props.className,

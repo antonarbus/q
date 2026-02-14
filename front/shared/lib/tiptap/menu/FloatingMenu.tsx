@@ -1,7 +1,6 @@
 import { BubbleMenu } from '@tiptap/react/menus'
-import type { Editor } from '@tiptap/react'
 import { MenuButton } from './button/MenuButton'
-import { type JSX, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { Divider } from './button/Divider'
 import {
   RiBold,
@@ -28,14 +27,16 @@ import {
 } from 'react-icons/ri'
 import { liquidGlassStyle } from '../style/liquidGlassStyle'
 import { AlignButtons } from './button/AlignButtons'
+import { useTiptap } from '../provider/TiptapProvider'
 
-type Props = {
-  editor: Editor
-}
-
-export const FloatingMenu = (props: Props): JSX.Element => {
+export const FloatingMenu = (): React.ReactNode => {
   const menuRef = useRef<HTMLDivElement | null>(null)
   const [linkInput, setLinkInput] = useState<string | null>(null)
+  const { editor } = useTiptap()
+
+  if (editor === null) {
+    return null
+  }
 
   return (
     <BubbleMenu
@@ -45,7 +46,7 @@ export const FloatingMenu = (props: Props): JSX.Element => {
           menuRef.current = element
         }
       }}
-      editor={props.editor}
+      editor={editor}
       updateDelay={100}
       shouldShow={(ctx) => {
         if (ctx.editor.isDestroyed === true) {
@@ -63,8 +64,8 @@ export const FloatingMenu = (props: Props): JSX.Element => {
         onShow: (): void => {
           //* Issue: for row cells menu is randomly positioned
           requestAnimationFrame(() => {
-            props.editor.view.dispatch(
-              props.editor.state.tr.setMeta('bubbleMenu', 'updatePosition'),
+            editor.view.dispatch(
+              editor.state.tr.setMeta('bubbleMenu', 'updatePosition'),
             )
           })
         },
@@ -86,7 +87,7 @@ export const FloatingMenu = (props: Props): JSX.Element => {
           isActive={false}
           title='Undo'
           onClick={() => {
-            props.editor.chain().focus().undo().run()
+            editor.chain().focus().undo().run()
           }}
         >
           <RiArrowGoBackLine size={16} />
@@ -96,7 +97,7 @@ export const FloatingMenu = (props: Props): JSX.Element => {
           isActive={false}
           title='Redo'
           onClick={() => {
-            props.editor.chain().focus().redo().run()
+            editor.chain().focus().redo().run()
           }}
         >
           <RiArrowGoForwardLine size={16} />
@@ -106,60 +107,60 @@ export const FloatingMenu = (props: Props): JSX.Element => {
 
         {/* Text formatting */}
         <MenuButton
-          isActive={props.editor.isActive('bold')}
+          isActive={editor.isActive('bold')}
           title='Bold'
           onClick={() => {
-            props.editor.chain().focus().toggleBold().run()
+            editor.chain().focus().toggleBold().run()
           }}
         >
           <RiBold size={16} />
         </MenuButton>
 
         <MenuButton
-          isActive={props.editor.isActive('italic')}
+          isActive={editor.isActive('italic')}
           title='Italic'
           onClick={() => {
-            props.editor.chain().focus().toggleItalic().run()
+            editor.chain().focus().toggleItalic().run()
           }}
         >
           <RiItalic size={16} />
         </MenuButton>
 
         <MenuButton
-          isActive={props.editor.isActive('underline')}
+          isActive={editor.isActive('underline')}
           title='Underline'
           onClick={() => {
-            props.editor.chain().focus().toggleUnderline().run()
+            editor.chain().focus().toggleUnderline().run()
           }}
         >
           <RiUnderline size={16} />
         </MenuButton>
 
         <MenuButton
-          isActive={props.editor.isActive('strike')}
+          isActive={editor.isActive('strike')}
           title='Strikethrough'
           onClick={() => {
-            props.editor.chain().focus().toggleStrike().run()
+            editor.chain().focus().toggleStrike().run()
           }}
         >
           <RiStrikethrough size={16} />
         </MenuButton>
 
         <MenuButton
-          isActive={props.editor.isActive('superscript')}
+          isActive={editor.isActive('superscript')}
           title='Superscript'
           onClick={() => {
-            props.editor.chain().focus().toggleSuperscript().run()
+            editor.chain().focus().toggleSuperscript().run()
           }}
         >
           <RiSuperscript size={16} />
         </MenuButton>
 
         <MenuButton
-          isActive={props.editor.isActive('subscript')}
+          isActive={editor.isActive('subscript')}
           title='Subscript'
           onClick={() => {
-            props.editor.chain().focus().toggleSubscript().run()
+            editor.chain().focus().toggleSubscript().run()
           }}
         >
           <RiSubscript size={16} />
@@ -169,30 +170,30 @@ export const FloatingMenu = (props: Props): JSX.Element => {
 
         {/* Headings */}
         <MenuButton
-          isActive={props.editor.isActive('heading', { level: 1 })}
+          isActive={editor.isActive('heading', { level: 1 })}
           title='Heading 1'
           onClick={() => {
-            props.editor.chain().focus().toggleHeading({ level: 1 }).run()
+            editor.chain().focus().toggleHeading({ level: 1 }).run()
           }}
         >
           <RiH1 size={16} />
         </MenuButton>
 
         <MenuButton
-          isActive={props.editor.isActive('heading', { level: 2 })}
+          isActive={editor.isActive('heading', { level: 2 })}
           title='Heading 2'
           onClick={() => {
-            props.editor.chain().focus().toggleHeading({ level: 2 }).run()
+            editor.chain().focus().toggleHeading({ level: 2 }).run()
           }}
         >
           <RiH2 size={16} />
         </MenuButton>
 
         <MenuButton
-          isActive={props.editor.isActive('heading', { level: 3 })}
+          isActive={editor.isActive('heading', { level: 3 })}
           title='Heading 3'
           onClick={() => {
-            props.editor.chain().focus().toggleHeading({ level: 3 }).run()
+            editor.chain().focus().toggleHeading({ level: 3 }).run()
           }}
         >
           <RiH3 size={16} />
@@ -202,30 +203,30 @@ export const FloatingMenu = (props: Props): JSX.Element => {
 
         {/* Lists */}
         <MenuButton
-          isActive={props.editor.isActive('bulletList')}
+          isActive={editor.isActive('bulletList')}
           title='Bullet List'
           onClick={() => {
-            props.editor.chain().focus().toggleBulletList().run()
+            editor.chain().focus().toggleBulletList().run()
           }}
         >
           <RiListUnordered size={16} />
         </MenuButton>
 
         <MenuButton
-          isActive={props.editor.isActive('orderedList')}
+          isActive={editor.isActive('orderedList')}
           title='Ordered List'
           onClick={() => {
-            props.editor.chain().focus().toggleOrderedList().run()
+            editor.chain().focus().toggleOrderedList().run()
           }}
         >
           <RiListOrdered2 size={16} />
         </MenuButton>
 
         <MenuButton
-          isActive={props.editor.isActive('taskList')}
+          isActive={editor.isActive('taskList')}
           title='Task List'
           onClick={() => {
-            props.editor.chain().focus().toggleTaskList().run()
+            editor.chain().focus().toggleTaskList().run()
           }}
         >
           <RiListCheck3 size={16} />
@@ -235,20 +236,20 @@ export const FloatingMenu = (props: Props): JSX.Element => {
 
         {/* Block types */}
         <MenuButton
-          isActive={props.editor.isActive('blockquote')}
+          isActive={editor.isActive('blockquote')}
           title='Blockquote'
           onClick={() => {
-            props.editor.chain().focus().toggleBlockquote().run()
+            editor.chain().focus().toggleBlockquote().run()
           }}
         >
           <RiDoubleQuotesL size={16} />
         </MenuButton>
 
         <MenuButton
-          isActive={props.editor.isActive('codeBlock')}
+          isActive={editor.isActive('codeBlock')}
           title='Code Block'
           onClick={() => {
-            props.editor.chain().focus().toggleCodeBlock().run()
+            editor.chain().focus().toggleCodeBlock().run()
           }}
         >
           <RiCodeBoxLine size={16} />
@@ -258,7 +259,7 @@ export const FloatingMenu = (props: Props): JSX.Element => {
           isActive={false}
           title='Horizontal Rule'
           onClick={() => {
-            props.editor.chain().focus().setHorizontalRule().run()
+            editor.chain().focus().setHorizontalRule().run()
           }}
         >
           <RiSeparator size={16} />
@@ -267,7 +268,7 @@ export const FloatingMenu = (props: Props): JSX.Element => {
         <Divider />
 
         {/* Alignment */}
-        <AlignButtons editor={props.editor} />
+        <AlignButtons editor={editor} />
 
         <Divider />
 
@@ -275,10 +276,10 @@ export const FloatingMenu = (props: Props): JSX.Element => {
         {linkInput === null ? (
           <>
             <MenuButton
-              isActive={props.editor.isActive('link')}
+              isActive={editor.isActive('link')}
               title='Link'
               onClick={() => {
-                const attrs = props.editor.getAttributes('link')
+                const attrs = editor.getAttributes('link')
 
                 const existing =
                   typeof attrs.href === 'string' ? attrs.href : ''
@@ -289,12 +290,12 @@ export const FloatingMenu = (props: Props): JSX.Element => {
               <RiLink size={16} />
             </MenuButton>
 
-            {props.editor.isActive('link') && (
+            {editor.isActive('link') && (
               <MenuButton
                 isActive={false}
                 title='Unlink'
                 onClick={() => {
-                  props.editor.chain().focus().unsetLink().run()
+                  editor.chain().focus().unsetLink().run()
                 }}
               >
                 <RiLinkUnlink size={16} />
@@ -317,14 +318,14 @@ export const FloatingMenu = (props: Props): JSX.Element => {
                   }
 
                   if (linkInput === '') {
-                    props.editor
+                    editor
                       .chain()
                       .focus()
                       .extendMarkRange('link')
                       .unsetLink()
                       .run()
                   } else {
-                    props.editor
+                    editor
                       .chain()
                       .focus()
                       .extendMarkRange('link')
@@ -360,14 +361,14 @@ export const FloatingMenu = (props: Props): JSX.Element => {
                 }
 
                 if (linkInput === '') {
-                  props.editor
+                  editor
                     .chain()
                     .focus()
                     .extendMarkRange('link')
                     .unsetLink()
                     .run()
                 } else {
-                  props.editor
+                  editor
                     .chain()
                     .focus()
                     .extendMarkRange('link')
@@ -396,24 +397,20 @@ export const FloatingMenu = (props: Props): JSX.Element => {
 
         {/* Colors */}
         <MenuButton
-          isActive={props.editor.isActive('textStyle', { color: '#ef4444' })}
+          isActive={editor.isActive('textStyle', { color: '#ef4444' })}
           title='Red'
           onClick={() => {
-            props.editor.chain().focus().setColor('#ef4444').run()
+            editor.chain().focus().setColor('#ef4444').run()
           }}
         >
           <RiFontColor size={16} color='#ef4444' />
         </MenuButton>
 
         <MenuButton
-          isActive={props.editor.isActive('highlight')}
+          isActive={editor.isActive('highlight')}
           title='Highlight'
           onClick={() => {
-            props.editor
-              .chain()
-              .focus()
-              .toggleHighlight({ color: '#fef08a' })
-              .run()
+            editor.chain().focus().toggleHighlight({ color: '#fef08a' }).run()
           }}
         >
           <RiMarkPenLine size={16} color='#fef08a' />

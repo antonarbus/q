@@ -1,15 +1,16 @@
 import { BubbleMenu } from '@tiptap/react/menus'
-import type { Editor } from '@tiptap/react'
-import { type JSX, useRef } from 'react'
+import { useRef } from 'react'
 import { AlignButtons } from './button/AlignButtons'
 import { liquidGlassStyle } from '../style/liquidGlassStyle'
+import { useTiptap } from '../provider/TiptapProvider'
 
-type Props = {
-  editor: Editor
-}
-
-export const ImageMenu = (props: Props): JSX.Element => {
+export const ImageMenu = (): React.ReactNode => {
   const menuRef = useRef<HTMLDivElement | null>(null)
+  const { editor } = useTiptap()
+
+  if (editor === null) {
+    return null
+  }
 
   return (
     <BubbleMenu
@@ -19,7 +20,7 @@ export const ImageMenu = (props: Props): JSX.Element => {
           menuRef.current = element
         }
       }}
-      editor={props.editor}
+      editor={editor}
       updateDelay={0}
       shouldShow={(ctx) => {
         if (ctx.editor.isDestroyed === true) {
@@ -30,13 +31,11 @@ export const ImageMenu = (props: Props): JSX.Element => {
       }}
       getReferencedVirtualElement={() => {
         //* Issue: menu is not centered in the middle of the image
-        if (props.editor.isDestroyed === true) {
+        if (editor.isDestroyed === true) {
           return null
         }
 
-        const node = props.editor.view.nodeDOM(
-          props.editor.state.selection.from,
-        )
+        const node = editor.view.nodeDOM(editor.state.selection.from)
 
         if (node instanceof HTMLElement) {
           const img = node.querySelector('img')
@@ -52,8 +51,8 @@ export const ImageMenu = (props: Props): JSX.Element => {
         onShow: (): void => {
           //* Issue: for row cells menu is randomly positioned
           requestAnimationFrame(() => {
-            props.editor.view.dispatch(
-              props.editor.state.tr.setMeta('bubbleMenu', 'updatePosition'),
+            editor.view.dispatch(
+              editor.state.tr.setMeta('bubbleMenu', 'updatePosition'),
             )
           })
         },
@@ -68,7 +67,7 @@ export const ImageMenu = (props: Props): JSX.Element => {
           ...liquidGlassStyle,
         }}
       >
-        <AlignButtons editor={props.editor} />
+        <AlignButtons editor={editor} />
       </div>
     </BubbleMenu>
   )
