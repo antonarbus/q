@@ -1,6 +1,6 @@
 import type { Slice } from '@tiptap/pm/model'
 import type { EditorView } from '@tiptap/pm/view'
-import { useTiptap } from '../provider/TiptapProvider'
+import { useTiptapCtx } from '../provider/TiptapProvider'
 
 type OnDrop = (
   _view: EditorView,
@@ -10,7 +10,7 @@ type OnDrop = (
 ) => boolean
 
 export const useDropFile = (): OnDrop => {
-  const tiptap = useTiptap()
+  const tiptapCtx = useTiptapCtx()
 
   const onDrop: OnDrop = (_view, event, _slice, moved) => {
     if (moved === true) {
@@ -25,7 +25,7 @@ export const useDropFile = (): OnDrop => {
       return false
     }
 
-    const editorInstance = tiptap.editorRef.current
+    const editorInstance = tiptapCtx.editorRef.current
 
     if (editorInstance === null) {
       return false
@@ -39,7 +39,7 @@ export const useDropFile = (): OnDrop => {
       return false
     }
 
-    void tiptap.onUpload?.({
+    void tiptapCtx.onUpload?.({
       editor: editorInstance,
       files: Array.from(droppedFiles),
       type: file.type.startsWith('image/') ? 'image' : 'file',

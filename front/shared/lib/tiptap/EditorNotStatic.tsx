@@ -4,22 +4,22 @@ import { UploadButton } from './file-upload/UploadButton'
 import { DropHereText } from './file-upload/DropHereText'
 import { tiptapStyles } from './style/tiptapStyles'
 import { Box } from '@mui/material'
-import { useTiptap } from './provider/TiptapProvider'
+import { useTiptapCtx } from './provider/TiptapProvider'
 import { cls } from '@shared/cls'
 
 export const EditorNotStatic = (): React.ReactNode => {
-  const ctx = useTiptap()
+  const tiptapCtx = useTiptapCtx()
 
-  if (ctx.isEditorActive === false) {
+  if (tiptapCtx.isEditorActive === false) {
     return null
   }
 
   return (
     <Box
-      className={`${ctx.className} ${ctx.onUpload === undefined ? '' : cls.droppable}`}
-      onClick={ctx.onWrapperClick}
-      onFocus={ctx.onWrapperFocus}
-      sx={{ position: 'relative', ...tiptapStyles, ...ctx.sx }}
+      className={`${tiptapCtx.className} ${tiptapCtx.onUpload === undefined ? '' : cls.droppable}`}
+      onClick={tiptapCtx.onWrapperClick}
+      onFocus={tiptapCtx.onWrapperFocus}
+      sx={{ position: 'relative', ...tiptapStyles, ...tiptapCtx.sx }}
     >
       <UploadButton />
       <TiptapEditor />

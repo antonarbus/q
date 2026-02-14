@@ -1,15 +1,15 @@
 import { type JSX, useEffect } from 'react'
-import { useEditor, EditorContent } from '@tiptap/react'
+import { Tiptap, useEditor, EditorContent } from '@tiptap/react'
 import { FloatingMenu } from './menu/FloatingMenu'
 import { ImageMenu } from './menu/ImageMenu'
 import { useExtensions } from './extension/useExtensions'
 import { cls } from '@shared/cls'
 import { useDropFile } from './file-upload/useDropFile'
 import { usePasteFile } from './file-upload/usePasteFile'
-import { useTiptap } from './provider/TiptapProvider'
+import { useTiptapCtx } from './provider/TiptapProvider'
 
 export const TiptapEditor = (): JSX.Element => {
-  const ctx = useTiptap()
+  const tiptapCtx = useTiptapCtx()
   const extensions = useExtensions()
   const dropFile = useDropFile()
   const pasteFile = usePasteFile()
@@ -17,14 +17,14 @@ export const TiptapEditor = (): JSX.Element => {
   const editor = useEditor(
     {
       extensions,
-      content: ctx.content,
-      onCreate: ctx.onCreate,
-      onUpdate: ctx.onUpdate,
-      onBlur: ctx.onBlur,
+      content: tiptapCtx.content,
+      onCreate: tiptapCtx.onCreate,
+      onUpdate: tiptapCtx.onUpdate,
+      onBlur: tiptapCtx.onBlur,
       editorProps: {
         handleKeyDown: (view, event) => {
-          if (ctx.onKeyDown !== undefined) {
-            return ctx.onKeyDown(view, event)
+          if (tiptapCtx.onKeyDown !== undefined) {
+            return tiptapCtx.onKeyDown(view, event)
           }
 
           return false
@@ -40,22 +40,20 @@ export const TiptapEditor = (): JSX.Element => {
     [],
   )
 
-  const { editorRef, setEditor } = ctx
-
   useEffect(() => {
-    editorRef.current = editor
-    setEditor(editor)
+    tiptapCtx.editorRef.current = editor
 
     return (): void => {
-      editorRef.current = null
-      setEditor(null)
+      tiptapCtx.editorRef.current = null
     }
-  }, [editor, editorRef, setEditor])
+  }, [editor, tiptapCtx.editorRef])
 
   return (
     <>
-      <FloatingMenu />
-      <ImageMenu />
+      <Tiptap editor={editor}>
+        <FloatingMenu />
+        <ImageMenu />
+      </Tiptap>
       <EditorContent
         editor={editor}
         className={cls.tipTapEditor}

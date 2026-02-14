@@ -1,28 +1,23 @@
 import type { JSX } from 'react'
 import { MenuButton } from './MenuButton'
-import { type Editor, useEditorState } from '@tiptap/react'
+import { useTiptap, useTiptapState } from '@tiptap/react'
 import { RiAlignLeft, RiAlignCenter, RiAlignRight } from 'react-icons/ri'
 
 type Alignment = 'left' | 'center' | 'right'
 
-type Props = {
-  editor: Editor
-}
+export const AlignButtons = (): JSX.Element => {
+  const { editor } = useTiptap()
 
-export const AlignButtons = (props: Props): JSX.Element => {
-  const alignment = useEditorState({
-    editor: props.editor,
-    selector: (ctx): Alignment => {
-      if (ctx.editor.isActive({ textAlign: 'center' })) {
-        return 'center'
-      }
+  const alignment = useTiptapState((ctx): Alignment => {
+    if (ctx.editor.isActive({ textAlign: 'center' })) {
+      return 'center'
+    }
 
-      if (ctx.editor.isActive({ textAlign: 'right' })) {
-        return 'right'
-      }
+    if (ctx.editor.isActive({ textAlign: 'right' })) {
+      return 'right'
+    }
 
-      return 'left'
-    },
+    return 'left'
   })
 
   return (
@@ -31,7 +26,7 @@ export const AlignButtons = (props: Props): JSX.Element => {
         isActive={alignment === 'left'}
         title='Align left'
         onClick={() => {
-          props.editor.chain().focus().setTextAlign('left').run()
+          editor.chain().focus().setTextAlign('left').run()
         }}
       >
         <RiAlignLeft size={16} />
@@ -41,7 +36,7 @@ export const AlignButtons = (props: Props): JSX.Element => {
         isActive={alignment === 'center'}
         title='Align center'
         onClick={() => {
-          props.editor.chain().focus().setTextAlign('center').run()
+          editor.chain().focus().setTextAlign('center').run()
         }}
       >
         <RiAlignCenter size={16} />
@@ -51,7 +46,7 @@ export const AlignButtons = (props: Props): JSX.Element => {
         isActive={alignment === 'right'}
         title='Align right'
         onClick={() => {
-          props.editor.chain().focus().setTextAlign('right').run()
+          editor.chain().focus().setTextAlign('right').run()
         }}
       >
         <RiAlignRight size={16} />

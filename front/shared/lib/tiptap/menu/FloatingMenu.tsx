@@ -27,16 +27,12 @@ import {
 } from 'react-icons/ri'
 import { liquidGlassStyle } from '../style/liquidGlassStyle'
 import { AlignButtons } from './button/AlignButtons'
-import { useTiptap } from '../provider/TiptapProvider'
+import { useTiptap } from '@tiptap/react'
 
 export const FloatingMenu = (): React.ReactNode => {
   const menuRef = useRef<HTMLDivElement | null>(null)
   const [linkInput, setLinkInput] = useState<string | null>(null)
   const { editor } = useTiptap()
-
-  if (editor === null) {
-    return null
-  }
 
   return (
     <BubbleMenu
@@ -268,7 +264,7 @@ export const FloatingMenu = (): React.ReactNode => {
         <Divider />
 
         {/* Alignment */}
-        <AlignButtons editor={editor} />
+        <AlignButtons />
 
         <Divider />
 

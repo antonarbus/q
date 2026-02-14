@@ -1,13 +1,13 @@
 import { Box, Tooltip } from '@mui/material'
 import { useRef } from 'react'
 import { RiAttachmentLine } from 'react-icons/ri'
-import { useTiptap } from '../provider/TiptapProvider'
+import { useTiptapCtx } from '../provider/TiptapProvider'
 
 export const UploadButton = (): React.ReactNode => {
   const fileInputRef = useRef<HTMLInputElement | null>(null)
-  const tiptap = useTiptap()
+  const tiptapCtx = useTiptapCtx()
 
-  if (tiptap.onUpload === undefined) {
+  if (tiptapCtx.onUpload === undefined) {
     return null
   }
 
@@ -66,8 +66,8 @@ export const UploadButton = (): React.ReactNode => {
             return
           }
 
-          void tiptap.onUpload?.({
-            editor: tiptap.editorRef.current,
+          void tiptapCtx.onUpload?.({
+            editor: tiptapCtx.editorRef.current,
             files: Array.from(files),
             type: file.type.startsWith('image/') ? 'image' : 'file',
           })

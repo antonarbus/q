@@ -2,15 +2,11 @@ import { BubbleMenu } from '@tiptap/react/menus'
 import { useRef } from 'react'
 import { AlignButtons } from './button/AlignButtons'
 import { liquidGlassStyle } from '../style/liquidGlassStyle'
-import { useTiptap } from '../provider/TiptapProvider'
+import { useTiptap } from '@tiptap/react'
 
 export const ImageMenu = (): React.ReactNode => {
   const menuRef = useRef<HTMLDivElement | null>(null)
   const { editor } = useTiptap()
-
-  if (editor === null) {
-    return null
-  }
 
   return (
     <BubbleMenu
@@ -67,7 +63,7 @@ export const ImageMenu = (): React.ReactNode => {
           ...liquidGlassStyle,
         }}
       >
-        <AlignButtons editor={editor} />
+        <AlignButtons />
       </div>
     </BubbleMenu>
   )

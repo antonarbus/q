@@ -3,32 +3,32 @@ import { useEditor, EditorContent } from '@tiptap/react'
 import { useExtensions } from './extension/useExtensions'
 import { tiptapStyles } from './style/tiptapStyles'
 import { cls } from '@shared/cls'
-import { useTiptap } from './provider/TiptapProvider'
+import { useTiptapCtx } from './provider/TiptapProvider'
 
 export const EditorStatic = (): React.ReactNode => {
-  const ctx = useTiptap()
+  const tiptapCtx = useTiptapCtx()
   const extensions = useExtensions()
 
   const editor = useEditor(
     {
       extensions,
-      content: ctx.content,
+      content: tiptapCtx.content,
       editable: false,
     },
-    [ctx.content],
+    [tiptapCtx.content],
   )
 
-  if (ctx.isEditorActive === true) {
+  if (tiptapCtx.isEditorActive === true) {
     return null
   }
 
   return (
     <Box
-      className={`${cls.notEditable} ${ctx.className}`}
+      className={`${cls.notEditable} ${tiptapCtx.className}`}
       sx={{
         opacity: 0.5,
         ...tiptapStyles,
-        ...ctx.sx,
+        ...tiptapCtx.sx,
       }}
     >
       <EditorContent
