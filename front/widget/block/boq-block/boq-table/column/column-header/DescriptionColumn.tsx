@@ -5,7 +5,7 @@ import { columnHeaderStyle } from '@entity/quotation/style/columnHeaderStyle'
 import { updateColumnCell } from '@feature/blocks/update'
 import { type ReactNode, useRef } from 'react'
 import { ResizableColumn } from '../ResizableColumn'
-import { Tiptap } from '@shared/lib/tiptap/Tiptap'
+import { TextEditor } from '@shared/component/TextEditor'
 import type { Editor } from '@tiptap/react'
 
 export const DescriptionColumn = (): ReactNode => {
@@ -18,7 +18,7 @@ export const DescriptionColumn = (): ReactNode => {
       className='th description resizable'
       minWidth={columnMinWidth.description}
     >
-      <Tiptap
+      <TextEditor
         editorRef={editorRef}
         className='column-description'
         placeholder='Description...'

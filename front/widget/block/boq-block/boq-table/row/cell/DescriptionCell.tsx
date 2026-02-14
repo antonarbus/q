@@ -7,7 +7,7 @@ import { cellStyle } from '@entity/quotation/style/cellStyle'
 import { tabFromDescriptionCell } from '@feature/blocks/tab-away-from-cell'
 import { updateDescriptionCell } from '@feature/blocks/update'
 import { upload } from '@feature/file/upload-file'
-import { Tiptap } from '@shared/lib/tiptap/Tiptap'
+import { TextEditor } from '@shared/component/TextEditor'
 import type { JSX } from 'react'
 
 export const DescriptionCell = (): JSX.Element => {
@@ -21,7 +21,7 @@ export const DescriptionCell = (): JSX.Element => {
   })
 
   return (
-    <Tiptap
+    <TextEditor
       editorRef={row.descriptionCellEditorRef}
       className='td description'
       placeholder='Description...'

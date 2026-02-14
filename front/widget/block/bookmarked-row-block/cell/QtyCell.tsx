@@ -7,7 +7,7 @@ import { cellStyle } from '@entity/quotation/style/cellStyle'
 import { formatQtyCell } from '@feature/blocks/update/update-cell-at-bookmarked-row-block/qty/formatQtyCell'
 import { updateQtyCell } from '@feature/blocks/update/update-cell-at-bookmarked-row-block/qty/updateQtyCell'
 import { Box } from '@mui/material'
-import { Tiptap } from '@shared/lib/tiptap/Tiptap'
+import { TextEditor } from '@shared/component/TextEditor'
 import type { JSX } from 'react'
 
 export const QtyCell = (): JSX.Element => {
@@ -21,7 +21,7 @@ export const QtyCell = (): JSX.Element => {
 
   return (
     <Box sx={{ display: 'flex', position: 'relative' }}>
-      <Tiptap
+      <TextEditor
         editorRef={row.qtyCellEditorRef}
         className='td qty'
         placeholder='Qty...'

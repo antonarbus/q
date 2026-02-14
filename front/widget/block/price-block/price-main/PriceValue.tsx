@@ -5,7 +5,7 @@ import {
   useUpdateTotalPriceIfPricesAboveWereChanged,
   validateTotalPrice,
 } from '@feature/blocks/update'
-import { Tiptap } from '@shared/lib/tiptap/Tiptap'
+import { TextEditor } from '@shared/component/TextEditor'
 import { type JSX, useRef } from 'react'
 import type { Editor } from '@tiptap/react'
 
@@ -19,7 +19,7 @@ export const PriceValue = (): JSX.Element => {
   })
 
   return (
-    <Tiptap
+    <TextEditor
       editorRef={editorRef}
       className='price-value'
       placeholder='Total price...'

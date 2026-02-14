@@ -13,7 +13,7 @@ import {
   validatePrice,
 } from '@feature/blocks/update'
 import { Box } from '@mui/material'
-import { Tiptap } from '@shared/lib/tiptap/Tiptap'
+import { TextEditor } from '@shared/component/TextEditor'
 import type { JSX, MouseEvent } from 'react'
 
 export const PriceCell = (): JSX.Element => {
@@ -29,7 +29,7 @@ export const PriceCell = (): JSX.Element => {
 
   return (
     <Box sx={{ display: 'flex', position: 'relative' }}>
-      <Tiptap
+      <TextEditor
         editorRef={row.priceCellEditorRef}
         className='td price'
         placeholder='Price...'

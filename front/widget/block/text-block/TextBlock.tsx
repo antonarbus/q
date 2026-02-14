@@ -14,7 +14,7 @@ import { updateTextBlock } from '@feature/blocks/update'
 import { upload } from '@feature/file/upload-file'
 import { BookmarkBlockIcon } from '@feature/open-close/open-bookmark-modal'
 import { OpenInfoBlockModalIcon } from '@feature/open-close/open-info-modal'
-import { Tiptap } from '@shared/lib/tiptap/Tiptap'
+import { TextEditor } from '@shared/component/TextEditor'
 import { cls } from '@shared/cls'
 import { ItemActionButtonsLayout } from '@shared/layout/ItemActionButtonsLayout'
 import { type JSX, useRef } from 'react'
@@ -44,7 +44,7 @@ export const TextBlock = (): JSX.Element => {
         </ItemActionButtonsLayout>
       }
     >
-      <Tiptap
+      <TextEditor
         editorRef={editorRef}
         className='text'
         placeholder='Add text, tables, drop images, files, links, select to format...'

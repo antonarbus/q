@@ -4,7 +4,7 @@ import { titleCellStyle } from '@entity/quotation/style/titleCellStyle'
 import type { HeaderKey } from '@back/entity/quotation/schema'
 import { updateTitle } from '@feature/blocks/update'
 import { type JSX, useRef } from 'react'
-import { Tiptap } from '@shared/lib/tiptap/Tiptap'
+import { TextEditor } from '@shared/component/TextEditor'
 import type { Editor } from '@tiptap/react'
 
 const boqHeaderKey: HeaderKey = 'title'
@@ -14,7 +14,7 @@ export const Title = (): JSX.Element => {
   const block = useBlock()
 
   return (
-    <Tiptap
+    <TextEditor
       editorRef={editorRef}
       className='title'
       placeholder='Title...'

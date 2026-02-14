@@ -7,7 +7,7 @@ import { cellStyle } from '@entity/quotation/style/cellStyle'
 import { formatPriceCell } from '@feature/blocks/update/update-cell-at-bookmarked-row-block/price/formatPriceCell'
 import { updatePriceCell } from '@feature/blocks/update/update-cell-at-bookmarked-row-block/price/updatePriceCell'
 import { Box } from '@mui/material'
-import { Tiptap } from '@shared/lib/tiptap/Tiptap'
+import { TextEditor } from '@shared/component/TextEditor'
 import type { JSX } from 'react'
 
 export const PriceCell = (): JSX.Element => {
@@ -21,7 +21,7 @@ export const PriceCell = (): JSX.Element => {
 
   return (
     <Box sx={{ display: 'flex', position: 'relative' }}>
-      <Tiptap
+      <TextEditor
         editorRef={row.priceCellEditorRef}
         className='td price'
         placeholder='Price...'

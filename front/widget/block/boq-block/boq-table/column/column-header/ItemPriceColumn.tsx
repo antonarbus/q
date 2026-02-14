@@ -5,7 +5,7 @@ import { columnHeaderStyle } from '@entity/quotation/style/columnHeaderStyle'
 import { updateColumnCell } from '@feature/blocks/update'
 import { type JSX, useRef } from 'react'
 import { ResizableColumn } from '../ResizableColumn'
-import { Tiptap } from '@shared/lib/tiptap/Tiptap'
+import { TextEditor } from '@shared/component/TextEditor'
 import type { Editor } from '@tiptap/react'
 
 export const ItemPriceColumn = (): JSX.Element => {
@@ -18,7 +18,7 @@ export const ItemPriceColumn = (): JSX.Element => {
       className='th itemPrice resizable'
       minWidth={columnMinWidth.itemPrice}
     >
-      <Tiptap
+      <TextEditor
         editorRef={editorRef}
         className='column-item-price'
         placeholder='Item...'

@@ -1,6 +1,6 @@
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { updatePriceTitle } from '@feature/blocks/update'
-import { Tiptap } from '@shared/lib/tiptap/Tiptap'
+import { TextEditor } from '@shared/component/TextEditor'
 import { getState } from '@shared/lib/redux'
 import { type JSX, useRef } from 'react'
 import type { Editor } from '@tiptap/react'
@@ -10,7 +10,7 @@ export const PriceTitle = (): JSX.Element => {
   const block = useBlock()
 
   return (
-    <Tiptap
+    <TextEditor
       editorRef={editorRef}
       className='price-title'
       placeholder='Total price...'

@@ -31,12 +31,7 @@ export const EditorStatic = (): React.ReactNode => {
         ...tiptapCtx.sx,
       }}
     >
-      <EditorContent
-        editor={editor}
-        style={{
-          flexGrow: 1,
-        }}
-      />
+      <EditorContent editor={editor} style={{ flexGrow: 1 }} />
     </Box>
   )
 }

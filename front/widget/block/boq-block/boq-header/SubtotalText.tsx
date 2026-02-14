@@ -4,7 +4,7 @@ import { subTotalTextCellStyle } from '@entity/quotation/style/subTotalTextCellS
 import type { HeaderKey } from '@back/entity/quotation/schema'
 import { updateSubtotalText } from '@feature/blocks/update'
 import { type JSX, useRef } from 'react'
-import { Tiptap } from '@shared/lib/tiptap/Tiptap'
+import { TextEditor } from '@shared/component/TextEditor'
 import type { Editor } from '@tiptap/react'
 
 const boqHeaderKey: HeaderKey = 'subtotalText'
@@ -14,7 +14,7 @@ export const SubtotalText = (): JSX.Element => {
   const block = useBlock()
 
   return (
-    <Tiptap
+    <TextEditor
       editorRef={editorRef}
       className='sub-total-text'
       placeholder='Subtotal...'

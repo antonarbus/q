@@ -11,7 +11,7 @@ import {
   validatePrices,
 } from '@feature/blocks/update'
 import { useRef, type JSX, type MouseEvent } from 'react'
-import { Tiptap } from '@shared/lib/tiptap/Tiptap'
+import { TextEditor } from '@shared/component/TextEditor'
 
 const boqHeaderKey: HeaderKey = 'subTotalPrice'
 
@@ -30,7 +30,7 @@ export const SubTotalPrice = (): JSX.Element => {
   useUpdateSubtotal()
 
   return (
-    <Tiptap
+    <TextEditor
       editorRef={boq.subTotalPriceEditorRef}
       className='sub-total-price'
       placeholder='Price...'
