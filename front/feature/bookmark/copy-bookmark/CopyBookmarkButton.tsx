@@ -4,7 +4,7 @@ import { useGetBookmarkMutation } from '@entity/bookmark/api/useGetBookmarkMutat
 import { copySlice } from '@entity/copy/copySlice'
 import { IconButton, Tooltip } from '@mui/material'
 import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
-import { textSlice } from '@shared/lib/tiptap/textSlice'
+import { textSlice } from '@shared/lib/tiptap/store/textSlice'
 import { dispatch } from '@shared/lib/redux'
 import type { JSX } from 'react'
 import { MdCopyAll } from 'react-icons/md'

@@ -6,9 +6,9 @@ import {
   EditorContent,
 } from '@tiptap/react'
 import type { EditorView } from '@tiptap/pm/view'
-import { FloatingMenu } from './FloatingMenu'
-import { ImageMenu } from './ImageMenu'
-import { useExtensions } from './useExtensions'
+import { FloatingMenu } from './menu/FloatingMenu'
+import { ImageMenu } from './menu/ImageMenu'
+import { useExtensions } from './extension/useExtensions'
 import type { EditorRef } from '@shared/lib/tiptap/types'
 import { cls } from '@shared/cls'
 

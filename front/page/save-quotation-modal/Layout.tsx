@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import { cls } from '@shared/cls'
 import { OutlinedDivWithLabel } from '@shared/component/OutlinedDivWithLabel'
-import { textSlice } from '@shared/lib/tiptap/textSlice'
+import { textSlice } from '@shared/lib/tiptap/store/textSlice'
 import { dispatch, useSelector } from '@shared/lib/redux'
 import type { JSX, ReactNode } from 'react'
 import { useEffectOnce } from 'react-use'

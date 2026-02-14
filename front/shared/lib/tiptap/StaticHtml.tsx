@@ -1,8 +1,8 @@
 import { type CSSObject, Box } from '@mui/material'
 import type { JSX } from 'react'
 import { useEditor, EditorContent } from '@tiptap/react'
-import { useExtensions } from './useExtensions'
-import { tiptapStyles } from './tiptapStyles'
+import { useExtensions } from './extension/useExtensions'
+import { tiptapStyles } from './style/tiptapStyles'
 import { cls } from '@shared/cls'
 
 type Props = {

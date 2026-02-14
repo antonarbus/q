@@ -5,7 +5,7 @@ export const Divider = (): JSX.Element => (
     style={{
       width: 1,
       height: 20,
-      backgroundColor: '#4b5563',
+      backgroundColor: '#c4c4c4',
       margin: '0 4px',
     }}
   />

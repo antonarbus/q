@@ -3,7 +3,7 @@ import { useGetBookmarkMutation } from '@entity/bookmark/api/useGetBookmarkMutat
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { IconButton, Tooltip } from '@mui/material'
 import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
-import { textSlice } from '@shared/lib/tiptap/textSlice'
+import { textSlice } from '@shared/lib/tiptap/store/textSlice'
 import { dispatch } from '@shared/lib/redux'
 import type { JSX } from 'react'
 import { AiTwotoneEdit } from 'react-icons/ai'

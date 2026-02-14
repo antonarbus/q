@@ -1,6 +1,6 @@
 import type { DragStart, DropResult } from '@hello-pangea/dnd'
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
-import { textSlice } from '@shared/lib/tiptap/textSlice'
+import { textSlice } from '@shared/lib/tiptap/store/textSlice'
 import { dispatch, getState } from '@shared/lib/redux'
 import { arrayMoveImmutable } from 'array-move'
 

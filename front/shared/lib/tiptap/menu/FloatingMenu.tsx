@@ -1,8 +1,8 @@
 import { BubbleMenu } from '@tiptap/react/menus'
 import type { Editor } from '@tiptap/react'
-import { MenuButton } from './menu-buttons/MenuButton'
+import { MenuButton } from './button/MenuButton'
 import { type JSX, useCallback, useMemo, useRef, useState } from 'react'
-import { Divider } from './Divider'
+import { Divider } from './button/Divider'
 import {
   RiBold,
   RiItalic,
@@ -26,8 +26,8 @@ import {
   RiArrowGoForwardLine,
   RiSeparator,
 } from 'react-icons/ri'
-import { liquidGlassStyle } from './liquidGlassStyle'
-import { AlignButtons } from './menu-buttons/AlignButtons'
+import { liquidGlassStyle } from '../style/liquidGlassStyle'
+import { AlignButtons } from './button/AlignButtons'
 
 type Props = {
   editor: Editor

@@ -2,7 +2,7 @@ import { copySlice } from '@entity/copy/copySlice'
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 
 import { cls } from '@shared/cls'
-import { textSlice } from '@shared/lib/tiptap/textSlice'
+import { textSlice } from '@shared/lib/tiptap/store/textSlice'
 import { generateId } from '@front/shared/lib/nanoid'
 import { route } from '@shared/lib/react-router-dom/route'
 import { dispatch, getState } from '@shared/lib/redux'

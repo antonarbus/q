@@ -1,8 +1,8 @@
 import { BubbleMenu } from '@tiptap/react/menus'
 import type { Editor } from '@tiptap/react'
 import { type JSX, useCallback, useMemo, useRef } from 'react'
-import { AlignButtons } from './menu-buttons/AlignButtons'
-import { liquidGlassStyle } from './liquidGlassStyle'
+import { AlignButtons } from './button/AlignButtons'
+import { liquidGlassStyle } from '../style/liquidGlassStyle'
 
 type Props = {
   editor: Editor

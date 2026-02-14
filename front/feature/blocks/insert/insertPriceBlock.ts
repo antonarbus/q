@@ -3,7 +3,7 @@ import priceBlockPreviewHtml from '@entity/quotation/templates/priceBlockPreview
 import priceBlockTitleHtml from '@entity/quotation/templates/priceBlockTitle.html?raw'
 import priceBlockValueHtml from '@entity/quotation/templates/priceBlockValue.html?raw'
 import type { PriceBlock } from '@back/entity/quotation/schema'
-import { textSlice } from '@shared/lib/tiptap/textSlice'
+import { textSlice } from '@shared/lib/tiptap/store/textSlice'
 import { generateId } from '@front/shared/lib/nanoid'
 import { dispatch, getState } from '@shared/lib/redux'
 import type { MouseEvent } from 'react'

@@ -1,5 +1,5 @@
 import type { Editor } from '@tiptap/react'
-import { getStringWithNewFormattedNumber } from '../../util/getStringWithNewFormattedNumber'
+import { getStringWithNewFormattedNumber } from '../../../util/getStringWithNewFormattedNumber'
 
 type Props = {
   newNumber: number

@@ -2,7 +2,7 @@ import type { BoqColumnKey } from '@back/entity/quotation/schema'
 import { getBoqColumnFromStore } from '@entity/quotation/redux/getter/getBoqColumnFromStore'
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { cls } from '@shared/cls'
-import { textSlice } from '@shared/lib/tiptap/textSlice'
+import { textSlice } from '@shared/lib/tiptap/store/textSlice'
 import { dispatch } from '@shared/lib/redux'
 
 type Props = {
