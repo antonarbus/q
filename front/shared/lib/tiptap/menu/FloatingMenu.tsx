@@ -3,7 +3,6 @@ import { MenuButton } from './button/MenuButton'
 import { useRef, useState } from 'react'
 import { Divider } from './button/Divider'
 import {
-  RiBold,
   RiItalic,
   RiUnderline,
   RiStrikethrough,
@@ -28,6 +27,7 @@ import {
 import { liquidGlassStyle } from '../style/liquidGlassStyle'
 import { AlignButtons } from './button/AlignButtons'
 import { useTiptap } from '@tiptap/react'
+import { BoldButton } from './button/BoldButton'
 
 export const FloatingMenu = (): React.ReactNode => {
   const menuRef = useRef<HTMLDivElement | null>(null)
@@ -88,7 +88,6 @@ export const FloatingMenu = (): React.ReactNode => {
         >
           <RiArrowGoBackLine size={16} />
         </MenuButton>
-
         <MenuButton
           isActive={false}
           title='Redo'
@@ -98,19 +97,9 @@ export const FloatingMenu = (): React.ReactNode => {
         >
           <RiArrowGoForwardLine size={16} />
         </MenuButton>
-
         <Divider />
-
         {/* Text formatting */}
-        <MenuButton
-          isActive={editor.isActive('bold')}
-          title='Bold'
-          onClick={() => {
-            editor.chain().focus().toggleBold().run()
-          }}
-        >
-          <RiBold size={16} />
-        </MenuButton>
+        <BoldButton />
 
         <MenuButton
           isActive={editor.isActive('italic')}
@@ -121,7 +110,6 @@ export const FloatingMenu = (): React.ReactNode => {
         >
           <RiItalic size={16} />
         </MenuButton>
-
         <MenuButton
           isActive={editor.isActive('underline')}
           title='Underline'
@@ -131,7 +119,6 @@ export const FloatingMenu = (): React.ReactNode => {
         >
           <RiUnderline size={16} />
         </MenuButton>
-
         <MenuButton
           isActive={editor.isActive('strike')}
           title='Strikethrough'
@@ -141,7 +128,6 @@ export const FloatingMenu = (): React.ReactNode => {
         >
           <RiStrikethrough size={16} />
         </MenuButton>
-
         <MenuButton
           isActive={editor.isActive('superscript')}
           title='Superscript'
@@ -151,7 +137,6 @@ export const FloatingMenu = (): React.ReactNode => {
         >
           <RiSuperscript size={16} />
         </MenuButton>
-
         <MenuButton
           isActive={editor.isActive('subscript')}
           title='Subscript'
@@ -161,9 +146,7 @@ export const FloatingMenu = (): React.ReactNode => {
         >
           <RiSubscript size={16} />
         </MenuButton>
-
         <Divider />
-
         {/* Headings */}
         <MenuButton
           isActive={editor.isActive('heading', { level: 1 })}
@@ -174,7 +157,6 @@ export const FloatingMenu = (): React.ReactNode => {
         >
           <RiH1 size={16} />
         </MenuButton>
-
         <MenuButton
           isActive={editor.isActive('heading', { level: 2 })}
           title='Heading 2'
@@ -184,7 +166,6 @@ export const FloatingMenu = (): React.ReactNode => {
         >
           <RiH2 size={16} />
         </MenuButton>
-
         <MenuButton
           isActive={editor.isActive('heading', { level: 3 })}
           title='Heading 3'
@@ -194,9 +175,7 @@ export const FloatingMenu = (): React.ReactNode => {
         >
           <RiH3 size={16} />
         </MenuButton>
-
         <Divider />
-
         {/* Lists */}
         <MenuButton
           isActive={editor.isActive('bulletList')}
@@ -207,7 +186,6 @@ export const FloatingMenu = (): React.ReactNode => {
         >
           <RiListUnordered size={16} />
         </MenuButton>
-
         <MenuButton
           isActive={editor.isActive('orderedList')}
           title='Ordered List'
@@ -217,7 +195,6 @@ export const FloatingMenu = (): React.ReactNode => {
         >
           <RiListOrdered2 size={16} />
         </MenuButton>
-
         <MenuButton
           isActive={editor.isActive('taskList')}
           title='Task List'
@@ -227,9 +204,7 @@ export const FloatingMenu = (): React.ReactNode => {
         >
           <RiListCheck3 size={16} />
         </MenuButton>
-
         <Divider />
-
         {/* Block types */}
         <MenuButton
           isActive={editor.isActive('blockquote')}
@@ -240,7 +215,6 @@ export const FloatingMenu = (): React.ReactNode => {
         >
           <RiDoubleQuotesL size={16} />
         </MenuButton>
-
         <MenuButton
           isActive={editor.isActive('codeBlock')}
           title='Code Block'
@@ -250,7 +224,6 @@ export const FloatingMenu = (): React.ReactNode => {
         >
           <RiCodeBoxLine size={16} />
         </MenuButton>
-
         <MenuButton
           isActive={false}
           title='Horizontal Rule'
@@ -260,14 +233,10 @@ export const FloatingMenu = (): React.ReactNode => {
         >
           <RiSeparator size={16} />
         </MenuButton>
-
         <Divider />
-
         {/* Alignment */}
         <AlignButtons />
-
         <Divider />
-
         {/* Link */}
         {linkInput === null ? (
           <>
@@ -388,9 +357,7 @@ export const FloatingMenu = (): React.ReactNode => {
             </MenuButton>
           </div>
         )}
-
         <Divider />
-
         {/* Colors */}
         <MenuButton
           isActive={editor.isActive('textStyle', { color: '#ef4444' })}
@@ -401,7 +368,6 @@ export const FloatingMenu = (): React.ReactNode => {
         >
           <RiFontColor size={16} color='#ef4444' />
         </MenuButton>
-
         <MenuButton
           isActive={editor.isActive('highlight')}
           title='Highlight'
