@@ -3,13 +3,13 @@ import { getBoqHeaderHtmlFromStore } from '@entity/quotation/redux/getter/getBoq
 import { subTotalTextCellStyle } from '@entity/quotation/style/subTotalTextCellStyle'
 import type { HeaderKey } from '@back/entity/quotation/schema'
 import { updateSubtotalText } from '@feature/blocks/update'
-import { type JSX, useRef } from 'react'
+import { useRef } from 'react'
 import { TextEditor } from '@shared/component/TextEditor'
 import type { Editor } from '@tiptap/react'
 
 const boqHeaderKey: HeaderKey = 'subtotalText'
 
-export const SubtotalText = (): JSX.Element => {
+export const SubtotalText = (): React.JSX.Element => {
   const editorRef = useRef<Editor | null>(null)
   const block = useBlock()
 

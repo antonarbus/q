@@ -10,12 +10,12 @@ import {
   useUpdateSubtotal,
   validatePrices,
 } from '@feature/blocks/update'
-import { useRef, type JSX, type MouseEvent } from 'react'
+import { useRef } from 'react'
 import { TextEditor } from '@shared/component/TextEditor'
 
 const boqHeaderKey: HeaderKey = 'subTotalPrice'
 
-export const SubTotalPrice = (): JSX.Element => {
+export const SubTotalPrice = (): React.JSX.Element => {
   const boq = useBoq()
   const block = useBlock()
 
@@ -57,7 +57,7 @@ export const SubTotalPrice = (): JSX.Element => {
           subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
         })
       }}
-      onWrapperClick={(event: MouseEvent) => {
+      onWrapperClick={(event: React.MouseEvent) => {
         showHidePricePins({
           blockIndex: block.index,
           event: event.nativeEvent,

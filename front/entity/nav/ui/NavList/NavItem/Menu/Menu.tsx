@@ -5,7 +5,6 @@ import {
 import { Box } from '@mui/material'
 import { dispatch } from '@shared/lib/redux'
 import { useKeysForMenuNavigation } from '@widget/nav/handlers/useKeysForMenuNavigation'
-import type { ReactNode } from 'react'
 import { navSlice } from '../../../../navSlice'
 import { EmailAtBottomOfMenu } from './EmailAtBottomOfMenu'
 import { useCloseMenuOnClickOutside } from './functions/useCloseMenuOnClickOutside'
@@ -17,7 +16,7 @@ type Props = {
   navItemRef?: { current: HTMLElement | null }
 }
 
-const MenuContent = (props: Props): ReactNode => {
+const MenuContent = (props: Props): React.ReactNode => {
   const menuNavigation = useMenuNavigation()
   useKeysForMenuNavigation()
 
@@ -61,7 +60,7 @@ const MenuContent = (props: Props): ReactNode => {
   )
 }
 
-export const Menu = (props?: Props): ReactNode => {
+export const Menu = (props?: Props): React.ReactNode => {
   return (
     <MenuNavigationProvider>
       <MenuContent navItemRef={props?.navItemRef} />

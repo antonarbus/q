@@ -2,7 +2,6 @@ import { useMenuNavigation } from '@entity/nav/provider/MenuNavigationProvider'
 import { dispatch, useSelector } from '@shared/lib/redux'
 import { clickOnMenuItem } from '@widget/nav/handlers/clickOnMenuItem'
 import { iconRegistry } from '@widget/nav/iconRegistry'
-import type { JSX, MouseEvent } from 'react'
 import { FaChevronRight } from 'react-icons/fa'
 import { useLocation } from 'react-router-dom'
 import { navSlice } from '../../../../../navSlice'
@@ -21,7 +20,7 @@ type Props = {
   hoverIndex: number
 }
 
-export const MenuItem = (props: Props): JSX.Element => {
+export const MenuItem = (props: Props): React.JSX.Element => {
   const location = useLocation()
   const menuNavigation = useMenuNavigation()
 
@@ -104,7 +103,7 @@ export const MenuItem = (props: Props): JSX.Element => {
           filter: isHovered === true ? 'brightness(1.2)' : 'none',
         }}
         href={props.navItem.externalLink}
-        onClick={(event: MouseEvent): void => {
+        onClick={(event: React.MouseEvent): void => {
           if (document.activeElement instanceof HTMLElement) {
             document.activeElement.blur()
           }
@@ -143,7 +142,7 @@ export const MenuItem = (props: Props): JSX.Element => {
   return (
     <MenuItemLayout
       isHovered={isHovered}
-      onClick={(event: MouseEvent): void => {
+      onClick={(event: React.MouseEvent): void => {
         if (Boolean(props.navItem.funcId) === true) {
           event.preventDefault()
         }

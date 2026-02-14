@@ -3,11 +3,10 @@ import { textSlice } from '@shared/lib/tiptap/store/textSlice'
 import { dispatch, useSelector } from '@shared/lib/redux'
 import { Block } from '@widget/block/Block'
 import { AnimatePresence } from 'motion/react'
-import type { ReactNode } from 'react'
 import { useEffectOnce } from 'react-use'
 import { BookmarkFieldLayout } from './BookmarkFieldLayout'
 
-export const BookmarkField = (): ReactNode => {
+export const BookmarkField = (): React.ReactNode => {
   const blocks = useSelector((state) => state.quotation.blocks)
 
   useEffectOnce(() => {

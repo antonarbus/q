@@ -8,10 +8,9 @@ import { cls } from '@shared/cls'
 import { textSlice } from '@shared/lib/tiptap/store/textSlice'
 import { dispatch, getState, useSelector } from '@shared/lib/redux'
 import { getClosestRowHtml } from '@shared/util/html-getter/getClosestRowHtml'
-import type { JSX, MouseEvent } from 'react'
 import { MdCopyAll } from 'react-icons/md'
 
-export const CopyRowIcon = (): JSX.Element => {
+export const CopyRowIcon = (): React.JSX.Element => {
   const block = useBlock()
   const row = useRow()
   const isCopyable = useSelector((state) => state.copy.isCopyable)
@@ -27,7 +26,7 @@ export const CopyRowIcon = (): JSX.Element => {
       <span className={cls.actionIconContainer}>
         <MdCopyAll
           className={cls.actionIcon}
-          onClick={(event: MouseEvent): void => {
+          onClick={(event: React.MouseEvent): void => {
             if (disabled === true) {
               return
             }

@@ -8,9 +8,8 @@ import { formatQtyCell } from '@feature/blocks/update/update-cell-at-bookmarked-
 import { updateQtyCell } from '@feature/blocks/update/update-cell-at-bookmarked-row-block/qty/updateQtyCell'
 import { Box } from '@mui/material'
 import { TextEditor } from '@shared/component/TextEditor'
-import type { JSX } from 'react'
 
-export const QtyCell = (): JSX.Element => {
+export const QtyCell = (): React.JSX.Element => {
   const row = useRow()
 
   const stylesForResizableCell = useStylesForResizableCell({

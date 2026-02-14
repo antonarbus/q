@@ -17,10 +17,10 @@ import { OpenInfoBlockModalIcon } from '@feature/open-close/open-info-modal'
 import { TextEditor } from '@shared/component/TextEditor'
 import { cls } from '@shared/cls'
 import { ItemActionButtonsLayout } from '@shared/layout/ItemActionButtonsLayout'
-import { type JSX, useRef } from 'react'
+import { useRef } from 'react'
 import type { Editor } from '@tiptap/react'
 
-export const TextBlock = (): JSX.Element => {
+export const TextBlock = (): React.JSX.Element => {
   const editorRef = useRef<Editor | null>(null)
   const block = useBlock()
 

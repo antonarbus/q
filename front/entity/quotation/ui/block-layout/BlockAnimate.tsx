@@ -8,15 +8,15 @@ import type {
 import { theme } from '@shared/theme'
 import { motion } from 'motion/react'
 import type { ResizableProps } from 're-resizable'
-import type { JSX, ReactNode } from 'react'
+
 import { ResizableBlockPaper } from './ResizableBlockPaper'
 
 type Props = {
-  children: ReactNode
+  children: React.ReactNode
   blockHeight: number
   id: string
-  leftItemActionButtons?: ReactNode
-  rightItemActionButtons?: ReactNode
+  leftItemActionButtons?: React.ReactNode
+  rightItemActionButtons?: React.ReactNode
   autoWidth?: boolean
   minWidth?: ResizableProps['minWidth']
   onItemResizeStart?: OnBlockResizeStart
@@ -25,7 +25,7 @@ type Props = {
   className?: string
 }
 
-export const BlockAnimate = (props: Props): JSX.Element => {
+export const BlockAnimate = (props: Props): React.JSX.Element => {
   return (
     <motion.div
       animate={{

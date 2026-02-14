@@ -8,24 +8,24 @@ import { DragHandleContext } from '@shared/lib/hello-pangea-dnd/DragHandleContex
 import { useIsCopyModalVisible } from '@entity/copy/useIsCopyModalVisible'
 import { useIsLastBlock } from '../hook/useIsLastBlock'
 import type { ResizableProps } from 're-resizable'
-import type { JSX, ReactNode } from 'react'
+
 import { useBlock } from '../provider/BlockProvider'
 import { BlockAnimate } from './block-layout'
 import { PasteBlockTextOverlay } from './paste-block-overlay-text'
 
 type Props = {
-  children: ReactNode
+  children: React.ReactNode
   onBlockResizeStart?: OnBlockResizeStart
   onBlockResize?: OnBlockResize
   onBlockResizeStop?: OnBlockResizeStop
   autoWidth?: boolean
   minWidth?: ResizableProps['minWidth']
-  leftBlockActionButtons?: ReactNode
-  rightBlockActionButtons?: ReactNode
+  leftBlockActionButtons?: React.ReactNode
+  rightBlockActionButtons?: React.ReactNode
   className?: string
 }
 
-export const BlockComp = (props: Props): JSX.Element => {
+export const BlockComp = (props: Props): React.JSX.Element => {
   const block = useBlock()
   const isLastBlock = useIsLastBlock()
   const isCopyModalVisible = useIsCopyModalVisible()

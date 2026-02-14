@@ -1,11 +1,4 @@
-import {
-  type Context,
-  createContext,
-  type JSX,
-  type ReactNode,
-  useContext,
-  useMemo,
-} from 'react'
+import { createContext, useContext, useMemo } from 'react'
 import type { EditorEvents } from '@tiptap/react'
 import type { EditorView } from '@tiptap/pm/view'
 import type { EditorRef, OnUpload } from '../types'
@@ -25,16 +18,16 @@ type Props = {
   onWrapperClick?: (event: React.MouseEvent) => void
   onWrapperFocus?: (event: React.FocusEvent) => void
   onUpload?: OnUpload
-  children: ReactNode
+  children: React.ReactNode
 }
 
 type Res = Omit<Props, 'children'> & {
   isEditorActive: boolean
 }
 
-const TiptapContext: Context<Res | null> = createContext<Res | null>(null)
+const TiptapContext: React.Context<Res | null> = createContext<Res | null>(null)
 
-export const TiptapProvider = (props: Props): JSX.Element => {
+export const TiptapProvider = (props: Props): React.JSX.Element => {
   const isEditorActive = useSelector((state) => state.text.isEditable)
 
   const value = useMemo(() => {

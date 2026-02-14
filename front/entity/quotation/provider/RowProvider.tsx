@@ -1,11 +1,4 @@
-import {
-  type Context,
-  createContext,
-  type JSX,
-  type ReactNode,
-  useContext,
-  useMemo,
-} from 'react'
+import { createContext, useContext, useMemo } from 'react'
 import type { RowBlock } from '@back/entity/quotation/schema'
 import { useBoq } from './BoqBlockProvider'
 import type { EditorRef } from '@shared/lib/tiptap/types'
@@ -13,7 +6,7 @@ import type { EditorRef } from '@shared/lib/tiptap/types'
 type Props = {
   index: number
   item: RowBlock
-  children: ReactNode
+  children: React.ReactNode
 }
 
 type Res = Omit<Props, 'children'> & {
@@ -23,9 +16,9 @@ type Res = Omit<Props, 'children'> & {
   priceCellEditorRef: EditorRef
 }
 
-const RowContext: Context<Res | null> = createContext<Res | null>(null)
+const RowContext: React.Context<Res | null> = createContext<Res | null>(null)
 
-export const RowProvider = (props: Props): JSX.Element => {
+export const RowProvider = (props: Props): React.JSX.Element => {
   const boq = useBoq()
 
   const rowEditorRef = useMemo(() => {

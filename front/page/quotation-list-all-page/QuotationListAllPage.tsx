@@ -1,10 +1,9 @@
 import { useNavItemsOnBookmarksPageOpen } from '@feature/open-close/open-bookmarks-page'
 import { GridPageLayout } from '@shared/layout/GridPageLayout'
-import type { JSX } from 'react'
 import { Outlet } from 'react-router-dom'
 import { QuotationListAllGrid } from './QuotationListAllGrid'
 
-export const QuotationListAllPage = (): JSX.Element => {
+export const QuotationListAllPage = (): React.JSX.Element => {
   useNavItemsOnBookmarksPageOpen()
 
   return (

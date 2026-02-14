@@ -7,13 +7,12 @@ import { FormModal } from '@shared/component/FormModal'
 import { router } from '@shared/lib/react-router-dom/router'
 import { getState } from '@shared/lib/redux'
 import { useAnimatedElement } from '@shared/util/useAnimatedElement'
-import type { JSX } from 'react'
 import { ImLink } from 'react-icons/im'
 import { ShareQuotationField } from './share-quotation-field'
 import { useIsButtonDisabled } from './useIsButtonDisabled'
 import { useShareQuotationFormValues } from './useShareQuotationFormValues'
 
-export const ShareQuotationModal = (): JSX.Element => {
+export const ShareQuotationModal = (): React.JSX.Element => {
   const animatedElement = useAnimatedElement()
   const accessFormValuesSignal = useShareQuotationFormValues()
   useLoadInitValuesIntoShareQuotationModal({ accessFormValuesSignal })

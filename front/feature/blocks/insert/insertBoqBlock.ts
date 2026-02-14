@@ -23,9 +23,8 @@ import type { BoqBlock } from '@back/entity/quotation/schema'
 import { textSlice } from '@shared/lib/tiptap/store/textSlice'
 import { generateId } from '@front/shared/lib/nanoid'
 import { dispatch, getState } from '@shared/lib/redux'
-import type { MouseEvent } from 'react'
 
-export const insertBoqBlock = (event?: MouseEvent): void => {
+export const insertBoqBlock = (event?: React.MouseEvent): void => {
   const boqBlock: BoqBlock = {
     id: generateId(),
     bookmarkSchemaVersion: 2,

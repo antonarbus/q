@@ -2,10 +2,9 @@ import { getRowFromStore } from '@entity/quotation/redux/getter/getRowFromStore'
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { cls } from '@shared/cls'
 import { dispatch } from '@shared/lib/redux'
-import type { FocusEvent } from 'react'
 
 type Props = {
-  event: FocusEvent<HTMLDivElement>
+  event: React.FocusEvent<HTMLDivElement>
   blockIndex: number
   rowIndex: number
 }

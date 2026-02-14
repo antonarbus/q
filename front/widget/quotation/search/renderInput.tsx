@@ -3,12 +3,11 @@ import {
   InputAdornment,
   TextField,
 } from '@mui/material'
-import type { JSX } from 'react'
 import { GoSearch } from 'react-icons/go'
 
 export const renderInput = (
   params: AutocompleteRenderInputParams,
-): JSX.Element => {
+): React.JSX.Element => {
   const { InputProps, ...otherParams } = params
 
   return (

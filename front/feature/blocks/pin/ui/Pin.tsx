@@ -5,15 +5,14 @@ import { selectCellPin } from '@entity/quotation/redux/selector/selectCellPin'
 import { Box } from '@mui/material'
 import { cls } from '@shared/cls'
 import { useSelector } from '@shared/lib/redux'
-import type { MouseEvent, ReactNode } from 'react'
 import { VscPinned } from 'react-icons/vsc'
 
 type Props = {
   cellKey: CellKey
-  onClick: (e: MouseEvent) => void
+  onClick: (e: React.MouseEvent) => void
 }
 
-export const Pin = (props: Props): ReactNode => {
+export const Pin = (props: Props): React.ReactNode => {
   const block = useBlock()
   const row = useRow()
 

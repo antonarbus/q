@@ -3,10 +3,9 @@ import { navSlice } from '@entity/nav/navSlice'
 import { Box, IconButton } from '@mui/material'
 import { cls } from '@shared/cls'
 import { dispatch } from '@shared/lib/redux'
-import type { ReactNode } from 'react'
 import { FaPlus } from 'react-icons/fa6'
 
-export const OpenInsertMenuButton = (): ReactNode => {
+export const OpenInsertMenuButton = (): React.ReactNode => {
   return (
     <Box
       sx={{

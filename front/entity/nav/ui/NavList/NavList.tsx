@@ -1,10 +1,9 @@
 import { useSelector } from '@shared/lib/redux'
-import type { JSX } from 'react'
 import { useWindowSize } from 'react-use'
 import { navMediaQuery } from '../navMediaQuery'
 import { NavItem } from './NavItem'
 
-export const NavList = (): JSX.Element => {
+export const NavList = (): React.JSX.Element => {
   const navStructure = useSelector((state) => state.nav.navStructure)
   const windowSize = useWindowSize()
 

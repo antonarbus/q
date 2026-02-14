@@ -1,6 +1,5 @@
 import { BlockProvider } from '@entity/quotation/provider/BlockProvider'
 import type { BlockItem } from '@back/entity/quotation/schema'
-import type { ReactNode } from 'react'
 import { BookmarkedRowBlock } from './bookmarked-row-block'
 import { BoqBlock } from './boq-block'
 import { PriceBlock } from './price-block'
@@ -14,7 +13,7 @@ type Props = {
   blockIndex: number
 }
 
-export const Block = (props: Props): ReactNode => {
+export const Block = (props: Props): React.ReactNode => {
   const copyPlace = useSelector((state) => state.copy.place)
   const isPasteTextShown = useSelector((state) => state.copy.isPasteTextShown)
 

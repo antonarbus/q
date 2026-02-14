@@ -1,17 +1,16 @@
 import { Box, type CSSObject, Typography } from '@mui/material'
-import type { ComponentRef, JSX, MouseEvent, ReactNode, RefObject } from 'react'
 
 type Props = {
-  children?: ReactNode
+  children?: React.ReactNode
   sx?: CSSObject
-  reference?: RefObject<ComponentRef<'div'> | null>
-  title?: ReactNode
-  logo?: ReactNode
+  reference?: React.RefObject<React.ComponentRef<'div'> | null>
+  title?: React.ReactNode
+  logo?: React.ReactNode
 }
 
-export const CardCustom = (props: Props): JSX.Element => (
+export const CardCustom = (props: Props): React.JSX.Element => (
   <Box
-    onMouseDown={(event: MouseEvent): void => {
+    onMouseDown={(event: React.MouseEvent): void => {
       event.stopPropagation()
     }}
     ref={props.reference}

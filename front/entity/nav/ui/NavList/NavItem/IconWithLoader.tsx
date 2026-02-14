@@ -1,6 +1,5 @@
 import type { NavItem } from '@entity/nav/type'
 import { iconRegistry } from '@widget/nav/iconRegistry'
-import type { ReactNode } from 'react'
 import { navMediaQuery } from '../../navMediaQuery'
 import { ErrorIcon } from './ErrorIcon'
 import { Icon } from './Icon'
@@ -11,7 +10,7 @@ type Props = {
   navItem?: NavItem
 }
 
-export const IconWithLoader = (props: Props): ReactNode => {
+export const IconWithLoader = (props: Props): React.ReactNode => {
   const isMobile = window.innerWidth < navMediaQuery.widthWhenNothingFits
 
   if (props.navItem === undefined) {

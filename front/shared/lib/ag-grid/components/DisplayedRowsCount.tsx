@@ -1,8 +1,7 @@
 import { Box, Chip } from '@mui/material'
 import { useSelector } from '@shared/lib/redux'
-import type { JSX } from 'react'
 
-export const DisplayedRowsCount = (): JSX.Element => {
+export const DisplayedRowsCount = (): React.JSX.Element => {
   const displayedRowsCount = useSelector(
     (state) => state.agGrid.displayedRowsCount,
   )

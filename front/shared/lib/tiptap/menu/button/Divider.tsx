@@ -1,6 +1,4 @@
-import type { JSX } from 'react'
-
-export const Divider = (): JSX.Element => (
+export const Divider = (): React.JSX.Element => (
   <div
     style={{
       width: 1,

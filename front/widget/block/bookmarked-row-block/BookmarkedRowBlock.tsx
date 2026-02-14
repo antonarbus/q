@@ -6,12 +6,11 @@ import {
   onBoqBlockResizeStop,
 } from '@feature/blocks/resize'
 import { cls } from '@shared/cls'
-import type { JSX } from 'react'
 import { RowColumns } from './column'
 import { RowLayout } from './RowLayout'
 import { RowsWithOneBookmarkedRow } from './RowsWithOneBookmarkedRow'
 
-export const BookmarkedRowBlock = (): JSX.Element => {
+export const BookmarkedRowBlock = (): React.JSX.Element => {
   return (
     <BlockComp
       autoWidth

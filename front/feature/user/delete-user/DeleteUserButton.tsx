@@ -4,12 +4,11 @@ import { IconButton, Tooltip } from '@mui/material'
 import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import { instance } from '@shared/instance'
 import { queryKey } from '@shared/lib/tanstack/react-query/queryKey'
-import type { ReactNode } from 'react'
 import { MdDeleteOutline } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
 
-export const DeleteUserButton = (props: UrlParam): ReactNode => {
+export const DeleteUserButton = (props: UrlParam): React.ReactNode => {
   const deleteUserMutation = useDeleteUserMutation()
 
   useUpdateEffect(() => {

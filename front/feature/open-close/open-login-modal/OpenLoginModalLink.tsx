@@ -1,19 +1,18 @@
 import { appSlice } from '@shared/appSlice'
 import { route } from '@shared/lib/react-router-dom/route'
 import { dispatch } from '@shared/lib/redux'
-import type { JSX, MouseEvent } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 type Props = {
   slideOut: () => Promise<void>
 }
 
-export const OpenLoginModalLink = (props: Props): JSX.Element => {
+export const OpenLoginModalLink = (props: Props): React.JSX.Element => {
   const navigate = useNavigate()
 
   return (
     <Link
-      onClick={(event: MouseEvent): void => {
+      onClick={(event: React.MouseEvent): void => {
         event.preventDefault()
 
         const slideAndNavigate = async (): Promise<void> => {

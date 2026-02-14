@@ -1,8 +1,7 @@
 import { Box } from '@mui/material'
 import { useSelector } from '@shared/lib/redux'
-import type { JSX } from 'react'
 
-export const BackgroundMessage = (): JSX.Element => {
+export const BackgroundMessage = (): React.JSX.Element => {
   const backgroundMessage = useSelector((state) => state.app.backgroundMessage)
 
   return (

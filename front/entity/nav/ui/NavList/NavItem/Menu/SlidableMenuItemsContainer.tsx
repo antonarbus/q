@@ -1,15 +1,14 @@
 import type { NavItemId } from '@entity/nav/navItemId'
-import type { ComponentRef, ReactNode, RefObject } from 'react'
 import { getNavItem } from './functions/getNavItem'
 import { MenuItem } from './MenuItem'
 
 type Props = {
-  reference: RefObject<ComponentRef<'div'> | null>
+  reference: React.RefObject<React.ComponentRef<'div'> | null>
   className: string
   menuNavItemId: NavItemId | null
 }
 
-export const SlidableMenuItemsContainer = (props: Props): ReactNode => {
+export const SlidableMenuItemsContainer = (props: Props): React.ReactNode => {
   if (props.menuNavItemId === null) {
     return null
   }

@@ -3,12 +3,12 @@ import { navSlice } from '@entity/nav/navSlice'
 import type { NavItem } from '@entity/nav/type'
 import { dispatch, getState } from '@shared/lib/redux'
 import { functionRegistry } from '@widget/nav/functionRegistry'
-import type { ComponentRef, MouseEvent, RefObject } from 'react'
 
 type Props = {
-  event: MouseEvent
+  event: React.MouseEvent
+
   navItem: NavItem
-  navItemRef: RefObject<ComponentRef<'li'> | null>
+  navItemRef: React.RefObject<React.ComponentRef<'li'> | null>
   disabled: boolean
 }
 

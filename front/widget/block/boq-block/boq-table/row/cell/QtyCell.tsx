@@ -10,9 +10,8 @@ import { tabFromQtyCell } from '@feature/blocks/tab-away-from-cell'
 import { formatQtyCell, updateQtyCell } from '@feature/blocks/update'
 import { Box } from '@mui/material'
 import { TextEditor } from '@shared/component/TextEditor'
-import type { JSX, MouseEvent } from 'react'
 
-export const QtyCell = (): JSX.Element => {
+export const QtyCell = (): React.JSX.Element => {
   const block = useBlock()
   const boq = useBoq()
   const row = useRow()
@@ -64,7 +63,7 @@ export const QtyCell = (): JSX.Element => {
       />
       <Pin
         cellKey='qty'
-        onClick={(event: MouseEvent) => {
+        onClick={(event: React.MouseEvent) => {
           event.preventDefault() // otherwise form is submitted (no idea why)
           pinQtyCell({ blockIndex: block.index, rowIndex: row.index })
         }}

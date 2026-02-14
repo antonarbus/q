@@ -1,13 +1,12 @@
 import { InputAdornment, TextField, type TextFieldProps } from '@mui/material'
 import type { Signal } from '@preact/signals-react'
-import type { JSX } from 'react'
 import { BsFileEarmarkText } from 'react-icons/bs'
 
 type Props = {
   descSignal: Signal<string | undefined>
 } & TextFieldProps
 
-export const DescriptionField = (props: Props): JSX.Element => {
+export const DescriptionField = (props: Props): React.JSX.Element => {
   const { descSignal, ...restProps } = props
 
   return (

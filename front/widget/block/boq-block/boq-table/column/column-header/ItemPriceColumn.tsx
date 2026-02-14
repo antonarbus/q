@@ -3,12 +3,12 @@ import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { getBoqColumnHtmlFromStore } from '@entity/quotation/redux/getter/getBoqColumnHtmlFromStore'
 import { columnHeaderStyle } from '@entity/quotation/style/columnHeaderStyle'
 import { updateColumnCell } from '@feature/blocks/update'
-import { type JSX, useRef } from 'react'
+import { useRef } from 'react'
 import { ResizableColumn } from '../ResizableColumn'
 import { TextEditor } from '@shared/component/TextEditor'
 import type { Editor } from '@tiptap/react'
 
-export const ItemPriceColumn = (): JSX.Element => {
+export const ItemPriceColumn = (): React.JSX.Element => {
   const editorRef = useRef<Editor | null>(null)
   const block = useBlock()
 

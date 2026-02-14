@@ -1,14 +1,14 @@
 import { type AnimationScope, motion } from 'motion/react'
-import type { JSX, ReactNode } from 'react'
+
 import { useCursorPos } from './useCursorPos'
 import { cls } from '@shared/cls'
 
 type Props = {
-  children: ReactNode
+  children: React.ReactNode
   ref: AnimationScope<HTMLDivElement>
 }
 
-export const CopyModalLayout = (props: Props): JSX.Element => {
+export const CopyModalLayout = (props: Props): React.JSX.Element => {
   useCursorPos({ copyModalRef: props.ref })
 
   return (

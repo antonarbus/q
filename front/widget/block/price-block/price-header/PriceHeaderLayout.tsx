@@ -1,14 +1,13 @@
 import { Box } from '@mui/material'
 import { theme } from '@shared/theme'
-import type { JSX } from 'react'
 
 type Props = {
-  title: JSX.Element
+  title: React.JSX.Element
   hideContentForDevPurposes?: boolean
   outlinedForDevPurposes?: boolean
 }
 
-export const PriceHeaderLayout = (props: Props): JSX.Element => {
+export const PriceHeaderLayout = (props: Props): React.JSX.Element => {
   return (
     <Box
       sx={{

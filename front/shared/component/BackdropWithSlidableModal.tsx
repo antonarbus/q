@@ -1,17 +1,17 @@
 import { getState } from '@shared/lib/redux'
-import { type JSX, type ReactNode, useRef } from 'react'
+import { useRef } from 'react'
 import { useEffectOnce } from 'react-use'
 import { useAnimatedElement } from '../util/useAnimatedElement'
 
 type Props = {
-  children: ReactNode
+  children: React.ReactNode
   onMount?: () => void
   onUnmount?: () => void
   shouldUnmountOnClickAway: boolean
   shouldUnmountOnEsc?: boolean
 }
 
-export const BackdropWithSlidableModal = (props: Props): JSX.Element => {
+export const BackdropWithSlidableModal = (props: Props): React.JSX.Element => {
   const animatedElement = useAnimatedElement()
 
   const scrollTopPositionBeforeModalOpen = useRef(

@@ -8,9 +8,8 @@ import { tabFromDescriptionCell } from '@feature/blocks/tab-away-from-cell'
 import { updateDescriptionCell } from '@feature/blocks/update'
 import { upload } from '@feature/file/upload-file'
 import { TextEditor } from '@shared/component/TextEditor'
-import type { JSX } from 'react'
 
-export const DescriptionCell = (): JSX.Element => {
+export const DescriptionCell = (): React.JSX.Element => {
   const block = useBlock()
   const row = useRow()
 

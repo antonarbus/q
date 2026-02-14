@@ -1,4 +1,3 @@
-import type { JSX } from 'react'
 import type { EditorEvents } from '@tiptap/react'
 import type { EditorView } from '@tiptap/pm/view'
 import type { EditorRef, OnUpload } from '@shared/lib/tiptap/types'
@@ -22,7 +21,7 @@ type Props = {
   onUpload?: OnUpload
 }
 
-export const TextEditor = (props: Props): JSX.Element => {
+export const TextEditor = (props: Props): React.JSX.Element => {
   return (
     <TiptapProvider {...props}>
       <EditorNotStatic />

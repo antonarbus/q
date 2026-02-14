@@ -1,4 +1,4 @@
-import { type JSX, useEffect } from 'react'
+import { useEffect } from 'react'
 import { Tiptap, useEditor, EditorContent } from '@tiptap/react'
 import { FloatingMenu } from './menu/FloatingMenu'
 import { ImageMenu } from './menu/ImageMenu'
@@ -8,7 +8,7 @@ import { useDropFile } from './file-upload/useDropFile'
 import { usePasteFile } from './file-upload/usePasteFile'
 import { useTiptapCtx } from './provider/TiptapProvider'
 
-export const TiptapEditor = (): JSX.Element => {
+export const TiptapEditor = (): React.JSX.Element => {
   const tiptapCtx = useTiptapCtx()
   const extensions = useExtensions()
   const dropFile = useDropFile()

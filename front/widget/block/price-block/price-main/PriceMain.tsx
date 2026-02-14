@@ -1,7 +1,6 @@
-import type { JSX } from 'react'
 import { PriceMainLayout } from './PriceMainLayout'
 import { PriceValue } from './PriceValue'
 
-export const PriceMain = (): JSX.Element => {
+export const PriceMain = (): React.JSX.Element => {
   return <PriceMainLayout main={<PriceValue />} />
 }

@@ -1,15 +1,14 @@
 import { css } from '@emotion/react'
 import { theme } from '@shared/theme'
-import type { ComponentRef, JSX, ReactNode, RefObject } from 'react'
 
 type Props = {
-  children: ReactNode
-  navItemRef: RefObject<ComponentRef<'li'> | null>
+  children: React.ReactNode
+  navItemRef: React.RefObject<React.ComponentRef<'li'> | null>
   disabled: boolean
   isActive?: boolean
 }
 
-export const NavItemLayout = (props: Props): JSX.Element => {
+export const NavItemLayout = (props: Props): React.JSX.Element => {
   return (
     <li
       className='nav-item'

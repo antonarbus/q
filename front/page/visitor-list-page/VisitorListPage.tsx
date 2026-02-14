@@ -2,14 +2,14 @@ import { useGetUniqueDailyVisitorCountQuery } from '@entity/visitor/api/useGetUn
 import { Box } from '@mui/material'
 import { DatePicker } from '@mui/x-date-pickers'
 import { format, subDays } from 'date-fns'
-import { type JSX, useState } from 'react'
+import { useState } from 'react'
 import { useChart } from '@shared/lib/chart-js'
 import { useUpdateChart } from '@feature/visitors/update-chart-acc-to-date-range'
 
 const today = new Date()
 const thirtyDaysAgo = subDays(today, 30)
 
-export const VisitorListPage = (): JSX.Element => {
+export const VisitorListPage = (): React.JSX.Element => {
   const chart = useChart()
   const [startDate, setStartDate] = useState(thirtyDaysAgo)
   const [endDate, setEndDate] = useState(today)

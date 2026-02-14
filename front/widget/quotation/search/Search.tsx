@@ -10,7 +10,7 @@ import { cls } from '@shared/cls'
 import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import { textSlice } from '@shared/lib/tiptap/store/textSlice'
 import { dispatch, useSelector } from '@shared/lib/redux'
-import { type HTMLAttributes, type JSX, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
 import { OptionItemCategory } from './OptionItemCategory'
@@ -19,7 +19,7 @@ import { OptionItemName } from './OptionItemName'
 import { PaperComponent } from './PaperComponent'
 import { renderInput } from './renderInput'
 
-export const Search = (): JSX.Element => {
+export const Search = (): React.JSX.Element => {
   const getBookmarkListQuery = useGetBookmarkListQuery()
   const options = getBookmarkListQuery.data?.bookmarkList ?? []
   const inputValueSignal = useSignal('')
@@ -76,9 +76,9 @@ export const Search = (): JSX.Element => {
       popupIcon={null}
       renderInput={renderInput}
       renderOption={(
-        _props: HTMLAttributes<HTMLLIElement>,
+        _props: React.HTMLAttributes<HTMLLIElement>,
         option: ResBody['bookmarkList'][number],
-      ): JSX.Element => {
+      ): React.JSX.Element => {
         return (
           <li
             css={{

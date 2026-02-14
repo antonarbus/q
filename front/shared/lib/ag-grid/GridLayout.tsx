@@ -1,12 +1,11 @@
 import { Box } from '@mui/material'
-import type { ComponentRef, JSX, ReactNode, RefObject } from 'react'
 
 type Props = {
-  children: ReactNode
-  gridContainerRef: RefObject<ComponentRef<'div'> | null>
+  children: React.ReactNode
+  gridContainerRef: React.RefObject<React.ComponentRef<'div'> | null>
 }
 
-export const GridLayout = (props: Props): JSX.Element => {
+export const GridLayout = (props: Props): React.JSX.Element => {
   return (
     <Box
       className='q-table'

@@ -7,12 +7,12 @@ import { DescriptionField } from '@shared/component/input-field/DescriptionField
 import { InfoField } from '@shared/component/input-field/InfoField'
 import { NameField } from '@shared/component/input-field/NameField'
 import { router } from '@shared/lib/react-router-dom/router'
-import { type ReactNode, useRef } from 'react'
+import { useRef } from 'react'
 import { BsInfo } from 'react-icons/bs'
 import { useParams } from 'react-router-dom'
 import { useDistinctCategories } from './useDistinctCategories'
 
-export const InfoModal = (): ReactNode => {
+export const InfoModal = (): React.ReactNode => {
   const urlParams = useParams()
   const modalRef = useRef<HTMLDivElement>(null)
   const infoFormValues = useInfoFormValues()

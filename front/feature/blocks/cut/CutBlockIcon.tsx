@@ -10,10 +10,9 @@ import { dispatch, getState, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import { fixElementDimensionStyle } from '@shared/util/fixElementDimensionStyle'
 import { getClosestPaperElementHtml } from '@shared/util/html-getter/getClosestPaperElementHtml'
-import type { JSX, MouseEvent } from 'react'
 import { TbCut } from 'react-icons/tb'
 
-export const CutBlockIcon = (): JSX.Element => {
+export const CutBlockIcon = (): React.JSX.Element => {
   const block = useBlock()
   const isBlockAlone = useSelector(selectIsLastBlock)
   const isCuttable = useSelector((state) => state.copy.isCuttable)
@@ -24,7 +23,7 @@ export const CutBlockIcon = (): JSX.Element => {
       <span className={cls.actionIconContainer}>
         <TbCut
           className={cls.actionIcon}
-          onClick={(event: MouseEvent): void => {
+          onClick={(event: React.MouseEvent): void => {
             if (disabled === true) {
               return
             }

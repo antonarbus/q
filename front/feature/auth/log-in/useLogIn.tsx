@@ -10,7 +10,6 @@ import { route } from '@shared/lib/react-router-dom/route'
 import { dispatch, getState } from '@shared/lib/redux'
 import { asyncDelay } from '@shared/util/asyncDelay'
 import type { UseMutationResult } from '@tanstack/react-query'
-import type { SubmitEvent } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
@@ -22,7 +21,7 @@ type Props = {
 }
 
 type Res = {
-  handleSubmit: (e: SubmitEvent) => void
+  handleSubmit: (e: React.SubmitEvent) => void
   isPending: UseMutationResult['isPending']
   isSuccess: UseMutationResult['isSuccess']
   isError: UseMutationResult['isError']
@@ -142,7 +141,7 @@ export const useLogIn = (props: Props): Res => {
     }
   }, [logInUserMutation.isError])
 
-  const handleSubmit = (event: SubmitEvent): void => {
+  const handleSubmit = (event: React.SubmitEvent): void => {
     event.preventDefault()
 
     logInUserMutation.mutate({

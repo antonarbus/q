@@ -1,11 +1,10 @@
 import { cls } from '@shared/cls'
-import type { JSX, ReactNode } from 'react'
 
 type Props = {
-  children: ReactNode
+  children: React.ReactNode
 }
 
-export const RowsLayout = (props: Props): JSX.Element => {
+export const RowsLayout = (props: Props): React.JSX.Element => {
   return (
     <div
       className={cls.rows}

@@ -5,7 +5,6 @@ import {
   type TextFieldProps,
 } from '@mui/material'
 import type { Signal } from '@preact/signals-react'
-import type { JSX } from 'react'
 import { BsTags } from 'react-icons/bs'
 
 type Props = {
@@ -13,7 +12,7 @@ type Props = {
   options: string[]
 } & TextFieldProps
 
-export const CategoryField = (props: Props): JSX.Element => {
+export const CategoryField = (props: Props): React.JSX.Element => {
   const { categorySignal, options, ...rest } = props
 
   return (

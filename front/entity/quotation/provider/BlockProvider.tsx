@@ -1,11 +1,4 @@
-import {
-  type Context,
-  createContext,
-  type JSX,
-  type ReactNode,
-  useContext,
-  useMemo,
-} from 'react'
+import { createContext, useContext, useMemo } from 'react'
 import type { BlockItem } from '@back/entity/quotation/schema'
 
 type Res = {
@@ -14,12 +7,12 @@ type Res = {
 }
 
 type Props = Res & {
-  children: ReactNode
+  children: React.ReactNode
 }
 
-const BlockContext: Context<Res | null> = createContext<Res | null>(null)
+const BlockContext: React.Context<Res | null> = createContext<Res | null>(null)
 
-export const BlockProvider = (props: Props): JSX.Element => {
+export const BlockProvider = (props: Props): React.JSX.Element => {
   const blockContextData = useMemo(() => {
     const contextData = {
       index: props.index,

@@ -6,11 +6,11 @@ import type {
 } from '@shared/lib/re-resizable/resizablePaper'
 import { useSelector } from '@shared/lib/redux'
 import { Resizable, type ResizableProps } from 're-resizable'
-import type { JSX, ReactNode } from 'react'
+
 import { useBlock } from '../../provider/BlockProvider'
 
 type Props = {
-  children: ReactNode
+  children: React.ReactNode
   autoWidth?: boolean
   minWidth?: ResizableProps['minWidth']
   onItemResizeStart?: OnBlockResizeStart
@@ -18,7 +18,7 @@ type Props = {
   onItemResizeStop?: OnBlockResizeStop
 }
 
-export const ResizableBlockPaper = (props: Props): JSX.Element => {
+export const ResizableBlockPaper = (props: Props): React.JSX.Element => {
   const block = useBlock()
 
   const width = useSelector(

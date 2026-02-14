@@ -7,9 +7,8 @@ import { cellStyle } from '@entity/quotation/style/cellStyle'
 import { updateDescriptionCell } from '@feature/blocks/update/update-cell-at-bookmarked-row-block/description/updateDescriptionCell'
 import { upload } from '@feature/file/upload-file'
 import { TextEditor } from '@shared/component/TextEditor'
-import type { JSX } from 'react'
 
-export const DescriptionCell = (): JSX.Element => {
+export const DescriptionCell = (): React.JSX.Element => {
   const row = useRow()
 
   const stylesForResizableCell = useStylesForResizableCell({

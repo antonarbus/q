@@ -1,16 +1,9 @@
-import {
-  type Context,
-  createContext,
-  type JSX,
-  type ReactNode,
-  useContext,
-  useMemo,
-} from 'react'
+import { createContext, useContext, useMemo } from 'react'
 import type { RowEditorRefs } from '../ref/rowEditorRefs'
 import type { EditorRef } from '@shared/lib/tiptap/types'
 
 type Props = {
-  children: ReactNode
+  children: React.ReactNode
 }
 
 type Res = {
@@ -18,9 +11,9 @@ type Res = {
   rowEditorRefs: RowEditorRefs
 }
 
-const BoqContext: Context<Res | null> = createContext<Res | null>(null)
+const BoqContext: React.Context<Res | null> = createContext<Res | null>(null)
 
-export const BoqProvider = (props: Props): JSX.Element => {
+export const BoqProvider = (props: Props): React.JSX.Element => {
   const blockContextData = useMemo(() => {
     const contextData = {
       subTotalPriceEditorRef: { current: null },

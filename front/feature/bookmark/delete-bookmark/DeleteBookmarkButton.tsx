@@ -3,12 +3,11 @@ import { useDeleteBookmarkMutation } from '@entity/bookmark/api/useDeleteBookmar
 import { deleteFromBookmarkListCache } from '@entity/bookmark/cache-updater/deleteFromBookmarkListCache'
 import { IconButton, Tooltip } from '@mui/material'
 import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
-import type { JSX } from 'react'
 import { MdDeleteOutline } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
 
-export const DeleteBookmarkButton = (props: UrlParam): JSX.Element => {
+export const DeleteBookmarkButton = (props: UrlParam): React.JSX.Element => {
   const deleteBookmarkMutation = useDeleteBookmarkMutation()
 
   useUpdateEffect(() => {

@@ -1,14 +1,14 @@
 import { Box, Portal } from '@mui/material'
 import { theme } from '@shared/theme'
-import { type ReactNode, useMemo } from 'react'
+import { useMemo } from 'react'
 import { useIsMenuOutsideWindow } from './functions/useIsMenuOutsideWindow'
 
 type Props = {
-  children: ReactNode
+  children: React.ReactNode
   navItemRef?: { current: HTMLElement | null }
 }
 
-export const MenuLayout = (props: Props): ReactNode => {
+export const MenuLayout = (props: Props): React.ReactNode => {
   const isMenuOutsideWindow = useIsMenuOutsideWindow()
 
   // Calculate menu position based on parent nav item

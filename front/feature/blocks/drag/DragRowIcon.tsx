@@ -2,10 +2,9 @@ import { useIsRowsSortDisabled } from '@entity/quotation/hook/useIsRowsSortDisab
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/cls'
 import { useDragHandleProps } from '@shared/lib/hello-pangea-dnd/DragHandleContext'
-import type { JSX } from 'react'
 import { MdDragIndicator } from 'react-icons/md'
 
-export const DragRowIcon = (): JSX.Element => {
+export const DragRowIcon = (): React.JSX.Element => {
   const disabled = useIsRowsSortDisabled()
   const dragHandleProps = useDragHandleProps()
 

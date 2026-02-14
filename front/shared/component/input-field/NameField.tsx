@@ -1,13 +1,12 @@
 import { InputAdornment, TextField, type TextFieldProps } from '@mui/material'
 import type { Signal } from '@preact/signals-react'
-import type { JSX } from 'react'
 import { PiBooks } from 'react-icons/pi'
 
 type Props = {
   nameSignal: Signal<string | undefined>
 } & TextFieldProps
 
-export const NameField = (props: Props): JSX.Element => {
+export const NameField = (props: Props): React.JSX.Element => {
   const { nameSignal, ...restProps } = props
 
   return (

@@ -1,10 +1,9 @@
 import { columnMinWidth } from '@entity/quotation/const/columnMinWidth'
 import { columnHeaderStyle } from '@entity/quotation/style/columnHeaderStyle'
 import { Box } from '@mui/material'
-import type { JSX } from 'react'
 import { ResizableColumn } from '../ResizableColumn'
 
-export const ItemPriceColumn = (): JSX.Element => {
+export const ItemPriceColumn = (): React.JSX.Element => {
   return (
     <ResizableColumn
       boqColumnKey='itemPrice'

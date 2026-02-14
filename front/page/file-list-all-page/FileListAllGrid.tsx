@@ -19,14 +19,14 @@ import {
   themeQuartz,
 } from 'ag-grid-community'
 import { AgGridReact } from 'ag-grid-react'
-import { type ComponentRef, type JSX, useRef } from 'react'
+import { useRef } from 'react'
 import { columnDefs } from './columnDef'
 import { fileListAllAgGridRef } from './ref/fileListAllAgGridRef'
 
 ModuleRegistry.registerModules([AllCommunityModule])
 
-export const FileListAllGrid = (): JSX.Element => {
-  const gridContainerRef = useRef<ComponentRef<'div'> | null>(null)
+export const FileListAllGrid = (): React.JSX.Element => {
+  const gridContainerRef = useRef<React.ComponentRef<'div'> | null>(null)
   const fileListAll = useFileListAll()
   useShowLoadingJumpingDots({ isLoading: fileListAll.isLoading })
 

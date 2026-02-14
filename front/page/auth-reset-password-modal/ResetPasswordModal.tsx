@@ -9,11 +9,11 @@ import { EmailField } from '@shared/component/input-field/EmailField'
 import { PasswordField } from '@shared/component/input-field/PasswordField'
 import { router } from '@shared/lib/react-router-dom/router'
 import { useAnimatedElement } from '@shared/util/useAnimatedElement'
-import { type ReactNode, useRef } from 'react'
+import { useRef } from 'react'
 import { MdPassword } from 'react-icons/md'
 import { useParams } from 'react-router-dom'
 
-export const ResetPasswordModal = (): ReactNode => {
+export const ResetPasswordModal = (): React.ReactNode => {
   const animatedElement = useAnimatedElement()
   const urlParams = useParams()
   const inputRef = useRef<HTMLDivElement>(null)

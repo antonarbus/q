@@ -1,7 +1,6 @@
 import type { ResBody } from '@back/api/bookmark/getBookmarkListHandler'
 import { Box } from '@mui/material'
 import { getTextWithBoldSubStringAsJsx } from '@shared/util/getTextWithBoldSubStringAsJsx'
-import type { JSX } from 'react'
 import { PiBooks } from 'react-icons/pi'
 
 type Props = {
@@ -9,7 +8,7 @@ type Props = {
   option: ResBody['bookmarkList'][number]
 }
 
-export const OptionItemName = (props: Props): JSX.Element => {
+export const OptionItemName = (props: Props): React.JSX.Element => {
   return (
     <Box
       sx={{

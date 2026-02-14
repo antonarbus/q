@@ -1,8 +1,7 @@
 import { useIsCopyModalVisible } from '@entity/copy/useIsCopyModalVisible'
-import type { JSX } from 'react'
 import { CopyModal } from './CopyModal'
 
-export const Copy = (): JSX.Element | null => {
+export const Copy = (): React.JSX.Element | null => {
   const isCopyModalVisible = useIsCopyModalVisible()
 
   if (isCopyModalVisible === false) {

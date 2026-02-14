@@ -5,11 +5,10 @@ import { getRowFromStore } from '@entity/quotation/redux/getter/getRowFromStore'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/cls'
 import { route } from '@shared/lib/react-router-dom/route'
-import type { MouseEvent, ReactNode } from 'react'
 import { HiOutlineInformationCircle } from 'react-icons/hi2'
 import { useNavigate } from 'react-router-dom'
 
-export const OpenInfoRowModalIcon = (): ReactNode => {
+export const OpenInfoRowModalIcon = (): React.ReactNode => {
   const navigate = useNavigate()
   const block = useBlock()
   const row = useRow()
@@ -27,7 +26,7 @@ export const OpenInfoRowModalIcon = (): ReactNode => {
         <HiOutlineInformationCircle
           aria-hidden={false} // otherwise error in dev tools
           className={cls.actionIcon}
-          onClick={(event: MouseEvent): void => {
+          onClick={(event: React.MouseEvent): void => {
             if (disabled === true) {
               return
             }

@@ -1,6 +1,5 @@
 import { css } from '@emotion/react'
 import type { NavItem } from '@entity/nav/type'
-import type { ReactNode } from 'react'
 import { TiArrowSortedDown } from 'react-icons/ti'
 import { navMediaQuery } from '../../navMediaQuery'
 
@@ -8,7 +7,7 @@ type Props = {
   navItem: NavItem | undefined
 }
 
-export const ArrowForNestedMenu = (props: Props): ReactNode => {
+export const ArrowForNestedMenu = (props: Props): React.ReactNode => {
   const isNestedMenu = Boolean(props.navItem?.nestedItemList)
   const disabled = Boolean(props.navItem?.disabled)
 

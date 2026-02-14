@@ -4,12 +4,12 @@ import { BackdropWithSlidableModal } from '@shared/component/BackdropWithSlidabl
 import { CardCustom } from '@shared/component/CardCustom'
 import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import { theme } from '@shared/theme'
-import { type JSX, useRef } from 'react'
+import { useRef } from 'react'
 import { GrValidate } from 'react-icons/gr'
 import { PiSmileyBold, PiSmileySadBold } from 'react-icons/pi'
 import { useNavigate } from 'react-router-dom'
 
-export const ActivationModal = (): JSX.Element => {
+export const ActivationModal = (): React.JSX.Element => {
   const cardRef = useRef<HTMLDivElement>(null)
   const navigate = useNavigate()
   const activate = useActivate()

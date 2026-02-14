@@ -1,12 +1,11 @@
 import { navMediaQuery } from '@entity/nav/ui/navMediaQuery'
 import { theme } from '@shared/theme'
-import type { JSX, ReactNode } from 'react'
 
 type Props = {
-  children: ReactNode
+  children: React.ReactNode
 }
 
-export const NavLayout = (props: Props): JSX.Element => {
+export const NavLayout = (props: Props): React.JSX.Element => {
   return (
     <nav
       css={{

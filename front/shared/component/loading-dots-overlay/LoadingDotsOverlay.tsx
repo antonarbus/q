@@ -1,5 +1,4 @@
 import { useSelector } from '@shared/lib/redux'
-import type { JSX } from 'react'
 import { LoadingDots } from './LoadingDots'
 
 type Props = {
@@ -7,7 +6,7 @@ type Props = {
   text: string | null
 }
 
-export const LoadingDotsOverlay = (props: Props): JSX.Element | null => {
+export const LoadingDotsOverlay = (props: Props): React.JSX.Element | null => {
   const loadingOverlay = useSelector((state) => state.app.loadingOverlay)
 
   const notLoading =

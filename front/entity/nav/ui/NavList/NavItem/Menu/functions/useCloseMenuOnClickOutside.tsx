@@ -1,11 +1,11 @@
 import { navSlice } from '@entity/nav/navSlice'
 import { dispatch } from '@shared/lib/redux'
 import { didClickInsideThisElement } from '@shared/util/isClickInsideThisElement'
-import { type ComponentRef, type RefObject, useEffect } from 'react'
+import { useEffect } from 'react'
 
 type Props = {
-  menuContainerRef: RefObject<ComponentRef<'div'> | null>
-  navItemRef?: RefObject<HTMLElement | null>
+  menuContainerRef: React.RefObject<React.ComponentRef<'div'> | null>
+  navItemRef?: React.RefObject<HTMLElement | null>
 }
 
 export const useCloseMenuOnClickOutside = (props: Props): void => {

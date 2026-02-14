@@ -5,7 +5,6 @@ import type {
   ICellRendererParams,
 } from 'ag-grid-community'
 import { format, isValid } from 'date-fns'
-import type { ReactNode } from 'react'
 
 type Props<
   TData extends Record<string, unknown>,
@@ -49,7 +48,9 @@ export const getDateColDef = <
         return 0
       },
     },
-    cellRenderer: (params: ICellRendererParams<TData, TValue>): ReactNode => {
+    cellRenderer: (
+      params: ICellRendererParams<TData, TValue>,
+    ): React.ReactNode => {
       if (typeof params.value !== 'string') {
         return null
       }

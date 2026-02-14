@@ -7,14 +7,14 @@ import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import { getState } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import { format } from 'bytes'
-import { type JSX, useMemo, useRef, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { FiFileText } from 'react-icons/fi'
 import { GrStorage } from 'react-icons/gr'
 import { IoSettingsOutline } from 'react-icons/io5'
 import { MdExpandLess, MdExpandMore } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
 
-export const SettingsModal = (): JSX.Element => {
+export const SettingsModal = (): React.JSX.Element => {
   const cardRef = useRef<HTMLDivElement>(null)
   const navigate = useNavigate()
   const [collapseOpen, setCollapseOpen] = useState(false)

@@ -1,12 +1,11 @@
 import { DownloadFileIcon } from '@feature/file/download-file'
 import { Box } from '@mui/material'
 import type { ICellRendererParams } from 'ag-grid-community'
-import type { ReactNode } from 'react'
 import type { ResBody } from '@back/api/file/getFileListAllHandler'
 
 type Params = ICellRendererParams<ResBody['fileList'][number]>
 
-export const ActionButtonsCellRenderer = (params: Params): ReactNode => {
+export const ActionButtonsCellRenderer = (params: Params): React.ReactNode => {
   if (params.data?.id === undefined) {
     return null
   }

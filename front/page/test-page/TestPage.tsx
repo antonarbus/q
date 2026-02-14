@@ -1,6 +1,5 @@
-import type { JSX } from 'react'
 import { Box } from '@mui/material'
 
-export const TestPage = (): JSX.Element => {
+export const TestPage = (): React.JSX.Element => {
   return <Box>test</Box>
 }

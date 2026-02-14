@@ -1,11 +1,10 @@
 import { type CSSObject, TextField } from '@mui/material'
-import type { JSX, ReactNode, RefObject } from 'react'
 
 type InputComponentProps = Record<string, unknown> & {
-  ref: RefObject<HTMLDivElement>
+  ref: React.RefObject<HTMLDivElement>
 }
 
-const InputComponent = (props: InputComponentProps): JSX.Element => {
+const InputComponent = (props: InputComponentProps): React.JSX.Element => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { ownerState, ref, ...other } = props
 
@@ -23,13 +22,13 @@ const InputComponent = (props: InputComponentProps): JSX.Element => {
 }
 
 type Props = {
-  children: ReactNode
+  children: React.ReactNode
   label: string
   sx?: CSSObject
 }
 
 // eslint-disable-next-line react/no-multi-comp
-export const OutlinedDivWithLabel = (props: Props): JSX.Element => {
+export const OutlinedDivWithLabel = (props: Props): React.JSX.Element => {
   return (
     <TextField
       disabled={false}

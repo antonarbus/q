@@ -1,11 +1,11 @@
-import type { ReactNode } from 'react'
-
 type Props = {
   text: string
   subString: string
 }
 
-export const getTextWithBoldSubStringAsJsx = (props: Props): ReactNode => {
+export const getTextWithBoldSubStringAsJsx = (
+  props: Props,
+): React.ReactNode => {
   if (props.subString.length === 0) {
     return props.text
   }

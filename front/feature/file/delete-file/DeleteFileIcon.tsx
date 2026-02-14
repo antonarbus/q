@@ -1,7 +1,6 @@
 import { Tooltip } from '@mui/material'
 import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import { theme } from '@shared/theme'
-import type { JSX } from 'react'
 import { MdDeleteOutline } from 'react-icons/md'
 import { useDeleteFile } from './useDeleteFile'
 
@@ -9,7 +8,7 @@ type Props = {
   fileId: string
 }
 
-export const DeleteFileIcon = (props: Props): JSX.Element => {
+export const DeleteFileIcon = (props: Props): React.JSX.Element => {
   const deleteFile = useDeleteFile({ fileId: props.fileId })
 
   if (deleteFile.isPending === true) {

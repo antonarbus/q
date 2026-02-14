@@ -1,11 +1,10 @@
-import type { JSX } from 'react'
 import { MenuButton } from './MenuButton'
 import { useTiptap, useTiptapState } from '@tiptap/react'
 import { RiAlignLeft, RiAlignCenter, RiAlignRight } from 'react-icons/ri'
 
 type Alignment = 'left' | 'center' | 'right'
 
-export const AlignButtons = (): JSX.Element => {
+export const AlignButtons = (): React.JSX.Element => {
   const { editor } = useTiptap()
 
   const alignment = useTiptapState((ctx): Alignment => {

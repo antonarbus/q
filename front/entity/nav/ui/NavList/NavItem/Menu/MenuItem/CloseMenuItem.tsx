@@ -1,6 +1,6 @@
 import { dispatch, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
-import { createElement, type JSX, type MouseEvent } from 'react'
+import { createElement } from 'react'
 import { CgClose as CloseIcon } from 'react-icons/cg'
 import { navSlice } from '../../../../../navSlice'
 import { Icon } from '../../Icon'
@@ -9,7 +9,7 @@ import { TextInMenu } from './TextInMenu'
 
 const closeIcon = createElement(CloseIcon, {})
 
-export const CloseMenuItem = (): JSX.Element => {
+export const CloseMenuItem = (): React.JSX.Element => {
   const color = theme.colors.topMenuItem
 
   const isHovered = useSelector((state) => state.nav.hoverIndex === 0)
@@ -17,7 +17,7 @@ export const CloseMenuItem = (): JSX.Element => {
   return (
     <MenuItemLayout
       isHovered={isHovered}
-      onClick={(event: MouseEvent): void => {
+      onClick={(event: React.MouseEvent): void => {
         event.preventDefault()
         dispatch(navSlice.actions.closeMenu())
       }}

@@ -8,10 +8,10 @@ import { EmailField } from '@shared/component/input-field/EmailField'
 import { PasswordField } from '@shared/component/input-field/PasswordField'
 import { router } from '@shared/lib/react-router-dom/router'
 import { useAnimatedElement } from '@shared/util/useAnimatedElement'
-import { type JSX, useRef } from 'react'
+import { useRef } from 'react'
 import { MdLockOutline } from 'react-icons/md'
 
-export const RegisterModal = (): JSX.Element => {
+export const RegisterModal = (): React.JSX.Element => {
   const animatedElement = useAnimatedElement()
   const inputRef = useRef<HTMLDivElement>(null)
   const emailSignal = useSignal('')

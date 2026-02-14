@@ -3,13 +3,13 @@ import { getBoqHeaderHtmlFromStore } from '@entity/quotation/redux/getter/getBoq
 import { titleCellStyle } from '@entity/quotation/style/titleCellStyle'
 import type { HeaderKey } from '@back/entity/quotation/schema'
 import { updateTitle } from '@feature/blocks/update'
-import { type JSX, useRef } from 'react'
+import { useRef } from 'react'
 import { TextEditor } from '@shared/component/TextEditor'
 import type { Editor } from '@tiptap/react'
 
 const boqHeaderKey: HeaderKey = 'title'
 
-export const Title = (): JSX.Element => {
+export const Title = (): React.JSX.Element => {
   const editorRef = useRef<Editor | null>(null)
   const block = useBlock()
 

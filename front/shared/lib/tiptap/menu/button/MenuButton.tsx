@@ -1,14 +1,13 @@
 import { Box } from '@mui/material'
-import type { JSX, ReactNode } from 'react'
 
 type Props = {
   onClick: () => void
   isActive: boolean
   title: string
-  children: ReactNode
+  children: React.ReactNode
 }
 
-export const MenuButton = (props: Props): JSX.Element => (
+export const MenuButton = (props: Props): React.JSX.Element => (
   <Box
     component='button'
     type='button'

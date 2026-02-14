@@ -5,13 +5,12 @@ import { IconButton, Tooltip } from '@mui/material'
 import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import { textSlice } from '@shared/lib/tiptap/store/textSlice'
 import { dispatch } from '@shared/lib/redux'
-import type { JSX } from 'react'
 import { AiTwotoneEdit } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
 
-export const OpenBookmarkModalButton = (props: UrlParam): JSX.Element => {
+export const OpenBookmarkModalButton = (props: UrlParam): React.JSX.Element => {
   const navigate = useNavigate()
   const getBookmarkMutation = useGetBookmarkMutation()
 

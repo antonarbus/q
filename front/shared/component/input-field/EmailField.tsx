@@ -2,14 +2,13 @@ import { InputAdornment, TextField } from '@mui/material'
 import { type Signal, useSignal, useSignalEffect } from '@preact/signals-react'
 import { theme } from '@shared/theme'
 import mailcheck from 'mailcheck'
-import type { ComponentRef, JSX, RefObject } from 'react'
 import { RiUser3Line } from 'react-icons/ri'
 import { z } from 'zod'
 
 type Props = {
   emailSignal: Signal<string>
   isEmailOkSignal: Signal<boolean>
-  inputRef?: RefObject<ComponentRef<'div'> | null>
+  inputRef?: React.RefObject<React.ComponentRef<'div'> | null>
   disabled?: boolean
   onClickAway?: () => void
   label?: string
@@ -22,7 +21,7 @@ type Suggestion = {
   full: string
 }
 
-export const EmailField = (props: Props): JSX.Element => {
+export const EmailField = (props: Props): React.JSX.Element => {
   const emailSuggestionSignal = useSignal('')
   const initEmailLabel = props.label ?? 'Email'
   const emailLabelSignal = useSignal(initEmailLabel)

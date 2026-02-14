@@ -3,12 +3,11 @@ import { useDeleteQuotationMutation } from '@entity/quotation/api/useDeleteQuota
 import { deleteFromQuotationListCache } from '@entity/quotation/cache-updater/deleteFromQuotationListCache'
 import { IconButton, Tooltip } from '@mui/material'
 import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
-import type { ReactNode } from 'react'
 import { MdDeleteOutline } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
 
-export const DeleteQuotationButton = (props: Payload): ReactNode => {
+export const DeleteQuotationButton = (props: Payload): React.ReactNode => {
   const deleteQuotationMutation = useDeleteQuotationMutation()
 
   useUpdateEffect(() => {

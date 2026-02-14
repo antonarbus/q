@@ -7,7 +7,6 @@ import { userSlice } from '@entity/user/redux/userSlice'
 import { agGridSlice } from '@shared/lib/ag-grid/agGridSlice'
 import { dispatch, getState } from '@shared/lib/redux'
 import { jwtDecode } from 'jwt-decode'
-import type { ReactNode } from 'react'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
 import { createActor } from 'xstate'
 
@@ -31,7 +30,7 @@ const loadingMenuIconMachine = createLoadingMenuIconMachine({
 
 const loadingIconActor = createActor(loadingMenuIconMachine).start()
 
-export const AccessToken = (): ReactNode => {
+export const AccessToken = (): React.ReactNode => {
   const getUserAccessTokenQuery = useGetUserAccessTokenQuery()
 
   // get initial access token on app load

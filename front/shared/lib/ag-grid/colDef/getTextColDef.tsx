@@ -4,7 +4,6 @@ import type {
   ColDefField,
   ICellRendererParams,
 } from 'ag-grid-community'
-import type { ReactNode } from 'react'
 
 type Props<
   TData extends Record<string, unknown>,
@@ -24,7 +23,9 @@ export const getTextColDef = <
     colId: props.field,
     cellDataType: 'text',
     filter: 'agTextColumnFilter',
-    cellRenderer: (params: ICellRendererParams<TData, TValue>): ReactNode => {
+    cellRenderer: (
+      params: ICellRendererParams<TData, TValue>,
+    ): React.ReactNode => {
       type FilterModel = Partial<
         Record<
           ColDefField<TData, TValue>,

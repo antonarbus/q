@@ -4,13 +4,12 @@ import { selectRows } from '@entity/quotation/redux/selector/selectRows'
 import { onRowDragEnd, onRowDragStart } from '@feature/blocks/drag'
 import { useSelector } from '@shared/lib/redux'
 import { arrayShapesEqualityFn } from '@shared/util/arrayShapesEqualityFn'
-import type { JSX, ReactNode } from 'react'
 
 type Props = {
-  children: ReactNode
+  children: React.ReactNode
 }
 
-export const RowsSortableContext = (props: Props): JSX.Element => {
+export const RowsSortableContext = (props: Props): React.JSX.Element => {
   const block = useBlock()
 
   const rows = useSelector(

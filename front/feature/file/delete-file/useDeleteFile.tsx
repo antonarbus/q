@@ -1,7 +1,7 @@
 import { useDeleteFileMutation } from '@entity/file/api/useDeleteFileMutation'
 import { instance } from '@shared/instance'
 import { queryKey } from '@shared/lib/tanstack/react-query/queryKey'
-import { type MouseEvent, useCallback } from 'react'
+import { useCallback } from 'react'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
 
@@ -10,7 +10,7 @@ type Props = {
 }
 
 type Res = {
-  handleClick: (e: MouseEvent) => void
+  handleClick: (e: React.MouseEvent) => void
   isSuccess: boolean
   isPending: boolean
 }
@@ -32,7 +32,7 @@ export const useDeleteFile = (props: Props): Res => {
     }
   }, [deleteFileMutation.isError])
 
-  const handleClick = useCallback((event: MouseEvent): void => {
+  const handleClick = useCallback((event: React.MouseEvent): void => {
     event.preventDefault()
     event.stopPropagation()
 

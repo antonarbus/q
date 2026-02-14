@@ -6,12 +6,11 @@ import { useLogOutUserMutation } from '@entity/user/api/useLogOutUserMutation'
 import { userSlice } from '@entity/user/redux/userSlice'
 import { appSlice } from '@shared/appSlice'
 import { dispatch } from '@shared/lib/redux'
-import type { ReactNode } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
 
-export const Logout = (): ReactNode => {
+export const Logout = (): React.ReactNode => {
   const navigate = useNavigate()
 
   const logOutUserMutation = useLogOutUserMutation()

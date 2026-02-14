@@ -1,5 +1,4 @@
 import { type Signal, useSignal, useSignalEffect } from '@preact/signals-react'
-import type { JSX } from 'react'
 import { PasswordField } from './input-field/PasswordField'
 
 type Props = {
@@ -7,7 +6,7 @@ type Props = {
   isConfirmPasswordOkSignal: Signal<boolean>
 }
 
-export const ConfirmPasswordField = (props: Props): JSX.Element => {
+export const ConfirmPasswordField = (props: Props): React.JSX.Element => {
   const confirmPasswordSignal = useSignal('')
   const didBlurSignal = useSignal(false)
   const initLabel = 'Confirm password'

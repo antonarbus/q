@@ -7,7 +7,6 @@ import { appSlice } from '@shared/appSlice'
 import { dispatch, getState } from '@shared/lib/redux'
 import { asyncDelay } from '@shared/util/asyncDelay'
 import type { UseMutationResult } from '@tanstack/react-query'
-import type { SubmitEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
@@ -19,7 +18,7 @@ type Props = {
 }
 
 type Res = {
-  handleSubmit: (e: SubmitEvent) => void
+  handleSubmit: (e: React.SubmitEvent) => void
   isPending: UseMutationResult['isPending']
   isSuccess: UseMutationResult['isSuccess']
   isError: UseMutationResult['isError']
@@ -105,7 +104,7 @@ export const useRegister = (props: Props): Res => {
     }
   }, [registerUserMutation.isError])
 
-  const handleSubmit = (event: SubmitEvent): void => {
+  const handleSubmit = (event: React.SubmitEvent): void => {
     event.preventDefault()
 
     registerUserMutation.mutate({

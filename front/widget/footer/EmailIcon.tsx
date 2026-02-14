@@ -1,9 +1,8 @@
 import { Tooltip } from '@mui/material'
 import { theme } from '@shared/theme'
-import type { JSX } from 'react'
 import { MdAlternateEmail } from 'react-icons/md'
 
-export const EmailIcon = (): JSX.Element => {
+export const EmailIcon = (): React.JSX.Element => {
   return (
     <Tooltip
       placement='top'

@@ -6,12 +6,11 @@ import { IconButton, Tooltip } from '@mui/material'
 import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import { textSlice } from '@shared/lib/tiptap/store/textSlice'
 import { dispatch } from '@shared/lib/redux'
-import type { JSX } from 'react'
 import { MdCopyAll } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
 
-export const CopyBookmarkButton = (props: UrlParam): JSX.Element => {
+export const CopyBookmarkButton = (props: UrlParam): React.JSX.Element => {
   const getBookmarkMutation = useGetBookmarkMutation()
 
   useUpdateEffect(() => {

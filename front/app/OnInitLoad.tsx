@@ -5,9 +5,8 @@ import { useCountUniqueDailyVisitor } from '@feature/init-load/useCountUniqueDai
 import { useHideInitHtmlElements } from '@feature/init-load/useHideInitHtmlElements'
 import { useRemoveThirdPartyCookies } from '@feature/init-load/useRemoveThirdPartyCookies'
 import { useInitMousePositionTracking } from '@shared/util/mousePosition'
-import type { ReactNode } from 'react'
 
-export const OnInitLoad = (): ReactNode => {
+export const OnInitLoad = (): React.ReactNode => {
   useInitMousePositionTracking()
   useLogoutIfAccessTokenExpired()
   useHideInitHtmlElements()

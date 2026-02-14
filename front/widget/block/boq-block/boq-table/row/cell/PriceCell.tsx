@@ -14,9 +14,8 @@ import {
 } from '@feature/blocks/update'
 import { Box } from '@mui/material'
 import { TextEditor } from '@shared/component/TextEditor'
-import type { JSX, MouseEvent } from 'react'
 
-export const PriceCell = (): JSX.Element => {
+export const PriceCell = (): React.JSX.Element => {
   const block = useBlock()
   const row = useRow()
   const boq = useBoq()
@@ -79,7 +78,7 @@ export const PriceCell = (): JSX.Element => {
       />
       <Pin
         cellKey='price'
-        onClick={(event: MouseEvent) => {
+        onClick={(event: React.MouseEvent) => {
           event.preventDefault() // otherwise form is submitted (no idea why)
           pinPriceCell({ blockIndex: block.index, rowIndex: row.index })
         }}

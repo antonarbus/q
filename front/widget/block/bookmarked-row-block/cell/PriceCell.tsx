@@ -8,9 +8,8 @@ import { formatPriceCell } from '@feature/blocks/update/update-cell-at-bookmarke
 import { updatePriceCell } from '@feature/blocks/update/update-cell-at-bookmarked-row-block/price/updatePriceCell'
 import { Box } from '@mui/material'
 import { TextEditor } from '@shared/component/TextEditor'
-import type { JSX } from 'react'
 
-export const PriceCell = (): JSX.Element => {
+export const PriceCell = (): React.JSX.Element => {
   const row = useRow()
 
   const stylesForResizableCell = useStylesForResizableCell({

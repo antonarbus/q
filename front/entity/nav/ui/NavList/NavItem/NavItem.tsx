@@ -1,7 +1,7 @@
 import type { NavItem as NavItemType } from '@entity/nav/type'
 import { useSelector } from '@shared/lib/redux'
 import { clickOnNavItem } from '@widget/nav/handlers/clickOnNavItem'
-import { type ComponentRef, type JSX, type MouseEvent, useRef } from 'react'
+import { useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { ArrowForNestedMenu } from './ArrowForNestedMenu'
 import { IconWithLoader } from './IconWithLoader'
@@ -13,11 +13,11 @@ type Props = {
   navItem: NavItemType
 }
 
-export const NavItem = (props: Props): JSX.Element => {
+export const NavItem = (props: Props): React.JSX.Element => {
   const location = useLocation()
 
   // required to avoid Menu to go over the narrow window
-  const navItemRef = useRef<ComponentRef<'li'> | null>(null)
+  const navItemRef = useRef<React.ComponentRef<'li'> | null>(null)
 
   // needs to open only menu under clicked navItem, otherwise multiple menus are opened under all navItems
   const isMenuOpen = useSelector(
@@ -43,7 +43,7 @@ export const NavItem = (props: Props): JSX.Element => {
       >
         <a
           href={props.navItem.externalLink}
-          onClick={(event: MouseEvent): void => {
+          onClick={(event: React.MouseEvent): void => {
             if (document.activeElement instanceof HTMLElement) {
               document.activeElement.blur()
             }
@@ -84,7 +84,7 @@ export const NavItem = (props: Props): JSX.Element => {
         css={{
           position: 'relative',
         }}
-        onClick={(event: MouseEvent): void => {
+        onClick={(event: React.MouseEvent): void => {
           if (Boolean(props.navItem.funcId) === true) {
             event.preventDefault()
           }

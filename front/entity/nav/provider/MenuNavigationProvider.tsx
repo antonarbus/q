@@ -1,25 +1,15 @@
 import { type NavItemId, navItemId } from '@entity/nav/navItemId'
 import { useMenuAnimation } from '@entity/nav/ui/NavList/NavItem/Menu/functions/useMenuAnimation'
 import { useSelector } from '@shared/lib/redux'
-import {
-  type ComponentRef,
-  type Context,
-  createContext,
-  type JSX,
-  type ReactNode,
-  type RefObject,
-  useContext,
-  useRef,
-  useMemo,
-} from 'react'
+import { createContext, useContext, useRef, useMemo } from 'react'
 
 type MenuNavigation = {
   goUp: () => Promise<void>
   goDown: (args: { navItemId: NavItemId }) => Promise<void>
-  menuContainerRef: RefObject<ComponentRef<'div'> | null>
-  currentMenuRef: RefObject<ComponentRef<'div'> | null>
-  nextMenuRef: RefObject<ComponentRef<'div'> | null>
-  fakeMenuRef: RefObject<ComponentRef<'div'> | null>
+  menuContainerRef: React.RefObject<React.ComponentRef<'div'> | null>
+  currentMenuRef: React.RefObject<React.ComponentRef<'div'> | null>
+  nextMenuRef: React.RefObject<React.ComponentRef<'div'> | null>
+  fakeMenuRef: React.RefObject<React.ComponentRef<'div'> | null>
   currentMenuNavItemId: NavItemId | null
   nextMenuNavItemId: NavItemId | null
   idsToCurrentMenuItems: NavItemId[]
@@ -27,17 +17,17 @@ type MenuNavigation = {
 }
 
 type Props = {
-  children: ReactNode
+  children: React.ReactNode
 }
 
-const MenuNavigationContext: Context<MenuNavigation | null> =
+const MenuNavigationContext: React.Context<MenuNavigation | null> =
   createContext<MenuNavigation | null>(null)
 
-export const MenuNavigationProvider = (props: Props): JSX.Element => {
-  const menuContainerRef = useRef<ComponentRef<'div'> | null>(null)
-  const currentMenuRef = useRef<ComponentRef<'div'> | null>(null)
-  const nextMenuRef = useRef<ComponentRef<'div'> | null>(null)
-  const fakeMenuRef = useRef<ComponentRef<'div'> | null>(null)
+export const MenuNavigationProvider = (props: Props): React.JSX.Element => {
+  const menuContainerRef = useRef<React.ComponentRef<'div'> | null>(null)
+  const currentMenuRef = useRef<React.ComponentRef<'div'> | null>(null)
+  const nextMenuRef = useRef<React.ComponentRef<'div'> | null>(null)
+  const fakeMenuRef = useRef<React.ComponentRef<'div'> | null>(null)
 
   const currentMenuNavItemId = useSelector(
     (state) => state.nav.currentMenuNavItemId,

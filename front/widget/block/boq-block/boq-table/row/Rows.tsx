@@ -5,7 +5,6 @@ import { hidePinsOnRowBlur } from '@feature/blocks/pin'
 import { useSelector } from '@shared/lib/redux'
 import { arrayShapesEqualityFn } from '@shared/util/arrayShapesEqualityFn'
 import { AnimatePresence } from 'motion/react'
-import type { JSX } from 'react'
 import { PasteRowTextOverlay } from './PasteRowTextOverlay'
 import { Row } from './Row'
 import { RowAnimate } from './RowAnimate'
@@ -13,7 +12,7 @@ import { RowSortable } from './RowSortable'
 import { RowsLayout } from './RowsLayout'
 import { RowsSortableContext } from './RowsSortableContext'
 
-export const Rows = (): JSX.Element => {
+export const Rows = (): React.JSX.Element => {
   const block = useBlock()
   const copyPlace = useSelector((state) => state.copy.place)
   const isPasteTextShown = useSelector((state) => state.copy.isPasteTextShown)

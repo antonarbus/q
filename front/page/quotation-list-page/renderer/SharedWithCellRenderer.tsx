@@ -3,7 +3,6 @@ import { Chip, Tooltip } from '@mui/material'
 import { route } from '@shared/lib/react-router-dom/route'
 import { getTextWithBoldSubStringAsJsx } from '@shared/util/getTextWithBoldSubStringAsJsx'
 import type { ICellRendererParams } from 'ag-grid-community'
-import type { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 
 type FilterModel = {
@@ -16,7 +15,7 @@ type FilterModel = {
 
 export const SharedWithCellRenderer = (
   params: ICellRendererParams<ResBody['quotationList'][number], string>,
-): ReactNode => {
+): React.ReactNode => {
   const quotationId = params.data?.id
   const accessLevel = params.data?.access.level
   const userList = params.data?.access.userList ?? []

@@ -13,12 +13,11 @@ import { NameField } from '@shared/component/input-field/NameField'
 import { router } from '@shared/lib/react-router-dom/router'
 import { dispatch } from '@shared/lib/redux'
 import { useAnimatedElement } from '@shared/util/useAnimatedElement'
-import type { JSX } from 'react'
 import { FiEdit3 } from 'react-icons/fi'
 import { useUnmount } from 'react-use'
 import { BookmarkField } from './BookmarkField'
 
-export const BookmarkModal = (): JSX.Element => {
+export const BookmarkModal = (): React.JSX.Element => {
   const animatedElement = useAnimatedElement()
   const bookmarkFormValues = useBookmarkFormValues()
   useLoadBookmarkModalOpenedWithDirectLink({ bookmarkFormValues })

@@ -3,14 +3,13 @@ import { navSlice } from '@entity/nav/navSlice'
 import { getNavItem } from '@entity/nav/ui/NavList/NavItem/Menu/functions/getNavItem'
 import { dispatch, getState } from '@shared/lib/redux'
 import { functionRegistry } from '@widget/nav/functionRegistry'
-import type { MouseEvent } from 'react'
 
 type MenuNavigation = {
   goDown: (args: { navItemId: NavItemId }) => Promise<void>
 }
 
 export const clickOnMenuItem = (
-  event: MouseEvent,
+  event: React.MouseEvent,
   navItemId: NavItemId,
   disabled: boolean,
   menuNavigation: MenuNavigation,

@@ -1,14 +1,13 @@
 import { useMenuNavigation } from '@entity/nav/provider/MenuNavigationProvider'
 import { dispatch, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
-import type { JSX, MouseEvent } from 'react'
 import { FaChevronLeft } from 'react-icons/fa'
 import { navSlice } from '../../../../../navSlice'
 import { Icon } from '../../Icon'
 import { MenuItemLayout } from './MenuItemStyled'
 import { TextInMenu } from './TextInMenu'
 
-export const BackMenuItem = (): JSX.Element => {
+export const BackMenuItem = (): React.JSX.Element => {
   const menuNavigation = useMenuNavigation()
   const isHovered = useSelector((state) => state.nav.hoverIndex === 0)
 
@@ -17,7 +16,7 @@ export const BackMenuItem = (): JSX.Element => {
   return (
     <MenuItemLayout
       isHovered={isHovered}
-      onClick={(event: MouseEvent): void => {
+      onClick={(event: React.MouseEvent): void => {
         event.preventDefault()
         void menuNavigation.goUp()
       }}

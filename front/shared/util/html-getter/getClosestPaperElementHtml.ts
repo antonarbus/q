@@ -1,7 +1,6 @@
 import { cls } from '@shared/cls'
-import type { MouseEvent } from 'react'
 
-export const getClosestPaperElementHtml = (event: MouseEvent): string => {
+export const getClosestPaperElementHtml = (event: React.MouseEvent): string => {
   const clickedIconElement = event.target
 
   if (clickedIconElement instanceof Element === false) {

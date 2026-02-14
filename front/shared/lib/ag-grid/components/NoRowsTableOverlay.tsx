@@ -1,6 +1,4 @@
-import type { JSX } from 'react'
-
-export const NoRowsTableOverlay = (): JSX.Element => {
+export const NoRowsTableOverlay = (): React.JSX.Element => {
   return (
     <div
       css={{

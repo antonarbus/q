@@ -1,8 +1,7 @@
 import { Box } from '@mui/material'
-import type { JSX } from 'react'
 import logoSrc from './logo.png'
 
-export const Logo = (): JSX.Element => {
+export const Logo = (): React.JSX.Element => {
   return (
     <div
       className='logo-container'

@@ -8,16 +8,15 @@ import {
 } from '@feature/blocks/resize'
 import { useSelector } from '@shared/lib/redux'
 import { Resizable } from 're-resizable'
-import type { JSX, ReactNode } from 'react'
 
 type Props = {
-  children: ReactNode
+  children: React.ReactNode
   className: string
   boqColumnKey: BoqColumnKey
   minWidth: number
 }
 
-export const ResizableColumn = (props: Props): JSX.Element => {
+export const ResizableColumn = (props: Props): React.JSX.Element => {
   const block = useBlock()
 
   const colWidth = useSelector(

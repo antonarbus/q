@@ -5,9 +5,8 @@ import type { TextBlock } from '@back/entity/quotation/schema'
 import { textSlice } from '@shared/lib/tiptap/store/textSlice'
 import { generateId } from '@front/shared/lib/nanoid'
 import { dispatch, getState } from '@shared/lib/redux'
-import type { MouseEvent } from 'react'
 
-export const insertTextBlock = (event?: MouseEvent): void => {
+export const insertTextBlock = (event?: React.MouseEvent): void => {
   const block: TextBlock = {
     id: generateId(),
     bookmarkSchemaVersion: 2,

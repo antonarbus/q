@@ -1,4 +1,4 @@
-import { type JSX, useLayoutEffect, useRef } from 'react'
+import { useLayoutEffect, useRef } from 'react'
 
 type Props = {
   width: number
@@ -6,7 +6,7 @@ type Props = {
   html: string
 }
 
-export const ScaledCopyItem = (props: Props): JSX.Element => {
+export const ScaledCopyItem = (props: Props): React.JSX.Element => {
   const divRef = useRef<HTMLDivElement>(null)
 
   useLayoutEffect(() => {

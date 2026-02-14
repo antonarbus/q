@@ -1,7 +1,6 @@
 import type { AccessFormValuesSignal } from '@entity/quotation/form/types'
 import type { Quotation } from '@back/entity/quotation/schema'
 import { Box, FormControlLabel, Radio, RadioGroup } from '@mui/material'
-import type { JSX } from 'react'
 import { BsFillPersonPlusFill } from 'react-icons/bs'
 import { MdGroupOff, MdGroups } from 'react-icons/md'
 
@@ -9,7 +8,7 @@ type Props = {
   accessFormValuesSignal: AccessFormValuesSignal
 }
 
-export const SharedWithRadioButtons = (props: Props): JSX.Element => {
+export const SharedWithRadioButtons = (props: Props): React.JSX.Element => {
   return (
     <RadioGroup
       name='controlled-radio-buttons-group'

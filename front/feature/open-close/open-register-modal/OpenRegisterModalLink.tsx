@@ -1,5 +1,4 @@
 import { route } from '@shared/lib/react-router-dom/route'
-import type { JSX, MouseEvent } from 'react'
 import { Link } from 'react-router-dom'
 import { openRegisterModal } from './openRegisterModal'
 
@@ -7,10 +6,10 @@ type Props = {
   slideOut: () => Promise<void>
 }
 
-export const OpenRegisterModalLink = (props: Props): JSX.Element => {
+export const OpenRegisterModalLink = (props: Props): React.JSX.Element => {
   return (
     <Link
-      onClick={(event: MouseEvent): void => {
+      onClick={(event: React.MouseEvent): void => {
         event.preventDefault()
 
         const slideAndNavigate = async (): Promise<void> => {

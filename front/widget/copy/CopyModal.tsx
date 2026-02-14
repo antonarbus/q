@@ -3,14 +3,13 @@ import {
   PressEscIcon,
   useEnableEditorsOnCloseCopyModal,
 } from '@feature/open-close/close-copy-modal'
-import type { JSX } from 'react'
 import { CopyModalLayout } from './CopyModalLayout'
 import { FirstCopiedItem } from './FirstCopiedItem'
 import { RestOfCopiedItems } from './RestOfCopiedItems'
 import { useAnimatedCopyModalElement } from './useAnimatedCopyModalElement'
 import { useDisableNavItemsOnCopyModal } from './useDisableNavItemsOnCopyModal'
 
-export const CopyModal = (): JSX.Element => {
+export const CopyModal = (): React.JSX.Element => {
   const copyModalElement = useAnimatedCopyModalElement()
   useMovePasteText()
   usePasteClick()

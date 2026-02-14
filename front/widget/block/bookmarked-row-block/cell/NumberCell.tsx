@@ -1,9 +1,8 @@
 import { columnMinWidth } from '@entity/quotation/const/columnMinWidth'
 import { useStylesForResizableCell } from '@entity/quotation/hook/useStylesForResizableCell'
 import { Box } from '@mui/material'
-import type { JSX } from 'react'
 
-export const NumberCell = (): JSX.Element => {
+export const NumberCell = (): React.JSX.Element => {
   const stylesForResizableCell = useStylesForResizableCell({
     blockIndex: 0,
     boqColumnKey: 'number',

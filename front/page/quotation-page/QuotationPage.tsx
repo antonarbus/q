@@ -4,11 +4,10 @@ import { arrayShapesEqualityFn } from '@shared/util/arrayShapesEqualityFn'
 import { BlockMany } from '@widget/block'
 import { InfoLeft, InfoRight } from '@widget/quotation/info'
 import { Search } from '@widget/quotation/search'
-import type { JSX } from 'react'
 import { Outlet } from 'react-router-dom'
 import { InfoAndSearchLayout } from './InfoAndSearchLayout'
 
-export const QuotationPage = (): JSX.Element => {
+export const QuotationPage = (): React.JSX.Element => {
   const blocks = useSelector(
     (state) => state.quotation.blocks,
     arrayShapesEqualityFn,

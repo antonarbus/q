@@ -1,11 +1,10 @@
 import type { NavItem } from '@entity/nav/type'
 import { mousePosition } from '@shared/util/mousePosition'
 import { functionRegistry } from '@widget/nav/functionRegistry'
-import type { MouseEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useEffectOnce } from 'react-use'
 
-type MouseEventLike = Pick<MouseEvent, 'clientX' | 'clientY'>
+type MouseEventLike = Pick<React.MouseEvent, 'clientX' | 'clientY'>
 
 type Shortcuts = {
   name: string
@@ -38,7 +37,7 @@ const searchForShortcutsInNavStructure = (props: Props): void => {
             : (event?: MouseEventLike): void => {
                 // Safe: func only uses clientX/clientY properties
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-                func(event as MouseEvent | undefined)
+                func(event as React.MouseEvent | undefined)
               },
         link: navItem.link ?? null,
       })

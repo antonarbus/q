@@ -1,7 +1,6 @@
 import { useSelector } from '@shared/lib/redux'
-import type { ReactNode } from 'react'
 
-export const EmailAtBottomOfMenu = (): ReactNode => {
+export const EmailAtBottomOfMenu = (): React.ReactNode => {
   const email = useSelector((state) => state.user.email)
 
   if (email === null) {

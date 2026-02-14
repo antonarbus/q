@@ -1,14 +1,13 @@
 import type { CSSObject } from '@emotion/react'
-import type { JSX, ReactNode } from 'react'
 
 type Props = {
-  children: ReactNode
+  children: React.ReactNode
   css?: CSSObject
   className?: string
   disabled?: boolean
 }
 
-export const RoundSpanForIcon = (props: Props): JSX.Element => {
+export const RoundSpanForIcon = (props: Props): React.JSX.Element => {
   return (
     <span
       className={props.className}

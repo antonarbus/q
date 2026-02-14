@@ -1,13 +1,12 @@
 import { Box } from '@mui/material'
 import { cls } from '@shared/cls'
 import { OutlinedDivWithLabel } from '@shared/component/OutlinedDivWithLabel'
-import type { JSX, ReactNode } from 'react'
 
 type Props = {
-  children: ReactNode
+  children: React.ReactNode
 }
 
-export const BookmarkFieldLayout = (props: Props): JSX.Element => {
+export const BookmarkFieldLayout = (props: Props): React.JSX.Element => {
   return (
     <OutlinedDivWithLabel label='Item'>
       <Box

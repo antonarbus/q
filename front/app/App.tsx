@@ -12,13 +12,12 @@ import { themeClient } from '@shared/theme'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { enGB } from 'date-fns/locale'
-import type { JSX } from 'react'
 import { Provider } from 'react-redux'
 import { RouterProvider } from 'react-router-dom'
 import { GlobalStyles } from './GlobalStyles'
 import { QueryDevtoolsProductionHidden } from './QueryDevtoolsProductionHidden'
 
-export const App = (): JSX.Element => {
+export const App = (): React.JSX.Element => {
   return (
     <Provider store={store}>
       <QueryClientProvider client={instance.queryClient}>

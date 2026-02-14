@@ -13,11 +13,10 @@ import { BookmarkBlockIcon } from '@feature/open-close/open-bookmark-modal'
 import { OpenInfoBlockModalIcon } from '@feature/open-close/open-info-modal'
 import { cls } from '@shared/cls'
 import { ItemActionButtonsLayout } from '@shared/layout/ItemActionButtonsLayout'
-import type { JSX } from 'react'
 import { BoqHeader } from './boq-header'
 import { BoqTable } from './boq-table'
 
-export const BoqBlock = (): JSX.Element => {
+export const BoqBlock = (): React.JSX.Element => {
   return (
     <BoqProvider>
       <BlockComp

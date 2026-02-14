@@ -1,5 +1,4 @@
 import { keyframes } from '@emotion/react'
-import type { JSX } from 'react'
 
 const bounceLoading = keyframes`
   to {
@@ -16,7 +15,7 @@ type Props = {
   dots?: number
 }
 
-export const LoadingDots = (props: Props): JSX.Element => (
+export const LoadingDots = (props: Props): React.JSX.Element => (
   <div
     style={{
       display: 'inline-flex',

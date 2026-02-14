@@ -1,6 +1,6 @@
 import type { AccessFormValuesSignal } from '@entity/quotation/form/types'
 import { useSignal } from '@preact/signals-react'
-import { type JSX, useEffect } from 'react'
+import { useEffect } from 'react'
 import { z } from 'zod'
 import { Layout } from './Layout'
 import { SharedWithEmailInputField } from './SharedWithEmailInputField'
@@ -11,7 +11,7 @@ type Props = {
   accessFormValuesSignal: AccessFormValuesSignal
 }
 
-export const ShareQuotationField = (props: Props): JSX.Element => {
+export const ShareQuotationField = (props: Props): React.JSX.Element => {
   const emailSignal = useSignal('')
   const isButtonDisabledSignal = useSignal(true)
 

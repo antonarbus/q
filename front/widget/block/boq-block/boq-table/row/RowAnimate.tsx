@@ -1,12 +1,11 @@
 import { theme } from '@shared/theme'
 import { motion } from 'motion/react'
-import type { JSX, ReactNode } from 'react'
 
 type Props = {
-  children: ReactNode
+  children: React.ReactNode
 }
 
-export const RowAnimate = (props: Props): JSX.Element => {
+export const RowAnimate = (props: Props): React.JSX.Element => {
   return (
     <motion.div
       className='boq-row-animate'

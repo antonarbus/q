@@ -6,10 +6,9 @@ import { cls } from '@shared/cls'
 import { textSlice } from '@shared/lib/tiptap/store/textSlice'
 import { dispatch, getState, useSelector } from '@shared/lib/redux'
 import { getClosestPaperElementHtml } from '@shared/util/html-getter/getClosestPaperElementHtml'
-import type { JSX, MouseEvent } from 'react'
 import { MdCopyAll } from 'react-icons/md'
 
-export const CopyBlockIcon = (): JSX.Element => {
+export const CopyBlockIcon = (): React.JSX.Element => {
   const block = useBlock()
   const isCopyable = useSelector((state) => state.copy.isCopyable)
   const disabled = isCopyable === false
@@ -24,7 +23,7 @@ export const CopyBlockIcon = (): JSX.Element => {
       <span className={cls.actionIconContainer}>
         <MdCopyAll
           className={cls.actionIcon}
-          onClick={(event: MouseEvent): void => {
+          onClick={(event: React.MouseEvent): void => {
             if (disabled === true) {
               return
             }

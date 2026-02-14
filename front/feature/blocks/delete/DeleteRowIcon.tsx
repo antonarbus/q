@@ -8,11 +8,10 @@ import { cls } from '@shared/cls'
 import { textSlice } from '@shared/lib/tiptap/store/textSlice'
 import { dispatch, getState, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
-import type { JSX } from 'react'
 import { flushSync } from 'react-dom'
 import { GoTrash } from 'react-icons/go'
 
-export const DeleteRowIcon = (): JSX.Element => {
+export const DeleteRowIcon = (): React.JSX.Element => {
   const block = useBlock()
   const row = useRow()
 

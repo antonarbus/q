@@ -3,10 +3,9 @@ import { useIsLastBlock } from '@entity/quotation/hook/useIsLastBlock'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/cls'
 import { useDragHandleProps } from '@shared/lib/hello-pangea-dnd/DragHandleContext'
-import type { JSX } from 'react'
 import { MdDragIndicator } from 'react-icons/md'
 
-export const DragBlockIcon = (): JSX.Element => {
+export const DragBlockIcon = (): React.JSX.Element => {
   const isLastBlock = useIsLastBlock()
   const isCopyModalVisible = useIsCopyModalVisible()
   const disabled = isLastBlock || isCopyModalVisible

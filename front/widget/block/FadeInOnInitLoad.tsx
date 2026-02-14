@@ -1,12 +1,11 @@
 import { cls } from '@shared/cls'
 import { motion } from 'motion/react'
-import type { JSX, ReactNode } from 'react'
 
 type Props = {
-  children: ReactNode
+  children: React.ReactNode
 }
 
-export const FadeInOnInitLoad = (props: Props): JSX.Element => {
+export const FadeInOnInitLoad = (props: Props): React.JSX.Element => {
   return (
     <motion.div
       animate={{

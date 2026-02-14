@@ -1,8 +1,7 @@
 import { theme } from '@shared/theme'
 import { motion } from 'motion/react'
-import type { JSX } from 'react'
 
-export const PasteItemBlock = (): JSX.Element => {
+export const PasteItemBlock = (): React.JSX.Element => {
   return (
     <motion.div
       animate={{

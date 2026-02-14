@@ -12,13 +12,12 @@ import { NameField } from '@shared/component/input-field/NameField'
 import { route } from '@shared/lib/react-router-dom/route'
 import { router } from '@shared/lib/react-router-dom/router'
 import { useAnimatedElement } from '@shared/util/useAnimatedElement'
-import type { JSX } from 'react'
 import { MdSaveAlt } from 'react-icons/md'
 import { useLocation } from 'react-router-dom'
 import { QuotationPreviewField } from './QuotationPreviewField'
 import { useQuotationSaveFormValues } from './useQuotationSaveFormValues'
 
-export const SaveQuotationModal = (): JSX.Element => {
+export const SaveQuotationModal = (): React.JSX.Element => {
   const isQuotationsPage = useLocation().pathname.includes(route.quotationList)
   const animatedElement = useAnimatedElement()
   const saveQuotationFormValues = useQuotationSaveFormValues()

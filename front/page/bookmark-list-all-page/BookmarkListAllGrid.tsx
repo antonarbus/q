@@ -19,14 +19,14 @@ import {
   themeQuartz,
 } from 'ag-grid-community'
 import { AgGridReact } from 'ag-grid-react'
-import { type ComponentRef, type JSX, useRef } from 'react'
+import { useRef } from 'react'
 import { columnDefs } from './columnDef'
 import { bookmarkListAllAgGridRef } from './ref/bookmarkListAllAgGridRef'
 
 ModuleRegistry.registerModules([AllCommunityModule])
 
-export const BookmarkListAllGrid = (): JSX.Element => {
-  const gridContainerRef = useRef<ComponentRef<'div'> | null>(null)
+export const BookmarkListAllGrid = (): React.JSX.Element => {
+  const gridContainerRef = useRef<React.ComponentRef<'div'> | null>(null)
   const bookmarkListAll = useBookmarkListAll()
   useShowLoadingJumpingDots({ isLoading: bookmarkListAll.isLoading })
 

@@ -20,14 +20,14 @@ import {
   themeQuartz,
 } from 'ag-grid-community'
 import { AgGridReact } from 'ag-grid-react'
-import { type ComponentRef, type JSX, useRef } from 'react'
+import { useRef } from 'react'
 import { columnDefs } from './columnDef'
 import { bookmarkListAgGridRef } from './ref/bookmarkListAgGridRef'
 
 ModuleRegistry.registerModules([AllCommunityModule])
 
-export const BookmarkListGrid = (): JSX.Element => {
-  const gridContainerRef = useRef<ComponentRef<'div'> | null>(null)
+export const BookmarkListGrid = (): React.JSX.Element => {
+  const gridContainerRef = useRef<React.ComponentRef<'div'> | null>(null)
   const getBookmarkListQuery = useGetBookmarkListQuery()
 
   useDisableLoadingOverlayWhenItemsAreFetched({

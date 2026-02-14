@@ -1,8 +1,6 @@
-import type { JSX, ReactNode } from 'react'
-
 type Props = {
   reserveSpaceForIcon?: boolean
-  name: ReactNode | string
+  name: React.ReactNode | string
   disabled?: boolean
 }
 
@@ -12,7 +10,7 @@ type Props = {
  * - if we have nested menu some space should be reserved for 'go inside' icon
  * - if name is long it will be trimmed ellipsis (... dots)
  */
-export const TextInMenu = (props: Props): JSX.Element => {
+export const TextInMenu = (props: Props): React.JSX.Element => {
   return (
     <span
       style={{

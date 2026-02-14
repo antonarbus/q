@@ -1,7 +1,7 @@
 import type { ResBody } from '@back/api/bookmark/getBookmarkListHandler'
 import { Box } from '@mui/material'
 import { getTextWithBoldSubStringAsJsx } from '@shared/util/getTextWithBoldSubStringAsJsx'
-import { type JSX, type ReactNode, useCallback } from 'react'
+import { useCallback } from 'react'
 import { BsFileEarmarkText } from 'react-icons/bs'
 
 type Props = {
@@ -9,8 +9,8 @@ type Props = {
   option: ResBody['bookmarkList'][number]
 }
 
-export const OptionItemDescription = (props: Props): JSX.Element => {
-  const getHighlightedDescription = useCallback((): ReactNode => {
+export const OptionItemDescription = (props: Props): React.JSX.Element => {
+  const getHighlightedDescription = useCallback((): React.ReactNode => {
     if (props.inputValueSignal.value !== '') {
       const boldSubString = getTextWithBoldSubStringAsJsx({
         text: props.option.desc ?? '',

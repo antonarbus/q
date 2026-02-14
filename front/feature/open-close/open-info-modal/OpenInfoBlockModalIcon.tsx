@@ -5,11 +5,10 @@ import { getBlockFromStore } from '@entity/quotation/redux/getter/getBlockFromSt
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/cls'
 import { route } from '@shared/lib/react-router-dom/route'
-import type { MouseEvent, ReactNode } from 'react'
 import { HiOutlineInformationCircle } from 'react-icons/hi2'
 import { useNavigate } from 'react-router-dom'
 
-export const OpenInfoBlockModalIcon = (): ReactNode => {
+export const OpenInfoBlockModalIcon = (): React.ReactNode => {
   const navigate = useNavigate()
   const block = useBlock()
   const isCopyModalVisible = useIsCopyModalVisible()
@@ -26,7 +25,7 @@ export const OpenInfoBlockModalIcon = (): ReactNode => {
         <HiOutlineInformationCircle
           aria-hidden={false} // otherwise error in dev tools
           className={cls.actionIcon}
-          onClick={(event: MouseEvent): void => {
+          onClick={(event: React.MouseEvent): void => {
             if (disabled === true) {
               return
             }

@@ -9,15 +9,7 @@ import { cls } from '@shared/cls'
 import { theme } from '@shared/theme'
 import type { AnimationScope } from 'motion'
 import { AnimatePresence, motion } from 'motion/react'
-import {
-  Children,
-  type ComponentRef,
-  type SubmitEvent,
-  type JSX,
-  type MouseEvent,
-  type ReactNode,
-  type RefObject,
-} from 'react'
+import { Children } from 'react'
 import { IoClose } from 'react-icons/io5'
 import { BackdropWithSlidableModal } from './BackdropWithSlidableModal'
 import { ButtonCustom } from './ButtonCustom'
@@ -26,23 +18,23 @@ type Props = {
   width?: CSSObject['width']
   paddingContent?: CSSObject['width']
   sx?: CSSObject
-  headerIcon: ReactNode
+  headerIcon: React.ReactNode
   headerText: string
-  children: ReactNode
+  children: React.ReactNode
   onUnmount?: () => void
-  onSubmit?: (e: SubmitEvent) => void
-  onCloseClick?: (e: MouseEvent) => void
+  onSubmit?: (e: React.SubmitEvent) => void
+  onCloseClick?: (e: React.MouseEvent) => void
   buttonText?: string
   isButtonDisabled?: boolean
   isButtonLoading?: boolean
   isButtonSuccess?: boolean
   isButtonError?: boolean
-  modalRef: RefObject<ComponentRef<'div'> | null> | AnimationScope
+  modalRef: React.RefObject<React.ComponentRef<'div'> | null> | AnimationScope
   shouldUnmountOnClickAway: boolean
   shouldUnmountOnEsc: boolean
 }
 
-export const FormModal = (props: Props): JSX.Element => {
+export const FormModal = (props: Props): React.JSX.Element => {
   const FORM_ID = 'form-id'
 
   return (
@@ -53,7 +45,7 @@ export const FormModal = (props: Props): JSX.Element => {
     >
       <Box
         className={cls.formModal}
-        onMouseDown={(event: MouseEvent): void => {
+        onMouseDown={(event: React.MouseEvent): void => {
           event.stopPropagation()
         }}
         ref={props.modalRef}

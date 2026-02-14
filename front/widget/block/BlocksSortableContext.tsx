@@ -1,13 +1,12 @@
 import { DragDropContext, Droppable } from '@hello-pangea/dnd'
 import { onBlockDragEnd, onBlockDragStart } from '@feature/blocks/drag'
 import { getState } from '@shared/lib/redux'
-import type { JSX, ReactNode } from 'react'
 
 type Props = {
-  children: ReactNode
+  children: React.ReactNode
 }
 
-export const BlocksSortableContext = (props: Props): JSX.Element => {
+export const BlocksSortableContext = (props: Props): React.JSX.Element => {
   const blockIds = getState().quotation.blocks.map((block) => block.id)
 
   return (

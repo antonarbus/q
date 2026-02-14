@@ -3,14 +3,14 @@ import { cls } from '@shared/cls'
 import { OutlinedDivWithLabel } from '@shared/component/OutlinedDivWithLabel'
 import { textSlice } from '@shared/lib/tiptap/store/textSlice'
 import { dispatch, useSelector } from '@shared/lib/redux'
-import type { JSX, ReactNode } from 'react'
+
 import { useEffectOnce } from 'react-use'
 
 type Props = {
-  children: ReactNode
+  children: React.ReactNode
 }
 
-export const Layout = (props: Props): JSX.Element => {
+export const Layout = (props: Props): React.JSX.Element => {
   useEffectOnce(() => {
     dispatch(textSlice.actions.setEditable())
   })

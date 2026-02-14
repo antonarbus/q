@@ -9,13 +9,12 @@ import { IconButton, Tooltip } from '@mui/material'
 import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import { route } from '@shared/lib/react-router-dom/route'
 import { dispatch } from '@shared/lib/redux'
-import type { ReactNode } from 'react'
 import { MdLogin } from 'react-icons/md'
 import { useLocation } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
 
-export const LogInAsUserButton = (props: UrlParam): ReactNode => {
+export const LogInAsUserButton = (props: UrlParam): React.ReactNode => {
   const logInUserMutation = useLogInUserMutation()
   const location = useLocation()
   const getQuotationListQuery = useGetQuotationListQuery()

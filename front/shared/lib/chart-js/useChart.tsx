@@ -1,5 +1,5 @@
 import { chartConfigurationForVisitorList } from './chartConfigurationForVisitorList'
-import { type RefObject, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import {
   Chart,
   BarController,
@@ -25,8 +25,8 @@ Chart.register(
 )
 
 type Res = {
-  canvasRef: RefObject<HTMLCanvasElement | null>
-  chartInstanceRef: RefObject<Chart | null>
+  canvasRef: React.RefObject<HTMLCanvasElement | null>
+  chartInstanceRef: React.RefObject<Chart | null>
 }
 
 export const useChart = (): Res => {

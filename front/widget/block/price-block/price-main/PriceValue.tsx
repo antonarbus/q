@@ -6,10 +6,10 @@ import {
   validateTotalPrice,
 } from '@feature/blocks/update'
 import { TextEditor } from '@shared/component/TextEditor'
-import { type JSX, useRef } from 'react'
+import { useRef } from 'react'
 import type { Editor } from '@tiptap/react'
 
-export const PriceValue = (): JSX.Element => {
+export const PriceValue = (): React.JSX.Element => {
   const editorRef = useRef<Editor | null>(null)
   const block = useBlock()
 

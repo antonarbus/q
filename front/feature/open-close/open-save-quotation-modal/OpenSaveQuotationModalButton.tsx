@@ -8,13 +8,14 @@ import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import { textSlice } from '@shared/lib/tiptap/store/textSlice'
 import { route } from '@shared/lib/react-router-dom/route'
 import { dispatch } from '@shared/lib/redux'
-import type { JSX } from 'react'
 import { AiTwotoneEdit } from 'react-icons/ai'
 import { Link, useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
 
-export const OpenSaveQuotationModalButton = (props: UrlParam): JSX.Element => {
+export const OpenSaveQuotationModalButton = (
+  props: UrlParam,
+): React.JSX.Element => {
   const navigate = useNavigate()
 
   const quotationMutation = useGetQuotationMutation()

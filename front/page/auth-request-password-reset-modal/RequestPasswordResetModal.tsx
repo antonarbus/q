@@ -6,10 +6,10 @@ import { FormModal } from '@shared/component/FormModal'
 import { EmailField } from '@shared/component/input-field/EmailField'
 import { router } from '@shared/lib/react-router-dom/router'
 import { useAnimatedElement } from '@shared/util/useAnimatedElement'
-import { type JSX, useRef } from 'react'
+import { useRef } from 'react'
 import { PiPassword } from 'react-icons/pi'
 
-export const RequestPasswordResetModal = (): JSX.Element => {
+export const RequestPasswordResetModal = (): React.JSX.Element => {
   const animatedElement = useAnimatedElement()
   const inputRef = useRef<HTMLDivElement>(null)
   const emailSignal = useSignal('')

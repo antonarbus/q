@@ -20,14 +20,14 @@ import {
   themeQuartz,
 } from 'ag-grid-community'
 import { AgGridReact } from 'ag-grid-react'
-import { type ComponentRef, type JSX, useRef } from 'react'
+import { useRef } from 'react'
 import { columnDefs } from './columnDef'
 import { quotationListAgGridRef } from './ref/quotationListAgGridRef'
 
 ModuleRegistry.registerModules([AllCommunityModule])
 
-export const QuotationListGrid = (): JSX.Element => {
-  const gridContainerRef = useRef<ComponentRef<'div'> | null>(null)
+export const QuotationListGrid = (): React.JSX.Element => {
+  const gridContainerRef = useRef<React.ComponentRef<'div'> | null>(null)
   const getQuotationListQuery = useGetQuotationListQuery()
 
   useDisableLoadingOverlayWhenItemsAreFetched({

@@ -8,10 +8,9 @@ import { textSlice } from '@shared/lib/tiptap/store/textSlice'
 import { dispatch, getState, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import { fixElementDimensionStyle } from '@shared/util/fixElementDimensionStyle'
-import type { JSX, MouseEvent } from 'react'
 import { GoTrash } from 'react-icons/go'
 
-export const DeleteBlockIcon = (): JSX.Element => {
+export const DeleteBlockIcon = (): React.JSX.Element => {
   const block = useBlock()
 
   const isBlockAlone = useSelector(selectIsLastBlock)
@@ -33,7 +32,7 @@ export const DeleteBlockIcon = (): JSX.Element => {
               color: disabled === true ? '#acacac' : 'red !important',
             },
           }}
-          onClick={(event: MouseEvent): void => {
+          onClick={(event: React.MouseEvent): void => {
             if (disabled === true) {
               return
             }

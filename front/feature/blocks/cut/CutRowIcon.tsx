@@ -10,10 +10,9 @@ import { textSlice } from '@shared/lib/tiptap/store/textSlice'
 import { dispatch, getState, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import { getClosestRowHtml } from '@shared/util/html-getter/getClosestRowHtml'
-import type { JSX, MouseEvent } from 'react'
 import { TbCut } from 'react-icons/tb'
 
-export const CutRowIcon = (): JSX.Element => {
+export const CutRowIcon = (): React.JSX.Element => {
   const block = useBlock()
   const row = useRow()
   const isCopyable = useSelector((state) => state.copy.isCopyable)
@@ -26,7 +25,7 @@ export const CutRowIcon = (): JSX.Element => {
       <span className={cls.actionIconContainer}>
         <TbCut
           className={cls.actionIcon}
-          onClick={(event: MouseEvent): void => {
+          onClick={(event: React.MouseEvent): void => {
             if (disabled === true) {
               return
             }

@@ -1,11 +1,10 @@
 import { Box, IconButton, Paper } from '@mui/material'
 import { cls } from '@shared/cls'
-import type { HTMLAttributes, JSX } from 'react'
 import { IoClose } from 'react-icons/io5'
 
 export const PaperComponent = (
-  props: HTMLAttributes<HTMLElement>,
-): JSX.Element => {
+  props: React.HTMLAttributes<HTMLElement>,
+): React.JSX.Element => {
   return (
     <Paper
       className={cls.searchAutocomplete}

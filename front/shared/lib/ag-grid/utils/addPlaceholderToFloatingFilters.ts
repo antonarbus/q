@@ -1,7 +1,5 @@
-import type { ComponentRef, RefObject } from 'react'
-
 type Props = {
-  gridContainerRef: RefObject<ComponentRef<'div'> | null>
+  gridContainerRef: React.RefObject<React.ComponentRef<'div'> | null>
 }
 
 export const addPlaceholderToFloatingFilters = (props: Props): void => {

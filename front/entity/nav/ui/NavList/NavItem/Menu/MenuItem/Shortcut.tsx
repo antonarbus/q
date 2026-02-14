@@ -1,5 +1,4 @@
 import { css } from '@emotion/react'
-import type { JSX } from 'react'
 import { capitalizeKey } from './function/capitalizeKey'
 
 type Props = {
@@ -7,7 +6,7 @@ type Props = {
   $isHovered: boolean
 }
 
-export const Shortcut = (props: Props): JSX.Element => {
+export const Shortcut = (props: Props): React.JSX.Element => {
   const keys = props.shortcut.join('+')
 
   return (

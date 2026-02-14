@@ -4,9 +4,8 @@ import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { useRow } from '@entity/quotation/provider/RowProvider'
 import { getNumberOfBoqBlocksAbove } from '@entity/quotation/util/getNumberOfBoqBlocksAbove'
 import { Box } from '@mui/material'
-import type { JSX } from 'react'
 
-export const NumberCell = (): JSX.Element => {
+export const NumberCell = (): React.JSX.Element => {
   const block = useBlock()
   const row = useRow()
 
