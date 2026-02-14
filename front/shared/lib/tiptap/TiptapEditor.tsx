@@ -1,15 +1,10 @@
 import { type JSX, useEffect } from 'react'
-import {
-  type Editor,
-  type EditorEvents,
-  useEditor,
-  EditorContent,
-} from '@tiptap/react'
+import { type EditorEvents, useEditor, EditorContent } from '@tiptap/react'
 import type { EditorView } from '@tiptap/pm/view'
 import { FloatingMenu } from './menu/FloatingMenu'
 import { ImageMenu } from './menu/ImageMenu'
 import { useExtensions } from './extension/useExtensions'
-import type { EditorRef } from '@shared/lib/tiptap/types'
+import type { EditorRef, OnUpload } from '@shared/lib/tiptap/types'
 import { cls } from '@shared/cls'
 import { onFileDrop } from './file-upload/onFileDrop'
 import { onFilePaste } from './file-upload/onFilePaste'
@@ -22,11 +17,7 @@ type Props = {
   onUpdate: (props: EditorEvents['update']) => void
   onBlur?: (props: EditorEvents['blur']) => void
   onKeyDown?: (view: EditorView, event: KeyboardEvent) => boolean
-  onUpload?: (props: {
-    editor: Editor | null
-    type: 'image' | 'file'
-    files: File[]
-  }) => Promise<void>
+  onUpload?: OnUpload
 }
 
 export const TiptapEditor = (props: Props): JSX.Element => {

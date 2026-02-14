@@ -4,7 +4,6 @@ import type {
   ReqBody as Payload,
   ResBody as ResBodyMakeFilePublic,
 } from '@back/api/file/saveFileInfoHandler'
-import type { Editor } from '@tiptap/react'
 import { axiosWithAuth } from '@shared/lib/axios'
 import { getState } from '@shared/lib/redux'
 import { asyncDelay } from '@shared/util/asyncDelay'
@@ -12,14 +11,9 @@ import { getFileSizeInMb } from '@shared/util/getFileSizeInMb'
 import axios, { type AxiosError } from 'axios'
 import { toast } from 'sonner'
 import { hideDraggableArea } from './showDraggableArea'
+import type { OnUpload } from '@shared/lib/tiptap/types'
 
-type Upload = (props: {
-  type: 'image' | 'file'
-  editor: Editor | null
-  files: File[]
-}) => Promise<void>
-
-export const upload: Upload = async (props) => {
+export const upload: OnUpload = async (props) => {
   hideDraggableArea()
 
   // when user is not logged save files and images as base64 urls

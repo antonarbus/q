@@ -1,7 +1,7 @@
 import type { JSX } from 'react'
-import type { Editor, EditorEvents } from '@tiptap/react'
+import type { EditorEvents } from '@tiptap/react'
 import type { EditorView } from '@tiptap/pm/view'
-import type { EditorRef } from '@shared/lib/tiptap/types'
+import type { EditorRef, OnUpload } from '@shared/lib/tiptap/types'
 import { type CSSObject, Box } from '@mui/material'
 import { cls } from '@shared/cls'
 import { StaticHtml } from './StaticHtml'
@@ -23,11 +23,7 @@ type Props = {
   onKeyDown?: (view: EditorView, event: KeyboardEvent) => boolean
   onWrapperClick?: (event: React.MouseEvent) => void
   onWrapperFocus?: (event: React.FocusEvent) => void
-  onUpload?: (props: {
-    editor: Editor | null
-    type: 'image' | 'file'
-    files: File[]
-  }) => Promise<void>
+  onUpload?: OnUpload
 }
 
 export const Tiptap = (props: Props): JSX.Element => {

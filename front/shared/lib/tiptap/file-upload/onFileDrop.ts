@@ -1,15 +1,10 @@
 import type { Slice } from '@tiptap/pm/model'
 import type { EditorView } from '@tiptap/pm/view'
-import type { Editor } from '@tiptap/react'
-import type { EditorRef } from '../types'
+import type { EditorRef, OnUpload } from '../types'
 
 type Props = {
   editorRef: EditorRef
-  onUpload?: (props: {
-    editor: Editor | null
-    type: 'image' | 'file'
-    files: File[]
-  }) => Promise<void>
+  onUpload?: OnUpload
 }
 
 type OnDrop = (
