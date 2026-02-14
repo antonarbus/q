@@ -53,11 +53,7 @@ export const Tiptap = (props: Props): JSX.Element => {
         className={`${props.className} ${props.onUpload === undefined ? '' : cls.droppable}`}
         onClick={props.onWrapperClick}
         onFocus={props.onWrapperFocus}
-        sx={{
-          position: 'relative',
-          ...tiptapStyles,
-          ...props.sx,
-        }}
+        sx={{ position: 'relative', ...tiptapStyles, ...props.sx }}
       >
         <UploadButton />
         <TiptapEditor />
