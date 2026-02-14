@@ -2,7 +2,9 @@ import { BubbleMenu } from '@tiptap/react/menus'
 import { useRef } from 'react'
 import { Divider } from './button/shared/Divider'
 import { liquidGlassStyle } from '../style/liquidGlassStyle'
-import { AlignButtons } from './button/AlignButtons'
+import { AlignLeftButton } from './button/AlignLeftButton'
+import { AlignCenterButton } from './button/AlignCenterButton'
+import { AlignRightButton } from './button/AlignRightButton'
 import { useTiptap } from '@tiptap/react'
 import { BoldButton } from './button/BoldButton'
 import { ItalicButton } from './button/ItalicButton'
@@ -149,7 +151,9 @@ export const FloatingMenu = (): React.ReactNode => {
               flexWrap: 'nowrap',
             }}
           >
-            <AlignButtons />
+            <AlignLeftButton />
+            <AlignCenterButton />
+            <AlignRightButton />
             <Divider />
             <LinkButtons />
           </Box>
