@@ -1,23 +1,23 @@
 import { useTiptap, useTiptapState } from '@tiptap/react'
 import { MenuButton } from './shared/MenuButton'
-import { RiBold } from 'react-icons/ri'
+import { RiItalic } from 'react-icons/ri'
 
-export const BoldButton = (): React.JSX.Element => {
+export const ItalicButton = (): React.JSX.Element => {
   const { editor } = useTiptap()
 
   const isActive = useTiptapState((ctx) => {
-    return ctx.editor.isActive('bold')
+    return ctx.editor.isActive('italic')
   })
 
   return (
     <MenuButton
       isActive={isActive}
-      title='Bold'
+      title='Italic'
       onClick={() => {
-        editor.chain().focus().toggleBold().run()
+        editor.chain().focus().toggleItalic().run()
       }}
     >
-      <RiBold size={16} />
+      <RiItalic size={16} />
     </MenuButton>
   )
 }

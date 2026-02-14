@@ -1,23 +1,23 @@
 import { useTiptap, useTiptapState } from '@tiptap/react'
 import { MenuButton } from './shared/MenuButton'
-import { RiBold } from 'react-icons/ri'
+import { RiSubscript } from 'react-icons/ri'
 
-export const BoldButton = (): React.JSX.Element => {
+export const SubscriptButton = (): React.JSX.Element => {
   const { editor } = useTiptap()
 
   const isActive = useTiptapState((ctx) => {
-    return ctx.editor.isActive('bold')
+    return ctx.editor.isActive('subscript')
   })
 
   return (
     <MenuButton
       isActive={isActive}
-      title='Bold'
+      title='Subscript'
       onClick={() => {
-        editor.chain().focus().toggleBold().run()
+        editor.chain().focus().toggleSubscript().run()
       }}
     >
-      <RiBold size={16} />
+      <RiSubscript size={16} />
     </MenuButton>
   )
 }

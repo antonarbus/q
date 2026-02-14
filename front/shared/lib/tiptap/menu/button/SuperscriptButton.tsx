@@ -1,23 +1,23 @@
 import { useTiptap, useTiptapState } from '@tiptap/react'
 import { MenuButton } from './shared/MenuButton'
-import { RiBold } from 'react-icons/ri'
+import { RiSuperscript } from 'react-icons/ri'
 
-export const BoldButton = (): React.JSX.Element => {
+export const SuperscriptButton = (): React.JSX.Element => {
   const { editor } = useTiptap()
 
   const isActive = useTiptapState((ctx) => {
-    return ctx.editor.isActive('bold')
+    return ctx.editor.isActive('superscript')
   })
 
   return (
     <MenuButton
       isActive={isActive}
-      title='Bold'
+      title='Superscript'
       onClick={() => {
-        editor.chain().focus().toggleBold().run()
+        editor.chain().focus().toggleSuperscript().run()
       }}
     >
-      <RiBold size={16} />
+      <RiSuperscript size={16} />
     </MenuButton>
   )
 }

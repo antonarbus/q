@@ -1,23 +1,23 @@
 import { useTiptap, useTiptapState } from '@tiptap/react'
 import { MenuButton } from './shared/MenuButton'
-import { RiBold } from 'react-icons/ri'
+import { RiListOrdered2 } from 'react-icons/ri'
 
-export const BoldButton = (): React.JSX.Element => {
+export const OrderedListButton = (): React.JSX.Element => {
   const { editor } = useTiptap()
 
   const isActive = useTiptapState((ctx) => {
-    return ctx.editor.isActive('bold')
+    return ctx.editor.isActive('orderedList')
   })
 
   return (
     <MenuButton
       isActive={isActive}
-      title='Bold'
+      title='Ordered List'
       onClick={() => {
-        editor.chain().focus().toggleBold().run()
+        editor.chain().focus().toggleOrderedList().run()
       }}
     >
-      <RiBold size={16} />
+      <RiListOrdered2 size={16} />
     </MenuButton>
   )
 }

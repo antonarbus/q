@@ -1,23 +1,23 @@
 import { useTiptap, useTiptapState } from '@tiptap/react'
 import { MenuButton } from './shared/MenuButton'
-import { RiBold } from 'react-icons/ri'
+import { RiDoubleQuotesL } from 'react-icons/ri'
 
-export const BoldButton = (): React.JSX.Element => {
+export const BlockquoteButton = (): React.JSX.Element => {
   const { editor } = useTiptap()
 
   const isActive = useTiptapState((ctx) => {
-    return ctx.editor.isActive('bold')
+    return ctx.editor.isActive('blockquote')
   })
 
   return (
     <MenuButton
       isActive={isActive}
-      title='Bold'
+      title='Blockquote'
       onClick={() => {
-        editor.chain().focus().toggleBold().run()
+        editor.chain().focus().toggleBlockquote().run()
       }}
     >
-      <RiBold size={16} />
+      <RiDoubleQuotesL size={16} />
     </MenuButton>
   )
 }

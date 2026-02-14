@@ -1,4 +1,4 @@
-import { MenuButton } from './MenuButton'
+import { MenuButton } from './shared/MenuButton'
 import { useTiptap, useTiptapState } from '@tiptap/react'
 import { RiAlignLeft, RiAlignCenter, RiAlignRight } from 'react-icons/ri'
 

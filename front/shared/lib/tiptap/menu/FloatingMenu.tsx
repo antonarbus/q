@@ -1,37 +1,35 @@
 import { BubbleMenu } from '@tiptap/react/menus'
-import { MenuButton } from './button/MenuButton'
-import { useRef, useState } from 'react'
-import { Divider } from './button/Divider'
-import {
-  RiItalic,
-  RiUnderline,
-  RiStrikethrough,
-  RiH1,
-  RiH2,
-  RiH3,
-  RiListUnordered,
-  RiListOrdered2,
-  RiListCheck3,
-  RiDoubleQuotesL,
-  RiCodeBoxLine,
-  RiFontColor,
-  RiMarkPenLine,
-  RiLink,
-  RiLinkUnlink,
-  RiSuperscript,
-  RiSubscript,
-  RiArrowGoBackLine,
-  RiArrowGoForwardLine,
-  RiSeparator,
-} from 'react-icons/ri'
+import { useRef } from 'react'
+import { Divider } from './button/shared/Divider'
 import { liquidGlassStyle } from '../style/liquidGlassStyle'
 import { AlignButtons } from './button/AlignButtons'
 import { useTiptap } from '@tiptap/react'
 import { BoldButton } from './button/BoldButton'
+import { ItalicButton } from './button/ItalicButton'
+import { UnderlineButton } from './button/UnderlineButton'
+import { StrikethroughButton } from './button/StrikethroughButton'
+import { SuperscriptButton } from './button/SuperscriptButton'
+import { SubscriptButton } from './button/SubscriptButton'
+import { Heading1Button } from './button/Heading1Button'
+import { Heading2Button } from './button/Heading2Button'
+import { Heading3Button } from './button/Heading3Button'
+import { Heading4Button } from './button/Heading4Button'
+import { Heading5Button } from './button/Heading5Button'
+import { Heading6Button } from './button/Heading6Button'
+import { BulletListButton } from './button/BulletListButton'
+import { OrderedListButton } from './button/OrderedListButton'
+import { TaskListButton } from './button/TaskListButton'
+import { BlockquoteButton } from './button/BlockquoteButton'
+import { CodeBlockButton } from './button/CodeBlockButton'
+import { HorizontalRuleButton } from './button/HorizontalRuleButton'
+import { UndoButton } from './button/UndoButton'
+import { RedoButton } from './button/RedoButton'
+import { LinkButtons } from './button/LinkButtons'
+import { RedColorButton } from './button/RedColorButton'
+import { HighlightButton } from './button/HighlightButton'
 
 export const FloatingMenu = (): React.ReactNode => {
   const menuRef = useRef<HTMLDivElement | null>(null)
-  const [linkInput, setLinkInput] = useState<string | null>(null)
   const { editor } = useTiptap()
 
   return (
@@ -78,305 +76,37 @@ export const FloatingMenu = (): React.ReactNode => {
           ...liquidGlassStyle,
         }}
       >
-        {/* Undo / Redo */}
-        <MenuButton
-          isActive={false}
-          title='Undo'
-          onClick={() => {
-            editor.chain().focus().undo().run()
-          }}
-        >
-          <RiArrowGoBackLine size={16} />
-        </MenuButton>
-        <MenuButton
-          isActive={false}
-          title='Redo'
-          onClick={() => {
-            editor.chain().focus().redo().run()
-          }}
-        >
-          <RiArrowGoForwardLine size={16} />
-        </MenuButton>
+        <UndoButton />
+        <RedoButton />
         <Divider />
-        {/* Text formatting */}
         <BoldButton />
-
-        <MenuButton
-          isActive={editor.isActive('italic')}
-          title='Italic'
-          onClick={() => {
-            editor.chain().focus().toggleItalic().run()
-          }}
-        >
-          <RiItalic size={16} />
-        </MenuButton>
-        <MenuButton
-          isActive={editor.isActive('underline')}
-          title='Underline'
-          onClick={() => {
-            editor.chain().focus().toggleUnderline().run()
-          }}
-        >
-          <RiUnderline size={16} />
-        </MenuButton>
-        <MenuButton
-          isActive={editor.isActive('strike')}
-          title='Strikethrough'
-          onClick={() => {
-            editor.chain().focus().toggleStrike().run()
-          }}
-        >
-          <RiStrikethrough size={16} />
-        </MenuButton>
-        <MenuButton
-          isActive={editor.isActive('superscript')}
-          title='Superscript'
-          onClick={() => {
-            editor.chain().focus().toggleSuperscript().run()
-          }}
-        >
-          <RiSuperscript size={16} />
-        </MenuButton>
-        <MenuButton
-          isActive={editor.isActive('subscript')}
-          title='Subscript'
-          onClick={() => {
-            editor.chain().focus().toggleSubscript().run()
-          }}
-        >
-          <RiSubscript size={16} />
-        </MenuButton>
+        <ItalicButton />
+        <UnderlineButton />
+        <StrikethroughButton />
+        <SuperscriptButton />
+        <SubscriptButton />
         <Divider />
-        {/* Headings */}
-        <MenuButton
-          isActive={editor.isActive('heading', { level: 1 })}
-          title='Heading 1'
-          onClick={() => {
-            editor.chain().focus().toggleHeading({ level: 1 }).run()
-          }}
-        >
-          <RiH1 size={16} />
-        </MenuButton>
-        <MenuButton
-          isActive={editor.isActive('heading', { level: 2 })}
-          title='Heading 2'
-          onClick={() => {
-            editor.chain().focus().toggleHeading({ level: 2 }).run()
-          }}
-        >
-          <RiH2 size={16} />
-        </MenuButton>
-        <MenuButton
-          isActive={editor.isActive('heading', { level: 3 })}
-          title='Heading 3'
-          onClick={() => {
-            editor.chain().focus().toggleHeading({ level: 3 }).run()
-          }}
-        >
-          <RiH3 size={16} />
-        </MenuButton>
+        <Heading1Button />
+        <Heading2Button />
+        <Heading3Button />
+        <Heading4Button />
+        <Heading5Button />
+        <Heading6Button />
         <Divider />
-        {/* Lists */}
-        <MenuButton
-          isActive={editor.isActive('bulletList')}
-          title='Bullet List'
-          onClick={() => {
-            editor.chain().focus().toggleBulletList().run()
-          }}
-        >
-          <RiListUnordered size={16} />
-        </MenuButton>
-        <MenuButton
-          isActive={editor.isActive('orderedList')}
-          title='Ordered List'
-          onClick={() => {
-            editor.chain().focus().toggleOrderedList().run()
-          }}
-        >
-          <RiListOrdered2 size={16} />
-        </MenuButton>
-        <MenuButton
-          isActive={editor.isActive('taskList')}
-          title='Task List'
-          onClick={() => {
-            editor.chain().focus().toggleTaskList().run()
-          }}
-        >
-          <RiListCheck3 size={16} />
-        </MenuButton>
+        <BulletListButton />
+        <OrderedListButton />
+        <TaskListButton />
         <Divider />
-        {/* Block types */}
-        <MenuButton
-          isActive={editor.isActive('blockquote')}
-          title='Blockquote'
-          onClick={() => {
-            editor.chain().focus().toggleBlockquote().run()
-          }}
-        >
-          <RiDoubleQuotesL size={16} />
-        </MenuButton>
-        <MenuButton
-          isActive={editor.isActive('codeBlock')}
-          title='Code Block'
-          onClick={() => {
-            editor.chain().focus().toggleCodeBlock().run()
-          }}
-        >
-          <RiCodeBoxLine size={16} />
-        </MenuButton>
-        <MenuButton
-          isActive={false}
-          title='Horizontal Rule'
-          onClick={() => {
-            editor.chain().focus().setHorizontalRule().run()
-          }}
-        >
-          <RiSeparator size={16} />
-        </MenuButton>
+        <BlockquoteButton />
+        <CodeBlockButton />
+        <HorizontalRuleButton />
         <Divider />
-        {/* Alignment */}
         <AlignButtons />
         <Divider />
-        {/* Link */}
-        {linkInput === null ? (
-          <>
-            <MenuButton
-              isActive={editor.isActive('link')}
-              title='Link'
-              onClick={() => {
-                const attrs = editor.getAttributes('link')
-
-                const existing =
-                  typeof attrs.href === 'string' ? attrs.href : ''
-
-                setLinkInput(existing)
-              }}
-            >
-              <RiLink size={16} />
-            </MenuButton>
-
-            {editor.isActive('link') && (
-              <MenuButton
-                isActive={false}
-                title='Unlink'
-                onClick={() => {
-                  editor.chain().focus().unsetLink().run()
-                }}
-              >
-                <RiLinkUnlink size={16} />
-              </MenuButton>
-            )}
-          </>
-        ) : (
-          <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-            <input
-              type='text'
-              placeholder='https://...'
-              value={linkInput}
-              onChange={(event) => {
-                setLinkInput(event.target.value)
-              }}
-              onKeyDown={(event) => {
-                if (event.key === 'Enter') {
-                  if (linkInput === null) {
-                    return
-                  }
-
-                  if (linkInput === '') {
-                    editor
-                      .chain()
-                      .focus()
-                      .extendMarkRange('link')
-                      .unsetLink()
-                      .run()
-                  } else {
-                    editor
-                      .chain()
-                      .focus()
-                      .extendMarkRange('link')
-                      .setLink({ href: linkInput })
-                      .run()
-                  }
-
-                  setLinkInput(null)
-                }
-
-                if (event.key === 'Escape') {
-                  setLinkInput(null)
-                }
-              }}
-              style={{
-                padding: '2px 6px',
-                fontSize: 13,
-                border: '1px solid rgba(255,255,255,0.3)',
-                borderRadius: 4,
-                background: 'rgba(0,0,0,0.2)',
-                color: 'inherit',
-                outline: 'none',
-                width: 160,
-              }}
-              autoFocus
-            />
-            <MenuButton
-              isActive={false}
-              title='Apply'
-              onClick={() => {
-                if (linkInput === null) {
-                  return
-                }
-
-                if (linkInput === '') {
-                  editor
-                    .chain()
-                    .focus()
-                    .extendMarkRange('link')
-                    .unsetLink()
-                    .run()
-                } else {
-                  editor
-                    .chain()
-                    .focus()
-                    .extendMarkRange('link')
-                    .setLink({ href: linkInput })
-                    .run()
-                }
-
-                setLinkInput(null)
-              }}
-            >
-              <RiLink size={16} />
-            </MenuButton>
-            <MenuButton
-              isActive={false}
-              title='Cancel'
-              onClick={() => {
-                setLinkInput(null)
-              }}
-            >
-              <RiLinkUnlink size={16} />
-            </MenuButton>
-          </div>
-        )}
+        <LinkButtons />
         <Divider />
-        {/* Colors */}
-        <MenuButton
-          isActive={editor.isActive('textStyle', { color: '#ef4444' })}
-          title='Red'
-          onClick={() => {
-            editor.chain().focus().setColor('#ef4444').run()
-          }}
-        >
-          <RiFontColor size={16} color='#ef4444' />
-        </MenuButton>
-        <MenuButton
-          isActive={editor.isActive('highlight')}
-          title='Highlight'
-          onClick={() => {
-            editor.chain().focus().toggleHighlight({ color: '#fef08a' }).run()
-          }}
-        >
-          <RiMarkPenLine size={16} color='#fef08a' />
-        </MenuButton>
+        <RedColorButton />
+        <HighlightButton />
       </div>
     </BubbleMenu>
   )

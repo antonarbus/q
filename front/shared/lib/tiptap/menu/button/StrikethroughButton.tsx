@@ -1,23 +1,23 @@
 import { useTiptap, useTiptapState } from '@tiptap/react'
 import { MenuButton } from './shared/MenuButton'
-import { RiBold } from 'react-icons/ri'
+import { RiStrikethrough } from 'react-icons/ri'
 
-export const BoldButton = (): React.JSX.Element => {
+export const StrikethroughButton = (): React.JSX.Element => {
   const { editor } = useTiptap()
 
   const isActive = useTiptapState((ctx) => {
-    return ctx.editor.isActive('bold')
+    return ctx.editor.isActive('strike')
   })
 
   return (
     <MenuButton
       isActive={isActive}
-      title='Bold'
+      title='Strikethrough'
       onClick={() => {
-        editor.chain().focus().toggleBold().run()
+        editor.chain().focus().toggleStrike().run()
       }}
     >
-      <RiBold size={16} />
+      <RiStrikethrough size={16} />
     </MenuButton>
   )
 }

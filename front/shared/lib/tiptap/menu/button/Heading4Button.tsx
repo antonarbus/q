@@ -1,23 +1,23 @@
 import { useTiptap, useTiptapState } from '@tiptap/react'
 import { MenuButton } from './shared/MenuButton'
-import { RiBold } from 'react-icons/ri'
+import { RiH4 } from 'react-icons/ri'
 
-export const BoldButton = (): React.JSX.Element => {
+export const Heading4Button = (): React.JSX.Element => {
   const { editor } = useTiptap()
 
   const isActive = useTiptapState((ctx) => {
-    return ctx.editor.isActive('bold')
+    return ctx.editor.isActive('heading', { level: 4 })
   })
 
   return (
     <MenuButton
       isActive={isActive}
-      title='Bold'
+      title='Heading 4'
       onClick={() => {
-        editor.chain().focus().toggleBold().run()
+        editor.chain().focus().toggleHeading({ level: 4 }).run()
       }}
     >
-      <RiBold size={16} />
+      <RiH4 size={16} />
     </MenuButton>
   )
 }
