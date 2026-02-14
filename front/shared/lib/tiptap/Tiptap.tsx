@@ -6,8 +6,8 @@ import { type CSSObject, Box } from '@mui/material'
 import { cls } from '@shared/cls'
 import { StaticHtml } from './StaticHtml'
 import { TiptapEditor } from './TiptapEditor'
-import { UploadButton } from './menu/button/UploadButton'
-import { DropHereText } from './DropHereText'
+import { UploadButton } from './file-upload/UploadButton'
+import { DropHereText } from './file-upload/DropHereText'
 import { tiptapStyles } from './style/tiptapStyles'
 
 type Props = {

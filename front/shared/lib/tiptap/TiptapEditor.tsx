@@ -11,6 +11,8 @@ import { ImageMenu } from './menu/ImageMenu'
 import { useExtensions } from './extension/useExtensions'
 import type { EditorRef } from '@shared/lib/tiptap/types'
 import { cls } from '@shared/cls'
+import { onFileDrop } from './file-upload/onFileDrop'
+import { onFilePaste } from './file-upload/onFilePaste'
 
 type Props = {
   editorRef: EditorRef
@@ -46,66 +48,20 @@ export const TiptapEditor = (props: Props): JSX.Element => {
           return false
         },
         handleDrop: (_view, event, _slice, moved) => {
-          if (moved === true) {
-            return false
-          }
-
-          const droppedFiles = event.dataTransfer?.files
-
-          const hasFiles = droppedFiles !== undefined && droppedFiles.length > 0
-
-          if (hasFiles === false) {
-            return false
-          }
-
-          const editorInstance = props.editorRef.current
-
-          if (editorInstance === null) {
-            return false
-          }
-
-          event.preventDefault()
-
-          const [file] = droppedFiles
-
-          if (file === undefined) {
-            return false
-          }
-
-          void props.onUpload?.({
-            editor: editorInstance,
-            files: Array.from(droppedFiles),
-            type: file.type.startsWith('image/') ? 'image' : 'file',
+          const dropFile = onFileDrop({
+            editorRef: props.editorRef,
+            onUpload: props.onUpload,
           })
 
-          return true
+          dropFile(_view, event, _slice, moved)
         },
         handlePaste: (_view, event) => {
-          const pastedFiles = event.clipboardData?.files
-
-          const hasFiles = pastedFiles !== undefined && pastedFiles.length > 0
-
-          if (hasFiles === false) {
-            return false
-          }
-
-          if (props.editorRef.current === null) {
-            return false
-          }
-
-          const [file] = pastedFiles
-
-          if (file === undefined) {
-            return false
-          }
-
-          void props.onUpload?.({
-            editor: props.editorRef.current,
-            files: Array.from(pastedFiles),
-            type: file.type.startsWith('image/') ? 'image' : 'file',
+          const pastFile = onFilePaste({
+            editorRef: props.editorRef,
+            onUpload: props.onUpload,
           })
 
-          return true
+          pastFile(_view, event)
         },
       },
     },
@@ -127,9 +83,7 @@ export const TiptapEditor = (props: Props): JSX.Element => {
       <EditorContent
         editor={editor}
         className={cls.tipTapEditor}
-        style={{
-          flexGrow: 1,
-        }}
+        style={{ flexGrow: 1 }}
       />
     </>
   )

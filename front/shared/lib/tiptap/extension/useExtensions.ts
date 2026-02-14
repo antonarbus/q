@@ -1,6 +1,5 @@
 import type { AnyExtension } from '@tiptap/react'
 import { useMemo } from 'react'
-
 // Nodes
 import Document from '@tiptap/extension-document'
 import Paragraph from '@tiptap/extension-paragraph'
@@ -10,7 +9,6 @@ import Blockquote from '@tiptap/extension-blockquote'
 import CodeBlock from '@tiptap/extension-code-block'
 import HorizontalRule from '@tiptap/extension-horizontal-rule'
 import HardBreak from '@tiptap/extension-hard-break'
-
 // Lists
 import {
   BulletList,
@@ -20,7 +18,6 @@ import {
   TaskList,
   TaskItem,
 } from '@tiptap/extension-list'
-
 // Marks
 import Bold from '@tiptap/extension-bold'
 import Italic from '@tiptap/extension-italic'
@@ -33,10 +30,8 @@ import Superscript from '@tiptap/extension-superscript'
 import { TextStyle } from '@tiptap/extension-text-style'
 import Color from '@tiptap/extension-color'
 import Highlight from '@tiptap/extension-highlight'
-
 // Styling
 import TextAlign from '@tiptap/extension-text-align'
-
 // Utilities
 import {
   Dropcursor,
@@ -45,9 +40,8 @@ import {
   UndoRedo,
   TrailingNode,
 } from '@tiptap/extensions'
-
 // Custom
-import { ResizableImage } from './ResizableImage'
+import { ResizableImage } from './image/ResizableImage'
 
 type Props = {
   placeholder: string
@@ -65,7 +59,6 @@ export const useExtensions = (props: Props): AnyExtension[] => {
       CodeBlock,
       HorizontalRule,
       HardBreak,
-
       // Lists
       BulletList,
       OrderedList,
@@ -73,7 +66,6 @@ export const useExtensions = (props: Props): AnyExtension[] => {
       ListKeymap,
       TaskList,
       TaskItem.configure({ nested: true }),
-
       // Marks
       Bold,
       Italic,
@@ -89,17 +81,14 @@ export const useExtensions = (props: Props): AnyExtension[] => {
       TextStyle,
       Color,
       Highlight.configure({ multicolor: true }),
-
       // Styling
       TextAlign.configure({ types: ['heading', 'paragraph', 'image'] }),
-
       // Utilities
       Dropcursor,
       Gapcursor,
       Placeholder.configure({ placeholder: props.placeholder }),
       UndoRedo,
       TrailingNode,
-
       // Custom
       ResizableImage.configure({
         allowBase64: true,
