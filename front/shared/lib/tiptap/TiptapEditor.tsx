@@ -1,58 +1,39 @@
 import { type JSX, useEffect } from 'react'
-import { type EditorEvents, useEditor, EditorContent } from '@tiptap/react'
-import type { EditorView } from '@tiptap/pm/view'
+import { useEditor, EditorContent } from '@tiptap/react'
 import { FloatingMenu } from './menu/FloatingMenu'
 import { ImageMenu } from './menu/ImageMenu'
 import { useExtensions } from './extension/useExtensions'
-import type { EditorRef, OnUpload } from '@shared/lib/tiptap/types'
 import { cls } from '@shared/cls'
-import { onFileDrop } from './file-upload/onFileDrop'
-import { onFilePaste } from './file-upload/onFilePaste'
+import { useFileDrop } from './file-upload/useFileDrop'
+import { useFilePaste } from './file-upload/useFilePaste'
+import { useTiptap } from './provider/TiptapProvider'
 
-type Props = {
-  editorRef: EditorRef
-  placeholder: string
-  content: string
-  onCreate?: (props: EditorEvents['create']) => void
-  onUpdate: (props: EditorEvents['update']) => void
-  onBlur?: (props: EditorEvents['blur']) => void
-  onKeyDown?: (view: EditorView, event: KeyboardEvent) => boolean
-  onUpload?: OnUpload
-}
-
-export const TiptapEditor = (props: Props): JSX.Element => {
-  const extensions = useExtensions({ placeholder: props.placeholder })
+export const TiptapEditor = (): JSX.Element => {
+  const ctx = useTiptap()
+  const extensions = useExtensions()
+  const handleDrop = useFileDrop()
+  const handlePaste = useFilePaste()
 
   const editor = useEditor(
     {
       extensions,
-      content: props.content,
-      onCreate: props.onCreate,
-      onUpdate: props.onUpdate,
-      onBlur: props.onBlur,
+      content: ctx.content,
+      onCreate: ctx.onCreate,
+      onUpdate: ctx.onUpdate,
+      onBlur: ctx.onBlur,
       editorProps: {
         handleKeyDown: (view, event) => {
-          if (props.onKeyDown !== undefined) {
-            return props.onKeyDown(view, event)
+          if (ctx.onKeyDown !== undefined) {
+            return ctx.onKeyDown(view, event)
           }
 
           return false
         },
         handleDrop: (_view, event, _slice, moved) => {
-          const dropFile = onFileDrop({
-            editorRef: props.editorRef,
-            onUpload: props.onUpload,
-          })
-
-          dropFile(_view, event, _slice, moved)
+          return handleDrop(_view, event, _slice, moved)
         },
         handlePaste: (_view, event) => {
-          const pastFile = onFilePaste({
-            editorRef: props.editorRef,
-            onUpload: props.onUpload,
-          })
-
-          pastFile(_view, event)
+          return handlePaste(_view, event)
         },
       },
     },
@@ -60,12 +41,12 @@ export const TiptapEditor = (props: Props): JSX.Element => {
   )
 
   useEffect(() => {
-    props.editorRef.current = editor
+    ctx.editorRef.current = editor
 
     return (): void => {
-      props.editorRef.current = null
+      ctx.editorRef.current = null
     }
-  }, [editor, props.editorRef])
+  }, [editor, ctx.editorRef])
 
   return (
     <>

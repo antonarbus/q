@@ -1,14 +1,11 @@
 import type { EditorView } from '@tiptap/pm/view'
-import type { EditorRef, OnUpload } from '../types'
-
-type Props = {
-  editorRef: EditorRef
-  onUpload?: OnUpload
-}
+import { useTiptap } from '../provider/TiptapProvider'
 
 type OnPaste = (_view: EditorView, event: ClipboardEvent) => boolean
 
-export const onFilePaste = (props: Props): OnPaste => {
+export const useFilePaste = (): OnPaste => {
+  const ctx = useTiptap()
+
   const onPaste: OnPaste = (_view, event) => {
     const pastedFiles = event.clipboardData?.files
 
@@ -18,7 +15,7 @@ export const onFilePaste = (props: Props): OnPaste => {
       return false
     }
 
-    if (props.editorRef.current === null) {
+    if (ctx.editorRef.current === null) {
       return false
     }
 
@@ -28,8 +25,8 @@ export const onFilePaste = (props: Props): OnPaste => {
       return false
     }
 
-    void props.onUpload?.({
-      editor: props.editorRef.current,
+    void ctx.onUpload?.({
+      editor: ctx.editorRef.current,
       files: Array.from(pastedFiles),
       type: file.type.startsWith('image/') ? 'image' : 'file',
     })

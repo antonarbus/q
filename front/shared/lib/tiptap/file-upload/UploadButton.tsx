@@ -1,13 +1,11 @@
 import { Box, Tooltip } from '@mui/material'
 import { type JSX, useRef } from 'react'
 import { RiAttachmentLine } from 'react-icons/ri'
+import { useTiptap } from '../provider/TiptapProvider'
 
-type Props = {
-  onFileSelect: (files: File[], type: 'image' | 'file') => void
-}
-
-export const UploadButton = (props: Props): JSX.Element => {
+export const UploadButton = (): JSX.Element => {
   const fileInputRef = useRef<HTMLInputElement | null>(null)
+  const ctx = useTiptap()
 
   return (
     <>
@@ -52,7 +50,9 @@ export const UploadButton = (props: Props): JSX.Element => {
         onChange={(event) => {
           const { files } = event.target
 
-          if (files === null || files.length === 0) {
+          const hasFiles = files !== null && files.length > 0
+
+          if (hasFiles === false) {
             return
           }
 
@@ -62,9 +62,11 @@ export const UploadButton = (props: Props): JSX.Element => {
             return
           }
 
-          const type = file.type.startsWith('image/') ? 'image' : 'file'
-
-          props.onFileSelect(Array.from(files), type)
+          void ctx.onUpload?.({
+            editor: ctx.editorRef.current,
+            files: Array.from(files),
+            type: file.type.startsWith('image/') ? 'image' : 'file',
+          })
 
           event.target.value = ''
         }}

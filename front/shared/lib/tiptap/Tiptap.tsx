@@ -9,6 +9,7 @@ import { TiptapEditor } from './TiptapEditor'
 import { UploadButton } from './file-upload/UploadButton'
 import { DropHereText } from './file-upload/DropHereText'
 import { tiptapStyles } from './style/tiptapStyles'
+import { TiptapProvider } from './provider/TiptapProvider'
 
 type Props = {
   editorRef: EditorRef
@@ -39,38 +40,30 @@ export const Tiptap = (props: Props): JSX.Element => {
   }
 
   return (
-    <Box
-      className={`${props.className} ${props.onUpload === undefined ? '' : cls.droppable}`}
-      onClick={props.onWrapperClick}
-      onFocus={props.onWrapperFocus}
-      sx={{
-        position: 'relative',
-        ...tiptapStyles,
-        ...props.sx,
-      }}
+    <TiptapProvider
+      editorRef={props.editorRef}
+      placeholder={props.placeholder}
+      content={props.content}
+      onCreate={props.onCreate}
+      onUpdate={props.onUpdate}
+      onBlur={props.onBlur}
+      onKeyDown={props.onKeyDown}
+      onUpload={props.onUpload}
     >
-      {props.onUpload !== undefined && (
-        <UploadButton
-          onFileSelect={(files, type) => {
-            void props.onUpload?.({
-              editor: props.editorRef.current,
-              files,
-              type,
-            })
-          }}
-        />
-      )}
-      <TiptapEditor
-        editorRef={props.editorRef}
-        placeholder={props.placeholder}
-        content={props.content}
-        onCreate={props.onCreate}
-        onUpdate={props.onUpdate}
-        onBlur={props.onBlur}
-        onKeyDown={props.onKeyDown}
-        onUpload={props.onUpload}
-      />
-      {props.onUpload !== undefined && <DropHereText />}
-    </Box>
+      <Box
+        className={`${props.className} ${props.onUpload === undefined ? '' : cls.droppable}`}
+        onClick={props.onWrapperClick}
+        onFocus={props.onWrapperFocus}
+        sx={{
+          position: 'relative',
+          ...tiptapStyles,
+          ...props.sx,
+        }}
+      >
+        {props.onUpload !== undefined && <UploadButton />}
+        <TiptapEditor />
+        {props.onUpload !== undefined && <DropHereText />}
+      </Box>
+    </TiptapProvider>
   )
 }

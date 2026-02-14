@@ -42,12 +42,11 @@ import {
 } from '@tiptap/extensions'
 // Custom
 import { ResizableImage } from './image/ResizableImage'
+import { useTiptap } from '../provider/TiptapProvider'
 
-type Props = {
-  placeholder: string
-}
+export const useExtensions = (): AnyExtension[] => {
+  const ctx = useTiptap()
 
-export const useExtensions = (props: Props): AnyExtension[] => {
   const extensions = useMemo<AnyExtension[]>(() => {
     const exts: AnyExtension[] = [
       // Nodes
@@ -86,7 +85,7 @@ export const useExtensions = (props: Props): AnyExtension[] => {
       // Utilities
       Dropcursor,
       Gapcursor,
-      Placeholder.configure({ placeholder: props.placeholder }),
+      Placeholder.configure({ placeholder: ctx.placeholder }),
       UndoRedo,
       TrailingNode,
       // Custom
@@ -101,7 +100,7 @@ export const useExtensions = (props: Props): AnyExtension[] => {
     ]
 
     return exts
-  }, [])
+  }, [ctx.placeholder])
 
   return extensions
 }
