@@ -67,7 +67,7 @@ export const ImageMenu = (props: Props): JSX.Element => {
         }
       }}
       editor={props.editor}
-      updateDelay={200}
+      updateDelay={0}
       shouldShow={shouldShow}
       getReferencedVirtualElement={getReferencedVirtualElement}
       options={options}
