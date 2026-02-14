@@ -17,7 +17,7 @@ export const OrderedListButton = (): React.JSX.Element => {
         editor.chain().focus().toggleOrderedList().run()
       }}
     >
-      <RiListOrdered2 size={16} />
+      <RiListOrdered2 />
     </MenuButton>
   )
 }

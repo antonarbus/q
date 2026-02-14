@@ -17,7 +17,7 @@ export const BlockquoteButton = (): React.JSX.Element => {
         editor.chain().focus().toggleBlockquote().run()
       }}
     >
-      <RiDoubleQuotesL size={16} />
+      <RiDoubleQuotesL />
     </MenuButton>
   )
 }

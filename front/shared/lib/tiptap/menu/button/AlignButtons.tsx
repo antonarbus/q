@@ -28,7 +28,7 @@ export const AlignButtons = (): React.JSX.Element => {
           editor.chain().focus().setTextAlign('left').run()
         }}
       >
-        <RiAlignLeft size={16} />
+        <RiAlignLeft />
       </MenuButton>
 
       <MenuButton
@@ -38,7 +38,7 @@ export const AlignButtons = (): React.JSX.Element => {
           editor.chain().focus().setTextAlign('center').run()
         }}
       >
-        <RiAlignCenter size={16} />
+        <RiAlignCenter />
       </MenuButton>
 
       <MenuButton
@@ -48,7 +48,7 @@ export const AlignButtons = (): React.JSX.Element => {
           editor.chain().focus().setTextAlign('right').run()
         }}
       >
-        <RiAlignRight size={16} />
+        <RiAlignRight />
       </MenuButton>
     </>
   )

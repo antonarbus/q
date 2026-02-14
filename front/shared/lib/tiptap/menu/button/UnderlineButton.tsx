@@ -17,7 +17,7 @@ export const UnderlineButton = (): React.JSX.Element => {
         editor.chain().focus().toggleUnderline().run()
       }}
     >
-      <RiUnderline size={16} />
+      <RiUnderline />
     </MenuButton>
   )
 }

@@ -17,7 +17,7 @@ export const HighlightButton = (): React.JSX.Element => {
         editor.chain().focus().toggleHighlight({ color: '#fef08a' }).run()
       }}
     >
-      <RiMarkPenLine size={16} color='#fef08a' />
+      <RiMarkPenLine color='#fef08a' />
     </MenuButton>
   )
 }

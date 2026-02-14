@@ -13,7 +13,7 @@ export const UndoButton = (): React.JSX.Element => {
         editor.chain().focus().undo().run()
       }}
     >
-      <RiArrowGoBackLine size={16} />
+      <RiArrowGoBackLine />
     </MenuButton>
   )
 }

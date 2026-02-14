@@ -17,7 +17,7 @@ export const CodeBlockButton = (): React.JSX.Element => {
         editor.chain().focus().toggleCodeBlock().run()
       }}
     >
-      <RiCodeBoxLine size={16} />
+      <RiCodeBoxLine />
     </MenuButton>
   )
 }

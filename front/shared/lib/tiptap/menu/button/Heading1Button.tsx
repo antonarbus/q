@@ -17,7 +17,7 @@ export const Heading1Button = (): React.JSX.Element => {
         editor.chain().focus().toggleHeading({ level: 1 }).run()
       }}
     >
-      <RiH1 size={16} />
+      <RiH1 />
     </MenuButton>
   )
 }

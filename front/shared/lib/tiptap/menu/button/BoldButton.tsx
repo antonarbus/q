@@ -17,7 +17,7 @@ export const BoldButton = (): React.JSX.Element => {
         editor.chain().focus().toggleBold().run()
       }}
     >
-      <RiBold size={16} />
+      <RiBold />
     </MenuButton>
   )
 }

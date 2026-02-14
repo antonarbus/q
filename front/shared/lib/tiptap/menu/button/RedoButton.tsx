@@ -13,7 +13,7 @@ export const RedoButton = (): React.JSX.Element => {
         editor.chain().focus().redo().run()
       }}
     >
-      <RiArrowGoForwardLine size={16} />
+      <RiArrowGoForwardLine />
     </MenuButton>
   )
 }

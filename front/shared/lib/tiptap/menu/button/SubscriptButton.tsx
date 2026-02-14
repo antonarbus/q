@@ -17,7 +17,7 @@ export const SubscriptButton = (): React.JSX.Element => {
         editor.chain().focus().toggleSubscript().run()
       }}
     >
-      <RiSubscript size={16} />
+      <RiSubscript />
     </MenuButton>
   )
 }

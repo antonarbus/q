@@ -17,7 +17,7 @@ export const SuperscriptButton = (): React.JSX.Element => {
         editor.chain().focus().toggleSuperscript().run()
       }}
     >
-      <RiSuperscript size={16} />
+      <RiSuperscript />
     </MenuButton>
   )
 }

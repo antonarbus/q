@@ -71,7 +71,7 @@ export const LinkButtons = (): React.JSX.Element => {
             setLinkInput(null)
           }}
         >
-          <RiLink size={16} />
+          <RiLink />
         </MenuButton>
         <MenuButton
           isActive={false}
@@ -80,7 +80,7 @@ export const LinkButtons = (): React.JSX.Element => {
             setLinkInput(null)
           }}
         >
-          <RiLinkUnlink size={16} />
+          <RiLinkUnlink />
         </MenuButton>
       </div>
     )
@@ -99,7 +99,7 @@ export const LinkButtons = (): React.JSX.Element => {
           setLinkInput(existing)
         }}
       >
-        <RiLink size={16} />
+        <RiLink />
       </MenuButton>
 
       {isActive === true ? (
@@ -110,7 +110,7 @@ export const LinkButtons = (): React.JSX.Element => {
             editor.chain().focus().unsetLink().run()
           }}
         >
-          <RiLinkUnlink size={16} />
+          <RiLinkUnlink />
         </MenuButton>
       ) : null}
     </>

@@ -17,7 +17,7 @@ export const StrikethroughButton = (): React.JSX.Element => {
         editor.chain().focus().toggleStrike().run()
       }}
     >
-      <RiStrikethrough size={16} />
+      <RiStrikethrough />
     </MenuButton>
   )
 }

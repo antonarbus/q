@@ -17,7 +17,7 @@ export const ItalicButton = (): React.JSX.Element => {
         editor.chain().focus().toggleItalic().run()
       }}
     >
-      <RiItalic size={16} />
+      <RiItalic />
     </MenuButton>
   )
 }

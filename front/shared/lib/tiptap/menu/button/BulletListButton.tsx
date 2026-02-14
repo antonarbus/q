@@ -17,7 +17,7 @@ export const BulletListButton = (): React.JSX.Element => {
         editor.chain().focus().toggleBulletList().run()
       }}
     >
-      <RiListUnordered size={16} />
+      <RiListUnordered />
     </MenuButton>
   )
 }

@@ -13,7 +13,7 @@ export const HorizontalRuleButton = (): React.JSX.Element => {
         editor.chain().focus().setHorizontalRule().run()
       }}
     >
-      <RiSeparator size={16} />
+      <RiSeparator />
     </MenuButton>
   )
 }

@@ -17,7 +17,7 @@ export const TaskListButton = (): React.JSX.Element => {
         editor.chain().focus().toggleTaskList().run()
       }}
     >
-      <RiListCheck3 size={16} />
+      <RiListCheck3 />
     </MenuButton>
   )
 }

@@ -15,18 +15,18 @@ import { Heading2Button } from './button/Heading2Button'
 import { Heading3Button } from './button/Heading3Button'
 import { Heading4Button } from './button/Heading4Button'
 import { Heading5Button } from './button/Heading5Button'
-import { Heading6Button } from './button/Heading6Button'
 import { BulletListButton } from './button/BulletListButton'
 import { OrderedListButton } from './button/OrderedListButton'
 import { TaskListButton } from './button/TaskListButton'
 import { BlockquoteButton } from './button/BlockquoteButton'
 import { CodeBlockButton } from './button/CodeBlockButton'
 import { HorizontalRuleButton } from './button/HorizontalRuleButton'
-import { UndoButton } from './button/UndoButton'
-import { RedoButton } from './button/RedoButton'
+// import { UndoButton } from './button/UndoButton'
+// import { RedoButton } from './button/RedoButton'
 import { LinkButtons } from './button/LinkButtons'
 import { RedColorButton } from './button/RedColorButton'
 import { HighlightButton } from './button/HighlightButton'
+import { Box } from '@mui/material'
 
 export const FloatingMenu = (): React.ReactNode => {
   const menuRef = useRef<HTMLDivElement | null>(null)
@@ -65,49 +65,108 @@ export const FloatingMenu = (): React.ReactNode => {
         },
       }}
     >
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 2,
+      <Box
+        sx={{
           padding: '6px 8px',
-          flexWrap: 'wrap',
-          maxWidth: 520,
+          // maxWidth: 520,
           ...liquidGlassStyle,
         }}
       >
-        <UndoButton />
-        <RedoButton />
-        <Divider />
-        <BoldButton />
-        <ItalicButton />
-        <UnderlineButton />
-        <StrikethroughButton />
-        <SuperscriptButton />
-        <SubscriptButton />
-        <Divider />
-        <Heading1Button />
-        <Heading2Button />
-        <Heading3Button />
-        <Heading4Button />
-        <Heading5Button />
-        <Heading6Button />
-        <Divider />
-        <BulletListButton />
-        <OrderedListButton />
-        <TaskListButton />
-        <Divider />
-        <BlockquoteButton />
-        <CodeBlockButton />
-        <HorizontalRuleButton />
-        <Divider />
-        <AlignButtons />
-        <Divider />
-        <LinkButtons />
-        <Divider />
-        <RedColorButton />
-        <HighlightButton />
-      </div>
+        <Box
+          sx={{
+            display: 'flex',
+            flexWrap: 'nowrap',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+        >
+          <Box
+            sx={{
+              display: 'flex',
+              flexWrap: 'nowrap',
+            }}
+          >
+            <BoldButton />
+            <ItalicButton />
+            <UnderlineButton />
+            <StrikethroughButton />
+            <SuperscriptButton />
+            <SubscriptButton />
+          </Box>
+
+          <Divider />
+
+          <Box
+            sx={{
+              display: 'flex',
+              flexWrap: 'nowrap',
+            }}
+          >
+            <Heading1Button />
+            <Heading2Button />
+            <Heading3Button />
+            <Heading4Button />
+            <Heading5Button />
+          </Box>
+        </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            flexWrap: 'nowrap',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+        >
+          <Box
+            sx={{
+              display: 'flex',
+              flexWrap: 'nowrap',
+            }}
+          >
+            <BulletListButton />
+            <OrderedListButton />
+            <TaskListButton />
+          </Box>
+
+          <Divider />
+
+          <Box
+            sx={{
+              display: 'flex',
+              flexWrap: 'nowrap',
+            }}
+          >
+            <BlockquoteButton />
+            <CodeBlockButton />
+            <HorizontalRuleButton />
+          </Box>
+
+          <Divider />
+
+          <Box
+            sx={{
+              display: 'flex',
+              flexWrap: 'nowrap',
+            }}
+          >
+            <AlignButtons />
+            <Divider />
+            <LinkButtons />
+          </Box>
+
+          <Divider />
+
+          <Box
+            sx={{
+              display: 'flex',
+              flexWrap: 'nowrap',
+            }}
+          >
+            <RedColorButton />
+            <HighlightButton />
+          </Box>
+        </Box>
+      </Box>
     </BubbleMenu>
   )
 }

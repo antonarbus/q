@@ -17,7 +17,7 @@ export const RedColorButton = (): React.JSX.Element => {
         editor.chain().focus().setColor('#ef4444').run()
       }}
     >
-      <RiFontColor size={16} color='#ef4444' />
+      <RiFontColor color='#ef4444' />
     </MenuButton>
   )
 }
