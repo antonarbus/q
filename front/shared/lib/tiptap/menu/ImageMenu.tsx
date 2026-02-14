@@ -3,7 +3,6 @@ import type { Editor } from '@tiptap/react'
 import { type JSX, useRef } from 'react'
 import { AlignButtons } from './button/AlignButtons'
 import { liquidGlassStyle } from '../style/liquidGlassStyle'
-import { useTiptap } from '../provider/TiptapProvider'
 
 type Props = {
   editor: Editor
@@ -11,8 +10,6 @@ type Props = {
 
 export const ImageMenu = (props: Props): JSX.Element => {
   const menuRef = useRef<HTMLDivElement | null>(null)
-
-  const = useTiptap()
 
   return (
     <BubbleMenu
