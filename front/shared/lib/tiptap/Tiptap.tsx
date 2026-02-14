@@ -64,7 +64,6 @@ export const Tiptap = (props: Props): JSX.Element => {
           }}
         />
       )}
-      {props.onUpload !== undefined && <DropHereText />}
       <TiptapEditor
         editorRef={props.editorRef}
         placeholder={props.placeholder}
@@ -75,6 +74,7 @@ export const Tiptap = (props: Props): JSX.Element => {
         onKeyDown={props.onKeyDown}
         onUpload={props.onUpload}
       />
+      {props.onUpload !== undefined && <DropHereText />}
     </Box>
   )
 }

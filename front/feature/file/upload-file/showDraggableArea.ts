@@ -1,40 +1,17 @@
 import { cls } from '@shared/cls'
 
-const DROP_ELEMENT_SELECTOR = `.${cls.droppable} .${cls.tipTapEditor}`
-const DROP_HERE_TEXT_SELECTOR = `.${cls.dropHereText}`
-
 export const showDraggableArea = (): void => {
-  const droppableElements = document.querySelectorAll(DROP_ELEMENT_SELECTOR)
-
-  droppableElements.forEach((element) => {
-    if (element instanceof HTMLElement) {
-      element.style.outline = '2px dashed grey'
-    }
-  })
-
-  const dropHereTextElements = document.querySelectorAll(
-    DROP_HERE_TEXT_SELECTOR,
-  )
+  const dropHereTextElements = document.querySelectorAll(`.${cls.dropHereText}`)
 
   dropHereTextElements.forEach((element) => {
     if (element instanceof HTMLElement) {
-      element.style.display = 'block'
+      element.style.display = 'grid'
     }
   })
 }
 
 export const hideDraggableArea = (): void => {
-  const droppableElements = document.querySelectorAll(DROP_ELEMENT_SELECTOR)
-
-  droppableElements.forEach((element) => {
-    if (element instanceof HTMLElement) {
-      element.style.outline = ''
-    }
-  })
-
-  const dropHereTextElements = document.querySelectorAll(
-    DROP_HERE_TEXT_SELECTOR,
-  )
+  const dropHereTextElements = document.querySelectorAll(`.${cls.dropHereText}`)
 
   dropHereTextElements.forEach((element) => {
     if (element instanceof HTMLElement) {

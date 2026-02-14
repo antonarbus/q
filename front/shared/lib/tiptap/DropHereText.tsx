@@ -7,16 +7,20 @@ export const DropHereText = (): JSX.Element => {
       className={cls.dropHereText}
       style={{
         position: 'absolute',
-        // top: 2,
-        // right: 5,
         inset: 0,
-        display: 'grid',
-        placeItems: 'center',
         color: 'grey',
-        fontSize: 12,
-        fontWeight: 700,
+        fontSize: 14,
+        fontWeight: 600,
         userSelect: 'none',
-        // display: 'none',
+        margin: '5px',
+        background: 'rgba(255, 255, 255, 0.7)',
+        backdropFilter: 'blur(1.2px) saturate(180%)',
+        border: '2px dashed grey',
+        borderRadius: '4px',
+        pointerEvents: 'none',
+        // display: 'grid', // set with JS
+        placeItems: 'center',
+        display: 'none',
       }}
     >
       Drop here
