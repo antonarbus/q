@@ -2,9 +2,9 @@ import { cls } from '@shared/cls'
 import { useTiptap } from '../provider/TiptapProvider'
 
 export const DropHereText = (): React.ReactNode => {
-  const ctx = useTiptap()
+  const tiptap = useTiptap()
 
-  if (ctx.onUpload === undefined) {
+  if (tiptap.onUpload === undefined) {
     return null
   }
 

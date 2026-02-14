@@ -5,9 +5,9 @@ import { useTiptap } from '../provider/TiptapProvider'
 
 export const UploadButton = (): React.ReactNode => {
   const fileInputRef = useRef<HTMLInputElement | null>(null)
-  const ctx = useTiptap()
+  const tiptap = useTiptap()
 
-  if (ctx.onUpload === undefined) {
+  if (tiptap.onUpload === undefined) {
     return null
   }
 
@@ -66,8 +66,8 @@ export const UploadButton = (): React.ReactNode => {
             return
           }
 
-          void ctx.onUpload?.({
-            editor: ctx.editorRef.current,
+          void tiptap.onUpload?.({
+            editor: tiptap.editorRef.current,
             files: Array.from(files),
             type: file.type.startsWith('image/') ? 'image' : 'file',
           })

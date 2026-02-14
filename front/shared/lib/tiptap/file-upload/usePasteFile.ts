@@ -4,7 +4,7 @@ import { useTiptap } from '../provider/TiptapProvider'
 type OnPaste = (_view: EditorView, event: ClipboardEvent) => boolean
 
 export const usePasteFile = (): OnPaste => {
-  const ctx = useTiptap()
+  const tiptap = useTiptap()
 
   const onPaste: OnPaste = (_view, event) => {
     const pastedFiles = event.clipboardData?.files
@@ -15,7 +15,7 @@ export const usePasteFile = (): OnPaste => {
       return false
     }
 
-    if (ctx.editorRef.current === null) {
+    if (tiptap.editorRef.current === null) {
       return false
     }
 
@@ -25,8 +25,8 @@ export const usePasteFile = (): OnPaste => {
       return false
     }
 
-    void ctx.onUpload?.({
-      editor: ctx.editorRef.current,
+    void tiptap.onUpload?.({
+      editor: tiptap.editorRef.current,
       files: Array.from(pastedFiles),
       type: file.type.startsWith('image/') ? 'image' : 'file',
     })

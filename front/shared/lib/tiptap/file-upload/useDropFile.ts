@@ -10,7 +10,7 @@ type OnDrop = (
 ) => boolean
 
 export const useDropFile = (): OnDrop => {
-  const ctx = useTiptap()
+  const tiptap = useTiptap()
 
   const onDrop: OnDrop = (_view, event, _slice, moved) => {
     if (moved === true) {
@@ -25,7 +25,7 @@ export const useDropFile = (): OnDrop => {
       return false
     }
 
-    const editorInstance = ctx.editorRef.current
+    const editorInstance = tiptap.editorRef.current
 
     if (editorInstance === null) {
       return false
@@ -39,7 +39,7 @@ export const useDropFile = (): OnDrop => {
       return false
     }
 
-    void ctx.onUpload?.({
+    void tiptap.onUpload?.({
       editor: editorInstance,
       files: Array.from(droppedFiles),
       type: file.type.startsWith('image/') ? 'image' : 'file',
