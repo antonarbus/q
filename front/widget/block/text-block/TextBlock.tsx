@@ -19,12 +19,10 @@ import { cls } from '@shared/cls'
 import { ItemActionButtonsLayout } from '@shared/layout/ItemActionButtonsLayout'
 import { type JSX, useRef } from 'react'
 import type { Editor } from '@tiptap/react'
-import { useSelector } from '@shared/lib/redux'
 
 export const TextBlock = (): JSX.Element => {
   const editorRef = useRef<Editor | null>(null)
   const block = useBlock()
-  const isEditorActive = useSelector((state) => state.text.isEditable)
 
   return (
     <BlockComp
@@ -50,7 +48,6 @@ export const TextBlock = (): JSX.Element => {
         editorRef={editorRef}
         className='text'
         placeholder='Add text, tables, drop images, files, links, select to format...'
-        isEditorActive={isEditorActive}
         content={getTextBlockHtmlFromStore({ blockIndex: block.index })}
         onUpdate={(params) => {
           updateTextBlock({ editorRef, blockIndex: block.index })

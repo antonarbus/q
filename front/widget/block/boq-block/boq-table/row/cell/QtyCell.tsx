@@ -10,14 +10,12 @@ import { tabFromQtyCell } from '@feature/blocks/tab-away-from-cell'
 import { formatQtyCell, updateQtyCell } from '@feature/blocks/update'
 import { Box } from '@mui/material'
 import { Tiptap } from '@shared/lib/tiptap/Tiptap'
-import { useSelector } from '@shared/lib/redux'
 import type { JSX, MouseEvent } from 'react'
 
 export const QtyCell = (): JSX.Element => {
   const block = useBlock()
   const boq = useBoq()
   const row = useRow()
-  const isEditorActive = useSelector((state) => state.text.isEditable)
 
   const stylesForResizableCell = useStylesForResizableCell({
     blockIndex: block.index,
@@ -31,7 +29,6 @@ export const QtyCell = (): JSX.Element => {
         editorRef={row.qtyCellEditorRef}
         className='td qty'
         placeholder='Qty...'
-        isEditorActive={isEditorActive}
         content={getCellHtmlFromStore({
           blockIndex: block.index,
           rowIndex: row.index,

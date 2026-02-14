@@ -7,12 +7,10 @@ import { type JSX, useRef } from 'react'
 import { ResizableColumn } from '../ResizableColumn'
 import { Tiptap } from '@shared/lib/tiptap/Tiptap'
 import type { Editor } from '@tiptap/react'
-import { useSelector } from '@shared/lib/redux'
 
 export const ItemPriceColumn = (): JSX.Element => {
   const editorRef = useRef<Editor | null>(null)
   const block = useBlock()
-  const isEditorActive = useSelector((state) => state.text.isEditable)
 
   return (
     <ResizableColumn
@@ -24,7 +22,6 @@ export const ItemPriceColumn = (): JSX.Element => {
         editorRef={editorRef}
         className='column-item-price'
         placeholder='Item...'
-        isEditorActive={isEditorActive}
         content={getBoqColumnHtmlFromStore({
           blockIndex: block.index,
           boqColumnKey: 'itemPrice',

@@ -1,35 +1,34 @@
-import { type CSSObject, Box } from '@mui/material'
-import type { JSX } from 'react'
+import { Box } from '@mui/material'
 import { useEditor, EditorContent } from '@tiptap/react'
 import { useExtensions } from './extension/useExtensions'
 import { tiptapStyles } from './style/tiptapStyles'
 import { cls } from '@shared/cls'
+import { useTiptap } from './provider/TiptapProvider'
 
-type Props = {
-  className: string
-  content: string
-  sx: CSSObject
-}
-
-export const StaticHtml = (props: Props): JSX.Element => {
+export const EditorStatic = (): React.ReactNode => {
+  const ctx = useTiptap()
   const extensions = useExtensions()
 
   const editor = useEditor(
     {
       extensions,
-      content: props.content,
+      content: ctx.content,
       editable: false,
     },
-    [props.content],
+    [ctx.content],
   )
+
+  if (ctx.isEditorActive === true) {
+    return null
+  }
 
   return (
     <Box
-      className={`${cls.notEditable} ${props.className}`}
+      className={`${cls.notEditable} ${ctx.className}`}
       sx={{
         opacity: 0.5,
         ...tiptapStyles,
-        ...props.sx,
+        ...ctx.sx,
       }}
     >
       <EditorContent

@@ -12,14 +12,12 @@ import {
 } from '@feature/blocks/update'
 import { useRef, type JSX, type MouseEvent } from 'react'
 import { Tiptap } from '@shared/lib/tiptap/Tiptap'
-import { useSelector } from '@shared/lib/redux'
 
 const boqHeaderKey: HeaderKey = 'subTotalPrice'
 
 export const SubTotalPrice = (): JSX.Element => {
   const boq = useBoq()
   const block = useBlock()
-  const isEditorActive = useSelector((state) => state.text.isEditable)
 
   const hidePinsClickHandlerRef = useRef<(e: globalThis.MouseEvent) => void>(
     (event) => {
@@ -36,7 +34,6 @@ export const SubTotalPrice = (): JSX.Element => {
       editorRef={boq.subTotalPriceEditorRef}
       className='sub-total-price'
       placeholder='Price...'
-      isEditorActive={isEditorActive}
       content={getBoqHeaderHtmlFromStore({
         blockIndex: block.index,
         boqHeaderKey,

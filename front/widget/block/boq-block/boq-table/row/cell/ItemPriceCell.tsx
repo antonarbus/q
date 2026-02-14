@@ -13,14 +13,12 @@ import {
 } from '@feature/blocks/update'
 import { Box } from '@mui/material'
 import { Tiptap } from '@shared/lib/tiptap/Tiptap'
-import { useSelector } from '@shared/lib/redux'
 import type { JSX, MouseEvent } from 'react'
 
 export const ItemPriceCell = (): JSX.Element => {
   const block = useBlock()
   const boq = useBoq()
   const row = useRow()
-  const isEditorActive = useSelector((state) => state.text.isEditable)
 
   const stylesForResizableCell = useStylesForResizableCell({
     blockIndex: block.index,
@@ -34,7 +32,6 @@ export const ItemPriceCell = (): JSX.Element => {
         editorRef={row.itemPriceCellEditorRef}
         className='td itemPrice'
         placeholder='Item price...'
-        isEditorActive={isEditorActive}
         content={getCellHtmlFromStore({
           blockIndex: block.index,
           cellKey: 'itemPrice',

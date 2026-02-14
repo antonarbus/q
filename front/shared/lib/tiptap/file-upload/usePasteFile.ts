@@ -3,7 +3,7 @@ import { useTiptap } from '../provider/TiptapProvider'
 
 type OnPaste = (_view: EditorView, event: ClipboardEvent) => boolean
 
-export const useFilePaste = (): OnPaste => {
+export const usePasteFile = (): OnPaste => {
   const ctx = useTiptap()
 
   const onPaste: OnPaste = (_view, event) => {

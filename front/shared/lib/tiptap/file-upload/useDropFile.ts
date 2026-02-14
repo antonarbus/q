@@ -9,7 +9,7 @@ type OnDrop = (
   moved: boolean,
 ) => boolean
 
-export const useFileDrop = (): OnDrop => {
+export const useDropFile = (): OnDrop => {
   const ctx = useTiptap()
 
   const onDrop: OnDrop = (_view, event, _slice, moved) => {

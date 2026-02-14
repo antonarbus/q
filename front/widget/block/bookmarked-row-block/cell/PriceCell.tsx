@@ -8,12 +8,10 @@ import { formatPriceCell } from '@feature/blocks/update/update-cell-at-bookmarke
 import { updatePriceCell } from '@feature/blocks/update/update-cell-at-bookmarked-row-block/price/updatePriceCell'
 import { Box } from '@mui/material'
 import { Tiptap } from '@shared/lib/tiptap/Tiptap'
-import { useSelector } from '@shared/lib/redux'
 import type { JSX } from 'react'
 
 export const PriceCell = (): JSX.Element => {
   const row = useRow()
-  const isEditorActive = useSelector((state) => state.text.isEditable)
 
   const stylesForResizableCell = useStylesForResizableCell({
     blockIndex: BOOKMARK_POS_AT_BLOCKS,
@@ -27,7 +25,6 @@ export const PriceCell = (): JSX.Element => {
         editorRef={row.priceCellEditorRef}
         className='td price'
         placeholder='Price...'
-        isEditorActive={isEditorActive}
         content={getBookmarkedRowCellHtmlFromStore({ cellKey: 'price' })}
         onUpdate={(params) => {
           updatePriceCell({

@@ -8,12 +8,10 @@ import {
 import { Tiptap } from '@shared/lib/tiptap/Tiptap'
 import { type JSX, useRef } from 'react'
 import type { Editor } from '@tiptap/react'
-import { useSelector } from '@shared/lib/redux'
 
 export const PriceValue = (): JSX.Element => {
   const editorRef = useRef<Editor | null>(null)
   const block = useBlock()
-  const isEditorActive = useSelector((state) => state.text.isEditable)
 
   useUpdateTotalPriceIfPricesAboveWereChanged({
     blockIndex: block.index,
@@ -26,7 +24,6 @@ export const PriceValue = (): JSX.Element => {
       className='price-value'
       placeholder='Total price...'
       content={getPriceBlockHtmlFromStore({ blockIndex: block.index })}
-      isEditorActive={isEditorActive}
       onCreate={(params) => {
         validateTotalPrice({ editorRef, blockIndex: block.index })
       }}

@@ -4,15 +4,15 @@ import { FloatingMenu } from './menu/FloatingMenu'
 import { ImageMenu } from './menu/ImageMenu'
 import { useExtensions } from './extension/useExtensions'
 import { cls } from '@shared/cls'
-import { useFileDrop } from './file-upload/useFileDrop'
-import { useFilePaste } from './file-upload/useFilePaste'
+import { useDropFile } from './file-upload/useDropFile'
+import { usePasteFile } from './file-upload/usePasteFile'
 import { useTiptap } from './provider/TiptapProvider'
 
 export const TiptapEditor = (): JSX.Element => {
   const ctx = useTiptap()
   const extensions = useExtensions()
-  const handleDrop = useFileDrop()
-  const handlePaste = useFilePaste()
+  const dropFile = useDropFile()
+  const pasteFile = usePasteFile()
 
   const editor = useEditor(
     {
@@ -30,10 +30,10 @@ export const TiptapEditor = (): JSX.Element => {
           return false
         },
         handleDrop: (_view, event, _slice, moved) => {
-          return handleDrop(_view, event, _slice, moved)
+          return dropFile(_view, event, _slice, moved)
         },
         handlePaste: (_view, event) => {
-          return handlePaste(_view, event)
+          return pasteFile(_view, event)
         },
       },
     },

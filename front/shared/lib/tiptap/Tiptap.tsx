@@ -2,20 +2,15 @@ import type { JSX } from 'react'
 import type { EditorEvents } from '@tiptap/react'
 import type { EditorView } from '@tiptap/pm/view'
 import type { EditorRef, OnUpload } from '@shared/lib/tiptap/types'
-import { type CSSObject, Box } from '@mui/material'
-import { cls } from '@shared/cls'
-import { StaticHtml } from './StaticHtml'
-import { TiptapEditor } from './TiptapEditor'
-import { UploadButton } from './file-upload/UploadButton'
-import { DropHereText } from './file-upload/DropHereText'
-import { tiptapStyles } from './style/tiptapStyles'
+import type { CSSObject } from '@mui/material'
+import { EditorStatic } from './EditorStatic'
 import { TiptapProvider } from './provider/TiptapProvider'
+import { EditorNotStatic } from './EditorNotStatic'
 
 type Props = {
   editorRef: EditorRef
-  isEditorActive: boolean
-  className: string
   placeholder: string
+  className: string
   sx: CSSObject
   content: string
   onCreate?: (props: EditorEvents['create']) => void
@@ -28,37 +23,23 @@ type Props = {
 }
 
 export const Tiptap = (props: Props): JSX.Element => {
-  if (props.isEditorActive === false) {
-    return (
-      <StaticHtml
-        className={props.className}
-        content={props.content}
-        sx={props.sx}
-      />
-    )
-  }
-
   return (
     <TiptapProvider
       editorRef={props.editorRef}
       placeholder={props.placeholder}
+      className={props.className}
+      sx={props.sx}
       content={props.content}
       onCreate={props.onCreate}
       onUpdate={props.onUpdate}
       onBlur={props.onBlur}
       onKeyDown={props.onKeyDown}
+      onWrapperClick={props.onWrapperClick}
+      onWrapperFocus={props.onWrapperFocus}
       onUpload={props.onUpload}
     >
-      <Box
-        className={`${props.className} ${props.onUpload === undefined ? '' : cls.droppable}`}
-        onClick={props.onWrapperClick}
-        onFocus={props.onWrapperFocus}
-        sx={{ position: 'relative', ...tiptapStyles, ...props.sx }}
-      >
-        <UploadButton />
-        <TiptapEditor />
-        <DropHereText />
-      </Box>
+      <EditorNotStatic />
+      <EditorStatic />
     </TiptapProvider>
   )
 }

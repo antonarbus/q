@@ -8,13 +8,11 @@ import { tabFromDescriptionCell } from '@feature/blocks/tab-away-from-cell'
 import { updateDescriptionCell } from '@feature/blocks/update'
 import { upload } from '@feature/file/upload-file'
 import { Tiptap } from '@shared/lib/tiptap/Tiptap'
-import { useSelector } from '@shared/lib/redux'
 import type { JSX } from 'react'
 
 export const DescriptionCell = (): JSX.Element => {
   const block = useBlock()
   const row = useRow()
-  const isEditorActive = useSelector((state) => state.text.isEditable)
 
   const stylesForResizableCell = useStylesForResizableCell({
     blockIndex: block.index,
@@ -27,7 +25,6 @@ export const DescriptionCell = (): JSX.Element => {
       editorRef={row.descriptionCellEditorRef}
       className='td description'
       placeholder='Description...'
-      isEditorActive={isEditorActive}
       content={getCellHtmlFromStore({
         blockIndex: block.index,
         cellKey: 'description',

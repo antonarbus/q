@@ -5,14 +5,12 @@ import { useRow } from '@entity/quotation/provider/RowProvider'
 import { getBookmarkedRowCellHtmlFromStore } from '@entity/quotation/redux/getter/getBookmarkedRowCellHtmlFromStore'
 import { cellStyle } from '@entity/quotation/style/cellStyle'
 import { updateDescriptionCell } from '@feature/blocks/update/update-cell-at-bookmarked-row-block/description/updateDescriptionCell'
-import { useSelector } from '@shared/lib/redux'
 import { upload } from '@feature/file/upload-file'
 import { Tiptap } from '@shared/lib/tiptap/Tiptap'
 import type { JSX } from 'react'
 
 export const DescriptionCell = (): JSX.Element => {
   const row = useRow()
-  const isEditorActive = useSelector((state) => state.text.isEditable)
 
   const stylesForResizableCell = useStylesForResizableCell({
     blockIndex: BOOKMARK_POS_AT_BLOCKS,
@@ -25,7 +23,6 @@ export const DescriptionCell = (): JSX.Element => {
       editorRef={row.descriptionCellEditorRef}
       className='td description'
       placeholder='Description...'
-      isEditorActive={isEditorActive}
       content={getBookmarkedRowCellHtmlFromStore({ cellKey: 'description' })}
       onUpdate={(params) => {
         updateDescriptionCell({

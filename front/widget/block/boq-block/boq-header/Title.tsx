@@ -6,21 +6,18 @@ import { updateTitle } from '@feature/blocks/update'
 import { type JSX, useRef } from 'react'
 import { Tiptap } from '@shared/lib/tiptap/Tiptap'
 import type { Editor } from '@tiptap/react'
-import { useSelector } from '@shared/lib/redux'
 
 const boqHeaderKey: HeaderKey = 'title'
 
 export const Title = (): JSX.Element => {
   const editorRef = useRef<Editor | null>(null)
   const block = useBlock()
-  const isEditorActive = useSelector((state) => state.text.isEditable)
 
   return (
     <Tiptap
       editorRef={editorRef}
       className='title'
       placeholder='Title...'
-      isEditorActive={isEditorActive}
       content={getBoqHeaderHtmlFromStore({
         blockIndex: block.index,
         boqHeaderKey,
