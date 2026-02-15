@@ -9,13 +9,15 @@ export const EditorStatic = (): React.ReactNode => {
   const tiptapCtx = useTiptapCtx()
   const extensions = useExtensions()
 
+  const content = tiptapCtx.contentGetter()
+
   const editor = useEditor(
     {
       extensions,
-      content: tiptapCtx.contentGetter(),
+      content,
       editable: false,
     },
-    [],
+    [content],
   )
 
   if (tiptapCtx.isEditorActive === true) {
