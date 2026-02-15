@@ -18,10 +18,12 @@ export const Title = (): React.JSX.Element => {
       editorRef={editorRef}
       className='title'
       placeholder='Title...'
-      content={getBoqHeaderHtmlFromStore({
-        blockIndex: block.index,
-        boqHeaderKey,
-      })}
+      content={() =>
+        getBoqHeaderHtmlFromStore({
+          blockIndex: block.index,
+          boqHeaderKey,
+        })
+      }
       onUpdate={(params) => {
         updateTitle({
           blockIndex: block.index,

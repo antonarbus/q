@@ -48,7 +48,7 @@ export const TextBlock = (): React.JSX.Element => {
         editorRef={editorRef}
         className='text'
         placeholder='Add text, tables, drop images, files, links, select to format...'
-        content={getTextBlockHtmlFromStore({ blockIndex: block.index })}
+        content={() => getTextBlockHtmlFromStore({ blockIndex: block.index })}
         onUpdate={(params) => {
           updateTextBlock({ editorRef, blockIndex: block.index })
         }}

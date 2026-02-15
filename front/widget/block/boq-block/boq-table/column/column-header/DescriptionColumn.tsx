@@ -22,10 +22,12 @@ export const DescriptionColumn = (): React.ReactNode => {
         editorRef={editorRef}
         className='column-description'
         placeholder='Description...'
-        content={getBoqColumnHtmlFromStore({
-          blockIndex: block.index,
-          boqColumnKey: 'description',
-        })}
+        content={() =>
+          getBoqColumnHtmlFromStore({
+            blockIndex: block.index,
+            boqColumnKey: 'description',
+          })
+        }
         onUpdate={(params) => {
           updateColumnCell({
             editorRef,

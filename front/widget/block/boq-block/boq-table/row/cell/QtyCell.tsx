@@ -28,11 +28,13 @@ export const QtyCell = (): React.JSX.Element => {
         editorRef={row.qtyCellEditorRef}
         className='td qty'
         placeholder='Qty...'
-        content={getCellHtmlFromStore({
-          blockIndex: block.index,
-          rowIndex: row.index,
-          cellKey: 'qty',
-        })}
+        content={() =>
+          getCellHtmlFromStore({
+            blockIndex: block.index,
+            rowIndex: row.index,
+            cellKey: 'qty',
+          })
+        }
         onUpdate={(params) => {
           updateQtyCell({
             blockIndex: block.index,

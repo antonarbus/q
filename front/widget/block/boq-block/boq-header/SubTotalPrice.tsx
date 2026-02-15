@@ -34,10 +34,12 @@ export const SubTotalPrice = (): React.JSX.Element => {
       editorRef={boq.subTotalPriceEditorRef}
       className='sub-total-price'
       placeholder='Price...'
-      content={getBoqHeaderHtmlFromStore({
-        blockIndex: block.index,
-        boqHeaderKey,
-      })}
+      content={() =>
+        getBoqHeaderHtmlFromStore({
+          blockIndex: block.index,
+          boqHeaderKey,
+        })
+      }
       onUpdate={(params) => {
         updateSubtotalPrice({
           blockIndex: block.index,

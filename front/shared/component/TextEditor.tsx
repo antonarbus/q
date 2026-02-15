@@ -11,7 +11,7 @@ type Props = {
   placeholder: string
   className: string
   sx: CSSObject
-  content: string
+  content: () => string
   onCreate?: (props: EditorEvents['create']) => void
   onUpdate: (props: EditorEvents['update']) => void
   onBlur?: (props: EditorEvents['blur']) => void

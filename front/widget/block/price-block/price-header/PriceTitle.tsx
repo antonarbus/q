@@ -14,7 +14,7 @@ export const PriceTitle = (): React.JSX.Element => {
       editorRef={editorRef}
       className='price-title'
       placeholder='Total price...'
-      content={((): string => {
+      content={(): string => {
         const priceBlock = getState().quotation.blocks[block.index]
 
         if (priceBlock?.type !== 'price') {
@@ -22,7 +22,7 @@ export const PriceTitle = (): React.JSX.Element => {
         }
 
         return priceBlock.title.html
-      })()}
+      }}
       onUpdate={(params) => {
         updatePriceTitle({ editorRef, blockIndex: block.index })
       }}

@@ -22,10 +22,12 @@ export const ItemPriceColumn = (): React.JSX.Element => {
         editorRef={editorRef}
         className='column-item-price'
         placeholder='Item...'
-        content={getBoqColumnHtmlFromStore({
-          blockIndex: block.index,
-          boqColumnKey: 'itemPrice',
-        })}
+        content={() =>
+          getBoqColumnHtmlFromStore({
+            blockIndex: block.index,
+            boqColumnKey: 'itemPrice',
+          })
+        }
         onUpdate={(params) => {
           updateColumnCell({
             editorRef,

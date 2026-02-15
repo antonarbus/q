@@ -24,11 +24,13 @@ export const DescriptionCell = (): React.JSX.Element => {
       editorRef={row.descriptionCellEditorRef}
       className='td description'
       placeholder='Description...'
-      content={getCellHtmlFromStore({
-        blockIndex: block.index,
-        cellKey: 'description',
-        rowIndex: row.index,
-      })}
+      content={() =>
+        getCellHtmlFromStore({
+          blockIndex: block.index,
+          cellKey: 'description',
+          rowIndex: row.index,
+        })
+      }
       onUpdate={(params) => {
         updateDescriptionCell({
           blockIndex: block.index,

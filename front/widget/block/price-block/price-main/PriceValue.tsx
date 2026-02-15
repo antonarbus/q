@@ -23,7 +23,7 @@ export const PriceValue = (): React.JSX.Element => {
       editorRef={editorRef}
       className='price-value'
       placeholder='Total price...'
-      content={getPriceBlockHtmlFromStore({ blockIndex: block.index })}
+      content={() => getPriceBlockHtmlFromStore({ blockIndex: block.index })}
       onCreate={(params) => {
         validateTotalPrice({ editorRef, blockIndex: block.index })
       }}

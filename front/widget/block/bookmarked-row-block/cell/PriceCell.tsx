@@ -24,7 +24,7 @@ export const PriceCell = (): React.JSX.Element => {
         editorRef={row.priceCellEditorRef}
         className='td price'
         placeholder='Price...'
-        content={getBookmarkedRowCellHtmlFromStore({ cellKey: 'price' })}
+        content={() => getBookmarkedRowCellHtmlFromStore({ cellKey: 'price' })}
         onUpdate={(params) => {
           updatePriceCell({
             itemPriceCellEditorRef: row.itemPriceCellEditorRef,

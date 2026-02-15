@@ -31,11 +31,13 @@ export const ItemPriceCell = (): React.JSX.Element => {
         editorRef={row.itemPriceCellEditorRef}
         className='td itemPrice'
         placeholder='Item price...'
-        content={getCellHtmlFromStore({
-          blockIndex: block.index,
-          cellKey: 'itemPrice',
-          rowIndex: row.index,
-        })}
+        content={() =>
+          getCellHtmlFromStore({
+            blockIndex: block.index,
+            cellKey: 'itemPrice',
+            rowIndex: row.index,
+          })
+        }
         onUpdate={(params) => {
           updateItemPriceCell({
             blockIndex: block.index,
