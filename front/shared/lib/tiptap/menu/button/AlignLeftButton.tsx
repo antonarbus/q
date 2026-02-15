@@ -6,7 +6,15 @@ export const AlignLeftButton = (): React.JSX.Element => {
   const { editor } = useTiptap()
 
   const isActive = useTiptapState((ctx) => {
-    return ctx.editor.isActive({ textAlign: 'left' })
+    if (ctx.editor.isActive({ textAlign: 'center' })) {
+      return false
+    }
+
+    if (ctx.editor.isActive({ textAlign: 'right' })) {
+      return false
+    }
+
+    return true
   })
 
   return (
