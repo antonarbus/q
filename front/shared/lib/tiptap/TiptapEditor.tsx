@@ -49,16 +49,14 @@ export const TiptapEditor = (): React.JSX.Element => {
   }, [editor, tiptapCtx.editorRef])
 
   return (
-    <>
-      <Tiptap editor={editor}>
-        <FloatingMenu />
-        <ImageMenu />
-      </Tiptap>
+    <Tiptap editor={editor}>
+      <FloatingMenu />
+      <ImageMenu />
       <EditorContent
         editor={editor}
         className={cls.tipTapEditor}
         style={{ flexGrow: 1 }}
       />
-    </>
+    </Tiptap>
   )
 }
