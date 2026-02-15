@@ -25,8 +25,6 @@ import Strike from '@tiptap/extension-strike'
 import Code from '@tiptap/extension-code'
 import Underline from '@tiptap/extension-underline'
 import Link from '@tiptap/extension-link'
-import Subscript from '@tiptap/extension-subscript'
-import Superscript from '@tiptap/extension-superscript'
 import { TextStyle } from '@tiptap/extension-text-style'
 import Color from '@tiptap/extension-color'
 import Highlight from '@tiptap/extension-highlight'
@@ -75,8 +73,6 @@ export const useExtensions = (): AnyExtension[] => {
         openOnClick: true,
         HTMLAttributes: { rel: 'noopener noreferrer', target: '_blank' },
       }),
-      Subscript,
-      Superscript,
       TextStyle,
       Color,
       Highlight.configure({ multicolor: true }),

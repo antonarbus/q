@@ -10,8 +10,6 @@ import { BoldButton } from './button/BoldButton'
 import { ItalicButton } from './button/ItalicButton'
 import { UnderlineButton } from './button/UnderlineButton'
 import { StrikethroughButton } from './button/StrikethroughButton'
-import { SuperscriptButton } from './button/SuperscriptButton'
-import { SubscriptButton } from './button/SubscriptButton'
 import { Heading1Button } from './button/Heading1Button'
 import { Heading2Button } from './button/Heading2Button'
 import { Heading3Button } from './button/Heading3Button'
@@ -94,8 +92,6 @@ export const FloatingMenu = (): React.ReactNode => {
             <ItalicButton />
             <UnderlineButton />
             <StrikethroughButton />
-            <SuperscriptButton />
-            <SubscriptButton />
           </Box>
 
           <Divider />
