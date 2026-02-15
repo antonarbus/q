@@ -18,7 +18,7 @@ export const Title = (): React.JSX.Element => {
       editorRef={editorRef}
       className='title'
       placeholder='Title...'
-      content={() =>
+      contentGetter={() =>
         getBoqHeaderHtmlFromStore({
           blockIndex: block.index,
           boqHeaderKey,

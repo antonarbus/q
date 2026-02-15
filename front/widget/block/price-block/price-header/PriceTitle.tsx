@@ -14,7 +14,7 @@ export const PriceTitle = (): React.JSX.Element => {
       editorRef={editorRef}
       className='price-title'
       placeholder='Total price...'
-      content={(): string => {
+      contentGetter={() => {
         const priceBlock = getState().quotation.blocks[block.index]
 
         if (priceBlock?.type !== 'price') {

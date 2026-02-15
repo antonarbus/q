@@ -22,7 +22,7 @@ export const DescriptionCell = (): React.JSX.Element => {
       editorRef={row.descriptionCellEditorRef}
       className='td description'
       placeholder='Description...'
-      content={() =>
+      contentGetter={() =>
         getBookmarkedRowCellHtmlFromStore({ cellKey: 'description' })
       }
       onUpdate={(params) => {

@@ -24,7 +24,7 @@ export const DescriptionCell = (): React.JSX.Element => {
       editorRef={row.descriptionCellEditorRef}
       className='td description'
       placeholder='Description...'
-      content={() =>
+      contentGetter={() =>
         getCellHtmlFromStore({
           blockIndex: block.index,
           cellKey: 'description',

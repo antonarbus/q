@@ -18,7 +18,7 @@ export const SubtotalText = (): React.JSX.Element => {
       editorRef={editorRef}
       className='sub-total-text'
       placeholder='Subtotal...'
-      content={() =>
+      contentGetter={() =>
         getBoqHeaderHtmlFromStore({
           blockIndex: block.index,
           boqHeaderKey,

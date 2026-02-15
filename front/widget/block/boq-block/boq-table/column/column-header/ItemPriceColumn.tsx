@@ -22,7 +22,7 @@ export const ItemPriceColumn = (): React.JSX.Element => {
         editorRef={editorRef}
         className='column-item-price'
         placeholder='Item...'
-        content={() =>
+        contentGetter={() =>
           getBoqColumnHtmlFromStore({
             blockIndex: block.index,
             boqColumnKey: 'itemPrice',

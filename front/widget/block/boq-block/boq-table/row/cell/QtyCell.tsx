@@ -28,7 +28,7 @@ export const QtyCell = (): React.JSX.Element => {
         editorRef={row.qtyCellEditorRef}
         className='td qty'
         placeholder='Qty...'
-        content={() =>
+        contentGetter={() =>
           getCellHtmlFromStore({
             blockIndex: block.index,
             rowIndex: row.index,

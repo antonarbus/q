@@ -8,7 +8,7 @@ import type { CSSObject } from '@mui/material'
 type Props = {
   editorRef: EditorRef
   placeholder: string
-  content: () => string
+  contentGetter: () => string
   className: string
   sx: CSSObject
   onCreate?: (props: EditorEvents['create']) => void
@@ -21,9 +21,8 @@ type Props = {
   children: React.ReactNode
 }
 
-type Res = Omit<Props, 'children' | 'content'> & {
+type Res = Omit<Props, 'children'> & {
   isEditorActive: boolean
-  content: string
 }
 
 const TiptapContext: React.Context<Res | null> = createContext<Res | null>(null)
@@ -36,7 +35,7 @@ export const TiptapProvider = (props: Props): React.JSX.Element => {
       editorRef: props.editorRef,
       isEditorActive,
       placeholder: props.placeholder,
-      content: props.content(),
+      contentGetter: props.contentGetter,
       className: props.className,
       sx: props.sx,
       onCreate: props.onCreate,
@@ -47,21 +46,7 @@ export const TiptapProvider = (props: Props): React.JSX.Element => {
       onWrapperFocus: props.onWrapperFocus,
       onUpload: props.onUpload,
     }
-  }, [
-    props.editorRef,
-    isEditorActive,
-    props.placeholder,
-    props.content,
-    props.className,
-    props.sx,
-    props.onCreate,
-    props.onUpdate,
-    props.onBlur,
-    props.onKeyDown,
-    props.onWrapperClick,
-    props.onWrapperFocus,
-    props.onUpload,
-  ])
+  }, [props, isEditorActive])
 
   return (
     <TiptapContext.Provider value={value}>

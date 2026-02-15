@@ -31,7 +31,7 @@ export const ItemPriceCell = (): React.JSX.Element => {
         editorRef={row.itemPriceCellEditorRef}
         className='td itemPrice'
         placeholder='Item price...'
-        content={() =>
+        contentGetter={() =>
           getCellHtmlFromStore({
             blockIndex: block.index,
             cellKey: 'itemPrice',

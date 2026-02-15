@@ -22,7 +22,7 @@ export const DescriptionColumn = (): React.ReactNode => {
         editorRef={editorRef}
         className='column-description'
         placeholder='Description...'
-        content={() =>
+        contentGetter={() =>
           getBoqColumnHtmlFromStore({
             blockIndex: block.index,
             boqColumnKey: 'description',

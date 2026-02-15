@@ -34,7 +34,7 @@ export const SubTotalPrice = (): React.JSX.Element => {
       editorRef={boq.subTotalPriceEditorRef}
       className='sub-total-price'
       placeholder='Price...'
-      content={() =>
+      contentGetter={() =>
         getBoqHeaderHtmlFromStore({
           blockIndex: block.index,
           boqHeaderKey,

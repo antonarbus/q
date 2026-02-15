@@ -22,7 +22,7 @@ export const QtyColumn = (): React.JSX.Element => {
         editorRef={editorRef}
         className='column-qty'
         placeholder='Qty...'
-        content={() =>
+        contentGetter={() =>
           getBoqColumnHtmlFromStore({
             blockIndex: block.index,
             boqColumnKey: 'qty',
