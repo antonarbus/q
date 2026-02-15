@@ -17,7 +17,7 @@ export const TiptapEditor = (): React.JSX.Element => {
   const editor = useEditor(
     {
       extensions,
-      content: tiptapCtx.content,
+      content: tiptapCtx.contentGetter(),
       onCreate: tiptapCtx.onCreate,
       onUpdate: tiptapCtx.onUpdate,
       onBlur: tiptapCtx.onBlur,

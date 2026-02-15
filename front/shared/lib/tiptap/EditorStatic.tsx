@@ -12,10 +12,10 @@ export const EditorStatic = (): React.ReactNode => {
   const editor = useEditor(
     {
       extensions,
-      content: tiptapCtx.content,
+      content: tiptapCtx.contentGetter(),
       editable: false,
     },
-    [tiptapCtx.content],
+    [],
   )
 
   if (tiptapCtx.isEditorActive === true) {
