@@ -31,11 +31,16 @@ export const MenuForEmptyLine = (): React.ReactNode => {
       }
       state: {
         selection: {
+          empty: boolean
           $from: { parent: { isTextblock: boolean; textContent: string } }
         }
       }
     }) => {
       if (!ctx.editor.isFocused) {
+        return false
+      }
+
+      if (!ctx.state.selection.empty) {
         return false
       }
 
