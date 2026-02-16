@@ -91,6 +91,56 @@ export const tiptapStyles: NestedCSSObject = {
     minWidth: 30,
   },
 
+  // Table styles
+  '& table': {
+    borderCollapse: 'collapse',
+    width: '100%',
+    margin: '0.5em 0',
+    overflow: 'hidden',
+  },
+  '& th, & td': {
+    border: '1px solid #d0d0d0',
+    padding: '6px 10px',
+    minWidth: '80px',
+    verticalAlign: 'top',
+    position: 'relative',
+  },
+  '& th': {
+    fontWeight: 600,
+    backgroundColor: '#f5f5f5',
+  },
+  '& .selectedCell': {
+    backgroundColor: 'rgba(200, 200, 255, 0.3)',
+  },
+  '& .column-resize-handle': {
+    position: 'absolute',
+    right: -2,
+    top: 0,
+    bottom: -2,
+    width: 4,
+    backgroundColor: '#adf',
+    pointerEvents: 'none',
+  },
+  '& .tableWrapper': {
+    overflowX: 'auto',
+  },
+
+  // YouTube embed
+  '& div[data-youtube-video]': {
+    position: 'relative',
+    paddingBottom: '56.25%',
+    height: 0,
+    overflow: 'hidden',
+    '& iframe': {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      border: 0,
+    },
+  },
+
   // Upload button: hidden by default, shown on hover
   '& .tiptap-upload-button': {
     opacity: 0,

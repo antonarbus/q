@@ -38,6 +38,10 @@ import {
   UndoRedo,
   TrailingNode,
 } from '@tiptap/extensions'
+// Table
+import { TableKit } from '@tiptap/extension-table'
+// YouTube
+import Youtube from '@tiptap/extension-youtube'
 // Custom
 import { ResizableImage } from './image/ResizableImage'
 import { useTiptapCtx } from '../provider/TiptapProvider'
@@ -89,6 +93,14 @@ export const useExtensions = (): AnyExtension[] => {
       Placeholder.configure({ placeholder: tiptapCtx.placeholder }),
       UndoRedo,
       TrailingNode,
+      // Table
+      TableKit.configure({
+        table: { resizable: true },
+      }),
+      // YouTube
+      Youtube.configure({
+        addPasteHandler: true,
+      }),
       // Custom
       ResizableImage.configure({
         allowBase64: true,
