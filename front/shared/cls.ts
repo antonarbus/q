@@ -1,5 +1,7 @@
 export const cls = {
-  tipTapEditor: 'tiptap-editor',
+  tiptapEditor: 'tiptap-editor',
+  tiptapContent: 'tiptap-content',
+  tiptapLink: 'tiptap-link',
   notEditable: 'not-editable',
   droppable: 'droppable',
   waitForInitFilesToLoad: 'wait-for-init-files-to-load',

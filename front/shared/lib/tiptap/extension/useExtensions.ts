@@ -41,6 +41,7 @@ import {
 // Custom
 import { ResizableImage } from './image/ResizableImage'
 import { useTiptapCtx } from '../provider/TiptapProvider'
+import { cls } from '@shared/cls'
 
 export const useExtensions = (): AnyExtension[] => {
   const tiptapCtx = useTiptapCtx()
@@ -74,7 +75,7 @@ export const useExtensions = (): AnyExtension[] => {
         HTMLAttributes: {
           rel: 'noopener noreferrer',
           target: '_blank',
-          class: 'tip-tap-link',
+          class: cls.tiptapLink,
         },
       }),
       TextStyle,

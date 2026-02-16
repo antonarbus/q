@@ -6,7 +6,7 @@ import { AlignRightButton } from './button/AlignRightButton'
 import { liquidGlassStyle } from '../style/liquidGlassStyle'
 import { useTiptap } from '@tiptap/react'
 
-export const ImageMenu = (): React.ReactNode => {
+export const MenuForImageSelection = (): React.ReactNode => {
   const menuRef = useRef<HTMLDivElement | null>(null)
   const { editor } = useTiptap()
 

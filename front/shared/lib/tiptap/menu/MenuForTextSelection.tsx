@@ -26,7 +26,7 @@ import { RedColorButton } from './button/RedColorButton'
 import { HighlightButton } from './button/HighlightButton'
 import { Box } from '@mui/material'
 
-export const FloatingMenu = (): React.ReactNode => {
+export const MenuForTextSelection = (): React.ReactNode => {
   const menuRef = useRef<HTMLDivElement | null>(null)
   const { editor } = useTiptap()
 
