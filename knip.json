@@ -1,6 +1,5 @@
 {
   "ignore": [
-    "back/build/*",
     "back/shared/lib/drizzle/schema.ts",
     "front/shared/lib/ag-grid/colDef/getNumberColDef.tsx",
     "tests/setup/auth.setup.ts",
