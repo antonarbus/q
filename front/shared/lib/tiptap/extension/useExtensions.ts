@@ -51,7 +51,7 @@ export const useExtensions = (): AnyExtension[] => {
       Document,
       Paragraph,
       Text,
-      Heading,
+      Heading.configure({ levels: [1, 2, 3, 4, 5] }),
       Blockquote,
       CodeBlock,
       HorizontalRule,
@@ -71,7 +71,11 @@ export const useExtensions = (): AnyExtension[] => {
       Underline,
       Link.configure({
         openOnClick: true,
-        HTMLAttributes: { rel: 'noopener noreferrer', target: '_blank' },
+        HTMLAttributes: {
+          rel: 'noopener noreferrer',
+          target: '_blank',
+          class: 'tip-tap-link',
+        },
       }),
       TextStyle,
       Color,

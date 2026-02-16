@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Tiptap, useEditor, EditorContent } from '@tiptap/react'
+import { Tiptap, useEditor } from '@tiptap/react'
 import { FloatingMenu } from './menu/FloatingMenu'
 import { ImageMenu } from './menu/ImageMenu'
 import { useExtensions } from './extension/useExtensions'
@@ -14,6 +14,7 @@ export const TiptapEditor = (): React.JSX.Element => {
   const dropFile = useDropFile()
   const pasteFile = usePasteFile()
 
+  // https://tiptap.dev/docs/guides/react-composable-api
   const editor = useEditor(
     {
       extensions,
@@ -40,6 +41,8 @@ export const TiptapEditor = (): React.JSX.Element => {
     [],
   )
 
+  // Set editor instances to refs to let it be controlled from everywhere
+  // For ex. modify price on qty change
   useEffect(() => {
     tiptapCtx.editorRef.current = editor
 
@@ -52,11 +55,7 @@ export const TiptapEditor = (): React.JSX.Element => {
     <Tiptap editor={editor}>
       <FloatingMenu />
       <ImageMenu />
-      <EditorContent
-        editor={editor}
-        className={cls.tipTapEditor}
-        style={{ flexGrow: 1 }}
-      />
+      <Tiptap.Content className={cls.tipTapEditor} style={{ flexGrow: 1 }} />
     </Tiptap>
   )
 }
