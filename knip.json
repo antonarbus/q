@@ -1,5 +1,6 @@
 {
   "ignore": [
+    "back/build/*",
     "back/shared/lib/drizzle/schema.ts",
     "front/shared/lib/ag-grid/colDef/getNumberColDef.tsx",
     "tests/setup/auth.setup.ts",
@@ -11,11 +12,5 @@
     "@preact/signals-react-transform",
     "@emotion/babel-plugin"
   ],
-  "ignoreBinaries": [
-    "gcloud",
-    "terraform",
-    "open",
-    "vite-bundle-visualizer",
-    "back/build/index.js"
-  ]
+  "ignoreBinaries": ["gcloud", "terraform", "open", "vite-bundle-visualizer"]
 }
