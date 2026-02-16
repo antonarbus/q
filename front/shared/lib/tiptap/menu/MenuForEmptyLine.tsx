@@ -25,13 +25,20 @@ export const MenuForEmptyLine = (): React.ReactNode => {
 
   const shouldShow = useCallback(
     (ctx: {
-      editor: { isActive: (name: string) => boolean }
+      editor: {
+        isActive: (name: string) => boolean
+        isFocused: boolean
+      }
       state: {
         selection: {
           $from: { parent: { isTextblock: boolean; textContent: string } }
         }
       }
     }) => {
+      if (!ctx.editor.isFocused) {
+        return false
+      }
+
       if (ctx.editor.isActive('codeBlock')) {
         return false
       }
