@@ -1,4 +1,5 @@
 import type { CSSObject } from '@mui/material'
+import { cls } from '@shared/cls'
 
 type NestedCSSObject = CSSObject & Record<`&${string}`, CSSObject>
 
@@ -142,12 +143,12 @@ export const tiptapStyles: NestedCSSObject = {
   },
 
   // Upload button: hidden by default, shown on hover
-  '& .tiptap-upload-button': {
+  [`& .${cls.tiptapInsertButton}`]: {
     opacity: 0,
-    pointerEvents: 'none',
+    pointerEvents: 'none' as const,
   },
-  '&:hover .tiptap-upload-button': {
+  [`&:hover .${cls.tiptapInsertButton}`]: {
     opacity: 1,
-    pointerEvents: 'auto',
+    pointerEvents: 'auto' as const,
   },
 }
