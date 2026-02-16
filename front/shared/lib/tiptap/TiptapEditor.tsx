@@ -2,12 +2,12 @@ import { useEffect } from 'react'
 import { Tiptap, useEditor } from '@tiptap/react'
 import { MenuForTextSelection } from './menu/MenuForTextSelection'
 import { MenuForImageSelection } from './menu/MenuForImageSelection'
-import { MenuForEmptyLine } from './menu/MenuForEmptyLine'
 import { useExtensions } from './extension/useExtensions'
 import { cls } from '@shared/cls'
 import { useDropFile } from './file-upload/useDropFile'
 import { usePasteFile } from './file-upload/usePasteFile'
 import { useTiptapCtx } from './provider/TiptapProvider'
+import { InsertButton } from './menu/button/InsertButton'
 
 export const TiptapEditor = (): React.JSX.Element => {
   const tiptapCtx = useTiptapCtx()
@@ -59,7 +59,7 @@ export const TiptapEditor = (): React.JSX.Element => {
     <Tiptap editor={editor}>
       <MenuForTextSelection />
       <MenuForImageSelection />
-      <MenuForEmptyLine />
+      <InsertButton />
       <Tiptap.Content className={cls.tiptapContent} style={{ flexGrow: 1 }} />
     </Tiptap>
   )

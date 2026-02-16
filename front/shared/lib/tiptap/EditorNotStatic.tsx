@@ -1,6 +1,5 @@
 /* eslint-disable react/jsx-handler-names */
 import { TiptapEditor } from './TiptapEditor'
-import { UploadButton } from './file-upload/UploadButton'
 import { DropHereText } from './file-upload/DropHereText'
 import { tiptapStyles } from './style/tiptapStyles'
 import { Box } from '@mui/material'
@@ -21,7 +20,6 @@ export const EditorNotStatic = (): React.ReactNode => {
       onFocus={tiptapCtx.onWrapperFocus}
       sx={{ position: 'relative', ...tiptapStyles, ...tiptapCtx.sx }}
     >
-      <UploadButton />
       <TiptapEditor />
       <DropHereText />
     </Box>
