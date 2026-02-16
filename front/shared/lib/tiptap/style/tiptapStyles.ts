@@ -4,18 +4,20 @@ type NestedCSSObject = CSSObject & Record<`&${string}`, CSSObject>
 
 // Custom SVG resize cursors for cross-browser compatibility (Safari lacks standard resize cursors)
 // cspell:disable-next-line
-const diagonalNwSe =
-  '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">' +
-  '<path d="M3 3l10 10M3 7V3h4M13 9v4H9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>' +
-  '<path d="M3 3l10 10M3 7V3h4M13 9v4H9" stroke="#555" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
-  '</svg>'
+const diagonalNwSe = `
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
+    <path d="M3 3l10 10M3 7V3h4M13 9v4H9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M3 3l10 10M3 7V3h4M13 9v4H9" stroke="#555" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+`
 
 // cspell:disable-next-line
-const diagonalNeSw =
-  '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">' +
-  '<path d="M13 3L3 13M9 3h4v4M7 13H3V9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>' +
-  '<path d="M13 3L3 13M9 3h4v4M7 13H3V9" stroke="#555" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
-  '</svg>'
+const diagonalNeSw = `
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
+    <path d="M13 3L3 13M9 3h4v4M7 13H3V9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M13 3L3 13M9 3h4v4M7 13H3V9" stroke="#555" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+`
 
 const resizeCursor = (svg: string): string =>
   `url("data:image/svg+xml,${encodeURIComponent(svg)}") 8 8, auto !important`
