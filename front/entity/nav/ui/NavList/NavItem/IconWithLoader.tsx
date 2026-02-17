@@ -1,6 +1,6 @@
 import type { NavItem } from '@entity/nav/type'
+import { useSelector } from '@shared/lib/redux'
 import { iconRegistry } from '@widget/nav/iconRegistry'
-import { navMediaQuery } from '../../navMediaQuery'
 import { ErrorIcon } from './ErrorIcon'
 import { Icon } from './Icon'
 import { SpinnerIcon } from './SpinnerIcon'
@@ -11,7 +11,7 @@ type Props = {
 }
 
 export const IconWithLoader = (props: Props): React.ReactNode => {
-  const isMobile = window.innerWidth < navMediaQuery.widthWhenNothingFits
+  const isHamburger = useSelector((state) => state.nav.navMode === 'hamburger')
 
   if (props.navItem === undefined) {
     return null
@@ -26,7 +26,7 @@ export const IconWithLoader = (props: Props): React.ReactNode => {
       ? undefined
       : iconRegistry[props.navItem.iconId]
 
-  if (isMobile === true) {
+  if (isHamburger === true) {
     return icon
   }
 

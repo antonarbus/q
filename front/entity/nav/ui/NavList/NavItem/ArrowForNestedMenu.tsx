@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import type { NavItem } from '@entity/nav/type'
+import { useSelector } from '@shared/lib/redux'
 import { TiArrowSortedDown } from 'react-icons/ti'
-import { navMediaQuery } from '../../navMediaQuery'
 
 type Props = {
   navItem: NavItem | undefined
@@ -11,9 +11,9 @@ export const ArrowForNestedMenu = (props: Props): React.ReactNode => {
   const isNestedMenu = Boolean(props.navItem?.nestedItemList)
   const disabled = Boolean(props.navItem?.disabled)
 
-  const isMobile = window.innerWidth < navMediaQuery.widthWhenNothingFits
+  const isHamburger = useSelector((state) => state.nav.navMode === 'hamburger')
 
-  if (isMobile === true) {
+  if (isHamburger === true) {
     return null
   }
 

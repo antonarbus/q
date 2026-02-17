@@ -11,8 +11,11 @@ import { setMenuItemPropValue } from './setMenuItemPropValue'
 import type { NavItem, NavItemId } from './type'
 import { getNavItem } from './ui/NavList/NavItem/Menu/functions/getNavItem'
 
+export type NavMode = 'full' | 'text-only' | 'icons-only' | 'hamburger'
+
 type InitState = {
   navStructure: NavItem[]
+  navMode: NavMode
   burger: {
     isOpen: boolean
   }
@@ -25,6 +28,7 @@ type InitState = {
 
 const initialState: InitState = {
   navStructure: [] as NavItem[],
+  navMode: 'full' as NavMode,
   burger: { isOpen: false },
   idsToCurrentMenuItems: [navItemIdKey.burger] as NavItemId[],
   currentMenuNavItemId: null as NavItemId | null,
@@ -37,6 +41,12 @@ export const navSlice = createSlice({
   name: 'nav',
   initialState,
   reducers: {
+    setNavMode: (
+      state: WritableDraft<InitState>,
+      action: PayloadAction<{ mode: NavMode }>,
+    ) => {
+      state.navMode = action.payload.mode
+    },
     addNavStructure: (
       state: WritableDraft<InitState>,
       action: PayloadAction<{

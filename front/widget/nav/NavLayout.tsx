@@ -1,13 +1,19 @@
-import { navMediaQuery } from '@entity/nav/ui/navMediaQuery'
+import { useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
+import { useNavModeDetection } from './useNavModeDetection'
 
 type Props = {
   children: React.ReactNode
 }
 
 export const NavLayout = (props: Props): React.JSX.Element => {
+  const navRef = useNavModeDetection()
+  const navMode = useSelector((state) => state.nav.navMode)
+
   return (
     <nav
+      data-nav-mode={navMode}
+      ref={navRef}
       css={{
         display: 'flex',
         flexWrap: 'nowrap',
@@ -31,19 +37,18 @@ export const NavLayout = (props: Props): React.JSX.Element => {
         zIndex: 6,
         contain: 'layout inline-size',
         fontWeight: 300,
-        '& > ul > li > a .icon-round-wrapper': {
-          [`@media (${navMediaQuery.widthWhenNamesDoNotFit}px <= width <= ${navMediaQuery.widthWhenIconsWithNamesDoNotFit}px)`]:
-            {
-              display: 'none',
-            },
-          [`@media (width <= ${navMediaQuery.widthWhenNamesDoNotFit}px)`]: {
-            marginRight: '24px',
-          },
+
+        '&[data-nav-mode="text-only"] > ul > li > a .icon-round-wrapper': {
+          display: 'none',
         },
-        '& .nav-item-name': {
-          [`@media (width <= ${navMediaQuery.widthWhenNamesDoNotFit}px)`]: {
-            display: 'none',
-          },
+        '&[data-nav-mode="icons-only"] .nav-item-name': {
+          display: 'none',
+        },
+        '&[data-nav-mode="icons-only"] > ul > li > a .icon-round-wrapper': {
+          marginRight: '24px',
+        },
+        '&[data-nav-mode="hamburger"] .nav-item-name': {
+          display: 'none',
         },
       }}
     >

@@ -1,16 +1,12 @@
 import { useSelector } from '@shared/lib/redux'
-import { useWindowSize } from 'react-use'
-import { navMediaQuery } from '../navMediaQuery'
 import { NavItem } from './NavItem'
 
 export const NavList = (): React.JSX.Element => {
   const navStructure = useSelector((state) => state.nav.navStructure)
-  const windowSize = useWindowSize()
-
-  const isMobile = windowSize.width < navMediaQuery.widthWhenNothingFits
+  const navMode = useSelector((state) => state.nav.navMode)
 
   const navStructureToLoad =
-    isMobile === true ? navStructure : navStructure[0]?.nestedItemList
+    navMode === 'hamburger' ? navStructure : navStructure[0]?.nestedItemList
 
   const nonHiddenNavItems = navStructureToLoad
     ?.filter((navItem) => navItem.isHidden === false)
