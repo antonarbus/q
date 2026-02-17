@@ -11,7 +11,7 @@ import { setMenuItemPropValue } from './setMenuItemPropValue'
 import type { NavItem, NavItemId } from './type'
 import { getNavItem } from './ui/NavList/NavItem/Menu/functions/getNavItem'
 
-export type NavMode = 'full' | 'text-only' | 'icons-only' | 'hamburger'
+type NavMode = 'full' | 'text-only' | 'icons-only' | 'hamburger'
 
 type InitState = {
   navStructure: NavItem[]
