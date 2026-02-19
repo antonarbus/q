@@ -151,4 +151,10 @@ export const tiptapStyles: NestedCSSObject = {
     opacity: 1,
     pointerEvents: 'auto' as const,
   },
+
+  // Lists
+  '& ::marker': {
+    color: '#666666',
+    fontSize: '15px',
+  },
 }

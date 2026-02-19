@@ -56,38 +56,10 @@ export const useExtensions = (): AnyExtension[] => {
       Document,
       Paragraph,
       Text,
-      Heading.configure({ levels: [1, 2, 3, 4, 5] }),
-      Blockquote,
-      CodeBlock,
-      HorizontalRule,
       HardBreak,
-      // Lists
-      BulletList,
-      OrderedList,
-      ListItem,
-      ListKeymap,
-      TaskList,
-      TaskItem.configure({ nested: true }),
-      // Marks
-      Bold,
-      Italic,
-      Strike,
-      Code,
-      Underline,
-      Link.configure({
-        openOnClick: true,
-        HTMLAttributes: {
-          rel: 'noopener noreferrer',
-          target: '_blank',
-          class: cls.tiptapLink,
-        },
-      }),
+
+      // smth
       TextStyle,
-      Color,
-      Highlight.configure({ multicolor: true }),
-      // Styling
-      TextAlign.configure({ types: ['heading', 'paragraph', 'image'] }),
-      // Utilities
       Dropcursor,
       Gapcursor,
       Placeholder.configure({ placeholder: tiptapCtx.placeholder }),
@@ -108,6 +80,46 @@ export const useExtensions = (): AnyExtension[] => {
           enabled: true,
           directions: ['top-left', 'top-right', 'bottom-left', 'bottom-right'],
           alwaysPreserveAspectRatio: true,
+        },
+      }),
+
+      // Row 1, block 1
+      Bold,
+      Italic,
+      Underline,
+      Strike,
+
+      // Row 1, block 2
+      Color,
+      Highlight.configure({ multicolor: true }),
+
+      // Row 1, block 3
+      Heading.configure({ levels: [1, 2, 3, 4, 5] }),
+
+      // Row 2, block 1
+      ListItem,
+      ListKeymap,
+      BulletList,
+      OrderedList,
+      TaskList,
+      TaskItem.configure({ nested: true }),
+
+      // Row 2, block 2
+      Blockquote,
+      Code,
+      CodeBlock,
+      HorizontalRule,
+
+      // Row 2, block 3
+      TextAlign.configure({ types: ['heading', 'paragraph', 'image'] }),
+
+      // Row 2, block 4
+      Link.configure({
+        openOnClick: true,
+        HTMLAttributes: {
+          rel: 'noopener noreferrer',
+          target: '_blank',
+          class: cls.tiptapLink,
         },
       }),
     ]
