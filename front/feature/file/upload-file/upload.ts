@@ -1,4 +1,5 @@
 import { route } from '@back/api/route'
+import { getImageDimensions } from './getImageDimensions'
 import type { ResBody as ResBodyGetSignedUrl } from '@back/api/file/fileUploadSignedUrlHandler'
 import type {
   ReqBody as Payload,
@@ -38,14 +39,18 @@ export const upload: OnUpload = async (props) => {
       }
 
       if (props.type === 'image') {
-        props.editor
-          .chain()
-          .focus()
-          .setImage({
-            src: fileAsBase64String,
-            alt: file.name,
-          })
-          .run()
+        void getImageDimensions(fileAsBase64String).then((imageDimensions) => {
+          props.editor
+            ?.chain()
+            .focus()
+            .setImage({
+              src: fileAsBase64String,
+              alt: file.name,
+              width: imageDimensions.width > 0 ? imageDimensions.width : undefined,
+              height: imageDimensions.height > 0 ? imageDimensions.height : undefined,
+            })
+            .run()
+        })
       }
 
       if (props.type === 'file') {
@@ -222,12 +227,18 @@ export const upload: OnUpload = async (props) => {
   }
 
   if (props.type === 'image') {
+    const blobUrl = URL.createObjectURL(file)
+    const { width, height } = await getImageDimensions(blobUrl)
+    URL.revokeObjectURL(blobUrl)
+
     props.editor
       .chain()
       .focus()
       .setImage({
         src: uploadUrl,
         alt: file.name,
+        width: width > 0 ? width : undefined,
+        height: height > 0 ? height : undefined,
       })
       .run()
   }
