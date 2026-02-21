@@ -37,9 +37,9 @@ export const ResizableColumn = (props: Props): React.JSX.Element => {
       }}
       handleStyles={{
         right: {
-          background: '#c1c1c1',
+          background: '#d0cfcf',
           borderRadius: '3px',
-          right: '-1px',
+          right: '0px',
           width: '3px',
         },
       }}

@@ -18,7 +18,7 @@ import { Heading5Button } from './button/Heading5Button'
 import { BulletListButton } from './button/BulletListButton'
 import { OrderedListButton } from './button/OrderedListButton'
 import { TaskListButton } from './button/TaskListButton'
-import { BlockquoteButton } from './button/BlockquoteButton'
+import { QuoteButton } from './button/QuoteButton'
 import { CodeBlockButton } from './button/CodeBlockButton'
 import { HorizontalRuleButton } from './button/HorizontalRuleButton'
 import { LinkButtons } from './button/LinkButtons'
@@ -102,6 +102,7 @@ export const TiptapMenu = (): React.ReactNode => {
               <ItalicButton />
               <UnderlineButton />
               <StrikethroughButton />
+              <CodeButton />
             </ButtonsGroupLayout>
 
             <Divider />
@@ -126,20 +127,8 @@ export const TiptapMenu = (): React.ReactNode => {
               <BulletListButton />
               <OrderedListButton />
               <TaskListButton />
-            </ButtonsGroupLayout>
-
-            <Divider />
-
-            <ButtonsGroupLayout>
-              <BlockquoteButton />
-              <HorizontalRuleButton />
-            </ButtonsGroupLayout>
-
-            <Divider />
-
-            <ButtonsGroupLayout>
+              <QuoteButton />
               <CodeBlockButton />
-              <CodeButton />
             </ButtonsGroupLayout>
 
             <Divider />
@@ -153,6 +142,7 @@ export const TiptapMenu = (): React.ReactNode => {
             <Divider />
 
             <ButtonsGroupLayout>
+              <HorizontalRuleButton />
               <LinkButtons />
             </ButtonsGroupLayout>
           </ButtonsRowLayout>
