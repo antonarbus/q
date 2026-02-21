@@ -152,6 +152,22 @@ export const tiptapStyles: NestedCSSObject = {
     pointerEvents: 'auto' as const,
   },
 
+  // Code block
+  '& pre': {
+    backgroundColor: '#f4f4f5',
+    borderRadius: '4px',
+    padding: '2px 6px',
+    margin: '5px 0',
+    overflowX: 'auto',
+  },
+  '& pre code': {
+    background: 'none',
+    padding: 0,
+    fontFamily: 'monospace',
+    fontSize: '0.85em',
+    color: '#374151',
+  },
+
   // Blockquote
   '& blockquote': {
     borderLeft: '3px solid #d0d0d0',
