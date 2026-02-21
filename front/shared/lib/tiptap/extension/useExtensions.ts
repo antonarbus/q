@@ -53,7 +53,7 @@ export const useExtensions = (): AnyExtension[] => {
   const extensions = useMemo<AnyExtension[]>(() => {
     const exts: AnyExtension[] = [
       // Nodes
-      Document, // top node, mandatory
+      Document, // mandatory top node
       Paragraph,
       Text,
       HardBreak,
