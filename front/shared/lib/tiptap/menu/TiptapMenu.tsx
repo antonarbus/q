@@ -1,5 +1,5 @@
 import { BubbleMenu } from '@tiptap/react/menus'
-import { useCallback, useRef } from 'react'
+import { useRef } from 'react'
 import { Divider } from './button/shared/Divider'
 import { AlignLeftButton } from './button/AlignLeftButton'
 import { AlignCenterButton } from './button/AlignCenterButton'
@@ -34,16 +34,6 @@ export const TiptapMenu = (): React.ReactNode => {
 
   const isImageActive = useTiptapState((ctx) => ctx.editor.isActive('image'))
 
-  const shouldShow = useCallback((ctx: { editor: typeof editor }) => {
-    if (ctx.editor.isDestroyed === true) {
-      return false
-    }
-
-    return (
-      ctx.editor.isActive('image') || ctx.editor.state.selection.empty === false
-    )
-  }, [])
-
   return (
     <BubbleMenu
       ref={(element) => {
@@ -54,7 +44,17 @@ export const TiptapMenu = (): React.ReactNode => {
       }}
       editor={editor}
       updateDelay={isImageActive === true ? 0 : 200}
-      shouldShow={shouldShow}
+      shouldShow={(ctx) => {
+        if (ctx.editor.isDestroyed === true) {
+          return false
+        }
+
+        if (ctx.editor.state.selection.empty === true) {
+          return false
+        }
+
+        return true
+      }}
       getReferencedVirtualElement={() => {
         //* Issue: menu is not centered in the middle of the image
         if (editor.isDestroyed === true) {
