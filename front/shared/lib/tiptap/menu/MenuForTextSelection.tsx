@@ -10,6 +10,7 @@ import { BoldButton } from './button/BoldButton'
 import { ItalicButton } from './button/ItalicButton'
 import { UnderlineButton } from './button/UnderlineButton'
 import { StrikethroughButton } from './button/StrikethroughButton'
+import { CodeButton } from './button/CodeButton'
 import { Heading1Button } from './button/Heading1Button'
 import { Heading2Button } from './button/Heading2Button'
 import { Heading3Button } from './button/Heading3Button'
@@ -153,8 +154,20 @@ export const MenuForTextSelection = (): React.ReactNode => {
             }}
           >
             <BlockquoteButton />
-            <CodeBlockButton />
             <HorizontalRuleButton />
+          </Box>
+
+          <Divider />
+
+          <Box
+            sx={{
+              display: 'flex',
+              flexWrap: 'nowrap',
+              gap: '2px',
+            }}
+          >
+            <CodeBlockButton />
+            <CodeButton />
           </Box>
 
           <Divider />

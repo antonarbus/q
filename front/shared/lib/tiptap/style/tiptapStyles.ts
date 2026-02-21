@@ -152,6 +152,16 @@ export const tiptapStyles: NestedCSSObject = {
     pointerEvents: 'auto' as const,
   },
 
+  // Inline code
+  '& :not(pre) > code': {
+    backgroundColor: '#f4f4f5',
+    borderRadius: '3px',
+    padding: '1px 4px',
+    fontFamily: 'monospace',
+    fontSize: '12px',
+    color: '#4f4f4f',
+  },
+
   // Code block
   '& pre': {
     backgroundColor: '#f4f4f5',
@@ -164,8 +174,8 @@ export const tiptapStyles: NestedCSSObject = {
     background: 'none',
     padding: 0,
     fontFamily: 'monospace',
-    fontSize: '0.85em',
-    color: '#374151',
+    fontSize: '12px',
+    color: '#4f4f4f',
   },
 
   // Blockquote
