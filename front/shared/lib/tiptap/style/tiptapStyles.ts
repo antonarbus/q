@@ -192,4 +192,11 @@ export const tiptapStyles: NestedCSSObject = {
     color: '#666666',
     fontSize: '15px',
   },
+
+  // Horizontal line
+  '& hr': {
+    border: 'none',
+    borderTop: '1px solid #d0d0d0',
+    margin: '0.75em 0',
+  },
 }

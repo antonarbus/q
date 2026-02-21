@@ -1,6 +1,6 @@
 import { useTiptap } from '@tiptap/react'
 import { MenuButton } from './shared/MenuButton'
-import { RiSeparator } from 'react-icons/ri'
+import { GoHorizontalRule } from 'react-icons/go'
 
 export const HorizontalRuleButton = (): React.JSX.Element => {
   const { editor } = useTiptap()
@@ -13,7 +13,7 @@ export const HorizontalRuleButton = (): React.JSX.Element => {
         editor.chain().focus().setHorizontalRule().run()
       }}
     >
-      <RiSeparator />
+      <GoHorizontalRule />
     </MenuButton>
   )
 }

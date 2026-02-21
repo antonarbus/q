@@ -8,7 +8,6 @@ import Heading from '@tiptap/extension-heading'
 import Blockquote from '@tiptap/extension-blockquote'
 import CodeBlock from '@tiptap/extension-code-block'
 import HorizontalRule from '@tiptap/extension-horizontal-rule'
-import HardBreak from '@tiptap/extension-hard-break'
 // Lists
 import {
   BulletList,
@@ -56,7 +55,6 @@ export const useExtensions = (): AnyExtension[] => {
       Document, // mandatory top node
       Paragraph,
       Text,
-      HardBreak,
 
       // smth
       TextStyle,
