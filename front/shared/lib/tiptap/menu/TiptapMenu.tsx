@@ -122,6 +122,7 @@ export const TiptapMenu = (): React.ReactNode => {
               <Heading5Button />
             </ButtonsGroupLayout>
           </ButtonsRowLayout>
+
           <ButtonsRowLayout>
             <ButtonsGroupLayout>
               <BulletListButton />
