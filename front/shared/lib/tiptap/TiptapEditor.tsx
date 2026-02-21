@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { Tiptap, useEditor } from '@tiptap/react'
-import { MenuForTextSelection } from './menu/MenuForTextSelection'
+import { TiptapMenu } from './menu/TiptapMenu'
 import { useExtensions } from './extension/useExtensions'
 import { cls } from '@shared/cls'
 import { useDropFile } from './file-upload/useDropFile'
@@ -56,7 +56,7 @@ export const TiptapEditor = (): React.JSX.Element => {
 
   return (
     <Tiptap editor={editor}>
-      <MenuForTextSelection />
+      <TiptapMenu />
       <InsertButton />
       <Tiptap.Content className={cls.tiptapContent} style={{ flexGrow: 1 }} />
     </Tiptap>

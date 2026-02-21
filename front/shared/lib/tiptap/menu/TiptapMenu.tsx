@@ -28,7 +28,7 @@ import { ButtonsGroupLayout } from '../style/ButtonsGroupLayout'
 import { ButtonsRowLayout } from '../style/ButtonsRowLayout'
 import { TiptapMenuLayout } from '../style/TiptapMenuLayout'
 
-export const MenuForTextSelection = (): React.ReactNode => {
+export const TiptapMenu = (): React.ReactNode => {
   const menuRef = useRef<HTMLDivElement | null>(null)
   const { editor } = useTiptap()
 
@@ -55,6 +55,24 @@ export const MenuForTextSelection = (): React.ReactNode => {
       editor={editor}
       updateDelay={isImageActive === true ? 0 : 200}
       shouldShow={shouldShow}
+      getReferencedVirtualElement={() => {
+        //* Issue: menu is not centered in the middle of the image
+        if (editor.isDestroyed === true) {
+          return null
+        }
+
+        const node = editor.view.nodeDOM(editor.state.selection.from)
+
+        if (node instanceof HTMLElement) {
+          const img = node.querySelector('img')
+
+          if (img !== null) {
+            return img
+          }
+        }
+
+        return null
+      }}
       options={{
         onShow: (): void => {
           //* Issue: for row cells menu is randomly positioned
