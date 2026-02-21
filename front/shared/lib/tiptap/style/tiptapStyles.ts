@@ -152,6 +152,15 @@ export const tiptapStyles: NestedCSSObject = {
     pointerEvents: 'auto' as const,
   },
 
+  // Blockquote
+  '& blockquote': {
+    borderLeft: '3px solid #d0d0d0',
+    margin: '0.5em 0',
+    paddingLeft: '1em',
+    color: '#666666',
+    fontStyle: 'italic',
+  },
+
   // Lists
   '& ::marker': {
     color: '#666666',
