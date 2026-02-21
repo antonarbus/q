@@ -158,7 +158,7 @@ export const tiptapStyles: NestedCSSObject = {
     borderRadius: '3px',
     padding: '1px 4px',
     fontFamily: 'monospace',
-    fontSize: '12px',
+    fontSize: '0.9rem',
     color: '#4f4f4f',
   },
 
@@ -174,7 +174,7 @@ export const tiptapStyles: NestedCSSObject = {
     background: 'none',
     padding: 0,
     fontFamily: 'monospace',
-    fontSize: '12px',
+    fontSize: '0.9rem',
     color: '#4f4f4f',
   },
 
