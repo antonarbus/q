@@ -1,6 +1,6 @@
 import { useTiptap, useTiptapState } from '@tiptap/react'
 import { MenuButton } from './shared/MenuButton'
-import { RiDoubleQuotesL } from 'react-icons/ri'
+import { GoQuote } from 'react-icons/go'
 
 export const BlockquoteButton = (): React.JSX.Element => {
   const { editor } = useTiptap()
@@ -17,7 +17,7 @@ export const BlockquoteButton = (): React.JSX.Element => {
         editor.chain().focus().toggleBlockquote().run()
       }}
     >
-      <RiDoubleQuotesL />
+      <GoQuote />
     </MenuButton>
   )
 }
