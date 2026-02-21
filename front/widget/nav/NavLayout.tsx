@@ -45,7 +45,10 @@ export const NavLayout = (props: Props): React.JSX.Element => {
           display: 'none',
         },
         '&[data-nav-mode="icons-only"] > ul > li > a .icon-round-wrapper': {
-          marginRight: '24px',
+          marginRight: '10px',
+        },
+        '&[data-nav-mode="icons-only"] > ul > li > a .nested-menu-arrow': {
+          display: 'none',
         },
         '&[data-nav-mode="hamburger"] .nav-item-name': {
           display: 'none',

@@ -27,6 +27,7 @@ export const ArrowForNestedMenu = (props: Props): React.ReactNode => {
 
   return (
     <TiArrowSortedDown
+      className='nested-menu-arrow'
       css={css`
         display: block;
         position: absolute;
