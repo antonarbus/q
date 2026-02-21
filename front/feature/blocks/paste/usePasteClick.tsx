@@ -59,6 +59,9 @@ const pasteItemOnClick = (): void => {
 
   const newItemId = generateId()
 
+  const persistedScrollX = window.scrollX
+  const persistedScrollY = window.scrollY
+
   dispatch(
     quotationSlice.actions.pasteItemReducer({
       item: topItemInCopyModal,
@@ -67,6 +70,11 @@ const pasteItemOnClick = (): void => {
       pastePos: state.copy.place.pastePos,
     }),
   )
+
+  // Restore scroll position after React renders
+  requestAnimationFrame(() => {
+    window.scrollTo(persistedScrollX, persistedScrollY)
+  })
 
   dispatch(copySlice.actions.removeItem())
   dispatch(copySlice.actions.forbidAllActions())
