@@ -1,7 +1,6 @@
 import { BubbleMenu } from '@tiptap/react/menus'
 import { useCallback, useRef } from 'react'
 import { Divider } from './button/shared/Divider'
-import { liquidGlassStyle } from '../style/liquidGlassStyle'
 import { AlignLeftButton } from './button/AlignLeftButton'
 import { AlignCenterButton } from './button/AlignCenterButton'
 import { AlignRightButton } from './button/AlignRightButton'
@@ -25,7 +24,9 @@ import { HorizontalRuleButton } from './button/HorizontalRuleButton'
 import { LinkButtons } from './button/LinkButtons'
 import { RedColorButton } from './button/RedColorButton'
 import { HighlightButton } from './button/HighlightButton'
-import { Box } from '@mui/material'
+import { ButtonsGroupLayout } from '../style/ButtonsGroupLayout'
+import { ButtonsRowLayout } from '../style/ButtonsRowLayout'
+import { TiptapMenuLayout } from '../style/TiptapMenuLayout'
 
 export const MenuForTextSelection = (): React.ReactNode => {
   const menuRef = useRef<HTMLDivElement | null>(null)
@@ -66,152 +67,78 @@ export const MenuForTextSelection = (): React.ReactNode => {
       }}
     >
       {isImageActive === true ? (
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 2,
-            padding: '6px 8px',
-            ...liquidGlassStyle,
-          }}
-        >
-          <AlignLeftButton />
-          <AlignCenterButton />
-          <AlignRightButton />
-        </div>
+        <TiptapMenuLayout>
+          <ButtonsRowLayout>
+            <ButtonsGroupLayout>
+              <AlignLeftButton />
+              <AlignCenterButton />
+              <AlignRightButton />
+            </ButtonsGroupLayout>
+          </ButtonsRowLayout>
+        </TiptapMenuLayout>
       ) : (
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '2px',
-            padding: '6px 8px',
-            ...liquidGlassStyle,
-          }}
-        >
-          <Box
-            sx={{
-              display: 'flex',
-              flexWrap: 'nowrap',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}
-          >
-            <Box
-              sx={{
-                display: 'flex',
-                flexWrap: 'nowrap',
-                gap: '2px',
-              }}
-            >
+        <TiptapMenuLayout>
+          <ButtonsRowLayout>
+            <ButtonsGroupLayout>
               <BoldButton />
               <ItalicButton />
               <UnderlineButton />
               <StrikethroughButton />
-            </Box>
+            </ButtonsGroupLayout>
 
             <Divider />
 
-            <Box
-              sx={{
-                display: 'flex',
-                flexWrap: 'nowrap',
-                gap: '2px',
-              }}
-            >
+            <ButtonsGroupLayout>
               <RedColorButton />
               <HighlightButton />
-            </Box>
+            </ButtonsGroupLayout>
 
             <Divider />
 
-            <Box
-              sx={{
-                display: 'flex',
-                flexWrap: 'nowrap',
-                gap: '2px',
-              }}
-            >
+            <ButtonsGroupLayout>
               <Heading1Button />
               <Heading2Button />
               <Heading3Button />
               <Heading4Button />
               <Heading5Button />
-            </Box>
-          </Box>
-          <Box
-            sx={{
-              display: 'flex',
-              flexWrap: 'nowrap',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}
-          >
-            <Box
-              sx={{
-                display: 'flex',
-                flexWrap: 'nowrap',
-                gap: '2px',
-              }}
-            >
+            </ButtonsGroupLayout>
+          </ButtonsRowLayout>
+          <ButtonsRowLayout>
+            <ButtonsGroupLayout>
               <BulletListButton />
               <OrderedListButton />
               <TaskListButton />
-            </Box>
+            </ButtonsGroupLayout>
 
             <Divider />
 
-            <Box
-              sx={{
-                display: 'flex',
-                flexWrap: 'nowrap',
-                gap: '2px',
-              }}
-            >
+            <ButtonsGroupLayout>
               <BlockquoteButton />
               <HorizontalRuleButton />
-            </Box>
+            </ButtonsGroupLayout>
 
             <Divider />
 
-            <Box
-              sx={{
-                display: 'flex',
-                flexWrap: 'nowrap',
-                gap: '2px',
-              }}
-            >
+            <ButtonsGroupLayout>
               <CodeBlockButton />
               <CodeButton />
-            </Box>
+            </ButtonsGroupLayout>
 
             <Divider />
 
-            <Box
-              sx={{
-                display: 'flex',
-                flexWrap: 'nowrap',
-                gap: '2px',
-              }}
-            >
+            <ButtonsGroupLayout>
               <AlignLeftButton />
               <AlignCenterButton />
               <AlignRightButton />
-            </Box>
+            </ButtonsGroupLayout>
 
             <Divider />
 
-            <Box
-              sx={{
-                display: 'flex',
-                flexWrap: 'nowrap',
-                gap: '2px',
-              }}
-            >
+            <ButtonsGroupLayout>
               <LinkButtons />
-            </Box>
-          </Box>
-        </Box>
+            </ButtonsGroupLayout>
+          </ButtonsRowLayout>
+        </TiptapMenuLayout>
       )}
     </BubbleMenu>
   )
