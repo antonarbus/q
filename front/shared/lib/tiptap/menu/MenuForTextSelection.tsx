@@ -52,7 +52,7 @@ export const MenuForTextSelection = (): React.ReactNode => {
         }
       }}
       editor={editor}
-      updateDelay={100}
+      updateDelay={isImageActive === true ? 0 : 200}
       shouldShow={shouldShow}
       options={{
         onShow: (): void => {
