@@ -25,7 +25,7 @@ import { InsertTableButton } from './button/InsertTableButton'
 import { LinkButton } from './button/LinkButton'
 import { YouTubeButton } from './button/YouTubeButton'
 import { UploadFileButton } from './button/UploadFileButton'
-import { RedColorButton } from './button/RedColorButton'
+import { ColorButton } from './button/ColorButton'
 import { HighlightButton } from './button/HighlightButton'
 import { ButtonsGroupLayout } from '../style/ButtonsGroupLayout'
 import { ButtonsRowLayout } from '../style/ButtonsRowLayout'
@@ -110,7 +110,7 @@ export const TiptapMenu = (): React.ReactNode => {
               <Divider />
 
               <ButtonsGroupLayout>
-                <RedColorButton />
+                <ColorButton />
                 <HighlightButton />
               </ButtonsGroupLayout>
 
