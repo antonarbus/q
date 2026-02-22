@@ -81,7 +81,8 @@ export const MenuButtonWithDropdown = (props: Props): React.JSX.Element => {
             padding: '0 2px',
             backgroundColor: 'transparent',
             '&:hover': {
-              backgroundColor: '#e0e0e081',
+              scale: 1.3,
+              transition: 'scale 0.2s ease',
             },
           }}
         >

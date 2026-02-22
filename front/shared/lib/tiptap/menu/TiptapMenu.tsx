@@ -24,6 +24,7 @@ import { UploadFileButton } from './button/UploadFileButton'
 import { ColorButton } from './button/ColorButton'
 import { HighlightButton } from './button/HighlightButton'
 import { AlignButton } from './button/AlignButton'
+import { FontSizeButton } from './button/FontSizeButton'
 import { ButtonsGroupLayout } from '../style/ButtonsGroupLayout'
 import { ButtonsRowLayout } from '../style/ButtonsRowLayout'
 import { TiptapMenuLayout } from '../style/TiptapMenuLayout'
@@ -109,6 +110,7 @@ export const TiptapMenu = (): React.ReactNode => {
               <ButtonsGroupLayout>
                 <ColorButton />
                 <HighlightButton />
+                <FontSizeButton />
                 <HeadingButton />
                 <AlignButton />
               </ButtonsGroupLayout>
