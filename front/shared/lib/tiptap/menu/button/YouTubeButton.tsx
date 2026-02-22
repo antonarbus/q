@@ -1,6 +1,7 @@
 import type { Editor } from '@tiptap/react'
 import { MenuButton } from './shared/MenuButton'
 import { RiYoutubeLine } from 'react-icons/ri'
+import { RxUpload } from 'react-icons/rx'
 import { useState } from 'react'
 
 type Props = {
@@ -17,6 +18,7 @@ export const YouTubeButton = (props: Props): React.JSX.Element => {
         <input
           type='text'
           placeholder='YouTube URL...'
+          autoFocus
           value={urlInput}
           onChange={(event) => {
             setUrlInput(event.target.value)
@@ -46,7 +48,6 @@ export const YouTubeButton = (props: Props): React.JSX.Element => {
             outline: 'none',
             width: 160,
           }}
-          autoFocus
         />
         <MenuButton
           isActive={false}
@@ -60,7 +61,7 @@ export const YouTubeButton = (props: Props): React.JSX.Element => {
             props.onDone?.()
           }}
         >
-          <RiYoutubeLine />
+          <RxUpload />
         </MenuButton>
       </div>
     )
