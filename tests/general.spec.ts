@@ -41,6 +41,6 @@ test.describe('basic ui elements on front page', () => {
     await expect(body).toHaveText(/Qty/u)
     await expect(body).toHaveText(/Price/u)
     await expect(body).toHaveText(/Total price/u)
-    await expect(body).toHaveText(/Terms & Conditions/u)
+    await expect(body).toHaveText(/TERMS & CONDITIONS/u)
   })
 })
