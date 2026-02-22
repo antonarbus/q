@@ -126,9 +126,9 @@ export const TiptapMenu = (): React.ReactNode => {
               <Divider />
 
               <ButtonsGroupLayout>
-                <HorizontalRuleButton />
                 <InsertTableButton />
                 <YouTubeButton />
+                <HorizontalRuleButton />
                 <LinkButton />
                 <UploadFileButton />
               </ButtonsGroupLayout>
