@@ -100,7 +100,9 @@ export const FontSizeButton = (): React.JSX.Element => {
         </Box>
       }
     >
-      <Box component='span'>{activeSizeLabel}</Box>
+      <Box component='span' sx={{ fontSize: 12 }}>
+        {activeSizeLabel}
+      </Box>
     </MenuButtonWithDropdown>
   )
 }
