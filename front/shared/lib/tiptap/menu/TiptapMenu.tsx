@@ -23,6 +23,7 @@ import { YouTubeButton } from './button/YouTubeButton'
 import { UploadFileButton } from './button/UploadFileButton'
 import { ColorButton } from './button/ColorButton'
 import { HighlightButton } from './button/HighlightButton'
+import { AlignButton } from './button/AlignButton'
 import { ButtonsGroupLayout } from '../style/ButtonsGroupLayout'
 import { ButtonsRowLayout } from '../style/ButtonsRowLayout'
 import { TiptapMenuLayout } from '../style/TiptapMenuLayout'
@@ -109,6 +110,7 @@ export const TiptapMenu = (): React.ReactNode => {
                 <ColorButton />
                 <HighlightButton />
                 <HeadingButton />
+                <AlignButton />
               </ButtonsGroupLayout>
             </ButtonsRowLayout>
 
@@ -119,14 +121,6 @@ export const TiptapMenu = (): React.ReactNode => {
                 <TaskListButton />
                 <QuoteButton />
                 <CodeBlockButton />
-              </ButtonsGroupLayout>
-
-              <Divider />
-
-              <ButtonsGroupLayout>
-                <AlignLeftButton />
-                <AlignCenterButton />
-                <AlignRightButton />
               </ButtonsGroupLayout>
 
               <Divider />
