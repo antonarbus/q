@@ -10,11 +10,7 @@ import { ItalicButton } from './button/ItalicButton'
 import { UnderlineButton } from './button/UnderlineButton'
 import { StrikethroughButton } from './button/StrikethroughButton'
 import { CodeButton } from './button/CodeButton'
-import { Heading1Button } from './button/Heading1Button'
-import { Heading2Button } from './button/Heading2Button'
-import { Heading3Button } from './button/Heading3Button'
-import { Heading4Button } from './button/Heading4Button'
-import { Heading5Button } from './button/Heading5Button'
+import { HeadingButton } from './button/HeadingButton'
 import { BulletListButton } from './button/BulletListButton'
 import { OrderedListButton } from './button/OrderedListButton'
 import { TaskListButton } from './button/TaskListButton'
@@ -117,11 +113,7 @@ export const TiptapMenu = (): React.ReactNode => {
               <Divider />
 
               <ButtonsGroupLayout>
-                <Heading1Button />
-                <Heading2Button />
-                <Heading3Button />
-                <Heading4Button />
-                <Heading5Button />
+                <HeadingButton />
               </ButtonsGroupLayout>
             </ButtonsRowLayout>
 
