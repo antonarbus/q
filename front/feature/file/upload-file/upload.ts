@@ -46,8 +46,10 @@ export const upload: OnUpload = async (props) => {
             .setImage({
               src: fileAsBase64String,
               alt: file.name,
-              width: imageDimensions.width > 0 ? imageDimensions.width : undefined,
-              height: imageDimensions.height > 0 ? imageDimensions.height : undefined,
+              width:
+                imageDimensions.width > 0 ? imageDimensions.width : undefined,
+              height:
+                imageDimensions.height > 0 ? imageDimensions.height : undefined,
             })
             .run()
         })
