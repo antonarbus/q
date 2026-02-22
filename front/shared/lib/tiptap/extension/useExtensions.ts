@@ -51,9 +51,9 @@ export const useExtensions = (): AnyExtension[] => {
 
   const extensions = useMemo<AnyExtension[]>(() => {
     const exts: AnyExtension[] = [
-      // Nodes
-      Document, // mandatory top node
-      Paragraph, // mandatory
+      // Nodes mandatory
+      Document,
+      Paragraph,
       Text,
 
       // smth

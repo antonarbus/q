@@ -4,10 +4,7 @@ import { RiUnderline } from 'react-icons/ri'
 
 export const UnderlineButton = (): React.JSX.Element => {
   const { editor } = useTiptap()
-
-  const isActive = useTiptapState((ctx) => {
-    return ctx.editor.isActive('underline')
-  })
+  const isActive = useTiptapState((ctx) => ctx.editor.isActive('underline'))
 
   return (
     <MenuButton

@@ -4,10 +4,7 @@ import { RiBold } from 'react-icons/ri'
 
 export const BoldButton = (): React.JSX.Element => {
   const { editor } = useTiptap()
-
-  const isActive = useTiptapState((ctx) => {
-    return ctx.editor.isActive('bold')
-  })
+  const isActive = useTiptapState((ctx) => ctx.editor.isActive('bold'))
 
   return (
     <MenuButton

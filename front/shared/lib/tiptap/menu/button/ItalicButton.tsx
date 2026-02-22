@@ -4,10 +4,7 @@ import { RiItalic } from 'react-icons/ri'
 
 export const ItalicButton = (): React.JSX.Element => {
   const { editor } = useTiptap()
-
-  const isActive = useTiptapState((ctx) => {
-    return ctx.editor.isActive('italic')
-  })
+  const isActive = useTiptapState((ctx) => ctx.editor.isActive('italic'))
 
   return (
     <MenuButton

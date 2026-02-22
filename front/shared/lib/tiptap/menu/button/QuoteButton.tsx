@@ -4,10 +4,7 @@ import { GoQuote } from 'react-icons/go'
 
 export const QuoteButton = (): React.JSX.Element => {
   const { editor } = useTiptap()
-
-  const isActive = useTiptapState((ctx) => {
-    return ctx.editor.isActive('blockquote')
-  })
+  const isActive = useTiptapState((ctx) => ctx.editor.isActive('blockquote'))
 
   return (
     <MenuButton

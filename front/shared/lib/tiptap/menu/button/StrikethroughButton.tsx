@@ -4,10 +4,7 @@ import { RiStrikethrough } from 'react-icons/ri'
 
 export const StrikethroughButton = (): React.JSX.Element => {
   const { editor } = useTiptap()
-
-  const isActive = useTiptapState((ctx) => {
-    return ctx.editor.isActive('strike')
-  })
+  const isActive = useTiptapState((ctx) => ctx.editor.isActive('strike'))
 
   return (
     <MenuButton

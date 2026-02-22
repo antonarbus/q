@@ -6,10 +6,7 @@ import { useState } from 'react'
 export const LinkButtons = (): React.JSX.Element => {
   const { editor } = useTiptap()
   const [linkInput, setLinkInput] = useState<string | null>(null)
-
-  const isActive = useTiptapState((ctx) => {
-    return ctx.editor.isActive('link')
-  })
+  const isActive = useTiptapState((ctx) => ctx.editor.isActive('link'))
 
   if (linkInput !== null) {
     return (

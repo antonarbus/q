@@ -4,10 +4,7 @@ import { RiListUnordered } from 'react-icons/ri'
 
 export const BulletListButton = (): React.JSX.Element => {
   const { editor } = useTiptap()
-
-  const isActive = useTiptapState((ctx) => {
-    return ctx.editor.isActive('bulletList')
-  })
+  const isActive = useTiptapState((ctx) => ctx.editor.isActive('bulletList'))
 
   return (
     <MenuButton

@@ -4,10 +4,7 @@ import { RiMarkPenLine } from 'react-icons/ri'
 
 export const HighlightButton = (): React.JSX.Element => {
   const { editor } = useTiptap()
-
-  const isActive = useTiptapState((ctx) => {
-    return ctx.editor.isActive('highlight')
-  })
+  const isActive = useTiptapState((ctx) => ctx.editor.isActive('highlight'))
 
   return (
     <MenuButton

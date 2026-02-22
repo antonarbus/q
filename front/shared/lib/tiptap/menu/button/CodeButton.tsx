@@ -4,10 +4,7 @@ import { RiCodeLine } from 'react-icons/ri'
 
 export const CodeButton = (): React.JSX.Element => {
   const { editor } = useTiptap()
-
-  const isActive = useTiptapState((ctx) => {
-    return ctx.editor.isActive('code')
-  })
+  const isActive = useTiptapState((ctx) => ctx.editor.isActive('code'))
 
   return (
     <MenuButton

@@ -4,10 +4,7 @@ import { PiCodeBlock } from 'react-icons/pi'
 
 export const CodeBlockButton = (): React.JSX.Element => {
   const { editor } = useTiptap()
-
-  const isActive = useTiptapState((ctx) => {
-    return ctx.editor.isActive('codeBlock')
-  })
+  const isActive = useTiptapState((ctx) => ctx.editor.isActive('codeBlock'))
 
   return (
     <MenuButton
