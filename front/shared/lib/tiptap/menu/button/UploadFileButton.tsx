@@ -17,7 +17,7 @@ export const UploadFileButton = (): React.JSX.Element | null => {
     <>
       <MenuButton
         isActive={false}
-        title='Upload file'
+        title='Upload'
         onClick={() => {
           fileInputRef.current?.click()
         }}
@@ -32,7 +32,9 @@ export const UploadFileButton = (): React.JSX.Element | null => {
           const { files } = event.target
           const hasFiles = files !== null && files.length > 0
 
-          if (hasFiles === false) return
+          if (hasFiles === false) {
+            return
+          }
 
           const { onUpload } = tiptapCtx
 

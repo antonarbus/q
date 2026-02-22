@@ -44,7 +44,7 @@ export const UploadButton = (): React.ReactNode => {
           enterDelay={500}
           enterNextDelay={500}
           placement='top'
-          title='Upload file'
+          title='Upload'
         >
           <TbUpload size={14} />
         </Tooltip>
@@ -57,7 +57,9 @@ export const UploadButton = (): React.ReactNode => {
           const { files } = event.target
           const hasFiles = files !== null && files.length > 0
 
-          if (hasFiles === false) return
+          if (hasFiles === false) {
+            return
+          }
 
           const { onUpload } = tiptapCtx
 

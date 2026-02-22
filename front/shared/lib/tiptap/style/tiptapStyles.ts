@@ -231,4 +231,8 @@ export const tiptapStyles: NestedCSSObject = {
     textDecoration: 'line-through',
     color: '#9ca3af',
   },
+  // bold
+  '& strong': {
+    fontWeight: 500,
+  },
 }
