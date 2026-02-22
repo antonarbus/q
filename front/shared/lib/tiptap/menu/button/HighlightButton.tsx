@@ -1,6 +1,7 @@
 import { useTiptap, useTiptapState } from '@tiptap/react'
+import { Box } from '@mui/material'
 import { MenuButtonWithDropdown } from './shared/MenuButtonWithDropdown'
-import { RiMarkPenLine } from 'react-icons/ri'
+import { FaHighlighter } from 'react-icons/fa'
 
 const DEFAULT_COLOR = '#f8d38d'
 
@@ -30,24 +31,58 @@ export const HighlightButton = (): React.JSX.Element => {
     return DEFAULT_COLOR
   })
 
-  const dropdownItems = HIGHLIGHT_COLORS.map((item) => ({
-    label: item.label,
-    color: item.color,
-    onClick: (): void => {
-      editor.chain().focus().toggleHighlight({ color: item.color }).run()
-    },
-  }))
-
   return (
     <MenuButtonWithDropdown
       isActive={isActive}
       title='Highlight'
-      dropdownItems={dropdownItems}
       onClick={() => {
         editor.chain().focus().toggleHighlight({ color: activeColor }).run()
       }}
+      dropdownContent={
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 18px)',
+            gap: '5px',
+            padding: 1,
+          }}
+        >
+          {HIGHLIGHT_COLORS.map((item) => (
+            <Box
+              key={item.label}
+              component='button'
+              type='button'
+              title={item.label}
+              onMouseDown={(event: React.MouseEvent) => {
+                event.preventDefault()
+              }}
+              onClick={() => {
+                editor
+                  .chain()
+                  .focus()
+                  .toggleHighlight({ color: item.color })
+                  .run()
+              }}
+              sx={{
+                width: 18,
+                height: 18,
+                borderRadius: '50%',
+                border: '1.5px solid rgba(0,0,0,0.15)',
+                backgroundColor: item.color,
+                cursor: 'pointer',
+                padding: 0,
+                transition: 'transform 0.1s, box-shadow 0.1s',
+                ':hover': {
+                  transform: 'scale(1.15)',
+                  boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
+                },
+              }}
+            />
+          ))}
+        </Box>
+      }
     >
-      <RiMarkPenLine color={activeColor} />
+      <FaHighlighter color={activeColor} />
     </MenuButtonWithDropdown>
   )
 }
