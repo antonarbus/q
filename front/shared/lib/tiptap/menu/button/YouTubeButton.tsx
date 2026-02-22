@@ -1,16 +1,23 @@
+import { useTiptap } from '@tiptap/react'
 import { MenuButton } from './shared/MenuButton'
 import { RiYoutubeLine } from 'react-icons/ri'
 
-type Props = {
-  onClick: () => void
-}
+export const YouTubeButton = (): React.JSX.Element => {
+  const { editor } = useTiptap()
 
-export const YouTubeButton = (props: Props): React.JSX.Element => {
   return (
     <MenuButton
       isActive={false}
       title='YouTube video'
-      onClick={props.onClick}
+      onClick={() => {
+        const src = window.prompt('YouTube URL')
+
+        if (src === null || src.trim() === '') {
+          return
+        }
+
+        editor.commands.setYoutubeVideo({ src })
+      }}
     >
       <RiYoutubeLine />
     </MenuButton>

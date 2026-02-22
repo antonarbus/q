@@ -2,11 +2,7 @@ import { useTiptap, useTiptapState } from '@tiptap/react'
 import { MenuButton } from './shared/MenuButton'
 import { RiLink, RiLinkUnlink } from 'react-icons/ri'
 
-type Props = {
-  onOpenInput: (initialValue: string) => void
-}
-
-export const LinkButtons = (props: Props): React.JSX.Element => {
+export const LinkButtons = (): React.JSX.Element => {
   const { editor } = useTiptap()
   const isActive = useTiptapState((ctx) => ctx.editor.isActive('link'))
 
@@ -18,7 +14,17 @@ export const LinkButtons = (props: Props): React.JSX.Element => {
         onClick={() => {
           const attrs = editor.getAttributes('link')
           const existing = typeof attrs.href === 'string' ? attrs.href : ''
-          props.onOpenInput(existing)
+          const href = window.prompt('URL', existing)
+
+          if (href === null) {
+            return
+          }
+
+          if (href === '') {
+            editor.chain().focus().extendMarkRange('link').unsetLink().run()
+          } else {
+            editor.chain().focus().extendMarkRange('link').setLink({ href }).run()
+          }
         }}
       >
         <RiLink />
