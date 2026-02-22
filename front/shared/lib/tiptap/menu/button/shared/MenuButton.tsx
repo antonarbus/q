@@ -11,6 +11,9 @@ export const MenuButton = (props: Props): React.JSX.Element => (
   <Box
     component='button'
     type='button'
+    onMouseDown={(event: React.MouseEvent) => {
+      event.preventDefault()
+    }}
     onClick={props.onClick}
     title={props.title}
     sx={{

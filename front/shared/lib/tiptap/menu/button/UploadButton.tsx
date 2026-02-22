@@ -1,10 +1,11 @@
+import { Box, Tooltip } from '@mui/material'
 import { useRef } from 'react'
 import { useTiptap } from '@tiptap/react'
-import { MenuButton } from './shared/MenuButton'
-import { TbUpload } from 'react-icons/tb'
 import { useTiptapCtx } from '../../provider/TiptapProvider'
+import { cls } from '@shared/cls'
+import { TbUpload } from 'react-icons/tb'
 
-export const UploadFileButton = (): React.JSX.Element | null => {
+export const UploadButton = (): React.ReactNode => {
   const { editor } = useTiptap()
   const tiptapCtx = useTiptapCtx()
   const fileInputRef = useRef<HTMLInputElement | null>(null)
@@ -15,15 +16,39 @@ export const UploadFileButton = (): React.JSX.Element | null => {
 
   return (
     <>
-      <MenuButton
-        isActive={false}
-        title='Upload file'
+      <Box
+        className={cls.tiptapInsertButton}
         onClick={() => {
           fileInputRef.current?.click()
         }}
+        sx={{
+          position: 'absolute',
+          top: 4,
+          right: 4,
+          transition: 'opacity 0.2s ease-in-out',
+          userSelect: 'none',
+          cursor: 'pointer',
+          color: '#aaa',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: 24,
+          height: 24,
+          borderRadius: 4,
+          ':hover': {
+            color: 'black',
+          },
+        }}
       >
-        <TbUpload />
-      </MenuButton>
+        <Tooltip
+          enterDelay={500}
+          enterNextDelay={500}
+          placement='top'
+          title='Upload file'
+        >
+          <TbUpload size={14} />
+        </Tooltip>
+      </Box>
       <input
         ref={fileInputRef}
         type='file'

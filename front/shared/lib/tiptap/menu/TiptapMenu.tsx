@@ -1,5 +1,5 @@
 import { BubbleMenu } from '@tiptap/react/menus'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { Divider } from './button/shared/Divider'
 import { AlignLeftButton } from './button/AlignLeftButton'
 import { AlignCenterButton } from './button/AlignCenterButton'
@@ -21,16 +21,26 @@ import { TaskListButton } from './button/TaskListButton'
 import { QuoteButton } from './button/QuoteButton'
 import { CodeBlockButton } from './button/CodeBlockButton'
 import { HorizontalRuleButton } from './button/HorizontalRuleButton'
+import { InsertTableButton } from './button/InsertTableButton'
 import { LinkButtons } from './button/LinkButtons'
+import { YouTubeButton } from './button/YouTubeButton'
+import { UploadFileButton } from './button/UploadFileButton'
 import { RedColorButton } from './button/RedColorButton'
 import { HighlightButton } from './button/HighlightButton'
+import { OpenLinkMenu } from './button/OpenLinkMenu'
+import { OpenYouTubeMenu } from './button/OpenYouTubeMenu'
 import { ButtonsGroupLayout } from '../style/ButtonsGroupLayout'
 import { ButtonsRowLayout } from '../style/ButtonsRowLayout'
 import { TiptapMenuLayout } from '../style/TiptapMenuLayout'
 
+type ActiveMenu = 'link' | 'youtube' | null
+
 export const TiptapMenu = (): React.ReactNode => {
   const menuRef = useRef<HTMLDivElement | null>(null)
   const { editor } = useTiptap()
+
+  const [activeMenu, setActiveMenu] = useState<ActiveMenu>(null)
+  const [linkInitialHref, setLinkInitialHref] = useState('')
 
   const isImageActive = useTiptapState((ctx) => ctx.editor.isActive('image'))
 
@@ -84,8 +94,26 @@ export const TiptapMenu = (): React.ReactNode => {
         },
       }}
     >
-      {isImageActive === true ? (
-        <TiptapMenuLayout>
+      <TiptapMenuLayout>
+        {/* eslint-disable no-nested-ternary */}
+        {activeMenu === 'link' ? (
+          <ButtonsRowLayout>
+            <OpenLinkMenu
+              initialValue={linkInitialHref}
+              onClose={() => {
+                setActiveMenu(null)
+              }}
+            />
+          </ButtonsRowLayout>
+        ) : activeMenu === 'youtube' ? (
+          <ButtonsRowLayout>
+            <OpenYouTubeMenu
+              onClose={() => {
+                setActiveMenu(null)
+              }}
+            />
+          </ButtonsRowLayout>
+        ) : isImageActive === true ? (
           <ButtonsRowLayout>
             <ButtonsGroupLayout>
               <AlignLeftButton />
@@ -93,62 +121,74 @@ export const TiptapMenu = (): React.ReactNode => {
               <AlignRightButton />
             </ButtonsGroupLayout>
           </ButtonsRowLayout>
-        </TiptapMenuLayout>
-      ) : (
-        <TiptapMenuLayout>
-          <ButtonsRowLayout>
-            <ButtonsGroupLayout>
-              <BoldButton />
-              <ItalicButton />
-              <UnderlineButton />
-              <StrikethroughButton />
-              <CodeButton />
-            </ButtonsGroupLayout>
+        ) : (
+          <>
+            <ButtonsRowLayout>
+              <ButtonsGroupLayout>
+                <BoldButton />
+                <ItalicButton />
+                <UnderlineButton />
+                <StrikethroughButton />
+                <CodeButton />
+              </ButtonsGroupLayout>
 
-            <Divider />
+              <Divider />
 
-            <ButtonsGroupLayout>
-              <RedColorButton />
-              <HighlightButton />
-            </ButtonsGroupLayout>
+              <ButtonsGroupLayout>
+                <RedColorButton />
+                <HighlightButton />
+              </ButtonsGroupLayout>
 
-            <Divider />
+              <Divider />
 
-            <ButtonsGroupLayout>
-              <Heading1Button />
-              <Heading2Button />
-              <Heading3Button />
-              <Heading4Button />
-              <Heading5Button />
-            </ButtonsGroupLayout>
-          </ButtonsRowLayout>
+              <ButtonsGroupLayout>
+                <Heading1Button />
+                <Heading2Button />
+                <Heading3Button />
+                <Heading4Button />
+                <Heading5Button />
+              </ButtonsGroupLayout>
+            </ButtonsRowLayout>
 
-          <ButtonsRowLayout>
-            <ButtonsGroupLayout>
-              <BulletListButton />
-              <OrderedListButton />
-              <TaskListButton />
-              <QuoteButton />
-              <CodeBlockButton />
-            </ButtonsGroupLayout>
+            <ButtonsRowLayout>
+              <ButtonsGroupLayout>
+                <BulletListButton />
+                <OrderedListButton />
+                <TaskListButton />
+                <QuoteButton />
+                <CodeBlockButton />
+              </ButtonsGroupLayout>
 
-            <Divider />
+              <Divider />
 
-            <ButtonsGroupLayout>
-              <AlignLeftButton />
-              <AlignCenterButton />
-              <AlignRightButton />
-            </ButtonsGroupLayout>
+              <ButtonsGroupLayout>
+                <AlignLeftButton />
+                <AlignCenterButton />
+                <AlignRightButton />
+              </ButtonsGroupLayout>
 
-            <Divider />
+              <Divider />
 
-            <ButtonsGroupLayout>
-              <HorizontalRuleButton />
-              <LinkButtons />
-            </ButtonsGroupLayout>
-          </ButtonsRowLayout>
-        </TiptapMenuLayout>
-      )}
+              <ButtonsGroupLayout>
+                <HorizontalRuleButton />
+                <LinkButtons
+                  onOpenInput={(initialValue: string) => {
+                    setLinkInitialHref(initialValue)
+                    setActiveMenu('link')
+                  }}
+                />
+                <InsertTableButton />
+                <YouTubeButton
+                  onClick={() => {
+                    setActiveMenu('youtube')
+                  }}
+                />
+                <UploadFileButton />
+              </ButtonsGroupLayout>
+            </ButtonsRowLayout>
+          </>
+        )}
+      </TiptapMenuLayout>
     </BubbleMenu>
   )
 }

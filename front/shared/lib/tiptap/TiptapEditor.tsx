@@ -6,7 +6,7 @@ import { cls } from '@shared/cls'
 import { useDropFile } from './file-upload/useDropFile'
 import { usePasteFile } from './file-upload/usePasteFile'
 import { useTiptapCtx } from './provider/TiptapProvider'
-import { InsertButton } from './menu/button/InsertButton'
+import { UploadButton } from './menu/button/UploadButton'
 
 export const TiptapEditor = (): React.JSX.Element => {
   const tiptapCtx = useTiptapCtx()
@@ -57,7 +57,7 @@ export const TiptapEditor = (): React.JSX.Element => {
   return (
     <Tiptap editor={editor}>
       <TiptapMenu />
-      <InsertButton />
+      <UploadButton />
       <Tiptap.Content className={cls.tiptapContent} style={{ flexGrow: 1 }} />
     </Tiptap>
   )

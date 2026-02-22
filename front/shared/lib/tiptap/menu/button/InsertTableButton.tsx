@@ -1,26 +1,23 @@
-import type { Editor } from '@tiptap/react'
+import { useTiptap } from '@tiptap/react'
 import { MenuButton } from './shared/MenuButton'
-import { RiTableLine } from 'react-icons/ri'
+import { CiViewTable } from 'react-icons/ci'
 
-type Props = {
-  editor: Editor
-  onDone?: () => void
+export const InsertTableButton = (): React.JSX.Element => {
+  const { editor } = useTiptap()
+
+  return (
+    <MenuButton
+      isActive={false}
+      title='Insert table'
+      onClick={() => {
+        editor
+          .chain()
+          .focus()
+          .insertTable({ rows: 3, cols: 3, withHeaderRow: true })
+          .run()
+      }}
+    >
+      <CiViewTable />
+    </MenuButton>
+  )
 }
-
-export const InsertTableButton = (props: Props): React.JSX.Element => (
-  <MenuButton
-    isActive={false}
-    title='Insert table'
-    onClick={() => {
-      props.editor
-        .chain()
-        .focus()
-        .insertTable({ rows: 3, cols: 3, withHeaderRow: true })
-        .run()
-
-      props.onDone?.()
-    }}
-  >
-    <RiTableLine />
-  </MenuButton>
-)
