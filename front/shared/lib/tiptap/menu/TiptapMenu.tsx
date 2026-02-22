@@ -22,7 +22,7 @@ import { QuoteButton } from './button/QuoteButton'
 import { CodeBlockButton } from './button/CodeBlockButton'
 import { HorizontalRuleButton } from './button/HorizontalRuleButton'
 import { InsertTableButton } from './button/InsertTableButton'
-import { LinkButtons } from './button/LinkButtons'
+import { LinkButton } from './button/LinkButton'
 import { YouTubeButton } from './button/YouTubeButton'
 import { UploadFileButton } from './button/UploadFileButton'
 import { RedColorButton } from './button/RedColorButton'
@@ -146,9 +146,9 @@ export const TiptapMenu = (): React.ReactNode => {
 
               <ButtonsGroupLayout>
                 <HorizontalRuleButton />
-                <LinkButtons />
                 <InsertTableButton />
                 <YouTubeButton />
+                <LinkButton />
                 <UploadFileButton />
               </ButtonsGroupLayout>
             </ButtonsRowLayout>
