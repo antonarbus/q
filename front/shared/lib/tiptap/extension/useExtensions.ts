@@ -53,7 +53,7 @@ export const useExtensions = (): AnyExtension[] => {
     const exts: AnyExtension[] = [
       // Nodes
       Document, // mandatory top node
-      Paragraph,
+      Paragraph, // mandatory
       Text,
 
       // smth

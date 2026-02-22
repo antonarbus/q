@@ -199,4 +199,36 @@ export const tiptapStyles: NestedCSSObject = {
     borderTop: '1px solid #d0d0d0',
     margin: '0.75em 0',
   },
+
+  // Task list
+  '& ul[data-type="taskList"]': {
+    listStyle: 'none',
+    padding: 0,
+    margin: '0.25em 0',
+  },
+  '& ul[data-type="taskList"] li': {
+    display: 'flex',
+    alignItems: 'baseline',
+    gap: '0.5em',
+    margin: '0.15em 0',
+  },
+  '& ul[data-type="taskList"] li > label': {
+    display: 'flex',
+    alignItems: 'center',
+    flexShrink: 0,
+    marginTop: '0.1em',
+  },
+  '& ul[data-type="taskList"] li > label input[type="checkbox"]': {
+    width: '14px',
+    height: '14px',
+    cursor: 'pointer',
+    accentColor: '#6b7280',
+  },
+  '& ul[data-type="taskList"] li > div': {
+    flex: 1,
+  },
+  '& ul[data-type="taskList"] li[data-checked="true"] > div': {
+    textDecoration: 'line-through',
+    color: '#9ca3af',
+  },
 }
