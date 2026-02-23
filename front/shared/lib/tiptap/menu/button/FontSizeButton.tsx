@@ -43,15 +43,8 @@ export const FontSizeButton = (): React.JSX.Element => {
 
   return (
     <MenuButtonWithDropdown
-      isActive={isActive}
+      isActive={false}
       title='Font size'
-      onClick={() => {
-        if (isActive === true) {
-          editor.chain().focus().unsetFontSize().run()
-        } else {
-          editor.chain().focus().setFontSize(activeSize).run()
-        }
-      }}
       dropdownContent={
         <Box
           sx={{
@@ -71,7 +64,10 @@ export const FontSizeButton = (): React.JSX.Element => {
                 event.preventDefault()
               }}
               onClick={() => {
-                if (activeSize === item.value && isActive === true) {
+                const isCurrentSize =
+                  activeSize === item.value && isActive === true
+
+                if (isCurrentSize === true) {
                   editor.chain().focus().unsetFontSize().run()
                 } else {
                   editor.chain().focus().setFontSize(item.value).run()

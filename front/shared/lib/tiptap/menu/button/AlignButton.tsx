@@ -36,9 +36,6 @@ export const AlignButton = (): React.JSX.Element => {
     <MenuButtonWithDropdown
       isActive={isActive}
       title='Text align'
-      onClick={() => {
-        editor.chain().focus().setTextAlign(activeAlign).run()
-      }}
       dropdownContent={
         <Box
           sx={{

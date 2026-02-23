@@ -3,7 +3,7 @@ import { Box, Popover } from '@mui/material'
 import { RiArrowDropDownLine } from 'react-icons/ri'
 
 type Props = {
-  onClick: () => void
+  onClick?: () => void
   isActive: boolean
   disabled?: boolean
   title: string
@@ -54,7 +54,7 @@ export const MenuButtonWithDropdown = (props: Props): React.JSX.Element => {
           onMouseDown={(event: React.MouseEvent) => {
             event.preventDefault()
           }}
-          onClick={props.onClick}
+          onClick={props.onClick ?? handleArrowClick}
           sx={{
             ...baseButtonSx,
             minWidth: '28px',
