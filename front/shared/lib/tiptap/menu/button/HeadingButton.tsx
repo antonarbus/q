@@ -1,7 +1,7 @@
 import { useTiptap, useTiptapState } from '@tiptap/react'
 import { Box } from '@mui/material'
 import { MenuButtonWithDropdown } from './shared/MenuButtonWithDropdown'
-import { RiH1, RiH2, RiH3, RiH4, RiH5 } from 'react-icons/ri'
+import { RiH1, RiH2, RiH3, RiH4, RiH5, RiText } from 'react-icons/ri'
 
 const HEADINGS = [
   { level: 1, label: 'Heading 1', Icon: RiH1, fontSize: 17, fontWeight: 700 },
@@ -27,19 +27,16 @@ export const HeadingButton = (): React.JSX.Element => {
       }
     }
 
-    return 3 as const
+    return null
   })
 
   const ActiveIcon =
-    HEADINGS.find((heading) => heading.level === activeLevel)?.Icon ?? RiH3
+    HEADINGS.find((heading) => heading.level === activeLevel)?.Icon ?? RiText
 
   return (
     <MenuButtonWithDropdown
-      isActive={isActive}
+      isActive={false}
       title='Heading'
-      onClick={() => {
-        editor.chain().focus().toggleHeading({ level: activeLevel }).run()
-      }}
       dropdownContent={
         <Box
           sx={{
@@ -48,6 +45,34 @@ export const HeadingButton = (): React.JSX.Element => {
             py: '4px',
           }}
         >
+          <Box
+            component='button'
+            type='button'
+            title='Normal text'
+            onMouseDown={(event: React.MouseEvent) => {
+              event.preventDefault()
+            }}
+            onClick={() => {
+              editor.chain().focus().setParagraph().run()
+            }}
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              width: '100%',
+              padding: '5px 12px',
+              border: 'none',
+              backgroundColor: isActive === true ? 'transparent' : '#efefef',
+              cursor: 'pointer',
+              fontSize: 13,
+              fontWeight: 400,
+              whiteSpace: 'nowrap',
+              ':hover': { backgroundColor: '#f5f5f5' },
+            }}
+          >
+            <RiText size={13} />
+            Normal text
+          </Box>
           {HEADINGS.map((heading) => (
             <Box
               key={heading.level}
