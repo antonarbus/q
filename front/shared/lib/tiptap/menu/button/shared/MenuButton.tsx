@@ -31,9 +31,9 @@ export const MenuButton = (props: Props): React.JSX.Element => (
       pointerEvents: props.disabled === true ? 'none' : 'auto',
       fontSize: 14,
       opacity: props.disabled === true ? 0.5 : 1,
-      backgroundColor: props.isActive === true ? '#dcdcdc' : 'transparent',
+      backgroundColor: props.isActive === true ? '#d8d8d87d' : 'transparent',
       ':hover': {
-        backgroundColor: props.isActive === true ? '#dcdcdc' : '#eaeaea',
+        backgroundColor: props.isActive === true ? '#d8d8d87d' : '#eaeaea',
       },
     }}
   >

@@ -44,7 +44,7 @@ export const TiptapMenu = (): React.ReactNode => {
         }
       }}
       editor={editor}
-      updateDelay={isImageActive === true ? 0 : 200}
+      updateDelay={isImageActive === true ? 0 : 250} // 250 is the default
       shouldShow={(ctx) => {
         if (ctx.editor.isDestroyed === true) {
           return false
@@ -56,6 +56,7 @@ export const TiptapMenu = (): React.ReactNode => {
 
         return true
       }}
+      // A callback to provide the anchor coordinates used to position the menu
       getReferencedVirtualElement={() => {
         //* Issue: menu is not centered in the middle of the image
         if (editor.isDestroyed === true) {
@@ -79,6 +80,7 @@ export const TiptapMenu = (): React.ReactNode => {
           //* Issue: for row cells menu is randomly positioned
           requestAnimationFrame(() => {
             editor.view.dispatch(
+              // Force update the position of the bubble menu
               editor.state.tr.setMeta('bubbleMenu', 'updatePosition'),
             )
           })
