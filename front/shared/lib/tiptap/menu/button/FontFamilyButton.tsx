@@ -52,7 +52,10 @@ export const FontFamilyButton = (): React.JSX.Element => {
                 event.preventDefault()
               }}
               onClick={() => {
-                if (activeFont.value === item.value && item.value !== DEFAULT_FONT.value) {
+                if (
+                  activeFont.value === item.value &&
+                  item.value !== DEFAULT_FONT.value
+                ) {
                   editor.chain().focus().unsetFontFamily().run()
                 } else {
                   editor.chain().focus().setFontFamily(item.value).run()
