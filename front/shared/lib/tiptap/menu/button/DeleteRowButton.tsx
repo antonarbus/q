@@ -1,6 +1,6 @@
 import { useTiptap } from '@tiptap/react'
-import { TbRowRemove } from 'react-icons/tb'
 import { MenuButton } from './shared/MenuButton'
+import { FcDeleteRow } from 'react-icons/fc'
 
 export const DeleteRowButton = (): React.JSX.Element => {
   const { editor } = useTiptap()
@@ -13,7 +13,7 @@ export const DeleteRowButton = (): React.JSX.Element => {
         editor.chain().focus().deleteRow().run()
       }}
     >
-      <TbRowRemove />
+      <FcDeleteRow />
     </MenuButton>
   )
 }

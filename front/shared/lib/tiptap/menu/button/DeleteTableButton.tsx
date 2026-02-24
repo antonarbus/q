@@ -1,6 +1,6 @@
 import { useTiptap } from '@tiptap/react'
-import { TbTableOff } from 'react-icons/tb'
 import { MenuButton } from './shared/MenuButton'
+import { FcDeleteDatabase } from 'react-icons/fc'
 
 export const DeleteTableButton = (): React.JSX.Element => {
   const { editor } = useTiptap()
@@ -13,7 +13,7 @@ export const DeleteTableButton = (): React.JSX.Element => {
         editor.chain().focus().deleteTable().run()
       }}
     >
-      <TbTableOff />
+      <FcDeleteDatabase />
     </MenuButton>
   )
 }

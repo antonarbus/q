@@ -1,6 +1,6 @@
 import { useTiptap } from '@tiptap/react'
-import { TbColumnRemove } from 'react-icons/tb'
 import { MenuButton } from './shared/MenuButton'
+import { FcDeleteColumn } from 'react-icons/fc'
 
 export const DeleteColumnButton = (): React.JSX.Element => {
   const { editor } = useTiptap()
@@ -13,7 +13,7 @@ export const DeleteColumnButton = (): React.JSX.Element => {
         editor.chain().focus().deleteColumn().run()
       }}
     >
-      <TbColumnRemove />
+      <FcDeleteColumn />
     </MenuButton>
   )
 }
