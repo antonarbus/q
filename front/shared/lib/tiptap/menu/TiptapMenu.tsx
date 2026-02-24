@@ -11,12 +11,34 @@ export const TiptapMenu = (): React.ReactNode => {
   const { editor } = useTiptap()
 
   const isImageActive = useTiptapState((ctx) => ctx.editor.isActive('image'))
-  const isTableActive = useTiptapState((ctx) => ctx.editor.isActive('table'))
+  const isInTable = useTiptapState((ctx) => ctx.editor.isActive('table'))
+
+  // CellSelection ($anchorCell exists) = multi-cell drag; plain TextSelection inside a cell = user selected text
+  const hasTextSelection = useTiptapState((ctx) => {
+    const { selection } = ctx.editor.state
+
+    if (selection.empty) {
+      return false
+    }
+
+    const isCellSelection = '$anchorCell' in selection
+    const isCellNotSelected = isCellSelection === false
+
+    return isCellNotSelected
+  })
 
   const shouldShow = useCallback((ctx: { editor: typeof editor }) => {
-    if (ctx.editor.isDestroyed === true) return false
-    if (ctx.editor.isActive('table')) return true
-    if (ctx.editor.state.selection.empty === true) return false
+    if (ctx.editor.isDestroyed === true) {
+      return false
+    }
+
+    if (ctx.editor.isActive('table')) {
+      return true
+    }
+
+    if (ctx.editor.state.selection.empty === true) {
+      return false
+    }
 
     return true
   }, [])
@@ -60,8 +82,10 @@ export const TiptapMenu = (): React.ReactNode => {
     >
       <TiptapMenuLayout>
         {isImageActive === true && <ImageMenu />}
-        {isTableActive === true && <TableMenu />}
-        {isImageActive === false && isTableActive === false && <TextMenu />}
+        {isImageActive === false &&
+          isInTable === true &&
+          hasTextSelection === false && <TableMenu />}
+        {isImageActive === false && hasTextSelection === true && <TextMenu />}
       </TiptapMenuLayout>
     </BubbleMenu>
   )
