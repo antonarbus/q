@@ -22,7 +22,7 @@ import Strike from '@tiptap/extension-strike'
 import Code from '@tiptap/extension-code'
 import Underline from '@tiptap/extension-underline'
 import Link from '@tiptap/extension-link'
-import { TextStyle, FontSize } from '@tiptap/extension-text-style'
+import { TextStyle, FontSize, FontFamily } from '@tiptap/extension-text-style'
 import Color from '@tiptap/extension-color'
 import Highlight from '@tiptap/extension-highlight'
 import TextAlign from '@tiptap/extension-text-align'
@@ -49,6 +49,7 @@ export const useExtensions = (): AnyExtension[] => {
       Text,
       TextStyle,
       FontSize,
+      FontFamily,
       Dropcursor,
       Gapcursor,
       Placeholder.configure({

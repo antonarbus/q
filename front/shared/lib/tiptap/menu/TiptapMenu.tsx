@@ -25,6 +25,7 @@ import { ColorButton } from './button/ColorButton'
 import { HighlightButton } from './button/HighlightButton'
 import { AlignButton } from './button/AlignButton'
 import { FontSizeButton } from './button/FontSizeButton'
+import { FontFamilyButton } from './button/FontFamilyButton'
 import { ButtonsGroupLayout } from '../style/ButtonsGroupLayout'
 import { ButtonsRowLayout } from '../style/ButtonsRowLayout'
 import { TiptapMenuLayout } from '../style/TiptapMenuLayout'
@@ -112,6 +113,11 @@ export const TiptapMenu = (): React.ReactNode => {
               <ButtonsGroupLayout>
                 <ColorButton />
                 <HighlightButton />
+              </ButtonsGroupLayout>
+
+              <Divider />
+
+              <ButtonsGroupLayout>
                 <FontSizeButton />
                 <HeadingButton />
                 <AlignButton />
@@ -125,6 +131,12 @@ export const TiptapMenu = (): React.ReactNode => {
                 <TaskListButton />
                 <QuoteButton />
                 <CodeBlockButton />
+              </ButtonsGroupLayout>
+
+              <Divider />
+
+              <ButtonsGroupLayout>
+                <FontFamilyButton />
               </ButtonsGroupLayout>
 
               <Divider />
