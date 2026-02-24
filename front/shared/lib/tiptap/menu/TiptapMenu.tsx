@@ -1,5 +1,5 @@
 import { BubbleMenu } from '@tiptap/react/menus'
-import { useRef, useCallback } from 'react'
+import { useRef, useCallback, useEffect } from 'react'
 import { useTiptap, useTiptapState } from '@tiptap/react'
 import { ImageMenu } from './ImageMenu'
 import { TextMenu } from './TextMenu'
@@ -43,6 +43,32 @@ export const TiptapMenu = (): React.ReactNode => {
     return true
   }, [])
 
+  // When switching from TableMenu to TextMenu inside a cell, the BubbleMenu
+  // repositions synchronously (updateDelay=0) before the browser has painted
+  // the selection bounds — tippy can't flip above yet. Force a recalculation
+  // on the next frame so tippy has real layout info.
+  useEffect(() => {
+    const shouldForceUpdate = isInTable === true && hasTextSelection === true
+
+    if (shouldForceUpdate !== true) {
+      return
+    }
+
+    const id = requestAnimationFrame(() => {
+      if (editor.isDestroyed === true) {
+        return
+      }
+
+      editor.view.dispatch(
+        editor.state.tr.setMeta('bubbleMenu', 'updatePosition'),
+      )
+    })
+
+    return (): void => {
+      cancelAnimationFrame(id)
+    }
+  }, [isInTable, hasTextSelection, editor])
+
   const getReferencedVirtualElement = useCallback(() => {
     //* Issue: menu is not centered in the middle of the image
     if (editor.isDestroyed === true) return null
@@ -66,7 +92,7 @@ export const TiptapMenu = (): React.ReactNode => {
         }
       }}
       editor={editor}
-      updateDelay={isImageActive === true ? 0 : 250}
+      updateDelay={isImageActive === true || isInTable === true ? 0 : 250}
       shouldShow={shouldShow}
       getReferencedVirtualElement={getReferencedVirtualElement}
       options={{
