@@ -28,6 +28,10 @@ export const tiptapStyles: NestedCSSObject = {
   '& .tiptap:focus': {
     outline: 'none',
   },
+  // Match app base weight; fonts without a 300 variant will render at 400
+  '& .tiptap': {
+    fontWeight: 300,
+  },
   // Placeholder styling
   '& .tiptap p.is-editor-empty:first-of-type::before': {
     color: 'rgb(173, 181, 189)',
@@ -233,6 +237,6 @@ export const tiptapStyles: NestedCSSObject = {
   },
   // bold
   '& strong': {
-    fontWeight: 500,
+    fontWeight: 700,
   },
 }
