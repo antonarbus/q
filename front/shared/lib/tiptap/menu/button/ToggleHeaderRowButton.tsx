@@ -1,5 +1,5 @@
 import { useTiptap } from '@tiptap/react'
-import { Box } from '@mui/material'
+import { TbTableRow } from 'react-icons/tb'
 import { MenuButton } from './shared/MenuButton'
 
 export const ToggleHeaderRowButton = (): React.JSX.Element => {
@@ -13,12 +13,7 @@ export const ToggleHeaderRowButton = (): React.JSX.Element => {
         editor.chain().focus().toggleHeaderRow().run()
       }}
     >
-      <Box
-        component='span'
-        sx={{ fontSize: 10, fontWeight: 700, lineHeight: 1 }}
-      >
-        H↔
-      </Box>
+      <TbTableRow />
     </MenuButton>
   )
 }
