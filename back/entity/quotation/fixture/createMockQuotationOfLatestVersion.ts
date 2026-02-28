@@ -33,7 +33,6 @@ export const createMockQuotationOfLatestVersion = <T = Quotation>(
       createdAt: '2024-01-01T00:00:00Z',
       updatedAt: '2024-01-01T00:00:00Z',
       info: 'info',
-      preview: 'preview',
       width: 100,
       height: 50,
       type: 'text',

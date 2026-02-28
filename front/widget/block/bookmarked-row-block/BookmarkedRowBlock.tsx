@@ -15,6 +15,7 @@ export const BookmarkedRowBlock = (): React.JSX.Element => {
     <BlockComp
       autoWidth
       className={cls.boqBlock}
+      draggable={false}
       minWidth={560}
       onBlockResize={onBoqBlockResize}
       onBlockResizeStart={onBoqBlockResizeStart}

@@ -38,7 +38,6 @@ export const insertBoqBlock = (event?: React.MouseEvent): void => {
     email: 'unknown@gmail.com',
     width: 600,
     height: 279,
-    preview: boqBlockPreviewHtml,
     boq: {
       header: {
         title: {
@@ -90,7 +89,7 @@ export const insertBoqBlock = (event?: React.MouseEvent): void => {
           email: 'unknown@gmail.com',
           height: 0,
           width: 0,
-          preview: '',
+
           description: {
             html: rowOneDescriptionHtml,
             value: 0,
@@ -137,7 +136,7 @@ export const insertBoqBlock = (event?: React.MouseEvent): void => {
           email: 'unknown@gmail.com',
           height: 0,
           width: 0,
-          preview: '',
+
           description: {
             html: rowTwoDescriptionHtml,
             value: 0,
@@ -184,7 +183,7 @@ export const insertBoqBlock = (event?: React.MouseEvent): void => {
           email: 'unknown@gmail.com',
           height: 0,
           width: 0,
-          preview: '',
+
           description: {
             html: rowThreeDescriptionHtml,
             value: 0,
@@ -226,7 +225,10 @@ export const insertBoqBlock = (event?: React.MouseEvent): void => {
   const persistedScrollY = window.scrollY
 
   dispatch(textSlice.actions.setNotEditable())
-  dispatch(copySlice.actions.addItem({ item: boqBlock }))
+
+  dispatch(
+    copySlice.actions.addItem({ item: boqBlock, preview: boqBlockPreviewHtml }),
+  )
 
   // Restore scroll position after React renders
   requestAnimationFrame(() => {

@@ -20,7 +20,6 @@ export const insertTextBlock = (event?: React.MouseEvent): void => {
     email: 'unknown@gmail.com',
     width: 600,
     height: 59.2,
-    preview: textBlockPreviewHtml,
     text: {
       html: textBlockContentHtml,
       value: null,
@@ -37,7 +36,9 @@ export const insertTextBlock = (event?: React.MouseEvent): void => {
     window.scrollTo(persistedScrollX, persistedScrollY)
   })
 
-  dispatch(copySlice.actions.addItem({ item: block }))
+  dispatch(
+    copySlice.actions.addItem({ item: block, preview: textBlockPreviewHtml }),
+  )
 
   const isCopyModalVisible = getState().copy.isVisible
 

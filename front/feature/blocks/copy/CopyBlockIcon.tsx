@@ -48,10 +48,9 @@ export const CopyBlockIcon = (): React.JSX.Element => {
               window.scrollTo(persistedScrollX, persistedScrollY)
             })
 
-            const blockCloned = structuredClone(blockToCopy)
-            blockCloned.preview = html
-
-            dispatch(copySlice.actions.addItem({ item: blockCloned }))
+            dispatch(
+              copySlice.actions.addItem({ item: blockToCopy, preview: html }),
+            )
 
             dispatch(copySlice.actions.allowToPaste())
 

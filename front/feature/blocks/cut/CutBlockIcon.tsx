@@ -69,10 +69,9 @@ export const CutBlockIcon = (): React.JSX.Element => {
               window.scrollTo(persistedScrollX, persistedScrollY)
             })
 
-            const blockCloned = structuredClone(blockToCut)
-            blockCloned.preview = html
-
-            dispatch(copySlice.actions.addItem({ item: blockCloned }))
+            dispatch(
+              copySlice.actions.addItem({ item: blockToCut, preview: html }),
+            )
 
             dispatch(
               quotationSlice.actions.deleteBlockReducer({ id: blockToCut.id }),

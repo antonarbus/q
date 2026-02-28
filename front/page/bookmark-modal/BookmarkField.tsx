@@ -2,6 +2,7 @@ import { BOOKMARK_POS_AT_BLOCKS } from '@entity/quotation/const/bookmarkPosAtBlo
 import { textSlice } from '@shared/lib/tiptap/store/textSlice'
 import { dispatch, useSelector } from '@shared/lib/redux'
 import { Block } from '@widget/block/Block'
+import { DragDropContext, Droppable } from '@hello-pangea/dnd'
 import { AnimatePresence } from 'motion/react'
 import { useEffectOnce } from 'react-use'
 import { BookmarkFieldLayout } from './BookmarkFieldLayout'
@@ -21,9 +22,25 @@ export const BookmarkField = (): React.ReactNode => {
 
   return (
     <BookmarkFieldLayout>
-      <AnimatePresence initial={false}>
-        <Block block={bookmarkBlock} blockIndex={BOOKMARK_POS_AT_BLOCKS} />
-      </AnimatePresence>
+      <DragDropContext
+        onDragEnd={(): void => {
+          // drag reordering is not applicable in the bookmark preview context
+        }}
+      >
+        <Droppable droppableId='bookmark-block'>
+          {(provided) => (
+            <div ref={provided.innerRef} {...provided.droppableProps}>
+              <AnimatePresence initial={false}>
+                <Block
+                  block={bookmarkBlock}
+                  blockIndex={BOOKMARK_POS_AT_BLOCKS}
+                />
+              </AnimatePresence>
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
     </BookmarkFieldLayout>
   )
 }

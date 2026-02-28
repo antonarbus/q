@@ -56,7 +56,7 @@ export const newQuotationTemplate: Quotation = {
       email: 'unknown@gmail.com',
       width: 600,
       height: 0,
-      preview: '',
+
       text: {
         html: welcomeTextHtml,
         value: null,
@@ -75,7 +75,7 @@ export const newQuotationTemplate: Quotation = {
       email: 'unknown@gmail.com',
       width: 600,
       height: 0,
-      preview: '',
+
       boq: {
         header: {
           title: {
@@ -127,7 +127,7 @@ export const newQuotationTemplate: Quotation = {
             email: 'unknown@gmail.com',
             height: 0,
             width: 0,
-            preview: '',
+
             description: {
               html: rowOneDescriptionHtml,
               value: 0,
@@ -174,7 +174,7 @@ export const newQuotationTemplate: Quotation = {
             email: 'unknown@gmail.com',
             height: 0,
             width: 0,
-            preview: '',
+
             description: {
               html: rowTwoDescriptionHtml,
               value: 0,
@@ -221,7 +221,7 @@ export const newQuotationTemplate: Quotation = {
             email: 'unknown@gmail.com',
             height: 0,
             width: 0,
-            preview: '',
+
             description: {
               html: rowThreeDescriptionHtml,
               value: 0,
@@ -271,7 +271,7 @@ export const newQuotationTemplate: Quotation = {
       email: 'unknown@gmail.com',
       width: 150,
       height: 0,
-      preview: '',
+
       title: {
         html: totalPriceTitleHtml,
         value: null,
@@ -294,7 +294,7 @@ export const newQuotationTemplate: Quotation = {
       email: 'unknown@gmail.com',
       width: 600,
       height: 0,
-      preview: '',
+
       text: {
         html: termsAndConditionsHtml,
         value: null,

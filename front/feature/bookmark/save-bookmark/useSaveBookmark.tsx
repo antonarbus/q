@@ -8,7 +8,6 @@ import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { cls } from '@shared/cls'
 import { dispatch, getState } from '@shared/lib/redux'
 import { asyncDelay } from '@shared/util/asyncDelay'
-import { getPaperElementHtmlAtModal } from '@shared/util/html-getter/getPaperElementHtmlAtModal'
 import type { UseMutationResult } from '@tanstack/react-query'
 import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -100,14 +99,8 @@ export const useSaveBookmark = (props: Props): Res => {
       return
     }
 
-    const html = getPaperElementHtmlAtModal()
-
-    const itemWithUpdatedPreview = structuredClone(bookmarkBlock)
-
-    itemWithUpdatedPreview.preview = html
-
     const item = {
-      ...itemWithUpdatedPreview,
+      ...bookmarkBlock,
       name: props.bookmarkFormValues.nameSignal.value,
       category: props.bookmarkFormValues.categorySignal.value,
       desc: props.bookmarkFormValues.descSignal.value,

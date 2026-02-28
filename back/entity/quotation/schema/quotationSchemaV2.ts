@@ -40,7 +40,6 @@ const blockCommonSchema = z.object({
   createdAt: z.string(),
   updatedAt: z.string(),
   info: z.string(),
-  preview: z.string(),
   width: z.number(),
   height: z.number(),
 })

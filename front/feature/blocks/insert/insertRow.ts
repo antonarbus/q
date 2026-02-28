@@ -23,7 +23,6 @@ export const insertRow = (event?: React.MouseEvent): void => {
     email: 'unknown@gmail.com',
     height: 55,
     width: 570,
-    preview: rowPreviewHtml,
     description: {
       html: rowDescriptionHtml,
       value: 0,
@@ -68,7 +67,7 @@ export const insertRow = (event?: React.MouseEvent): void => {
     window.scrollTo(persistedScrollX, persistedScrollY)
   })
 
-  dispatch(copySlice.actions.addItem({ item: row }))
+  dispatch(copySlice.actions.addItem({ item: row, preview: rowPreviewHtml }))
 
   const isCopyModalVisible = getState().copy.isVisible
 

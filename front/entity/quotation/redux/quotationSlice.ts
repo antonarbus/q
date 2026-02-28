@@ -38,7 +38,6 @@ import { updateBoqColumnNameTextReducer } from './reducer/update/updateBoqColumn
 import { updateBoqHeaderTextReducer } from './reducer/update/updateBoqHeaderTextReducer'
 import { updateCellReducer } from './reducer/update/updateCellReducer'
 import { updateItemInfoReducer } from './reducer/update/updateItemInfoReducer'
-import { updateItemPreviewReducer } from './reducer/update/updateItemPreviewReducer'
 import { updatePriceReducer } from './reducer/update/updatePriceReducer'
 import { updatePriceTitleReducer } from './reducer/update/updatePriceTitleReducer'
 import { updateQuotationInfoReducer } from './reducer/update/updateQuotationInfoReducer'
@@ -100,7 +99,6 @@ export const quotationSlice = createSlice({
     updatePriceReducer,
     updateQuotationInfoReducer,
     updateItemInfoReducer,
-    updateItemPreviewReducer,
   },
 })
 

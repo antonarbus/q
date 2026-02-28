@@ -72,12 +72,11 @@ export const CopyRowIcon = (): React.JSX.Element => {
             }
 
             const html = getClosestRowHtml(event)
-            const rowFromStoreCloned = structuredClone(rowFromStore)
-            rowFromStoreCloned.preview = html
 
             dispatch(
               copySlice.actions.addItem({
-                item: rowFromStoreCloned,
+                item: rowFromStore,
+                preview: html,
               }),
             )
 

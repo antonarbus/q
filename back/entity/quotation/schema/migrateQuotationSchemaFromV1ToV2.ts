@@ -72,9 +72,13 @@ export const migrateQuotationSchemaFromV1ToV2 = (props: Props): Res => {
 
   // ======== ↓ MIGRATION ↓ ========
 
+  //* For simple property addition or deletion migration is not required
+  //* For missing property add default value e.g. z.string().default('foo')
+  //* For failing validation use catch() e.g. z.string().catch('foo')
+
   const newDocument = structuredClone(
     oldDocumentValidationResult.data,
-  ) as QuotationV2 // <-- hack! cast QuotationV2 type for actual QuotationV1 to let us set new values
+  ) as unknown as QuotationV2 // <-- hack! cast QuotationV2 type for actual QuotationV1 to let us set new values
 
   newDocument.quotationSchemaVersion = MIGRATE_TO //* <-- TO BE IN EVERY MIGRATION FUNCTION
   newDocument.type = 'quotation'
