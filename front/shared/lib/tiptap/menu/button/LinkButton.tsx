@@ -36,6 +36,11 @@ export const LinkButton = (): React.JSX.Element => {
           return
         }
 
+        const normalizedHref =
+          href.trim().startsWith('http://') || href.trim().startsWith('https://') || href.trim().startsWith('mailto:')
+            ? href.trim()
+            : `https://${href.trim()}`
+
         const linkMark = editor.schema.marks.link
 
         if (linkMark === undefined) {
@@ -48,7 +53,7 @@ export const LinkButton = (): React.JSX.Element => {
 
         const tr = state.tr
           .setSelection(TextSelection.create(state.doc, from, to))
-          .addMark(from, to, linkMark.create({ href }))
+          .addMark(from, to, linkMark.create({ href: normalizedHref }))
 
         editor.view.dispatch(tr)
       }}
