@@ -51,10 +51,8 @@ export const LinkButton = (): React.JSX.Element => {
 
         editor.view.focus()
 
-        const { state } = editor
-
-        const tr = state.tr
-          .setSelection(TextSelection.create(state.doc, from, to))
+        const tr = editor.state.tr
+          .setSelection(TextSelection.create(editor.state.doc, from, to))
           .addMark(from, to, linkMark.create({ href: normalizedHref }))
 
         editor.view.dispatch(tr)
