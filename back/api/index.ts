@@ -122,6 +122,10 @@ export const api = {
     ...route.saveQuotation,
     handler: saveQuotationHandler,
   },
+  getUniqueQuotationCategoryList: {
+    ...route.getUniqueQuotationCategoryList,
+    handler: getQuotationCategoriesHandler,
+  },
   getQuotation: {
     ...route.getQuotation,
     handler: getQuotationHandler,
@@ -134,10 +138,6 @@ export const api = {
     ...route.getQuotationListAll,
     handler: getQuotationListAllHandler,
   },
-  getUniqueQuotationCategoryList: {
-    ...route.getUniqueQuotationCategoryList,
-    handler: getQuotationCategoriesHandler,
-  },
   deleteQuotation: {
     ...route.deleteQuotation,
     handler: deleteQuotationHandler,
@@ -146,6 +146,10 @@ export const api = {
   saveBookmark: {
     ...route.saveBookmark,
     handler: saveBookmarkHandler,
+  },
+  getUniqueBookmarkCategoryList: {
+    ...route.getUniqueBookmarkCategoryList,
+    handler: getBookmarkCategoriesHandler,
   },
   getBookmark: {
     ...route.getBookmark,
@@ -158,10 +162,6 @@ export const api = {
   getBookmarkListAll: {
     ...route.getBookmarkListAll,
     handler: getBookmarkListAllHandler,
-  },
-  getUniqueBookmarkCategoryList: {
-    ...route.getUniqueBookmarkCategoryList,
-    handler: getBookmarkCategoriesHandler,
   },
   deleteBookmark: {
     ...route.deleteBookmark,
