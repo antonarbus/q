@@ -9,7 +9,7 @@ import type { BlockItem } from '@back/entity/quotation/schema'
 
 type InitState = {
   isVisible: boolean
-  initCords: { x: number; y: number }
+  initCursorPos: { x: number; y: number } | null
   items: BlockItem[]
   previews: string[]
   place: CopyPlace
@@ -23,7 +23,7 @@ type InitState = {
 
 const initialState: InitState = {
   isVisible: false,
-  initCords: { x: 0, y: 0 },
+  initCursorPos: null,
   items: [],
   previews: [],
   place: {
@@ -42,23 +42,26 @@ export const copySlice = createSlice({
   name: 'copy',
   initialState,
   reducers: {
-    showCopyModal: (
+    setInitCursorPos: (
       state: WritableDraft<InitState>,
-      action: PayloadAction<{ initCursorPos: { x: number; y: number } }>,
+      action: PayloadAction<{ x: number; y: number }>,
     ) => {
+      state.initCursorPos = action.payload
+    },
+    showCopyModal: (state: WritableDraft<InitState>) => {
       state.isVisible = true
-      state.initCords = action.payload.initCursorPos
     },
     hideCopyModal: () => initialState,
     addItem: (
       state: WritableDraft<InitState>,
       action: PayloadAction<{
         item: BlockItem
+        preview: string
       }>,
     ) => {
       state.isCopying = true
       state.items.unshift(action.payload.item)
-      state.previews.unshift(action.payload.item.preview ?? '')
+      state.previews.unshift(action.payload.preview)
     },
     removeItem: (state: WritableDraft<InitState>) => {
       state.items.shift()

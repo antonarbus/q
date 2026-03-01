@@ -4,11 +4,12 @@ import { useGetBookmarkListQuery } from '@entity/bookmark/api/useGetBookmarkList
 import { useGetBookmarkMutation } from '@entity/bookmark/api/useGetBookmarkMutation'
 import { copySlice } from '@entity/copy/copySlice'
 import { useIsCopyModalVisible } from '@entity/copy/useIsCopyModalVisible'
+import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { Autocomplete, Box } from '@mui/material'
 import { useSignal } from '@preact/signals-react'
 import { cls } from '@shared/cls'
 import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
-import { textSlice } from '@shared/lib/tiptap/store/textSlice'
+
 import { dispatch, useSelector } from '@shared/lib/redux'
 import { useEffect } from 'react'
 import { useUpdateEffect } from 'react-use'
@@ -104,6 +105,7 @@ export const Search = (): React.JSX.Element => {
               }),
             }}
             key={option.id}
+            // todo: extract to the feature
             onClick={async (event: React.MouseEvent): Promise<void> => {
               const data = await getBookmarkMutation.mutateAsync({
                 id: option.id,
@@ -111,23 +113,16 @@ export const Search = (): React.JSX.Element => {
 
               isAutocompleteOpen.value = false
 
-              // Save scroll position before setNotEditable
-              const persistedScrollX = window.scrollX
-              const persistedScrollY = window.scrollY
-
-              dispatch(textSlice.actions.setNotEditable())
-
-              // Restore scroll position after React renders
-              requestAnimationFrame(() => {
-                window.scrollTo(persistedScrollX, persistedScrollY)
-              })
-
-              dispatch(copySlice.actions.addItem({ item: data.bookmark }))
-              dispatch(copySlice.actions.allowToPaste())
+              dispatch(
+                quotationSlice.actions.loadBlockAtPosThousandReducer({
+                  block: data.bookmark,
+                }),
+              )
 
               dispatch(
-                copySlice.actions.showCopyModal({
-                  initCursorPos: { x: event.clientX, y: event.clientY },
+                copySlice.actions.setInitCursorPos({
+                  x: event.clientX,
+                  y: event.clientY,
                 }),
               )
             }}

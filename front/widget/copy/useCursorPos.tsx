@@ -16,11 +16,13 @@ export const useCursorPos = (props: Props): void => {
       return
     }
 
-    // Initialize position from Redux
     const state = getState()
 
-    container.style.left = `${state.copy.initCords.x + 30}px`
-    container.style.top = `${state.copy.initCords.y + 30}px`
+    // Initialize position from Redux
+    if (state.copy.initCursorPos !== null) {
+      container.style.left = `${state.copy.initCursorPos.x + 30}px`
+      container.style.top = `${state.copy.initCursorPos.y + 30}px`
+    }
 
     const WAIT_MS = 20
 

@@ -19,7 +19,7 @@ import { Main } from '@shared/layout/Main'
 import { route } from '@shared/lib/react-router-dom/route'
 import { instantiateRouter } from '@shared/lib/react-router-dom/router'
 import { Copy } from '@widget/copy'
-import { CopyBookmarkCapture } from '@widget/copy/CopyBookmarkCapture'
+import { BookmarkCopyPreviewRenderer } from '@widget/copy/BookmarkCopyPreviewRenderer'
 import { Footer } from '@widget/footer'
 import { Nav } from '@widget/nav'
 import { lazy, Suspense } from 'react'
@@ -118,7 +118,7 @@ const router = createBrowserRouter([
         <LoadingDotsOverlay shouldShowLoader={false} text={null} />
         <Nav />
         <Copy />
-        <CopyBookmarkCapture />
+        <BookmarkCopyPreviewRenderer />
         <Main />
         <Footer />
       </>

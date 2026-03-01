@@ -49,9 +49,12 @@ export const insertPriceBlock = (event?: React.MouseEvent): void => {
 
   if (isCopyModalVisible === false && event !== undefined) {
     dispatch(
-      copySlice.actions.showCopyModal({
-        initCursorPos: { x: event.clientX, y: event.clientY },
+      copySlice.actions.setInitCursorPos({
+        x: event.clientX,
+        y: event.clientY,
       }),
     )
+
+    dispatch(copySlice.actions.showCopyModal())
   }
 }

@@ -23,6 +23,7 @@ type Props = {
   leftBlockActionButtons?: React.ReactNode
   rightBlockActionButtons?: React.ReactNode
   className?: string
+  draggable?: boolean
 }
 
 export const BlockComp = (props: Props): React.JSX.Element => {
@@ -30,6 +31,29 @@ export const BlockComp = (props: Props): React.JSX.Element => {
   const isLastBlock = useIsLastBlock()
   const isCopyModalVisible = useIsCopyModalVisible()
   const isDragDisabled = isLastBlock || isCopyModalVisible
+
+  const blockContent = (
+    <DragHandleContext.Provider value={null}>
+      <BlockAnimate
+        autoWidth={props.autoWidth}
+        blockHeight={block.item.height}
+        className={props.className}
+        id={block.item.id}
+        leftItemActionButtons={props.leftBlockActionButtons}
+        minWidth={props.minWidth}
+        onItemResize={props.onBlockResize}
+        onItemResizeStart={props.onBlockResizeStart}
+        onItemResizeStop={props.onBlockResizeStop}
+        rightItemActionButtons={props.rightBlockActionButtons}
+      >
+        <PasteBlockTextOverlay>{props.children}</PasteBlockTextOverlay>
+      </BlockAnimate>
+    </DragHandleContext.Provider>
+  )
+
+  if (props.draggable === false) {
+    return <div style={{ marginBottom: 20 }}>{blockContent}</div>
+  }
 
   return (
     <Draggable
@@ -45,7 +69,7 @@ export const BlockComp = (props: Props): React.JSX.Element => {
             style={{
               ...provided.draggableProps.style,
               marginBottom: 20,
-              zIndex: snapshot.isDragging ? 1000 : 0,
+              zIndex: snapshot.isDragging === true ? 1000 : 0,
             }}
           >
             <DragHandleContext.Provider value={provided.dragHandleProps}>
