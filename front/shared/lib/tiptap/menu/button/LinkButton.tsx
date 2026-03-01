@@ -37,7 +37,9 @@ export const LinkButton = (): React.JSX.Element => {
         }
 
         const normalizedHref =
-          href.trim().startsWith('http://') || href.trim().startsWith('https://') || href.trim().startsWith('mailto:')
+          href.trim().startsWith('http://') ||
+          href.trim().startsWith('https://') ||
+          href.trim().startsWith('mailto:')
             ? href.trim()
             : `https://${href.trim()}`
 
