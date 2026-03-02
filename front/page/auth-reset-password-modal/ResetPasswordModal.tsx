@@ -72,7 +72,10 @@ export const ResetPasswordModal = (): React.ReactNode => {
           justifyContent: 'space-between',
         }}
       >
-        <OpenRegisterModalLink slideOut={animatedElement.slideOut} />
+        <OpenRegisterModalLink
+          slideOut={animatedElement.slideOut}
+          prefilledEmail=''
+        />
         <OpenLoginModalLink slideOut={animatedElement.slideOut} />
       </Box>
     </FormModal>
