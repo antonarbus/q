@@ -86,7 +86,11 @@ export const runtimeConfig = {
     },
     portPreview: 3666,
     get baseUrl() {
-      return `${this.protocol}://${this.hostname}:${this.port}` as const
+      if (runtimeConfig.environment === 'local') {
+        return `${this.protocol}://${this.hostname}:${this.port}` as const
+      }
+
+      return `${this.protocol}://${this.hostname}` as const
     },
     get baseUrlPreview() {
       return `${this.protocol}://${this.hostname}:${this.portPreview}` as const
