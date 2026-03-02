@@ -38,11 +38,32 @@ import {
   UndoRedo,
   TrailingNode,
 } from '@tiptap/extensions'
-import { TableKit } from '@tiptap/extension-table'
+import { TableCell, TableHeader, TableKit } from '@tiptap/extension-table'
 import Youtube from '@tiptap/extension-youtube'
 import { ResizableImage } from './image/ResizableImage'
 import { useTiptapCtx } from '../provider/TiptapProvider'
 import { cls } from '@shared/cls'
+
+const tableCellTextAlignAttr = {
+  default: 'center',
+  parseHTML: (element: HTMLElement): string =>
+    element.style.textAlign === '' ? 'center' : element.style.textAlign,
+  renderHTML: (attributes: Record<string, string>): Record<string, string> => ({
+    style: `text-align: ${attributes.textAlign ?? 'center'}`,
+  }),
+}
+
+const CenteredTableCell = TableCell.extend({
+  addAttributes() {
+    return { ...this.parent?.(), textAlign: tableCellTextAlignAttr }
+  },
+})
+
+const CenteredTableHeader = TableHeader.extend({
+  addAttributes() {
+    return { ...this.parent?.(), textAlign: tableCellTextAlignAttr }
+  },
+})
 
 export const useExtensions = (): AnyExtension[] => {
   const tiptapCtx = useTiptapCtx()
@@ -65,7 +86,11 @@ export const useExtensions = (): AnyExtension[] => {
       TrailingNode,
       TableKit.configure({
         table: { resizable: true },
+        tableCell: false,
+        tableHeader: false,
       }),
+      CenteredTableCell,
+      CenteredTableHeader,
       Youtube.configure({
         addPasteHandler: true,
       }),
@@ -101,7 +126,7 @@ export const useExtensions = (): AnyExtension[] => {
       CodeBlock,
       HorizontalRule,
       TextAlign.configure({
-        types: ['heading', 'paragraph', 'image'],
+        types: ['heading', 'paragraph', 'image', 'tableCell', 'tableHeader'],
       }),
       Link.configure({
         openOnClick: true,
