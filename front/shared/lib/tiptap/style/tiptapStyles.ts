@@ -96,6 +96,11 @@ export const tiptapStyles: NestedCSSObject = {
     minWidth: 30,
   },
 
+  // Column resize cursor (class added by prosemirror-tables to the editor root)
+  '& .tiptap.resize-cursor': {
+    cursor: 'col-resize',
+  },
+
   // Table styles
   '& table': {
     borderCollapse: 'collapse',
