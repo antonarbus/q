@@ -44,26 +44,20 @@ import { ResizableImage } from './image/ResizableImage'
 import { useTiptapCtx } from '../provider/TiptapProvider'
 import { cls } from '@shared/cls'
 
-const tableCellTextAlignAttr = {
+const tableCellTextAlignAttribute = {
   default: 'center',
-  parseHTML: (element: HTMLElement): string =>
-    element.style.textAlign === '' ? 'center' : element.style.textAlign,
+  parseHTML: (element: HTMLElement): string => {
+    const textAlign =
+      element.style.textAlign === '' ? 'center' : element.style.textAlign
+
+    element.style.textAlign = textAlign
+
+    return textAlign
+  },
   renderHTML: (attributes: Record<string, string>): Record<string, string> => ({
     style: `text-align: ${attributes.textAlign ?? 'center'}`,
   }),
 }
-
-const CenteredTableCell = TableCell.extend({
-  addAttributes() {
-    return { ...this.parent?.(), textAlign: tableCellTextAlignAttr }
-  },
-})
-
-const CenteredTableHeader = TableHeader.extend({
-  addAttributes() {
-    return { ...this.parent?.(), textAlign: tableCellTextAlignAttr }
-  },
-})
 
 export const useExtensions = (): AnyExtension[] => {
   const tiptapCtx = useTiptapCtx()
@@ -89,8 +83,16 @@ export const useExtensions = (): AnyExtension[] => {
         tableCell: false,
         tableHeader: false,
       }),
-      CenteredTableCell,
-      CenteredTableHeader,
+      TableCell.extend({
+        addAttributes() {
+          return { ...this.parent?.(), textAlign: tableCellTextAlignAttribute }
+        },
+      }),
+      TableHeader.extend({
+        addAttributes() {
+          return { ...this.parent?.(), textAlign: tableCellTextAlignAttribute }
+        },
+      }),
       Youtube.configure({
         addPasteHandler: true,
       }),
