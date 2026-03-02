@@ -94,7 +94,7 @@ export const route = {
   },
   deleteUser: {
     path: '/api/admin/users/:id',
-    url: (id: string) => `/api/users/${id}`,
+    url: (id: string) => `/api/admin/users/${id}`,
     method: 'delete',
     description: 'Delete user (admin only)',
   },
@@ -106,7 +106,7 @@ export const route = {
     description: 'Create or update quotation',
   },
   getQuotation: {
-    path: '/api/quotations/:id', // ! fixed
+    path: '/api/quotations/:id',
     url: (id: string) => `/api/quotations/${id}`,
     method: 'get',
     description: 'Get single quotation by ID',
