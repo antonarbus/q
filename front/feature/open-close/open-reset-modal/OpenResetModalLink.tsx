@@ -4,6 +4,7 @@ import { dispatch } from '@shared/lib/redux'
 import { Link, useNavigate } from 'react-router-dom'
 
 type Props = {
+  prefilledEmail: string
   slideOut: () => Promise<void>
 }
 
@@ -18,7 +19,10 @@ export const OpenResetModalLink = (props: Props): React.JSX.Element => {
         const slideAndNavigate = async (): Promise<void> => {
           await props.slideOut()
           dispatch(appSlice.actions.setNavigateState({ shouldSlide: true }))
-          void navigate(`../${route.requestPasswordReset}`)
+
+          void navigate(`../${route.requestPasswordReset}`, {
+            state: { prefilledEmail: props.prefilledEmail },
+          })
         }
 
         void slideAndNavigate()

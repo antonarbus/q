@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
 import { useRequestPasswordReset } from '@feature/auth/request-password-reset'
 import { OpenLoginModalLink } from '@feature/open-close/open-login-modal'
 import { Box } from '@mui/material'
@@ -5,6 +6,7 @@ import { useSignal } from '@preact/signals-react'
 import { FormModal } from '@shared/component/FormModal'
 import { EmailField } from '@shared/component/input-field/EmailField'
 import { router } from '@shared/lib/react-router-dom/router'
+import { type Location, useLocation } from 'react-router-dom'
 import { useAnimatedElement } from '@shared/util/useAnimatedElement'
 import { useRef } from 'react'
 import { PiPassword } from 'react-icons/pi'
@@ -12,7 +14,12 @@ import { PiPassword } from 'react-icons/pi'
 export const RequestPasswordResetModal = (): React.JSX.Element => {
   const animatedElement = useAnimatedElement()
   const inputRef = useRef<HTMLDivElement>(null)
-  const emailSignal = useSignal('')
+
+  const location = useLocation() as Location<{
+    prefilledEmail: string
+  } | null>
+
+  const emailSignal = useSignal(location.state?.prefilledEmail ?? '')
   const isEmailOkSignal = useSignal(false)
 
   const requestPasswordReset = useRequestPasswordReset({

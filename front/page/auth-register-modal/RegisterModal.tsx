@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
 import { useRegister } from '@feature/auth/register'
 import { OpenLoginModalLink } from '@feature/open-close/open-login-modal'
 import { Box } from '@mui/material'
@@ -7,6 +8,7 @@ import { FormModal } from '@shared/component/FormModal'
 import { EmailField } from '@shared/component/input-field/EmailField'
 import { PasswordField } from '@shared/component/input-field/PasswordField'
 import { router } from '@shared/lib/react-router-dom/router'
+import { type Location, useLocation } from 'react-router-dom'
 import { useAnimatedElement } from '@shared/util/useAnimatedElement'
 import { useRef } from 'react'
 import { MdLockOutline } from 'react-icons/md'
@@ -14,7 +16,12 @@ import { MdLockOutline } from 'react-icons/md'
 export const RegisterModal = (): React.JSX.Element => {
   const animatedElement = useAnimatedElement()
   const inputRef = useRef<HTMLDivElement>(null)
-  const emailSignal = useSignal('')
+
+  const location = useLocation() as Location<{
+    prefilledEmail: string
+  } | null>
+
+  const emailSignal = useSignal(location.state?.prefilledEmail ?? '')
   const passwordSignal = useSignal('')
   const isEmailOkSignal = useSignal(false)
   const isConfirmPasswordOkSignal = useSignal(false)

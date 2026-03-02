@@ -2,7 +2,7 @@ import { useLogIn } from '@feature/auth/log-in'
 import { OpenRegisterModalLink } from '@feature/open-close/open-register-modal'
 import { OpenResetModalLink } from '@feature/open-close/open-reset-modal'
 import { Box } from '@mui/material'
-import { useSignal } from '@preact/signals-react'
+import { signal, useSignal } from '@preact/signals-react'
 import { FormModal } from '@shared/component/FormModal'
 import { EmailField } from '@shared/component/input-field/EmailField'
 import { PasswordField } from '@shared/component/input-field/PasswordField'
@@ -64,8 +64,14 @@ export const LoginModal = (): React.JSX.Element => {
           justifyContent: 'space-between',
         }}
       >
-        <OpenResetModalLink slideOut={animatedElement.slideOut} />
-        <OpenRegisterModalLink slideOut={animatedElement.slideOut} />
+        <OpenResetModalLink
+          prefilledEmail={emailSignal.value}
+          slideOut={animatedElement.slideOut}
+        />
+        <OpenRegisterModalLink
+          prefilledEmail={emailSignal.value}
+          slideOut={animatedElement.slideOut}
+        />
       </Box>
     </FormModal>
   )

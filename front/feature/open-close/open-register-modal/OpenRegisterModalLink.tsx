@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { openRegisterModal } from './openRegisterModal'
 
 type Props = {
+  prefilledEmail: string
   slideOut: () => Promise<void>
 }
 
@@ -14,7 +15,7 @@ export const OpenRegisterModalLink = (props: Props): React.JSX.Element => {
 
         const slideAndNavigate = async (): Promise<void> => {
           await props.slideOut()
-          openRegisterModal()
+          openRegisterModal({ prefilledEmail: props.prefilledEmail })
         }
 
         void slideAndNavigate()
