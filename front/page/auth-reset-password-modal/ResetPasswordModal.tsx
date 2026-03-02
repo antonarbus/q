@@ -74,7 +74,7 @@ export const ResetPasswordModal = (): React.ReactNode => {
       >
         <OpenRegisterModalLink
           slideOut={animatedElement.slideOut}
-          prefilledEmail=''
+          prefilledEmail={emailSignal.value}
         />
         <OpenLoginModalLink slideOut={animatedElement.slideOut} />
       </Box>
