@@ -11,6 +11,7 @@ import { NavName } from './NavName'
 
 type Props = {
   navItem: NavItemType
+  visibility?: 'hidden' | 'visible'
 }
 
 export const NavItem = (props: Props): React.JSX.Element => {
@@ -40,6 +41,7 @@ export const NavItem = (props: Props): React.JSX.Element => {
         disabled={props.navItem.disabled === true}
         isActive={props.navItem.isActive === true}
         navItemRef={navItemRef}
+        visibility={props.visibility}
       >
         <a
           href={props.navItem.externalLink}
@@ -79,6 +81,7 @@ export const NavItem = (props: Props): React.JSX.Element => {
       disabled={props.navItem.disabled === true}
       isActive={props.navItem.isActive === true}
       navItemRef={navItemRef}
+      visibility={props.visibility}
     >
       <Link
         css={{

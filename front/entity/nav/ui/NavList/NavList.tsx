@@ -1,3 +1,4 @@
+import { navItemId } from '@entity/nav/navItemId'
 import { useSelector } from '@shared/lib/redux'
 import { NavItem } from './NavItem'
 
@@ -9,8 +10,14 @@ export const NavList = (): React.JSX.Element => {
     navMode === 'hamburger' ? navStructure : navStructure[0]?.nestedItemList
 
   const nonHiddenNavItems = navStructureToLoad
-    ?.filter((navItem) => navItem.isHidden === false)
-    .map((navItem) => <NavItem key={navItem.id} navItem={navItem} />)
+    ?.filter((navItem) => navItem.isHidden === false || navItem.id === navItemId.back)
+    .map((navItem) => (
+      <NavItem
+        key={navItem.id}
+        navItem={navItem}
+        visibility={navItem.isHidden === true ? 'hidden' : 'visible'}
+      />
+    ))
 
   return (
     <ul
