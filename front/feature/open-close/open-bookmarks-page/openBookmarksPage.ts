@@ -1,3 +1,4 @@
+import { navItemId } from '@entity/nav/navItemId'
 import { navSlice } from '@entity/nav/navSlice'
 import { backToQuotationRef } from '@entity/quotation/ref/backToQuotationRef'
 import { route } from '@shared/lib/react-router-dom/route'
@@ -9,7 +10,7 @@ export const openBookmarksPage = (): void => {
 
   if (Boolean(currentQuotation.id) === true) {
     backToQuotationRef.current = currentQuotation
-    dispatch(navSlice.actions.showNavItems({ navItemIds: ['back'] }))
+    dispatch(navSlice.actions.showNavItems({ navItemIds: [navItemId.back] }))
   }
 
   void router.navigate(`/${route.bookmarkList}`)
