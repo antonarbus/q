@@ -6,12 +6,14 @@ type Props = {
   navItemRef: React.RefObject<React.ComponentRef<'li'> | null>
   disabled: boolean
   isActive?: boolean
+  visibility?: 'hidden' | 'visible'
 }
 
 export const NavItemLayout = (props: Props): React.JSX.Element => {
   return (
     <li
       className='nav-item'
+      style={{ visibility: props.visibility }}
       css={css`
         display: flex;
         position: relative;
