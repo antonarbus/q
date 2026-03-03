@@ -10,7 +10,9 @@ export const NavList = (): React.JSX.Element => {
     navMode === 'hamburger' ? navStructure : navStructure[0]?.nestedItemList
 
   const nonHiddenNavItems = navStructureToLoad
-    ?.filter((navItem) => navItem.isHidden === false || navItem.id === navItemId.back)
+    ?.filter(
+      (navItem) => navItem.isHidden === false || navItem.id === navItemId.back,
+    )
     .map((navItem) => (
       <NavItem
         key={navItem.id}
