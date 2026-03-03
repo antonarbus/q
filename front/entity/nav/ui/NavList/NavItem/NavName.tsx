@@ -19,7 +19,7 @@ export const NavName = (props: Props): React.ReactNode => {
       virtualElement.style.position = 'absolute'
       virtualElement.style.whiteSpace = 'nowrap'
       virtualElement.className = 'nav-item-name'
-      virtualElement.innerText = ref.current.innerText
+      virtualElement.innerText = props.name ?? ''
       document.body.appendChild(virtualElement)
       const initialWidth = virtualElement.offsetWidth
       document.body.removeChild(virtualElement)
