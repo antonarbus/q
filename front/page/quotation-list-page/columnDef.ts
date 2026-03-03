@@ -56,6 +56,9 @@ export const columnDefs: ColDef<ResBody['quotationList'][number]>[] = [
   {
     field: 'access',
     headerName: 'shared with',
+    floatingFilterComponentParams: {
+      filterPlaceholder: 'Search...',
+    },
     cellRenderer: SharedWithCellRenderer,
     valueGetter: (
       params: ValueGetterParams<

@@ -11,7 +11,6 @@ import { GridLayout } from '@shared/lib/ag-grid/GridLayout'
 import { useRefetchDataOnEmailChange } from '@shared/lib/ag-grid/hooks/useRefetchDataOnEmailChange'
 import { useShowLoadingJumpingDots } from '@shared/lib/ag-grid/hooks/useShowLoadingJumpingDots'
 import { AgGridStyles } from '@shared/lib/ag-grid/styles/AgGridStyles'
-import { addPlaceholderToFloatingFilters } from '@shared/lib/ag-grid/utils/addPlaceholderToFloatingFilters'
 import { dispatch } from '@shared/lib/redux'
 import {
   AllCommunityModule,
@@ -48,9 +47,6 @@ export const UserListGrid = (): React.JSX.Element => {
         getRowId={(params) => params.data.email}
         loadingOverlayComponent={LoadingTableOverlay}
         noRowsOverlayComponent={NoRowsTableOverlay}
-        onGridReady={() => {
-          addPlaceholderToFloatingFilters({ gridContainerRef })
-        }}
         onModelUpdated={(params) => {
           const count = params.api.getDisplayedRowCount()
           dispatch(agGridSlice.actions.setCount({ count }))

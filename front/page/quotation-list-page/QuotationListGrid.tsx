@@ -11,7 +11,6 @@ import { GridLayout } from '@shared/lib/ag-grid/GridLayout'
 import { useRefetchDataOnEmailChange } from '@shared/lib/ag-grid/hooks/useRefetchDataOnEmailChange'
 import { useShowLoadingJumpingDots } from '@shared/lib/ag-grid/hooks/useShowLoadingJumpingDots'
 import { AgGridStyles } from '@shared/lib/ag-grid/styles/AgGridStyles'
-import { addPlaceholderToFloatingFilters } from '@shared/lib/ag-grid/utils/addPlaceholderToFloatingFilters'
 import { dispatch } from '@shared/lib/redux'
 import {
   AllCommunityModule,
@@ -52,9 +51,6 @@ export const QuotationListGrid = (): React.JSX.Element => {
         onFilterChanged={(event: FilterChangedEvent) => {
           // refresh cells on filter text input to show bold substring
           event.api.refreshCells({ force: true })
-        }}
-        onGridReady={() => {
-          addPlaceholderToFloatingFilters({ gridContainerRef })
         }}
         onModelUpdated={(params) => {
           const count = params.api.getDisplayedRowCount()

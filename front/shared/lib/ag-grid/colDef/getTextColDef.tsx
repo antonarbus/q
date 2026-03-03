@@ -23,6 +23,9 @@ export const getTextColDef = <
     colId: props.field,
     cellDataType: 'text',
     filter: 'agTextColumnFilter',
+    floatingFilterComponentParams: {
+      filterPlaceholder: 'Search...',
+    },
     cellRenderer: (
       params: ICellRendererParams<TData, TValue>,
     ): React.ReactNode => {

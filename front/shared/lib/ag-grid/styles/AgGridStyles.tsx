@@ -42,10 +42,7 @@ export const AgGridStyles = (): React.JSX.Element => {
             padding-left: 5px;
           }
 
-          .ag-floating-filter input::placeholder {
-            opacity: 0.5;
-          }
-
+          // otherwise placeholder is bright
           .ag-input-field-input.ag-text-field-input[type='date'] {
             opacity: 0.5;
           }
