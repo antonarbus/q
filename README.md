@@ -44,12 +44,12 @@ Dockerfile.prod               # Single container: Bun serves frontend static + b
 
 ## Environments
 
-| Env | Service | Domain |
-|---|---|---|
-| Dev | `<APP_NAME>-dev` | dev.\<DOMAIN\> |
-| Test | `<APP_NAME>-test` | test.\<DOMAIN\> |
+| Env   | Service            | Domain           |
+| ----- | ------------------ | ---------------- |
+| Dev   | `<APP_NAME>-dev`   | dev.\<DOMAIN\>   |
+| Test  | `<APP_NAME>-test`  | test.\<DOMAIN\>  |
 | Pilot | `<APP_NAME>-pilot` | pilot.\<DOMAIN\> |
-| Prod | `<APP_NAME>-prod` | \<DOMAIN\> |
+| Prod  | `<APP_NAME>-prod`  | \<DOMAIN\>       |
 
 Single `main` branch. `MASTER_DEPLOYS_TO_ENV` in `config/configVariables.ts` sets the deployment target (`prod` = direct to prod, `dev` = use promotion workflow).
 
