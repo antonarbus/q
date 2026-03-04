@@ -6,7 +6,7 @@ import path from 'node:path'
 import url from 'node:url'
 import { runtimeConfig } from '@root/config/runtime'
 import { api } from '@back/api'
-import { errorHandlerMiddleware } from '@back/middleware/errorHandlerMiddleware'
+import { errorHandlerMiddleware } from '@back/shared/errors/errorHandlerMiddleware'
 import { httpHandler } from '@back/shared/lib/express/httpHandler'
 import blog404Html from './static/blog-404.html'
 
