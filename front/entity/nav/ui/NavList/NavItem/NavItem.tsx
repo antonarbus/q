@@ -67,7 +67,7 @@ export const NavItem = (props: Props): React.JSX.Element => {
           target='_blank'
         >
           <IconWithLoader navItem={props.navItem} />
-          <NavName name={props.navItem.name} />
+          <NavName maxName={props.navItem.maxName} name={props.navItem.name} />
           <ArrowForNestedMenu navItem={props.navItem} />
         </a>
         {isMenuOpen === true ? <Menu navItemRef={navItemRef} /> : null}
@@ -114,7 +114,7 @@ export const NavItem = (props: Props): React.JSX.Element => {
         to={to}
       >
         <IconWithLoader navItem={props.navItem} />
-        <NavName name={props.navItem.name} />
+        <NavName maxName={props.navItem.maxName} name={props.navItem.name} />
         <ArrowForNestedMenu navItem={props.navItem} />
       </Link>
       {isMenuOpen === true ? <Menu navItemRef={navItemRef} /> : null}

@@ -34,6 +34,7 @@ export const navStructure: NavItem[] = [
         iconId: 'save',
         isHidden: false,
         name: 'Save',
+        maxName: 'Saving...',
         shortcut: ['control', 'shift', 's'],
         link: `./${route.save}`,
         tooltip: 'Save or update quotation (shortcut: ctrl+shift+s)',

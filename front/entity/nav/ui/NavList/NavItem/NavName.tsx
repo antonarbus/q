@@ -1,32 +1,9 @@
-import { useRef } from 'react'
-import { useEffectOnce } from 'react-use'
-
 type Props = {
   name?: string
+  maxName?: string
 }
 
 export const NavName = (props: Props): React.ReactNode => {
-  const ref = useRef<React.ComponentRef<'span'>>(null)
-
-  // set text container width to initial width + 30px to avoid text overflow
-  // when "Save" is changing to "Saving..."
-  useEffectOnce(() => {
-    if (ref.current !== null) {
-      // this is a workaround for the fact that the text container is not visible
-      // on small screen due media queries
-      const virtualElement = document.createElement('span')
-      virtualElement.style.visibility = 'hidden'
-      virtualElement.style.position = 'absolute'
-      virtualElement.style.whiteSpace = 'nowrap'
-      virtualElement.className = 'nav-item-name'
-      virtualElement.innerText = props.name ?? ''
-      document.body.appendChild(virtualElement)
-      const initialWidth = virtualElement.offsetWidth
-      document.body.removeChild(virtualElement)
-      ref.current.style.width = `${initialWidth + 30}px`
-    }
-  })
-
   if (props.name === undefined) {
     return null
   }
@@ -35,16 +12,22 @@ export const NavName = (props: Props): React.ReactNode => {
     <span
       className='nav-item-name'
       css={{
-        display: 'inline-flex',
-        alignItems: 'center',
+        position: 'relative',
+        display: 'inline-block',
         marginLeft: '5px',
+        paddingRight: props.maxName === undefined ? '30px' : 0,
       }}
-      ref={ref}
     >
+      <span style={{ visibility: 'hidden', whiteSpace: 'nowrap' }}>
+        {props.maxName ?? props.name}
+      </span>
       <span
         className='nav-item-text'
         style={{
-          display: 'inline-block',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          whiteSpace: 'nowrap',
         }}
       >
         {props.name}

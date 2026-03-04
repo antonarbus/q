@@ -5,6 +5,8 @@ import type { NavItemId } from '../navItemId'
 export type NavItem = {
   id: NavItemId
   name: string
+  /** Save --> Saving... */
+  maxName?: string
   iconId?: IconId
   link?: string
   externalLink?: string
