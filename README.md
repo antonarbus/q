@@ -6,6 +6,8 @@ Full-stack quotation management app — React frontend + Express backend, deploy
 
 Follows [Feature-Sliced Design](https://feature-sliced.design/) on both frontend and backend.
 
+![FSD Architecture](./fsd.png)
+
 ```
 front/                       # React frontend
   app/                       # App bootstrap (router, store, global styles)
