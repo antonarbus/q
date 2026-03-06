@@ -37,6 +37,7 @@ export const PriceValue = (): React.JSX.Element => {
       }}
       sx={{
         textAlign: 'center',
+        fontVariantNumeric: 'tabular-nums',
       }}
     />
   )

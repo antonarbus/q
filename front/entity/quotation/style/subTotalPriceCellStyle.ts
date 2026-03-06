@@ -8,4 +8,5 @@ export const subTotalPriceCellStyle: CSSObject = {
   flexShrink: 0,
   right: 0,
   minHeight: '24px',
+  fontVariantNumeric: 'tabular-nums',
 }
