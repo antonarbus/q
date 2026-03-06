@@ -86,37 +86,37 @@ export const TiptapMenu = (): React.ReactNode => {
 
   return (
     <>
-    <FloatingLineMenu />
-    <BubbleMenu
-      ref={(element) => {
-        if (element !== null) {
-          element.style.zIndex = '1000'
-          menuRef.current = element
-        }
-      }}
-      editor={editor}
-      updateDelay={isImageActive === true || isInTable === true ? 0 : 250}
-      shouldShow={shouldShow}
-      getReferencedVirtualElement={getReferencedVirtualElement}
-      options={{
-        onShow: (): void => {
-          //* Issue: for row cells menu is randomly positioned
-          requestAnimationFrame(() => {
-            editor.view.dispatch(
-              editor.state.tr.setMeta('bubbleMenu', 'updatePosition'),
-            )
-          })
-        },
-      }}
-    >
-      <TiptapMenuLayout>
-        {isImageActive === true && <ImageMenu />}
-        {isImageActive === false &&
-          isInTable === true &&
-          hasTextSelection === false && <TableMenu />}
-        {isImageActive === false && hasTextSelection === true && <TextMenu />}
-      </TiptapMenuLayout>
-    </BubbleMenu>
+      <FloatingLineMenu />
+      <BubbleMenu
+        ref={(element) => {
+          if (element !== null) {
+            element.style.zIndex = '1000'
+            menuRef.current = element
+          }
+        }}
+        editor={editor}
+        updateDelay={isImageActive === true || isInTable === true ? 0 : 250}
+        shouldShow={shouldShow}
+        getReferencedVirtualElement={getReferencedVirtualElement}
+        options={{
+          onShow: (): void => {
+            //* Issue: for row cells menu is randomly positioned
+            requestAnimationFrame(() => {
+              editor.view.dispatch(
+                editor.state.tr.setMeta('bubbleMenu', 'updatePosition'),
+              )
+            })
+          },
+        }}
+      >
+        <TiptapMenuLayout>
+          {isImageActive === true && <ImageMenu />}
+          {isImageActive === false &&
+            isInTable === true &&
+            hasTextSelection === false && <TableMenu />}
+          {isImageActive === false && hasTextSelection === true && <TextMenu />}
+        </TiptapMenuLayout>
+      </BubbleMenu>
     </>
   )
 }
