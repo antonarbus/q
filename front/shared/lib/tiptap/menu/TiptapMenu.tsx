@@ -4,6 +4,7 @@ import { useTiptap, useTiptapState } from '@tiptap/react'
 import { ImageMenu } from './ImageMenu'
 import { TextMenu } from './TextMenu'
 import { TableMenu } from './TableMenu'
+import { FloatingLineMenu } from './FloatingLineMenu'
 import { TiptapMenuLayout } from '../style/TiptapMenuLayout'
 
 export const TiptapMenu = (): React.ReactNode => {
@@ -84,6 +85,8 @@ export const TiptapMenu = (): React.ReactNode => {
   }, [editor])
 
   return (
+    <>
+    <FloatingLineMenu />
     <BubbleMenu
       ref={(element) => {
         if (element !== null) {
@@ -114,5 +117,6 @@ export const TiptapMenu = (): React.ReactNode => {
         {isImageActive === false && hasTextSelection === true && <TextMenu />}
       </TiptapMenuLayout>
     </BubbleMenu>
+    </>
   )
 }

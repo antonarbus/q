@@ -3,7 +3,7 @@ import { TextSelection } from '@tiptap/pm/state'
 import { MenuButton } from './shared/MenuButton'
 import { RiLink } from 'react-icons/ri'
 
-export const LinkButton = (): React.JSX.Element => {
+export const LinkFromTextButton = (): React.JSX.Element => {
   const { editor } = useTiptap()
   const isActive = useTiptapState((ctx) => ctx.editor.isActive('link'))
 

@@ -10,11 +10,7 @@ import { OrderedListButton } from './button/OrderedListButton'
 import { TaskListButton } from './button/TaskListButton'
 import { QuoteButton } from './button/QuoteButton'
 import { CodeBlockButton } from './button/CodeBlockButton'
-import { HorizontalRuleButton } from './button/HorizontalRuleButton'
-import { InsertTableButton } from './button/InsertTableButton'
-import { LinkButton } from './button/LinkButton'
-import { YouTubeButton } from './button/YouTubeButton'
-import { UploadFileButton } from './button/UploadFileButton'
+import { LinkFromTextButton } from './button/LinkFromTextButton'
 import { ColorButton } from './button/ColorButton'
 import { HighlightButton } from './button/HighlightButton'
 import { AlignButton } from './button/AlignButton'
@@ -33,13 +29,8 @@ export const TextMenu = (): React.JSX.Element => (
         <UnderlineButton />
         <StrikethroughButton />
         <CodeButton />
-      </ButtonsGroupLayout>
-
-      <Divider />
-
-      <ButtonsGroupLayout>
-        <ColorButton />
-        <HighlightButton />
+        <CodeBlockButton />
+        <LinkFromTextButton />
       </ButtonsGroupLayout>
 
       <Divider />
@@ -57,7 +48,13 @@ export const TextMenu = (): React.JSX.Element => (
         <OrderedListButton />
         <TaskListButton />
         <QuoteButton />
-        <CodeBlockButton />
+      </ButtonsGroupLayout>
+
+      <Divider />
+
+      <ButtonsGroupLayout>
+        <ColorButton />
+        <HighlightButton />
       </ButtonsGroupLayout>
 
       <Divider />
@@ -65,16 +62,6 @@ export const TextMenu = (): React.JSX.Element => (
       <ButtonsGroupLayout>
         <FontFamilyButton />
         <LineHeightButton />
-      </ButtonsGroupLayout>
-
-      <Divider />
-
-      <ButtonsGroupLayout>
-        <InsertTableButton />
-        <YouTubeButton />
-        <HorizontalRuleButton />
-        <LinkButton />
-        <UploadFileButton />
       </ButtonsGroupLayout>
     </ButtonsRowLayout>
   </>
