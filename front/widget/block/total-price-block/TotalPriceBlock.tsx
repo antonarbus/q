@@ -8,10 +8,10 @@ import { BookmarkBlockIcon } from '@feature/open-close/open-bookmark-modal'
 import { OpenInfoBlockModalIcon } from '@feature/open-close/open-info-modal'
 import { cls } from '@shared/cls'
 import { ItemActionButtonsLayout } from '@shared/layout/ItemActionButtonsLayout'
-import { PriceHeader } from './price-header/PriceHeader'
-import { PriceMain } from './price-main/PriceMain'
+import { PriceHeader } from './total-price-header/TotalPriceHeader'
+import { PriceMain } from './total-price-main/TotalPriceMain'
 
-export const PriceBlock = (): React.JSX.Element => {
+export const TotalPriceBlock = (): React.JSX.Element => {
   return (
     <BlockComp
       className={cls.priceBlock}

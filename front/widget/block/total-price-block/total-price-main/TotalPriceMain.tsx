@@ -1,5 +1,5 @@
-import { PriceMainLayout } from './PriceMainLayout'
-import { PriceValue } from './PriceValue'
+import { PriceMainLayout } from './TotalPriceMainLayout'
+import { PriceValue } from './TotalPriceValue'
 
 export const PriceMain = (): React.JSX.Element => {
   return <PriceMainLayout main={<PriceValue />} />
