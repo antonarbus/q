@@ -10,6 +10,7 @@ import { InsertLinkButton } from './button/InsertLinkButton'
 import { UploadFileButton } from './button/UploadFileButton'
 import { TiptapMenuLayout } from '../style/TiptapMenuLayout'
 import { ButtonsGroupLayout } from '../style/ButtonsGroupLayout'
+import { IoIosAddCircleOutline } from 'react-icons/io'
 
 export const FloatingLineMenu = (): React.ReactNode => {
   const { editor } = useTiptap()
@@ -185,31 +186,19 @@ export const FloatingLineMenu = (): React.ReactNode => {
           setIsOpen((prev) => prev === false)
         }}
         sx={{
-          width: 20,
-          height: 20,
-          borderRadius: '50%',
-          border: '1.5px solid rgba(0,0,0,0.2)',
+          border: 'none',
           background: 'transparent',
           cursor: 'pointer',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: 0,
-          flexShrink: 0,
           fontSize: 16,
-          lineHeight: 1,
-          color: 'black',
-          opacity: isOpen === true ? 0.8 : 0.35,
-          transition: 'opacity 0.15s, color 0.15s',
+          opacity: 0.5,
+          transition: 'opacity 0.15s',
           ':hover': {
-            opacity: 0.7,
-            color: 'rgba(0,0,0,0.6)',
+            opacity: 1,
           },
         }}
       >
-        +
+        <IoIosAddCircleOutline />
       </Box>
-
       {/* Expanded buttons, grow to the left of "+" */}
       {isOpen === true && (
         <TiptapMenuLayout>
