@@ -9,8 +9,8 @@ import { textSlice } from '@shared/lib/tiptap/store/textSlice'
 import { dispatch, getState, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import { fixElementDimensionStyle } from '@shared/util/fixElementDimensionStyle'
-import { getClosestPaperElementHtml } from '@shared/util/html-getter/getClosestPaperElementHtml'
 import { TbCut } from 'react-icons/tb'
+import { getCleanPaperHtml } from '@shared/util/html-getter/getCleanPaperHtml'
 
 export const CutBlockIcon = (): React.JSX.Element => {
   const block = useBlock()
@@ -57,7 +57,7 @@ export const CutBlockIcon = (): React.JSX.Element => {
             // width of animated element is changed for unknown reason, can't explain the issue, so let's fix it for animation purpose
             fixElementDimensionStyle({ element: paperElement })
 
-            const html = getClosestPaperElementHtml(event)
+            const html = getCleanPaperHtml({ paperElement })
 
             const persistedScrollX = window.scrollX
             const persistedScrollY = window.scrollY

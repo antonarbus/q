@@ -5,8 +5,8 @@ import { Tooltip } from '@mui/material'
 import { cls } from '@shared/cls'
 import { textSlice } from '@shared/lib/tiptap/store/textSlice'
 import { dispatch, getState, useSelector } from '@shared/lib/redux'
-import { getClosestPaperElementHtml } from '@shared/util/html-getter/getClosestPaperElementHtml'
 import { MdCopyAll } from 'react-icons/md'
+import { getCleanPaperHtml } from '@shared/util/html-getter/getCleanPaperHtml'
 
 export const CopyBlockIcon = (): React.JSX.Element => {
   const block = useBlock()
@@ -36,7 +36,25 @@ export const CopyBlockIcon = (): React.JSX.Element => {
               return
             }
 
-            const html = getClosestPaperElementHtml(event)
+            const clickedIconElement = event.target
+
+            if (clickedIconElement instanceof Element === false) {
+              return
+            }
+
+            const blockElement = clickedIconElement.closest(`.${cls.block}`)
+
+            if (blockElement instanceof Element === false) {
+              return
+            }
+
+            const paperElement = blockElement.querySelector(`.${cls.paper}`)
+
+            if (paperElement instanceof HTMLElement === false) {
+              return
+            }
+
+            const html = getCleanPaperHtml({ paperElement })
 
             const persistedScrollX = window.scrollX
             const persistedScrollY = window.scrollY

@@ -1,63 +1,13 @@
 import { copySlice } from '@entity/copy/copySlice'
 import { BOOKMARK_POS_AT_BLOCKS } from '@entity/quotation/const/bookmarkPosAtBlocks'
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
-import { cls } from '@shared/cls'
 import { textSlice } from '@shared/lib/tiptap/store/textSlice'
 import { dispatch, getState, useSelector } from '@shared/lib/redux'
 import { Block } from '@widget/block/Block'
 import { DragDropContext, Droppable } from '@hello-pangea/dnd'
 import { useEffect, useRef } from 'react'
-
-const noop = (): void => {
-  // drag reordering is not applicable in the offscreen capture context
-}
-
-const extractPaperHtmlFromContainer = (container: HTMLDivElement): string => {
-  const paperElement = container.querySelector(`.${cls.paper}`)
-
-  if (paperElement instanceof Element === false) {
-    return ''
-  }
-
-  const paperElementClone = paperElement.cloneNode(true)
-
-  if (paperElementClone instanceof Element === false) {
-    return ''
-  }
-
-  const elementsToRemove = paperElementClone.querySelectorAll(
-    cls.cleanFromPaper,
-  )
-
-  elementsToRemove.forEach((elementToRemove) => {
-    elementToRemove.parentNode?.removeChild(elementToRemove)
-  })
-
-  // Mirror the image-alignment fix from getClosestPaperElementHtml so the
-  // preview renders correctly when injected via innerHTML in ScaledCopyItem.
-  const imageWrappers = paperElementClone.querySelectorAll('[data-image-align]')
-
-  imageWrappers.forEach((imageWrapper) => {
-    if (imageWrapper instanceof HTMLElement === true) {
-      const { imageAlign } = imageWrapper.dataset
-
-      imageWrapper.style.display = 'flex'
-      imageWrapper.style.width = '100%'
-
-      if (imageAlign === 'center') {
-        imageWrapper.style.justifyContent = 'center'
-      } else if (imageAlign === 'right') {
-        imageWrapper.style.justifyContent = 'flex-end'
-      } else {
-        imageWrapper.style.justifyContent = 'flex-start'
-      }
-    }
-  })
-
-  const html = paperElementClone.innerHTML
-
-  return html.replaceAll('contenteditable="true"', '')
-}
+import { getCleanPaperHtml } from '@shared/util/html-getter/getCleanPaperHtml'
+import { cls } from '@shared/cls'
 
 /**
  * Always-mounted offscreen component that generates the copy preview HTML for
@@ -112,7 +62,13 @@ export const BookmarkCopyPreviewRenderer = (): React.ReactNode => {
         return
       }
 
-      const html = extractPaperHtmlFromContainer(container)
+      const paperElement = container.querySelector(`.${cls.paper}`)
+
+      if (paperElement instanceof HTMLElement === false) {
+        return
+      }
+
+      const html = getCleanPaperHtml({ paperElement })
 
       dispatch(textSlice.actions.setNotEditable())
 
@@ -155,7 +111,11 @@ export const BookmarkCopyPreviewRenderer = (): React.ReactNode => {
         pointerEvents: 'none',
       }}
     >
-      <DragDropContext onDragEnd={noop}>
+      <DragDropContext
+        onDragEnd={(): void => {
+          // drag reordering is not applicable in the offscreen capture context
+        }}
+      >
         <Droppable droppableId='capture-block'>
           {(provided) => (
             <div ref={provided.innerRef} {...provided.droppableProps}>
