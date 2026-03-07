@@ -49,9 +49,7 @@ export const Search = (): React.JSX.Element => {
           return option
         }
 
-        return (
-          (option.name ?? '') + (option.category ?? '') + (option.desc ?? '')
-        )
+        return option.name + option.category + option.desc
       }}
       inputValue={inputValueSignal.value}
       loading={getBookmarkListQuery.isPending}
