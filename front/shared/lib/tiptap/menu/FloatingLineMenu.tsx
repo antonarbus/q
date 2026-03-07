@@ -29,15 +29,13 @@ export const FloatingLineMenu = (): React.ReactNode => {
 
     const updatePos = (): void => {
       if (animFrameId !== null) {
-        cancelAnimationFrame(animFrameId)
+        window.cancelAnimationFrame(animFrameId)
       }
 
-      animFrameId = requestAnimationFrame(() => {
+      animFrameId = window.requestAnimationFrame(() => {
         animFrameId = null
 
-        const { isDestroyed, isFocused } = editor
-
-        const shouldHideEarly = isDestroyed || isFocused === false
+        const shouldHideEarly = editor.isDestroyed || editor.isFocused === false
 
         if (shouldHideEarly === true) {
           hideMenu()
@@ -45,13 +43,15 @@ export const FloatingLineMenu = (): React.ReactNode => {
           return
         }
 
-        const { $from, empty } = editor.state.selection
         const isInTable = editor.isActive('table')
         const isInImage = editor.isActive('image')
-        const isAtRootDepth = $from.depth === 1
+        const isAtRootDepth = editor.state.selection.$from.depth === 1
 
         const shouldHide =
-          empty === false || isAtRootDepth === false || isInTable || isInImage
+          editor.state.selection.empty === false ||
+          isAtRootDepth === false ||
+          isInTable ||
+          isInImage
 
         if (shouldHide === true) {
           hideMenu()
@@ -59,7 +59,7 @@ export const FloatingLineMenu = (): React.ReactNode => {
           return
         }
 
-        const node = $from.node()
+        const node = editor.state.selection.$from.node()
 
         const isEmptyParagraph =
           node.type.name === 'paragraph' && node.content.size === 0
@@ -70,7 +70,7 @@ export const FloatingLineMenu = (): React.ReactNode => {
           return
         }
 
-        const { pos: fromPos } = $from
+        const { pos: fromPos } = editor.state.selection.$from
         const coords = editor.view.coordsAtPos(fromPos)
 
         const elementNearWhichToShowMenu =
@@ -128,7 +128,7 @@ export const FloatingLineMenu = (): React.ReactNode => {
     }
   }, [editor, hideMenu])
 
-  // Close expanded menu on outside click
+  // Close expanded menu on click away
   useEffect(() => {
     if (isOpen === false) {
       return
@@ -156,7 +156,7 @@ export const FloatingLineMenu = (): React.ReactNode => {
     return null
   }
 
-  return createPortal(
+  const portal: React.ReactPortal = createPortal(
     <div
       ref={menuRef}
       onMouseDown={(): void => {
@@ -175,7 +175,6 @@ export const FloatingLineMenu = (): React.ReactNode => {
         gap: 6,
       }}
     >
-      {/* Trigger: subtle "+" that reveals buttons */}
       <Box
         component='button'
         type='button'
@@ -199,7 +198,6 @@ export const FloatingLineMenu = (): React.ReactNode => {
       >
         <IoIosAddCircleOutline />
       </Box>
-      {/* Expanded buttons, grow to the left of "+" */}
       {isOpen === true && (
         <TiptapMenuLayout>
           <ButtonsGroupLayout>
@@ -214,4 +212,6 @@ export const FloatingLineMenu = (): React.ReactNode => {
     </div>,
     document.body,
   )
+
+  return portal
 }
