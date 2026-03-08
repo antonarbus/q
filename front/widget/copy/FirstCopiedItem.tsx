@@ -3,6 +3,7 @@ import { theme } from '@shared/theme'
 import { AnimatePresence, motion, type Variants } from 'motion/react'
 import { containerPadding, containerWidth, itemMarginBottom } from './const'
 import { ScaledCopyItem } from './ScaledCopyItem'
+import { useAllImagesLoadedInHtml } from './useAllImagesLoadedInHtml'
 
 type Props = {
   isCopying: boolean
@@ -57,7 +58,11 @@ export const FirstCopiedItem = (): React.JSX.Element | null => {
   const isCopying = useSelector((state) => state.copy.isCopying)
 
   const [firstItem] = items
-  const [firstPreview] = getState().copy.previews
+  const firstItemPreviewHtml = getState().copy.previews.at(0) ?? ''
+
+  const allImagesLoadedInHtml = useAllImagesLoadedInHtml({
+    firstItemPreviewHtml,
+  })
 
   if (firstItem?.width === undefined) {
     return null
@@ -82,7 +87,11 @@ export const FirstCopiedItem = (): React.JSX.Element | null => {
   return (
     <AnimatePresence custom={animationProps} mode='wait'>
       <motion.div
-        animate='animate'
+        animate={
+          isCopying === true && allImagesLoadedInHtml === false
+            ? 'initial'
+            : 'animate'
+        }
         custom={animationProps}
         exit='exit'
         initial='initial'
@@ -96,7 +105,7 @@ export const FirstCopiedItem = (): React.JSX.Element | null => {
         variants={variants}
       >
         <ScaledCopyItem
-          html={firstPreview ?? '∑'}
+          html={firstItemPreviewHtml}
           scaleFactor={String(scaleFactorForFirstItem)}
           width={firstItem.width}
         />
