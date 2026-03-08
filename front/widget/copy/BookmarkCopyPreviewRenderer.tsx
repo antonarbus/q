@@ -29,7 +29,8 @@ import { cls } from '@shared/cls'
  * so the two cannot overlap.
  */
 export const BookmarkCopyPreviewRenderer = (): React.ReactNode => {
-  const block = useSelector((state) =>
+  // Rendered at pos 1000, it is a hack, otherwise we have to re-create all app contexts for bookmark
+  const bookmarkBlock = useSelector((state) =>
     state.quotation.blocks.at(BOOKMARK_POS_AT_BLOCKS),
   )
 
@@ -38,7 +39,7 @@ export const BookmarkCopyPreviewRenderer = (): React.ReactNode => {
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (block === undefined) {
+    if (bookmarkBlock === undefined) {
       return
     }
 
@@ -77,13 +78,12 @@ export const BookmarkCopyPreviewRenderer = (): React.ReactNode => {
         window.scrollTo(persistedScrollX, persistedScrollY)
       })
 
-      // Preload all images before opening the copy modal so the browser caches
-      // them. The modal slide animation then starts immediately on mount with no
-      // visible delay waiting for images to arrive over the network.
+      // Preload all images by browser over network before opening the copy modal
+      // Otherwise copy modal opens and item without images is pasted or it stays still until images are loaded
       const div = document.createElement('div')
       div.innerHTML = html
 
-      const imageSrcs = Array.from(div.querySelectorAll('img'))
+      const imageAtHtmlSrcList = Array.from(div.querySelectorAll('img'))
         .map((img) => img.src)
         .filter(Boolean)
 
@@ -96,7 +96,10 @@ export const BookmarkCopyPreviewRenderer = (): React.ReactNode => {
             return
           }
 
-          dispatch(copySlice.actions.addItem({ item: block, preview: html }))
+          dispatch(
+            copySlice.actions.addItem({ item: bookmarkBlock, preview: html }),
+          )
+
           dispatch(copySlice.actions.allowToPaste())
 
           const isCopyModalVisible = getState().copy.isVisible
@@ -109,12 +112,12 @@ export const BookmarkCopyPreviewRenderer = (): React.ReactNode => {
         })
       }
 
-      if (imageSrcs.length === 0) {
+      if (imageAtHtmlSrcList.length === 0) {
         openModal()
       } else {
-        let remaining = imageSrcs.length
+        let remaining = imageAtHtmlSrcList.length
 
-        imageSrcs.forEach((src) => {
+        imageAtHtmlSrcList.forEach((src) => {
           const image = new Image()
 
           image.onload = image.onerror = (): void => {
@@ -133,9 +136,9 @@ export const BookmarkCopyPreviewRenderer = (): React.ReactNode => {
     return (): void => {
       cancelled = true
     }
-  }, [block, initCursorPos])
+  }, [bookmarkBlock, initCursorPos])
 
-  const shouldNotRender = block === undefined || initCursorPos === null
+  const shouldNotRender = bookmarkBlock === undefined || initCursorPos === null
 
   if (shouldNotRender === true) {
     return null
@@ -160,7 +163,10 @@ export const BookmarkCopyPreviewRenderer = (): React.ReactNode => {
         <Droppable droppableId='capture-block'>
           {(provided) => (
             <div ref={provided.innerRef} {...provided.droppableProps}>
-              <Block block={block} blockIndex={BOOKMARK_POS_AT_BLOCKS} />
+              <Block
+                block={bookmarkBlock}
+                blockIndex={BOOKMARK_POS_AT_BLOCKS}
+              />
               {provided.placeholder}
             </div>
           )}
