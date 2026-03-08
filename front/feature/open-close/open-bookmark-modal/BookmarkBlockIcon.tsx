@@ -1,11 +1,10 @@
-import { useIsCopyModalVisible } from '@entity/copy/useIsCopyModalVisible'
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { getBlockFromStore } from '@entity/quotation/redux/getter/getBlockFromStore'
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/cls'
 import { route } from '@shared/lib/react-router-dom/route'
-import { dispatch, getState } from '@shared/lib/redux'
+import { dispatch, getState, useSelector } from '@shared/lib/redux'
 import { FaRegStar } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
@@ -13,7 +12,7 @@ import { toast } from 'sonner'
 export const BookmarkBlockIcon = (): React.ReactNode => {
   const navigate = useNavigate()
   const block = useBlock()
-  const isCopyModalVisible = useIsCopyModalVisible()
+  const isCopyModalVisible = useSelector((state) => state.copy.isVisible)
   const disabled = isCopyModalVisible
 
   return (

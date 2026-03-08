@@ -1,4 +1,3 @@
-import { useIsCopyModalVisible } from '@entity/copy/useIsCopyModalVisible'
 import { Tooltip } from '@mui/material'
 import { route } from '@shared/lib/react-router-dom/route'
 import { useSelector } from '@shared/lib/redux'
@@ -7,7 +6,7 @@ import { PiGlobe, PiGlobeX } from 'react-icons/pi'
 import { Link } from 'react-router-dom'
 
 export const OpenShareQuotationIcon = (): React.JSX.Element => {
-  const disabled = useIsCopyModalVisible()
+  const isCopyModalVisible = useSelector((state) => state.copy.isVisible)
   const access = useSelector((state) => state.quotation.access)
 
   return (
@@ -21,7 +20,7 @@ export const OpenShareQuotationIcon = (): React.JSX.Element => {
             color: '#3c5588 !important',
           },
         }}
-        to={disabled === true ? '' : `./${route.share}`}
+        to={isCopyModalVisible === true ? '' : `./${route.share}`}
       >
         {access.level === 'everyone' && (
           <PiGlobe

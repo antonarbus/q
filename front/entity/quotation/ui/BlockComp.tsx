@@ -5,13 +5,13 @@ import type {
   OnBlockResizeStop,
 } from '@shared/lib/re-resizable/resizablePaper'
 import { DragHandleContext } from '@shared/lib/hello-pangea-dnd/DragHandleContext'
-import { useIsCopyModalVisible } from '@entity/copy/useIsCopyModalVisible'
 import { useIsLastBlock } from '../hook/useIsLastBlock'
 import type { ResizableProps } from 're-resizable'
 
 import { useBlock } from '../provider/BlockProvider'
 import { BlockAnimate } from './block-layout'
 import { PasteBlockTextOverlay } from './paste-block-overlay-text'
+import { useSelector } from '@shared/lib/redux'
 
 type Props = {
   children: React.ReactNode
@@ -29,7 +29,7 @@ type Props = {
 export const BlockComp = (props: Props): React.JSX.Element => {
   const block = useBlock()
   const isLastBlock = useIsLastBlock()
-  const isCopyModalVisible = useIsCopyModalVisible()
+  const isCopyModalVisible = useSelector((state) => state.copy.isVisible)
   const isDragDisabled = isLastBlock || isCopyModalVisible
 
   const blockContent = (

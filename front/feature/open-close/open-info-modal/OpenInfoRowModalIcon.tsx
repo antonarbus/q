@@ -1,10 +1,10 @@
-import { useIsCopyModalVisible } from '@entity/copy/useIsCopyModalVisible'
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { useRow } from '@entity/quotation/provider/RowProvider'
 import { getRowFromStore } from '@entity/quotation/redux/getter/getRowFromStore'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/cls'
 import { route } from '@shared/lib/react-router-dom/route'
+import { useSelector } from '@shared/lib/redux'
 import { HiOutlineInformationCircle } from 'react-icons/hi2'
 import { useNavigate } from 'react-router-dom'
 
@@ -12,8 +12,7 @@ export const OpenInfoRowModalIcon = (): React.ReactNode => {
   const navigate = useNavigate()
   const block = useBlock()
   const row = useRow()
-  const isisCopyModalVisible = useIsCopyModalVisible()
-  const disabled = isisCopyModalVisible
+  const isCopyModalVisible = useSelector((state) => state.copy.isVisible)
 
   return (
     <Tooltip
@@ -27,7 +26,7 @@ export const OpenInfoRowModalIcon = (): React.ReactNode => {
           aria-hidden={false} // otherwise error in dev tools
           className={cls.actionIcon}
           onClick={(event: React.MouseEvent): void => {
-            if (disabled === true) {
+            if (isCopyModalVisible === true) {
               return
             }
 
@@ -43,7 +42,7 @@ export const OpenInfoRowModalIcon = (): React.ReactNode => {
             void navigate(`./${route.info}/${rowFromStore.id}`)
           }}
           style={{
-            color: disabled === true ? '#acacac' : '#000',
+            color: isCopyModalVisible === true ? '#acacac' : '#000',
             cursor: 'pointer',
             touchAction: 'none',
           }}

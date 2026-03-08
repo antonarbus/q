@@ -1,13 +1,13 @@
-import { useIsCopyModalVisible } from '@entity/copy/useIsCopyModalVisible'
 import { useIsLastBlock } from '@entity/quotation/hook/useIsLastBlock'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/cls'
 import { useDragHandleProps } from '@shared/lib/hello-pangea-dnd/DragHandleContext'
+import { useSelector } from '@shared/lib/redux'
 import { MdDragIndicator } from 'react-icons/md'
 
 export const DragBlockIcon = (): React.JSX.Element => {
   const isLastBlock = useIsLastBlock()
-  const isCopyModalVisible = useIsCopyModalVisible()
+  const isCopyModalVisible = useSelector((state) => state.copy.isVisible)
   const disabled = isLastBlock || isCopyModalVisible
   const dragHandleProps = useDragHandleProps()
 

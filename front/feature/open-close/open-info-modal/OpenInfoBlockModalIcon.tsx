@@ -1,17 +1,17 @@
-import { useIsCopyModalVisible } from '@entity/copy/useIsCopyModalVisible'
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { getBlockFromStore } from '@entity/quotation/redux/getter/getBlockFromStore'
 
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/cls'
 import { route } from '@shared/lib/react-router-dom/route'
+import { useSelector } from '@shared/lib/redux'
 import { HiOutlineInformationCircle } from 'react-icons/hi2'
 import { useNavigate } from 'react-router-dom'
 
 export const OpenInfoBlockModalIcon = (): React.ReactNode => {
   const navigate = useNavigate()
   const block = useBlock()
-  const isCopyModalVisible = useIsCopyModalVisible()
+  const isCopyModalVisible = useSelector((state) => state.copy.isVisible)
   const disabled = isCopyModalVisible
 
   return (
