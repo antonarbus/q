@@ -33,85 +33,84 @@ export const BookmarkCopyPreviewRenderer = (): React.ReactNode => {
     state.quotation.blocks.at(BOOKMARK_POS_AT_BLOCKS),
   )
 
-  // Logic to find images in html and wait till browser fully load them over network
+  // Logic to find images in html, wait for the browser fully loads them over network
+  // Then add item to the copy container and show it
   useEffect(() => {
+    // This is called outside in main code body
+    // dispatch(copySlice.actions.startPreviewPreparing())
+
     if (bookmarkBlock === undefined) {
       return
     }
 
+    if (containerRef.current === null) {
+      return
+    }
+
+    const paperElement = containerRef.current.querySelector(`.${cls.paper}`)
+
+    if (paperElement instanceof HTMLElement === false) {
+      return
+    }
+
+    const paperHtml = getCleanPaperHtml({ paperElement })
+
+    dispatch(textSlice.actions.setNotEditable())
+
     const persistedScrollX = window.scrollX
     const persistedScrollY = window.scrollY
 
+    // Restore scroll position that setNotEditable's re-render may have moved.
     requestAnimationFrame(() => {
-      const container = containerRef.current
+      window.scrollTo(persistedScrollX, persistedScrollY)
+    })
 
-      if (container === null) {
-        return
+    // Preload all images before opening the copy modal so they are in the
+    // browser cache — the slide animation then starts immediately with no
+    // visible delay waiting for images to arrive over the network.
+    // Promise.all([]) resolves immediately, so no special case for no images.
+    const div = document.createElement('div')
+    div.innerHTML = paperHtml
+
+    const imageSrcList = Array.from(div.querySelectorAll('img'))
+      .map((img) => img.src)
+      .filter(Boolean)
+
+    const imageLoadedPromiseList = imageSrcList.map(async (src) => {
+      const imageLoadedDeferred = Promise.withResolvers()
+
+      const image = new Image()
+
+      image.onload = (): void => {
+        imageLoadedDeferred.resolve()
       }
 
-      const paperElement = container.querySelector(`.${cls.paper}`)
-
-      if (paperElement instanceof HTMLElement === false) {
-        return
+      image.onerror = (): void => {
+        imageLoadedDeferred.resolve()
       }
 
-      const html = getCleanPaperHtml({ paperElement })
+      image.src = src
 
-      dispatch(textSlice.actions.setNotEditable())
+      return imageLoadedDeferred.promise
+    })
 
-      // Restore scroll position that setNotEditable's re-render may have moved.
-      requestAnimationFrame(() => {
-        window.scrollTo(persistedScrollX, persistedScrollY)
-      })
+    void Promise.all(imageLoadedPromiseList).then(() => {
+      dispatch(
+        copySlice.actions.addItem({
+          item: bookmarkBlock,
+          preview: paperHtml,
+        }),
+      )
 
-      // Preload all images before opening the copy modal so they are in the
-      // browser cache — the slide animation then starts immediately with no
-      // visible delay waiting for images to arrive over the network.
-      // Promise.all([]) resolves immediately, so no special case for no images.
-      const div = document.createElement('div')
-      div.innerHTML = html
+      dispatch(copySlice.actions.allowToPaste())
 
-      const imageSrcList = Array.from(div.querySelectorAll('img'))
-        .map((img) => img.src)
-        .filter(Boolean)
+      dispatch(copySlice.actions.stopPreviewPreparing())
 
-      const imageLoadedPromiseList = imageSrcList.map(async (src) => {
-        const imageLoadedDeferred = Promise.withResolvers()
+      if (getState().copy.isVisible === false) {
+        dispatch(copySlice.actions.showCopyModal())
+      }
 
-        const image = new Image()
-
-        image.onload = (): void => {
-          imageLoadedDeferred.resolve()
-        }
-
-        image.onerror = (): void => {
-          imageLoadedDeferred.resolve()
-        }
-
-        image.src = src
-
-        return imageLoadedDeferred.promise
-      })
-
-      void Promise.all(imageLoadedPromiseList).then(() => {
-        // rAF ensures dispatches run outside React's render cycle,
-        // preventing "setState during render" warnings from microtask timing.
-        requestAnimationFrame(() => {
-          dispatch(
-            copySlice.actions.addItem({ item: bookmarkBlock, preview: html }),
-          )
-
-          dispatch(copySlice.actions.allowToPaste())
-
-          dispatch(copySlice.actions.stopPreviewPreparing())
-
-          if (getState().copy.isVisible === false) {
-            dispatch(copySlice.actions.showCopyModal())
-          }
-
-          dispatch(quotationSlice.actions.removeBlockFromPosThousandReducer())
-        })
-      })
+      dispatch(quotationSlice.actions.removeBlockFromPosThousandReducer())
     })
   }, [bookmarkBlock])
 
