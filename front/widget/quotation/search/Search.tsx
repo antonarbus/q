@@ -1,18 +1,13 @@
-/* eslint-disable @typescript-eslint/strict-void-return */
 import type { ResBody } from '@back/api/bookmark/getBookmarkListHandler'
 import { useGetBookmarkListQuery } from '@entity/bookmark/api/useGetBookmarkListQuery'
-import { Autocomplete, Box } from '@mui/material'
+import { Autocomplete } from '@mui/material'
 import { useSignal } from '@preact/signals-react'
 import { cls } from '@shared/cls'
-import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import { useSelector } from '@shared/lib/redux'
 import { useEffect, useState } from 'react'
-import { OptionItemCategory } from './OptionItemCategory'
-import { OptionItemDescription } from './OptionItemDescription'
-import { OptionItemName } from './OptionItemName'
 import { PaperComponent } from './PaperComponent'
+import { SearchOption } from './SearchOption'
 import { renderInput } from './renderInput'
-import { useCopyBookmarkAtSearch } from '@feature/bookmark/copy-bookmark/useCopyBookmarkAtSearch'
 
 export const Search = (): React.JSX.Element => {
   const getBookmarkListQuery = useGetBookmarkListQuery()
@@ -28,15 +23,6 @@ export const Search = (): React.JSX.Element => {
 
   const [isAutocompleteOpen, setIsAutocompleteOpen] = useState(false)
   const isCopyModalVisible = useSelector((state) => state.copy.isVisible)
-
-  const isPreviewPreparing = useSelector(
-    (state) => state.copy.isPreviewPreparing,
-  )
-
-  const copyBookmarkAtSearch = useCopyBookmarkAtSearch()
-
-  const isBookmarkLoading =
-    copyBookmarkAtSearch.isPending === true || isPreviewPreparing === true
 
   return (
     <Autocomplete
@@ -75,72 +61,11 @@ export const Search = (): React.JSX.Element => {
         option: ResBody['bookmarkList'][number],
       ): React.JSX.Element => {
         return (
-          <li
-            css={{
-              position: 'relative',
-              cursor: 'pointer',
-              display: 'block',
-              borderRadius: '6px',
-              padding: '5px !important',
-              margin: '2px 4px',
-              fontSize: '14px',
-              border: '1px solid #ccc',
-              ':hover': {
-                background: 'rgba(0, 0, 0, 0.05)',
-              },
-              ...(isBookmarkLoading === false && {
-                ':hover::after': {
-                  content: '"Click to copy"',
-                  position: 'absolute',
-                  fontSize: '10px',
-                  top: '2px',
-                  right: '5px',
-                },
-              }),
-            }}
+          <SearchOption
             key={option.id}
-            onClick={async (event: React.MouseEvent): Promise<void> => {
-              await copyBookmarkAtSearch.mutateAsync({
-                bookmarkId: option.id,
-                cursorPos: {
-                  x: event.clientX,
-                  y: event.clientY,
-                },
-              })
-            }}
-          >
-            <OptionItemName
-              inputValueSignal={inputValueSignal}
-              option={option}
-            />
-
-            <OptionItemCategory
-              inputValueSignal={inputValueSignal}
-              option={option}
-            />
-
-            <OptionItemDescription
-              inputValueSignal={inputValueSignal}
-              option={option}
-            />
-
-            {isBookmarkLoading === true &&
-            option.id === copyBookmarkAtSearch.bookmarkId ? (
-              <Box
-                sx={{
-                  position: 'absolute',
-                  inset: 0,
-                  background: 'rgba(0, 0, 0, 0.05)',
-                  backdropFilter: 'blur(3px)',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-              >
-                <RotatingLoaderIcon />
-              </Box>
-            ) : null}
-          </li>
+            inputValueSignal={inputValueSignal}
+            option={option}
+          />
         )
       }}
       slotProps={{
