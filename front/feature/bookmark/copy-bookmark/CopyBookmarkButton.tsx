@@ -6,6 +6,7 @@ import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { IconButton, Tooltip } from '@mui/material'
 import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import { dispatch, useSelector } from '@shared/lib/redux'
+import { useEffect, useState } from 'react'
 import { MdCopyAll } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
@@ -13,9 +14,19 @@ import { toast } from 'sonner'
 export const CopyBookmarkButton = (props: UrlParam): React.JSX.Element => {
   const getBookmarkMutation = useGetBookmarkMutation()
 
+  const [isSpinner, setIsSpinner] = useState(false)
+
   const isPreviewPreparing = useSelector(
     (state) => state.copy.isPreviewPreparing,
   )
+
+  useEffect(() => {
+    if (isPreviewPreparing === false) {
+      requestAnimationFrame(() => {
+        setIsSpinner(false)
+      })
+    }
+  }, [isPreviewPreparing])
 
   useUpdateEffect(() => {
     if (getBookmarkMutation.isError === true) {
@@ -32,6 +43,8 @@ export const CopyBookmarkButton = (props: UrlParam): React.JSX.Element => {
     >
       <IconButton
         onClick={async (event: React.MouseEvent): Promise<void> => {
+          setIsSpinner(true)
+
           const data = await getBookmarkMutation.mutateAsync({ id: props.id })
 
           // Load block into redux at pos 1000 synchronously so it is available
@@ -42,6 +55,8 @@ export const CopyBookmarkButton = (props: UrlParam): React.JSX.Element => {
               block: data.bookmark,
             }),
           )
+
+          dispatch(copySlice.actions.startPreviewPreparing())
 
           dispatch(
             copySlice.actions.setInitCursorPos({
@@ -55,12 +70,7 @@ export const CopyBookmarkButton = (props: UrlParam): React.JSX.Element => {
           translate: '0px 1px',
         }}
       >
-        {getBookmarkMutation.isPending === true ||
-        isPreviewPreparing === true ? (
-          <RotatingLoaderIcon />
-        ) : (
-          <MdCopyAll />
-        )}
+        {isSpinner === true ? <RotatingLoaderIcon /> : <MdCopyAll />}
       </IconButton>
     </Tooltip>
   )

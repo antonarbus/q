@@ -121,6 +121,8 @@ export const BookmarkCopyPreviewRenderer = (): React.ReactNode => {
 
           dispatch(copySlice.actions.allowToPaste())
 
+          dispatch(copySlice.actions.stopPreviewPreparing())
+
           if (getState().copy.isVisible === false) {
             dispatch(copySlice.actions.showCopyModal())
           }

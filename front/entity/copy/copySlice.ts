@@ -50,10 +50,14 @@ export const copySlice = createSlice({
       action: PayloadAction<{ x: number; y: number }>,
     ) => {
       state.initCursorPos = action.payload
-      state.isPreviewPreparing = true
     },
     showCopyModal: (state: WritableDraft<InitState>) => {
       state.isVisible = true
+    },
+    startPreviewPreparing: (state: WritableDraft<InitState>) => {
+      state.isPreviewPreparing = true
+    },
+    stopPreviewPreparing: (state: WritableDraft<InitState>) => {
       state.isPreviewPreparing = false
     },
     hideCopyModal: () => initialState,

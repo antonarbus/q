@@ -41,6 +41,8 @@ export const useCopyBookmarkAtSearch = (): Res => {
         }),
       )
 
+      dispatch(copySlice.actions.startPreviewPreparing())
+
       dispatch(
         copySlice.actions.setInitCursorPos({
           x: params.cursorPos.x,
