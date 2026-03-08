@@ -78,19 +78,26 @@ export const BookmarkCopyPreviewRenderer = (): React.ReactNode => {
         window.scrollTo(persistedScrollX, persistedScrollY)
       })
 
-      // Preload all images by browser over network before opening the copy modal
-      // Otherwise copy modal opens and item without images is pasted or it stays still until images are loaded
+      // Preload all images before opening the copy modal so they are in the
+      // browser cache — the slide animation then starts immediately with no
+      // visible delay waiting for images to arrive over the network.
       const div = document.createElement('div')
       div.innerHTML = html
 
-      const imageAtHtmlSrcList = Array.from(div.querySelectorAll('img'))
+      const imageSrcList = Array.from(div.querySelectorAll('img'))
         .map((img) => img.src)
         .filter(Boolean)
 
-      const openModal = (): void => {
-        // Use requestAnimationFrame to ensure dispatches happen outside any
-        // current React render cycle, preventing "setState during render"
-        // warnings that occur when Promise microtasks fire mid-render.
+      let pendingImages = imageSrcList.length
+
+      // Opens the modal once all images are loaded by browser via network (or immediately when there are none)
+      // rAF ensures dispatches run outside React's render cycle,
+      // preventing "setState during render" warnings from microtask timing.
+      const onAllImagesReady = (): void => {
+        if (pendingImages > 0) {
+          return
+        }
+
         requestAnimationFrame(() => {
           if (cancelled === true) {
             return
@@ -102,9 +109,7 @@ export const BookmarkCopyPreviewRenderer = (): React.ReactNode => {
 
           dispatch(copySlice.actions.allowToPaste())
 
-          const isCopyModalVisible = getState().copy.isVisible
-
-          if (isCopyModalVisible === false) {
+          if (getState().copy.isVisible === false) {
             dispatch(copySlice.actions.showCopyModal())
           }
 
@@ -112,25 +117,19 @@ export const BookmarkCopyPreviewRenderer = (): React.ReactNode => {
         })
       }
 
-      if (imageAtHtmlSrcList.length === 0) {
-        openModal()
-      } else {
-        let remaining = imageAtHtmlSrcList.length
-
-        imageAtHtmlSrcList.forEach((src) => {
-          const image = new Image()
-
-          image.onload = image.onerror = (): void => {
-            remaining -= 1
-
-            if (remaining === 0) {
-              openModal()
-            }
-          }
-
-          image.src = src
-        })
+      const onImageDone = (): void => {
+        pendingImages = pendingImages - 1
+        onAllImagesReady()
       }
+
+      imageSrcList.forEach((src) => {
+        const image = new Image()
+        image.onload = onImageDone
+        image.onerror = onImageDone
+        image.src = src
+      })
+
+      onAllImagesReady()
     })
 
     return (): void => {
