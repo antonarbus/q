@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/strict-void-return */
 import type { ResBody } from '@back/api/bookmark/getBookmarkListHandler'
 import { useGetBookmarkListQuery } from '@entity/bookmark/api/useGetBookmarkListQuery'
-import { useIsCopyModalVisible } from '@entity/copy/useIsCopyModalVisible'
 import { Autocomplete, Box } from '@mui/material'
 import { useSignal } from '@preact/signals-react'
 import { cls } from '@shared/cls'
@@ -28,7 +27,7 @@ export const Search = (): React.JSX.Element => {
   }, [email])
 
   const [isAutocompleteOpen, setIsAutocompleteOpen] = useState(false)
-  const isCopyModalVisible = useIsCopyModalVisible()
+  const isCopyModalVisible = useSelector((state) => state.copy.isVisible)
 
   const isPreviewPreparing = useSelector(
     (state) => state.copy.isPreviewPreparing,
@@ -47,6 +46,10 @@ export const Search = (): React.JSX.Element => {
 
   return (
     <Autocomplete
+      open={isAutocompleteOpen}
+      onOpen={() => {
+        setIsAutocompleteOpen(true)
+      }}
       className={cls.search}
       clearOnBlur
       clearOnEscape
@@ -70,10 +73,6 @@ export const Search = (): React.JSX.Element => {
       onInputChange={(_event, newInputValue) => {
         inputValueSignal.value = newInputValue
       }}
-      onOpen={() => {
-        setIsAutocompleteOpen(true)
-      }}
-      open={isAutocompleteOpen ? !isCopyModalVisible : null}
       options={options}
       popupIcon={null}
       renderInput={renderInput}
