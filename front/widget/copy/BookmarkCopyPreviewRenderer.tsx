@@ -89,24 +89,25 @@ export const BookmarkCopyPreviewRenderer = (): React.ReactNode => {
         .map((img) => img.src)
         .filter(Boolean)
 
-      void Promise.all(
-        imageSrcList.map(
-          async (src) =>
-            new Promise<void>((resolve) => {
-              const image = new Image()
+      const imageLoadedPromiseList = imageSrcList.map(async (src) => {
+        const imageLoadedDeferred = Promise.withResolvers()
 
-              image.onload = (): void => {
-                resolve()
-              }
+        const image = new Image()
 
-              image.onerror = (): void => {
-                resolve()
-              }
+        image.onload = (): void => {
+          imageLoadedDeferred.resolve()
+        }
 
-              image.src = src
-            }),
-        ),
-      ).then(() => {
+        image.onerror = (): void => {
+          imageLoadedDeferred.resolve()
+        }
+
+        image.src = src
+
+        return imageLoadedDeferred.promise
+      })
+
+      void Promise.all(imageLoadedPromiseList).then(() => {
         // rAF ensures dispatches run outside React's render cycle,
         // preventing "setState during render" warnings from microtask timing.
         requestAnimationFrame(() => {
