@@ -23,40 +23,26 @@ import { cls } from '@shared/cls'
  *      to settle, then we extract the HTML and dispatch addItem → allowToPaste
  *      → showCopyModal (matching the order used by CopyBlockIcon).
  *   4. removeBlockFromPosThousandReducer → component returns null.
- *
- * Signal: initCursorPos being non-null uniquely identifies this flow.
- * BookmarkBlockIcon (which also sets blocks[1000]) never sets initCursorPos,
- * so the two cannot overlap.
  */
 export const BookmarkCopyPreviewRenderer = (): React.ReactNode => {
-  // Rendered at pos 1000, it is a hack, otherwise we have to re-create all app contexts for bookmark
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  // Hack! Set bookmark item at pos 1000 not to interfere with main block items
+  // Otherwise we would have to re-create all app contexts for bookmark as many elements use redux and providers
   const bookmarkBlock = useSelector((state) =>
     state.quotation.blocks.at(BOOKMARK_POS_AT_BLOCKS),
   )
 
-  const initCursorPos = useSelector((state) => state.copy.initCursorPos)
-
-  const containerRef = useRef<HTMLDivElement>(null)
-
+  // Logic to find images in html and wait till browser fully load them over network
   useEffect(() => {
     if (bookmarkBlock === undefined) {
       return
     }
 
-    if (initCursorPos === null) {
-      return
-    }
-
-    let cancelled = false
-
     const persistedScrollX = window.scrollX
     const persistedScrollY = window.scrollY
 
     requestAnimationFrame(() => {
-      if (cancelled === true) {
-        return
-      }
-
       const container = containerRef.current
 
       if (container === null) {
@@ -111,10 +97,6 @@ export const BookmarkCopyPreviewRenderer = (): React.ReactNode => {
         // rAF ensures dispatches run outside React's render cycle,
         // preventing "setState during render" warnings from microtask timing.
         requestAnimationFrame(() => {
-          if (cancelled === true) {
-            return
-          }
-
           dispatch(
             copySlice.actions.addItem({ item: bookmarkBlock, preview: html }),
           )
@@ -131,15 +113,9 @@ export const BookmarkCopyPreviewRenderer = (): React.ReactNode => {
         })
       })
     })
+  }, [bookmarkBlock])
 
-    return (): void => {
-      cancelled = true
-    }
-  }, [bookmarkBlock, initCursorPos])
-
-  const shouldNotRender = bookmarkBlock === undefined || initCursorPos === null
-
-  if (shouldNotRender === true) {
+  if (bookmarkBlock === undefined) {
     return null
   }
 
