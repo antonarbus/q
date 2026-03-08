@@ -7,7 +7,7 @@ import { useSignal } from '@preact/signals-react'
 import { cls } from '@shared/cls'
 import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import { useSelector } from '@shared/lib/redux'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { OptionItemCategory } from './OptionItemCategory'
 import { OptionItemDescription } from './OptionItemDescription'
 import { OptionItemName } from './OptionItemName'
@@ -27,14 +27,23 @@ export const Search = (): React.JSX.Element => {
     }
   }, [email])
 
-  const isAutocompleteOpen = useSignal(false)
+  const [isAutocompleteOpen, setIsAutocompleteOpen] = useState(false)
   const isCopyModalVisible = useIsCopyModalVisible()
 
-  const copyBookmarkAtSearch = useCopyBookmarkAtSearch({
-    onClose: () => {
-      isAutocompleteOpen.value = false
-    },
-  })
+  const isPreviewPreparing = useSelector(
+    (state) => state.copy.isPreviewPreparing,
+  )
+
+  useEffect(() => {
+    if (isCopyModalVisible === true) {
+      setIsAutocompleteOpen(false)
+    }
+  }, [isCopyModalVisible])
+
+  const copyBookmarkAtSearch = useCopyBookmarkAtSearch()
+
+  const isBookmarkLoading =
+    copyBookmarkAtSearch.isPending === true || isPreviewPreparing === true
 
   return (
     <Autocomplete
@@ -56,15 +65,15 @@ export const Search = (): React.JSX.Element => {
       loadingText={email === null ? 'Not logged in :(' : 'Loading...'}
       noOptionsText='No saved bookmarks'
       onClose={() => {
-        isAutocompleteOpen.value = false
+        setIsAutocompleteOpen(false)
       }}
       onInputChange={(_event, newInputValue) => {
         inputValueSignal.value = newInputValue
       }}
       onOpen={() => {
-        isAutocompleteOpen.value = true
+        setIsAutocompleteOpen(true)
       }}
-      open={isAutocompleteOpen.value}
+      open={isAutocompleteOpen ? !isCopyModalVisible : null}
       options={options}
       popupIcon={null}
       renderInput={renderInput}
@@ -86,7 +95,7 @@ export const Search = (): React.JSX.Element => {
               ':hover': {
                 background: 'rgba(0, 0, 0, 0.05)',
               },
-              ...(copyBookmarkAtSearch.isPending === false && {
+              ...(isBookmarkLoading === false && {
                 ':hover::after': {
                   content: '"Click to copy"',
                   position: 'absolute',
@@ -122,7 +131,7 @@ export const Search = (): React.JSX.Element => {
               option={option}
             />
 
-            {copyBookmarkAtSearch.isPending &&
+            {isBookmarkLoading === true &&
             option.id === copyBookmarkAtSearch.bookmarkId ? (
               <Box
                 sx={{

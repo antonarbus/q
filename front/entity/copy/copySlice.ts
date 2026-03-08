@@ -19,6 +19,8 @@ type InitState = {
   isCopyable: boolean
   isCuttable: boolean
   isDeletable: boolean
+  /** should not show copy container until images are loaded by browser */
+  isPreviewPreparing: boolean
 }
 
 const initialState: InitState = {
@@ -36,6 +38,7 @@ const initialState: InitState = {
   isCopyable: true,
   isCuttable: true,
   isDeletable: true,
+  isPreviewPreparing: false,
 }
 
 export const copySlice = createSlice({
@@ -47,9 +50,11 @@ export const copySlice = createSlice({
       action: PayloadAction<{ x: number; y: number }>,
     ) => {
       state.initCursorPos = action.payload
+      state.isPreviewPreparing = true
     },
     showCopyModal: (state: WritableDraft<InitState>) => {
       state.isVisible = true
+      state.isPreviewPreparing = false
     },
     hideCopyModal: () => initialState,
     addItem: (

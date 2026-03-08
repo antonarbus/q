@@ -77,16 +77,56 @@ export const BookmarkCopyPreviewRenderer = (): React.ReactNode => {
         window.scrollTo(persistedScrollX, persistedScrollY)
       })
 
-      dispatch(copySlice.actions.addItem({ item: block, preview: html }))
-      dispatch(copySlice.actions.allowToPaste())
+      // Preload all images before opening the copy modal so the browser caches
+      // them. The modal slide animation then starts immediately on mount with no
+      // visible delay waiting for images to arrive over the network.
+      const div = document.createElement('div')
+      div.innerHTML = html
+      const imageSrcs = Array.from(div.querySelectorAll('img'))
+        .map((img) => img.src)
+        .filter(Boolean)
 
-      const isCopyModalVisible = getState().copy.isVisible
+      const openModal = (): void => {
+        // Use requestAnimationFrame to ensure dispatches happen outside any
+        // current React render cycle, preventing "setState during render"
+        // warnings that occur when Promise microtasks fire mid-render.
+        requestAnimationFrame(() => {
+          if (cancelled === true) {
+            return
+          }
 
-      if (isCopyModalVisible === false) {
-        dispatch(copySlice.actions.showCopyModal())
+          dispatch(copySlice.actions.addItem({ item: block, preview: html }))
+          dispatch(copySlice.actions.allowToPaste())
+
+          const isCopyModalVisible = getState().copy.isVisible
+
+          if (isCopyModalVisible === false) {
+            dispatch(copySlice.actions.showCopyModal())
+          }
+
+          dispatch(quotationSlice.actions.removeBlockFromPosThousandReducer())
+        })
       }
 
-      dispatch(quotationSlice.actions.removeBlockFromPosThousandReducer())
+      if (imageSrcs.length === 0) {
+        openModal()
+      } else {
+        let remaining = imageSrcs.length
+
+        imageSrcs.forEach((src) => {
+          const image = new Image()
+
+          image.onload = image.onerror = (): void => {
+            remaining -= 1
+
+            if (remaining === 0) {
+              openModal()
+            }
+          }
+
+          image.src = src
+        })
+      }
     })
 
     return (): void => {

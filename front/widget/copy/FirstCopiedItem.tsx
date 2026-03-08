@@ -3,7 +3,6 @@ import { theme } from '@shared/theme'
 import { AnimatePresence, motion, type Variants } from 'motion/react'
 import { containerPadding, containerWidth, itemMarginBottom } from './const'
 import { ScaledCopyItem } from './ScaledCopyItem'
-import { useAllImagesLoadedInHtml } from './useAllImagesLoadedInHtml'
 
 type Props = {
   isCopying: boolean
@@ -60,10 +59,6 @@ export const FirstCopiedItem = (): React.JSX.Element | null => {
   const [firstItem] = items
   const firstItemPreviewHtml = getState().copy.previews.at(0) ?? ''
 
-  const allImagesLoadedInHtml = useAllImagesLoadedInHtml({
-    firstItemPreviewHtml,
-  })
-
   if (firstItem?.width === undefined) {
     return null
   }
@@ -87,11 +82,7 @@ export const FirstCopiedItem = (): React.JSX.Element | null => {
   return (
     <AnimatePresence custom={animationProps} mode='wait'>
       <motion.div
-        animate={
-          isCopying === true && allImagesLoadedInHtml === false
-            ? 'initial'
-            : 'animate'
-        }
+        animate='animate'
         custom={animationProps}
         exit='exit'
         initial='initial'

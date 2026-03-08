@@ -6,10 +6,6 @@ import { useCallback } from 'react'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
 
-type Props = {
-  onClose: () => void
-}
-
 type Params = {
   bookmarkId: string
   cursorPos: {
@@ -24,7 +20,7 @@ type Res = {
   bookmarkId: string | undefined
 }
 
-export const useCopyBookmarkAtSearch = (props: Props): Res => {
+export const useCopyBookmarkAtSearch = (): Res => {
   const getBookmarkMutation = useGetBookmarkMutation()
 
   useUpdateEffect(() => {
@@ -39,8 +35,6 @@ export const useCopyBookmarkAtSearch = (props: Props): Res => {
         id: params.bookmarkId,
       })
 
-      props.onClose()
-
       dispatch(
         quotationSlice.actions.loadBlockAtPosThousandReducer({
           block: data.bookmark,
@@ -54,7 +48,7 @@ export const useCopyBookmarkAtSearch = (props: Props): Res => {
         }),
       )
     },
-    [getBookmarkMutation, props.onClose],
+    [getBookmarkMutation],
   )
 
   return {

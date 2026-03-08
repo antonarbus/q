@@ -5,13 +5,17 @@ import { copySlice } from '@entity/copy/copySlice'
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { IconButton, Tooltip } from '@mui/material'
 import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
-import { dispatch } from '@shared/lib/redux'
+import { dispatch, useSelector } from '@shared/lib/redux'
 import { MdCopyAll } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
 
 export const CopyBookmarkButton = (props: UrlParam): React.JSX.Element => {
   const getBookmarkMutation = useGetBookmarkMutation()
+
+  const isPreviewPreparing = useSelector(
+    (state) => state.copy.isPreviewPreparing,
+  )
 
   useUpdateEffect(() => {
     if (getBookmarkMutation.isError === true) {
@@ -51,7 +55,8 @@ export const CopyBookmarkButton = (props: UrlParam): React.JSX.Element => {
           translate: '0px 1px',
         }}
       >
-        {getBookmarkMutation.isPending === true ? (
+        {getBookmarkMutation.isPending === true ||
+        isPreviewPreparing === true ? (
           <RotatingLoaderIcon />
         ) : (
           <MdCopyAll />
