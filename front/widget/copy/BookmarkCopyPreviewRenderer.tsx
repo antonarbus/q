@@ -82,6 +82,7 @@ export const BookmarkCopyPreviewRenderer = (): React.ReactNode => {
       // visible delay waiting for images to arrive over the network.
       const div = document.createElement('div')
       div.innerHTML = html
+
       const imageSrcs = Array.from(div.querySelectorAll('img'))
         .map((img) => img.src)
         .filter(Boolean)
