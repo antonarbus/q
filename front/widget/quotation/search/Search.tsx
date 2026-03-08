@@ -33,12 +33,6 @@ export const Search = (): React.JSX.Element => {
     (state) => state.copy.isPreviewPreparing,
   )
 
-  useEffect(() => {
-    if (isCopyModalVisible === true) {
-      setIsAutocompleteOpen(false)
-    }
-  }, [isCopyModalVisible])
-
   const copyBookmarkAtSearch = useCopyBookmarkAtSearch()
 
   const isBookmarkLoading =
