@@ -81,6 +81,7 @@ export const BookmarkCopyPreviewRenderer = (): React.ReactNode => {
       // Preload all images before opening the copy modal so they are in the
       // browser cache — the slide animation then starts immediately with no
       // visible delay waiting for images to arrive over the network.
+      // Promise.all([]) resolves immediately, so no special case for no images.
       const div = document.createElement('div')
       div.innerHTML = html
 
@@ -88,16 +89,26 @@ export const BookmarkCopyPreviewRenderer = (): React.ReactNode => {
         .map((img) => img.src)
         .filter(Boolean)
 
-      let pendingImages = imageSrcList.length
+      void Promise.all(
+        imageSrcList.map(
+          async (src) =>
+            new Promise<void>((resolve) => {
+              const image = new Image()
 
-      // Opens the modal once all images are loaded by browser via network (or immediately when there are none)
-      // rAF ensures dispatches run outside React's render cycle,
-      // preventing "setState during render" warnings from microtask timing.
-      const onAllImagesReady = (): void => {
-        if (pendingImages > 0) {
-          return
-        }
+              image.onload = (): void => {
+                resolve()
+              }
 
+              image.onerror = (): void => {
+                resolve()
+              }
+
+              image.src = src
+            }),
+        ),
+      ).then(() => {
+        // rAF ensures dispatches run outside React's render cycle,
+        // preventing "setState during render" warnings from microtask timing.
         requestAnimationFrame(() => {
           if (cancelled === true) {
             return
@@ -115,21 +126,7 @@ export const BookmarkCopyPreviewRenderer = (): React.ReactNode => {
 
           dispatch(quotationSlice.actions.removeBlockFromPosThousandReducer())
         })
-      }
-
-      const onImageDone = (): void => {
-        pendingImages = pendingImages - 1
-        onAllImagesReady()
-      }
-
-      imageSrcList.forEach((src) => {
-        const image = new Image()
-        image.onload = onImageDone
-        image.onerror = onImageDone
-        image.src = src
       })
-
-      onAllImagesReady()
     })
 
     return (): void => {
