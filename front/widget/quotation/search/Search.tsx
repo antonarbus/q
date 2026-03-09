@@ -39,6 +39,9 @@ export const Search = (): React.JSX.Element => {
       onOpen={() => {
         setIsAutocompleteOpen(true)
       }}
+      onClose={() => {
+        setIsAutocompleteOpen(false)
+      }}
       className={cls.search}
       clearOnBlur
       clearOnEscape
