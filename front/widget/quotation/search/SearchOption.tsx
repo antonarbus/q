@@ -9,7 +9,7 @@ import { OptionItemDescription } from './OptionItemDescription'
 import { OptionItemName } from './OptionItemName'
 
 type Props = {
-  inputValueSignal: { value: string }
+  inputValue: string
   option: ResBody['bookmarkList'][number]
 }
 
@@ -24,8 +24,7 @@ export const SearchOption = (props: Props): React.JSX.Element => {
     copyBookmarkAtSearch.isPending === true || isPreviewPreparing === true
 
   const isThisOptionLoading =
-    isLoading === true &&
-    props.option.id === copyBookmarkAtSearch.bookmarkId
+    isLoading === true && props.option.id === copyBookmarkAtSearch.bookmarkId
 
   return (
     <li
@@ -61,21 +60,12 @@ export const SearchOption = (props: Props): React.JSX.Element => {
         })
       }}
     >
-      <OptionItemName
-        inputValueSignal={props.inputValueSignal}
-        option={props.option}
-      />
-
-      <OptionItemCategory
-        inputValueSignal={props.inputValueSignal}
-        option={props.option}
-      />
-
+      <OptionItemName inputValue={props.inputValue} option={props.option} />
+      <OptionItemCategory inputValue={props.inputValue} option={props.option} />
       <OptionItemDescription
-        inputValueSignal={props.inputValueSignal}
+        inputValue={props.inputValue}
         option={props.option}
       />
-
       {isThisOptionLoading === true ? (
         <Box
           sx={{

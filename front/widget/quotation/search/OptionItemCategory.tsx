@@ -4,7 +4,7 @@ import { getTextWithBoldSubStringAsJsx } from '@shared/util/getTextWithBoldSubSt
 import { BsTags } from 'react-icons/bs'
 
 type Props = {
-  inputValueSignal: { value: string }
+  inputValue: string
   option: ResBody['bookmarkList'][number]
 }
 
@@ -39,11 +39,11 @@ export const OptionItemCategory = (props: Props): React.JSX.Element => {
           category:
         </span>
       </span>
-      {props.inputValueSignal.value === ''
-        ? (props.option.category ?? '')
+      {props.inputValue === ''
+        ? props.option.category
         : getTextWithBoldSubStringAsJsx({
-            text: props.option.category ?? '',
-            subString: props.inputValueSignal.value,
+            text: props.option.category,
+            subString: props.inputValue,
           })}
     </Box>
   )

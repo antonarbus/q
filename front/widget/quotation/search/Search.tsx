@@ -1,7 +1,6 @@
 import type { ResBody } from '@back/api/bookmark/getBookmarkListHandler'
 import { useGetBookmarkListQuery } from '@entity/bookmark/api/useGetBookmarkListQuery'
 import { Autocomplete } from '@mui/material'
-import { useSignal } from '@preact/signals-react'
 import { cls } from '@shared/cls'
 import { useSelector } from '@shared/lib/redux'
 import { useEffect, useState } from 'react'
@@ -12,7 +11,7 @@ import { renderInput } from './renderInput'
 export const Search = (): React.JSX.Element => {
   const getBookmarkListQuery = useGetBookmarkListQuery()
   const options = getBookmarkListQuery.data?.bookmarkList ?? []
-  const inputValueSignal = useSignal('')
+  const [inputValue, setInputValue] = useState('')
   const email = useSelector((state) => state.user.email)
 
   useEffect(() => {
@@ -36,6 +35,15 @@ export const Search = (): React.JSX.Element => {
       disablePortal
       disabled={isCopyModalVisible}
       freeSolo={options.length !== 0} // show MUI autocomplete even if no options
+      loading={getBookmarkListQuery.isPending}
+      loadingText={email === null ? 'Not logged in' : 'Loading...'}
+      onClose={() => {
+        setIsAutocompleteOpen(false)
+      }}
+      inputValue={inputValue}
+      onInputChange={(_event, newInputValue) => {
+        setInputValue(newInputValue)
+      }}
       getOptionLabel={(option: string | ResBody['bookmarkList'][number]) => {
         if (typeof option === 'string') {
           return option
@@ -43,16 +51,7 @@ export const Search = (): React.JSX.Element => {
 
         return option.name + option.category + option.desc
       }}
-      inputValue={inputValueSignal.value}
-      loading={getBookmarkListQuery.isPending}
-      loadingText={email === null ? 'Not logged in :(' : 'Loading...'}
       noOptionsText='No saved bookmarks'
-      onClose={() => {
-        setIsAutocompleteOpen(false)
-      }}
-      onInputChange={(_event, newInputValue) => {
-        inputValueSignal.value = newInputValue
-      }}
       options={options}
       popupIcon={null}
       renderInput={renderInput}
@@ -63,7 +62,7 @@ export const Search = (): React.JSX.Element => {
         return (
           <SearchOption
             key={option.id}
-            inputValueSignal={inputValueSignal}
+            inputValue={inputValue}
             option={option}
           />
         )

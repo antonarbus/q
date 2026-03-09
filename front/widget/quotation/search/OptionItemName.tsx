@@ -4,7 +4,7 @@ import { getTextWithBoldSubStringAsJsx } from '@shared/util/getTextWithBoldSubSt
 import { PiBooks } from 'react-icons/pi'
 
 type Props = {
-  inputValueSignal: { value: string }
+  inputValue: string
   option: ResBody['bookmarkList'][number]
 }
 
@@ -39,11 +39,11 @@ export const OptionItemName = (props: Props): React.JSX.Element => {
           name:
         </span>
       </span>
-      {props.inputValueSignal.value === ''
+      {props.inputValue === ''
         ? props.option.name
         : getTextWithBoldSubStringAsJsx({
-            text: props.option.name ?? '',
-            subString: props.inputValueSignal.value,
+            text: props.option.name,
+            subString: props.inputValue,
           })}
     </Box>
   )

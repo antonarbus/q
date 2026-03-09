@@ -5,22 +5,22 @@ import { useCallback } from 'react'
 import { BsFileEarmarkText } from 'react-icons/bs'
 
 type Props = {
-  inputValueSignal: { value: string }
+  inputValue: string
   option: ResBody['bookmarkList'][number]
 }
 
 export const OptionItemDescription = (props: Props): React.JSX.Element => {
   const getHighlightedDescription = useCallback((): React.ReactNode => {
-    if (props.inputValueSignal.value !== '') {
+    if (props.inputValue !== '') {
       const boldSubString = getTextWithBoldSubStringAsJsx({
-        text: props.option.desc ?? '',
-        subString: props.inputValueSignal.value,
+        text: props.option.desc,
+        subString: props.inputValue,
       })
 
       return boldSubString
     }
 
-    if (props.option.desc === undefined) {
+    if (props.option.desc === '') {
       return '-'
     }
 
@@ -29,7 +29,7 @@ export const OptionItemDescription = (props: Props): React.JSX.Element => {
     }
 
     return '-'
-  }, [props.inputValueSignal.value, props.option.desc])
+  }, [props.inputValue, props.option.desc])
 
   return (
     <Box
