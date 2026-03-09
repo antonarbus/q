@@ -24,7 +24,7 @@ import { cls } from '@shared/cls'
  *      → showCopyModal (matching the order used by CopyBlockIcon).
  *   4. removeBlockFromPosThousandReducer → component returns null.
  */
-export const BookmarkCopyPreviewRenderer = (): React.ReactNode => {
+export const BookmarkCopyPreviewCapturer = (): React.ReactNode => {
   const containerRef = useRef<HTMLDivElement>(null)
 
   // Hack! Set bookmark item at pos 1000 not to interfere with main block items
