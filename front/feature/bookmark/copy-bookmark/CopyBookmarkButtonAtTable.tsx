@@ -5,28 +5,19 @@ import { copySlice } from '@entity/copy/copySlice'
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { IconButton, Tooltip } from '@mui/material'
 import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
-import { dispatch, useSelector } from '@shared/lib/redux'
-import { useEffect, useState } from 'react'
+import { dispatch } from '@shared/lib/redux'
+import { getPreviewPreparingPromise } from '@widget/copy/useBookmarkCopyPreviewCapturer'
+import { useState } from 'react'
 import { MdCopyAll } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
 
-export const CopyBookmarkButton = (props: UrlParam): React.JSX.Element => {
+export const CopyBookmarkButtonAtTable = (
+  props: UrlParam,
+): React.JSX.Element => {
   const getBookmarkMutation = useGetBookmarkMutation()
 
   const [isSpinner, setIsSpinner] = useState(false)
-
-  const isPreviewPreparing = useSelector(
-    (state) => state.copy.isPreviewPreparing,
-  )
-
-  useEffect(() => {
-    if (isPreviewPreparing === false) {
-      requestAnimationFrame(() => {
-        setIsSpinner(false)
-      })
-    }
-  }, [isPreviewPreparing])
 
   useUpdateEffect(() => {
     if (getBookmarkMutation.isError === true) {
@@ -64,6 +55,10 @@ export const CopyBookmarkButton = (props: UrlParam): React.JSX.Element => {
               y: event.clientY,
             }),
           )
+
+          await getPreviewPreparingPromise()
+
+          setIsSpinner(false)
         }}
         size='small'
         sx={{

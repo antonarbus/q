@@ -8,6 +8,7 @@ import { PaperComponent } from './PaperComponent'
 import { SearchOption } from './SearchOption'
 import { renderInput } from './renderInput'
 import { useCopyBookmarkAtSearch } from '@feature/bookmark/copy-bookmark/useCopyBookmarkAtSearch'
+// todo: this should be in entity, maybe the whole component to be in entity or feature, it is strange configuration thing
 
 export const Search = (): React.JSX.Element => {
   const getBookmarkListQuery = useGetBookmarkListQuery()

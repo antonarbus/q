@@ -5,6 +5,7 @@ import { dispatch } from '@shared/lib/redux'
 import { useCallback } from 'react'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
+import { getPreviewPreparingPromise } from '@widget/copy/useBookmarkCopyPreviewCapturer'
 
 type Params = {
   bookmarkId: string
@@ -49,6 +50,8 @@ export const useCopyBookmarkAtSearch = (): Res => {
           y: params.cursorPos.y,
         }),
       )
+
+      await getPreviewPreparingPromise()
     },
     [getBookmarkMutation],
   )

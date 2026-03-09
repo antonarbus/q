@@ -1,1 +1,1 @@
-export { CopyBookmarkButton } from './CopyBookmarkButton'
+export { CopyBookmarkButtonAtTable as CopyBookmarkButton } from './CopyBookmarkButtonAtTable'
