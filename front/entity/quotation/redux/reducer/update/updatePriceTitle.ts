@@ -1,18 +1,18 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { Quotation } from '@back/entity/quotation/schema'
 
-export const updateBlockHeightReducer = (
+export const updatePriceTitle = (
   state: Quotation,
   action: PayloadAction<{
     blockIndex: number
-    height: number
+    html: string
   }>,
 ): void => {
   const block = state.blocks[action.payload.blockIndex]
 
-  if (block === undefined) {
+  if (block?.type !== 'price') {
     return
   }
 
-  block.height = action.payload.height
+  block.title.html = action.payload.html
 }

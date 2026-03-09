@@ -1,24 +1,25 @@
+import type { CellKey, Quotation } from '@back/entity/quotation/schema'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { Quotation } from '@back/entity/quotation/schema'
 import { getCellFromState } from '../../getter/getCellFromState'
 
-export const pinPriceReducer = (
+export const showCellPin = (
   state: Quotation,
   action: PayloadAction<{
     blockIndex: number
     rowIndex: number
+    cellKey: CellKey
   }>,
 ): void => {
-  const priceCell = getCellFromState({
+  const cell = getCellFromState({
     blockIndex: action.payload.blockIndex,
     rowIndex: action.payload.rowIndex,
-    cellKey: 'price',
+    cellKey: action.payload.cellKey,
     state,
   })
 
-  if (priceCell === undefined) {
+  if (cell === undefined) {
     return
   }
 
-  priceCell.pin.isPinned = priceCell.pin.isPinned === false
+  cell.pin.isShown = true
 }

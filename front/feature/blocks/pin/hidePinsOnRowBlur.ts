@@ -30,7 +30,7 @@ export const hidePinsOnRowBlur = (props: Props): void => {
 
   if (isItemPricePinShown === true) {
     dispatch(
-      quotationSlice.actions.hideCellPinReducer({
+      quotationSlice.actions.hideCellPin({
         blockIndex: props.blockIndex,
         rowIndex: props.rowIndex,
         cellKey: 'itemPrice',
@@ -42,7 +42,7 @@ export const hidePinsOnRowBlur = (props: Props): void => {
 
   if (isQtyPinShown === true) {
     dispatch(
-      quotationSlice.actions.hideCellPinReducer({
+      quotationSlice.actions.hideCellPin({
         blockIndex: props.blockIndex,
         rowIndex: props.rowIndex,
         cellKey: 'qty',

@@ -40,7 +40,7 @@ export const useUpdateTotalPriceIfPricesAboveWereChanged = (
     })
 
     dispatch(
-      quotationSlice.actions.updatePriceReducer({
+      quotationSlice.actions.updatePrice({
         blockIndex: props.blockIndex,
         html: updatedHtml,
         value: totalPrice,

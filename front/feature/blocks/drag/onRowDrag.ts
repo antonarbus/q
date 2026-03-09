@@ -44,7 +44,5 @@ export const onRowDragEnd =
 
     const reOrderedRows = arrayMoveImmutable(rows, oldIndex, newIndex)
 
-    dispatch(
-      quotationSlice.actions.reOrderRowsReducer({ reOrderedRows, blockIndex }),
-    )
+    dispatch(quotationSlice.actions.reOrderRows({ reOrderedRows, blockIndex }))
   }

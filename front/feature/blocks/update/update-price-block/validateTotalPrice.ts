@@ -44,7 +44,7 @@ export const validateTotalPrice = (props: Props): void => {
   })
 
   dispatch(
-    quotationSlice.actions.updatePriceReducer({
+    quotationSlice.actions.updatePrice({
       blockIndex: props.blockIndex,
       html: updatedHtml,
       value: price,

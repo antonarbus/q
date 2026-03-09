@@ -29,7 +29,7 @@ export const useLoadShareQuotationModalWithDirectLink = (
   useUpdateEffect(() => {
     if (getQuotationMutation.data?.quotation !== undefined) {
       dispatch(
-        quotationSlice.actions.loadQuotationReducer({
+        quotationSlice.actions.loadQuotation({
           quotation: getQuotationMutation.data.quotation,
         }),
       )

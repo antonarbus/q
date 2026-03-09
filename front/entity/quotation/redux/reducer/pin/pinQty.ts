@@ -2,7 +2,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import type { Quotation } from '@back/entity/quotation/schema'
 import { getCellFromState } from '../../getter/getCellFromState'
 
-export const pinItemPriceReducer = (
+export const pinQty = (
   state: Quotation,
   action: PayloadAction<{
     blockIndex: number
@@ -20,7 +20,7 @@ export const pinItemPriceReducer = (
     return
   }
 
-  itemPriceCell.pin.isPinned = true
+  itemPriceCell.pin.isPinned = false
 
   const qtyCell = getCellFromState({
     blockIndex: action.payload.blockIndex,
@@ -33,5 +33,5 @@ export const pinItemPriceReducer = (
     return
   }
 
-  qtyCell.pin.isPinned = false
+  qtyCell.pin.isPinned = true
 }

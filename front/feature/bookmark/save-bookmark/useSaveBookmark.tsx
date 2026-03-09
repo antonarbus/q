@@ -78,14 +78,14 @@ export const useSaveBookmark = (props: Props): Res => {
     }
 
     dispatch(
-      quotationSlice.actions.updateBlockHeightReducer({
+      quotationSlice.actions.updateBlockHeight({
         blockIndex: BOOKMARK_POS_AT_BLOCKS,
         height: paperElement.clientHeight,
       }),
     )
 
     dispatch(
-      quotationSlice.actions.updateBlockWidthReducer({
+      quotationSlice.actions.updateBlockWidth({
         blockIndex: BOOKMARK_POS_AT_BLOCKS,
         width: paperElement.clientWidth,
       }),

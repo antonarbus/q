@@ -2,7 +2,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import type { Quotation } from '@back/entity/quotation/schema'
 import { getRowFromState } from '../../getter/getRowFromState'
 
-export const updateRowHeightAndWidthReducer = (
+export const updateRowHeightAndWidth = (
   state: Quotation,
   action: PayloadAction<{
     blockIndex: number

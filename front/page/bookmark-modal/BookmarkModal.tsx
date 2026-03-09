@@ -28,7 +28,7 @@ export const BookmarkModal = (): React.JSX.Element => {
   })
 
   useUnmount(() => {
-    dispatch(quotationSlice.actions.removeBlockFromPosThousandReducer())
+    dispatch(quotationSlice.actions.removeBlockFromPosThousand())
   })
 
   const navigateUp = (): void => {

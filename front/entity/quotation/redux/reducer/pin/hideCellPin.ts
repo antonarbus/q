@@ -2,7 +2,7 @@ import type { CellKey, Quotation } from '@back/entity/quotation/schema'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { getCellFromState } from '../../getter/getCellFromState'
 
-export const showCellPinReducer = (
+export const hideCellPin = (
   state: Quotation,
   action: PayloadAction<{
     blockIndex: number
@@ -21,5 +21,5 @@ export const showCellPinReducer = (
     return
   }
 
-  cell.pin.isShown = true
+  cell.pin.isShown = false
 }

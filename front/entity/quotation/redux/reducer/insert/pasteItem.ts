@@ -103,7 +103,7 @@ const pasteRow = (
   }
 }
 
-export const pasteItemReducer = (
+export const pasteItem = (
   state: Quotation,
   action: PayloadAction<{
     id: string

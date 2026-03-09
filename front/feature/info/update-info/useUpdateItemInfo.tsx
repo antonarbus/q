@@ -11,7 +11,7 @@ type Props = {
 export const useUpdateItemInfo = (props: Props): void => {
   useSignalEffect(() => {
     dispatch(
-      quotationSlice.actions.updateItemInfoReducer({
+      quotationSlice.actions.updateItemInfo({
         id: props.id,
         name: props.infoFormValues.nameSignal.value,
         category: props.infoFormValues.categorySignal.value,

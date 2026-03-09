@@ -49,7 +49,7 @@ export const formatBookmarkedRowCellNumber = (props: Props): Res => {
   }
 
   dispatch(
-    quotationSlice.actions.updateBookmarkedRowCellReducer({
+    quotationSlice.actions.updateBookmarkedRowCell({
       html: newHtml,
       value: props.roundToTwoDecimals === true ? roundedValue : cell.value,
       cellKey: props.cellKey,

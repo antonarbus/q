@@ -21,7 +21,7 @@ export const pinQtyCell = (props: Props): void => {
   }
 
   dispatch(
-    quotationSlice.actions.pinQtyReducer({
+    quotationSlice.actions.pinQty({
       blockIndex: props.blockIndex,
       rowIndex: props.rowIndex,
     }),

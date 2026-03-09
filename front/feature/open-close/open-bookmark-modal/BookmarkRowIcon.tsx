@@ -66,7 +66,7 @@ export const BookmarkRowIcon = (): React.ReactNode => {
             }
 
             dispatch(
-              quotationSlice.actions.loadBlockAtPosThousandReducer({
+              quotationSlice.actions.loadBlockAtPosThousand({
                 block: rowFromStore,
               }),
             )

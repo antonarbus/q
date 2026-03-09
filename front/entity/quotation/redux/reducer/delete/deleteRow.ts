@@ -2,7 +2,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import type { Quotation } from '@back/entity/quotation/schema'
 import { getBoqBlockFromState } from '../../getter/getBoqBlockFromState'
 
-export const deleteRowReducer = (
+export const deleteRow = (
   state: Quotation,
   action: PayloadAction<{
     blockIndex: number

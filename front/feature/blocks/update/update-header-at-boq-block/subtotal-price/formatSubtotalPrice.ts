@@ -33,7 +33,7 @@ export const formatSubtotalPrice = (props: Props): void => {
   }
 
   dispatch(
-    quotationSlice.actions.updateSubTotalPriceReducer({
+    quotationSlice.actions.updateSubTotalPrice({
       blockIndex: props.blockIndex,
       html: newHtml,
       value: roundedValue,

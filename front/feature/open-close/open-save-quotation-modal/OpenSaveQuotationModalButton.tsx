@@ -28,7 +28,7 @@ export const OpenSaveQuotationModalButton = (
       dispatch(textSlice.actions.setNotEditable())
 
       dispatch(
-        quotationSlice.actions.loadQuotationReducer({
+        quotationSlice.actions.loadQuotation({
           quotation: quotationMutation.data.quotation,
         }),
       )

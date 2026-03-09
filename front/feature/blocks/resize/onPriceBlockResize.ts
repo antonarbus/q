@@ -11,7 +11,7 @@ export const onPriceBlockResizeStop: OnBlockResizeStop = (props) => {
   }
 
   dispatch(
-    quotationSlice.actions.updateBlockWidthReducer({
+    quotationSlice.actions.updateBlockWidth({
       blockIndex: props.blockIndex,
       width,
     }),

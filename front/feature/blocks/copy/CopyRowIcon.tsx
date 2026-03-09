@@ -49,7 +49,7 @@ export const CopyRowIcon = (): React.JSX.Element => {
             dispatch(textSlice.actions.setNotEditable())
 
             dispatch(
-              quotationSlice.actions.updateRowHeightAndWidthReducer({
+              quotationSlice.actions.updateRowHeightAndWidth({
                 blockIndex: block.index,
                 rowIndex: row.index,
                 height: rowElement.clientHeight,

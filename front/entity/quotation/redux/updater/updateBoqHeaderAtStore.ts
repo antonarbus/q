@@ -42,7 +42,7 @@ export const updateBoqHeaderAtStore = (props: Props): Res => {
   })
 
   dispatch(
-    quotationSlice.actions.updateBoqHeaderTextReducer({
+    quotationSlice.actions.updateBoqHeaderText({
       blockIndex: props.blockIndex,
       html,
       value: cellValueFromHtml,

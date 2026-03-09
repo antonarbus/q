@@ -41,7 +41,7 @@ export const useLoadBookmarkModalOpenedWithDirectLink = (
 
     if (getBookmarkMutation.isSuccess === true) {
       dispatch(
-        quotationSlice.actions.loadBlockAtPosThousandReducer({
+        quotationSlice.actions.loadBlockAtPosThousand({
           block: getBookmarkMutation.data.bookmark,
         }),
       )

@@ -92,12 +92,12 @@ export const useLoadQuotation = (): void => {
           )
 
           if (backToQuotationRef.current !== null) {
-            dispatch(quotationSlice.actions.resetQuotationReducer())
+            dispatch(quotationSlice.actions.resetQuotation())
 
             await asyncDelay(0)
 
             dispatch(
-              quotationSlice.actions.loadQuotationReducer({
+              quotationSlice.actions.loadQuotation({
                 quotation: backToQuotationRef.current,
               }),
             )
@@ -143,12 +143,12 @@ export const useLoadQuotation = (): void => {
             }),
           )
 
-          dispatch(quotationSlice.actions.resetQuotationReducer())
+          dispatch(quotationSlice.actions.resetQuotation())
 
           await asyncDelay(0)
 
           dispatch(
-            quotationSlice.actions.loadQuotationReducer({
+            quotationSlice.actions.loadQuotation({
               quotation: newQuotationTemplate,
             }),
           )
@@ -190,7 +190,7 @@ export const useLoadQuotation = (): void => {
           )
 
           dispatch(appSlice.actions.setBackgroundMessage({ message: '' }))
-          dispatch(quotationSlice.actions.resetQuotationReducer())
+          dispatch(quotationSlice.actions.resetQuotation())
           dispatch(navSlice.actions.removeUnderlineFromTopNav())
 
           dispatch(
@@ -219,14 +219,14 @@ export const useLoadQuotation = (): void => {
   useUpdateEffect(() => {
     if (getQuotationMutation.isSuccess === true) {
       dispatch(
-        quotationSlice.actions.loadQuotationReducer({
+        quotationSlice.actions.loadQuotation({
           quotation: getQuotationMutation.data.quotation,
         }),
       )
 
       if (getQuotationMutation.data.quotation.permissionLevel === 'FORBIDDEN') {
         dispatch(
-          quotationSlice.actions.loadQuotationReducer({
+          quotationSlice.actions.loadQuotation({
             quotation: getQuotationMutation.data.quotation,
           }),
         )

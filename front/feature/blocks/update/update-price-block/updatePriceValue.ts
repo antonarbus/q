@@ -32,7 +32,7 @@ export const updatePriceValue = (props: Props): void => {
   const cellValueFromHtml = getNumberFromString({ string: cellTextContent })
 
   dispatch(
-    quotationSlice.actions.updatePriceReducer({
+    quotationSlice.actions.updatePrice({
       blockIndex: props.blockIndex,
       html,
       value: cellValueFromHtml,

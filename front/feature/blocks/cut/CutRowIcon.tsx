@@ -48,7 +48,7 @@ export const CutRowIcon = (): React.JSX.Element => {
             dispatch(textSlice.actions.setNotEditable())
 
             dispatch(
-              quotationSlice.actions.updateRowHeightAndWidthReducer({
+              quotationSlice.actions.updateRowHeightAndWidth({
                 blockIndex: block.index,
                 rowIndex: row.index,
                 height: rowElement.clientHeight,
@@ -88,7 +88,7 @@ export const CutRowIcon = (): React.JSX.Element => {
             }
 
             dispatch(
-              quotationSlice.actions.deleteRowReducer({
+              quotationSlice.actions.deleteRow({
                 blockIndex: block.index,
                 rowIndex: row.index,
               }),

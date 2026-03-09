@@ -11,7 +11,7 @@ type Props = {
 
 export const showHidePricePins = (props: Props): void => {
   dispatch(
-    quotationSlice.actions.showBoqPriceCellPinsReducer({
+    quotationSlice.actions.showBoqPriceCellPins({
       blockIndex: props.blockIndex,
     }),
   )
@@ -39,7 +39,7 @@ export const showHidePricePins = (props: Props): void => {
     }
 
     dispatch(
-      quotationSlice.actions.hideBoqPriceCellPinsReducer({
+      quotationSlice.actions.hideBoqPriceCellPins({
         blockIndex: props.blockIndex,
       }),
     )

@@ -2,46 +2,46 @@ import { createSlice, type Reducer } from '@reduxjs/toolkit'
 import type { Quotation } from '@back/entity/quotation/schema'
 
 // Delete operations
-import { deleteBlockReducer } from './reducer/delete/deleteBlockReducer'
-import { deleteRowReducer } from './reducer/delete/deleteRowReducer'
+import { deleteBlock } from './reducer/delete/deleteBlock'
+import { deleteRow } from './reducer/delete/deleteRow'
 
 // Insert/paste operations
-import { pasteItemReducer } from './reducer/insert/pasteItemReducer'
-import { reOrderBlocksReducer } from './reducer/insert/reOrderItemsReducer'
-import { reOrderRowsReducer } from './reducer/insert/reOrderRowsReducer'
+import { pasteItem } from './reducer/insert/pasteItem'
+import { reOrderBlocks } from './reducer/insert/reOrderItems'
+import { reOrderRows } from './reducer/insert/reOrderRows'
 
 // Layout operations
-import { updateBlockHeightReducer } from './reducer/layout/updateBlockHeightReducer'
-import { updateBlockWidthReducer } from './reducer/layout/updateBlockWidthReducer'
-import { updateColWidthReducer } from './reducer/layout/updateColWidthReducer'
-import { updateRowHeightAndWidthReducer } from './reducer/layout/updateRowHeightAndWidthReducer'
+import { updateBlockHeight } from './reducer/layout/updateBlockHeight'
+import { updateBlockWidth } from './reducer/layout/updateBlockWidth'
+import { updateColWidth } from './reducer/layout/updateColWidth'
+import { updateRowHeightAndWidth } from './reducer/layout/updateRowHeightAndWidth'
 
 // Load operations
-import { loadBlockAtPosThousandReducer } from './reducer/load/loadBlockAtPosThousandReducer'
-import { loadQuotationReducer } from './reducer/load/loadItemsReducer'
-import { removeBlockFromPosThousandReducer } from './reducer/load/removeBlockFromPosThousandReducer'
+import { loadBlockAtPosThousand } from './reducer/load/loadBlockAtPosThousand'
+import { loadQuotation } from './reducer/load/loadQuotation'
+import { removeBlockFromPosThousand } from './reducer/load/removeBlockFromPosThousand'
 
 // Pin operations
-import { hideBoqItemPinsReducer } from './reducer/pin/hideBoqItemPinsReducer'
-import { hideBoqPriceCellPinsReducer } from './reducer/pin/hideBoqPriceCellPinsReducer'
-import { hideCellPinReducer } from './reducer/pin/hideCellPinReducer'
-import { pinItemPriceReducer } from './reducer/pin/pinItemPriceReducer'
-import { pinPriceReducer } from './reducer/pin/pinPriceReducer'
-import { pinQtyReducer } from './reducer/pin/pinQtyReducer'
-import { showBoqPriceCellPinsReducer } from './reducer/pin/showBoqPriceCellPinsReducer'
-import { showCellPinReducer } from './reducer/pin/showCellPinReducer'
+import { hideBoqItemPins } from './reducer/pin/hideBoqItemPins'
+import { hideBoqPriceCellPins } from './reducer/pin/hideBoqPriceCellPins'
+import { hideCellPin } from './reducer/pin/hideCellPin'
+import { pinItemPrice } from './reducer/pin/pinItemPrice'
+import { pinPrice } from './reducer/pin/pinPrice'
+import { pinQty } from './reducer/pin/pinQty'
+import { showBoqPriceCellPins } from './reducer/pin/showBoqPriceCellPins'
+import { showCellPin } from './reducer/pin/showCellPin'
 
 // Update operations
-import { updateBlockTextReducer } from './reducer/update/updateBlockTextReducer'
-import { updateBookmarkedRowCellReducer } from './reducer/update/updateBookmarkedRowCellReducer'
-import { updateBoqColumnNameTextReducer } from './reducer/update/updateBoqColumnNameTextReducer'
-import { updateBoqHeaderTextReducer } from './reducer/update/updateBoqHeaderTextReducer'
-import { updateCellReducer } from './reducer/update/updateCellReducer'
-import { updateItemInfoReducer } from './reducer/update/updateItemInfoReducer'
-import { updatePriceReducer } from './reducer/update/updatePriceReducer'
-import { updatePriceTitleReducer } from './reducer/update/updatePriceTitleReducer'
-import { updateQuotationInfoReducer } from './reducer/update/updateQuotationInfoReducer'
-import { updateSubTotalPriceReducer } from './reducer/update/updateSubTotalPriceReducer'
+import { updateBlockText } from './reducer/update/updateBlockText'
+import { updateBookmarkedRowCell } from './reducer/update/updateBookmarkedRowCell'
+import { updateBoqColumnNameText } from './reducer/update/updateBoqColumnNameText'
+import { updateBoqHeaderText } from './reducer/update/updateBoqHeaderText'
+import { updateCell } from './reducer/update/updateCell'
+import { updateItemInfo } from './reducer/update/updateItemInfo'
+import { updatePrice } from './reducer/update/updatePrice'
+import { updatePriceTitle } from './reducer/update/updatePriceTitle'
+import { updateQuotationInfo } from './reducer/update/updateQuotationInfo'
+import { updateSubTotalPrice } from './reducer/update/updateSubTotalPrice'
 
 const initialState: Quotation = {
   id: '',
@@ -68,37 +68,37 @@ export const quotationSlice = createSlice({
   name: 'quotation',
   initialState,
   reducers: {
-    loadQuotationReducer,
-    loadBlockAtPosThousandReducer,
-    removeBlockFromPosThousandReducer,
-    resetQuotationReducer: () => initialState,
-    deleteRowReducer,
-    deleteBlockReducer,
-    hideBoqItemPinsReducer,
-    hideCellPinReducer,
-    pasteItemReducer,
-    pinItemPriceReducer,
-    pinQtyReducer,
-    pinPriceReducer,
-    reOrderRowsReducer,
-    reOrderBlocksReducer,
-    showCellPinReducer,
-    showBoqPriceCellPinsReducer,
-    hideBoqPriceCellPinsReducer,
-    updateCellReducer,
-    updateBookmarkedRowCellReducer,
-    updateBoqColumnNameTextReducer,
-    updateBoqHeaderTextReducer,
-    updateRowHeightAndWidthReducer,
-    updateColWidthReducer,
-    updateBlockHeightReducer,
-    updateBlockTextReducer,
-    updateBlockWidthReducer,
-    updateSubTotalPriceReducer,
-    updatePriceTitleReducer,
-    updatePriceReducer,
-    updateQuotationInfoReducer,
-    updateItemInfoReducer,
+    loadQuotation,
+    loadBlockAtPosThousand,
+    removeBlockFromPosThousand,
+    resetQuotation: () => initialState,
+    deleteRow,
+    deleteBlock,
+    hideBoqItemPins,
+    hideCellPin,
+    pasteItem,
+    pinItemPrice,
+    pinQty,
+    pinPrice,
+    reOrderRows,
+    reOrderBlocks,
+    showCellPin,
+    showBoqPriceCellPins,
+    hideBoqPriceCellPins,
+    updateCell,
+    updateBookmarkedRowCell,
+    updateBoqColumnNameText,
+    updateBoqHeaderText,
+    updateRowHeightAndWidth,
+    updateColWidth,
+    updateBlockHeight,
+    updateBlockText,
+    updateBlockWidth,
+    updateSubTotalPrice,
+    updatePriceTitle,
+    updatePrice,
+    updateQuotationInfo,
+    updateItemInfo,
   },
 })
 

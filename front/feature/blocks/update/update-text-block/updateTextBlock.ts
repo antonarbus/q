@@ -27,7 +27,7 @@ export const updateTextBlock = (props: Props): void => {
   }
 
   dispatch(
-    quotationSlice.actions.updateBlockTextReducer({
+    quotationSlice.actions.updateBlockText({
       blockIndex: props.blockIndex,
       html,
     }),

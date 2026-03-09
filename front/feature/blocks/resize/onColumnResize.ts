@@ -20,7 +20,7 @@ export const onColumnResizeStart = (props: Props): void => {
   dispatch(textSlice.actions.setNotEditable())
 
   dispatch(
-    quotationSlice.actions.updateColWidthReducer({
+    quotationSlice.actions.updateColWidth({
       blockIndex: props.blockIndex,
       width,
       boqColumnKey: props.boqColumnKey,
@@ -28,7 +28,7 @@ export const onColumnResizeStart = (props: Props): void => {
   )
 
   dispatch(
-    quotationSlice.actions.hideBoqItemPinsReducer({
+    quotationSlice.actions.hideBoqItemPins({
       blockIndex: props.blockIndex,
     }),
   )
@@ -53,7 +53,7 @@ export const onColumnResize = (props: Props): void => {
   }
 
   dispatch(
-    quotationSlice.actions.updateColWidthReducer({
+    quotationSlice.actions.updateColWidth({
       blockIndex: props.blockIndex,
       width,
       boqColumnKey: props.boqColumnKey,
@@ -67,7 +67,7 @@ export const onColumnResizeStop = (props: Props): void => {
   lockScrollOnce()
 
   dispatch(
-    quotationSlice.actions.updateColWidthReducer({
+    quotationSlice.actions.updateColWidth({
       blockIndex: props.blockIndex,
       width: columnWidth,
       boqColumnKey: props.boqColumnKey,
@@ -79,7 +79,7 @@ export const onColumnResizeStop = (props: Props): void => {
   )?.clientWidth
 
   dispatch(
-    quotationSlice.actions.updateBlockWidthReducer({
+    quotationSlice.actions.updateBlockWidth({
       blockIndex: props.blockIndex,
       width: itemWidth ?? 0,
     }),

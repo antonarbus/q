@@ -21,7 +21,7 @@ export const pinItemPriceCell = (props: Props): void => {
   }
 
   dispatch(
-    quotationSlice.actions.pinItemPriceReducer({
+    quotationSlice.actions.pinItemPrice({
       blockIndex: props.blockIndex,
       rowIndex: props.rowIndex,
     }),

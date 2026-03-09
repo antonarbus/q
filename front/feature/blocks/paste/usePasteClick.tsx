@@ -63,7 +63,7 @@ const pasteItemOnClick = (): void => {
   lockScrollOnce()
 
   dispatch(
-    quotationSlice.actions.pasteItemReducer({
+    quotationSlice.actions.pasteItem({
       item: topItemInCopyModal,
       id: state.copy.place.id,
       newItemId,

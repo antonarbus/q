@@ -45,7 +45,7 @@ export const DeleteRowIcon = (): React.JSX.Element => {
             })
 
             dispatch(
-              quotationSlice.actions.deleteRowReducer({
+              quotationSlice.actions.deleteRow({
                 blockIndex: block.index,
                 rowIndex: row.index,
               }),

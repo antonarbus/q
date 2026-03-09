@@ -42,7 +42,7 @@ export const CopyBookmarkButtonAtTable = (
           // when CopyBookmarkCapture renders and its sub-components read from
           // getState().quotation.blocks[BOOKMARK_POS_AT_BLOCKS].
           dispatch(
-            quotationSlice.actions.loadBlockAtPosThousandReducer({
+            quotationSlice.actions.loadBlockAtPosThousand({
               block: data.bookmark,
             }),
           )

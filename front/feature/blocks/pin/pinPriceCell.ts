@@ -8,7 +8,7 @@ type Props = {
 
 export const pinPriceCell = (props: Props): void => {
   dispatch(
-    quotationSlice.actions.pinPriceReducer({
+    quotationSlice.actions.pinPrice({
       blockIndex: props.blockIndex,
       rowIndex: props.rowIndex,
     }),

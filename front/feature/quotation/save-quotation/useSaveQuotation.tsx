@@ -84,7 +84,7 @@ export const useSaveQuotation = (props: Props): Res => {
       dispatch(navSlice.actions.removeUnderlineFromTopNav())
 
       dispatch(
-        quotationSlice.actions.loadQuotationReducer({
+        quotationSlice.actions.loadQuotation({
           quotation: {
             ...getState().quotation,
             ...saveQuotationMutation.data.quotation,

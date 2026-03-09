@@ -8,7 +8,7 @@ type Payload = {
 
 type Reducer = (state: Quotation, action: PayloadAction<Payload>) => void
 
-export const loadBlockAtPosThousandReducer: Reducer = (state, action) => {
+export const loadBlockAtPosThousand: Reducer = (state, action) => {
   const clonedBlock = structuredClone(action.payload.block)
   state.blocks[BOOKMARK_POS_AT_BLOCKS] = clonedBlock
 }

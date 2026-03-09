@@ -30,7 +30,7 @@ export const updateColumnCellAtStore = (props: Props): void => {
   }
 
   dispatch(
-    quotationSlice.actions.updateBoqColumnNameTextReducer({
+    quotationSlice.actions.updateBoqColumnNameText({
       blockIndex: props.blockIndex,
       html,
       boqColumnKey: props.boqColumnKey,

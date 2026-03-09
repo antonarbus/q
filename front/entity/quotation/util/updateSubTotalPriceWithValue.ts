@@ -48,7 +48,7 @@ export const updateSubTotalPriceWithValue = (props: Props): Res => {
   })
 
   dispatch(
-    quotationSlice.actions.updateSubTotalPriceReducer({
+    quotationSlice.actions.updateSubTotalPrice({
       blockIndex: props.blockIndex,
       html: updatedHtml,
       value: props.value,

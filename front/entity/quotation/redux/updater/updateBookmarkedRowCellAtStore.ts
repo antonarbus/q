@@ -39,7 +39,7 @@ export const updateBookmarkedRowCellAtStore = (props: Props): Res => {
   })
 
   dispatch(
-    quotationSlice.actions.updateBookmarkedRowCellReducer({
+    quotationSlice.actions.updateBookmarkedRowCell({
       html: props.html,
       value: cellValueFromHtml,
       cellKey: props.cellKey,

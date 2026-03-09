@@ -1,7 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { Quotation } from '@back/entity/quotation/schema'
 
-export const updatePriceReducer = (
+export const updatePrice = (
   state: Quotation,
   action: PayloadAction<{
     blockIndex: number

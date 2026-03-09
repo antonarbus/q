@@ -7,6 +7,6 @@ type Payload = {
 
 type Reducer = (state: Quotation, action: PayloadAction<Payload>) => Quotation
 
-export const loadQuotationReducer: Reducer = (_state, action) => {
+export const loadQuotation: Reducer = (_state, action) => {
   return action.payload.quotation
 }

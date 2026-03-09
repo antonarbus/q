@@ -2,7 +2,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import type { Quotation } from '@back/entity/quotation/schema'
 import { getRowsFromState } from '../../getter/getRowsFromState'
 
-export const showBoqPriceCellPinsReducer = (
+export const hideBoqPriceCellPins = (
   state: Quotation,
   action: PayloadAction<{
     blockIndex: number
@@ -18,6 +18,6 @@ export const showBoqPriceCellPinsReducer = (
   }
 
   rows.forEach((row) => {
-    row.price.pin.isShown = true
+    row.price.pin.isShown = false
   })
 }

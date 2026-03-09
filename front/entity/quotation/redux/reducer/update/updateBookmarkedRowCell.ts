@@ -2,7 +2,7 @@ import { BOOKMARK_POS_AT_BLOCKS } from '@entity/quotation/const/bookmarkPosAtBlo
 import type { CellKey, Quotation } from '@back/entity/quotation/schema'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
-export const updateBookmarkedRowCellReducer = (
+export const updateBookmarkedRowCell = (
   state: Quotation,
   action: PayloadAction<{
     html: string

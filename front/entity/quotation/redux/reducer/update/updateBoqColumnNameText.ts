@@ -1,11 +1,11 @@
 import type { BoqColumnKey, Quotation } from '@back/entity/quotation/schema'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
-export const updateColWidthReducer = (
+export const updateBoqColumnNameText = (
   state: Quotation,
   action: PayloadAction<{
     blockIndex: number
-    width: number
+    html: string
     boqColumnKey: BoqColumnKey
   }>,
 ): void => {
@@ -19,5 +19,5 @@ export const updateColWidthReducer = (
     return
   }
 
-  block.boq.column[action.payload.boqColumnKey].width = action.payload.width
+  block.boq.column[action.payload.boqColumnKey].html = action.payload.html
 }

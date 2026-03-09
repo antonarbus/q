@@ -37,7 +37,7 @@ export const useCopyBookmarkAtSearch = (): Res => {
       })
 
       dispatch(
-        quotationSlice.actions.loadBlockAtPosThousandReducer({
+        quotationSlice.actions.loadBlockAtPosThousand({
           block: data.bookmark,
         }),
       )

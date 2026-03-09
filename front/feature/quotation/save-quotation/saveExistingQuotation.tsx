@@ -64,7 +64,7 @@ export const saveExistingQuotation = async (): Promise<void> => {
       void router.navigate(`/${data.quotation.id}`)
 
       dispatch(
-        quotationSlice.actions.loadQuotationReducer({
+        quotationSlice.actions.loadQuotation({
           quotation: { ...getState().quotation, ...data.quotation },
         }),
       )

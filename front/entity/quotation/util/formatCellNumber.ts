@@ -52,7 +52,7 @@ export const formatCellNumber = (props: Props): Res => {
   }
 
   dispatch(
-    quotationSlice.actions.updateCellReducer({
+    quotationSlice.actions.updateCell({
       blockIndex: props.blockIndex,
       rowIndex: props.rowIndex,
       html: newHtml,

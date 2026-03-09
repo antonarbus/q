@@ -70,7 +70,7 @@ export const DeleteBlockIcon = (): React.JSX.Element => {
             dispatch(textSlice.actions.setNotEditable())
 
             dispatch(
-              quotationSlice.actions.deleteBlockReducer({
+              quotationSlice.actions.deleteBlock({
                 id: blockToDelete.id,
               }),
             )

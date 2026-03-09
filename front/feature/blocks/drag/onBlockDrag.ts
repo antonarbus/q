@@ -40,5 +40,5 @@ export const onBlockDragEnd =
       newIndex,
     )
 
-    dispatch(quotationSlice.actions.reOrderBlocksReducer({ reOrderedItems }))
+    dispatch(quotationSlice.actions.reOrderBlocks({ reOrderedItems }))
   }

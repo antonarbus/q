@@ -1,7 +1,7 @@
 import type { CellKey, Quotation } from '@back/entity/quotation/schema'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
-export const updateCellReducer = (
+export const updateCell = (
   state: Quotation,
   action: PayloadAction<{
     blockIndex: number

@@ -22,7 +22,7 @@ export const OpenBookmarkModalButton = (props: UrlParam): React.JSX.Element => {
       dispatch(textSlice.actions.setNotEditable())
 
       dispatch(
-        quotationSlice.actions.loadBlockAtPosThousandReducer({
+        quotationSlice.actions.loadBlockAtPosThousand({
           block: getBookmarkMutation.data.bookmark,
         }),
       )

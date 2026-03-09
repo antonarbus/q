@@ -1,7 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { Quotation, BlockItem } from '@back/entity/quotation/schema'
 
-export const reOrderBlocksReducer = (
+export const reOrderBlocks = (
   state: Quotation,
   action: PayloadAction<{
     reOrderedItems: BlockItem[]

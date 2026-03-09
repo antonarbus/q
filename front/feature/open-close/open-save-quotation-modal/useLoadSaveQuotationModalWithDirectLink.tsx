@@ -32,7 +32,7 @@ export const useLoadSaveQuotationModalWithDirectLink = (props: Props): void => {
     }
 
     dispatch(
-      quotationSlice.actions.loadQuotationReducer({
+      quotationSlice.actions.loadQuotation({
         quotation: getQuotationMutation.data.quotation,
       }),
     )

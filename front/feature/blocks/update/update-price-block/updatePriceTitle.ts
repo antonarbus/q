@@ -27,7 +27,7 @@ export const updatePriceTitle = (props: Props): void => {
   }
 
   dispatch(
-    quotationSlice.actions.updatePriceTitleReducer({
+    quotationSlice.actions.updatePriceTitle({
       blockIndex: props.blockIndex,
       html,
     }),

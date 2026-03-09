@@ -1,24 +1,24 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { Quotation } from '@back/entity/quotation/schema'
+import type { Quotation, RowBlock } from '@back/entity/quotation/schema'
 import { getBoqBlockFromState } from '../../getter/getBoqBlockFromState'
 
-export const updateSubTotalPriceReducer = (
+export const reOrderRows = (
   state: Quotation,
   action: PayloadAction<{
     blockIndex: number
-    value: number
-    html: string
+    reOrderedRows: RowBlock[]
   }>,
-): void => {
+): Quotation | undefined => {
   const boqBlock = getBoqBlockFromState({
     blockIndex: action.payload.blockIndex,
     state,
   })
 
   if (boqBlock === undefined) {
-    return
+    return state
   }
 
-  boqBlock.boq.header.subTotalPrice.value = action.payload.value
-  boqBlock.boq.header.subTotalPrice.html = action.payload.html
+  boqBlock.boq.rows = action.payload.reOrderedRows
+
+  return undefined
 }

@@ -84,7 +84,7 @@ export const useBookmarkCopyPreviewCapturer = (
         dispatch(copySlice.actions.showCopyModal())
       }
 
-      dispatch(quotationSlice.actions.removeBlockFromPosThousandReducer())
+      dispatch(quotationSlice.actions.removeBlockFromPosThousand())
 
       previewPreparingDeferred.resolve()
     })

@@ -73,7 +73,7 @@ export const useShareQuotation = (props: Props): Res => {
       void getQuotationListQuery.refetch()
 
       dispatch(
-        quotationSlice.actions.loadQuotationReducer({
+        quotationSlice.actions.loadQuotation({
           quotation: {
             ...getState().quotation,
             ...saveQuotationMutation.data.quotation,
@@ -135,7 +135,7 @@ export const useShareQuotation = (props: Props): Res => {
     }
 
     saveQuotationMutation.mutate({ quotation })
-    dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
+    dispatch(quotationSlice.actions.loadQuotation({ quotation }))
   }
 
   return {

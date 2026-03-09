@@ -1,7 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { Quotation } from '@back/entity/quotation/schema'
 
-export const deleteBlockReducer = (
+export const deleteBlock = (
   state: Quotation,
   action: PayloadAction<{
     id: string
