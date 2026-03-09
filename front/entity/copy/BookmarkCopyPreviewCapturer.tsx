@@ -29,9 +29,13 @@ export const BookmarkCopyPreviewCapturer = (): React.ReactNode => {
     state.quotation.blocks.at(BOOKMARK_POS_AT_BLOCKS),
   )
 
+  // initCursorPos is set by the copy flow but not the open-modal flow.
+  // Without this check, opening the bookmark modal also triggers the capturer.
+  const initCursorPos = useSelector((state) => state.copy.initCursorPos)
+
   useBookmarkCopyPreviewCapturer(containerRef)
 
-  if (bookmarkBlock === undefined) {
+  if (bookmarkBlock === undefined || initCursorPos === null) {
     return null
   }
 
