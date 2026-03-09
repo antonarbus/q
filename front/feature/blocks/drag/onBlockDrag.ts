@@ -15,6 +15,7 @@ export const onBlockDragEnd =
   ({ itemIds }: { itemIds: string[] }) =>
   (dropResult: DropResult): void => {
     document.body.style.removeProperty('cursor')
+
     // Delay setEditable until after the DnD drop animation (~200ms), then lock
     // scroll before editors remount so Safari doesn't scroll to the focused editor.
     setTimeout(() => {
