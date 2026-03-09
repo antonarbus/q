@@ -7,7 +7,7 @@ type Props = {
   copyModalRef: AnimationScope<HTMLElement | null>
 }
 
-export const useCursorPos = (props: Props): void => {
+export const useModalFollowCursor = (props: Props): void => {
   useEffect(() => {
     const abortController = new AbortController()
     const container = props.copyModalRef.current

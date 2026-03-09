@@ -1,6 +1,6 @@
 import { type AnimationScope, motion } from 'motion/react'
 
-import { useCursorPos } from './useCursorPos'
+import { useModalFollowCursor } from './useModalFollowCursor'
 import { cls } from '@shared/cls'
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 }
 
 export const CopyModalLayout = (props: Props): React.JSX.Element => {
-  useCursorPos({ copyModalRef: props.ref })
+  useModalFollowCursor({ copyModalRef: props.ref })
 
   return (
     <motion.div
