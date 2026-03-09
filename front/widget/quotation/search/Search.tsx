@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react'
 import { PaperComponent } from './PaperComponent'
 import { SearchOption } from './SearchOption'
 import { renderInput } from './renderInput'
+import { useCopyBookmarkAtSearch } from '@feature/bookmark/copy-bookmark/useCopyBookmarkAtSearch'
 
 export const Search = (): React.JSX.Element => {
   const getBookmarkListQuery = useGetBookmarkListQuery()
@@ -23,6 +24,15 @@ export const Search = (): React.JSX.Element => {
   const [isAutocompleteOpen, setIsAutocompleteOpen] = useState(false)
   const isCopyModalVisible = useSelector((state) => state.copy.isVisible)
 
+  const copyBookmarkAtSearch = useCopyBookmarkAtSearch()
+
+  const isPreviewPreparing = useSelector(
+    (state) => state.copy.isPreviewPreparing,
+  )
+
+  const isLoading =
+    copyBookmarkAtSearch.isPending === true || isPreviewPreparing === true
+
   return (
     <Autocomplete
       open={isAutocompleteOpen}
@@ -37,9 +47,6 @@ export const Search = (): React.JSX.Element => {
       freeSolo={options.length !== 0} // show MUI autocomplete even if no options
       loading={getBookmarkListQuery.isPending}
       loadingText={email === null ? 'Not logged in' : 'Loading...'}
-      onClose={() => {
-        setIsAutocompleteOpen(false)
-      }}
       inputValue={inputValue}
       onInputChange={(_event, newInputValue) => {
         setInputValue(newInputValue)
@@ -64,6 +71,21 @@ export const Search = (): React.JSX.Element => {
             key={option.id}
             inputValue={inputValue}
             option={option}
+            isLoading={
+              isLoading === true &&
+              option.id === copyBookmarkAtSearch.bookmarkId
+            }
+            onClick={async (event: React.MouseEvent): Promise<void> => {
+              await copyBookmarkAtSearch.mutateAsync({
+                bookmarkId: option.id,
+                cursorPos: {
+                  x: event.clientX,
+                  y: event.clientY,
+                },
+              })
+
+              setIsAutocompleteOpen(false)
+            }}
           />
         )
       }}
