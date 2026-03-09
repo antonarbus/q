@@ -11,6 +11,7 @@ import { dispatch, getState, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import { getClosestRowHtml } from '@shared/util/html-getter/getClosestRowHtml'
 import { TbCut } from 'react-icons/tb'
+import { lockScrollOnce } from '@shared/lib/lockScrollOnce'
 
 export const CutRowIcon = (): React.JSX.Element => {
   const block = useBlock()
@@ -42,15 +43,9 @@ export const CutRowIcon = (): React.JSX.Element => {
               return
             }
 
-            const persistedScrollX = window.scrollX
-            const persistedScrollY = window.scrollY
+            lockScrollOnce()
 
             dispatch(textSlice.actions.setNotEditable())
-
-            // Restore scroll position after React renders
-            requestAnimationFrame(() => {
-              window.scrollTo(persistedScrollX, persistedScrollY)
-            })
 
             dispatch(
               quotationSlice.actions.updateRowHeightAndWidthReducer({

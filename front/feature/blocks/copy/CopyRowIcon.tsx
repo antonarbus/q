@@ -9,6 +9,7 @@ import { textSlice } from '@shared/lib/tiptap/store/textSlice'
 import { dispatch, getState, useSelector } from '@shared/lib/redux'
 import { getClosestRowHtml } from '@shared/util/html-getter/getClosestRowHtml'
 import { MdCopyAll } from 'react-icons/md'
+import { lockScrollOnce } from '@shared/lib/lockScrollOnce'
 
 export const CopyRowIcon = (): React.JSX.Element => {
   const block = useBlock()
@@ -43,15 +44,9 @@ export const CopyRowIcon = (): React.JSX.Element => {
               return
             }
 
-            const persistedScrollX = window.scrollX
-            const persistedScrollY = window.scrollY
+            lockScrollOnce()
 
             dispatch(textSlice.actions.setNotEditable())
-
-            // Restore scroll position after React renders
-            requestAnimationFrame(() => {
-              window.scrollTo(persistedScrollX, persistedScrollY)
-            })
 
             dispatch(
               quotationSlice.actions.updateRowHeightAndWidthReducer({

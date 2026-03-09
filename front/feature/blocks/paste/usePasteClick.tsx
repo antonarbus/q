@@ -9,6 +9,7 @@ import { dispatch, getState } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import { fixElementDimensionStyle } from '@shared/util/fixElementDimensionStyle'
 import { useEffectOnce, useUnmount } from 'react-use'
+import { lockScrollOnce } from '@shared/lib/lockScrollOnce'
 
 const pasteItemOnClick = (): void => {
   const isBookmarkListPage = window.location.pathname.includes(
@@ -59,8 +60,7 @@ const pasteItemOnClick = (): void => {
 
   const newItemId = generateId()
 
-  const persistedScrollX = window.scrollX
-  const persistedScrollY = window.scrollY
+  lockScrollOnce()
 
   dispatch(
     quotationSlice.actions.pasteItemReducer({
@@ -70,11 +70,6 @@ const pasteItemOnClick = (): void => {
       pastePos: state.copy.place.pastePos,
     }),
   )
-
-  // Restore scroll position after React renders
-  requestAnimationFrame(() => {
-    window.scrollTo(persistedScrollX, persistedScrollY)
-  })
 
   dispatch(copySlice.actions.removeItem())
   dispatch(copySlice.actions.forbidAllActions())

@@ -11,6 +11,7 @@ import { theme } from '@shared/theme'
 import { fixElementDimensionStyle } from '@shared/util/fixElementDimensionStyle'
 import { TbCut } from 'react-icons/tb'
 import { getCleanPaperHtml } from '@shared/util/html-getter/getCleanPaperHtml'
+import { lockScrollOnce } from '@shared/lib/lockScrollOnce'
 
 export const CutBlockIcon = (): React.JSX.Element => {
   const block = useBlock()
@@ -59,15 +60,9 @@ export const CutBlockIcon = (): React.JSX.Element => {
 
             const html = getCleanPaperHtml({ paperElement })
 
-            const persistedScrollX = window.scrollX
-            const persistedScrollY = window.scrollY
+            lockScrollOnce()
 
             dispatch(textSlice.actions.setNotEditable())
-
-            // Restore scroll position after React renders
-            requestAnimationFrame(() => {
-              window.scrollTo(persistedScrollX, persistedScrollY)
-            })
 
             dispatch(
               copySlice.actions.addItem({ item: blockToCut, preview: html }),

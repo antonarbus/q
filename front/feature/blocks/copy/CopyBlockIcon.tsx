@@ -7,6 +7,7 @@ import { textSlice } from '@shared/lib/tiptap/store/textSlice'
 import { dispatch, getState, useSelector } from '@shared/lib/redux'
 import { MdCopyAll } from 'react-icons/md'
 import { getCleanPaperHtml } from '@shared/util/html-getter/getCleanPaperHtml'
+import { lockScrollOnce } from '@shared/lib/lockScrollOnce'
 
 export const CopyBlockIcon = (): React.JSX.Element => {
   const block = useBlock()
@@ -56,15 +57,9 @@ export const CopyBlockIcon = (): React.JSX.Element => {
 
             const html = getCleanPaperHtml({ paperElement })
 
-            const persistedScrollX = window.scrollX
-            const persistedScrollY = window.scrollY
+            lockScrollOnce()
 
             dispatch(textSlice.actions.setNotEditable())
-
-            // Restore scroll position after React renders
-            requestAnimationFrame(() => {
-              window.scrollTo(persistedScrollX, persistedScrollY)
-            })
 
             dispatch(
               copySlice.actions.addItem({ item: blockToCopy, preview: html }),

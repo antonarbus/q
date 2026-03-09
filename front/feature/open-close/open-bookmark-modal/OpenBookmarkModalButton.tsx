@@ -9,6 +9,7 @@ import { AiTwotoneEdit } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
+import { lockScrollOnce } from '@shared/lib/lockScrollOnce'
 
 export const OpenBookmarkModalButton = (props: UrlParam): React.JSX.Element => {
   const navigate = useNavigate()
@@ -16,15 +17,9 @@ export const OpenBookmarkModalButton = (props: UrlParam): React.JSX.Element => {
 
   useUpdateEffect(() => {
     if (getBookmarkMutation.isSuccess === true) {
-      const persistedScrollX = window.scrollX
-      const persistedScrollY = window.scrollY
+      lockScrollOnce()
 
       dispatch(textSlice.actions.setNotEditable())
-
-      // Restore scroll position after React renders
-      requestAnimationFrame(() => {
-        window.scrollTo(persistedScrollX, persistedScrollY)
-      })
 
       dispatch(
         quotationSlice.actions.loadBlockAtPosThousandReducer({

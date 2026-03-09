@@ -9,6 +9,7 @@ import { dispatch, getState, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import { fixElementDimensionStyle } from '@shared/util/fixElementDimensionStyle'
 import { GoTrash } from 'react-icons/go'
+import { lockScrollOnce } from '@shared/lib/lockScrollOnce'
 
 export const DeleteBlockIcon = (): React.JSX.Element => {
   const block = useBlock()
@@ -64,15 +65,9 @@ export const DeleteBlockIcon = (): React.JSX.Element => {
             // width of animated element is changed for unknown reason, can't explain the issue, so let's fix it for animation purpose
             fixElementDimensionStyle({ element: paperElement })
 
-            const persistedScrollX = window.scrollX
-            const persistedScrollY = window.scrollY
+            lockScrollOnce()
 
             dispatch(textSlice.actions.setNotEditable())
-
-            // Restore scroll position after React renders
-            requestAnimationFrame(() => {
-              window.scrollTo(persistedScrollX, persistedScrollY)
-            })
 
             dispatch(
               quotationSlice.actions.deleteBlockReducer({
