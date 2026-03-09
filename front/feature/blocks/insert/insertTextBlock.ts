@@ -5,6 +5,7 @@ import type { TextBlock } from '@back/entity/quotation/schema'
 import { textSlice } from '@shared/lib/tiptap/store/textSlice'
 import { generateId } from '@front/shared/lib/nanoid'
 import { dispatch, getState } from '@shared/lib/redux'
+import { lockScrollOnce } from '@shared/lib/lockScrollOnce'
 
 export const insertTextBlock = (event?: React.MouseEvent): void => {
   const block: TextBlock = {
@@ -26,15 +27,8 @@ export const insertTextBlock = (event?: React.MouseEvent): void => {
     },
   }
 
-  const persistedScrollX = window.scrollX
-  const persistedScrollY = window.scrollY
-
+  lockScrollOnce()
   dispatch(textSlice.actions.setNotEditable())
-
-  // Restore scroll position after React renders
-  requestAnimationFrame(() => {
-    window.scrollTo(persistedScrollX, persistedScrollY)
-  })
 
   dispatch(
     copySlice.actions.addItem({ item: block, preview: textBlockPreviewHtml }),

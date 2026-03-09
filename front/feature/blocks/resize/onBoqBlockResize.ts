@@ -8,6 +8,7 @@ import type {
   OnBlockResizeStop,
 } from '@shared/lib/re-resizable/resizablePaper'
 import { dispatch, getState } from '@shared/lib/redux'
+import { lockScrollOnce } from '@shared/lib/lockScrollOnce'
 
 // can be global var for different boqItems as we can change width of one item at a time
 let initNumberColumnWidth = 0
@@ -23,6 +24,8 @@ let qtyColumnDeltaWidth = 0
 let priceColumnDeltaWidth = 0
 
 export const onBoqBlockResizeStart: OnBlockResizeStart = (props) => {
+  lockScrollOnce()
+
   dispatch(textSlice.actions.setNotEditable())
 
   dispatch(
@@ -232,6 +235,8 @@ export const onBoqBlockResizeStop: OnBlockResizeStop = (props) => {
   if (descriptionHeaderElement instanceof HTMLElement === false) {
     return
   }
+
+  lockScrollOnce()
 
   const width = descriptionHeaderElement.clientWidth
 

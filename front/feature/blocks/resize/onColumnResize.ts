@@ -4,6 +4,7 @@ import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { cls } from '@shared/cls'
 import { textSlice } from '@shared/lib/tiptap/store/textSlice'
 import { dispatch } from '@shared/lib/redux'
+import { lockScrollOnce } from '@shared/lib/lockScrollOnce'
 
 type Props = {
   headerColumnElement: HTMLElement
@@ -13,6 +14,8 @@ type Props = {
 
 export const onColumnResizeStart = (props: Props): void => {
   const width = props.headerColumnElement.clientWidth
+
+  lockScrollOnce()
 
   dispatch(textSlice.actions.setNotEditable())
 
@@ -61,6 +64,8 @@ export const onColumnResize = (props: Props): void => {
 export const onColumnResizeStop = (props: Props): void => {
   const columnWidth = props.headerColumnElement.clientWidth
 
+  lockScrollOnce()
+
   dispatch(
     quotationSlice.actions.updateColWidthReducer({
       blockIndex: props.blockIndex,
@@ -81,12 +86,4 @@ export const onColumnResizeStop = (props: Props): void => {
   )
 
   dispatch(textSlice.actions.setEditable())
-
-  const persistedScrollX = window.scrollX
-  const persistedScrollY = window.scrollY
-
-  // Restore scroll position after React renders
-  requestAnimationFrame(() => {
-    window.scrollTo(persistedScrollX, persistedScrollY)
-  })
 }

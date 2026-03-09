@@ -3,6 +3,7 @@ import { BOOKMARK_POS_AT_BLOCKS } from '@entity/quotation/const/bookmarkPosAtBlo
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { textSlice } from '@shared/lib/tiptap/store/textSlice'
 import { dispatch, getState, useSelector } from '@shared/lib/redux'
+import { lockScrollOnce } from '@shared/lib/lockScrollOnce'
 import { useEffect } from 'react'
 import { getCleanPaperHtml } from '@shared/util/html-getter/getCleanPaperHtml'
 import { cls } from '@shared/cls'
@@ -39,14 +40,8 @@ export const useBookmarkCopyPreviewCapturer = (
 
     const paperHtml = getCleanPaperHtml({ paperElement })
 
+    lockScrollOnce()
     dispatch(textSlice.actions.setNotEditable())
-
-    const persistedScrollX = window.scrollX
-    const persistedScrollY = window.scrollY
-
-    requestAnimationFrame(() => {
-      window.scrollTo(persistedScrollX, persistedScrollY)
-    })
 
     const div = document.createElement('div')
     div.innerHTML = paperHtml
