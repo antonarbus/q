@@ -278,7 +278,7 @@ export const newQuotationTemplate: Quotation = {
       },
       price: {
         html: totalPriceValueHtml,
-        value: 280,
+        value: 140,
       },
     },
     {
