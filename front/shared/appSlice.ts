@@ -19,6 +19,7 @@ type InitState = {
     to?: string
     shouldSlide?: boolean
   }
+  confirmationDialog: null
 }
 
 const initialState: InitState = {
@@ -35,6 +36,7 @@ const initialState: InitState = {
     to: undefined,
     shouldSlide: undefined,
   },
+  confirmationDialog: null,
 }
 
 export const appSlice = createSlice({
