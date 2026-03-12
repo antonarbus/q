@@ -7,20 +7,52 @@ import {
   DialogContentText,
   DialogTitle,
   FormControlLabel,
+  TextField,
 } from '@mui/material'
-import { useLayoutEffect } from 'react'
+import { useLayoutEffect, useState } from 'react'
 import { dispatch, useSelector } from '@shared/lib/redux'
 import { appSlice } from '@shared/appSlice'
 
-let confirmationResultDeferred = Promise.withResolvers<boolean>()
+let boolDeferred = Promise.withResolvers<boolean>()
+let stringDeferred = Promise.withResolvers<string | false>()
+let isInputMode = false
 
 export const confirmWithDialog = async (
   props: ConfirmationDialogOptions = {},
 ): Promise<boolean> => {
-  confirmationResultDeferred = Promise.withResolvers<boolean>()
+  boolDeferred = Promise.withResolvers<boolean>()
+  isInputMode = false
   dispatch(appSlice.actions.openConfirmationDialog(props))
 
-  return confirmationResultDeferred.promise
+  return boolDeferred.promise
+}
+
+export const promptWithDialog = async (
+  props: ConfirmationDialogOptions & { inputLabel: string },
+): Promise<string | false> => {
+  stringDeferred = Promise.withResolvers<string | false>()
+  isInputMode = true
+  dispatch(appSlice.actions.openConfirmationDialog(props))
+
+  return stringDeferred.promise
+}
+
+const resolveDialogReject = (): void => {
+  if (isInputMode === true) {
+    stringDeferred.resolve(false)
+  } else {
+    boolDeferred.resolve(false)
+  }
+}
+
+const resolveDialogConfirm = (inputValue?: string): void => {
+  const shouldResolveWithString = isInputMode === true && inputValue !== undefined
+
+  if (shouldResolveWithString === true) {
+    stringDeferred.resolve(inputValue)
+  } else {
+    boolDeferred.resolve(true)
+  }
 }
 
 type ConfirmationDialogBase = {
@@ -29,6 +61,7 @@ type ConfirmationDialogBase = {
   confirmButtonText?: string
   rejectButtonText?: string
   disableCloseButton?: true
+  inputLabel?: string
 }
 
 export type ConfirmationDialogOptions =
@@ -48,21 +81,47 @@ export const ConfirmationDialog = (): React.JSX.Element => {
     (state) => state.app.confirmationDialog,
   )
 
+  const [inputValue, setInputValue] = useState('')
+
   useLayoutEffect(() => {
-    if (
-      confirmationDialog.isOpen &&
-      confirmationDialog.shouldShowDoNotAskAgainCheckbox
-    ) {
+    const shouldAutoConfirm =
+      confirmationDialog.isOpen === true &&
+      confirmationDialog.shouldShowDoNotAskAgainCheckbox === true
+
+    if (shouldAutoConfirm === true) {
       const doNotAskAgainValue = sessionStorage.getItem(
         confirmationDialog.doNotAskAgainSessionKey,
       )
 
       if (doNotAskAgainValue === DO_NOT_ASK_AGAIN_SESSION_VALUE) {
         dispatch(appSlice.actions.closeConfirmationDialog())
-        confirmationResultDeferred.resolve(true)
+        resolveDialogConfirm()
       }
     }
-  }, [confirmationDialog.isOpen])
+  }, [
+    confirmationDialog.isOpen,
+    confirmationDialog.shouldShowDoNotAskAgainCheckbox,
+    confirmationDialog.doNotAskAgainSessionKey,
+  ])
+
+  const handleReject = (): void => {
+    setInputValue('')
+    dispatch(appSlice.actions.closeConfirmationDialog())
+    resolveDialogReject()
+  }
+
+  const handleConfirm = (): void => {
+    const resolveArg =
+      confirmationDialog.inputLabel === undefined ? undefined : inputValue
+
+    setInputValue('')
+
+    if (confirmationDialog.disableCloseButton !== true) {
+      dispatch(appSlice.actions.closeConfirmationDialog())
+    }
+
+    resolveDialogConfirm(resolveArg)
+  }
 
   return (
     <Dialog
@@ -90,6 +149,21 @@ export const ConfirmationDialog = (): React.JSX.Element => {
           {confirmationDialog.description ?? 'Are you sure?'}
         </DialogContentText>
 
+        {confirmationDialog.inputLabel !== undefined && (
+          <TextField
+            autoFocus
+            size='small'
+            label={confirmationDialog.inputLabel}
+            value={inputValue}
+            onChange={(event) => { setInputValue(event.target.value) }}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter') {
+                handleConfirm()
+              }
+            }}
+          />
+        )}
+
         {confirmationDialog.shouldShowDoNotAskAgainCheckbox === true && (
           <FormControlLabel
             control={<Checkbox disableTouchRipple />}
@@ -113,24 +187,15 @@ export const ConfirmationDialog = (): React.JSX.Element => {
         <Button
           variant='outlined'
           fullWidth
-          onClick={() => {
-            dispatch(appSlice.actions.closeConfirmationDialog())
-            confirmationResultDeferred.resolve(false)
-          }}
+          onClick={handleReject}
         >
           {confirmationDialog.rejectButtonText ?? 'No'}
         </Button>
         <Button
           variant='contained'
           fullWidth
-          autoFocus
-          onClick={() => {
-            if (confirmationDialog.disableCloseButton !== true) {
-              dispatch(appSlice.actions.closeConfirmationDialog())
-            }
-
-            confirmationResultDeferred.resolve(true)
-          }}
+          autoFocus={confirmationDialog.inputLabel === undefined}
+          onClick={handleConfirm}
         >
           {confirmationDialog.confirmButtonText ?? 'Yes'}
         </Button>
