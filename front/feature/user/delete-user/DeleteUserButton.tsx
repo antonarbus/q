@@ -2,6 +2,10 @@ import type { UrlParam } from '@back/api/user/deleteUserHandler'
 import { useDeleteUserMutation } from '@entity/user/api/useDeleteUserMutation'
 import { IconButton, Tooltip } from '@mui/material'
 import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
+import {
+  confirmWithDialog,
+  promptWithDialog,
+} from '@shared/component/ConfirmationDialog'
 import { instance } from '@shared/instance'
 import { queryKey } from '@shared/lib/tanstack/react-query/queryKey'
 import { MdDeleteOutline } from 'react-icons/md'
@@ -37,35 +41,31 @@ export const DeleteUserButton = (props: UrlParam): React.ReactNode => {
       title='Delete'
     >
       <IconButton
-        onClick={() => {
-          // Step 1: Initial confirmation
-          const askInitialConfirmation = (): boolean => {
-            const areYouSure = confirm('Are you sure?')
+        onClick={async () => {
+          const confirmed = await confirmWithDialog({
+            description: 'Are you sure?',
+          })
 
-            return areYouSure
-          }
-
-          // Step 2: Solve a simple math question
-          const checkMathAnswer = (): boolean => {
-            const answer = prompt('What is 2 + 3?')
-            const isCorrectAnswer = answer === '5'
-
-            return isCorrectAnswer
-          }
-
-          // Step 3: Final irrecoverable action confirmation
-          const askFinalConfirmation = (): boolean =>
-            confirm('This action is irrecoverable, are you really sure?')
-
-          if (askInitialConfirmation() === false) {
+          if (confirmed === false) {
             return
           }
 
-          if (checkMathAnswer() === false) {
+          const answer = await promptWithDialog({
+            description: 'What is 2 + 3?',
+            inputLabel: 'Answer',
+            confirmButtonText: 'Check',
+          })
+
+          if (answer !== '5') {
             return
           }
 
-          if (askFinalConfirmation() === false) {
+          const finalConfirmed = await confirmWithDialog({
+            description: 'This action is irrecoverable, are you really sure?',
+            confirmButtonText: 'Yes, delete',
+          })
+
+          if (finalConfirmed === false) {
             return
           }
 
