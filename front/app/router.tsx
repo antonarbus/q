@@ -26,6 +26,7 @@ import { lazy, Suspense } from 'react'
 import { createBrowserRouter, type RouteObject } from 'react-router-dom'
 import { Toaster } from 'sonner'
 import { OnInitLoad } from './OnInitLoad'
+import { ConfirmationDialog } from '@shared/component/ConfirmationDialog'
 
 const QuotationPageLazy = lazy(async () => {
   const module = await import('@page/quotation-page')
@@ -119,6 +120,7 @@ const router = createBrowserRouter([
         <Nav />
         <Copy />
         <BookmarkCopyPreviewCapturer />
+        <ConfirmationDialog />
         <Main />
         <Footer />
       </>

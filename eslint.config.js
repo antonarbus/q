@@ -153,6 +153,7 @@ export default [
           },
         },
       ],
+      '@typescript-eslint/strict-void-return': 'off',
 
       // adjust React rules,
       'react/no-multi-comp': 'warn', // sometimes 2 components are needed

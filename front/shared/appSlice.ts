@@ -4,6 +4,7 @@ import {
   type Reducer,
   type WritableDraft,
 } from '@reduxjs/toolkit'
+import type { ConfirmationDialogOptions } from './component/ConfirmationDialog'
 
 type InitState = {
   shouldLoadQuotation: {
@@ -19,7 +20,7 @@ type InitState = {
     to?: string
     shouldSlide?: boolean
   }
-  confirmationDialog: null
+  confirmationDialog: ConfirmationDialogOptions & { isOpen: boolean }
 }
 
 const initialState: InitState = {
@@ -36,7 +37,9 @@ const initialState: InitState = {
     to: undefined,
     shouldSlide: undefined,
   },
-  confirmationDialog: null,
+  confirmationDialog: {
+    isOpen: false,
+  },
 }
 
 export const appSlice = createSlice({
@@ -85,6 +88,15 @@ export const appSlice = createSlice({
     resetNavigateState: (state: WritableDraft<InitState>) => {
       state.navigateState.to = undefined
       state.navigateState.shouldSlide = undefined
+    },
+    openConfirmationDialog: (
+      state,
+      action: PayloadAction<ConfirmationDialogOptions>,
+    ) => {
+      state.confirmationDialog = { isOpen: true, ...action.payload }
+    },
+    closeConfirmationDialog: (state) => {
+      state.confirmationDialog.isOpen = false
     },
   },
 })

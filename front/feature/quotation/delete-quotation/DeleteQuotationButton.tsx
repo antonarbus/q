@@ -2,6 +2,7 @@ import type { UrlParam as Payload } from '@back/api/quotation/deleteQuotationHan
 import { useDeleteQuotationMutation } from '@entity/quotation/api/useDeleteQuotationMutation'
 import { deleteFromQuotationListCache } from '@entity/quotation/cache-updater/deleteFromQuotationListCache'
 import { IconButton, Tooltip } from '@mui/material'
+import { confirmWithDialog } from '@shared/component/ConfirmationDialog'
 import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import { MdDeleteOutline } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
@@ -37,18 +38,12 @@ export const DeleteQuotationButton = (props: Payload): React.ReactNode => {
       title='Delete'
     >
       <IconButton
-        onClick={() => {
-          const askForConfirmation = (): boolean => {
-            const areYouSure = confirm('Are you sure?')
+        onClick={async () => {
+          const areYouSure = await confirmWithDialog()
 
-            return areYouSure
+          if (areYouSure === true) {
+            deleteQuotationMutation.mutate({ id: props.id })
           }
-
-          if (askForConfirmation() === false) {
-            return
-          }
-
-          deleteQuotationMutation.mutate({ id: props.id })
         }}
         size='small'
       >

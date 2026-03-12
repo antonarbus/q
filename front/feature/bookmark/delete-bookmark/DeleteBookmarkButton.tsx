@@ -2,6 +2,7 @@ import type { UrlParam } from '@back/api/bookmark/deleteBookmarkHandler'
 import { useDeleteBookmarkMutation } from '@entity/bookmark/api/useDeleteBookmarkMutation'
 import { deleteFromBookmarkListCache } from '@entity/bookmark/cache-updater/deleteFromBookmarkListCache'
 import { IconButton, Tooltip } from '@mui/material'
+import { confirmWithDialog } from '@shared/component/ConfirmationDialog'
 import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import { MdDeleteOutline } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
@@ -31,18 +32,12 @@ export const DeleteBookmarkButton = (props: UrlParam): React.JSX.Element => {
       title='Delete'
     >
       <IconButton
-        onClick={() => {
-          const askForConfirmation = (): boolean => {
-            const areYouSure = confirm('Are you sure?')
+        onClick={async (): Promise<void> => {
+          const areYouSure = await confirmWithDialog()
 
-            return areYouSure
+          if (areYouSure === true) {
+            deleteBookmarkMutation.mutate({ id: props.id })
           }
-
-          if (askForConfirmation() === false) {
-            return
-          }
-
-          deleteBookmarkMutation.mutate({ id: props.id })
         }}
         size='small'
       >
