@@ -2,10 +2,7 @@ import type { UrlParam } from '@back/api/user/deleteUserHandler'
 import { useDeleteUserMutation } from '@entity/user/api/useDeleteUserMutation'
 import { IconButton, Tooltip } from '@mui/material'
 import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
-import {
-  confirmWithDialog,
-  promptWithDialog,
-} from '@shared/component/ConfirmationDialog'
+import { confirmWithDialog } from '@shared/component/ConfirmationDialog'
 import { instance } from '@shared/instance'
 import { queryKey } from '@shared/lib/tanstack/react-query/queryKey'
 import { MdDeleteOutline } from 'react-icons/md'
@@ -50,7 +47,7 @@ export const DeleteUserButton = (props: UrlParam): React.ReactNode => {
             return
           }
 
-          const answer = await promptWithDialog({
+          const answer = await confirmWithDialog({
             description: 'What is 2 + 3?',
             inputLabel: 'Answer',
             confirmButtonText: 'Check',

@@ -17,24 +17,30 @@ let boolDeferred = Promise.withResolvers<boolean>()
 let stringDeferred = Promise.withResolvers<string | false>()
 let isInputMode = false
 
-export const confirmWithDialog = async (
+export function confirmWithDialog(
+  props: ConfirmationDialogOptions & { inputLabel: string },
+): Promise<string | false>
+
+export function confirmWithDialog(
+  props?: ConfirmationDialogOptions,
+): Promise<boolean>
+
+export async function confirmWithDialog(
   props: ConfirmationDialogOptions = {},
-): Promise<boolean> => {
+): Promise<string | boolean> {
+  isInputMode = 'inputLabel' in props
+
+  if (isInputMode === true) {
+    stringDeferred = Promise.withResolvers<string | false>()
+    dispatch(appSlice.actions.openConfirmationDialog(props))
+
+    return stringDeferred.promise
+  }
+
   boolDeferred = Promise.withResolvers<boolean>()
-  isInputMode = false
   dispatch(appSlice.actions.openConfirmationDialog(props))
 
   return boolDeferred.promise
-}
-
-export const promptWithDialog = async (
-  props: ConfirmationDialogOptions & { inputLabel: string },
-): Promise<string | false> => {
-  stringDeferred = Promise.withResolvers<string | false>()
-  isInputMode = true
-  dispatch(appSlice.actions.openConfirmationDialog(props))
-
-  return stringDeferred.promise
 }
 
 const resolveDialogReject = (): void => {
@@ -46,7 +52,8 @@ const resolveDialogReject = (): void => {
 }
 
 const resolveDialogConfirm = (inputValue?: string): void => {
-  const shouldResolveWithString = isInputMode === true && inputValue !== undefined
+  const shouldResolveWithString =
+    isInputMode === true && inputValue !== undefined
 
   if (shouldResolveWithString === true) {
     stringDeferred.resolve(inputValue)
@@ -152,10 +159,13 @@ export const ConfirmationDialog = (): React.JSX.Element => {
         {confirmationDialog.inputLabel !== undefined && (
           <TextField
             autoFocus
+            focused
             size='small'
             label={confirmationDialog.inputLabel}
             value={inputValue}
-            onChange={(event) => { setInputValue(event.target.value) }}
+            onChange={(event) => {
+              setInputValue(event.target.value)
+            }}
             onKeyDown={(event) => {
               if (event.key === 'Enter') {
                 handleConfirm()
@@ -184,11 +194,7 @@ export const ConfirmationDialog = (): React.JSX.Element => {
         )}
       </DialogContent>
       <DialogActions sx={{ px: 3, pb: 2, pt: 3, gap: 1 }}>
-        <Button
-          variant='outlined'
-          fullWidth
-          onClick={handleReject}
-        >
+        <Button variant='outlined' fullWidth onClick={handleReject}>
           {confirmationDialog.rejectButtonText ?? 'No'}
         </Button>
         <Button
