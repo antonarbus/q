@@ -9,7 +9,7 @@ import { dispatch, getState, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import { fixElementDimensionStyle } from '@shared/util/fixElementDimensionStyle'
 import { GoTrash } from 'react-icons/go'
-import { lockScrollOnce } from '@shared/lib/lockScrollOnce'
+import { lockScroll } from '@shared/util/lockScroll'
 
 export const DeleteBlockIcon = (): React.JSX.Element => {
   const block = useBlock()
@@ -65,7 +65,7 @@ export const DeleteBlockIcon = (): React.JSX.Element => {
             // width of animated element is changed for unknown reason, can't explain the issue, so let's fix it for animation purpose
             fixElementDimensionStyle({ element: paperElement })
 
-            lockScrollOnce()
+            lockScroll()
 
             dispatch(textSlice.actions.setNotEditable())
 

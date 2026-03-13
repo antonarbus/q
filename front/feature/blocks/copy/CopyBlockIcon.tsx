@@ -7,7 +7,7 @@ import { textSlice } from '@shared/lib/tiptap/store/textSlice'
 import { dispatch, getState, useSelector } from '@shared/lib/redux'
 import { MdCopyAll } from 'react-icons/md'
 import { getCleanPaperHtml } from '@shared/util/html-getter/getCleanPaperHtml'
-import { lockScrollOnce } from '@shared/lib/lockScrollOnce'
+import { lockScroll } from '@shared/util/lockScroll'
 
 export const CopyBlockIcon = (): React.JSX.Element => {
   const block = useBlock()
@@ -57,7 +57,7 @@ export const CopyBlockIcon = (): React.JSX.Element => {
 
             const html = getCleanPaperHtml({ paperElement })
 
-            lockScrollOnce()
+            lockScroll()
 
             dispatch(textSlice.actions.setNotEditable())
 

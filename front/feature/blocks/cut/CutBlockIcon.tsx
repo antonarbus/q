@@ -11,7 +11,7 @@ import { theme } from '@shared/theme'
 import { fixElementDimensionStyle } from '@shared/util/fixElementDimensionStyle'
 import { TbCut } from 'react-icons/tb'
 import { getCleanPaperHtml } from '@shared/util/html-getter/getCleanPaperHtml'
-import { lockScrollOnce } from '@shared/lib/lockScrollOnce'
+import { lockScroll } from '@shared/util/lockScroll'
 
 export const CutBlockIcon = (): React.JSX.Element => {
   const block = useBlock()
@@ -60,7 +60,7 @@ export const CutBlockIcon = (): React.JSX.Element => {
 
             const html = getCleanPaperHtml({ paperElement })
 
-            lockScrollOnce()
+            lockScroll()
 
             dispatch(textSlice.actions.setNotEditable())
 

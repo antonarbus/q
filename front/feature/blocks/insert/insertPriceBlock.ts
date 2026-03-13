@@ -6,7 +6,7 @@ import type { PriceBlock } from '@back/entity/quotation/schema'
 import { textSlice } from '@shared/lib/tiptap/store/textSlice'
 import { generateId } from '@front/shared/lib/nanoid'
 import { dispatch, getState } from '@shared/lib/redux'
-import { lockScrollOnce } from '@shared/lib/lockScrollOnce'
+import { lockScroll } from '@shared/util/lockScroll'
 
 export const insertPriceBlock = (event?: React.MouseEvent): void => {
   const block: PriceBlock = {
@@ -32,7 +32,7 @@ export const insertPriceBlock = (event?: React.MouseEvent): void => {
     },
   }
 
-  lockScrollOnce()
+  lockScroll()
   dispatch(textSlice.actions.setNotEditable())
 
   dispatch(

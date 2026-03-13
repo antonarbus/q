@@ -2,11 +2,11 @@ import type { DragStart, DropResult } from '@hello-pangea/dnd'
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { textSlice } from '@shared/lib/tiptap/store/textSlice'
 import { dispatch, getState } from '@shared/lib/redux'
-import { lockScrollOnce } from '@shared/lib/lockScrollOnce'
+import { lockScroll } from '@shared/util/lockScroll'
 import { arrayMoveImmutable } from 'array-move'
 
 export const onBlockDragStart = (_event: DragStart): void => {
-  lockScrollOnce()
+  lockScroll()
   document.body.style.cursor = 'move'
   dispatch(textSlice.actions.setNotEditable())
 }
@@ -19,7 +19,7 @@ export const onBlockDragEnd =
     // Delay setEditable until after the DnD drop animation (~200ms), then lock
     // scroll before editors remount so Safari doesn't scroll to the focused editor.
     setTimeout(() => {
-      lockScrollOnce()
+      lockScroll()
       dispatch(textSlice.actions.setEditable())
     }, 250)
 

@@ -12,7 +12,7 @@ import { AiTwotoneEdit } from 'react-icons/ai'
 import { Link, useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
-import { lockScrollOnce } from '@shared/lib/lockScrollOnce'
+import { lockScroll } from '@shared/util/lockScroll'
 
 export const OpenSaveQuotationModalButton = (
   props: UrlParam,
@@ -23,7 +23,7 @@ export const OpenSaveQuotationModalButton = (
 
   useUpdateEffect(() => {
     if (quotationMutation.isSuccess === true) {
-      lockScrollOnce()
+      lockScroll()
 
       dispatch(textSlice.actions.setNotEditable())
 

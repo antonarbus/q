@@ -4,7 +4,7 @@ import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { cls } from '@shared/cls'
 import { textSlice } from '@shared/lib/tiptap/store/textSlice'
 import { dispatch } from '@shared/lib/redux'
-import { lockScrollOnce } from '@shared/lib/lockScrollOnce'
+import { lockScroll } from '@shared/util/lockScroll'
 
 type Props = {
   headerColumnElement: HTMLElement
@@ -15,7 +15,7 @@ type Props = {
 export const onColumnResizeStart = (props: Props): void => {
   const width = props.headerColumnElement.clientWidth
 
-  lockScrollOnce()
+  lockScroll()
 
   dispatch(textSlice.actions.setNotEditable())
 
@@ -64,7 +64,7 @@ export const onColumnResize = (props: Props): void => {
 export const onColumnResizeStop = (props: Props): void => {
   const columnWidth = props.headerColumnElement.clientWidth
 
-  lockScrollOnce()
+  lockScroll()
 
   dispatch(
     quotationSlice.actions.updateColWidth({

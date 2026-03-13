@@ -11,7 +11,7 @@ import { dispatch, getState, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import { getClosestRowHtml } from '@shared/util/html-getter/getClosestRowHtml'
 import { TbCut } from 'react-icons/tb'
-import { lockScrollOnce } from '@shared/lib/lockScrollOnce'
+import { lockScroll } from '@shared/util/lockScroll'
 
 export const CutRowIcon = (): React.JSX.Element => {
   const block = useBlock()
@@ -43,7 +43,7 @@ export const CutRowIcon = (): React.JSX.Element => {
               return
             }
 
-            lockScrollOnce()
+            lockScroll()
 
             dispatch(textSlice.actions.setNotEditable())
 

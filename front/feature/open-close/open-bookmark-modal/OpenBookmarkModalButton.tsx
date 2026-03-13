@@ -9,7 +9,7 @@ import { AiTwotoneEdit } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
-import { lockScrollOnce } from '@shared/lib/lockScrollOnce'
+import { lockScroll } from '@shared/util/lockScroll'
 
 export const OpenBookmarkModalButton = (props: UrlParam): React.JSX.Element => {
   const navigate = useNavigate()
@@ -17,7 +17,7 @@ export const OpenBookmarkModalButton = (props: UrlParam): React.JSX.Element => {
 
   useUpdateEffect(() => {
     if (getBookmarkMutation.isSuccess === true) {
-      lockScrollOnce()
+      lockScroll()
 
       dispatch(textSlice.actions.setNotEditable())
 

@@ -9,7 +9,7 @@ import { dispatch, getState } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import { fixElementDimensionStyle } from '@shared/util/fixElementDimensionStyle'
 import { useEffectOnce, useUnmount } from 'react-use'
-import { lockScrollOnce } from '@shared/lib/lockScrollOnce'
+import { lockScroll } from '@shared/util/lockScroll'
 
 const pasteItemOnClick = (): void => {
   const isBookmarkListPage = window.location.pathname.includes(
@@ -60,7 +60,7 @@ const pasteItemOnClick = (): void => {
 
   const newItemId = generateId()
 
-  lockScrollOnce()
+  lockScroll()
 
   dispatch(
     quotationSlice.actions.pasteItem({

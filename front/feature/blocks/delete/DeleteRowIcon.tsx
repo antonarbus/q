@@ -10,6 +10,7 @@ import { dispatch, getState, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import { flushSync } from 'react-dom'
 import { GoTrash } from 'react-icons/go'
+import { lockScroll } from '@shared/util/lockScroll'
 
 export const DeleteRowIcon = (): React.JSX.Element => {
   const block = useBlock()
@@ -39,6 +40,8 @@ export const DeleteRowIcon = (): React.JSX.Element => {
             if (disabled === true) {
               return
             }
+
+            lockScroll()
 
             flushSync(() => {
               dispatch(textSlice.actions.setNotEditable())
