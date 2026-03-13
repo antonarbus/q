@@ -111,6 +111,9 @@ export const RestOfCopiedItems = (): React.JSX.Element | null => {
                 height: item.height * scaleFactor,
                 marginBottom: itemMarginBottom,
                 width: item.width * scaleFactor,
+                overflow: 'hidden',
+                borderRadius: '6px',
+                boxShadow: 'rgba(0, 0, 0, 0.2) 0px 0px 6px 2px',
               }}
             >
               <ScaledCopyItem

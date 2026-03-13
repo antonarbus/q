@@ -24,9 +24,7 @@ export const ScaledCopyItem = (props: Props): React.JSX.Element => {
         width: props.width,
         transformOrigin: 'left top',
         scale: props.scaleFactor,
-        borderRadius: '6px',
         background: 'white',
-        boxShadow: 'rgba(0, 0, 0, 0.2) 0px 0px 6px 2px',
       }}
     />
   )

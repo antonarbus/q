@@ -92,6 +92,9 @@ export const FirstCopiedItem = (): React.JSX.Element | null => {
           width,
           marginTop: 15,
           marginBottom: itemMarginBottom,
+          overflow: 'hidden',
+          borderRadius: '6px',
+          boxShadow: 'rgba(0, 0, 0, 0.2) 0px 0px 6px 2px',
         }}
         variants={variants}
       >
