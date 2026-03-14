@@ -1,18 +1,20 @@
 // Safari scrolls unexpectedly when TipTap editors unmount/remount (e.g. during
-// drag or resize). Intercept the next scroll events and restore the
-// position for any scrolls during 500ms, so the jump is never visible to the user.
+// deletion). The scroll doesn't always fire a 'scroll' event (browser-native
+// focus-scroll bypasses it), so we restore position every rAF for 500ms instead.
 export const lockScroll = (): void => {
   const x = window.scrollX
   const y = window.scrollY
 
+  // performance.now() used instead of Date.now() for for timing animations alongside requestAnimationFrame
+  const deadline = performance.now() + 500
+
   const restoreScroll = (): void => {
     window.scrollTo(x, y)
+
+    if (performance.now() < deadline) {
+      requestAnimationFrame(restoreScroll)
+    }
   }
 
-  window.addEventListener('scroll', restoreScroll)
-
-  // Safety cleanup — don't block intentional scrolls after 500ms
-  setTimeout(() => {
-    window.removeEventListener('scroll', restoreScroll)
-  }, 500)
+  requestAnimationFrame(restoreScroll)
 }
