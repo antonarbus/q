@@ -6,7 +6,7 @@ export const lockScroll = (): void => {
   const y = window.scrollY
 
   // performance.now() used instead of Date.now() for for timing animations alongside requestAnimationFrame
-  const deadline = performance.now() + 500
+  const deadline = performance.now() + 700
 
   const restoreScroll = (): void => {
     window.scrollTo(x, y)
