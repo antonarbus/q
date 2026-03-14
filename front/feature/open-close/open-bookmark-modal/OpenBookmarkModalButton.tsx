@@ -17,10 +17,6 @@ export const OpenBookmarkModalButton = (props: UrlParam): React.JSX.Element => {
 
   useUpdateEffect(() => {
     if (getBookmarkMutation.isSuccess === true) {
-      lockScroll()
-
-      dispatch(textSlice.actions.setNotEditable())
-
       dispatch(
         quotationSlice.actions.loadBlockAtPosThousand({
           block: getBookmarkMutation.data.bookmark,

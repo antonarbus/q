@@ -27,9 +27,6 @@ export const insertTextBlock = (event?: React.MouseEvent): void => {
     },
   }
 
-  lockScroll()
-  dispatch(textSlice.actions.setNotEditable())
-
   dispatch(
     copySlice.actions.addItem({ item: block, preview: textBlockPreviewHtml }),
   )

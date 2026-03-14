@@ -32,9 +32,6 @@ export const insertPriceBlock = (event?: React.MouseEvent): void => {
     },
   }
 
-  lockScroll()
-  dispatch(textSlice.actions.setNotEditable())
-
   dispatch(
     copySlice.actions.addItem({ item: block, preview: priceBlockPreviewHtml }),
   )

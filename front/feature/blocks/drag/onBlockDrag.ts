@@ -8,20 +8,12 @@ import { arrayMoveImmutable } from 'array-move'
 export const onBlockDragStart = (_event: DragStart): void => {
   lockScroll()
   document.body.style.cursor = 'move'
-  dispatch(textSlice.actions.setNotEditable())
 }
 
 export const onBlockDragEnd =
   ({ itemIds }: { itemIds: string[] }) =>
   (dropResult: DropResult): void => {
     document.body.style.removeProperty('cursor')
-
-    // Delay setEditable until after the DnD drop animation (~200ms), then lock
-    // scroll before editors remount so Safari doesn't scroll to the focused editor.
-    setTimeout(() => {
-      lockScroll()
-      dispatch(textSlice.actions.setEditable())
-    }, 250)
 
     if (dropResult.destination === null) {
       return

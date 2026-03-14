@@ -2,9 +2,8 @@ import type { EditorEvents } from '@tiptap/react'
 import type { EditorView } from '@tiptap/pm/view'
 import type { EditorRef, OnUpload } from '@shared/lib/tiptap/types'
 import type { CSSObject } from '@mui/material'
-import { EditorStatic } from '../lib/tiptap/EditorStatic'
 import { TiptapProvider } from '../lib/tiptap/provider/TiptapProvider'
-import { EditorNotStatic } from '../lib/tiptap/EditorNotStatic'
+import { TiptapEditor } from '../lib/tiptap/TiptapEditor'
 
 type Props = {
   editorRef: EditorRef
@@ -24,8 +23,7 @@ type Props = {
 export const TextEditor = (props: Props): React.JSX.Element => {
   return (
     <TiptapProvider {...props}>
-      <EditorNotStatic />
-      <EditorStatic />
+      <TiptapEditor />
     </TiptapProvider>
   )
 }

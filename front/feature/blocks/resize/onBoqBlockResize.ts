@@ -24,10 +24,6 @@ let qtyColumnDeltaWidth = 0
 let priceColumnDeltaWidth = 0
 
 export const onBoqBlockResizeStart: OnBlockResizeStart = (props) => {
-  lockScroll()
-
-  dispatch(textSlice.actions.setNotEditable())
-
   dispatch(
     quotationSlice.actions.hideBoqItemPins({
       blockIndex: props.blockIndex,
@@ -247,8 +243,6 @@ export const onBoqBlockResizeStop: OnBlockResizeStop = (props) => {
       width,
     }),
   )
-
-  dispatch(textSlice.actions.setEditable())
 
   const itemWidth = props.elementRef.clientWidth
   const prevItemWidth = getState().quotation.blocks[props.blockIndex]?.width

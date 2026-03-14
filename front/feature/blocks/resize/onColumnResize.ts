@@ -15,10 +15,6 @@ type Props = {
 export const onColumnResizeStart = (props: Props): void => {
   const width = props.headerColumnElement.clientWidth
 
-  lockScroll()
-
-  dispatch(textSlice.actions.setNotEditable())
-
   dispatch(
     quotationSlice.actions.updateColWidth({
       blockIndex: props.blockIndex,
@@ -84,6 +80,4 @@ export const onColumnResizeStop = (props: Props): void => {
       width: itemWidth ?? 0,
     }),
   )
-
-  dispatch(textSlice.actions.setEditable())
 }

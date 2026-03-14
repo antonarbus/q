@@ -10,10 +10,6 @@ type Props = {
 }
 
 export const Layout = (props: Props): React.JSX.Element => {
-  useEffectOnce(() => {
-    dispatch(textSlice.actions.setEditable())
-  })
-
   const maxBlockWidth = useSelector((state) => {
     const maxWidth = state.quotation.blocks.reduce((accumulator, block) => {
       if ((block.width ?? 0) > accumulator) {

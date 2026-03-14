@@ -40,9 +40,6 @@ export const useBookmarkCopyPreviewCapturer = (
 
     const paperHtml = getCleanPaperHtml({ paperElement })
 
-    lockScroll()
-    dispatch(textSlice.actions.setNotEditable())
-
     const div = document.createElement('div')
     div.innerHTML = paperHtml
 

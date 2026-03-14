@@ -1,4 +1,3 @@
-import { copySlice } from '@entity/copy/copySlice'
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { selectIsLastBlock } from '@entity/quotation/redux/selector/selectIsLastBlock'
@@ -6,10 +5,8 @@ import { Tooltip } from '@mui/material'
 import { cls } from '@shared/cls'
 import { textSlice } from '@shared/lib/tiptap/store/textSlice'
 import { dispatch, getState, useSelector } from '@shared/lib/redux'
-import { theme } from '@shared/theme'
 import { fixElementDimensionStyle } from '@shared/util/fixElementDimensionStyle'
 import { GoTrash } from 'react-icons/go'
-import { lockScroll } from '@shared/util/lockScroll'
 
 export const DeleteBlockIcon = (): React.JSX.Element => {
   const block = useBlock()
@@ -65,37 +62,18 @@ export const DeleteBlockIcon = (): React.JSX.Element => {
             // width of animated element is changed for unknown reason, can't explain the issue, so let's fix it for animation purpose
             fixElementDimensionStyle({ element: paperElement })
 
-            lockScroll()
-
-            dispatch(textSlice.actions.setNotEditable())
-
             dispatch(
               quotationSlice.actions.deleteBlock({
                 id: blockToDelete.id,
               }),
             )
 
-            dispatch(copySlice.actions.forbidAllActions())
-
-            setTimeout(() => {
-              dispatch(copySlice.actions.allowAllActions())
-            }, 1000 * theme.block.animationDuration)
-
-            const isCopyModalVisible = getState().copy.isVisible
-
-            if (isCopyModalVisible === false) {
-              setTimeout(
-                () => {
-                  dispatch(textSlice.actions.setEditable())
-                },
-                1000 * theme.block.animationDuration + 500,
-              )
-            }
+            dispatch(textSlice.actions.triggerSubtotalUpdate())
           }}
+          tabIndex={-1}
           style={{
             color: disabled === true ? '#acacac' : '#000',
           }}
-          tabIndex={-1}
         />
       </span>
     </Tooltip>

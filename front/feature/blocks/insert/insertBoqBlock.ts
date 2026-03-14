@@ -222,9 +222,6 @@ export const insertBoqBlock = (event?: React.MouseEvent): void => {
     },
   }
 
-  lockScroll()
-  dispatch(textSlice.actions.setNotEditable())
-
   dispatch(
     copySlice.actions.addItem({ item: boqBlock, preview: boqBlockPreviewHtml }),
   )

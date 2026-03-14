@@ -10,10 +10,6 @@ import { BookmarkFieldLayout } from './BookmarkFieldLayout'
 export const BookmarkField = (): React.ReactNode => {
   const blocks = useSelector((state) => state.quotation.blocks)
 
-  useEffectOnce(() => {
-    dispatch(textSlice.actions.setEditable())
-  })
-
   const bookmarkBlock = blocks.at(BOOKMARK_POS_AT_BLOCKS)
 
   if (bookmarkBlock === undefined) {

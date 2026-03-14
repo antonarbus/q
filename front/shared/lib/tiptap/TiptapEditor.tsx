@@ -1,3 +1,7 @@
+/* eslint-disable react/jsx-handler-names */
+import { DropHereText } from './file-upload/DropHereText'
+import { tiptapStyles } from './style/tiptapStyles'
+import { Box } from '@mui/material'
 import { useEffect } from 'react'
 import { Tiptap, useEditor } from '@tiptap/react'
 import { TiptapMenu } from './menu/TiptapMenu'
@@ -8,7 +12,7 @@ import { usePasteFile } from './file-upload/usePasteFile'
 import { useTiptapCtx } from './provider/TiptapProvider'
 import { UploadButton } from './menu/button/UploadButton'
 
-export const TiptapEditor = (): React.JSX.Element => {
+export const TiptapEditor = (): React.ReactNode => {
   const tiptapCtx = useTiptapCtx()
   const extensions = useExtensions()
   const dropFile = useDropFile()
@@ -55,10 +59,18 @@ export const TiptapEditor = (): React.JSX.Element => {
   }, [editor, tiptapCtx.editorRef])
 
   return (
-    <Tiptap editor={editor}>
-      <TiptapMenu />
-      <UploadButton />
-      <Tiptap.Content className={cls.tiptapContent} style={{ flexGrow: 1 }} />
-    </Tiptap>
+    <Box
+      className={`${tiptapCtx.className} ${tiptapCtx.onUpload === undefined ? '' : cls.droppable}`}
+      onClick={tiptapCtx.onWrapperClick}
+      onFocus={tiptapCtx.onWrapperFocus}
+      sx={{ position: 'relative', ...tiptapStyles, ...tiptapCtx.sx }}
+    >
+      <Tiptap editor={editor}>
+        <TiptapMenu />
+        <UploadButton />
+        <Tiptap.Content className={cls.tiptapContent} style={{ flexGrow: 1 }} />
+      </Tiptap>
+      <DropHereText />
+    </Box>
   )
 }

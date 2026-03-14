@@ -57,10 +57,6 @@ export const CopyBlockIcon = (): React.JSX.Element => {
 
             const html = getCleanPaperHtml({ paperElement })
 
-            lockScroll()
-
-            dispatch(textSlice.actions.setNotEditable())
-
             dispatch(
               copySlice.actions.addItem({ item: blockToCopy, preview: html }),
             )

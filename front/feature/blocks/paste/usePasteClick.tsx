@@ -85,7 +85,6 @@ const pasteItemOnClick = (): void => {
 
     setTimeout(
       () => {
-        dispatch(textSlice.actions.setEditable())
         dispatch(copySlice.actions.allowAllActions())
       },
       1000 * theme.block.animationDuration + 500,

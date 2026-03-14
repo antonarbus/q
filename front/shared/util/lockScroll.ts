@@ -1,8 +1,9 @@
+import { browserType } from './browserType'
 // Safari scrolls unexpectedly when TipTap editors unmount/remount (e.g. during
 // deletion). The scroll doesn't always fire a 'scroll' event (browser-native
 // focus-scroll bypasses it), so we restore position every rAF for the given
 
-import { browserType } from './browserType'
+// todo: maybe if we remove the need for isEditable, then scroll prblem will be resolved automatically
 
 // duration instead. Pass blockScrollLockDurationMs from theme.ts.
 export const lockScroll = (): void => {

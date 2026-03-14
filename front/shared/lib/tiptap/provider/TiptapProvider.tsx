@@ -2,7 +2,6 @@ import { createContext, useContext, useMemo } from 'react'
 import type { EditorEvents } from '@tiptap/react'
 import type { EditorView } from '@tiptap/pm/view'
 import type { EditorRef, OnUpload } from '../types'
-import { useSelector } from '@shared/lib/redux'
 import type { CSSObject } from '@mui/material'
 
 type Props = {
@@ -21,19 +20,14 @@ type Props = {
   children: React.ReactNode
 }
 
-type Res = Omit<Props, 'children'> & {
-  isEditorActive: boolean
-}
+type Res = Omit<Props, 'children'>
 
 const TiptapContext: React.Context<Res | null> = createContext<Res | null>(null)
 
 export const TiptapProvider = (props: Props): React.JSX.Element => {
-  const isEditorActive = useSelector((state) => state.text.isEditable)
-
   const value = useMemo(() => {
     return {
       editorRef: props.editorRef,
-      isEditorActive,
       placeholder: props.placeholder,
       contentGetter: props.contentGetter,
       className: props.className,
@@ -46,7 +40,7 @@ export const TiptapProvider = (props: Props): React.JSX.Element => {
       onWrapperFocus: props.onWrapperFocus,
       onUpload: props.onUpload,
     }
-  }, [props, isEditorActive])
+  }, [props])
 
   return (
     <TiptapContext.Provider value={value}>

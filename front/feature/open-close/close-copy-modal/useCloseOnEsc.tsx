@@ -11,10 +11,6 @@ export const useExitCopyOnEsc = (): void => {
     }
 
     dispatch(copySlice.actions.hideCopyModal())
-
-    setTimeout(() => {
-      dispatch(textSlice.actions.setEditable())
-    }, 500)
   }
 
   type Res = () => void

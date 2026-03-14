@@ -1,22 +1,20 @@
 import { createSlice, type Reducer, type WritableDraft } from '@reduxjs/toolkit'
+import { nanoid } from 'nanoid'
 
 type InitState = {
-  isEditable: boolean
+  subtotalTrigger: string
 }
 
 const initialState: InitState = {
-  isEditable: true,
+  subtotalTrigger: nanoid(5),
 }
 
 export const textSlice = createSlice({
   name: 'text',
   initialState,
   reducers: {
-    setEditable: (state: WritableDraft<InitState>) => {
-      state.isEditable = true
-    },
-    setNotEditable: (state: WritableDraft<InitState>) => {
-      state.isEditable = false
+    triggerSubtotalUpdate: (state: WritableDraft<InitState>) => {
+      state.subtotalTrigger = nanoid(5)
     },
   },
 })

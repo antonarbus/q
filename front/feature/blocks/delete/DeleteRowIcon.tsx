@@ -1,4 +1,3 @@
-import { copySlice } from '@entity/copy/copySlice'
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { useRow } from '@entity/quotation/provider/RowProvider'
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
@@ -6,11 +5,8 @@ import { selectIsLastRow } from '@entity/quotation/redux/selector/selectIsLastRo
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/cls'
 import { textSlice } from '@shared/lib/tiptap/store/textSlice'
-import { dispatch, getState, useSelector } from '@shared/lib/redux'
-import { theme } from '@shared/theme'
-import { flushSync } from 'react-dom'
+import { dispatch, useSelector } from '@shared/lib/redux'
 import { GoTrash } from 'react-icons/go'
-import { lockScroll } from '@shared/util/lockScroll'
 
 export const DeleteRowIcon = (): React.JSX.Element => {
   const block = useBlock()
@@ -41,12 +37,6 @@ export const DeleteRowIcon = (): React.JSX.Element => {
               return
             }
 
-            lockScroll()
-
-            flushSync(() => {
-              dispatch(textSlice.actions.setNotEditable())
-            })
-
             dispatch(
               quotationSlice.actions.deleteRow({
                 blockIndex: block.index,
@@ -54,27 +44,12 @@ export const DeleteRowIcon = (): React.JSX.Element => {
               }),
             )
 
-            dispatch(copySlice.actions.forbidAllActions())
-
-            setTimeout(() => {
-              dispatch(copySlice.actions.allowAllActions())
-            }, 1000 * theme.block.animationDuration)
-
-            const isCopyModalVisible = getState().copy.isVisible
-
-            if (isCopyModalVisible === false) {
-              setTimeout(
-                () => {
-                  dispatch(textSlice.actions.setEditable())
-                },
-                1000 * theme.block.animationDuration + 500,
-              )
-            }
+            dispatch(textSlice.actions.triggerSubtotalUpdate())
           }}
+          tabIndex={-1}
           style={{
             color: disabled === true ? '#acacac' : '#000',
           }}
-          tabIndex={-1}
         />
       </span>
     </Tooltip>

@@ -43,10 +43,6 @@ export const CutRowIcon = (): React.JSX.Element => {
               return
             }
 
-            lockScroll()
-
-            dispatch(textSlice.actions.setNotEditable())
-
             dispatch(
               quotationSlice.actions.updateRowHeightAndWidth({
                 blockIndex: block.index,

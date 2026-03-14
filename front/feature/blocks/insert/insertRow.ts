@@ -58,9 +58,6 @@ export const insertRow = (event?: React.MouseEvent): void => {
     },
   }
 
-  lockScroll()
-  dispatch(textSlice.actions.setNotEditable())
-
   dispatch(copySlice.actions.addItem({ item: row, preview: rowPreviewHtml }))
 
   const isCopyModalVisible = getState().copy.isVisible

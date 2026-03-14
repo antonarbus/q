@@ -23,10 +23,6 @@ export const OpenSaveQuotationModalButton = (
 
   useUpdateEffect(() => {
     if (quotationMutation.isSuccess === true) {
-      lockScroll()
-
-      dispatch(textSlice.actions.setNotEditable())
-
       dispatch(
         quotationSlice.actions.loadQuotation({
           quotation: quotationMutation.data.quotation,

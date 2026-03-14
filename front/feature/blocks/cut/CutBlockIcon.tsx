@@ -60,10 +60,6 @@ export const CutBlockIcon = (): React.JSX.Element => {
 
             const html = getCleanPaperHtml({ paperElement })
 
-            lockScroll()
-
-            dispatch(textSlice.actions.setNotEditable())
-
             dispatch(
               copySlice.actions.addItem({ item: blockToCut, preview: html }),
             )
