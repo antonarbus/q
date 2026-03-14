@@ -42,7 +42,7 @@ const customTheme = {
     },
   },
   block: {
-    animationDuration: 0.5,
+    animationDuration: 0.3,
   },
   copy: {
     pasteTextColor: '#6c6c6c',
