@@ -7,7 +7,6 @@ import type {
   OnBlockResizeStop,
 } from '@shared/lib/re-resizable/resizablePaper'
 import { dispatch, getState } from '@shared/lib/redux'
-import { lockScroll } from '@shared/util/lockScroll'
 
 // can be global var for different boqItems as we can change width of one item at a time
 let initNumberColumnWidth = 0
@@ -230,8 +229,6 @@ export const onBoqBlockResizeStop: OnBlockResizeStop = (props) => {
   if (descriptionHeaderElement instanceof HTMLElement === false) {
     return
   }
-
-  lockScroll()
 
   const width = descriptionHeaderElement.clientWidth
 

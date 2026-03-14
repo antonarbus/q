@@ -3,7 +3,6 @@ import { getBoqColumnFromStore } from '@entity/quotation/redux/getter/getBoqColu
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { cls } from '@shared/cls'
 import { dispatch } from '@shared/lib/redux'
-import { lockScroll } from '@shared/util/lockScroll'
 
 type Props = {
   headerColumnElement: HTMLElement
@@ -58,8 +57,6 @@ export const onColumnResize = (props: Props): void => {
 
 export const onColumnResizeStop = (props: Props): void => {
   const columnWidth = props.headerColumnElement.clientWidth
-
-  lockScroll()
 
   dispatch(
     quotationSlice.actions.updateColWidth({

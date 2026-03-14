@@ -1,11 +1,9 @@
 import type { DragStart, DropResult } from '@hello-pangea/dnd'
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { dispatch, getState } from '@shared/lib/redux'
-import { lockScroll } from '@shared/util/lockScroll'
 import { arrayMoveImmutable } from 'array-move'
 
 export const onBlockDragStart = (_event: DragStart): void => {
-  lockScroll()
   document.body.style.cursor = 'move'
 }
 
