@@ -6,12 +6,10 @@ import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { selectIsLastRow } from '@entity/quotation/redux/selector/selectIsLastRow'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/cls'
-import { textSlice } from '@shared/lib/tiptap/store/textSlice'
 import { dispatch, getState, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import { getClosestRowHtml } from '@shared/util/html-getter/getClosestRowHtml'
 import { TbCut } from 'react-icons/tb'
-import { lockScroll } from '@shared/util/lockScroll'
 
 export const CutRowIcon = (): React.JSX.Element => {
   const block = useBlock()

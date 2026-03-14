@@ -5,13 +5,11 @@ import { selectIsLastBlock } from '@entity/quotation/redux/selector/selectIsLast
 import { saveBlockHeightByIndex } from '@entity/quotation/util/saveBlockHeightByIndex'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/cls'
-import { textSlice } from '@shared/lib/tiptap/store/textSlice'
 import { dispatch, getState, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import { fixElementDimensionStyle } from '@shared/util/fixElementDimensionStyle'
 import { TbCut } from 'react-icons/tb'
 import { getCleanPaperHtml } from '@shared/util/html-getter/getCleanPaperHtml'
-import { lockScroll } from '@shared/util/lockScroll'
 
 export const CutBlockIcon = (): React.JSX.Element => {
   const block = useBlock()

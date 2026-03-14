@@ -1,18 +1,15 @@
 import type { UrlParam } from '@back/api/bookmark/deleteBookmarkHandler'
 import { useGetQuotationMutation } from '@entity/quotation/api/useGetQuotationMutation'
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
-
 import { IconButton, Tooltip } from '@mui/material'
 import { appSlice } from '@shared/appSlice'
 import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
-import { textSlice } from '@shared/lib/tiptap/store/textSlice'
 import { route } from '@shared/lib/react-router-dom/route'
 import { dispatch } from '@shared/lib/redux'
 import { AiTwotoneEdit } from 'react-icons/ai'
 import { Link, useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
-import { lockScroll } from '@shared/util/lockScroll'
 
 export const OpenSaveQuotationModalButton = (
   props: UrlParam,

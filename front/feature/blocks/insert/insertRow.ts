@@ -5,10 +5,8 @@ import rowPreviewHtml from '@entity/quotation/templates/rowPreview.html?raw'
 import rowPriceHtml from '@entity/quotation/templates/rowPrice.html?raw'
 import rowQtyHtml from '@entity/quotation/templates/rowQty.html?raw'
 import type { RowBlock } from '@back/entity/quotation/schema'
-import { textSlice } from '@shared/lib/tiptap/store/textSlice'
 import { generateId } from '@front/shared/lib/nanoid'
 import { dispatch, getState } from '@shared/lib/redux'
-import { lockScroll } from '@shared/util/lockScroll'
 
 export const insertRow = (event?: React.MouseEvent): void => {
   const row: RowBlock = {

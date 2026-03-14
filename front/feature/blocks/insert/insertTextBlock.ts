@@ -2,10 +2,8 @@ import { copySlice } from '@entity/copy/copySlice'
 import textBlockContentHtml from '@entity/quotation/templates/textBlockContent.html?raw' // assets can be imported as strings using the ?raw suffix
 import textBlockPreviewHtml from '@entity/quotation/templates/textBlockPreview.html?raw'
 import type { TextBlock } from '@back/entity/quotation/schema'
-import { textSlice } from '@shared/lib/tiptap/store/textSlice'
 import { generateId } from '@front/shared/lib/nanoid'
 import { dispatch, getState } from '@shared/lib/redux'
-import { lockScroll } from '@shared/util/lockScroll'
 
 export const insertTextBlock = (event?: React.MouseEvent): void => {
   const block: TextBlock = {

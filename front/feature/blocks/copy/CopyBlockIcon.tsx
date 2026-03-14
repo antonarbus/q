@@ -3,11 +3,9 @@ import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { saveBlockHeightByIndex } from '@entity/quotation/util/saveBlockHeightByIndex'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/cls'
-import { textSlice } from '@shared/lib/tiptap/store/textSlice'
 import { dispatch, getState, useSelector } from '@shared/lib/redux'
 import { MdCopyAll } from 'react-icons/md'
 import { getCleanPaperHtml } from '@shared/util/html-getter/getCleanPaperHtml'
-import { lockScroll } from '@shared/util/lockScroll'
 
 export const CopyBlockIcon = (): React.JSX.Element => {
   const block = useBlock()

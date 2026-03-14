@@ -1,6 +1,4 @@
 import { copySlice } from '@entity/copy/copySlice'
-
-import { textSlice } from '@shared/lib/tiptap/store/textSlice'
 import { dispatch } from '@shared/lib/redux'
 import { useEffectOnce } from 'react-use'
 
