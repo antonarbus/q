@@ -1,9 +1,7 @@
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
-import { useBoq } from '@entity/quotation/provider/BoqBlockProvider'
 import { useRow } from '@entity/quotation/provider/RowProvider'
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { selectIsLastRow } from '@entity/quotation/redux/selector/selectIsLastRow'
-import { updateSubTotalPrice } from '@entity/quotation/util/updateSubTotalPrice'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/cls'
 import { dispatch, useSelector } from '@shared/lib/redux'
@@ -11,7 +9,6 @@ import { GoTrash } from 'react-icons/go'
 
 export const DeleteRowIcon = (): React.JSX.Element => {
   const block = useBlock()
-  const boq = useBoq()
   const row = useRow()
 
   const isLastRow = useSelector(selectIsLastRow({ blockIndex: block.index }))
@@ -45,11 +42,6 @@ export const DeleteRowIcon = (): React.JSX.Element => {
                 rowIndex: row.index,
               }),
             )
-
-            updateSubTotalPrice({
-              blockIndex: block.index,
-              subTotalPriceEditor: boq.subTotalPriceEditorRef.current,
-            })
           }}
           tabIndex={-1}
           style={{
