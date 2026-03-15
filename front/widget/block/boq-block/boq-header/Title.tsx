@@ -5,7 +5,7 @@ import type { HeaderKey } from '@back/entity/quotation/schema'
 import { useRef } from 'react'
 import { TextEditor } from '@shared/component/TextEditor'
 import type { Editor } from '@tiptap/react'
-import { changeTitle } from '@feature/blocks/change-title-at-boq-block/changeTitle'
+import { handleChangeOfTitle } from '@feature/blocks/handle-change-of-title-at-boq-block/handleChangeOfTitle'
 
 const boqHeaderKey: HeaderKey = 'title'
 
@@ -25,7 +25,7 @@ export const Title = (): React.JSX.Element => {
         })
       }
       onUpdate={(params) => {
-        changeTitle({
+        handleChangeOfTitle({
           blockIndex: block.index,
           boqHeaderKey,
           editorRef,

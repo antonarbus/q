@@ -10,8 +10,8 @@ import { TextEditor } from '@shared/component/TextEditor'
 import { Pin } from './Pin'
 import { pinItemPriceCell } from '@feature/blocks/pin-item-price-cell/pinItemPriceCell'
 import { tabFromItemPriceCell } from '@feature/blocks/tab-away-from-item-price-cell/tabFromItemPriceCell'
-import { changeItemPriceCell } from '@feature/blocks/change-item-price-cell-at-boq-block/changeItemPriceCell'
-import { focusOutFromItemPriceCell } from '@feature/blocks/focus-out-from-item-price-cell-at-boq-block/focusOutFromItemPriceCell'
+import { handleChangeOfItemPriceCell } from '@feature/blocks/handle-change-of-item-price-cell-at-boq-block/handleChangeOfItemPriceCell'
+import { handleFocusOutFromItemPriceCell } from '@feature/blocks/handle-focus-out-from-item-price-cell-at-boq-block/handleFocusOutFromItemPriceCell'
 
 export const ItemPriceCell = (): React.JSX.Element => {
   const block = useBlock()
@@ -38,7 +38,7 @@ export const ItemPriceCell = (): React.JSX.Element => {
           })
         }
         onUpdate={(params) => {
-          changeItemPriceCell({
+          handleChangeOfItemPriceCell({
             blockIndex: block.index,
             itemPriceCellEditorRef: row.itemPriceCellEditorRef,
             priceCellEditorRef: row.priceCellEditorRef,
@@ -47,7 +47,7 @@ export const ItemPriceCell = (): React.JSX.Element => {
           })
         }}
         onBlur={() => {
-          focusOutFromItemPriceCell({
+          handleFocusOutFromItemPriceCell({
             blockIndex: block.index,
             itemPriceCellEditorRef: row.itemPriceCellEditorRef,
             rowIndex: row.index,

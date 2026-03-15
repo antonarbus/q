@@ -4,7 +4,7 @@ import { useStylesForResizableCell } from '@entity/quotation/hook/useStylesForRe
 import { useRow } from '@entity/quotation/provider/RowProvider'
 import { getBookmarkedRowCellHtmlFromStore } from '@entity/quotation/redux/getter/getBookmarkedRowCellHtmlFromStore'
 import { cellStyle } from '@entity/quotation/style/cellStyle'
-import { changeDescriptionCell } from '@feature/blocks/change-description-cell-at-bookmark-block/changeDescriptionCell'
+import { handleChangeOfDescriptionCell } from '@feature/blocks/handle-change-of-description-cell-at-bookmark-block/handleChangeOfDescriptionCell'
 import { upload } from '@feature/file/upload-file'
 import { TextEditor } from '@shared/component/TextEditor'
 
@@ -26,7 +26,7 @@ export const DescriptionCell = (): React.JSX.Element => {
         getBookmarkedRowCellHtmlFromStore({ cellKey: 'description' })
       }
       onUpdate={(params) => {
-        changeDescriptionCell({
+        handleChangeOfDescriptionCell({
           editorRef: row.descriptionCellEditorRef,
         })
       }}

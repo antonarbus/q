@@ -3,7 +3,7 @@ import { TextEditor } from '@shared/component/TextEditor'
 import { getState } from '@shared/lib/redux'
 import { useRef } from 'react'
 import type { Editor } from '@tiptap/react'
-import { changePriceTitle } from '@feature/blocks/change-price-title-at-price-block/changePriceTitle'
+import { handleChangeOfPriceTitle } from '@feature/blocks/handle-change-of-price-title-at-price-block/handleChangeOfPriceTitle'
 
 export const PriceTitle = (): React.JSX.Element => {
   const editorRef = useRef<Editor | null>(null)
@@ -24,7 +24,7 @@ export const PriceTitle = (): React.JSX.Element => {
         return priceBlock.title.html
       }}
       onUpdate={(params) => {
-        changePriceTitle({ editorRef, blockIndex: block.index })
+        handleChangeOfPriceTitle({ editorRef, blockIndex: block.index })
       }}
       sx={{
         textAlign: 'center',

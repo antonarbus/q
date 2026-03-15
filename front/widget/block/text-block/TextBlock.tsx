@@ -18,7 +18,7 @@ import {
   onTextBlockResizeStart,
   onTextBlockResizeStop,
 } from '@feature/blocks/resize-text-block/onTextBlockResize'
-import { changeTextBlock } from '@feature/blocks/change-text-block/changeTextBlock'
+import { handleChangeOfTextBlock } from '@feature/blocks/handle-change-of-text-block/handleChangeOfTextBlock'
 
 export const TextBlock = (): React.JSX.Element => {
   const editorRef = useRef<Editor | null>(null)
@@ -52,7 +52,7 @@ export const TextBlock = (): React.JSX.Element => {
           getTextBlockHtmlFromStore({ blockIndex: block.index })
         }
         onUpdate={(params) => {
-          changeTextBlock({ editorRef, blockIndex: block.index })
+          handleChangeOfTextBlock({ editorRef, blockIndex: block.index })
         }}
         onUpload={upload}
         sx={textItemCellStyle}
