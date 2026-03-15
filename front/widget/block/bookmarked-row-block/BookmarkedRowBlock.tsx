@@ -1,14 +1,14 @@
 import { BoqProvider } from '@entity/quotation/provider/BoqBlockProvider'
 import { BlockComp } from '@entity/quotation/ui/BlockComp'
-import {
-  onBoqBlockResize,
-  onBoqBlockResizeStart,
-  onBoqBlockResizeStop,
-} from '@feature/blocks/resize'
 import { cls } from '@shared/cls'
 import { RowColumns } from './column'
 import { RowLayout } from './RowLayout'
 import { RowsWithOneBookmarkedRow } from './RowsWithOneBookmarkedRow'
+import {
+  onBoqBlockResize,
+  onBoqBlockResizeStart,
+  onBoqBlockResizeStop,
+} from '@feature/blocks/resize-boq-block/onBoqBlockResize'
 
 export const BookmarkedRowBlock = (): React.JSX.Element => {
   return (

@@ -1,13 +1,11 @@
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { getPriceBlockHtmlFromStore } from '@entity/quotation/redux/getter/getPriceBlockHtmlFromStore'
-import {
-  updatePriceValue,
-  useUpdateTotalPriceIfPricesAboveWereChanged,
-  validateTotalPrice,
-} from '@feature/blocks/update'
 import { TextEditor } from '@shared/component/TextEditor'
 import { useRef } from 'react'
 import type { Editor } from '@tiptap/react'
+import { useUpdateTotalPriceIfPricesAboveWereChanged } from '@feature/blocks/yyy'
+import { validateTotalPrice } from '@feature/blocks/focus-out-from-price-value-at-price-block/validateTotalPrice'
+import { updatePriceValue } from '@feature/blocks/change-price-value-at-price-block/updatePriceValue'
 
 export const PriceValue = (): React.JSX.Element => {
   const editorRef = useRef<Editor | null>(null)

@@ -2,10 +2,10 @@ import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { getBoqHeaderHtmlFromStore } from '@entity/quotation/redux/getter/getBoqHeaderHtmlFromStore'
 import { titleCellStyle } from '@entity/quotation/style/titleCellStyle'
 import type { HeaderKey } from '@back/entity/quotation/schema'
-import { updateTitle } from '@feature/blocks/update'
 import { useRef } from 'react'
 import { TextEditor } from '@shared/component/TextEditor'
 import type { Editor } from '@tiptap/react'
+import { updateTitle } from '@feature/blocks/change-title-at-boq-block/updateTitle'
 
 const boqHeaderKey: HeaderKey = 'title'
 

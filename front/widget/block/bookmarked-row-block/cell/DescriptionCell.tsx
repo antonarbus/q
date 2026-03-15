@@ -4,7 +4,7 @@ import { useStylesForResizableCell } from '@entity/quotation/hook/useStylesForRe
 import { useRow } from '@entity/quotation/provider/RowProvider'
 import { getBookmarkedRowCellHtmlFromStore } from '@entity/quotation/redux/getter/getBookmarkedRowCellHtmlFromStore'
 import { cellStyle } from '@entity/quotation/style/cellStyle'
-import { updateDescriptionCell } from '@feature/blocks/update/update-cell-at-bookmarked-row-block/description/updateDescriptionCell'
+import { updateDescriptionCell } from '@feature/blocks/change-description-cell-at-bookmark-block/updateDescriptionCell'
 import { upload } from '@feature/file/upload-file'
 import { TextEditor } from '@shared/component/TextEditor'
 

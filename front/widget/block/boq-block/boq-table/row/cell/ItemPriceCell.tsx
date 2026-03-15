@@ -5,14 +5,13 @@ import { useBoq } from '@entity/quotation/provider/BoqBlockProvider'
 import { useRow } from '@entity/quotation/provider/RowProvider'
 import { getCellHtmlFromStore } from '@entity/quotation/redux/getter/getCellHtmlFromStore'
 import { cellStyle } from '@entity/quotation/style/cellStyle'
-import { Pin, pinItemPriceCell } from '@feature/blocks/pin'
-import { tabFromItemPriceCell } from '@feature/blocks/tab-away-from-cell'
-import {
-  formatItemPriceCell,
-  updateItemPriceCell,
-} from '@feature/blocks/update'
 import { Box } from '@mui/material'
 import { TextEditor } from '@shared/component/TextEditor'
+import { Pin } from './Pin'
+import { pinItemPriceCell } from '@feature/blocks/pin-item-price-cell/pinItemPriceCell'
+import { tabFromItemPriceCell } from '@feature/blocks/tab-away-from-item-price-cell/tabFromItemPriceCell'
+import { updateItemPriceCell } from '@feature/blocks/change-item-price-cell-at-boq-block/updateItemPriceCell'
+import { formatItemPriceCell } from '@feature/blocks/focus-out-from-item-price-cell-at-boq-block/formatItemPriceCell'
 
 export const ItemPriceCell = (): React.JSX.Element => {
   const block = useBlock()

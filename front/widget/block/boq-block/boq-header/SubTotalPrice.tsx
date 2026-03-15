@@ -3,15 +3,12 @@ import { useBoq } from '@entity/quotation/provider/BoqBlockProvider'
 import { getBoqHeaderHtmlFromStore } from '@entity/quotation/redux/getter/getBoqHeaderHtmlFromStore'
 import { subTotalPriceCellStyle } from '@entity/quotation/style/subTotalPriceCellStyle'
 import type { HeaderKey } from '@back/entity/quotation/schema'
-import { showHidePricePins } from '@feature/blocks/pin'
-import {
-  formatSubtotalPrice,
-  updateSubtotalPrice,
-  useUpdateSubtotal,
-  validatePrices,
-} from '@feature/blocks/update'
 import { useRef } from 'react'
 import { TextEditor } from '@shared/component/TextEditor'
+import { showHidePricePins } from '@feature/blocks/show-hide-pins-in-price-column/showHidePricePins'
+import { updateSubtotalPrice } from '@feature/blocks/change-subtotal-price-at-boq-block/updateSubtotalPrice'
+import { formatSubtotalPrice } from '@feature/blocks/focus-out-from-subtotal-price-at-boq-block/formatSubtotalPrice'
+import { validatePrices } from '@feature/blocks/focus-out-from-subtotal-price-at-boq-block/validatePrices'
 
 const boqHeaderKey: HeaderKey = 'subTotalPrice'
 
@@ -27,7 +24,7 @@ export const SubTotalPrice = (): React.JSX.Element => {
 
   const isInitClickRef = useRef(true)
 
-  useUpdateSubtotal()
+  // useUpdateSubtotal()
 
   return (
     <TextEditor

@@ -5,15 +5,15 @@ import { useBoq } from '@entity/quotation/provider/BoqBlockProvider'
 import { useRow } from '@entity/quotation/provider/RowProvider'
 import { getCellHtmlFromStore } from '@entity/quotation/redux/getter/getCellHtmlFromStore'
 import { cellStyle } from '@entity/quotation/style/cellStyle'
-import { Pin, pinPriceCell, showRowPins } from '@feature/blocks/pin'
-import { tabFromPriceCell } from '@feature/blocks/tab-away-from-cell'
-import {
-  formatPriceCell,
-  updatePriceCell,
-  validatePrice,
-} from '@feature/blocks/update'
+import { showRowPins } from '@feature/blocks/show-row-pins/showRowPins'
 import { Box } from '@mui/material'
 import { TextEditor } from '@shared/component/TextEditor'
+import { Pin } from './Pin'
+import { pinPriceCell } from '@feature/blocks/pin-price-cell/pinPriceCell'
+import { tabFromPriceCell } from '@feature/blocks/tab-away-from-price-cell/tabFromPriceCell'
+import { updatePriceCell } from '@feature/blocks/change-price-cell-at-boq-block/updatePriceCell'
+import { formatPriceCell } from '@feature/blocks/focus-out-from-price-cell-at-boq-block/formatPriceCell'
+import { validatePrice } from '@feature/blocks/focus-out-from-price-cell-at-boq-block/validatePrice'
 
 export const PriceCell = (): React.JSX.Element => {
   const block = useBlock()

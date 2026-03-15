@@ -1,9 +1,12 @@
 import { DragDropContext, Droppable } from '@hello-pangea/dnd'
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { selectRows } from '@entity/quotation/redux/selector/selectRows'
-import { onRowDragEnd, onRowDragStart } from '@feature/blocks/drag'
 import { useSelector } from '@shared/lib/redux'
 import { arrayShapesEqualityFn } from '@shared/util/arrayShapesEqualityFn'
+import {
+  onRowDragEnd,
+  onRowDragStart,
+} from '@feature/blocks/drag-row/onRowDrag'
 
 type Props = {
   children: React.ReactNode

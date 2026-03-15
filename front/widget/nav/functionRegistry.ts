@@ -1,9 +1,7 @@
-import {
-  insertBoqBlock,
-  insertPriceBlock,
-  insertRow,
-  insertTextBlock,
-} from '@feature/blocks/insert'
+import { insertBoqBlock } from '@feature/blocks/insert-boq-block/insertBoqBlock'
+import { insertPriceBlock } from '@feature/blocks/insert-price-block/insertPriceBlock'
+import { insertRow } from '@feature/blocks/insert-row/insertRow'
+import { insertTextBlock } from '@feature/blocks/insert-text-block/insertTextBlock'
 import { openBookmarksPage } from '@feature/open-close/open-bookmarks-page'
 import { openLoginModal } from '@feature/open-close/open-login-modal'
 import {

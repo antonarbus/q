@@ -4,7 +4,7 @@ import {
   onColumnResize,
   onColumnResizeStart,
   onColumnResizeStop,
-} from '@feature/blocks/resize'
+} from '@feature/blocks/resize-column/onColumnResize'
 import { useSelector } from '@shared/lib/redux'
 import { Resizable } from 're-resizable'
 

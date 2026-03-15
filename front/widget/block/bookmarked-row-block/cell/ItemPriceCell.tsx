@@ -4,8 +4,8 @@ import { useStylesForResizableCell } from '@entity/quotation/hook/useStylesForRe
 import { useRow } from '@entity/quotation/provider/RowProvider'
 import { getBookmarkedRowCellHtmlFromStore } from '@entity/quotation/redux/getter/getBookmarkedRowCellHtmlFromStore'
 import { cellStyle } from '@entity/quotation/style/cellStyle'
-import { formatItemPriceCell } from '@feature/blocks/update/update-cell-at-bookmarked-row-block/item-price/formatItemPriceCell'
-import { updateItemPriceCell } from '@feature/blocks/update/update-cell-at-bookmarked-row-block/item-price/updateItemPriceCell'
+import { formatItemPriceCell } from '@feature/blocks/focus-out-from-item-price-cell-at-bookmark-block/formatItemPriceCell'
+import { updateItemPriceCell } from '@feature/blocks/change-item-price-cell-at-bookmark-block/updateItemPriceCell'
 import { Box } from '@mui/material'
 import { TextEditor } from '@shared/component/TextEditor'
 

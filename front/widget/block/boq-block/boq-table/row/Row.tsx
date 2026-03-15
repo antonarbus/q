@@ -1,7 +1,3 @@
-import { CopyRowIcon } from '@feature/blocks/copy'
-import { CutRowIcon } from '@feature/blocks/cut'
-import { DeleteRowIcon } from '@feature/blocks/delete'
-import { DragRowIcon } from '@feature/blocks/drag'
 import { BookmarkRowIcon } from '@feature/open-close/open-bookmark-modal'
 import { OpenInfoRowModalIcon } from '@feature/open-close/open-info-modal'
 import { DescriptionCell } from './cell/DescriptionCell'
@@ -11,6 +7,10 @@ import { PriceCell } from './cell/PriceCell'
 import { QtyCell } from './cell/QtyCell'
 import { RowActionButtonsLayout } from './RowActionButtonsLayout'
 import { RowLayout } from './RowLayout'
+import { CopyRowIcon } from '@feature/blocks/copy-row/CopyRowIcon'
+import { CutRowIcon } from '@feature/blocks/cut-row/CutRowIcon'
+import { DeleteRowIcon } from '@feature/blocks/delete-row/DeleteRowIcon'
+import { DragRowIcon } from '@feature/blocks/drag-row/DragRowIcon'
 
 type Props = {
   onBlur: (e: React.FocusEvent<HTMLDivElement>) => void

@@ -1,7 +1,6 @@
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { RowProvider } from '@entity/quotation/provider/RowProvider'
 import { selectRows } from '@entity/quotation/redux/selector/selectRows'
-import { hidePinsOnRowBlur } from '@feature/blocks/pin'
 import { useSelector } from '@shared/lib/redux'
 import { arrayShapesEqualityFn } from '@shared/util/arrayShapesEqualityFn'
 import { AnimatePresence } from 'motion/react'
@@ -11,6 +10,7 @@ import { RowAnimate } from './RowAnimate'
 import { RowSortable } from './RowSortable'
 import { RowsLayout } from './RowsLayout'
 import { RowsSortableContext } from './RowsSortableContext'
+import { hidePinsOnRowBlur } from '@feature/blocks/hide-row-pins/hidePinsOnRowBlur'
 
 export const Rows = (): React.JSX.Element => {
   const block = useBlock()

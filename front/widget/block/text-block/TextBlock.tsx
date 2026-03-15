@@ -2,15 +2,6 @@ import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { getTextBlockHtmlFromStore } from '@entity/quotation/redux/getter/getTextBlockHtmlFromStore'
 import { textItemCellStyle } from '@entity/quotation/style/textItemCellStyle'
 import { BlockComp } from '@entity/quotation/ui/BlockComp'
-import { CopyBlockIcon } from '@feature/blocks/copy'
-import { CutBlockIcon } from '@feature/blocks/cut'
-import { DeleteBlockIcon } from '@feature/blocks/delete'
-import { DragBlockIcon } from '@feature/blocks/drag'
-import {
-  onTextBlockResizeStart,
-  onTextBlockResizeStop,
-} from '@feature/blocks/resize'
-import { updateTextBlock } from '@feature/blocks/update'
 import { upload } from '@feature/file/upload-file'
 import { BookmarkBlockIcon } from '@feature/open-close/open-bookmark-modal'
 import { OpenInfoBlockModalIcon } from '@feature/open-close/open-info-modal'
@@ -19,6 +10,15 @@ import { cls } from '@shared/cls'
 import { ItemActionButtonsLayout } from '@shared/layout/ItemActionButtonsLayout'
 import { useRef } from 'react'
 import type { Editor } from '@tiptap/react'
+import { CopyBlockIcon } from '@feature/blocks/copy-block/CopyBlockIcon'
+import { CutBlockIcon } from '@feature/blocks/cut-block/CutBlockIcon'
+import { DeleteBlockIcon } from '@feature/blocks/delete-block/DeleteBlockIcon'
+import { DragBlockIcon } from '@feature/blocks/drag-block/DragBlockIcon'
+import {
+  onTextBlockResizeStart,
+  onTextBlockResizeStop,
+} from '@feature/blocks/resize-text-block/onTextBlockResize'
+import { updateTextBlock } from '@feature/blocks/change-text-block/updateTextBlock'
 
 export const TextBlock = (): React.JSX.Element => {
   const editorRef = useRef<Editor | null>(null)

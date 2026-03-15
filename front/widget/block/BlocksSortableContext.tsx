@@ -1,5 +1,8 @@
+import {
+  onBlockDragEnd,
+  onBlockDragStart,
+} from '@feature/blocks/drag-block/onBlockDrag'
 import { DragDropContext, Droppable } from '@hello-pangea/dnd'
-import { onBlockDragEnd, onBlockDragStart } from '@feature/blocks/drag'
 import { getState } from '@shared/lib/redux'
 
 type Props = {

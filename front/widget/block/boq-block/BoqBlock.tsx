@@ -1,20 +1,20 @@
 import { BoqProvider } from '@entity/quotation/provider/BoqBlockProvider'
 import { BlockComp } from '@entity/quotation/ui/BlockComp'
-import { CopyBlockIcon } from '@feature/blocks/copy'
-import { CutBlockIcon } from '@feature/blocks/cut'
-import { DeleteBlockIcon } from '@feature/blocks/delete'
-import { DragBlockIcon } from '@feature/blocks/drag'
-import {
-  onBoqBlockResize,
-  onBoqBlockResizeStart,
-  onBoqBlockResizeStop,
-} from '@feature/blocks/resize'
 import { BookmarkBlockIcon } from '@feature/open-close/open-bookmark-modal'
 import { OpenInfoBlockModalIcon } from '@feature/open-close/open-info-modal'
 import { cls } from '@shared/cls'
 import { ItemActionButtonsLayout } from '@shared/layout/ItemActionButtonsLayout'
 import { BoqHeader } from './boq-header'
 import { BoqTable } from './boq-table'
+import { CopyBlockIcon } from '@feature/blocks/copy-block/CopyBlockIcon'
+import { CutBlockIcon } from '@feature/blocks/cut-block/CutBlockIcon'
+import { DeleteBlockIcon } from '@feature/blocks/delete-block/DeleteBlockIcon'
+import { DragBlockIcon } from '@feature/blocks/drag-block/DragBlockIcon'
+import {
+  onBoqBlockResize,
+  onBoqBlockResizeStart,
+  onBoqBlockResizeStop,
+} from '@feature/blocks/resize-boq-block/onBoqBlockResize'
 
 export const BoqBlock = (): React.JSX.Element => {
   return (

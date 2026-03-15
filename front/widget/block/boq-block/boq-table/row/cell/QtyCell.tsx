@@ -5,11 +5,13 @@ import { useBoq } from '@entity/quotation/provider/BoqBlockProvider'
 import { useRow } from '@entity/quotation/provider/RowProvider'
 import { getCellHtmlFromStore } from '@entity/quotation/redux/getter/getCellHtmlFromStore'
 import { cellStyle } from '@entity/quotation/style/cellStyle'
-import { Pin, pinQtyCell } from '@feature/blocks/pin'
-import { tabFromQtyCell } from '@feature/blocks/tab-away-from-cell'
-import { formatQtyCell, updateQtyCell } from '@feature/blocks/update'
 import { Box } from '@mui/material'
 import { TextEditor } from '@shared/component/TextEditor'
+import { Pin } from './Pin'
+import { pinQtyCell } from '@feature/blocks/pin-qty-cell/pinQtyCell'
+import { tabFromQtyCell } from '@feature/blocks/tab-away-from-qty-cell/tabFromQtyCell'
+import { updateQtyCell } from '@feature/blocks/change-qty-cell-at-boq-block/updateQtyCell'
+import { formatQtyCell } from '@feature/blocks/focus-out-from-qty-cell-at-boq-block/formatQtyCell'
 
 export const QtyCell = (): React.JSX.Element => {
   const block = useBlock()

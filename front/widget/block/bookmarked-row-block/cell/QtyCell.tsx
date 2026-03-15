@@ -4,8 +4,8 @@ import { useStylesForResizableCell } from '@entity/quotation/hook/useStylesForRe
 import { useRow } from '@entity/quotation/provider/RowProvider'
 import { getBookmarkedRowCellHtmlFromStore } from '@entity/quotation/redux/getter/getBookmarkedRowCellHtmlFromStore'
 import { cellStyle } from '@entity/quotation/style/cellStyle'
-import { formatQtyCell } from '@feature/blocks/update/update-cell-at-bookmarked-row-block/qty/formatQtyCell'
-import { updateQtyCell } from '@feature/blocks/update/update-cell-at-bookmarked-row-block/qty/updateQtyCell'
+import { formatQtyCell } from '@feature/blocks/focus-out-from-qty-cell-at-bookmark-block/formatQtyCell'
+import { updateQtyCell } from '@feature/blocks/change-qty-cell-at-bookmark-block/updateQtyCell'
 import { Box } from '@mui/material'
 import { TextEditor } from '@shared/component/TextEditor'
 

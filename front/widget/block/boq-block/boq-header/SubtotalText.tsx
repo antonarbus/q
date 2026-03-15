@@ -2,10 +2,10 @@ import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { getBoqHeaderHtmlFromStore } from '@entity/quotation/redux/getter/getBoqHeaderHtmlFromStore'
 import { subTotalTextCellStyle } from '@entity/quotation/style/subTotalTextCellStyle'
 import type { HeaderKey } from '@back/entity/quotation/schema'
-import { updateSubtotalText } from '@feature/blocks/update'
 import { useRef } from 'react'
 import { TextEditor } from '@shared/component/TextEditor'
 import type { Editor } from '@tiptap/react'
+import { updateSubtotalText } from '@feature/blocks/change-subtotal-text-at-boq-block/updateSubtotalText'
 
 const boqHeaderKey: HeaderKey = 'subtotalText'
 
