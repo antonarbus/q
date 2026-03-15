@@ -59,7 +59,7 @@ export const updateSubTotalPriceWithValue = (props: Props): Res => {
     updateNumberAtHtmlIncrementally({
       oldNumber: subTotalPriceValueCurrent,
       newNumber: props.value,
-      editor: props.subTotalPriceEditor,
+      totalPriceValueEditor: props.subTotalPriceEditor,
       html: boqBlock.boq.header.subTotalPrice.html,
     })
   } else {

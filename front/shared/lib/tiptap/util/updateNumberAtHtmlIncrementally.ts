@@ -7,7 +7,7 @@ type Props = {
   oldNumber: number
   newNumber: number
   html: string
-  editor: Editor
+  totalPriceValueEditor: Editor
 }
 
 export const updateNumberAtHtmlIncrementally = (props: Props): void => {
@@ -35,7 +35,9 @@ export const updateNumberAtHtmlIncrementally = (props: Props): void => {
         })
 
         setTimeout(() => {
-          props.editor.commands.setContent(updatedHtml, { emitUpdate: false })
+          props.totalPriceValueEditor.commands.setContent(updatedHtml, {
+            emitUpdate: false,
+          })
 
           if (index === steps) {
             resolve('done')
@@ -53,7 +55,9 @@ export const updateNumberAtHtmlIncrementally = (props: Props): void => {
       newNumber: props.newNumber,
     })
 
-    props.editor.commands.setContent(finalHtml, { emitUpdate: false })
+    props.totalPriceValueEditor.commands.setContent(finalHtml, {
+      emitUpdate: false,
+    })
   }
 
   setTimeout(() => {

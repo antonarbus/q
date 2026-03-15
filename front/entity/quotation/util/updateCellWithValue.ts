@@ -52,7 +52,7 @@ export const updateCellWithValue = (props: Props): void => {
   updateNumberAtHtmlIncrementally({
     oldNumber: priceValueFromHtml,
     newNumber: props.value,
-    editor: props.editor,
+    totalPriceValueEditor: props.editor,
     html: row[props.cellKey].html,
   })
 }

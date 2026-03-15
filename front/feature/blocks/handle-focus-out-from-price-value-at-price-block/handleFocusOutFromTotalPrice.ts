@@ -54,7 +54,7 @@ export const handleFocusOutFromTotalPrice = (props: Props): void => {
   updateNumberAtHtmlIncrementally({
     oldNumber: priceBlock.price.value,
     newNumber: price,
-    editor: props.editorRef.current,
+    totalPriceValueEditor: props.editorRef.current,
     html: priceBlock.price.html,
   })
 }

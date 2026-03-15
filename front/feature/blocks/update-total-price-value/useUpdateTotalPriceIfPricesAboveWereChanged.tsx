@@ -50,7 +50,7 @@ export const useUpdateTotalPriceIfPricesAboveWereChanged = (
     updateNumberAtHtmlIncrementally({
       oldNumber: priceBlock.price.value,
       newNumber: totalPrice,
-      editor: props.editorRef.current,
+      totalPriceValueEditor: props.editorRef.current,
       html: priceBlock.price.html,
     })
   }, [totalPrice])
