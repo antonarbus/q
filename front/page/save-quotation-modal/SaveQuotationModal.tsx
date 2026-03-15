@@ -3,7 +3,7 @@ import {
   useLoadInitValuesIntoSaveQuotationModal,
   useLoadSaveQuotationModalWithDirectLink,
 } from '@feature/open-close/open-save-quotation-modal'
-import { useSaveQuotation } from '@feature/quotation/save-quotation'
+import { useSaveQuotation } from '@feature/quotation/save-quotation/useSaveQuotation'
 import { FormModal } from '@shared/component/FormModal'
 import { CategoryField } from '@shared/component/input-field/CategoryField'
 import { DescriptionField } from '@shared/component/input-field/DescriptionField'

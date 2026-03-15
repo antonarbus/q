@@ -14,7 +14,7 @@ import { openSettingsModal } from '@feature/open-close/open-settings-modal'
 import { openShareQuotationModal } from '@feature/open-close/open-share-quotation-modal'
 import { downloadExcel } from '@feature/quotation/download-quotation-as-excel'
 import { downloadPdf } from '@feature/quotation/download-quotation-as-pdf'
-import { saveExistingQuotation } from '@feature/quotation/save-quotation'
+import { saveExistingQuotation } from '@feature/quotation/save-quotation/saveExistingQuotation'
 import { getState } from '@shared/lib/redux'
 
 /** Required to avoid storing non-serializable values in Redux store */

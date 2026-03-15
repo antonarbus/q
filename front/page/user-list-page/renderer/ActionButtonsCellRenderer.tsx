@@ -1,6 +1,6 @@
 import type { ResBody } from '@back/api/user/getUserListHandler'
-import { DeleteUserButton } from '@feature/user/delete-user'
-import { LogInAsUserButton } from '@feature/user/log-in-as-user'
+import { DeleteUserButton } from '@feature/user/delete-user/DeleteUserButton'
+import { LogInAsUserButton } from '@feature/user/log-in-as-user-secretely/LogInAsUserButton'
 import { Box } from '@mui/material'
 import type { ICellRendererParams } from 'ag-grid-community'
 

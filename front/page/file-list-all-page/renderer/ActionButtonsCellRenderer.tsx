@@ -1,4 +1,4 @@
-import { DownloadFileIcon } from '@feature/file/download-file'
+import { DownloadFileIcon } from '@feature/file/download-file/DownloadFileIcon'
 import { Box } from '@mui/material'
 import type { ICellRendererParams } from 'ag-grid-community'
 import type { ResBody } from '@back/api/file/getFileListAllHandler'

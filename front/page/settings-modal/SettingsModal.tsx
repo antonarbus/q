@@ -1,5 +1,5 @@
 import { useGetFileListStatsQuery } from '@entity/file/api/useGetFileListStatsQuery'
-import { DeleteFileIcon } from '@feature/file/delete-file'
+import { DeleteFileIcon } from '@feature/file/delete-file/DeleteFileIcon'
 import { Avatar, Box, Collapse } from '@mui/material'
 import { BackdropWithSlidableModal } from '@shared/component/BackdropWithSlidableModal'
 import { CardCustom } from '@shared/component/CardCustom'

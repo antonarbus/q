@@ -4,7 +4,7 @@ import { DatePicker } from '@mui/x-date-pickers'
 import { format, subDays } from 'date-fns'
 import { useState } from 'react'
 import { useChart } from '@shared/lib/chart-js'
-import { useUpdateChart } from '@feature/visitors/update-chart-acc-to-date-range'
+import { useUpdateChart } from '@feature/visitors/update-chart-based-on-date-range/useUpdateChart'
 
 const today = new Date()
 const thirtyDaysAgo = subDays(today, 30)

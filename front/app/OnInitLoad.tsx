@@ -1,9 +1,9 @@
-import { useLogoutIfAccessTokenExpired } from '@feature/auth/log-out'
+import { useLogoutIfAccessTokenExpired } from '@feature/auth/log-out/useLogoutIfAccessTokenExpired'
 import { useShowDragAndDropArea } from '@feature/file/upload-file'
-import { useConnectionToBackendCheck } from '@feature/init-load/useConnectionToBackend'
-import { useCountUniqueDailyVisitor } from '@feature/init-load/useCountUniqueDailyVisitor'
-import { useHideInitHtmlElements } from '@feature/init-load/useHideInitHtmlElements'
-import { useRemoveThirdPartyCookies } from '@feature/init-load/useRemoveThirdPartyCookies'
+import { useConnectionToBackendCheck } from '@feature/init-load/check-connection-to-server/useConnectionToBackend'
+import { useCountUniqueDailyVisitor } from '@feature/init-load/count-unique-daily-visitors/useCountUniqueDailyVisitor'
+import { useHideInitHtmlElements } from '@feature/init-load/hide-loading-text/useHideInitHtmlElements'
+import { useRemoveThirdPartyCookies } from '@feature/init-load/remove-third-party-cookies/useRemoveThirdPartyCookies'
 import { useInitMousePositionTracking } from '@shared/util/mousePosition'
 
 export const OnInitLoad = (): React.ReactNode => {

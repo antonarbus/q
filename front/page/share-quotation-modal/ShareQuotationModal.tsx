@@ -2,7 +2,7 @@ import {
   useLoadInitValuesIntoShareQuotationModal,
   useLoadShareQuotationModalWithDirectLink,
 } from '@feature/open-close/open-share-quotation-modal'
-import { useShareQuotation } from '@feature/quotation/share-quotation'
+import { useShareQuotation } from '@feature/quotation/share-quotation/useShareQuotation'
 import { FormModal } from '@shared/component/FormModal'
 import { router } from '@shared/lib/react-router-dom/router'
 import { getState } from '@shared/lib/redux'

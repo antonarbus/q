@@ -1,4 +1,4 @@
-import { useActivate } from '@feature/auth/activate'
+import { useActivate } from '@feature/auth/activate-user/useActivate'
 import { Avatar, Box } from '@mui/material'
 import { BackdropWithSlidableModal } from '@shared/component/BackdropWithSlidableModal'
 import { CardCustom } from '@shared/component/CardCustom'

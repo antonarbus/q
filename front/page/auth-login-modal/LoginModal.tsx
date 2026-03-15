@@ -1,4 +1,4 @@
-import { useLogIn } from '@feature/auth/log-in'
+import { useLogIn } from '@feature/auth/log-in/useLogIn'
 import { OpenRegisterModalLink } from '@feature/open-close/open-register-modal'
 import { OpenResetModalLink } from '@feature/open-close/open-reset-modal'
 import { Box } from '@mui/material'

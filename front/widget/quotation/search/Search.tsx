@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 import { PaperComponent } from './PaperComponent'
 import { SearchOption } from './SearchOption'
 import { renderInput } from './renderInput'
-import { useCopyBookmarkAtSearch } from '@feature/bookmark/copy-bookmark/useCopyBookmarkAtSearch'
+import { useCopyBookmarkAtSearch } from '@feature/bookmark/copy-bookmark-at-search/useCopyBookmarkAtSearch'
 
 export const Search = (): React.JSX.Element => {
   const getBookmarkListQuery = useGetBookmarkListQuery()

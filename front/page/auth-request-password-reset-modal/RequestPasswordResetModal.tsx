@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
-import { useRequestPasswordReset } from '@feature/auth/request-password-reset'
+import { useRequestPasswordReset } from '@feature/auth/request-password-reset/useRequestPasswordReset'
 import { OpenLoginModalLink } from '@feature/open-close/open-login-modal'
 import { Box } from '@mui/material'
 import { useSignal } from '@preact/signals-react'

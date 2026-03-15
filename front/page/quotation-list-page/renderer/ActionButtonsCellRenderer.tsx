@@ -1,7 +1,7 @@
 import type { ResBody } from '@back/api/quotation/getQuotationListHandler'
 import { OpenQuotationPageAndLoadFromServerButton } from '@feature/open-close/open-quotation-page'
 import { OpenSaveQuotationModalButton } from '@feature/open-close/open-save-quotation-modal'
-import { DeleteQuotationButton } from '@feature/quotation/delete-quotation'
+import { DeleteQuotationButton } from '@feature/quotation/delete-quotation/DeleteQuotationButton'
 import { Box } from '@mui/material'
 import type { ICellRendererParams } from 'ag-grid-community'
 

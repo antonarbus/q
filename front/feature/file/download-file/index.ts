@@ -1,1 +1,0 @@
-export { DownloadFileIcon } from './DownloadFileIcon'

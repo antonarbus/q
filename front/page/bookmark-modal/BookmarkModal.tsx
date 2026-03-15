@@ -1,6 +1,5 @@
 import { useGetBookmarkCategoryListQuery } from '@entity/bookmark/api/useGetBookmarkCategoryListQuery'
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
-import { useSaveBookmark } from '@feature/bookmark/save-bookmark'
 import {
   useLoadBookmarkModalOpenedWithDirectLink,
   useBookmarkFormValues,
@@ -16,6 +15,7 @@ import { useAnimatedElement } from '@shared/util/useAnimatedElement'
 import { FiEdit3 } from 'react-icons/fi'
 import { useUnmount } from 'react-use'
 import { BookmarkField } from './BookmarkField'
+import { useSaveBookmark } from '@feature/bookmark/save-bookmark/useSaveBookmark'
 
 export const BookmarkModal = (): React.JSX.Element => {
   const animatedElement = useAnimatedElement()

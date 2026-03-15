@@ -1,1 +1,0 @@
-export { DeleteFileIcon } from './DeleteFileIcon'

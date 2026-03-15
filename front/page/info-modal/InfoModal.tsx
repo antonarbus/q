@@ -1,4 +1,4 @@
-import { useUpdateItemInfo } from '@feature/info/update-info'
+import { useUpdateItemInfo } from '@feature/info/update-info/useUpdateItemInfo'
 import { useInfoFormValues } from '@feature/open-close/open-info-modal'
 import { useLoadInfoModalOpenedWithDirectLink } from '@feature/open-close/open-info-modal/useLoadInfoModalOpenedWithDirectLink'
 import { FormModal } from '@shared/component/FormModal'

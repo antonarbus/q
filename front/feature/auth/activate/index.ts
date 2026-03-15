@@ -1,1 +1,0 @@
-export { useActivate } from './useActivate'

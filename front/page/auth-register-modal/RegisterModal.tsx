@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
-import { useRegister } from '@feature/auth/register'
+import { useRegister } from '@feature/auth/register-user/useRegister'
 import { OpenLoginModalLink } from '@feature/open-close/open-login-modal'
 import { Box } from '@mui/material'
 import { useSignal, useSignalEffect } from '@preact/signals-react'

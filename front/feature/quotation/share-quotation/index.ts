@@ -1,1 +1,0 @@
-export { useShareQuotation } from './useShareQuotation'

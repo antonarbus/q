@@ -1,4 +1,4 @@
-import { useResetPassword } from '@feature/auth/reset-password'
+import { useResetPassword } from '@feature/auth/reset-password/useResetPassword'
 import { OpenLoginModalLink } from '@feature/open-close/open-login-modal'
 import { OpenRegisterModalLink } from '@feature/open-close/open-register-modal'
 import { Box } from '@mui/material'
