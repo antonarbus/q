@@ -3,7 +3,7 @@ import { getPriceBlockHtmlFromStore } from '@entity/quotation/redux/getter/getPr
 import { TextEditor } from '@shared/component/TextEditor'
 import { useRef } from 'react'
 import type { Editor } from '@tiptap/react'
-import { useUpdateTotalPriceIfPricesAboveWereChanged } from '@feature/blocks/update-total-price-value/useUpdateTotalPriceIfPricesAboveWereChanged'
+import { useUpdateTotalPriceIfPricesAboveWereChanged } from '@feature/blocks/update-total-price-value-if-prices-above-changed/useUpdateTotalPriceIfPricesAboveWereChanged'
 import { handleFocusOutFromTotalPrice } from '@feature/blocks/handle-focus-out-from-price-value-at-price-block/handleFocusOutFromTotalPrice'
 import { handleChangeOfPriceValue } from '@feature/blocks/handle-change-of-price-value-at-price-block/handleChangeOfPriceValue'
 
