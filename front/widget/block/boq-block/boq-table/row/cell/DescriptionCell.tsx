@@ -4,7 +4,7 @@ import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { useRow } from '@entity/quotation/provider/RowProvider'
 import { getCellHtmlFromStore } from '@entity/quotation/redux/getter/getCellHtmlFromStore'
 import { cellStyle } from '@entity/quotation/style/cellStyle'
-import { updateDescriptionCell } from '@feature/blocks/change-description-cell-at-boq-block/updateDescriptionCell'
+import { changeDescriptionCell } from '@feature/blocks/change-description-cell-at-boq-block/changeDescriptionCell'
 import { tabFromDescriptionCell } from '@feature/blocks/tab-away-from-description-cell/tabFromDescriptionCell'
 import { upload } from '@feature/file/upload-file'
 import { TextEditor } from '@shared/component/TextEditor'
@@ -32,7 +32,7 @@ export const DescriptionCell = (): React.JSX.Element => {
         })
       }
       onUpdate={(params) => {
-        updateDescriptionCell({
+        changeDescriptionCell({
           blockIndex: block.index,
           cellKey: 'description',
           editorRef: row.descriptionCellEditorRef,

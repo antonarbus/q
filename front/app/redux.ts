@@ -5,7 +5,6 @@ import { userReducer } from '@entity/user/redux/userSlice'
 import { configureStore } from '@reduxjs/toolkit'
 import { appReducer } from '@shared/appSlice'
 import { agGridReducer } from '@shared/lib/ag-grid/agGridSlice'
-import { textReducer } from '@shared/lib/tiptap/store/textSlice'
 import { instantiateStore } from '@shared/lib/redux/redux'
 import type { TypedUseSelectorHook } from 'react-redux'
 
@@ -17,7 +16,6 @@ const store = configureStore({
     quotation: quotationReducer,
     copy: copyReducer,
     agGrid: agGridReducer,
-    text: textReducer,
   },
   // Vite's magic, browser does not have 'process' variable,
   // Vite replaces process.env.NODE_ENV with the actual string value at build time

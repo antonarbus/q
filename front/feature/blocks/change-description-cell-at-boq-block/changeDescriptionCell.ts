@@ -9,7 +9,7 @@ type Props = {
   cellKey: CellKey
 }
 
-export const updateDescriptionCell = (props: Props): void => {
+export const changeDescriptionCell = (props: Props): void => {
   if (props.editorRef.current === null) {
     return
   }

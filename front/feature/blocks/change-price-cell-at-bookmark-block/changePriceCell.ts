@@ -6,18 +6,18 @@ import type { EditorRef } from '@shared/lib/tiptap/types'
 import { roundTo } from 'round-to'
 
 type Props = {
-  qtyCellEditorRef: EditorRef
+  itemPriceCellEditorRef: EditorRef
   priceCellEditorRef: EditorRef
 }
 
-export const updateQtyCell = (props: Props): void => {
-  if (props.qtyCellEditorRef.current === null) {
+export const changePriceCell = (props: Props): void => {
+  if (props.priceCellEditorRef.current === null) {
     return
   }
 
   updateBookmarkedRowCellAtStore({
-    cellKey: 'qty',
-    html: props.qtyCellEditorRef.current.getHTML(),
+    cellKey: 'price',
+    html: props.priceCellEditorRef.current.getHTML(),
   })
 
   const block = getState().quotation.blocks[BOOKMARK_POS_AT_BLOCKS]
@@ -28,12 +28,16 @@ export const updateQtyCell = (props: Props): void => {
 
   const row = block
 
-  const newPriceValue = row.qty.value * row.itemPrice.value
-  const newPriceValueRounded = roundTo(newPriceValue, 2)
+  if (row.qty.value === 0) {
+    return
+  }
+
+  const newItemPriceValue = row.price.value / row.qty.value
+  const newItemPriceValueRounded = roundTo(newItemPriceValue, 2)
 
   updateBookmarkedRowCellWithValue({
-    cellKey: 'price',
-    editor: props.priceCellEditorRef.current,
-    value: newPriceValueRounded,
+    editor: props.itemPriceCellEditorRef.current,
+    cellKey: 'itemPrice',
+    value: newItemPriceValueRounded,
   })
 }

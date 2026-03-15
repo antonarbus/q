@@ -10,8 +10,8 @@ import { TextEditor } from '@shared/component/TextEditor'
 import { Pin } from './Pin'
 import { pinQtyCell } from '@feature/blocks/pin-qty-cell/pinQtyCell'
 import { tabFromQtyCell } from '@feature/blocks/tab-away-from-qty-cell/tabFromQtyCell'
-import { updateQtyCell } from '@feature/blocks/change-qty-cell-at-boq-block/updateQtyCell'
-import { formatQtyCell } from '@feature/blocks/focus-out-from-qty-cell-at-boq-block/formatQtyCell'
+import { changeQtyCell } from '@feature/blocks/change-qty-cell-at-boq-block/changeQtyCell'
+import { focusOutFromQtyCell } from '@feature/blocks/focus-out-from-qty-cell-at-boq-block/focusOutFromQtyCell'
 
 export const QtyCell = (): React.JSX.Element => {
   const block = useBlock()
@@ -38,7 +38,7 @@ export const QtyCell = (): React.JSX.Element => {
           })
         }
         onUpdate={(params) => {
-          updateQtyCell({
+          changeQtyCell({
             blockIndex: block.index,
             priceCellEditorRef: row.priceCellEditorRef,
             qtyCellEditorRef: row.qtyCellEditorRef,
@@ -47,7 +47,7 @@ export const QtyCell = (): React.JSX.Element => {
           })
         }}
         onBlur={() => {
-          formatQtyCell({
+          focusOutFromQtyCell({
             blockIndex: block.index,
             qtyCellEditorRef: row.qtyCellEditorRef,
             rowIndex: row.index,

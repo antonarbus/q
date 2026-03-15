@@ -1,13 +1,15 @@
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { dispatch, getState } from '@shared/lib/redux'
 import type { EditorRef } from '@shared/lib/tiptap/types'
+import { getNumberFromString } from '@shared/util/getNumberFromString'
+import { getTextContentFromHtml } from '@shared/util/getTextContentFromHtml'
 
 type Props = {
   editorRef: EditorRef
   blockIndex: number
 }
 
-export const updatePriceTitle = (props: Props): void => {
+export const changePriceValue = (props: Props): void => {
   if (props.editorRef.current === null) {
     return
   }
@@ -18,18 +20,22 @@ export const updatePriceTitle = (props: Props): void => {
     return
   }
 
-  const prevHtml = priceBlock.title.html
+  const prevHtml = priceBlock.price.html
   const html = props.editorRef.current.getHTML()
-  const didTextChange = prevHtml !== html
+  const didHtmlChange = prevHtml !== html
 
-  if (didTextChange === false) {
+  if (didHtmlChange === false) {
     return
   }
 
+  const cellTextContent = getTextContentFromHtml({ html })
+  const cellValueFromHtml = getNumberFromString({ string: cellTextContent })
+
   dispatch(
-    quotationSlice.actions.updatePriceTitle({
+    quotationSlice.actions.updatePrice({
       blockIndex: props.blockIndex,
       html,
+      value: cellValueFromHtml,
     }),
   )
 }

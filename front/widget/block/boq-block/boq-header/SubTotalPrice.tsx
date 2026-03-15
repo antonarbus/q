@@ -6,8 +6,8 @@ import type { HeaderKey } from '@back/entity/quotation/schema'
 import { useRef } from 'react'
 import { TextEditor } from '@shared/component/TextEditor'
 import { showHidePricePins } from '@feature/blocks/show-hide-pins-in-price-column/showHidePricePins'
-import { updateSubtotalPrice } from '@feature/blocks/change-subtotal-price-at-boq-block/updateSubtotalPrice'
-import { formatSubtotalPrice } from '@feature/blocks/focus-out-from-subtotal-price-at-boq-block/formatSubtotalPrice'
+import { changeSubtotalPrice } from '@feature/blocks/change-subtotal-price-at-boq-block/changeSubtotalPrice'
+import { focusOutFromSubtotalPrice } from '@feature/blocks/focus-out-from-subtotal-price-at-boq-block/focusOutFromSubtotalPrice'
 import { validatePrices } from '@feature/blocks/focus-out-from-subtotal-price-at-boq-block/validatePrices'
 
 const boqHeaderKey: HeaderKey = 'subTotalPrice'
@@ -38,14 +38,14 @@ export const SubTotalPrice = (): React.JSX.Element => {
         })
       }
       onUpdate={(params) => {
-        updateSubtotalPrice({
+        changeSubtotalPrice({
           blockIndex: block.index,
           rowEditorRefs: boq.rowEditorRefs,
           subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
         })
       }}
       onBlur={() => {
-        formatSubtotalPrice({
+        focusOutFromSubtotalPrice({
           blockIndex: block.index,
           subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
         })

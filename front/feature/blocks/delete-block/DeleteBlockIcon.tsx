@@ -1,15 +1,17 @@
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
+import { useBoq } from '@entity/quotation/provider/BoqBlockProvider'
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { selectIsLastBlock } from '@entity/quotation/redux/selector/selectIsLastBlock'
+import { updateSubTotalPrice } from '@entity/quotation/util/updateSubTotalPrice'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/cls'
-import { textSlice } from '@shared/lib/tiptap/store/textSlice'
 import { dispatch, getState, useSelector } from '@shared/lib/redux'
 import { fixElementDimensionStyle } from '@shared/util/fixElementDimensionStyle'
 import { GoTrash } from 'react-icons/go'
 
 export const DeleteBlockIcon = (): React.JSX.Element => {
   const block = useBlock()
+  const boq = useBoq()
 
   const isBlockAlone = useSelector(selectIsLastBlock)
   const isDeletable = useSelector((state) => state.copy.isDeletable)
@@ -68,7 +70,10 @@ export const DeleteBlockIcon = (): React.JSX.Element => {
               }),
             )
 
-            dispatch(textSlice.actions.triggerSubtotalUpdate())
+            updateSubTotalPrice({
+              blockIndex: block.index,
+              subTotalPriceEditor: boq.subTotalPriceEditorRef.current,
+            })
           }}
           tabIndex={-1}
           style={{

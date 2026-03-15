@@ -7,7 +7,7 @@ type Props = {
   blockIndex: number
 }
 
-export const updateTextBlock = (props: Props): void => {
+export const changeTextBlock = (props: Props): void => {
   if (props.editorRef.current === null) {
     return
   }

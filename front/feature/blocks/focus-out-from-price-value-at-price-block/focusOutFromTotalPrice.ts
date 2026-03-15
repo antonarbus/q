@@ -12,7 +12,7 @@ type Props = {
   blockIndex: number
 }
 
-export const validateTotalPrice = (props: Props): void => {
+export const focusOutFromTotalPrice = (props: Props): void => {
   if (props.editorRef.current === null) {
     return
   }

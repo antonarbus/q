@@ -16,7 +16,7 @@ type Props = {
   rowIndex: number
 }
 
-export const updatePriceCell = (props: Props): void => {
+export const changePriceCell = (props: Props): void => {
   if (props.priceCellEditorRef.current === null) {
     return
   }

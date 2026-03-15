@@ -10,7 +10,7 @@ type Props = {
   subTotalPriceEditorRef: EditorRef
 }
 
-export const formatSubtotalPrice = (props: Props): void => {
+export const focusOutFromSubtotalPrice = (props: Props): void => {
   if (props.subTotalPriceEditorRef.current === null) {
     return
   }

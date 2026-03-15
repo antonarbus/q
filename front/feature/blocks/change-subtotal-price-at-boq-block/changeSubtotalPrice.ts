@@ -17,8 +17,7 @@ type Props = {
   rowEditorRefs: RowEditorRefs
 }
 
-// todo: move into entity
-export const updateSubtotalPrice = (props: Props): void => {
+export const changeSubtotalPrice = (props: Props): void => {
   if (props.subTotalPriceEditorRef.current === null) {
     return
   }

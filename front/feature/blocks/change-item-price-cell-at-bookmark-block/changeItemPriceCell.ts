@@ -10,7 +10,7 @@ type Props = {
   priceCellEditorRef: EditorRef
 }
 
-export const updateItemPriceCell = (props: Props): void => {
+export const changeItemPriceCell = (props: Props): void => {
   if (props.itemPriceCellEditorRef.current === null) {
     return
   }

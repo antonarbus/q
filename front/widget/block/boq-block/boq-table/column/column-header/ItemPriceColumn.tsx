@@ -6,7 +6,7 @@ import { useRef } from 'react'
 import { ResizableColumn } from '../ResizableColumn'
 import { TextEditor } from '@shared/component/TextEditor'
 import type { Editor } from '@tiptap/react'
-import { updateColumnCell } from '@feature/blocks/change-table-header-cell-at-boq-block/updateColumnCell'
+import { changeColumnCell } from '@feature/blocks/change-table-header-cell-at-boq-block/changeColumnCell'
 
 export const ItemPriceColumn = (): React.JSX.Element => {
   const editorRef = useRef<Editor | null>(null)
@@ -29,7 +29,7 @@ export const ItemPriceColumn = (): React.JSX.Element => {
           })
         }
         onUpdate={(params) => {
-          updateColumnCell({
+          changeColumnCell({
             editorRef,
             blockIndex: block.index,
             boqColumnKey: 'itemPrice',

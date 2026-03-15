@@ -4,8 +4,8 @@ import { TextEditor } from '@shared/component/TextEditor'
 import { useRef } from 'react'
 import type { Editor } from '@tiptap/react'
 import { useUpdateTotalPriceIfPricesAboveWereChanged } from '@feature/blocks/yyy'
-import { validateTotalPrice } from '@feature/blocks/focus-out-from-price-value-at-price-block/validateTotalPrice'
-import { updatePriceValue } from '@feature/blocks/change-price-value-at-price-block/updatePriceValue'
+import { focusOutFromTotalPrice } from '@feature/blocks/focus-out-from-price-value-at-price-block/focusOutFromTotalPrice'
+import { changePriceValue } from '@feature/blocks/change-price-value-at-price-block/changePriceValue'
 
 export const PriceValue = (): React.JSX.Element => {
   const editorRef = useRef<Editor | null>(null)
@@ -25,13 +25,13 @@ export const PriceValue = (): React.JSX.Element => {
         getPriceBlockHtmlFromStore({ blockIndex: block.index })
       }
       onCreate={(params) => {
-        validateTotalPrice({ editorRef, blockIndex: block.index })
+        focusOutFromTotalPrice({ editorRef, blockIndex: block.index })
       }}
       onUpdate={(params) => {
-        updatePriceValue({ editorRef, blockIndex: block.index })
+        changePriceValue({ editorRef, blockIndex: block.index })
       }}
       onBlur={() => {
-        validateTotalPrice({ editorRef, blockIndex: block.index })
+        focusOutFromTotalPrice({ editorRef, blockIndex: block.index })
       }}
       sx={{
         textAlign: 'center',

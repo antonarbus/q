@@ -8,23 +8,23 @@ import { roundTo } from 'round-to'
 import type { EditorRef } from '@shared/lib/tiptap/types'
 
 type Props = {
-  itemPriceCellEditorRef: EditorRef
+  qtyCellEditorRef: EditorRef
   priceCellEditorRef: EditorRef
   subTotalPriceEditorRef: EditorRef
   blockIndex: number
   rowIndex: number
 }
 
-export const updateItemPriceCell = (props: Props): void => {
-  if (props.itemPriceCellEditorRef.current === null) {
+export const changeQtyCell = (props: Props): void => {
+  if (props.qtyCellEditorRef.current === null) {
     return
   }
 
   updateCellAtStore({
     blockIndex: props.blockIndex,
     rowIndex: props.rowIndex,
-    cellKey: 'itemPrice',
-    html: props.itemPriceCellEditorRef.current.getHTML(),
+    cellKey: 'qty',
+    html: props.qtyCellEditorRef.current.getHTML(),
   })
 
   const row = getRowFromStore({

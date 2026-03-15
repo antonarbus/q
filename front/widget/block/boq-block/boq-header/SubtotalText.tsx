@@ -5,7 +5,7 @@ import type { HeaderKey } from '@back/entity/quotation/schema'
 import { useRef } from 'react'
 import { TextEditor } from '@shared/component/TextEditor'
 import type { Editor } from '@tiptap/react'
-import { updateSubtotalText } from '@feature/blocks/change-subtotal-text-at-boq-block/updateSubtotalText'
+import { changeSubtotalText } from '@feature/blocks/change-subtotal-text-at-boq-block/changeSubtotalText'
 
 const boqHeaderKey: HeaderKey = 'subtotalText'
 
@@ -25,7 +25,7 @@ export const SubtotalText = (): React.JSX.Element => {
         })
       }
       onUpdate={(params) => {
-        updateSubtotalText({
+        changeSubtotalText({
           editorRef,
           blockIndex: block.index,
           boqHeaderKey,

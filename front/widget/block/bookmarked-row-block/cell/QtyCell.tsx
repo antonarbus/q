@@ -4,8 +4,8 @@ import { useStylesForResizableCell } from '@entity/quotation/hook/useStylesForRe
 import { useRow } from '@entity/quotation/provider/RowProvider'
 import { getBookmarkedRowCellHtmlFromStore } from '@entity/quotation/redux/getter/getBookmarkedRowCellHtmlFromStore'
 import { cellStyle } from '@entity/quotation/style/cellStyle'
-import { formatQtyCell } from '@feature/blocks/focus-out-from-qty-cell-at-bookmark-block/formatQtyCell'
-import { updateQtyCell } from '@feature/blocks/change-qty-cell-at-bookmark-block/updateQtyCell'
+import { focusOutFromQtyCell } from '@feature/blocks/focus-out-from-qty-cell-at-bookmark-block/focusOutFromQtyCell'
+import { changeQtyCell } from '@feature/blocks/change-qty-cell-at-bookmark-block/changeQtyCell'
 import { Box } from '@mui/material'
 import { TextEditor } from '@shared/component/TextEditor'
 
@@ -28,13 +28,13 @@ export const QtyCell = (): React.JSX.Element => {
           getBookmarkedRowCellHtmlFromStore({ cellKey: 'qty' })
         }
         onUpdate={(params) => {
-          updateQtyCell({
+          changeQtyCell({
             priceCellEditorRef: row.priceCellEditorRef,
             qtyCellEditorRef: row.qtyCellEditorRef,
           })
         }}
         onBlur={() => {
-          formatQtyCell({ qtyCellEditorRef: row.qtyCellEditorRef })
+          focusOutFromQtyCell({ qtyCellEditorRef: row.qtyCellEditorRef })
         }}
         sx={{
           ...stylesForResizableCell,

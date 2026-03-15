@@ -2,13 +2,13 @@ import { formatBookmarkedRowCellNumber } from '@entity/quotation/util/formatBook
 import type { EditorRef } from '@shared/lib/tiptap/types'
 
 type Props = {
-  priceCellEditorRef: EditorRef
+  qtyCellEditorRef: EditorRef
 }
 
-export const formatPriceCell = (props: Props): void => {
+export const focusOutFromQtyCell = (props: Props): void => {
   formatBookmarkedRowCellNumber({
-    cellKey: 'price',
-    editorRef: props.priceCellEditorRef,
-    roundToTwoDecimals: true,
+    cellKey: 'qty',
+    editorRef: props.qtyCellEditorRef,
+    roundToTwoDecimals: false,
   })
 }
