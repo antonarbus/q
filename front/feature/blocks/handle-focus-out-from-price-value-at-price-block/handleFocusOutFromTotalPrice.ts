@@ -6,7 +6,6 @@ import { getNumberFromString } from '@shared/util/getNumberFromString'
 import { getStringWithNewFormattedNumber } from '@shared/util/getStringWithNewFormattedNumber'
 import { getTextContentFromHtml } from '@shared/util/getTextContentFromHtml'
 import { editorRegistry } from '@shared/lib/tiptap/editorRegistry'
-import { blockEditorKey } from '@shared/lib/tiptap/editorKey'
 
 type Props = {
   blockIndex: number
@@ -14,12 +13,10 @@ type Props = {
 
 export const handleFocusOutFromTotalPrice = (props: Props): void => {
   const editor =
-    editorRegistry.get(
-      blockEditorKey({
-        blockIndex: props.blockIndex,
-        editorName: 'totalPriceValue',
-      }),
-    ) ?? null
+    editorRegistry.get({
+      blockIndex: props.blockIndex,
+      editorName: 'totalPriceValue',
+    }) ?? null
 
   if (editor === null) {
     return

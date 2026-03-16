@@ -1,5 +1,4 @@
 import { editorRegistry } from '@shared/lib/tiptap/editorRegistry'
-import { rowEditorKey } from '@shared/lib/tiptap/editorKey'
 
 type Props = {
   event: KeyboardEvent
@@ -14,13 +13,11 @@ export const tabFromDescriptionCell = (props: Props): boolean => {
     props.event.preventDefault()
 
     editorRegistry
-      .get(
-        rowEditorKey({
-          blockIndex: props.blockIndex,
-          rowIndex: props.rowIndex,
-          cellKey: 'itemPrice',
-        }),
-      )
+      .get({
+        blockIndex: props.blockIndex,
+        rowIndex: props.rowIndex,
+        cellKey: 'itemPrice',
+      })
       ?.chain()
       .focus()
       .selectAll()

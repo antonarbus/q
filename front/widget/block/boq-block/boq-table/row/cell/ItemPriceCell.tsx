@@ -11,7 +11,6 @@ import { pinItemPriceCell } from '@feature/blocks/pin-item-price-cell/pinItemPri
 import { tabFromItemPriceCell } from '@feature/blocks/tab-away-from-item-price-cell/tabFromItemPriceCell'
 import { handleChangeOfItemPriceCell } from '@feature/blocks/handle-change-of-item-price-cell-at-boq-block/handleChangeOfItemPriceCell'
 import { handleFocusOutFromItemPriceCell } from '@feature/blocks/handle-focus-out-from-item-price-cell-at-boq-block/handleFocusOutFromItemPriceCell'
-import { rowEditorKey } from '@shared/lib/tiptap/editorKey'
 
 export const ItemPriceCell = (): React.JSX.Element => {
   const block = useBlock()
@@ -26,11 +25,11 @@ export const ItemPriceCell = (): React.JSX.Element => {
   return (
     <Box sx={{ display: 'flex', position: 'relative' }}>
       <TextEditor
-        registryKey={rowEditorKey({
+        registryKey={{
           blockIndex: block.index,
           rowIndex: row.index,
           cellKey: 'itemPrice',
-        })}
+        }}
         className='td itemPrice'
         placeholder='Item price...'
         contentGetter={() =>

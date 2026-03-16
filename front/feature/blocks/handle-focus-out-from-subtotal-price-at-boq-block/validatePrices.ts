@@ -6,7 +6,6 @@ import { updateSubTotalPriceWithValue } from '@entity/quotation/util/updateSubTo
 import { roundTo } from 'round-to'
 import { toast } from 'sonner'
 import { editorRegistry } from '@shared/lib/tiptap/editorRegistry'
-import { blockEditorKey, rowEditorKey } from '@shared/lib/tiptap/editorKey'
 
 type Props = {
   blockIndex: number
@@ -23,13 +22,11 @@ export const validatePrices = (props: Props): void => {
 
   rows.forEach((row, rowIndex) => {
     const priceCellEditor =
-      editorRegistry.get(
-        rowEditorKey({
-          blockIndex: props.blockIndex,
-          rowIndex,
-          cellKey: 'price',
-        }),
-      ) ?? null
+      editorRegistry.get({
+        blockIndex: props.blockIndex,
+        rowIndex,
+        cellKey: 'price',
+      }) ?? null
 
     if (priceCellEditor === null) {
       return
@@ -81,12 +78,10 @@ export const validatePrices = (props: Props): void => {
       updateSubTotalPriceWithValue({
         blockIndex: props.blockIndex,
         subTotalPriceEditor:
-          editorRegistry.get(
-            blockEditorKey({
-              blockIndex: props.blockIndex,
-              editorName: 'subTotalPrice',
-            }),
-          ) ?? null,
+          editorRegistry.get({
+            blockIndex: props.blockIndex,
+            editorName: 'subTotalPrice',
+          }) ?? null,
         value: subTotalPriceValueNewRounded,
         incrementally: false,
       })

@@ -5,7 +5,6 @@ import { dispatch, getState, useSelector } from '@shared/lib/redux'
 import { getStringWithNewFormattedNumber } from '@shared/util/getStringWithNewFormattedNumber'
 import { useUpdateEffect } from 'react-use'
 import { editorRegistry } from '@shared/lib/tiptap/editorRegistry'
-import { blockEditorKey } from '@shared/lib/tiptap/editorKey'
 
 type Props = {
   blockIndex: number
@@ -25,12 +24,10 @@ export const useUpdateTotalPriceIfPricesAboveWereChanged = (
 
   useUpdateEffect(() => {
     const editor =
-      editorRegistry.get(
-        blockEditorKey({
-          blockIndex: props.blockIndex,
-          editorName: 'totalPriceValue',
-        }),
-      ) ?? null
+      editorRegistry.get({
+        blockIndex: props.blockIndex,
+        editorName: 'totalPriceValue',
+      }) ?? null
 
     if (editor === null) {
       return

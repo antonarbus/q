@@ -7,7 +7,6 @@ import { handleFocusOutFromQtyCell } from '@feature/blocks/handle-focus-out-from
 import { handleChangeOfQtyCell } from '@feature/blocks/handle-change-of-qty-cell-at-bookmark-block/handleChangeOfQtyCell'
 import { Box } from '@mui/material'
 import { TextEditor } from '@shared/component/TextEditor'
-import { rowEditorKey } from '@shared/lib/tiptap/editorKey'
 
 export const QtyCell = (): React.JSX.Element => {
   const stylesForResizableCell = useStylesForResizableCell({
@@ -19,11 +18,11 @@ export const QtyCell = (): React.JSX.Element => {
   return (
     <Box sx={{ display: 'flex', position: 'relative' }}>
       <TextEditor
-        registryKey={rowEditorKey({
+        registryKey={{
           blockIndex: BOOKMARK_POS_AT_BLOCKS,
           rowIndex: 0,
           cellKey: 'qty',
-        })}
+        }}
         className='td qty'
         placeholder='Qty...'
         contentGetter={() =>

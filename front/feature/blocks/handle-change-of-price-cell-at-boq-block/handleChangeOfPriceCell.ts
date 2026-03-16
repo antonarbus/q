@@ -6,7 +6,6 @@ import { updateCellWithValue } from '@entity/quotation/util/updateCellWithValue'
 import { updateSubTotalPriceWithValue } from '@entity/quotation/util/updateSubTotalPriceWithValue'
 import { roundTo } from 'round-to'
 import { editorRegistry } from '@shared/lib/tiptap/editorRegistry'
-import { blockEditorKey, rowEditorKey } from '@shared/lib/tiptap/editorKey'
 
 type Props = {
   blockIndex: number
@@ -15,13 +14,11 @@ type Props = {
 
 export const handleChangeOfPriceCell = (props: Props): void => {
   const priceCellEditor =
-    editorRegistry.get(
-      rowEditorKey({
-        blockIndex: props.blockIndex,
-        rowIndex: props.rowIndex,
-        cellKey: 'price',
-      }),
-    ) ?? null
+    editorRegistry.get({
+      blockIndex: props.blockIndex,
+      rowIndex: props.rowIndex,
+      cellKey: 'price',
+    }) ?? null
 
   if (priceCellEditor === null) {
     return
@@ -55,13 +52,11 @@ export const handleChangeOfPriceCell = (props: Props): void => {
 
     updateCellWithValue({
       editor:
-        editorRegistry.get(
-          rowEditorKey({
-            blockIndex: props.blockIndex,
-            rowIndex: props.rowIndex,
-            cellKey: 'qty',
-          }),
-        ) ?? null,
+        editorRegistry.get({
+          blockIndex: props.blockIndex,
+          rowIndex: props.rowIndex,
+          cellKey: 'qty',
+        }) ?? null,
       blockIndex: props.blockIndex,
       rowIndex: props.rowIndex,
       cellKey: 'qty',
@@ -81,13 +76,11 @@ export const handleChangeOfPriceCell = (props: Props): void => {
 
     updateCellWithValue({
       editor:
-        editorRegistry.get(
-          rowEditorKey({
-            blockIndex: props.blockIndex,
-            rowIndex: props.rowIndex,
-            cellKey: 'itemPrice',
-          }),
-        ) ?? null,
+        editorRegistry.get({
+          blockIndex: props.blockIndex,
+          rowIndex: props.rowIndex,
+          cellKey: 'itemPrice',
+        }) ?? null,
       blockIndex: props.blockIndex,
       rowIndex: props.rowIndex,
       cellKey: 'itemPrice',
@@ -116,12 +109,10 @@ export const handleChangeOfPriceCell = (props: Props): void => {
   updateSubTotalPriceWithValue({
     blockIndex: props.blockIndex,
     subTotalPriceEditor:
-      editorRegistry.get(
-        blockEditorKey({
-          blockIndex: props.blockIndex,
-          editorName: 'subTotalPrice',
-        }),
-      ) ?? null,
+      editorRegistry.get({
+        blockIndex: props.blockIndex,
+        editorName: 'subTotalPrice',
+      }) ?? null,
     value: subTotalPriceValueNewRounded,
     incrementally: true,
   })

@@ -6,7 +6,6 @@ import { useUpdateEffect } from 'react-use'
 import { roundTo } from 'round-to'
 import { useSelector } from '@shared/lib/redux'
 import { editorRegistry } from '@shared/lib/tiptap/editorRegistry'
-import { blockEditorKey } from '@shared/lib/tiptap/editorKey'
 
 export const useUpdateSubtotalPriceValue = (): void => {
   const block = useBlock()
@@ -42,12 +41,10 @@ export const useUpdateSubtotalPriceValue = (): void => {
     updateSubTotalPriceWithValue({
       blockIndex: block.index,
       subTotalPriceEditor:
-        editorRegistry.get(
-          blockEditorKey({
-            blockIndex: block.index,
-            editorName: 'subTotalPrice',
-          }),
-        ) ?? null,
+        editorRegistry.get({
+          blockIndex: block.index,
+          editorName: 'subTotalPrice',
+        }) ?? null,
       value: subTotalPriceValueNewRounded,
       incrementally: true,
     })

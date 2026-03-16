@@ -3,9 +3,10 @@ import type { EditorEvents } from '@tiptap/react'
 import type { EditorView } from '@tiptap/pm/view'
 import type { OnUpload } from '../types'
 import type { CSSObject } from '@mui/material'
+import type { BlockKeyProps, RowKeyProps } from '../editorRegistry'
 
 type Props = {
-  registryKey: string
+  registryKey: BlockKeyProps | RowKeyProps
   placeholder: string
   contentGetter: () => string
   className: string

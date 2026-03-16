@@ -7,7 +7,6 @@ import { ResizableColumn } from '../ResizableColumn'
 import { TextEditor } from '@shared/component/TextEditor'
 import type { Editor } from '@tiptap/react'
 import { handleChangeOfColumnCell } from '@feature/blocks/handle-change-of-table-header-cell-at-boq-block/handleChangeOfColumnCell'
-import { blockEditorKey } from '@shared/lib/tiptap/editorKey'
 
 export const QtyColumn = (): React.JSX.Element => {
   const editorRef = useRef<Editor | null>(null)
@@ -20,10 +19,7 @@ export const QtyColumn = (): React.JSX.Element => {
       minWidth={columnMinWidth.qty}
     >
       <TextEditor
-        registryKey={blockEditorKey({
-          blockIndex: block.index,
-          editorName: 'qtyColumn',
-        })}
+        registryKey={{ blockIndex: block.index, editorName: 'qtyColumn' }}
         className='column-qty'
         placeholder='Qty...'
         contentGetter={() =>

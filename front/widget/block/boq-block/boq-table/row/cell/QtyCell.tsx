@@ -11,7 +11,6 @@ import { pinQtyCell } from '@feature/blocks/pin-qty-cell/pinQtyCell'
 import { tabFromQtyCell } from '@feature/blocks/tab-away-from-qty-cell/tabFromQtyCell'
 import { handleChangeOfQtyCell } from '@feature/blocks/handle-change-of-qty-cell-at-boq-block/handleChangeOfQtyCell'
 import { handleFocusOutFromQtyCell } from '@feature/blocks/handle-focus-out-from-qty-cell-at-boq-block/handleFocusOutFromQtyCell'
-import { rowEditorKey } from '@shared/lib/tiptap/editorKey'
 
 export const QtyCell = (): React.JSX.Element => {
   const block = useBlock()
@@ -26,11 +25,11 @@ export const QtyCell = (): React.JSX.Element => {
   return (
     <Box sx={{ display: 'flex', position: 'relative' }}>
       <TextEditor
-        registryKey={rowEditorKey({
+        registryKey={{
           blockIndex: block.index,
           rowIndex: row.index,
           cellKey: 'qty',
-        })}
+        }}
         className='td qty'
         placeholder='Qty...'
         contentGetter={() =>

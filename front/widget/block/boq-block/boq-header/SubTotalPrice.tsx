@@ -9,8 +9,6 @@ import { handleChangeOfSubtotalPrice } from '@feature/blocks/handle-change-of-su
 import { handleFocusOutFromSubtotalPrice } from '@feature/blocks/handle-focus-out-from-subtotal-price-at-boq-block/handleFocusOutFromSubtotalPrice'
 import { validatePrices } from '@feature/blocks/handle-focus-out-from-subtotal-price-at-boq-block/validatePrices'
 import { useUpdateSubtotalPriceValue } from '@feature/blocks/update-subtotal-price-value-if-rows-qty-changed/useUpdateSubtotalPriceValue'
-import { blockEditorKey } from '@shared/lib/tiptap/editorKey'
-
 const boqHeaderKey: HeaderKey = 'subTotalPrice'
 
 export const SubTotalPrice = (): React.JSX.Element => {
@@ -28,10 +26,7 @@ export const SubTotalPrice = (): React.JSX.Element => {
 
   return (
     <TextEditor
-      registryKey={blockEditorKey({
-        blockIndex: block.index,
-        editorName: 'subTotalPrice',
-      })}
+      registryKey={{ blockIndex: block.index, editorName: 'subTotalPrice' }}
       className='sub-total-price'
       placeholder='Price...'
       contentGetter={() =>

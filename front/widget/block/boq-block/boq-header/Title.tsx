@@ -6,8 +6,6 @@ import { useRef } from 'react'
 import { TextEditor } from '@shared/component/TextEditor'
 import type { Editor } from '@tiptap/react'
 import { handleChangeOfTitle } from '@feature/blocks/handle-change-of-title-at-boq-block/handleChangeOfTitle'
-import { blockEditorKey } from '@shared/lib/tiptap/editorKey'
-
 const boqHeaderKey: HeaderKey = 'title'
 
 export const Title = (): React.JSX.Element => {
@@ -16,10 +14,7 @@ export const Title = (): React.JSX.Element => {
 
   return (
     <TextEditor
-      registryKey={blockEditorKey({
-        blockIndex: block.index,
-        editorName: 'boqTitle',
-      })}
+      registryKey={{ blockIndex: block.index, editorName: 'boqTitle' }}
       className='title'
       placeholder='Title...'
       contentGetter={() =>

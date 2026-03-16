@@ -8,7 +8,6 @@ import { handleChangeOfDescriptionCell } from '@feature/blocks/handle-change-of-
 import { tabFromDescriptionCell } from '@feature/blocks/tab-away-from-description-cell/tabFromDescriptionCell'
 import { upload } from '@feature/file/upload-file'
 import { TextEditor } from '@shared/component/TextEditor'
-import { rowEditorKey } from '@shared/lib/tiptap/editorKey'
 
 export const DescriptionCell = (): React.JSX.Element => {
   const block = useBlock()
@@ -22,11 +21,11 @@ export const DescriptionCell = (): React.JSX.Element => {
 
   return (
     <TextEditor
-      registryKey={rowEditorKey({
+      registryKey={{
         blockIndex: block.index,
         rowIndex: row.index,
         cellKey: 'description',
-      })}
+      }}
       className='td description'
       placeholder='Description...'
       contentGetter={() =>

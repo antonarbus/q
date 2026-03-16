@@ -4,7 +4,6 @@ import { TextEditor } from '@shared/component/TextEditor'
 import { useUpdateTotalPriceIfPricesAboveWereChanged } from '@feature/blocks/update-total-price-value-if-prices-above-changed/useUpdateTotalPriceIfPricesAboveWereChanged'
 import { handleFocusOutFromTotalPrice } from '@feature/blocks/handle-focus-out-from-price-value-at-price-block/handleFocusOutFromTotalPrice'
 import { handleChangeOfPriceValue } from '@feature/blocks/handle-change-of-price-value-at-price-block/handleChangeOfPriceValue'
-import { blockEditorKey } from '@shared/lib/tiptap/editorKey'
 
 export const PriceValue = (): React.JSX.Element => {
   const block = useBlock()
@@ -13,10 +12,7 @@ export const PriceValue = (): React.JSX.Element => {
 
   return (
     <TextEditor
-      registryKey={blockEditorKey({
-        blockIndex: block.index,
-        editorName: 'totalPriceValue',
-      })}
+      registryKey={{ blockIndex: block.index, editorName: 'totalPriceValue' }}
       className='price-value'
       placeholder='Total price...'
       contentGetter={() =>

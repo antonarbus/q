@@ -3,20 +3,17 @@ import { updateBookmarkedRowCellAtStore } from '@entity/quotation/redux/updater/
 import { updateBookmarkedRowCellWithValue } from '@entity/quotation/util/updateBookmarkedRowCellWithValue'
 import { getState } from '@shared/lib/redux'
 import { editorRegistry } from '@shared/lib/tiptap/editorRegistry'
-import { rowEditorKey } from '@shared/lib/tiptap/editorKey'
 import { roundTo } from 'round-to'
 
 type Props = Record<string, never>
 
 export const handleChangeOfPriceCell = (_props: Props): void => {
   const priceCellEditor =
-    editorRegistry.get(
-      rowEditorKey({
-        blockIndex: BOOKMARK_POS_AT_BLOCKS,
-        rowIndex: 0,
-        cellKey: 'price',
-      }),
-    ) ?? null
+    editorRegistry.get({
+      blockIndex: BOOKMARK_POS_AT_BLOCKS,
+      rowIndex: 0,
+      cellKey: 'price',
+    }) ?? null
 
   if (priceCellEditor === null) {
     return
@@ -44,13 +41,11 @@ export const handleChangeOfPriceCell = (_props: Props): void => {
 
   updateBookmarkedRowCellWithValue({
     editor:
-      editorRegistry.get(
-        rowEditorKey({
-          blockIndex: BOOKMARK_POS_AT_BLOCKS,
-          rowIndex: 0,
-          cellKey: 'itemPrice',
-        }),
-      ) ?? null,
+      editorRegistry.get({
+        blockIndex: BOOKMARK_POS_AT_BLOCKS,
+        rowIndex: 0,
+        cellKey: 'itemPrice',
+      }) ?? null,
     cellKey: 'itemPrice',
     value: newItemPriceValueRounded,
   })
