@@ -37,13 +37,15 @@ export const editorRegistry = {
       registry.set(strKey, editor)
     }
   },
-  delete: (key: RegistryKey): void => {
+  delete: (key: RegistryKey, editor: Editor): void => {
     const strKey =
       'rowIndex' in key
         ? `${key.blockIndex}:${key.rowIndex}:${key.cellKey}`
         : `${key.blockIndex}:${key.editorName}`
 
-    registry.delete(strKey)
+    if (registry.get(strKey) === editor) {
+      registry.delete(strKey)
+    }
   },
   get: (key: RegistryKey): Editor | undefined => {
     const strKey =

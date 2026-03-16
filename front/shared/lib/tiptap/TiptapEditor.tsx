@@ -53,7 +53,9 @@ export const TiptapEditor = (): React.ReactNode => {
     editorRegistry.set(tiptapCtx.registryKey, editor)
 
     return (): void => {
-      editorRegistry.delete(tiptapCtx.registryKey)
+      if (editor !== null) {
+        editorRegistry.delete(tiptapCtx.registryKey, editor)
+      }
     }
   }, [editor, tiptapCtx.registryKey])
 
