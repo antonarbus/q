@@ -1,6 +1,7 @@
 import type { Slice } from '@tiptap/pm/model'
 import type { EditorView } from '@tiptap/pm/view'
 import { useTiptapCtx } from '../provider/TiptapProvider'
+import { editorRegistry } from '../editorRegistry'
 
 type OnDrop = (
   _view: EditorView,
@@ -25,7 +26,7 @@ export const useDropFile = (): OnDrop => {
       return false
     }
 
-    const editorInstance = tiptapCtx.editorRef.current
+    const editorInstance = editorRegistry.get(tiptapCtx.registryKey) ?? null
 
     if (editorInstance === null) {
       return false

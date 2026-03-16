@@ -7,6 +7,7 @@ import { ResizableColumn } from '../ResizableColumn'
 import { TextEditor } from '@shared/component/TextEditor'
 import type { Editor } from '@tiptap/react'
 import { handleChangeOfColumnCell } from '@feature/blocks/handle-change-of-table-header-cell-at-boq-block/handleChangeOfColumnCell'
+import { blockEditorKey } from '@shared/lib/tiptap/editorKey'
 
 export const PriceColumn = (): React.JSX.Element => {
   const editorRef = useRef<Editor | null>(null)
@@ -19,7 +20,10 @@ export const PriceColumn = (): React.JSX.Element => {
       minWidth={columnMinWidth.price}
     >
       <TextEditor
-        editorRef={editorRef}
+        registryKey={blockEditorKey({
+          blockIndex: block.index,
+          editorName: 'priceColumn',
+        })}
         className='column-price'
         placeholder='Price...'
         contentGetter={() =>

@@ -1,4 +1,3 @@
-import { BoqProvider } from '@entity/quotation/provider/BoqBlockProvider'
 import { BlockComp } from '@entity/quotation/ui/BlockComp'
 import { cls } from '@shared/cls'
 import { RowColumns } from './column'
@@ -21,12 +20,10 @@ export const BookmarkedRowBlock = (): React.JSX.Element => {
       onBlockResizeStart={onBoqBlockResizeStart}
       onBlockResizeStop={onBoqBlockResizeStop}
     >
-      <BoqProvider>
-        <RowLayout>
-          <RowColumns />
-          <RowsWithOneBookmarkedRow />
-        </RowLayout>
-      </BoqProvider>
+      <RowLayout>
+        <RowColumns />
+        <RowsWithOneBookmarkedRow />
+      </RowLayout>
     </BlockComp>
   )
 }

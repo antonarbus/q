@@ -1,17 +1,25 @@
 import { getBoqBlockFromStore } from '@entity/quotation/redux/getter/getBoqBlockFromStore'
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { dispatch } from '@shared/lib/redux'
-import type { EditorRef } from '@shared/lib/tiptap/types'
+import { editorRegistry } from '@shared/lib/tiptap/editorRegistry'
+import { blockEditorKey } from '@shared/lib/tiptap/editorKey'
 import { getStringWithNewFormattedNumber } from '@shared/util/getStringWithNewFormattedNumber'
 import { roundTo } from 'round-to'
 
 type Props = {
   blockIndex: number
-  subTotalPriceEditorRef: EditorRef
 }
 
 export const handleFocusOutFromSubtotalPrice = (props: Props): void => {
-  if (props.subTotalPriceEditorRef.current === null) {
+  const subTotalPriceEditor =
+    editorRegistry.get(
+      blockEditorKey({
+        blockIndex: props.blockIndex,
+        editorName: 'subTotalPrice',
+      }),
+    ) ?? null
+
+  if (subTotalPriceEditor === null) {
     return
   }
 
@@ -40,7 +48,7 @@ export const handleFocusOutFromSubtotalPrice = (props: Props): void => {
     }),
   )
 
-  props.subTotalPriceEditorRef.current.commands.setContent(newHtml, {
+  subTotalPriceEditor.commands.setContent(newHtml, {
     emitUpdate: false,
   })
 }

@@ -2,18 +2,26 @@ import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { getTotalPriceAbove } from '@entity/quotation/util/getTotalPriceAbove'
 import { updateNumberAtHtmlIncrementally } from '@shared/lib/tiptap/util/updateNumberAtHtmlIncrementally'
 import { dispatch, getState } from '@shared/lib/redux'
-import type { EditorRef } from '@shared/lib/tiptap/types'
 import { getNumberFromString } from '@shared/util/getNumberFromString'
 import { getStringWithNewFormattedNumber } from '@shared/util/getStringWithNewFormattedNumber'
 import { getTextContentFromHtml } from '@shared/util/getTextContentFromHtml'
+import { editorRegistry } from '@shared/lib/tiptap/editorRegistry'
+import { blockEditorKey } from '@shared/lib/tiptap/editorKey'
 
 type Props = {
-  editorRef: EditorRef
   blockIndex: number
 }
 
 export const handleFocusOutFromTotalPrice = (props: Props): void => {
-  if (props.editorRef.current === null) {
+  const editor =
+    editorRegistry.get(
+      blockEditorKey({
+        blockIndex: props.blockIndex,
+        editorName: 'totalPriceValue',
+      }),
+    ) ?? null
+
+  if (editor === null) {
     return
   }
 
@@ -23,7 +31,7 @@ export const handleFocusOutFromTotalPrice = (props: Props): void => {
     return
   }
 
-  const currentHtml = props.editorRef.current.getHTML()
+  const currentHtml = editor.getHTML()
   const cellTextContent = getTextContentFromHtml({ html: currentHtml })
   const cellValueFromHtml = getNumberFromString({ string: cellTextContent })
 
@@ -54,7 +62,7 @@ export const handleFocusOutFromTotalPrice = (props: Props): void => {
   updateNumberAtHtmlIncrementally({
     oldNumber: priceBlock.price.value,
     newNumber: price,
-    totalPriceValueEditor: props.editorRef.current,
+    totalPriceValueEditor: editor,
     html: priceBlock.price.html,
   })
 }

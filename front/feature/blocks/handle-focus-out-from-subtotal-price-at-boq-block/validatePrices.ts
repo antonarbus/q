@@ -5,13 +5,11 @@ import { updateCellWithValue } from '@entity/quotation/util/updateCellWithValue'
 import { updateSubTotalPriceWithValue } from '@entity/quotation/util/updateSubTotalPriceWithValue'
 import { roundTo } from 'round-to'
 import { toast } from 'sonner'
-import type { RowEditorRefs } from '@entity/quotation/ref/rowEditorRefs'
-import type { EditorRef } from '@shared/lib/tiptap/types'
+import { editorRegistry } from '@shared/lib/tiptap/editorRegistry'
+import { blockEditorKey, rowEditorKey } from '@shared/lib/tiptap/editorKey'
 
 type Props = {
   blockIndex: number
-  subTotalPriceEditorRef: EditorRef
-  rowEditorRefs: RowEditorRefs
 }
 
 export const validatePrices = (props: Props): void => {
@@ -24,18 +22,21 @@ export const validatePrices = (props: Props): void => {
   let didNotifyAboutInvalidPriceOnes = false
 
   rows.forEach((row, rowIndex) => {
-    const priceCellEditorRef = props.rowEditorRefs.at(rowIndex)
+    const priceCellEditor =
+      editorRegistry.get(
+        rowEditorKey({
+          blockIndex: props.blockIndex,
+          rowIndex,
+          cellKey: 'price',
+        }),
+      ) ?? null
 
-    if (priceCellEditorRef === undefined) {
-      return
-    }
-
-    if (priceCellEditorRef.price.current === null) {
+    if (priceCellEditor === null) {
       return
     }
 
     const isPriceValid = isRowPriceValid({
-      html: priceCellEditorRef.price.current.getHTML(),
+      html: priceCellEditor.getHTML(),
       blockIndex: props.blockIndex,
       rowIndex,
     })
@@ -54,7 +55,7 @@ export const validatePrices = (props: Props): void => {
 
       updateCellWithValue({
         cellKey: 'price',
-        editor: priceCellEditorRef.price.current,
+        editor: priceCellEditor,
         blockIndex: props.blockIndex,
         rowIndex,
         value: newPriceValueRounded,
@@ -79,7 +80,13 @@ export const validatePrices = (props: Props): void => {
 
       updateSubTotalPriceWithValue({
         blockIndex: props.blockIndex,
-        subTotalPriceEditor: props.subTotalPriceEditorRef.current,
+        subTotalPriceEditor:
+          editorRegistry.get(
+            blockEditorKey({
+              blockIndex: props.blockIndex,
+              editorName: 'subTotalPrice',
+            }),
+          ) ?? null,
         value: subTotalPriceValueNewRounded,
         incrementally: false,
       })

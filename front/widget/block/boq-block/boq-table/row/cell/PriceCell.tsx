@@ -1,7 +1,6 @@
 import { columnMinWidth } from '@entity/quotation/const/columnMinWidth'
 import { useStylesForResizableCell } from '@entity/quotation/hook/useStylesForResizableCell'
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
-import { useBoq } from '@entity/quotation/provider/BoqBlockProvider'
 import { useRow } from '@entity/quotation/provider/RowProvider'
 import { getCellHtmlFromStore } from '@entity/quotation/redux/getter/getCellHtmlFromStore'
 import { cellStyle } from '@entity/quotation/style/cellStyle'
@@ -14,11 +13,11 @@ import { tabFromPriceCell } from '@feature/blocks/tab-away-from-price-cell/tabFr
 import { handleChangeOfPriceCell } from '@feature/blocks/handle-change-of-price-cell-at-boq-block/handleChangeOfPriceCell'
 import { handleFocusOutFromPriceCell } from '@feature/blocks/handle-focus-out-from-price-cell-at-boq-block/handleFocusOutFromPriceCell'
 import { validatePrice } from '@feature/blocks/handle-focus-out-from-price-cell-at-boq-block/validatePrice'
+import { rowEditorKey } from '@shared/lib/tiptap/editorKey'
 
 export const PriceCell = (): React.JSX.Element => {
   const block = useBlock()
   const row = useRow()
-  const boq = useBoq()
 
   const stylesForResizableCell = useStylesForResizableCell({
     blockIndex: block.index,
@@ -29,7 +28,11 @@ export const PriceCell = (): React.JSX.Element => {
   return (
     <Box sx={{ display: 'flex', position: 'relative' }}>
       <TextEditor
-        editorRef={row.priceCellEditorRef}
+        registryKey={rowEditorKey({
+          blockIndex: block.index,
+          rowIndex: row.index,
+          cellKey: 'price',
+        })}
         className='td price'
         placeholder='Price...'
         contentGetter={() =>
@@ -42,25 +45,18 @@ export const PriceCell = (): React.JSX.Element => {
         onUpdate={(params) => {
           handleChangeOfPriceCell({
             blockIndex: block.index,
-            itemPriceCellEditorRef: row.itemPriceCellEditorRef,
-            priceCellEditorRef: row.priceCellEditorRef,
-            qtyCellEditorRef: row.qtyCellEditorRef,
             rowIndex: row.index,
-            subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
           })
         }}
         onBlur={() => {
           handleFocusOutFromPriceCell({
             blockIndex: block.index,
-            priceCellEditorRef: row.priceCellEditorRef,
             rowIndex: row.index,
           })
 
           validatePrice({
             blockIndex: block.index,
-            priceCellEditorRef: row.priceCellEditorRef,
             rowIndex: row.index,
-            subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
           })
         }}
         onWrapperFocus={() => {
@@ -69,7 +65,7 @@ export const PriceCell = (): React.JSX.Element => {
         onKeyDown={(_view, event) =>
           tabFromPriceCell({
             event,
-            rowEditorRefs: boq.rowEditorRefs,
+            blockIndex: block.index,
             rowIndex: row.index,
           })
         }

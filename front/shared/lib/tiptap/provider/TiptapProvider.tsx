@@ -1,11 +1,11 @@
 import { createContext, useContext, useMemo } from 'react'
 import type { EditorEvents } from '@tiptap/react'
 import type { EditorView } from '@tiptap/pm/view'
-import type { EditorRef, OnUpload } from '../types'
+import type { OnUpload } from '../types'
 import type { CSSObject } from '@mui/material'
 
 type Props = {
-  editorRef: EditorRef
+  registryKey: string
   placeholder: string
   contentGetter: () => string
   className: string
@@ -27,7 +27,7 @@ const TiptapContext: React.Context<Res | null> = createContext<Res | null>(null)
 export const TiptapProvider = (props: Props): React.JSX.Element => {
   const value = useMemo(() => {
     return {
-      editorRef: props.editorRef,
+      registryKey: props.registryKey,
       placeholder: props.placeholder,
       contentGetter: props.contentGetter,
       className: props.className,

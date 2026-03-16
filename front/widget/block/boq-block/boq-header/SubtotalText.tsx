@@ -6,6 +6,7 @@ import { useRef } from 'react'
 import { TextEditor } from '@shared/component/TextEditor'
 import type { Editor } from '@tiptap/react'
 import { handleChangeOfSubtotalText } from '@feature/blocks/handle-change-of-subtotal-text-at-boq-block/handleChangeOfSubtotalText'
+import { blockEditorKey } from '@shared/lib/tiptap/editorKey'
 
 const boqHeaderKey: HeaderKey = 'subtotalText'
 
@@ -15,7 +16,10 @@ export const SubtotalText = (): React.JSX.Element => {
 
   return (
     <TextEditor
-      editorRef={editorRef}
+      registryKey={blockEditorKey({
+        blockIndex: block.index,
+        editorName: 'subtotalText',
+      })}
       className='sub-total-text'
       placeholder='Subtotal...'
       contentGetter={() =>

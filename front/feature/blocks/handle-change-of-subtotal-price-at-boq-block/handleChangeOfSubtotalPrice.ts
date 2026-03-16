@@ -8,17 +8,23 @@ import { updateSubTotalPriceWithValue } from '@entity/quotation/util/updateSubTo
 import type { Editor } from '@tiptap/react'
 import { roundTo } from 'round-to'
 import { toast } from 'sonner'
-import type { RowEditorRefs } from '@entity/quotation/ref/rowEditorRefs'
-import type { EditorRef } from '@shared/lib/tiptap/types'
+import { editorRegistry } from '@shared/lib/tiptap/editorRegistry'
+import { blockEditorKey, rowEditorKey } from '@shared/lib/tiptap/editorKey'
 
 type Props = {
   blockIndex: number
-  subTotalPriceEditorRef: EditorRef
-  rowEditorRefs: RowEditorRefs
 }
 
 export const handleChangeOfSubtotalPrice = (props: Props): void => {
-  if (props.subTotalPriceEditorRef.current === null) {
+  const subTotalPriceEditor =
+    editorRegistry.get(
+      blockEditorKey({
+        blockIndex: props.blockIndex,
+        editorName: 'subTotalPrice',
+      }),
+    ) ?? null
+
+  if (subTotalPriceEditor === null) {
     return
   }
 
@@ -29,7 +35,7 @@ export const handleChangeOfSubtotalPrice = (props: Props): void => {
   }
 
   updateBoqHeaderAtStore({
-    editorRef: props.subTotalPriceEditorRef,
+    editor: subTotalPriceEditor,
     blockIndex: props.blockIndex,
     boqHeaderKey: 'subTotalPrice',
   })
@@ -78,7 +84,14 @@ export const handleChangeOfSubtotalPrice = (props: Props): void => {
         row.price.pin.isPinned === true
           ? row.price.value
           : roundTo(newValue, 2),
-      editor: props.rowEditorRefs.at(index)?.price.current ?? null,
+      editor:
+        editorRegistry.get(
+          rowEditorKey({
+            blockIndex: props.blockIndex,
+            rowIndex: index,
+            cellKey: 'price',
+          }),
+        ) ?? null,
     }
   })
 
@@ -89,7 +102,7 @@ export const handleChangeOfSubtotalPrice = (props: Props): void => {
 
     updateSubTotalPriceWithValue({
       blockIndex: props.blockIndex,
-      subTotalPriceEditor: props.subTotalPriceEditorRef.current,
+      subTotalPriceEditor,
       value: prevSubTotalPriceValue,
       incrementally: true,
     })
@@ -102,7 +115,7 @@ export const handleChangeOfSubtotalPrice = (props: Props): void => {
 
     updateSubTotalPriceWithValue({
       blockIndex: props.blockIndex,
-      subTotalPriceEditor: props.subTotalPriceEditorRef.current,
+      subTotalPriceEditor,
       value: prevSubTotalPriceValue,
       incrementally: true,
     })
@@ -111,7 +124,14 @@ export const handleChangeOfSubtotalPrice = (props: Props): void => {
   prices.forEach((price, rowIndex) => {
     updateCellWithValue({
       cellKey: 'price',
-      editor: props.rowEditorRefs.at(rowIndex)?.price.current ?? null,
+      editor:
+        editorRegistry.get(
+          rowEditorKey({
+            blockIndex: props.blockIndex,
+            rowIndex,
+            cellKey: 'price',
+          }),
+        ) ?? null,
       blockIndex: props.blockIndex,
       rowIndex,
       value: price.newValue,
@@ -130,7 +150,14 @@ export const handleChangeOfSubtotalPrice = (props: Props): void => {
       const newQtyValueRounded = roundTo(newQtyValue, 3)
 
       updateCellWithValue({
-        editor: props.rowEditorRefs.at(rowIndex)?.qty.current ?? null,
+        editor:
+          editorRegistry.get(
+            rowEditorKey({
+              blockIndex: props.blockIndex,
+              rowIndex,
+              cellKey: 'qty',
+            }),
+          ) ?? null,
         blockIndex: props.blockIndex,
         rowIndex,
         cellKey: 'qty',
@@ -149,7 +176,14 @@ export const handleChangeOfSubtotalPrice = (props: Props): void => {
       const newItemPriceValueRounded = roundTo(newItemPriceValue, 2)
 
       updateCellWithValue({
-        editor: props.rowEditorRefs.at(rowIndex)?.itemPrice.current ?? null,
+        editor:
+          editorRegistry.get(
+            rowEditorKey({
+              blockIndex: props.blockIndex,
+              rowIndex,
+              cellKey: 'itemPrice',
+            }),
+          ) ?? null,
         blockIndex: props.blockIndex,
         rowIndex,
         cellKey: 'itemPrice',
@@ -177,7 +211,7 @@ export const handleChangeOfSubtotalPrice = (props: Props): void => {
 
   updateSubTotalPriceWithValue({
     blockIndex: props.blockIndex,
-    subTotalPriceEditor: props.subTotalPriceEditorRef.current,
+    subTotalPriceEditor,
     value: subTotalPriceValueNewRounded,
     incrementally: true,
   })

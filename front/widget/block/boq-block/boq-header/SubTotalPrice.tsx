@@ -1,5 +1,4 @@
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
-import { useBoq } from '@entity/quotation/provider/BoqBlockProvider'
 import { getBoqHeaderHtmlFromStore } from '@entity/quotation/redux/getter/getBoqHeaderHtmlFromStore'
 import { subTotalPriceCellStyle } from '@entity/quotation/style/subTotalPriceCellStyle'
 import type { HeaderKey } from '@back/entity/quotation/schema'
@@ -10,11 +9,11 @@ import { handleChangeOfSubtotalPrice } from '@feature/blocks/handle-change-of-su
 import { handleFocusOutFromSubtotalPrice } from '@feature/blocks/handle-focus-out-from-subtotal-price-at-boq-block/handleFocusOutFromSubtotalPrice'
 import { validatePrices } from '@feature/blocks/handle-focus-out-from-subtotal-price-at-boq-block/validatePrices'
 import { useUpdateSubtotalPriceValue } from '@feature/blocks/update-subtotal-price-value-if-rows-qty-changed/useUpdateSubtotalPriceValue'
+import { blockEditorKey } from '@shared/lib/tiptap/editorKey'
 
 const boqHeaderKey: HeaderKey = 'subTotalPrice'
 
 export const SubTotalPrice = (): React.JSX.Element => {
-  const boq = useBoq()
   const block = useBlock()
 
   const hidePinsClickHandlerRef = useRef<(e: globalThis.MouseEvent) => void>(
@@ -29,7 +28,10 @@ export const SubTotalPrice = (): React.JSX.Element => {
 
   return (
     <TextEditor
-      editorRef={boq.subTotalPriceEditorRef}
+      registryKey={blockEditorKey({
+        blockIndex: block.index,
+        editorName: 'subTotalPrice',
+      })}
       className='sub-total-price'
       placeholder='Price...'
       contentGetter={() =>
@@ -41,20 +43,15 @@ export const SubTotalPrice = (): React.JSX.Element => {
       onUpdate={(params) => {
         handleChangeOfSubtotalPrice({
           blockIndex: block.index,
-          rowEditorRefs: boq.rowEditorRefs,
-          subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
         })
       }}
       onBlur={() => {
         handleFocusOutFromSubtotalPrice({
           blockIndex: block.index,
-          subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
         })
 
         validatePrices({
           blockIndex: block.index,
-          rowEditorRefs: boq.rowEditorRefs,
-          subTotalPriceEditorRef: boq.subTotalPriceEditorRef,
         })
       }}
       onWrapperClick={(event: React.MouseEvent) => {

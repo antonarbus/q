@@ -1,8 +1,8 @@
 import { formatCellNumber } from '@entity/quotation/util/formatCellNumber'
-import type { EditorRef } from '@shared/lib/tiptap/types'
+import { editorRegistry } from '@shared/lib/tiptap/editorRegistry'
+import { rowEditorKey } from '@shared/lib/tiptap/editorKey'
 
 type Props = {
-  itemPriceCellEditorRef: EditorRef
   blockIndex: number
   rowIndex: number
 }
@@ -12,7 +12,14 @@ export const handleFocusOutFromItemPriceCell = (props: Props): void => {
     blockIndex: props.blockIndex,
     rowIndex: props.rowIndex,
     cellKey: 'itemPrice',
-    editorRef: props.itemPriceCellEditorRef,
+    editor:
+      editorRegistry.get(
+        rowEditorKey({
+          blockIndex: props.blockIndex,
+          rowIndex: props.rowIndex,
+          cellKey: 'itemPrice',
+        }),
+      ) ?? null,
     roundToTwoDecimals: true,
   })
 }

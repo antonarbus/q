@@ -11,6 +11,7 @@ import { useDropFile } from './file-upload/useDropFile'
 import { usePasteFile } from './file-upload/usePasteFile'
 import { useTiptapCtx } from './provider/TiptapProvider'
 import { UploadButton } from './menu/button/UploadButton'
+import { editorRegistry } from './editorRegistry'
 
 export const TiptapEditor = (): React.ReactNode => {
   const tiptapCtx = useTiptapCtx()
@@ -48,15 +49,13 @@ export const TiptapEditor = (): React.ReactNode => {
     [],
   )
 
-  // Set editor instances to refs to let it be controlled from everywhere
-  // For ex. modify price on qty change
   useEffect(() => {
-    tiptapCtx.editorRef.current = editor
+    editorRegistry.set(tiptapCtx.registryKey, editor)
 
     return (): void => {
-      tiptapCtx.editorRef.current = null
+      editorRegistry.delete(tiptapCtx.registryKey)
     }
-  }, [editor, tiptapCtx.editorRef])
+  }, [editor, tiptapCtx.registryKey])
 
   return (
     <Box

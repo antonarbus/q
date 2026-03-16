@@ -11,6 +11,7 @@ import { ItemActionButtonsLayout } from '@shared/layout/ItemActionButtonsLayout'
 import { useRef } from 'react'
 import type { Editor } from '@tiptap/react'
 import { CopyBlockIcon } from '@feature/blocks/copy-block/CopyBlockIcon'
+import { blockEditorKey } from '@shared/lib/tiptap/editorKey'
 import { CutBlockIcon } from '@feature/blocks/cut-block/CutBlockIcon'
 import { DeleteBlockIcon } from '@feature/blocks/delete-block/DeleteBlockIcon'
 import { DragBlockIcon } from '@feature/blocks/drag-block/DragBlockIcon'
@@ -45,7 +46,10 @@ export const TextBlock = (): React.JSX.Element => {
       }
     >
       <TextEditor
-        editorRef={editorRef}
+        registryKey={blockEditorKey({
+          blockIndex: block.index,
+          editorName: 'textBlock',
+        })}
         className='text'
         placeholder='Add text, tables, drop images, files, links, select to format...'
         contentGetter={() =>

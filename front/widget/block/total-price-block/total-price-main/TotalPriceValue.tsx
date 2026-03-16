@@ -1,38 +1,36 @@
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { getPriceBlockHtmlFromStore } from '@entity/quotation/redux/getter/getPriceBlockHtmlFromStore'
 import { TextEditor } from '@shared/component/TextEditor'
-import { useRef } from 'react'
-import type { Editor } from '@tiptap/react'
 import { useUpdateTotalPriceIfPricesAboveWereChanged } from '@feature/blocks/update-total-price-value-if-prices-above-changed/useUpdateTotalPriceIfPricesAboveWereChanged'
 import { handleFocusOutFromTotalPrice } from '@feature/blocks/handle-focus-out-from-price-value-at-price-block/handleFocusOutFromTotalPrice'
 import { handleChangeOfPriceValue } from '@feature/blocks/handle-change-of-price-value-at-price-block/handleChangeOfPriceValue'
+import { blockEditorKey } from '@shared/lib/tiptap/editorKey'
 
 export const PriceValue = (): React.JSX.Element => {
-  const editorRef = useRef<Editor | null>(null)
   const block = useBlock()
 
-  useUpdateTotalPriceIfPricesAboveWereChanged({
-    blockIndex: block.index,
-    editorRef,
-  })
+  useUpdateTotalPriceIfPricesAboveWereChanged({ blockIndex: block.index })
 
   return (
     <TextEditor
-      editorRef={editorRef}
+      registryKey={blockEditorKey({
+        blockIndex: block.index,
+        editorName: 'totalPriceValue',
+      })}
       className='price-value'
       placeholder='Total price...'
       contentGetter={() =>
         getPriceBlockHtmlFromStore({ blockIndex: block.index })
       }
-      onCreate={(params) => {
+      onCreate={() => {
         // probably just to revalidate total price, has some issue with incorrect values, not sure
-        handleFocusOutFromTotalPrice({ editorRef, blockIndex: block.index })
+        handleFocusOutFromTotalPrice({ blockIndex: block.index })
       }}
-      onUpdate={(params) => {
-        handleChangeOfPriceValue({ editorRef, blockIndex: block.index })
+      onUpdate={() => {
+        handleChangeOfPriceValue({ blockIndex: block.index })
       }}
       onBlur={() => {
-        handleFocusOutFromTotalPrice({ editorRef, blockIndex: block.index })
+        handleFocusOutFromTotalPrice({ blockIndex: block.index })
       }}
       sx={{
         textAlign: 'center',

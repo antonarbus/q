@@ -5,26 +5,42 @@ import { isRowPriceValid } from '@entity/quotation/util/isRowPriceValid'
 import { updateCellWithValue } from '@entity/quotation/util/updateCellWithValue'
 import { updateSubTotalPriceWithValue } from '@entity/quotation/util/updateSubTotalPriceWithValue'
 import { roundTo } from 'round-to'
-import type { EditorRef } from '@shared/lib/tiptap/types'
+import { editorRegistry } from '@shared/lib/tiptap/editorRegistry'
+import { blockEditorKey, rowEditorKey } from '@shared/lib/tiptap/editorKey'
 
 type Props = {
-  priceCellEditorRef: EditorRef
-  subTotalPriceEditorRef: EditorRef
   blockIndex: number
   rowIndex: number
 }
 
 export const validatePrice = (props: Props): void => {
-  if (props.priceCellEditorRef.current === null) {
+  const priceCellEditor =
+    editorRegistry.get(
+      rowEditorKey({
+        blockIndex: props.blockIndex,
+        rowIndex: props.rowIndex,
+        cellKey: 'price',
+      }),
+    ) ?? null
+
+  const subTotalPriceEditor =
+    editorRegistry.get(
+      blockEditorKey({
+        blockIndex: props.blockIndex,
+        editorName: 'subTotalPrice',
+      }),
+    ) ?? null
+
+  if (priceCellEditor === null) {
     return
   }
 
-  if (props.subTotalPriceEditorRef.current === null) {
+  if (subTotalPriceEditor === null) {
     return
   }
 
   const isPriceValid = isRowPriceValid({
-    html: props.priceCellEditorRef.current.getHTML(),
+    html: priceCellEditor.getHTML(),
     blockIndex: props.blockIndex,
     rowIndex: props.rowIndex,
   })
@@ -44,7 +60,7 @@ export const validatePrice = (props: Props): void => {
 
     updateCellWithValue({
       cellKey: 'price',
-      editor: props.priceCellEditorRef.current,
+      editor: priceCellEditor,
       blockIndex: props.blockIndex,
       rowIndex: props.rowIndex,
       value: newPriceValueRounded,
@@ -69,7 +85,7 @@ export const validatePrice = (props: Props): void => {
 
     updateSubTotalPriceWithValue({
       blockIndex: props.blockIndex,
-      subTotalPriceEditor: props.subTotalPriceEditorRef.current,
+      subTotalPriceEditor,
       value: subTotalPriceValueNewRounded,
       incrementally: true,
     })

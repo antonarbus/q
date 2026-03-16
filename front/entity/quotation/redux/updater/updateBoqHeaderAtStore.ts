@@ -4,10 +4,10 @@ import { getTextContentFromHtml } from '@shared/util/getTextContentFromHtml'
 import type { HeaderKey } from '@back/entity/quotation/schema'
 import { getBoqBlockFromStore } from '../getter/getBoqBlockFromStore'
 import { quotationSlice } from '../quotationSlice'
-import type { EditorRef } from '@shared/lib/tiptap/types'
+import type { Editor } from '@tiptap/react'
 
 type Props = {
-  editorRef: EditorRef
+  editor: Editor | null
   blockIndex: number
   boqHeaderKey: HeaderKey
 }
@@ -17,7 +17,7 @@ type Res = {
 }
 
 export const updateBoqHeaderAtStore = (props: Props): Res => {
-  if (props.editorRef.current === null) {
+  if (props.editor === null) {
     return { didUpdate: false }
   }
 
@@ -28,7 +28,7 @@ export const updateBoqHeaderAtStore = (props: Props): Res => {
   }
 
   const prevHtml = boqBlock.boq.header[props.boqHeaderKey].html
-  const html = props.editorRef.current.getHTML()
+  const html = props.editor.getHTML()
   const didTextChange = prevHtml !== html
 
   if (didTextChange === false) {

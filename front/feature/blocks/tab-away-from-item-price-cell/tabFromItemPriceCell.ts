@@ -1,8 +1,9 @@
-import type { EditorRef } from '@shared/lib/tiptap/types'
+import { editorRegistry } from '@shared/lib/tiptap/editorRegistry'
+import { rowEditorKey } from '@shared/lib/tiptap/editorKey'
 
 type Props = {
   event: KeyboardEvent
-  qtyCellEditorRef: EditorRef
+  blockIndex: number
   rowIndex: number
 }
 
@@ -11,7 +12,19 @@ export const tabFromItemPriceCell = (props: Props): boolean => {
 
   if (isTabKey === true) {
     props.event.preventDefault()
-    props.qtyCellEditorRef.current?.chain().focus().selectAll().run()
+
+    editorRegistry
+      .get(
+        rowEditorKey({
+          blockIndex: props.blockIndex,
+          rowIndex: props.rowIndex,
+          cellKey: 'qty',
+        }),
+      )
+      ?.chain()
+      .focus()
+      .selectAll()
+      .run()
 
     return true
   }

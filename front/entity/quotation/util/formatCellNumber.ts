@@ -4,13 +4,13 @@ import { roundTo } from 'round-to'
 import type { CellKey } from '@back/entity/quotation/schema'
 import { getRowFromStore } from '../redux/getter/getRowFromStore'
 import { quotationSlice } from '../redux/quotationSlice'
-import type { EditorRef } from '@shared/lib/tiptap/types'
+import type { Editor } from '@tiptap/react'
 
 type Props = {
   blockIndex: number
   rowIndex: number
   cellKey: CellKey
-  editorRef: EditorRef
+  editor: Editor | null
   roundToTwoDecimals: boolean
 }
 
@@ -19,7 +19,7 @@ type Res = {
 }
 
 export const formatCellNumber = (props: Props): Res => {
-  if (props.editorRef.current === null) {
+  if (props.editor === null) {
     return {
       didUpdate: false,
     }
@@ -61,7 +61,7 @@ export const formatCellNumber = (props: Props): Res => {
     }),
   )
 
-  props.editorRef.current.commands.setContent(newHtml, { emitUpdate: false })
+  props.editor.commands.setContent(newHtml, { emitUpdate: false })
 
   return {
     didUpdate: true,

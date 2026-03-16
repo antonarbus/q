@@ -1,15 +1,15 @@
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
-import { useBoq } from '@entity/quotation/provider/BoqBlockProvider'
 import { getRowsFromStore } from '@entity/quotation/redux/getter/getRowsFromStore'
 import type { RowBlock } from '@back/entity/quotation/schema'
 import { updateSubTotalPriceWithValue } from '@entity/quotation/util/updateSubTotalPriceWithValue'
 import { useUpdateEffect } from 'react-use'
 import { roundTo } from 'round-to'
 import { useSelector } from '@shared/lib/redux'
+import { editorRegistry } from '@shared/lib/tiptap/editorRegistry'
+import { blockEditorKey } from '@shared/lib/tiptap/editorKey'
 
 export const useUpdateSubtotalPriceValue = (): void => {
   const block = useBlock()
-  const boq = useBoq()
 
   const rowsQty = useSelector((state) => {
     const thisBlock = state.quotation.blocks[block.index]
@@ -41,7 +41,13 @@ export const useUpdateSubtotalPriceValue = (): void => {
 
     updateSubTotalPriceWithValue({
       blockIndex: block.index,
-      subTotalPriceEditor: boq.subTotalPriceEditorRef.current,
+      subTotalPriceEditor:
+        editorRegistry.get(
+          blockEditorKey({
+            blockIndex: block.index,
+            editorName: 'subTotalPrice',
+          }),
+        ) ?? null,
       value: subTotalPriceValueNewRounded,
       incrementally: true,
     })

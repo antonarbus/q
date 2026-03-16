@@ -1,7 +1,5 @@
 import { createContext, useContext, useMemo } from 'react'
 import type { RowBlock } from '@back/entity/quotation/schema'
-import { useBoq } from './BoqBlockProvider'
-import type { EditorRef } from '@shared/lib/tiptap/types'
 
 type Props = {
   index: number
@@ -9,46 +7,19 @@ type Props = {
   children: React.ReactNode
 }
 
-type Res = Omit<Props, 'children'> & {
-  descriptionCellEditorRef: EditorRef
-  itemPriceCellEditorRef: EditorRef
-  qtyCellEditorRef: EditorRef
-  priceCellEditorRef: EditorRef
-}
+type Res = Omit<Props, 'children'>
 
 const RowContext: React.Context<Res | null> = createContext<Res | null>(null)
 
 export const RowProvider = (props: Props): React.JSX.Element => {
-  const boq = useBoq()
-
-  const rowEditorRef = useMemo(() => {
-    return {
-      descriptionCellEditorRef: { current: null },
-      itemPriceCellEditorRef: { current: null },
-      qtyCellEditorRef: { current: null },
-      priceCellEditorRef: { current: null },
-    }
-  }, [])
-
-  boq.rowEditorRefs[props.index] = {
-    description: rowEditorRef.descriptionCellEditorRef,
-    itemPrice: rowEditorRef.itemPriceCellEditorRef,
-    qty: rowEditorRef.qtyCellEditorRef,
-    price: rowEditorRef.priceCellEditorRef,
-  }
-
   const rowContextData = useMemo(() => {
     const context = {
       index: props.index,
       item: props.item,
-      descriptionCellEditorRef: rowEditorRef.descriptionCellEditorRef,
-      itemPriceCellEditorRef: rowEditorRef.itemPriceCellEditorRef,
-      qtyCellEditorRef: rowEditorRef.qtyCellEditorRef,
-      priceCellEditorRef: rowEditorRef.priceCellEditorRef,
     }
 
     return context
-  }, [props.index, props.item, boq.rowEditorRefs])
+  }, [props.index, props.item])
 
   return (
     <RowContext.Provider value={rowContextData}>

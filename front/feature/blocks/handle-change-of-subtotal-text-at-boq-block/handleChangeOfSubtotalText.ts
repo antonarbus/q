@@ -10,7 +10,7 @@ type Props = {
 
 export const handleChangeOfSubtotalText = (props: Props): void => {
   updateBoqHeaderAtStore({
-    editorRef: props.editorRef,
+    editor: props.editorRef.current,
     blockIndex: props.blockIndex,
     boqHeaderKey: props.boqHeaderKey,
   })
