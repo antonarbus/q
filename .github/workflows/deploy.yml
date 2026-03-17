@@ -109,7 +109,7 @@ jobs:
         run: bun run knip
 
       - name: 'Find circular dependencies'
-        run: bun run madge
+        run: bun run circular
 
       - name: 'Run TypeScript checks'
         run: bun run tsc
