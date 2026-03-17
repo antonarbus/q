@@ -17,7 +17,7 @@ export const handleChangeOfPriceCell = (props: Props): void => {
     editorRegistry.get({
       blockIndex: props.blockIndex,
       rowIndex: props.rowIndex,
-      cellKey: 'price',
+      cellKey: 'priceCell',
     }) ?? null
 
   if (priceCellEditor === null) {
@@ -55,7 +55,7 @@ export const handleChangeOfPriceCell = (props: Props): void => {
         editorRegistry.get({
           blockIndex: props.blockIndex,
           rowIndex: props.rowIndex,
-          cellKey: 'qty',
+          cellKey: 'qtyCell',
         }) ?? null,
       blockIndex: props.blockIndex,
       rowIndex: props.rowIndex,
@@ -79,7 +79,7 @@ export const handleChangeOfPriceCell = (props: Props): void => {
         editorRegistry.get({
           blockIndex: props.blockIndex,
           rowIndex: props.rowIndex,
-          cellKey: 'itemPrice',
+          cellKey: 'itemPriceCell',
         }) ?? null,
       blockIndex: props.blockIndex,
       rowIndex: props.rowIndex,

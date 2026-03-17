@@ -12,7 +12,7 @@ export const handleChangeOfPriceCell = (_props: Props): void => {
     editorRegistry.get({
       blockIndex: BOOKMARK_POS_AT_BLOCKS,
       rowIndex: 0,
-      cellKey: 'price',
+      cellKey: 'priceCell',
     }) ?? null
 
   if (priceCellEditor === null) {
@@ -44,7 +44,7 @@ export const handleChangeOfPriceCell = (_props: Props): void => {
       editorRegistry.get({
         blockIndex: BOOKMARK_POS_AT_BLOCKS,
         rowIndex: 0,
-        cellKey: 'itemPrice',
+        cellKey: 'itemPriceCell',
       }) ?? null,
     cellKey: 'itemPrice',
     value: newItemPriceValueRounded,

@@ -13,7 +13,7 @@ export const handleChangeOfDescriptionCell = (props: Props): void => {
     editorRegistry.get({
       blockIndex: props.blockIndex,
       rowIndex: props.rowIndex,
-      cellKey: 'description',
+      cellKey: 'descriptionCell',
     }) ?? null
 
   if (editor === null) {

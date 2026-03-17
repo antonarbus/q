@@ -15,7 +15,7 @@ export const handleFocusOutFromPriceCell = (props: Props): void => {
       editorRegistry.get({
         blockIndex: props.blockIndex,
         rowIndex: props.rowIndex,
-        cellKey: 'price',
+        cellKey: 'priceCell',
       }) ?? null,
     roundToTwoDecimals: true,
   })

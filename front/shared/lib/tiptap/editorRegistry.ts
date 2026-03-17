@@ -12,7 +12,11 @@ export type BlockEditorName =
   | 'totalPriceTitle'
   | 'totalPriceValue'
 
-export type CellKey = 'description' | 'itemPrice' | 'price' | 'qty'
+export type CellKey =
+  | 'descriptionCell'
+  | 'itemPriceCell'
+  | 'priceCell'
+  | 'qtyCell'
 
 export type BlockKeyProps = { blockIndex: number; editorName: BlockEditorName }
 

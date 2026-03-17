@@ -16,7 +16,7 @@ export const tabFromQtyCell = (props: Props): boolean => {
       .get({
         blockIndex: props.blockIndex,
         rowIndex: props.rowIndex,
-        cellKey: 'price',
+        cellKey: 'priceCell',
       })
       ?.chain()
       .focus()

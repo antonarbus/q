@@ -28,7 +28,7 @@ export const QtyCell = (): React.JSX.Element => {
         registryKey={{
           blockIndex: block.index,
           rowIndex: row.index,
-          cellKey: 'qty',
+          cellKey: 'qtyCell',
         }}
         className='td qty'
         placeholder='Qty...'

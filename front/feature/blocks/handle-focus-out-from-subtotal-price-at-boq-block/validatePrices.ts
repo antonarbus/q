@@ -25,7 +25,7 @@ export const validatePrices = (props: Props): void => {
       editorRegistry.get({
         blockIndex: props.blockIndex,
         rowIndex,
-        cellKey: 'price',
+        cellKey: 'priceCell',
       }) ?? null
 
     if (priceCellEditor === null) {

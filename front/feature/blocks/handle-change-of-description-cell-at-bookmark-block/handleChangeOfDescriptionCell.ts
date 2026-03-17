@@ -9,7 +9,7 @@ export const handleChangeOfDescriptionCell = (_props: Props): void => {
     editorRegistry.get({
       blockIndex: BOOKMARK_POS_AT_BLOCKS,
       rowIndex: 0,
-      cellKey: 'description',
+      cellKey: 'descriptionCell',
     }) ?? null
 
   if (editor === null) {

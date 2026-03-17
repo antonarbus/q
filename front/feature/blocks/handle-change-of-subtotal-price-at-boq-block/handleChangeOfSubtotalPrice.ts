@@ -85,7 +85,7 @@ export const handleChangeOfSubtotalPrice = (props: Props): void => {
         editorRegistry.get({
           blockIndex: props.blockIndex,
           rowIndex: index,
-          cellKey: 'price',
+          cellKey: 'priceCell',
         }) ?? null,
     }
   })
@@ -123,7 +123,7 @@ export const handleChangeOfSubtotalPrice = (props: Props): void => {
         editorRegistry.get({
           blockIndex: props.blockIndex,
           rowIndex,
-          cellKey: 'price',
+          cellKey: 'priceCell',
         }) ?? null,
       blockIndex: props.blockIndex,
       rowIndex,
@@ -147,7 +147,7 @@ export const handleChangeOfSubtotalPrice = (props: Props): void => {
           editorRegistry.get({
             blockIndex: props.blockIndex,
             rowIndex,
-            cellKey: 'qty',
+            cellKey: 'qtyCell',
           }) ?? null,
         blockIndex: props.blockIndex,
         rowIndex,
@@ -171,7 +171,7 @@ export const handleChangeOfSubtotalPrice = (props: Props): void => {
           editorRegistry.get({
             blockIndex: props.blockIndex,
             rowIndex,
-            cellKey: 'itemPrice',
+            cellKey: 'itemPriceCell',
           }) ?? null,
         blockIndex: props.blockIndex,
         rowIndex,

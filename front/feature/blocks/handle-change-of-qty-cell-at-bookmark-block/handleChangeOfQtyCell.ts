@@ -12,7 +12,7 @@ export const handleChangeOfQtyCell = (_props: Props): void => {
     editorRegistry.get({
       blockIndex: BOOKMARK_POS_AT_BLOCKS,
       rowIndex: 0,
-      cellKey: 'qty',
+      cellKey: 'qtyCell',
     }) ?? null
 
   if (qtyCellEditor === null) {
@@ -41,7 +41,7 @@ export const handleChangeOfQtyCell = (_props: Props): void => {
       editorRegistry.get({
         blockIndex: BOOKMARK_POS_AT_BLOCKS,
         rowIndex: 0,
-        cellKey: 'price',
+        cellKey: 'priceCell',
       }) ?? null,
     value: newPriceValueRounded,
   })

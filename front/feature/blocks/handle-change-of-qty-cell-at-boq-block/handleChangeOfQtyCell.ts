@@ -17,7 +17,7 @@ export const handleChangeOfQtyCell = (props: Props): void => {
     editorRegistry.get({
       blockIndex: props.blockIndex,
       rowIndex: props.rowIndex,
-      cellKey: 'qty',
+      cellKey: 'qtyCell',
     }) ?? null
 
   if (qtyCellEditor === null) {
@@ -49,7 +49,7 @@ export const handleChangeOfQtyCell = (props: Props): void => {
       editorRegistry.get({
         blockIndex: props.blockIndex,
         rowIndex: props.rowIndex,
-        cellKey: 'price',
+        cellKey: 'priceCell',
       }) ?? null,
     blockIndex: props.blockIndex,
     rowIndex: props.rowIndex,

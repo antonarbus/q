@@ -24,7 +24,7 @@ export const DescriptionCell = (): React.JSX.Element => {
       registryKey={{
         blockIndex: block.index,
         rowIndex: row.index,
-        cellKey: 'description',
+        cellKey: 'descriptionCell',
       }}
       className='td description'
       placeholder='Description...'

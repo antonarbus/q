@@ -15,7 +15,7 @@ export const handleFocusOutFromQtyCell = (props: Props): void => {
       editorRegistry.get({
         blockIndex: props.blockIndex,
         rowIndex: props.rowIndex,
-        cellKey: 'qty',
+        cellKey: 'qtyCell',
       }) ?? null,
     roundToTwoDecimals: false,
   })
