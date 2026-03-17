@@ -16,6 +16,7 @@ import {
   getRegistryKey,
 } from '@shared/lib/tiptap/editorRegistry'
 import { getItemFromStore } from '@entity/quotation/redux/getter/getFromStore'
+import { recalculateTotalPrices } from '@entity/quotation/util/recalculateTotalPrices'
 
 const pasteItemOnClick = (): void => {
   const isBookmarkListPage = window.location.pathname.includes(
@@ -109,6 +110,13 @@ const pasteItemOnClick = (): void => {
       incrementally: true,
     })
   }
+
+  // Deferred so React re-renders first. The editor registry is keyed by blockIndex —
+  // inserting a block shifts the price block's index, and its editor stays registered
+  // under the old key until PriceValue re-renders with the new blockIndex from context.
+  setTimeout(() => {
+    recalculateTotalPrices()
+  }, 0)
 
   dispatch(copySlice.actions.removeItem())
   dispatch(copySlice.actions.forbidAllActions())
