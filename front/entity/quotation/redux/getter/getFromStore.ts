@@ -1,32 +1,54 @@
 import { getState } from '@shared/lib/redux'
-import type { BlockItem, Quotation } from '@back/entity/quotation/schema'
+import type {
+  BlockItem,
+  Quotation,
+  RowBlock,
+} from '@back/entity/quotation/schema'
 
 type Props = {
   id: string
 }
 
-export const getFromStore = (
-  props: Props,
-): BlockItem | Quotation | undefined => {
+type Res =
+  | {
+      type: 'quotation'
+      data: Quotation
+    }
+  | {
+      type: 'block'
+      data: BlockItem
+      blockIndex: number
+    }
+  | {
+      type: 'row'
+      data: RowBlock
+      blockIndex: number
+      rowIndex: number
+    }
+  | undefined
+
+export const getItemFromStore = (props: Props): Res => {
   const state = getState()
 
   if (state.quotation.id === props.id) {
-    return state.quotation
+    return { type: 'quotation', data: state.quotation }
   }
 
-  const blockWithSameId = state.quotation.blocks.find((block) => {
-    return block.id === props.id
-  })
+  const blockWithSameId = state.quotation.blocks.find(
+    (block) => block.id === props.id,
+  )
 
   if (blockWithSameId !== undefined) {
-    return blockWithSameId
+    const blockIndex = state.quotation.blocks.indexOf(blockWithSameId)
+
+    return { type: 'block', data: blockWithSameId, blockIndex }
   }
 
-  for (const block of state.quotation.blocks) {
-    if (block.type === 'boq') {
-      for (const row of block.boq.rows) {
+  for (const [blockIndex, boqBlock] of state.quotation.blocks.entries()) {
+    if (boqBlock.type === 'boq') {
+      for (const [rowIndex, row] of boqBlock.boq.rows.entries()) {
         if (row.id === props.id) {
-          return row
+          return { type: 'row', data: row, blockIndex, rowIndex }
         }
       }
     }

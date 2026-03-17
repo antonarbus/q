@@ -1,11 +1,19 @@
+import type { RowBlock } from '@back/entity/quotation/schema'
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { useRow } from '@entity/quotation/provider/RowProvider'
+import { getRowsFromStore } from '@entity/quotation/redux/getter/getRowsFromStore'
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { selectIsLastRow } from '@entity/quotation/redux/selector/selectIsLastRow'
+import { updateSubTotalPriceWithValue } from '@entity/quotation/util/updateSubTotalPriceWithValue'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/cls'
 import { dispatch, useSelector } from '@shared/lib/redux'
+import {
+  editorRegistry,
+  getRegistryKey,
+} from '@shared/lib/tiptap/editorRegistry'
 import { GoTrash } from 'react-icons/go'
+import { roundTo } from 'round-to'
 
 export const DeleteRowIcon = (): React.JSX.Element => {
   const block = useBlock()
@@ -42,6 +50,40 @@ export const DeleteRowIcon = (): React.JSX.Element => {
                 rowIndex: row.index,
               }),
             )
+
+            const rows = getRowsFromStore({ blockIndex: block.index })
+
+            if (rows === undefined) {
+              return
+            }
+
+            const subTotalPriceValueNew: number = rows.reduce(
+              (accumulator: number, boqRow: RowBlock) => {
+                const price = boqRow.price.value
+
+                return accumulator + price
+              },
+              0,
+            )
+
+            const subTotalPriceValueNewRounded = roundTo(
+              subTotalPriceValueNew,
+              2,
+            )
+
+            updateSubTotalPriceWithValue({
+              blockIndex: block.index,
+              subTotalPriceEditor:
+                editorRegistry.get(
+                  getRegistryKey({
+                    editorName: 'boqBlockSubTotalPrice',
+                    blockIndex: block.index,
+                    rowIndex: null,
+                  }),
+                ) ?? null,
+              value: subTotalPriceValueNewRounded,
+              incrementally: true,
+            })
           }}
           tabIndex={-1}
           style={{

@@ -8,7 +8,6 @@ import { showHidePricePins } from '@feature/blocks/show-hide-pins-in-price-colum
 import { handleChangeOfSubtotalPrice } from '@feature/blocks/handle-change-of-subtotal-price-at-boq-block/handleChangeOfSubtotalPrice'
 import { handleFocusOutFromSubtotalPrice } from '@feature/blocks/handle-focus-out-from-subtotal-price-at-boq-block/handleFocusOutFromSubtotalPrice'
 import { validatePrices } from '@feature/blocks/handle-focus-out-from-subtotal-price-at-boq-block/validatePrices'
-import { useUpdateSubtotalPriceValue } from '@feature/blocks/update-subtotal-price-value-if-rows-qty-changed/useUpdateSubtotalPriceValue'
 import { getRegistryKey } from '@shared/lib/tiptap/editorRegistry'
 const boqHeaderKey: HeaderKey = 'subTotalPrice'
 
@@ -22,8 +21,6 @@ export const SubTotalPrice = (): React.JSX.Element => {
   )
 
   const isInitClickRef = useRef(true)
-
-  useUpdateSubtotalPriceValue()
 
   return (
     <TextEditor

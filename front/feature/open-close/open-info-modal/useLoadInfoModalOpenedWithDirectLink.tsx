@@ -1,4 +1,4 @@
-import { getFromStore } from '@entity/quotation/redux/getter/getFromStore'
+import { getItemFromStore } from '@entity/quotation/redux/getter/getFromStore'
 import type { InfoFormValues } from '@entity/quotation/form/types'
 import { useSelector } from '@shared/lib/redux'
 import { useParams } from 'react-router-dom'
@@ -13,15 +13,15 @@ export const useLoadInfoModalOpenedWithDirectLink = (props: Props): void => {
   const urlParams = useParams()
 
   useUpdateEffect(() => {
-    const item = getFromStore({
+    const item = getItemFromStore({
       id: urlParams.bookmarkId ?? urlParams.quotationId ?? 'new',
     })
 
     if (item !== undefined) {
-      props.infoFormValues.nameSignal.value = item.name
-      props.infoFormValues.categorySignal.value = item.category
-      props.infoFormValues.descSignal.value = item.desc
-      props.infoFormValues.infoSignal.value = item.info
+      props.infoFormValues.nameSignal.value = item.data.name
+      props.infoFormValues.categorySignal.value = item.data.category
+      props.infoFormValues.descSignal.value = item.data.desc
+      props.infoFormValues.infoSignal.value = item.data.info
     }
   }, [quotation])
 }

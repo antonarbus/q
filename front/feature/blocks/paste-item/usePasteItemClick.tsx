@@ -7,6 +7,15 @@ import { dispatch, getState } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import { fixElementDimensionStyle } from '@shared/util/fixElementDimensionStyle'
 import { useEffectOnce, useUnmount } from 'react-use'
+import { getRowsFromStore } from '@entity/quotation/redux/getter/getRowsFromStore'
+import type { RowBlock } from '@back/entity/quotation/schema'
+import { roundTo } from 'round-to'
+import { updateSubTotalPriceWithValue } from '@entity/quotation/util/updateSubTotalPriceWithValue'
+import {
+  editorRegistry,
+  getRegistryKey,
+} from '@shared/lib/tiptap/editorRegistry'
+import { getItemFromStore } from '@entity/quotation/redux/getter/getFromStore'
 
 const pasteItemOnClick = (): void => {
   const isBookmarkListPage = window.location.pathname.includes(
@@ -65,6 +74,41 @@ const pasteItemOnClick = (): void => {
       pastePos: state.copy.place.pastePos,
     }),
   )
+
+  const item = getItemFromStore({ id: newItemId })
+
+  if (topItemInCopyModal.type === 'row' && item?.type === 'row') {
+    const rows = getRowsFromStore({ blockIndex: item.blockIndex })
+
+    if (rows === undefined) {
+      return
+    }
+
+    const subTotalPriceValueNew: number = rows.reduce(
+      (accumulator: number, boqRow: RowBlock) => {
+        const price = boqRow.price.value
+
+        return accumulator + price
+      },
+      0,
+    )
+
+    const subTotalPriceValueNewRounded = roundTo(subTotalPriceValueNew, 2)
+
+    updateSubTotalPriceWithValue({
+      blockIndex: item.blockIndex,
+      subTotalPriceEditor:
+        editorRegistry.get(
+          getRegistryKey({
+            editorName: 'boqBlockSubTotalPrice',
+            blockIndex: item.blockIndex,
+            rowIndex: null,
+          }),
+        ) ?? null,
+      value: subTotalPriceValueNewRounded,
+      incrementally: true,
+    })
+  }
 
   dispatch(copySlice.actions.removeItem())
   dispatch(copySlice.actions.forbidAllActions())
