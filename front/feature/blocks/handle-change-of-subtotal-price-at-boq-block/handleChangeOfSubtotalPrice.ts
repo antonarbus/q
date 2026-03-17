@@ -3,6 +3,7 @@ import { getRowFromStore } from '@entity/quotation/redux/getter/getRowFromStore'
 import { getRowsFromStore } from '@entity/quotation/redux/getter/getRowsFromStore'
 import { updateBoqHeaderAtStore } from '@entity/quotation/redux/updater/updateBoqHeaderAtStore'
 import type { RowBlock } from '@back/entity/quotation/schema'
+import { recalculateTotalPrices } from '@entity/quotation/util/recalculateTotalPrices'
 import { updateCellWithValue } from '@entity/quotation/util/updateCellWithValue'
 import { updateSubTotalPriceWithValue } from '@entity/quotation/util/updateSubTotalPriceWithValue'
 import type { Editor } from '@tiptap/react'
@@ -218,4 +219,6 @@ export const handleChangeOfSubtotalPrice = (props: Props): void => {
     value: subTotalPriceValueNewRounded,
     incrementally: true,
   })
+
+  recalculateTotalPrices()
 }

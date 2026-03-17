@@ -1,5 +1,6 @@
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
+import { recalculateTotalPrices } from '@entity/quotation/util/recalculateTotalPrices'
 import { selectIsLastBlock } from '@entity/quotation/redux/selector/selectIsLastBlock'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/cls'
@@ -66,6 +67,13 @@ export const DeleteBlockIcon = (): React.JSX.Element => {
                 id: blockToDelete.id,
               }),
             )
+
+            // Deferred so React re-renders first. The editor registry is keyed by blockIndex —
+            // removing a block shifts the price block's index, and its editor stays registered
+            // under the old key until PriceValue re-renders with the new blockIndex from context.
+            setTimeout(() => {
+              recalculateTotalPrices()
+            }, 0)
           }}
           tabIndex={-1}
           style={{

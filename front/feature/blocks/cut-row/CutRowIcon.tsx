@@ -6,6 +6,7 @@ import { getRowFromStore } from '@entity/quotation/redux/getter/getRowFromStore'
 import { getRowsFromStore } from '@entity/quotation/redux/getter/getRowsFromStore'
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { selectIsLastRow } from '@entity/quotation/redux/selector/selectIsLastRow'
+import { recalculateTotalPrices } from '@entity/quotation/util/recalculateTotalPrices'
 import { updateSubTotalPriceWithValue } from '@entity/quotation/util/updateSubTotalPriceWithValue'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/cls'
@@ -129,6 +130,8 @@ export const CutRowIcon = (): React.JSX.Element => {
               value: subTotalPriceValueNewRounded,
               incrementally: true,
             })
+
+            recalculateTotalPrices()
 
             dispatch(copySlice.actions.forbidAllActions())
 

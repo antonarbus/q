@@ -2,6 +2,7 @@ import { getRowFromStore } from '@entity/quotation/redux/getter/getRowFromStore'
 import { getRowsFromStore } from '@entity/quotation/redux/getter/getRowsFromStore'
 import { updateCellAtStore } from '@entity/quotation/redux/updater/updateCellAtStore'
 import type { RowBlock } from '@back/entity/quotation/schema'
+import { recalculateTotalPrices } from '@entity/quotation/util/recalculateTotalPrices'
 import { updateCellWithValue } from '@entity/quotation/util/updateCellWithValue'
 import { updateSubTotalPriceWithValue } from '@entity/quotation/util/updateSubTotalPriceWithValue'
 import { roundTo } from 'round-to'
@@ -128,4 +129,6 @@ export const handleChangeOfPriceCell = (props: Props): void => {
     value: subTotalPriceValueNewRounded,
     incrementally: true,
   })
+
+  recalculateTotalPrices()
 }

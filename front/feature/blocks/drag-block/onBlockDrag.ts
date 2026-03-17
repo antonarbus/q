@@ -1,5 +1,6 @@
 import type { DragStart, DropResult } from '@hello-pangea/dnd'
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
+import { recalculateTotalPrices } from '@entity/quotation/util/recalculateTotalPrices'
 import { dispatch, getState } from '@shared/lib/redux'
 import { arrayMoveImmutable } from 'array-move'
 
@@ -30,4 +31,11 @@ export const onBlockDragEnd =
     )
 
     dispatch(quotationSlice.actions.reOrderBlocks({ reOrderedItems }))
+
+    // Deferred so React re-renders first. The editor registry is keyed by blockIndex —
+    // reordering blocks changes the price block's index, and its editor stays registered
+    // under the old key until PriceValue re-renders with the new blockIndex from context.
+    setTimeout(() => {
+      recalculateTotalPrices()
+    }, 0)
   }

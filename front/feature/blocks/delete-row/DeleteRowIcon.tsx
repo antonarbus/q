@@ -4,6 +4,7 @@ import { useRow } from '@entity/quotation/provider/RowProvider'
 import { getRowsFromStore } from '@entity/quotation/redux/getter/getRowsFromStore'
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { selectIsLastRow } from '@entity/quotation/redux/selector/selectIsLastRow'
+import { recalculateTotalPrices } from '@entity/quotation/util/recalculateTotalPrices'
 import { updateSubTotalPriceWithValue } from '@entity/quotation/util/updateSubTotalPriceWithValue'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/cls'
@@ -84,6 +85,8 @@ export const DeleteRowIcon = (): React.JSX.Element => {
               value: subTotalPriceValueNewRounded,
               incrementally: true,
             })
+
+            recalculateTotalPrices()
           }}
           tabIndex={-1}
           style={{
