@@ -2,7 +2,10 @@ import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { dispatch, getState } from '@shared/lib/redux'
 import { getNumberFromString } from '@shared/util/getNumberFromString'
 import { getTextContentFromHtml } from '@shared/util/getTextContentFromHtml'
-import { editorRegistry } from '@shared/lib/tiptap/editorRegistry'
+import {
+  editorRegistry,
+  getRegistryKey,
+} from '@shared/lib/tiptap/editorRegistry'
 
 type Props = {
   blockIndex: number
@@ -10,10 +13,13 @@ type Props = {
 
 export const handleChangeOfPriceValue = (props: Props): void => {
   const editor =
-    editorRegistry.get({
-      blockIndex: props.blockIndex,
-      editorName: 'totalPriceValue',
-    }) ?? null
+    editorRegistry.get(
+      getRegistryKey({
+        editorName: 'priceBlockPrice',
+        blockIndex: props.blockIndex,
+        rowIndex: null,
+      }),
+    ) ?? null
 
   if (editor === null) {
     return

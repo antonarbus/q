@@ -2,12 +2,12 @@ import type { EditorEvents } from '@tiptap/react'
 import type { EditorView } from '@tiptap/pm/view'
 import type { OnUpload } from '@shared/lib/tiptap/types'
 import type { CSSObject } from '@mui/material'
-import type { BlockKeyProps, RowKeyProps } from '../lib/tiptap/editorRegistry'
+import type { RegistryKey } from '../lib/tiptap/editorRegistry'
 import { TiptapProvider } from '../lib/tiptap/provider/TiptapProvider'
 import { TiptapEditor } from '../lib/tiptap/TiptapEditor'
 
 type Props = {
-  registryKey: BlockKeyProps | RowKeyProps
+  registryKey: RegistryKey
   placeholder: string
   className: string
   sx: CSSObject

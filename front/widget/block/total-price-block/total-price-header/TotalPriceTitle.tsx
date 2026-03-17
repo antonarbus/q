@@ -4,6 +4,7 @@ import { getState } from '@shared/lib/redux'
 import { useRef } from 'react'
 import type { Editor } from '@tiptap/react'
 import { handleChangeOfPriceTitle } from '@feature/blocks/handle-change-of-price-title-at-price-block/handleChangeOfPriceTitle'
+import { getRegistryKey } from '@shared/lib/tiptap/editorRegistry'
 
 export const PriceTitle = (): React.JSX.Element => {
   const editorRef = useRef<Editor | null>(null)
@@ -11,7 +12,11 @@ export const PriceTitle = (): React.JSX.Element => {
 
   return (
     <TextEditor
-      registryKey={{ blockIndex: block.index, editorName: 'totalPriceTitle' }}
+      registryKey={getRegistryKey({
+        editorName: 'priceBlockTitle',
+        blockIndex: block.index,
+        rowIndex: null,
+      })}
       className='price-title'
       placeholder='Total price...'
       contentGetter={() => {

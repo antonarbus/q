@@ -7,6 +7,7 @@ import { ResizableColumn } from '../ResizableColumn'
 import { TextEditor } from '@shared/component/TextEditor'
 import type { Editor } from '@tiptap/react'
 import { handleChangeOfColumnCell } from '@feature/blocks/handle-change-of-table-header-cell-at-boq-block/handleChangeOfColumnCell'
+import { getRegistryKey } from '@shared/lib/tiptap/editorRegistry'
 
 export const DescriptionColumn = (): React.ReactNode => {
   const editorRef = useRef<Editor | null>(null)
@@ -19,10 +20,11 @@ export const DescriptionColumn = (): React.ReactNode => {
       minWidth={columnMinWidth.description}
     >
       <TextEditor
-        registryKey={{
+        registryKey={getRegistryKey({
+          editorName: 'boqBlockDescriptionColumn',
           blockIndex: block.index,
-          editorName: 'descriptionColumn',
-        }}
+          rowIndex: null,
+        })}
         className='column-description'
         placeholder='Description...'
         contentGetter={() =>

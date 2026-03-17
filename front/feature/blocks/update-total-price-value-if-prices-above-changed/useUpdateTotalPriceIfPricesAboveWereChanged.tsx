@@ -4,7 +4,10 @@ import { updateNumberAtHtmlIncrementally } from '@shared/lib/tiptap/util/updateN
 import { dispatch, getState, useSelector } from '@shared/lib/redux'
 import { getStringWithNewFormattedNumber } from '@shared/util/getStringWithNewFormattedNumber'
 import { useUpdateEffect } from 'react-use'
-import { editorRegistry } from '@shared/lib/tiptap/editorRegistry'
+import {
+  editorRegistry,
+  getRegistryKey,
+} from '@shared/lib/tiptap/editorRegistry'
 
 type Props = {
   blockIndex: number
@@ -24,10 +27,13 @@ export const useUpdateTotalPriceIfPricesAboveWereChanged = (
 
   useUpdateEffect(() => {
     const editor =
-      editorRegistry.get({
-        blockIndex: props.blockIndex,
-        editorName: 'totalPriceValue',
-      }) ?? null
+      editorRegistry.get(
+        getRegistryKey({
+          editorName: 'priceBlockPrice',
+          blockIndex: props.blockIndex,
+          rowIndex: null,
+        }),
+      ) ?? null
 
     if (editor === null) {
       return

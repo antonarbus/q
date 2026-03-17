@@ -13,6 +13,7 @@ import { tabFromPriceCell } from '@feature/blocks/tab-away-from-price-cell/tabFr
 import { handleChangeOfPriceCell } from '@feature/blocks/handle-change-of-price-cell-at-boq-block/handleChangeOfPriceCell'
 import { handleFocusOutFromPriceCell } from '@feature/blocks/handle-focus-out-from-price-cell-at-boq-block/handleFocusOutFromPriceCell'
 import { validatePrice } from '@feature/blocks/handle-focus-out-from-price-cell-at-boq-block/validatePrice'
+import { getRegistryKey } from '@shared/lib/tiptap/editorRegistry'
 
 export const PriceCell = (): React.JSX.Element => {
   const block = useBlock()
@@ -27,11 +28,11 @@ export const PriceCell = (): React.JSX.Element => {
   return (
     <Box sx={{ display: 'flex', position: 'relative' }}>
       <TextEditor
-        registryKey={{
+        registryKey={getRegistryKey({
+          editorName: 'boqBlockPriceCell',
           blockIndex: block.index,
           rowIndex: row.index,
-          cellKey: 'priceCell',
-        }}
+        })}
         className='td price'
         placeholder='Price...'
         contentGetter={() =>

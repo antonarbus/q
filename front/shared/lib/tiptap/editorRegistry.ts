@@ -1,62 +1,50 @@
 import type { Editor } from '@tiptap/react'
 
-export type BlockEditorName =
-  | 'boqTitle'
-  | 'subtotalText'
-  | 'subTotalPrice'
-  | 'descriptionColumn'
-  | 'itemPriceColumn'
-  | 'priceColumn'
-  | 'qtyColumn'
+type BlockEditorName =
   | 'textBlock'
-  | 'totalPriceTitle'
-  | 'totalPriceValue'
+  | 'boqBlockTitle'
+  | 'boqBlockSubtotalText'
+  | 'boqBlockSubTotalPrice'
+  | 'boqBlockDescriptionColumn'
+  | 'boqBlockQtyColumn'
+  | 'boqBlockItemPriceColumn'
+  | 'boqBlockPriceColumn'
+  | 'boqBlockDescriptionCell'
+  | 'boqBlockItemPriceCell'
+  | 'boqBlockPriceCell'
+  | 'boqBlockQtyCell'
+  | 'priceBlockTitle'
+  | 'priceBlockPrice'
 
-export type CellKey =
-  | 'descriptionCell'
-  | 'itemPriceCell'
-  | 'priceCell'
-  | 'qtyCell'
-
-export type BlockKeyProps = { blockIndex: number; editorName: BlockEditorName }
-
-export type RowKeyProps = {
+type RegistryKeyProps = {
+  editorName: BlockEditorName
   blockIndex: number
-  rowIndex: number
-  cellKey: CellKey
+  rowIndex: number | null
 }
 
-type RegistryKey = BlockKeyProps | RowKeyProps
+export type RegistryKey =
+  `${RegistryKeyProps['editorName']}:${RegistryKeyProps['blockIndex']}:${RegistryKeyProps['rowIndex']}`
 
-const registry = new Map<string, Editor>()
+export const getRegistryKey = (props: RegistryKeyProps): RegistryKey => {
+  return `${props.editorName}:${props.blockIndex}:${props.rowIndex}`
+}
+
+const registry = new Map<RegistryKey, Editor>()
 
 export const editorRegistry = {
-  set: (key: RegistryKey, editor: Editor | null): void => {
+  set: (registryKey: RegistryKey, editor: Editor | null): void => {
     if (editor !== null) {
-      const strKey =
-        'rowIndex' in key
-          ? `${key.blockIndex}:${key.rowIndex}:${key.cellKey}`
-          : `${key.blockIndex}:${key.editorName}`
-
-      registry.set(strKey, editor)
+      registry.set(registryKey, editor)
     }
   },
-  delete: (key: RegistryKey, editor: Editor): void => {
-    const strKey =
-      'rowIndex' in key
-        ? `${key.blockIndex}:${key.rowIndex}:${key.cellKey}`
-        : `${key.blockIndex}:${key.editorName}`
-
-    if (registry.get(strKey) === editor) {
-      registry.delete(strKey)
+  delete: (registryKey: RegistryKey, editor: Editor): void => {
+    if (registry.get(registryKey) === editor) {
+      registry.delete(registryKey)
     }
   },
-  get: (key: RegistryKey): Editor | undefined => {
-    const strKey =
-      'rowIndex' in key
-        ? `${key.blockIndex}:${key.rowIndex}:${key.cellKey}`
-        : `${key.blockIndex}:${key.editorName}`
+  get: (registryKey: RegistryKey): Editor | undefined => {
+    const editor = registry.get(registryKey)
 
-    return registry.get(strKey)
+    return editor
   },
 }

@@ -19,6 +19,7 @@ import {
   onTextBlockResizeStop,
 } from '@feature/blocks/resize-text-block/onTextBlockResize'
 import { handleChangeOfTextBlock } from '@feature/blocks/handle-change-of-text-block/handleChangeOfTextBlock'
+import { getRegistryKey } from '@shared/lib/tiptap/editorRegistry'
 
 export const TextBlock = (): React.JSX.Element => {
   const editorRef = useRef<Editor | null>(null)
@@ -45,7 +46,11 @@ export const TextBlock = (): React.JSX.Element => {
       }
     >
       <TextEditor
-        registryKey={{ blockIndex: block.index, editorName: 'textBlock' }}
+        registryKey={getRegistryKey({
+          editorName: 'textBlock',
+          blockIndex: block.index,
+          rowIndex: null,
+        })}
         className='text'
         placeholder='Add text, tables, drop images, files, links, select to format...'
         contentGetter={() =>

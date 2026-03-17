@@ -7,6 +7,7 @@ import { handleFocusOutFromPriceCell } from '@feature/blocks/handle-focus-out-fr
 import { handleChangeOfPriceCell } from '@feature/blocks/handle-change-of-price-cell-at-bookmark-block/handleChangeOfPriceCell'
 import { Box } from '@mui/material'
 import { TextEditor } from '@shared/component/TextEditor'
+import { getRegistryKey } from '@shared/lib/tiptap/editorRegistry'
 
 export const PriceCell = (): React.JSX.Element => {
   const stylesForResizableCell = useStylesForResizableCell({
@@ -18,11 +19,11 @@ export const PriceCell = (): React.JSX.Element => {
   return (
     <Box sx={{ display: 'flex', position: 'relative' }}>
       <TextEditor
-        registryKey={{
+        registryKey={getRegistryKey({
+          editorName: 'boqBlockPriceCell',
           blockIndex: BOOKMARK_POS_AT_BLOCKS,
           rowIndex: 0,
-          cellKey: 'priceCell',
-        }}
+        })}
         className='td price'
         placeholder='Price...'
         contentGetter={() =>

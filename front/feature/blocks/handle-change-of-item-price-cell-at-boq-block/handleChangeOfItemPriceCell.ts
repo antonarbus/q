@@ -5,7 +5,10 @@ import type { RowBlock } from '@back/entity/quotation/schema'
 import { updateCellWithValue } from '@entity/quotation/util/updateCellWithValue'
 import { updateSubTotalPriceWithValue } from '@entity/quotation/util/updateSubTotalPriceWithValue'
 import { roundTo } from 'round-to'
-import { editorRegistry } from '@shared/lib/tiptap/editorRegistry'
+import {
+  editorRegistry,
+  getRegistryKey,
+} from '@shared/lib/tiptap/editorRegistry'
 
 type Props = {
   blockIndex: number
@@ -14,11 +17,13 @@ type Props = {
 
 export const handleChangeOfItemPriceCell = (props: Props): void => {
   const itemPriceCellEditor =
-    editorRegistry.get({
-      blockIndex: props.blockIndex,
-      rowIndex: props.rowIndex,
-      cellKey: 'itemPriceCell',
-    }) ?? null
+    editorRegistry.get(
+      getRegistryKey({
+        editorName: 'boqBlockItemPriceCell',
+        blockIndex: props.blockIndex,
+        rowIndex: props.rowIndex,
+      }),
+    ) ?? null
 
   if (itemPriceCellEditor === null) {
     return
@@ -46,11 +51,13 @@ export const handleChangeOfItemPriceCell = (props: Props): void => {
   updateCellWithValue({
     cellKey: 'price',
     editor:
-      editorRegistry.get({
-        blockIndex: props.blockIndex,
-        rowIndex: props.rowIndex,
-        cellKey: 'priceCell',
-      }) ?? null,
+      editorRegistry.get(
+        getRegistryKey({
+          editorName: 'boqBlockPriceCell',
+          blockIndex: props.blockIndex,
+          rowIndex: props.rowIndex,
+        }),
+      ) ?? null,
     blockIndex: props.blockIndex,
     rowIndex: props.rowIndex,
     value: newPriceValueRounded,
@@ -76,10 +83,13 @@ export const handleChangeOfItemPriceCell = (props: Props): void => {
   updateSubTotalPriceWithValue({
     blockIndex: props.blockIndex,
     subTotalPriceEditor:
-      editorRegistry.get({
-        blockIndex: props.blockIndex,
-        editorName: 'subTotalPrice',
-      }) ?? null,
+      editorRegistry.get(
+        getRegistryKey({
+          editorName: 'boqBlockSubTotalPrice',
+          blockIndex: props.blockIndex,
+          rowIndex: null,
+        }),
+      ) ?? null,
     value: subTotalPriceValueNewRounded,
     incrementally: true,
   })

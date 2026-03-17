@@ -124,7 +124,7 @@ jobs:
       - name: 'Run Playwright tests against source environment'
         env:
           ENVIRONMENT: ${{ github.event.inputs.source-env }}
-        run: bun run e2e-test
+        run: bun run playwright
 
   setup-promotion:
     name: 'Setup Promotion'

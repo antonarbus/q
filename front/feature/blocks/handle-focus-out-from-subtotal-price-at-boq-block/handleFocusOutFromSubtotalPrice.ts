@@ -1,7 +1,10 @@
 import { getBoqBlockFromStore } from '@entity/quotation/redux/getter/getBoqBlockFromStore'
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { dispatch } from '@shared/lib/redux'
-import { editorRegistry } from '@shared/lib/tiptap/editorRegistry'
+import {
+  editorRegistry,
+  getRegistryKey,
+} from '@shared/lib/tiptap/editorRegistry'
 import { getStringWithNewFormattedNumber } from '@shared/util/getStringWithNewFormattedNumber'
 import { roundTo } from 'round-to'
 
@@ -11,10 +14,13 @@ type Props = {
 
 export const handleFocusOutFromSubtotalPrice = (props: Props): void => {
   const subTotalPriceEditor =
-    editorRegistry.get({
-      blockIndex: props.blockIndex,
-      editorName: 'subTotalPrice',
-    }) ?? null
+    editorRegistry.get(
+      getRegistryKey({
+        editorName: 'boqBlockSubTotalPrice',
+        blockIndex: props.blockIndex,
+        rowIndex: null,
+      }),
+    ) ?? null
 
   if (subTotalPriceEditor === null) {
     return

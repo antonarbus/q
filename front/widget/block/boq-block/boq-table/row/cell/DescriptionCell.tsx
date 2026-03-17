@@ -8,6 +8,7 @@ import { handleChangeOfDescriptionCell } from '@feature/blocks/handle-change-of-
 import { tabFromDescriptionCell } from '@feature/blocks/tab-away-from-description-cell/tabFromDescriptionCell'
 import { upload } from '@feature/file/upload-file'
 import { TextEditor } from '@shared/component/TextEditor'
+import { getRegistryKey } from '@shared/lib/tiptap/editorRegistry'
 
 export const DescriptionCell = (): React.JSX.Element => {
   const block = useBlock()
@@ -21,11 +22,11 @@ export const DescriptionCell = (): React.JSX.Element => {
 
   return (
     <TextEditor
-      registryKey={{
+      registryKey={getRegistryKey({
+        editorName: 'boqBlockDescriptionCell',
         blockIndex: block.index,
         rowIndex: row.index,
-        cellKey: 'descriptionCell',
-      }}
+      })}
       className='td description'
       placeholder='Description...'
       contentGetter={() =>

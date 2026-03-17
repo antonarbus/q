@@ -100,22 +100,22 @@ jobs:
           service_account: 'github-actions-sa@${{ needs.terraform.outputs.projectId }}.iam.gserviceaccount.com'
 
       - name: 'Run Prettier'
-        run: bun run format-check
+        run: bun run prettier
 
       - name: 'Run unit tests'
         run: bun run unit-test
 
       - name: 'Find unused code'
-        run: bun run find-unused-files
+        run: bun run knip
 
       - name: 'Find circular dependencies'
-        run: bun run find-circular-deps
+        run: bun run madge
 
       - name: 'Run TypeScript checks'
         run: bun run tsc
 
       - name: 'Run ESLint'
-        run: bun run lint-check-quiet
+        run: bun run lint-quiet
 
       - name: 'Verify frontend build'
         run: bun run build-front
@@ -148,7 +148,7 @@ jobs:
           service_account: 'github-actions-sa@${{ needs.terraform.outputs.projectId }}.iam.gserviceaccount.com'
 
       - name: 'Run Playwright tests'
-        run: bun run e2e-test
+        run: bun run playwright
 
   deploy:
     name: 'Build and Deploy Application'

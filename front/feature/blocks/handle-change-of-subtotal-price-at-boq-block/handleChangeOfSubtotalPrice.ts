@@ -8,7 +8,10 @@ import { updateSubTotalPriceWithValue } from '@entity/quotation/util/updateSubTo
 import type { Editor } from '@tiptap/react'
 import { roundTo } from 'round-to'
 import { toast } from 'sonner'
-import { editorRegistry } from '@shared/lib/tiptap/editorRegistry'
+import {
+  editorRegistry,
+  getRegistryKey,
+} from '@shared/lib/tiptap/editorRegistry'
 
 type Props = {
   blockIndex: number
@@ -16,10 +19,13 @@ type Props = {
 
 export const handleChangeOfSubtotalPrice = (props: Props): void => {
   const subTotalPriceEditor =
-    editorRegistry.get({
-      blockIndex: props.blockIndex,
-      editorName: 'subTotalPrice',
-    }) ?? null
+    editorRegistry.get(
+      getRegistryKey({
+        editorName: 'boqBlockSubTotalPrice',
+        blockIndex: props.blockIndex,
+        rowIndex: null,
+      }),
+    ) ?? null
 
   if (subTotalPriceEditor === null) {
     return
@@ -82,11 +88,13 @@ export const handleChangeOfSubtotalPrice = (props: Props): void => {
           ? row.price.value
           : roundTo(newValue, 2),
       editor:
-        editorRegistry.get({
-          blockIndex: props.blockIndex,
-          rowIndex: index,
-          cellKey: 'priceCell',
-        }) ?? null,
+        editorRegistry.get(
+          getRegistryKey({
+            editorName: 'boqBlockPriceCell',
+            blockIndex: props.blockIndex,
+            rowIndex: index,
+          }),
+        ) ?? null,
     }
   })
 
@@ -120,11 +128,13 @@ export const handleChangeOfSubtotalPrice = (props: Props): void => {
     updateCellWithValue({
       cellKey: 'price',
       editor:
-        editorRegistry.get({
-          blockIndex: props.blockIndex,
-          rowIndex,
-          cellKey: 'priceCell',
-        }) ?? null,
+        editorRegistry.get(
+          getRegistryKey({
+            editorName: 'boqBlockPriceCell',
+            blockIndex: props.blockIndex,
+            rowIndex,
+          }),
+        ) ?? null,
       blockIndex: props.blockIndex,
       rowIndex,
       value: price.newValue,
@@ -144,11 +154,13 @@ export const handleChangeOfSubtotalPrice = (props: Props): void => {
 
       updateCellWithValue({
         editor:
-          editorRegistry.get({
-            blockIndex: props.blockIndex,
-            rowIndex,
-            cellKey: 'qtyCell',
-          }) ?? null,
+          editorRegistry.get(
+            getRegistryKey({
+              editorName: 'boqBlockQtyCell',
+              blockIndex: props.blockIndex,
+              rowIndex,
+            }),
+          ) ?? null,
         blockIndex: props.blockIndex,
         rowIndex,
         cellKey: 'qty',
@@ -168,11 +180,13 @@ export const handleChangeOfSubtotalPrice = (props: Props): void => {
 
       updateCellWithValue({
         editor:
-          editorRegistry.get({
-            blockIndex: props.blockIndex,
-            rowIndex,
-            cellKey: 'itemPriceCell',
-          }) ?? null,
+          editorRegistry.get(
+            getRegistryKey({
+              editorName: 'boqBlockItemPriceCell',
+              blockIndex: props.blockIndex,
+              rowIndex,
+            }),
+          ) ?? null,
         blockIndex: props.blockIndex,
         rowIndex,
         cellKey: 'itemPrice',

@@ -6,6 +6,7 @@ import { cellStyle } from '@entity/quotation/style/cellStyle'
 import { handleChangeOfDescriptionCell } from '@feature/blocks/handle-change-of-description-cell-at-bookmark-block/handleChangeOfDescriptionCell'
 import { upload } from '@feature/file/upload-file'
 import { TextEditor } from '@shared/component/TextEditor'
+import { getRegistryKey } from '@shared/lib/tiptap/editorRegistry'
 
 export const DescriptionCell = (): React.JSX.Element => {
   const stylesForResizableCell = useStylesForResizableCell({
@@ -16,11 +17,11 @@ export const DescriptionCell = (): React.JSX.Element => {
 
   return (
     <TextEditor
-      registryKey={{
+      registryKey={getRegistryKey({
+        editorName: 'boqBlockDescriptionCell',
         blockIndex: BOOKMARK_POS_AT_BLOCKS,
         rowIndex: 0,
-        cellKey: 'descriptionCell',
-      }}
+      })}
       className='td description'
       placeholder='Description...'
       contentGetter={() =>

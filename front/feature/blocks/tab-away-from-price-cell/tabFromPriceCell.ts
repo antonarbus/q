@@ -1,5 +1,8 @@
 import { getRowsFromStore } from '@entity/quotation/redux/getter/getRowsFromStore'
-import { editorRegistry } from '@shared/lib/tiptap/editorRegistry'
+import {
+  editorRegistry,
+  getRegistryKey,
+} from '@shared/lib/tiptap/editorRegistry'
 
 type Props = {
   event: KeyboardEvent
@@ -23,11 +26,13 @@ export const tabFromPriceCell = (props: Props): boolean => {
       props.event.preventDefault()
 
       editorRegistry
-        .get({
-          blockIndex: props.blockIndex,
-          rowIndex: props.rowIndex + 1,
-          cellKey: 'descriptionCell',
-        })
+        .get(
+          getRegistryKey({
+            editorName: 'boqBlockDescriptionCell',
+            blockIndex: props.blockIndex,
+            rowIndex: props.rowIndex + 1,
+          }),
+        )
         ?.chain()
         .focus()
         .selectAll()
