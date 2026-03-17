@@ -1,8 +1,7 @@
 import { getRowsFromStore } from '@entity/quotation/redux/getter/getRowsFromStore'
-import type { RowBlock } from '@back/entity/quotation/schema'
 import { isRowPriceValid } from '@entity/quotation/util/isRowPriceValid'
+import { recalculateSubTotalPrices } from '@entity/quotation/util/recalculateSubTotalPrices'
 import { updateCellWithValue } from '@entity/quotation/util/updateCellWithValue'
-import { updateSubTotalPriceWithValue } from '@entity/quotation/util/updateSubTotalPriceWithValue'
 import { roundTo } from 'round-to'
 import { toast } from 'sonner'
 import {
@@ -63,36 +62,7 @@ export const validatePrices = (props: Props): void => {
         value: newPriceValueRounded,
       })
 
-      const boqRows = getRowsFromStore({ blockIndex: props.blockIndex })
-
-      if (boqRows === undefined) {
-        return
-      }
-
-      const subTotalPriceValueNew: number = boqRows.reduce(
-        (accumulator: number, boqRow: RowBlock) => {
-          const price = boqRow.price.value
-
-          return accumulator + price
-        },
-        0,
-      )
-
-      const subTotalPriceValueNewRounded = roundTo(subTotalPriceValueNew, 2)
-
-      updateSubTotalPriceWithValue({
-        blockIndex: props.blockIndex,
-        subTotalPriceEditor:
-          editorRegistry.get(
-            getRegistryKey({
-              editorName: 'boqBlockSubTotalPrice',
-              blockIndex: props.blockIndex,
-              rowIndex: null,
-            }),
-          ) ?? null,
-        value: subTotalPriceValueNewRounded,
-        incrementally: false,
-      })
+      recalculateSubTotalPrices({ incrementally: false })
     }
   })
 }

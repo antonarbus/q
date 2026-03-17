@@ -7,15 +7,7 @@ import { dispatch, getState } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import { fixElementDimensionStyle } from '@shared/util/fixElementDimensionStyle'
 import { useEffectOnce, useUnmount } from 'react-use'
-import { getRowsFromStore } from '@entity/quotation/redux/getter/getRowsFromStore'
-import type { RowBlock } from '@back/entity/quotation/schema'
-import { roundTo } from 'round-to'
-import { updateSubTotalPriceWithValue } from '@entity/quotation/util/updateSubTotalPriceWithValue'
-import {
-  editorRegistry,
-  getRegistryKey,
-} from '@shared/lib/tiptap/editorRegistry'
-import { getItemFromStore } from '@entity/quotation/redux/getter/getFromStore'
+import { recalculateSubTotalPrices } from '@entity/quotation/util/recalculateSubTotalPrices'
 import { recalculateTotalPrices } from '@entity/quotation/util/recalculateTotalPrices'
 
 const pasteItemOnClick = (): void => {
@@ -76,40 +68,7 @@ const pasteItemOnClick = (): void => {
     }),
   )
 
-  const item = getItemFromStore({ id: newItemId })
-
-  if (topItemInCopyModal.type === 'row' && item?.type === 'row') {
-    const rows = getRowsFromStore({ blockIndex: item.blockIndex })
-
-    if (rows === undefined) {
-      return
-    }
-
-    const subTotalPriceValueNew: number = rows.reduce(
-      (accumulator: number, boqRow: RowBlock) => {
-        const price = boqRow.price.value
-
-        return accumulator + price
-      },
-      0,
-    )
-
-    const subTotalPriceValueNewRounded = roundTo(subTotalPriceValueNew, 2)
-
-    updateSubTotalPriceWithValue({
-      blockIndex: item.blockIndex,
-      subTotalPriceEditor:
-        editorRegistry.get(
-          getRegistryKey({
-            editorName: 'boqBlockSubTotalPrice',
-            blockIndex: item.blockIndex,
-            rowIndex: null,
-          }),
-        ) ?? null,
-      value: subTotalPriceValueNewRounded,
-      incrementally: true,
-    })
-  }
+  recalculateSubTotalPrices({ incrementally: true })
 
   // Deferred so React re-renders first. The editor registry is keyed by blockIndex —
   // inserting a block shifts the price block's index, and its editor stays registered

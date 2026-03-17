@@ -1,9 +1,7 @@
 import { getRowFromStore } from '@entity/quotation/redux/getter/getRowFromStore'
-import { getRowsFromStore } from '@entity/quotation/redux/getter/getRowsFromStore'
-import type { RowBlock } from '@back/entity/quotation/schema'
 import { isRowPriceValid } from '@entity/quotation/util/isRowPriceValid'
+import { recalculateSubTotalPrices } from '@entity/quotation/util/recalculateSubTotalPrices'
 import { updateCellWithValue } from '@entity/quotation/util/updateCellWithValue'
-import { updateSubTotalPriceWithValue } from '@entity/quotation/util/updateSubTotalPriceWithValue'
 import { roundTo } from 'round-to'
 import {
   editorRegistry,
@@ -25,20 +23,7 @@ export const validatePrice = (props: Props): void => {
       }),
     ) ?? null
 
-  const subTotalPriceEditor =
-    editorRegistry.get(
-      getRegistryKey({
-        editorName: 'boqBlockSubTotalPrice',
-        blockIndex: props.blockIndex,
-        rowIndex: null,
-      }),
-    ) ?? null
-
   if (priceCellEditor === null) {
-    return
-  }
-
-  if (subTotalPriceEditor === null) {
     return
   }
 
@@ -69,28 +54,6 @@ export const validatePrice = (props: Props): void => {
       value: newPriceValueRounded,
     })
 
-    const rows = getRowsFromStore({ blockIndex: props.blockIndex })
-
-    if (rows === undefined) {
-      return
-    }
-
-    const subTotalPriceValueNew: number = rows.reduce(
-      (accumulator: number, _row: RowBlock) => {
-        const price = _row.price.value
-
-        return accumulator + price
-      },
-      0,
-    )
-
-    const subTotalPriceValueNewRounded = roundTo(subTotalPriceValueNew, 2)
-
-    updateSubTotalPriceWithValue({
-      blockIndex: props.blockIndex,
-      subTotalPriceEditor,
-      value: subTotalPriceValueNewRounded,
-      incrementally: true,
-    })
+    recalculateSubTotalPrices({ incrementally: true })
   }
 }
