@@ -9,8 +9,7 @@
   ],
   "ignoreDependencies": [
     "@preact/signals-react-transform",
-    "@emotion/babel-plugin",
-    "madge"
+    "@emotion/babel-plugin"
   ],
   "ignoreBinaries": [
     "gcloud",
