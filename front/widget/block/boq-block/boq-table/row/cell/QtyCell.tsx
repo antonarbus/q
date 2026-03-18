@@ -8,9 +8,9 @@ import { Box } from '@mui/material'
 import { TextEditor } from '@shared/component/TextEditor'
 import { Pin } from './Pin'
 import { pinQtyCell } from '@feature/blocks/pin-qty-cell/pinQtyCell'
-import { tabFromQtyCell } from '@feature/blocks/tab-away-from-qty-cell/tabFromQtyCell'
-import { handleChangeOfQtyCell } from '@feature/blocks/handle-change-of-qty-cell-at-boq-block/handleChangeOfQtyCell'
-import { handleFocusOutFromQtyCell } from '@feature/blocks/handle-focus-out-from-qty-cell-at-boq-block/handleFocusOutFromQtyCell'
+import { onTabAwayFromQtyCell } from '@feature/blocks/on-tab-away-from-qty-cell/onTabAwayFromQtyCell'
+import { onChangeQtyCellAtBoqBlock } from '@feature/blocks/on-change-qty-cell-at-boq-block/onChangeQtyCellAtBoqBlock'
+import { onFocusOutFromQtyCell } from '@feature/blocks/on-focus-out-from-qty-cell-at-boq-block/onFocusOutFromQtyCell'
 import { getRegistryKey } from '@shared/lib/tiptap/editorRegistry'
 
 export const QtyCell = (): React.JSX.Element => {
@@ -41,19 +41,19 @@ export const QtyCell = (): React.JSX.Element => {
           })
         }
         onUpdate={(params) => {
-          handleChangeOfQtyCell({
+          onChangeQtyCellAtBoqBlock({
             blockIndex: block.index,
             rowIndex: row.index,
           })
         }}
         onBlur={() => {
-          handleFocusOutFromQtyCell({
+          onFocusOutFromQtyCell({
             blockIndex: block.index,
             rowIndex: row.index,
           })
         }}
         onKeyDown={(_view, event) =>
-          tabFromQtyCell({
+          onTabAwayFromQtyCell({
             event,
             blockIndex: block.index,
             rowIndex: row.index,

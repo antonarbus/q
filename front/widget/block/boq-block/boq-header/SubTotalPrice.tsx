@@ -5,9 +5,9 @@ import type { HeaderKey } from '@back/entity/quotation/schema'
 import { useRef } from 'react'
 import { TextEditor } from '@shared/component/TextEditor'
 import { showHidePricePins } from '@feature/blocks/show-hide-pins-in-price-column/showHidePricePins'
-import { handleChangeOfSubtotalPrice } from '@feature/blocks/handle-change-of-subtotal-price-at-boq-block/handleChangeOfSubtotalPrice'
-import { handleFocusOutFromSubtotalPrice } from '@feature/blocks/handle-focus-out-from-subtotal-price-at-boq-block/handleFocusOutFromSubtotalPrice'
-import { validatePrices } from '@feature/blocks/handle-focus-out-from-subtotal-price-at-boq-block/validatePrices'
+import { onChangeSubtotalPriceAtBoqBlock } from '@feature/blocks/on-change-subtotal-price-at-boq-block/onChangeSubtotalPriceAtBoqBlock'
+import { onFocusOutFromSubtotalPrice } from '@feature/blocks/on-focus-out-from-subtotal-price-at-boq-block/onFocusOutFromSubtotalPrice'
+import { validatePrices } from '@feature/blocks/on-focus-out-from-subtotal-price-at-boq-block/validatePrices'
 import { getRegistryKey } from '@shared/lib/tiptap/editorRegistry'
 const boqHeaderKey: HeaderKey = 'subTotalPrice'
 
@@ -38,12 +38,12 @@ export const SubTotalPrice = (): React.JSX.Element => {
         })
       }
       onUpdate={(params) => {
-        handleChangeOfSubtotalPrice({
+        onChangeSubtotalPriceAtBoqBlock({
           blockIndex: block.index,
         })
       }}
       onBlur={() => {
-        handleFocusOutFromSubtotalPrice({
+        onFocusOutFromSubtotalPrice({
           blockIndex: block.index,
         })
 

@@ -9,10 +9,10 @@ import { Box } from '@mui/material'
 import { TextEditor } from '@shared/component/TextEditor'
 import { Pin } from './Pin'
 import { pinPriceCell } from '@feature/blocks/pin-price-cell/pinPriceCell'
-import { tabFromPriceCell } from '@feature/blocks/tab-away-from-price-cell/tabFromPriceCell'
-import { handleChangeOfPriceCell } from '@feature/blocks/handle-change-of-price-cell-at-boq-block/handleChangeOfPriceCell'
-import { handleFocusOutFromPriceCell } from '@feature/blocks/handle-focus-out-from-price-cell-at-boq-block/handleFocusOutFromPriceCell'
-import { validatePrice } from '@feature/blocks/handle-focus-out-from-price-cell-at-boq-block/validatePrice'
+import { onTabAwayFromPriceCell } from '@feature/blocks/on-tab-away-from-price-cell/onTabAwayFromPriceCell'
+import { onChangePriceCellAtBoqBlock } from '@feature/blocks/on-change-price-cell-at-boq-block/onChangePriceCellAtBoqBlock'
+import { onFocusOutFromPriceCell } from '@feature/blocks/on-focus-out-from-price-cell-at-boq-block/onFocusOutFromPriceCell'
+import { validatePrice } from '@feature/blocks/on-focus-out-from-price-cell-at-boq-block/validatePrice'
 import { getRegistryKey } from '@shared/lib/tiptap/editorRegistry'
 
 export const PriceCell = (): React.JSX.Element => {
@@ -43,13 +43,13 @@ export const PriceCell = (): React.JSX.Element => {
           })
         }
         onUpdate={(params) => {
-          handleChangeOfPriceCell({
+          onChangePriceCellAtBoqBlock({
             blockIndex: block.index,
             rowIndex: row.index,
           })
         }}
         onBlur={() => {
-          handleFocusOutFromPriceCell({
+          onFocusOutFromPriceCell({
             blockIndex: block.index,
             rowIndex: row.index,
           })
@@ -63,7 +63,7 @@ export const PriceCell = (): React.JSX.Element => {
           showRowPins({ blockIndex: block.index, rowIndex: row.index })
         }}
         onKeyDown={(_view, event) =>
-          tabFromPriceCell({
+          onTabAwayFromPriceCell({
             event,
             blockIndex: block.index,
             rowIndex: row.index,

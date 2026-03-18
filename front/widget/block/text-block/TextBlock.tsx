@@ -18,7 +18,7 @@ import {
   onTextBlockResizeStart,
   onTextBlockResizeStop,
 } from '@feature/blocks/resize-text-block/onTextBlockResize'
-import { handleChangeOfTextBlock } from '@feature/blocks/handle-change-of-text-block/handleChangeOfTextBlock'
+import { onChangeTextBlock } from '@feature/blocks/on-change-text-block/onChangeTextBlock'
 import { getRegistryKey } from '@shared/lib/tiptap/editorRegistry'
 
 export const TextBlock = (): React.JSX.Element => {
@@ -57,7 +57,7 @@ export const TextBlock = (): React.JSX.Element => {
           getTextBlockHtmlFromStore({ blockIndex: block.index })
         }
         onUpdate={(params) => {
-          handleChangeOfTextBlock({ editorRef, blockIndex: block.index })
+          onChangeTextBlock({ editorRef, blockIndex: block.index })
         }}
         onUpload={upload}
         sx={textItemCellStyle}

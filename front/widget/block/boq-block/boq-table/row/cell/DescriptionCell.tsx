@@ -4,8 +4,8 @@ import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { useRow } from '@entity/quotation/provider/RowProvider'
 import { getCellHtmlFromStore } from '@entity/quotation/redux/getter/getCellHtmlFromStore'
 import { cellStyle } from '@entity/quotation/style/cellStyle'
-import { handleChangeOfDescriptionCell } from '@feature/blocks/handle-change-of-description-cell-at-boq-block/handleChangeOfDescriptionCell'
-import { tabFromDescriptionCell } from '@feature/blocks/tab-away-from-description-cell/tabFromDescriptionCell'
+import { onChangeDescriptionCellAtBoqBlock } from '@feature/blocks/on-change-description-cell-at-boq-block/onChangeDescriptionCellAtBoqBlock'
+import { onTabAwayFromDescriptionCell } from '@feature/blocks/on-tab-away-from-description-cell/onTabAwayFromDescriptionCell'
 import { upload } from '@feature/file/upload-file'
 import { TextEditor } from '@shared/component/TextEditor'
 import { getRegistryKey } from '@shared/lib/tiptap/editorRegistry'
@@ -37,7 +37,7 @@ export const DescriptionCell = (): React.JSX.Element => {
         })
       }
       onUpdate={(params) => {
-        handleChangeOfDescriptionCell({
+        onChangeDescriptionCellAtBoqBlock({
           blockIndex: block.index,
           cellKey: 'description',
           rowIndex: row.index,
@@ -45,7 +45,7 @@ export const DescriptionCell = (): React.JSX.Element => {
       }}
       onUpload={upload}
       onKeyDown={(_view, event) =>
-        tabFromDescriptionCell({
+        onTabAwayFromDescriptionCell({
           event,
           blockIndex: block.index,
           rowIndex: row.index,

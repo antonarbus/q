@@ -8,9 +8,9 @@ import { Box } from '@mui/material'
 import { TextEditor } from '@shared/component/TextEditor'
 import { Pin } from './Pin'
 import { pinItemPriceCell } from '@feature/blocks/pin-item-price-cell/pinItemPriceCell'
-import { tabFromItemPriceCell } from '@feature/blocks/tab-away-from-item-price-cell/tabFromItemPriceCell'
-import { handleChangeOfItemPriceCell } from '@feature/blocks/handle-change-of-item-price-cell-at-boq-block/handleChangeOfItemPriceCell'
-import { handleFocusOutFromItemPriceCell } from '@feature/blocks/handle-focus-out-from-item-price-cell-at-boq-block/handleFocusOutFromItemPriceCell'
+import { onTabAwayFromItemPriceCell } from '@feature/blocks/on-tab-away-from-item-price-cell/onTabAwayFromItemPriceCell'
+import { onChangeItemPriceCellAtBoqBlock } from '@feature/blocks/on-change-item-price-cell-at-boq-block/onChangeItemPriceCellAtBoqBlock'
+import { onFocusOutFromItemPriceCell } from '@feature/blocks/on-focus-out-from-item-price-cell-at-boq-block/onFocusOutFromItemPriceCell'
 import { getRegistryKey } from '@shared/lib/tiptap/editorRegistry'
 
 export const ItemPriceCell = (): React.JSX.Element => {
@@ -41,19 +41,19 @@ export const ItemPriceCell = (): React.JSX.Element => {
           })
         }
         onUpdate={(params) => {
-          handleChangeOfItemPriceCell({
+          onChangeItemPriceCellAtBoqBlock({
             blockIndex: block.index,
             rowIndex: row.index,
           })
         }}
         onBlur={() => {
-          handleFocusOutFromItemPriceCell({
+          onFocusOutFromItemPriceCell({
             blockIndex: block.index,
             rowIndex: row.index,
           })
         }}
         onKeyDown={(_view, event) =>
-          tabFromItemPriceCell({
+          onTabAwayFromItemPriceCell({
             event,
             blockIndex: block.index,
             rowIndex: row.index,

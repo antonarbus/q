@@ -1,4 +1,4 @@
-import { RequireRoles } from '@feature/auth/check-page-required-roles/RequireRoles'
+import { RequireRoles } from '@feature/auth/check-page-required-roles-before-page-load/RequireRoles'
 import { AccessToken } from '@feature/auth/try-to-log-in-without-prompt/AccessToken'
 import { Logout } from '@feature/auth/log-out/Logout'
 import { LoadQuotation } from '@feature/quotation/load-quotation'
