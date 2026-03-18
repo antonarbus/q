@@ -3,7 +3,7 @@ import { TextEditor } from '@shared/component/TextEditor'
 import { getState } from '@shared/lib/redux'
 import { useRef } from 'react'
 import type { Editor } from '@tiptap/react'
-import { onChangePriceTitleAtPriceBlock } from '@feature/blocks/on-change-price-title-at-price-block/onChangePriceTitleAtPriceBlock'
+import { onChangePriceTitleAtPriceBlock } from '@feature/blocks/on-text-change/on-change-price-title-at-price-block/onChangePriceTitleAtPriceBlock'
 import { getRegistryKey } from '@shared/lib/tiptap/editorRegistry'
 
 export const PriceTitle = (): React.JSX.Element => {

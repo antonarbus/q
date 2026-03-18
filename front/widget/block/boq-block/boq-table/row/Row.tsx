@@ -7,10 +7,10 @@ import { PriceCell } from './cell/PriceCell'
 import { QtyCell } from './cell/QtyCell'
 import { RowActionButtonsLayout } from './RowActionButtonsLayout'
 import { RowLayout } from './RowLayout'
-import { CopyRowIcon } from '@feature/blocks/copy-row/CopyRowIcon'
-import { CutRowIcon } from '@feature/blocks/cut-row/CutRowIcon'
-import { DeleteRowIcon } from '@feature/blocks/delete-row/DeleteRowIcon'
-import { DragRowIcon } from '@feature/blocks/drag-row/DragRowIcon'
+import { CopyRowIcon } from '@feature/blocks/copy-item/CopyRowIcon'
+import { CutRowIcon } from '@feature/blocks/cut-item/CutRowIcon'
+import { DeleteRowIcon } from '@feature/blocks/delete-item/DeleteRowIcon'
+import { DragRowIcon } from '@feature/blocks/drag-item/DragRowIcon'
 
 type Props = {
   onBlur: (e: React.FocusEvent<HTMLDivElement>) => void

@@ -6,7 +6,7 @@ import { arrayShapesEqualityFn } from '@shared/util/arrayShapesEqualityFn'
 import {
   onRowDragEnd,
   onRowDragStart,
-} from '@feature/blocks/drag-row/onRowDrag'
+} from '@feature/blocks/drag-item/onRowDrag'
 
 type Props = {
   children: React.ReactNode

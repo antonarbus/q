@@ -6,8 +6,8 @@ import type { PriceBlock } from '@back/entity/quotation/schema'
 import { generateId } from '@front/shared/lib/nanoid'
 import { dispatch, getState } from '@shared/lib/redux'
 
-export const insertPriceBlock = (event?: React.MouseEvent): void => {
-  const block: PriceBlock = {
+export const copyPriceBlockTemplate = (event?: React.MouseEvent): void => {
+  const priceBlockTemplate: PriceBlock = {
     id: generateId(),
     bookmarkSchemaVersion: 2,
     name: '',
@@ -31,7 +31,10 @@ export const insertPriceBlock = (event?: React.MouseEvent): void => {
   }
 
   dispatch(
-    copySlice.actions.addItem({ item: block, preview: priceBlockPreviewHtml }),
+    copySlice.actions.addItem({
+      item: priceBlockTemplate,
+      preview: priceBlockPreviewHtml,
+    }),
   )
 
   const isCopyModalVisible = getState().copy.isVisible

@@ -5,15 +5,15 @@ import { cls } from '@shared/cls'
 import { ItemActionButtonsLayout } from '@shared/layout/ItemActionButtonsLayout'
 import { BoqHeader } from './boq-header'
 import { BoqTable } from './boq-table'
-import { CopyBlockIcon } from '@feature/blocks/copy-block/CopyBlockIcon'
-import { CutBlockIcon } from '@feature/blocks/cut-block/CutBlockIcon'
-import { DeleteBlockIcon } from '@feature/blocks/delete-block/DeleteBlockIcon'
-import { DragBlockIcon } from '@feature/blocks/drag-block/DragBlockIcon'
+import { CopyBlockIcon } from '@feature/blocks/copy-item/CopyBlockIcon'
+import { CutBlockIcon } from '@feature/blocks/cut-item/CutBlockIcon'
+import { DeleteBlockIcon } from '@feature/blocks/delete-item/DeleteBlockIcon'
+import { DragBlockIcon } from '@feature/blocks/drag-item/DragBlockIcon'
 import {
   onBoqBlockResize,
   onBoqBlockResizeStart,
   onBoqBlockResizeStop,
-} from '@feature/blocks/resize-boq-block/onBoqBlockResize'
+} from '@feature/blocks/resize/resize-boq-block/onBoqBlockResize'
 
 export const BoqBlock = (): React.JSX.Element => {
   return (

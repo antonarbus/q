@@ -5,11 +5,11 @@ import { cls } from '@shared/cls'
 import { ItemActionButtonsLayout } from '@shared/layout/ItemActionButtonsLayout'
 import { PriceHeader } from './total-price-header/TotalPriceHeader'
 import { PriceMain } from './total-price-main/TotalPriceMain'
-import { CopyBlockIcon } from '@feature/blocks/copy-block/CopyBlockIcon'
-import { CutBlockIcon } from '@feature/blocks/cut-block/CutBlockIcon'
-import { DeleteBlockIcon } from '@feature/blocks/delete-block/DeleteBlockIcon'
-import { DragBlockIcon } from '@feature/blocks/drag-block/DragBlockIcon'
-import { onPriceBlockResizeStop } from '@feature/blocks/resize-price-block/onPriceBlockResize'
+import { CopyBlockIcon } from '@feature/blocks/copy-item/CopyBlockIcon'
+import { CutBlockIcon } from '@feature/blocks/cut-item/CutBlockIcon'
+import { DeleteBlockIcon } from '@feature/blocks/delete-item/DeleteBlockIcon'
+import { DragBlockIcon } from '@feature/blocks/drag-item/DragBlockIcon'
+import { onPriceBlockResizeStop } from '@feature/blocks/resize/resize-price-block/onPriceBlockResize'
 
 export const TotalPriceBlock = (): React.JSX.Element => {
   return (

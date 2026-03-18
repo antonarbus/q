@@ -7,7 +7,7 @@ import {
   onBoqBlockResize,
   onBoqBlockResizeStart,
   onBoqBlockResizeStop,
-} from '@feature/blocks/resize-boq-block/onBoqBlockResize'
+} from '@feature/blocks/resize/resize-boq-block/onBoqBlockResize'
 
 export const BookmarkedRowBlock = (): React.JSX.Element => {
   return (

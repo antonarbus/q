@@ -6,7 +6,7 @@ import { useRef } from 'react'
 import { ResizableColumn } from '../ResizableColumn'
 import { TextEditor } from '@shared/component/TextEditor'
 import type { Editor } from '@tiptap/react'
-import { onChangeTableHeaderCellAtBoqBlock } from '@feature/blocks/on-change-table-header-cell-at-boq-block/onChangeTableHeaderCellAtBoqBlock'
+import { onChangeTableHeaderCellAtBoqBlock } from '@feature/blocks/on-text-change/on-change-table-header-cell-at-boq-block/onChangeTableHeaderCellAtBoqBlock'
 import { getRegistryKey } from '@shared/lib/tiptap/editorRegistry'
 
 export const QtyColumn = (): React.JSX.Element => {

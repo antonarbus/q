@@ -10,15 +10,15 @@ import { cls } from '@shared/cls'
 import { ItemActionButtonsLayout } from '@shared/layout/ItemActionButtonsLayout'
 import { useRef } from 'react'
 import type { Editor } from '@tiptap/react'
-import { CopyBlockIcon } from '@feature/blocks/copy-block/CopyBlockIcon'
-import { CutBlockIcon } from '@feature/blocks/cut-block/CutBlockIcon'
-import { DeleteBlockIcon } from '@feature/blocks/delete-block/DeleteBlockIcon'
-import { DragBlockIcon } from '@feature/blocks/drag-block/DragBlockIcon'
+import { CopyBlockIcon } from '@feature/blocks/copy-item/CopyBlockIcon'
+import { CutBlockIcon } from '@feature/blocks/cut-item/CutBlockIcon'
+import { DeleteBlockIcon } from '@feature/blocks/delete-item/DeleteBlockIcon'
+import { DragBlockIcon } from '@feature/blocks/drag-item/DragBlockIcon'
 import {
   onTextBlockResizeStart,
   onTextBlockResizeStop,
-} from '@feature/blocks/resize-text-block/onTextBlockResize'
-import { onChangeTextBlock } from '@feature/blocks/on-change-text-block/onChangeTextBlock'
+} from '@feature/blocks/resize/resize-text-block/onTextBlockResize'
+import { onChangeTextBlock } from '@feature/blocks/on-text-change/on-change-text-block/onChangeTextBlock'
 import { getRegistryKey } from '@shared/lib/tiptap/editorRegistry'
 
 export const TextBlock = (): React.JSX.Element => {

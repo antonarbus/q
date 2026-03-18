@@ -8,8 +8,8 @@ import type { RowBlock } from '@back/entity/quotation/schema'
 import { generateId } from '@front/shared/lib/nanoid'
 import { dispatch, getState } from '@shared/lib/redux'
 
-export const insertRow = (event?: React.MouseEvent): void => {
-  const row: RowBlock = {
+export const copyRowBlockTemplate = (event?: React.MouseEvent): void => {
+  const rowTemplate: RowBlock = {
     id: generateId(),
     bookmarkSchemaVersion: 2,
     name: '',
@@ -56,7 +56,12 @@ export const insertRow = (event?: React.MouseEvent): void => {
     },
   }
 
-  dispatch(copySlice.actions.addItem({ item: row, preview: rowPreviewHtml }))
+  dispatch(
+    copySlice.actions.addItem({
+      item: rowTemplate,
+      preview: rowPreviewHtml,
+    }),
+  )
 
   const isCopyModalVisible = getState().copy.isVisible
 

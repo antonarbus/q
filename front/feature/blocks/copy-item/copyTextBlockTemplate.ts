@@ -5,8 +5,8 @@ import type { TextBlock } from '@back/entity/quotation/schema'
 import { generateId } from '@front/shared/lib/nanoid'
 import { dispatch, getState } from '@shared/lib/redux'
 
-export const insertTextBlock = (event?: React.MouseEvent): void => {
-  const block: TextBlock = {
+export const copyTextBlockTemplate = (event?: React.MouseEvent): void => {
+  const textBlockTemplate: TextBlock = {
     id: generateId(),
     bookmarkSchemaVersion: 2,
     name: '',
@@ -26,7 +26,10 @@ export const insertTextBlock = (event?: React.MouseEvent): void => {
   }
 
   dispatch(
-    copySlice.actions.addItem({ item: block, preview: textBlockPreviewHtml }),
+    copySlice.actions.addItem({
+      item: textBlockTemplate,
+      preview: textBlockPreviewHtml,
+    }),
   )
 
   const isCopyModalVisible = getState().copy.isVisible

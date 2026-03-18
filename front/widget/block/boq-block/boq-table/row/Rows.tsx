@@ -10,7 +10,7 @@ import { RowAnimate } from './RowAnimate'
 import { RowSortable } from './RowSortable'
 import { RowsLayout } from './RowsLayout'
 import { RowsSortableContext } from './RowsSortableContext'
-import { hidePinsOnRowBlur } from '@feature/blocks/hide-row-pins/hidePinsOnRowBlur'
+import { hidePinsOnRowBlur } from '@feature/blocks/pin/hide-row-pins/hidePinsOnRowBlur'
 
 export const Rows = (): React.JSX.Element => {
   const block = useBlock()

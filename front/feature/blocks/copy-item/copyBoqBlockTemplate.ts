@@ -23,8 +23,8 @@ import type { BoqBlock } from '@back/entity/quotation/schema'
 import { generateId } from '@front/shared/lib/nanoid'
 import { dispatch, getState } from '@shared/lib/redux'
 
-export const insertBoqBlock = (event?: React.MouseEvent): void => {
-  const boqBlock: BoqBlock = {
+export const copyBoqBlockTemplate = (event?: React.MouseEvent): void => {
+  const boqBlockTemplate: BoqBlock = {
     id: generateId(),
     bookmarkSchemaVersion: 2,
     name: '',
@@ -221,7 +221,10 @@ export const insertBoqBlock = (event?: React.MouseEvent): void => {
   }
 
   dispatch(
-    copySlice.actions.addItem({ item: boqBlock, preview: boqBlockPreviewHtml }),
+    copySlice.actions.addItem({
+      item: boqBlockTemplate,
+      preview: boqBlockPreviewHtml,
+    }),
   )
 
   const isCopyModalVisible = getState().copy.isVisible

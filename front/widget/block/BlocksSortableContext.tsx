@@ -1,7 +1,7 @@
 import {
   onBlockDragEnd,
   onBlockDragStart,
-} from '@feature/blocks/drag-block/onBlockDrag'
+} from '@feature/blocks/drag-item/onBlockDrag'
 import { DragDropContext, Droppable } from '@hello-pangea/dnd'
 import { getState } from '@shared/lib/redux'
 

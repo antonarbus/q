@@ -1,8 +1,8 @@
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { getPriceBlockHtmlFromStore } from '@entity/quotation/redux/getter/getPriceBlockHtmlFromStore'
 import { TextEditor } from '@shared/component/TextEditor'
-import { onFocusOutFromTotalPrice } from '@feature/blocks/on-focus-out-from-price-value-at-price-block/onFocusOutFromTotalPrice'
-import { onChangePriceValueAtPriceBlock } from '@feature/blocks/on-change-price-value-at-price-block/onChangePriceValueAtPriceBlock'
+import { onFocusOutFromTotalPrice } from '@feature/blocks/on-text-focus-out/on-focus-out-from-price-value-at-price-block/onFocusOutFromTotalPrice'
+import { onChangePriceValueAtPriceBlock } from '@feature/blocks/on-text-change/on-change-price-value-at-price-block/onChangePriceValueAtPriceBlock'
 import { getRegistryKey } from '@shared/lib/tiptap/editorRegistry'
 
 export const PriceValue = (): React.JSX.Element => {

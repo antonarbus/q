@@ -1,5 +1,5 @@
 import type { Quotation } from '@back/entity/quotation/schema'
-import { CopyBookmarkButtonAtTable } from '@feature/bookmark/copy-bookmark-at-table/CopyBookmarkButtonAtTable'
+import { CopyBookmarkButtonAtTable } from '@feature/bookmark/copy-bookmark/CopyBookmarkButtonAtTable'
 import { DeleteBookmarkButton } from '@feature/bookmark/delete-bookmark/DeleteBookmarkButton'
 import { OpenBookmarkModalButton } from '@feature/open-close/open-bookmark-modal'
 import { Box } from '@mui/material'

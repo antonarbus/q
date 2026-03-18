@@ -5,7 +5,7 @@ import type { HeaderKey } from '@back/entity/quotation/schema'
 import { useRef } from 'react'
 import { TextEditor } from '@shared/component/TextEditor'
 import type { Editor } from '@tiptap/react'
-import { onChangeSubtotalTextAtBoqBlock } from '@feature/blocks/on-change-subtotal-text-at-boq-block/onChangeSubtotalTextAtBoqBlock'
+import { onChangeSubtotalTextAtBoqBlock } from '@feature/blocks/on-text-change/on-change-subtotal-text-at-boq-block/onChangeSubtotalTextAtBoqBlock'
 import { getRegistryKey } from '@shared/lib/tiptap/editorRegistry'
 const boqHeaderKey: HeaderKey = 'subtotalText'
 

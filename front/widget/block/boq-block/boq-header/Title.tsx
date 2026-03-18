@@ -5,7 +5,7 @@ import type { HeaderKey } from '@back/entity/quotation/schema'
 import { useRef } from 'react'
 import { TextEditor } from '@shared/component/TextEditor'
 import type { Editor } from '@tiptap/react'
-import { onChangeTitleAtBoqBlock } from '@feature/blocks/on-change-title-at-boq-block/onChangeTitleAtBoqBlock'
+import { onChangeTitleAtBoqBlock } from '@feature/blocks/on-text-change/on-change-title-at-boq-block/onChangeTitleAtBoqBlock'
 import { getRegistryKey } from '@shared/lib/tiptap/editorRegistry'
 const boqHeaderKey: HeaderKey = 'title'
 
