@@ -7,6 +7,8 @@ import {
 } from '@shared/lib/tiptap/editorRegistry'
 import { getStringWithNewFormattedNumber } from '@shared/util/getStringWithNewFormattedNumber'
 import { roundTo } from 'round-to'
+import { validatePrices } from './validatePrices'
+import { recalculateTotalPrices } from '@entity/quotation/util/recalculateTotalPrices'
 
 type Props = {
   blockIndex: number
@@ -54,4 +56,10 @@ export const onFocusOutFromSubtotalPrice = (props: Props): void => {
   subTotalPriceEditor.commands.setContent(newHtml, {
     emitUpdate: false,
   })
+
+  validatePrices({
+    blockIndex: props.blockIndex,
+  })
+
+  recalculateTotalPrices()
 }

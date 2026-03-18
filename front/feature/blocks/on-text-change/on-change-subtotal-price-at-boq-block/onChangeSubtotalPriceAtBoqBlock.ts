@@ -2,7 +2,6 @@ import { getBoqHeaderFromStore } from '@entity/quotation/redux/getter/getBoqHead
 import { getRowFromStore } from '@entity/quotation/redux/getter/getRowFromStore'
 import { getRowsFromStore } from '@entity/quotation/redux/getter/getRowsFromStore'
 import { updateBoqHeaderAtStore } from '@entity/quotation/redux/updater/updateBoqHeaderAtStore'
-import type { RowBlock } from '@back/entity/quotation/schema'
 import { recalculateTotalPrices } from '@entity/quotation/util/recalculateTotalPrices'
 import { updateCellWithValue } from '@entity/quotation/util/updateCellWithValue'
 import { updateSubTotalPriceWithValue } from '@entity/quotation/util/updateSubTotalPriceWithValue'
@@ -194,30 +193,6 @@ export const onChangeSubtotalPriceAtBoqBlock = (props: Props): void => {
         value: newItemPriceValueRounded,
       })
     }
-  })
-
-  const rowsUpdated = getRowsFromStore({ blockIndex: props.blockIndex })
-
-  if (rowsUpdated === undefined) {
-    return
-  }
-
-  const subTotalPriceValueNew: number = rowsUpdated.reduce(
-    (accumulator: number, row: RowBlock) => {
-      const price = row.price.value
-
-      return accumulator + price
-    },
-    0,
-  )
-
-  const subTotalPriceValueNewRounded = roundTo(subTotalPriceValueNew, 2)
-
-  updateSubTotalPriceWithValue({
-    blockIndex: props.blockIndex,
-    subTotalPriceEditor,
-    value: subTotalPriceValueNewRounded,
-    incrementally: true,
   })
 
   recalculateTotalPrices()

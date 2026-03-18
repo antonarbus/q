@@ -7,7 +7,6 @@ import { TextEditor } from '@shared/component/TextEditor'
 import { showHidePricePins } from '@feature/blocks/pin/show-hide-pins-in-price-column/showHidePricePins'
 import { onChangeSubtotalPriceAtBoqBlock } from '@feature/blocks/on-text-change/on-change-subtotal-price-at-boq-block/onChangeSubtotalPriceAtBoqBlock'
 import { onFocusOutFromSubtotalPrice } from '@feature/blocks/on-text-focus-out/on-focus-out-from-subtotal-price-at-boq-block/onFocusOutFromSubtotalPrice'
-import { validatePrices } from '@feature/blocks/on-text-focus-out/on-focus-out-from-subtotal-price-at-boq-block/validatePrices'
 import { getRegistryKey } from '@shared/lib/tiptap/editorRegistry'
 const boqHeaderKey: HeaderKey = 'subTotalPrice'
 
@@ -44,10 +43,6 @@ export const SubTotalPrice = (): React.JSX.Element => {
       }}
       onBlur={() => {
         onFocusOutFromSubtotalPrice({
-          blockIndex: block.index,
-        })
-
-        validatePrices({
           blockIndex: block.index,
         })
       }}
