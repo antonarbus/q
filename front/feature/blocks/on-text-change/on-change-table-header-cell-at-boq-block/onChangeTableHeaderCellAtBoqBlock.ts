@@ -1,24 +1,25 @@
 import type { BoqColumnKey } from '@back/entity/quotation/schema'
 import { updateColumnCellAtStore } from '@entity/quotation/redux/updater/updateColumnCellAtStore'
-import { editorRegistry, getRegistryKey } from '@shared/lib/tiptap/editorRegistry'
+import {
+  editorRegistry,
+  getRegistryKey,
+} from '@shared/lib/tiptap/editorRegistry'
 
 type Props = {
   blockIndex: number
   boqColumnKey: BoqColumnKey
+  editorName:
+    | 'boqBlockDescriptionColumn'
+    | 'boqBlockQtyColumn'
+    | 'boqBlockPriceColumn'
+    | 'boqBlockItemPriceColumn'
 }
-
-const editorNameByColumnKey = {
-  description: 'boqBlockDescriptionColumn',
-  qty: 'boqBlockQtyColumn',
-  price: 'boqBlockPriceColumn',
-  itemPrice: 'boqBlockItemPriceColumn',
-} as const
 
 export const onChangeTableHeaderCellAtBoqBlock = (props: Props): void => {
   const editor =
     editorRegistry.get(
       getRegistryKey({
-        editorName: editorNameByColumnKey[props.boqColumnKey],
+        editorName: props.editorName,
         blockIndex: props.blockIndex,
         rowIndex: null,
       }),

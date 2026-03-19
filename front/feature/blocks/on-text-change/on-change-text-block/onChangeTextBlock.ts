@@ -1,6 +1,9 @@
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { dispatch, getState } from '@shared/lib/redux'
-import { editorRegistry, getRegistryKey } from '@shared/lib/tiptap/editorRegistry'
+import {
+  editorRegistry,
+  getRegistryKey,
+} from '@shared/lib/tiptap/editorRegistry'
 
 type Props = {
   blockIndex: number

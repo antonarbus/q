@@ -34,6 +34,7 @@ export const DescriptionColumn = (): React.ReactNode => {
           onChangeTableHeaderCellAtBoqBlock({
             blockIndex: block.index,
             boqColumnKey: 'description',
+            editorName: 'boqBlockDescriptionColumn',
           })
         }}
         sx={{

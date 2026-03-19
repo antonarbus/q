@@ -1,6 +1,9 @@
 import { updateBoqHeaderAtStore } from '@entity/quotation/redux/updater/updateBoqHeaderAtStore'
 import type { HeaderKey } from '@back/entity/quotation/schema'
-import { editorRegistry, getRegistryKey } from '@shared/lib/tiptap/editorRegistry'
+import {
+  editorRegistry,
+  getRegistryKey,
+} from '@shared/lib/tiptap/editorRegistry'
 
 type Props = {
   blockIndex: number

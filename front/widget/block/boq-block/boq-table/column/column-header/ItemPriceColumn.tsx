@@ -34,6 +34,7 @@ export const ItemPriceColumn = (): React.JSX.Element => {
           onChangeTableHeaderCellAtBoqBlock({
             blockIndex: block.index,
             boqColumnKey: 'itemPrice',
+            editorName: 'boqBlockItemPriceColumn',
           })
         }}
         sx={columnHeaderStyle}

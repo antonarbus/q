@@ -12,7 +12,6 @@ import { pinPriceCell } from '@feature/blocks/pin/pin-price-cell/pinPriceCell'
 import { onTabAwayFromPriceCell } from '@feature/blocks/on-cell-tab-away/on-tab-away-from-price-cell/onTabAwayFromPriceCell'
 import { onChangePriceCellAtBoqBlock } from '@feature/blocks/on-text-change/on-change-price-cell-at-boq-block/onChangePriceCellAtBoqBlock'
 import { onFocusOutFromPriceCell } from '@feature/blocks/on-text-focus-out/on-focus-out-from-price-cell-at-boq-block/onFocusOutFromPriceCell'
-import { validatePrice } from '@feature/blocks/on-text-focus-out/on-focus-out-from-price-cell-at-boq-block/validatePrice'
 import { getRegistryKey } from '@shared/lib/tiptap/editorRegistry'
 
 export const PriceCell = (): React.JSX.Element => {
@@ -50,11 +49,6 @@ export const PriceCell = (): React.JSX.Element => {
         }}
         onFocusOut={() => {
           onFocusOutFromPriceCell({
-            blockIndex: block.index,
-            rowIndex: row.index,
-          })
-
-          validatePrice({
             blockIndex: block.index,
             rowIndex: row.index,
           })
