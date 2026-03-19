@@ -1,7 +1,7 @@
 import { copySlice } from '@entity/copy/copySlice'
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { useRow } from '@entity/quotation/provider/RowProvider'
-import { getRowFromStore } from '@entity/quotation/redux/getter/getRowFromStore'
+import { getRowFromStoreByIndex } from '@entity/quotation/redux/getter/getRowFromStoreByIndex'
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/cls'
@@ -51,7 +51,7 @@ export const CopyRowIcon = (): React.JSX.Element => {
               }),
             )
 
-            const rowFromStore = getRowFromStore({
+            const rowFromStore = getRowFromStoreByIndex({
               blockIndex: block.index,
               rowIndex: row.index,
             })

@@ -1,6 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { Quotation, RowBlock } from '@back/entity/quotation/schema'
-import { getBoqBlockFromState } from '../../getter/getBoqBlockFromState'
+import { getBoqBlockFromStateByIndex } from '../../getter/getBoqBlockFromStateByIndex'
 
 export const reOrderRows = (
   state: Quotation,
@@ -9,7 +9,7 @@ export const reOrderRows = (
     reOrderedRows: RowBlock[]
   }>,
 ): Quotation | undefined => {
-  const boqBlock = getBoqBlockFromState({
+  const boqBlock = getBoqBlockFromStateByIndex({
     blockIndex: action.payload.blockIndex,
     state,
   })

@@ -1,4 +1,4 @@
-import { getRowFromStore } from '@entity/quotation/redux/getter/getRowFromStore'
+import { getRowFromStoreByIndex } from '@entity/quotation/redux/getter/getRowFromStoreByIndex'
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { dispatch } from '@shared/lib/redux'
 
@@ -8,7 +8,7 @@ type Props = {
 }
 
 export const showRowPins = (props: Props): void => {
-  const row = getRowFromStore({
+  const row = getRowFromStoreByIndex({
     blockIndex: props.blockIndex,
     rowIndex: props.rowIndex,
   })

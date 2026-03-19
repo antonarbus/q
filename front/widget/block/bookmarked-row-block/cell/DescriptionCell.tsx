@@ -1,7 +1,7 @@
 import { BOOKMARK_POS_AT_BLOCKS } from '@entity/quotation/const/bookmarkPosAtBlocks'
 import { columnMinWidth } from '@entity/quotation/const/columnMinWidth'
 import { useStylesForResizableCell } from '@entity/quotation/hook/useStylesForResizableCell'
-import { getBookmarkedRowCellHtmlFromStore } from '@entity/quotation/redux/getter/getBookmarkedRowCellHtmlFromStore'
+import { getHtmlOfBookmarkedRowCellFromStoreByIndex } from '@entity/quotation/redux/getter/getHtmlOfBookmarkedRowCellFromStoreByIndex'
 import { cellStyle } from '@entity/quotation/style/cellStyle'
 import { onChangeDescriptionCellAtBookmarkBlock } from '@feature/blocks/on-text-change/on-change-description-cell-at-bookmark-block/onChangeDescriptionCellAtBookmarkBlock'
 import { upload } from '@feature/file/upload-file'
@@ -25,7 +25,7 @@ export const DescriptionCell = (): React.JSX.Element => {
       className='td description'
       placeholder='Description...'
       contentGetter={() =>
-        getBookmarkedRowCellHtmlFromStore({ cellKey: 'description' })
+        getHtmlOfBookmarkedRowCellFromStoreByIndex({ cellKey: 'description' })
       }
       onUpdate={() => {
         onChangeDescriptionCellAtBookmarkBlock()

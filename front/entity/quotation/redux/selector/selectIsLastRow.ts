@@ -1,5 +1,5 @@
 import type { RootState } from '@shared/lib/redux'
-import { getRowsFromStore } from '../getter/getRowsFromStore'
+import { getRowsFromStoreByIndex } from '../getter/getRowsFromStoreByIndex'
 
 type Props = {
   blockIndex: number
@@ -8,7 +8,7 @@ type Props = {
 export const selectIsLastRow =
   ({ blockIndex }: Props) =>
   (state: RootState): boolean => {
-    const rows = getRowsFromStore({ blockIndex })
+    const rows = getRowsFromStoreByIndex({ blockIndex })
 
     if (rows === undefined) {
       return false

@@ -2,7 +2,7 @@ import type { CellKey } from '@back/entity/quotation/schema'
 import { dispatch } from '@shared/lib/redux'
 import { getNumberFromString } from '@shared/util/getNumberFromString'
 import { getTextContentFromHtml } from '@shared/util/getTextContentFromHtml'
-import { getRowFromStore } from '../getter/getRowFromStore'
+import { getRowFromStoreByIndex } from '../getter/getRowFromStoreByIndex'
 import { quotationSlice } from '../quotationSlice'
 
 type Props = {
@@ -17,7 +17,7 @@ type Res = {
 }
 
 export const updateCellAtStore = (props: Props): Res => {
-  const row = getRowFromStore({
+  const row = getRowFromStoreByIndex({
     blockIndex: props.blockIndex,
     rowIndex: props.rowIndex,
   })

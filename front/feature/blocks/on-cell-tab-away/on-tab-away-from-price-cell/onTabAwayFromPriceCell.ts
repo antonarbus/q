@@ -1,4 +1,4 @@
-import { getRowsFromStore } from '@entity/quotation/redux/getter/getRowsFromStore'
+import { getRowsFromStoreByIndex } from '@entity/quotation/redux/getter/getRowsFromStoreByIndex'
 import {
   editorRegistry,
   getRegistryKey,
@@ -14,7 +14,7 @@ export const onTabAwayFromPriceCell = (props: Props): boolean => {
   const isTabKey = props.event.key === 'Tab'
 
   if (isTabKey === true) {
-    const rows = getRowsFromStore({ blockIndex: props.blockIndex })
+    const rows = getRowsFromStoreByIndex({ blockIndex: props.blockIndex })
     const rowCount = rows?.length ?? 0
     const isLastRow = rowCount === props.rowIndex + 1
 

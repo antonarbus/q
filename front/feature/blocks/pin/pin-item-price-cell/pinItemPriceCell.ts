@@ -1,4 +1,4 @@
-import { getCellFromStore } from '@entity/quotation/redux/getter/getCellFromStore'
+import { getCellFromStoreByIndex } from '@entity/quotation/redux/getter/getCellFromStoreByIndex'
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { dispatch } from '@shared/lib/redux'
 
@@ -8,7 +8,7 @@ type Props = {
 }
 
 export const pinItemPriceCell = (props: Props): void => {
-  const itemPrice = getCellFromStore({
+  const itemPrice = getCellFromStoreByIndex({
     blockIndex: props.blockIndex,
     rowIndex: props.rowIndex,
     cellKey: 'itemPrice',

@@ -1,5 +1,5 @@
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
-import { getBlockFromStore } from '@entity/quotation/redux/getter/getBlockFromStore'
+import { getBlockFromStoreByIndex } from '@entity/quotation/redux/getter/getBlockFromStoreByIndex'
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/cls'
@@ -42,7 +42,7 @@ export const BookmarkBlockIcon = (): React.ReactNode => {
               return
             }
 
-            const blockFromStore = getBlockFromStore({
+            const blockFromStore = getBlockFromStoreByIndex({
               blockIndex: block.index,
             })
 

@@ -3,7 +3,7 @@ import { updateNumberAtHtml } from '@shared/lib/tiptap/util/updateNumberAtHtml'
 import { updateNumberAtHtmlIncrementally } from '@shared/lib/tiptap/util/updateNumberAtHtmlIncrementally'
 import { dispatch } from '@shared/lib/redux'
 import { getStringWithNewFormattedNumber } from '@shared/util/getStringWithNewFormattedNumber'
-import { getBoqBlockFromStore } from '../redux/getter/getBoqBlockFromStore'
+import { getBoqBlockFromStoreByIndex } from '../redux/getter/getBoqBlockFromStoreByIndex'
 import { quotationSlice } from '../redux/quotationSlice'
 
 type Props = {
@@ -24,7 +24,7 @@ export const updateSubTotalPriceWithValue = (props: Props): Res => {
     }
   }
 
-  const boqBlock = getBoqBlockFromStore({ blockIndex: props.blockIndex })
+  const boqBlock = getBoqBlockFromStoreByIndex({ blockIndex: props.blockIndex })
 
   if (boqBlock === undefined) {
     return {

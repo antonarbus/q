@@ -1,5 +1,5 @@
 import { columnMinWidth } from '@entity/quotation/const/columnMinWidth'
-import { getBoqColumnFromStore } from '@entity/quotation/redux/getter/getBoqColumnFromStore'
+import { getBoqColumnFromStoreByIndex } from '@entity/quotation/redux/getter/getBoqColumnFromStoreByIndex'
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import type {
   OnBlockResize,
@@ -57,7 +57,7 @@ export const onBoqBlockResize: OnBlockResize = (props) => {
 
   // description column
 
-  const descriptionColumn = getBoqColumnFromStore({
+  const descriptionColumn = getBoqColumnFromStoreByIndex({
     blockIndex: props.blockIndex,
     boqColumnKey: 'description',
   })
@@ -86,7 +86,7 @@ export const onBoqBlockResize: OnBlockResize = (props) => {
 
     // number column
 
-    const numberColumn = getBoqColumnFromStore({
+    const numberColumn = getBoqColumnFromStoreByIndex({
       blockIndex: props.blockIndex,
       boqColumnKey: 'number',
     })
@@ -113,7 +113,7 @@ export const onBoqBlockResize: OnBlockResize = (props) => {
 
     // itemPrice column
 
-    const itemPriceColumn = getBoqColumnFromStore({
+    const itemPriceColumn = getBoqColumnFromStoreByIndex({
       blockIndex: props.blockIndex,
       boqColumnKey: 'itemPrice',
     })
@@ -142,7 +142,7 @@ export const onBoqBlockResize: OnBlockResize = (props) => {
 
     // qty column
 
-    const qtyColumn = getBoqColumnFromStore({
+    const qtyColumn = getBoqColumnFromStoreByIndex({
       blockIndex: props.blockIndex,
       boqColumnKey: 'qty',
     })
@@ -173,7 +173,7 @@ export const onBoqBlockResize: OnBlockResize = (props) => {
 
     // price column
 
-    const priceColumn = getBoqColumnFromStore({
+    const priceColumn = getBoqColumnFromStoreByIndex({
       blockIndex: props.blockIndex,
       boqColumnKey: 'price',
     })

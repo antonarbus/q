@@ -1,6 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { Quotation } from '@back/entity/quotation/schema'
-import { getRowFromState } from '../../getter/getRowFromState'
+import { getRowFromStateByIndex } from '../../getter/getRowFromStateByIndex'
 
 export const updateRowHeightAndWidth = (
   state: Quotation,
@@ -11,7 +11,7 @@ export const updateRowHeightAndWidth = (
     width: number
   }>,
 ): void => {
-  const row = getRowFromState({
+  const row = getRowFromStateByIndex({
     blockIndex: action.payload.blockIndex,
     rowIndex: action.payload.rowIndex,
     state,

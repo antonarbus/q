@@ -1,6 +1,6 @@
-import { getBoqHeaderFromStore } from '@entity/quotation/redux/getter/getBoqHeaderFromStore'
-import { getRowFromStore } from '@entity/quotation/redux/getter/getRowFromStore'
-import { getRowsFromStore } from '@entity/quotation/redux/getter/getRowsFromStore'
+import { getBoqHeaderFromStoreByIndex } from '@entity/quotation/redux/getter/getBoqHeaderFromStoreByIndex'
+import { getRowFromStoreByIndex } from '@entity/quotation/redux/getter/getRowFromStoreByIndex'
+import { getRowsFromStoreByIndex } from '@entity/quotation/redux/getter/getRowsFromStoreByIndex'
 import { updateBoqHeaderAtStore } from '@entity/quotation/redux/updater/updateBoqHeaderAtStore'
 import { recalculateTotalPrices } from '@entity/quotation/util/recalculateTotalPrices'
 import { updateCellWithValue } from '@entity/quotation/util/updateCellWithValue'
@@ -31,7 +31,7 @@ export const onChangeSubtotalPriceAtBoqBlock = (props: Props): void => {
     return
   }
 
-  const rows = getRowsFromStore({ blockIndex: props.blockIndex })
+  const rows = getRowsFromStoreByIndex({ blockIndex: props.blockIndex })
 
   if (rows === undefined) {
     return
@@ -55,7 +55,7 @@ export const onChangeSubtotalPriceAtBoqBlock = (props: Props): void => {
     return accumulator
   }, 0)
 
-  const subTotalPriceFromStore = getBoqHeaderFromStore({
+  const subTotalPriceFromStore = getBoqHeaderFromStoreByIndex({
     blockIndex: props.blockIndex,
     boqHeaderKey: 'subTotalPrice',
   })
@@ -140,7 +140,10 @@ export const onChangeSubtotalPriceAtBoqBlock = (props: Props): void => {
       value: price.newValue,
     })
 
-    const row = getRowFromStore({ blockIndex: props.blockIndex, rowIndex })
+    const row = getRowFromStoreByIndex({
+      blockIndex: props.blockIndex,
+      rowIndex,
+    })
 
     const isItemPricePinned = row?.itemPrice.pin.isPinned
 

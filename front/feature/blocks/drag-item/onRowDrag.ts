@@ -1,5 +1,5 @@
 import type { DragStart, DropResult } from '@hello-pangea/dnd'
-import { getRowsFromStore } from '@entity/quotation/redux/getter/getRowsFromStore'
+import { getRowsFromStoreByIndex } from '@entity/quotation/redux/getter/getRowsFromStoreByIndex'
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { dispatch } from '@shared/lib/redux'
 import { arrayMoveImmutable } from 'array-move'
@@ -25,7 +25,7 @@ export const onRowDragEnd =
 
     const oldIndex = dropResult.source.index
     const newIndex = dropResult.destination.index
-    const rows = getRowsFromStore({ blockIndex })
+    const rows = getRowsFromStoreByIndex({ blockIndex })
 
     if (rows === undefined) {
       return

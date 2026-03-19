@@ -1,7 +1,7 @@
 import { getNumberFromString } from '@shared/util/getNumberFromString'
 import { getTextContentFromHtml } from '@shared/util/getTextContentFromHtml'
 import { roundTo } from 'round-to'
-import { getRowFromStore } from '../redux/getter/getRowFromStore'
+import { getRowFromStoreByIndex } from '../redux/getter/getRowFromStoreByIndex'
 
 type Props = {
   blockIndex: number
@@ -10,7 +10,7 @@ type Props = {
 }
 
 export const isRowPriceValid = (props: Props): boolean => {
-  const row = getRowFromStore({
+  const row = getRowFromStoreByIndex({
     blockIndex: props.blockIndex,
     rowIndex: props.rowIndex,
   })

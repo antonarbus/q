@@ -1,4 +1,4 @@
-import { getBoqBlockFromStore } from '@entity/quotation/redux/getter/getBoqBlockFromStore'
+import { getBoqBlockFromStoreByIndex } from '@entity/quotation/redux/getter/getBoqBlockFromStoreByIndex'
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { dispatch } from '@shared/lib/redux'
 import {
@@ -28,7 +28,7 @@ export const onFocusOutFromSubtotalPrice = (props: Props): void => {
     return
   }
 
-  const boqBlock = getBoqBlockFromStore({ blockIndex: props.blockIndex })
+  const boqBlock = getBoqBlockFromStoreByIndex({ blockIndex: props.blockIndex })
 
   if (boqBlock === undefined) {
     return

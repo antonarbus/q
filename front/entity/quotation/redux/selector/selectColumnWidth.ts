@@ -1,6 +1,6 @@
 import type { BoqColumnKey } from '@back/entity/quotation/schema'
 import type { RootState } from '@shared/lib/redux'
-import { getBoqBlockFromStore } from '../getter/getBoqBlockFromStore'
+import { getBoqBlockFromStoreByIndex } from '../getter/getBoqBlockFromStoreByIndex'
 
 type Props = {
   blockIndex: number
@@ -10,7 +10,7 @@ type Props = {
 export const selectColumnWidth =
   ({ blockIndex, boqColumnKey }: Props) =>
   (_state: RootState): number => {
-    const boqBlock = getBoqBlockFromStore({ blockIndex })
+    const boqBlock = getBoqBlockFromStoreByIndex({ blockIndex })
 
     if (boqBlock === undefined) {
       return 0

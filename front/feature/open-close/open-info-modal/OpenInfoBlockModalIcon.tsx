@@ -1,5 +1,5 @@
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
-import { getBlockFromStore } from '@entity/quotation/redux/getter/getBlockFromStore'
+import { getBlockFromStoreByIndex } from '@entity/quotation/redux/getter/getBlockFromStoreByIndex'
 
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/cls'
@@ -30,7 +30,7 @@ export const OpenInfoBlockModalIcon = (): React.ReactNode => {
               return
             }
 
-            const item = getBlockFromStore({ blockIndex: block.index })
+            const item = getBlockFromStoreByIndex({ blockIndex: block.index })
 
             if (item === undefined) {
               return

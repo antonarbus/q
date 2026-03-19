@@ -1,6 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { Quotation } from '@back/entity/quotation/schema'
-import { getBoqBlockFromState } from '../../getter/getBoqBlockFromState'
+import { getBoqBlockFromStateByIndex } from '../../getter/getBoqBlockFromStateByIndex'
 
 export const updateSubTotalPrice = (
   state: Quotation,
@@ -10,7 +10,7 @@ export const updateSubTotalPrice = (
     html: string
   }>,
 ): void => {
-  const boqBlock = getBoqBlockFromState({
+  const boqBlock = getBoqBlockFromStateByIndex({
     blockIndex: action.payload.blockIndex,
     state,
   })

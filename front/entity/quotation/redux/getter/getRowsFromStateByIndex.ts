@@ -1,13 +1,15 @@
 import type { Quotation, RowBlock } from '@back/entity/quotation/schema'
-import { getBoqBlockFromState } from './getBoqBlockFromState'
+import { getBoqBlockFromStateByIndex } from './getBoqBlockFromStateByIndex'
 
 type Props = {
   blockIndex: number
   state: Quotation
 }
 
-export const getRowsFromState = (props: Props): RowBlock[] | undefined => {
-  const boqBlock = getBoqBlockFromState({
+export const getRowsFromStateByIndex = (
+  props: Props,
+): RowBlock[] | undefined => {
+  const boqBlock = getBoqBlockFromStateByIndex({
     blockIndex: props.blockIndex,
     state: props.state,
   })

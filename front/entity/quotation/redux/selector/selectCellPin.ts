@@ -1,6 +1,6 @@
 import type { CellKey, CellPin } from '@back/entity/quotation/schema'
 import type { RootState } from '@shared/lib/redux'
-import { getRowFromStore } from '../getter/getRowFromStore'
+import { getRowFromStoreByIndex } from '../getter/getRowFromStoreByIndex'
 
 type Props = {
   blockIndex: number
@@ -11,7 +11,7 @@ type Props = {
 export const selectCellPin =
   ({ blockIndex, rowIndex, cellKey }: Props) =>
   (_state: RootState): CellPin | undefined => {
-    const row = getRowFromStore({ blockIndex, rowIndex })
+    const row = getRowFromStoreByIndex({ blockIndex, rowIndex })
 
     if (row === undefined) {
       return

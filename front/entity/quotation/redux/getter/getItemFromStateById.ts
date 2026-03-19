@@ -5,7 +5,7 @@ type Props = {
   state: Quotation
 }
 
-export const getFromState = (
+export const getItemFromStateById = (
   props: Props,
 ): Quotation | BlockItem | undefined => {
   const quotationWithSameId = props.state.id === props.id

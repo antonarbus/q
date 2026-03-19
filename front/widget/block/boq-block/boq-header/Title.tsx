@@ -1,5 +1,5 @@
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
-import { getBoqHeaderHtmlFromStore } from '@entity/quotation/redux/getter/getBoqHeaderHtmlFromStore'
+import { getHtmlOfBoqHeaderFromStoreByIndex } from '@entity/quotation/redux/getter/getHtmlOfBoqHeaderFromStoreByIndex'
 import { titleCellStyle } from '@entity/quotation/style/titleCellStyle'
 import type { HeaderKey } from '@back/entity/quotation/schema'
 import { useRef } from 'react'
@@ -23,7 +23,10 @@ export const Title = (): React.JSX.Element => {
       className='title'
       placeholder='Title...'
       contentGetter={() =>
-        getBoqHeaderHtmlFromStore({ blockIndex: block.index, boqHeaderKey })
+        getHtmlOfBoqHeaderFromStoreByIndex({
+          blockIndex: block.index,
+          boqHeaderKey,
+        })
       }
       onUpdate={() => {
         onChangeTitleAtBoqBlock({

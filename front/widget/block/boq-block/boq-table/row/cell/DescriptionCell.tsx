@@ -2,7 +2,7 @@ import { columnMinWidth } from '@entity/quotation/const/columnMinWidth'
 import { useStylesForResizableCell } from '@entity/quotation/hook/useStylesForResizableCell'
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { useRow } from '@entity/quotation/provider/RowProvider'
-import { getCellHtmlFromStore } from '@entity/quotation/redux/getter/getCellHtmlFromStore'
+import { getHtmlOfCellFromStoreByIndex } from '@entity/quotation/redux/getter/getHtmlOfCellFromStoreByIndex'
 import { cellStyle } from '@entity/quotation/style/cellStyle'
 import { onChangeDescriptionCellAtBoqBlock } from '@feature/blocks/on-text-change/on-change-description-cell-at-boq-block/onChangeDescriptionCellAtBoqBlock'
 import { onTabAwayFromDescriptionCell } from '@feature/blocks/on-cell-tab-away/on-tab-away-from-description-cell/onTabAwayFromDescriptionCell'
@@ -30,7 +30,7 @@ export const DescriptionCell = (): React.JSX.Element => {
       className='td description'
       placeholder='Description...'
       contentGetter={() =>
-        getCellHtmlFromStore({
+        getHtmlOfCellFromStoreByIndex({
           blockIndex: block.index,
           cellKey: 'description',
           rowIndex: row.index,

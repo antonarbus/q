@@ -1,5 +1,5 @@
 import type { Quotation, Cell, CellKey } from '@back/entity/quotation/schema'
-import { getRowFromState } from './getRowFromState'
+import { getRowFromStateByIndex } from './getRowFromStateByIndex'
 
 type Props = {
   blockIndex: number
@@ -8,8 +8,8 @@ type Props = {
   state: Quotation
 }
 
-export const getCellFromState = (props: Props): Cell | undefined => {
-  const row = getRowFromState({
+export const getCellFromStateByIndex = (props: Props): Cell | undefined => {
+  const row = getRowFromStateByIndex({
     blockIndex: props.blockIndex,
     rowIndex: props.rowIndex,
     state: props.state,

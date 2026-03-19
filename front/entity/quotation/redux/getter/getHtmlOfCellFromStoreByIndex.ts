@@ -7,7 +7,7 @@ type Props = {
   cellKey: CellKey
 }
 
-export const getCellHtmlFromStore = (props: Props): string => {
+export const getHtmlOfCellFromStoreByIndex = (props: Props): string => {
   const block = getState().quotation.blocks[props.blockIndex]
 
   if (block?.type !== 'boq') {

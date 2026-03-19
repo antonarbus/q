@@ -1,4 +1,4 @@
-import { getItemFromStore } from '@entity/quotation/redux/getter/getFromStore'
+import { getItemFromStoreById } from '@entity/quotation/redux/getter/getItemFromStoreById'
 import type { InfoFormValues } from '@entity/quotation/form/types'
 import { useSignal } from '@preact/signals-react'
 import { useParams } from 'react-router-dom'
@@ -17,7 +17,7 @@ export const useInfoFormValues = (): Res => {
   }
 
   useEffectOnce(() => {
-    const item = getItemFromStore({
+    const item = getItemFromStoreById({
       id: urlParams.bookmarkId ?? urlParams.quotationId ?? 'new',
     })
 

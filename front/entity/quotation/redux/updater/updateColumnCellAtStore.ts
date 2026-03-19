@@ -1,6 +1,6 @@
 import type { BoqColumnKey } from '@back/entity/quotation/schema'
 import { dispatch } from '@shared/lib/redux'
-import { getBoqBlockFromStore } from '../getter/getBoqBlockFromStore'
+import { getBoqBlockFromStoreByIndex } from '../getter/getBoqBlockFromStoreByIndex'
 import { quotationSlice } from '../quotationSlice'
 import type { EditorRef } from '@shared/lib/tiptap/types'
 
@@ -15,7 +15,7 @@ export const updateColumnCellAtStore = (props: Props): void => {
     return
   }
 
-  const boqBlock = getBoqBlockFromStore({ blockIndex: props.blockIndex })
+  const boqBlock = getBoqBlockFromStoreByIndex({ blockIndex: props.blockIndex })
 
   if (boqBlock === undefined) {
     return

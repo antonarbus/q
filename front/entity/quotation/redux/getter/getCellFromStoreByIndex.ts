@@ -1,5 +1,5 @@
 import type { CellKey, Cell } from '@back/entity/quotation/schema'
-import { getRowFromStore } from './getRowFromStore'
+import { getRowFromStoreByIndex } from './getRowFromStoreByIndex'
 
 type Props = {
   blockIndex: number
@@ -7,8 +7,8 @@ type Props = {
   cellKey: CellKey
 }
 
-export const getCellFromStore = (props: Props): Cell | undefined => {
-  const row = getRowFromStore({
+export const getCellFromStoreByIndex = (props: Props): Cell | undefined => {
+  const row = getRowFromStoreByIndex({
     blockIndex: props.blockIndex,
     rowIndex: props.rowIndex,
   })

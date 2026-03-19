@@ -1,5 +1,5 @@
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
-import { getPriceBlockHtmlFromStore } from '@entity/quotation/redux/getter/getPriceBlockHtmlFromStore'
+import { getHtmlOfPriceBlockFromStoreByIndex } from '@entity/quotation/redux/getter/getHtmlOfPriceBlockFromStoreByIndex'
 import { TextEditor } from '@shared/component/TextEditor'
 import { onFocusOutFromTotalPrice } from '@feature/blocks/on-text-focus-out/on-focus-out-from-price-value-at-price-block/onFocusOutFromTotalPrice'
 import { onChangePriceValueAtPriceBlock } from '@feature/blocks/on-text-change/on-change-price-value-at-price-block/onChangePriceValueAtPriceBlock'
@@ -18,7 +18,7 @@ export const PriceValue = (): React.JSX.Element => {
       className='price-value'
       placeholder='Total price...'
       contentGetter={() =>
-        getPriceBlockHtmlFromStore({ blockIndex: block.index })
+        getHtmlOfPriceBlockFromStoreByIndex({ blockIndex: block.index })
       }
       onUpdate={() => {
         onChangePriceValueAtPriceBlock({ blockIndex: block.index })

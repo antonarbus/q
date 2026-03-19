@@ -6,7 +6,7 @@ type Props = {
   boqHeaderKey: HeaderKey
 }
 
-export const getBoqHeaderHtmlFromStore = (props: Props): string => {
+export const getHtmlOfBoqHeaderFromStoreByIndex = (props: Props): string => {
   const block = getState().quotation.blocks[props.blockIndex]
 
   if (block?.type !== 'boq') {

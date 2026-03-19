@@ -1,6 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { Quotation } from '@back/entity/quotation/schema'
-import { getCellFromState } from '../../getter/getCellFromState'
+import { getCellFromStateByIndex } from '../../getter/getCellFromStateByIndex'
 
 export const pinPrice = (
   state: Quotation,
@@ -9,7 +9,7 @@ export const pinPrice = (
     rowIndex: number
   }>,
 ): void => {
-  const priceCell = getCellFromState({
+  const priceCell = getCellFromStateByIndex({
     blockIndex: action.payload.blockIndex,
     rowIndex: action.payload.rowIndex,
     cellKey: 'price',

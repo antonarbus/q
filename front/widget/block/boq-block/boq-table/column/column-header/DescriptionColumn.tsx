@@ -1,6 +1,6 @@
 import { columnMinWidth } from '@entity/quotation/const/columnMinWidth'
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
-import { getBoqColumnHtmlFromStore } from '@entity/quotation/redux/getter/getBoqColumnHtmlFromStore'
+import { getHtmlOfBoqColumnFromStoreByIndex } from '@entity/quotation/redux/getter/getHtmlOfBoqColumnFromStoreByIndex'
 import { columnHeaderStyle } from '@entity/quotation/style/columnHeaderStyle'
 import { useRef } from 'react'
 import { ResizableColumn } from '../ResizableColumn'
@@ -28,7 +28,7 @@ export const DescriptionColumn = (): React.ReactNode => {
         className='column-description'
         placeholder='Description...'
         contentGetter={() =>
-          getBoqColumnHtmlFromStore({
+          getHtmlOfBoqColumnFromStoreByIndex({
             blockIndex: block.index,
             boqColumnKey: 'description',
           })

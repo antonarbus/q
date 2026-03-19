@@ -4,7 +4,7 @@ import { getNumberFromString } from '@shared/util/getNumberFromString'
 import { getStringWithNewFormattedNumber } from '@shared/util/getStringWithNewFormattedNumber'
 import { getTextContentFromHtml } from '@shared/util/getTextContentFromHtml'
 import type { CellKey } from '@back/entity/quotation/schema'
-import { getRowFromStore } from '../redux/getter/getRowFromStore'
+import { getRowFromStoreByIndex } from '../redux/getter/getRowFromStoreByIndex'
 import { updateCellAtStore } from '../redux/updater/updateCellAtStore'
 
 type Props = {
@@ -20,7 +20,7 @@ export const updateCellWithValue = (props: Props): void => {
     return
   }
 
-  const row = getRowFromStore({
+  const row = getRowFromStoreByIndex({
     blockIndex: props.blockIndex,
     rowIndex: props.rowIndex,
   })

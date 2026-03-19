@@ -1,4 +1,4 @@
-import { getRowsFromStore } from '@entity/quotation/redux/getter/getRowsFromStore'
+import { getRowsFromStoreByIndex } from '@entity/quotation/redux/getter/getRowsFromStoreByIndex'
 import { isRowPriceValid } from '@entity/quotation/util/isRowPriceValid'
 import { recalculateSubTotalPrices } from '@entity/quotation/util/recalculateSubTotalPrices'
 import { updateCellWithValue } from '@entity/quotation/util/updateCellWithValue'
@@ -14,7 +14,7 @@ type Props = {
 }
 
 export const validatePrices = (props: Props): void => {
-  const rows = getRowsFromStore({ blockIndex: props.blockIndex })
+  const rows = getRowsFromStoreByIndex({ blockIndex: props.blockIndex })
 
   if (rows === undefined) {
     return

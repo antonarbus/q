@@ -1,6 +1,6 @@
 import type { CellKey, Quotation } from '@back/entity/quotation/schema'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { getCellFromState } from '../../getter/getCellFromState'
+import { getCellFromStateByIndex } from '../../getter/getCellFromStateByIndex'
 
 export const showCellPin = (
   state: Quotation,
@@ -10,7 +10,7 @@ export const showCellPin = (
     cellKey: CellKey
   }>,
 ): void => {
-  const cell = getCellFromState({
+  const cell = getCellFromStateByIndex({
     blockIndex: action.payload.blockIndex,
     rowIndex: action.payload.rowIndex,
     cellKey: action.payload.cellKey,

@@ -1,7 +1,7 @@
 import { BOOKMARK_POS_AT_BLOCKS } from '@entity/quotation/const/bookmarkPosAtBlocks'
 import { columnMinWidth } from '@entity/quotation/const/columnMinWidth'
 import { useStylesForResizableCell } from '@entity/quotation/hook/useStylesForResizableCell'
-import { getBookmarkedRowCellHtmlFromStore } from '@entity/quotation/redux/getter/getBookmarkedRowCellHtmlFromStore'
+import { getHtmlOfBookmarkedRowCellFromStoreByIndex } from '@entity/quotation/redux/getter/getHtmlOfBookmarkedRowCellFromStoreByIndex'
 import { cellStyle } from '@entity/quotation/style/cellStyle'
 import { onFocusOutFromQtyCell } from '@feature/blocks/on-text-focus-out/on-focus-out-from-qty-cell-at-bookmark-block/onFocusOutFromQtyCell'
 import { onChangeQtyCellAtBookmarkBlock } from '@feature/blocks/on-text-change/on-change-qty-cell-at-bookmark-block/onChangeQtyCellAtBookmarkBlock'
@@ -27,7 +27,7 @@ export const QtyCell = (): React.JSX.Element => {
         className='td qty'
         placeholder='Qty...'
         contentGetter={() =>
-          getBookmarkedRowCellHtmlFromStore({ cellKey: 'qty' })
+          getHtmlOfBookmarkedRowCellFromStoreByIndex({ cellKey: 'qty' })
         }
         onUpdate={(params) => {
           onChangeQtyCellAtBookmarkBlock()

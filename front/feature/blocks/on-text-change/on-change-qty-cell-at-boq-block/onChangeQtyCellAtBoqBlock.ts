@@ -1,4 +1,4 @@
-import { getRowFromStore } from '@entity/quotation/redux/getter/getRowFromStore'
+import { getRowFromStoreByIndex } from '@entity/quotation/redux/getter/getRowFromStoreByIndex'
 import { updateCellAtStore } from '@entity/quotation/redux/updater/updateCellAtStore'
 import { recalculateSubTotalPrices } from '@entity/quotation/util/recalculateSubTotalPrices'
 import { recalculateTotalPrices } from '@entity/quotation/util/recalculateTotalPrices'
@@ -35,7 +35,7 @@ export const onChangeQtyCellAtBoqBlock = (props: Props): void => {
     html: qtyCellEditor.getHTML(),
   })
 
-  const row = getRowFromStore({
+  const row = getRowFromStoreByIndex({
     blockIndex: props.blockIndex,
     rowIndex: props.rowIndex,
   })

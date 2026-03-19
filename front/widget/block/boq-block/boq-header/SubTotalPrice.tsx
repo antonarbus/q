@@ -1,5 +1,5 @@
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
-import { getBoqHeaderHtmlFromStore } from '@entity/quotation/redux/getter/getBoqHeaderHtmlFromStore'
+import { getHtmlOfBoqHeaderFromStoreByIndex } from '@entity/quotation/redux/getter/getHtmlOfBoqHeaderFromStoreByIndex'
 import { subTotalPriceCellStyle } from '@entity/quotation/style/subTotalPriceCellStyle'
 import type { HeaderKey } from '@back/entity/quotation/schema'
 import { useRef } from 'react'
@@ -31,7 +31,7 @@ export const SubTotalPrice = (): React.JSX.Element => {
       className='sub-total-price'
       placeholder='Price...'
       contentGetter={() =>
-        getBoqHeaderHtmlFromStore({
+        getHtmlOfBoqHeaderFromStoreByIndex({
           blockIndex: block.index,
           boqHeaderKey,
         })

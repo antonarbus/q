@@ -6,7 +6,7 @@ type Props = {
   boqColumnKey: BoqColumnKey
 }
 
-export const getBoqColumnHtmlFromStore = (props: Props): string => {
+export const getHtmlOfBoqColumnFromStoreByIndex = (props: Props): string => {
   const block = getState().quotation.blocks[props.blockIndex]
 
   if (block?.type !== 'boq') {

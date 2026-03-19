@@ -1,7 +1,7 @@
 import { BOOKMARK_POS_AT_BLOCKS } from '@entity/quotation/const/bookmarkPosAtBlocks'
 import { columnMinWidth } from '@entity/quotation/const/columnMinWidth'
 import { useStylesForResizableCell } from '@entity/quotation/hook/useStylesForResizableCell'
-import { getBookmarkedRowCellHtmlFromStore } from '@entity/quotation/redux/getter/getBookmarkedRowCellHtmlFromStore'
+import { getHtmlOfBookmarkedRowCellFromStoreByIndex } from '@entity/quotation/redux/getter/getHtmlOfBookmarkedRowCellFromStoreByIndex'
 import { cellStyle } from '@entity/quotation/style/cellStyle'
 import { onFocusOutFromItemPriceCell } from '@feature/blocks/on-text-focus-out/on-focus-out-from-item-price-cell-at-bookmark-block/onFocusOutFromItemPriceCell'
 import { onChangeItemPriceCellAtBookmarkBlock } from '@feature/blocks/on-text-change/on-change-item-price-cell-at-bookmark-block/onChangeItemPriceCellAtBookmarkBlock'
@@ -27,7 +27,7 @@ export const ItemPriceCell = (): React.JSX.Element => {
         className='td itemPrice'
         placeholder='Item price...'
         contentGetter={() =>
-          getBookmarkedRowCellHtmlFromStore({ cellKey: 'itemPrice' })
+          getHtmlOfBookmarkedRowCellFromStoreByIndex({ cellKey: 'itemPrice' })
         }
         onUpdate={() => {
           onChangeItemPriceCellAtBookmarkBlock()

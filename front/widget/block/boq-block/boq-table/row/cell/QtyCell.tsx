@@ -2,7 +2,7 @@ import { columnMinWidth } from '@entity/quotation/const/columnMinWidth'
 import { useStylesForResizableCell } from '@entity/quotation/hook/useStylesForResizableCell'
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { useRow } from '@entity/quotation/provider/RowProvider'
-import { getCellHtmlFromStore } from '@entity/quotation/redux/getter/getCellHtmlFromStore'
+import { getHtmlOfCellFromStoreByIndex } from '@entity/quotation/redux/getter/getHtmlOfCellFromStoreByIndex'
 import { cellStyle } from '@entity/quotation/style/cellStyle'
 import { Box } from '@mui/material'
 import { TextEditor } from '@shared/component/TextEditor'
@@ -34,7 +34,7 @@ export const QtyCell = (): React.JSX.Element => {
         className='td qty'
         placeholder='Qty...'
         contentGetter={() =>
-          getCellHtmlFromStore({
+          getHtmlOfCellFromStoreByIndex({
             blockIndex: block.index,
             rowIndex: row.index,
             cellKey: 'qty',

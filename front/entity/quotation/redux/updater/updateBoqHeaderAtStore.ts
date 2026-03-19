@@ -2,7 +2,7 @@ import { dispatch } from '@shared/lib/redux'
 import { getNumberFromString } from '@shared/util/getNumberFromString'
 import { getTextContentFromHtml } from '@shared/util/getTextContentFromHtml'
 import type { HeaderKey } from '@back/entity/quotation/schema'
-import { getBoqBlockFromStore } from '../getter/getBoqBlockFromStore'
+import { getBoqBlockFromStoreByIndex } from '../getter/getBoqBlockFromStoreByIndex'
 import { quotationSlice } from '../quotationSlice'
 import type { Editor } from '@tiptap/react'
 
@@ -21,7 +21,7 @@ export const updateBoqHeaderAtStore = (props: Props): Res => {
     return { didUpdate: false }
   }
 
-  const boqBlock = getBoqBlockFromStore({ blockIndex: props.blockIndex })
+  const boqBlock = getBoqBlockFromStoreByIndex({ blockIndex: props.blockIndex })
 
   if (boqBlock === undefined) {
     return { didUpdate: false }

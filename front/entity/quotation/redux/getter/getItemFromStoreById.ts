@@ -27,7 +27,7 @@ type Res =
     }
   | undefined
 
-export const getItemFromStore = (props: Props): Res => {
+export const getItemFromStoreById = (props: Props): Res => {
   const state = getState()
 
   if (state.quotation.id === props.id) {

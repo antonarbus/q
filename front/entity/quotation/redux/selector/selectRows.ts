@@ -1,6 +1,6 @@
 import type { RootState } from '@shared/lib/redux'
 import type { RowBlock } from '@back/entity/quotation/schema'
-import { getRowsFromStore } from '../getter/getRowsFromStore'
+import { getRowsFromStoreByIndex } from '../getter/getRowsFromStoreByIndex'
 
 type Props = {
   blockIndex: number
@@ -9,7 +9,7 @@ type Props = {
 export const selectRows =
   ({ blockIndex }: Props) =>
   (_state: RootState): RowBlock[] => {
-    const rows = getRowsFromStore({ blockIndex })
+    const rows = getRowsFromStoreByIndex({ blockIndex })
 
     if (rows === undefined) {
       return []

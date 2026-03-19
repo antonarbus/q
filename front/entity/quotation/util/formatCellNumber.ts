@@ -2,7 +2,7 @@ import { dispatch } from '@shared/lib/redux'
 import { getStringWithNewFormattedNumber } from '@shared/util/getStringWithNewFormattedNumber'
 import { roundTo } from 'round-to'
 import type { CellKey } from '@back/entity/quotation/schema'
-import { getRowFromStore } from '../redux/getter/getRowFromStore'
+import { getRowFromStoreByIndex } from '../redux/getter/getRowFromStoreByIndex'
 import { quotationSlice } from '../redux/quotationSlice'
 import type { Editor } from '@tiptap/react'
 
@@ -25,7 +25,7 @@ export const formatCellNumber = (props: Props): Res => {
     }
   }
 
-  const row = getRowFromStore({
+  const row = getRowFromStoreByIndex({
     blockIndex: props.blockIndex,
     rowIndex: props.rowIndex,
   })

@@ -6,7 +6,9 @@ type Props = {
   cellKey: CellKey
 }
 
-export const getBookmarkedRowCellHtmlFromStore = (props: Props): string => {
+export const getHtmlOfBookmarkedRowCellFromStoreByIndex = (
+  props: Props,
+): string => {
   const block = getState().quotation.blocks[BOOKMARK_POS_AT_BLOCKS]
 
   if (block?.type !== 'row') {

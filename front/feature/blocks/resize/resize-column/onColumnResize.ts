@@ -1,5 +1,5 @@
 import type { BoqColumnKey } from '@back/entity/quotation/schema'
-import { getBoqColumnFromStore } from '@entity/quotation/redux/getter/getBoqColumnFromStore'
+import { getBoqColumnFromStoreByIndex } from '@entity/quotation/redux/getter/getBoqColumnFromStoreByIndex'
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { cls } from '@shared/cls'
 import { dispatch } from '@shared/lib/redux'
@@ -31,7 +31,7 @@ export const onColumnResizeStart = (props: Props): void => {
 export const onColumnResize = (props: Props): void => {
   const width = props.headerColumnElement.clientWidth
 
-  const column = getBoqColumnFromStore({
+  const column = getBoqColumnFromStoreByIndex({
     blockIndex: props.blockIndex,
     boqColumnKey: props.boqColumnKey,
   })

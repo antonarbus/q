@@ -1,6 +1,6 @@
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { useRow } from '@entity/quotation/provider/RowProvider'
-import { getRowFromStore } from '@entity/quotation/redux/getter/getRowFromStore'
+import { getRowFromStoreByIndex } from '@entity/quotation/redux/getter/getRowFromStoreByIndex'
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/cls'
@@ -56,7 +56,7 @@ export const BookmarkRowIcon = (): React.ReactNode => {
               return
             }
 
-            const rowFromStore = getRowFromStore({
+            const rowFromStore = getRowFromStoreByIndex({
               rowIndex: row.index,
               blockIndex: block.index,
             })

@@ -1,6 +1,6 @@
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { useRow } from '@entity/quotation/provider/RowProvider'
-import { getRowFromStore } from '@entity/quotation/redux/getter/getRowFromStore'
+import { getRowFromStoreByIndex } from '@entity/quotation/redux/getter/getRowFromStoreByIndex'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/cls'
 import { route } from '@shared/lib/react-router-dom/route'
@@ -30,7 +30,7 @@ export const OpenInfoRowModalIcon = (): React.ReactNode => {
               return
             }
 
-            const rowFromStore = getRowFromStore({
+            const rowFromStore = getRowFromStoreByIndex({
               rowIndex: row.index,
               blockIndex: block.index,
             })

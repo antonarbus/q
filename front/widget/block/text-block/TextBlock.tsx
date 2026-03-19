@@ -1,5 +1,5 @@
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
-import { getTextBlockHtmlFromStore } from '@entity/quotation/redux/getter/getTextBlockHtmlFromStore'
+import { getHtmlOfTextBlockFromStoreByIndex } from '@entity/quotation/redux/getter/getHtmlOfTextBlockFromStoreByIndex'
 import { textItemCellStyle } from '@entity/quotation/style/textItemCellStyle'
 import { BlockComp } from '@entity/quotation/ui/BlockComp'
 import { upload } from '@feature/file/upload-file'
@@ -54,7 +54,7 @@ export const TextBlock = (): React.JSX.Element => {
         className='text'
         placeholder='Add text, tables, drop images, files, links, select to format...'
         contentGetter={() =>
-          getTextBlockHtmlFromStore({ blockIndex: block.index })
+          getHtmlOfTextBlockFromStoreByIndex({ blockIndex: block.index })
         }
         onUpdate={() => {
           onChangeTextBlock({ editorRef, blockIndex: block.index })

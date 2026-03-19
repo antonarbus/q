@@ -2,7 +2,7 @@ import { columnMinWidth } from '@entity/quotation/const/columnMinWidth'
 import { useStylesForResizableCell } from '@entity/quotation/hook/useStylesForResizableCell'
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { useRow } from '@entity/quotation/provider/RowProvider'
-import { getCellHtmlFromStore } from '@entity/quotation/redux/getter/getCellHtmlFromStore'
+import { getHtmlOfCellFromStoreByIndex } from '@entity/quotation/redux/getter/getHtmlOfCellFromStoreByIndex'
 import { cellStyle } from '@entity/quotation/style/cellStyle'
 import { showRowPins } from '@feature/blocks/pin/show-row-pins/showRowPins'
 import { Box } from '@mui/material'
@@ -36,7 +36,7 @@ export const PriceCell = (): React.JSX.Element => {
         className='td price'
         placeholder='Price...'
         contentGetter={() =>
-          getCellHtmlFromStore({
+          getHtmlOfCellFromStoreByIndex({
             blockIndex: block.index,
             cellKey: 'price',
             rowIndex: row.index,
