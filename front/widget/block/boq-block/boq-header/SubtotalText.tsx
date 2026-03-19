@@ -2,15 +2,12 @@ import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { getHtmlOfBoqHeaderFromStoreByIndex } from '@entity/quotation/redux/getter/getHtmlOfBoqHeaderFromStoreByIndex'
 import { subTotalTextCellStyle } from '@entity/quotation/style/subTotalTextCellStyle'
 import type { HeaderKey } from '@back/entity/quotation/schema'
-import { useRef } from 'react'
 import { TextEditor } from '@shared/component/TextEditor'
-import type { Editor } from '@tiptap/react'
 import { onChangeSubtotalTextAtBoqBlock } from '@feature/blocks/on-text-change/on-change-subtotal-text-at-boq-block/onChangeSubtotalTextAtBoqBlock'
 import { getRegistryKey } from '@shared/lib/tiptap/editorRegistry'
 const boqHeaderKey: HeaderKey = 'subtotalText'
 
 export const SubtotalText = (): React.JSX.Element => {
-  const editorRef = useRef<Editor | null>(null)
   const block = useBlock()
 
   return (
@@ -30,7 +27,6 @@ export const SubtotalText = (): React.JSX.Element => {
       }
       onChange={() => {
         onChangeSubtotalTextAtBoqBlock({
-          editorRef,
           blockIndex: block.index,
           boqHeaderKey,
         })

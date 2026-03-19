@@ -1,14 +1,22 @@
 import { quotationSlice } from '@entity/quotation/redux/quotationSlice'
 import { dispatch, getState } from '@shared/lib/redux'
-import type { EditorRef } from '@shared/lib/tiptap/types'
+import { editorRegistry, getRegistryKey } from '@shared/lib/tiptap/editorRegistry'
 
 type Props = {
-  editorRef: EditorRef
   blockIndex: number
 }
 
 export const onChangeTextBlock = (props: Props): void => {
-  if (props.editorRef.current === null) {
+  const editor =
+    editorRegistry.get(
+      getRegistryKey({
+        editorName: 'textBlock',
+        blockIndex: props.blockIndex,
+        rowIndex: null,
+      }),
+    ) ?? null
+
+  if (editor === null) {
     return
   }
 
@@ -19,7 +27,7 @@ export const onChangeTextBlock = (props: Props): void => {
   }
 
   const prevHtml = block.text.html
-  const html = props.editorRef.current.getHTML()
+  const html = editor.getHTML()
   const didTextChange = prevHtml !== html
 
   if (didTextChange === false) {

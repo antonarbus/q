@@ -2,16 +2,16 @@ import type { BoqColumnKey } from '@back/entity/quotation/schema'
 import { dispatch } from '@shared/lib/redux'
 import { getBoqBlockFromStoreByIndex } from '../getter/getBoqBlockFromStoreByIndex'
 import { quotationSlice } from '../quotationSlice'
-import type { EditorRef } from '@shared/lib/tiptap/types'
+import type { Editor } from '@tiptap/react'
 
 type Props = {
-  editorRef: EditorRef
+  editor: Editor | null
   blockIndex: number
   boqColumnKey: BoqColumnKey
 }
 
 export const updateColumnCellAtStore = (props: Props): void => {
-  if (props.editorRef.current === null) {
+  if (props.editor === null) {
     return
   }
 
@@ -22,7 +22,7 @@ export const updateColumnCellAtStore = (props: Props): void => {
   }
 
   const prevHtml = boqBlock.boq.column[props.boqColumnKey].html
-  const html = props.editorRef.current.getHTML()
+  const html = props.editor.getHTML()
   const didTextChange = prevHtml !== html
 
   if (didTextChange === false) {

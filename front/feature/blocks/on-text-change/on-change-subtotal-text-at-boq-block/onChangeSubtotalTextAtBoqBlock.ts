@@ -1,16 +1,24 @@
 import { updateBoqHeaderAtStore } from '@entity/quotation/redux/updater/updateBoqHeaderAtStore'
 import type { HeaderKey } from '@back/entity/quotation/schema'
-import type { EditorRef } from '@shared/lib/tiptap/types'
+import { editorRegistry, getRegistryKey } from '@shared/lib/tiptap/editorRegistry'
 
 type Props = {
-  editorRef: EditorRef
   blockIndex: number
   boqHeaderKey: HeaderKey
 }
 
 export const onChangeSubtotalTextAtBoqBlock = (props: Props): void => {
+  const editor =
+    editorRegistry.get(
+      getRegistryKey({
+        editorName: 'boqBlockSubtotalText',
+        blockIndex: props.blockIndex,
+        rowIndex: null,
+      }),
+    ) ?? null
+
   updateBoqHeaderAtStore({
-    editor: props.editorRef.current,
+    editor,
     blockIndex: props.blockIndex,
     boqHeaderKey: props.boqHeaderKey,
   })

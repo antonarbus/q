@@ -8,8 +8,6 @@ import { OpenInfoBlockModalIcon } from '@feature/open-close/open-info-modal'
 import { TextEditor } from '@shared/component/TextEditor'
 import { cls } from '@shared/cls'
 import { ItemActionButtonsLayout } from '@shared/layout/ItemActionButtonsLayout'
-import { useRef } from 'react'
-import type { Editor } from '@tiptap/react'
 import { CopyBlockIcon } from '@feature/blocks/copy-item/CopyBlockIcon'
 import { CutBlockIcon } from '@feature/blocks/cut-item/CutBlockIcon'
 import { DeleteBlockIcon } from '@feature/blocks/delete-item/DeleteBlockIcon'
@@ -22,7 +20,6 @@ import { onChangeTextBlock } from '@feature/blocks/on-text-change/on-change-text
 import { getRegistryKey } from '@shared/lib/tiptap/editorRegistry'
 
 export const TextBlock = (): React.JSX.Element => {
-  const editorRef = useRef<Editor | null>(null)
   const block = useBlock()
 
   return (
@@ -57,7 +54,7 @@ export const TextBlock = (): React.JSX.Element => {
           getHtmlOfTextBlockFromStoreByIndex({ blockIndex: block.index })
         }
         onChange={() => {
-          onChangeTextBlock({ editorRef, blockIndex: block.index })
+          onChangeTextBlock({ blockIndex: block.index })
         }}
         onUpload={upload}
         sx={textItemCellStyle}
