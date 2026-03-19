@@ -5,9 +5,7 @@ import {
   getRegistryKey,
 } from '@shared/lib/tiptap/editorRegistry'
 
-type Props = Record<string, never>
-
-export const onChangeDescriptionCellAtBookmarkBlock = (_props: Props): void => {
+export const onChangeDescriptionCellAtBookmarkBlock = (): void => {
   const editor =
     editorRegistry.get(
       getRegistryKey({

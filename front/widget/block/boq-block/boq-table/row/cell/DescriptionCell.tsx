@@ -36,14 +36,13 @@ export const DescriptionCell = (): React.JSX.Element => {
           rowIndex: row.index,
         })
       }
-      onUpdate={(params) => {
+      onUpdate={() => {
         onChangeDescriptionCellAtBoqBlock({
           blockIndex: block.index,
           cellKey: 'description',
           rowIndex: row.index,
         })
       }}
-      onUpload={upload}
       onKeyDown={(_view, event) =>
         onTabAwayFromDescriptionCell({
           event,
@@ -51,6 +50,7 @@ export const DescriptionCell = (): React.JSX.Element => {
           rowIndex: row.index,
         })
       }
+      onUpload={upload}
       sx={{
         ...stylesForResizableCell,
         ...cellStyle,

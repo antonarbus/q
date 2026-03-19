@@ -23,12 +23,9 @@ export const Title = (): React.JSX.Element => {
       className='title'
       placeholder='Title...'
       contentGetter={() =>
-        getBoqHeaderHtmlFromStore({
-          blockIndex: block.index,
-          boqHeaderKey,
-        })
+        getBoqHeaderHtmlFromStore({ blockIndex: block.index, boqHeaderKey })
       }
-      onUpdate={(params) => {
+      onUpdate={() => {
         onChangeTitleAtBoqBlock({
           blockIndex: block.index,
           boqHeaderKey,

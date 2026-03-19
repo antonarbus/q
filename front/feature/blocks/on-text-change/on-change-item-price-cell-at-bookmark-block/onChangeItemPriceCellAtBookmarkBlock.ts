@@ -8,9 +8,7 @@ import {
 } from '@shared/lib/tiptap/editorRegistry'
 import { roundTo } from 'round-to'
 
-type Props = Record<string, never>
-
-export const onChangeItemPriceCellAtBookmarkBlock = (_props: Props): void => {
+export const onChangeItemPriceCellAtBookmarkBlock = (): void => {
   const itemPriceCellEditor =
     editorRegistry.get(
       getRegistryKey({

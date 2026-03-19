@@ -33,7 +33,7 @@ export const DescriptionColumn = (): React.ReactNode => {
             boqColumnKey: 'description',
           })
         }
-        onUpdate={(params) => {
+        onUpdate={() => {
           onChangeTableHeaderCellAtBoqBlock({
             editorRef,
             blockIndex: block.index,

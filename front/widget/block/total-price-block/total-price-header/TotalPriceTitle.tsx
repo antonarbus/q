@@ -28,7 +28,7 @@ export const PriceTitle = (): React.JSX.Element => {
 
         return priceBlock.title.html
       }}
-      onUpdate={(params) => {
+      onUpdate={() => {
         onChangePriceTitleAtPriceBlock({
           editorRef,
           blockIndex: block.index,

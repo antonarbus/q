@@ -5,9 +5,7 @@ import {
   getRegistryKey,
 } from '@shared/lib/tiptap/editorRegistry'
 
-type Props = Record<string, never>
-
-export const onFocusOutFromQtyCell = (_props: Props): void => {
+export const onFocusOutFromQtyCell = (): void => {
   formatBookmarkedRowCellNumber({
     cellKey: 'qty',
     editor:

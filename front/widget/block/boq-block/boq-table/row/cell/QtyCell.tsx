@@ -40,7 +40,7 @@ export const QtyCell = (): React.JSX.Element => {
             cellKey: 'qty',
           })
         }
-        onUpdate={(params) => {
+        onUpdate={() => {
           onChangeQtyCellAtBoqBlock({
             blockIndex: block.index,
             rowIndex: row.index,
@@ -66,8 +66,7 @@ export const QtyCell = (): React.JSX.Element => {
       />
       <Pin
         cellKey='qty'
-        onClick={(event: React.MouseEvent) => {
-          event.preventDefault() // otherwise form is submitted (no idea why)
+        onClick={() => {
           pinQtyCell({ blockIndex: block.index, rowIndex: row.index })
         }}
       />

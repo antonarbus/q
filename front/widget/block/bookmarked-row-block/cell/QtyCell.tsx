@@ -30,10 +30,10 @@ export const QtyCell = (): React.JSX.Element => {
           getBookmarkedRowCellHtmlFromStore({ cellKey: 'qty' })
         }
         onUpdate={(params) => {
-          onChangeQtyCellAtBookmarkBlock({})
+          onChangeQtyCellAtBookmarkBlock()
         }}
         onBlur={() => {
-          onFocusOutFromQtyCell({})
+          onFocusOutFromQtyCell()
         }}
         sx={{
           ...stylesForResizableCell,

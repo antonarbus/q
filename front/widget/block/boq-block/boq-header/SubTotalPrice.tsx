@@ -36,15 +36,11 @@ export const SubTotalPrice = (): React.JSX.Element => {
           boqHeaderKey,
         })
       }
-      onUpdate={(params) => {
-        onChangeSubtotalPriceAtBoqBlock({
-          blockIndex: block.index,
-        })
+      onUpdate={() => {
+        onChangeSubtotalPriceAtBoqBlock({ blockIndex: block.index })
       }}
       onBlur={() => {
-        onFocusOutFromSubtotalPrice({
-          blockIndex: block.index,
-        })
+        onFocusOutFromSubtotalPrice({ blockIndex: block.index })
       }}
       onWrapperClick={(event: React.MouseEvent) => {
         showHidePricePins({

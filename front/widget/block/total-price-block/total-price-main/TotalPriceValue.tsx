@@ -20,10 +20,6 @@ export const PriceValue = (): React.JSX.Element => {
       contentGetter={() =>
         getPriceBlockHtmlFromStore({ blockIndex: block.index })
       }
-      onCreate={() => {
-        // probably just to revalidate total price, has some issue with incorrect values, not sure
-        onFocusOutFromTotalPrice({ blockIndex: block.index })
-      }}
       onUpdate={() => {
         onChangePriceValueAtPriceBlock({ blockIndex: block.index })
       }}

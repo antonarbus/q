@@ -29,11 +29,11 @@ export const ItemPriceCell = (): React.JSX.Element => {
         contentGetter={() =>
           getBookmarkedRowCellHtmlFromStore({ cellKey: 'itemPrice' })
         }
-        onUpdate={(params) => {
-          onChangeItemPriceCellAtBookmarkBlock({})
+        onUpdate={() => {
+          onChangeItemPriceCellAtBookmarkBlock()
         }}
         onBlur={() => {
-          onFocusOutFromItemPriceCell({})
+          onFocusOutFromItemPriceCell()
         }}
         sx={{
           ...stylesForResizableCell,

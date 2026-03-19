@@ -42,7 +42,7 @@ export const PriceCell = (): React.JSX.Element => {
             rowIndex: row.index,
           })
         }
-        onUpdate={(params) => {
+        onUpdate={() => {
           onChangePriceCellAtBoqBlock({
             blockIndex: block.index,
             rowIndex: row.index,
@@ -76,8 +76,7 @@ export const PriceCell = (): React.JSX.Element => {
       />
       <Pin
         cellKey='price'
-        onClick={(event: React.MouseEvent) => {
-          event.preventDefault() // otherwise form is submitted (no idea why)
+        onClick={() => {
           pinPriceCell({ blockIndex: block.index, rowIndex: row.index })
         }}
       />
