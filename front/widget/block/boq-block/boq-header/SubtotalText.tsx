@@ -28,7 +28,7 @@ export const SubtotalText = (): React.JSX.Element => {
           boqHeaderKey,
         })
       }
-      onUpdate={() => {
+      onChange={() => {
         onChangeSubtotalTextAtBoqBlock({
           editorRef,
           blockIndex: block.index,

@@ -20,10 +20,10 @@ export const PriceValue = (): React.JSX.Element => {
       contentGetter={() =>
         getHtmlOfPriceBlockFromStoreByIndex({ blockIndex: block.index })
       }
-      onUpdate={() => {
+      onChange={() => {
         onChangePriceValueAtPriceBlock({ blockIndex: block.index })
       }}
-      onBlur={() => {
+      onFocusOut={() => {
         onFocusOutFromTotalPrice({ blockIndex: block.index })
       }}
       sx={{

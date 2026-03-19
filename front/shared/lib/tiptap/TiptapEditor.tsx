@@ -25,8 +25,8 @@ export const TiptapEditor = (): React.ReactNode => {
       extensions,
       content: tiptapCtx.contentGetter(),
       onCreate: tiptapCtx.onCreate,
-      onUpdate: tiptapCtx.onUpdate,
-      onBlur: tiptapCtx.onBlur,
+      onUpdate: tiptapCtx.onChange,
+      onBlur: tiptapCtx.onFocusOut,
       editorProps: {
         attributes: {
           class: cls.tiptapEditor,

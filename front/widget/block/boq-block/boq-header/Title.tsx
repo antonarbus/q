@@ -28,7 +28,7 @@ export const Title = (): React.JSX.Element => {
           boqHeaderKey,
         })
       }
-      onUpdate={() => {
+      onChange={() => {
         onChangeTitleAtBoqBlock({
           blockIndex: block.index,
           boqHeaderKey,

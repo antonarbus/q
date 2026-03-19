@@ -56,7 +56,7 @@ export const TextBlock = (): React.JSX.Element => {
         contentGetter={() =>
           getHtmlOfTextBlockFromStoreByIndex({ blockIndex: block.index })
         }
-        onUpdate={() => {
+        onChange={() => {
           onChangeTextBlock({ editorRef, blockIndex: block.index })
         }}
         onUpload={upload}

@@ -13,8 +13,8 @@ type Props = {
   sx: CSSObject
   contentGetter: () => string
   onCreate?: (props: EditorEvents['create']) => void
-  onUpdate: (props: EditorEvents['update']) => void
-  onBlur?: (props: EditorEvents['blur']) => void
+  onChange: (props: EditorEvents['update']) => void
+  onFocusOut?: (props: EditorEvents['blur']) => void
   onKeyDown?: (view: EditorView, event: KeyboardEvent) => boolean
   onWrapperClick?: (event: React.MouseEvent) => void
   onWrapperFocus?: (event: React.FocusEvent) => void

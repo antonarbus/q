@@ -36,7 +36,7 @@ export const DescriptionCell = (): React.JSX.Element => {
           rowIndex: row.index,
         })
       }
-      onUpdate={() => {
+      onChange={() => {
         onChangeDescriptionCellAtBoqBlock({
           blockIndex: block.index,
           cellKey: 'description',

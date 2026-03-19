@@ -42,13 +42,13 @@ export const PriceCell = (): React.JSX.Element => {
             rowIndex: row.index,
           })
         }
-        onUpdate={() => {
+        onChange={() => {
           onChangePriceCellAtBoqBlock({
             blockIndex: block.index,
             rowIndex: row.index,
           })
         }}
-        onBlur={() => {
+        onFocusOut={() => {
           onFocusOutFromPriceCell({
             blockIndex: block.index,
             rowIndex: row.index,

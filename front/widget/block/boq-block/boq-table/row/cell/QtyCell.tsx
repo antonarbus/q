@@ -40,13 +40,13 @@ export const QtyCell = (): React.JSX.Element => {
             cellKey: 'qty',
           })
         }
-        onUpdate={() => {
+        onChange={() => {
           onChangeQtyCellAtBoqBlock({
             blockIndex: block.index,
             rowIndex: row.index,
           })
         }}
-        onBlur={() => {
+        onFocusOut={() => {
           onFocusOutFromQtyCell({
             blockIndex: block.index,
             rowIndex: row.index,

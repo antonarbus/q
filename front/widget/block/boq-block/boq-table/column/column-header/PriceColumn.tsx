@@ -33,7 +33,7 @@ export const PriceColumn = (): React.JSX.Element => {
             boqColumnKey: 'price',
           })
         }
-        onUpdate={() => {
+        onChange={() => {
           onChangeTableHeaderCellAtBoqBlock({
             blockIndex: block.index,
             boqColumnKey: 'price',

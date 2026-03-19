@@ -27,7 +27,7 @@ export const DescriptionCell = (): React.JSX.Element => {
       contentGetter={() =>
         getHtmlOfBookmarkedRowCellFromStoreByIndex({ cellKey: 'description' })
       }
-      onUpdate={() => {
+      onChange={() => {
         onChangeDescriptionCellAtBookmarkBlock()
       }}
       onUpload={upload}

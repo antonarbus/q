@@ -29,10 +29,10 @@ export const PriceCell = (): React.JSX.Element => {
         contentGetter={() =>
           getHtmlOfBookmarkedRowCellFromStoreByIndex({ cellKey: 'price' })
         }
-        onUpdate={() => {
+        onChange={() => {
           onChangePriceCellAtBookmarkBlock()
         }}
-        onBlur={() => {
+        onFocusOut={() => {
           onFocusOutFromPriceCell()
         }}
         sx={{

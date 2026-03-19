@@ -29,10 +29,10 @@ export const QtyCell = (): React.JSX.Element => {
         contentGetter={() =>
           getHtmlOfBookmarkedRowCellFromStoreByIndex({ cellKey: 'qty' })
         }
-        onUpdate={(params) => {
+        onChange={(params) => {
           onChangeQtyCellAtBookmarkBlock()
         }}
-        onBlur={() => {
+        onFocusOut={() => {
           onFocusOutFromQtyCell()
         }}
         sx={{
