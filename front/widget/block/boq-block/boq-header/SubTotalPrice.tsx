@@ -1,12 +1,14 @@
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { getHtmlOfBoqHeaderFromStoreByIndex } from '@entity/quotation/redux/getter/getHtmlOfBoqHeaderFromStoreByIndex'
+import { recalculateTotalPrices } from '@entity/quotation/util/recalculateTotalPrices'
 import { subTotalPriceCellStyle } from '@entity/quotation/style/subTotalPriceCellStyle'
 import type { HeaderKey } from '@back/entity/quotation/schema'
 import { useRef } from 'react'
 import { TextEditor } from '@shared/component/TextEditor'
 import { showHidePricePins } from '@feature/blocks/pin/show-hide-pins-in-price-column/showHidePricePins'
-import { onChangeSubtotalPriceAtBoqBlock } from '@feature/blocks/on-text-change/on-change-subtotal-price-at-boq-block/onChangeSubtotalPriceAtBoqBlock'
-import { onFocusOutFromSubtotalPrice } from '@feature/blocks/on-text-focus-out/on-focus-out-from-subtotal-price-at-boq-block/onFocusOutFromSubtotalPrice'
+import { redistributePricesAtBoqBlock } from '@feature/blocks/redistribute-prices-at-boq-block/redistributePricesAtBoqBlock'
+import { formatSubtotalPriceAtBoqBlock } from '@feature/blocks/format-subtotal-price-at-boq-block/formatSubtotalPriceAtBoqBlock'
+import { validatePricesAtBoqBlock } from '@feature/blocks/validate-prices-at-boq-block/validatePricesAtBoqBlock'
 import { getRegistryKey } from '@shared/lib/tiptap/editorRegistry'
 const boqHeaderKey: HeaderKey = 'subTotalPrice'
 
@@ -37,10 +39,18 @@ export const SubTotalPrice = (): React.JSX.Element => {
         })
       }
       onChange={() => {
-        onChangeSubtotalPriceAtBoqBlock({ blockIndex: block.index })
+        redistributePricesAtBoqBlock({ blockIndex: block.index })
+        recalculateTotalPrices()
       }}
       onFocusOut={() => {
-        onFocusOutFromSubtotalPrice({ blockIndex: block.index })
+        const didFormat = formatSubtotalPriceAtBoqBlock({
+          blockIndex: block.index,
+        })
+
+        if (didFormat === true) {
+          validatePricesAtBoqBlock({ blockIndex: block.index })
+          recalculateTotalPrices()
+        }
       }}
       onWrapperClick={(event: React.MouseEvent) => {
         showHidePricePins({

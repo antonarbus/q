@@ -4,13 +4,15 @@ import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { useRow } from '@entity/quotation/provider/RowProvider'
 import { getHtmlOfCellFromStoreByIndex } from '@entity/quotation/redux/getter/getHtmlOfCellFromStoreByIndex'
 import { cellStyle } from '@entity/quotation/style/cellStyle'
+import { recalculateSubTotalPrices } from '@entity/quotation/util/recalculateSubTotalPrices'
+import { recalculateTotalPrices } from '@entity/quotation/util/recalculateTotalPrices'
 import { Box } from '@mui/material'
 import { TextEditor } from '@shared/component/TextEditor'
 import { Pin } from './Pin'
 import { pinItemPriceCell } from '@feature/blocks/pin/pin-item-price-cell/pinItemPriceCell'
-import { onTabAwayFromItemPriceCell } from '@feature/blocks/on-cell-tab-away/on-tab-away-from-item-price-cell/onTabAwayFromItemPriceCell'
-import { onChangeItemPriceCellAtBoqBlock } from '@feature/blocks/on-text-change/on-change-item-price-cell-at-boq-block/onChangeItemPriceCellAtBoqBlock'
-import { onFocusOutFromItemPriceCell } from '@feature/blocks/on-text-focus-out/on-focus-out-from-item-price-cell-at-boq-block/onFocusOutFromItemPriceCell'
+import { focusQtyCellAtBoqBlock } from '@feature/blocks/focus-qty-cell-at-boq-block/focusQtyCellAtBoqBlock'
+import { updateItemPriceCellAtBoqBlock } from '@feature/blocks/update-item-price-cell-at-boq-block/updateItemPriceCellAtBoqBlock'
+import { formatItemPriceCellAtBoqBlock } from '@feature/blocks/format-item-price-cell-at-boq-block/formatItemPriceCellAtBoqBlock'
 import { getRegistryKey } from '@shared/lib/tiptap/editorRegistry'
 
 export const ItemPriceCell = (): React.JSX.Element => {
@@ -41,24 +43,37 @@ export const ItemPriceCell = (): React.JSX.Element => {
           })
         }
         onChange={() => {
-          onChangeItemPriceCellAtBoqBlock({
+          const didUpdate = updateItemPriceCellAtBoqBlock({
             blockIndex: block.index,
             rowIndex: row.index,
           })
+
+          if (didUpdate === true) {
+            recalculateSubTotalPrices({ incrementally: true })
+            recalculateTotalPrices()
+          }
         }}
         onFocusOut={() => {
-          onFocusOutFromItemPriceCell({
+          formatItemPriceCellAtBoqBlock({
             blockIndex: block.index,
             rowIndex: row.index,
           })
         }}
-        onKeyDown={(_view, event) =>
-          onTabAwayFromItemPriceCell({
-            event,
+        onKeyDown={(_view, event) => {
+          if (event.key !== 'Tab') {
+            return false
+          }
+
+          event.preventDefault()
+
+          focusQtyCellAtBoqBlock({
             blockIndex: block.index,
             rowIndex: row.index,
           })
-        }
+
+          // todo: why do we return boolean?
+          return true
+        }}
         sx={{
           ...stylesForResizableCell,
           ...cellStyle,

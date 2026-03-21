@@ -3,7 +3,7 @@ import { columnMinWidth } from '@entity/quotation/const/columnMinWidth'
 import { useStylesForResizableCell } from '@entity/quotation/hook/useStylesForResizableCell'
 import { getHtmlOfBookmarkedRowCellFromStoreByIndex } from '@entity/quotation/redux/getter/getHtmlOfBookmarkedRowCellFromStoreByIndex'
 import { cellStyle } from '@entity/quotation/style/cellStyle'
-import { onChangeDescriptionCellAtBookmarkBlock } from '@feature/blocks/on-text-change/on-change-description-cell-at-bookmark-block/onChangeDescriptionCellAtBookmarkBlock'
+import { updateDescriptionCellAtBookmarkBlock } from '@feature/blocks/update-description-cell-at-bookmark-block/updateDescriptionCellAtBookmarkBlock'
 import { upload } from '@feature/file/upload-file'
 import { TextEditor } from '@shared/component/TextEditor'
 import { getRegistryKey } from '@shared/lib/tiptap/editorRegistry'
@@ -28,7 +28,7 @@ export const DescriptionCell = (): React.JSX.Element => {
         getHtmlOfBookmarkedRowCellFromStoreByIndex({ cellKey: 'description' })
       }
       onChange={() => {
-        onChangeDescriptionCellAtBookmarkBlock()
+        updateDescriptionCellAtBookmarkBlock()
       }}
       onUpload={upload}
       sx={{

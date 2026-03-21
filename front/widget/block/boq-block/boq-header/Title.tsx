@@ -3,7 +3,7 @@ import { getHtmlOfBoqHeaderFromStoreByIndex } from '@entity/quotation/redux/gett
 import { titleCellStyle } from '@entity/quotation/style/titleCellStyle'
 import type { HeaderKey } from '@back/entity/quotation/schema'
 import { TextEditor } from '@shared/component/TextEditor'
-import { onChangeTitleAtBoqBlock } from '@feature/blocks/on-text-change/on-change-title-at-boq-block/onChangeTitleAtBoqBlock'
+import { updateBoqTitle } from '@feature/blocks/update-boq-title/updateBoqTitle'
 import { getRegistryKey } from '@shared/lib/tiptap/editorRegistry'
 const boqHeaderKey: HeaderKey = 'title'
 
@@ -26,7 +26,7 @@ export const Title = (): React.JSX.Element => {
         })
       }
       onChange={() => {
-        onChangeTitleAtBoqBlock({
+        updateBoqTitle({
           blockIndex: block.index,
           boqHeaderKey,
         })

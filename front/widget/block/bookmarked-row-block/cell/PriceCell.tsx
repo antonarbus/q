@@ -3,8 +3,8 @@ import { columnMinWidth } from '@entity/quotation/const/columnMinWidth'
 import { useStylesForResizableCell } from '@entity/quotation/hook/useStylesForResizableCell'
 import { getHtmlOfBookmarkedRowCellFromStoreByIndex } from '@entity/quotation/redux/getter/getHtmlOfBookmarkedRowCellFromStoreByIndex'
 import { cellStyle } from '@entity/quotation/style/cellStyle'
-import { onFocusOutFromPriceCell } from '@feature/blocks/on-text-focus-out/on-focus-out-from-price-cell-at-bookmark-block/onFocusOutFromPriceCell'
-import { onChangePriceCellAtBookmarkBlock } from '@feature/blocks/on-text-change/on-change-price-cell-at-bookmark-block/onChangePriceCellAtBookmarkBlock'
+import { formatPriceCellAtBookmarkBlock } from '@feature/blocks/format-price-cell-at-bookmark-block/formatPriceCellAtBookmarkBlock'
+import { updatePriceCellAtBookmarkBlock } from '@feature/blocks/update-price-cell-at-bookmark-block/updatePriceCellAtBookmarkBlock'
 import { Box } from '@mui/material'
 import { TextEditor } from '@shared/component/TextEditor'
 import { getRegistryKey } from '@shared/lib/tiptap/editorRegistry'
@@ -30,10 +30,10 @@ export const PriceCell = (): React.JSX.Element => {
           getHtmlOfBookmarkedRowCellFromStoreByIndex({ cellKey: 'price' })
         }
         onChange={() => {
-          onChangePriceCellAtBookmarkBlock()
+          updatePriceCellAtBookmarkBlock()
         }}
         onFocusOut={() => {
-          onFocusOutFromPriceCell()
+          formatPriceCellAtBookmarkBlock()
         }}
         sx={{
           ...stylesForResizableCell,

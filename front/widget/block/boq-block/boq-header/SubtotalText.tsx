@@ -3,7 +3,7 @@ import { getHtmlOfBoqHeaderFromStoreByIndex } from '@entity/quotation/redux/gett
 import { subTotalTextCellStyle } from '@entity/quotation/style/subTotalTextCellStyle'
 import type { HeaderKey } from '@back/entity/quotation/schema'
 import { TextEditor } from '@shared/component/TextEditor'
-import { onChangeSubtotalTextAtBoqBlock } from '@feature/blocks/on-text-change/on-change-subtotal-text-at-boq-block/onChangeSubtotalTextAtBoqBlock'
+import { updateSubtotalTextAtBoqBlock } from '@feature/blocks/update-subtotal-text-at-boq-block/updateSubtotalTextAtBoqBlock'
 import { getRegistryKey } from '@shared/lib/tiptap/editorRegistry'
 const boqHeaderKey: HeaderKey = 'subtotalText'
 
@@ -26,7 +26,7 @@ export const SubtotalText = (): React.JSX.Element => {
         })
       }
       onChange={() => {
-        onChangeSubtotalTextAtBoqBlock({
+        updateSubtotalTextAtBoqBlock({
           blockIndex: block.index,
           boqHeaderKey,
         })

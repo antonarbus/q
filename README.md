@@ -36,34 +36,6 @@ tests/                       # Playwright e2e tests
 Dockerfile.prod               # Single container: Bun serves frontend static + backend API
 ```
 
-## Feature Naming Conventions
-
-All user-driven code lives in `feature/`. Each subfolder represents one feature, named after what triggers it.
-
-There are two kinds of features, and they're named differently:
-
-**Deliberate actions** — the user has a clear intent. Name by that intent.
-
-```
-cut-row
-delete-block
-save-quotation
-insert-row
-copy-bookmark-at-search
-```
-
-**Reactive events** — the user interacts with a field/cell and the system responds. There's no single clean outcome to name (one gesture may trigger multiple effects). Name by the event signal, prefixed with `on-`.
-
-```
-on-change-qty-cell-at-boq-block
-on-focus-out-from-price-cell-at-boq-block
-on-change-text-block
-```
-
-The `on-` prefix is the visual signal that a folder is reactive — borrowed from DOM/React event naming convention (`onClick`, `onChange`). No `handle-` prefix anywhere.
-
-**The decision rule**: if a user interaction has one clear intent, name by that intent. If the interaction produces multiple or ambiguous effects, name by the event signal with `on-`.
-
 ## Stack
 
 - **Frontend**: React (Vite, served as static files by the backend)

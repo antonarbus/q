@@ -1,8 +1,8 @@
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { getHtmlOfPriceFromStoreByIndex } from '@entity/quotation/redux/getter/getHtmlOfPriceFromStoreByIndex'
 import { TextEditor } from '@shared/component/TextEditor'
-import { onFocusOutFromTotalPrice } from '@feature/blocks/on-text-focus-out/on-focus-out-from-price-value-at-price-block/onFocusOutFromTotalPrice'
-import { onChangePriceValueAtPriceBlock } from '@feature/blocks/on-text-change/on-change-price-value-at-price-block/onChangePriceValueAtPriceBlock'
+import { correctTotalPriceAtPriceBlock } from '@feature/blocks/correct-total-price-at-price-block/correctTotalPriceAtPriceBlock'
+import { updatePriceValueAtPriceBlock } from '@feature/blocks/update-price-value-at-price-block/updatePriceValueAtPriceBlock'
 import { getRegistryKey } from '@shared/lib/tiptap/editorRegistry'
 
 export const PriceValue = (): React.JSX.Element => {
@@ -21,10 +21,10 @@ export const PriceValue = (): React.JSX.Element => {
         getHtmlOfPriceFromStoreByIndex({ blockIndex: block.index })
       }
       onChange={() => {
-        onChangePriceValueAtPriceBlock({ blockIndex: block.index })
+        updatePriceValueAtPriceBlock({ blockIndex: block.index })
       }}
       onFocusOut={() => {
-        onFocusOutFromTotalPrice({ blockIndex: block.index })
+        correctTotalPriceAtPriceBlock({ blockIndex: block.index })
       }}
       sx={{
         textAlign: 'center',

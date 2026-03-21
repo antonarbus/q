@@ -4,13 +4,15 @@ import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { useRow } from '@entity/quotation/provider/RowProvider'
 import { getHtmlOfCellFromStoreByIndex } from '@entity/quotation/redux/getter/getHtmlOfCellFromStoreByIndex'
 import { cellStyle } from '@entity/quotation/style/cellStyle'
+import { recalculateSubTotalPrices } from '@entity/quotation/util/recalculateSubTotalPrices'
+import { recalculateTotalPrices } from '@entity/quotation/util/recalculateTotalPrices'
 import { Box } from '@mui/material'
 import { TextEditor } from '@shared/component/TextEditor'
 import { Pin } from './Pin'
 import { pinQtyCell } from '@feature/blocks/pin/pin-qty-cell/pinQtyCell'
-import { onTabAwayFromQtyCell } from '@feature/blocks/on-cell-tab-away/on-tab-away-from-qty-cell/onTabAwayFromQtyCell'
-import { onChangeQtyCellAtBoqBlock } from '@feature/blocks/on-text-change/on-change-qty-cell-at-boq-block/onChangeQtyCellAtBoqBlock'
-import { onFocusOutFromQtyCell } from '@feature/blocks/on-text-focus-out/on-focus-out-from-qty-cell-at-boq-block/onFocusOutFromQtyCell'
+import { focusPriceCellAtBoqBlock } from '@feature/blocks/focus-price-cell-at-boq-block/focusPriceCellAtBoqBlock'
+import { updateQtyCellAtBoqBlock } from '@feature/blocks/update-qty-cell-at-boq-block/updateQtyCellAtBoqBlock'
+import { formatQtyCellAtBoqBlock } from '@feature/blocks/format-qty-cell-at-boq-block/formatQtyCellAtBoqBlock'
 import { getRegistryKey } from '@shared/lib/tiptap/editorRegistry'
 
 export const QtyCell = (): React.JSX.Element => {
@@ -41,24 +43,36 @@ export const QtyCell = (): React.JSX.Element => {
           })
         }
         onChange={() => {
-          onChangeQtyCellAtBoqBlock({
+          const didUpdate = updateQtyCellAtBoqBlock({
             blockIndex: block.index,
             rowIndex: row.index,
           })
+
+          if (didUpdate === true) {
+            recalculateSubTotalPrices({ incrementally: true })
+            recalculateTotalPrices()
+          }
         }}
         onFocusOut={() => {
-          onFocusOutFromQtyCell({
+          formatQtyCellAtBoqBlock({
             blockIndex: block.index,
             rowIndex: row.index,
           })
         }}
-        onKeyDown={(_view, event) =>
-          onTabAwayFromQtyCell({
-            event,
+        onKeyDown={(_view, event) => {
+          if (event.key !== 'Tab') {
+            return false
+          }
+
+          event.preventDefault()
+
+          focusPriceCellAtBoqBlock({
             blockIndex: block.index,
             rowIndex: row.index,
           })
-        }
+
+          return true
+        }}
         sx={{
           ...stylesForResizableCell,
           ...cellStyle,

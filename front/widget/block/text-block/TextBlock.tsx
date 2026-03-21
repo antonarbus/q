@@ -15,8 +15,8 @@ import { DragBlockIcon } from '@feature/blocks/drag-item/DragBlockIcon'
 import {
   onTextBlockResizeStart,
   onTextBlockResizeStop,
-} from '@feature/blocks/resize/resize-text-block/onTextBlockResize'
-import { onChangeTextBlock } from '@feature/blocks/on-text-change/on-change-text-block/onChangeTextBlock'
+} from '@feature/blocks/resize-text-block/onTextBlockResize'
+import { updateTextBlock } from '@feature/blocks/update-text-block/updateTextBlock'
 import { getRegistryKey } from '@shared/lib/tiptap/editorRegistry'
 
 export const TextBlock = (): React.JSX.Element => {
@@ -54,7 +54,7 @@ export const TextBlock = (): React.JSX.Element => {
           getHtmlOfTextBlockFromStoreByIndex({ blockIndex: block.index })
         }
         onChange={() => {
-          onChangeTextBlock({ blockIndex: block.index })
+          updateTextBlock({ blockIndex: block.index })
         }}
         onUpload={upload}
         sx={textItemCellStyle}

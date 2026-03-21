@@ -4,14 +4,17 @@ import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { useRow } from '@entity/quotation/provider/RowProvider'
 import { getHtmlOfCellFromStoreByIndex } from '@entity/quotation/redux/getter/getHtmlOfCellFromStoreByIndex'
 import { cellStyle } from '@entity/quotation/style/cellStyle'
+import { recalculateSubTotalPrices } from '@entity/quotation/util/recalculateSubTotalPrices'
+import { recalculateTotalPrices } from '@entity/quotation/util/recalculateTotalPrices'
 import { showRowPins } from '@feature/blocks/pin/show-row-pins/showRowPins'
 import { Box } from '@mui/material'
 import { TextEditor } from '@shared/component/TextEditor'
 import { Pin } from './Pin'
 import { pinPriceCell } from '@feature/blocks/pin/pin-price-cell/pinPriceCell'
-import { onTabAwayFromPriceCell } from '@feature/blocks/on-cell-tab-away/on-tab-away-from-price-cell/onTabAwayFromPriceCell'
-import { onChangePriceCellAtBoqBlock } from '@feature/blocks/on-text-change/on-change-price-cell-at-boq-block/onChangePriceCellAtBoqBlock'
-import { onFocusOutFromPriceCell } from '@feature/blocks/on-text-focus-out/on-focus-out-from-price-cell-at-boq-block/onFocusOutFromPriceCell'
+import { focusNextRowDescriptionCellAtBoqBlock } from '@feature/blocks/focus-next-row-description-cell-at-boq-block/focusNextRowDescriptionCellAtBoqBlock'
+import { updatePriceCellAtBoqBlock } from '@feature/blocks/update-price-cell-at-boq-block/updatePriceCellAtBoqBlock'
+import { formatPriceCellAtBoqBlock } from '@feature/blocks/format-price-cell-at-boq-block/formatPriceCellAtBoqBlock'
+import { validateAndCorrectPriceCellAtBoqBlock } from '@feature/blocks/validate-and-correct-price-cell-at-boq-block/validateAndCorrectPriceCellAtBoqBlock'
 import { getRegistryKey } from '@shared/lib/tiptap/editorRegistry'
 
 export const PriceCell = (): React.JSX.Element => {
@@ -42,13 +45,23 @@ export const PriceCell = (): React.JSX.Element => {
           })
         }
         onChange={() => {
-          onChangePriceCellAtBoqBlock({
+          const didUpdate = updatePriceCellAtBoqBlock({
             blockIndex: block.index,
             rowIndex: row.index,
           })
+
+          if (didUpdate === true) {
+            recalculateSubTotalPrices({ incrementally: true })
+            recalculateTotalPrices()
+          }
         }}
         onFocusOut={() => {
-          onFocusOutFromPriceCell({
+          formatPriceCellAtBoqBlock({
+            blockIndex: block.index,
+            rowIndex: row.index,
+          })
+
+          validateAndCorrectPriceCellAtBoqBlock({
             blockIndex: block.index,
             rowIndex: row.index,
           })
@@ -56,13 +69,22 @@ export const PriceCell = (): React.JSX.Element => {
         onWrapperFocus={() => {
           showRowPins({ blockIndex: block.index, rowIndex: row.index })
         }}
-        onKeyDown={(_view, event) =>
-          onTabAwayFromPriceCell({
-            event,
+        onKeyDown={(_view, event) => {
+          if (event.key !== 'Tab') {
+            return false
+          }
+
+          const didNavigate = focusNextRowDescriptionCellAtBoqBlock({
             blockIndex: block.index,
             rowIndex: row.index,
           })
-        }
+
+          if (didNavigate === true) {
+            event.preventDefault()
+          }
+
+          return didNavigate
+        }}
         sx={{
           ...stylesForResizableCell,
           ...cellStyle,

@@ -1,6 +1,6 @@
 import { useBlock } from '@entity/quotation/provider/BlockProvider'
 import { TextEditor } from '@shared/component/TextEditor'
-import { onChangePriceTitleAtPriceBlock } from '@feature/blocks/on-text-change/on-change-price-title-at-price-block/onChangePriceTitleAtPriceBlock'
+import { updatePriceTitleAtPriceBlock } from '@feature/blocks/update-price-title-at-price-block/updatePriceTitleAtPriceBlock'
 import { getRegistryKey } from '@shared/lib/tiptap/editorRegistry'
 import { getHtmlOfPriceTitleFromStoreByIndex } from '@entity/quotation/redux/getter/getHtmlOfPriceTitleFromStoreByIndex'
 
@@ -20,9 +20,7 @@ export const PriceTitle = (): React.JSX.Element => {
         getHtmlOfPriceTitleFromStoreByIndex({ blockIndex: block.index })
       }
       onChange={() => {
-        onChangePriceTitleAtPriceBlock({
-          blockIndex: block.index,
-        })
+        updatePriceTitleAtPriceBlock({ blockIndex: block.index })
       }}
       sx={{
         textAlign: 'center',

@@ -3,8 +3,8 @@ import { columnMinWidth } from '@entity/quotation/const/columnMinWidth'
 import { useStylesForResizableCell } from '@entity/quotation/hook/useStylesForResizableCell'
 import { getHtmlOfBookmarkedRowCellFromStoreByIndex } from '@entity/quotation/redux/getter/getHtmlOfBookmarkedRowCellFromStoreByIndex'
 import { cellStyle } from '@entity/quotation/style/cellStyle'
-import { onFocusOutFromQtyCell } from '@feature/blocks/on-text-focus-out/on-focus-out-from-qty-cell-at-bookmark-block/onFocusOutFromQtyCell'
-import { onChangeQtyCellAtBookmarkBlock } from '@feature/blocks/on-text-change/on-change-qty-cell-at-bookmark-block/onChangeQtyCellAtBookmarkBlock'
+import { formatQtyCellAtBookmarkBlock } from '@feature/blocks/format-qty-cell-at-bookmark-block/formatQtyCellAtBookmarkBlock'
+import { updateQtyCellAtBookmarkBlock } from '@feature/blocks/update-qty-cell-at-bookmark-block/updateQtyCellAtBookmarkBlock'
 import { Box } from '@mui/material'
 import { TextEditor } from '@shared/component/TextEditor'
 import { getRegistryKey } from '@shared/lib/tiptap/editorRegistry'
@@ -29,11 +29,11 @@ export const QtyCell = (): React.JSX.Element => {
         contentGetter={() =>
           getHtmlOfBookmarkedRowCellFromStoreByIndex({ cellKey: 'qty' })
         }
-        onChange={(params) => {
-          onChangeQtyCellAtBookmarkBlock()
+        onChange={() => {
+          updateQtyCellAtBookmarkBlock()
         }}
         onFocusOut={() => {
-          onFocusOutFromQtyCell()
+          formatQtyCellAtBookmarkBlock()
         }}
         sx={{
           ...stylesForResizableCell,

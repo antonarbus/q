@@ -9,7 +9,7 @@ import { CopyBlockIcon } from '@feature/blocks/copy-item/CopyBlockIcon'
 import { CutBlockIcon } from '@feature/blocks/cut-item/CutBlockIcon'
 import { DeleteBlockIcon } from '@feature/blocks/delete-item/DeleteBlockIcon'
 import { DragBlockIcon } from '@feature/blocks/drag-item/DragBlockIcon'
-import { onPriceBlockResizeStop } from '@feature/blocks/resize/resize-price-block/onPriceBlockResize'
+import { onPriceBlockResizeStop } from '@feature/blocks/resize-price-block/onPriceBlockResize'
 
 export const TotalPriceBlock = (): React.JSX.Element => {
   return (

@@ -4,7 +4,7 @@ import { getHtmlOfBoqColumnFromStoreByIndex } from '@entity/quotation/redux/gett
 import { columnHeaderStyle } from '@entity/quotation/style/columnHeaderStyle'
 import { ResizableColumn } from '../ResizableColumn'
 import { TextEditor } from '@shared/component/TextEditor'
-import { onChangeTableHeaderCellAtBoqBlock } from '@feature/blocks/on-text-change/on-change-table-header-cell-at-boq-block/onChangeTableHeaderCellAtBoqBlock'
+import { updateTableHeaderCellAtBoqBlock } from '@feature/blocks/update-table-header-cell-at-boq-block/updateTableHeaderCellAtBoqBlock'
 import { getRegistryKey } from '@shared/lib/tiptap/editorRegistry'
 
 export const QtyColumn = (): React.JSX.Element => {
@@ -31,7 +31,7 @@ export const QtyColumn = (): React.JSX.Element => {
           })
         }
         onChange={() => {
-          onChangeTableHeaderCellAtBoqBlock({
+          updateTableHeaderCellAtBoqBlock({
             blockIndex: block.index,
             boqColumnKey: 'qty',
             editorName: 'boqBlockQtyColumn',
