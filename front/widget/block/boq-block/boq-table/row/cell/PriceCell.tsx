@@ -65,6 +65,8 @@ export const PriceCell = (): React.JSX.Element => {
             blockIndex: block.index,
             rowIndex: row.index,
           })
+
+          recalculateTotalPrices()
         }}
         onWrapperFocus={() => {
           showRowPins({ blockIndex: block.index, rowIndex: row.index })
