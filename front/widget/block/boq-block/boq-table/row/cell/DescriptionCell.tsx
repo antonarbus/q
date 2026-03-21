@@ -50,13 +50,12 @@ export const DescriptionCell = (): React.JSX.Element => {
 
         event.preventDefault()
 
-        // todo: move event.preventDefault() inside
         focusItemPriceCellAtBoqBlock({
           blockIndex: block.index,
           rowIndex: row.index,
         })
 
-        return true
+        return true // stop ProseMirror propagation
       }}
       onUpload={upload}
       sx={{

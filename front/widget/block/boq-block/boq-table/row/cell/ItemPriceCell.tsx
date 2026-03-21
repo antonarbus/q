@@ -71,8 +71,7 @@ export const ItemPriceCell = (): React.JSX.Element => {
             rowIndex: row.index,
           })
 
-          // todo: why do we return boolean?
-          return true
+          return true // stop ProseMirror propagation
         }}
         sx={{
           ...stylesForResizableCell,

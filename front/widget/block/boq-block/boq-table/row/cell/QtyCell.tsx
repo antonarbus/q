@@ -71,7 +71,7 @@ export const QtyCell = (): React.JSX.Element => {
             rowIndex: row.index,
           })
 
-          return true
+          return true // stop ProseMirror propagation
         }}
         sx={{
           ...stylesForResizableCell,
