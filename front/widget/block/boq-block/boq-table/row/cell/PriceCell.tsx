@@ -45,17 +45,14 @@ export const PriceCell = (): React.JSX.Element => {
           })
         }
         onChange={() => {
-          const didUpdate = updatePriceCellAtBoqBlock({
+          // console.log('changed')
+        }}
+        onFocusOut={() => {
+          updatePriceCellAtBoqBlock({
             blockIndex: block.index,
             rowIndex: row.index,
           })
 
-          if (didUpdate === true) {
-            recalculateSubTotalPrices({ incrementally: true })
-            recalculateTotalPrices()
-          }
-        }}
-        onFocusOut={() => {
           formatPriceCellAtBoqBlock({
             blockIndex: block.index,
             rowIndex: row.index,
@@ -65,6 +62,8 @@ export const PriceCell = (): React.JSX.Element => {
             blockIndex: block.index,
             rowIndex: row.index,
           })
+
+          recalculateSubTotalPrices({ incrementally: true })
 
           recalculateTotalPrices()
         }}

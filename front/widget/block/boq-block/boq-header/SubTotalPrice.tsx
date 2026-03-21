@@ -39,18 +39,13 @@ export const SubTotalPrice = (): React.JSX.Element => {
         })
       }
       onChange={() => {
-        redistributePricesAtBoqBlock({ blockIndex: block.index })
-        recalculateTotalPrices()
+        // console.log('on change')
       }}
       onFocusOut={() => {
-        const didFormat = formatSubtotalPriceAtBoqBlock({
-          blockIndex: block.index,
-        })
-
-        if (didFormat === true) {
-          validatePricesAtBoqBlock({ blockIndex: block.index })
-          recalculateTotalPrices()
-        }
+        formatSubtotalPriceAtBoqBlock({ blockIndex: block.index })
+        redistributePricesAtBoqBlock({ blockIndex: block.index })
+        validatePricesAtBoqBlock({ blockIndex: block.index })
+        recalculateTotalPrices()
       }}
       onWrapperClick={(event: React.MouseEvent) => {
         showHidePricePins({
