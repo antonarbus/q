@@ -5,7 +5,7 @@ import type {
   ResBody,
 } from '@back/api/bookmark/saveBookmarkHandler'
 import { axiosWithAuth } from '@shared/lib/axios'
-import { queryKey } from '@shared/lib/tanstack/react-query/queryKey'
+import { queryKey } from '@shared/lib/tanstack-query/queryKey'
 import { type UseMutationResult, useMutation } from '@tanstack/react-query'
 import type { AxiosError, AxiosResponse } from 'axios'
 

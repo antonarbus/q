@@ -1,7 +1,7 @@
 import './router'
 import './redux'
-import './queryClient'
-import './axiosWithAuth'
+import '../shared/lib/tanstack-query/queryClient'
+import './axiosConfig'
 import { ThemeProvider } from '@mui/material/styles'
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
@@ -15,7 +15,7 @@ import { enGB } from 'date-fns/locale'
 import { Provider } from 'react-redux'
 import { RouterProvider } from 'react-router-dom'
 import { GlobalStyles } from './GlobalStyles'
-import { QueryDevtoolsProductionHidden } from './QueryDevtoolsProductionHidden'
+import { QueryDevtoolsProductionHidden } from '../shared/lib/tanstack-query/QueryDevtoolsProductionHidden'
 
 export const App = (): React.JSX.Element => {
   return (

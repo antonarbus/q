@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/member-ordering */
-import type { QueryClientType } from '@app/queryClient'
+import type { QueryClientType } from '@shared/lib/tanstack-query/queryClient'
 import type { NavItem } from '@entity/nav/type'
 
 class Instance {

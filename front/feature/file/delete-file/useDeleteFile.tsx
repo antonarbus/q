@@ -1,6 +1,6 @@
 import { useDeleteFileMutation } from '@entity/file/api/useDeleteFileMutation'
 import { instance } from '@shared/instance'
-import { queryKey } from '@shared/lib/tanstack/react-query/queryKey'
+import { queryKey } from '@shared/lib/tanstack-query/queryKey'
 import { useCallback } from 'react'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'

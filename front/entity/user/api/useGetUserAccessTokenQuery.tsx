@@ -3,7 +3,7 @@ import type {
   ErrorResBody,
   ResBody,
 } from '@back/api/user/getAccessTokenHandler'
-import { queryKey } from '@shared/lib/tanstack/react-query/queryKey'
+import { queryKey } from '@shared/lib/tanstack-query/queryKey'
 import { type UseQueryResult, useQuery } from '@tanstack/react-query'
 import axios, { type AxiosError, type AxiosResponse } from 'axios'
 

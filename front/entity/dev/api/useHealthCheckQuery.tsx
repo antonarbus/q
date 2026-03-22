@@ -1,6 +1,6 @@
 import { route } from '@back/api/route'
 import type { ErrorResBody, ResBody } from '@back/api/dev/healthCheckHandler'
-import { queryKey } from '@shared/lib/tanstack/react-query/queryKey'
+import { queryKey } from '@shared/lib/tanstack-query/queryKey'
 import { type UseQueryResult, useQuery } from '@tanstack/react-query'
 import axios, { type AxiosError, type AxiosResponse } from 'axios'
 
