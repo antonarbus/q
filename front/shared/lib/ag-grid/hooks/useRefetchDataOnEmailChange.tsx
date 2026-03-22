@@ -1,4 +1,4 @@
-import { useSelector } from '@shared/lib/redux'
+import { useSelector } from '@front/shared/lib/redux'
 import type { QueryObserverResult } from '@tanstack/react-query'
 import { useEffect } from 'react'
 

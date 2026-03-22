@@ -40,12 +40,6 @@
     "types": ["bun", "node"],
     "baseUrl": ".",
     "paths": {
-      "@app/*": ["./front/app/*"],
-      "@page/*": ["./front/page/*"],
-      "@widget/*": ["./front/widget/*"],
-      "@feature/*": ["./front/feature/*"],
-      "@entity/*": ["./front/entity/*"],
-      "@shared/*": ["./front/shared/*"],
       "@front/*": ["./front/*"],
       "@back/*": ["./back/*"],
       "@root/*": ["./*"]

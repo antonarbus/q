@@ -42,7 +42,7 @@ import { TableCell, TableHeader, TableKit } from '@tiptap/extension-table'
 import Youtube from '@tiptap/extension-youtube'
 import { ResizableImage } from './image/ResizableImage'
 import { useTiptapCtx } from '../provider/TiptapProvider'
-import { cls } from '@shared/cls'
+import { cls } from '@front/shared/cls'
 
 const tableCellTextAlignAttribute = {
   default: 'center',

@@ -1,6 +1,6 @@
 import { InputAdornment, TextField } from '@mui/material'
 import { type Signal, useSignal, useSignalEffect } from '@preact/signals-react'
-import { theme } from '@shared/theme'
+import { theme } from '@front/shared/theme'
 import mailcheck from 'mailcheck'
 import { RiUser3Line } from 'react-icons/ri'
 import { z } from 'zod'

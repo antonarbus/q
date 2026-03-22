@@ -2,7 +2,7 @@ import { Box, Tooltip } from '@mui/material'
 import { useRef } from 'react'
 import { useTiptap } from '@tiptap/react'
 import { useTiptapCtx } from '../../provider/TiptapProvider'
-import { cls } from '@shared/cls'
+import { cls } from '@front/shared/cls'
 import { TbUpload } from 'react-icons/tb'
 
 export const UploadButton = (): React.ReactNode => {

@@ -1,5 +1,5 @@
-import { appSlice } from '@shared/appSlice'
-import { dispatch } from '@shared/lib/redux'
+import { appSlice } from '@front/shared/appSlice'
+import { dispatch } from '@front/shared/lib/redux'
 import { useEffect } from 'react'
 
 type Props = {

@@ -1,5 +1,5 @@
 import type { Editor } from '@tiptap/react'
-import { getDecimalPlaces } from '@shared/util/getDecimalPlaces'
+import { getDecimalPlaces } from '@front/shared/util/getDecimalPlaces'
 import { roundTo } from 'round-to'
 import { getStringWithNewFormattedNumber } from '../../../util/getStringWithNewFormattedNumber'
 

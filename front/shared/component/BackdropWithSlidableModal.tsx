@@ -1,4 +1,4 @@
-import { getState } from '@shared/lib/redux'
+import { getState } from '@front/shared/lib/redux'
 import { useRef } from 'react'
 import { useEffectOnce } from 'react-use'
 import { useAnimatedElement } from '../util/useAnimatedElement'

@@ -1,4 +1,4 @@
-import { getTextWithBoldSubStringAsJsx } from '@shared/util/getTextWithBoldSubStringAsJsx'
+import { getTextWithBoldSubStringAsJsx } from '@front/shared/util/getTextWithBoldSubStringAsJsx'
 import type {
   ColDef,
   ColDefField,

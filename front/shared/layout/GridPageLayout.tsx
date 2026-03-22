@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import { theme } from '@shared/theme'
+import { theme } from '@front/shared/theme'
 
 type Props = {
   children: React.ReactNode

@@ -1,4 +1,4 @@
-import { instance } from '@shared/instance'
+import { instance } from '@front/shared/instance'
 import { QueryClient } from '@tanstack/react-query'
 
 const queryClient = new QueryClient()

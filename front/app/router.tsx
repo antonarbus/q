@@ -1,77 +1,77 @@
-import { RequireRoles } from '@feature/auth/check-page-required-roles-before-page-load/RequireRoles'
-import { AccessToken } from '@feature/auth/try-to-log-in-without-prompt/AccessToken'
-import { Logout } from '@feature/auth/log-out/Logout'
-import { LoadQuotation } from '@feature/quotation/load-quotation'
-import { ActivationModal } from '@page/auth-activation-modal/ActivationModal'
-import { LoginModal } from '@page/auth-login-modal/LoginModal'
-import { RegisterModal } from '@page/auth-register-modal/RegisterModal'
-import { RequestPasswordResetModal } from '@page/auth-request-password-reset-modal/RequestPasswordResetModal'
-import { ResetPasswordModal } from '@page/auth-reset-password-modal/ResetPasswordModal'
-import { BookmarkModal } from '@page/bookmark-modal/BookmarkModal'
-import { ErrorPage } from '@page/error-page/ErrorPage'
-import { InfoModal } from '@page/info-modal/InfoModal'
-import { SaveQuotationModal } from '@page/save-quotation-modal/SaveQuotationModal'
-import { SettingsModal } from '@page/settings-modal/SettingsModal'
-import { ShareQuotationModal } from '@page/share-quotation-modal/ShareQuotationModal'
-import { TestPage } from '@page/test-page/TestPage'
-import { LoadingDotsOverlay } from '@shared/component/loading-dots-overlay'
-import { Main } from '@shared/layout/Main'
-import { route } from '@shared/lib/react-router-dom/route'
-import { instantiateRouter } from '@shared/lib/react-router-dom/router'
-import { Copy } from '@widget/copy'
-import { BookmarkCopyPreviewCapturer } from '@entity/copy/BookmarkCopyPreviewCapturer'
-import { Footer } from '@widget/footer'
-import { Nav } from '@widget/nav'
+import { RequireRoles } from '@front/features/auth/check-page-required-roles-before-page-load/RequireRoles'
+import { AccessToken } from '@front/features/auth/try-to-log-in-without-prompt/AccessToken'
+import { Logout } from '@front/features/auth/log-out/Logout'
+import { LoadQuotation } from '@front/features/quotation/load-quotation'
+import { ActivationModal } from '@front/pages/auth-activation-modal/ActivationModal'
+import { LoginModal } from '@front/pages/auth-login-modal/LoginModal'
+import { RegisterModal } from '@front/pages/auth-register-modal/RegisterModal'
+import { RequestPasswordResetModal } from '@front/pages/auth-request-password-reset-modal/RequestPasswordResetModal'
+import { ResetPasswordModal } from '@front/pages/auth-reset-password-modal/ResetPasswordModal'
+import { BookmarkModal } from '@front/pages/bookmark-modal/BookmarkModal'
+import { ErrorPage } from '@front/pages/error-page/ErrorPage'
+import { InfoModal } from '@front/pages/info-modal/InfoModal'
+import { SaveQuotationModal } from '@front/pages/save-quotation-modal/SaveQuotationModal'
+import { SettingsModal } from '@front/pages/settings-modal/SettingsModal'
+import { ShareQuotationModal } from '@front/pages/share-quotation-modal/ShareQuotationModal'
+import { TestPage } from '@front/pages/test-page/TestPage'
+import { LoadingDotsOverlay } from '@front/shared/component/loading-dots-overlay'
+import { Main } from '@front/shared/layout/Main'
+import { route } from '@front/shared/lib/react-router-dom/route'
+import { instantiateRouter } from '@front/shared/lib/react-router-dom/router'
+import { Copy } from '@front/widgets/copy'
+import { BookmarkCopyPreviewCapturer } from '@front/entities/copy/BookmarkCopyPreviewCapturer'
+import { Footer } from '@front/widgets/footer'
+import { Nav } from '@front/widgets/nav'
 import { lazy, Suspense } from 'react'
 import { createBrowserRouter, type RouteObject } from 'react-router-dom'
 import { Toaster } from 'sonner'
 import { OnInitLoad } from './OnInitLoad'
-import { ConfirmationDialog } from '@shared/component/ConfirmationDialog'
+import { ConfirmationDialog } from '@front/shared/component/ConfirmationDialog'
 
 const QuotationPageLazy = lazy(async () => {
-  const module = await import('@page/quotation-page')
+  const module = await import('@front/pages/quotation-page')
 
   return module
 })
 
 const QuotationListPageLazy = lazy(async () => {
-  const module = await import('@page/quotation-list-page')
+  const module = await import('@front/pages/quotation-list-page')
 
   return module
 })
 
 const BookmarkListPageLazy = lazy(async () => {
-  const module = await import('@page/bookmark-list-page')
+  const module = await import('@front/pages/bookmark-list-page')
 
   return module
 })
 
 const QuotationListAllPageLazy = lazy(async () => {
-  const module = await import('@page/quotation-list-all-page')
+  const module = await import('@front/pages/quotation-list-all-page')
 
   return module
 })
 
 const BookmarkListAllPageLazy = lazy(async () => {
-  const module = await import('@page/bookmark-list-all-page')
+  const module = await import('@front/pages/bookmark-list-all-page')
 
   return module
 })
 
 const UserListPageLazy = lazy(async () => {
-  const module = await import('@page/user-list-page')
+  const module = await import('@front/pages/user-list-page')
 
   return module
 })
 
 const VisitorListPageLazy = lazy(async () => {
-  const module = await import('@page/visitor-list-page')
+  const module = await import('@front/pages/visitor-list-page')
 
   return module
 })
 
 const FileListAllPageLazy = lazy(async () => {
-  const module = await import('@page/file-list-all-page')
+  const module = await import('@front/pages/file-list-all-page')
 
   return module
 })

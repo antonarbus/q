@@ -1,5 +1,5 @@
 import { Box, Chip } from '@mui/material'
-import { useSelector } from '@shared/lib/redux'
+import { useSelector } from '@front/shared/lib/redux'
 
 export const DisplayedRowsCount = (): React.JSX.Element => {
   const displayedRowsCount = useSelector(

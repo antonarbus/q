@@ -1,0 +1,44 @@
+import { columnMinWidth } from '@front/entities/quotation/const/columnMinWidth'
+import { useBlock } from '@front/entities/quotation/provider/BlockProvider'
+import { getHtmlOfBoqColumnFromStoreByIndex } from '@front/entities/quotation/redux/getter/getHtmlOfBoqColumnFromStoreByIndex'
+import { columnHeaderStyle } from '@front/entities/quotation/style/columnHeaderStyle'
+import { ResizableColumn } from '../ResizableColumn'
+import { TextEditor } from '@front/shared/component/TextEditor'
+import { updateTableHeaderCellAtBoqBlock } from '@front/features/blocks/update-table-header-cell-at-boq-block/updateTableHeaderCellAtBoqBlock'
+import { getRegistryKey } from '@front/shared/lib/tiptap/editorRegistry'
+
+export const QtyColumn = (): React.JSX.Element => {
+  const block = useBlock()
+
+  return (
+    <ResizableColumn
+      boqColumnKey='qty'
+      className='th qty resizable'
+      minWidth={columnMinWidth.qty}
+    >
+      <TextEditor
+        registryKey={getRegistryKey({
+          editorName: 'boqBlockQtyColumn',
+          blockIndex: block.index,
+          rowIndex: null,
+        })}
+        className='column-qty'
+        placeholder='Qty...'
+        contentGetter={() =>
+          getHtmlOfBoqColumnFromStoreByIndex({
+            blockIndex: block.index,
+            boqColumnKey: 'qty',
+          })
+        }
+        onChange={() => {
+          updateTableHeaderCellAtBoqBlock({
+            blockIndex: block.index,
+            boqColumnKey: 'qty',
+            editorName: 'boqBlockQtyColumn',
+          })
+        }}
+        sx={columnHeaderStyle}
+      />
+    </ResizableColumn>
+  )
+}

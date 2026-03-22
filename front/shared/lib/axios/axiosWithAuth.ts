@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
 /* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
-import type { AxiosWithAuth } from '@shared/lib/axios/axiosConfig'
+import type { AxiosWithAuth } from '@front/shared/lib/axios/axiosConfig'
 
 export let axiosWithAuth = null as unknown as AxiosWithAuth
 

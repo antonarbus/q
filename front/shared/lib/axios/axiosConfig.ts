@@ -1,10 +1,10 @@
 import { route } from '@back/api/route'
 import type { ResBody } from '@back/api/user/getAccessTokenHandler'
 import { headerName } from '@back/shared/headers'
-import { userSlice } from '@entity/user/redux/userSlice'
-import { getAccessTokenDeferred } from '@feature/auth/try-to-log-in-without-prompt/AccessToken'
-import { instantiateAxiosWithAuth } from '@shared/lib/axios/axiosWithAuth'
-import { dispatch, getState } from '@shared/lib/redux'
+import { userSlice } from '@front/entities/user/redux/userSlice'
+import { getAccessTokenDeferred } from '@front/features/auth/try-to-log-in-without-prompt/AccessToken'
+import { instantiateAxiosWithAuth } from '@front/shared/lib/axios/axiosWithAuth'
+import { dispatch, getState } from '@front/shared/lib/redux'
 import axios, { AxiosError, type AxiosRequestConfig } from 'axios'
 
 const axiosWithAuth = axios.create({ withCredentials: true })

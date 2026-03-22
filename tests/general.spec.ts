@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 import { runtimeConfig } from '@root/config/runtime'
-import { route } from '@shared/lib/react-router-dom/route'
+import { route } from '@front/shared/lib/react-router-dom/route'
 
 test.describe('basic ui elements on front page', () => {
   test.use({ baseURL: runtimeConfig.front.baseUrl })

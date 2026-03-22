@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/prefer-destructuring */
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
 /* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
-import type { Dispatch, GetState, Store, UseSelector } from '@app/redux'
+import type { Dispatch, GetState, Store, UseSelector } from '@front/app/redux'
 import { useSelector as useSelectorNotTyped } from 'react-redux'
 
-export type { State as RootState } from '@app/redux'
+export type { State as RootState } from '@front/app/redux'
 
 export let store = null as unknown as Store
 export let useSelector = null as unknown as UseSelector

@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test'
-import { route } from '@shared/lib/react-router-dom/route'
+import { route } from '@front/shared/lib/react-router-dom/route'
 import { userFilePath } from './setup/userFilePath'
 import { runtimeConfig } from '@root/config/runtime'
 

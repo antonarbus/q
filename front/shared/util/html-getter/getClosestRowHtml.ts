@@ -1,4 +1,4 @@
-import { cls } from '@shared/cls'
+import { cls } from '@front/shared/cls'
 
 export const getClosestRowHtml = (event: React.MouseEvent): string => {
   const clickedIconElement = event.target

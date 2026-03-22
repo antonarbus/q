@@ -1,0 +1,58 @@
+import type { Editor } from '@tiptap/react'
+import { updateNumberAtHtmlIncrementally } from '@front/shared/lib/tiptap/util/updateNumberAtHtmlIncrementally'
+import { getNumberFromString } from '@front/shared/util/getNumberFromString'
+import { getStringWithNewFormattedNumber } from '@front/shared/util/getStringWithNewFormattedNumber'
+import { getTextContentFromHtml } from '@front/shared/util/getTextContentFromHtml'
+import type { CellKey } from '@back/entity/quotation/schema'
+import { getRowFromStoreByIndex } from '../redux/getter/getRowFromStoreByIndex'
+import { updateCellAtStore } from '../redux/updater/updateCellAtStore'
+
+type Props = {
+  blockIndex: number
+  rowIndex: number
+  editor: Editor | null
+  cellKey: CellKey
+  value: number
+}
+
+export const updateCellWithValue = (props: Props): void => {
+  if (props.editor === null) {
+    return
+  }
+
+  const row = getRowFromStoreByIndex({
+    blockIndex: props.blockIndex,
+    rowIndex: props.rowIndex,
+  })
+
+  if (row === undefined) {
+    return
+  }
+
+  const priceTextContent = getTextContentFromHtml({
+    html: row[props.cellKey].html,
+  })
+
+  const priceValueFromHtml = getNumberFromString({
+    string: priceTextContent,
+  })
+
+  const updatedHtml = getStringWithNewFormattedNumber({
+    string: row[props.cellKey].html,
+    newNumber: props.value,
+  })
+
+  updateCellAtStore({
+    blockIndex: props.blockIndex,
+    rowIndex: props.rowIndex,
+    cellKey: props.cellKey,
+    html: updatedHtml,
+  })
+
+  updateNumberAtHtmlIncrementally({
+    oldNumber: priceValueFromHtml,
+    newNumber: props.value,
+    totalPriceValueEditor: props.editor,
+    html: row[props.cellKey].html,
+  })
+}

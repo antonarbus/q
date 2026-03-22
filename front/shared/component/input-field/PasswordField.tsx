@@ -1,6 +1,6 @@
 import { IconButton, InputAdornment, TextField } from '@mui/material'
 import { type Signal, useSignal } from '@preact/signals-react'
-import { theme } from '@shared/theme'
+import { theme } from '@front/shared/theme'
 import { MdOutlineLock } from 'react-icons/md'
 import { VscEye, VscEyeClosed } from 'react-icons/vsc'
 

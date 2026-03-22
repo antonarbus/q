@@ -1,4 +1,4 @@
-import { dispatch } from '@shared/lib/redux'
+import { dispatch } from '@front/shared/lib/redux'
 import { useUpdateEffect } from 'react-use'
 import { agGridSlice } from '../agGridSlice'
 

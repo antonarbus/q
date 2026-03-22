@@ -5,8 +5,8 @@ import {
   type CSSObject,
   Typography,
 } from '@mui/material'
-import { cls } from '@shared/cls'
-import { theme } from '@shared/theme'
+import { cls } from '@front/shared/cls'
+import { theme } from '@front/shared/theme'
 import type { AnimationScope } from 'motion'
 import { AnimatePresence, motion } from 'motion/react'
 import { Children } from 'react'

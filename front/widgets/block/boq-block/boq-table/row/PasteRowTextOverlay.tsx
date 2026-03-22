@@ -1,0 +1,38 @@
+import { theme } from '@front/shared/theme'
+import { motion } from 'motion/react'
+
+export const PasteRowTextOverlay = (): React.JSX.Element => (
+  <motion.div
+    animate={{
+      height: 40,
+      opacity: 1,
+    }}
+    exit={{
+      height: 0,
+      opacity: 0,
+    }}
+    initial={{
+      height: 0,
+      opacity: 0,
+    }}
+    style={{
+      display: 'grid',
+      placeItems: 'center',
+      fontWeight: 600,
+      color: theme.copy.pasteTextColor,
+      userSelect: 'none',
+      borderBottom: '1px solid #e8e8e8',
+      marginBottom: '-1px',
+    }}
+    transition={{
+      height: {
+        duration: theme.block.animationDuration,
+      },
+      opacity: {
+        duration: 0,
+      },
+    }}
+  >
+    Paste here
+  </motion.div>
+)

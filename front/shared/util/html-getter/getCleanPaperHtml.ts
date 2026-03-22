@@ -1,4 +1,4 @@
-import { cls } from '@shared/cls'
+import { cls } from '@front/shared/cls'
 
 type Props = {
   paperElement: HTMLElement

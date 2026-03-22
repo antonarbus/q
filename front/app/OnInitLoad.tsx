@@ -1,10 +1,10 @@
-import { useLogoutIfAccessTokenExpired } from '@feature/auth/log-out/useLogoutIfAccessTokenExpired'
-import { useShowDragAndDropArea } from '@feature/file/upload-file'
-import { useConnectionToBackendCheck } from '@feature/on-init-load/check-connection-to-server/useConnectionToBackend'
-import { useCountUniqueDailyVisitor } from '@feature/on-init-load/count-unique-daily-visitors/useCountUniqueDailyVisitor'
-import { useHideInitHtmlElements } from '@feature/on-init-load/hide-loading-text/useHideInitHtmlElements'
-import { useRemoveThirdPartyCookies } from '@feature/on-init-load/remove-third-party-cookies/useRemoveThirdPartyCookies'
-import { useInitMousePositionTracking } from '@shared/util/mousePosition'
+import { useLogoutIfAccessTokenExpired } from '@front/features/auth/log-out/useLogoutIfAccessTokenExpired'
+import { useShowDragAndDropArea } from '@front/features/file/upload-file'
+import { useConnectionToBackendCheck } from '@front/features/on-init-load/check-connection-to-server/useConnectionToBackend'
+import { useCountUniqueDailyVisitor } from '@front/features/on-init-load/count-unique-daily-visitors/useCountUniqueDailyVisitor'
+import { useHideInitHtmlElements } from '@front/features/on-init-load/hide-loading-text/useHideInitHtmlElements'
+import { useRemoveThirdPartyCookies } from '@front/features/on-init-load/remove-third-party-cookies/useRemoveThirdPartyCookies'
+import { useInitMousePositionTracking } from '@front/shared/util/mousePosition'
 
 export const OnInitLoad = (): React.ReactNode => {
   useInitMousePositionTracking()

@@ -1,5 +1,5 @@
 import type { CSSObject } from '@mui/material'
-import { cls } from '@shared/cls'
+import { cls } from '@front/shared/cls'
 
 type NestedCSSObject = CSSObject & Record<`&${string}`, CSSObject>
 

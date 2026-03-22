@@ -10,8 +10,8 @@ import {
   TextField,
 } from '@mui/material'
 import { useLayoutEffect, useState } from 'react'
-import { dispatch, useSelector } from '@shared/lib/redux'
-import { appSlice } from '@shared/appSlice'
+import { dispatch, useSelector } from '@front/shared/lib/redux'
+import { appSlice } from '@front/shared/appSlice'
 
 let boolDeferred = Promise.withResolvers<boolean>()
 let stringDeferred = Promise.withResolvers<string | false>()

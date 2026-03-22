@@ -1,0 +1,35 @@
+import { appSlice } from '@front/shared/appSlice'
+import { route } from '@front/shared/lib/react-router-dom/route'
+import { dispatch } from '@front/shared/lib/redux'
+import { Link, useNavigate } from 'react-router-dom'
+
+type Props = {
+  prefilledEmail: string
+  slideOut: () => Promise<void>
+}
+
+export const OpenResetModalLink = (props: Props): React.JSX.Element => {
+  const navigate = useNavigate()
+
+  return (
+    <Link
+      onClick={(event: React.MouseEvent): void => {
+        event.preventDefault()
+
+        const slideAndNavigate = async (): Promise<void> => {
+          await props.slideOut()
+          dispatch(appSlice.actions.setNavigateState({ shouldSlide: true }))
+
+          void navigate(`../${route.requestPasswordReset}`, {
+            state: { prefilledEmail: props.prefilledEmail },
+          })
+        }
+
+        void slideAndNavigate()
+      }}
+      to={`../${route.requestPasswordReset}`}
+    >
+      Reset
+    </Link>
+  )
+}

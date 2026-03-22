@@ -1,4 +1,4 @@
-import { useSelector } from '@shared/lib/redux'
+import { useSelector } from '@front/shared/lib/redux'
 import { LoadingDots } from './loading-dots-overlay/LoadingDots'
 
 export const LoadingTableOverlay = (): React.JSX.Element | null => {

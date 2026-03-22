@@ -1,4 +1,4 @@
-import { cls } from '@shared/cls'
+import { cls } from '@front/shared/cls'
 import { useTiptapCtx } from '../provider/TiptapProvider'
 
 export const DropHereText = (): React.ReactNode => {
