@@ -21,7 +21,7 @@ export default defineConfig([
       'fsd/no-segmentless-slices': 'warn',
       'fsd/no-segments-on-sliced-layers': 'warn',
       'fsd/no-ui-in-app': 'warn',
-      'fsd/public-api': 'warn',
+      'fsd/public-api': 'off',
       'fsd/repetitive-naming': 'warn',
       'fsd/segments-by-purpose': 'warn',
       'fsd/shared-lib-grouping': 'warn',
