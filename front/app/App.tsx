@@ -1,7 +1,7 @@
 import './router'
 import './redux'
 import '../shared/lib/tanstack-query/queryClient'
-import './axiosConfig'
+import '../shared/lib/axios/axiosConfig'
 import { ThemeProvider } from '@mui/material/styles'
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
