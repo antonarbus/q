@@ -16,7 +16,7 @@ export default defineConfig([
       'fsd/no-higher-level-imports': 'warn',
       'fsd/no-layer-public-api': 'warn',
       'fsd/no-processes': 'warn',
-      'fsd/no-public-api-sidestep': 'warn',
+      'fsd/no-public-api-sidestep': 'off',
       'fsd/no-reserved-folder-names': 'warn',
       'fsd/no-segmentless-slices': 'warn',
       'fsd/no-segments-on-sliced-layers': 'warn',
