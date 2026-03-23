@@ -1,4 +1,4 @@
-import { columnMinWidth } from '@front/entities/quotation/const/columnMinWidth'
+import { columnMinWidth } from '@front/entities/quotation/ui/columnMinWidth'
 import { columnHeaderStyle } from '@front/entities/quotation/style/columnHeaderStyle'
 import { Box } from '@mui/material'
 import { ResizableColumn } from '../ResizableColumn'

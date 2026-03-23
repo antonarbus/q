@@ -2,7 +2,7 @@ import { useGetBookmarkCategoryListQuery } from '@front/entities/bookmark/api/us
 import { useGetBookmarkListQuery } from '@front/entities/bookmark/api/useGetBookmarkListQuery'
 import { useSaveBookmarkMutation } from '@front/entities/bookmark/api/useSaveBookmarkMutation'
 import type { BookmarkFormValues } from '@front/entities/bookmark/form/types'
-import { BOOKMARK_POS_AT_BLOCKS } from '@front/entities/quotation/const/bookmarkPosAtBlocks'
+import { BOOKMARK_POS_AT_BLOCKS } from '@front/entities/quotation/redux/bookmarkPosAtBlocks'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 
 import { cls } from '@front/shared/cls'

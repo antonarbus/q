@@ -1,4 +1,4 @@
-import { columnMinWidth } from '@front/entities/quotation/const/columnMinWidth'
+import { columnMinWidth } from '@front/entities/quotation/ui/columnMinWidth'
 import { getBoqColumnFromStoreByIndex } from '@front/entities/quotation/redux/getter/getBoqColumnFromStoreByIndex'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import type {

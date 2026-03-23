@@ -1,4 +1,4 @@
-import { BOOKMARK_POS_AT_BLOCKS } from '@front/entities/quotation/const/bookmarkPosAtBlocks'
+import { BOOKMARK_POS_AT_BLOCKS } from '@front/entities/quotation/redux/bookmarkPosAtBlocks'
 import { formatBookmarkedRowCellNumber } from '@front/entities/quotation/util/formatBookmarkedRowCellNumber'
 import {
   editorRegistry,

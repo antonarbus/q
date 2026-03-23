@@ -1,7 +1,7 @@
 import { dispatch, getState } from '@front/shared/lib/redux'
 import { getStringWithNewFormattedNumber } from '@front/shared/util/getStringWithNewFormattedNumber'
 import { roundTo } from 'round-to'
-import { BOOKMARK_POS_AT_BLOCKS } from '../const/bookmarkPosAtBlocks'
+import { BOOKMARK_POS_AT_BLOCKS } from '../redux/bookmarkPosAtBlocks'
 import type { CellKey } from '@back/entity/quotation/schema'
 import { quotationSlice } from '../redux/quotationSlice'
 import type { Editor } from '@tiptap/react'

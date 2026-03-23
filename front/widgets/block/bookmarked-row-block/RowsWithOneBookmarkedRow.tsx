@@ -1,4 +1,4 @@
-import { BOOKMARK_POS_AT_BLOCKS } from '@front/entities/quotation/const/bookmarkPosAtBlocks'
+import { BOOKMARK_POS_AT_BLOCKS } from '@front/entities/quotation/redux/bookmarkPosAtBlocks'
 import { RowProvider } from '@front/entities/quotation/provider/RowProvider'
 import { getState } from '@front/shared/lib/redux'
 import { BookmarkedRow } from './BookmarkedRow'

@@ -1,4 +1,4 @@
-import { BOOKMARK_POS_AT_BLOCKS } from '@front/entities/quotation/const/bookmarkPosAtBlocks'
+import { BOOKMARK_POS_AT_BLOCKS } from '@front/entities/quotation/redux/bookmarkPosAtBlocks'
 import type { BlockItem } from '@back/entity/quotation/schema'
 import { OpenInsertMenuButton } from '@front/features/open-close/open-insert-menu'
 import { AnimatePresence } from 'motion/react'

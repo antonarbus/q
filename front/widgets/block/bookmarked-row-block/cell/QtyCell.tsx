@@ -1,5 +1,5 @@
-import { BOOKMARK_POS_AT_BLOCKS } from '@front/entities/quotation/const/bookmarkPosAtBlocks'
-import { columnMinWidth } from '@front/entities/quotation/const/columnMinWidth'
+import { BOOKMARK_POS_AT_BLOCKS } from '@front/entities/quotation/redux/bookmarkPosAtBlocks'
+import { columnMinWidth } from '@front/entities/quotation/ui/columnMinWidth'
 import { useStylesForResizableCell } from '@front/entities/quotation/hook/useStylesForResizableCell'
 import { getHtmlOfBookmarkedRowCellFromStoreByIndex } from '@front/entities/quotation/redux/getter/getHtmlOfBookmarkedRowCellFromStoreByIndex'
 import { cellStyle } from '@front/entities/quotation/style/cellStyle'

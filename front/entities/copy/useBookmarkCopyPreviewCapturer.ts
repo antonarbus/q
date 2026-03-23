@@ -1,5 +1,5 @@
 import { copySlice } from '@front/entities/copy/copySlice'
-import { BOOKMARK_POS_AT_BLOCKS } from '@front/entities/quotation/const/bookmarkPosAtBlocks'
+import { BOOKMARK_POS_AT_BLOCKS } from '@front/entities/quotation/redux/bookmarkPosAtBlocks'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { dispatch, getState, useSelector } from '@front/shared/lib/redux'
 import { useEffect } from 'react'

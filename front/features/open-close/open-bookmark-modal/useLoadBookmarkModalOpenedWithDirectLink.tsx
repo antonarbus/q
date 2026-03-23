@@ -1,6 +1,6 @@
 import { useGetBookmarkMutation } from '@front/entities/bookmark/api/useGetBookmarkMutation'
 import type { BookmarkFormValues } from '@front/entities/bookmark/form/types'
-import { BOOKMARK_POS_AT_BLOCKS } from '@front/entities/quotation/const/bookmarkPosAtBlocks'
+import { BOOKMARK_POS_AT_BLOCKS } from '@front/entities/quotation/redux/bookmarkPosAtBlocks'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 
 import { dispatch, getState } from '@front/shared/lib/redux'

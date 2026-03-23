@@ -4,7 +4,7 @@ import { getState } from '@front/shared/lib/redux'
 import { getNumberFromString } from '@front/shared/util/getNumberFromString'
 import { getStringWithNewFormattedNumber } from '@front/shared/util/getStringWithNewFormattedNumber'
 import { getTextContentFromHtml } from '@front/shared/util/getTextContentFromHtml'
-import { BOOKMARK_POS_AT_BLOCKS } from '../const/bookmarkPosAtBlocks'
+import { BOOKMARK_POS_AT_BLOCKS } from '../redux/bookmarkPosAtBlocks'
 import type { CellKey } from '@back/entity/quotation/schema'
 import { updateBookmarkedRowCellAtStore } from '../redux/updater/updateBookmarkedRowCellAtStore'
 
