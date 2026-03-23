@@ -5,11 +5,13 @@
     "tests/setup/auth.setup.ts",
     "shared/const/permissionLevel.ts",
     "shared/types/*",
-    "front/entities/quotation/const/rowTypeKey.ts"
+    "front/entities/quotation/const/rowTypeKey.ts",
+    "steiger.config.ts"
   ],
   "ignoreDependencies": [
     "@preact/signals-react-transform",
-    "@emotion/babel-plugin"
+    "@emotion/babel-plugin",
+    "@feature-sliced/steiger-plugin"
   ],
   "ignoreBinaries": [
     "gcloud",
