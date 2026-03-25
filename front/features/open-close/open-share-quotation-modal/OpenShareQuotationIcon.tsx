@@ -1,13 +1,16 @@
 import { Tooltip } from '@mui/material'
 import { route } from '@front/shared/lib/react-router-dom/route'
-import { useSelector } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { BsPersonFillLock } from 'react-icons/bs'
 import { PiGlobe, PiGlobeX } from 'react-icons/pi'
 import { Link } from 'react-router-dom'
 
 export const OpenShareQuotationIcon = (): React.JSX.Element => {
-  const isCopyModalVisible = useSelector((state) => state.copy.isVisible)
-  const access = useSelector((state) => state.quotation.access)
+  const isCopyModalVisible = reduxHolder.useSelector(
+    (state) => state.copy.isVisible,
+  )
+
+  const access = reduxHolder.useSelector((state) => state.quotation.access)
 
   return (
     <Tooltip title='Share'>

@@ -1,5 +1,5 @@
 import { copySlice } from '@front/entities/copy/copySlice'
-import { dispatch, useSelector } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { theme } from '@front/shared/theme'
 import { type AnimationScope, useAnimate } from 'motion/react'
 import { useEffect } from 'react'
@@ -13,7 +13,7 @@ type Res = {
 export const useAnimatedCopyModalElement = (): Res => {
   const [scope, animate] = useAnimate<HTMLDivElement>()
   const isFirstMount = useFirstMountState()
-  const items = useSelector((state) => state.copy.items)
+  const items = reduxHolder.useSelector((state) => state.copy.items)
 
   useEffect(() => {
     const newHeight = items.reduce((accumulator, item) => {
@@ -48,10 +48,10 @@ export const useAnimatedCopyModalElement = (): Res => {
       },
     )
 
-    dispatch(copySlice.actions.forbidAllActions())
+    reduxHolder.dispatch(copySlice.actions.forbidAllActions())
 
     setTimeout(() => {
-      dispatch(copySlice.actions.allowAllActions())
+      reduxHolder.dispatch(copySlice.actions.allowAllActions())
     }, 1000 * theme.block.animationDuration)
   }, [items.length])
 

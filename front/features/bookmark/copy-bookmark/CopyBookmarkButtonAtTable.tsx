@@ -5,7 +5,7 @@ import { copySlice } from '@front/entities/copy/copySlice'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { IconButton, Tooltip } from '@mui/material'
 import { RotatingLoaderIcon } from '@front/shared/component/RotatingLoaderIcon'
-import { dispatch } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { getPreviewPreparingPromise } from '@front/entities/copy/useBookmarkCopyPreviewCapturer'
 import { useState } from 'react'
 import { MdCopyAll } from 'react-icons/md'
@@ -41,15 +41,15 @@ export const CopyBookmarkButtonAtTable = (
           // Load block into redux at pos 1000 synchronously so it is available
           // when CopyBookmarkCapture renders and its sub-components read from
           // getState().quotation.blocks[BOOKMARK_POS_AT_BLOCKS].
-          dispatch(
+          reduxHolder.dispatch(
             quotationSlice.actions.loadBlockAtPosThousand({
               block: data.bookmark,
             }),
           )
 
-          dispatch(copySlice.actions.startPreviewPreparing())
+          reduxHolder.dispatch(copySlice.actions.startPreviewPreparing())
 
-          dispatch(
+          reduxHolder.dispatch(
             copySlice.actions.setInitCursorPos({
               x: event.clientX,
               y: event.clientY,

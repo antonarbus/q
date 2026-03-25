@@ -1,11 +1,11 @@
 import { appSlice } from '@front/shared/appSlice'
-import { dispatch } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { useEffectOnce } from 'react-use'
 
 export const useResetQuotationOnNavigationButtonClick = (): void => {
   useEffectOnce(() => {
     const resetQuotationOnPopState = (): void => {
-      dispatch(
+      reduxHolder.dispatch(
         appSlice.actions.setShouldLoadQuotation({
           yesOrNo: 'yes',
           from: undefined,

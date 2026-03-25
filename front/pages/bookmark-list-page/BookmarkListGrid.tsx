@@ -11,7 +11,7 @@ import { GridLayout } from '@front/shared/lib/ag-grid/GridLayout'
 import { useRefetchDataOnEmailChange } from '@front/shared/lib/ag-grid/hooks/useRefetchDataOnEmailChange'
 import { useShowLoadingJumpingDots } from '@front/shared/lib/ag-grid/hooks/useShowLoadingJumpingDots'
 import { AgGridStyles } from '@front/shared/lib/ag-grid/styles/AgGridStyles'
-import { dispatch } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import {
   AllCommunityModule,
   type FilterChangedEvent,
@@ -54,7 +54,7 @@ export const BookmarkListGrid = (): React.JSX.Element => {
         }}
         onModelUpdated={(params) => {
           const count = params.api.getDisplayedRowCount()
-          dispatch(agGridSlice.actions.setCount({ count }))
+          reduxHolder.dispatch(agGridSlice.actions.setCount({ count }))
         }}
         ref={bookmarkListAgGridRef}
         rowData={getBookmarkListQuery.data?.bookmarkList}

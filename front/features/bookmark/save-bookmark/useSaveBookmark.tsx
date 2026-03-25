@@ -6,7 +6,7 @@ import { BOOKMARK_POS_AT_BLOCKS } from '@front/entities/quotation/redux/bookmark
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 
 import { cls } from '@front/shared/cls'
-import { dispatch, getState } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { asyncDelay } from '@front/shared/util/asyncDelay'
 import type { UseMutationResult } from '@tanstack/react-query'
 import { useCallback } from 'react'
@@ -63,7 +63,7 @@ export const useSaveBookmark = (props: Props): Res => {
   const handleSubmit = useCallback((event: React.SubmitEvent) => {
     event.preventDefault()
 
-    if (getState().user.email === null) {
+    if (reduxHolder.getState().user.email === null) {
       toast.warning('Not logged in')
 
       return
@@ -77,21 +77,23 @@ export const useSaveBookmark = (props: Props): Res => {
       return
     }
 
-    dispatch(
+    reduxHolder.dispatch(
       quotationSlice.actions.updateBlockHeight({
         blockIndex: BOOKMARK_POS_AT_BLOCKS,
         height: paperElement.clientHeight,
       }),
     )
 
-    dispatch(
+    reduxHolder.dispatch(
       quotationSlice.actions.updateBlockWidth({
         blockIndex: BOOKMARK_POS_AT_BLOCKS,
         width: paperElement.clientWidth,
       }),
     )
 
-    const bookmarkBlock = getState().quotation.blocks.at(BOOKMARK_POS_AT_BLOCKS)
+    const bookmarkBlock = reduxHolder
+      .getState()
+      .quotation.blocks.at(BOOKMARK_POS_AT_BLOCKS)
 
     if (bookmarkBlock === undefined) {
       toast.warning('No item loaded')

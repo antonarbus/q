@@ -1,6 +1,6 @@
 import { type NavItemId, navItemId } from '@front/entities/nav/navItemId'
 import { useMenuAnimation } from '@front/entities/nav/ui/NavList/NavItem/Menu/functions/useMenuAnimation'
-import { useSelector } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { createContext, useContext, useRef, useMemo } from 'react'
 
 type MenuNavigation = {
@@ -29,13 +29,15 @@ export const MenuNavigationProvider = (props: Props): React.JSX.Element => {
   const nextMenuRef = useRef<React.ComponentRef<'div'> | null>(null)
   const fakeMenuRef = useRef<React.ComponentRef<'div'> | null>(null)
 
-  const currentMenuNavItemId = useSelector(
+  const currentMenuNavItemId = reduxHolder.useSelector(
     (state) => state.nav.currentMenuNavItemId,
   )
 
-  const nextMenuNavItemId = useSelector((state) => state.nav.nextMenuNavItemId)
+  const nextMenuNavItemId = reduxHolder.useSelector(
+    (state) => state.nav.nextMenuNavItemId,
+  )
 
-  const idsToCurrentMenuItems = useSelector(
+  const idsToCurrentMenuItems = reduxHolder.useSelector(
     (state) => state.nav.idsToCurrentMenuItems,
   )
 

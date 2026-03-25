@@ -117,6 +117,12 @@ jobs:
       - name: 'Run ESLint'
         run: bun run lint-quiet
 
+      - name: 'Check dead code'
+        run: bun run knip
+
+      - name: 'Run FSD compliance checks'
+        run: bun run fsd
+
       - name: 'Verify frontend build'
         run: bun run build-front
 

@@ -1,5 +1,5 @@
 import { useMenuNavigation } from '@front/entities/nav/provider/MenuNavigationProvider'
-import { dispatch, useSelector } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { theme } from '@front/shared/theme'
 import { FaChevronLeft } from 'react-icons/fa'
 import { navSlice } from '../../../../../navSlice'
@@ -9,7 +9,10 @@ import { TextInMenu } from './TextInMenu'
 
 export const BackMenuItem = (): React.JSX.Element => {
   const menuNavigation = useMenuNavigation()
-  const isHovered = useSelector((state) => state.nav.hoverIndex === 0)
+
+  const isHovered = reduxHolder.useSelector(
+    (state) => state.nav.hoverIndex === 0,
+  )
 
   const color = theme.colors.topMenuItem
 
@@ -21,7 +24,7 @@ export const BackMenuItem = (): React.JSX.Element => {
         void menuNavigation.goUp()
       }}
       onMouseEnter={(): void => {
-        dispatch(
+        reduxHolder.dispatch(
           navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
         )
       }}

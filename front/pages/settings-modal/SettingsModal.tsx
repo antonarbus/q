@@ -4,7 +4,7 @@ import { Avatar, Box, Collapse } from '@mui/material'
 import { BackdropWithSlidableModal } from '@front/shared/component/BackdropWithSlidableModal'
 import { CardCustom } from '@front/shared/component/CardCustom'
 import { RotatingLoaderIcon } from '@front/shared/component/RotatingLoaderIcon'
-import { getState } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { theme } from '@front/shared/theme'
 import { format } from 'bytes'
 import { useMemo, useRef, useState } from 'react'
@@ -54,7 +54,7 @@ export const SettingsModal = (): React.JSX.Element => {
           paddingLeft: '20px',
           paddingRight: '20px',
         }}
-        title={getState().user.email}
+        title={reduxHolder.getState().user.email}
       >
         <Box
           sx={{

@@ -3,18 +3,15 @@ import {
   onBlockDragStart,
 } from '@front/features/blocks/drag-item/onBlockDrag'
 import { DragDropContext, Droppable } from '@hello-pangea/dnd'
-import { getState } from '@front/shared/lib/redux'
 
 type Props = {
   children: React.ReactNode
 }
 
 export const BlocksSortableContext = (props: Props): React.JSX.Element => {
-  const blockIds = getState().quotation.blocks.map((block) => block.id)
-
   return (
     <DragDropContext
-      onDragEnd={onBlockDragEnd({ itemIds: blockIds })}
+      onDragEnd={onBlockDragEnd()}
       onDragStart={onBlockDragStart}
     >
       <Droppable droppableId='blocks'>

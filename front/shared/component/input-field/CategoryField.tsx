@@ -20,7 +20,7 @@ export const CategoryField = (props: Props): React.JSX.Element => {
       <Autocomplete
         freeSolo
         inputValue={categorySignal.value}
-        onInputChange={(event, newInputValue) => {
+        onInputChange={(_event, newInputValue) => {
           categorySignal.value = newInputValue
         }}
         options={options}
@@ -59,7 +59,7 @@ export const CategoryField = (props: Props): React.JSX.Element => {
             />
           )
         }}
-        renderOption={(params, option, { selected, index, inputValue }) => {
+        renderOption={(params, option) => {
           return (
             <li
               {...params}

@@ -1,1 +1,1 @@
-export { dispatch, getState, type RootState, store, useSelector } from './redux'
+export { reduxHolder, type RootState } from './redux'

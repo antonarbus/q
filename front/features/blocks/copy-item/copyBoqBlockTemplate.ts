@@ -21,7 +21,7 @@ import rowTwoPriceHtml from '@front/entities/quotation/templates/rowTwoPrice.htm
 import rowTwoQtyHtml from '@front/entities/quotation/templates/rowTwoQty.html?raw'
 import type { BoqBlock } from '@back/entity/quotation/schema'
 import { generateId } from '@front/shared/lib/nanoid'
-import { dispatch, getState } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 
 export const copyBoqBlockTemplate = (event?: React.MouseEvent): void => {
   const boqBlockTemplate: BoqBlock = {
@@ -220,23 +220,23 @@ export const copyBoqBlockTemplate = (event?: React.MouseEvent): void => {
     },
   }
 
-  dispatch(
+  reduxHolder.dispatch(
     copySlice.actions.addItem({
       item: boqBlockTemplate,
       preview: boqBlockPreviewHtml,
     }),
   )
 
-  const isCopyModalVisible = getState().copy.isVisible
+  const isCopyModalVisible = reduxHolder.getState().copy.isVisible
 
   if (isCopyModalVisible === false && event !== undefined) {
-    dispatch(
+    reduxHolder.dispatch(
       copySlice.actions.setInitCursorPos({
         x: event.clientX,
         y: event.clientY,
       }),
     )
 
-    dispatch(copySlice.actions.showCopyModal())
+    reduxHolder.dispatch(copySlice.actions.showCopyModal())
   }
 }

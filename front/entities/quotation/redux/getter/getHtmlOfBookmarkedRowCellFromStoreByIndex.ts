@@ -1,6 +1,6 @@
 import { BOOKMARK_POS_AT_BLOCKS } from '@front/entities/quotation/redux/bookmarkPosAtBlocks'
 import type { CellKey } from '@back/entity/quotation/schema'
-import { getState } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 
 type Props = {
   cellKey: CellKey
@@ -9,7 +9,7 @@ type Props = {
 export const getHtmlOfBookmarkedRowCellFromStoreByIndex = (
   props: Props,
 ): string => {
-  const block = getState().quotation.blocks[BOOKMARK_POS_AT_BLOCKS]
+  const block = reduxHolder.getState().quotation.blocks[BOOKMARK_POS_AT_BLOCKS]
 
   if (block?.type !== 'row') {
     return ''

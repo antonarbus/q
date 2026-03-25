@@ -1,5 +1,5 @@
 import { navSlice } from '@front/entities/nav/navSlice'
-import { dispatch } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { didClickInsideThisElement } from '@front/shared/util/isClickInsideThisElement'
 import { useEffect } from 'react'
 
@@ -51,7 +51,7 @@ export const useCloseMenuOnClickOutside = (props: Props): void => {
           thisElement: menuContainer,
         }) === false
       ) {
-        dispatch(navSlice.actions.closeMenu())
+        reduxHolder.dispatch(navSlice.actions.closeMenu())
       }
     }
   }

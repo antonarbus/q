@@ -1,10 +1,13 @@
 import { navItemId } from '@front/entities/nav/navItemId'
-import { useSelector } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { NavItem } from './NavItem'
 
 export const NavList = (): React.JSX.Element => {
-  const navStructure = useSelector((state) => state.nav.navStructure)
-  const navMode = useSelector((state) => state.nav.navMode)
+  const navStructure = reduxHolder.useSelector(
+    (state) => state.nav.navStructure,
+  )
+
+  const navMode = reduxHolder.useSelector((state) => state.nav.navMode)
 
   const navStructureToLoad =
     navMode === 'hamburger' ? navStructure : navStructure[0]?.nestedItemList

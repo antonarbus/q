@@ -1,4 +1,4 @@
-import { getState } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import type { BlockItem } from '@back/entity/quotation/schema'
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
 export const getBlockFromStoreByIndex = (
   props: Props,
 ): BlockItem | undefined => {
-  const block = getState().quotation.blocks[props.blockIndex]
+  const block = reduxHolder.getState().quotation.blocks[props.blockIndex]
 
   if (block === undefined) {
     return

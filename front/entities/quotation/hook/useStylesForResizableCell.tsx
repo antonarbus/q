@@ -1,4 +1,4 @@
-import { useSelector } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { selectColumnWidth } from '../redux/selector/selectColumnWidth'
 import type { BoqColumnKey } from '@back/entity/quotation/schema'
 import type { CSSObject } from '@mui/material'
@@ -10,7 +10,7 @@ type Props = {
 }
 
 export const useStylesForResizableCell = (props: Props): CSSObject => {
-  const columnWidth = useSelector(
+  const columnWidth = reduxHolder.useSelector(
     selectColumnWidth({
       blockIndex: props.blockIndex,
       boqColumnKey: props.boqColumnKey,

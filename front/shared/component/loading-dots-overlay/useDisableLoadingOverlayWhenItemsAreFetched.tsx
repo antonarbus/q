@@ -1,5 +1,5 @@
 import { appSlice } from '@front/shared/appSlice'
-import { dispatch } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { useEffect } from 'react'
 
 type Props = {
@@ -11,7 +11,7 @@ export const useDisableLoadingOverlayWhenItemsAreFetched = (
 ): void => {
   useEffect(() => {
     if (props.isFetched === true) {
-      dispatch(appSlice.actions.hideLoadingOverlay())
+      reduxHolder.dispatch(appSlice.actions.hideLoadingOverlay())
     }
   }, [props.isFetched])
 }

@@ -5,7 +5,7 @@ import {
   type Reducer,
   type WritableDraft,
 } from '@reduxjs/toolkit'
-import { instance } from '@front/shared/instance'
+import { getNavStructure } from './navStructureHolder'
 import { getMenuItemPropValue } from './getMenuItemPropValue'
 import { setMenuItemPropValue } from './setMenuItemPropValue'
 import type { NavItem, NavItemId } from './type'
@@ -174,7 +174,7 @@ export const navSlice = createSlice({
 
       if (action.payload.navItemNameWhileLoading !== undefined) {
         const initialMenuItemName = getMenuItemPropValue({
-          menu: instance.navStructure,
+          menu: getNavStructure(),
           navItemId: action.payload.navItemId,
           prop: 'name',
         })

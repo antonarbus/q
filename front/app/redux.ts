@@ -5,8 +5,7 @@ import { userReducer } from '@front/entities/user/redux/userSlice'
 import { configureStore } from '@reduxjs/toolkit'
 import { appReducer } from '@front/shared/appSlice'
 import { agGridReducer } from '@front/shared/lib/ag-grid/agGridSlice'
-import { instantiateStore } from '@front/shared/lib/redux/redux'
-import type { TypedUseSelectorHook } from 'react-redux'
+import { reduxHolder } from '@front/shared/lib/redux/redux'
 
 const store = configureStore({
   reducer: {
@@ -24,10 +23,18 @@ const store = configureStore({
   devTools: process.env.NODE_ENV !== 'production',
 })
 
-export type Store = typeof store
-export type State = ReturnType<typeof store.getState>
-export type Dispatch = typeof store.dispatch
-export type GetState = typeof store.getState
-export type UseSelector = TypedUseSelectorHook<State>
+// Augment the Register interface in shared so that shared/lib/redux/redux.ts
+// derives RootState, AppDispatch etc. from the concrete store — without shared importing app.
+declare module '@front/shared/lib/redux/register' {
+  // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
+  interface Register {
+    state: ReturnType<typeof store.getState>
+    dispatch: typeof store.dispatch
+    store: typeof store
+  }
+}
 
-instantiateStore(store)
+export { store }
+
+// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+reduxHolder.store = store

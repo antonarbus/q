@@ -13,7 +13,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => HttpResponse<ResBody>
 
-export const rootHandler: RouterHandler = (req, res, next) => {
+export const rootHandler: RouterHandler = () => {
   return httpJsonResponse({
     statusCode: httpStatusCode.success200,
     body: `I am Express JS running on Bun version ${Bun.version}. Who are you?`,

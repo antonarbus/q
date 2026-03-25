@@ -1,7 +1,7 @@
 import type { Editor } from '@tiptap/react'
 import { updateNumberAtHtml } from '@front/shared/lib/tiptap/util/updateNumberAtHtml'
 import { updateNumberAtHtmlIncrementally } from '@front/shared/lib/tiptap/util/updateNumberAtHtmlIncrementally'
-import { dispatch } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { getStringWithNewFormattedNumber } from '@front/shared/util/getStringWithNewFormattedNumber'
 import { getBoqBlockFromStoreByIndex } from '../redux/getter/getBoqBlockFromStoreByIndex'
 import { quotationSlice } from '../redux/quotationSlice'
@@ -47,7 +47,7 @@ export const updateSubTotalPriceWithValue = (props: Props): Res => {
     newNumber: props.value,
   })
 
-  dispatch(
+  reduxHolder.dispatch(
     quotationSlice.actions.updateSubTotalPrice({
       blockIndex: props.blockIndex,
       html: updatedHtml,

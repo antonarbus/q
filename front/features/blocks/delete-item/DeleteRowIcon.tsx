@@ -6,16 +6,18 @@ import { recalculateSubTotalPrices } from '@front/entities/quotation/util/recalc
 import { recalculateTotalPrices } from '@front/entities/quotation/util/recalculateTotalPrices'
 import { Tooltip } from '@mui/material'
 import { cls } from '@front/shared/cls'
-import { dispatch, useSelector } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { GoTrash } from 'react-icons/go'
 
 export const DeleteRowIcon = (): React.JSX.Element => {
   const block = useBlock()
   const row = useRow()
 
-  const isLastRow = useSelector(selectIsLastRow({ blockIndex: block.index }))
+  const isLastRow = reduxHolder.useSelector(
+    selectIsLastRow({ blockIndex: block.index }),
+  )
 
-  const isDeletable = useSelector((state) => state.copy.isDeletable)
+  const isDeletable = reduxHolder.useSelector((state) => state.copy.isDeletable)
   const disabled = isLastRow || isDeletable === false
 
   return (
@@ -38,7 +40,7 @@ export const DeleteRowIcon = (): React.JSX.Element => {
               return
             }
 
-            dispatch(
+            reduxHolder.dispatch(
               quotationSlice.actions.deleteRow({
                 blockIndex: block.index,
                 rowIndex: row.index,

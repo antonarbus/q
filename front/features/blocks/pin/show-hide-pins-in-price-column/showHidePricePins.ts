@@ -1,6 +1,6 @@
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { cls } from '@front/shared/cls'
-import { dispatch } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 
 type Props = {
   event: MouseEvent
@@ -10,7 +10,7 @@ type Props = {
 }
 
 export const showHidePricePins = (props: Props): void => {
-  dispatch(
+  reduxHolder.dispatch(
     quotationSlice.actions.showBoqPriceCellPins({
       blockIndex: props.blockIndex,
     }),
@@ -38,7 +38,7 @@ export const showHidePricePins = (props: Props): void => {
       )
     }
 
-    dispatch(
+    reduxHolder.dispatch(
       quotationSlice.actions.hideBoqPriceCellPins({
         blockIndex: props.blockIndex,
       }),

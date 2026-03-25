@@ -5,14 +5,14 @@ import { getRowFromStoreByIndex } from '@front/entities/quotation/redux/getter/g
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { Tooltip } from '@mui/material'
 import { cls } from '@front/shared/cls'
-import { dispatch, getState, useSelector } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { getClosestRowHtml } from '@front/shared/util/html-getter/getClosestRowHtml'
 import { MdCopyAll } from 'react-icons/md'
 
 export const CopyRowIcon = (): React.JSX.Element => {
   const block = useBlock()
   const row = useRow()
-  const isCopyable = useSelector((state) => state.copy.isCopyable)
+  const isCopyable = reduxHolder.useSelector((state) => state.copy.isCopyable)
   const disabled = isCopyable === false
 
   return (
@@ -42,7 +42,7 @@ export const CopyRowIcon = (): React.JSX.Element => {
               return
             }
 
-            dispatch(
+            reduxHolder.dispatch(
               quotationSlice.actions.updateRowHeightAndWidth({
                 blockIndex: block.index,
                 rowIndex: row.index,
@@ -62,26 +62,26 @@ export const CopyRowIcon = (): React.JSX.Element => {
 
             const html = getClosestRowHtml(event)
 
-            dispatch(
+            reduxHolder.dispatch(
               copySlice.actions.addItem({
                 item: rowFromStore,
                 preview: html,
               }),
             )
 
-            dispatch(copySlice.actions.allowToPaste())
+            reduxHolder.dispatch(copySlice.actions.allowToPaste())
 
-            const isCopyModalVisible = getState().copy.isVisible
+            const isCopyModalVisible = reduxHolder.getState().copy.isVisible
 
             if (isCopyModalVisible === false) {
-              dispatch(
+              reduxHolder.dispatch(
                 copySlice.actions.setInitCursorPos({
                   x: event.clientX,
                   y: event.clientY,
                 }),
               )
 
-              dispatch(copySlice.actions.showCopyModal())
+              reduxHolder.dispatch(copySlice.actions.showCopyModal())
             }
           }}
           style={{

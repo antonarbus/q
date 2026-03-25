@@ -8,7 +8,7 @@ import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import type { Quotation } from '@back/entity/quotation/schema'
 import type { SaveQuotationFormValues } from '@front/entities/quotation/form/types'
 import { route } from '@front/shared/lib/react-router-dom/route'
-import { dispatch, getState } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { asyncDelay } from '@front/shared/util/asyncDelay'
 import type { UseMutationResult } from '@tanstack/react-query'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -81,12 +81,12 @@ export const useSaveQuotation = (props: Props): Res => {
       void getQuotationListQuery.refetch()
 
       loadingIconActor.send({ type: 'show success icon' })
-      dispatch(navSlice.actions.removeUnderlineFromTopNav())
+      reduxHolder.dispatch(navSlice.actions.removeUnderlineFromTopNav())
 
-      dispatch(
+      reduxHolder.dispatch(
         quotationSlice.actions.loadQuotation({
           quotation: {
-            ...getState().quotation,
+            ...reduxHolder.getState().quotation,
             ...saveQuotationMutation.data.quotation,
           },
         }),
@@ -119,19 +119,19 @@ export const useSaveQuotation = (props: Props): Res => {
   const handleSubmit = (event: React.SubmitEvent): void => {
     event.preventDefault()
 
-    if (getState().user.email === null) {
+    if (reduxHolder.getState().user.email === null) {
       toast.warning('Not logged in')
 
       return
     }
 
     const quotation: Quotation = {
-      ...getState().quotation,
+      ...reduxHolder.getState().quotation,
       name: props.saveQuotationFormValues.nameSignal.value,
       category: props.saveQuotationFormValues.categorySignal.value,
       desc: props.saveQuotationFormValues.descSignal.value,
       info: props.saveQuotationFormValues.infoSignal.value,
-      blocks: getState().quotation.blocks,
+      blocks: reduxHolder.getState().quotation.blocks,
     }
 
     saveQuotationMutation.mutate({ quotation })

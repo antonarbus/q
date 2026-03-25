@@ -46,7 +46,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<HttpResponse<ResBody>>
 
-export const activateHandler: RouterHandler = async (req, res, next) => {
+export const activateHandler: RouterHandler = async (req, res) => {
   const messageList: string[] = []
 
   const [userSelected] = await db

@@ -4,9 +4,9 @@ import type {
   OnBlockResizeStart,
   OnBlockResizeStop,
 } from '@front/shared/lib/re-resizable/resizablePaper'
-import { dispatch, getState } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 
-export const onTextBlockResizeStart: OnBlockResizeStart = (props) => {
+export const onTextBlockResizeStart: OnBlockResizeStart = () => {
   // nothing yet
 }
 
@@ -22,13 +22,15 @@ export const onTextBlockResizeStart: OnBlockResizeStart = (props) => {
 
 export const onTextBlockResizeStop: OnBlockResizeStop = (props) => {
   const width = parseInt(props.elementRef.style.width)
-  const prevItemWidth = getState().quotation.blocks[props.blockIndex]?.width
+
+  const prevItemWidth =
+    reduxHolder.getState().quotation.blocks[props.blockIndex]?.width
 
   if (width === prevItemWidth) {
     return
   }
 
-  dispatch(
+  reduxHolder.dispatch(
     quotationSlice.actions.updateBlockWidth({
       blockIndex: props.blockIndex,
       width,

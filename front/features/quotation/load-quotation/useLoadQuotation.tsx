@@ -5,7 +5,7 @@ import { newQuotationTemplate } from '@front/entities/quotation/newQuotationTemp
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { backToQuotationRef } from '@front/entities/quotation/ref/backToQuotationRef'
 import { appSlice } from '@front/shared/appSlice'
-import { dispatch, useSelector } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { asyncDelay } from '@front/shared/util/asyncDelay'
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
@@ -15,7 +15,7 @@ import { toast } from 'sonner'
 export const useLoadQuotation = (): void => {
   const urlParams = useParams()
 
-  const shouldLoadQuotation = useSelector(
+  const shouldLoadQuotation = reduxHolder.useSelector(
     (state) => state.app.shouldLoadQuotation,
   )
 
@@ -48,7 +48,7 @@ export const useLoadQuotation = (): void => {
   useEffectOnce(() => {
     const fromWhereToLoad = getFromWhereToLoadQuotation()
 
-    dispatch(
+    reduxHolder.dispatch(
       appSlice.actions.setShouldLoadQuotation({
         yesOrNo: 'yes',
         from: fromWhereToLoad,
@@ -65,21 +65,24 @@ export const useLoadQuotation = (): void => {
 
         // load previous quotation when user clicks on "< Back" button
         if (fromWhereToLoad === 'memory') {
-          dispatch(
+          reduxHolder.dispatch(
             appSlice.actions.showLoadingOverlay({
               shouldShowLoader: true,
               text: 'Going back...',
             }),
           )
 
-          dispatch(appSlice.actions.setBackgroundMessage({ message: '' }))
-          dispatch(navSlice.actions.removeUnderlineFromTopNav())
+          reduxHolder.dispatch(
+            appSlice.actions.setBackgroundMessage({ message: '' }),
+          )
 
-          dispatch(
+          reduxHolder.dispatch(navSlice.actions.removeUnderlineFromTopNav())
+
+          reduxHolder.dispatch(
             navSlice.actions.hideNavItems({ navItemIds: [navItemId.back] }),
           )
 
-          dispatch(
+          reduxHolder.dispatch(
             navSlice.actions.enableNavItems({
               navItemIds: [
                 navItemId.save,
@@ -92,17 +95,17 @@ export const useLoadQuotation = (): void => {
           )
 
           if (backToQuotationRef.current !== null) {
-            dispatch(quotationSlice.actions.resetQuotation())
+            reduxHolder.dispatch(quotationSlice.actions.resetQuotation())
 
             await asyncDelay(0)
 
-            dispatch(
+            reduxHolder.dispatch(
               quotationSlice.actions.loadQuotation({
                 quotation: backToQuotationRef.current,
               }),
             )
 
-            dispatch(
+            reduxHolder.dispatch(
               appSlice.actions.setShouldLoadQuotation({
                 yesOrNo: 'no',
                 from: undefined,
@@ -111,27 +114,30 @@ export const useLoadQuotation = (): void => {
           }
 
           setTimeout(() => {
-            dispatch(appSlice.actions.hideLoadingOverlay())
+            reduxHolder.dispatch(appSlice.actions.hideLoadingOverlay())
           }, 1250)
         }
 
         // load new quotation template
         if (fromWhereToLoad === 'template') {
-          dispatch(
+          reduxHolder.dispatch(
             appSlice.actions.showLoadingOverlay({
               shouldShowLoader: true,
               text: 'Loading template...',
             }),
           )
 
-          dispatch(appSlice.actions.setBackgroundMessage({ message: '' }))
-          dispatch(navSlice.actions.removeUnderlineFromTopNav())
+          reduxHolder.dispatch(
+            appSlice.actions.setBackgroundMessage({ message: '' }),
+          )
 
-          dispatch(
+          reduxHolder.dispatch(navSlice.actions.removeUnderlineFromTopNav())
+
+          reduxHolder.dispatch(
             navSlice.actions.hideNavItems({ navItemIds: [navItemId.back] }),
           )
 
-          dispatch(
+          reduxHolder.dispatch(
             navSlice.actions.enableNavItems({
               navItemIds: [
                 navItemId.save,
@@ -143,25 +149,25 @@ export const useLoadQuotation = (): void => {
             }),
           )
 
-          dispatch(quotationSlice.actions.resetQuotation())
+          reduxHolder.dispatch(quotationSlice.actions.resetQuotation())
 
           await asyncDelay(0)
 
-          dispatch(
+          reduxHolder.dispatch(
             quotationSlice.actions.loadQuotation({
               quotation: newQuotationTemplate,
             }),
           )
 
           setTimeout(() => {
-            dispatch(appSlice.actions.hideLoadingOverlay())
+            reduxHolder.dispatch(appSlice.actions.hideLoadingOverlay())
           }, 1250)
 
-          dispatch(
+          reduxHolder.dispatch(
             navSlice.actions.underlineNavItem({ navItemId: navItemId.new }),
           )
 
-          dispatch(
+          reduxHolder.dispatch(
             appSlice.actions.setShouldLoadQuotation({
               yesOrNo: 'no',
               from: undefined,
@@ -171,7 +177,7 @@ export const useLoadQuotation = (): void => {
 
         // load quotation from server
         if (fromWhereToLoad === 'server') {
-          dispatch(
+          reduxHolder.dispatch(
             appSlice.actions.showLoadingOverlay({
               shouldShowLoader: true,
               text: `Loading ${urlParams.quotationId}...`,
@@ -182,22 +188,25 @@ export const useLoadQuotation = (): void => {
             getQuotationMutation.mutate({ id: urlParams.quotationId })
           }
 
-          dispatch(
+          reduxHolder.dispatch(
             appSlice.actions.setShouldLoadQuotation({
               yesOrNo: 'no',
               from: undefined,
             }),
           )
 
-          dispatch(appSlice.actions.setBackgroundMessage({ message: '' }))
-          dispatch(quotationSlice.actions.resetQuotation())
-          dispatch(navSlice.actions.removeUnderlineFromTopNav())
+          reduxHolder.dispatch(
+            appSlice.actions.setBackgroundMessage({ message: '' }),
+          )
 
-          dispatch(
+          reduxHolder.dispatch(quotationSlice.actions.resetQuotation())
+          reduxHolder.dispatch(navSlice.actions.removeUnderlineFromTopNav())
+
+          reduxHolder.dispatch(
             navSlice.actions.hideNavItems({ navItemIds: [navItemId.back] }),
           )
 
-          dispatch(
+          reduxHolder.dispatch(
             navSlice.actions.enableNavItems({
               navItemIds: [
                 navItemId.save,
@@ -218,27 +227,27 @@ export const useLoadQuotation = (): void => {
   // above we triggered quotation loading, now we handle the response
   useUpdateEffect(() => {
     if (getQuotationMutation.isSuccess === true) {
-      dispatch(
+      reduxHolder.dispatch(
         quotationSlice.actions.loadQuotation({
           quotation: getQuotationMutation.data.quotation,
         }),
       )
 
       if (getQuotationMutation.data.quotation.permissionLevel === 'FORBIDDEN') {
-        dispatch(
+        reduxHolder.dispatch(
           quotationSlice.actions.loadQuotation({
             quotation: getQuotationMutation.data.quotation,
           }),
         )
 
-        dispatch(
+        reduxHolder.dispatch(
           appSlice.actions.setBackgroundMessage({
             message: `Forbidden to view quotation ${urlParams.quotationId}`,
           }),
         )
       }
 
-      dispatch(
+      reduxHolder.dispatch(
         navSlice.actions.enableNavItems({
           navItemIds: [
             navItemId.save,
@@ -251,7 +260,7 @@ export const useLoadQuotation = (): void => {
       )
 
       setTimeout(() => {
-        dispatch(appSlice.actions.hideLoadingOverlay())
+        reduxHolder.dispatch(appSlice.actions.hideLoadingOverlay())
       }, 1250)
     }
   }, [getQuotationMutation.isSuccess])
@@ -262,7 +271,7 @@ export const useLoadQuotation = (): void => {
         getQuotationMutation.error.response?.data.errorCode ===
         'QUOTATION_NOT_FOUND'
       ) {
-        dispatch(
+        reduxHolder.dispatch(
           appSlice.actions.setBackgroundMessage({
             message: `Quotation ${urlParams.quotationId} not found`,
           }),
@@ -273,7 +282,7 @@ export const useLoadQuotation = (): void => {
         getQuotationMutation.error.response?.data.errorCode ===
         'QUOTATION_STORAGE_NOT_FOUND'
       ) {
-        dispatch(
+        reduxHolder.dispatch(
           appSlice.actions.setBackgroundMessage({
             message: `Quotation ${urlParams.quotationId} not found, probably deleted`,
           }),
@@ -285,13 +294,13 @@ export const useLoadQuotation = (): void => {
       ) {
         toast.error('Internal error')
 
-        dispatch(
+        reduxHolder.dispatch(
           appSlice.actions.setBackgroundMessage({ message: 'Internal error' }),
         )
       }
 
       setTimeout(() => {
-        dispatch(appSlice.actions.hideLoadingOverlay())
+        reduxHolder.dispatch(appSlice.actions.hideLoadingOverlay())
       }, 1250)
     }
   }, [getQuotationMutation.isError])

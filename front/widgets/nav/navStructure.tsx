@@ -1,6 +1,6 @@
 import { navItemId } from '@front/entities/nav/navItemId'
+import { setNavStructure } from '@front/entities/nav/navStructureHolder'
 import type { NavItem } from '@front/entities/nav/type'
-import { instance } from '@front/shared/instance'
 import { route } from '@front/shared/lib/react-router-dom/route'
 
 export const navStructure: NavItem[] = [
@@ -248,4 +248,4 @@ export const navStructure: NavItem[] = [
   },
 ]
 
-instance.navStructure = navStructure
+setNavStructure(navStructure)

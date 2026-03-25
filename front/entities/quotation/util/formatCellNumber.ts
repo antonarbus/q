@@ -1,4 +1,4 @@
-import { dispatch } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { getStringWithNewFormattedNumber } from '@front/shared/util/getStringWithNewFormattedNumber'
 import { roundTo } from 'round-to'
 import type { CellKey } from '@back/entity/quotation/schema'
@@ -51,7 +51,7 @@ export const formatCellNumber = (props: Props): Res => {
     }
   }
 
-  dispatch(
+  reduxHolder.dispatch(
     quotationSlice.actions.updateCell({
       blockIndex: props.blockIndex,
       rowIndex: props.rowIndex,

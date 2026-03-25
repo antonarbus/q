@@ -41,7 +41,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<HttpResponse<ResBody>>
 
-export const getUserListHandler: RouterHandler = async (req, res, next) => {
+export const getUserListHandler: RouterHandler = async (req) => {
   const messageList: string[] = []
 
   const userFromAccessToken = await getUserFromAccessTokenOrThrowUnauthorized({

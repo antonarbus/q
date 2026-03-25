@@ -1,7 +1,7 @@
 import { navItemId } from '@front/entities/nav/navItemId'
 import { navSlice } from '@front/entities/nav/navSlice'
 import type { NavItem } from '@front/entities/nav/type'
-import { dispatch, getState } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { functionRegistry } from '@front/widgets/nav/functionRegistry'
 
 type Props = {
@@ -40,23 +40,24 @@ export const clickOnNavItem = (props: Props): void => {
   props.event.preventDefault()
 
   // handle burger close separately
-  const isBurger = getState().nav.currentMenuNavItemId === navItemId.burger
+  const isBurger =
+    reduxHolder.getState().nav.currentMenuNavItemId === navItemId.burger
 
   if (isBurger === true) {
-    dispatch(navSlice.actions.closeMenu())
+    reduxHolder.dispatch(navSlice.actions.closeMenu())
 
     return
   }
 
   // if click on NavItem for which Menu is opened, then close it, otherwise it closes and opens immediately
-  const state = getState()
+  const state = reduxHolder.getState()
 
   const isMenuOpenedUnderThisNavItem =
     state.nav.currentMenuNavItemId === props.navItem.id &&
     state.nav.currentMenuNavItemId !== navItemId.burger
 
   if (isMenuOpenedUnderThisNavItem === true) {
-    dispatch(navSlice.actions.closeMenu())
+    reduxHolder.dispatch(navSlice.actions.closeMenu())
 
     return
   }
@@ -72,7 +73,12 @@ export const clickOnNavItem = (props: Props): void => {
     const navItemRightPos =
       props.navItemRef.current.getBoundingClientRect().right
 
-    dispatch(navSlice.actions.setNavItemRightPos({ navItemRightPos }))
-    dispatch(navSlice.actions.openMenuWithId({ navItemId: props.navItem.id }))
+    reduxHolder.dispatch(
+      navSlice.actions.setNavItemRightPos({ navItemRightPos }),
+    )
+
+    reduxHolder.dispatch(
+      navSlice.actions.openMenuWithId({ navItemId: props.navItem.id }),
+    )
   }
 }

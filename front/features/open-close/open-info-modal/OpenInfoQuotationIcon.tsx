@@ -1,11 +1,13 @@
 import { Tooltip } from '@mui/material'
 import { route } from '@front/shared/lib/react-router-dom/route'
-import { useSelector } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { PiInfoBold } from 'react-icons/pi'
 import { Link } from 'react-router-dom'
 
 export const OpenInfoQuotationIcon = (): React.JSX.Element => {
-  const isCopyModalVisible = useSelector((state) => state.copy.isVisible)
+  const isCopyModalVisible = reduxHolder.useSelector(
+    (state) => state.copy.isVisible,
+  )
 
   return (
     <Tooltip title='Info'>

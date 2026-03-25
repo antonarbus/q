@@ -1,5 +1,5 @@
 import { cls } from '@front/shared/cls'
-import { dispatch } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { quotationSlice } from '../redux/quotationSlice'
 
 type Props = {
@@ -14,7 +14,7 @@ export const saveBlockHeightByIndex = (props: Props): void => {
     return
   }
 
-  dispatch(
+  reduxHolder.dispatch(
     quotationSlice.actions.updateBlockHeight({
       blockIndex: props.blockIndex,
       height: paperElement.clientHeight,

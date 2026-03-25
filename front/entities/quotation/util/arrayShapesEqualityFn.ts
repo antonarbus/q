@@ -29,7 +29,7 @@ export const arrayShapesEqualityFn: EqualityFn = (
   }
 
   const idsDoNotMatch = prevSliced.some(
-    (item: Obj, index: number) =>
+    (_item: Obj, index: number) =>
       prevSliced[index]?.id !== currentSliced[index]?.id,
   )
 

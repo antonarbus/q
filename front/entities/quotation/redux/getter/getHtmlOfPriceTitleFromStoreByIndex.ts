@@ -1,11 +1,11 @@
-import { getState } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 
 type Props = {
   blockIndex: number
 }
 
 export const getHtmlOfPriceTitleFromStoreByIndex = (props: Props): string => {
-  const priceBlock = getState().quotation.blocks[props.blockIndex]
+  const priceBlock = reduxHolder.getState().quotation.blocks[props.blockIndex]
 
   if (priceBlock?.type !== 'price') {
     return ''

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import type { NavItem } from '@front/entities/nav/type'
-import { useSelector } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { TiArrowSortedDown } from 'react-icons/ti'
 
 type Props = {
@@ -11,7 +11,9 @@ export const ArrowForNestedMenu = (props: Props): React.ReactNode => {
   const isNestedMenu = Boolean(props.navItem?.nestedItemList)
   const disabled = Boolean(props.navItem?.disabled)
 
-  const isHamburger = useSelector((state) => state.nav.navMode === 'hamburger')
+  const isHamburger = reduxHolder.useSelector(
+    (state) => state.nav.navMode === 'hamburger',
+  )
 
   if (isHamburger === true) {
     return null

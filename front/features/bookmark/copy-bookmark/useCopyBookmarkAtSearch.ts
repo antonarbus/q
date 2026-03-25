@@ -1,7 +1,7 @@
 import { useGetBookmarkMutation } from '@front/entities/bookmark/api/useGetBookmarkMutation'
 import { copySlice } from '@front/entities/copy/copySlice'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
-import { dispatch } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { useCallback } from 'react'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
@@ -36,15 +36,15 @@ export const useCopyBookmarkAtSearch = (): Res => {
         id: params.bookmarkId,
       })
 
-      dispatch(
+      reduxHolder.dispatch(
         quotationSlice.actions.loadBlockAtPosThousand({
           block: data.bookmark,
         }),
       )
 
-      dispatch(copySlice.actions.startPreviewPreparing())
+      reduxHolder.dispatch(copySlice.actions.startPreviewPreparing())
 
-      dispatch(
+      reduxHolder.dispatch(
         copySlice.actions.setInitCursorPos({
           x: params.cursorPos.x,
           y: params.cursorPos.y,

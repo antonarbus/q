@@ -1,4 +1,4 @@
-import { dispatch, useSelector } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { theme } from '@front/shared/theme'
 import { createElement } from 'react'
 import { CgClose as CloseIcon } from 'react-icons/cg'
@@ -12,17 +12,19 @@ const closeIcon = createElement(CloseIcon, {})
 export const CloseMenuItem = (): React.JSX.Element => {
   const color = theme.colors.topMenuItem
 
-  const isHovered = useSelector((state) => state.nav.hoverIndex === 0)
+  const isHovered = reduxHolder.useSelector(
+    (state) => state.nav.hoverIndex === 0,
+  )
 
   return (
     <MenuItemLayout
       isHovered={isHovered}
       onClick={(event: React.MouseEvent): void => {
         event.preventDefault()
-        dispatch(navSlice.actions.closeMenu())
+        reduxHolder.dispatch(navSlice.actions.closeMenu())
       }}
       onMouseEnter={(): void => {
-        dispatch(
+        reduxHolder.dispatch(
           navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
         )
       }}

@@ -3,7 +3,7 @@ import { useGetBookmarkMutation } from '@front/entities/bookmark/api/useGetBookm
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { IconButton, Tooltip } from '@mui/material'
 import { RotatingLoaderIcon } from '@front/shared/component/RotatingLoaderIcon'
-import { dispatch } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { AiTwotoneEdit } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
@@ -15,7 +15,7 @@ export const OpenBookmarkModalButton = (props: UrlParam): React.JSX.Element => {
 
   useUpdateEffect(() => {
     if (getBookmarkMutation.isSuccess === true) {
-      dispatch(
+      reduxHolder.dispatch(
         quotationSlice.actions.loadBlockAtPosThousand({
           block: getBookmarkMutation.data.bookmark,
         }),

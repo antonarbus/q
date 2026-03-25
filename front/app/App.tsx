@@ -1,13 +1,12 @@
 import './router'
-import './redux'
+import { store } from './redux'
 import '../shared/lib/tanstack-query/queryClient'
-import '../shared/lib/axios/axiosConfig'
+import './axiosConfig'
 import { ThemeProvider } from '@mui/material/styles'
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { instance } from '@front/shared/instance'
-import { router } from '@front/shared/lib/react-router-dom/router'
-import { store } from '@front/shared/lib/redux'
+import { routerHolder } from '@front/shared/lib/react-router-dom/router'
 import { themeClient } from '@front/shared/theme'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
@@ -27,7 +26,7 @@ export const App = (): React.JSX.Element => {
             adapterLocale={enGB}
             dateAdapter={AdapterDateFns}
           >
-            <RouterProvider router={router} />
+            <RouterProvider router={routerHolder.router} />
           </LocalizationProvider>
           {import.meta.env.DEV ? <ReactQueryDevtools /> : null}
           {import.meta.env.PROD ? <QueryDevtoolsProductionHidden /> : null}

@@ -1,4 +1,4 @@
-import { useSelector } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { LoadingDots } from './LoadingDots'
 
 type Props = {
@@ -7,7 +7,9 @@ type Props = {
 }
 
 export const LoadingDotsOverlay = (props: Props): React.JSX.Element | null => {
-  const loadingOverlay = useSelector((state) => state.app.loadingOverlay)
+  const loadingOverlay = reduxHolder.useSelector(
+    (state) => state.app.loadingOverlay,
+  )
 
   const notLoading =
     loadingOverlay.shouldShowLoader === false &&

@@ -1,12 +1,14 @@
 import { useRow } from '@front/entities/quotation/provider/RowProvider'
-import { useSelector } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 
 export const useIsPasteHere = (): boolean => {
   const row = useRow()
-  const pastePos = useSelector((state) => state.copy.place.pastePos)
-  const pasteItemId = useSelector((state) => state.copy.place.id)
+  const pastePos = reduxHolder.useSelector((state) => state.copy.place.pastePos)
+  const pasteItemId = reduxHolder.useSelector((state) => state.copy.place.id)
 
-  const isPasteTextShown = useSelector((state) => state.copy.isPasteTextShown)
+  const isPasteTextShown = reduxHolder.useSelector(
+    (state) => state.copy.isPasteTextShown,
+  )
 
   const isPasteHere =
     isPasteTextShown && row.item.id === pasteItemId && pastePos === 'middle'

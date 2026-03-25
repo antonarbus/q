@@ -1,4 +1,4 @@
-import { useSelector } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { theme } from '@front/shared/theme'
 import { useNavModeDetection } from './useNavModeDetection'
 
@@ -8,7 +8,7 @@ type Props = {
 
 export const NavLayout = (props: Props): React.JSX.Element => {
   const navRef = useNavModeDetection()
-  const navMode = useSelector((state) => state.nav.navMode)
+  const navMode = reduxHolder.useSelector((state) => state.nav.navMode)
 
   return (
     <nav

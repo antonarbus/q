@@ -1,6 +1,6 @@
 import type { SelectUser } from '@back/entity/user/db/usersTableSchema'
 import { useGetUserAccessTokenQuery } from '@front/entities/user/api/useGetUserAccessTokenQuery'
-import { useSelector } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 
 type Props = {
   requiredRoles: SelectUser['roles']
@@ -10,7 +10,7 @@ type Props = {
 export const RequireRoles = (props: Props): React.ReactNode => {
   const getUserAccessTokenQuery = useGetUserAccessTokenQuery()
 
-  const userRoles = useSelector((state) => state.user.roles)
+  const userRoles = reduxHolder.useSelector((state) => state.user.roles)
 
   const haveRequiredRole = props.requiredRoles.some((role) =>
     userRoles.includes(role),

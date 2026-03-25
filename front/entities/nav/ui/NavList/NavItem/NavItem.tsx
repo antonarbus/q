@@ -1,5 +1,5 @@
 import type { NavItem as NavItemType } from '@front/entities/nav/type'
-import { useSelector } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { clickOnNavItem } from '@front/widgets/nav/handlers/clickOnNavItem'
 import { useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
@@ -21,7 +21,7 @@ export const NavItem = (props: Props): React.JSX.Element => {
   const navItemRef = useRef<React.ComponentRef<'li'> | null>(null)
 
   // needs to open only menu under clicked navItem, otherwise multiple menus are opened under all navItems
-  const isMenuOpen = useSelector(
+  const isMenuOpen = reduxHolder.useSelector(
     (state) => state.nav.idsToCurrentMenuItems.at(1) === props.navItem.id,
   )
 

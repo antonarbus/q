@@ -1,14 +1,14 @@
 import { Box } from '@mui/material'
 import { cls } from '@front/shared/cls'
 import { OutlinedDivWithLabel } from '@front/shared/component/OutlinedDivWithLabel'
-import { useSelector } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 
 type Props = {
   children: React.ReactNode
 }
 
 export const Layout = (props: Props): React.JSX.Element => {
-  const maxBlockWidth = useSelector((state) => {
+  const maxBlockWidth = reduxHolder.useSelector((state) => {
     const maxWidth = state.quotation.blocks.reduce((accumulator, block) => {
       if ((block.width ?? 0) > accumulator) {
         return block.width ?? 0

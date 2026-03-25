@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { getRefreshTokenFromCookie } from '@back/shared/headers/token/getRefreshTokenFromCookie'
-import { verifyRefreshToken } from '@back/shared/lib/json-webtoken'
+import { getPayloadFromRefreshToken } from '@back/shared/lib/json-webtoken'
 import type { Request } from 'express'
 import type { SelectUser } from './db/usersTableSchema'
 
@@ -35,18 +35,19 @@ export const getUserFromRefreshTokenOrUnknownPerson = async (
     return unknownPerson
   }
 
-  const jwtPayload = await verifyRefreshToken(refreshJwtToken)
+  const payloadFromRefreshToken =
+    await getPayloadFromRefreshToken(refreshJwtToken)
 
-  if (jwtPayload === undefined) {
+  if (payloadFromRefreshToken === undefined) {
     return unknownPerson
   }
 
-  if (typeof jwtPayload.email !== 'string') {
+  if (typeof payloadFromRefreshToken.email !== 'string') {
     return unknownPerson
   }
 
   return {
-    email: jwtPayload.email,
-    roles: jwtPayload.roles,
+    email: payloadFromRefreshToken.email,
+    roles: payloadFromRefreshToken.roles,
   }
 }

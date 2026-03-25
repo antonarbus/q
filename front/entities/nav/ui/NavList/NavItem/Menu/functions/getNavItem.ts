@@ -1,6 +1,6 @@
 import type { NavItemId } from '@front/entities/nav/navItemId'
 import type { NavItem } from '@front/entities/nav/type'
-import { getState, type RootState } from '@front/shared/lib/redux'
+import { reduxHolder, type RootState } from '@front/shared/lib/redux'
 
 type Props = {
   navItemId: NavItemId | null
@@ -48,7 +48,8 @@ export const getNavItem = (props: Props): Res => {
   }
 
   const navLevel =
-    props.navState?.navStructure.at(0) ?? getState().nav.navStructure.at(0)
+    props.navState?.navStructure.at(0) ??
+    reduxHolder.getState().nav.navStructure.at(0)
 
   if (navLevel === undefined) {
     return {

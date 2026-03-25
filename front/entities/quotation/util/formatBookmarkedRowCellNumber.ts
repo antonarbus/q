@@ -1,4 +1,4 @@
-import { dispatch, getState } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { getStringWithNewFormattedNumber } from '@front/shared/util/getStringWithNewFormattedNumber'
 import { roundTo } from 'round-to'
 import { BOOKMARK_POS_AT_BLOCKS } from '../redux/bookmarkPosAtBlocks'
@@ -23,7 +23,7 @@ export const formatBookmarkedRowCellNumber = (props: Props): Res => {
     }
   }
 
-  const block = getState().quotation.blocks[BOOKMARK_POS_AT_BLOCKS]
+  const block = reduxHolder.getState().quotation.blocks[BOOKMARK_POS_AT_BLOCKS]
 
   if (block?.type !== 'row') {
     return {
@@ -48,7 +48,7 @@ export const formatBookmarkedRowCellNumber = (props: Props): Res => {
     }
   }
 
-  dispatch(
+  reduxHolder.dispatch(
     quotationSlice.actions.updateBookmarkedRowCell({
       html: newHtml,
       value: props.roundToTwoDecimals === true ? roundedValue : cell.value,

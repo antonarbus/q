@@ -158,6 +158,109 @@ bun run prettier-fix           # Prettier
 bun run check                # All checks (tsc, lint, format, tests, build)
 ```
 
+## FSD: Cross-Layer Singleton Pattern
+
+FSD forbids `shared/` from importing higher layers (`entities`, `features`, `app`). This creates a tension: infrastructure singletons like the router, Redux store, and axios instance are _created_ in `app/` (where all dependencies are available), but need to be _accessed_ from anywhere (`shared/`, `entities/`, `features/`).
+
+### Solution: holder + side-effect import + module augmentation
+
+**Three techniques used together:**
+
+#### 1. Class holder in `shared/`
+
+Each singleton lives in `shared/` as a class with a private field, a setter (throws on double-set) and a getter (throws if uninitialized):
+
+```ts
+// shared/lib/react-router-dom/router.ts
+class RouterHolder {
+  #router: Router | null = null
+  set router(r: Router) { /* throws if already set */ }
+  get router(): Router { /* throws if not set */ }
+}
+export const routerHolder = new RouterHolder()
+
+// shared/lib/redux/redux.ts
+class ReduxHolder {
+  #store: Store | null = null
+  set store(s: Store) { ... }
+  get store(): Store { ... }
+  get dispatch() { return this.store.dispatch }
+  get getState() { return this.store.getState }
+  readonly useSelector = useSelectorFromReactRedux
+}
+export const reduxHolder = new ReduxHolder()
+
+// shared/instance.ts  (queryClient, navStructure, etc.)
+class Instance {
+  #queryClient: QueryClient | null = null
+  set queryClient(qc) { ... }
+  get queryClient() { ... }
+}
+export const instance = new Instance()
+```
+
+#### 2. Side-effect imports at the top of `app/App.tsx`
+
+`app/` creates the concrete instances and injects them into the holders. The side-effect import pattern means no explicit `initialize()` call is needed at the `App` component level — importing the module _is_ the initialization:
+
+```ts
+// app/App.tsx — import order matters: these run before anything renders
+import './router' // creates router, sets routerHolder.router = router
+import './redux' // creates store,  sets reduxHolder.store = store
+import './axiosConfig' // creates axios instance, sets axiosWithAuth
+import '../shared/lib/tanstack-query/queryClient' // sets instance.queryClient
+```
+
+```ts
+// app/router.tsx
+const router = createBrowserRouter([...])
+routerHolder.router = router  // inject into shared holder
+
+// app/redux.ts
+const store = configureStore({ reducer: { ... } })
+reduxHolder.store = store     // inject into shared holder
+```
+
+#### 3. Module augmentation for Redux types (`shared` never imports `app`)
+
+The Redux holder needs typed `dispatch`/`getState`/`useSelector`, but those types come from the concrete store in `app/`. The fix: declare an empty `Register` interface in `shared`, and augment it from `app/` — same pattern used by TanStack Query.
+
+```ts
+// shared/lib/redux/register.ts
+export interface Register {} // augmented externally
+
+// shared/lib/redux/redux.ts — types derived without importing app
+export type RootState = Register extends { state: infer S } ? S : never
+type AppDispatch = Register extends { dispatch: infer D } ? D : never
+type Store = Register extends { store: infer ST } ? ST : never
+
+// app/redux.ts — fills in the concrete types globally at compile time
+declare module '@front/shared/lib/redux/register' {
+  interface Register {
+    state: ReturnType<typeof store.getState>
+    dispatch: typeof store.dispatch
+    store: typeof store
+  }
+}
+```
+
+### Usage across all layers
+
+```ts
+// any layer (entities, features, widgets, pages)
+import { routerHolder } from '@front/shared/lib/react-router-dom/router'
+import { reduxHolder }  from '@front/shared/lib/redux'
+import { instance }     from '@front/shared/instance'
+
+routerHolder.router.navigate('/path')
+reduxHolder.dispatch(someAction())
+reduxHolder.getState().user.accessToken
+reduxHolder.useSelector(selectSomething)
+instance.queryClient.invalidateQueries({ queryKey: [...] })
+```
+
+---
+
 ## Troubleshooting
 
 **409 Already Exists** — Import existing resource into Terraform state:

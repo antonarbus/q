@@ -3,7 +3,7 @@ import { getPastePlace } from '@front/entities/copy/getPastePlace'
 import type { CopyPlace } from '@front/entities/copy/types'
 import { cls } from '@front/shared/cls'
 import { route } from '@front/shared/lib/react-router-dom/route'
-import { dispatch, getState, useSelector } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import isEqual from 'lodash.isequal'
 import { useEffect } from 'react'
 
@@ -21,8 +21,8 @@ const movePasteTextItem = (event: MouseEvent): void => {
   }
 
   const removePasteIfNeeded = (): void => {
-    if (getState().copy.isPasteTextShown === true) {
-      dispatch(copySlice.actions.hidePasteText())
+    if (reduxHolder.getState().copy.isPasteTextShown === true) {
+      reduxHolder.dispatch(copySlice.actions.hidePasteText())
     }
   }
 
@@ -66,7 +66,7 @@ const movePasteTextItem = (event: MouseEvent): void => {
     return
   }
 
-  if (getState().copy.isPastable === false) {
+  if (reduxHolder.getState().copy.isPastable === false) {
     removePasteIfNeeded()
 
     return
@@ -81,18 +81,19 @@ const movePasteTextItem = (event: MouseEvent): void => {
   const isNarrowGapUnderNav = event.clientY > 100
 
   const isCursorAboveUnderNavDuringCopy =
-    isNarrowGapUnderNav && getState().copy.isPasteTextShown === false
+    isNarrowGapUnderNav &&
+    reduxHolder.getState().copy.isPasteTextShown === false
 
   if (isCursorAboveUnderNavDuringCopy === true) {
-    const [firstBlock] = getState().quotation.blocks
+    const [firstBlock] = reduxHolder.getState().quotation.blocks
 
     if (firstBlock === undefined) {
       return
     }
 
     const pastePlace: CopyPlace = { pastePos: 'top', id: firstBlock.id }
-    dispatch(copySlice.actions.updatePastePos(pastePlace))
-    dispatch(copySlice.actions.showPasteText())
+    reduxHolder.dispatch(copySlice.actions.updatePastePos(pastePlace))
+    reduxHolder.dispatch(copySlice.actions.showPasteText())
 
     return
   }
@@ -103,7 +104,7 @@ const movePasteTextItem = (event: MouseEvent): void => {
     return
   }
 
-  const prevPlace = getState().copy.place
+  const prevPlace = reduxHolder.getState().copy.place
 
   const pastePlace = getPastePlace({
     hoveredElement: blockElement,
@@ -112,14 +113,15 @@ const movePasteTextItem = (event: MouseEvent): void => {
   })
 
   const stillMayPasteToTheSamePlace =
-    isEqual(pastePlace, prevPlace) && getState().copy.isPasteTextShown
+    isEqual(pastePlace, prevPlace) &&
+    reduxHolder.getState().copy.isPasteTextShown
 
   if (stillMayPasteToTheSamePlace === true) {
     return
   }
 
-  dispatch(copySlice.actions.updatePastePos(pastePlace))
-  dispatch(copySlice.actions.showPasteText())
+  reduxHolder.dispatch(copySlice.actions.updatePastePos(pastePlace))
+  reduxHolder.dispatch(copySlice.actions.showPasteText())
 }
 
 const movePasteTextRow = (event: MouseEvent): void => {
@@ -127,12 +129,12 @@ const movePasteTextRow = (event: MouseEvent): void => {
     return
   }
 
-  const prevPlace = getState().copy.place
+  const prevPlace = reduxHolder.getState().copy.place
   const rowsElement = event.target.closest(`.${cls.rows}`)
 
   const removePasteIfNeeded = (): void => {
-    if (getState().copy.isPasteTextShown === true) {
-      dispatch(copySlice.actions.hidePasteText())
+    if (reduxHolder.getState().copy.isPasteTextShown === true) {
+      reduxHolder.dispatch(copySlice.actions.hidePasteText())
     }
   }
 
@@ -154,7 +156,7 @@ const movePasteTextRow = (event: MouseEvent): void => {
     return
   }
 
-  if (getState().copy.isPastable === false) {
+  if (reduxHolder.getState().copy.isPastable === false) {
     removePasteIfNeeded()
 
     return
@@ -173,18 +175,19 @@ const movePasteTextRow = (event: MouseEvent): void => {
   })
 
   const shouldPasteToSamePlace =
-    isEqual(pastePlace, prevPlace) && getState().copy.isPasteTextShown
+    isEqual(pastePlace, prevPlace) &&
+    reduxHolder.getState().copy.isPasteTextShown
 
   if (shouldPasteToSamePlace === true) {
     return
   }
 
-  dispatch(copySlice.actions.updatePastePos(pastePlace))
-  dispatch(copySlice.actions.showPasteText())
+  reduxHolder.dispatch(copySlice.actions.updatePastePos(pastePlace))
+  reduxHolder.dispatch(copySlice.actions.showPasteText())
 }
 
 export const useMovePasteText = (): void => {
-  const typeOfNextPasteItem = useSelector(
+  const typeOfNextPasteItem = reduxHolder.useSelector(
     (state) => state.copy.items.at(0)?.type,
   )
 

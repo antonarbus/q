@@ -8,7 +8,7 @@ import { recalculateSubTotalPrices } from '@front/entities/quotation/util/recalc
 import { recalculateTotalPrices } from '@front/entities/quotation/util/recalculateTotalPrices'
 import { Tooltip } from '@mui/material'
 import { cls } from '@front/shared/cls'
-import { dispatch, getState, useSelector } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { theme } from '@front/shared/theme'
 import { getClosestRowHtml } from '@front/shared/util/html-getter/getClosestRowHtml'
 import { TbCut } from 'react-icons/tb'
@@ -16,9 +16,13 @@ import { TbCut } from 'react-icons/tb'
 export const CutRowIcon = (): React.JSX.Element => {
   const block = useBlock()
   const row = useRow()
-  const isCopyable = useSelector((state) => state.copy.isCopyable)
-  const isLastRow = useSelector(selectIsLastRow({ blockIndex: block.index }))
-  const isDeletable = useSelector((state) => state.copy.isDeletable)
+  const isCopyable = reduxHolder.useSelector((state) => state.copy.isCopyable)
+
+  const isLastRow = reduxHolder.useSelector(
+    selectIsLastRow({ blockIndex: block.index }),
+  )
+
+  const isDeletable = reduxHolder.useSelector((state) => state.copy.isDeletable)
   const disabled = isLastRow || isDeletable === false || isCopyable === false
 
   return (
@@ -43,7 +47,7 @@ export const CutRowIcon = (): React.JSX.Element => {
               return
             }
 
-            dispatch(
+            reduxHolder.dispatch(
               quotationSlice.actions.updateRowHeightAndWidth({
                 blockIndex: block.index,
                 rowIndex: row.index,
@@ -63,27 +67,27 @@ export const CutRowIcon = (): React.JSX.Element => {
 
             const html = getClosestRowHtml(event)
 
-            dispatch(
+            reduxHolder.dispatch(
               copySlice.actions.addItem({
                 item: rowFromStore,
                 preview: html,
               }),
             )
 
-            const isCopyModalVisible = getState().copy.isVisible
+            const isCopyModalVisible = reduxHolder.getState().copy.isVisible
 
             if (isCopyModalVisible === false) {
-              dispatch(
+              reduxHolder.dispatch(
                 copySlice.actions.setInitCursorPos({
                   x: event.clientX,
                   y: event.clientY,
                 }),
               )
 
-              dispatch(copySlice.actions.showCopyModal())
+              reduxHolder.dispatch(copySlice.actions.showCopyModal())
             }
 
-            dispatch(
+            reduxHolder.dispatch(
               quotationSlice.actions.deleteRow({
                 blockIndex: block.index,
                 rowIndex: row.index,
@@ -93,10 +97,10 @@ export const CutRowIcon = (): React.JSX.Element => {
             recalculateSubTotalPrices({ incrementally: true })
             recalculateTotalPrices()
 
-            dispatch(copySlice.actions.forbidAllActions())
+            reduxHolder.dispatch(copySlice.actions.forbidAllActions())
 
             setTimeout(() => {
-              dispatch(copySlice.actions.allowAllActions())
+              reduxHolder.dispatch(copySlice.actions.allowAllActions())
             }, 1000 * theme.block.animationDuration)
           }}
           style={{

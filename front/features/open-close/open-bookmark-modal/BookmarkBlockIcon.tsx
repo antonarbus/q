@@ -4,7 +4,7 @@ import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { Tooltip } from '@mui/material'
 import { cls } from '@front/shared/cls'
 import { route } from '@front/shared/lib/react-router-dom/route'
-import { dispatch, getState, useSelector } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { FaRegStar } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
@@ -12,7 +12,11 @@ import { toast } from 'sonner'
 export const BookmarkBlockIcon = (): React.ReactNode => {
   const navigate = useNavigate()
   const block = useBlock()
-  const isCopyModalVisible = useSelector((state) => state.copy.isVisible)
+
+  const isCopyModalVisible = reduxHolder.useSelector(
+    (state) => state.copy.isVisible,
+  )
+
   const disabled = isCopyModalVisible
 
   return (
@@ -30,12 +34,12 @@ export const BookmarkBlockIcon = (): React.ReactNode => {
               color: disabled === true ? '#acacac' : '#ff7f00 !important',
             },
           }}
-          onClick={(event: React.MouseEvent): void => {
+          onClick={(): void => {
             if (disabled === true) {
               return
             }
 
-            if (getState().user.email === null) {
+            if (reduxHolder.getState().user.email === null) {
               toast.warning('Not logged in')
               void navigate(`./${route.login}`)
 
@@ -50,7 +54,7 @@ export const BookmarkBlockIcon = (): React.ReactNode => {
               return
             }
 
-            dispatch(
+            reduxHolder.dispatch(
               quotationSlice.actions.loadBlockAtPosThousand({
                 block: blockFromStore,
               }),

@@ -6,7 +6,7 @@ import type {
   OnBlockResizeStart,
   OnBlockResizeStop,
 } from '@front/shared/lib/re-resizable/resizablePaper'
-import { dispatch, getState } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 
 // can be global var for different boqItems as we can change width of one item at a time
 let initNumberColumnWidth = 0
@@ -22,13 +22,13 @@ let qtyColumnDeltaWidth = 0
 let priceColumnDeltaWidth = 0
 
 export const onBoqBlockResizeStart: OnBlockResizeStart = (props) => {
-  dispatch(
+  reduxHolder.dispatch(
     quotationSlice.actions.hideBoqItemPins({
       blockIndex: props.blockIndex,
     }),
   )
 
-  const block = getState().quotation.blocks[props.blockIndex]
+  const block = reduxHolder.getState().quotation.blocks[props.blockIndex]
 
   if (block?.type !== 'boq') {
     return
@@ -73,7 +73,7 @@ export const onBoqBlockResize: OnBlockResize = (props) => {
       const descriptionColumnWidth =
         initDescriptionColumnWidth + descriptionColumnDeltaWidth
 
-      dispatch(
+      reduxHolder.dispatch(
         quotationSlice.actions.updateColWidth({
           blockIndex: props.blockIndex,
           boqColumnKey: 'description',
@@ -100,7 +100,7 @@ export const onBoqBlockResize: OnBlockResize = (props) => {
 
       const numberColumnWidth = initNumberColumnWidth + numberColumnDeltaWidth
 
-      dispatch(
+      reduxHolder.dispatch(
         quotationSlice.actions.updateColWidth({
           blockIndex: props.blockIndex,
           boqColumnKey: 'number',
@@ -129,7 +129,7 @@ export const onBoqBlockResize: OnBlockResize = (props) => {
       const itemPriceColumnWidth =
         initItemPriceColumnWidth + itemPriceColumnDeltaWidth
 
-      dispatch(
+      reduxHolder.dispatch(
         quotationSlice.actions.updateColWidth({
           blockIndex: props.blockIndex,
           boqColumnKey: 'itemPrice',
@@ -160,7 +160,7 @@ export const onBoqBlockResize: OnBlockResize = (props) => {
 
       const qtyColumnWidth = initQtyColumnWidth + qtyColumnDeltaWidth
 
-      dispatch(
+      reduxHolder.dispatch(
         quotationSlice.actions.updateColWidth({
           blockIndex: props.blockIndex,
           boqColumnKey: 'qty',
@@ -192,7 +192,7 @@ export const onBoqBlockResize: OnBlockResize = (props) => {
 
       const priceColumnWidth = initPriceColumnWidth + priceColumnDeltaWidth
 
-      dispatch(
+      reduxHolder.dispatch(
         quotationSlice.actions.updateColWidth({
           blockIndex: props.blockIndex,
           boqColumnKey: 'price',
@@ -212,7 +212,7 @@ export const onBoqBlockResize: OnBlockResize = (props) => {
     const descriptionColumnWidth =
       initDescriptionColumnWidth + descriptionColumnDeltaWidth
 
-    dispatch(
+    reduxHolder.dispatch(
       quotationSlice.actions.updateColWidth({
         blockIndex: props.blockIndex,
         boqColumnKey: 'description',
@@ -232,7 +232,7 @@ export const onBoqBlockResizeStop: OnBlockResizeStop = (props) => {
 
   const width = descriptionHeaderElement.clientWidth
 
-  dispatch(
+  reduxHolder.dispatch(
     quotationSlice.actions.updateColWidth({
       blockIndex: props.blockIndex,
       boqColumnKey: 'description',
@@ -241,10 +241,12 @@ export const onBoqBlockResizeStop: OnBlockResizeStop = (props) => {
   )
 
   const itemWidth = props.elementRef.clientWidth
-  const prevItemWidth = getState().quotation.blocks[props.blockIndex]?.width
+
+  const prevItemWidth =
+    reduxHolder.getState().quotation.blocks[props.blockIndex]?.width
 
   if (itemWidth !== prevItemWidth) {
-    dispatch(
+    reduxHolder.dispatch(
       quotationSlice.actions.updateBlockWidth({
         blockIndex: props.blockIndex,
         width: itemWidth,

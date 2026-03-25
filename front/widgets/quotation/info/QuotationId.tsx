@@ -1,8 +1,8 @@
 import { Box, Tooltip } from '@mui/material'
-import { useSelector } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 
 export const QuotationId = (): React.JSX.Element => {
-  const quotationId = useSelector((state) => state.quotation.id)
+  const quotationId = reduxHolder.useSelector((state) => state.quotation.id)
 
   return (
     <Tooltip title='Quotation ID'>

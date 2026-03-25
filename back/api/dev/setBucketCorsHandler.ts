@@ -32,7 +32,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<HttpResponse<ResBody>>
 
-export const setBucketCorsHandler: RouterHandler = async (req, res, next) => {
+export const setBucketCorsHandler: RouterHandler = async (req) => {
   const userFromRefreshToken = await getUserFromRefreshTokenOrUnknownPerson({
     req,
   })

@@ -2,7 +2,7 @@
 import { getRefreshTokenFromCookie } from '@back/shared/headers/token/getRefreshTokenFromCookie'
 import {
   getJwtExpirationInDays,
-  verifyRefreshToken,
+  getPayloadFromRefreshToken,
 } from '@back/shared/lib/json-webtoken'
 import type { Request } from 'express'
 import type { SelectUser } from './db/usersTableSchema'
@@ -28,13 +28,14 @@ export const getUserFromRefreshTokenOrNull = async (
     return null
   }
 
-  const jwtPayload = await verifyRefreshToken(refreshJwtToken)
+  const payloadFromRefreshToken =
+    await getPayloadFromRefreshToken(refreshJwtToken)
 
-  if (jwtPayload === undefined) {
+  if (payloadFromRefreshToken === undefined) {
     return null
   }
 
-  if (typeof jwtPayload.email !== 'string') {
+  if (typeof payloadFromRefreshToken.email !== 'string') {
     return null
   }
 
@@ -43,8 +44,8 @@ export const getUserFromRefreshTokenOrNull = async (
   })
 
   return {
-    email: jwtPayload.email,
-    roles: jwtPayload.roles,
+    email: payloadFromRefreshToken.email,
+    roles: payloadFromRefreshToken.roles,
     refreshJwtToken,
     jwtRefreshTokenExpirationDays,
   }

@@ -3,7 +3,7 @@ import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { cls } from '@front/shared/cls'
 import { generateId } from '@front/shared/lib/nanoid'
 import { route } from '@front/shared/lib/react-router-dom/route'
-import { dispatch, getState } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { theme } from '@front/shared/theme'
 import { fixElementDimensionStyle } from '@front/shared/util/fixElementDimensionStyle'
 import { useEffectOnce, useUnmount } from 'react-use'
@@ -27,17 +27,17 @@ const pasteItemOnClick = (): void => {
     return
   }
 
-  if (getState().copy.isPasteTextShown === false) {
+  if (reduxHolder.getState().copy.isPasteTextShown === false) {
     return
   }
 
-  dispatch(copySlice.actions.hidePasteText())
+  reduxHolder.dispatch(copySlice.actions.hidePasteText())
 
-  if (getState().copy.isPastable === false) {
+  if (reduxHolder.getState().copy.isPastable === false) {
     return
   }
 
-  const state = getState()
+  const state = reduxHolder.getState()
   const [topItemInCopyModal] = state.copy.items
 
   if (topItemInCopyModal === undefined) {
@@ -59,7 +59,7 @@ const pasteItemOnClick = (): void => {
 
   const newItemId = generateId()
 
-  dispatch(
+  reduxHolder.dispatch(
     quotationSlice.actions.pasteItem({
       item: topItemInCopyModal,
       id: state.copy.place.id,
@@ -77,21 +77,21 @@ const pasteItemOnClick = (): void => {
     recalculateTotalPrices()
   }, 0)
 
-  dispatch(copySlice.actions.removeItem())
-  dispatch(copySlice.actions.forbidAllActions())
+  reduxHolder.dispatch(copySlice.actions.removeItem())
+  reduxHolder.dispatch(copySlice.actions.forbidAllActions())
 
   setTimeout(() => {
-    dispatch(copySlice.actions.allowAllActions())
+    reduxHolder.dispatch(copySlice.actions.allowAllActions())
   }, 1000 * theme.block.animationDuration)
 
-  const itemsInCopyModal = getState().copy.items
+  const itemsInCopyModal = reduxHolder.getState().copy.items
 
   if (itemsInCopyModal.length === 0) {
-    dispatch(copySlice.actions.hideCopyModal())
+    reduxHolder.dispatch(copySlice.actions.hideCopyModal())
 
     setTimeout(
       () => {
-        dispatch(copySlice.actions.allowAllActions())
+        reduxHolder.dispatch(copySlice.actions.allowAllActions())
       },
       1000 * theme.block.animationDuration + 500,
     )

@@ -1,7 +1,7 @@
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { getTotalPriceAbove } from '@front/entities/quotation/util/getTotalPriceAbove'
 import { updateNumberAtHtmlIncrementally } from '@front/shared/lib/tiptap/util/updateNumberAtHtmlIncrementally'
-import { dispatch, getState } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { getNumberFromString } from '@front/shared/util/getNumberFromString'
 import { getStringWithNewFormattedNumber } from '@front/shared/util/getStringWithNewFormattedNumber'
 import { getTextContentFromHtml } from '@front/shared/util/getTextContentFromHtml'
@@ -28,7 +28,7 @@ export const correctTotalPriceAtPriceBlock = (props: Props): void => {
     return
   }
 
-  const priceBlock = getState().quotation.blocks[props.blockIndex]
+  const priceBlock = reduxHolder.getState().quotation.blocks[props.blockIndex]
 
   if (priceBlock?.type !== 'price') {
     return
@@ -40,7 +40,7 @@ export const correctTotalPriceAtPriceBlock = (props: Props): void => {
 
   const price = getTotalPriceAbove({
     blockIndex: props.blockIndex,
-    blocks: getState().quotation.blocks,
+    blocks: reduxHolder.getState().quotation.blocks,
   })
 
   const shouldCorrectValue = cellValueFromHtml === price
@@ -54,7 +54,7 @@ export const correctTotalPriceAtPriceBlock = (props: Props): void => {
     newNumber: price,
   })
 
-  dispatch(
+  reduxHolder.dispatch(
     quotationSlice.actions.updatePrice({
       blockIndex: props.blockIndex,
       html: updatedHtml,

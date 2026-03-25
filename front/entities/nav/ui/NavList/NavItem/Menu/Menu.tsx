@@ -3,7 +3,7 @@ import {
   useMenuNavigation,
 } from '@front/entities/nav/provider/MenuNavigationProvider'
 import { Box } from '@mui/material'
-import { dispatch } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { useKeysForMenuNavigation } from '@front/widgets/nav/handlers/useKeysForMenuNavigation'
 import { navSlice } from '../../../../navSlice'
 import { EmailAtBottomOfMenu } from './EmailAtBottomOfMenu'
@@ -31,7 +31,7 @@ const MenuContent = (props: Props): React.ReactNode => {
         ref={menuNavigation.menuContainerRef}
         className='drop-down-nav-menu'
         onMouseLeave={(): void => {
-          dispatch(
+          reduxHolder.dispatch(
             navSlice.actions.setMenuItemHoverIndex({
               menuItemHoverIndex: -1,
             }),

@@ -4,14 +4,18 @@ import { getBlockFromStoreByIndex } from '@front/entities/quotation/redux/getter
 import { Tooltip } from '@mui/material'
 import { cls } from '@front/shared/cls'
 import { route } from '@front/shared/lib/react-router-dom/route'
-import { useSelector } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { HiOutlineInformationCircle } from 'react-icons/hi2'
 import { useNavigate } from 'react-router-dom'
 
 export const OpenInfoBlockModalIcon = (): React.ReactNode => {
   const navigate = useNavigate()
   const block = useBlock()
-  const isCopyModalVisible = useSelector((state) => state.copy.isVisible)
+
+  const isCopyModalVisible = reduxHolder.useSelector(
+    (state) => state.copy.isVisible,
+  )
+
   const disabled = isCopyModalVisible
 
   return (
@@ -25,7 +29,7 @@ export const OpenInfoBlockModalIcon = (): React.ReactNode => {
         <HiOutlineInformationCircle
           aria-hidden={false} // otherwise error in dev tools
           className={cls.actionIcon}
-          onClick={(event: React.MouseEvent): void => {
+          onClick={(): void => {
             if (disabled === true) {
               return
             }

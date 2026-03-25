@@ -6,7 +6,7 @@ import { recalculateTotalPrices } from '@front/entities/quotation/util/recalcula
 import { saveBlockHeightByIndex } from '@front/entities/quotation/util/saveBlockHeightByIndex'
 import { Tooltip } from '@mui/material'
 import { cls } from '@front/shared/cls'
-import { dispatch, getState, useSelector } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { theme } from '@front/shared/theme'
 import { fixElementDimensionStyle } from '@front/shared/util/fixElementDimensionStyle'
 import { TbCut } from 'react-icons/tb'
@@ -14,8 +14,8 @@ import { getCleanPaperHtml } from '@front/shared/util/html-getter/getCleanPaperH
 
 export const CutBlockIcon = (): React.JSX.Element => {
   const block = useBlock()
-  const isBlockAlone = useSelector(selectIsLastBlock)
-  const isCuttable = useSelector((state) => state.copy.isCuttable)
+  const isBlockAlone = reduxHolder.useSelector(selectIsLastBlock)
+  const isCuttable = reduxHolder.useSelector((state) => state.copy.isCuttable)
   const disabled = isBlockAlone || isCuttable === false
 
   return (
@@ -30,7 +30,8 @@ export const CutBlockIcon = (): React.JSX.Element => {
 
             saveBlockHeightByIndex({ blockIndex: block.index })
 
-            const blockToCut = getState().quotation.blocks[block.index]
+            const blockToCut =
+              reduxHolder.getState().quotation.blocks[block.index]
 
             if (blockToCut === undefined) {
               return
@@ -59,11 +60,13 @@ export const CutBlockIcon = (): React.JSX.Element => {
 
             const html = getCleanPaperHtml({ paperElement })
 
-            dispatch(
+            reduxHolder.dispatch(
               copySlice.actions.addItem({ item: blockToCut, preview: html }),
             )
 
-            dispatch(quotationSlice.actions.deleteBlock({ id: blockToCut.id }))
+            reduxHolder.dispatch(
+              quotationSlice.actions.deleteBlock({ id: blockToCut.id }),
+            )
 
             // Deferred so React re-renders first. The editor registry is keyed by blockIndex —
             // removing a block shifts the price block's index, and its editor stays registered
@@ -72,24 +75,24 @@ export const CutBlockIcon = (): React.JSX.Element => {
               recalculateTotalPrices()
             }, 0)
 
-            dispatch(copySlice.actions.forbidAllActions())
+            reduxHolder.dispatch(copySlice.actions.forbidAllActions())
 
-            const isCopyModalVisible = getState().copy.isVisible
+            const isCopyModalVisible = reduxHolder.getState().copy.isVisible
 
             if (isCopyModalVisible === false) {
-              dispatch(
+              reduxHolder.dispatch(
                 copySlice.actions.setInitCursorPos({
                   x: event.clientX,
                   y: event.clientY,
                 }),
               )
 
-              dispatch(copySlice.actions.showCopyModal())
+              reduxHolder.dispatch(copySlice.actions.showCopyModal())
             }
 
             setTimeout(
               () => {
-                dispatch(copySlice.actions.allowAllActions())
+                reduxHolder.dispatch(copySlice.actions.allowAllActions())
               },
               1000 * theme.block.animationDuration + 500,
             )

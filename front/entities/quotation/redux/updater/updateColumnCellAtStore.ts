@@ -1,5 +1,5 @@
 import type { BoqColumnKey } from '@back/entity/quotation/schema'
-import { dispatch } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { getBoqBlockFromStoreByIndex } from '../getter/getBoqBlockFromStoreByIndex'
 import { quotationSlice } from '../quotationSlice'
 import type { Editor } from '@tiptap/react'
@@ -29,7 +29,7 @@ export const updateColumnCellAtStore = (props: Props): void => {
     return
   }
 
-  dispatch(
+  reduxHolder.dispatch(
     quotationSlice.actions.updateBoqColumnNameText({
       blockIndex: props.blockIndex,
       html,

@@ -1,5 +1,5 @@
 import { BOOKMARK_POS_AT_BLOCKS } from '@front/entities/quotation/redux/bookmarkPosAtBlocks'
-import { dispatch, getState } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { getNumberFromString } from '@front/shared/util/getNumberFromString'
 import { getTextContentFromHtml } from '@front/shared/util/getTextContentFromHtml'
 import { quotationSlice } from '../quotationSlice'
@@ -15,7 +15,7 @@ type Res = {
 }
 
 export const updateBookmarkedRowCellAtStore = (props: Props): Res => {
-  const block = getState().quotation.blocks[BOOKMARK_POS_AT_BLOCKS]
+  const block = reduxHolder.getState().quotation.blocks[BOOKMARK_POS_AT_BLOCKS]
 
   if (block?.type !== 'row') {
     return {
@@ -38,7 +38,7 @@ export const updateBookmarkedRowCellAtStore = (props: Props): Res => {
     string: cellTextContent,
   })
 
-  dispatch(
+  reduxHolder.dispatch(
     quotationSlice.actions.updateBookmarkedRowCell({
       html: props.html,
       value: cellValueFromHtml,

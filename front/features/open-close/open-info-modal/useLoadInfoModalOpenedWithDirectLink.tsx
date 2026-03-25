@@ -1,6 +1,6 @@
 import { getItemFromStoreById } from '@front/entities/quotation/redux/getter/getItemFromStoreById'
 import type { InfoFormValues } from '@front/entities/quotation/form/types'
-import { useSelector } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { useParams } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 
@@ -9,7 +9,7 @@ type Props = {
 }
 
 export const useLoadInfoModalOpenedWithDirectLink = (props: Props): void => {
-  const quotation = useSelector((state) => state.quotation)
+  const quotation = reduxHolder.useSelector((state) => state.quotation)
   const urlParams = useParams()
 
   useUpdateEffect(() => {

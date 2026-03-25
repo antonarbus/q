@@ -1,6 +1,6 @@
 import { navItemId } from '@front/entities/nav/navItemId'
 import { createLoadingMenuIconMachine } from '@front/entities/nav/state-machine/createLoadingMenuIconMachine'
-import { getState } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { downloadBlobAsFile } from '@front/shared/util/downloadBlobAsFile'
 import { toast } from 'sonner'
 import { createActor } from 'xstate'
@@ -21,7 +21,7 @@ export const downloadExcel = (): void => {
 
   const workerRequestMessage: WorkerRequestMessage = {
     msg: 'send me excel',
-    quotation: getState().quotation,
+    quotation: reduxHolder.getState().quotation,
   }
 
   worker.postMessage(workerRequestMessage)
@@ -31,7 +31,7 @@ export const downloadExcel = (): void => {
   ): void => {
     downloadBlobAsFile({
       blob: messageEvent.data.excelBlob,
-      fileName: `quotation - ${getState().quotation.id}.xlsx`,
+      fileName: `quotation - ${reduxHolder.getState().quotation.id}.xlsx`,
     })
 
     setTimeout(() => {

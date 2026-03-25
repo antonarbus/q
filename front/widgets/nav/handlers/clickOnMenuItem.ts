@@ -1,7 +1,7 @@
 import type { NavItemId } from '@front/entities/nav/navItemId'
 import { navSlice } from '@front/entities/nav/navSlice'
 import { getNavItem } from '@front/entities/nav/ui/NavList/NavItem/Menu/functions/getNavItem'
-import { dispatch, getState } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { functionRegistry } from '@front/widgets/nav/functionRegistry'
 
 type MenuNavigation = {
@@ -19,7 +19,7 @@ export const clickOnMenuItem = (
   const isNestedMenuAvailable = Boolean(nextMenuItems.length)
 
   const menuNavItem = getNavItem({
-    navItemId: getState().nav.currentMenuNavItemId,
+    navItemId: reduxHolder.getState().nav.currentMenuNavItemId,
   })
 
   const menuItems = menuNavItem.current?.nestedItemList ?? []
@@ -35,7 +35,7 @@ export const clickOnMenuItem = (
   if (link !== undefined) {
     // follow the link natively and call the func
     func?.(event)
-    dispatch(navSlice.actions.closeMenu())
+    reduxHolder.dispatch(navSlice.actions.closeMenu())
 
     return
   }
@@ -44,7 +44,7 @@ export const clickOnMenuItem = (
 
   if (func !== undefined) {
     func(event)
-    dispatch(navSlice.actions.closeMenu())
+    reduxHolder.dispatch(navSlice.actions.closeMenu())
 
     return
   }

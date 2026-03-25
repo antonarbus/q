@@ -1,6 +1,6 @@
 import { getCellFromStoreByIndex } from '@front/entities/quotation/redux/getter/getCellFromStoreByIndex'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
-import { dispatch } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 
 type Props = {
   blockIndex: number
@@ -20,7 +20,7 @@ export const pinItemPriceCell = (props: Props): void => {
     return
   }
 
-  dispatch(
+  reduxHolder.dispatch(
     quotationSlice.actions.pinItemPrice({
       blockIndex: props.blockIndex,
       rowIndex: props.rowIndex,

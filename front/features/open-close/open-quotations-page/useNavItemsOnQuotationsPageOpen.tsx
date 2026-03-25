@@ -1,11 +1,11 @@
 import { navItemId } from '@front/entities/nav/navItemId'
 import { navSlice } from '@front/entities/nav/navSlice'
-import { dispatch } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { useEffectOnce, useUnmount } from 'react-use'
 
 export const useNavItemsOnQuotationsPageOpen = (): void => {
   useEffectOnce(() => {
-    dispatch(
+    reduxHolder.dispatch(
       navSlice.actions.disableNavItems({
         navItemIds: [
           navItemId.save,
@@ -18,9 +18,9 @@ export const useNavItemsOnQuotationsPageOpen = (): void => {
       }),
     )
 
-    dispatch(navSlice.actions.removeUnderlineFromTopNav())
+    reduxHolder.dispatch(navSlice.actions.removeUnderlineFromTopNav())
 
-    dispatch(
+    reduxHolder.dispatch(
       navSlice.actions.underlineNavItem({
         navItemId: navItemId.quotationList,
       }),
@@ -28,6 +28,6 @@ export const useNavItemsOnQuotationsPageOpen = (): void => {
   })
 
   useUnmount(() => {
-    dispatch(navSlice.actions.enableTopNavItems())
+    reduxHolder.dispatch(navSlice.actions.enableTopNavItems())
   })
 }

@@ -36,7 +36,7 @@ export const useShowDragAndDropArea = (): void => {
       }
     })
 
-    document.addEventListener('dragenter', (event: DragEvent): void => {
+    document.addEventListener('dragenter', (): void => {
       dragCounter.current = dragCounter.current + 1
 
       if (dragCounter.current === 1) {
@@ -44,7 +44,7 @@ export const useShowDragAndDropArea = (): void => {
       }
     })
 
-    document.addEventListener('dragleave', (event: DragEvent): void => {
+    document.addEventListener('dragleave', (): void => {
       dragCounter.current = dragCounter.current - 1
 
       if (dragCounter.current === 0) {

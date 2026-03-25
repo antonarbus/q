@@ -10,7 +10,7 @@ import {
   TextField,
 } from '@mui/material'
 import { useLayoutEffect, useState } from 'react'
-import { dispatch, useSelector } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { appSlice } from '@front/shared/appSlice'
 
 let boolDeferred = Promise.withResolvers<boolean>()
@@ -32,13 +32,13 @@ export async function confirmWithDialog(
 
   if (isInputMode === true) {
     stringDeferred = Promise.withResolvers<string | false>()
-    dispatch(appSlice.actions.openConfirmationDialog(props))
+    reduxHolder.dispatch(appSlice.actions.openConfirmationDialog(props))
 
     return stringDeferred.promise
   }
 
   boolDeferred = Promise.withResolvers<boolean>()
-  dispatch(appSlice.actions.openConfirmationDialog(props))
+  reduxHolder.dispatch(appSlice.actions.openConfirmationDialog(props))
 
   return boolDeferred.promise
 }
@@ -84,7 +84,7 @@ export type ConfirmationDialogOptions =
 export const ConfirmationDialog = (): React.JSX.Element => {
   const DO_NOT_ASK_AGAIN_SESSION_VALUE = 'true'
 
-  const confirmationDialog = useSelector(
+  const confirmationDialog = reduxHolder.useSelector(
     (state) => state.app.confirmationDialog,
   )
 
@@ -101,7 +101,7 @@ export const ConfirmationDialog = (): React.JSX.Element => {
       )
 
       if (doNotAskAgainValue === DO_NOT_ASK_AGAIN_SESSION_VALUE) {
-        dispatch(appSlice.actions.closeConfirmationDialog())
+        reduxHolder.dispatch(appSlice.actions.closeConfirmationDialog())
         resolveDialogConfirm()
       }
     }
@@ -113,7 +113,7 @@ export const ConfirmationDialog = (): React.JSX.Element => {
 
   const handleReject = (): void => {
     setInputValue('')
-    dispatch(appSlice.actions.closeConfirmationDialog())
+    reduxHolder.dispatch(appSlice.actions.closeConfirmationDialog())
     resolveDialogReject()
   }
 
@@ -124,7 +124,7 @@ export const ConfirmationDialog = (): React.JSX.Element => {
     setInputValue('')
 
     if (confirmationDialog.disableCloseButton !== true) {
-      dispatch(appSlice.actions.closeConfirmationDialog())
+      reduxHolder.dispatch(appSlice.actions.closeConfirmationDialog())
     }
 
     resolveDialogConfirm(resolveArg)

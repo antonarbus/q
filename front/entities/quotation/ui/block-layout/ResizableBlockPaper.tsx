@@ -4,7 +4,7 @@ import type {
   OnBlockResizeStart,
   OnBlockResizeStop,
 } from '@front/shared/lib/re-resizable/resizablePaper'
-import { useSelector } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { Resizable, type ResizableProps } from 're-resizable'
 
 import { useBlock } from '../../provider/BlockProvider'
@@ -21,7 +21,7 @@ type Props = {
 export const ResizableBlockPaper = (props: Props): React.JSX.Element => {
   const block = useBlock()
 
-  const width = useSelector(
+  const width = reduxHolder.useSelector(
     (state) => state.quotation.blocks[block.index]?.width,
   )
 

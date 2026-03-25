@@ -5,7 +5,7 @@ import { deleteQuotationListCache } from '@front/entities/quotation/cache-update
 import { useLogOutUserMutation } from '@front/entities/user/api/useLogOutUserMutation'
 import { userSlice } from '@front/entities/user/redux/userSlice'
 import { appSlice } from '@front/shared/appSlice'
-import { dispatch } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { useNavigate } from 'react-router-dom'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
@@ -19,7 +19,7 @@ export const Logout = (): React.ReactNode => {
 
   useUpdateEffect(() => {
     if (logOutUserMutation.isPending === true) {
-      dispatch(
+      reduxHolder.dispatch(
         appSlice.actions.showLoadingOverlay({
           shouldShowLoader: true,
           text: 'Logging out',
@@ -33,21 +33,28 @@ export const Logout = (): React.ReactNode => {
       deleteQuotationListCache()
       deleteBookmarkListCache()
 
-      dispatch(userSlice.actions.setAccessToken({ accessToken: null }))
-      dispatch(userSlice.actions.forgetLoggedUser())
+      reduxHolder.dispatch(
+        userSlice.actions.setAccessToken({ accessToken: null }),
+      )
 
-      dispatch(navSlice.actions.showNavItems({ navItemIds: [navItemId.login] }))
+      reduxHolder.dispatch(userSlice.actions.forgetLoggedUser())
 
-      dispatch(
+      reduxHolder.dispatch(
+        navSlice.actions.showNavItems({ navItemIds: [navItemId.login] }),
+      )
+
+      reduxHolder.dispatch(
         navSlice.actions.hideNavItems({
           navItemIds: [navItemId.profile],
         }),
       )
 
-      dispatch(navSlice.actions.hideNavItems({ navItemIds: ['admin'] }))
+      reduxHolder.dispatch(
+        navSlice.actions.hideNavItems({ navItemIds: ['admin'] }),
+      )
 
       setTimeout(() => {
-        dispatch(appSlice.actions.hideLoadingOverlay())
+        reduxHolder.dispatch(appSlice.actions.hideLoadingOverlay())
         void navigate('..')
       }, 1000)
     }
@@ -58,7 +65,7 @@ export const Logout = (): React.ReactNode => {
       toast.error('Problems with logging out')
 
       setTimeout(() => {
-        dispatch(appSlice.actions.hideLoadingOverlay())
+        reduxHolder.dispatch(appSlice.actions.hideLoadingOverlay())
         void navigate('..')
       }, 1000)
     }

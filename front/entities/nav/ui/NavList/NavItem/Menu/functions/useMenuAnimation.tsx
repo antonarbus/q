@@ -1,6 +1,6 @@
 import type { NavItemId } from '@front/entities/nav/navItemId'
 import { navSlice } from '@front/entities/nav/navSlice'
-import { dispatch } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { theme } from '@front/shared/theme'
 import { elementHeight } from '@front/shared/util/elementHeight'
 import { animate } from 'motion'
@@ -67,7 +67,7 @@ export const useMenuAnimation = (props: Props): MenuNavigation => {
     ) {
       isGoingDown.current = true
 
-      dispatch(navSlice.actions.goDownInNextMenu({ navItemId }))
+      reduxHolder.dispatch(navSlice.actions.goDownInNextMenu({ navItemId }))
 
       await Promise.all([
         animate(
@@ -78,7 +78,7 @@ export const useMenuAnimation = (props: Props): MenuNavigation => {
         animate(props.nextMenuRef.current, { x: ['100%', '0'] }, { duration }),
       ])
 
-      dispatch(navSlice.actions.goDownInCurrentMenu({ navItemId }))
+      reduxHolder.dispatch(navSlice.actions.goDownInCurrentMenu({ navItemId }))
     }
   }
 
@@ -89,7 +89,7 @@ export const useMenuAnimation = (props: Props): MenuNavigation => {
     ) {
       isGoingDown.current = false
 
-      dispatch(navSlice.actions.goUpInCurrentMenu())
+      reduxHolder.dispatch(navSlice.actions.goUpInCurrentMenu())
 
       await Promise.all([
         animate(
@@ -104,7 +104,7 @@ export const useMenuAnimation = (props: Props): MenuNavigation => {
         ),
       ])
 
-      dispatch(navSlice.actions.goUpInNextMenu())
+      reduxHolder.dispatch(navSlice.actions.goUpInNextMenu())
     }
   }
 

@@ -1,4 +1,4 @@
-import { getState } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import type { HeaderKey, HeaderValue } from '@back/entity/quotation/schema'
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 export const getBoqHeaderFromStoreByIndex = (
   props: Props,
 ): HeaderValue | undefined => {
-  const block = getState().quotation.blocks[props.blockIndex]
+  const block = reduxHolder.getState().quotation.blocks[props.blockIndex]
 
   if (block?.type !== 'boq') {
     return

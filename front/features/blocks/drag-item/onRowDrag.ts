@@ -1,17 +1,17 @@
 import type { DragStart, DropResult } from '@hello-pangea/dnd'
 import { getRowsFromStoreByIndex } from '@front/entities/quotation/redux/getter/getRowsFromStoreByIndex'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
-import { dispatch } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { arrayMoveImmutable } from 'array-move'
 
 export const onRowDragStart =
-  ({ blockIndex }: { blockIndex: number }) =>
+  () =>
   (_event: DragStart): void => {
     document.body.style.cursor = 'move'
   }
 
 export const onRowDragEnd =
-  ({ blockIndex, rowIds }: { blockIndex: number; rowIds: string[] }) =>
+  ({ blockIndex }: { blockIndex: number }) =>
   (dropResult: DropResult): void => {
     document.body.style.removeProperty('cursor')
 
@@ -33,5 +33,7 @@ export const onRowDragEnd =
 
     const reOrderedRows = arrayMoveImmutable(rows, oldIndex, newIndex)
 
-    dispatch(quotationSlice.actions.reOrderRows({ reOrderedRows, blockIndex }))
+    reduxHolder.dispatch(
+      quotationSlice.actions.reOrderRows({ reOrderedRows, blockIndex }),
+    )
   }

@@ -2,7 +2,7 @@ import type { ResBody } from '@back/api/bookmark/getBookmarkListHandler'
 import { useGetBookmarkListQuery } from '@front/entities/bookmark/api/useGetBookmarkListQuery'
 import { Autocomplete } from '@mui/material'
 import { cls } from '@front/shared/cls'
-import { useSelector } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { useEffect, useState } from 'react'
 import { PaperComponent } from './PaperComponent'
 import { SearchOption } from './SearchOption'
@@ -13,7 +13,7 @@ export const Search = (): React.JSX.Element => {
   const getBookmarkListQuery = useGetBookmarkListQuery()
   const options = getBookmarkListQuery.data?.bookmarkList ?? []
   const [inputValue, setInputValue] = useState('')
-  const email = useSelector((state) => state.user.email)
+  const email = reduxHolder.useSelector((state) => state.user.email)
 
   useEffect(() => {
     if (email !== null) {
@@ -22,11 +22,14 @@ export const Search = (): React.JSX.Element => {
   }, [email])
 
   const [isAutocompleteOpen, setIsAutocompleteOpen] = useState(false)
-  const isCopyModalVisible = useSelector((state) => state.copy.isVisible)
+
+  const isCopyModalVisible = reduxHolder.useSelector(
+    (state) => state.copy.isVisible,
+  )
 
   const copyBookmarkAtSearch = useCopyBookmarkAtSearch()
 
-  const isPreviewPreparing = useSelector(
+  const isPreviewPreparing = reduxHolder.useSelector(
     (state) => state.copy.isPreviewPreparing,
   )
 

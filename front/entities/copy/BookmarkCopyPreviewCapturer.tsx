@@ -1,5 +1,5 @@
 import { BOOKMARK_POS_AT_BLOCKS } from '@front/entities/quotation/redux/bookmarkPosAtBlocks'
-import { useSelector } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { Block } from '@front/widgets/block/Block'
 import { DragDropContext, Droppable } from '@hello-pangea/dnd'
 import { useRef } from 'react'
@@ -25,11 +25,11 @@ export const BookmarkCopyPreviewCapturer = (): React.ReactNode => {
 
   // Hack! Set bookmark item at pos 1000 not to interfere with main block items
   // Otherwise we would have to re-create all app contexts for bookmark as many elements use redux and providers
-  const bookmarkBlock = useSelector((state) =>
+  const bookmarkBlock = reduxHolder.useSelector((state) =>
     state.quotation.blocks.at(BOOKMARK_POS_AT_BLOCKS),
   )
 
-  const isPreviewPreparing = useSelector(
+  const isPreviewPreparing = reduxHolder.useSelector(
     (state) => state.copy.isPreviewPreparing,
   )
 

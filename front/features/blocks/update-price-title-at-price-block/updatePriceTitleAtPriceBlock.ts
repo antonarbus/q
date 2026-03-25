@@ -1,5 +1,5 @@
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
-import { dispatch, getState } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import {
   editorRegistry,
   getRegistryKey,
@@ -23,7 +23,7 @@ export const updatePriceTitleAtPriceBlock = (props: Props): void => {
     return
   }
 
-  const priceBlock = getState().quotation.blocks[props.blockIndex]
+  const priceBlock = reduxHolder.getState().quotation.blocks[props.blockIndex]
 
   if (priceBlock?.type !== 'price') {
     return
@@ -37,7 +37,7 @@ export const updatePriceTitleAtPriceBlock = (props: Props): void => {
     return
   }
 
-  dispatch(
+  reduxHolder.dispatch(
     quotationSlice.actions.updatePriceTitle({
       blockIndex: props.blockIndex,
       html,

@@ -1,5 +1,5 @@
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
-import { dispatch, getState } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { getNumberFromString } from '@front/shared/util/getNumberFromString'
 import { getTextContentFromHtml } from '@front/shared/util/getTextContentFromHtml'
 import {
@@ -25,7 +25,7 @@ export const updatePriceValueAtPriceBlock = (props: Props): void => {
     return
   }
 
-  const priceBlock = getState().quotation.blocks[props.blockIndex]
+  const priceBlock = reduxHolder.getState().quotation.blocks[props.blockIndex]
 
   if (priceBlock?.type !== 'price') {
     return
@@ -42,7 +42,7 @@ export const updatePriceValueAtPriceBlock = (props: Props): void => {
   const cellTextContent = getTextContentFromHtml({ html })
   const cellValueFromHtml = getNumberFromString({ string: cellTextContent })
 
-  dispatch(
+  reduxHolder.dispatch(
     quotationSlice.actions.updatePrice({
       blockIndex: props.blockIndex,
       html,

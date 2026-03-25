@@ -35,11 +35,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<HttpResponse<ResBody>>
 
-export const getQuotationListHandler: RouterHandler = async (
-  req,
-  res,
-  next,
-) => {
+export const getQuotationListHandler: RouterHandler = async (req) => {
   const userFromAccessToken = await getUserFromAccessTokenOrThrowUnauthorized({
     req,
   })

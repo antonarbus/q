@@ -7,7 +7,7 @@ import {
   generateAccessToken,
   generateRefreshToken,
   getJwtExpirationInDays,
-  verifyRefreshToken,
+  getPayloadFromRefreshToken,
 } from '@back/shared/lib/json-webtoken'
 import { sendEmail } from '@back/shared/lib/mailersend'
 import bcrypt from 'bcryptjs'
@@ -60,7 +60,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<HttpResponse<ResBody>>
 
-export const logInHandler: RouterHandler = async (req, res, next) => {
+export const logInHandler: RouterHandler = async (req, res) => {
   const passwordFromInput = req.body.password
   const emailFromInput = req.body.email.toLowerCase()
 
@@ -97,12 +97,14 @@ export const logInHandler: RouterHandler = async (req, res, next) => {
     // just log in as a user without password coz you are a super-admin
     // do not leave traces of login + opening quotations & bookmarks
 
-    const isExistingRefreshJwtTokenValid = Boolean(
-      verifyRefreshToken(userSelected.refreshJwtToken),
+    const payloadFromRefreshToken = await getPayloadFromRefreshToken(
+      userSelected.refreshJwtToken,
     )
 
+    const isValidRefreshToken = Boolean(payloadFromRefreshToken)
+
     const getRefreshToken = async (): Promise<string> => {
-      if (isExistingRefreshJwtTokenValid === true) {
+      if (isValidRefreshToken === true) {
         return userSelected.refreshJwtToken
       }
 
@@ -216,12 +218,14 @@ export const logInHandler: RouterHandler = async (req, res, next) => {
     })
   }
 
-  const isExistingRefreshJwtToken = Boolean(
-    verifyRefreshToken(userSelected.refreshJwtToken),
+  const payloadFromRefreshToken = await getPayloadFromRefreshToken(
+    userSelected.refreshJwtToken,
   )
 
+  const isValidRefreshJwtToken = Boolean(payloadFromRefreshToken)
+
   const getRefreshToken = async (): Promise<string> => {
-    if (isExistingRefreshJwtToken === true) {
+    if (isValidRefreshJwtToken === true) {
       return userSelected.refreshJwtToken
     }
 

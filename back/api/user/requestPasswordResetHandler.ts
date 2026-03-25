@@ -45,11 +45,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<HttpResponse<ResBody>>
 
-export const requestPasswordResetHandler: RouterHandler = async (
-  req,
-  res,
-  next,
-) => {
+export const requestPasswordResetHandler: RouterHandler = async (req) => {
   const messageList: string[] = []
 
   const emailFromInput = req.body.email.toLowerCase()

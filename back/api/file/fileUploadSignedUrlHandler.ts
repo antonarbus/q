@@ -34,11 +34,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<HttpResponse<ResBody>>
 
-export const fileUploadSignedUrlHandler: RouterHandler = async (
-  req,
-  res,
-  next,
-) => {
+export const fileUploadSignedUrlHandler: RouterHandler = async (req) => {
   await getUserFromAccessTokenOrThrowUnauthorized({ req })
 
   const messageList: string[] = []

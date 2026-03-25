@@ -4,7 +4,7 @@ import { BookmarkedRowBlock } from './bookmarked-row-block'
 import { BoqBlock } from './boq-block'
 import { PriceBlock } from './total-price-block'
 import { TextBlock } from './text-block'
-import { useSelector } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { PasteItemBlock } from './paste-block'
 import { AnimatePresence } from 'motion/react'
 
@@ -14,8 +14,11 @@ type Props = {
 }
 
 export const Block = (props: Props): React.ReactNode => {
-  const copyPlace = useSelector((state) => state.copy.place)
-  const isPasteTextShown = useSelector((state) => state.copy.isPasteTextShown)
+  const copyPlace = reduxHolder.useSelector((state) => state.copy.place)
+
+  const isPasteTextShown = reduxHolder.useSelector(
+    (state) => state.copy.isPasteTextShown,
+  )
 
   const shouldShowPasteBefore =
     isPasteTextShown &&

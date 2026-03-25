@@ -4,8 +4,8 @@ import {
 } from '@front/features/open-close/open-share-quotation-modal'
 import { useShareQuotation } from '@front/features/quotation/share-quotation/useShareQuotation'
 import { FormModal } from '@front/shared/component/FormModal'
-import { router } from '@front/shared/lib/react-router-dom/router'
-import { getState } from '@front/shared/lib/redux'
+import { routerHolder } from '@front/shared/lib/react-router-dom/router'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { useAnimatedElement } from '@front/shared/util/useAnimatedElement'
 import { ImLink } from 'react-icons/im'
 import { ShareQuotationField } from './share-quotation-field'
@@ -18,7 +18,7 @@ export const ShareQuotationModal = (): React.JSX.Element => {
   useLoadInitValuesIntoShareQuotationModal({ accessFormValuesSignal })
   useLoadShareQuotationModalWithDirectLink({ accessFormValuesSignal })
   const isButtonDisabled = useIsButtonDisabled({ accessFormValuesSignal })
-  const isNewQuotation = getState().quotation.id === 'new'
+  const isNewQuotation = reduxHolder.getState().quotation.id === 'new'
 
   const shareQuotation = useShareQuotation({
     accessFormValuesSignal,
@@ -26,7 +26,7 @@ export const ShareQuotationModal = (): React.JSX.Element => {
   })
 
   const navigateUp = (): void => {
-    void router.navigate('..')
+    void routerHolder.router.navigate('..')
   }
 
   return (

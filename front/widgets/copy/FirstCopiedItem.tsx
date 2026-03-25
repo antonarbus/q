@@ -1,4 +1,4 @@
-import { getState, useSelector } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { theme } from '@front/shared/theme'
 import { AnimatePresence, motion, type Variants } from 'motion/react'
 import { containerPadding, containerWidth, itemMarginBottom } from './const'
@@ -53,11 +53,11 @@ const variants: Variants = {
 }
 
 export const FirstCopiedItem = (): React.JSX.Element | null => {
-  const items = useSelector((state) => state.copy.items)
-  const isCopying = useSelector((state) => state.copy.isCopying)
+  const items = reduxHolder.useSelector((state) => state.copy.items)
+  const isCopying = reduxHolder.useSelector((state) => state.copy.isCopying)
 
   const [firstItem] = items
-  const firstItemPreviewHtml = getState().copy.previews.at(0) ?? ''
+  const firstItemPreviewHtml = reduxHolder.getState().copy.previews.at(0) ?? ''
 
   if (firstItem?.width === undefined) {
     return null

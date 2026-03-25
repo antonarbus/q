@@ -7,7 +7,7 @@ import { userSlice } from '@front/entities/user/redux/userSlice'
 import type { Signal } from '@preact/signals-react'
 import { appSlice } from '@front/shared/appSlice'
 import { route } from '@front/shared/lib/react-router-dom/route'
-import { dispatch, getState } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { asyncDelay } from '@front/shared/util/asyncDelay'
 import type { UseMutationResult } from '@tanstack/react-query'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -38,22 +38,24 @@ export const useLogIn = (props: Props): Res => {
 
   useUpdateEffect(() => {
     if (logInUserMutation.isSuccess === true) {
-      dispatch(
+      reduxHolder.dispatch(
         userSlice.actions.setAccessToken({
           accessToken: logInUserMutation.data.accessJwtToken,
         }),
       )
 
-      dispatch(
+      reduxHolder.dispatch(
         userSlice.actions.rememberLoggedUser({
           email: logInUserMutation.data.email,
           roles: logInUserMutation.data.roles,
         }),
       )
 
-      dispatch(navSlice.actions.hideNavItems({ navItemIds: [navItemId.login] }))
+      reduxHolder.dispatch(
+        navSlice.actions.hideNavItems({ navItemIds: [navItemId.login] }),
+      )
 
-      dispatch(
+      reduxHolder.dispatch(
         navSlice.actions.showNavItems({ navItemIds: [navItemId.profile] }),
       )
 
@@ -61,11 +63,17 @@ export const useLogIn = (props: Props): Res => {
         logInUserMutation.data.roles.includes('super-admin') === true
 
       if (isSuperAdmin === true) {
-        dispatch(navSlice.actions.showNavItems({ navItemIds: ['admin'] }))
-        dispatch(navSlice.actions.showAdminIcon())
+        reduxHolder.dispatch(
+          navSlice.actions.showNavItems({ navItemIds: ['admin'] }),
+        )
+
+        reduxHolder.dispatch(navSlice.actions.showAdminIcon())
       } else {
-        dispatch(navSlice.actions.hideNavItems({ navItemIds: ['admin'] }))
-        dispatch(navSlice.actions.showUserIcon())
+        reduxHolder.dispatch(
+          navSlice.actions.hideNavItems({ navItemIds: ['admin'] }),
+        )
+
+        reduxHolder.dispatch(navSlice.actions.showUserIcon())
       }
 
       const isQuotationListPage = location.pathname.includes(
@@ -82,8 +90,8 @@ export const useLogIn = (props: Props): Res => {
         void getBookmarkListQuery.refetch()
       }
 
-      if (getState().quotation.permissionLevel === 'FORBIDDEN') {
-        dispatch(
+      if (reduxHolder.getState().quotation.permissionLevel === 'FORBIDDEN') {
+        reduxHolder.dispatch(
           appSlice.actions.setShouldLoadQuotation({
             yesOrNo: 'yes',
             from: 'server',
@@ -95,11 +103,11 @@ export const useLogIn = (props: Props): Res => {
         await asyncDelay(1000)
         await props.slideOut()
 
-        const navigateTo = getState().app.navigateState.to
+        const navigateTo = reduxHolder.getState().app.navigateState.to
 
         if (navigateTo !== undefined) {
           await navigate(navigateTo)
-          dispatch(appSlice.actions.resetNavigateState())
+          reduxHolder.dispatch(appSlice.actions.resetNavigateState())
 
           return
         }
@@ -113,7 +121,9 @@ export const useLogIn = (props: Props): Res => {
 
   useUpdateEffect(() => {
     if (logInUserMutation.isError === true) {
-      dispatch(userSlice.actions.setAccessToken({ accessToken: null }))
+      reduxHolder.dispatch(
+        userSlice.actions.setAccessToken({ accessToken: null }),
+      )
 
       const errorCode = logInUserMutation.error.response?.data.errorCode
 

@@ -6,7 +6,7 @@ import { CategoryField } from '@front/shared/component/input-field/CategoryField
 import { DescriptionField } from '@front/shared/component/input-field/DescriptionField'
 import { InfoField } from '@front/shared/component/input-field/InfoField'
 import { NameField } from '@front/shared/component/input-field/NameField'
-import { router } from '@front/shared/lib/react-router-dom/router'
+import { routerHolder } from '@front/shared/lib/react-router-dom/router'
 import { useRef } from 'react'
 import { BsInfo } from 'react-icons/bs'
 import { useParams } from 'react-router-dom'
@@ -22,7 +22,7 @@ export const InfoModal = (): React.ReactNode => {
   const distinctCategories = useDistinctCategories()
 
   const navigateUp = (): void => {
-    void router.navigate('..')
+    void routerHolder.router.navigate('..')
   }
 
   return (

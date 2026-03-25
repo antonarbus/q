@@ -1,4 +1,4 @@
-import { dispatch } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { getNumberFromString } from '@front/shared/util/getNumberFromString'
 import { getTextContentFromHtml } from '@front/shared/util/getTextContentFromHtml'
 import type { HeaderKey } from '@back/entity/quotation/schema'
@@ -41,7 +41,7 @@ export const updateBoqHeaderAtStore = (props: Props): Res => {
     string: cellTextContent,
   })
 
-  dispatch(
+  reduxHolder.dispatch(
     quotationSlice.actions.updateBoqHeaderText({
       blockIndex: props.blockIndex,
       html,

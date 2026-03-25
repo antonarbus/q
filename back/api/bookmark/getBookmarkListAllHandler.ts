@@ -43,11 +43,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<HttpResponse<ResBody>>
 
-export const getBookmarkListAllHandler: RouterHandler = async (
-  req,
-  res,
-  next,
-) => {
+export const getBookmarkListAllHandler: RouterHandler = async (req) => {
   const userFromAccessToken = await getUserFromAccessTokenOrThrowUnauthorized({
     req,
   })

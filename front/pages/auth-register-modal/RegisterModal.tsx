@@ -7,7 +7,7 @@ import { ConfirmPasswordField } from '@front/shared/component/ConfirmPasswordFie
 import { FormModal } from '@front/shared/component/FormModal'
 import { EmailField } from '@front/shared/component/input-field/EmailField'
 import { PasswordField } from '@front/shared/component/input-field/PasswordField'
-import { router } from '@front/shared/lib/react-router-dom/router'
+import { routerHolder } from '@front/shared/lib/react-router-dom/router'
 import { type Location, useLocation } from 'react-router-dom'
 import { useAnimatedElement } from '@front/shared/util/useAnimatedElement'
 import { useRef } from 'react'
@@ -39,7 +39,7 @@ export const RegisterModal = (): React.JSX.Element => {
   })
 
   const navigateUp = (): void => {
-    void router.navigate('..')
+    void routerHolder.router.navigate('..')
   }
 
   return (

@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken'
 import { isJwtPayloadExtended, type JwtPayloadExtended } from './types'
 import { getSecret } from '../secret-manager/getSecret'
 
-export const verifyRefreshToken = async (
+export const getPayloadFromRefreshToken = async (
   refreshJwtToken: unknown,
 ): Promise<JwtPayloadExtended | undefined> => {
   const JWT_REFRESH_SECRET = await getSecret('JWT_REFRESH_SECRET')

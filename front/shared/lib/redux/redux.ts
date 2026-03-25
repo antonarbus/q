@@ -1,39 +1,44 @@
-/* eslint-disable @typescript-eslint/prefer-destructuring */
-/* eslint-disable @typescript-eslint/no-unnecessary-condition */
-/* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
-import type { Dispatch, GetState, Store, UseSelector } from '@front/app/redux'
-import { useSelector as useSelectorNotTyped } from 'react-redux'
+/* eslint-disable @typescript-eslint/member-ordering */
+import type { Register } from './register'
+import {
+  useSelector as useSelectorNotTyped,
+  type TypedUseSelectorHook,
+} from 'react-redux'
 
-export type { State as RootState } from '@front/app/redux'
+export type RootState = Register extends { state: infer S } ? S : never
+type AppDispatch = Register extends { dispatch: infer D } ? D : never
+type Store = Register extends { store: infer ST } ? ST : never
+type UseSelector = TypedUseSelectorHook<RootState>
 
-export let store = null as unknown as Store
-export let useSelector = null as unknown as UseSelector
-export let dispatch = null as unknown as Dispatch
-export let getState = null as unknown as GetState
+class ReduxHolder {
+  #store: Store | null = null
 
-export const instantiateStore = (instance: Store): void => {
-  if (store !== null) {
-    throw new Error('store is already instantiated')
+  public readonly useSelector: UseSelector = useSelectorNotTyped as UseSelector
+
+  public set store(instance: Store) {
+    if (this.#store !== null) {
+      throw new Error('store is already instantiated')
+    }
+
+    this.#store = instance
   }
 
-  store = instance
+  public get store(): Store {
+    if (this.#store === null) {
+      throw new Error('store is not initialized')
+    }
 
-  if (useSelector !== null) {
-    throw new Error('useSelector is already instantiated')
+    return this.#store
   }
 
-  useSelector = useSelectorNotTyped as UseSelector
-
-  if (dispatch !== null) {
-    throw new Error('dispatch is already instantiated')
+  public get dispatch(): AppDispatch {
+    return this.store.dispatch
   }
 
-  dispatch = store.dispatch
-
-  if (getState !== null) {
-    throw new Error('getState is already instantiated')
+  public get getState(): () => RootState {
+    // eslint-disable-next-line @typescript-eslint/unbound-method
+    return this.store.getState as () => RootState
   }
-
-  // eslint-disable-next-line @typescript-eslint/unbound-method
-  getState = store.getState
 }
+
+export const reduxHolder = new ReduxHolder()

@@ -1,8 +1,8 @@
 import { useBlock } from '@front/entities/quotation/provider/BlockProvider'
 import { RowProvider } from '@front/entities/quotation/provider/RowProvider'
 import { selectRows } from '@front/entities/quotation/redux/selector/selectRows'
-import { useSelector } from '@front/shared/lib/redux'
-import { arrayShapesEqualityFn } from '@front/shared/util/arrayShapesEqualityFn'
+import { reduxHolder } from '@front/shared/lib/redux'
+import { arrayShapesEqualityFn } from '@front/entities/quotation/util/arrayShapesEqualityFn'
 import { AnimatePresence } from 'motion/react'
 import { PasteRowTextOverlay } from './PasteRowTextOverlay'
 import { Row } from './Row'
@@ -14,10 +14,13 @@ import { hidePinsOnRowBlur } from '@front/features/blocks/pin/hide-row-pins/hide
 
 export const Rows = (): React.JSX.Element => {
   const block = useBlock()
-  const copyPlace = useSelector((state) => state.copy.place)
-  const isPasteTextShown = useSelector((state) => state.copy.isPasteTextShown)
+  const copyPlace = reduxHolder.useSelector((state) => state.copy.place)
 
-  const rows = useSelector(
+  const isPasteTextShown = reduxHolder.useSelector(
+    (state) => state.copy.isPasteTextShown,
+  )
+
+  const rows = reduxHolder.useSelector(
     selectRows({ blockIndex: block.index }),
     arrayShapesEqualityFn,
   )

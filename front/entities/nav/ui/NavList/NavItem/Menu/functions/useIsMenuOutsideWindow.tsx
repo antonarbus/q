@@ -1,4 +1,4 @@
-import { useSelector } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { theme } from '@front/shared/theme'
 
 /**
@@ -10,7 +10,10 @@ import { theme } from '@front/shared/theme'
  * - if so, we can fix 'left' side of the menu, instead of 'right'
  */
 export const useIsMenuOutsideWindow = (): boolean => {
-  const navItemRightPos = useSelector((state) => state.nav.navItemRightPos)
+  const navItemRightPos = reduxHolder.useSelector(
+    (state) => state.nav.navItemRightPos,
+  )
+
   const isMenuOutsideWindow = theme.menu.width > navItemRightPos
 
   return isMenuOutsideWindow

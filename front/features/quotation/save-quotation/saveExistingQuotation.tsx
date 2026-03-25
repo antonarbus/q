@@ -6,8 +6,8 @@ import { saveQuotationMutationFn } from '@front/entities/quotation/api/useSaveQu
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import type { Quotation } from '@back/entity/quotation/schema'
 import { route } from '@front/shared/lib/react-router-dom/route'
-import { router } from '@front/shared/lib/react-router-dom/router'
-import { dispatch, getState } from '@front/shared/lib/redux'
+import { routerHolder } from '@front/shared/lib/react-router-dom/router'
+import { reduxHolder } from '@front/shared/lib/redux'
 import type { AxiosError } from 'axios'
 import { toast } from 'sonner'
 import { createActor } from 'xstate'
@@ -20,7 +20,7 @@ const loadingMenuIconMachine = createLoadingMenuIconMachine({
 const loadingIconActor = createActor(loadingMenuIconMachine).start()
 
 export const saveExistingQuotation = async (): Promise<void> => {
-  if (getState().user.email === null) {
+  if (reduxHolder.getState().user.email === null) {
     toast.warning('Not logged in')
 
     return
@@ -28,16 +28,16 @@ export const saveExistingQuotation = async (): Promise<void> => {
 
   // why?
   const quotation: Quotation = {
-    ...getState().quotation,
-    id: getState().quotation.id,
+    ...reduxHolder.getState().quotation,
+    id: reduxHolder.getState().quotation.id,
   }
 
   const isAbleToSave =
-    getState().quotation.permissionLevel === 'PUBLIC' ||
-    getState().quotation.permissionLevel === 'SHARED'
+    reduxHolder.getState().quotation.permissionLevel === 'PUBLIC' ||
+    reduxHolder.getState().quotation.permissionLevel === 'SHARED'
 
   if (isAbleToSave === true) {
-    void router.navigate(`./${route.save}`)
+    void routerHolder.router.navigate(`./${route.save}`)
 
     return
   }
@@ -61,16 +61,16 @@ export const saveExistingQuotation = async (): Promise<void> => {
         )
       }
 
-      void router.navigate(`/${data.quotation.id}`)
+      void routerHolder.router.navigate(`/${data.quotation.id}`)
 
-      dispatch(
+      reduxHolder.dispatch(
         quotationSlice.actions.loadQuotation({
-          quotation: { ...getState().quotation, ...data.quotation },
+          quotation: { ...reduxHolder.getState().quotation, ...data.quotation },
         }),
       )
 
       loadingIconActor.send({ type: 'show success icon' })
-      dispatch(navSlice.actions.removeUnderlineFromTopNav())
+      reduxHolder.dispatch(navSlice.actions.removeUnderlineFromTopNav())
     }
   } catch (error) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion

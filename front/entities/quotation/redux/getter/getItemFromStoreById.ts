@@ -1,4 +1,4 @@
-import { getState } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import type {
   BlockItem,
   Quotation,
@@ -28,7 +28,7 @@ type Res =
   | undefined
 
 export const getItemFromStoreById = (props: Props): Res => {
-  const state = getState()
+  const state = reduxHolder.getState()
 
   if (state.quotation.id === props.id) {
     return { type: 'quotation', data: state.quotation }

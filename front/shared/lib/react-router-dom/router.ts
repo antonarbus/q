@@ -1,13 +1,26 @@
-/* eslint-disable @typescript-eslint/no-unnecessary-condition */
-/* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
-import type { Router } from '@front/app/router'
+/* eslint-disable @typescript-eslint/member-ordering */
+import type { createBrowserRouter } from 'react-router-dom'
 
-export let router = null as unknown as Router
+type Router = ReturnType<typeof createBrowserRouter>
 
-export const instantiateRouter = (instance: Router): void => {
-  if (router !== null) {
-    throw new Error('router is already instantiated')
+class RouterHolder {
+  #router: Router | null = null
+
+  public set router(instance: Router) {
+    if (this.#router !== null) {
+      throw new Error('router is already instantiated')
+    }
+
+    this.#router = instance
   }
 
-  router = instance
+  public get router(): Router {
+    if (this.#router === null) {
+      throw new Error('router is not initialized')
+    }
+
+    return this.#router
+  }
 }
+
+export const routerHolder = new RouterHolder()

@@ -1,7 +1,7 @@
 import { navSlice } from '@front/entities/nav/navSlice'
 import { useMenuNavigation } from '@front/entities/nav/provider/MenuNavigationProvider'
 import { getNavItem } from '@front/entities/nav/ui/NavList/NavItem/Menu/functions/getNavItem'
-import { dispatch, getState } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { functionRegistry } from '@front/widgets/nav/functionRegistry'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -14,7 +14,7 @@ export const useKeysForMenuNavigation = (): void => {
     const controller = new AbortController()
 
     const navKeyboardHandler = (event: KeyboardEvent): void => {
-      const state = getState()
+      const state = reduxHolder.getState()
 
       const navItem = getNavItem({
         navItemId: state.nav.currentMenuNavItemId,
@@ -34,14 +34,14 @@ export const useKeysForMenuNavigation = (): void => {
         const isLastMenuItem = state.nav.hoverIndex === menuItemsQty
 
         if (isLastMenuItem === true) {
-          dispatch(
+          reduxHolder.dispatch(
             navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
           )
 
           return
         }
 
-        dispatch(
+        reduxHolder.dispatch(
           navSlice.actions.setMenuItemHoverIndex({
             menuItemHoverIndex: state.nav.hoverIndex + 1,
           }),
@@ -55,7 +55,7 @@ export const useKeysForMenuNavigation = (): void => {
         const isTopMenuItem = state.nav.hoverIndex < 1
 
         if (isTopMenuItem === true) {
-          dispatch(
+          reduxHolder.dispatch(
             navSlice.actions.setMenuItemHoverIndex({
               menuItemHoverIndex: menuItemsQty,
             }),
@@ -64,7 +64,7 @@ export const useKeysForMenuNavigation = (): void => {
           return
         }
 
-        dispatch(
+        reduxHolder.dispatch(
           navSlice.actions.setMenuItemHoverIndex({
             menuItemHoverIndex: state.nav.hoverIndex - 1,
           }),
@@ -76,7 +76,7 @@ export const useKeysForMenuNavigation = (): void => {
       const shouldGoBack = isNestedMenu && event.key === 'Backspace'
 
       if (shouldGoBack === true) {
-        dispatch(
+        reduxHolder.dispatch(
           navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
         )
 
@@ -88,13 +88,13 @@ export const useKeysForMenuNavigation = (): void => {
       const shouldClose = isNestedMenu === false && event.key === 'Backspace'
 
       if (shouldClose === true) {
-        dispatch(navSlice.actions.closeMenu())
+        reduxHolder.dispatch(navSlice.actions.closeMenu())
 
         return
       }
 
       if (event.key === 'Escape') {
-        dispatch(navSlice.actions.closeMenu())
+        reduxHolder.dispatch(navSlice.actions.closeMenu())
 
         return
       }
@@ -103,7 +103,7 @@ export const useKeysForMenuNavigation = (): void => {
         const isBackMenuItem = state.nav.hoverIndex === 0 && isNestedMenu
 
         if (isBackMenuItem === true) {
-          dispatch(
+          reduxHolder.dispatch(
             navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
           )
 
@@ -116,7 +116,7 @@ export const useKeysForMenuNavigation = (): void => {
           state.nav.hoverIndex === 0 && isNestedMenu === false
 
         if (isCloseMenuItem === true) {
-          dispatch(navSlice.actions.closeMenu())
+          reduxHolder.dispatch(navSlice.actions.closeMenu())
 
           return
         }
@@ -133,7 +133,7 @@ export const useKeysForMenuNavigation = (): void => {
 
         if (externalLink !== undefined) {
           window.open(externalLink, '_blank', 'noopener,noreferrer')
-          dispatch(navSlice.actions.closeMenu())
+          reduxHolder.dispatch(navSlice.actions.closeMenu())
 
           return
         }
@@ -142,7 +142,7 @@ export const useKeysForMenuNavigation = (): void => {
 
         if (link !== undefined) {
           void navigate(link)
-          dispatch(navSlice.actions.closeMenu())
+          reduxHolder.dispatch(navSlice.actions.closeMenu())
 
           return
         }
@@ -153,7 +153,7 @@ export const useKeysForMenuNavigation = (): void => {
 
         if (func !== undefined) {
           func()
-          dispatch(navSlice.actions.closeMenu())
+          reduxHolder.dispatch(navSlice.actions.closeMenu())
 
           return
         }
@@ -162,7 +162,7 @@ export const useKeysForMenuNavigation = (): void => {
           navItemHovered.current?.nestedItemList,
         )
 
-        dispatch(
+        reduxHolder.dispatch(
           navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
         )
 
@@ -181,7 +181,7 @@ export const useKeysForMenuNavigation = (): void => {
         const shouldJumpToClose = isNestedMenu === false && event.key === 'c'
 
         if (shouldJumpToClose === true) {
-          dispatch(
+          reduxHolder.dispatch(
             navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
           )
 
@@ -191,7 +191,7 @@ export const useKeysForMenuNavigation = (): void => {
         const shouldJumpToGoBack = isNestedMenu && event.key === 'b'
 
         if (shouldJumpToGoBack === true) {
-          dispatch(
+          reduxHolder.dispatch(
             navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
           )
 
@@ -216,7 +216,7 @@ export const useKeysForMenuNavigation = (): void => {
         })
 
         if (indexToJump > -1) {
-          dispatch(
+          reduxHolder.dispatch(
             navSlice.actions.setMenuItemHoverIndex({
               menuItemHoverIndex: indexToJump + 1,
             }),
@@ -234,7 +234,7 @@ export const useKeysForMenuNavigation = (): void => {
           })
 
           if (newIndex > -1) {
-            dispatch(
+            reduxHolder.dispatch(
               navSlice.actions.setMenuItemHoverIndex({
                 menuItemHoverIndex: newIndex + 1,
               }),

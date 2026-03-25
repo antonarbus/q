@@ -1,5 +1,5 @@
 import { updateSubTotalPriceWithValue } from '@front/entities/quotation/util/updateSubTotalPriceWithValue'
-import { getState } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import {
   editorRegistry,
   getRegistryKey,
@@ -11,7 +11,7 @@ type Props = {
 }
 
 export const recalculateSubTotalPrices = (props: Props): void => {
-  const state = getState()
+  const state = reduxHolder.getState()
 
   state.quotation.blocks.forEach((block, blockIndex) => {
     if (block.type !== 'boq') {

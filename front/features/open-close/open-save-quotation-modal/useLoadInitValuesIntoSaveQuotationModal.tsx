@@ -1,5 +1,5 @@
 import type { SaveQuotationFormValues } from '@front/entities/quotation/form/types'
-import { getState } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { useEffectOnce } from 'react-use'
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
 
 export const useLoadInitValuesIntoSaveQuotationModal = (props: Props): void => {
   useEffectOnce(() => {
-    const state = getState()
+    const state = reduxHolder.getState()
 
     props.saveQuotationFormValues.nameSignal.value = state.quotation.name
 

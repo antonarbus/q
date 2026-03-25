@@ -1,5 +1,5 @@
 import type { CellKey } from '@back/entity/quotation/schema'
-import { dispatch } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { getNumberFromString } from '@front/shared/util/getNumberFromString'
 import { getTextContentFromHtml } from '@front/shared/util/getTextContentFromHtml'
 import { getRowFromStoreByIndex } from '../getter/getRowFromStoreByIndex'
@@ -43,7 +43,7 @@ export const updateCellAtStore = (props: Props): Res => {
     string: cellTextContent,
   })
 
-  dispatch(
+  reduxHolder.dispatch(
     quotationSlice.actions.updateCell({
       blockIndex: props.blockIndex,
       rowIndex: props.rowIndex,

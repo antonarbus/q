@@ -1,7 +1,7 @@
 import { copySlice } from '@front/entities/copy/copySlice'
 import { BOOKMARK_POS_AT_BLOCKS } from '@front/entities/quotation/redux/bookmarkPosAtBlocks'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
-import { dispatch, getState, useSelector } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { useEffect } from 'react'
 import { getCleanPaperHtml } from '@front/shared/util/html-getter/getCleanPaperHtml'
 import { cls } from '@front/shared/cls'
@@ -17,7 +17,7 @@ export const getPreviewPreparingPromise = async (): Promise<unknown> => {
 export const useBookmarkCopyPreviewCapturer = (
   containerRef: React.RefObject<HTMLDivElement | null>,
 ): void => {
-  const bookmarkBlock = useSelector((state) =>
+  const bookmarkBlock = reduxHolder.useSelector((state) =>
     state.quotation.blocks.at(BOOKMARK_POS_AT_BLOCKS),
   )
 
@@ -64,22 +64,22 @@ export const useBookmarkCopyPreviewCapturer = (
     })
 
     void Promise.all(imageLoadedPromiseList).then(() => {
-      dispatch(
+      reduxHolder.dispatch(
         copySlice.actions.addItem({
           item: bookmarkBlock,
           preview: paperHtml,
         }),
       )
 
-      dispatch(copySlice.actions.allowToPaste())
+      reduxHolder.dispatch(copySlice.actions.allowToPaste())
 
-      dispatch(copySlice.actions.stopPreviewPreparing())
+      reduxHolder.dispatch(copySlice.actions.stopPreviewPreparing())
 
-      if (getState().copy.isVisible === false) {
-        dispatch(copySlice.actions.showCopyModal())
+      if (reduxHolder.getState().copy.isVisible === false) {
+        reduxHolder.dispatch(copySlice.actions.showCopyModal())
       }
 
-      dispatch(quotationSlice.actions.removeBlockFromPosThousand())
+      reduxHolder.dispatch(quotationSlice.actions.removeBlockFromPosThousand())
 
       previewPreparingDeferred.resolve()
     })

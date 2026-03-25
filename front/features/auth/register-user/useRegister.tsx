@@ -4,7 +4,7 @@ import { useRegisterUserMutation } from '@front/entities/user/api/useRegisterUse
 import { userSlice } from '@front/entities/user/redux/userSlice'
 import type { Signal } from '@preact/signals-react'
 import { appSlice } from '@front/shared/appSlice'
-import { dispatch, getState } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { asyncDelay } from '@front/shared/util/asyncDelay'
 import type { UseMutationResult } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
@@ -33,22 +33,24 @@ export const useRegister = (props: Props): Res => {
     if (registerUserMutation.isSuccess === true) {
       toast.info('Check your inbox or spam')
 
-      dispatch(
+      reduxHolder.dispatch(
         userSlice.actions.setAccessToken({
           accessToken: registerUserMutation.data.accessJwtToken,
         }),
       )
 
-      dispatch(
+      reduxHolder.dispatch(
         userSlice.actions.rememberLoggedUser({
           email: registerUserMutation.data.email,
           roles: registerUserMutation.data.roles,
         }),
       )
 
-      dispatch(navSlice.actions.hideNavItems({ navItemIds: [navItemId.login] }))
+      reduxHolder.dispatch(
+        navSlice.actions.hideNavItems({ navItemIds: [navItemId.login] }),
+      )
 
-      dispatch(
+      reduxHolder.dispatch(
         navSlice.actions.showNavItems({ navItemIds: [navItemId.profile] }),
       )
 
@@ -56,11 +58,11 @@ export const useRegister = (props: Props): Res => {
         await asyncDelay(1000)
         await props.slideOut()
 
-        const navigateTo = getState().app.navigateState.to
+        const navigateTo = reduxHolder.getState().app.navigateState.to
 
         if (navigateTo !== undefined) {
           await navigate(navigateTo)
-          dispatch(appSlice.actions.resetNavigateState())
+          reduxHolder.dispatch(appSlice.actions.resetNavigateState())
 
           return
         }

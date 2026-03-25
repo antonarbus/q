@@ -33,7 +33,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<HttpResponse<ResBody>>
 
-export const healthCheckHandler: RouterHandler = async (req, res, next) => {
+export const healthCheckHandler: RouterHandler = async (req) => {
   const userFromAccessToken = await getUserFromRefreshTokenOrNull({ req })
 
   const messageList: string[] = []

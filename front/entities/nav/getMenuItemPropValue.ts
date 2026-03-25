@@ -1,4 +1,4 @@
-import { instance } from '@front/shared/instance'
+import { getNavStructure } from './navStructureHolder'
 import type { NavItem, NavItemId } from './type'
 
 // https://www.typescriptlang.org/docs/handbook/2/generics.html
@@ -15,7 +15,7 @@ type Res<K extends keyof NavItem> = NavItem[K] | undefined
 export const getMenuItemPropValue = <K extends keyof NavItem>(
   props: Props<K>,
 ): Res<K> => {
-  for (const el of props.menu ?? instance.navStructure) {
+  for (const el of props.menu ?? getNavStructure()) {
     if (el.id === props.navItemId) {
       return el[props.prop]
     }

@@ -1,6 +1,6 @@
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { getTotalPriceAbove } from '@front/entities/quotation/util/getTotalPriceAbove'
-import { dispatch, getState } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import {
   editorRegistry,
   getRegistryKey,
@@ -9,7 +9,7 @@ import { updateNumberAtHtmlIncrementally } from '@front/shared/lib/tiptap/util/u
 import { getStringWithNewFormattedNumber } from '@front/shared/util/getStringWithNewFormattedNumber'
 
 export const recalculateTotalPrices = (): void => {
-  const state = getState()
+  const state = reduxHolder.getState()
 
   state.quotation.blocks.forEach((block, blockIndex) => {
     if (block.type !== 'price') {
@@ -39,7 +39,7 @@ export const recalculateTotalPrices = (): void => {
       newNumber: totalPrice,
     })
 
-    dispatch(
+    reduxHolder.dispatch(
       quotationSlice.actions.updatePrice({
         blockIndex,
         html: updatedHtml,

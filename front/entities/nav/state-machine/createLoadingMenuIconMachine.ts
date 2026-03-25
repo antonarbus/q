@@ -1,6 +1,6 @@
 import type { NavItemId } from '@front/entities/nav/navItemId'
 import { navSlice } from '@front/entities/nav/navSlice'
-import { dispatch } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { setup } from 'xstate'
 
 type Props = {
@@ -22,7 +22,7 @@ export const createLoadingMenuIconMachine = (props: Props) =>
     },
     actions: {
       'show spinner': () => {
-        dispatch(
+        reduxHolder.dispatch(
           navSlice.actions.startLoadingIcon({
             navItemId: props.navItemId,
             navItemNameWhileLoading: props.navItemNameWhileLoading,
@@ -30,7 +30,7 @@ export const createLoadingMenuIconMachine = (props: Props) =>
         )
       },
       'hide spinner': () => {
-        dispatch(
+        reduxHolder.dispatch(
           navSlice.actions.stopLoadingIcon({
             navItemId: props.navItemId,
             navItemNameWhileLoading: props.navItemNameWhileLoading,
@@ -38,18 +38,22 @@ export const createLoadingMenuIconMachine = (props: Props) =>
         )
       },
       'show error icon': () => {
-        dispatch(navSlice.actions.showErrorIcon({ navItemId: props.navItemId }))
+        reduxHolder.dispatch(
+          navSlice.actions.showErrorIcon({ navItemId: props.navItemId }),
+        )
       },
       'hide error icon': () => {
-        dispatch(navSlice.actions.hideErrorIcon({ navItemId: props.navItemId }))
+        reduxHolder.dispatch(
+          navSlice.actions.hideErrorIcon({ navItemId: props.navItemId }),
+        )
       },
       'show success icon': () => {
-        dispatch(
+        reduxHolder.dispatch(
           navSlice.actions.showSuccessIcon({ navItemId: props.navItemId }),
         )
       },
       'hide success icon': () => {
-        dispatch(
+        reduxHolder.dispatch(
           navSlice.actions.hideSuccessIcon({ navItemId: props.navItemId }),
         )
       },

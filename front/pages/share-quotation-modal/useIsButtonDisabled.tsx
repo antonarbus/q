@@ -1,12 +1,12 @@
 import type { AccessFormValuesSignal } from '@front/entities/quotation/form/types'
-import { getState } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 
 type Props = {
   accessFormValuesSignal: AccessFormValuesSignal
 }
 
 export const useIsButtonDisabled = (props: Props): boolean => {
-  const state = getState()
+  const state = reduxHolder.getState()
 
   const sameNobodyAccessLevel =
     state.quotation.access.level === 'nobody' &&

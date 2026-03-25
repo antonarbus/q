@@ -6,7 +6,7 @@ import type {
   ResBody as ResBodyMakeFilePublic,
 } from '@back/api/file/saveFileInfoHandler'
 import { axiosWithAuth } from '@front/shared/lib/axios'
-import { getState } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { asyncDelay } from '@front/shared/util/asyncDelay'
 import { getFileSizeInMb } from '@front/shared/util/getFileSizeInMb'
 import axios, { type AxiosError } from 'axios'
@@ -18,7 +18,7 @@ export const upload: OnUpload = async (props) => {
   hideDraggableArea()
 
   // when user is not logged save files and images as base64 urls
-  if (getState().user.email === null) {
+  if (reduxHolder.getState().user.email === null) {
     const file = props.files['0']
 
     if (file === undefined) {

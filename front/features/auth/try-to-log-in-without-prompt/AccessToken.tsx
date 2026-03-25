@@ -5,7 +5,7 @@ import { createLoadingMenuIconMachine } from '@front/entities/nav/state-machine/
 import { useGetUserAccessTokenQuery } from '@front/entities/user/api/useGetUserAccessTokenQuery'
 import { userSlice } from '@front/entities/user/redux/userSlice'
 import { agGridSlice } from '@front/shared/lib/ag-grid/agGridSlice'
-import { dispatch, getState } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { jwtDecode } from 'jwt-decode'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
 import { createActor } from 'xstate'
@@ -35,7 +35,7 @@ export const AccessToken = (): React.ReactNode => {
 
   // get initial access token on app load
   useEffectOnce(() => {
-    if (getState().user.accessToken === null) {
+    if (reduxHolder.getState().user.accessToken === null) {
       void getUserAccessTokenQuery.refetch()
     }
   })
@@ -45,7 +45,7 @@ export const AccessToken = (): React.ReactNode => {
     if (getUserAccessTokenQuery.isFetching === true) {
       loadingIconActor.send({ type: 'show loading icon' })
 
-      dispatch(
+      reduxHolder.dispatch(
         agGridSlice.actions.showLoadingOverlay({
           showLoader: true,
           text: 'Checking credentials',
@@ -60,29 +60,31 @@ export const AccessToken = (): React.ReactNode => {
         getUserAccessTokenQuery.data.accessJwtToken,
       )
 
-      dispatch(
+      reduxHolder.dispatch(
         userSlice.actions.setAccessToken({
           accessToken: getUserAccessTokenQuery.data.accessJwtToken,
         }),
       )
 
-      dispatch(
+      reduxHolder.dispatch(
         agGridSlice.actions.showLoadingOverlay({
           showLoader: false,
           text: 'Logged in',
         }),
       )
 
-      dispatch(
+      reduxHolder.dispatch(
         userSlice.actions.rememberLoggedUser({
           email: jwtPayload.email,
           roles: getUserAccessTokenQuery.data.roles,
         }),
       )
 
-      dispatch(navSlice.actions.hideNavItems({ navItemIds: [navItemId.login] }))
+      reduxHolder.dispatch(
+        navSlice.actions.hideNavItems({ navItemIds: [navItemId.login] }),
+      )
 
-      dispatch(
+      reduxHolder.dispatch(
         navSlice.actions.showNavItems({
           navItemIds: [navItemId.profile],
         }),
@@ -91,14 +93,20 @@ export const AccessToken = (): React.ReactNode => {
       const isSuperAdmin = jwtPayload.roles.includes('super-admin')
 
       if (isSuperAdmin === true) {
-        dispatch(navSlice.actions.showNavItems({ navItemIds: ['admin'] }))
-        dispatch(navSlice.actions.showAdminIcon())
+        reduxHolder.dispatch(
+          navSlice.actions.showNavItems({ navItemIds: ['admin'] }),
+        )
+
+        reduxHolder.dispatch(navSlice.actions.showAdminIcon())
       } else {
-        dispatch(navSlice.actions.hideNavItems({ navItemIds: ['admin'] }))
-        dispatch(navSlice.actions.showUserIcon())
+        reduxHolder.dispatch(
+          navSlice.actions.hideNavItems({ navItemIds: ['admin'] }),
+        )
+
+        reduxHolder.dispatch(navSlice.actions.showUserIcon())
       }
 
-      dispatch(
+      reduxHolder.dispatch(
         navSlice.actions.stopLoadingIcon({
           navItemId: navItemId.login,
         }),
@@ -111,24 +119,26 @@ export const AccessToken = (): React.ReactNode => {
 
   useUpdateEffect(() => {
     if (getUserAccessTokenQuery.isError === true) {
-      dispatch(
+      reduxHolder.dispatch(
         agGridSlice.actions.showLoadingOverlay({
           showLoader: false,
           text: 'Not logged in',
         }),
       )
 
-      dispatch(userSlice.actions.forgetLoggedUser())
+      reduxHolder.dispatch(userSlice.actions.forgetLoggedUser())
 
-      dispatch(navSlice.actions.showNavItems({ navItemIds: [navItemId.login] }))
+      reduxHolder.dispatch(
+        navSlice.actions.showNavItems({ navItemIds: [navItemId.login] }),
+      )
 
-      dispatch(
+      reduxHolder.dispatch(
         navSlice.actions.hideNavItems({
           navItemIds: [navItemId.profile],
         }),
       )
 
-      dispatch(
+      reduxHolder.dispatch(
         navSlice.actions.stopLoadingIcon({
           navItemId: navItemId.login,
         }),

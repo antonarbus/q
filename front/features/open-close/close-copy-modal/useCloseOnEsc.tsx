@@ -1,5 +1,5 @@
 import { copySlice } from '@front/entities/copy/copySlice'
-import { dispatch } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { useEffectOnce } from 'react-use'
 
 export const useExitCopyOnEsc = (): void => {
@@ -8,7 +8,7 @@ export const useExitCopyOnEsc = (): void => {
       return
     }
 
-    dispatch(copySlice.actions.hideCopyModal())
+    reduxHolder.dispatch(copySlice.actions.hideCopyModal())
   }
 
   type Res = () => void

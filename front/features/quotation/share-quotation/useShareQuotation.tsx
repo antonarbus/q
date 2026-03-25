@@ -8,7 +8,7 @@ import type { Quotation } from '@back/entity/quotation/schema'
 import type { AccessFormValuesSignal } from '@front/entities/quotation/form/types'
 import { generateId } from '@front/shared/lib/nanoid'
 import { route } from '@front/shared/lib/react-router-dom/route'
-import { dispatch, getState } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { asyncDelay } from '@front/shared/util/asyncDelay'
 import type { UseMutationResult } from '@tanstack/react-query'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -72,17 +72,17 @@ export const useShareQuotation = (props: Props): Res => {
 
       void getQuotationListQuery.refetch()
 
-      dispatch(
+      reduxHolder.dispatch(
         quotationSlice.actions.loadQuotation({
           quotation: {
-            ...getState().quotation,
+            ...reduxHolder.getState().quotation,
             ...saveQuotationMutation.data.quotation,
           },
         }),
       )
 
       loadingIconActor.send({ type: 'show success icon' })
-      dispatch(navSlice.actions.removeUnderlineFromTopNav())
+      reduxHolder.dispatch(navSlice.actions.removeUnderlineFromTopNav())
 
       const slideOutAndChangeUrl = async (): Promise<void> => {
         await asyncDelay(1000)
@@ -111,13 +111,13 @@ export const useShareQuotation = (props: Props): Res => {
   const handleSubmit = (event: React.SubmitEvent): void => {
     event.preventDefault()
 
-    if (getState().user.email === null) {
+    if (reduxHolder.getState().user.email === null) {
       toast.warning('Not logged in')
 
       return
     }
 
-    const existingId = getState().quotation.id
+    const existingId = reduxHolder.getState().quotation.id
     const id = existingId === 'new' ? generateId() : existingId
 
     if (props.accessFormValuesSignal.value.level === 'everyone') {
@@ -129,13 +129,13 @@ export const useShareQuotation = (props: Props): Res => {
     }
 
     const quotation: Quotation = {
-      ...getState().quotation,
+      ...reduxHolder.getState().quotation,
       id,
       access: props.accessFormValuesSignal.value,
     }
 
     saveQuotationMutation.mutate({ quotation })
-    dispatch(quotationSlice.actions.loadQuotation({ quotation }))
+    reduxHolder.dispatch(quotationSlice.actions.loadQuotation({ quotation }))
   }
 
   return {

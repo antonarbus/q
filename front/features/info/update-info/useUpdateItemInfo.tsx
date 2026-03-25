@@ -1,7 +1,7 @@
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import type { InfoFormValues } from '@front/entities/quotation/form/types'
 import { useSignalEffect } from '@preact/signals-react'
-import { dispatch } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 
 type Props = {
   id: string
@@ -10,7 +10,7 @@ type Props = {
 
 export const useUpdateItemInfo = (props: Props): void => {
   useSignalEffect(() => {
-    dispatch(
+    reduxHolder.dispatch(
       quotationSlice.actions.updateItemInfo({
         id: props.id,
         name: props.infoFormValues.nameSignal.value,

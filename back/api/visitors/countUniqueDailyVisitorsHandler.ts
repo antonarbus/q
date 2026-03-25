@@ -34,11 +34,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<HttpResponse<ResBody>>
 
-export const countUniqueDailyVisitorsHandler: RouterHandler = async (
-  req,
-  res,
-  next,
-) => {
+export const countUniqueDailyVisitorsHandler: RouterHandler = async (req) => {
   const messageList: string[] = []
 
   const isE2ETest = req.headers[headerName.e2eTest] === 'true'

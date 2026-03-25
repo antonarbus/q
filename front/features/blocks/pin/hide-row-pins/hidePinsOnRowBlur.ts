@@ -1,7 +1,7 @@
 import { getRowFromStoreByIndex } from '@front/entities/quotation/redux/getter/getRowFromStoreByIndex'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { cls } from '@front/shared/cls'
-import { dispatch } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 
 type Props = {
   event: React.FocusEvent<HTMLDivElement>
@@ -29,7 +29,7 @@ export const hidePinsOnRowBlur = (props: Props): void => {
   const isItemPricePinShown = row.itemPrice.pin.isShown
 
   if (isItemPricePinShown === true) {
-    dispatch(
+    reduxHolder.dispatch(
       quotationSlice.actions.hideCellPin({
         blockIndex: props.blockIndex,
         rowIndex: props.rowIndex,
@@ -41,7 +41,7 @@ export const hidePinsOnRowBlur = (props: Props): void => {
   const isQtyPinShown = row.qty.pin.isShown
 
   if (isQtyPinShown === true) {
-    dispatch(
+    reduxHolder.dispatch(
       quotationSlice.actions.hideCellPin({
         blockIndex: props.blockIndex,
         rowIndex: props.rowIndex,

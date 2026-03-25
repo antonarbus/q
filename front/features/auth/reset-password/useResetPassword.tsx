@@ -3,7 +3,7 @@ import { navSlice } from '@front/entities/nav/navSlice'
 import { useResetUserPasswordMutation } from '@front/entities/user/api/useResetUserPasswordMutation'
 import { userSlice } from '@front/entities/user/redux/userSlice'
 import type { Signal } from '@preact/signals-react'
-import { dispatch } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { asyncDelay } from '@front/shared/util/asyncDelay'
 import type { UseMutationResult } from '@tanstack/react-query'
 import type { AnimationScope } from 'motion-dom'
@@ -42,22 +42,24 @@ export const useResetPassword = (props: Props): Res => {
         return
       }
 
-      dispatch(
+      reduxHolder.dispatch(
         userSlice.actions.setAccessToken({
           accessToken: resetUserPasswordMutation.data.accessJwtToken,
         }),
       )
 
-      dispatch(
+      reduxHolder.dispatch(
         userSlice.actions.rememberLoggedUser({
           email: resetUserPasswordMutation.data.email,
           roles: resetUserPasswordMutation.data.roles ?? ['user'],
         }),
       )
 
-      dispatch(navSlice.actions.hideNavItems({ navItemIds: [navItemId.login] }))
+      reduxHolder.dispatch(
+        navSlice.actions.hideNavItems({ navItemIds: [navItemId.login] }),
+      )
 
-      dispatch(
+      reduxHolder.dispatch(
         navSlice.actions.showNavItems({
           navItemIds: [navItemId.profile],
         }),

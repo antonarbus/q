@@ -1,21 +1,21 @@
 import { appSlice } from '@front/shared/appSlice'
 import { route } from '@front/shared/lib/react-router-dom/route'
-import { router } from '@front/shared/lib/react-router-dom/router'
-import { dispatch, getState } from '@front/shared/lib/redux'
+import { routerHolder } from '@front/shared/lib/react-router-dom/router'
+import { reduxHolder } from '@front/shared/lib/redux'
 
 export const openShareQuotationModal = (): void => {
-  if (getState().user.email === null) {
-    dispatch(
+  if (reduxHolder.getState().user.email === null) {
+    reduxHolder.dispatch(
       appSlice.actions.setNavigateState({
         to: `/${route.share}`,
         shouldSlide: true,
       }),
     )
 
-    void router.navigate(`./${route.login}`)
+    void routerHolder.router.navigate(`./${route.login}`)
 
     return
   }
 
-  void router.navigate(`./${route.share}`)
+  void routerHolder.router.navigate(`./${route.share}`)
 }

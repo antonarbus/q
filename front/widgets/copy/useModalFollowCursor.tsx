@@ -1,4 +1,4 @@
-import { getState } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import throttle from 'lodash.throttle'
 import type { AnimationScope } from 'motion/react'
 import { useEffect } from 'react'
@@ -16,7 +16,7 @@ export const useModalFollowCursor = (props: Props): void => {
       return
     }
 
-    const state = getState()
+    const state = reduxHolder.getState()
 
     // Initialize position from Redux
     if (state.copy.initCursorPos !== null) {

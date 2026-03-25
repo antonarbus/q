@@ -1,7 +1,7 @@
 import { useGetQuotationMutation } from '@front/entities/quotation/api/useGetQuotationMutation'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import type { SaveQuotationFormValues } from '@front/entities/quotation/form/types'
-import { dispatch, getState } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { useParams } from 'react-router-dom'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
 
@@ -16,7 +16,7 @@ export const useLoadSaveQuotationModalWithDirectLink = (props: Props): void => {
   useEffectOnce(() => {
     if (urlParams.quotationId !== undefined) {
       const quotationIsAlreadyLoaded =
-        getState().quotation.id === urlParams.quotationId
+        reduxHolder.getState().quotation.id === urlParams.quotationId
 
       if (quotationIsAlreadyLoaded === true) {
         return
@@ -31,7 +31,7 @@ export const useLoadSaveQuotationModalWithDirectLink = (props: Props): void => {
       return
     }
 
-    dispatch(
+    reduxHolder.dispatch(
       quotationSlice.actions.loadQuotation({
         quotation: getQuotationMutation.data.quotation,
       }),

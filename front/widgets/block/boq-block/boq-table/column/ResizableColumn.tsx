@@ -6,7 +6,7 @@ import {
   onColumnResizeStart,
   onColumnResizeStop,
 } from '@front/features/blocks/resize-column/onColumnResize'
-import { useSelector } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { Resizable } from 're-resizable'
 
 type Props = {
@@ -19,7 +19,7 @@ type Props = {
 export const ResizableColumn = (props: Props): React.JSX.Element => {
   const block = useBlock()
 
-  const colWidth = useSelector(
+  const colWidth = reduxHolder.useSelector(
     selectColumnWidth({
       blockIndex: block.index,
       boqColumnKey: props.boqColumnKey,
@@ -44,21 +44,21 @@ export const ResizableColumn = (props: Props): React.JSX.Element => {
         },
       }}
       minWidth={props.minWidth}
-      onResize={(event, direction, element, delta): void => {
+      onResize={(_event, _direction, element, _delta): void => {
         onColumnResize({
           blockIndex: block.index,
           boqColumnKey: props.boqColumnKey,
           headerColumnElement: element,
         })
       }}
-      onResizeStart={(event, direction, element): void => {
+      onResizeStart={(_event, _direction, element): void => {
         onColumnResizeStart({
           blockIndex: block.index,
           boqColumnKey: props.boqColumnKey,
           headerColumnElement: element,
         })
       }}
-      onResizeStop={(event, direction, element): void => {
+      onResizeStop={(_event, _direction, element): void => {
         onColumnResizeStop({
           blockIndex: block.index,
           boqColumnKey: props.boqColumnKey,

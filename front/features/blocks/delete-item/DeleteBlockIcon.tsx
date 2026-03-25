@@ -4,15 +4,15 @@ import { recalculateTotalPrices } from '@front/entities/quotation/util/recalcula
 import { selectIsLastBlock } from '@front/entities/quotation/redux/selector/selectIsLastBlock'
 import { Tooltip } from '@mui/material'
 import { cls } from '@front/shared/cls'
-import { dispatch, getState, useSelector } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { fixElementDimensionStyle } from '@front/shared/util/fixElementDimensionStyle'
 import { GoTrash } from 'react-icons/go'
 
 export const DeleteBlockIcon = (): React.JSX.Element => {
   const block = useBlock()
 
-  const isBlockAlone = useSelector(selectIsLastBlock)
-  const isDeletable = useSelector((state) => state.copy.isDeletable)
+  const isBlockAlone = reduxHolder.useSelector(selectIsLastBlock)
+  const isDeletable = reduxHolder.useSelector((state) => state.copy.isDeletable)
   const disabled = isBlockAlone || isDeletable === false
 
   return (
@@ -35,7 +35,8 @@ export const DeleteBlockIcon = (): React.JSX.Element => {
               return
             }
 
-            const blockToDelete = getState().quotation.blocks[block.index]
+            const blockToDelete =
+              reduxHolder.getState().quotation.blocks[block.index]
 
             if (blockToDelete === undefined) {
               return
@@ -62,7 +63,7 @@ export const DeleteBlockIcon = (): React.JSX.Element => {
             // width of animated element is changed for unknown reason, can't explain the issue, so let's fix it for animation purpose
             fixElementDimensionStyle({ element: paperElement })
 
-            dispatch(
+            reduxHolder.dispatch(
               quotationSlice.actions.deleteBlock({
                 id: blockToDelete.id,
               }),

@@ -1,4 +1,4 @@
-import { dispatch, useSelector } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { theme } from '@front/shared/theme'
 import { Fade as BurgerIcon } from 'hamburger-react'
 import { navSlice } from '../../../navSlice'
@@ -6,21 +6,21 @@ import { navSlice } from '../../../navSlice'
 // https://hamburger-react.netlify.app/
 
 export const Burger = (): React.JSX.Element => {
-  const isOpen = useSelector((state) => state.nav.burger.isOpen)
+  const isOpen = reduxHolder.useSelector((state) => state.nav.burger.isOpen)
 
   return (
     <BurgerIcon
       color={theme.colors.greyFont}
       data-testid='hamburger icon'
       label='Show menu'
-      onToggle={(toggled): void => {
+      onToggle={(): void => {
         // if (toggled) console.log('menu opened')
-        // if (!toggled) dispatch(closeMenu())
+        // if (!toggled) reduxHolder.dispatch(closeMenu())
       }}
       rounded
       size={20}
       toggle={(): void => {
-        dispatch(navSlice.actions.toggleBurger())
+        reduxHolder.dispatch(navSlice.actions.toggleBurger())
       }}
       toggled={isOpen}
     />

@@ -4,7 +4,7 @@ import { useRow } from '@front/entities/quotation/provider/RowProvider'
 import { selectCellPin } from '@front/entities/quotation/redux/selector/selectCellPin'
 import { Box } from '@mui/material'
 import { cls } from '@front/shared/cls'
-import { useSelector } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { VscPinned } from 'react-icons/vsc'
 
 type Props = {
@@ -16,7 +16,7 @@ export const Pin = (props: Props): React.ReactNode => {
   const block = useBlock()
   const row = useRow()
 
-  const pin = useSelector(
+  const pin = reduxHolder.useSelector(
     selectCellPin({
       blockIndex: block.index,
       rowIndex: row.index,

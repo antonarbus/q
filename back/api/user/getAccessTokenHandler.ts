@@ -42,7 +42,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<HttpResponse<ResBody>>
 
-export const getAccessTokenHandler: RouterHandler = async (req, res, next) => {
+export const getAccessTokenHandler: RouterHandler = async (req, res) => {
   const messageList: string[] = []
 
   // User perviously logged in

@@ -1,7 +1,7 @@
 import type { DragStart, DropResult } from '@hello-pangea/dnd'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { recalculateTotalPrices } from '@front/entities/quotation/util/recalculateTotalPrices'
-import { dispatch, getState } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { arrayMoveImmutable } from 'array-move'
 
 export const onBlockDragStart = (_event: DragStart): void => {
@@ -9,7 +9,7 @@ export const onBlockDragStart = (_event: DragStart): void => {
 }
 
 export const onBlockDragEnd =
-  ({ itemIds }: { itemIds: string[] }) =>
+  () =>
   (dropResult: DropResult): void => {
     document.body.style.removeProperty('cursor')
 
@@ -25,12 +25,14 @@ export const onBlockDragEnd =
     const newIndex = dropResult.destination.index
 
     const reOrderedItems = arrayMoveImmutable(
-      getState().quotation.blocks,
+      reduxHolder.getState().quotation.blocks,
       oldIndex,
       newIndex,
     )
 
-    dispatch(quotationSlice.actions.reOrderBlocks({ reOrderedItems }))
+    reduxHolder.dispatch(
+      quotationSlice.actions.reOrderBlocks({ reOrderedItems }),
+    )
 
     // Deferred so React re-renders first. The editor registry is keyed by blockIndex —
     // reordering blocks changes the price block's index, and its editor stays registered

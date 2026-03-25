@@ -1,7 +1,7 @@
 import { navItemId } from '@front/entities/nav/navItemId'
 import { createLoadingMenuIconMachine } from '@front/entities/nav/state-machine/createLoadingMenuIconMachine'
 import { cls } from '@front/shared/cls'
-import { getState } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { downloadBlobAsFile } from '@front/shared/util/downloadBlobAsFile'
 import { toast } from 'sonner'
 import { createActor } from 'xstate'
@@ -162,7 +162,7 @@ export const downloadPdf = async (): Promise<void> => {
   ): void => {
     downloadBlobAsFile({
       blob: messageEvent.data.pdfBlob,
-      fileName: `quotation - ${getState().quotation.id}.pdf`,
+      fileName: `quotation - ${reduxHolder.getState().quotation.id}.pdf`,
     })
 
     setTimeout(() => {

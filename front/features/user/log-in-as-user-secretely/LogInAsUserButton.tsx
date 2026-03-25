@@ -8,7 +8,7 @@ import { userSlice } from '@front/entities/user/redux/userSlice'
 import { IconButton, Tooltip } from '@mui/material'
 import { RotatingLoaderIcon } from '@front/shared/component/RotatingLoaderIcon'
 import { route } from '@front/shared/lib/react-router-dom/route'
-import { dispatch } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { MdLogin } from 'react-icons/md'
 import { useLocation } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
@@ -22,22 +22,24 @@ export const LogInAsUserButton = (props: UrlParam): React.ReactNode => {
 
   useUpdateEffect(() => {
     if (logInUserMutation.isSuccess === true) {
-      dispatch(
+      reduxHolder.dispatch(
         userSlice.actions.setAccessToken({
           accessToken: logInUserMutation.data.accessJwtToken,
         }),
       )
 
-      dispatch(
+      reduxHolder.dispatch(
         userSlice.actions.rememberLoggedUser({
           email: logInUserMutation.data.email,
           roles: logInUserMutation.data.roles,
         }),
       )
 
-      dispatch(navSlice.actions.hideNavItems({ navItemIds: [navItemId.login] }))
+      reduxHolder.dispatch(
+        navSlice.actions.hideNavItems({ navItemIds: [navItemId.login] }),
+      )
 
-      dispatch(
+      reduxHolder.dispatch(
         navSlice.actions.showNavItems({
           navItemIds: [navItemId.profile],
         }),
@@ -47,9 +49,13 @@ export const LogInAsUserButton = (props: UrlParam): React.ReactNode => {
         logInUserMutation.data.roles.includes('super-admin') === true
 
       if (isSuperAdmin === true) {
-        dispatch(navSlice.actions.showNavItems({ navItemIds: ['admin'] }))
+        reduxHolder.dispatch(
+          navSlice.actions.showNavItems({ navItemIds: ['admin'] }),
+        )
       } else {
-        dispatch(navSlice.actions.hideNavItems({ navItemIds: ['admin'] }))
+        reduxHolder.dispatch(
+          navSlice.actions.hideNavItems({ navItemIds: ['admin'] }),
+        )
       }
 
       const isQuotationListPage = location.pathname.includes(

@@ -51,7 +51,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<HttpResponse<ResBody>>
 
-export const getQuotationHandler: RouterHandler = async (req, res, next) => {
+export const getQuotationHandler: RouterHandler = async (req) => {
   const userFromAccessToken = await getUserFromAccessTokenOrNull({ req })
 
   const messageList: string[] = []

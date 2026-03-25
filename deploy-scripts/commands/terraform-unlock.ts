@@ -7,8 +7,8 @@ import type { DeployedEnvironment } from '@root/config/environment'
 
 type Props = {
   environment: DeployedEnvironment
-  lockId?: string
-  force?: boolean
+  lockId: string | undefined
+  force: boolean | undefined
 }
 
 const detectLockId = async (

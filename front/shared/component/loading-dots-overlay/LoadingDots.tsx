@@ -24,7 +24,7 @@ export const LoadingDots = (props: Props): React.JSX.Element => (
   >
     {Array(props.dots ?? 3)
       .fill('')
-      .map((dot, index) => (
+      .map((_dot, index) => (
         <span
           css={{
             width: props.size ?? '1.5rem',

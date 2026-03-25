@@ -6,7 +6,7 @@ import { useSignal } from '@preact/signals-react'
 import { FormModal } from '@front/shared/component/FormModal'
 import { EmailField } from '@front/shared/component/input-field/EmailField'
 import { PasswordField } from '@front/shared/component/input-field/PasswordField'
-import { router } from '@front/shared/lib/react-router-dom/router'
+import { routerHolder } from '@front/shared/lib/react-router-dom/router'
 import { useAnimatedElement } from '@front/shared/util/useAnimatedElement'
 import { useRef } from 'react'
 import { FiLogIn } from 'react-icons/fi'
@@ -30,7 +30,7 @@ export const LoginModal = (): React.JSX.Element => {
     logIn.isPending
 
   const navigateUp = (): void => {
-    void router.navigate('..')
+    void routerHolder.router.navigate('..')
   }
 
   return (

@@ -1,4 +1,4 @@
-import { getState } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { useRef } from 'react'
 import { useEffectOnce } from 'react-use'
 import { useAnimatedElement } from '../util/useAnimatedElement'
@@ -6,7 +6,7 @@ import { useAnimatedElement } from '../util/useAnimatedElement'
 type Props = {
   children: React.ReactNode
   onMount?: () => void
-  onUnmount?: () => void
+  onUnmount?: (() => void) | undefined
   shouldUnmountOnClickAway: boolean
   shouldUnmountOnEsc?: boolean
 }
@@ -19,7 +19,7 @@ export const BackdropWithSlidableModal = (props: Props): React.JSX.Element => {
   )
 
   useEffectOnce(() => {
-    if (getState().app.navigateState.shouldSlide === true) {
+    if (reduxHolder.getState().app.navigateState.shouldSlide === true) {
       const slideInAndSomeAction = async (): Promise<void> => {
         await animatedElement.slideIn()
         props.onMount?.()
@@ -37,7 +37,7 @@ export const BackdropWithSlidableModal = (props: Props): React.JSX.Element => {
         props.shouldUnmountOnEsc === true && event.key === 'Escape'
 
       if (shouldCloseModalOnEsc === true) {
-        if (getState().app.navigateState.shouldSlide === true) {
+        if (reduxHolder.getState().app.navigateState.shouldSlide === true) {
           const slideOutAndSomeAction = async (): Promise<void> => {
             await animatedElement.slideOut()
             props.onUnmount?.()
@@ -90,7 +90,7 @@ export const BackdropWithSlidableModal = (props: Props): React.JSX.Element => {
 
   const unmountOnClickAway = (): void => {
     if (props.shouldUnmountOnClickAway === true) {
-      if (getState().app.navigateState.shouldSlide === true) {
+      if (reduxHolder.getState().app.navigateState.shouldSlide === true) {
         const slideOutAndSomeAction = async (): Promise<void> => {
           await animatedElement.slideOut()
           props.onUnmount?.()

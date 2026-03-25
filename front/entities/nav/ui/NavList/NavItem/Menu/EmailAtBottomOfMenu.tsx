@@ -1,7 +1,7 @@
-import { useSelector } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 
 export const EmailAtBottomOfMenu = (): React.ReactNode => {
-  const email = useSelector((state) => state.user.email)
+  const email = reduxHolder.useSelector((state) => state.user.email)
 
   if (email === null) {
     return null

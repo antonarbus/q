@@ -1,5 +1,5 @@
 import { useMenuNavigation } from '@front/entities/nav/provider/MenuNavigationProvider'
-import { dispatch, useSelector } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { clickOnMenuItem } from '@front/widgets/nav/handlers/clickOnMenuItem'
 import { iconRegistry } from '@front/widgets/nav/iconRegistry'
 import { FaChevronRight } from 'react-icons/fa'
@@ -24,7 +24,7 @@ export const MenuItem = (props: Props): React.JSX.Element => {
   const location = useLocation()
   const menuNavigation = useMenuNavigation()
 
-  const isHovered = useSelector(
+  const isHovered = reduxHolder.useSelector(
     (state) => state.nav.hoverIndex === props.hoverIndex,
   )
 
@@ -121,10 +121,10 @@ export const MenuItem = (props: Props): React.JSX.Element => {
           }
 
           // Close menu after clicking external link
-          dispatch(navSlice.actions.closeMenu())
+          reduxHolder.dispatch(navSlice.actions.closeMenu())
         }}
         onMouseEnter={(): void => {
-          dispatch(
+          reduxHolder.dispatch(
             navSlice.actions.setMenuItemHoverIndex({
               menuItemHoverIndex: props.hoverIndex,
             }),
@@ -173,7 +173,7 @@ export const MenuItem = (props: Props): React.JSX.Element => {
         )
       }}
       onMouseEnter={(): void => {
-        dispatch(
+        reduxHolder.dispatch(
           navSlice.actions.setMenuItemHoverIndex({
             menuItemHoverIndex: props.hoverIndex,
           }),

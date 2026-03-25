@@ -1,4 +1,4 @@
-import { useSelector } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import type { QueryObserverResult } from '@tanstack/react-query'
 import { useEffect } from 'react'
 
@@ -7,7 +7,7 @@ type Props = {
 }
 
 export const useRefetchDataOnEmailChange = (props: Props): void => {
-  const email = useSelector((state) => state.user.email)
+  const email = reduxHolder.useSelector((state) => state.user.email)
 
   useEffect(() => {
     if (email !== null) {

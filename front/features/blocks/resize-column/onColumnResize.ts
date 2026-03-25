@@ -2,7 +2,7 @@ import type { BoqColumnKey } from '@back/entity/quotation/schema'
 import { getBoqColumnFromStoreByIndex } from '@front/entities/quotation/redux/getter/getBoqColumnFromStoreByIndex'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { cls } from '@front/shared/cls'
-import { dispatch } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 
 type Props = {
   headerColumnElement: HTMLElement
@@ -13,7 +13,7 @@ type Props = {
 export const onColumnResizeStart = (props: Props): void => {
   const width = props.headerColumnElement.clientWidth
 
-  dispatch(
+  reduxHolder.dispatch(
     quotationSlice.actions.updateColWidth({
       blockIndex: props.blockIndex,
       width,
@@ -21,7 +21,7 @@ export const onColumnResizeStart = (props: Props): void => {
     }),
   )
 
-  dispatch(
+  reduxHolder.dispatch(
     quotationSlice.actions.hideBoqItemPins({
       blockIndex: props.blockIndex,
     }),
@@ -46,7 +46,7 @@ export const onColumnResize = (props: Props): void => {
     return
   }
 
-  dispatch(
+  reduxHolder.dispatch(
     quotationSlice.actions.updateColWidth({
       blockIndex: props.blockIndex,
       width,
@@ -58,7 +58,7 @@ export const onColumnResize = (props: Props): void => {
 export const onColumnResizeStop = (props: Props): void => {
   const columnWidth = props.headerColumnElement.clientWidth
 
-  dispatch(
+  reduxHolder.dispatch(
     quotationSlice.actions.updateColWidth({
       blockIndex: props.blockIndex,
       width: columnWidth,
@@ -70,7 +70,7 @@ export const onColumnResizeStop = (props: Props): void => {
     `.${cls.paper}`,
   )?.clientWidth
 
-  dispatch(
+  reduxHolder.dispatch(
     quotationSlice.actions.updateBlockWidth({
       blockIndex: props.blockIndex,
       width: itemWidth ?? 0,

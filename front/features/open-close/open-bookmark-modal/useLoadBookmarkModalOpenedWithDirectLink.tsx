@@ -3,7 +3,7 @@ import type { BookmarkFormValues } from '@front/entities/bookmark/form/types'
 import { BOOKMARK_POS_AT_BLOCKS } from '@front/entities/quotation/redux/bookmarkPosAtBlocks'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 
-import { dispatch, getState } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
@@ -20,7 +20,10 @@ export const useLoadBookmarkModalOpenedWithDirectLink = (
   const getBookmarkMutation = useGetBookmarkMutation()
 
   useEffectOnce(() => {
-    const firstBlock = getState().quotation.blocks.at(BOOKMARK_POS_AT_BLOCKS)
+    const firstBlock = reduxHolder
+      .getState()
+      .quotation.blocks.at(BOOKMARK_POS_AT_BLOCKS)
+
     const isOpenedFromButton = Boolean(firstBlock)
 
     if (isOpenedFromButton === true) {
@@ -40,13 +43,15 @@ export const useLoadBookmarkModalOpenedWithDirectLink = (
     }
 
     if (getBookmarkMutation.isSuccess === true) {
-      dispatch(
+      reduxHolder.dispatch(
         quotationSlice.actions.loadBlockAtPosThousand({
           block: getBookmarkMutation.data.bookmark,
         }),
       )
 
-      const block = getState().quotation.blocks.at(BOOKMARK_POS_AT_BLOCKS)
+      const block = reduxHolder
+        .getState()
+        .quotation.blocks.at(BOOKMARK_POS_AT_BLOCKS)
 
       if (block !== undefined) {
         props.bookmarkFormValues.nameSignal.value = block.name

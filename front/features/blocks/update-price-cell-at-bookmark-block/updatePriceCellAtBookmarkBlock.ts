@@ -1,7 +1,7 @@
 import { BOOKMARK_POS_AT_BLOCKS } from '@front/entities/quotation/redux/bookmarkPosAtBlocks'
 import { updateBookmarkedRowCellAtStore } from '@front/entities/quotation/redux/updater/updateBookmarkedRowCellAtStore'
 import { updateBookmarkedRowCellWithValue } from '@front/entities/quotation/util/updateBookmarkedRowCellWithValue'
-import { getState } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import {
   editorRegistry,
   getRegistryKey,
@@ -27,7 +27,7 @@ export const updatePriceCellAtBookmarkBlock = (): void => {
     html: priceCellEditor.getHTML(),
   })
 
-  const block = getState().quotation.blocks[BOOKMARK_POS_AT_BLOCKS]
+  const block = reduxHolder.getState().quotation.blocks[BOOKMARK_POS_AT_BLOCKS]
 
   if (block?.type !== 'row') {
     return

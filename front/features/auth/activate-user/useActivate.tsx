@@ -2,7 +2,7 @@ import { navItemId } from '@front/entities/nav/navItemId'
 import { navSlice } from '@front/entities/nav/navSlice'
 import { useActivateUserMutation } from '@front/entities/user/api/useActivateUserMutation'
 import { userSlice } from '@front/entities/user/redux/userSlice'
-import { dispatch } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import type { UseMutationResult } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
@@ -26,22 +26,24 @@ export const useActivate = (): Res => {
 
   useUpdateEffect(() => {
     if (activateUserMutation.isSuccess === true) {
-      dispatch(
+      reduxHolder.dispatch(
         userSlice.actions.setAccessToken({
           accessToken: activateUserMutation.data.accessJwtToken,
         }),
       )
 
-      dispatch(
+      reduxHolder.dispatch(
         userSlice.actions.rememberLoggedUser({
           email: activateUserMutation.data.email,
           roles: activateUserMutation.data.roles,
         }),
       )
 
-      dispatch(navSlice.actions.hideNavItems({ navItemIds: [navItemId.login] }))
+      reduxHolder.dispatch(
+        navSlice.actions.hideNavItems({ navItemIds: [navItemId.login] }),
+      )
 
-      dispatch(
+      reduxHolder.dispatch(
         navSlice.actions.showNavItems({ navItemIds: [navItemId.profile] }),
       )
     }

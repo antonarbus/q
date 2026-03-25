@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
 /* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
-import type { AxiosWithAuth } from '@front/shared/lib/axios/axiosConfig'
+import type { AxiosInstance } from 'axios'
 
-export let axiosWithAuth = null as unknown as AxiosWithAuth
+type AxiosWithAuth = AxiosInstance
+
+export let axiosWithAuth = null as unknown as AxiosInstance
 
 export const instantiateAxiosWithAuth = (instance: AxiosWithAuth): void => {
   if (axiosWithAuth !== null) {

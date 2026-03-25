@@ -17,7 +17,7 @@ import { TestPage } from '@front/pages/test-page/TestPage'
 import { LoadingDotsOverlay } from '@front/shared/component/loading-dots-overlay'
 import { Main } from '@front/shared/layout/Main'
 import { route } from '@front/shared/lib/react-router-dom/route'
-import { instantiateRouter } from '@front/shared/lib/react-router-dom/router'
+import { routerHolder } from '@front/shared/lib/react-router-dom/router'
 import { Copy } from '@front/widgets/copy'
 import { BookmarkCopyPreviewCapturer } from '@front/entities/copy/BookmarkCopyPreviewCapturer'
 import { Footer } from '@front/widgets/footer'
@@ -272,6 +272,4 @@ const router = createBrowserRouter([
   },
 ])
 
-export type Router = typeof router
-
-instantiateRouter(router)
+routerHolder.router = router

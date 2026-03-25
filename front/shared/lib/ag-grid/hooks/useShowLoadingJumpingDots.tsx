@@ -1,4 +1,4 @@
-import { dispatch } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { useUpdateEffect } from 'react-use'
 import { agGridSlice } from '../agGridSlice'
 
@@ -9,7 +9,7 @@ type Props = {
 export const useShowLoadingJumpingDots = (props: Props): void => {
   useUpdateEffect(() => {
     if (props.isLoading === true) {
-      dispatch(
+      reduxHolder.dispatch(
         agGridSlice.actions.showLoadingOverlay({
           showLoader: true,
           text: 'Loading',

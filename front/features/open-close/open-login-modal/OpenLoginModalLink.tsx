@@ -1,6 +1,6 @@
 import { appSlice } from '@front/shared/appSlice'
 import { route } from '@front/shared/lib/react-router-dom/route'
-import { dispatch } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { Link, useNavigate } from 'react-router-dom'
 
 type Props = {
@@ -17,7 +17,11 @@ export const OpenLoginModalLink = (props: Props): React.JSX.Element => {
 
         const slideAndNavigate = async (): Promise<void> => {
           await props.slideOut()
-          dispatch(appSlice.actions.setNavigateState({ shouldSlide: true }))
+
+          reduxHolder.dispatch(
+            appSlice.actions.setNavigateState({ shouldSlide: true }),
+          )
+
           void navigate(`../${route.login}`)
         }
 

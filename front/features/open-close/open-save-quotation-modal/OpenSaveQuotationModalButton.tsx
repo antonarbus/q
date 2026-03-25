@@ -5,7 +5,7 @@ import { IconButton, Tooltip } from '@mui/material'
 import { appSlice } from '@front/shared/appSlice'
 import { RotatingLoaderIcon } from '@front/shared/component/RotatingLoaderIcon'
 import { route } from '@front/shared/lib/react-router-dom/route'
-import { dispatch } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { AiTwotoneEdit } from 'react-icons/ai'
 import { Link, useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
@@ -20,13 +20,13 @@ export const OpenSaveQuotationModalButton = (
 
   useUpdateEffect(() => {
     if (quotationMutation.isSuccess === true) {
-      dispatch(
+      reduxHolder.dispatch(
         quotationSlice.actions.loadQuotation({
           quotation: quotationMutation.data.quotation,
         }),
       )
 
-      dispatch(
+      reduxHolder.dispatch(
         appSlice.actions.setNavigateState({
           to: `/${route.save}`,
           shouldSlide: true,

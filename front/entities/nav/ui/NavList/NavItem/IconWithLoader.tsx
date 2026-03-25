@@ -1,5 +1,5 @@
 import type { NavItem } from '@front/entities/nav/type'
-import { useSelector } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { iconRegistry } from '@front/widgets/nav/iconRegistry'
 import { ErrorIcon } from './ErrorIcon'
 import { Icon } from './Icon'
@@ -11,7 +11,9 @@ type Props = {
 }
 
 export const IconWithLoader = (props: Props): React.ReactNode => {
-  const isHamburger = useSelector((state) => state.nav.navMode === 'hamburger')
+  const isHamburger = reduxHolder.useSelector(
+    (state) => state.nav.navMode === 'hamburger',
+  )
 
   if (props.navItem === undefined) {
     return null

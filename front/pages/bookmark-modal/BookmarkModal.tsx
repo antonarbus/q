@@ -9,8 +9,8 @@ import { CategoryField } from '@front/shared/component/input-field/CategoryField
 import { DescriptionField } from '@front/shared/component/input-field/DescriptionField'
 import { InfoField } from '@front/shared/component/input-field/InfoField'
 import { NameField } from '@front/shared/component/input-field/NameField'
-import { router } from '@front/shared/lib/react-router-dom/router'
-import { dispatch } from '@front/shared/lib/redux'
+import { routerHolder } from '@front/shared/lib/react-router-dom/router'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { useAnimatedElement } from '@front/shared/util/useAnimatedElement'
 import { FiEdit3 } from 'react-icons/fi'
 import { useUnmount } from 'react-use'
@@ -28,11 +28,11 @@ export const BookmarkModal = (): React.JSX.Element => {
   })
 
   useUnmount(() => {
-    dispatch(quotationSlice.actions.removeBlockFromPosThousand())
+    reduxHolder.dispatch(quotationSlice.actions.removeBlockFromPosThousand())
   })
 
   const navigateUp = (): void => {
-    void router.navigate('..')
+    void routerHolder.router.navigate('..')
   }
 
   const getBookmarkCategoryListQuery = useGetBookmarkCategoryListQuery()

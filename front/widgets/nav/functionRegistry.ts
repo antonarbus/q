@@ -15,14 +15,14 @@ import { openShareQuotationModal } from '@front/features/open-close/open-share-q
 import { downloadExcel } from '@front/features/quotation/download-quotation-as-excel'
 import { downloadPdf } from '@front/features/quotation/download-quotation-as-pdf'
 import { saveExistingQuotation } from '@front/features/quotation/save-quotation/saveExistingQuotation'
-import { getState } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 
 /** Required to avoid storing non-serializable values in Redux store */
 export const functionRegistry = {
   openQuotationPageAndLoadPrev,
   openQuotationPageAndLoadNew,
   saveQuotation: (): void => {
-    if (getState().quotation.id === 'new') {
+    if (reduxHolder.getState().quotation.id === 'new') {
       openSaveQuotationModal()
     } else {
       void saveExistingQuotation()

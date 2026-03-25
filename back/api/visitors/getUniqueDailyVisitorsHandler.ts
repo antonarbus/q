@@ -40,11 +40,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<HttpResponse<ResBody>>
 
-export const getUniqueDailyVisitorsHandler: RouterHandler = async (
-  req,
-  res,
-  next,
-) => {
+export const getUniqueDailyVisitorsHandler: RouterHandler = async (req) => {
   const messageList: string[] = []
 
   const userFromAccessToken = await getUserFromAccessTokenOrNull({ req })

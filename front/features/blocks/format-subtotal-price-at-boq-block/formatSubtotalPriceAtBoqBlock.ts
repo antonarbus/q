@@ -1,6 +1,6 @@
 import { getBoqBlockFromStoreByIndex } from '@front/entities/quotation/redux/getter/getBoqBlockFromStoreByIndex'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
-import { dispatch } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import {
   editorRegistry,
   getRegistryKey,
@@ -43,7 +43,7 @@ export const formatSubtotalPriceAtBoqBlock = (props: Props): boolean => {
     return false
   }
 
-  dispatch(
+  reduxHolder.dispatch(
     quotationSlice.actions.updateSubTotalPrice({
       blockIndex: props.blockIndex,
       html: newHtml,

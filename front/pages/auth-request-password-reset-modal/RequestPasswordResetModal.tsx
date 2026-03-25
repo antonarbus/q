@@ -5,7 +5,7 @@ import { Box } from '@mui/material'
 import { useSignal } from '@preact/signals-react'
 import { FormModal } from '@front/shared/component/FormModal'
 import { EmailField } from '@front/shared/component/input-field/EmailField'
-import { router } from '@front/shared/lib/react-router-dom/router'
+import { routerHolder } from '@front/shared/lib/react-router-dom/router'
 import { type Location, useLocation } from 'react-router-dom'
 import { useAnimatedElement } from '@front/shared/util/useAnimatedElement'
 import { useRef } from 'react'
@@ -28,7 +28,7 @@ export const RequestPasswordResetModal = (): React.JSX.Element => {
   })
 
   const navigateUp = (): void => {
-    void router.navigate('..')
+    void routerHolder.router.navigate('..')
   }
 
   return (

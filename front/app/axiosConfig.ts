@@ -4,7 +4,7 @@ import { headerName } from '@back/shared/headers'
 import { userSlice } from '@front/entities/user/redux/userSlice'
 import { getAccessTokenDeferred } from '@front/features/auth/try-to-log-in-without-prompt/AccessToken'
 import { instantiateAxiosWithAuth } from '@front/shared/lib/axios/axiosWithAuth'
-import { dispatch, getState } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import axios, { AxiosError, type AxiosRequestConfig } from 'axios'
 
 const axiosWithAuth = axios.create({ withCredentials: true })
@@ -12,7 +12,9 @@ const axiosWithAuth = axios.create({ withCredentials: true })
 axiosWithAuth.interceptors.request.use(async (config) => {
   // wait until initial access token if fetched, otherwise token is null and another immediate duplicate request for access token will be sent
   await getAccessTokenDeferred.promise
-  config.headers[headerName.accessJwtToken] = getState().user.accessToken
+
+  config.headers[headerName.accessJwtToken] =
+    reduxHolder.getState().user.accessToken
 
   return config
 })
@@ -53,7 +55,7 @@ axiosWithAuth.interceptors.response.use(
         )
 
         if (res.data.accessJwtToken !== undefined) {
-          dispatch(
+          reduxHolder.dispatch(
             userSlice.actions.setAccessToken({
               accessToken: res.data.accessJwtToken,
             }),
@@ -68,7 +70,7 @@ axiosWithAuth.interceptors.response.use(
 
         if (isUnauthorized === true) {
           // still unauthorized after attempt to refresh the access token
-          dispatch(
+          reduxHolder.dispatch(
             userSlice.actions.setAccessToken({
               accessToken: null,
             }),
@@ -83,7 +85,5 @@ axiosWithAuth.interceptors.response.use(
     throw error
   },
 )
-
-export type AxiosWithAuth = typeof axiosWithAuth
 
 instantiateAxiosWithAuth(axiosWithAuth)

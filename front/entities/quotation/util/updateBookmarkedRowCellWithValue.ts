@@ -1,6 +1,6 @@
 import type { Editor } from '@tiptap/react'
 import { updateNumberAtHtmlIncrementally } from '@front/shared/lib/tiptap/util/updateNumberAtHtmlIncrementally'
-import { getState } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
 import { getNumberFromString } from '@front/shared/util/getNumberFromString'
 import { getStringWithNewFormattedNumber } from '@front/shared/util/getStringWithNewFormattedNumber'
 import { getTextContentFromHtml } from '@front/shared/util/getTextContentFromHtml'
@@ -19,7 +19,7 @@ export const updateBookmarkedRowCellWithValue = (props: Props): void => {
     return
   }
 
-  const block = getState().quotation.blocks[BOOKMARK_POS_AT_BLOCKS]
+  const block = reduxHolder.getState().quotation.blocks[BOOKMARK_POS_AT_BLOCKS]
 
   if (block?.type !== 'row') {
     return
