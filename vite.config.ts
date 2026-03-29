@@ -47,7 +47,8 @@ export default {
     babel({
       plugins: [
         [
-          '@emotion/babel-plugin', // readable class names in styled components
+          // readable class names in styled components
+          '@emotion/babel-plugin',
           // https://github.com/styled-components/babel-plugin-styled-components/issues/350#issuecomment-979873241
           {
             displayName: true,
@@ -68,7 +69,8 @@ export default {
   },
   build: {
     outDir: './front/build',
-    chunkSizeWarningLimit: 1500, // in KB
+    // in KB
+    chunkSizeWarningLimit: 1500,
     rolldownOptions: {
       output: {
         // https://rollupjs.org/configuration-options/#output-manualchunks

@@ -7,15 +7,15 @@ import striptags from 'striptags'
 export const stripHtmlWithBreaksPreserve = (html: string): string => {
   // First replace block elements with line breaks
   const htmlWithBreaks = html
-    .replace(/<p[^>]*>/gu, '\n')
-    .replace(/<\/p>/gu, '')
-    .replace(/<br\s*\/?>/gu, '\n')
-    .replace(/<ul>/gu, '\n')
-    .replace(/<\/ul>/gu, '')
-    .replace(/<li>/gu, '• ')
-    .replace(/<\/li>/gu, '\n')
-    .replace(/<div[^>]*>/gu, '\n')
-    .replace(/<\/div>/gu, '')
+    .replaceAll(/<p[^>]*>/gu, '\n')
+    .replaceAll('</p>', '')
+    .replaceAll(/<br\s*\/?>/gu, '\n')
+    .replaceAll('<ul>', '\n')
+    .replaceAll('</ul>', '')
+    .replaceAll('<li>', '• ')
+    .replaceAll('</li>', '\n')
+    .replaceAll(/<div[^>]*>/gu, '\n')
+    .replaceAll('</div>', '')
 
   // Then strip remaining tags
   const textWithBreaks = striptags(htmlWithBreaks)

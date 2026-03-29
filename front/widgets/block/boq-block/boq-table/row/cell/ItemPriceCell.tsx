@@ -71,7 +71,8 @@ export const ItemPriceCell = (): React.JSX.Element => {
             rowIndex: row.index,
           })
 
-          return true // stop ProseMirror propagation
+          // stop ProseMirror propagation
+          return true
         }}
         sx={{
           ...stylesForResizableCell,

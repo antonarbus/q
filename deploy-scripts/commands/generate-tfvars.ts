@@ -27,7 +27,7 @@ export const generateTfvars = async (): Promise<void> => {
      *  Terraform variables use snake_case: project_id, artifact_registry_name, etc.
      */
     const toSnakeCase = (str: string): string => {
-      const strSnakedCased = str.replace(/[A-Z]/gu, (letter) => `_${letter.toLowerCase()}`)
+      const strSnakedCased = str.replaceAll(/[A-Z]/gu, (letter) => `_${letter.toLowerCase()}`)
 
       return strSnakedCased
     }

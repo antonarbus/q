@@ -7,7 +7,8 @@ import { userFilePath } from '@root/tests/setup/userFilePath'
 export default defineConfig({
   testDir: './tests',
   fullyParallel: true,
-  forbidOnly: runtimeConfig.ci === true, // set at .github/workflows/deployment.yaml:9.
+  // set at .github/workflows/deployment.yaml:9.
+  forbidOnly: runtimeConfig.ci === true,
   retries: runtimeConfig.ci === true ? 2 : 0,
   workers: runtimeConfig.ci === true ? 1 : undefined,
   reporter: runtimeConfig.ci === true ? 'dot' : 'line',

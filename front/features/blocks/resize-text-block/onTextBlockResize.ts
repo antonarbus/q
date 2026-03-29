@@ -21,7 +21,7 @@ export const onTextBlockResizeStart: OnBlockResizeStart = () => {
 // }
 
 export const onTextBlockResizeStop: OnBlockResizeStop = (props) => {
-  const width = parseInt(props.elementRef.style.width)
+  const width = parseInt(props.elementRef.style.width, 10)
 
   const prevItemWidth = reduxHolder.getState().quotation.blocks[props.blockIndex]?.width
 

@@ -1,9 +1,11 @@
 import { z } from 'zod'
-import { quotationSchema as quotationSchemaV1 } from './quotationSchemaV1' //* <-- V1
+//* V1
+import { quotationSchema as quotationSchemaV1 } from './quotationSchemaV1'
+//* V2
 import {
-  quotationSchema as quotationSchemaV2, //* <-- V2
-  type Quotation as QuotationV2, //* <-- V2
-} from './quotationSchemaV2' //* <-- V2
+  quotationSchema as quotationSchemaV2,
+  type Quotation as QuotationV2,
+} from './quotationSchemaV2'
 
 const MIGRATE_FROM = 1
 const MIGRATE_TO = 2
@@ -73,9 +75,11 @@ export const migrateQuotationSchemaFromV1ToV2 = (props: Props): Res => {
   //* For missing property add default value e.g. z.string().default('foo')
   //* For failing validation use catch() e.g. z.string().catch('foo')
 
-  const newDocument = structuredClone(oldDocumentValidationResult.data) as unknown as QuotationV2 // <-- hack! cast QuotationV2 type for actual QuotationV1 to let us set new values
+  //! hack! cast QuotationV2 type for actual QuotationV1 to let us set new values
+  const newDocument = structuredClone(oldDocumentValidationResult.data) as unknown as QuotationV2
 
-  newDocument.quotationSchemaVersion = MIGRATE_TO //* <-- TO BE IN EVERY MIGRATION FUNCTION
+  //* TO BE IN EVERY MIGRATION FUNCTION
+  newDocument.quotationSchemaVersion = MIGRATE_TO
   newDocument.type = 'quotation'
 
   newDocument.blocks.forEach((block) => {

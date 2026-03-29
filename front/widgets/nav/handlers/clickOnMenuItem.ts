@@ -16,7 +16,7 @@ export const clickOnMenuItem = (
 ): void => {
   const navItem = getNavItem({ navItemId })
   const nextMenuItems = navItem.current?.nestedItemList ?? []
-  const isNestedMenuAvailable = Boolean(nextMenuItems.length)
+  const isNestedMenuAvailable = nextMenuItems.length > 0
 
   const menuNavItem = getNavItem({
     navItemId: reduxHolder.getState().nav.currentMenuNavItemId,

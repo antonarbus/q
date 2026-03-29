@@ -21,11 +21,13 @@ export const useKeysForMenuNavigation = (): void => {
       })
 
       // +1 for "Close" or "Back" item before currentMenuItems
+      // 3 items without first "close" or "Back"
       const navItems = (navItem.current?.nestedItemList ?? []).filter(
         (item) => item.isHidden === false,
-      ) // 3 items without first "close" or "Back"
+      )
 
-      const menuItemsQty = navItems.length // 3
+      // 3
+      const menuItemsQty = navItems.length
 
       const isNestedMenu = state.nav.idsToCurrentMenuItems.length > 2
 

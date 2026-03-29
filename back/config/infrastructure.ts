@@ -57,13 +57,20 @@ export const sharedInfraConfig = {
   // NOTE: One shared project across all environments
   // Each environment has its own database within the shared project
   // neonApiKey is in secrets.ts (not exposed to frontend)
-  neonProjectId: 'noisy-water-33471538', // Shared project ID
-  neonOrgId: 'org-winter-tree-49001956', // Organization ID
-  neonProjectName: 'q', // Project name (for reference)
-  neonRegion: 'aws-us-east-2', // Close to us-central1
+
+  // Shared project ID
+  neonProjectId: 'noisy-water-33471538',
+  // Organization ID
+  neonOrgId: 'org-winter-tree-49001956',
+  // Project name (for reference)
+  neonProjectName: 'q',
+  // Close to us-central1
+  neonRegion: 'aws-us-east-2',
   neonPgVersion: '16',
-  neonMinCu: 0.25, // Free tier minimum
-  neonMaxCu: 0.25, // Keep at 0.25 to minimize costs (free tier max is 2)
+  // Free tier minimum
+  neonMinCu: 0.25,
+  // Keep at 0.25 to minimize costs (free tier max is 2)
+  neonMaxCu: 0.25,
 } as const
 
 type InfraConfig = Record<
@@ -83,23 +90,28 @@ export const infraConfig = {
     ...sharedInfraConfig,
     cloudRunServiceName: `web-app-prod`,
     domain: DOMAIN,
-    neonDatabaseName: 'prod', // Production database
-    storageBucketName: 'quotation-app-prod', // Also used by pilot
+    // Production database
+    neonDatabaseName: 'prod',
+    // Also used by pilot
+    storageBucketName: 'quotation-app-prod',
     environment: 'prod',
   },
   pilot: {
     ...sharedInfraConfig,
     cloudRunServiceName: `web-app-pilot`,
     domain: `pilot.${DOMAIN}`,
-    neonDatabaseName: 'prod', // Shares production database
-    storageBucketName: 'quotation-app-prod', // Shares production bucket
+    // Shares production database
+    neonDatabaseName: 'prod',
+    // Shares production bucket
+    storageBucketName: 'quotation-app-prod',
     environment: 'pilot',
   },
   test: {
     ...sharedInfraConfig,
     cloudRunServiceName: `web-app-test`,
     domain: `test.${DOMAIN}`,
-    neonDatabaseName: 'test', // Test database
+    // Test database
+    neonDatabaseName: 'test',
     storageBucketName: 'quotation-app-test',
     environment: 'test',
   },
@@ -107,8 +119,10 @@ export const infraConfig = {
     ...sharedInfraConfig,
     cloudRunServiceName: `web-app-dev`,
     domain: `dev.${DOMAIN}`,
-    neonDatabaseName: 'dev', // Development database
-    storageBucketName: 'quotation-app-dev', // Also used by local and unknown
+    // Development database
+    neonDatabaseName: 'dev',
+    // Also used by local and unknown
+    storageBucketName: 'quotation-app-dev',
     environment: 'dev',
   },
 } as const satisfies InfraConfig

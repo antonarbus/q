@@ -31,8 +31,10 @@ export const CopyModalLayout = (props: Props): React.JSX.Element => {
     >
       <div
         style={{
-          margin: 10, // needed to have a gap at the bottom specifically, otherwise overflow: hidden trims the content at the bottom edge
-          padding: 10, // needed to avoid shadow trimming by overflow: hidden
+          // needed to have a gap at the bottom specifically, otherwise overflow: hidden trims the content at the bottom edge
+          margin: 10,
+          // needed to avoid shadow trimming by overflow: hidden
+          padding: 10,
           overflowY: 'hidden',
           maxHeight: 240,
         }}

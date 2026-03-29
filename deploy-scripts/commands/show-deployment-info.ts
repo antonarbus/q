@@ -29,7 +29,9 @@ const showServiceInfo = async (props: ShowServiceInfoProps): Promise<void> => {
         await $`gcloud artifacts docker tags list ${baseImageUrl} --project=${props.projectId}`.text()
 
       // Find the digest for the environment tag (e.g., "dev", "test")
-      const lines = tagListOutput.trim().split('\n').slice(1) // Skip header
+
+      // Skip header
+      const lines = tagListOutput.trim().split('\n').slice(1)
 
       for (const line of lines) {
         const parts = line.trim().split(/\s+/u)
@@ -65,13 +67,15 @@ const showServiceInfo = async (props: ShowServiceInfoProps): Promise<void> => {
       const tagListOutput =
         await $`gcloud artifacts docker tags list ${baseImageUrl} --project=${props.projectId}`.text()
 
-      const lines = tagListOutput.trim().split('\n').slice(1) // Skip header
+      // Skip header
+      const lines = tagListOutput.trim().split('\n').slice(1)
 
       for (const line of lines) {
         const parts = line.trim().split(/\s+/u)
 
         if (parts.length >= 3) {
-          const [tagPath, , tagDigest] = parts // Column 3: DIGEST (0=TAG, 1=IMAGE, 2=DIGEST)
+          // Column 3: DIGEST (0=TAG, 1=IMAGE, 2=DIGEST)
+          const [tagPath, , tagDigest] = parts
           const tag = tagPath?.split('/tags/').pop() ?? null
 
           // If this tag points to same digest and looks like a git SHA (40 hex chars), use it
@@ -96,7 +100,7 @@ const showServiceInfo = async (props: ShowServiceInfoProps): Promise<void> => {
         const commitAuthor = await $`git log -1 --format=%an ${gitSha}`.text()
         const commitDate = await $`git log -1 --format=%ar ${gitSha}`.text()
 
-        logger.info(`Git SHA: ${gitSha.substring(0, 7)}`)
+        logger.info(`Git SHA: ${gitSha.slice(0, 7)}`)
         logger.info(`Message: ${commitMessage.trim()}`)
         logger.info(`Author: ${commitAuthor.trim()}`)
         logger.info(`Date: ${commitDate.trim()}`)

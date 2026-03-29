@@ -21,5 +21,5 @@ export const getImageDimensions = async (
 
   img.src = src
 
-  return imgDimensionsDeferred.promise
+  return await imgDimensionsDeferred.promise
 }

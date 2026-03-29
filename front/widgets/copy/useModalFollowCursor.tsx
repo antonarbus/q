@@ -27,8 +27,10 @@ export const useModalFollowCursor = (props: Props): void => {
     const WAIT_MS = 20
 
     const throttledMouseMove = throttle((event: MouseEvent): void => {
-      container.style.left = `${event.x + 30}px` // '30px', //  <-- update on cursor move
-      container.style.top = `${event.y + 30}px` // '30px', // <-- update on cursor move
+      // '30px', //  <-- update on cursor move
+      container.style.left = `${event.x + 30}px`
+      // '30px', // <-- update on cursor move
+      container.style.top = `${event.y + 30}px`
     }, WAIT_MS)
 
     document.addEventListener('mousemove', throttledMouseMove, {

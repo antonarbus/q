@@ -6,8 +6,10 @@ import { getDbUrl } from '@back/config/getDbUrl'
 const dbUrl = await getDbUrl()
 
 export default defineConfig({
-  schema: './back/shared/lib/drizzle/schema.ts', // schema file path
-  out: './drizzle', // migrations folder
+  // schema file path
+  schema: './back/shared/lib/drizzle/schema.ts',
+  // migrations folder
+  out: './drizzle',
   dialect: 'postgresql',
   dbCredentials: {
     url: dbUrl,

@@ -3,7 +3,7 @@ import type { OnBlockResizeStop } from '@front/shared/lib/re-resizable/resizable
 import { reduxHolder } from '@front/shared/lib/redux'
 
 export const onPriceBlockResizeStop: OnBlockResizeStop = (props) => {
-  const width = parseInt(props.elementRef.style.width)
+  const width = parseInt(props.elementRef.style.width, 10)
 
   const prevItemWidth = reduxHolder.getState().quotation.blocks[props.blockIndex]?.width
 

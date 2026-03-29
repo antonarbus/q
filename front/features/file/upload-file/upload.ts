@@ -110,7 +110,8 @@ export const upload: OnUpload = async (props) => {
     method: 'put',
     data: file,
     headers: {
-      'x-goog-content-length-range': '0,104857600', // Allow up to 100MB
+      // Allow up to 100MB
+      'x-goog-content-length-range': '0,104857600',
     },
     onUploadProgress: (progressEvent) => {
       const showProgress = async (): Promise<void> => {

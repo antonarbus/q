@@ -22,13 +22,13 @@ export const runInteractiveMode = async (): Promise<void> => {
       name: 'generate-tfvars',
       description: 'Generate .tfvars files from TypeScript config',
       requiresEnv: false,
-      action: async () => generateTfvars(),
+      action: async () => await generateTfvars(),
     },
     {
       name: 'list-gcloud-services',
       description: 'List enabled Google Cloud services',
       requiresEnv: false,
-      action: async () => listGcloudServices(),
+      action: async () => await listGcloudServices(),
     },
     {
       name: 'show-deployment-info',
@@ -70,7 +70,7 @@ export const runInteractiveMode = async (): Promise<void> => {
       name: 'terraform-format',
       description: 'Format Terraform files',
       requiresEnv: false,
-      action: async () => terraformFormat(),
+      action: async () => await terraformFormat(),
     },
     {
       name: 'terraform-unlock',

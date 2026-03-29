@@ -22,7 +22,7 @@ export const ResizableImage = Image.extend({
       const nodeView = createNodeView(props)
 
       if (nodeView.dom instanceof HTMLElement === false) {
-        throw new Error('Not an HTMLElement')
+        throw new TypeError('Not an HTMLElement')
       }
 
       nodeView.dom.style.display = 'inline-flex'
@@ -57,7 +57,7 @@ export const ResizableImage = Image.extend({
 
         if (result === true) {
           if (nodeView.dom instanceof HTMLElement === false) {
-            throw new Error('Not an HTMLElement')
+            throw new TypeError('Not an HTMLElement')
           }
 
           nodeView.dom.style.display = 'inline-flex'

@@ -9,7 +9,7 @@ export const getPayloadFromAccessToken = async (
 
   try {
     if (typeof accessJwtToken !== 'string') {
-      throw new Error('JWT is not a string')
+      throw new TypeError('JWT is not a string')
     }
 
     const jwtPayload = jwt.verify(accessJwtToken, JWT_ACCESS_SECRET)
@@ -26,6 +26,7 @@ export const getPayloadFromAccessToken = async (
 
     return jwtPayload
   } catch {
-    return undefined // if token is expired it will result in error
+    // if token is expired it will result in error
+    return undefined
   }
 }

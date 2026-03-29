@@ -23,7 +23,8 @@ export const useShowDragAndDropArea = (): void => {
     })
 
     document.addEventListener('drop', (event) => {
-      event.preventDefault() // to avoid open image in browser
+      // to avoid open image in browser
+      event.preventDefault()
       resetDragState()
     })
 

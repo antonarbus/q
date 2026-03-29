@@ -9,7 +9,8 @@ export const RowLayout = (props: Props): React.JSX.Element => {
     <Box
       className='boq-table-container-with-paddings'
       style={{
-        padding: '10px 10px 2px 10px', // to have a gap when overflow
+        // to have a gap when overflow
+        padding: '10px 10px 2px 10px',
       }}
     >
       <Box

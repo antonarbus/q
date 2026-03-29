@@ -8,7 +8,8 @@ test.describe('authenticate for all further tests', () => {
 
   test('authenticate', async () => {
     const context = await request.newContext({
-      ignoreHTTPSErrors: true, // This line ignores certificate errors
+      // This line ignores certificate errors
+      ignoreHTTPSErrors: true,
     })
 
     const response = await context.post(route.logIn.url, {
@@ -24,7 +25,8 @@ test.describe('authenticate for all further tests', () => {
       await context.storageState({ path: userFilePath.authenticated })
       console.info('🫡 authenticated before all tests')
     } else {
-      const responseBody = await response.text() // Get the response body as text
+      // Get the response body as text
+      const responseBody = await response.text()
 
       throw new Error(`Failed to authenticate: ${response.status()} - ${responseBody}`)
     }

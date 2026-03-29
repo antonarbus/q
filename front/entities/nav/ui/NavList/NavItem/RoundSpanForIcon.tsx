@@ -22,7 +22,8 @@ export const RoundSpanForIcon = (props: Props): React.JSX.Element => {
         alignItems: 'center',
         justifyContent: 'center',
         color: '#dadce1',
-        flexShrink: 0, // to avoid logo shrink when menu item text is long
+        // to avoid logo shrink when menu item text is long
+        flexShrink: 0,
         '& svg': {
           color: props.disabled === true ? 'grey' : '',
         },
