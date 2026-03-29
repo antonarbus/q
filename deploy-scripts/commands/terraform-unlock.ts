@@ -93,11 +93,11 @@ export const terraformUnlock = async (props: Props): Promise<void> => {
     }
 
     logger.info(`Detected lock ID: ${lockIdToUse}`)
-    logger.emptyLine()
   } else {
     logger.info(`Lock ID: ${lockIdToUse}`)
-    logger.emptyLine()
   }
+
+  logger.emptyLine()
 
   logger.info('Unlocking Terraform state...')
   logger.emptyLine()

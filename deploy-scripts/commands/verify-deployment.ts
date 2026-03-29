@@ -7,6 +7,7 @@ import axios, { type AxiosResponse } from 'axios'
 import type { ResBody } from '@back/api/dev/healthCheckHandler'
 import { route } from '@back/api/route'
 import type { DeployedEnvironment } from '@root/config/environment'
+import { sleep } from 'bun'
 
 type Props = {
   environment: DeployedEnvironment
@@ -16,7 +17,7 @@ type Props = {
 export const verifyDeployment = async (props: Props): Promise<void> => {
   try {
     logger.info('Waiting for deployment to be ready...')
-    await Bun.sleep(10000)
+    await sleep(10000)
 
     logger.emptyLine()
 

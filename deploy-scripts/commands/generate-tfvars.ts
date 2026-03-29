@@ -1,6 +1,7 @@
 import { resolve } from 'node:path'
 import { infraConfig } from '@back/config/infrastructure'
 import { logger } from '../lib/output/logger'
+import { write } from 'bun'
 
 type Props = {
   environment: string
@@ -57,7 +58,7 @@ export const generateTfvars = async (): Promise<void> => {
     const content = generateTfvarsContent({ environment: env, config })
 
     // eslint-disable-next-line no-await-in-loop
-    await Bun.write(TFVARS_FILE_PATH, content)
+    await write(TFVARS_FILE_PATH, content)
     logger.success(`Generated ${env}.tfvars`)
   }
 
