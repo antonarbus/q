@@ -53,7 +53,7 @@ export const downloadPdf = async (): Promise<void> => {
   tempClone.style.left = '-9999px'
   tempClone.style.visibility = 'hidden'
   tempClone.style.width = `${maxPaperWidth}px`
-  document.body.appendChild(tempClone)
+  document.body.append(tempClone)
 
   // Remove button from temp clone to get correct height
   const tempOpenInsertMenuButton = tempClone.querySelector(`.${cls.openInsertMenuButton}`)

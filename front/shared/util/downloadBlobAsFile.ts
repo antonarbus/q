@@ -8,7 +8,7 @@ export const downloadBlobAsFile = (props: Props): void => {
   const link = document.createElement('a')
   link.href = fileUrl
   link.download = props.fileName
-  document.body.appendChild(link)
+  document.body.append(link)
   link.click()
   document.body.removeChild(link)
   URL.revokeObjectURL(fileUrl)

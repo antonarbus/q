@@ -8,7 +8,7 @@ describe('#getStringWithNewFormattedNumber', () => {
       newNumber: 1230,
     })
 
-    expect(result).toBe('<p>1\u202f230 <span>USD</span></p>')
+    expect(result).toBe('<p>1\u202F230 <span>USD</span></p>')
   })
 
   test('replaces decimal number with comma', () => {
@@ -35,7 +35,7 @@ describe('#getStringWithNewFormattedNumber', () => {
       newNumber: 5000,
     })
 
-    expect(result).toBe('<p>5\u202f000 <span>USD</span></p>')
+    expect(result).toBe('<p>5\u202F000 <span>USD</span></p>')
   })
 
   test('replaces only first number', () => {
@@ -53,7 +53,7 @@ describe('#getStringWithNewFormattedNumber', () => {
       newNumber: 1500,
     })
 
-    expect(result).toBe('<p style="text-align: center;">1\u202f500</p>')
+    expect(result).toBe('<p style="text-align: center;">1\u202F500</p>')
   })
 
   test('formats large numbers with spaces', () => {
@@ -62,7 +62,7 @@ describe('#getStringWithNewFormattedNumber', () => {
       newNumber: 1000000,
     })
 
-    expect(result).toBe('<div>1\u202f000\u202f000</div>')
+    expect(result).toBe('<div>1\u202F000\u202F000</div>')
   })
 
   test('handles decimal formatting', () => {
@@ -80,7 +80,7 @@ describe('#getStringWithNewFormattedNumber', () => {
       newNumber: 1230,
     })
 
-    expect(result).toBe('<p>1\u202f230 <span>USD</span></p>')
+    expect(result).toBe('<p>1\u202F230 <span>USD</span></p>')
   })
 
   test('handles zero', () => {

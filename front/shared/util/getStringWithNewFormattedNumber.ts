@@ -26,7 +26,7 @@ export const getStringWithNewFormattedNumber = (props: Props): string => {
 
   // Remove any spaces/narrow-no-break-spaces between digits (e.g., "1 230" or "1\u202f230" becomes "1230")
   // This normalizes the HTML before searching for the number
-  const normalizedHtml = props.string.replace(/(?<=\d)[\s\u202f]+(?=\d)/gu, '')
+  const normalizedHtml = props.string.replaceAll(/(?<=\d)[\s\u202F]+(?=\d)/gu, '')
 
   // Pattern to match any decimal number (e.g., "123", "123.45", "123,45")
   // Matches: digits, optionally followed by (comma or period) and more digits
