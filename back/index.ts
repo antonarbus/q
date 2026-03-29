@@ -9,6 +9,7 @@ import { api } from '@back/api'
 import { errorHandlerMiddleware } from '@back/shared/errors/errorHandlerMiddleware'
 import { httpHandler } from '@back/shared/lib/express/httpHandler'
 import blog404Html from './static/blog-404.html'
+import { log } from './shared/util/log'
 
 const thisDirPathAbsolute = path.dirname(url.fileURLToPath(import.meta.url))
 
@@ -114,7 +115,7 @@ if (runtimeConfig.nodeEnv === 'production') {
 app.use(errorHandlerMiddleware)
 
 app.listen(runtimeConfig.back.port, () => {
-  console.info(`
+  log.info(`
       Backend server started 🚀
       URL: ${runtimeConfig.back.baseUrl}
       NODE_ENV: ${runtimeConfig.nodeEnv}

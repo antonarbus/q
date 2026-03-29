@@ -2,6 +2,7 @@ import { request, test } from '@playwright/test'
 import { userFilePath } from './userFilePath'
 import { runtimeConfig } from '@root/config/runtime'
 import { route } from '@back/api/route'
+import { log } from '../shared/utils/log'
 
 test.describe('authenticate for all further tests', () => {
   test.use({ baseURL: runtimeConfig.front.baseUrl })
@@ -23,7 +24,7 @@ test.describe('authenticate for all further tests', () => {
 
     if (isResponseOk === true) {
       await context.storageState({ path: userFilePath.authenticated })
-      console.info('🫡 authenticated before all tests')
+      log.info('🫡 authenticated before all tests')
     } else {
       // Get the response body as text
       const responseBody = await response.text()

@@ -20,7 +20,7 @@ export const getCurrentCloudRunImage = async (props: Props): Promise<string | nu
     return imageName
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : String(error)
-    logger.warning(`Could not retrieve current image: ${errorMessage}`)
+    logger.warn(`Could not retrieve current image: ${errorMessage}`)
 
     return null
   }

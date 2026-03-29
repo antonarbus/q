@@ -9,6 +9,7 @@ import { eq } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
 import type { ParsedQs } from 'qs'
 import { httpRedirect, type HttpResponse } from '@back/shared/lib/express/httpResponse'
+import { log } from '@back/shared/util/log'
 
 type SearchQuery = ParsedQs
 
@@ -108,7 +109,7 @@ export const proxyFileToBucketHandler: RouterHandler = async (req, res) => {
       redirectUrl: signedUrl,
     })
   } catch (error) {
-    console.error('Error generating signed URL:', error)
+    log.error('Error generating signed URL:', error)
 
     messageList.push('Failed to generate signed URL')
 

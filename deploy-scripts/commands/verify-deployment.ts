@@ -103,7 +103,7 @@ export const verifyDeployment = async (props: Props): Promise<void> => {
       exit(0)
     } else {
       logger.error(`${totalFailures} verification test(s) failed`)
-      logger.warning('Service may not be functioning correctly')
+      logger.warn('Service may not be functioning correctly')
       logger.plain(`🌐 Application URL: ${appUrl}`)
       logger.plain(`🔧 API URL: ${appUrl}/api`)
       logger.emptyLine()

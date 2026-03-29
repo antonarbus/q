@@ -1,3 +1,4 @@
+// oxlint-disable no-console
 import { runtimeConfig } from '@root/config/runtime'
 
 export default function globalSetup(): void {

@@ -19,6 +19,7 @@ import { getQuotationPermissionLevel } from '@back/entity/quotation/getQuotation
 import { getShouldTrace } from '@back/shared/headers/no-trace/getShouldTrace'
 import { hideQuotationPrivateData } from '@back/entity/quotation/hideQuotationPrivateData'
 import { validateQuotation } from '@back/entity/quotation/validateQuotation'
+import { log } from '@back/shared/util/log'
 
 type SearchQuery = ParsedQs
 
@@ -112,7 +113,7 @@ export const getQuotationHandler: RouterHandler = async (req) => {
         .returning()
         .catch((error: unknown) => {
           messageList.push('Failed to update "openedAt" field')
-          console.error('failed to update "openedAt" field', error)
+          log.error('failed to update "openedAt" field', error)
 
           return []
         })
@@ -134,7 +135,7 @@ export const getQuotationHandler: RouterHandler = async (req) => {
         .returning()
         .catch((error: unknown) => {
           messageList.push('Failed to update "viewedAt" field')
-          console.error('failed to update viewedAt field', error)
+          log.error('failed to update viewedAt field', error)
 
           return []
         })

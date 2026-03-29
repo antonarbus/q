@@ -5,6 +5,7 @@ import { userSlice } from '@front/entities/user/redux/userSlice'
 import { getAccessTokenDeferred } from '@front/features/auth/try-to-log-in-without-prompt/AccessToken'
 import { instantiateAxiosWithAuth } from '@front/shared/lib/axios/axiosWithAuth'
 import { reduxHolder } from '@front/shared/lib/redux'
+import { log } from '@front/shared/util/log'
 import axios, { AxiosError, type AxiosRequestConfig } from 'axios'
 
 const axiosWithAuth = axios.create({ withCredentials: true })
@@ -63,14 +64,9 @@ axiosWithAuth.interceptors.response.use(
 
         if (isUnauthorized === true) {
           // still unauthorized after attempt to refresh the access token
-          reduxHolder.dispatch(
-            userSlice.actions.setAccessToken({
-              accessToken: null,
-            }),
-          )
+          reduxHolder.dispatch(userSlice.actions.setAccessToken({ accessToken: null }))
 
-          console.warn('not authorized')
-          console.error(err)
+          log.warn('not authorized')
         }
       }
     }

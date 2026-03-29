@@ -24,7 +24,7 @@ export const terraformPlan = async (props: Props): Promise<void> => {
   logger.info(`Config: ${TFVARS_FILE_PATH}`)
   logger.emptyLine()
 
-  logger.warning(`Planning infrastructure changes for environment: ${props.environment}`)
+  logger.warn(`Planning infrastructure changes for environment: ${props.environment}`)
 
   logger.emptyLine()
 

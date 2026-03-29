@@ -45,7 +45,7 @@ const promoteServiceImage = async (props: PromoteServiceImageProps): Promise<voi
 
     sourceImageDigest = digestOutput.trim()
   } catch {
-    logger.warning(`  Could not retrieve ${props.serviceName} source image digest`)
+    logger.warn(`  Could not retrieve ${props.serviceName} source image digest`)
   }
 
   logger.info(`  ${props.serviceName} digest: ${sourceImageDigest}`)

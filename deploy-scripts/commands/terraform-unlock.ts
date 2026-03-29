@@ -47,7 +47,7 @@ const detectLockId = async (tfvarsFilePath: string): Promise<string | undefined>
 
     // If we got an error but couldn't find a lock ID, it might be a different error
     if (errorMessage.includes('Error acquiring the state lock')) {
-      logger.warning('Lock error detected but could not parse lock ID')
+      logger.warn('Lock error detected but could not parse lock ID')
       logger.info('Full error message:')
       logger.error(errorMessage)
     }
@@ -55,7 +55,7 @@ const detectLockId = async (tfvarsFilePath: string): Promise<string | undefined>
     return undefined
   } catch (error: unknown) {
     // Unexpected error
-    logger.warning('Unexpected error during lock detection')
+    logger.warn('Unexpected error during lock detection')
 
     if (typeof error === 'string') {
       logger.error(error)
@@ -73,7 +73,7 @@ export const terraformUnlock = async (props: Props): Promise<void> => {
 
   const TFVARS_FILE_PATH = resolve(__dirname, `../../config/${props.environment}.tfvars`)
 
-  logger.warning(`Removing Terraform state lock for environment: ${props.environment}`)
+  logger.warn(`Removing Terraform state lock for environment: ${props.environment}`)
 
   logger.emptyLine()
 
@@ -94,7 +94,7 @@ export const terraformUnlock = async (props: Props): Promise<void> => {
     lockIdToUse = await detectLockId(TFVARS_FILE_PATH)
 
     if (lockIdToUse === null) {
-      logger.warning('No lock detected on the state.')
+      logger.warn('No lock detected on the state.')
       logger.emptyLine()
 
       return

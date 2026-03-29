@@ -24,7 +24,7 @@ export const terraformApply = async (props: Props): Promise<void> => {
   logger.info(`Config: ${TFVARS_FILE_PATH}`)
   logger.emptyLine()
 
-  logger.warning(`Deploying main infrastructure for environment: ${props.environment}`)
+  logger.warn(`Deploying main infrastructure for environment: ${props.environment}`)
 
   logger.emptyLine()
 

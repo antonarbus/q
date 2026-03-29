@@ -14,15 +14,10 @@ type Props = {
   path?: string
 }
 
-export const removeCookie = (props: Props): void => {
-  // Set the cookie expiration to a date in the past
-  let cookieString = `${props.name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${props.path ?? '/'};`
-
-  // If a domain is provided, add it to the cookie string
-  if (props.domain !== '') {
-    cookieString += ` domain=${props.domain ?? DOMAIN};`
-  }
-
-  // Set the cookie, which effectively removes it
-  document.cookie = cookieString
+export const removeCookie = async (props: Props): Promise<void> => {
+  await cookieStore.delete({
+    name: props.name,
+    domain: props.domain ?? DOMAIN,
+    path: props.path ?? '/',
+  })
 }

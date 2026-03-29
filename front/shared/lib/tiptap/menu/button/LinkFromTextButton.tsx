@@ -2,6 +2,7 @@ import { useTiptap, useTiptapState } from '@tiptap/react'
 import { TextSelection } from '@tiptap/pm/state'
 import { MenuButton } from './shared/MenuButton'
 import { RiLink } from 'react-icons/ri'
+import { confirmWithDialog } from '@front/shared/component/ConfirmationDialog'
 
 export const LinkFromTextButton = (): React.JSX.Element => {
   const { editor } = useTiptap()
@@ -24,11 +25,23 @@ export const LinkFromTextButton = (): React.JSX.Element => {
       isActive={isActive}
       disabled={isDisabled}
       title='Link'
-      onClick={() => {
+      onClick={async () => {
         const { from, to } = editor.state.selection
         const attrs = editor.getAttributes('link')
         const existing = typeof attrs.href === 'string' ? attrs.href : ''
-        const href = window.prompt('URL', existing)
+
+        const href = await confirmWithDialog({
+          inputLabel: 'Url',
+          title: 'Link',
+          initialValue: existing ? attrs.href : '',
+          description: '',
+          confirmButtonText: 'Add',
+          rejectButtonText: 'Cancel',
+        })
+
+        if (href === false) {
+          return
+        }
 
         const isCancelled = href === null || href.trim() === ''
 

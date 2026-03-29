@@ -53,7 +53,7 @@ const generateTfvarsContent = (props: Props): string => {
  * Run this after modifying config/configVariables.ts
  */
 export const generateTfvars = async (): Promise<void> => {
-  logger.warning('Generating .tfvars files from TypeScript config...')
+  logger.warn('Generating .tfvars files from TypeScript config...')
   logger.emptyLine()
 
   for (const [env, config] of Object.entries(infraConfig)) {
@@ -62,6 +62,7 @@ export const generateTfvars = async (): Promise<void> => {
 
     const content = generateTfvarsContent({ environment: env, config })
 
+    // oxlint-disable-next-line no-await-in-loop
     await write(TFVARS_FILE_PATH, content)
     logger.success(`Generated ${env}.tfvars`)
   }

@@ -17,6 +17,7 @@ import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
 import { type HttpResponse, httpJsonResponse } from '@back/shared/lib/express/httpResponse'
 import { z } from 'zod'
+import { log } from '@back/shared/util/log'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
@@ -59,7 +60,7 @@ export const saveQuotationHandler: RouterHandler = async (req) => {
   if (quotationValidationResult.success === false) {
     messageList.push('Invalid structure')
     const treeifiedError = z.treeifyError(quotationValidationResult.error)
-    console.error('Validation failed:', treeifiedError)
+    log.error('Validation failed:', treeifiedError)
     messageList.push(`Zod error: ${JSON.stringify(treeifiedError)}`)
 
     throw new HttpError<ErrorResBody['errorCode']>({

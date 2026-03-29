@@ -1,5 +1,6 @@
 import { migrateBookmarkSchemaFromV1ToV2 } from './schema/migrateBookmarkSchemaFromV1ToV2'
 import { type Bookmark, bookmarkSchema } from './schema'
+import { log } from '@back/shared/util/log'
 
 const migrateBookmarkSchemaList = [
   migrateBookmarkSchemaFromV1ToV2,
@@ -74,8 +75,7 @@ export const validateBookmark = (props: Props): Res => {
 
   if (migratedDocumentValidationResult.success !== true) {
     const msg = `Document has the latest schema version, but validation failed for some unknown reason 🤷‍♂️`
-
-    console.error(msg)
+    log.error(msg)
     messageList.push(msg)
 
     return {

@@ -50,12 +50,12 @@ const showServiceInfo = async (props: ShowServiceInfoProps): Promise<void> => {
       }
 
       if (digest === null) {
-        logger.warning(`Could not find digest for tag: ${envTag}`)
+        logger.warn(`Could not find digest for tag: ${envTag}`)
 
         return
       }
     } catch {
-      logger.warning('Could not get image digest')
+      logger.warn('Could not get image digest')
 
       return
     }
@@ -90,7 +90,7 @@ const showServiceInfo = async (props: ShowServiceInfoProps): Promise<void> => {
         }
       }
     } catch {
-      logger.warning('Could not list repository tags')
+      logger.warn('Could not list repository tags')
     }
 
     // If we found a git SHA, get commit details
@@ -105,10 +105,10 @@ const showServiceInfo = async (props: ShowServiceInfoProps): Promise<void> => {
         logger.info(`Author: ${commitAuthor.trim()}`)
         logger.info(`Date: ${commitDate.trim()}`)
       } catch {
-        logger.warning('Could not fetch git commit info from repository')
+        logger.warn('Could not fetch git commit info from repository')
       }
     } else {
-      logger.warning('Could not determine git commit SHA')
+      logger.warn('Could not determine git commit SHA')
     }
   } catch (error) {
     logger.error(`Failed to get deployment info for ${props.serviceName}`)
@@ -127,7 +127,7 @@ type Props = {
  */
 export const showDeploymentInfo = async (props: Props): Promise<void> => {
   // Print section header
-  logger.warning(props.environment.toUpperCase())
+  logger.warn(props.environment.toUpperCase())
   logger.emptyLine()
 
   logger.info('=== Application Service ===')

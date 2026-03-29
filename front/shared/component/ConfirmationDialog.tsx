@@ -66,6 +66,7 @@ type ConfirmationDialogBase = {
   rejectButtonText?: string
   disableCloseButton?: true
   inputLabel?: string
+  initialValue?: string
 }
 
 export type ConfirmationDialogOptions =
@@ -83,7 +84,7 @@ export const ConfirmationDialog = (): React.JSX.Element => {
 
   const confirmationDialog = reduxHolder.useSelector((state) => state.app.confirmationDialog)
 
-  const [inputValue, setInputValue] = useState('')
+  const [inputValue, setInputValue] = useState(confirmationDialog.initialValue ?? '')
 
   useLayoutEffect(() => {
     const shouldAutoConfirm =

@@ -9,6 +9,7 @@ import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
 import { getUserFromRefreshTokenOrNull } from '@back/entity/user/getUserFromRefreshTokenOrNull'
 import { type HttpResponse, httpJsonResponse } from '@back/shared/lib/express/httpResponse'
+import { log } from '@back/shared/util/log'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
@@ -39,7 +40,7 @@ export const healthCheckHandler: RouterHandler = async (req) => {
 
   // Simple query to verify Postgres / Drizzle connectivity
   await db.execute(sql`select 1`).catch((error: unknown) => {
-    console.error('health check database error', error)
+    log.error('health check database error', error)
 
     messageList.push('Database connection failed')
 
