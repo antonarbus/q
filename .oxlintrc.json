@@ -4,10 +4,16 @@
     "browser": true,
     "node": true
   },
-  "categories": { "correctness": "error", "nursery": "error", "pedantic": "error" },
+  "categories": {
+    "correctness": "error",
+    "nursery": "error",
+    "pedantic": "error",
+    "suspicious": "error"
+  },
   "rules": {
     "max-lines-per-function": "off",
     "eslint/max-depth": "off",
-    "eslint/max-lines": "off"
+    "eslint/max-lines": "off",
+    "unicorn/require-post-message-target-origin": "off"
   }
 }

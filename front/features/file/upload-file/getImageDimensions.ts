@@ -8,16 +8,16 @@ export const getImageDimensions = async (
 
   const img = new window.Image()
 
-  img.onload = (): void => {
+  img.addEventListener('load', () => {
     imgDimensionsDeferred.resolve({
       width: img.naturalWidth,
       height: img.naturalHeight,
     })
-  }
+  })
 
-  img.onerror = (): void => {
+  img.addEventListener('error', () => {
     imgDimensionsDeferred.resolve({ width: 0, height: 0 })
-  }
+  })
 
   img.src = src
 

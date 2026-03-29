@@ -146,7 +146,7 @@ export const downloadPdf = async (): Promise<void> => {
 
   worker.postMessage(workerRequestMessage)
 
-  worker.onmessage = (messageEvent: MessageEvent<WorkerResponseMessage>): void => {
+  worker.addEventListener('message', (messageEvent: MessageEvent<WorkerResponseMessage>): void => {
     downloadBlobAsFile({
       blob: messageEvent.data.pdfBlob,
       fileName: `quotation - ${reduxHolder.getState().quotation.id}.pdf`,
@@ -156,12 +156,12 @@ export const downloadPdf = async (): Promise<void> => {
       loadingIconActor.send({ type: 'show success icon' })
       toast.info('File downloaded')
     }, 1000)
-  }
+  })
 
-  worker.onerror = (): void => {
+  worker.addEventListener('error', () => {
     setTimeout(() => {
       loadingIconActor.send({ type: 'show error icon' })
       toast.error('Error downloading file')
     }, 1000)
-  }
+  })
 }

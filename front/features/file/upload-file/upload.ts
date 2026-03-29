@@ -27,7 +27,7 @@ export const upload: OnUpload = async (props) => {
 
     const reader = new FileReader()
 
-    reader.onload = (event): void => {
+    reader.addEventListener('load', (event): void => {
       const fileAsBase64String = event.target?.result
 
       if (props.editor === null) {
@@ -71,7 +71,7 @@ export const upload: OnUpload = async (props) => {
           })
           .run()
       }
-    }
+    })
 
     reader.readAsDataURL(file)
 

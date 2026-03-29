@@ -8,22 +8,22 @@ type Props = {
   accessFormValuesSignal: AccessFormValuesSignal
 }
 
+const getIsCorrectValue = (
+  radioButtonValue: string,
+): radioButtonValue is Quotation['access']['level'] => {
+  const isCorrect =
+    radioButtonValue === 'everyone' ||
+    radioButtonValue === 'nobody' ||
+    radioButtonValue === 'custom'
+
+  return isCorrect
+}
+
 export const SharedWithRadioButtons = (props: Props): React.JSX.Element => {
   return (
     <RadioGroup
       name='controlled-radio-buttons-group'
       onChange={(_event, value): void => {
-        const getIsCorrectValue = (
-          radioButtonValue: string,
-        ): radioButtonValue is Quotation['access']['level'] => {
-          const isCorrect =
-            radioButtonValue === 'everyone' ||
-            radioButtonValue === 'nobody' ||
-            radioButtonValue === 'custom'
-
-          return isCorrect
-        }
-
         const isCorrectValue = getIsCorrectValue(value)
 
         if (isCorrectValue === true) {

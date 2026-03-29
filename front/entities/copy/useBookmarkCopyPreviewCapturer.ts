@@ -50,13 +50,13 @@ export const useBookmarkCopyPreviewCapturer = (
 
       const image = new Image()
 
-      image.onload = (): void => {
+      image.addEventListener('load', () => {
         imageLoadedDeferred.resolve()
-      }
+      })
 
-      image.onerror = (): void => {
+      image.addEventListener('error', () => {
         imageLoadedDeferred.resolve()
-      }
+      })
 
       image.src = src
 
