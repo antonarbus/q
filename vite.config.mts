@@ -1,13 +1,8 @@
-import path from 'node:path'
-import url from 'node:url'
+import babel from '@rolldown/plugin-babel'
 import basicSsl from '@vitejs/plugin-basic-ssl'
 import react from '@vitejs/plugin-react'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import { runtimeConfig } from './config/runtime' // relative imports, otherwise some scripts break
-import type { Plugin } from 'vite'
-
-const thisFilePath: string = url.fileURLToPath(import.meta.url)
-const thisDirPath: string = path.dirname(thisFilePath)
 
 /**
  * API routes are now properly separated:
@@ -40,7 +35,6 @@ export default {
   },
   worker: {
     format: 'es',
-    plugins: (): Plugin[] => [tsconfigPaths({ root: thisDirPath })],
   },
   esbuild: {
     define: {
@@ -48,29 +42,26 @@ export default {
     },
   },
   plugins: [
-    react({
-      // to show readable class names in styled components with vite
-      // https://github.com/styled-components/babel-plugin-styled-components/issues/350#issuecomment-979873241
-      jsxImportSource: '@emotion/react',
-      babel: {
-        plugins: [
-          [
-            '@emotion/babel-plugin', // from package 'babel-plugin-styled-components',
-            {
-              displayName: true,
-              fileName: true,
-            },
-          ],
-          // https://github.com/preactjs/signals/tree/main/packages/react#react-integration
-          ['module:@preact/signals-react-transform'],
+    babel({
+      plugins: [
+        [
+          '@emotion/babel-plugin', // readable class names in styled components
+          // https://github.com/styled-components/babel-plugin-styled-components/issues/350#issuecomment-979873241
+          {
+            displayName: true,
+            fileName: true,
+          },
         ],
-      },
+        // https://github.com/preactjs/signals/tree/main/packages/react#react-integration
+        ['module:@preact/signals-react-transform'],
+      ],
     }),
-    // https://github.com/aleclarson/vite-tsconfig-paths
-    tsconfigPaths({ root: thisDirPath }),
+    react({
+      jsxImportSource: '@emotion/react',
+    }),
+    tsconfigPaths({ root: '../', loose: true }), // resolve @front/*, @back/*, @root/* from project root
     basicSsl(),
   ],
-  // Path aliases are automatically loaded from tsconfig.json via tsconfigPaths() plugin
   build: {
     outDir: './build',
     chunkSizeWarningLimit: 1500, // in KB

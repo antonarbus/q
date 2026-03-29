@@ -60,7 +60,7 @@ Single `main` branch. `MASTER_DEPLOYS_TO_ENV` in `config/configVariables.ts` set
 ```bash
 bun install
 bun dev                      # Frontend (3000) + Backend (4000) concurrently
-bun run unit-test
+bun run test
 bun run playwright
 bun run cli                  # Interactive deployment CLI
 ```
@@ -148,14 +148,14 @@ bun run cli show-deployment-info --env dev
 ## Testing & Code Quality
 
 ```bash
-bun run unit-test            # Vitest unit tests
-bun run unit-test-ui         # Unit tests with UI
-bun run playwright             # Playwright e2e
-bun run playwright-debug       # Debug mode
-bun run tsc                  # Type check
-bun run lint-fix             # ESLint
-bun run prettier-fix           # Prettier
-bun run check                # All checks (tsc, lint, format, tests, build)
+bun run test                  # Vitest unit tests
+bun run test-ui               # Unit tests with UI
+bun run playwright            # Playwright e2e
+bun run playwright-debug      # Debug mode
+bun run tsc                   # Type check
+bun run lint-fix              # ESLint
+bun run prettier-fix          # Prettier
+bun run check                 # All checks (tsc, lint, format, tests, build)
 ```
 
 ## FSD: Cross-Layer Singleton Pattern

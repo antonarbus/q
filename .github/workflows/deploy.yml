@@ -103,7 +103,7 @@ jobs:
         run: bun run prettier
 
       - name: 'Run unit tests'
-        run: bun run unit-test
+        run: bun run test
 
       - name: 'Find unused code'
         run: bun run knip
