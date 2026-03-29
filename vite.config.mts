@@ -1,7 +1,7 @@
 import babel from '@rolldown/plugin-babel'
 import basicSsl from '@vitejs/plugin-basic-ssl'
 import react from '@vitejs/plugin-react'
-import tsconfigPaths from 'vite-tsconfig-paths'
+import path from 'node:path'
 import { runtimeConfig } from './config/runtime' // relative imports, otherwise some scripts break
 
 /**
@@ -14,7 +14,14 @@ import { runtimeConfig } from './config/runtime' // relative imports, otherwise 
 // https://vitejs.dev/config/
 
 export default {
-  root: './front/',
+  publicDir: './front/public',
+  resolve: {
+    alias: [
+      { find: '@front/', replacement: `${path.resolve('front')}/` },
+      { find: '@back/', replacement: `${path.resolve('back')}/` },
+      { find: '@root/', replacement: `${path.resolve('.')}/` },
+    ],
+  },
   server: {
     host: runtimeConfig.front.hostname,
     port: runtimeConfig.front.port,
@@ -36,11 +43,6 @@ export default {
   worker: {
     format: 'es',
   },
-  esbuild: {
-    define: {
-      this: 'window', // to suppress warning in terminal: [vite] warning: Top-level "this" will be replaced with undefined since this file is an ECMAScript module
-    },
-  },
   plugins: [
     babel({
       plugins: [
@@ -59,13 +61,18 @@ export default {
     react({
       jsxImportSource: '@emotion/react',
     }),
-    tsconfigPaths({ root: '../', loose: true }), // resolve @front/*, @back/*, @root/* from project root
     basicSsl(),
   ],
+  test: {
+    include: [
+      'front/**/*.test.{ts,tsx,js,jsx}',
+      'back/**/*.test.{ts,tsx,js,jsx}',
+    ],
+  },
   build: {
-    outDir: './build',
+    outDir: './front/build',
     chunkSizeWarningLimit: 1500, // in KB
-    rollupOptions: {
+    rolldownOptions: {
       output: {
         // https://rollupjs.org/configuration-options/#output-manualchunks
         manualChunks: (pathAbsolute: string): string | undefined => {
