@@ -23,6 +23,6 @@ export const useCountUniqueDailyVisitor = (): void => {
       localStorage.setItem(NAME_AT_LOCAL_STORAGE, today)
     }
 
-    void countVisitor()
+    countVisitor()
   })
 }

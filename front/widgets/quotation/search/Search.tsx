@@ -17,7 +17,7 @@ export const Search = (): React.JSX.Element => {
 
   useEffect(() => {
     if (email !== null) {
-      void getBookmarkListQuery.refetch()
+      getBookmarkListQuery.refetch()
     }
   }, [email])
 

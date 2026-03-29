@@ -16,7 +16,7 @@ export const SubTotalPrice = (): React.JSX.Element => {
   const block = useBlock()
 
   const hidePinsClickHandlerRef = useRef<(e: globalThis.MouseEvent) => void>(() => {
-    console.warn('hidePinsClickHandlerRef')
+    // console.warn('hidePinsClickHandlerRef')
   })
 
   const isInitClickRef = useRef(true)

@@ -11,7 +11,7 @@ export const useRefetchDataOnEmailChange = (props: Props): void => {
 
   useEffect(() => {
     if (email !== null) {
-      void props.refetch()
+      props.refetch()
     }
   }, [email])
 }

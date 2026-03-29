@@ -2,6 +2,8 @@ import { useRouteError } from 'react-router-dom'
 
 export const ErrorPage = (): React.JSX.Element => {
   const error = useRouteError()
+
+  // oxlint-disable-next-line no-console
   console.error(error)
 
   return (

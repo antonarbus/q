@@ -14,5 +14,5 @@ export const openBookmarksPage = (): void => {
     reduxHolder.dispatch(navSlice.actions.showNavItems({ navItemIds: [navItemId.back] }))
   }
 
-  void routerHolder.router.navigate(`/${route.bookmarkList}`)
+  routerHolder.router.navigate(`/${route.bookmarkList}`)
 }

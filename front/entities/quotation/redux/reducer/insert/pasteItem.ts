@@ -34,9 +34,9 @@ const prepareItemForPasting = (item: BlockItem, newItemId: string): BlockItem =>
   const clonedItem: BlockItem = { ...structuredClone(item), id: newItemId }
 
   if (clonedItem.type === 'boq') {
-    clonedItem.boq.rows.forEach((row) => {
+    for (const row of clonedItem.boq.rows) {
       row.id = generateId()
-    })
+    }
   }
 
   return clonedItem

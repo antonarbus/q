@@ -22,7 +22,7 @@ export const InfoModal = (): React.ReactNode => {
   const distinctCategories = useDistinctCategories()
 
   const navigateUp = (): void => {
-    void routerHolder.router.navigate('..')
+    routerHolder.router.navigate('..')
   }
 
   return (

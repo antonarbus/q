@@ -12,10 +12,10 @@ export const openShareQuotationModal = (): void => {
       }),
     )
 
-    void routerHolder.router.navigate(`./${route.login}`)
+    routerHolder.router.navigate(`./${route.login}`)
 
     return
   }
 
-  void routerHolder.router.navigate(`./${route.share}`)
+  routerHolder.router.navigate(`./${route.share}`)
 }

@@ -94,7 +94,7 @@ export const useShareQuotation = (props: Props): Res => {
         navigate(navigateTo, { replace: true })
       }
 
-      void slideOutAndChangeUrl()
+      slideOutAndChangeUrl()
     }
   }, [saveQuotationMutation.isSuccess])
 

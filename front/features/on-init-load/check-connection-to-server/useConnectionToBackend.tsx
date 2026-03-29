@@ -7,6 +7,7 @@ export const useConnectionToBackendCheck = (): void => {
 
   useUpdateEffect(() => {
     if (healthCheckQuery.isError === true) {
+      // oxlint-disable-next-line no-console
       console.error(healthCheckQuery.error)
 
       if (healthCheckQuery.error.response?.data.errorCode === 'DB_CONNECTION_FAILED') {

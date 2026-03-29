@@ -39,7 +39,7 @@ export const upload: OnUpload = async (props) => {
       }
 
       if (props.type === 'image') {
-        void getImageDimensions(fileAsBase64String).then((imageDimensions) => {
+        getImageDimensions(fileAsBase64String).then((imageDimensions) => {
           props.editor
             ?.chain()
             .focus()
@@ -169,7 +169,7 @@ export const upload: OnUpload = async (props) => {
         }
       }
 
-      void showProgress()
+      showProgress()
     },
   })
 
