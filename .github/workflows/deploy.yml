@@ -102,6 +102,9 @@ jobs:
       - name: 'Formatting checks'
         run: bun run fmt
 
+      - name: 'Run lint checks'
+        run: bun run lint-quiet
+
       - name: 'Unit tests'
         run: bun run test
 
@@ -113,9 +116,6 @@ jobs:
 
       - name: 'Run TypeScript checks'
         run: bun run tsc
-
-      - name: 'Run ling checks'
-        run: bun run lint-quiet
 
       - name: 'Check dead code'
         run: bun run knip
