@@ -5,11 +5,11 @@ type InputComponentProps = Record<string, unknown> & {
 }
 
 const InputComponent = (props: InputComponentProps): React.JSX.Element => {
-  const { ownerState, ref, ...other } = props
+  const { ownerState: _ownerState, ref, ...rest } = props
 
   return (
     <div
-      {...other}
+      {...rest}
       css={{
         overflow: 'hidden',
         backgroundColor: 'white',

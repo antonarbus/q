@@ -16,7 +16,5 @@ export class HttpError<ErrorCode extends string = string> extends Error {
     this.errorCode = errorCode
     this.statusCode = statusCode
     this.name = 'HttpError'
-
-    Error.captureStackTrace(this, this.constructor)
   }
 }

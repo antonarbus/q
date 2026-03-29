@@ -1,6 +1,7 @@
 import { useTiptap } from '@tiptap/react'
 import { MenuButton } from './shared/MenuButton'
 import { MdAddLink } from 'react-icons/md'
+import { confirmWithDialog } from '@front/shared/component/ConfirmationDialog'
 
 export const InsertLinkButton = (): React.JSX.Element => {
   const { editor } = useTiptap()
@@ -9,8 +10,18 @@ export const InsertLinkButton = (): React.JSX.Element => {
     <MenuButton
       isActive={false}
       title='Insert link'
-      onClick={() => {
-        const href = window.prompt('URL')
+      onClick={async () => {
+        const href = await confirmWithDialog({
+          inputLabel: 'Url',
+          title: 'Link',
+          description: '',
+          confirmButtonText: 'Add',
+          rejectButtonText: 'Cancel',
+        })
+
+        if (href === false) {
+          return
+        }
 
         if (href === null || href.trim() === '') {
           return

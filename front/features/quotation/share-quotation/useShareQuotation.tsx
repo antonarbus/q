@@ -70,7 +70,7 @@ export const useShareQuotation = (props: Props): Res => {
         })
       }
 
-      void getQuotationListQuery.refetch()
+      getQuotationListQuery.refetch()
 
       reduxHolder.dispatch(
         quotationSlice.actions.loadQuotation({

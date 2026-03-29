@@ -75,8 +75,8 @@ export const useSaveQuotation = (props: Props): Res => {
         navigate(`/${saveQuotationMutation.data.quotation.id}`)
       }
 
-      void getQuotationCategoryListQuery.refetch()
-      void getQuotationListQuery.refetch()
+      getQuotationCategoryListQuery.refetch()
+      getQuotationListQuery.refetch()
 
       loadingIconActor.send({ type: 'show success icon' })
       reduxHolder.dispatch(navSlice.actions.removeUnderlineFromTopNav())
@@ -100,7 +100,7 @@ export const useSaveQuotation = (props: Props): Res => {
         navigate(navigateTo, { replace: true })
       }
 
-      void slideOutAndChangeUrl()
+      slideOutAndChangeUrl()
     }
   }, [saveQuotationMutation.isSuccess])
 

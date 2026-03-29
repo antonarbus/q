@@ -10,7 +10,7 @@ type Props = {
 export const openRegisterModal = (props: Props): void => {
   reduxHolder.dispatch(appSlice.actions.setNavigateState({ shouldSlide: true }))
 
-  void routerHolder.router.navigate(`../${route.register}`, {
+  routerHolder.router.navigate(`../${route.register}`, {
     state: { prefilledEmail: props.prefilledEmail },
   })
 }

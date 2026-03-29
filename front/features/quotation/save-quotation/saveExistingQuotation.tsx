@@ -37,7 +37,7 @@ export const saveExistingQuotation = async (): Promise<void> => {
     reduxHolder.getState().quotation.permissionLevel === 'SHARED'
 
   if (isAbleToSave === true) {
-    void routerHolder.router.navigate(`./${route.save}`)
+    routerHolder.router.navigate(`./${route.save}`)
 
     return
   }
@@ -58,7 +58,7 @@ export const saveExistingQuotation = async (): Promise<void> => {
         })
       }
 
-      void routerHolder.router.navigate(`/${data.quotation.id}`)
+      routerHolder.router.navigate(`/${data.quotation.id}`)
 
       reduxHolder.dispatch(
         quotationSlice.actions.loadQuotation({

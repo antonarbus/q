@@ -11,5 +11,5 @@ export const openQuotationPageAndLoadNew = (): void => {
     }),
   )
 
-  void routerHolder.router.navigate(`/${route.new}`)
+  routerHolder.router.navigate(`/${route.new}`)
 }

@@ -29,6 +29,7 @@ export const sendEmail = async (props: Props): Promise<APIResponse> => {
 
     return sendEmailRes
   } catch (error) {
+    // oxlint-disable-next-line no-console
     console.error('error at mail send 😬', error)
 
     throw error

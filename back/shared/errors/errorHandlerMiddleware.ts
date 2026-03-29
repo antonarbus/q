@@ -27,6 +27,7 @@ export const errorHandlerMiddleware: RouterHandler = (error, _req, res, _next) =
   }
 
   // Handle unknown errors
+  // oxlint-disable-next-line no-console
   console.error(error)
 
   res.status(httpStatusCode.serverError500).json({

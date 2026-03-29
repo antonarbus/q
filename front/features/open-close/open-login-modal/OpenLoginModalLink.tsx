@@ -23,7 +23,7 @@ export const OpenLoginModalLink = (props: Props): React.JSX.Element => {
           navigate(`../${route.login}`)
         }
 
-        void slideAndNavigate()
+        slideAndNavigate()
       }}
       to={`../${route.login}`}
     >
