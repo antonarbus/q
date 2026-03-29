@@ -1,7 +1,7 @@
 // oxlint-disable typescript/no-explicit-any
 import { BOOKMARK_POS_AT_BLOCKS } from '@front/entities/quotation/redux/bookmarkPosAtBlocks'
 
-type EqualityFn = (a: any, b: any) => boolean
+type EqualityFn = (itemA: any, itemB: any) => boolean
 
 type Obj = {
   [x: string]: unknown

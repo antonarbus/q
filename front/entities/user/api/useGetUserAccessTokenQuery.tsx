@@ -20,7 +20,7 @@ export const useGetUserAccessTokenQuery = (): Res => {
         url: route.getAccessToken.url,
         method: route.getAccessToken.method,
         withCredentials: true,
-        timeout: 10000,
+        timeout: 10_000,
       })
 
       return response.data

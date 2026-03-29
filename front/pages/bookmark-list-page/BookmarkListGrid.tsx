@@ -49,7 +49,7 @@ export const BookmarkListGrid = (): React.JSX.Element => {
         loadingOverlayComponent={LoadingTableOverlay}
         noRowsOverlayComponent={NoRowsTableOverlay}
         onFilterChanged={(event: FilterChangedEvent) => {
-          // refresh cells on filter text input to show bold substring
+          // Refresh cells on filter text input to show bold substring
           event.api.refreshCells({ force: true })
         }}
         onModelUpdated={(params) => {

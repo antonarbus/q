@@ -9,7 +9,7 @@ import { VscPinned } from 'react-icons/vsc'
 
 type Props = {
   cellKey: CellKey
-  onClick: (e: React.MouseEvent) => void
+  onClick: (event: React.MouseEvent) => void
 }
 
 export const Pin = (props: Props): React.ReactNode => {

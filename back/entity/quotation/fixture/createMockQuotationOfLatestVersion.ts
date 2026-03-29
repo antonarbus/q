@@ -1,10 +1,10 @@
 import type { Quotation } from '../schema'
 
-type MockQuotationOverrides<T> = Partial<T>
+type MockQuotationOverrides<QuotationType> = Partial<QuotationType>
 
 /** Creates quotation of latest schema version where you may override any property  */
-export const createMockQuotationOfLatestVersion = <T = Quotation>(
-  overrides: MockQuotationOverrides<T> = {},
+export const createMockQuotationOfLatestVersion = <QuotationType = Quotation>(
+  overrides: MockQuotationOverrides<QuotationType> = {},
 ): Quotation => ({
   id: 'test-id-123',
   quotationSchemaVersion: 2,

@@ -54,14 +54,14 @@ export const useLoadQuotation = (): void => {
     )
   })
 
-  // quotation loading
+  // Quotation loading
   useEffect(() => {
     const loadQuotation = async (): Promise<void> => {
       if (shouldLoadQuotation.yesOrNo === 'yes') {
         const fromWhereToLoad = getFromWhereToLoadQuotation()
         backToQuotationRef.current = null
 
-        // load previous quotation when user clicks on "< Back" button
+        // Load previous quotation when user clicks on "< Back" button
         if (fromWhereToLoad === 'memory') {
           reduxHolder.dispatch(
             appSlice.actions.showLoadingOverlay({
@@ -112,7 +112,7 @@ export const useLoadQuotation = (): void => {
           }, 1250)
         }
 
-        // load new quotation template
+        // Load new quotation template
         if (fromWhereToLoad === 'template') {
           reduxHolder.dispatch(
             appSlice.actions.showLoadingOverlay({
@@ -163,7 +163,7 @@ export const useLoadQuotation = (): void => {
           )
         }
 
-        // load quotation from server
+        // Load quotation from server
         if (fromWhereToLoad === 'server') {
           reduxHolder.dispatch(
             appSlice.actions.showLoadingOverlay({
@@ -208,7 +208,7 @@ export const useLoadQuotation = (): void => {
     loadQuotation()
   }, [shouldLoadQuotation.yesOrNo])
 
-  // above we triggered quotation loading, now we handle the response
+  // Above we triggered quotation loading, now we handle the response
   useUpdateEffect(() => {
     if (getQuotationMutation.isSuccess === true) {
       reduxHolder.dispatch(

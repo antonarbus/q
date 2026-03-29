@@ -100,6 +100,7 @@ export const getQuotationHandler: RouterHandler = async (req) => {
   const publicOrSharedWithYou =
     quotationPermissionLevel === 'SHARED' || quotationPermissionLevel === 'PUBLIC'
 
+  // oxlint-disable-next-line init-declarations
   let quotationUpdated
 
   if (shouldTrace === true) {

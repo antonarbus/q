@@ -70,13 +70,17 @@ export const TiptapMenu = (): React.ReactNode => {
 
   const getReferencedVirtualElement = useCallback(() => {
     //* Issue: menu is not centered in the middle of the image
-    if (editor.isDestroyed === true) return null
+    if (editor.isDestroyed === true) {
+      return null
+    }
 
     const node = editor.view.nodeDOM(editor.state.selection.from)
 
     if (node instanceof HTMLElement) {
       const img = node.querySelector('img')
-      if (img !== null) return img
+      if (img !== null) {
+        return img
+      }
     }
 
     return null

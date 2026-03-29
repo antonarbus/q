@@ -37,7 +37,7 @@ export const useDropFile = (): OnDrop => {
 
     tiptapCtx.onUpload?.({
       editor: editorInstance,
-      files: Array.from(droppedFiles),
+      files: [...droppedFiles],
       type: file.type.startsWith('image/') ? 'image' : 'file',
     })
 

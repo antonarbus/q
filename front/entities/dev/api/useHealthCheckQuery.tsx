@@ -16,7 +16,7 @@ export const useHealthCheckQuery = (): Res => {
         url: route.health.url,
         method: route.health.method,
         withCredentials: true,
-        timeout: 30000,
+        timeout: 30_000,
       })
 
       return response.data

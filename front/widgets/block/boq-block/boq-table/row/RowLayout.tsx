@@ -5,7 +5,7 @@ import { PasteRowTextOverlay } from './paste-here-row'
 
 type Props = {
   children: React.ReactNode
-  onBlur: (e: React.FocusEvent<HTMLDivElement>) => void
+  onBlur: (event: React.FocusEvent<HTMLDivElement>) => void
 }
 
 export const RowLayout = (props: Props): React.JSX.Element => {

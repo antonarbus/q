@@ -1,5 +1,4 @@
-import { $ } from 'bun'
-import process from 'bun'
+import process, { $ } from 'bun'
 
 export const getCurrentGitBranchName = async (): Promise<string> => {
   // In GitHub Actions, use GITHUB_REF_NAME

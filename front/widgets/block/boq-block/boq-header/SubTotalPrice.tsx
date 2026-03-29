@@ -15,7 +15,7 @@ const boqHeaderKey: HeaderKey = 'subTotalPrice'
 export const SubTotalPrice = (): React.JSX.Element => {
   const block = useBlock()
 
-  const hidePinsClickHandlerRef = useRef<(e: globalThis.MouseEvent) => void>(() => {
+  const hidePinsClickHandlerRef = useRef<(event: globalThis.MouseEvent) => void>(() => {
     // console.warn('hidePinsClickHandlerRef')
   })
 

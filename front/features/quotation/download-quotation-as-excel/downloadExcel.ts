@@ -15,7 +15,7 @@ const loadingIconActor = createActor(loadingMenuIconMachine).start()
 export const downloadExcel = (): void => {
   loadingIconActor.send({ type: 'show loading icon' })
 
-  const worker = new Worker(new URL('./excelWorker', import.meta.url), {
+  const worker = new Worker(new URL('excelWorker', import.meta.url), {
     type: 'module',
   })
 

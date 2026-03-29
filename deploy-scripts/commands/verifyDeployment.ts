@@ -17,7 +17,7 @@ type Props = {
 export const verifyDeployment = async (props: Props): Promise<void> => {
   try {
     logger.info('Waiting for deployment to be ready...')
-    await sleep(10000)
+    await sleep(10_000)
 
     logger.emptyLine()
 

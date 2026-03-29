@@ -5,7 +5,7 @@ import { reduxHolder } from '@front/shared/lib/redux'
 type Props = {
   event: MouseEvent
   blockIndex: number
-  hidePinsClickHandlerRef: React.RefObject<(e: MouseEvent) => void>
+  hidePinsClickHandlerRef: React.RefObject<(event: MouseEvent) => void>
   isInitClickRef: React.RefObject<boolean>
 }
 

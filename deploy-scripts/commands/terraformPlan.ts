@@ -1,11 +1,10 @@
 import { $ } from 'bun'
-import { resolve } from 'node:path'
+import path, { resolve } from 'node:path'
 import { chdir } from 'node:process'
 import { infraConfig } from '@back/config/infrastructure'
 import { logger } from '../lib/output/logger'
 import type { DeployedEnvironment } from '@root/config/environment'
 import url from 'node:url'
-import path from 'node:path'
 
 type Props = {
   environment: DeployedEnvironment
@@ -14,7 +13,7 @@ type Props = {
 const __filename = url.fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-export const terraformApply = async (props: Props): Promise<void> => {
+export const terraformPlan = async (props: Props): Promise<void> => {
   logger.info(`Environment: ${props.environment}`)
 
   const TERRAFORM_DIR = resolve(__dirname, '../../terraform/infrastructure')
@@ -24,7 +23,7 @@ export const terraformApply = async (props: Props): Promise<void> => {
   logger.info(`Config: ${TFVARS_FILE_PATH}`)
   logger.emptyLine()
 
-  logger.warn(`Deploying main infrastructure for environment: ${props.environment}`)
+  logger.warn(`Planning infrastructure changes for environment: ${props.environment}`)
 
   logger.emptyLine()
 
@@ -36,20 +35,13 @@ export const terraformApply = async (props: Props): Promise<void> => {
   await $`terraform init -reconfigure -backend-config=bucket=${infraConfig[props.environment].bucketForTerraformStateName} -backend-config=prefix=terraform/state/${props.environment}`
 
   logger.emptyLine()
-  logger.info('Applying Terraform configuration...')
+  logger.info('Running Terraform plan...')
   logger.info(`Config file: ${TFVARS_FILE_PATH}`)
   logger.emptyLine()
 
-  await $`terraform apply -auto-approve -var-file=${TFVARS_FILE_PATH}`
+  await $`terraform plan -var-file=${TFVARS_FILE_PATH}`
 
   logger.emptyLine()
-  logger.success('Terraform apply completed successfully')
-  logger.emptyLine()
-
-  logger.info('Terraform Outputs:')
-  await $`terraform output`
-
-  logger.emptyLine()
-  logger.success('Infrastructure deployment complete!')
+  logger.success('Terraform plan completed successfully')
   logger.emptyLine()
 }

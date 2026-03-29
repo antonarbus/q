@@ -16,7 +16,7 @@ export const useExitCopyOnEsc = (): void => {
   const listenForEsc = (): Res => {
     window.addEventListener('keydown', closeOnEsc)
 
-    // cleanup
+    // Cleanup
     return (): void => {
       window.removeEventListener('keydown', closeOnEsc)
     }

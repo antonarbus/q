@@ -59,8 +59,9 @@ axiosWithAuth.interceptors.response.use(
 
         // make original request
         return await axiosWithAuth.request(originalRequestConfig)
-      } catch (err: unknown) {
-        const isUnauthorized = err instanceof AxiosError && err.response?.status === 401
+      } catch (axiosError: unknown) {
+        const isUnauthorized =
+          axiosError instanceof AxiosError && axiosError.response?.status === 401
 
         if (isUnauthorized === true) {
           // still unauthorized after attempt to refresh the access token

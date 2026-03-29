@@ -22,7 +22,7 @@ type Props = {
 }
 
 type Res = {
-  handleSubmit: (e: React.SubmitEvent) => void
+  handleSubmit: (event: React.SubmitEvent) => void
   isPending: UseMutationResult['isPending']
   isSuccess: UseMutationResult['isSuccess']
   isError: UseMutationResult['isError']
@@ -62,8 +62,8 @@ export const useSaveQuotation = (props: Props): Res => {
         toast.info('Updated')
       }
 
-      // this should not be a use case in main page, but we still may open /id/save route directly
-      // this may be a use case in quotations page
+      // This should not be a use case in main page, but we still may open /id/save route directly
+      // This may be a use case in quotations page
       if (saveQuotationMutation.data.status === 'COPIED') {
         toast.success(
           `Shared quotation was copied and saved under id ${saveQuotationMutation.data.quotation.id}`,

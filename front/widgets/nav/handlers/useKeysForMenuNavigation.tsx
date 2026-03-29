@@ -200,7 +200,7 @@ export const useKeysForMenuNavigation = (): void => {
           return false
         })
 
-        if (indexToJump > -1) {
+        if (indexToJump !== -1) {
           reduxHolder.dispatch(
             navSlice.actions.setMenuItemHoverIndex({
               menuItemHoverIndex: indexToJump + 1,
@@ -216,7 +216,7 @@ export const useKeysForMenuNavigation = (): void => {
             return isiKeySameAsFirstItemLetter
           })
 
-          if (newIndex > -1) {
+          if (newIndex !== -1) {
             reduxHolder.dispatch(
               navSlice.actions.setMenuItemHoverIndex({
                 menuItemHoverIndex: newIndex + 1,

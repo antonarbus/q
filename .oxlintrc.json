@@ -10,9 +10,11 @@
     "pedantic": "error",
     "suspicious": "error",
     "perf": "error",
-    "restriction": "error"
+    "restriction": "error",
+    "style": "error"
   },
   "rules": {
+    "no-undefined": "warn",
     "max-lines-per-function": "off",
     "eslint/max-depth": "off",
     "eslint/max-lines": "off",
@@ -23,6 +25,27 @@
     "no-array-for-each": "off",
     "no-array-reduce": "off",
     "complexity": "off",
-    "no-undefined": "warn"
+    "max-statements": "off",
+    "no-ternary": "off",
+    "sort-keys": "off",
+    "sort-imports": "off",
+    "no-magic-numbers": "off",
+    "unicorn/no-null": "off",
+    "arrow-body-style": "off",
+    "unicorn/prefer-global-this": "off",
+    "typescript/consistent-type-definitions": ["error", "type"],
+    "eslint/id-length": ["error", { "exceptions": ["x", "y"] }],
+    "eslint/max-params": "off",
+    "eslint/operator-assignment": "off",
+    "eslint/capitalized-comments": "off",
+    "unicorn/filename-case": [
+      "error",
+      {
+        "cases": {
+          "camelCase": true,
+          "pascalCase": true
+        }
+      }
+    ]
   }
 }

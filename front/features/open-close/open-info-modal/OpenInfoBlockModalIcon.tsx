@@ -20,7 +20,7 @@ export const OpenInfoBlockModalIcon = (): React.ReactNode => {
     <Tooltip enterDelay={500} enterNextDelay={500} placement='right' title='Info'>
       <span className={cls.actionIconContainer}>
         <HiOutlineInformationCircle
-          // otherwise error in dev tools
+          // Otherwise error in dev tools
           aria-hidden={false}
           className={cls.actionIcon}
           onClick={(): void => {

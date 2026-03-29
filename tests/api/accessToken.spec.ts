@@ -1,3 +1,4 @@
+// oxlint-disable init-declarations
 import { route } from '@back/api/route'
 import { expect, test } from '@playwright/test'
 import { runtimeConfig } from '@root/config/runtime'

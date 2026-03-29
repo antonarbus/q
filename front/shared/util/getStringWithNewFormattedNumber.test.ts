@@ -59,7 +59,7 @@ describe('#getStringWithNewFormattedNumber', () => {
   test('formats large numbers with spaces', () => {
     const result = getStringWithNewFormattedNumber({
       string: '<div>1000000</div>',
-      newNumber: 1000000,
+      newNumber: 1_000_000,
     })
 
     expect(result).toBe('<div>1\u202F000\u202F000</div>')
@@ -68,7 +68,7 @@ describe('#getStringWithNewFormattedNumber', () => {
   test('handles decimal formatting', () => {
     const result = getStringWithNewFormattedNumber({
       string: '<p>100</p>',
-      newNumber: 123.456789,
+      newNumber: 123.456_789,
     })
 
     expect(result).toBe('<p>123,456789</p>')

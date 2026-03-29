@@ -1,15 +1,15 @@
 import type { HttpStatusCode } from '@back/shared/const/httpStatusCode'
 
-type HttpJsonResponse<T = unknown> = {
+type HttpJsonResponse<ResponseBody = unknown> = {
   type?: 'json'
   statusCode: HttpStatusCode
-  body: T
+  body: ResponseBody
 }
 
-export const httpJsonResponse = <T>(props: {
+export const httpJsonResponse = <ResponseBody>(props: {
   statusCode: HttpStatusCode
-  body: T
-}): HttpJsonResponse<T> => {
+  body: ResponseBody
+}): HttpJsonResponse<ResponseBody> => {
   return {
     type: 'json',
     statusCode: props.statusCode,
@@ -34,4 +34,4 @@ export const httpRedirect = (props: {
   }
 }
 
-export type HttpResponse<T = unknown> = HttpJsonResponse<T> | HttpRedirect
+export type HttpResponse<ResponseData = unknown> = HttpJsonResponse<ResponseData> | HttpRedirect

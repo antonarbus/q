@@ -41,9 +41,7 @@ export const useBookmarkCopyPreviewCapturer = (
     const div = document.createElement('div')
     div.innerHTML = paperHtml
 
-    const imageSrcList = Array.from(div.querySelectorAll('img'))
-      .map((img) => img.src)
-      .filter(Boolean)
+    const imageSrcList = [...div.querySelectorAll('img')].map((img) => img.src).filter(Boolean)
 
     const imageLoadedPromiseList = imageSrcList.map(async (src) => {
       const imageLoadedDeferred = Promise.withResolvers()

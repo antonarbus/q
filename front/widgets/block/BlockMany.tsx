@@ -15,7 +15,7 @@ export const BlockMany = (props: Props): React.ReactNode => {
     return null
   }
 
-  // clean blocks from a bookmark at blocks[1000] which we use to show in in modal view
+  // Clean blocks from a bookmark at blocks[1000] which we use to show in in modal view
   const blocksCloned = structuredClone(props.blocks)
 
   blocksCloned[BOOKMARK_POS_AT_BLOCKS] = null

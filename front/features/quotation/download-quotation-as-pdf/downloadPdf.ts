@@ -16,7 +16,7 @@ const loadingIconActor = createActor(menuIconMachine).start()
 export const downloadPdf = async (): Promise<void> => {
   loadingIconActor.send({ type: 'show loading icon' })
 
-  const worker = new Worker(new URL('./pdfWorker', import.meta.url), {
+  const worker = new Worker(new URL('pdfWorker', import.meta.url), {
     type: 'module',
   })
 
@@ -30,7 +30,7 @@ export const downloadPdf = async (): Promise<void> => {
   const paperElements = blocksContainerElement.querySelectorAll(`.${cls.paper}`)
 
   const maxPaperWidth =
-    Array.from(paperElements).reduce((maxWidth, paperElement) => {
+    [...paperElements].reduce((maxWidth, paperElement) => {
       const paperElementWidth = paperElement.clientWidth
 
       if (paperElementWidth > maxWidth) {

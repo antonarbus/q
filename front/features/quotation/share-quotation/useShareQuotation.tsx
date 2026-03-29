@@ -22,7 +22,7 @@ type Props = {
 }
 
 type Res = {
-  handleSubmit: (e: React.SubmitEvent) => void
+  handleSubmit: (event: React.SubmitEvent) => void
   isPending: UseMutationResult['isPending']
   isSuccess: UseMutationResult['isSuccess']
   isError: UseMutationResult['isError']
@@ -54,12 +54,12 @@ export const useShareQuotation = (props: Props): Res => {
     }
 
     if (saveQuotationMutation.isSuccess === true) {
-      // may save new quotation by sharing the link, strange, but maybe nice
+      // May save new quotation by sharing the link, strange, but maybe nice
       if (saveQuotationMutation.data.status === 'SAVED') {
         toast.success(`Saved under id ${quotation.id}`)
       }
 
-      // usual case
+      // Usual case
       if (saveQuotationMutation.data.status === 'UPDATED') {
         toast.info('Updated')
       }

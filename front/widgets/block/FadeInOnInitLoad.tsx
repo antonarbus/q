@@ -16,7 +16,7 @@ export const FadeInOnInitLoad = (props: Props): React.JSX.Element => {
         opacity: 0,
       }}
       style={{
-        // needed for .pdf and to avoid problems with boq in narrow window
+        // Needed for .pdf and to avoid problems with boq in narrow window
         display: 'inline-flex',
         flexDirection: 'column',
         justifyContent: 'center',
@@ -25,7 +25,7 @@ export const FadeInOnInitLoad = (props: Props): React.JSX.Element => {
         padding: '25px 10px',
       }}
       transition={{
-        // to show "Q" logo on init load to avoid some jumps
+        // To show "Q" logo on init load to avoid some jumps
         delay: 0.7,
       }}
     >

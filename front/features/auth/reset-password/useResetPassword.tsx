@@ -18,7 +18,7 @@ type Props = {
 }
 
 type Res = {
-  handleSubmit: (e: React.SubmitEvent) => void
+  handleSubmit: (event: React.SubmitEvent) => void
   isPending: UseMutationResult['isPending']
   isSuccess: UseMutationResult['isSuccess']
   isError: UseMutationResult['isError']

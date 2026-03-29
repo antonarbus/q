@@ -1,11 +1,10 @@
 import { $ } from 'bun'
-import { resolve } from 'node:path'
+import path, { resolve } from 'node:path'
 import { chdir } from 'node:process'
 import { infraConfig } from '@back/config/infrastructure'
 import { logger } from '../lib/output/logger'
 import type { DeployedEnvironment } from '@root/config/environment'
 import url from 'node:url'
-import path from 'node:path'
 
 type Props = {
   environment: DeployedEnvironment

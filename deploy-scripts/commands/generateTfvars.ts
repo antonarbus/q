@@ -1,9 +1,8 @@
-import { resolve } from 'node:path'
+import path, { resolve } from 'node:path'
 import { infraConfig } from '@back/config/infrastructure'
 import { logger } from '../lib/output/logger'
 import { write } from 'bun'
 import url from 'node:url'
-import path from 'node:path'
 
 type Props = {
   environment: string

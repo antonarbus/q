@@ -1,9 +1,9 @@
 import type { Register } from './register'
 import { useSelector as useSelectorNotTyped, type TypedUseSelectorHook } from 'react-redux'
 
-export type RootState = Register extends { state: infer S } ? S : never
-type AppDispatch = Register extends { dispatch: infer D } ? D : never
-type Store = Register extends { store: infer ST } ? ST : never
+export type RootState = Register extends { state: infer StateType } ? StateType : never
+type AppDispatch = Register extends { dispatch: infer DispatchFunction } ? DispatchFunction : never
+type Store = Register extends { store: infer StoreType } ? StoreType : never
 type UseSelector = TypedUseSelectorHook<RootState>
 
 class ReduxHolder {

@@ -11,7 +11,7 @@ type Props = {
 }
 
 type Res = {
-  handleClick: (e: React.MouseEvent) => void
+  handleClick: (event: React.MouseEvent) => void
   isSuccess: boolean
   isPending: boolean
 }

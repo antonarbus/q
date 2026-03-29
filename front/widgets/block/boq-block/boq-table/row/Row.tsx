@@ -13,7 +13,7 @@ import { DeleteRowIcon } from '@front/features/blocks/delete-item/DeleteRowIcon'
 import { DragRowIcon } from '@front/features/blocks/drag-item/DragRowIcon'
 
 type Props = {
-  onBlur: (e: React.FocusEvent<HTMLDivElement>) => void
+  onBlur: (event: React.FocusEvent<HTMLDivElement>) => void
 }
 
 export const Row = (props: Props): React.JSX.Element => {

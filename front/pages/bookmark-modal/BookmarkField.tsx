@@ -18,7 +18,7 @@ export const BookmarkField = (): React.ReactNode => {
     <BookmarkFieldLayout>
       <DragDropContext
         onDragEnd={(): void => {
-          // drag reordering is not applicable in the bookmark preview context
+          // Drag reordering is not applicable in the bookmark preview context
         }}
       >
         <Droppable droppableId='bookmark-block'>

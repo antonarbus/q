@@ -18,7 +18,7 @@ const variants: Variants = {
         transition: {
           delay: 0,
           duration: theme.copy.animationDuration,
-          // type: 'spring',
+          // Type: 'spring',
           ease: 'linear',
         },
         y: 0,
@@ -33,7 +33,7 @@ const variants: Variants = {
         transition: {
           delay: 0,
           duration: theme.copy.animationDuration,
-          // type: 'spring',
+          // Type: 'spring',
           ease: 'linear',
         },
         y: -prevFirstItemHeight,

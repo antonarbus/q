@@ -1,4 +1,4 @@
-import z from 'zod'
+import zod from 'zod'
 import type { DeployedEnvironment } from '@root/config/environment'
 import { DOMAIN } from '@root/config/domain'
 
@@ -149,6 +149,6 @@ export const MASTER_DEPLOYS_TO_ENVIRONMENT: DeployedEnvironment = 'dev'
  */
 export const allowedPromotionPath = [`dev-test`, `test-pilot`, `pilot-prod`] as const
 
-export const allowedPromotionPathSchema = z.enum(allowedPromotionPath)
+export const allowedPromotionPathSchema = zod.enum(allowedPromotionPath)
 
-export type AllowedPromotionPath = z.infer<typeof allowedPromotionPathSchema>
+export type AllowedPromotionPath = zod.infer<typeof allowedPromotionPathSchema>

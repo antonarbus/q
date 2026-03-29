@@ -4,15 +4,17 @@ import type { NavItem, NavItemId } from './type'
 // https://www.typescriptlang.org/docs/handbook/2/generics.html
 // https://stackoverflow.com/a/49286056/7239778
 
-type Props<K> = {
+type Props<NavItemKey> = {
   menu?: NavItem[]
   navItemId: NavItemId
-  prop: K
+  prop: NavItemKey
 }
 
-type Res<K extends keyof NavItem> = NavItem[K] | undefined
+type Res<NavItemKey extends keyof NavItem> = NavItem[NavItemKey] | undefined
 
-export const getMenuItemPropValue = <K extends keyof NavItem>(props: Props<K>): Res<K> => {
+export const getMenuItemPropValue = <NavItemKey extends keyof NavItem>(
+  props: Props<NavItemKey>,
+): Res<NavItemKey> => {
   for (const el of props.menu ?? getNavStructure()) {
     if (el.id === props.navItemId) {
       return el[props.prop]

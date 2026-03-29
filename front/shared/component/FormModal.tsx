@@ -16,8 +16,8 @@ type Props = {
   headerText: string
   children: React.ReactNode
   onUnmount?: () => void
-  onSubmit?: (e: React.SubmitEvent) => void
-  onCloseClick?: (e: React.MouseEvent) => void
+  onSubmit?: (event: React.SubmitEvent) => void
+  onCloseClick?: (event: React.MouseEvent) => void
   buttonText?: string
   isButtonDisabled?: boolean
   isButtonLoading?: boolean

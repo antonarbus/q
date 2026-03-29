@@ -30,7 +30,7 @@ export const usePasteFile = (): OnPaste => {
 
     tiptapCtx.onUpload?.({
       editor: editorInstance,
-      files: Array.from(pastedFiles),
+      files: [...pastedFiles],
       type: file.type.startsWith('image/') ? 'image' : 'file',
     })
 

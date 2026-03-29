@@ -6,7 +6,7 @@ import { PriceCell } from './cell/PriceCell'
 import { QtyCell } from './cell/QtyCell'
 
 type Props = {
-  onBlur: (e: React.FocusEvent<HTMLDivElement>) => void
+  onBlur: (event: React.FocusEvent<HTMLDivElement>) => void
 }
 
 export const BookmarkedRow = (props: Props): React.JSX.Element => {

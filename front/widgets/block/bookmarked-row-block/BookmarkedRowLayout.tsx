@@ -3,7 +3,7 @@ import { cls } from '@front/shared/cls'
 
 type Props = {
   children: React.ReactNode
-  onBlur: (e: React.FocusEvent<HTMLDivElement>) => void
+  onBlur: (event: React.FocusEvent<HTMLDivElement>) => void
 }
 
 export const BookmarkedRowLayout = (props: Props): React.JSX.Element => {

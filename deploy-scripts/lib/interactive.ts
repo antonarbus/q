@@ -1,12 +1,12 @@
 import { input, select } from '@inquirer/prompts'
 import chalk from 'chalk'
-import { generateTfvars } from '../commands/generate-tfvars'
-import { listGcloudServices } from '../commands/list-gcloud-services'
-import { showDeploymentInfo } from '../commands/show-deployment-info'
-import { terraformApply } from '../commands/terraform-apply'
-import { terraformFormat } from '../commands/terraform-format'
-import { terraformPlan } from '../commands/terraform-plan'
-import { terraformUnlock } from '../commands/terraform-unlock'
+import { generateTfvars } from '../commands/generateTfvars'
+import { listGcloudServices } from '../commands/listGcloudServices'
+import { showDeploymentInfo } from '../commands/showDeploymentInfo'
+import { terraformApply } from '../commands/terraformApply'
+import { terraformFormat } from '../commands/terraformFormat'
+import { terraformPlan } from '../commands/terraformPlan'
+import { terraformUnlock } from '../commands/terraformUnlock'
 import type { DeployedEnvironment } from '@root/config/environment'
 import { logger } from './output/logger'
 
@@ -124,7 +124,7 @@ export const runInteractiveMode = async (): Promise<void> => {
 
   const command = commands.find((cmd) => cmd.name === selectedCommand)
 
-  let environment: DeployedEnvironment | undefined
+  let environment: DeployedEnvironment | undefined = 'dev'
 
   if (command?.requiresEnv === true) {
     environment = await select({

@@ -39,7 +39,7 @@ export const UploadFileButton = (): React.JSX.Element | null => {
           const { onUpload } = tiptapCtx
 
           if (onUpload !== undefined) {
-            const fileArray = Array.from(files)
+            const fileArray = [...files]
 
             const hasImage = fileArray.some((file) => file.type.startsWith('image/'))
 
