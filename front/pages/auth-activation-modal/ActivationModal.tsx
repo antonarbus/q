@@ -17,7 +17,7 @@ export const ActivationModal = (): React.JSX.Element => {
   return (
     <BackdropWithSlidableModal
       onUnmount={(): void => {
-        void navigate('..')
+        navigate('..')
       }}
       shouldUnmountOnClickAway
       shouldUnmountOnEsc

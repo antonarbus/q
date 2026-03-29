@@ -99,7 +99,7 @@ export const usePressNavShortcut = (props: Props): void => {
         }
 
         if (matchedNavItemByShortcut.link !== null) {
-          void navigate(matchedNavItemByShortcut.link)
+          navigate(matchedNavItemByShortcut.link)
         }
       }
     })

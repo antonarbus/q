@@ -14,7 +14,7 @@ export const DeleteUserButton = (props: UrlParam): React.ReactNode => {
 
   useUpdateEffect(() => {
     if (deleteUserMutation.isSuccess === true) {
-      void instance.queryClient.invalidateQueries({
+      instance.queryClient.invalidateQueries({
         queryKey: [queryKey.getUserList],
       })
     }
@@ -24,7 +24,7 @@ export const DeleteUserButton = (props: UrlParam): React.ReactNode => {
     if (deleteUserMutation.isError === true) {
       toast.error(deleteUserMutation.error.response?.data.message)
 
-      void instance.queryClient.invalidateQueries({
+      instance.queryClient.invalidateQueries({
         queryKey: [queryKey.getUserList],
       })
     }

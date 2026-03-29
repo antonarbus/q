@@ -1,10 +1,11 @@
-import { exit } from 'process'
+import { exit } from 'node:process'
 import {
   type AllowedPromotionPath,
   allowedPromotionPath,
   allowedPromotionPathSchema,
 } from '@back/config/infrastructure'
 import type { DeployedEnvironment } from '@root/config/environment'
+import { logger } from '../lib/output/logger'
 
 type Props = {
   sourceEnvironment: DeployedEnvironment
@@ -24,11 +25,11 @@ export const validatePromotion = (props: Props): void => {
   )
 
   if (validationResult.success === false) {
-    console.error(
+    logger.error(
       `❌ Invalid promotion path: ${props.sourceEnvironment} → ${props.targetEnvironment}`,
     )
 
-    console.error(
+    logger.error(
       `Allowed promotion paths: ${allowedPromotionPath.map((path) => path.replace('-', '→')).join(', ')}`,
     )
 
@@ -37,5 +38,5 @@ export const validatePromotion = (props: Props): void => {
 
   const validatedPromotionPath: AllowedPromotionPath = validationResult.data
 
-  console.info(`✅ Valid promotion path: ${validatedPromotionPath.replace('-', '→')}`)
+  logger.info(`✅ Valid promotion path: ${validatedPromotionPath.replace('-', '→')}`)
 }

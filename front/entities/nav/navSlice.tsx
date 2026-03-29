@@ -358,14 +358,14 @@ export const navSlice = createSlice({
 
       const topNavItemsIds = (topLevelNavMenu.nestedItemList ?? []).map((navItem) => navItem.id)
 
-      topNavItemsIds.forEach((navItemId) => {
+      for (const navItemId of topNavItemsIds) {
         setMenuItemPropValue({
           menu: state.navStructure,
           navItemId,
           prop: 'isActive',
           value: false,
         })
-      })
+      }
     },
     underlineNavItem: (
       state: WritableDraft<InitState>,

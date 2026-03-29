@@ -21,7 +21,7 @@ export const OpenBookmarkModalButton = (props: UrlParam): React.JSX.Element => {
         }),
       )
 
-      void navigate(`./${props.id}`)
+      navigate(`./${props.id}`)
     }
   }, [getBookmarkMutation.isSuccess])
 

@@ -36,7 +36,7 @@ export const BookmarkRowIcon = (): React.ReactNode => {
 
             if (reduxHolder.getState().user.email === null) {
               toast.warning('Not logged in')
-              void navigate(`./${route.login}`)
+              navigate(`./${route.login}`)
 
               return
             }
@@ -68,7 +68,7 @@ export const BookmarkRowIcon = (): React.ReactNode => {
               }),
             )
 
-            void navigate(`./${route.bookmark}/${rowFromStore.id}`)
+            navigate(`./${route.bookmark}/${rowFromStore.id}`)
           }}
           style={{
             color: disabled === true ? '#acacac' : '#000',

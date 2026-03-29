@@ -136,7 +136,7 @@ export const useKeysForMenuNavigation = (): void => {
         const link = navItemHovered.current?.link
 
         if (link !== undefined) {
-          void navigate(link)
+          navigate(link)
           reduxHolder.dispatch(navSlice.actions.closeMenu())
 
           return

@@ -12,10 +12,10 @@ export const openSaveQuotationModal = (): void => {
       }),
     )
 
-    void routerHolder.router.navigate(`./${route.login}`)
+    routerHolder.router.navigate(`./${route.login}`)
 
     return
   }
 
-  void routerHolder.router.navigate(`./${route.save}`)
+  routerHolder.router.navigate(`./${route.save}`)
 }

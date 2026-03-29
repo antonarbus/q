@@ -1,4 +1,4 @@
-import { exit } from 'process'
+import { exit } from 'node:process'
 import { MASTER_DEPLOYS_TO_ENVIRONMENT } from '@back/config/infrastructure'
 import { getCurrentGitBranchName } from '../lib/git/getCurrentGitBranchName'
 import { logToGithubOutput } from '../lib/output/logToGithubOutput'

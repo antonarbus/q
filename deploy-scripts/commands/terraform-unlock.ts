@@ -1,6 +1,6 @@
 import { $ } from 'bun'
-import { resolve } from 'path'
-import { chdir } from 'process'
+import { resolve } from 'node:path'
+import { chdir } from 'node:process'
 import { infraConfig } from '@back/config/infrastructure'
 import { logger } from '../lib/output/logger'
 import type { DeployedEnvironment } from '@root/config/environment'
@@ -44,14 +44,17 @@ const detectLockId = async (tfvarsFilePath: string): Promise<string | undefined>
     if (errorMessage.includes('Error acquiring the state lock')) {
       logger.warning('Lock error detected but could not parse lock ID')
       logger.info('Full error message:')
-      console.error(errorMessage)
+      logger.error(errorMessage)
     }
 
     return undefined
   } catch (error: unknown) {
     // Unexpected error
     logger.warning('Unexpected error during lock detection')
-    console.error(error)
+
+    if (typeof error === 'string') {
+      logger.error(error)
+    }
 
     return undefined
   }

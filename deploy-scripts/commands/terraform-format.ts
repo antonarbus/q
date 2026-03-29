@@ -1,5 +1,5 @@
 import { $ } from 'bun'
-import { resolve } from 'path'
+import { resolve } from 'node:path'
 import { logger } from '../lib/output/logger'
 
 export const terraformFormat = async (): Promise<void> => {

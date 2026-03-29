@@ -1,4 +1,4 @@
-import { exit } from 'process'
+import { exit } from 'node:process'
 import { infraConfig } from '@back/config/infrastructure'
 import { logToGithubOutput } from '../lib/output/logToGithubOutput'
 import { logger } from '../lib/output/logger'

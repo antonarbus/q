@@ -13,8 +13,8 @@ export const getNumberFromString = (props: Props): number => {
 
   const stringWithNumbersOnly = props.string.replaceAll(/[^-0-9,.]/gu, '').replaceAll(',', '.')
 
-  const number = parseFloat(stringWithNumbersOnly)
-  const isNotANumber = isNaN(number)
+  const number = Number.parseFloat(stringWithNumbersOnly)
+  const isNotANumber = Number.isNaN(number)
 
   if (isNotANumber === true) {
     return 0

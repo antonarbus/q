@@ -72,7 +72,7 @@ export const useSaveQuotation = (props: Props): Res => {
           },
         )
 
-        void navigate(`/${saveQuotationMutation.data.quotation.id}`)
+        navigate(`/${saveQuotationMutation.data.quotation.id}`)
       }
 
       void getQuotationCategoryListQuery.refetch()
@@ -97,7 +97,7 @@ export const useSaveQuotation = (props: Props): Res => {
         const navigateTo =
           isQuotationsPage === true ? '..' : `/${saveQuotationMutation.data.quotation.id}`
 
-        void navigate(navigateTo, { replace: true })
+        navigate(navigateTo, { replace: true })
       }
 
       void slideOutAndChangeUrl()

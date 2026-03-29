@@ -54,13 +54,13 @@ export const LogInAsUserButton = (props: UrlParam): React.ReactNode => {
       const isQuotationListPage = location.pathname.includes(route.quotationList)
 
       if (isQuotationListPage === true) {
-        void getQuotationListQuery.refetch()
+        getQuotationListQuery.refetch()
       }
 
       const isBookmarkListPage = location.pathname.includes(route.bookmarkList)
 
       if (isBookmarkListPage === true) {
-        void getBookmarkListQuery.refetch()
+        getBookmarkListQuery.refetch()
       }
     }
   }, [logInUserMutation.isSuccess])

@@ -91,7 +91,7 @@ export const useShareQuotation = (props: Props): Res => {
         const navigateTo =
           isQuotationsPage === true ? '..' : `/${saveQuotationMutation.data.quotation.id}`
 
-        void navigate(navigateTo, { replace: true })
+        navigate(navigateTo, { replace: true })
       }
 
       void slideOutAndChangeUrl()

@@ -36,7 +36,7 @@ export const OpenInfoRowModalIcon = (): React.ReactNode => {
               return
             }
 
-            void navigate(`./${route.info}/${rowFromStore.id}`)
+            navigate(`./${route.info}/${rowFromStore.id}`)
           }}
           style={{
             color: isCopyModalVisible === true ? '#acacac' : '#000',

@@ -8,12 +8,18 @@
     "correctness": "error",
     "nursery": "error",
     "pedantic": "error",
-    "suspicious": "error"
+    "suspicious": "error",
+    "perf": "error",
+    "restriction": "error"
   },
   "rules": {
     "max-lines-per-function": "off",
     "eslint/max-depth": "off",
     "eslint/max-lines": "off",
-    "unicorn/require-post-message-target-origin": "off"
+    "unicorn/require-post-message-target-origin": "off",
+    "oxc/no-optional-chaining": "off",
+    "oxc/no-async-await": "off",
+    "oxc/no-rest-spread-properties": "off",
+    "no-undefined": "warn"
   }
 }

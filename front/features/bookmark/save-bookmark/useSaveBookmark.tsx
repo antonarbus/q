@@ -46,7 +46,7 @@ export const useSaveBookmark = (props: Props): Res => {
       const slideOutAndChangeUrl = async (): Promise<void> => {
         await asyncDelay(1000)
         await props.slideOut()
-        void navigate('..')
+        navigate('..')
       }
 
       void slideOutAndChangeUrl()

@@ -21,12 +21,12 @@ export const OpenResetModalLink = (props: Props): React.JSX.Element => {
 
           reduxHolder.dispatch(appSlice.actions.setNavigateState({ shouldSlide: true }))
 
-          void navigate(`../${route.requestPasswordReset}`, {
+          navigate(`../${route.requestPasswordReset}`, {
             state: { prefilledEmail: props.prefilledEmail },
           })
         }
 
-        void slideAndNavigate()
+        slideAndNavigate()
       }}
       to={`../${route.requestPasswordReset}`}
     >

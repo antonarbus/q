@@ -34,7 +34,7 @@ export const OpenInfoBlockModalIcon = (): React.ReactNode => {
               return
             }
 
-            void navigate(`./${route.info}/${item.id}`)
+            navigate(`./${route.info}/${item.id}`)
           }}
           style={{
             color: disabled === true ? '#acacac' : '#000',

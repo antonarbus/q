@@ -70,7 +70,7 @@ export const useLoadBookmarkModalOpenedWithDirectLink = (props: Props): void => 
         toast.warning('Internal error')
       }
 
-      void navigate('..')
+      navigate('..')
     }
   }, [getBookmarkMutation.isError])
 }

@@ -31,7 +31,7 @@ export const OpenSaveQuotationModalButton = (props: UrlParam): React.JSX.Element
         }),
       )
 
-      void navigate(`./${props.id}`)
+      navigate(`./${props.id}`)
     }
   }, [quotationMutation.isSuccess])
 

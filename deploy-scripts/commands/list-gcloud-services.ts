@@ -10,7 +10,7 @@ export const listGcloudServices = async (): Promise<void> => {
     const output =
       await $`gcloud services list --enabled --project=${sharedInfraConfig.projectId}`.text()
 
-    console.info(output)
+    logger.info(output)
     logger.success('Services listed successfully')
   } catch (error) {
     logger.error(`Failed to list services: ${String(error)}`)
