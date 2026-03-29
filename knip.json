@@ -1,8 +1,26 @@
 {
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "workspaces": {
+    ".": {
+      "entry": [
+        "tests/**/*.spec.ts",
+        "tests/setup/*.ts"
+      ]
+    },
+    "front": {
+      "entry": [
+        "index.tsx",
+        "features/quotation/download-quotation-as-excel/excelWorker.ts",
+        "features/quotation/download-quotation-as-pdf/pdfWorker.ts"
+      ]
+    },
+    "back": {
+      "entry": ["index.ts"]
+    }
+  },
   "ignore": [
     "back/shared/lib/drizzle/schema.ts",
     "front/shared/lib/ag-grid/colDef/getNumberColDef.tsx",
-    "tests/setup/auth.setup.ts",
     "steiger.config.ts"
   ],
   "ignoreDependencies": [
@@ -10,5 +28,5 @@
     "@emotion/babel-plugin",
     "@feature-sliced/steiger-plugin"
   ],
-  "ignoreBinaries": ["gcloud", "terraform", "open", "vite-bundle-visualizer", "back/build/index.js"]
+  "ignoreBinaries": ["gcloud", "terraform", "open", "vite-bundle-visualizer"]
 }
