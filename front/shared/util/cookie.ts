@@ -1,5 +1,3 @@
-import { DOMAIN } from '@root/config/domain'
-
 /**
  * Removes a cookie by name, domain, and path.
  *
@@ -17,7 +15,7 @@ type Props = {
 export const removeCookie = async (props: Props): Promise<void> => {
   await cookieStore.delete({
     name: props.name,
-    domain: props.domain ?? DOMAIN,
+    ...(props.domain !== undefined && { domain: props.domain }),
     path: props.path ?? '/',
   })
 }
