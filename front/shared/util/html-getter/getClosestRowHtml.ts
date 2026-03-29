@@ -22,7 +22,7 @@ export const getClosestRowHtml = (event: React.MouseEvent): string => {
   const elementsToRemove = rowElementClone.querySelectorAll(cls.cleanFromPaper)
 
   elementsToRemove.forEach((element) => {
-    element.parentNode?.removeChild(element)
+    element.remove()
   })
 
   const html = rowElementClone.outerHTML

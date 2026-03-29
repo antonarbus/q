@@ -74,7 +74,7 @@ export const downloadPdf = async (): Promise<void> => {
 
   const correctedHeight = tempClone.clientHeight
 
-  document.body.removeChild(tempClone)
+  tempClone.remove()
 
   const quotationScreenshot = await modernScreenshotModule.domToJpeg(blocksContainerElement, {
     width: maxPaperWidth,

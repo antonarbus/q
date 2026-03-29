@@ -14,7 +14,7 @@ export const getCleanPaperHtml = (props: Props): string => {
   const elementsToRemove = paperElementClone.querySelectorAll(cls.cleanFromPaper)
 
   elementsToRemove.forEach((elementToRemove) => {
-    elementToRemove.parentNode?.removeChild(elementToRemove)
+    elementToRemove.remove()
   })
 
   // Images should align correct in preview

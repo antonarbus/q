@@ -10,6 +10,6 @@ export const downloadBlobAsFile = (props: Props): void => {
   link.download = props.fileName
   document.body.append(link)
   link.click()
-  document.body.removeChild(link)
+  link.remove()
   URL.revokeObjectURL(fileUrl)
 }
