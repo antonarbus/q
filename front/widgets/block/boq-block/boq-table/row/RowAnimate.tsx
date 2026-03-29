@@ -10,7 +10,8 @@ export const RowAnimate = (props: Props): React.JSX.Element => {
     <motion.div
       className='boq-row-animate'
       animate={{
-        height: 'auto', // height is being stored on copy/cut icon click
+        // height is being stored on copy/cut icon click
+        height: 'auto',
         opacity: 1,
         transitionEnd: {
           height: 'auto',

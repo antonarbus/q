@@ -32,8 +32,10 @@ type RouterHandler = (
 
 const signedUrlCache = new Map<string, { url: string; expiresAt: number }>()
 
-const SIGNED_URL_TTL_MS = 5 * 60 * 1000 // 5 minutes
-const CLIENT_CACHE_MAX_AGE = SIGNED_URL_TTL_MS / 1000 // 5 min in seconds
+// 5 minutes
+const SIGNED_URL_TTL_MS = 5 * 60 * 1000
+// 5 min in seconds
+const CLIENT_CACHE_MAX_AGE = SIGNED_URL_TTL_MS / 1000
 
 export const proxyFileToBucketHandler: RouterHandler = async (req, res) => {
   const messageList: string[] = []
@@ -70,13 +72,15 @@ export const proxyFileToBucketHandler: RouterHandler = async (req, res) => {
   try {
     const bucket = await getBucket()
     const fileInfo = getFileInfo({ id: req.params.id })
-    const file = bucket.file(fileInfo.path) // Get reference to the file in the bucket
+    // Get reference to the file in the bucket
+    const file = bucket.file(fileInfo.path)
 
     const [signedUrl] = await file.getSignedUrl({
       version: 'v4',
       action: 'read',
       expires: Date.now() + SIGNED_URL_TTL_MS,
-      responseDisposition: `inline; filename="${fileSelected.name}"`, // display in browser
+      // display in browser
+      responseDisposition: `inline; filename="${fileSelected.name}"`,
       // responseDisposition: `attachment; filename="${fileMeta.originalName}"`, // force to download
     })
 
@@ -91,7 +95,8 @@ export const proxyFileToBucketHandler: RouterHandler = async (req, res) => {
 
     signedUrlCache.set(req.params.id, {
       url: signedUrl,
-      expiresAt: Date.now() + SIGNED_URL_TTL_MS, // should be slightly less, but let it be like this for now
+      // should be slightly less, but let it be like this for now
+      expiresAt: Date.now() + SIGNED_URL_TTL_MS,
     })
 
     messageList.push('Generated new signed URL and cached it')

@@ -55,7 +55,8 @@ export const DescriptionCell = (): React.JSX.Element => {
           rowIndex: row.index,
         })
 
-        return true // stop ProseMirror propagation
+        // stop ProseMirror propagation
+        return true
       }}
       onUpload={upload}
       sx={{

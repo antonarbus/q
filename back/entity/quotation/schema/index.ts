@@ -1,6 +1,7 @@
 // This is the real technical need for index.ts barrel file
 
 // We reference latest schema & types and keep names variable names unchanged
+//* CHANGE TO THE LATEST VERSION
 export {
   quotationSchema,
   type Quotation,
@@ -16,4 +17,4 @@ export {
   type TextBlock,
   type PriceBlock,
   type BlockItem,
-} from './quotationSchemaV2' //* <-- CHANGE TO THE LATEST VERSION
+} from './quotationSchemaV2'

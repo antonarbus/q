@@ -1,3 +1,4 @@
+// oxlint-disable unicorn/prefer-native-coercion-functions
 import { filesTable, type SelectFile } from '@back/entity/file/db/filesTableSchema'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entity/user/getUserFromAccessTokenOrThrowUnauthorized'
 import { HttpError } from '@back/shared/errors/HttpError'

@@ -21,10 +21,14 @@ const rootPathAbsolute =
 
 const app = express()
 
-app.use(compression()) // gzip compression for responses
-app.use(morgan('dev')) // http logs in terminal
-app.use(express.json({ limit: '50mb' })) // parses JSON payload and adds it to req.body
-app.use(cookieParser()) // parses Cookie header and adds to req.cookies
+// gzip compression for responses
+app.use(compression())
+// http logs in terminal
+app.use(morgan('dev'))
+// parses JSON payload and adds it to req.body
+app.use(express.json({ limit: '50mb' }))
+// parses Cookie header and adds to req.cookies
+app.use(cookieParser())
 
 // Serve bundled React static files in production (JS, CSS, images, etc.)
 if (runtimeConfig.nodeEnv === 'production') {
@@ -32,15 +36,21 @@ if (runtimeConfig.nodeEnv === 'production') {
 
   app.use(
     express.static(frontendBuildPath, {
-      index: 'index.html', // Serve index.html for root '/' path
-      maxAge: '1y', // Cache hashed assets (JS, CSS, images) for 1 year
+      // Serve index.html for root '/' path
+      index: 'index.html',
+      // Cache hashed assets (JS, CSS, images) for 1 year
+      maxAge: '1y',
       setHeaders: (res, filepath) => {
         // Overwrite cache settings for files that should NOT be cached (no hash in filename)
         const noCacheFileList = [
-          'index.html', // Entry point - references change on every deploy
-          'styles.css', // Global CSS without content hash
-          'sitemap.xml', // Updates when site structure changes
-          'robots.txt', // Updates when site structure changes
+          // Entry point - references change on every deploy
+          'index.html',
+          // Global CSS without content hash
+          'styles.css',
+          // Updates when site structure changes
+          'sitemap.xml',
+          // Updates when site structure changes
+          'robots.txt',
         ]
 
         // Don't cache files without hashes at file names added by bundler OR blog files
@@ -50,8 +60,10 @@ if (runtimeConfig.nodeEnv === 'production') {
         if (shouldNotCache === true) {
           res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate')
 
-          res.setHeader('Pragma', 'no-cache') // HTTP 1.0 compatibility
-          res.setHeader('Expires', '0') // Proxies
+          // HTTP 1.0 compatibility
+          res.setHeader('Pragma', 'no-cache')
+          // Proxies
+          res.setHeader('Expires', '0')
         }
       },
     }),

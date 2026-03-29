@@ -1,5 +1,7 @@
 import { copySlice } from '@front/entities/copy/copySlice'
-import textBlockContentHtml from '@front/entities/quotation/templates/textBlockContent.html?raw' // assets can be imported as strings using the ?raw suffix
+
+// assets can be imported as strings using the ?raw suffix
+import textBlockContentHtml from '@front/entities/quotation/templates/textBlockContent.html?raw'
 import textBlockPreviewHtml from '@front/entities/quotation/templates/textBlockPreview.html?raw'
 import type { TextBlock } from '@back/entity/quotation/schema'
 import { generateId } from '@front/shared/lib/nanoid'

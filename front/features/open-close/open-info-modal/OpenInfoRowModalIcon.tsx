@@ -19,7 +19,8 @@ export const OpenInfoRowModalIcon = (): React.ReactNode => {
     <Tooltip enterDelay={500} enterNextDelay={500} placement='right' title='Info'>
       <span className={cls.actionIconContainer}>
         <HiOutlineInformationCircle
-          aria-hidden={false} // otherwise error in dev tools
+          // otherwise error in dev tools
+          aria-hidden={false}
           className={cls.actionIcon}
           onClick={(): void => {
             if (isCopyModalVisible === true) {

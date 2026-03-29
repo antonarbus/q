@@ -99,7 +99,7 @@ export const getQuotationHandler: RouterHandler = async (req) => {
   const publicOrSharedWithYou =
     quotationPermissionLevel === 'SHARED' || quotationPermissionLevel === 'PUBLIC'
 
-  let quotationUpdated: SelectQuotation | undefined = undefined
+  let quotationUpdated
 
   if (shouldTrace === true) {
     if (quotationPermissionLevel === 'OWNER') {

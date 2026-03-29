@@ -47,9 +47,11 @@ export const fileUploadSignedUrlHandler: RouterHandler = async (req) => {
     const [signedUrl] = await file.getSignedUrl({
       version: 'v4',
       action: 'write',
-      expires: Date.now() + 5 * 60 * 1000, // 5 minutes expiration
+      // 5 minutes expiration
+      expires: Date.now() + 5 * 60 * 1000,
       extensionHeaders: {
-        'x-goog-content-length-range': '0,104857600', // Allow up to 100MB
+        // Allow up to 100MB
+        'x-goog-content-length-range': '0,104857600',
       },
     })
 

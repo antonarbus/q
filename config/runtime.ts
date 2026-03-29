@@ -82,7 +82,8 @@ export const runtimeConfig = {
         return 3000
       }
 
-      return 443 // default, not specified at browser
+      // default, not specified at browser
+      return 443
     },
     portPreview: 3666,
     get baseUrl() {

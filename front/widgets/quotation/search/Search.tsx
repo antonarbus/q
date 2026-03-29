@@ -45,7 +45,8 @@ export const Search = (): React.JSX.Element => {
       clearOnEscape
       disablePortal
       disabled={isCopyModalVisible}
-      freeSolo={options.length !== 0} // show MUI autocomplete even if no options
+      // show MUI autocomplete even if no options
+      freeSolo={options.length > 0}
       loading={getBookmarkListQuery.isPending}
       loadingText={email === null ? 'Not logged in' : 'Loading...'}
       inputValue={inputValue}

@@ -1,3 +1,4 @@
+// oxlint-disable unicorn/prefer-native-coercion-functions
 import { bookmarksTable, type SelectBookmark } from '@back/entity/bookmark/db/bookmarksTableSchema'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entity/user/getUserFromAccessTokenOrThrowUnauthorized'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'

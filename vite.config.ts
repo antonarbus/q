@@ -2,7 +2,9 @@ import babel from '@rolldown/plugin-babel'
 import basicSsl from '@vitejs/plugin-basic-ssl'
 import react from '@vitejs/plugin-react'
 import path from 'node:path'
-import { runtimeConfig } from './config/runtime' // relative imports, otherwise some scripts break
+
+// relative imports, otherwise some scripts break
+import { runtimeConfig } from './config/runtime'
 
 /**
  * API routes are now properly separated:

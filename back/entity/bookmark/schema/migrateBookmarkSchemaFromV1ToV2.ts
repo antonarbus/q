@@ -1,9 +1,10 @@
 import { z } from 'zod'
-import { bookmarkSchema as bookmarkSchemaV1 } from './bookmarkSchemaV1' //* <-- V1
-import {
-  bookmarkSchema as bookmarkSchemaV2, //* <-- V2
-  type Bookmark as BookmarkV2, //* <-- V2
-} from './bookmarkSchemaV2' //* <-- V2
+
+//* V1
+import { bookmarkSchema as bookmarkSchemaV1 } from './bookmarkSchemaV1'
+
+//* V2
+import { bookmarkSchema as bookmarkSchemaV2, type Bookmark as BookmarkV2 } from './bookmarkSchemaV2'
 
 const MIGRATE_FROM = 1
 const MIGRATE_TO = 2
@@ -73,9 +74,11 @@ export const migrateBookmarkSchemaFromV1ToV2 = (props: Props): Res => {
   //* For missing property add default value e.g. z.string().default('foo')
   //* For failing validation use catch() e.g. z.string().catch('foo')
 
-  const newDocument = structuredClone(oldDocumentValidationResult.data) as unknown as BookmarkV2 // <-- hack! cast QuotationV2 type for actual QuotationV1 to let us set new values
+  //! hack! cast QuotationV2 type for actual QuotationV1 to let us set new values
+  const newDocument = structuredClone(oldDocumentValidationResult.data) as unknown as BookmarkV2
 
-  newDocument.bookmarkSchemaVersion = MIGRATE_TO //* <-- TO BE IN EVERY MIGRATION FUNCTION
+  //* TO BE IN EVERY MIGRATION FUNCTION
+  newDocument.bookmarkSchemaVersion = MIGRATE_TO
 
   // ======== ↑ MIGRATION ↑ ========
 

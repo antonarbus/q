@@ -38,7 +38,7 @@ export async function confirmWithDialog(
   boolDeferred = Promise.withResolvers<boolean>()
   reduxHolder.dispatch(appSlice.actions.openConfirmationDialog(props))
 
-  return boolDeferred.promise
+  return await boolDeferred.promise
 }
 
 const resolveDialogReject = (): void => {

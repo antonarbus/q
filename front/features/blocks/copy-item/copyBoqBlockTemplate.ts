@@ -1,5 +1,7 @@
 import { copySlice } from '@front/entities/copy/copySlice'
-import boqBlockPreviewHtml from '@front/entities/quotation/templates/boqBlockPreview.html?raw' // assets can be imported as strings using the ?raw suffix
+
+// assets can be imported as strings using the ?raw suffix
+import boqBlockPreviewHtml from '@front/entities/quotation/templates/boqBlockPreview.html?raw'
 import boqHeaderDescriptionHtml from '@front/entities/quotation/templates/boqHeaderDescription.html?raw'
 import boqHeaderItemPriceHtml from '@front/entities/quotation/templates/boqHeaderItemPrice.html?raw'
 import boqHeaderPriceHtml from '@front/entities/quotation/templates/boqHeaderPrice.html?raw'

@@ -51,11 +51,12 @@ export const setBucketCorsHandler: RouterHandler = async (req) => {
         `http://${DOMAIN}`,
         `https://*.${DOMAIN}`,
         `http://*.${DOMAIN}`,
-        `http://local.${DOMAIN}:3000`, // pdf download does not work without port
-        `https://local.${DOMAIN}:3000`, // pdf download does not work without port
-        'http://localhost:3000', // pdf download does not work without port
-        'https://localhost:3000', // pdf download does not work without port
-        '*', // pdf download does not work without port
+        // pdf download does not work without port
+        `http://local.${DOMAIN}:3000`,
+        `https://local.${DOMAIN}:3000`,
+        'http://localhost:3000',
+        'https://localhost:3000',
+        '*',
       ],
       method: ['PUT', 'POST', 'GET'],
       maxAgeSeconds: 3600,

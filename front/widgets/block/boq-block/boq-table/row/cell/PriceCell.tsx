@@ -84,7 +84,8 @@ export const PriceCell = (): React.JSX.Element => {
             event.preventDefault()
           }
 
-          return didNavigate // stop ProseMirror propagation if return true
+          // stop ProseMirror propagation if return true
+          return didNavigate
         }}
         sx={{
           ...stylesForResizableCell,

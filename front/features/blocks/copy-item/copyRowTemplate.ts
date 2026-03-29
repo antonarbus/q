@@ -1,5 +1,7 @@
 import { copySlice } from '@front/entities/copy/copySlice'
-import rowDescriptionHtml from '@front/entities/quotation/templates/rowDescription.html?raw' // assets can be imported as strings using the ?raw suffix
+
+// assets can be imported as strings using the ?raw suffix
+import rowDescriptionHtml from '@front/entities/quotation/templates/rowDescription.html?raw'
 import rowItemPriceHtml from '@front/entities/quotation/templates/rowItemPrice.html?raw'
 import rowPreviewHtml from '@front/entities/quotation/templates/rowPreview.html?raw'
 import rowPriceHtml from '@front/entities/quotation/templates/rowPrice.html?raw'

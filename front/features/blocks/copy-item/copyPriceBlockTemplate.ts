@@ -1,5 +1,7 @@
 import { copySlice } from '@front/entities/copy/copySlice'
-import priceBlockPreviewHtml from '@front/entities/quotation/templates/priceBlockPreview.html?raw' // assets can be imported as strings using the ?raw suffix
+
+// assets can be imported as strings using the ?raw suffix
+import priceBlockPreviewHtml from '@front/entities/quotation/templates/priceBlockPreview.html?raw'
 import priceBlockTitleHtml from '@front/entities/quotation/templates/priceBlockTitle.html?raw'
 import priceBlockValueHtml from '@front/entities/quotation/templates/priceBlockValue.html?raw'
 import type { PriceBlock } from '@back/entity/quotation/schema'

@@ -4,6 +4,7 @@ import { theme } from '@front/shared/theme'
 export const cellStyle: CSSObject = {
   textAlign: 'center',
   padding: theme.cell.padding,
-  minHeight: '50px', // otherwise placeholder is misplaced on init
+  // otherwise placeholder is misplaced on init
+  minHeight: '50px',
   fontVariantNumeric: 'tabular-nums',
 }

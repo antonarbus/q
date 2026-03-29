@@ -11,7 +11,7 @@ let previewPreparingDeferred = Promise.withResolvers()
 export const getPreviewPreparingPromise = async (): Promise<unknown> => {
   previewPreparingDeferred = Promise.withResolvers()
 
-  return previewPreparingDeferred.promise
+  return await previewPreparingDeferred.promise
 }
 
 export const useBookmarkCopyPreviewCapturer = (
@@ -60,7 +60,7 @@ export const useBookmarkCopyPreviewCapturer = (
 
       image.src = src
 
-      return imageLoadedDeferred.promise
+      return await imageLoadedDeferred.promise
     })
 
     void Promise.all(imageLoadedPromiseList).then(() => {
