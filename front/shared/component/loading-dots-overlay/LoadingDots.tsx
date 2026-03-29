@@ -22,7 +22,7 @@ export const LoadingDots = (props: Props): React.JSX.Element => (
       justifyContent: 'center',
     }}
   >
-    {Array(props.dots ?? 3)
+    {Array.from({ length: props.dots ?? 3 })
       .fill('')
       .map((_dot, index) => (
         <span
