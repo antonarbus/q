@@ -18,9 +18,10 @@
   ],
   "exclude": ["**/node_modules", "**/build"],
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "ESNext",
+    "target": "esnext",
+    "module": "esnext",
     "moduleResolution": "bundler",
+    "strict": true,
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "noEmit": true,
@@ -28,7 +29,6 @@
     "checkJs": false,
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
-    "strict": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -50,7 +50,6 @@
     "jsx": "react-jsx",
     "jsxImportSource": "@emotion/react",
     "types": ["bun", "node"],
-    "baseUrl": ".",
     "paths": {
       "@front/*": ["./front/*"],
       "@back/*": ["./back/*"],

@@ -3,9 +3,6 @@
     "back/shared/lib/drizzle/schema.ts",
     "front/shared/lib/ag-grid/colDef/getNumberColDef.tsx",
     "tests/setup/auth.setup.ts",
-    "shared/const/permissionLevel.ts",
-    "shared/types/*",
-    "front/entities/quotation/const/rowTypeKey.ts",
     "steiger.config.ts"
   ],
   "ignoreDependencies": [
