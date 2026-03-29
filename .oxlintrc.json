@@ -1,5 +1,20 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": [
+    "eslint",
+    "oxc",
+    "typescript",
+    "unicorn"
+    // "promise"
+    // "import",
+    // "jsdoc",
+    // "jsx-a11y",
+    // "node",
+    // "react-perf",
+    // "react",
+    // "vitest",
+    // "jest"
+  ],
   "env": {
     "browser": true,
     "node": true
@@ -46,6 +61,18 @@
           "pascalCase": true
         }
       }
-    ]
+    ],
+    "react-in-jsx-scope": "off",
+    "jsx-filename-extension": ["error", { "extensions": ["jsx", "tsx"] }],
+    "max-dependencies": "off",
+    "no-duplicate-imports": "off",
+    "import/no-named-export": "off",
+    "import/prefer-default-export": "off",
+    "react/jsx-max-depth": "off",
+    "import/no-unassigned-import": "off",
+    "jest/require-hook": "off",
+    "import/no-anonymous-default-export": "off",
+    "import/no-default-export": "off",
+    "import/no-nodejs-modules": "off"
   }
 }
