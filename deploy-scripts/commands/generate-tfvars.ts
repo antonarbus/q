@@ -57,7 +57,6 @@ export const generateTfvars = async (): Promise<void> => {
 
     const content = generateTfvarsContent({ environment: env, config })
 
-     no-await-in-loop
     await write(TFVARS_FILE_PATH, content)
     logger.success(`Generated ${env}.tfvars`)
   }

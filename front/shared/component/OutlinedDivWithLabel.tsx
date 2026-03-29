@@ -26,7 +26,6 @@ type Props = {
   sx?: CSSObject
 }
 
-react / no - multi - comp
 export const OutlinedDivWithLabel = (props: Props): React.JSX.Element => {
   return (
     <TextField

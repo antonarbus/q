@@ -1,4 +1,3 @@
- id-length
 import z from 'zod'
 import type { DeployedEnvironment } from '@root/config/environment'
 import { DOMAIN } from '@root/config/domain'

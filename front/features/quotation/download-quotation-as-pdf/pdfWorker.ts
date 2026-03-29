@@ -5,7 +5,6 @@ self.addEventListener(
   async (messageEvent: MessageEvent<WorkerRequestMessage>): Promise<void> => {
     const jspdfModule = await import('jspdf')
 
-     new-cap
     const pdf = new jspdfModule.jsPDF({
       orientation: messageEvent.data.width > messageEvent.data.height ? 'landscape' : 'portrait',
       unit: 'px',

@@ -42,7 +42,6 @@ export const getBucket = async (): Promise<Bucket> => {
 
   const storage = new Storage({ credentials })
 
-   require-atomic-updates
   bucketInstance = storage.bucket(storageConfig.bucketName)
 
   return bucketInstance

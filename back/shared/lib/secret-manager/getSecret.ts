@@ -35,17 +35,12 @@ export const getSecret = async (secretName: SecretName): Promise<string> => {
     name: `projects/${sharedInfraConfig.projectId}/secrets/${secretName}/versions/latest`,
   })
 
-  if (
-     no-restricted-syntax
-    accessResponse.payload?.data === undefined ||
-    accessResponse.payload.data === null
-  ) {
+  if (accessResponse.payload?.data === undefined || accessResponse.payload.data === null) {
     throw new Error('Secrete not found')
   }
 
   const secreteValue = accessResponse.payload.data.toString('utf8')
 
-   require-atomic-updates
   cachedSecrets[secretName] = secreteValue
 
   return secreteValue
