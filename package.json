@@ -39,7 +39,7 @@
     "fsd": "bun steiger ./front",
     "terraform-check": "cd terraform && terraform fmt -check -recursive",
     "terraform-format": "cd terraform && terraform fmt -recursive",
-    "check": "bun run tsc && bun run lint-quiet && bun run fmt && bun run test && bun run knip && bun run circular && bun run terraform-check && bun run fsd && bun run playwright && bun run build",
+    "check": "rm -rf ./back/build/ && bun run tsc && bun run lint-quiet && bun run fmt && bun run test && bun run knip && bun run circular && bun run terraform-check && bun run fsd && bun run playwright && bun run build",
     "update-root": "bun update -i --latest",
     "update-front": "cd ./front && bun update -i --latest",
     "update-back": "cd ./back && bun update -i --latest",
