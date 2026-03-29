@@ -14,7 +14,6 @@
     "style": "error"
   },
   "rules": {
-    "no-undefined": "warn",
     "max-lines-per-function": "off",
     "eslint/max-depth": "off",
     "eslint/max-lines": "off",
@@ -28,6 +27,7 @@
     "max-statements": "off",
     "no-ternary": "off",
     "sort-keys": "off",
+    "no-undefined": "off",
     "sort-imports": "off",
     "no-magic-numbers": "off",
     "unicorn/no-null": "off",
