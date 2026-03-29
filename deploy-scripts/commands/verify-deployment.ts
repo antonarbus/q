@@ -1,4 +1,4 @@
-import { exit } from 'process'
+import { exit } from 'node:process'
 import { infraConfig } from '@back/config/infrastructure'
 import { getCloudRunServiceUrl } from '../lib/gcloud/getCloudRunServiceUrl'
 import { rollbackCloudRunService } from '../lib/gcloud/rollbackCloudRunService'
