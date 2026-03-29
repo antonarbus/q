@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unnecessary-condition */
 import type { NavItem } from './type'
 
 let navStructureInstance: NavItem[] | null = null

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/member-ordering */
 import type { QueryClientType } from '@front/shared/lib/tanstack-query/queryClient'
 
 class Instance {

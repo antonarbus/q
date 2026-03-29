@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /**
  * - GitHub Actions output to stdout(key = value pairs)
  * - Required for passing data between steps in Github Actions workflow

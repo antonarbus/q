@@ -1,4 +1,3 @@
-/* eslint-disable require-unicode-regexp */
 import type esbuild from 'esbuild'
 import fs from 'node:fs'
 import path from 'node:path'

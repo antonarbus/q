@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unnecessary-condition */
-/* eslint-disable no-restricted-syntax */
 import { migrateQuotationSchemaFromV1ToV2 } from './schema/migrateQuotationSchemaFromV1ToV2'
 import { type Quotation, quotationSchema } from './schema'
 

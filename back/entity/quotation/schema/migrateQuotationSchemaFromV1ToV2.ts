@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
 import { z } from 'zod'
 import { quotationSchema as quotationSchemaV1 } from './quotationSchemaV1' //* <-- V1
 import {

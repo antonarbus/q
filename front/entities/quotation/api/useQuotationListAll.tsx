@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/strict-void-return */
-/* eslint-disable @typescript-eslint/no-misused-promises */
 import { route } from '@back/api/route'
 import type { ResBody } from '@back/api/quotation/getQuotationListAllHandler'
 import { axiosWithAuth } from '@front/shared/lib/axios'

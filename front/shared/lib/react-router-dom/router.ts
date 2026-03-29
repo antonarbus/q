@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/member-ordering */
 import type { createBrowserRouter } from 'react-router-dom'
 
 type Router = ReturnType<typeof createBrowserRouter>

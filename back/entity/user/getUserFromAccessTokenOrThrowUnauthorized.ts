@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { HttpError } from '@back/shared/errors/HttpError'
 import { headerName } from '@back/shared/headers'

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
 import { useRegister } from '@front/features/auth/register-user/useRegister'
 import { OpenLoginModalLink } from '@front/features/open-close/open-login-modal'
 import { Box } from '@mui/material'

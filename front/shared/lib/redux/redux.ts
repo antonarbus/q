@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/member-ordering */
 import type { Register } from './register'
 import { useSelector as useSelectorNotTyped, type TypedUseSelectorHook } from 'react-redux'
 

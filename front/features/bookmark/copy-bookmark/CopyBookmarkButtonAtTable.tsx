@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/strict-void-return */
 import type { UrlParam } from '@back/api/bookmark/getBookmarkHandler'
 import { useGetBookmarkMutation } from '@front/entities/bookmark/api/useGetBookmarkMutation'
 import { copySlice } from '@front/entities/copy/copySlice'

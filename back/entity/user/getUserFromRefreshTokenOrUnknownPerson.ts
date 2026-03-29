@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { getRefreshTokenFromCookie } from '@back/shared/headers/token/getRefreshTokenFromCookie'
 import { getPayloadFromRefreshToken } from '@back/shared/lib/json-webtoken'
 import type { Request } from 'express'

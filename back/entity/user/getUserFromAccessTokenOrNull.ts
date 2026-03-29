@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { headerName } from '@back/shared/headers'
 import { getPayloadFromAccessToken } from '@back/shared/lib/json-webtoken'
 import type { Request } from 'express'

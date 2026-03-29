@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { defineConfig } from 'steiger'
 import fsd from '@feature-sliced/steiger-plugin'
 

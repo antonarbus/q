@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/strict-void-return */
 import type { ResBody } from '@back/api/bookmark/getBookmarkListHandler'
 import { Box } from '@mui/material'
 import { RotatingLoaderIcon } from '@front/shared/component/RotatingLoaderIcon'

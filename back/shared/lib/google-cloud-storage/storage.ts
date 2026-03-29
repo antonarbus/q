@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import { Storage, type Bucket } from '@google-cloud/storage'
 import { sharedInfraConfig } from '@back/config/infrastructure'
 import { storageConfig } from '@back/config/storage'

@@ -1,4 +1,3 @@
-/* eslint-disable max-depth */
 import { $ } from 'bun'
 import { infraConfig } from '@back/config/infrastructure'
 import { logger } from '../lib/output/logger'

@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unnecessary-condition */
-/* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
 import type { AxiosInstance } from 'axios'
 
 type AxiosWithAuth = AxiosInstance

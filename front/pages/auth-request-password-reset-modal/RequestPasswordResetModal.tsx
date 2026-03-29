@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
 import { useRequestPasswordReset } from '@front/features/auth/request-password-reset/useRequestPasswordReset'
 import { OpenLoginModalLink } from '@front/features/open-close/open-login-modal'
 import { Box } from '@mui/material'

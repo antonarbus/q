@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-handler-names */
 import { DropHereText } from './file-upload/DropHereText'
 import { tiptapStyles } from './style/tiptapStyles'
 import { Box } from '@mui/material'

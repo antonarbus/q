@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unnecessary-condition */
-/* eslint-disable no-restricted-syntax */
 import { migrateBookmarkSchemaFromV1ToV2 } from './schema/migrateBookmarkSchemaFromV1ToV2'
 import { type Bookmark, bookmarkSchema } from './schema'
 
