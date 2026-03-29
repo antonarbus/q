@@ -20,9 +20,7 @@ export const useNavItemsOnBookmarksPageOpen = (): void => {
 
     reduxHolder.dispatch(navSlice.actions.removeUnderlineFromTopNav())
 
-    reduxHolder.dispatch(
-      navSlice.actions.underlineNavItem({ navItemId: navItemId.bookmarkList }),
-    )
+    reduxHolder.dispatch(navSlice.actions.underlineNavItem({ navItemId: navItemId.bookmarkList }))
   })
 
   useUnmount(() => {

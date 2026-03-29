@@ -6,10 +6,7 @@ import { getBucket } from '@back/shared/lib/google-cloud-storage'
 import type { NextFunction, Request, Response } from 'express'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
-import {
-  type HttpResponse,
-  httpJsonResponse,
-} from '@back/shared/lib/express/httpResponse'
+import { type HttpResponse, httpJsonResponse } from '@back/shared/lib/express/httpResponse'
 
 // https://cloud.google.com/storage/docs/using-cors#storage-get-bucket-metadata-nodejs
 

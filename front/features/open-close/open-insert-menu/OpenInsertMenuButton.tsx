@@ -15,9 +15,7 @@ export const OpenInsertMenuButton = (): React.ReactNode => {
       <IconButton
         className={cls.openInsertMenuButton}
         onClick={() => {
-          reduxHolder.dispatch(
-            navSlice.actions.openMenuWithId({ navItemId: navItemId.insert }),
-          )
+          reduxHolder.dispatch(navSlice.actions.openMenuWithId({ navItemId: navItemId.insert }))
         }}
       >
         <FaPlus />

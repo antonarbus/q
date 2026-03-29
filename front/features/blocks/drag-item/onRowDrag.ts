@@ -33,7 +33,5 @@ export const onRowDragEnd =
 
     const reOrderedRows = arrayMoveImmutable(rows, oldIndex, newIndex)
 
-    reduxHolder.dispatch(
-      quotationSlice.actions.reOrderRows({ reOrderedRows, blockIndex }),
-    )
+    reduxHolder.dispatch(quotationSlice.actions.reOrderRows({ reOrderedRows, blockIndex }))
   }

@@ -15,10 +15,7 @@ import { db } from '@back/shared/lib/drizzle/db'
 import { and, eq } from 'drizzle-orm'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
-import {
-  type HttpResponse,
-  httpJsonResponse,
-} from '@back/shared/lib/express/httpResponse'
+import { type HttpResponse, httpJsonResponse } from '@back/shared/lib/express/httpResponse'
 import { z } from 'zod'
 
 type SearchQuery = ParsedQs
@@ -57,9 +54,7 @@ export const saveQuotationHandler: RouterHandler = async (req) => {
 
   const messageList: string[] = []
 
-  const quotationValidationResult = quotationSchema.safeParse(
-    req.body.quotation,
-  )
+  const quotationValidationResult = quotationSchema.safeParse(req.body.quotation)
 
   if (quotationValidationResult.success === false) {
     messageList.push('Invalid structure')

@@ -9,16 +9,13 @@ type Props = {
   accessFormValuesSignal: AccessFormValuesSignal
 }
 
-export const useLoadShareQuotationModalWithDirectLink = (
-  props: Props,
-): void => {
+export const useLoadShareQuotationModalWithDirectLink = (props: Props): void => {
   const urlParams = useParams()
   const getQuotationMutation = useGetQuotationMutation()
 
   useEffectOnce(() => {
     if (urlParams.quotationId !== undefined) {
-      const quotationIsAlreadyLoaded =
-        reduxHolder.getState().quotation.id === urlParams.quotationId
+      const quotationIsAlreadyLoaded = reduxHolder.getState().quotation.id === urlParams.quotationId
 
       if (quotationIsAlreadyLoaded === false) {
         getQuotationMutation.mutate({ id: urlParams.quotationId })
@@ -34,8 +31,7 @@ export const useLoadShareQuotationModalWithDirectLink = (
         }),
       )
 
-      props.accessFormValuesSignal.value =
-        getQuotationMutation.data.quotation.access
+      props.accessFormValuesSignal.value = getQuotationMutation.data.quotation.access
     }
   }, [getQuotationMutation.isSuccess])
 }

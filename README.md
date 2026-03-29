@@ -153,8 +153,8 @@ bun run test-ui               # Unit tests with UI
 bun run playwright            # Playwright e2e
 bun run playwright-debug      # Debug mode
 bun run tsc                   # Type check
-bun run lint-fix              # ESLint
-bun run prettier-fix          # Prettier
+bun run lint-fix              # Lint check
+bun run fmt-fix               # Formatting
 bun run check                 # All checks (tsc, lint, format, tests, build)
 ```
 

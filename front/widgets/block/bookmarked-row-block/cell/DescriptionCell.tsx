@@ -24,9 +24,7 @@ export const DescriptionCell = (): React.JSX.Element => {
       })}
       className='td description'
       placeholder='Description...'
-      contentGetter={() =>
-        getHtmlOfBookmarkedRowCellFromStoreByIndex({ cellKey: 'description' })
-      }
+      contentGetter={() => getHtmlOfBookmarkedRowCellFromStoreByIndex({ cellKey: 'description' })}
       onChange={() => {
         updateDescriptionCellAtBookmarkBlock()
       }}

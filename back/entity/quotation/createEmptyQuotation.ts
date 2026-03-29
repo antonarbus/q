@@ -1,9 +1,7 @@
 import { nanoid } from 'nanoid'
 import type { Quotation } from './schema'
 
-export const createEmptyQuotation = (
-  overrides: Partial<Quotation>,
-): Quotation => ({
+export const createEmptyQuotation = (overrides: Partial<Quotation>): Quotation => ({
   id: nanoid(),
   quotationSchemaVersion: 2,
   type: 'quotation',

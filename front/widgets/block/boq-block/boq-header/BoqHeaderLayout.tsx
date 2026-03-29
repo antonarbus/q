@@ -14,14 +14,10 @@ export const BoqHeaderLayout = (props: Props): React.JSX.Element => {
     <Box
       sx={{
         '& .layout': {
-          boxShadow:
-            props.outlinedForDevPurposes === true
-              ? '0 0 1px 1px #cf5757c3 inset'
-              : 'none',
+          boxShadow: props.outlinedForDevPurposes === true ? '0 0 1px 1px #cf5757c3 inset' : 'none',
         },
         '& :where(.content)': {
-          visibility:
-            props.hideContentForDevPurposes === true ? 'hidden' : 'visible',
+          visibility: props.hideContentForDevPurposes === true ? 'hidden' : 'visible',
         },
       }}
     >

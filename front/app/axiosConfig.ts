@@ -13,8 +13,7 @@ axiosWithAuth.interceptors.request.use(async (config) => {
   // wait until initial access token if fetched, otherwise token is null and another immediate duplicate request for access token will be sent
   await getAccessTokenDeferred.promise
 
-  config.headers[headerName.accessJwtToken] =
-    reduxHolder.getState().user.accessToken
+  config.headers[headerName.accessJwtToken] = reduxHolder.getState().user.accessToken
 
   return config
 })
@@ -27,8 +26,7 @@ axiosWithAuth.interceptors.response.use(
   },
   async (error: AxiosError) => {
     // remember original request to use it when we refresh user's access token
-    const originalRequestConfig: ExtendedAxiosRequestConfig | undefined =
-      error.config
+    const originalRequestConfig: ExtendedAxiosRequestConfig | undefined = error.config
 
     const isRetry = originalRequestConfig?.isRetry
 
@@ -39,20 +37,16 @@ axiosWithAuth.interceptors.response.use(
       (isRetry === false || isRetry === undefined)
 
     const shouldRetry =
-      isUnauthorizedAfterCheckingAccessToken === true &&
-      originalRequestConfig !== undefined
+      isUnauthorizedAfterCheckingAccessToken === true && originalRequestConfig !== undefined
 
     if (shouldRetry === true) {
       originalRequestConfig.isRetry = true
 
       try {
         // refresh expired or invalid access token & extend refresh token if it is about to expire
-        const res = await axios[route.getAccessToken.method]<ResBody>(
-          route.getAccessToken.url,
-          {
-            withCredentials: true,
-          },
-        )
+        const res = await axios[route.getAccessToken.method]<ResBody>(route.getAccessToken.url, {
+          withCredentials: true,
+        })
 
         if (res.data.accessJwtToken !== undefined) {
           reduxHolder.dispatch(
@@ -65,8 +59,7 @@ axiosWithAuth.interceptors.response.use(
         // make original request
         return await axiosWithAuth.request(originalRequestConfig)
       } catch (err: unknown) {
-        const isUnauthorized =
-          err instanceof AxiosError && err.response?.status === 401
+        const isUnauthorized = err instanceof AxiosError && err.response?.status === 401
 
         if (isUnauthorized === true) {
           // still unauthorized after attempt to refresh the access token

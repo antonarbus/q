@@ -8,8 +8,6 @@ coverage
 /blob-report/
 /playwright/.cache/
 tests/setup/authenticated_user.json
-.eslintcache
-.prettiercache
 tsconfig.tsbuildinfo
 .tsbuildinfo-back
 .tsbuildinfo-front

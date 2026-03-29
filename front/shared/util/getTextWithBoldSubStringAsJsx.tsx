@@ -3,9 +3,7 @@ type Props = {
   subString: string
 }
 
-export const getTextWithBoldSubStringAsJsx = (
-  props: Props,
-): React.ReactNode => {
+export const getTextWithBoldSubStringAsJsx = (props: Props): React.ReactNode => {
   if (props.subString.length === 0) {
     return props.text
   }
@@ -20,11 +18,7 @@ export const getTextWithBoldSubStringAsJsx = (
 
         return (
           <span key={`substring-${String(index)}`}>
-            {isMatch === true ? (
-              <b style={{ fontWeight: 600 }}>{part}</b>
-            ) : (
-              part
-            )}
+            {isMatch === true ? <b style={{ fontWeight: 600 }}>{part}</b> : part}
           </span>
         )
       })}

@@ -5,9 +5,7 @@ import { RiAlignRight } from 'react-icons/ri'
 export const AlignRightButton = (): React.JSX.Element => {
   const { editor } = useTiptap()
 
-  const isActive = useTiptapState((ctx) =>
-    ctx.editor.isActive({ textAlign: 'right' }),
-  )
+  const isActive = useTiptapState((ctx) => ctx.editor.isActive({ textAlign: 'right' }))
 
   return (
     <MenuButton

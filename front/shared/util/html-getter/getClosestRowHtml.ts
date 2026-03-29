@@ -27,10 +27,7 @@ export const getClosestRowHtml = (event: React.MouseEvent): string => {
 
   const html = rowElementClone.outerHTML
 
-  const htmlWithoutContentEditableTag = html.replaceAll(
-    'contenteditable="true"',
-    '',
-  )
+  const htmlWithoutContentEditableTag = html.replaceAll('contenteditable="true"', '')
 
   return htmlWithoutContentEditableTag
 }

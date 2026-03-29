@@ -11,9 +11,7 @@ export const ArrowForNestedMenu = (props: Props): React.ReactNode => {
   const isNestedMenu = Boolean(props.navItem?.nestedItemList)
   const disabled = Boolean(props.navItem?.disabled)
 
-  const isHamburger = reduxHolder.useSelector(
-    (state) => state.nav.navMode === 'hamburger',
-  )
+  const isHamburger = reduxHolder.useSelector((state) => state.nav.navMode === 'hamburger')
 
   if (isHamburger === true) {
     return null

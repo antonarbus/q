@@ -23,18 +23,13 @@ export const Search = (): React.JSX.Element => {
 
   const [isAutocompleteOpen, setIsAutocompleteOpen] = useState(false)
 
-  const isCopyModalVisible = reduxHolder.useSelector(
-    (state) => state.copy.isVisible,
-  )
+  const isCopyModalVisible = reduxHolder.useSelector((state) => state.copy.isVisible)
 
   const copyBookmarkAtSearch = useCopyBookmarkAtSearch()
 
-  const isPreviewPreparing = reduxHolder.useSelector(
-    (state) => state.copy.isPreviewPreparing,
-  )
+  const isPreviewPreparing = reduxHolder.useSelector((state) => state.copy.isPreviewPreparing)
 
-  const isLoading =
-    copyBookmarkAtSearch.isPending === true || isPreviewPreparing === true
+  const isLoading = copyBookmarkAtSearch.isPending === true || isPreviewPreparing === true
 
   return (
     <Autocomplete
@@ -77,10 +72,7 @@ export const Search = (): React.JSX.Element => {
             key={option.id}
             inputValue={inputValue}
             option={option}
-            isLoading={
-              isLoading === true &&
-              option.id === copyBookmarkAtSearch.bookmarkId
-            }
+            isLoading={isLoading === true && option.id === copyBookmarkAtSearch.bookmarkId}
             onClick={async (event: React.MouseEvent): Promise<void> => {
               await copyBookmarkAtSearch.mutateAsync({
                 bookmarkId: option.id,

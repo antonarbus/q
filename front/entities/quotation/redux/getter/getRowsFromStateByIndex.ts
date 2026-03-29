@@ -6,9 +6,7 @@ type Props = {
   state: Quotation
 }
 
-export const getRowsFromStateByIndex = (
-  props: Props,
-): RowBlock[] | undefined => {
+export const getRowsFromStateByIndex = (props: Props): RowBlock[] | undefined => {
   const boqBlock = getBoqBlockFromStateByIndex({
     blockIndex: props.blockIndex,
     state: props.state,

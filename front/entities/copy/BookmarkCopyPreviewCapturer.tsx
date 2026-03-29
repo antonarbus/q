@@ -29,9 +29,7 @@ export const BookmarkCopyPreviewCapturer = (): React.ReactNode => {
     state.quotation.blocks.at(BOOKMARK_POS_AT_BLOCKS),
   )
 
-  const isPreviewPreparing = reduxHolder.useSelector(
-    (state) => state.copy.isPreviewPreparing,
-  )
+  const isPreviewPreparing = reduxHolder.useSelector((state) => state.copy.isPreviewPreparing)
 
   useBookmarkCopyPreviewCapturer(containerRef)
 
@@ -58,10 +56,7 @@ export const BookmarkCopyPreviewCapturer = (): React.ReactNode => {
         <Droppable droppableId='capture-block'>
           {(provided) => (
             <div ref={provided.innerRef} {...provided.droppableProps}>
-              <Block
-                block={bookmarkBlock}
-                blockIndex={BOOKMARK_POS_AT_BLOCKS}
-              />
+              <Block block={bookmarkBlock} blockIndex={BOOKMARK_POS_AT_BLOCKS} />
               {provided.placeholder}
             </div>
           )}

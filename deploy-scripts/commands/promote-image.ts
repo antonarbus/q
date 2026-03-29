@@ -15,9 +15,7 @@ type PromoteServiceImageProps = {
   targetEnvironment: DeployedEnvironment
 }
 
-const promoteServiceImage = async (
-  props: PromoteServiceImageProps,
-): Promise<void> => {
+const promoteServiceImage = async (props: PromoteServiceImageProps): Promise<void> => {
   logger.info(`Promoting ${props.serviceName} image...`)
 
   // Construct image URLs (same registry, different tags)
@@ -47,9 +45,7 @@ const promoteServiceImage = async (
 
     sourceImageDigest = digestOutput.trim()
   } catch {
-    logger.warning(
-      `  Could not retrieve ${props.serviceName} source image digest`,
-    )
+    logger.warning(`  Could not retrieve ${props.serviceName} source image digest`)
   }
 
   logger.info(`  ${props.serviceName} digest: ${sourceImageDigest}`)

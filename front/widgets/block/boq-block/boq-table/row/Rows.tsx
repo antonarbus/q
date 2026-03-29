@@ -16,9 +16,7 @@ export const Rows = (): React.JSX.Element => {
   const block = useBlock()
   const copyPlace = reduxHolder.useSelector((state) => state.copy.place)
 
-  const isPasteTextShown = reduxHolder.useSelector(
-    (state) => state.copy.isPasteTextShown,
-  )
+  const isPasteTextShown = reduxHolder.useSelector((state) => state.copy.isPasteTextShown)
 
   const rows = reduxHolder.useSelector(
     selectRows({ blockIndex: block.index }),
@@ -31,14 +29,10 @@ export const Rows = (): React.JSX.Element => {
         <AnimatePresence initial={false}>
           {rows.map((row, rowIndex) => {
             const shouldShowPasteBefore =
-              isPasteTextShown &&
-              copyPlace.id === row.id &&
-              copyPlace.pastePos === 'top'
+              isPasteTextShown && copyPlace.id === row.id && copyPlace.pastePos === 'top'
 
             const shouldShowPasteAfter =
-              isPasteTextShown &&
-              copyPlace.id === row.id &&
-              copyPlace.pastePos === 'bottom'
+              isPasteTextShown && copyPlace.id === row.id && copyPlace.pastePos === 'bottom'
 
             return (
               <div key={`row-container-${row.id}`}>

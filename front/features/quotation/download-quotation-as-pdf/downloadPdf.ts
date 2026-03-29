@@ -56,18 +56,14 @@ export const downloadPdf = async (): Promise<void> => {
   document.body.appendChild(tempClone)
 
   // Remove button from temp clone to get correct height
-  const tempOpenInsertMenuButton = tempClone.querySelector(
-    `.${cls.openInsertMenuButton}`,
-  )
+  const tempOpenInsertMenuButton = tempClone.querySelector(`.${cls.openInsertMenuButton}`)
 
   if (tempOpenInsertMenuButton !== null) {
     tempOpenInsertMenuButton.remove()
   }
 
   // Also remove action buttons from temp clone
-  const tempActionElements = tempClone.querySelectorAll(
-    `.${cls.actionsContainer}`,
-  )
+  const tempActionElements = tempClone.querySelectorAll(`.${cls.actionsContainer}`)
 
   tempActionElements.forEach((element) => {
     element.remove()
@@ -80,55 +76,48 @@ export const downloadPdf = async (): Promise<void> => {
 
   document.body.removeChild(tempClone)
 
-  const quotationScreenshot = await modernScreenshotModule.domToJpeg(
-    blocksContainerElement,
-    {
-      width: maxPaperWidth,
-      height: correctedHeight,
-      backgroundColor: 'grey',
-      quality: 1,
-      scale: 1.5,
-      onCloneNode: (blocksElement) => {
-        if (blocksElement instanceof HTMLElement === false) {
-          return
+  const quotationScreenshot = await modernScreenshotModule.domToJpeg(blocksContainerElement, {
+    width: maxPaperWidth,
+    height: correctedHeight,
+    backgroundColor: 'grey',
+    quality: 1,
+    scale: 1.5,
+    onCloneNode: (blocksElement) => {
+      if (blocksElement instanceof HTMLElement === false) {
+        return
+      }
+
+      blocksElement.style.display = 'inline-flex'
+      blocksElement.style.justifyContent = 'flex-start'
+
+      // remove '+' button at the bottom
+      const openInsertMenuButtonElement = blocksElement.querySelector(
+        `.${cls.openInsertMenuButton}`,
+      )
+
+      if (openInsertMenuButtonElement !== null) {
+        openInsertMenuButtonElement.remove()
+      }
+
+      // remove buttons to the right and to the left from item block and row
+      const actionElements = blocksElement.querySelectorAll(`.${cls.actionsContainer}`)
+
+      actionElements.forEach((element) => {
+        element.remove()
+      })
+
+      const paperElementList = blocksElement.querySelectorAll(`.${cls.paper}`)
+
+      // Remove liquid glass from .pdf
+      paperElementList.forEach((paperElement) => {
+        if (paperElement instanceof HTMLElement === true) {
+          paperElement.style.backgroundColor = 'white'
         }
-
-        blocksElement.style.display = 'inline-flex'
-        blocksElement.style.justifyContent = 'flex-start'
-
-        // remove '+' button at the bottom
-        const openInsertMenuButtonElement = blocksElement.querySelector(
-          `.${cls.openInsertMenuButton}`,
-        )
-
-        if (openInsertMenuButtonElement !== null) {
-          openInsertMenuButtonElement.remove()
-        }
-
-        // remove buttons to the right and to the left from item block and row
-        const actionElements = blocksElement.querySelectorAll(
-          `.${cls.actionsContainer}`,
-        )
-
-        actionElements.forEach((element) => {
-          element.remove()
-        })
-
-        const paperElementList = blocksElement.querySelectorAll(`.${cls.paper}`)
-
-        // Remove liquid glass from .pdf
-        paperElementList.forEach((paperElement) => {
-          if (paperElement instanceof HTMLElement === true) {
-            paperElement.style.backgroundColor = 'white'
-          }
-        })
-      },
+      })
     },
-  )
+  })
 
-  const linkElements = blocksContainerElement.querySelectorAll(
-    `.${cls.tiptapLink}`,
-  )
+  const linkElements = blocksContainerElement.querySelectorAll(`.${cls.tiptapLink}`)
 
   const links: WorkerRequestMessage['links'] = []
 
@@ -157,9 +146,7 @@ export const downloadPdf = async (): Promise<void> => {
 
   worker.postMessage(workerRequestMessage)
 
-  worker.onmessage = (
-    messageEvent: MessageEvent<WorkerResponseMessage>,
-  ): void => {
+  worker.onmessage = (messageEvent: MessageEvent<WorkerResponseMessage>): void => {
     downloadBlobAsFile({
       blob: messageEvent.data.pdfBlob,
       fileName: `quotation - ${reduxHolder.getState().quotation.id}.pdf`,

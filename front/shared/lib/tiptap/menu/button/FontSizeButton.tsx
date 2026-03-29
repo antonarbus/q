@@ -23,9 +23,7 @@ export const FontSizeButton = (): React.JSX.Element => {
   const { editor } = useTiptap()
 
   const isActive = useTiptapState((ctx) =>
-    FONT_SIZES.some((item) =>
-      ctx.editor.isActive('textStyle', { fontSize: item.value }),
-    ),
+    FONT_SIZES.some((item) => ctx.editor.isActive('textStyle', { fontSize: item.value })),
   )
 
   const activeSize = useTiptapState((ctx) => {
@@ -38,8 +36,7 @@ export const FontSizeButton = (): React.JSX.Element => {
     return DEFAULT_SIZE
   })
 
-  const activeSizeLabel =
-    FONT_SIZES.find((size) => size.value === activeSize)?.label ?? '16'
+  const activeSizeLabel = FONT_SIZES.find((size) => size.value === activeSize)?.label ?? '16'
 
   return (
     <MenuButtonWithDropdown
@@ -64,8 +61,7 @@ export const FontSizeButton = (): React.JSX.Element => {
                 event.preventDefault()
               }}
               onClick={() => {
-                const isCurrentSize =
-                  activeSize === item.value && isActive === true
+                const isCurrentSize = activeSize === item.value && isActive === true
 
                 if (isCurrentSize === true) {
                   editor.chain().focus().unsetFontSize().run()
@@ -79,10 +75,7 @@ export const FontSizeButton = (): React.JSX.Element => {
                 padding: '4px 8px',
                 border: 'none',
                 borderRadius: '4px',
-                backgroundColor:
-                  activeSize === item.value && isActive
-                    ? '#efefef'
-                    : 'transparent',
+                backgroundColor: activeSize === item.value && isActive ? '#efefef' : 'transparent',
                 cursor: 'pointer',
                 fontSize: 13,
                 ':hover': {

@@ -18,9 +18,7 @@ export const CutRowIcon = (): React.JSX.Element => {
   const row = useRow()
   const isCopyable = reduxHolder.useSelector((state) => state.copy.isCopyable)
 
-  const isLastRow = reduxHolder.useSelector(
-    selectIsLastRow({ blockIndex: block.index }),
-  )
+  const isLastRow = reduxHolder.useSelector(selectIsLastRow({ blockIndex: block.index }))
 
   const isDeletable = reduxHolder.useSelector((state) => state.copy.isDeletable)
   const disabled = isLastRow || isDeletable === false || isCopyable === false

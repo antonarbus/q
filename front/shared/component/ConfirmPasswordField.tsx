@@ -24,9 +24,7 @@ export const ConfirmPasswordField = (props: Props): React.JSX.Element => {
       Boolean(confirmPasswordSignal.value) &&
       props.isConfirmPasswordOkSignal.value === false
 
-    labelSignal.value = isLabelRedSignal.value
-      ? 'Passwords do not match'
-      : initLabel
+    labelSignal.value = isLabelRedSignal.value ? 'Passwords do not match' : initLabel
   })
 
   return (

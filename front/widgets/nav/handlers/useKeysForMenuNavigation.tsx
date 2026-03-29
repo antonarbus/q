@@ -34,9 +34,7 @@ export const useKeysForMenuNavigation = (): void => {
         const isLastMenuItem = state.nav.hoverIndex === menuItemsQty
 
         if (isLastMenuItem === true) {
-          reduxHolder.dispatch(
-            navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
-          )
+          reduxHolder.dispatch(navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }))
 
           return
         }
@@ -76,9 +74,7 @@ export const useKeysForMenuNavigation = (): void => {
       const shouldGoBack = isNestedMenu && event.key === 'Backspace'
 
       if (shouldGoBack === true) {
-        reduxHolder.dispatch(
-          navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
-        )
+        reduxHolder.dispatch(navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }))
 
         void menuNavigation.goUp()
 
@@ -103,17 +99,14 @@ export const useKeysForMenuNavigation = (): void => {
         const isBackMenuItem = state.nav.hoverIndex === 0 && isNestedMenu
 
         if (isBackMenuItem === true) {
-          reduxHolder.dispatch(
-            navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
-          )
+          reduxHolder.dispatch(navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }))
 
           void menuNavigation.goUp()
 
           return
         }
 
-        const isCloseMenuItem =
-          state.nav.hoverIndex === 0 && isNestedMenu === false
+        const isCloseMenuItem = state.nav.hoverIndex === 0 && isNestedMenu === false
 
         if (isCloseMenuItem === true) {
           reduxHolder.dispatch(navSlice.actions.closeMenu())
@@ -158,13 +151,9 @@ export const useKeysForMenuNavigation = (): void => {
           return
         }
 
-        const isNestedMenuAvailable = Boolean(
-          navItemHovered.current?.nestedItemList,
-        )
+        const isNestedMenuAvailable = Boolean(navItemHovered.current?.nestedItemList)
 
-        reduxHolder.dispatch(
-          navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
-        )
+        reduxHolder.dispatch(navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }))
 
         if (isNestedMenuAvailable === true) {
           void menuNavigation.goDown({ navItemId: navItemIdHovered })
@@ -181,9 +170,7 @@ export const useKeysForMenuNavigation = (): void => {
         const shouldJumpToClose = isNestedMenu === false && event.key === 'c'
 
         if (shouldJumpToClose === true) {
-          reduxHolder.dispatch(
-            navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
-          )
+          reduxHolder.dispatch(navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }))
 
           return
         }
@@ -191,18 +178,14 @@ export const useKeysForMenuNavigation = (): void => {
         const shouldJumpToGoBack = isNestedMenu && event.key === 'b'
 
         if (shouldJumpToGoBack === true) {
-          reduxHolder.dispatch(
-            navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
-          )
+          reduxHolder.dispatch(navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }))
 
           return
         }
 
         // jump to item by letter
         const indexToJump = navItems.findIndex((item, index) => {
-          const isiKeySameAsFirstItemLetter = item.name
-            .toLowerCase()
-            .startsWith(event.key)
+          const isiKeySameAsFirstItemLetter = item.name.toLowerCase().startsWith(event.key)
 
           if (isiKeySameAsFirstItemLetter === false) {
             return false
@@ -226,9 +209,7 @@ export const useKeysForMenuNavigation = (): void => {
         // if no found below hovered item, do it again from the top
         if (indexToJump === -1) {
           const newIndex = navItems.findIndex((item) => {
-            const isiKeySameAsFirstItemLetter = item.name
-              .toLowerCase()
-              .startsWith(event.key)
+            const isiKeySameAsFirstItemLetter = item.name.toLowerCase().startsWith(event.key)
 
             return isiKeySameAsFirstItemLetter
           })

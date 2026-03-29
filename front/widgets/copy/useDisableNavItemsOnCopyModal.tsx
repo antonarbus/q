@@ -38,9 +38,7 @@ export const useDisableNavItemsOnCopyModal = (): void => {
       return
     }
 
-    const isQuotationListPage = window.location.pathname.includes(
-      route.quotationList,
-    )
+    const isQuotationListPage = window.location.pathname.includes(route.quotationList)
 
     if (isQuotationListPage === true) {
       reduxHolder.dispatch(

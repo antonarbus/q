@@ -21,14 +21,11 @@ export const SettingsModal = (): React.JSX.Element => {
   const getFileListStatsQuery = useGetFileListStatsQuery()
 
   const totalSize = useMemo(() => {
-    const size = (getFileListStatsQuery.data?.fileList ?? []).reduce(
-      (accumulator, item) => {
-        const incrementedSum = accumulator + item.size
+    const size = (getFileListStatsQuery.data?.fileList ?? []).reduce((accumulator, item) => {
+      const incrementedSum = accumulator + item.size
 
-        return incrementedSum
-      },
-      0,
-    )
+      return incrementedSum
+    }, 0)
 
     return size
   }, [getFileListStatsQuery.data])
@@ -98,11 +95,7 @@ export const SettingsModal = (): React.JSX.Element => {
                     unitSeparator: ' ',
                   })}
                 </Box>
-                {totalCount > 0 && collapseOpen ? (
-                  <MdExpandLess />
-                ) : (
-                  <MdExpandMore />
-                )}
+                {totalCount > 0 && collapseOpen ? <MdExpandLess /> : <MdExpandMore />}
               </Box>
               <Collapse
                 in={collapseOpen}

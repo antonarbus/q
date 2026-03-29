@@ -11,9 +11,7 @@ type Props = {
   force: boolean | undefined
 }
 
-const detectLockId = async (
-  tfvarsFilePath: string,
-): Promise<string | undefined> => {
+const detectLockId = async (tfvarsFilePath: string): Promise<string | undefined> => {
   try {
     // Try to run terraform plan which will fail if locked
     // Use -input=false to prevent any prompts and -lock-timeout to fail fast
@@ -65,14 +63,9 @@ export const terraformUnlock = async (props: Props): Promise<void> => {
 
   const TERRAFORM_DIR = resolve(__dirname, '../../terraform/infrastructure')
 
-  const TFVARS_FILE_PATH = resolve(
-    __dirname,
-    `../../config/${props.environment}.tfvars`,
-  )
+  const TFVARS_FILE_PATH = resolve(__dirname, `../../config/${props.environment}.tfvars`)
 
-  logger.warning(
-    `Removing Terraform state lock for environment: ${props.environment}`,
-  )
+  logger.warning(`Removing Terraform state lock for environment: ${props.environment}`)
 
   logger.emptyLine()
 

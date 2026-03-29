@@ -2,10 +2,7 @@ import { BOOKMARK_POS_AT_BLOCKS } from '@front/entities/quotation/redux/bookmark
 import { updateBookmarkedRowCellAtStore } from '@front/entities/quotation/redux/updater/updateBookmarkedRowCellAtStore'
 import { updateBookmarkedRowCellWithValue } from '@front/entities/quotation/util/updateBookmarkedRowCellWithValue'
 import { reduxHolder } from '@front/shared/lib/redux'
-import {
-  editorRegistry,
-  getRegistryKey,
-} from '@front/shared/lib/tiptap/editorRegistry'
+import { editorRegistry, getRegistryKey } from '@front/shared/lib/tiptap/editorRegistry'
 import { roundTo } from 'round-to'
 
 export const updatePriceCellAtBookmarkBlock = (): void => {

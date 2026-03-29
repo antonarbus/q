@@ -11,11 +11,7 @@ export const QtyColumn = (): React.JSX.Element => {
   const block = useBlock()
 
   return (
-    <ResizableColumn
-      boqColumnKey='qty'
-      className='th qty resizable'
-      minWidth={columnMinWidth.qty}
-    >
+    <ResizableColumn boqColumnKey='qty' className='th qty resizable' minWidth={columnMinWidth.qty}>
       <TextEditor
         registryKey={getRegistryKey({
           editorName: 'boqBlockQtyColumn',

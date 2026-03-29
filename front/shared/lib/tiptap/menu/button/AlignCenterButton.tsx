@@ -5,9 +5,7 @@ import { RiAlignCenter } from 'react-icons/ri'
 export const AlignCenterButton = (): React.JSX.Element => {
   const { editor } = useTiptap()
 
-  const isActive = useTiptapState((ctx) =>
-    ctx.editor.isActive({ textAlign: 'center' }),
-  )
+  const isActive = useTiptapState((ctx) => ctx.editor.isActive({ textAlign: 'center' }))
 
   return (
     <MenuButton

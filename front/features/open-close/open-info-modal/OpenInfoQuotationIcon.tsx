@@ -5,9 +5,7 @@ import { PiInfoBold } from 'react-icons/pi'
 import { Link } from 'react-router-dom'
 
 export const OpenInfoQuotationIcon = (): React.JSX.Element => {
-  const isCopyModalVisible = reduxHolder.useSelector(
-    (state) => state.copy.isVisible,
-  )
+  const isCopyModalVisible = reduxHolder.useSelector((state) => state.copy.isVisible)
 
   return (
     <Tooltip title='Info'>

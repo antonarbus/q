@@ -37,9 +37,7 @@ export const VisitorListPage = (): React.JSX.Element => {
         <canvas ref={chart.canvasRef} />
       </Box>
       <Box sx={{ height: '20px' }}>
-        {getUniqueDailyVisitorCountQuery.isLoading === true
-          ? 'Loading...'
-          : null}
+        {getUniqueDailyVisitorCountQuery.isLoading === true ? 'Loading...' : null}
       </Box>
       <Box
         sx={{

@@ -1,17 +1,11 @@
-import {
-  filesTable,
-  type SelectFile,
-} from '@back/entity/file/db/filesTableSchema'
+import { filesTable, type SelectFile } from '@back/entity/file/db/filesTableSchema'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entity/user/getUserFromAccessTokenOrThrowUnauthorized'
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { db } from '@back/shared/lib/drizzle/db'
 import { getBucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
-import {
-  type HttpResponse,
-  httpJsonResponse,
-} from '@back/shared/lib/express/httpResponse'
+import { type HttpResponse, httpJsonResponse } from '@back/shared/lib/express/httpResponse'
 import { and, eq } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
 import type { ParsedQs } from 'qs'
@@ -104,10 +98,7 @@ export const deleteFileHandler: RouterHandler = async (req) => {
       const deleteFromDatabasePromise = db
         .delete(filesTable)
         .where(
-          and(
-            eq(filesTable.email, userFromAccessToken.email),
-            eq(filesTable.id, req.params.id),
-          ),
+          and(eq(filesTable.email, userFromAccessToken.email), eq(filesTable.id, req.params.id)),
         )
 
       await Promise.all([deleteFromBucketPromise, deleteFromDatabasePromise])

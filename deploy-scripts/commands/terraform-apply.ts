@@ -14,17 +14,12 @@ export const terraformApply = async (props: Props): Promise<void> => {
 
   const TERRAFORM_DIR = resolve(__dirname, '../../terraform/infrastructure')
 
-  const TFVARS_FILE_PATH = resolve(
-    __dirname,
-    `../../config/${props.environment}.tfvars`,
-  )
+  const TFVARS_FILE_PATH = resolve(__dirname, `../../config/${props.environment}.tfvars`)
 
   logger.info(`Config: ${TFVARS_FILE_PATH}`)
   logger.emptyLine()
 
-  logger.warning(
-    `Deploying main infrastructure for environment: ${props.environment}`,
-  )
+  logger.warning(`Deploying main infrastructure for environment: ${props.environment}`)
 
   logger.emptyLine()
 

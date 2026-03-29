@@ -10,10 +10,7 @@ import { and, eq, ne } from 'drizzle-orm'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
-import {
-  type HttpResponse,
-  httpJsonResponse,
-} from '@back/shared/lib/express/httpResponse'
+import { type HttpResponse, httpJsonResponse } from '@back/shared/lib/express/httpResponse'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
@@ -46,10 +43,7 @@ export const getQuotationCategoriesHandler: RouterHandler = async (req) => {
     .selectDistinct({ category: quotationsTable.category })
     .from(quotationsTable)
     .where(
-      and(
-        eq(quotationsTable.email, userFromAccessToken.email),
-        ne(quotationsTable.category, ''),
-      ),
+      and(eq(quotationsTable.email, userFromAccessToken.email), ne(quotationsTable.category, '')),
     )
     .orderBy(quotationsTable.category)
 

@@ -37,8 +37,7 @@ export const BookmarkModal = (): React.JSX.Element => {
 
   const getBookmarkCategoryListQuery = useGetBookmarkCategoryListQuery()
 
-  const distinctCategoryList =
-    getBookmarkCategoryListQuery.data?.distinctCategoryList ?? []
+  const distinctCategoryList = getBookmarkCategoryListQuery.data?.distinctCategoryList ?? []
 
   return (
     <FormModal

@@ -1,9 +1,6 @@
 import type { BoqColumnKey } from '@back/entity/quotation/schema'
 import { updateColumnCellAtStore } from '@front/entities/quotation/redux/updater/updateColumnCellAtStore'
-import {
-  editorRegistry,
-  getRegistryKey,
-} from '@front/shared/lib/tiptap/editorRegistry'
+import { editorRegistry, getRegistryKey } from '@front/shared/lib/tiptap/editorRegistry'
 
 type Props = {
   blockIndex: number

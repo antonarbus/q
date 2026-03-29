@@ -14,17 +14,12 @@ export const terraformPlan = async (props: Props): Promise<void> => {
 
   const TERRAFORM_DIR = resolve(__dirname, '../../terraform/infrastructure')
 
-  const TFVARS_FILE_PATH = resolve(
-    __dirname,
-    `../../config/${props.environment}.tfvars`,
-  )
+  const TFVARS_FILE_PATH = resolve(__dirname, `../../config/${props.environment}.tfvars`)
 
   logger.info(`Config: ${TFVARS_FILE_PATH}`)
   logger.emptyLine()
 
-  logger.warning(
-    `Planning infrastructure changes for environment: ${props.environment}`,
-  )
+  logger.warning(`Planning infrastructure changes for environment: ${props.environment}`)
 
   logger.emptyLine()
 

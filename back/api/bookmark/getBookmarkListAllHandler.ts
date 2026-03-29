@@ -1,7 +1,4 @@
-import {
-  bookmarksTable,
-  type SelectBookmark,
-} from '@back/entity/bookmark/db/bookmarksTableSchema'
+import { bookmarksTable, type SelectBookmark } from '@back/entity/bookmark/db/bookmarksTableSchema'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entity/user/getUserFromAccessTokenOrThrowUnauthorized'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { db } from '@back/shared/lib/drizzle/db'
@@ -11,10 +8,7 @@ import { z } from 'zod'
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import type { ParamsDictionary } from 'express-serve-static-core'
-import {
-  type HttpResponse,
-  httpJsonResponse,
-} from '@back/shared/lib/express/httpResponse'
+import { type HttpResponse, httpJsonResponse } from '@back/shared/lib/express/httpResponse'
 
 type UrlParam = ParamsDictionary
 type ReqBody = undefined
@@ -69,9 +63,7 @@ export const getBookmarkListAllHandler: RouterHandler = async (req) => {
     }),
   )
 
-  const sortModelParsed = sortModelSchema.safeParse(
-    JSON.parse(req.query.sortModel),
-  )
+  const sortModelParsed = sortModelSchema.safeParse(JSON.parse(req.query.sortModel))
 
   if (sortModelParsed.success === false) {
     throw new Error('Invalid sortModel format', sortModelParsed.error)
@@ -93,9 +85,7 @@ export const getBookmarkListAllHandler: RouterHandler = async (req) => {
 
       return sortedColumn
     })
-    .filter((condition): condition is NonNullable<typeof condition> =>
-      Boolean(condition),
-    )
+    .filter((condition): condition is NonNullable<typeof condition> => Boolean(condition))
 
   const filterModelSchema = z.record(
     z.string(),
@@ -106,9 +96,7 @@ export const getBookmarkListAllHandler: RouterHandler = async (req) => {
     }),
   )
 
-  const filterModelParsed = filterModelSchema.safeParse(
-    JSON.parse(req.query.filterModel),
-  )
+  const filterModelParsed = filterModelSchema.safeParse(JSON.parse(req.query.filterModel))
 
   if (filterModelParsed.success === false) {
     throw new Error('Invalid filterModel format', filterModelParsed.error)
@@ -130,22 +118,16 @@ export const getBookmarkListAllHandler: RouterHandler = async (req) => {
 
       return filterCondition
     })
-    .filter((condition): condition is NonNullable<typeof condition> =>
-      Boolean(condition),
-    )
+    .filter((condition): condition is NonNullable<typeof condition> => Boolean(condition))
 
   // Query all bookmarks (no user filter)
   const baseQuery = db.select().from(bookmarksTable)
 
   const queryWithFilters =
-    filterConditions.length > 0
-      ? baseQuery.where(and(...filterConditions))
-      : baseQuery
+    filterConditions.length > 0 ? baseQuery.where(and(...filterConditions)) : baseQuery
 
   const queryWithSort =
-    sortConditions.length > 0
-      ? queryWithFilters.orderBy(...sortConditions)
-      : queryWithFilters
+    sortConditions.length > 0 ? queryWithFilters.orderBy(...sortConditions) : queryWithFilters
 
   const bookmarkListPromise = queryWithSort
     .offset(Number(req.query.startRow))
@@ -154,19 +136,16 @@ export const getBookmarkListAllHandler: RouterHandler = async (req) => {
   const baseCountQuery = db.select({ count: count() }).from(bookmarksTable)
 
   const countQueryWithFilters =
-    filterConditions.length > 0
-      ? baseCountQuery.where(and(...filterConditions))
-      : baseCountQuery
+    filterConditions.length > 0 ? baseCountQuery.where(and(...filterConditions)) : baseCountQuery
 
   const bookmarkListTotalCountPromise = countQueryWithFilters.then(
     (result) => result[0]?.count ?? 0,
   )
 
-  const [bookmarkListResponse, bookmarkListTotalCountResponse] =
-    await Promise.allSettled([
-      bookmarkListPromise,
-      bookmarkListTotalCountPromise,
-    ])
+  const [bookmarkListResponse, bookmarkListTotalCountResponse] = await Promise.allSettled([
+    bookmarkListPromise,
+    bookmarkListTotalCountPromise,
+  ])
 
   const fulfilled =
     bookmarkListResponse.status === 'fulfilled' &&
@@ -182,13 +161,9 @@ export const getBookmarkListAllHandler: RouterHandler = async (req) => {
     })
   }
 
-  messageList.push(
-    `Found ${bookmarkListTotalCountResponse.value} total bookmarks`,
-  )
+  messageList.push(`Found ${bookmarkListTotalCountResponse.value} total bookmarks`)
 
-  messageList.push(
-    `Returned ${bookmarkListResponse.value.length} bookmarks for current page`,
-  )
+  messageList.push(`Returned ${bookmarkListResponse.value.length} bookmarks for current page`)
 
   return httpJsonResponse({
     statusCode: httpStatusCode.success200,

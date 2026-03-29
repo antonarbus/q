@@ -55,9 +55,7 @@ export const useSaveQuotation = (props: Props): Res => {
 
     if (saveQuotationMutation.isSuccess === true) {
       if (saveQuotationMutation.data.status === 'SAVED') {
-        toast.success(
-          `Saved under id ${saveQuotationMutation.data.quotation.id}`,
-        )
+        toast.success(`Saved under id ${saveQuotationMutation.data.quotation.id}`)
       }
 
       if (saveQuotationMutation.data.status === 'UPDATED') {
@@ -97,9 +95,7 @@ export const useSaveQuotation = (props: Props): Res => {
         await props.slideOut()
 
         const navigateTo =
-          isQuotationsPage === true
-            ? '..'
-            : `/${saveQuotationMutation.data.quotation.id}`
+          isQuotationsPage === true ? '..' : `/${saveQuotationMutation.data.quotation.id}`
 
         void navigate(navigateTo, { replace: true })
       }

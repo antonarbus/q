@@ -1,9 +1,4 @@
-import {
-  createSlice,
-  type PayloadAction,
-  type Reducer,
-  type WritableDraft,
-} from '@reduxjs/toolkit'
+import { createSlice, type PayloadAction, type Reducer, type WritableDraft } from '@reduxjs/toolkit'
 import type { ConfirmationDialogOptions } from './component/ConfirmationDialog'
 
 type InitState = {
@@ -89,10 +84,7 @@ export const appSlice = createSlice({
       state.navigateState.to = undefined
       state.navigateState.shouldSlide = undefined
     },
-    openConfirmationDialog: (
-      state,
-      action: PayloadAction<ConfirmationDialogOptions>,
-    ) => {
+    openConfirmationDialog: (state, action: PayloadAction<ConfirmationDialogOptions>) => {
       state.confirmationDialog = { isOpen: true, ...action.payload }
     },
     closeConfirmationDialog: (state) => {

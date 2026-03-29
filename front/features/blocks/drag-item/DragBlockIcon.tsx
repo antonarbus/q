@@ -8,20 +8,13 @@ import { MdDragIndicator } from 'react-icons/md'
 export const DragBlockIcon = (): React.JSX.Element => {
   const isLastBlock = useIsLastBlock()
 
-  const isCopyModalVisible = reduxHolder.useSelector(
-    (state) => state.copy.isVisible,
-  )
+  const isCopyModalVisible = reduxHolder.useSelector((state) => state.copy.isVisible)
 
   const disabled = isLastBlock || isCopyModalVisible
   const dragHandleProps = useDragHandleProps()
 
   return (
-    <Tooltip
-      enterDelay={500}
-      enterNextDelay={500}
-      placement='left'
-      title='Drag'
-    >
+    <Tooltip enterDelay={500} enterNextDelay={500} placement='left' title='Drag'>
       <span className={cls.actionIconContainer} {...dragHandleProps}>
         <MdDragIndicator
           className={cls.actionIcon}

@@ -1,29 +1,19 @@
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { setRefreshTokenCookie } from '@back/shared/headers'
-import {
-  generateAccessToken,
-  generateRefreshToken,
-} from '@back/shared/lib/json-webtoken'
+import { generateAccessToken, generateRefreshToken } from '@back/shared/lib/json-webtoken'
 import { sendEmail } from '@back/shared/lib/mailersend'
 import { generateId } from '@back/shared/lib/nanoid'
 import bcrypt from 'bcryptjs'
 import type { NextFunction, Request, Response } from 'express'
 import { runtimeConfig } from '@root/config/runtime'
-import {
-  usersTable,
-  type InsertUser,
-  type SelectUser,
-} from '@back/entity/user/db/usersTableSchema'
+import { usersTable, type InsertUser, type SelectUser } from '@back/entity/user/db/usersTableSchema'
 import { db } from '@back/shared/lib/drizzle/db'
 import { and, eq } from 'drizzle-orm'
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
-import {
-  type HttpResponse,
-  httpJsonResponse,
-} from '@back/shared/lib/express/httpResponse'
+import { type HttpResponse, httpJsonResponse } from '@back/shared/lib/express/httpResponse'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
@@ -43,11 +33,7 @@ export type ResBody = {
 
 export type ErrorResBody = {
   message: string
-  errorCode:
-    | ErrorCode
-    | 'ALREADY_EXISTS'
-    | 'ACTIVATION_LINK_NOT_SENT'
-    | 'ACTIVATION_KEY_NOT_ISSUED'
+  errorCode: ErrorCode | 'ALREADY_EXISTS' | 'ACTIVATION_LINK_NOT_SENT' | 'ACTIVATION_KEY_NOT_ISSUED'
 }
 
 type RouterHandler = (
@@ -65,12 +51,7 @@ export const registerUserHandler: RouterHandler = async (req, res) => {
   const [userSelected] = await db
     .select()
     .from(usersTable)
-    .where(
-      and(
-        eq(usersTable.email, emailFromInput),
-        eq(usersTable.isActivated, true),
-      ),
-    )
+    .where(and(eq(usersTable.email, emailFromInput), eq(usersTable.isActivated, true)))
 
   if (userSelected !== undefined) {
     messageList.push('User already exists')

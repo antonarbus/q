@@ -14,15 +14,7 @@ import {
 // may import all components without manual registration
 // import 'chart.js/auto'
 
-Chart.register(
-  BarController,
-  BarElement,
-  CategoryScale,
-  LinearScale,
-  Legend,
-  Title,
-  Tooltip,
-)
+Chart.register(BarController, BarElement, CategoryScale, LinearScale, Legend, Title, Tooltip)
 
 type Res = {
   canvasRef: React.RefObject<HTMLCanvasElement | null>
@@ -38,10 +30,7 @@ export const useChart = (): Res => {
       const ctx = canvasRef.current.getContext('2d')
 
       if (ctx !== null) {
-        chartInstanceRef.current = new Chart(
-          ctx,
-          chartConfigurationForVisitorList,
-        )
+        chartInstanceRef.current = new Chart(ctx, chartConfigurationForVisitorList)
       }
     }
 

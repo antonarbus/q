@@ -7,9 +7,7 @@ export const deleteBlock = (
     id: string
   }>,
 ): undefined => {
-  const blocksWithoutDeletedOne = state.blocks.filter(
-    (block) => block.id !== action.payload.id,
-  )
+  const blocksWithoutDeletedOne = state.blocks.filter((block) => block.id !== action.payload.id)
 
   state.blocks = blocksWithoutDeletedOne
 }

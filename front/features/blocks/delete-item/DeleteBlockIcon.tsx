@@ -16,12 +16,7 @@ export const DeleteBlockIcon = (): React.JSX.Element => {
   const disabled = isBlockAlone || isDeletable === false
 
   return (
-    <Tooltip
-      enterDelay={500}
-      enterNextDelay={500}
-      placement='right'
-      title='Delete'
-    >
+    <Tooltip enterDelay={500} enterNextDelay={500} placement='right' title='Delete'>
       <span className={cls.actionIconContainer}>
         <GoTrash
           className={cls.actionIcon}
@@ -35,8 +30,7 @@ export const DeleteBlockIcon = (): React.JSX.Element => {
               return
             }
 
-            const blockToDelete =
-              reduxHolder.getState().quotation.blocks[block.index]
+            const blockToDelete = reduxHolder.getState().quotation.blocks[block.index]
 
             if (blockToDelete === undefined) {
               return

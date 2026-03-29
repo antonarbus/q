@@ -8,10 +8,7 @@ import { Outlet } from 'react-router-dom'
 import { InfoAndSearchLayout } from './InfoAndSearchLayout'
 
 export const QuotationPage = (): React.JSX.Element => {
-  const blocks = reduxHolder.useSelector(
-    (state) => state.quotation.blocks,
-    arrayShapesEqualityFn,
-  )
+  const blocks = reduxHolder.useSelector((state) => state.quotation.blocks, arrayShapesEqualityFn)
 
   return (
     <>

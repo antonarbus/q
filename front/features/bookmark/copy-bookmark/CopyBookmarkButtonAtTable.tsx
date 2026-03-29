@@ -12,9 +12,7 @@ import { MdCopyAll } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
 
-export const CopyBookmarkButtonAtTable = (
-  props: UrlParam,
-): React.JSX.Element => {
+export const CopyBookmarkButtonAtTable = (props: UrlParam): React.JSX.Element => {
   const getBookmarkMutation = useGetBookmarkMutation()
 
   const [isSpinner, setIsSpinner] = useState(false)
@@ -26,12 +24,7 @@ export const CopyBookmarkButtonAtTable = (
   }, [getBookmarkMutation.isError])
 
   return (
-    <Tooltip
-      enterDelay={500}
-      enterNextDelay={500}
-      placement='bottom'
-      title='Copy'
-    >
+    <Tooltip enterDelay={500} enterNextDelay={500} placement='bottom' title='Copy'>
       <IconButton
         onClick={async (event: React.MouseEvent): Promise<void> => {
           setIsSpinner(true)

@@ -1,9 +1,4 @@
-import {
-  createSlice,
-  type PayloadAction,
-  type Reducer,
-  type WritableDraft,
-} from '@reduxjs/toolkit'
+import { createSlice, type PayloadAction, type Reducer, type WritableDraft } from '@reduxjs/toolkit'
 import type { CopyPlace } from './types'
 import type { BlockItem } from '@back/entity/quotation/schema'
 
@@ -78,10 +73,7 @@ export const copySlice = createSlice({
       state.isCopying = false
       state.place = initialState.place
     },
-    updatePastePos: (
-      state: WritableDraft<InitState>,
-      action: PayloadAction<CopyPlace>,
-    ) => {
+    updatePastePos: (state: WritableDraft<InitState>, action: PayloadAction<CopyPlace>) => {
       const itemIdAndWhereToPlace = action.payload
       state.place = itemIdAndWhereToPlace
     },

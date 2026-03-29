@@ -26,9 +26,7 @@ export const ItemPriceCell = (): React.JSX.Element => {
         })}
         className='td itemPrice'
         placeholder='Item price...'
-        contentGetter={() =>
-          getHtmlOfBookmarkedRowCellFromStoreByIndex({ cellKey: 'itemPrice' })
-        }
+        contentGetter={() => getHtmlOfBookmarkedRowCellFromStoreByIndex({ cellKey: 'itemPrice' })}
         onChange={() => {
           updateItemPriceCellAtBookmarkBlock()
         }}

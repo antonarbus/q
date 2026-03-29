@@ -129,9 +129,7 @@ const router = createBrowserRouter([
       {
         path: ':quotationId?',
         element: (
-          <Suspense
-            fallback={<LoadingDotsOverlay shouldShowLoader text='Loading...' />}
-          >
+          <Suspense fallback={<LoadingDotsOverlay shouldShowLoader text='Loading...' />}>
             <LoadQuotation />
             <QuotationPageLazy />
           </Suspense>
@@ -164,9 +162,7 @@ const router = createBrowserRouter([
       {
         path: route.quotationList,
         element: (
-          <Suspense
-            fallback={<LoadingDotsOverlay shouldShowLoader text='Loading...' />}
-          >
+          <Suspense fallback={<LoadingDotsOverlay shouldShowLoader text='Loading...' />}>
             <QuotationListPageLazy />
           </Suspense>
         ),
@@ -185,9 +181,7 @@ const router = createBrowserRouter([
       {
         path: route.bookmarkList,
         element: (
-          <Suspense
-            fallback={<LoadingDotsOverlay shouldShowLoader text='Loading...' />}
-          >
+          <Suspense fallback={<LoadingDotsOverlay shouldShowLoader text='Loading...' />}>
             <BookmarkListPageLazy />
           </Suspense>
         ),
@@ -202,9 +196,7 @@ const router = createBrowserRouter([
       {
         path: route.userList,
         element: (
-          <Suspense
-            fallback={<LoadingDotsOverlay shouldShowLoader text='Loading...' />}
-          >
+          <Suspense fallback={<LoadingDotsOverlay shouldShowLoader text='Loading...' />}>
             <RequireRoles requiredRoles={['super-admin']}>
               <UserListPageLazy />
             </RequireRoles>
@@ -214,9 +206,7 @@ const router = createBrowserRouter([
       {
         path: route.visitorList,
         element: (
-          <Suspense
-            fallback={<LoadingDotsOverlay shouldShowLoader text='Loading...' />}
-          >
+          <Suspense fallback={<LoadingDotsOverlay shouldShowLoader text='Loading...' />}>
             <RequireRoles requiredRoles={['super-admin']}>
               <VisitorListPageLazy />
             </RequireRoles>
@@ -226,9 +216,7 @@ const router = createBrowserRouter([
       {
         path: route.quotationListAll,
         element: (
-          <Suspense
-            fallback={<LoadingDotsOverlay shouldShowLoader text='Loading...' />}
-          >
+          <Suspense fallback={<LoadingDotsOverlay shouldShowLoader text='Loading...' />}>
             <RequireRoles requiredRoles={['super-admin']}>
               <QuotationListAllPageLazy />
             </RequireRoles>
@@ -238,9 +226,7 @@ const router = createBrowserRouter([
       {
         path: route.bookmarkListAll,
         element: (
-          <Suspense
-            fallback={<LoadingDotsOverlay shouldShowLoader text='Loading...' />}
-          >
+          <Suspense fallback={<LoadingDotsOverlay shouldShowLoader text='Loading...' />}>
             <RequireRoles requiredRoles={['super-admin']}>
               <BookmarkListAllPageLazy />
             </RequireRoles>
@@ -250,9 +236,7 @@ const router = createBrowserRouter([
       {
         path: route.fileListAll,
         element: (
-          <Suspense
-            fallback={<LoadingDotsOverlay shouldShowLoader text='Loading...' />}
-          >
+          <Suspense fallback={<LoadingDotsOverlay shouldShowLoader text='Loading...' />}>
             <RequireRoles requiredRoles={['super-admin']}>
               <FileListAllPageLazy />
             </RequireRoles>

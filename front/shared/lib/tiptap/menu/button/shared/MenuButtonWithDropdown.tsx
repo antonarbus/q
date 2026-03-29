@@ -14,13 +14,10 @@ type Props = {
 export const MenuButtonWithDropdown = (props: Props): React.JSX.Element => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 
-  const handleArrowClick = useCallback(
-    (event: React.MouseEvent<HTMLButtonElement>) => {
-      event.preventDefault()
-      setAnchorEl(event.currentTarget)
-    },
-    [],
-  )
+  const handleArrowClick = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault()
+    setAnchorEl(event.currentTarget)
+  }, [])
 
   const handleClose = useCallback(() => {
     setAnchorEl(null)
@@ -59,11 +56,9 @@ export const MenuButtonWithDropdown = (props: Props): React.JSX.Element => {
             ...baseButtonSx,
             minWidth: '28px',
             padding: '4px 6px',
-            backgroundColor:
-              props.isActive === true ? '#d8d8d87d' : 'transparent',
+            backgroundColor: props.isActive === true ? '#d8d8d87d' : 'transparent',
             ':hover': {
-              backgroundColor:
-                props.isActive === true ? '#d8d8d87d' : '#eaeaea',
+              backgroundColor: props.isActive === true ? '#d8d8d87d' : '#eaeaea',
             },
           }}
         >

@@ -41,9 +41,7 @@ export const UploadFileButton = (): React.JSX.Element | null => {
           if (onUpload !== undefined) {
             const fileArray = Array.from(files)
 
-            const hasImage = fileArray.some((file) =>
-              file.type.startsWith('image/'),
-            )
+            const hasImage = fileArray.some((file) => file.type.startsWith('image/'))
 
             void onUpload({
               editor,

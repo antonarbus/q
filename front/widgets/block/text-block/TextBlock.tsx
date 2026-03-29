@@ -50,9 +50,7 @@ export const TextBlock = (): React.JSX.Element => {
         })}
         className='text'
         placeholder='Add text, tables, drop images, files, links, select to format...'
-        contentGetter={() =>
-          getHtmlOfTextBlockFromStoreByIndex({ blockIndex: block.index })
-        }
+        contentGetter={() => getHtmlOfTextBlockFromStoreByIndex({ blockIndex: block.index })}
         onChange={() => {
           updateTextBlock({ blockIndex: block.index })
         }}

@@ -25,8 +25,7 @@ export const NumberCell = (): React.JSX.Element => {
         paddingBottom: '4px',
       }}
     >
-      {getNumberOfBoqBlocksAbove({ blockIndex: block.index }) + 1}.
-      {row.index + 1}
+      {getNumberOfBoqBlocksAbove({ blockIndex: block.index }) + 1}.{row.index + 1}
     </Box>
   )
 }

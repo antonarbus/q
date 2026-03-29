@@ -32,10 +32,7 @@ export const showHidePricePins = (props: Props): void => {
         return
       }
 
-      document.removeEventListener(
-        'click',
-        props.hidePinsClickHandlerRef.current,
-      )
+      document.removeEventListener('click', props.hidePinsClickHandlerRef.current)
     }
 
     reduxHolder.dispatch(

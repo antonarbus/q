@@ -17,9 +17,7 @@ export const ErrorPage = (): React.JSX.Element => {
       }}
     >
       <h1>Oops!</h1>
-      <p style={{ marginTop: '20px' }}>
-        Sorry, an unexpected error has occurred.
-      </p>
+      <p style={{ marginTop: '20px' }}>Sorry, an unexpected error has occurred.</p>
 
       {/* <p style={{ marginTop: '20px' }}>
         Name

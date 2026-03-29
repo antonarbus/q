@@ -12,19 +12,12 @@ export const OpenInfoBlockModalIcon = (): React.ReactNode => {
   const navigate = useNavigate()
   const block = useBlock()
 
-  const isCopyModalVisible = reduxHolder.useSelector(
-    (state) => state.copy.isVisible,
-  )
+  const isCopyModalVisible = reduxHolder.useSelector((state) => state.copy.isVisible)
 
   const disabled = isCopyModalVisible
 
   return (
-    <Tooltip
-      enterDelay={500}
-      enterNextDelay={500}
-      placement='right'
-      title='Info'
-    >
+    <Tooltip enterDelay={500} enterNextDelay={500} placement='right' title='Info'>
       <span className={cls.actionIconContainer}>
         <HiOutlineInformationCircle
           aria-hidden={false} // otherwise error in dev tools

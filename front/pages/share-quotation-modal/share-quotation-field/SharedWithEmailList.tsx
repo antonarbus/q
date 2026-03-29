@@ -47,10 +47,9 @@ export const SharedWithEmailList = (props: Props): React.ReactNode => {
             key={email}
             label={email}
             onDelete={() => {
-              const userListWithoutDeletedItem =
-                props.accessFormValuesSignal.value.userList.filter(
-                  (emailInArray) => emailInArray !== email,
-                )
+              const userListWithoutDeletedItem = props.accessFormValuesSignal.value.userList.filter(
+                (emailInArray) => emailInArray !== email,
+              )
 
               props.accessFormValuesSignal.value = {
                 level: props.accessFormValuesSignal.value.level,

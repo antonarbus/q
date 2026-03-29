@@ -12,9 +12,7 @@ const movePasteTextItem = (event: MouseEvent): void => {
     return
   }
 
-  const isQuotationListPage = window.location.pathname.includes(
-    route.quotationList,
-  )
+  const isQuotationListPage = window.location.pathname.includes(route.quotationList)
 
   if (isQuotationListPage === true) {
     return
@@ -81,8 +79,7 @@ const movePasteTextItem = (event: MouseEvent): void => {
   const isNarrowGapUnderNav = event.clientY > 100
 
   const isCursorAboveUnderNavDuringCopy =
-    isNarrowGapUnderNav &&
-    reduxHolder.getState().copy.isPasteTextShown === false
+    isNarrowGapUnderNav && reduxHolder.getState().copy.isPasteTextShown === false
 
   if (isCursorAboveUnderNavDuringCopy === true) {
     const [firstBlock] = reduxHolder.getState().quotation.blocks
@@ -113,8 +110,7 @@ const movePasteTextItem = (event: MouseEvent): void => {
   })
 
   const stillMayPasteToTheSamePlace =
-    isEqual(pastePlace, prevPlace) &&
-    reduxHolder.getState().copy.isPasteTextShown
+    isEqual(pastePlace, prevPlace) && reduxHolder.getState().copy.isPasteTextShown
 
   if (stillMayPasteToTheSamePlace === true) {
     return
@@ -175,8 +171,7 @@ const movePasteTextRow = (event: MouseEvent): void => {
   })
 
   const shouldPasteToSamePlace =
-    isEqual(pastePlace, prevPlace) &&
-    reduxHolder.getState().copy.isPasteTextShown
+    isEqual(pastePlace, prevPlace) && reduxHolder.getState().copy.isPasteTextShown
 
   if (shouldPasteToSamePlace === true) {
     return
@@ -187,9 +182,7 @@ const movePasteTextRow = (event: MouseEvent): void => {
 }
 
 export const useMovePasteText = (): void => {
-  const typeOfNextPasteItem = reduxHolder.useSelector(
-    (state) => state.copy.items.at(0)?.type,
-  )
+  const typeOfNextPasteItem = reduxHolder.useSelector((state) => state.copy.items.at(0)?.type)
 
   const isBlock =
     typeOfNextPasteItem === 'boq' ||

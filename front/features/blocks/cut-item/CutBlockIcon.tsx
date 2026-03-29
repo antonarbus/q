@@ -30,8 +30,7 @@ export const CutBlockIcon = (): React.JSX.Element => {
 
             saveBlockHeightByIndex({ blockIndex: block.index })
 
-            const blockToCut =
-              reduxHolder.getState().quotation.blocks[block.index]
+            const blockToCut = reduxHolder.getState().quotation.blocks[block.index]
 
             if (blockToCut === undefined) {
               return
@@ -60,13 +59,9 @@ export const CutBlockIcon = (): React.JSX.Element => {
 
             const html = getCleanPaperHtml({ paperElement })
 
-            reduxHolder.dispatch(
-              copySlice.actions.addItem({ item: blockToCut, preview: html }),
-            )
+            reduxHolder.dispatch(copySlice.actions.addItem({ item: blockToCut, preview: html }))
 
-            reduxHolder.dispatch(
-              quotationSlice.actions.deleteBlock({ id: blockToCut.id }),
-            )
+            reduxHolder.dispatch(quotationSlice.actions.deleteBlock({ id: blockToCut.id }))
 
             // Deferred so React re-renders first. The editor registry is keyed by blockIndex —
             // removing a block shifts the price block's index, and its editor stays registered

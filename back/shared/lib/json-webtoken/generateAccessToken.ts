@@ -8,18 +8,14 @@ type Res = {
   expiresOn: string
 }
 
-export const generateAccessToken = async (
-  payload: JwtPayloadExtended,
-): Promise<Res> => {
+export const generateAccessToken = async (payload: JwtPayloadExtended): Promise<Res> => {
   const JWT_ACCESS_SECRET = await getSecret('JWT_ACCESS_SECRET')
 
   const value = jwt.sign(payload, JWT_ACCESS_SECRET, {
     expiresIn: FIFTEEN_MIN_IN_SEC,
   })
 
-  const expiresOn = new Date(
-    Date.now() + FIFTEEN_MIN_IN_SEC * 1000,
-  ).toISOString()
+  const expiresOn = new Date(Date.now() + FIFTEEN_MIN_IN_SEC * 1000).toISOString()
 
   const accessToken = {
     value,

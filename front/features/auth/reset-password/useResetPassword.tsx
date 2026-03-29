@@ -55,9 +55,7 @@ export const useResetPassword = (props: Props): Res => {
         }),
       )
 
-      reduxHolder.dispatch(
-        navSlice.actions.hideNavItems({ navItemIds: [navItemId.login] }),
-      )
+      reduxHolder.dispatch(navSlice.actions.hideNavItems({ navItemIds: [navItemId.login] }))
 
       reduxHolder.dispatch(
         navSlice.actions.showNavItems({
@@ -77,19 +75,13 @@ export const useResetPassword = (props: Props): Res => {
 
   useUpdateEffect(() => {
     if (resetUserPasswordMutation.isError === true) {
-      if (
-        resetUserPasswordMutation.error.response?.data.errorCode ===
-        'INCORRECT_RESET_KEY'
-      ) {
+      if (resetUserPasswordMutation.error.response?.data.errorCode === 'INCORRECT_RESET_KEY') {
         toast.warning('Incorrect reset key')
 
         return
       }
 
-      if (
-        resetUserPasswordMutation.error.response?.data.errorCode ===
-        'NOT_ACTIVATED'
-      ) {
+      if (resetUserPasswordMutation.error.response?.data.errorCode === 'NOT_ACTIVATED') {
         toast.warning('Account not activated')
 
         return
@@ -105,8 +97,7 @@ export const useResetPassword = (props: Props): Res => {
     resetUserPasswordMutation.mutate({
       password: props.passwordSignal.value,
       email: urlParams.email ?? 'email is missing',
-      resetPasswordKey:
-        urlParams.resetPasswordKey ?? 'resetPasswordKey is missing',
+      resetPasswordKey: urlParams.resetPasswordKey ?? 'resetPasswordKey is missing',
     })
   }
 

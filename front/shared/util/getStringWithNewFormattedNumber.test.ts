@@ -103,8 +103,7 @@ describe('#getStringWithNewFormattedNumber', () => {
 
   test('handles complex HTML structure', () => {
     const result = getStringWithNewFormattedNumber({
-      string:
-        '<div class="price"><strong>99.99</strong> <span class="currency">EUR</span></div>',
+      string: '<div class="price"><strong>99.99</strong> <span class="currency">EUR</span></div>',
       newNumber: 150.5,
     })
 

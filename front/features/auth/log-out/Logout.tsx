@@ -33,15 +33,11 @@ export const Logout = (): React.ReactNode => {
       deleteQuotationListCache()
       deleteBookmarkListCache()
 
-      reduxHolder.dispatch(
-        userSlice.actions.setAccessToken({ accessToken: null }),
-      )
+      reduxHolder.dispatch(userSlice.actions.setAccessToken({ accessToken: null }))
 
       reduxHolder.dispatch(userSlice.actions.forgetLoggedUser())
 
-      reduxHolder.dispatch(
-        navSlice.actions.showNavItems({ navItemIds: [navItemId.login] }),
-      )
+      reduxHolder.dispatch(navSlice.actions.showNavItems({ navItemIds: [navItemId.login] }))
 
       reduxHolder.dispatch(
         navSlice.actions.hideNavItems({
@@ -49,9 +45,7 @@ export const Logout = (): React.ReactNode => {
         }),
       )
 
-      reduxHolder.dispatch(
-        navSlice.actions.hideNavItems({ navItemIds: ['admin'] }),
-      )
+      reduxHolder.dispatch(navSlice.actions.hideNavItems({ navItemIds: ['admin'] }))
 
       setTimeout(() => {
         reduxHolder.dispatch(appSlice.actions.hideLoadingOverlay())

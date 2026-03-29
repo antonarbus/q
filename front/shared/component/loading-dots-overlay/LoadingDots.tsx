@@ -32,9 +32,7 @@ export const LoadingDots = (props: Props): React.JSX.Element => (
             margin: `0 ${props.margin ?? '1rem'}`,
             background: props.background ?? '#fff',
             borderRadius: '50%',
-            animation: `${
-              props.duration ?? '0.8s'
-            } ${bounceLoading} infinite alternate`,
+            animation: `${props.duration ?? '0.8s'} ${bounceLoading} infinite alternate`,
             '&:nth-of-type(2n + 0)': { animationDelay: '0.3s' },
             '&:nth-of-type(3n + 0)': { animationDelay: '0.6s' },
           }}

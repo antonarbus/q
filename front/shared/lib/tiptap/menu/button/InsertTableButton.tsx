@@ -10,11 +10,7 @@ export const InsertTableButton = (): React.JSX.Element => {
       isActive={false}
       title='Insert table'
       onClick={() => {
-        editor
-          .chain()
-          .focus()
-          .insertTable({ rows: 3, cols: 3, withHeaderRow: true })
-          .run()
+        editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run()
       }}
     >
       <CiViewTable />

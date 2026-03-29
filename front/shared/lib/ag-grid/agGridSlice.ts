@@ -1,9 +1,4 @@
-import {
-  createSlice,
-  type PayloadAction,
-  type Reducer,
-  type WritableDraft,
-} from '@reduxjs/toolkit'
+import { createSlice, type PayloadAction, type Reducer, type WritableDraft } from '@reduxjs/toolkit'
 
 type InitState = {
   displayedRowsCount: number

@@ -6,12 +6,9 @@ export const useIsPasteHere = (): boolean => {
   const pastePos = reduxHolder.useSelector((state) => state.copy.place.pastePos)
   const pasteItemId = reduxHolder.useSelector((state) => state.copy.place.id)
 
-  const isPasteTextShown = reduxHolder.useSelector(
-    (state) => state.copy.isPasteTextShown,
-  )
+  const isPasteTextShown = reduxHolder.useSelector((state) => state.copy.isPasteTextShown)
 
-  const isPasteHere =
-    isPasteTextShown && row.item.id === pasteItemId && pastePos === 'middle'
+  const isPasteHere = isPasteTextShown && row.item.id === pasteItemId && pastePos === 'middle'
 
   return isPasteHere
 }

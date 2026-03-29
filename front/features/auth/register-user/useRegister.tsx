@@ -46,13 +46,9 @@ export const useRegister = (props: Props): Res => {
         }),
       )
 
-      reduxHolder.dispatch(
-        navSlice.actions.hideNavItems({ navItemIds: [navItemId.login] }),
-      )
+      reduxHolder.dispatch(navSlice.actions.hideNavItems({ navItemIds: [navItemId.login] }))
 
-      reduxHolder.dispatch(
-        navSlice.actions.showNavItems({ navItemIds: [navItemId.profile] }),
-      )
+      reduxHolder.dispatch(navSlice.actions.showNavItems({ navItemIds: [navItemId.profile] }))
 
       const slideOutAndChangeUrl = async (): Promise<void> => {
         await asyncDelay(1000)
@@ -76,27 +72,19 @@ export const useRegister = (props: Props): Res => {
 
   useUpdateEffect(() => {
     if (registerUserMutation.isError === true) {
-      if (
-        registerUserMutation.error.response?.data.errorCode === 'ALREADY_EXISTS'
-      ) {
+      if (registerUserMutation.error.response?.data.errorCode === 'ALREADY_EXISTS') {
         toast.info('Already registered')
 
         return
       }
 
-      if (
-        registerUserMutation.error.response?.data.errorCode ===
-        'ACTIVATION_KEY_NOT_ISSUED'
-      ) {
+      if (registerUserMutation.error.response?.data.errorCode === 'ACTIVATION_KEY_NOT_ISSUED') {
         toast.warning('Something went wrong, activation key was not issued')
 
         return
       }
 
-      if (
-        registerUserMutation.error.response?.data.errorCode ===
-        'ACTIVATION_LINK_NOT_SENT'
-      ) {
+      if (registerUserMutation.error.response?.data.errorCode === 'ACTIVATION_LINK_NOT_SENT') {
         toast.warning('Something went wrong, activation key was not sent')
 
         return

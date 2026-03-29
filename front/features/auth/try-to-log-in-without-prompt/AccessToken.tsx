@@ -20,9 +20,7 @@ if (typeof Promise.withResolvers !== 'function') {
   throw new Error('old browser, please update')
 }
 
-export const getAccessTokenDeferred = Promise.withResolvers<
-  'fetched' | 'failed'
->()
+export const getAccessTokenDeferred = Promise.withResolvers<'fetched' | 'failed'>()
 
 const loadingMenuIconMachine = createLoadingMenuIconMachine({
   navItemId: navItemId.login,
@@ -56,9 +54,7 @@ export const AccessToken = (): React.ReactNode => {
 
   useUpdateEffect(() => {
     if (getUserAccessTokenQuery.isSuccess === true) {
-      const jwtPayload = jwtDecode<JwtPayloadExtended>(
-        getUserAccessTokenQuery.data.accessJwtToken,
-      )
+      const jwtPayload = jwtDecode<JwtPayloadExtended>(getUserAccessTokenQuery.data.accessJwtToken)
 
       reduxHolder.dispatch(
         userSlice.actions.setAccessToken({
@@ -80,9 +76,7 @@ export const AccessToken = (): React.ReactNode => {
         }),
       )
 
-      reduxHolder.dispatch(
-        navSlice.actions.hideNavItems({ navItemIds: [navItemId.login] }),
-      )
+      reduxHolder.dispatch(navSlice.actions.hideNavItems({ navItemIds: [navItemId.login] }))
 
       reduxHolder.dispatch(
         navSlice.actions.showNavItems({
@@ -93,15 +87,11 @@ export const AccessToken = (): React.ReactNode => {
       const isSuperAdmin = jwtPayload.roles.includes('super-admin')
 
       if (isSuperAdmin === true) {
-        reduxHolder.dispatch(
-          navSlice.actions.showNavItems({ navItemIds: ['admin'] }),
-        )
+        reduxHolder.dispatch(navSlice.actions.showNavItems({ navItemIds: ['admin'] }))
 
         reduxHolder.dispatch(navSlice.actions.showAdminIcon())
       } else {
-        reduxHolder.dispatch(
-          navSlice.actions.hideNavItems({ navItemIds: ['admin'] }),
-        )
+        reduxHolder.dispatch(navSlice.actions.hideNavItems({ navItemIds: ['admin'] }))
 
         reduxHolder.dispatch(navSlice.actions.showUserIcon())
       }
@@ -128,9 +118,7 @@ export const AccessToken = (): React.ReactNode => {
 
       reduxHolder.dispatch(userSlice.actions.forgetLoggedUser())
 
-      reduxHolder.dispatch(
-        navSlice.actions.showNavItems({ navItemIds: [navItemId.login] }),
-      )
+      reduxHolder.dispatch(navSlice.actions.showNavItems({ navItemIds: [navItemId.login] }))
 
       reduxHolder.dispatch(
         navSlice.actions.hideNavItems({

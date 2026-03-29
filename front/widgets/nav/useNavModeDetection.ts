@@ -6,9 +6,7 @@ import { useWindowSize } from 'react-use'
 export const useNavModeDetection = (): React.RefObject<HTMLElement | null> => {
   const navRef = useRef<HTMLElement | null>(null)
 
-  const navStructure = reduxHolder.useSelector(
-    (state) => state.nav.navStructure,
-  )
+  const navStructure = reduxHolder.useSelector((state) => state.nav.navStructure)
 
   const navMode = reduxHolder.useSelector((state) => state.nav.navMode)
   const windowSize = useWindowSize()
@@ -26,16 +24,13 @@ export const useNavModeDetection = (): React.RefObject<HTMLElement | null> => {
 
     nav.dataset.navMode = navMode
 
-    const shouldStepDown =
-      nav.scrollWidth > nav.clientWidth && navMode !== 'hamburger'
+    const shouldStepDown = nav.scrollWidth > nav.clientWidth && navMode !== 'hamburger'
 
     if (shouldStepDown === true) {
       if (navMode === 'full') {
         reduxHolder.dispatch(navSlice.actions.setNavMode({ mode: 'text-only' }))
       } else if (navMode === 'text-only') {
-        reduxHolder.dispatch(
-          navSlice.actions.setNavMode({ mode: 'icons-only' }),
-        )
+        reduxHolder.dispatch(navSlice.actions.setNavMode({ mode: 'icons-only' }))
       } else if (navMode === 'icons-only') {
         reduxHolder.dispatch(navSlice.actions.setNavMode({ mode: 'hamburger' }))
       } else {

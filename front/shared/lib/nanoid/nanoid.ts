@@ -1,8 +1,6 @@
 import { customAlphabet } from 'nanoid'
 
-const nanoid = customAlphabet(
-  '123456789abcdefghijkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ',
-)
+const nanoid = customAlphabet('123456789abcdefghijkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ')
 
 type Props = {
   size?: number

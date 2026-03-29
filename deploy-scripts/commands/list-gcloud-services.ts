@@ -5,9 +5,7 @@ import { logger } from '../lib/output/logger'
 /** List all enabled Google Cloud services for the project */
 export const listGcloudServices = async (): Promise<void> => {
   try {
-    logger.info(
-      `Listing enabled services for project: ${sharedInfraConfig.projectId}`,
-    )
+    logger.info(`Listing enabled services for project: ${sharedInfraConfig.projectId}`)
 
     const output =
       await $`gcloud services list --enabled --project=${sharedInfraConfig.projectId}`.text()

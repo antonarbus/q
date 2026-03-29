@@ -38,24 +38,16 @@ export const createLoadingMenuIconMachine = (props: Props) =>
         )
       },
       'show error icon': () => {
-        reduxHolder.dispatch(
-          navSlice.actions.showErrorIcon({ navItemId: props.navItemId }),
-        )
+        reduxHolder.dispatch(navSlice.actions.showErrorIcon({ navItemId: props.navItemId }))
       },
       'hide error icon': () => {
-        reduxHolder.dispatch(
-          navSlice.actions.hideErrorIcon({ navItemId: props.navItemId }),
-        )
+        reduxHolder.dispatch(navSlice.actions.hideErrorIcon({ navItemId: props.navItemId }))
       },
       'show success icon': () => {
-        reduxHolder.dispatch(
-          navSlice.actions.showSuccessIcon({ navItemId: props.navItemId }),
-        )
+        reduxHolder.dispatch(navSlice.actions.showSuccessIcon({ navItemId: props.navItemId }))
       },
       'hide success icon': () => {
-        reduxHolder.dispatch(
-          navSlice.actions.hideSuccessIcon({ navItemId: props.navItemId }),
-        )
+        reduxHolder.dispatch(navSlice.actions.hideSuccessIcon({ navItemId: props.navItemId }))
       },
     },
   }).createMachine({

@@ -56,25 +56,14 @@ export const useMenuAnimation = (props: Props): MenuNavigation => {
     return 0
   }
 
-  const goDownInMenu = async ({
-    navItemId,
-  }: {
-    navItemId: NavItemId
-  }): Promise<void> => {
-    if (
-      props.currentMenuRef.current !== null &&
-      props.nextMenuRef.current !== null
-    ) {
+  const goDownInMenu = async ({ navItemId }: { navItemId: NavItemId }): Promise<void> => {
+    if (props.currentMenuRef.current !== null && props.nextMenuRef.current !== null) {
       isGoingDown.current = true
 
       reduxHolder.dispatch(navSlice.actions.goDownInNextMenu({ navItemId }))
 
       await Promise.all([
-        animate(
-          props.currentMenuRef.current,
-          { x: ['0%', '-100%'] },
-          { duration },
-        ),
+        animate(props.currentMenuRef.current, { x: ['0%', '-100%'] }, { duration }),
         animate(props.nextMenuRef.current, { x: ['100%', '0'] }, { duration }),
       ])
 
@@ -83,25 +72,14 @@ export const useMenuAnimation = (props: Props): MenuNavigation => {
   }
 
   const goUpInMenu = async (): Promise<void> => {
-    if (
-      props.currentMenuRef.current !== null &&
-      props.nextMenuRef.current !== null
-    ) {
+    if (props.currentMenuRef.current !== null && props.nextMenuRef.current !== null) {
       isGoingDown.current = false
 
       reduxHolder.dispatch(navSlice.actions.goUpInCurrentMenu())
 
       await Promise.all([
-        animate(
-          props.currentMenuRef.current,
-          { x: ['-100%', '0%'] },
-          { duration },
-        ),
-        animate(
-          props.nextMenuRef.current,
-          { x: ['0%', ' 100%'] },
-          { duration },
-        ),
+        animate(props.currentMenuRef.current, { x: ['-100%', '0%'] }, { duration }),
+        animate(props.nextMenuRef.current, { x: ['0%', ' 100%'] }, { duration }),
       ])
 
       reduxHolder.dispatch(navSlice.actions.goUpInNextMenu())

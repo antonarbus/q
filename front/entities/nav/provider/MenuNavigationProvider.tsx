@@ -29,17 +29,11 @@ export const MenuNavigationProvider = (props: Props): React.JSX.Element => {
   const nextMenuRef = useRef<React.ComponentRef<'div'> | null>(null)
   const fakeMenuRef = useRef<React.ComponentRef<'div'> | null>(null)
 
-  const currentMenuNavItemId = reduxHolder.useSelector(
-    (state) => state.nav.currentMenuNavItemId,
-  )
+  const currentMenuNavItemId = reduxHolder.useSelector((state) => state.nav.currentMenuNavItemId)
 
-  const nextMenuNavItemId = reduxHolder.useSelector(
-    (state) => state.nav.nextMenuNavItemId,
-  )
+  const nextMenuNavItemId = reduxHolder.useSelector((state) => state.nav.nextMenuNavItemId)
 
-  const idsToCurrentMenuItems = reduxHolder.useSelector(
-    (state) => state.nav.idsToCurrentMenuItems,
-  )
+  const idsToCurrentMenuItems = reduxHolder.useSelector((state) => state.nav.idsToCurrentMenuItems)
 
   const menuAnimation = useMenuAnimation({
     currentMenuRef,
@@ -85,9 +79,7 @@ export const useMenuNavigation = (): MenuNavigation => {
   const context = useContext(MenuNavigationContext)
 
   if (context === null) {
-    throw new Error(
-      'useMenuNavigation must be used within a MenuNavigationProvider',
-    )
+    throw new Error('useMenuNavigation must be used within a MenuNavigationProvider')
   }
 
   return context

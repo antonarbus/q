@@ -39,30 +39,21 @@ export const useActivate = (): Res => {
         }),
       )
 
-      reduxHolder.dispatch(
-        navSlice.actions.hideNavItems({ navItemIds: [navItemId.login] }),
-      )
+      reduxHolder.dispatch(navSlice.actions.hideNavItems({ navItemIds: [navItemId.login] }))
 
-      reduxHolder.dispatch(
-        navSlice.actions.showNavItems({ navItemIds: [navItemId.profile] }),
-      )
+      reduxHolder.dispatch(navSlice.actions.showNavItems({ navItemIds: [navItemId.profile] }))
     }
   }, [activateUserMutation.isSuccess])
 
   useUpdateEffect(() => {
     if (activateUserMutation.isError === true) {
-      if (
-        activateUserMutation.error.response?.data.errorCode === 'KEY_NOT_FOUND'
-      ) {
+      if (activateUserMutation.error.response?.data.errorCode === 'KEY_NOT_FOUND') {
         toast.warning('Activation key not found')
 
         return
       }
 
-      if (
-        activateUserMutation.error.response?.data.errorCode ===
-        'ALREADY_ACTIVATED'
-      ) {
+      if (activateUserMutation.error.response?.data.errorCode === 'ALREADY_ACTIVATED') {
         toast.info('Already activated')
 
         return

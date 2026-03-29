@@ -8,8 +8,7 @@ export const ResizableImage = Image.extend({
   addNodeView() {
     const createNodeView = this.parent?.()
 
-    const isNodeViewMissing =
-      createNodeView === null || createNodeView === undefined
+    const isNodeViewMissing = createNodeView === null || createNodeView === undefined
 
     if (isNodeViewMissing === true) {
       return null
@@ -54,8 +53,7 @@ export const ResizableImage = Image.extend({
       const originalUpdate = nodeView.update?.bind(nodeView)
 
       nodeView.update = (node, decorations, innerDecorations): boolean => {
-        const result =
-          originalUpdate?.(node, decorations, innerDecorations) ?? true
+        const result = originalUpdate?.(node, decorations, innerDecorations) ?? true
 
         if (result === true) {
           if (nodeView.dom instanceof HTMLElement === false) {

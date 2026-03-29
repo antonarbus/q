@@ -25,8 +25,7 @@ const searchForShortcutsInNavStructure = (props: Props): void => {
 
   arrForNavStructureIteration.forEach((navItem) => {
     if (navItem.shortcut !== undefined) {
-      const func =
-        navItem.funcId === undefined ? null : functionRegistry[navItem.funcId]
+      const func = navItem.funcId === undefined ? null : functionRegistry[navItem.funcId]
 
       shortcuts.push({
         name: navItem.name,
@@ -65,8 +64,7 @@ export const usePressNavShortcut = (props: Props): void => {
 
     window.addEventListener('keydown', (event) => {
       // Only handle real keyboard events
-      const isRealKeyboardEvent =
-        typeof event.key === 'string' && event.key !== ''
+      const isRealKeyboardEvent = typeof event.key === 'string' && event.key !== ''
 
       if (isRealKeyboardEvent === false) {
         return
@@ -108,8 +106,7 @@ export const usePressNavShortcut = (props: Props): void => {
 
     window.addEventListener('keyup', (event) => {
       // Only handle real keyboard events
-      const isRealKeyboardEvent =
-        typeof event.key === 'string' && event.key !== ''
+      const isRealKeyboardEvent = typeof event.key === 'string' && event.key !== ''
 
       if (isRealKeyboardEvent === false) {
         return
@@ -117,9 +114,7 @@ export const usePressNavShortcut = (props: Props): void => {
 
       const keyReleased = event.key.toLowerCase()
 
-      keysAreBeingPressed = keysAreBeingPressed.filter(
-        (key) => key !== keyReleased,
-      )
+      keysAreBeingPressed = keysAreBeingPressed.filter((key) => key !== keyReleased)
     })
   })
 }

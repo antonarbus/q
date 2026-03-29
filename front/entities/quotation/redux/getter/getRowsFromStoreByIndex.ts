@@ -5,9 +5,7 @@ type Props = {
   blockIndex: number
 }
 
-export const getRowsFromStoreByIndex = (
-  props: Props,
-): RowBlock[] | undefined => {
+export const getRowsFromStoreByIndex = (props: Props): RowBlock[] | undefined => {
   const boqBlock = getBoqBlockFromStoreByIndex({ blockIndex: props.blockIndex })
 
   if (boqBlock === undefined) {

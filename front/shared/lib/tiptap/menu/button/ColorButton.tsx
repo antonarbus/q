@@ -21,9 +21,7 @@ export const ColorButton = (): React.JSX.Element => {
   const { editor } = useTiptap()
 
   const isActive = useTiptapState((ctx) =>
-    TEXT_COLORS.some((item) =>
-      ctx.editor.isActive('textStyle', { color: item.color }),
-    ),
+    TEXT_COLORS.some((item) => ctx.editor.isActive('textStyle', { color: item.color })),
   )
 
   const activeColor = useTiptapState((ctx) => {

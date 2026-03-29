@@ -1,9 +1,6 @@
 import { bookmarksTable } from '@back/entity/bookmark/db/bookmarksTableSchema'
 import { quotationsTable } from '@back/entity/quotation/db/quotationsTableSchema'
-import {
-  type SelectUser,
-  usersTable,
-} from '@back/entity/user/db/usersTableSchema'
+import { type SelectUser, usersTable } from '@back/entity/user/db/usersTableSchema'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { db } from '@back/shared/lib/drizzle/db'
 import { eq } from 'drizzle-orm'
@@ -11,10 +8,7 @@ import type { NextFunction, Request, Response } from 'express'
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import type { ParsedQs } from 'qs'
-import {
-  type HttpResponse,
-  httpJsonResponse,
-} from '@back/shared/lib/express/httpResponse'
+import { type HttpResponse, httpJsonResponse } from '@back/shared/lib/express/httpResponse'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entity/user/getUserFromAccessTokenOrThrowUnauthorized'
 
 type SearchQuery = ParsedQs
@@ -73,9 +67,7 @@ export const deleteUserHandler: RouterHandler = async (req) => {
 
   // delete from db
 
-  const deleteUserResponse = await db
-    .delete(usersTable)
-    .where(eq(usersTable.email, req.params.id))
+  const deleteUserResponse = await db.delete(usersTable).where(eq(usersTable.email, req.params.id))
 
   if (deleteUserResponse.rowCount === 0) {
     statistics.push(`${req.params.id} was not found in database ❌`)
@@ -90,9 +82,7 @@ export const deleteUserHandler: RouterHandler = async (req) => {
   if (deleteQuotationsResult.rowCount === 0) {
     statistics.push(`quotations were not found in database ❌`)
   } else {
-    statistics.push(
-      `${deleteQuotationsResult.rowCount} quotations were deleted from database ✅`,
-    )
+    statistics.push(`${deleteQuotationsResult.rowCount} quotations were deleted from database ✅`)
   }
 
   const deleteBookmarkResponse = await db
@@ -102,9 +92,7 @@ export const deleteUserHandler: RouterHandler = async (req) => {
   if (deleteBookmarkResponse.rowCount === 0) {
     statistics.push(`bookmarks were not found in database ❌`)
   } else {
-    statistics.push(
-      `${deleteBookmarkResponse.rowCount} bookmarks were deleted from database ✅`,
-    )
+    statistics.push(`${deleteBookmarkResponse.rowCount} bookmarks were deleted from database ✅`)
   }
 
   // delete quotations from bucket

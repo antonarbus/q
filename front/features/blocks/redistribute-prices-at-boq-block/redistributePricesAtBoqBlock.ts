@@ -7,10 +7,7 @@ import { updateSubTotalPriceWithValue } from '@front/entities/quotation/util/upd
 import type { Editor } from '@tiptap/react'
 import { roundTo } from 'round-to'
 import { toast } from 'sonner'
-import {
-  editorRegistry,
-  getRegistryKey,
-} from '@front/shared/lib/tiptap/editorRegistry'
+import { editorRegistry, getRegistryKey } from '@front/shared/lib/tiptap/editorRegistry'
 
 type Props = {
   blockIndex: number
@@ -76,16 +73,12 @@ export const redistributePricesAtBoqBlock = (props: Props): void => {
   }[]
 
   const prices: Prices = rows.map((row, index) => {
-    const newValue =
-      row.price.value * (unpinnedPricesSumTarget / unpinnedPricesSum)
+    const newValue = row.price.value * (unpinnedPricesSumTarget / unpinnedPricesSum)
 
     return {
       oldValue: row.price.value,
       isPinned: row.price.pin.isPinned,
-      newValue:
-        row.price.pin.isPinned === true
-          ? row.price.value
-          : roundTo(newValue, 2),
+      newValue: row.price.pin.isPinned === true ? row.price.value : roundTo(newValue, 2),
       editor:
         editorRegistry.get(
           getRegistryKey({
@@ -111,9 +104,7 @@ export const redistributePricesAtBoqBlock = (props: Props): void => {
   }
 
   if (unpinnedPricesSum === 0) {
-    toast.info(
-      'Unpinned prices give zero. Impossible to adjust individual prices.',
-    )
+    toast.info('Unpinned prices give zero. Impossible to adjust individual prices.')
 
     updateSubTotalPriceWithValue({
       blockIndex: props.blockIndex,

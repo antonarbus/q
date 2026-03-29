@@ -24,9 +24,7 @@ export const MenuItem = (props: Props): React.JSX.Element => {
   const location = useLocation()
   const menuNavigation = useMenuNavigation()
 
-  const isHovered = reduxHolder.useSelector(
-    (state) => state.nav.hoverIndex === props.hoverIndex,
-  )
+  const isHovered = reduxHolder.useSelector((state) => state.nav.hoverIndex === props.hoverIndex)
 
   const isNextMenuAvailable = Boolean(props.navItem.nestedItemList)
   const link = props.navItem.link ?? ''
@@ -38,22 +36,13 @@ export const MenuItem = (props: Props): React.JSX.Element => {
 
   const to = link.includes('.') ? fixedLink : link
 
-  const icon =
-    props.navItem.iconId === undefined
-      ? undefined
-      : iconRegistry[props.navItem.iconId]
+  const icon = props.navItem.iconId === undefined ? undefined : iconRegistry[props.navItem.iconId]
 
   const menuItemContent = (
     <>
-      {Boolean(props.navItem.iconId) && props.navItem.isLoading === true ? (
-        <SpinnerIcon />
-      ) : null}
-      {Boolean(props.navItem.iconId) && props.navItem.isSuccess === true ? (
-        <SuccessIcon />
-      ) : null}
-      {Boolean(props.navItem.iconId) && props.navItem.isError === true ? (
-        <ErrorIcon />
-      ) : null}
+      {Boolean(props.navItem.iconId) && props.navItem.isLoading === true ? <SpinnerIcon /> : null}
+      {Boolean(props.navItem.iconId) && props.navItem.isSuccess === true ? <SuccessIcon /> : null}
+      {Boolean(props.navItem.iconId) && props.navItem.isError === true ? <ErrorIcon /> : null}
       {Boolean(props.navItem.iconId) &&
       props.navItem.isLoading !== true &&
       props.navItem.isSuccess !== true &&
@@ -165,12 +154,7 @@ export const MenuItem = (props: Props): React.JSX.Element => {
           return
         }
 
-        clickOnMenuItem(
-          event,
-          props.navItem.id,
-          Boolean(props.navItem.disabled),
-          menuNavigation,
-        )
+        clickOnMenuItem(event, props.navItem.id, Boolean(props.navItem.disabled), menuNavigation)
       }}
       onMouseEnter={(): void => {
         reduxHolder.dispatch(

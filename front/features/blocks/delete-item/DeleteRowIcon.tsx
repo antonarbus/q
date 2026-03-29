@@ -13,20 +13,13 @@ export const DeleteRowIcon = (): React.JSX.Element => {
   const block = useBlock()
   const row = useRow()
 
-  const isLastRow = reduxHolder.useSelector(
-    selectIsLastRow({ blockIndex: block.index }),
-  )
+  const isLastRow = reduxHolder.useSelector(selectIsLastRow({ blockIndex: block.index }))
 
   const isDeletable = reduxHolder.useSelector((state) => state.copy.isDeletable)
   const disabled = isLastRow || isDeletable === false
 
   return (
-    <Tooltip
-      enterDelay={500}
-      enterNextDelay={500}
-      placement='right'
-      title='Delete'
-    >
+    <Tooltip enterDelay={500} enterNextDelay={500} placement='right' title='Delete'>
       <span className={cls.actionIconContainer}>
         <GoTrash
           className={cls.actionIcon}

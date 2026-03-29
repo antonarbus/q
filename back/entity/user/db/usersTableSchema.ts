@@ -1,10 +1,4 @@
-import {
-  boolean,
-  index,
-  pgTable,
-  timestamp,
-  varchar,
-} from 'drizzle-orm/pg-core'
+import { boolean, index, pgTable, timestamp, varchar } from 'drizzle-orm/pg-core'
 
 export const usersTable = pgTable(
   'users',
@@ -18,15 +12,9 @@ export const usersTable = pgTable(
     isActivated: boolean().notNull().default(false),
     activationKey: varchar({ length: 255 }),
     resetPasswordKey: varchar({ length: 255 }),
-    refreshJwtToken: varchar({ length: 500 })
-      .notNull()
-      .default('incorrect token'),
-    registeredAt: timestamp({ mode: 'string', withTimezone: true })
-      .notNull()
-      .defaultNow(),
-    loggedAt: timestamp({ mode: 'string', withTimezone: true })
-      .notNull()
-      .defaultNow(),
+    refreshJwtToken: varchar({ length: 500 }).notNull().default('incorrect token'),
+    registeredAt: timestamp({ mode: 'string', withTimezone: true }).notNull().defaultNow(),
+    loggedAt: timestamp({ mode: 'string', withTimezone: true }).notNull().defaultNow(),
   },
   (table) => [index('users_email_idx').on(table.email)],
 )

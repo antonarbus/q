@@ -38,10 +38,7 @@ export const InfoModal = (): React.ReactNode => {
       width='350px'
     >
       <NameField nameSignal={infoFormValues.nameSignal} />
-      <CategoryField
-        categorySignal={infoFormValues.categorySignal}
-        options={distinctCategories}
-      />
+      <CategoryField categorySignal={infoFormValues.categorySignal} options={distinctCategories} />
       <DescriptionField descSignal={infoFormValues.descSignal} />
       <InfoField infoSignal={infoFormValues.infoSignal} />
     </FormModal>

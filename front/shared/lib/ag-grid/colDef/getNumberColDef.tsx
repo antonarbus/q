@@ -1,9 +1,9 @@
 import type { ColDef, ColDefField } from 'ag-grid-community'
 
-type Props<
-  TData extends Record<string, unknown>,
-  TValue extends number = number,
-> = ColDef<TData, TValue> & {
+type Props<TData extends Record<string, unknown>, TValue extends number = number> = ColDef<
+  TData,
+  TValue
+> & {
   field: ColDefField<TData, TValue>
 }
 

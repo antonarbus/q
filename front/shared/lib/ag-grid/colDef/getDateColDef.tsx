@@ -1,15 +1,11 @@
 import { Box } from '@mui/material'
-import type {
-  ColDef,
-  ColDefField,
-  ICellRendererParams,
-} from 'ag-grid-community'
+import type { ColDef, ColDefField, ICellRendererParams } from 'ag-grid-community'
 import { format, isValid } from 'date-fns'
 
-type Props<
-  TData extends Record<string, unknown>,
-  TValue extends string | Date = string,
-> = ColDef<TData, TValue> & {
+type Props<TData extends Record<string, unknown>, TValue extends string | Date = string> = ColDef<
+  TData,
+  TValue
+> & {
   field: ColDefField<TData, TValue>
 }
 
@@ -26,12 +22,8 @@ export const getDateColDef = <
     filter: 'agDateColumnFilter',
     minWidth: 200,
     filterParams: {
-      comparator: (
-        filterLocalDateAtMidnight: Date,
-        cellValue: string,
-      ): number => {
-        const filterLocalDateAtMidnightString =
-          filterLocalDateAtMidnight.toISOString()
+      comparator: (filterLocalDateAtMidnight: Date, cellValue: string): number => {
+        const filterLocalDateAtMidnightString = filterLocalDateAtMidnight.toISOString()
 
         if (filterLocalDateAtMidnightString === cellValue) {
           return 0
@@ -48,9 +40,7 @@ export const getDateColDef = <
         return 0
       },
     },
-    cellRenderer: (
-      params: ICellRendererParams<TData, TValue>,
-    ): React.ReactNode => {
+    cellRenderer: (params: ICellRendererParams<TData, TValue>): React.ReactNode => {
       if (typeof params.value !== 'string') {
         return null
       }

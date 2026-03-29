@@ -11,18 +11,14 @@ export const getCleanPaperHtml = (props: Props): string => {
     return ''
   }
 
-  const elementsToRemove = paperElementClone.querySelectorAll(
-    cls.cleanFromPaper,
-  )
+  const elementsToRemove = paperElementClone.querySelectorAll(cls.cleanFromPaper)
 
   elementsToRemove.forEach((elementToRemove) => {
     elementToRemove.parentNode?.removeChild(elementToRemove)
   })
 
   // Images should align correct in preview
-  const imageContainers = paperElementClone.querySelectorAll(
-    '[data-resize-container]',
-  )
+  const imageContainers = paperElementClone.querySelectorAll('[data-resize-container]')
 
   imageContainers.forEach((imageContainer) => {
     if (imageContainer instanceof HTMLElement === false) {

@@ -2,10 +2,7 @@ import { getRowFromStoreByIndex } from '@front/entities/quotation/redux/getter/g
 import { updateCellAtStore } from '@front/entities/quotation/redux/updater/updateCellAtStore'
 import { updateCellWithValue } from '@front/entities/quotation/util/updateCellWithValue'
 import { roundTo } from 'round-to'
-import {
-  editorRegistry,
-  getRegistryKey,
-} from '@front/shared/lib/tiptap/editorRegistry'
+import { editorRegistry, getRegistryKey } from '@front/shared/lib/tiptap/editorRegistry'
 
 type Props = {
   blockIndex: number

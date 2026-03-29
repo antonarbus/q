@@ -1,12 +1,7 @@
 import { Burger } from '@front/entities/nav/ui/NavList/NavItem/Burger'
 import { CiViewTable } from 'react-icons/ci'
 import { FaRegFileImage, FaRegFilePdf, FaRegStar } from 'react-icons/fa'
-import {
-  FaGripLines,
-  FaRegRectangleList,
-  FaRegShareFromSquare,
-  FaUsersGear,
-} from 'react-icons/fa6'
+import { FaGripLines, FaRegRectangleList, FaRegShareFromSquare, FaUsersGear } from 'react-icons/fa6'
 import { FiDollarSign, FiLogIn, FiLogOut, FiSave } from 'react-icons/fi'
 import { HiOutlineBookOpen } from 'react-icons/hi2'
 import { ImLink } from 'react-icons/im'
@@ -23,12 +18,7 @@ import { VscNewFile } from 'react-icons/vsc'
 
 export const iconRegistry = {
   burger: <Burger />,
-  back: (
-    <IoChevronBackOutline
-      data-testid='back icon'
-      style={{ color: '#3bc3ff' }}
-    />
-  ),
+  back: <IoChevronBackOutline data-testid='back icon' style={{ color: '#3bc3ff' }} />,
   new: <VscNewFile data-testid='new icon' />,
   save: <FiSave data-testid='save icon' />,
   share: <FaRegShareFromSquare data-testid='share icon' />,

@@ -22,22 +22,11 @@ import Strike from '@tiptap/extension-strike'
 import Code from '@tiptap/extension-code'
 import Underline from '@tiptap/extension-underline'
 import Link from '@tiptap/extension-link'
-import {
-  TextStyle,
-  FontSize,
-  FontFamily,
-  LineHeight,
-} from '@tiptap/extension-text-style'
+import { TextStyle, FontSize, FontFamily, LineHeight } from '@tiptap/extension-text-style'
 import Color from '@tiptap/extension-color'
 import Highlight from '@tiptap/extension-highlight'
 import TextAlign from '@tiptap/extension-text-align'
-import {
-  Dropcursor,
-  Gapcursor,
-  Placeholder,
-  UndoRedo,
-  TrailingNode,
-} from '@tiptap/extensions'
+import { Dropcursor, Gapcursor, Placeholder, UndoRedo, TrailingNode } from '@tiptap/extensions'
 import { TableCell, TableHeader, TableKit } from '@tiptap/extension-table'
 import Youtube from '@tiptap/extension-youtube'
 import { ResizableImage } from './image/ResizableImage'
@@ -47,8 +36,7 @@ import { cls } from '@front/shared/cls'
 const tableCellTextAlignAttribute = {
   default: 'center',
   parseHTML: (element: HTMLElement): string => {
-    const textAlign =
-      element.style.textAlign === '' ? 'center' : element.style.textAlign
+    const textAlign = element.style.textAlign === '' ? 'center' : element.style.textAlign
 
     element.style.textAlign = textAlign
 

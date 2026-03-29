@@ -26,9 +26,7 @@ export const downloadExcel = (): void => {
 
   worker.postMessage(workerRequestMessage)
 
-  worker.onmessage = (
-    messageEvent: MessageEvent<WorkerResponseMessage>,
-  ): void => {
+  worker.onmessage = (messageEvent: MessageEvent<WorkerResponseMessage>): void => {
     downloadBlobAsFile({
       blob: messageEvent.data.excelBlob,
       fileName: `quotation - ${reduxHolder.getState().quotation.id}.xlsx`,

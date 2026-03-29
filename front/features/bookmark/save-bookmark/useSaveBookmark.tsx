@@ -69,9 +69,7 @@ export const useSaveBookmark = (props: Props): Res => {
       return
     }
 
-    const paperElement = document.querySelector(
-      `.${cls.formModal} .${cls.paper}`,
-    )
+    const paperElement = document.querySelector(`.${cls.formModal} .${cls.paper}`)
 
     if (paperElement === null) {
       return
@@ -91,9 +89,7 @@ export const useSaveBookmark = (props: Props): Res => {
       }),
     )
 
-    const bookmarkBlock = reduxHolder
-      .getState()
-      .quotation.blocks.at(BOOKMARK_POS_AT_BLOCKS)
+    const bookmarkBlock = reduxHolder.getState().quotation.blocks.at(BOOKMARK_POS_AT_BLOCKS)
 
     if (bookmarkBlock === undefined) {
       toast.warning('No item loaded')

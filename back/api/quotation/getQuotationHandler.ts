@@ -8,10 +8,7 @@ import type { NextFunction, Request, Response } from 'express'
 import { db } from '@back/shared/lib/drizzle/db'
 import { eq } from 'drizzle-orm'
 import type { ParsedQs } from 'qs'
-import {
-  type HttpResponse,
-  httpJsonResponse,
-} from '@back/shared/lib/express/httpResponse'
+import { type HttpResponse, httpJsonResponse } from '@back/shared/lib/express/httpResponse'
 import {
   quotationsTable,
   type SelectQuotation,
@@ -100,8 +97,7 @@ export const getQuotationHandler: RouterHandler = async (req) => {
   }
 
   const publicOrSharedWithYou =
-    quotationPermissionLevel === 'SHARED' ||
-    quotationPermissionLevel === 'PUBLIC'
+    quotationPermissionLevel === 'SHARED' || quotationPermissionLevel === 'PUBLIC'
 
   let quotationUpdated: SelectQuotation | undefined = undefined
 

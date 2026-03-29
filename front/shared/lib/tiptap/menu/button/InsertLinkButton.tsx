@@ -35,11 +35,7 @@ export const InsertLinkButton = (): React.JSX.Element => {
 
         const tr = editor.state.tr
           .insertText(normalizedHref, from)
-          .addMark(
-            from,
-            from + normalizedHref.length,
-            linkMark.create({ href: normalizedHref }),
-          )
+          .addMark(from, from + normalizedHref.length, linkMark.create({ href: normalizedHref }))
 
         editor.view.dispatch(tr)
       }}

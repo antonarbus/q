@@ -1,9 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { getRefreshTokenFromCookie } from '@back/shared/headers/token/getRefreshTokenFromCookie'
-import {
-  getJwtExpirationInDays,
-  getPayloadFromRefreshToken,
-} from '@back/shared/lib/json-webtoken'
+import { getJwtExpirationInDays, getPayloadFromRefreshToken } from '@back/shared/lib/json-webtoken'
 import type { Request } from 'express'
 import type { SelectUser } from './db/usersTableSchema'
 
@@ -19,17 +16,14 @@ type Res = {
 } | null
 
 /** Used only to get short lived access token. */
-export const getUserFromRefreshTokenOrNull = async (
-  props: Props,
-): Promise<Res> => {
+export const getUserFromRefreshTokenOrNull = async (props: Props): Promise<Res> => {
   const refreshJwtToken = getRefreshTokenFromCookie({ req: props.req })
 
   if (refreshJwtToken === undefined) {
     return null
   }
 
-  const payloadFromRefreshToken =
-    await getPayloadFromRefreshToken(refreshJwtToken)
+  const payloadFromRefreshToken = await getPayloadFromRefreshToken(refreshJwtToken)
 
   if (payloadFromRefreshToken === undefined) {
     return null

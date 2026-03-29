@@ -15,19 +15,12 @@ export const BookmarkRowIcon = (): React.ReactNode => {
   const block = useBlock()
   const row = useRow()
 
-  const isCopyModalVisible = reduxHolder.useSelector(
-    (state) => state.copy.isVisible,
-  )
+  const isCopyModalVisible = reduxHolder.useSelector((state) => state.copy.isVisible)
 
   const disabled = isCopyModalVisible
 
   return (
-    <Tooltip
-      enterDelay={500}
-      enterNextDelay={500}
-      placement='right'
-      title='Add to bookmarks'
-    >
+    <Tooltip enterDelay={500} enterNextDelay={500} placement='right' title='Add to bookmarks'>
       <span className={cls.actionIconContainer}>
         <FaRegStar
           className={cls.actionIcon}

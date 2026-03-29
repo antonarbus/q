@@ -27,8 +27,7 @@ export const useAnimatedElement = (): Res => {
     const elementHeight = ref.current.offsetHeight
     const moreDistanceToMoveAwayCloseButton = 100
 
-    const offsetPosition =
-      screenHeight / 2 + elementHeight / 2 + moreDistanceToMoveAwayCloseButton
+    const offsetPosition = screenHeight / 2 + elementHeight / 2 + moreDistanceToMoveAwayCloseButton
 
     ref.current.style.transform = `translateY(${offsetPosition}px)`
 

@@ -9,8 +9,6 @@ type Props = {
 
 export const useLoadNavStructure = (props: Props): void => {
   useEffectOnce(() => {
-    reduxHolder.dispatch(
-      navSlice.actions.addNavStructure({ navStructure: props.navStructure }),
-    )
+    reduxHolder.dispatch(navSlice.actions.addNavStructure({ navStructure: props.navStructure }))
   })
 }

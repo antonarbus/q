@@ -11,9 +11,7 @@ export const openQuotationsPage = (): void => {
   if (Boolean(currentQuotation.id) === true) {
     backToQuotationRef.current = currentQuotation
 
-    reduxHolder.dispatch(
-      navSlice.actions.showNavItems({ navItemIds: [navItemId.back] }),
-    )
+    reduxHolder.dispatch(navSlice.actions.showNavItems({ navItemIds: [navItemId.back] }))
   }
 
   void routerHolder.router.navigate(`/${route.quotationList}`)

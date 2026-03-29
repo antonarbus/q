@@ -35,9 +35,7 @@ export const LogInAsUserButton = (props: UrlParam): React.ReactNode => {
         }),
       )
 
-      reduxHolder.dispatch(
-        navSlice.actions.hideNavItems({ navItemIds: [navItemId.login] }),
-      )
+      reduxHolder.dispatch(navSlice.actions.hideNavItems({ navItemIds: [navItemId.login] }))
 
       reduxHolder.dispatch(
         navSlice.actions.showNavItems({
@@ -45,22 +43,15 @@ export const LogInAsUserButton = (props: UrlParam): React.ReactNode => {
         }),
       )
 
-      const isSuperAdmin =
-        logInUserMutation.data.roles.includes('super-admin') === true
+      const isSuperAdmin = logInUserMutation.data.roles.includes('super-admin') === true
 
       if (isSuperAdmin === true) {
-        reduxHolder.dispatch(
-          navSlice.actions.showNavItems({ navItemIds: ['admin'] }),
-        )
+        reduxHolder.dispatch(navSlice.actions.showNavItems({ navItemIds: ['admin'] }))
       } else {
-        reduxHolder.dispatch(
-          navSlice.actions.hideNavItems({ navItemIds: ['admin'] }),
-        )
+        reduxHolder.dispatch(navSlice.actions.hideNavItems({ navItemIds: ['admin'] }))
       }
 
-      const isQuotationListPage = location.pathname.includes(
-        route.quotationList,
-      )
+      const isQuotationListPage = location.pathname.includes(route.quotationList)
 
       if (isQuotationListPage === true) {
         void getQuotationListQuery.refetch()
@@ -81,12 +72,7 @@ export const LogInAsUserButton = (props: UrlParam): React.ReactNode => {
   }, [logInUserMutation.isError])
 
   return (
-    <Tooltip
-      enterDelay={500}
-      enterNextDelay={500}
-      placement='bottom'
-      title='Log in as super admin'
-    >
+    <Tooltip enterDelay={500} enterNextDelay={500} placement='bottom' title='Log in as super admin'>
       <IconButton
         onClick={() => {
           logInUserMutation.mutate({
@@ -96,11 +82,7 @@ export const LogInAsUserButton = (props: UrlParam): React.ReactNode => {
         }}
         size='small'
       >
-        {logInUserMutation.isPending === true ? (
-          <RotatingLoaderIcon />
-        ) : (
-          <MdLogin />
-        )}
+        {logInUserMutation.isPending === true ? <RotatingLoaderIcon /> : <MdLogin />}
       </IconButton>
     </Tooltip>
   )

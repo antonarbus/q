@@ -13,12 +13,7 @@ export const CopyBlockIcon = (): React.JSX.Element => {
   const disabled = isCopyable === false
 
   return (
-    <Tooltip
-      enterDelay={500}
-      enterNextDelay={500}
-      placement='left'
-      title='Copy'
-    >
+    <Tooltip enterDelay={500} enterNextDelay={500} placement='left' title='Copy'>
       <span className={cls.actionIconContainer}>
         <MdCopyAll
           className={cls.actionIcon}
@@ -29,8 +24,7 @@ export const CopyBlockIcon = (): React.JSX.Element => {
 
             saveBlockHeightByIndex({ blockIndex: block.index })
 
-            const blockToCopy =
-              reduxHolder.getState().quotation.blocks[block.index]
+            const blockToCopy = reduxHolder.getState().quotation.blocks[block.index]
 
             if (blockToCopy === undefined) {
               return
@@ -56,9 +50,7 @@ export const CopyBlockIcon = (): React.JSX.Element => {
 
             const html = getCleanPaperHtml({ paperElement })
 
-            reduxHolder.dispatch(
-              copySlice.actions.addItem({ item: blockToCopy, preview: html }),
-            )
+            reduxHolder.dispatch(copySlice.actions.addItem({ item: blockToCopy, preview: html }))
 
             reduxHolder.dispatch(copySlice.actions.allowToPaste())
 

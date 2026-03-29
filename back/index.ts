@@ -45,8 +45,7 @@ if (runtimeConfig.nodeEnv === 'production') {
 
         // Don't cache files without hashes at file names added by bundler OR blog files
         const shouldNotCache =
-          noCacheFileList.some((file) => filepath.endsWith(file)) ||
-          filepath.includes('/blog/')
+          noCacheFileList.some((file) => filepath.endsWith(file)) || filepath.includes('/blog/')
 
         if (shouldNotCache === true) {
           res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate')
@@ -64,8 +63,7 @@ const apiList = Object.entries(api)
 // Register API routes
 apiList.forEach(([_key, item]) => {
   // Skip root '/' route in production - frontend serves index.html there
-  const isProductionRootRoute =
-    runtimeConfig.nodeEnv === 'production' && item.path === '/'
+  const isProductionRootRoute = runtimeConfig.nodeEnv === 'production' && item.path === '/'
 
   if (isProductionRootRoute === true) {
     return
@@ -90,12 +88,7 @@ if (runtimeConfig.nodeEnv === 'production') {
 
 // SPA fallback: serve index.html for any route not matched above
 if (runtimeConfig.nodeEnv === 'production') {
-  const indexHtmlPath = path.join(
-    rootPathAbsolute,
-    'front',
-    'build',
-    'index.html',
-  )
+  const indexHtmlPath = path.join(rootPathAbsolute, 'front', 'build', 'index.html')
 
   app.get(/.*/u, (_req, res): void => {
     // Don't cache index.html (same reason as above in express.static)

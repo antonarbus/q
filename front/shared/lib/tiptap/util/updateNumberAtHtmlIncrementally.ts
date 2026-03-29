@@ -24,10 +24,7 @@ export const updateNumberAtHtmlIncrementally = (props: Props): void => {
   const incrementValues = async (): Promise<void> => {
     await new Promise((resolve) => {
       for (let index = 1; index <= steps; index = index + 1) {
-        const incrementedValue = roundTo(
-          props.oldNumber + index * stepValue,
-          decimalPlaces,
-        )
+        const incrementedValue = roundTo(props.oldNumber + index * stepValue, decimalPlaces)
 
         const updatedHtml = getStringWithNewFormattedNumber({
           string: props.html,

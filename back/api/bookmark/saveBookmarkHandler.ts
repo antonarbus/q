@@ -1,7 +1,4 @@
-import {
-  bookmarksTable,
-  type SelectBookmark,
-} from '@back/entity/bookmark/db/bookmarksTableSchema'
+import { bookmarksTable, type SelectBookmark } from '@back/entity/bookmark/db/bookmarksTableSchema'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entity/user/getUserFromAccessTokenOrThrowUnauthorized'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { db } from '@back/shared/lib/drizzle/db'
@@ -12,10 +9,7 @@ import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
-import {
-  type HttpResponse,
-  httpJsonResponse,
-} from '@back/shared/lib/express/httpResponse'
+import { type HttpResponse, httpJsonResponse } from '@back/shared/lib/express/httpResponse'
 import { bookmarkSchema, type Bookmark } from '@back/entity/bookmark/schema'
 import { z } from 'zod'
 
@@ -117,11 +111,7 @@ export const saveBookmarkHandler: RouterHandler = async (req) => {
 
   const isNew = bookmarkInserted.createdAt === bookmarkInserted.updatedAt
 
-  messageList.push(
-    isNew === true
-      ? 'Bookmark created in database'
-      : 'Bookmark updated in database',
-  )
+  messageList.push(isNew === true ? 'Bookmark created in database' : 'Bookmark updated in database')
 
   const bucket = await getBucket()
   const fileInfo = getFileInfo({ id: req.body.bookmark.id })

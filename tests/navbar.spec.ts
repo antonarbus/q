@@ -49,9 +49,7 @@ test.describe('nav bar ui elements at different width', () => {
       await expect(nav.locator('[data-testid="profile icon"]')).toBeVisible()
       await expect(nav).toHaveText(/Profile/u)
 
-      await expect(
-        nav.locator('[data-testid="hamburger icon"]'),
-      ).not.toBeVisible()
+      await expect(nav.locator('[data-testid="hamburger icon"]')).not.toBeVisible()
     })
   })
 
@@ -71,9 +69,7 @@ test.describe('nav bar ui elements at different width', () => {
       await expect(nav.locator('[data-testid="login icon"]')).toBeVisible()
       await expect(nav).toHaveText(/Log in/u)
 
-      await expect(
-        nav.locator('[data-testid="profile icon"]'),
-      ).not.toBeVisible()
+      await expect(nav.locator('[data-testid="profile icon"]')).not.toBeVisible()
 
       await expect(nav).not.toHaveText(/Profile/u)
     })
@@ -99,15 +95,11 @@ test.describe('nav bar ui elements at different width', () => {
       await expect(nav.locator('[data-testid="insert icon"]')).not.toBeVisible()
       await expect(nav.locator('text=Insert')).not.toBeVisible()
 
-      await expect(
-        nav.locator('[data-testid="bookmarks icon"]'),
-      ).not.toBeVisible()
+      await expect(nav.locator('[data-testid="bookmarks icon"]')).not.toBeVisible()
 
       await expect(nav.locator('text=Bookmarks')).not.toBeVisible()
 
-      await expect(
-        nav.locator('[data-testid="quotations icon"]'),
-      ).not.toBeVisible()
+      await expect(nav.locator('[data-testid="quotations icon"]')).not.toBeVisible()
 
       await expect(nav.locator('text=Quotations')).not.toBeVisible()
       await expect(nav.locator('[data-testid="login icon"]')).not.toBeVisible()

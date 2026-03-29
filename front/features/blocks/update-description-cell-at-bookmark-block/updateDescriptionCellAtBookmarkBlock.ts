@@ -1,9 +1,6 @@
 import { BOOKMARK_POS_AT_BLOCKS } from '@front/entities/quotation/redux/bookmarkPosAtBlocks'
 import { updateBookmarkedRowCellAtStore } from '@front/entities/quotation/redux/updater/updateBookmarkedRowCellAtStore'
-import {
-  editorRegistry,
-  getRegistryKey,
-} from '@front/shared/lib/tiptap/editorRegistry'
+import { editorRegistry, getRegistryKey } from '@front/shared/lib/tiptap/editorRegistry'
 
 export const updateDescriptionCellAtBookmarkBlock = (): void => {
   const editor =

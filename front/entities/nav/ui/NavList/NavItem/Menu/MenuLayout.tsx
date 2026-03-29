@@ -33,9 +33,7 @@ export const MenuLayout = (props: Props): React.ReactNode => {
   }
 
   const leftPosition =
-    isMenuOutsideWindow === true
-      ? menuPosition.left
-      : menuPosition.right - theme.menu.width
+    isMenuOutsideWindow === true ? menuPosition.left : menuPosition.right - theme.menu.width
 
   return (
     <Portal>

@@ -37,7 +37,5 @@ export const validatePromotion = (props: Props): void => {
 
   const validatedPromotionPath: AllowedPromotionPath = validationResult.data
 
-  console.info(
-    `✅ Valid promotion path: ${validatedPromotionPath.replace('-', '→')}`,
-  )
+  console.info(`✅ Valid promotion path: ${validatedPromotionPath.replace('-', '→')}`)
 }

@@ -15,9 +15,7 @@ export const HeadingButton = (): React.JSX.Element => {
   const { editor } = useTiptap()
 
   const isActive = useTiptapState((ctx) =>
-    HEADINGS.some((heading) =>
-      ctx.editor.isActive('heading', { level: heading.level }),
-    ),
+    HEADINGS.some((heading) => ctx.editor.isActive('heading', { level: heading.level })),
   )
 
   const activeLevel = useTiptapState((ctx) => {
@@ -30,8 +28,7 @@ export const HeadingButton = (): React.JSX.Element => {
     return null
   })
 
-  const ActiveIcon =
-    HEADINGS.find((heading) => heading.level === activeLevel)?.Icon ?? RiText
+  const ActiveIcon = HEADINGS.find((heading) => heading.level === activeLevel)?.Icon ?? RiText
 
   return (
     <MenuButtonWithDropdown
@@ -83,11 +80,7 @@ export const HeadingButton = (): React.JSX.Element => {
                 event.preventDefault()
               }}
               onClick={() => {
-                editor
-                  .chain()
-                  .focus()
-                  .toggleHeading({ level: heading.level })
-                  .run()
+                editor.chain().focus().toggleHeading({ level: heading.level }).run()
               }}
               sx={{
                 display: 'flex',
@@ -97,9 +90,7 @@ export const HeadingButton = (): React.JSX.Element => {
                 padding: '5px 12px',
                 border: 'none',
                 backgroundColor:
-                  isActive && activeLevel === heading.level
-                    ? '#efefef'
-                    : 'transparent',
+                  isActive && activeLevel === heading.level ? '#efefef' : 'transparent',
                 cursor: 'pointer',
                 fontSize: heading.fontSize,
                 fontWeight: heading.fontWeight,

@@ -1,6 +1,6 @@
 import { drizzle } from 'drizzle-orm/neon-http'
 import { neon } from '@neondatabase/serverless'
-import {  getDbUrl } from '@back/config/getDbUrl'
+import { getDbUrl } from '@back/config/getDbUrl'
 
 // https://neon.com/docs/guides/drizzle#initialize-the-drizzle-client
 

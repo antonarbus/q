@@ -12,9 +12,7 @@ type Props<K> = {
 
 type Res<K extends keyof NavItem> = NavItem[K] | undefined
 
-export const getMenuItemPropValue = <K extends keyof NavItem>(
-  props: Props<K>,
-): Res<K> => {
+export const getMenuItemPropValue = <K extends keyof NavItem>(props: Props<K>): Res<K> => {
   for (const el of props.menu ?? getNavStructure()) {
     if (el.id === props.navItemId) {
       return el[props.prop]

@@ -16,26 +16,18 @@ type Props = {
 export const Block = (props: Props): React.ReactNode => {
   const copyPlace = reduxHolder.useSelector((state) => state.copy.place)
 
-  const isPasteTextShown = reduxHolder.useSelector(
-    (state) => state.copy.isPasteTextShown,
-  )
+  const isPasteTextShown = reduxHolder.useSelector((state) => state.copy.isPasteTextShown)
 
   const shouldShowPasteBefore =
-    isPasteTextShown &&
-    copyPlace.id === props.block.id &&
-    copyPlace.pastePos === 'top'
+    isPasteTextShown && copyPlace.id === props.block.id && copyPlace.pastePos === 'top'
 
   const shouldShowPasteAfter =
-    isPasteTextShown &&
-    copyPlace.id === props.block.id &&
-    copyPlace.pastePos === 'bottom'
+    isPasteTextShown && copyPlace.id === props.block.id && copyPlace.pastePos === 'bottom'
 
   return (
     <BlockProvider item={props.block} index={props.blockIndex}>
       <AnimatePresence>
-        {shouldShowPasteBefore === true && (
-          <PasteItemBlock key='paste-before' />
-        )}
+        {shouldShowPasteBefore === true && <PasteItemBlock key='paste-before' />}
       </AnimatePresence>
       {props.block.type === 'text' && <TextBlock />}
       {props.block.type === 'boq' && <BoqBlock />}

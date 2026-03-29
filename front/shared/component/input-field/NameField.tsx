@@ -25,9 +25,7 @@ export const NameField = (props: Props): React.JSX.Element => {
           input: {
             startAdornment: (
               <InputAdornment position='start'>
-                <PiBooks
-                  style={{ height: '22px', width: '22px', translate: '0px' }}
-                />
+                <PiBooks style={{ height: '22px', width: '22px', translate: '0px' }} />
               </InputAdornment>
             ),
           },

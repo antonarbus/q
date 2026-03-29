@@ -12,8 +12,7 @@ export const useLoadInitValuesIntoSaveQuotationModal = (props: Props): void => {
 
     props.saveQuotationFormValues.nameSignal.value = state.quotation.name
 
-    props.saveQuotationFormValues.categorySignal.value =
-      state.quotation.category
+    props.saveQuotationFormValues.categorySignal.value = state.quotation.category
 
     props.saveQuotationFormValues.descSignal.value = state.quotation.desc
     props.saveQuotationFormValues.infoSignal.value = state.quotation.info

@@ -43,11 +43,7 @@ export const TiptapProvider = (props: Props): React.JSX.Element => {
     }
   }, [props])
 
-  return (
-    <TiptapContext.Provider value={value}>
-      {props.children}
-    </TiptapContext.Provider>
-  )
+  return <TiptapContext.Provider value={value}>{props.children}</TiptapContext.Provider>
 }
 
 export const useTiptapCtx = (): Res => {

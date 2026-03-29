@@ -17,9 +17,7 @@ export const LineHeightButton = (): React.JSX.Element => {
   const { editor } = useTiptap()
 
   const isActive = useTiptapState((ctx) =>
-    LINE_HEIGHTS.some((item) =>
-      ctx.editor.isActive('textStyle', { lineHeight: item.value }),
-    ),
+    LINE_HEIGHTS.some((item) => ctx.editor.isActive('textStyle', { lineHeight: item.value })),
   )
 
   const activeLineHeight = useTiptapState((ctx) => {
@@ -32,8 +30,7 @@ export const LineHeightButton = (): React.JSX.Element => {
     return DEFAULT_LINE_HEIGHT
   })
 
-  const activeLabel =
-    LINE_HEIGHTS.find((item) => item.value === activeLineHeight)?.label ?? '1.2'
+  const activeLabel = LINE_HEIGHTS.find((item) => item.value === activeLineHeight)?.label ?? '1.2'
 
   return (
     <MenuButtonWithDropdown
@@ -58,8 +55,7 @@ export const LineHeightButton = (): React.JSX.Element => {
                 event.preventDefault()
               }}
               onClick={() => {
-                const isCurrent =
-                  activeLineHeight === item.value && isActive === true
+                const isCurrent = activeLineHeight === item.value && isActive === true
 
                 if (isCurrent === true) {
                   editor.chain().focus().unsetLineHeight().run()
@@ -74,9 +70,7 @@ export const LineHeightButton = (): React.JSX.Element => {
                 border: 'none',
                 borderRadius: '4px',
                 backgroundColor:
-                  activeLineHeight === item.value && isActive
-                    ? '#efefef'
-                    : 'transparent',
+                  activeLineHeight === item.value && isActive ? '#efefef' : 'transparent',
                 cursor: 'pointer',
                 fontSize: 13,
                 ':hover': {

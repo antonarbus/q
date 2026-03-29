@@ -12,13 +12,10 @@ export const useDistinctCategories = (): Res => {
   const quotationCategories =
     getQuotationCategoryListQuery.data?.distinctQuotationCategoryList ?? []
 
-  const bookmarkCategories =
-    getBookmarkCategoryListQuery.data?.distinctCategoryList ?? []
+  const bookmarkCategories = getBookmarkCategoryListQuery.data?.distinctCategoryList ?? []
 
   const distinctCategories =
-    urlParams.bookmarkId === undefined
-      ? quotationCategories
-      : bookmarkCategories
+    urlParams.bookmarkId === undefined ? quotationCategories : bookmarkCategories
 
   return distinctCategories
 }

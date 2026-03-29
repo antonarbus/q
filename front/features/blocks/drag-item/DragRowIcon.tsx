@@ -9,12 +9,7 @@ export const DragRowIcon = (): React.JSX.Element => {
   const dragHandleProps = useDragHandleProps()
 
   return (
-    <Tooltip
-      enterDelay={500}
-      enterNextDelay={500}
-      placement='left'
-      title='Drag'
-    >
+    <Tooltip enterDelay={500} enterNextDelay={500} placement='left' title='Drag'>
       <span className={cls.actionIconContainer} {...dragHandleProps}>
         <MdDragIndicator
           className={cls.actionIcon}

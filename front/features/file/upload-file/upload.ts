@@ -46,10 +46,8 @@ export const upload: OnUpload = async (props) => {
             .setImage({
               src: fileAsBase64String,
               alt: file.name,
-              width:
-                imageDimensions.width > 0 ? imageDimensions.width : undefined,
-              height:
-                imageDimensions.height > 0 ? imageDimensions.height : undefined,
+              width: imageDimensions.width > 0 ? imageDimensions.width : undefined,
+              height: imageDimensions.height > 0 ? imageDimensions.height : undefined,
             })
             .run()
         })
@@ -128,9 +126,7 @@ export const upload: OnUpload = async (props) => {
           return
         }
 
-        const percentCompleted = Math.round(
-          (progressEvent.loaded * 100) / progressEvent.total,
-        )
+        const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total)
 
         if (percentCompleted <= 95) {
           toast.loading(`Uploading... ${percentCompleted}%`, {
@@ -138,8 +134,7 @@ export const upload: OnUpload = async (props) => {
           })
         }
 
-        const gotCompletedInOneChunk =
-          percentCompleted === 100 && eventCount === 1
+        const gotCompletedInOneChunk = percentCompleted === 100 && eventCount === 1
 
         if (gotCompletedInOneChunk === true) {
           await asyncDelay(50)
@@ -162,8 +157,7 @@ export const upload: OnUpload = async (props) => {
           toast.loading(`Uploading... 90%`, { id: toastId })
         }
 
-        const gotCompletedInMultipleChunks =
-          percentCompleted === 100 && eventCount !== 1
+        const gotCompletedInMultipleChunks = percentCompleted === 100 && eventCount !== 1
 
         if (gotCompletedInMultipleChunks === true) {
           toast.loading(`Uploading... 95%`, { id: toastId })

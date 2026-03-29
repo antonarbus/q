@@ -25,10 +25,7 @@ export const BookmarkField = (): React.ReactNode => {
           {(provided) => (
             <div ref={provided.innerRef} {...provided.droppableProps}>
               <AnimatePresence initial={false}>
-                <Block
-                  block={bookmarkBlock}
-                  blockIndex={BOOKMARK_POS_AT_BLOCKS}
-                />
+                <Block block={bookmarkBlock} blockIndex={BOOKMARK_POS_AT_BLOCKS} />
               </AnimatePresence>
               {provided.placeholder}
             </div>

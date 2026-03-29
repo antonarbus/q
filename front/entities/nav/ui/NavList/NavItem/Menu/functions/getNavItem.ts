@@ -48,8 +48,7 @@ export const getNavItem = (props: Props): Res => {
   }
 
   const navLevel =
-    props.navState?.navStructure.at(0) ??
-    reduxHolder.getState().nav.navStructure.at(0)
+    props.navState?.navStructure.at(0) ?? reduxHolder.getState().nav.navStructure.at(0)
 
   if (navLevel === undefined) {
     return {

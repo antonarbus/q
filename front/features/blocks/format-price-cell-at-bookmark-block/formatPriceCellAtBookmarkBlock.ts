@@ -1,9 +1,6 @@
 import { BOOKMARK_POS_AT_BLOCKS } from '@front/entities/quotation/redux/bookmarkPosAtBlocks'
 import { formatBookmarkedRowCellNumber } from '@front/entities/quotation/util/formatBookmarkedRowCellNumber'
-import {
-  editorRegistry,
-  getRegistryKey,
-} from '@front/shared/lib/tiptap/editorRegistry'
+import { editorRegistry, getRegistryKey } from '@front/shared/lib/tiptap/editorRegistry'
 
 export const formatPriceCellAtBookmarkBlock = (): void => {
   formatBookmarkedRowCellNumber({

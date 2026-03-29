@@ -1,10 +1,7 @@
 import { getShouldTrace, removeRefreshTokenCookie } from '@back/shared/headers'
 import { generateAccessToken } from '@back/shared/lib/json-webtoken'
 import type { NextFunction, Request, Response } from 'express'
-import {
-  usersTable,
-  type SelectUser,
-} from '@back/entity/user/db/usersTableSchema'
+import { usersTable, type SelectUser } from '@back/entity/user/db/usersTableSchema'
 import { db } from '@back/shared/lib/drizzle/db'
 import { and, eq } from 'drizzle-orm'
 import { HttpError } from '@back/shared/errors/HttpError'
@@ -12,10 +9,7 @@ import type { ErrorCode } from '@back/shared/const/errorCode'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
-import {
-  type HttpResponse,
-  httpJsonResponse,
-} from '@back/shared/lib/express/httpResponse'
+import { type HttpResponse, httpJsonResponse } from '@back/shared/lib/express/httpResponse'
 import { getUserFromRefreshTokenOrNull } from '@back/entity/user/getUserFromRefreshTokenOrNull'
 
 type SearchQuery = ParsedQs
@@ -134,8 +128,7 @@ export const getAccessTokenHandler: RouterHandler = async (req, res) => {
       accessJwtTokenExpiresOn: accessToken.expiresOn,
       roles: userFromRefreshToken.roles,
       email: userFromRefreshToken.email,
-      jwtRefreshTokenExpirationDays:
-        userFromRefreshToken.jwtRefreshTokenExpirationDays,
+      jwtRefreshTokenExpirationDays: userFromRefreshToken.jwtRefreshTokenExpirationDays,
       message: messageList.join(' | '),
     },
   })

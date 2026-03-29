@@ -5,9 +5,7 @@ type Props = {
   blockIndex: number
 }
 
-export const getBlockFromStoreByIndex = (
-  props: Props,
-): BlockItem | undefined => {
+export const getBlockFromStoreByIndex = (props: Props): BlockItem | undefined => {
   const block = reduxHolder.getState().quotation.blocks[props.blockIndex]
 
   if (block === undefined) {

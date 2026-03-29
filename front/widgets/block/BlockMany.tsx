@@ -27,9 +27,7 @@ export const BlockMany = (props: Props): React.ReactNode => {
           {blocksCloned
             .filter((block) => block !== null)
             .map((block, bockIndex) => {
-              return (
-                <Block block={block} blockIndex={bockIndex} key={block.id} />
-              )
+              return <Block block={block} blockIndex={bockIndex} key={block.id} />
             })}
           <OpenInsertMenuButton />
         </AnimatePresence>

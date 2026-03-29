@@ -2,9 +2,7 @@ import { reduxHolder } from '@front/shared/lib/redux'
 import { LoadingDots } from './loading-dots-overlay/LoadingDots'
 
 export const LoadingTableOverlay = (): React.JSX.Element | null => {
-  const loadingOverlay = reduxHolder.useSelector(
-    (state) => state.agGrid.loadingOverlay,
-  )
+  const loadingOverlay = reduxHolder.useSelector((state) => state.agGrid.loadingOverlay)
 
   return (
     <div
@@ -31,9 +29,7 @@ export const LoadingTableOverlay = (): React.JSX.Element | null => {
       >
         {loadingOverlay.text}
       </div>
-      {loadingOverlay.showLoader === true ? (
-        <LoadingDots background='grey' />
-      ) : null}
+      {loadingOverlay.showLoader === true ? <LoadingDots background='grey' /> : null}
     </div>
   )
 }

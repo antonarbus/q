@@ -30,9 +30,7 @@ export const BlockComp = (props: Props): React.JSX.Element => {
   const block = useBlock()
   const isLastBlock = useIsLastBlock()
 
-  const isCopyModalVisible = reduxHolder.useSelector(
-    (state) => state.copy.isVisible,
-  )
+  const isCopyModalVisible = reduxHolder.useSelector((state) => state.copy.isVisible)
 
   const isDragDisabled = isLastBlock || isCopyModalVisible
 
@@ -60,11 +58,7 @@ export const BlockComp = (props: Props): React.JSX.Element => {
   }
 
   return (
-    <Draggable
-      draggableId={block.item.id}
-      index={block.index}
-      isDragDisabled={isDragDisabled}
-    >
+    <Draggable draggableId={block.item.id} index={block.index} isDragDisabled={isDragDisabled}>
       {(provided, snapshot) => {
         return (
           <div

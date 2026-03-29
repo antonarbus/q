@@ -1,10 +1,7 @@
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { getTotalPriceAbove } from '@front/entities/quotation/util/getTotalPriceAbove'
 import { reduxHolder } from '@front/shared/lib/redux'
-import {
-  editorRegistry,
-  getRegistryKey,
-} from '@front/shared/lib/tiptap/editorRegistry'
+import { editorRegistry, getRegistryKey } from '@front/shared/lib/tiptap/editorRegistry'
 import { updateNumberAtHtmlIncrementally } from '@front/shared/lib/tiptap/util/updateNumberAtHtmlIncrementally'
 import { getStringWithNewFormattedNumber } from '@front/shared/util/getStringWithNewFormattedNumber'
 

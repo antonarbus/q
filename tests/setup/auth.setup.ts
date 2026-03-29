@@ -26,9 +26,7 @@ test.describe('authenticate for all further tests', () => {
     } else {
       const responseBody = await response.text() // Get the response body as text
 
-      throw new Error(
-        `Failed to authenticate: ${response.status()} - ${responseBody}`,
-      )
+      throw new Error(`Failed to authenticate: ${response.status()} - ${responseBody}`)
     }
   })
 })

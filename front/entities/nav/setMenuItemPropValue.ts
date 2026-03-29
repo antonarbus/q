@@ -10,9 +10,7 @@ type Props<K extends keyof NavItem> = {
   value: NavItem[K]
 }
 
-export const setMenuItemPropValue = <K extends keyof NavItem>(
-  props: Props<K>,
-): void => {
+export const setMenuItemPropValue = <K extends keyof NavItem>(props: Props<K>): void => {
   props.menu.forEach((el) => {
     if (el.id === props.navItemId) {
       el[props.prop] = props.value

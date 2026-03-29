@@ -18,9 +18,7 @@ export const OpenLoginModalLink = (props: Props): React.JSX.Element => {
         const slideAndNavigate = async (): Promise<void> => {
           await props.slideOut()
 
-          reduxHolder.dispatch(
-            appSlice.actions.setNavigateState({ shouldSlide: true }),
-          )
+          reduxHolder.dispatch(appSlice.actions.setNavigateState({ shouldSlide: true }))
 
           void navigate(`../${route.login}`)
         }

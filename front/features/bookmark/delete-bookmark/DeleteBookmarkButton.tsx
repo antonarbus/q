@@ -25,12 +25,7 @@ export const DeleteBookmarkButton = (props: UrlParam): React.JSX.Element => {
   }, [deleteBookmarkMutation.isError])
 
   return (
-    <Tooltip
-      enterDelay={500}
-      enterNextDelay={500}
-      placement='bottom'
-      title='Delete'
-    >
+    <Tooltip enterDelay={500} enterNextDelay={500} placement='bottom' title='Delete'>
       <IconButton
         onClick={async (): Promise<void> => {
           const areYouSure = await confirmWithDialog()
@@ -41,11 +36,7 @@ export const DeleteBookmarkButton = (props: UrlParam): React.JSX.Element => {
         }}
         size='small'
       >
-        {deleteBookmarkMutation.isPending === true ? (
-          <RotatingLoaderIcon />
-        ) : (
-          <MdDeleteOutline />
-        )}
+        {deleteBookmarkMutation.isPending === true ? <RotatingLoaderIcon /> : <MdDeleteOutline />}
       </IconButton>
     </Tooltip>
   )

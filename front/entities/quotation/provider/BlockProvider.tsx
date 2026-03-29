@@ -22,11 +22,7 @@ export const BlockProvider = (props: Props): React.JSX.Element => {
     return contextData
   }, [props.index, props.item])
 
-  return (
-    <BlockContext.Provider value={blockContextData}>
-      {props.children}
-    </BlockContext.Provider>
-  )
+  return <BlockContext.Provider value={blockContextData}>{props.children}</BlockContext.Provider>
 }
 
 export const useBlock = (): Res => {

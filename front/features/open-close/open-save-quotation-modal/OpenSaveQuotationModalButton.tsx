@@ -11,9 +11,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
 
-export const OpenSaveQuotationModalButton = (
-  props: UrlParam,
-): React.JSX.Element => {
+export const OpenSaveQuotationModalButton = (props: UrlParam): React.JSX.Element => {
   const navigate = useNavigate()
 
   const quotationMutation = useGetQuotationMutation()
@@ -44,12 +42,7 @@ export const OpenSaveQuotationModalButton = (
   }, [quotationMutation.isError])
 
   return (
-    <Tooltip
-      enterDelay={500}
-      enterNextDelay={500}
-      placement='bottom'
-      title='Quick edit'
-    >
+    <Tooltip enterDelay={500} enterNextDelay={500} placement='bottom' title='Quick edit'>
       <Link
         onClick={(event) => {
           event.preventDefault()
@@ -63,11 +56,7 @@ export const OpenSaveQuotationModalButton = (
             translate: '0px 1px',
           }}
         >
-          {quotationMutation.isPending === true ? (
-            <RotatingLoaderIcon />
-          ) : (
-            <AiTwotoneEdit />
-          )}
+          {quotationMutation.isPending === true ? <RotatingLoaderIcon /> : <AiTwotoneEdit />}
         </IconButton>
       </Link>
     </Tooltip>

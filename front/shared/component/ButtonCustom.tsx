@@ -13,13 +13,7 @@ type Props = ButtonProps & {
 }
 
 export const ButtonCustom = (props: Props): React.JSX.Element => {
-  const {
-    isButtonDisabled,
-    isButtonLoading,
-    isButtonSuccess,
-    isButtonError,
-    ...restProps
-  } = props
+  const { isButtonDisabled, isButtonLoading, isButtonSuccess, isButtonError, ...restProps } = props
 
   const showSuccessIcon = useSignal(false)
   const showErrorIcon = useSignal(false)
@@ -59,9 +53,7 @@ export const ButtonCustom = (props: Props): React.JSX.Element => {
         ...restProps.sx,
       }}
     >
-      {showSuccessIcon.value === false &&
-        showErrorIcon.value === false &&
-        restProps.children}
+      {showSuccessIcon.value === false && showErrorIcon.value === false && restProps.children}
       {isButtonLoading === true && (
         <RotatingLoaderIcon
           style={{

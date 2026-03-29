@@ -70,8 +70,7 @@ export const onBoqBlockResize: OnBlockResize = (props) => {
     if (descriptionColumn.width > columnMinWidth.description) {
       descriptionColumnDeltaWidth = props.delta.width
 
-      const descriptionColumnWidth =
-        initDescriptionColumnWidth + descriptionColumnDeltaWidth
+      const descriptionColumnWidth = initDescriptionColumnWidth + descriptionColumnDeltaWidth
 
       reduxHolder.dispatch(
         quotationSlice.actions.updateColWidth({
@@ -126,8 +125,7 @@ export const onBoqBlockResize: OnBlockResize = (props) => {
       itemPriceColumnDeltaWidth =
         props.delta.width - numberColumnDeltaWidth - descriptionColumnDeltaWidth
 
-      const itemPriceColumnWidth =
-        initItemPriceColumnWidth + itemPriceColumnDeltaWidth
+      const itemPriceColumnWidth = initItemPriceColumnWidth + itemPriceColumnDeltaWidth
 
       reduxHolder.dispatch(
         quotationSlice.actions.updateColWidth({
@@ -209,8 +207,7 @@ export const onBoqBlockResize: OnBlockResize = (props) => {
   if (isExpanding === true) {
     descriptionColumnDeltaWidth = props.delta.width
 
-    const descriptionColumnWidth =
-      initDescriptionColumnWidth + descriptionColumnDeltaWidth
+    const descriptionColumnWidth = initDescriptionColumnWidth + descriptionColumnDeltaWidth
 
     reduxHolder.dispatch(
       quotationSlice.actions.updateColWidth({
@@ -223,8 +220,7 @@ export const onBoqBlockResize: OnBlockResize = (props) => {
 }
 
 export const onBoqBlockResizeStop: OnBlockResizeStop = (props) => {
-  const descriptionHeaderElement =
-    props.elementRef.querySelector('.th.description')
+  const descriptionHeaderElement = props.elementRef.querySelector('.th.description')
 
   if (descriptionHeaderElement instanceof HTMLElement === false) {
     return
@@ -242,8 +238,7 @@ export const onBoqBlockResizeStop: OnBlockResizeStop = (props) => {
 
   const itemWidth = props.elementRef.clientWidth
 
-  const prevItemWidth =
-    reduxHolder.getState().quotation.blocks[props.blockIndex]?.width
+  const prevItemWidth = reduxHolder.getState().quotation.blocks[props.blockIndex]?.width
 
   if (itemWidth !== prevItemWidth) {
     reduxHolder.dispatch(

@@ -2,9 +2,7 @@ import { Box } from '@mui/material'
 import { reduxHolder } from '@front/shared/lib/redux'
 
 export const InfoLeft = (): React.ReactNode => {
-  const permissionLevel = reduxHolder.useSelector(
-    (state) => state.quotation.permissionLevel,
-  )
+  const permissionLevel = reduxHolder.useSelector((state) => state.quotation.permissionLevel)
 
   return (
     <Box

@@ -61,9 +61,7 @@ export const RestOfCopiedItems = (): React.JSX.Element | null => {
   const [firstItem] = items
 
   const scaleFactorForFirstItem =
-    firstItem?.width === undefined
-      ? 0
-      : (containerWidth - 2 * containerPadding) / firstItem.width
+    firstItem?.width === undefined ? 0 : (containerWidth - 2 * containerPadding) / firstItem.width
 
   const firstItemHeight =
     firstItem?.height === undefined
@@ -95,8 +93,7 @@ export const RestOfCopiedItems = (): React.JSX.Element | null => {
         variants={variants}
       >
         {items.map((item, index) => {
-          const scaleFactor =
-            (containerWidth - 2 * containerPadding) / item.width
+          const scaleFactor = (containerWidth - 2 * containerPadding) / item.width
 
           const preview = reduxHolder.getState().copy.previews[index]
 

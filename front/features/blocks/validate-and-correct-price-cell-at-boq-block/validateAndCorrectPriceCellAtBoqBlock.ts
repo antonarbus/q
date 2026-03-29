@@ -3,10 +3,7 @@ import { isRowPriceValid } from '@front/entities/quotation/util/isRowPriceValid'
 import { recalculateSubTotalPrices } from '@front/entities/quotation/util/recalculateSubTotalPrices'
 import { updateCellWithValue } from '@front/entities/quotation/util/updateCellWithValue'
 import { roundTo } from 'round-to'
-import {
-  editorRegistry,
-  getRegistryKey,
-} from '@front/shared/lib/tiptap/editorRegistry'
+import { editorRegistry, getRegistryKey } from '@front/shared/lib/tiptap/editorRegistry'
 
 type Props = {
   blockIndex: number

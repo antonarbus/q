@@ -22,10 +22,7 @@ export const App = (): React.JSX.Element => {
       <QueryClientProvider client={instance.queryClient}>
         <ThemeProvider theme={themeClient}>
           <GlobalStyles />
-          <LocalizationProvider
-            adapterLocale={enGB}
-            dateAdapter={AdapterDateFns}
-          >
+          <LocalizationProvider adapterLocale={enGB} dateAdapter={AdapterDateFns}>
             <RouterProvider router={routerHolder.router} />
           </LocalizationProvider>
           {import.meta.env.DEV ? <ReactQueryDevtools /> : null}

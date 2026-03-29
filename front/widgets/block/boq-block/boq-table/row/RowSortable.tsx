@@ -12,11 +12,7 @@ export const RowSortable = (props: Props): React.JSX.Element => {
   const isDragDisabled = useIsRowsSortDisabled()
 
   return (
-    <Draggable
-      draggableId={row.item.id}
-      index={row.index}
-      isDragDisabled={isDragDisabled}
-    >
+    <Draggable draggableId={row.item.id} index={row.index} isDragDisabled={isDragDisabled}>
       {(provided, snapshot) => {
         return (
           <div

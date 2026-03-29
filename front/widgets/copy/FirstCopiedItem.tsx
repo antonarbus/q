@@ -67,8 +67,7 @@ export const FirstCopiedItem = (): React.JSX.Element | null => {
     return null
   }
 
-  const scaleFactorForFirstItem =
-    (containerWidth - 2 * containerPadding) / firstItem.width
+  const scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / firstItem.width
 
   const height = firstItem.height * scaleFactorForFirstItem
   const width = firstItem.width * scaleFactorForFirstItem

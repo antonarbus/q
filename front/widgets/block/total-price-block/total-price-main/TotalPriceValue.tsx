@@ -17,9 +17,7 @@ export const PriceValue = (): React.JSX.Element => {
       })}
       className='price-value'
       placeholder='Total price...'
-      contentGetter={() =>
-        getHtmlOfPriceFromStoreByIndex({ blockIndex: block.index })
-      }
+      contentGetter={() => getHtmlOfPriceFromStoreByIndex({ blockIndex: block.index })}
       onChange={() => {
         updatePriceValueAtPriceBlock({ blockIndex: block.index })
       }}

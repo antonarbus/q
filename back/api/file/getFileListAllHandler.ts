@@ -1,16 +1,10 @@
-import {
-  filesTable,
-  type SelectFile,
-} from '@back/entity/file/db/filesTableSchema'
+import { filesTable, type SelectFile } from '@back/entity/file/db/filesTableSchema'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entity/user/getUserFromAccessTokenOrThrowUnauthorized'
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { db } from '@back/shared/lib/drizzle/db'
-import {
-  type HttpResponse,
-  httpJsonResponse,
-} from '@back/shared/lib/express/httpResponse'
+import { type HttpResponse, httpJsonResponse } from '@back/shared/lib/express/httpResponse'
 import { and, asc, count, desc, ilike } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
 import type { ParamsDictionary } from 'express-serve-static-core'
@@ -69,9 +63,7 @@ export const getFileListAllHandler: RouterHandler = async (req) => {
     }),
   )
 
-  const sortModelParsed = sortModelSchema.safeParse(
-    JSON.parse(req.query.sortModel),
-  )
+  const sortModelParsed = sortModelSchema.safeParse(JSON.parse(req.query.sortModel))
 
   if (sortModelParsed.success === false) {
     throw new Error('Invalid sortModel format', sortModelParsed.error)
@@ -93,9 +85,7 @@ export const getFileListAllHandler: RouterHandler = async (req) => {
 
       return sortedColumn
     })
-    .filter((condition): condition is NonNullable<typeof condition> =>
-      Boolean(condition),
-    )
+    .filter((condition): condition is NonNullable<typeof condition> => Boolean(condition))
 
   const filterModelSchema = z.record(
     z.string(),
@@ -106,9 +96,7 @@ export const getFileListAllHandler: RouterHandler = async (req) => {
     }),
   )
 
-  const filterModelParsed = filterModelSchema.safeParse(
-    JSON.parse(req.query.filterModel),
-  )
+  const filterModelParsed = filterModelSchema.safeParse(JSON.parse(req.query.filterModel))
 
   if (filterModelParsed.success === false) {
     throw new Error('Invalid filterModel format', filterModelParsed.error)
@@ -130,22 +118,16 @@ export const getFileListAllHandler: RouterHandler = async (req) => {
 
       return filterCondition
     })
-    .filter((condition): condition is NonNullable<typeof condition> =>
-      Boolean(condition),
-    )
+    .filter((condition): condition is NonNullable<typeof condition> => Boolean(condition))
 
   // Query all files (no user filter)
   const baseQuery = db.select().from(filesTable)
 
   const queryWithFilters =
-    filterConditions.length > 0
-      ? baseQuery.where(and(...filterConditions))
-      : baseQuery
+    filterConditions.length > 0 ? baseQuery.where(and(...filterConditions)) : baseQuery
 
   const queryWithSort =
-    sortConditions.length > 0
-      ? queryWithFilters.orderBy(...sortConditions)
-      : queryWithFilters
+    sortConditions.length > 0 ? queryWithFilters.orderBy(...sortConditions) : queryWithFilters
 
   const fileListPromise = queryWithSort
     .offset(Number(req.query.startRow))
@@ -154,20 +136,17 @@ export const getFileListAllHandler: RouterHandler = async (req) => {
   const baseCountQuery = db.select({ count: count() }).from(filesTable)
 
   const countQueryWithFilters =
-    filterConditions.length > 0
-      ? baseCountQuery.where(and(...filterConditions))
-      : baseCountQuery
+    filterConditions.length > 0 ? baseCountQuery.where(and(...filterConditions)) : baseCountQuery
 
-  const fileListTotalCountPromise = countQueryWithFilters.then(
-    (result) => result[0]?.count ?? 0,
-  )
+  const fileListTotalCountPromise = countQueryWithFilters.then((result) => result[0]?.count ?? 0)
 
-  const [fileListResponse, fileListTotalCountResponse] =
-    await Promise.allSettled([fileListPromise, fileListTotalCountPromise])
+  const [fileListResponse, fileListTotalCountResponse] = await Promise.allSettled([
+    fileListPromise,
+    fileListTotalCountPromise,
+  ])
 
   const fulfilled =
-    fileListResponse.status === 'fulfilled' &&
-    fileListTotalCountResponse.status === 'fulfilled'
+    fileListResponse.status === 'fulfilled' && fileListTotalCountResponse.status === 'fulfilled'
 
   if (fulfilled === false) {
     messageList.push('Failed to fetch files from database')
@@ -181,9 +160,7 @@ export const getFileListAllHandler: RouterHandler = async (req) => {
 
   messageList.push(`Found ${fileListTotalCountResponse.value} total files`)
 
-  messageList.push(
-    `Returned ${fileListResponse.value.length} files for current page`,
-  )
+  messageList.push(`Returned ${fileListResponse.value.length} files for current page`)
 
   return httpJsonResponse({
     statusCode: httpStatusCode.success200,

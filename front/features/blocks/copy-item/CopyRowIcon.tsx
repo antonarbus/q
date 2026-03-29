@@ -16,12 +16,7 @@ export const CopyRowIcon = (): React.JSX.Element => {
   const disabled = isCopyable === false
 
   return (
-    <Tooltip
-      enterDelay={500}
-      enterNextDelay={500}
-      placement='left'
-      title='Copy'
-    >
+    <Tooltip enterDelay={500} enterNextDelay={500} placement='left' title='Copy'>
       <span className={cls.actionIconContainer}>
         <MdCopyAll
           className={cls.actionIcon}

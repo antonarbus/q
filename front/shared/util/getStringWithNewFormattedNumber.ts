@@ -33,10 +33,7 @@ export const getStringWithNewFormattedNumber = (props: Props): string => {
   const decimalNumberPattern = /\d+(?:[,.]\d+)?/u
 
   // Replace the first decimal number found with the new formatted number
-  const htmlWithNewNumber = normalizedHtml.replace(
-    decimalNumberPattern,
-    newNumberFormatted,
-  )
+  const htmlWithNewNumber = normalizedHtml.replace(decimalNumberPattern, newNumberFormatted)
 
   return htmlWithNewNumber
 }

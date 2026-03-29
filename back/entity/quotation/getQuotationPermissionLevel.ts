@@ -14,9 +14,7 @@ type Props = {
   shouldTrace: boolean
 }
 
-export const getQuotationPermissionLevel = (
-  props: Props,
-): Quotation['permissionLevel'] => {
+export const getQuotationPermissionLevel = (props: Props): Quotation['permissionLevel'] => {
   const isLoggedUser = props.user !== null
   const emailFromToken = props.user?.email
 

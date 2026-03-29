@@ -11,9 +11,7 @@ type Props = {
 }
 
 export const IconWithLoader = (props: Props): React.ReactNode => {
-  const isHamburger = reduxHolder.useSelector(
-    (state) => state.nav.navMode === 'hamburger',
-  )
+  const isHamburger = reduxHolder.useSelector((state) => state.nav.navMode === 'hamburger')
 
   if (props.navItem === undefined) {
     return null
@@ -23,10 +21,7 @@ export const IconWithLoader = (props: Props): React.ReactNode => {
   const disabled = Boolean(props.navItem.disabled)
   const tooltipText = props.navItem.tooltip
 
-  const icon =
-    props.navItem.iconId === undefined
-      ? undefined
-      : iconRegistry[props.navItem.iconId]
+  const icon = props.navItem.iconId === undefined ? undefined : iconRegistry[props.navItem.iconId]
 
   if (isHamburger === true) {
     return icon

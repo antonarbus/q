@@ -14,9 +14,7 @@ type Props = {
 export const BackdropWithSlidableModal = (props: Props): React.JSX.Element => {
   const animatedElement = useAnimatedElement()
 
-  const scrollTopPositionBeforeModalOpen = useRef(
-    document.documentElement.scrollTop,
-  )
+  const scrollTopPositionBeforeModalOpen = useRef(document.documentElement.scrollTop)
 
   useEffectOnce(() => {
     if (reduxHolder.getState().app.navigateState.shouldSlide === true) {
@@ -33,8 +31,7 @@ export const BackdropWithSlidableModal = (props: Props): React.JSX.Element => {
 
   useEffectOnce(() => {
     const closeModalOnEsc = (event: KeyboardEvent): void => {
-      const shouldCloseModalOnEsc =
-        props.shouldUnmountOnEsc === true && event.key === 'Escape'
+      const shouldCloseModalOnEsc = props.shouldUnmountOnEsc === true && event.key === 'Escape'
 
       if (shouldCloseModalOnEsc === true) {
         if (reduxHolder.getState().app.navigateState.shouldSlide === true) {
@@ -67,8 +64,7 @@ export const BackdropWithSlidableModal = (props: Props): React.JSX.Element => {
         bodyElement.style.setProperty('overflow', 'hidden')
         bodyElement.scrollTop = scrollTopPositionBeforeModalOpen.current
 
-        document.documentElement.scrollTop =
-          scrollTopPositionBeforeModalOpen.current
+        document.documentElement.scrollTop = scrollTopPositionBeforeModalOpen.current
       }
     }
 
@@ -78,8 +74,7 @@ export const BackdropWithSlidableModal = (props: Props): React.JSX.Element => {
       if (bodyElement instanceof HTMLElement) {
         bodyElement.style.removeProperty('overflow')
 
-        document.documentElement.scrollTop =
-          scrollTopPositionBeforeModalOpen.current
+        document.documentElement.scrollTop = scrollTopPositionBeforeModalOpen.current
       }
     }
 

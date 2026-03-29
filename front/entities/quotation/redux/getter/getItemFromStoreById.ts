@@ -1,9 +1,5 @@
 import { reduxHolder } from '@front/shared/lib/redux'
-import type {
-  BlockItem,
-  Quotation,
-  RowBlock,
-} from '@back/entity/quotation/schema'
+import type { BlockItem, Quotation, RowBlock } from '@back/entity/quotation/schema'
 
 type Props = {
   id: string
@@ -34,9 +30,7 @@ export const getItemFromStoreById = (props: Props): Res => {
     return { type: 'quotation', data: state.quotation }
   }
 
-  const blockWithSameId = state.quotation.blocks.find(
-    (block) => block.id === props.id,
-  )
+  const blockWithSameId = state.quotation.blocks.find((block) => block.id === props.id)
 
   if (blockWithSameId !== undefined) {
     const blockIndex = state.quotation.blocks.indexOf(blockWithSameId)

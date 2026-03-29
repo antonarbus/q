@@ -12,9 +12,7 @@ export const RequireRoles = (props: Props): React.ReactNode => {
 
   const userRoles = reduxHolder.useSelector((state) => state.user.roles)
 
-  const haveRequiredRole = props.requiredRoles.some((role) =>
-    userRoles.includes(role),
-  )
+  const haveRequiredRole = props.requiredRoles.some((role) => userRoles.includes(role))
 
   if (getUserAccessTokenQuery.isLoading === true) {
     return (

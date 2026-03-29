@@ -19,9 +19,7 @@ type Res = {
  * Public quotation can be visited by strangers with restricted data, \
  * But logged owner gets the same quotation in full access
  */
-export const getUserFromAccessTokenOrNull = async (
-  props: Props,
-): Promise<Res> => {
+export const getUserFromAccessTokenOrNull = async (props: Props): Promise<Res> => {
   const accessJwtToken = props.req.headers[headerName.accessJwtToken]
 
   if (typeof accessJwtToken !== 'string') {

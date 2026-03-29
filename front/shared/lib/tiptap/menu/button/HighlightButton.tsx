@@ -57,11 +57,7 @@ export const HighlightButton = (): React.JSX.Element => {
                 event.preventDefault()
               }}
               onClick={() => {
-                editor
-                  .chain()
-                  .focus()
-                  .toggleHighlight({ color: item.color })
-                  .run()
+                editor.chain().focus().toggleHighlight({ color: item.color }).run()
               }}
               sx={{
                 width: 18,

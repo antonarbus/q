@@ -52,9 +52,7 @@ export const migrateQuotationSchemaFromV1ToV2 = (props: Props): Res => {
     }
   }
 
-  const oldDocumentValidationResult = quotationSchemaV1.safeParse(
-    props.document,
-  )
+  const oldDocumentValidationResult = quotationSchemaV1.safeParse(props.document)
 
   if (oldDocumentValidationResult.success === false) {
     const treeifiedError = z.treeifyError(oldDocumentValidationResult.error)
@@ -76,9 +74,7 @@ export const migrateQuotationSchemaFromV1ToV2 = (props: Props): Res => {
   //* For missing property add default value e.g. z.string().default('foo')
   //* For failing validation use catch() e.g. z.string().catch('foo')
 
-  const newDocument = structuredClone(
-    oldDocumentValidationResult.data,
-  ) as unknown as QuotationV2 // <-- hack! cast QuotationV2 type for actual QuotationV1 to let us set new values
+  const newDocument = structuredClone(oldDocumentValidationResult.data) as unknown as QuotationV2 // <-- hack! cast QuotationV2 type for actual QuotationV1 to let us set new values
 
   newDocument.quotationSchemaVersion = MIGRATE_TO //* <-- TO BE IN EVERY MIGRATION FUNCTION
   newDocument.type = 'quotation'

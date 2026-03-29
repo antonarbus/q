@@ -11,9 +11,7 @@ export const openBookmarksPage = (): void => {
   if (Boolean(currentQuotation.id) === true) {
     backToQuotationRef.current = currentQuotation
 
-    reduxHolder.dispatch(
-      navSlice.actions.showNavItems({ navItemIds: [navItemId.back] }),
-    )
+    reduxHolder.dispatch(navSlice.actions.showNavItems({ navItemIds: [navItemId.back] }))
   }
 
   void routerHolder.router.navigate(`/${route.bookmarkList}`)

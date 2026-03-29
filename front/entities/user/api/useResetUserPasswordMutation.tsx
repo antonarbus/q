@@ -1,9 +1,5 @@
 import { route } from '@back/api/route'
-import type {
-  ErrorResBody,
-  ReqBody as Payload,
-  ResBody,
-} from '@back/api/user/resetPasswordHandler'
+import type { ErrorResBody, ReqBody as Payload, ResBody } from '@back/api/user/resetPasswordHandler'
 import { queryKey } from '@front/shared/lib/tanstack-query/queryKey'
 import { type UseMutationResult, useMutation } from '@tanstack/react-query'
 import axios, { type AxiosError } from 'axios'

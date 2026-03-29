@@ -32,12 +32,7 @@ export const OpenBookmarkModalButton = (props: UrlParam): React.JSX.Element => {
   }, [getBookmarkMutation.isError])
 
   return (
-    <Tooltip
-      enterDelay={500}
-      enterNextDelay={500}
-      placement='bottom'
-      title='Edit'
-    >
+    <Tooltip enterDelay={500} enterNextDelay={500} placement='bottom' title='Edit'>
       <IconButton
         onClick={() => {
           getBookmarkMutation.mutate({ id: props.id })
@@ -47,11 +42,7 @@ export const OpenBookmarkModalButton = (props: UrlParam): React.JSX.Element => {
           translate: '0px 1px',
         }}
       >
-        {getBookmarkMutation.isPending === true ? (
-          <RotatingLoaderIcon />
-        ) : (
-          <AiTwotoneEdit />
-        )}
+        {getBookmarkMutation.isPending === true ? <RotatingLoaderIcon /> : <AiTwotoneEdit />}
       </IconButton>
     </Tooltip>
   )

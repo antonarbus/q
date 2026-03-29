@@ -9,14 +9,8 @@ import { queryKey } from '@front/shared/lib/tanstack-query/queryKey'
 import { type UseMutationResult, useMutation } from '@tanstack/react-query'
 import type { AxiosError, AxiosResponse } from 'axios'
 
-export const saveQuotationMutationFn = async (
-  payload: Payload,
-): Promise<ResBody> => {
-  const response = await axiosWithAuth<
-    ResBody,
-    AxiosResponse<ResBody>,
-    Payload
-  >({
+export const saveQuotationMutationFn = async (payload: Payload): Promise<ResBody> => {
+  const response = await axiosWithAuth<ResBody, AxiosResponse<ResBody>, Payload>({
     url: route.saveQuotation.url,
     method: route.saveQuotation.method,
     data: {

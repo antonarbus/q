@@ -28,17 +28,14 @@ export const EmailField = (props: Props): React.JSX.Element => {
   const inputFocusedOutOnesSignal = useSignal(false)
 
   useSignalEffect(() => {
-    props.isEmailOkSignal.value = z
-      .email()
-      .safeParse(props.emailSignal.value).success
+    props.isEmailOkSignal.value = z.email().safeParse(props.emailSignal.value).success
 
     const isMailPatternOk =
       inputFocusedOutOnesSignal.value &&
       props.emailSignal.value !== '' &&
       props.isEmailOkSignal.value === false
 
-    emailLabelSignal.value =
-      isMailPatternOk === true ? 'Check email pattern' : initEmailLabel
+    emailLabelSignal.value = isMailPatternOk === true ? 'Check email pattern' : initEmailLabel
   })
 
   const suggestEmail = (email: string): void => {
@@ -83,8 +80,7 @@ export const EmailField = (props: Props): React.JSX.Element => {
         }}
         sx={{
           '& .MuiInputLabel-shrink': {
-            color:
-              emailLabelSignal.value === initEmailLabel ? '' : theme.colors.red,
+            color: emailLabelSignal.value === initEmailLabel ? '' : theme.colors.red,
           },
           '.MuiInputBase-root': {
             background: 'white',

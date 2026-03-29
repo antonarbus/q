@@ -6,9 +6,7 @@ type Props = {
   boqColumnKey: BoqColumnKey
 }
 
-export const getBoqColumnFromStoreByIndex = (
-  props: Props,
-): Column | undefined => {
+export const getBoqColumnFromStoreByIndex = (props: Props): Column | undefined => {
   const block = reduxHolder.getState().quotation.blocks[props.blockIndex]
 
   if (block?.type !== 'boq') {

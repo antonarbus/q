@@ -78,9 +78,7 @@ const showServiceInfo = async (props: ShowServiceInfoProps): Promise<void> => {
           // If this tag points to same digest and looks like a git SHA (40 hex chars), use it
 
           const isGitSha =
-            tagDigest === digest &&
-            tag !== null &&
-            /^[0-9a-f]{40}$/u.exec(tag) !== null
+            tagDigest === digest && tag !== null && /^[0-9a-f]{40}$/u.exec(tag) !== null
 
           if (isGitSha === true) {
             gitSha = tag

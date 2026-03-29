@@ -1,9 +1,4 @@
-import {
-  Autocomplete,
-  InputAdornment,
-  TextField,
-  type TextFieldProps,
-} from '@mui/material'
+import { Autocomplete, InputAdornment, TextField, type TextFieldProps } from '@mui/material'
 import type { Signal } from '@preact/signals-react'
 import { BsTags } from 'react-icons/bs'
 

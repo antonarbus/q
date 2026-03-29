@@ -131,9 +131,7 @@ export type CellPin = z.infer<typeof cellSchema.shape.pin>
 export type Column = z.infer<typeof columnSchema>
 export type HeaderValue = z.infer<typeof headerValueSchema>
 export type HeaderKey = keyof z.infer<typeof headerSchema>
-export type BoqColumnKey = keyof z.infer<
-  typeof boqBlockSchema.shape.boq.shape.column
->
+export type BoqColumnKey = keyof z.infer<typeof boqBlockSchema.shape.boq.shape.column>
 export type CellKey = Exclude<BoqColumnKey, 'number'>
 export type RowBlock = z.infer<typeof rowBlockSchema>
 export type BoqBlock = z.infer<typeof boqBlockSchema>

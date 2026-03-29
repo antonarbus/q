@@ -60,9 +60,7 @@ export const TiptapMenu = (): React.ReactNode => {
         return
       }
 
-      editor.view.dispatch(
-        editor.state.tr.setMeta('bubbleMenu', 'updatePosition'),
-      )
+      editor.view.dispatch(editor.state.tr.setMeta('bubbleMenu', 'updatePosition'))
     })
 
     return (): void => {
@@ -102,18 +100,16 @@ export const TiptapMenu = (): React.ReactNode => {
           onShow: (): void => {
             //* Issue: for row cells menu is randomly positioned
             requestAnimationFrame(() => {
-              editor.view.dispatch(
-                editor.state.tr.setMeta('bubbleMenu', 'updatePosition'),
-              )
+              editor.view.dispatch(editor.state.tr.setMeta('bubbleMenu', 'updatePosition'))
             })
           },
         }}
       >
         <TiptapMenuLayout>
           {isImageActive === true && <ImageMenu />}
-          {isImageActive === false &&
-            isInTable === true &&
-            hasTextSelection === false && <TableMenu />}
+          {isImageActive === false && isInTable === true && hasTextSelection === false && (
+            <TableMenu />
+          )}
           {isImageActive === false && hasTextSelection === true && <TextMenu />}
         </TiptapMenuLayout>
       </BubbleMenu>

@@ -2,9 +2,7 @@ import { Box } from '@mui/material'
 import { reduxHolder } from '@front/shared/lib/redux'
 
 export const BackgroundMessage = (): React.JSX.Element => {
-  const backgroundMessage = reduxHolder.useSelector(
-    (state) => state.app.backgroundMessage,
-  )
+  const backgroundMessage = reduxHolder.useSelector((state) => state.app.backgroundMessage)
 
   return (
     <Box

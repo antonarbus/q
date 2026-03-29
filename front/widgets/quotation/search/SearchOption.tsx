@@ -42,10 +42,7 @@ export const SearchOption = (props: Props): React.JSX.Element => {
     >
       <OptionItemName inputValue={props.inputValue} option={props.option} />
       <OptionItemCategory inputValue={props.inputValue} option={props.option} />
-      <OptionItemDescription
-        inputValue={props.inputValue}
-        option={props.option}
-      />
+      <OptionItemDescription inputValue={props.inputValue} option={props.option} />
       {props.isLoading === true ? (
         <Box
           sx={{

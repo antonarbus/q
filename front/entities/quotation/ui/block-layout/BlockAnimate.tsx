@@ -38,9 +38,7 @@ export const BlockAnimate = (props: Props): React.JSX.Element => {
           overflow: 'visible',
         },
       }}
-      className={
-        cls.block + (props.className === undefined ? '' : ` ${props.className}`)
-      }
+      className={cls.block + (props.className === undefined ? '' : ` ${props.className}`)}
       exit={{
         height: 0,
         marginBottom: -20, // wrapper has 20px, so total = 0

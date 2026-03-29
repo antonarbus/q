@@ -14,9 +14,7 @@ export const useBookmarkFormValues = (): BookmarkFormValues => {
   }
 
   useEffectOnce(() => {
-    const bookmark = reduxHolder
-      .getState()
-      .quotation.blocks.at(BOOKMARK_POS_AT_BLOCKS)
+    const bookmark = reduxHolder.getState().quotation.blocks.at(BOOKMARK_POS_AT_BLOCKS)
 
     if (bookmark !== undefined) {
       bookmarkFromValues.nameSignal.value = bookmark.name

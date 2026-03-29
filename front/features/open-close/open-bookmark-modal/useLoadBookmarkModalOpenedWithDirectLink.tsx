@@ -12,17 +12,13 @@ type Props = {
   bookmarkFormValues: BookmarkFormValues
 }
 
-export const useLoadBookmarkModalOpenedWithDirectLink = (
-  props: Props,
-): void => {
+export const useLoadBookmarkModalOpenedWithDirectLink = (props: Props): void => {
   const urlParams = useParams()
   const navigate = useNavigate()
   const getBookmarkMutation = useGetBookmarkMutation()
 
   useEffectOnce(() => {
-    const firstBlock = reduxHolder
-      .getState()
-      .quotation.blocks.at(BOOKMARK_POS_AT_BLOCKS)
+    const firstBlock = reduxHolder.getState().quotation.blocks.at(BOOKMARK_POS_AT_BLOCKS)
 
     const isOpenedFromButton = Boolean(firstBlock)
 
@@ -49,9 +45,7 @@ export const useLoadBookmarkModalOpenedWithDirectLink = (
         }),
       )
 
-      const block = reduxHolder
-        .getState()
-        .quotation.blocks.at(BOOKMARK_POS_AT_BLOCKS)
+      const block = reduxHolder.getState().quotation.blocks.at(BOOKMARK_POS_AT_BLOCKS)
 
       if (block !== undefined) {
         props.bookmarkFormValues.nameSignal.value = block.name
@@ -64,23 +58,15 @@ export const useLoadBookmarkModalOpenedWithDirectLink = (
 
   useUpdateEffect(() => {
     if (getBookmarkMutation.isError === true) {
-      if (
-        getBookmarkMutation.error.response?.data.errorCode ===
-        'BOOKMARK_NOT_FOUND'
-      ) {
+      if (getBookmarkMutation.error.response?.data.errorCode === 'BOOKMARK_NOT_FOUND') {
         toast.warning('Bookmark not found')
       }
 
-      if (
-        getBookmarkMutation.error.response?.data.errorCode ===
-        'BOOKMARK_STORAGE_NOT_FOUND'
-      ) {
+      if (getBookmarkMutation.error.response?.data.errorCode === 'BOOKMARK_STORAGE_NOT_FOUND') {
         toast.warning('Bookmark not found, probably deleted')
       }
 
-      if (
-        getBookmarkMutation.error.response?.data.errorCode === 'INTERNAL_ERROR'
-      ) {
+      if (getBookmarkMutation.error.response?.data.errorCode === 'INTERNAL_ERROR') {
         toast.warning('Internal error')
       }
 

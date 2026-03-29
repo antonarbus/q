@@ -2,9 +2,7 @@ import { Box, IconButton, Paper } from '@mui/material'
 import { cls } from '@front/shared/cls'
 import { IoClose } from 'react-icons/io5'
 
-export const PaperComponent = (
-  props: React.HTMLAttributes<HTMLElement>,
-): React.JSX.Element => {
+export const PaperComponent = (props: React.HTMLAttributes<HTMLElement>): React.JSX.Element => {
   return (
     <Paper
       className={cls.searchAutocomplete}
@@ -23,8 +21,7 @@ export const PaperComponent = (
         backdropFilter: 'blur(4px) saturate(180%)',
         border: '1px solid rgba(255, 255, 255, 0.1)',
         borderRadius: '8px',
-        boxShadow:
-          '0 8px 32px 0 rgba(0, 0, 0, 0.37), inset 0 1px 1px 0 rgba(255, 255, 255, 0.05)',
+        boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.37), inset 0 1px 1px 0 rgba(255, 255, 255, 0.05)',
       }}
       {...props}
     >

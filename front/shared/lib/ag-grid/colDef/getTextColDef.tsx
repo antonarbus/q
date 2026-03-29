@@ -1,14 +1,10 @@
 import { getTextWithBoldSubStringAsJsx } from '@front/shared/util/getTextWithBoldSubStringAsJsx'
-import type {
-  ColDef,
-  ColDefField,
-  ICellRendererParams,
-} from 'ag-grid-community'
+import type { ColDef, ColDefField, ICellRendererParams } from 'ag-grid-community'
 
-type Props<
-  TData extends Record<string, unknown>,
-  TValue extends string = string,
-> = ColDef<TData, TValue> & {
+type Props<TData extends Record<string, unknown>, TValue extends string = string> = ColDef<
+  TData,
+  TValue
+> & {
   field: ColDefField<TData, TValue>
 }
 
@@ -26,9 +22,7 @@ export const getTextColDef = <
     floatingFilterComponentParams: {
       filterPlaceholder: 'Search...',
     },
-    cellRenderer: (
-      params: ICellRendererParams<TData, TValue>,
-    ): React.ReactNode => {
+    cellRenderer: (params: ICellRendererParams<TData, TValue>): React.ReactNode => {
       type FilterModel = Partial<
         Record<
           ColDefField<TData, TValue>,

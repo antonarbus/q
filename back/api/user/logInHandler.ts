@@ -1,7 +1,4 @@
-import {
-  usersTable,
-  type SelectUser,
-} from '@back/entity/user/db/usersTableSchema'
+import { usersTable, type SelectUser } from '@back/entity/user/db/usersTableSchema'
 import { setNoTraceMode, setRefreshTokenCookie } from '@back/shared/headers'
 import {
   generateAccessToken,
@@ -20,10 +17,7 @@ import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
-import {
-  type HttpResponse,
-  httpJsonResponse,
-} from '@back/shared/lib/express/httpResponse'
+import { type HttpResponse, httpJsonResponse } from '@back/shared/lib/express/httpResponse'
 import { getUserFromAccessTokenOrNull } from '@back/entity/user/getUserFromAccessTokenOrNull'
 
 type SearchQuery = ParsedQs
@@ -88,8 +82,7 @@ export const logInHandler: RouterHandler = async (req, res) => {
   const emailFromAccessToken = userFromAccessToken?.email ?? 'unknown@gmail.com'
 
   const isSuperAdminOnBehalfOfUser =
-    rolesFromAccessToken.includes('super-admin') &&
-    emailFromInput !== emailFromAccessToken
+    rolesFromAccessToken.includes('super-admin') && emailFromInput !== emailFromAccessToken
 
   if (isSuperAdminOnBehalfOfUser === true) {
     messageList.push('Super-admin logging in on behalf of user')
@@ -97,9 +90,7 @@ export const logInHandler: RouterHandler = async (req, res) => {
     // just log in as a user without password coz you are a super-admin
     // do not leave traces of login + opening quotations & bookmarks
 
-    const payloadFromRefreshToken = await getPayloadFromRefreshToken(
-      userSelected.refreshJwtToken,
-    )
+    const payloadFromRefreshToken = await getPayloadFromRefreshToken(userSelected.refreshJwtToken)
 
     const isValidRefreshToken = Boolean(payloadFromRefreshToken)
 
@@ -160,10 +151,7 @@ export const logInHandler: RouterHandler = async (req, res) => {
     })
   }
 
-  const isPasswordValid = await bcrypt.compare(
-    passwordFromInput,
-    passwordFromDb,
-  )
+  const isPasswordValid = await bcrypt.compare(passwordFromInput, passwordFromDb)
 
   if (isPasswordValid === false) {
     messageList.push('Invalid password')
@@ -218,9 +206,7 @@ export const logInHandler: RouterHandler = async (req, res) => {
     })
   }
 
-  const payloadFromRefreshToken = await getPayloadFromRefreshToken(
-    userSelected.refreshJwtToken,
-  )
+  const payloadFromRefreshToken = await getPayloadFromRefreshToken(userSelected.refreshJwtToken)
 
   const isValidRefreshJwtToken = Boolean(payloadFromRefreshToken)
 

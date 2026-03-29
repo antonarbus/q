@@ -7,9 +7,7 @@ export type JwtPayloadExtended = JwtPayload & {
 }
 
 /** Check if 'email' and 'roles' properties are in payload */
-export const isJwtPayloadExtended = (
-  payload: JwtPayload,
-): payload is JwtPayloadExtended => {
+export const isJwtPayloadExtended = (payload: JwtPayload): payload is JwtPayloadExtended => {
   if ('email' in payload === false) {
     return false
   }

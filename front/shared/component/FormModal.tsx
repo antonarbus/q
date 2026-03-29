@@ -1,10 +1,4 @@
-import {
-  Avatar,
-  Box,
-  IconButton,
-  type CSSObject,
-  Typography,
-} from '@mui/material'
+import { Avatar, Box, IconButton, type CSSObject, Typography } from '@mui/material'
 import { cls } from '@front/shared/cls'
 import { theme } from '@front/shared/theme'
 import type { AnimationScope } from 'motion'
@@ -86,9 +80,7 @@ export const FormModal = (props: Props): React.JSX.Element => {
             position: 'relative',
           }}
         >
-          <Avatar sx={{ bgcolor: theme.colors.darkBackground }}>
-            {props.headerIcon}
-          </Avatar>
+          <Avatar sx={{ bgcolor: theme.colors.darkBackground }}>{props.headerIcon}</Avatar>
           <Typography component='h1' variant='h6'>
             {props.headerText}
           </Typography>
@@ -181,10 +173,7 @@ export const FormModal = (props: Props): React.JSX.Element => {
           >
             <ButtonCustom
               form={FORM_ID}
-              isButtonDisabled={
-                Boolean(props.isButtonDisabled) ||
-                Boolean(props.isButtonLoading)
-              }
+              isButtonDisabled={Boolean(props.isButtonDisabled) || Boolean(props.isButtonLoading)}
               isButtonError={props.isButtonError}
               isButtonLoading={props.isButtonLoading}
               isButtonSuccess={props.isButtonSuccess}

@@ -134,11 +134,7 @@ export const MASTER_DEPLOYS_TO_ENVIRONMENT: DeployedEnvironment = 'dev'
  * * DO NOT MODIFY, but may (most likely this is correct)
  * * If modified, then to be aligned with .github/workflows/promote.yml:12
  */
-export const allowedPromotionPath = [
-  `dev-test`,
-  `test-pilot`,
-  `pilot-prod`,
-] as const
+export const allowedPromotionPath = [`dev-test`, `test-pilot`, `pilot-prod`] as const
 
 export const allowedPromotionPathSchema = z.enum(allowedPromotionPath)
 

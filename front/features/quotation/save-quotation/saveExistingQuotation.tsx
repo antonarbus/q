@@ -53,12 +53,9 @@ export const saveExistingQuotation = async (): Promise<void> => {
       }
 
       if (data.status === 'COPIED') {
-        toast.success(
-          `Shared quotation was copied and saved under id ${data.quotation.id}`,
-          {
-            duration: 5000,
-          },
-        )
+        toast.success(`Shared quotation was copied and saved under id ${data.quotation.id}`, {
+          duration: 5000,
+        })
       }
 
       void routerHolder.router.navigate(`/${data.quotation.id}`)

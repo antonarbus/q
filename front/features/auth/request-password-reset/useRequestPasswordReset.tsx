@@ -39,18 +39,14 @@ export const useRequestPasswordReset = (props: Props): Res => {
 
   useUpdateEffect(() => {
     if (requestUserPasswordResetMutation.isError === true) {
-      if (
-        requestUserPasswordResetMutation.error.response?.data.errorCode ===
-        'USER_NOT_FOUND'
-      ) {
+      if (requestUserPasswordResetMutation.error.response?.data.errorCode === 'USER_NOT_FOUND') {
         toast.info('User not found')
 
         return
       }
 
       if (
-        requestUserPasswordResetMutation.error.response?.data.errorCode ===
-        'ACCOUNT_NOT_ACTIVATED'
+        requestUserPasswordResetMutation.error.response?.data.errorCode === 'ACCOUNT_NOT_ACTIVATED'
       ) {
         toast.warning('Account not activated')
 
@@ -58,8 +54,7 @@ export const useRequestPasswordReset = (props: Props): Res => {
       }
 
       if (
-        requestUserPasswordResetMutation.error.response?.data.errorCode ===
-        'RESET_LINK_NOT_SENT'
+        requestUserPasswordResetMutation.error.response?.data.errorCode === 'RESET_LINK_NOT_SENT'
       ) {
         toast.warning('Something happened, failed to send the mail')
 
@@ -67,8 +62,7 @@ export const useRequestPasswordReset = (props: Props): Res => {
       }
 
       if (
-        requestUserPasswordResetMutation.error.response?.data.errorCode ===
-        'RESET_KEY_NOT_ISSUED'
+        requestUserPasswordResetMutation.error.response?.data.errorCode === 'RESET_KEY_NOT_ISSUED'
       ) {
         toast.warning('Something happened, failed to generate reset link')
 

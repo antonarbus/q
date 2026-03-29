@@ -6,9 +6,7 @@ type Props = {
   boqHeaderKey: HeaderKey
 }
 
-export const getBoqHeaderFromStoreByIndex = (
-  props: Props,
-): HeaderValue | undefined => {
+export const getBoqHeaderFromStoreByIndex = (props: Props): HeaderValue | undefined => {
   const block = reduxHolder.getState().quotation.blocks[props.blockIndex]
 
   if (block?.type !== 'boq') {

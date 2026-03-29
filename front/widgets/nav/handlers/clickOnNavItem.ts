@@ -20,9 +20,7 @@ export const clickOnNavItem = (props: Props): void => {
   document.activeElement.blur() // to prevent open an active navItem link on Enter key
 
   const func =
-    props.navItem.funcId === undefined
-      ? undefined
-      : functionRegistry[props.navItem.funcId]
+    props.navItem.funcId === undefined ? undefined : functionRegistry[props.navItem.funcId]
 
   if (props.disabled === true) {
     return
@@ -40,8 +38,7 @@ export const clickOnNavItem = (props: Props): void => {
   props.event.preventDefault()
 
   // handle burger close separately
-  const isBurger =
-    reduxHolder.getState().nav.currentMenuNavItemId === navItemId.burger
+  const isBurger = reduxHolder.getState().nav.currentMenuNavItemId === navItemId.burger
 
   if (isBurger === true) {
     reduxHolder.dispatch(navSlice.actions.closeMenu())
@@ -70,15 +67,10 @@ export const clickOnNavItem = (props: Props): void => {
 
   if (props.navItemRef.current !== null) {
     // open menu and determine its position (right: 0 OR left: 0)
-    const navItemRightPos =
-      props.navItemRef.current.getBoundingClientRect().right
+    const navItemRightPos = props.navItemRef.current.getBoundingClientRect().right
 
-    reduxHolder.dispatch(
-      navSlice.actions.setNavItemRightPos({ navItemRightPos }),
-    )
+    reduxHolder.dispatch(navSlice.actions.setNavItemRightPos({ navItemRightPos }))
 
-    reduxHolder.dispatch(
-      navSlice.actions.openMenuWithId({ navItemId: props.navItem.id }),
-    )
+    reduxHolder.dispatch(navSlice.actions.openMenuWithId({ navItemId: props.navItem.id }))
   }
 }

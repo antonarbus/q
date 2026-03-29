@@ -21,9 +21,7 @@ type Props = {
 export const ResizableBlockPaper = (props: Props): React.JSX.Element => {
   const block = useBlock()
 
-  const width = reduxHolder.useSelector(
-    (state) => state.quotation.blocks[block.index]?.width,
-  )
+  const width = reduxHolder.useSelector((state) => state.quotation.blocks[block.index]?.width)
 
   const isWidthSetManually = width !== undefined
 
@@ -81,8 +79,7 @@ export const ResizableBlockPaper = (props: Props): React.JSX.Element => {
         borderRadius: 6,
         position: 'relative',
         background: 'white',
-        boxShadow:
-          '0 8px 32px 0 rgba(0, 0, 0, 0.37), inset 0 1px 1px 0 rgba(255, 255, 255, 0.05)',
+        boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.37), inset 0 1px 1px 0 rgba(255, 255, 255, 0.05)',
       }}
       // grid={[20, 0]}
     >

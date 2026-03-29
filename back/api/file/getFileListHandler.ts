@@ -1,14 +1,8 @@
-import {
-  filesTable,
-  type SelectFile,
-} from '@back/entity/file/db/filesTableSchema'
+import { filesTable, type SelectFile } from '@back/entity/file/db/filesTableSchema'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entity/user/getUserFromAccessTokenOrThrowUnauthorized'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { db } from '@back/shared/lib/drizzle/db'
-import {
-  type HttpResponse,
-  httpJsonResponse,
-} from '@back/shared/lib/express/httpResponse'
+import { type HttpResponse, httpJsonResponse } from '@back/shared/lib/express/httpResponse'
 import { eq } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
 import type { ErrorCode } from '@back/shared/const/errorCode'

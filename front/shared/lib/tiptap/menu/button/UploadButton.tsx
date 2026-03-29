@@ -40,12 +40,7 @@ export const UploadButton = (): React.ReactNode => {
           },
         }}
       >
-        <Tooltip
-          enterDelay={500}
-          enterNextDelay={500}
-          placement='top'
-          title='Upload'
-        >
+        <Tooltip enterDelay={500} enterNextDelay={500} placement='top' title='Upload'>
           <TbUpload size={14} />
         </Tooltip>
       </Box>
@@ -66,9 +61,7 @@ export const UploadButton = (): React.ReactNode => {
           if (onUpload !== undefined) {
             const fileArray = Array.from(files)
 
-            const hasImage = fileArray.some((file) =>
-              file.type.startsWith('image/'),
-            )
+            const hasImage = fileArray.some((file) => file.type.startsWith('image/'))
 
             void onUpload({
               editor,

@@ -51,34 +51,23 @@ export const useLogIn = (props: Props): Res => {
         }),
       )
 
-      reduxHolder.dispatch(
-        navSlice.actions.hideNavItems({ navItemIds: [navItemId.login] }),
-      )
+      reduxHolder.dispatch(navSlice.actions.hideNavItems({ navItemIds: [navItemId.login] }))
 
-      reduxHolder.dispatch(
-        navSlice.actions.showNavItems({ navItemIds: [navItemId.profile] }),
-      )
+      reduxHolder.dispatch(navSlice.actions.showNavItems({ navItemIds: [navItemId.profile] }))
 
-      const isSuperAdmin =
-        logInUserMutation.data.roles.includes('super-admin') === true
+      const isSuperAdmin = logInUserMutation.data.roles.includes('super-admin') === true
 
       if (isSuperAdmin === true) {
-        reduxHolder.dispatch(
-          navSlice.actions.showNavItems({ navItemIds: ['admin'] }),
-        )
+        reduxHolder.dispatch(navSlice.actions.showNavItems({ navItemIds: ['admin'] }))
 
         reduxHolder.dispatch(navSlice.actions.showAdminIcon())
       } else {
-        reduxHolder.dispatch(
-          navSlice.actions.hideNavItems({ navItemIds: ['admin'] }),
-        )
+        reduxHolder.dispatch(navSlice.actions.hideNavItems({ navItemIds: ['admin'] }))
 
         reduxHolder.dispatch(navSlice.actions.showUserIcon())
       }
 
-      const isQuotationListPage = location.pathname.includes(
-        route.quotationList,
-      )
+      const isQuotationListPage = location.pathname.includes(route.quotationList)
 
       if (isQuotationListPage === true) {
         void getQuotationListQuery.refetch()
@@ -121,9 +110,7 @@ export const useLogIn = (props: Props): Res => {
 
   useUpdateEffect(() => {
     if (logInUserMutation.isError === true) {
-      reduxHolder.dispatch(
-        userSlice.actions.setAccessToken({ accessToken: null }),
-      )
+      reduxHolder.dispatch(userSlice.actions.setAccessToken({ accessToken: null }))
 
       const errorCode = logInUserMutation.error.response?.data.errorCode
 
@@ -140,9 +127,7 @@ export const useLogIn = (props: Props): Res => {
       }
 
       if (errorCode === 'ACTIVATION_LINK_SENT_AGAIN') {
-        toast.info(
-          'Account registered but not activated. Check mailbox or spam.',
-        )
+        toast.info('Account registered but not activated. Check mailbox or spam.')
 
         return
       }

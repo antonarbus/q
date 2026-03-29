@@ -53,10 +53,7 @@ export const validateQuotation = (props: Props): Res => {
   for (const migrate of migrateQuotationSchemaList) {
     const migrationResult = migrate({ document: currentDocument })
 
-    if (
-      migrationResult.status === 'MIGRATION_BUG' ||
-      migrationResult.status === 'CORRUPTED'
-    ) {
+    if (migrationResult.status === 'MIGRATION_BUG' || migrationResult.status === 'CORRUPTED') {
       messageList.push(migrationResult.message)
 
       return {
@@ -66,10 +63,7 @@ export const validateQuotation = (props: Props): Res => {
       }
     }
 
-    if (
-      migrationResult.status === 'SKIPPED' ||
-      migrationResult.status === 'MIGRATED'
-    ) {
+    if (migrationResult.status === 'SKIPPED' || migrationResult.status === 'MIGRATED') {
       // Assign migrated document to the currentDocument and go to next migration
       currentDocument = migrationResult.data
       messageList.push(migrationResult.message)
@@ -77,8 +71,7 @@ export const validateQuotation = (props: Props): Res => {
   }
 
   // Validate as the latest version after migration
-  const migratedDocumentValidationResult =
-    quotationSchema.safeParse(currentDocument)
+  const migratedDocumentValidationResult = quotationSchema.safeParse(currentDocument)
 
   if (migratedDocumentValidationResult.success !== true) {
     const msg = `Document has the latest schema version, but validation failed for some unknown reason 🤷‍♂️`

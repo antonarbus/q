@@ -11,11 +11,7 @@ export class HttpError<ErrorCode extends string = string> extends Error {
 
   public readonly statusCode: HttpStatusCode
 
-  public constructor({
-    errorCode,
-    statusCode,
-    message,
-  }: HttpErrorParams<ErrorCode>) {
+  public constructor({ errorCode, statusCode, message }: HttpErrorParams<ErrorCode>) {
     super(message)
     this.errorCode = errorCode
     this.statusCode = statusCode

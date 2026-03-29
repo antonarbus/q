@@ -64,9 +64,7 @@ export const SharedWithRadioButtons = (props: Props): React.JSX.Element => {
           gap: '15px',
         }}
       >
-        <MdGroups
-          style={{ opacity: 0.7, scale: '1.2', translate: '-1px 0px' }}
-        />
+        <MdGroups style={{ opacity: 0.7, scale: '1.2', translate: '-1px 0px' }} />
         <FormControlLabel
           control={<Radio size='small' />}
           disabled={props.accessFormValuesSignal.value.level === 'everyone'}

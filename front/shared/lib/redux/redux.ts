@@ -1,9 +1,6 @@
 /* eslint-disable @typescript-eslint/member-ordering */
 import type { Register } from './register'
-import {
-  useSelector as useSelectorNotTyped,
-  type TypedUseSelectorHook,
-} from 'react-redux'
+import { useSelector as useSelectorNotTyped, type TypedUseSelectorHook } from 'react-redux'
 
 export type RootState = Register extends { state: infer S } ? S : never
 type AppDispatch = Register extends { dispatch: infer D } ? D : never

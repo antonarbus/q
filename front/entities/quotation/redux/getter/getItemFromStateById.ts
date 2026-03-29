@@ -5,9 +5,7 @@ type Props = {
   state: Quotation
 }
 
-export const getItemFromStateById = (
-  props: Props,
-): Quotation | BlockItem | undefined => {
+export const getItemFromStateById = (props: Props): Quotation | BlockItem | undefined => {
   const quotationWithSameId = props.state.id === props.id
 
   if (quotationWithSameId === true) {

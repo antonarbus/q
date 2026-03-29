@@ -26,9 +26,7 @@ export const QtyCell = (): React.JSX.Element => {
         })}
         className='td qty'
         placeholder='Qty...'
-        contentGetter={() =>
-          getHtmlOfBookmarkedRowCellFromStoreByIndex({ cellKey: 'qty' })
-        }
+        contentGetter={() => getHtmlOfBookmarkedRowCellFromStoreByIndex({ cellKey: 'qty' })}
         onChange={() => {
           updateQtyCellAtBookmarkBlock()
         }}

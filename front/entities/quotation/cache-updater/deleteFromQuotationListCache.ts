@@ -16,9 +16,7 @@ export const deleteFromQuotationListCache = (props: Props): void => {
           return
         }
 
-        const index = draft.quotationList.findIndex(
-          (quotation) => quotation.id === props.id,
-        )
+        const index = draft.quotationList.findIndex((quotation) => quotation.id === props.id)
 
         const foundInCache = index !== -1
 

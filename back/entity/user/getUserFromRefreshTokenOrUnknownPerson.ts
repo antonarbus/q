@@ -21,9 +21,7 @@ type Res = {
  * https://sendmequotation.today/api/set-bucket-cors
  * https://sendmequotation.today/api/get-bucket-cor
  */
-export const getUserFromRefreshTokenOrUnknownPerson = async (
-  props: Props,
-): Promise<Res> => {
+export const getUserFromRefreshTokenOrUnknownPerson = async (props: Props): Promise<Res> => {
   const refreshJwtToken = getRefreshTokenFromCookie({ req: props.req })
 
   const unknownPerson = {
@@ -35,8 +33,7 @@ export const getUserFromRefreshTokenOrUnknownPerson = async (
     return unknownPerson
   }
 
-  const payloadFromRefreshToken =
-    await getPayloadFromRefreshToken(refreshJwtToken)
+  const payloadFromRefreshToken = await getPayloadFromRefreshToken(refreshJwtToken)
 
   if (payloadFromRefreshToken === undefined) {
     return unknownPerson

@@ -1,9 +1,6 @@
 import type { CellKey } from '@back/entity/quotation/schema'
 import { updateCellAtStore } from '@front/entities/quotation/redux/updater/updateCellAtStore'
-import {
-  editorRegistry,
-  getRegistryKey,
-} from '@front/shared/lib/tiptap/editorRegistry'
+import { editorRegistry, getRegistryKey } from '@front/shared/lib/tiptap/editorRegistry'
 
 type Props = {
   blockIndex: number

@@ -1,9 +1,4 @@
-import {
-  createSlice,
-  type PayloadAction,
-  type Reducer,
-  type WritableDraft,
-} from '@reduxjs/toolkit'
+import { createSlice, type PayloadAction, type Reducer, type WritableDraft } from '@reduxjs/toolkit'
 import type { SelectUser } from '@back/entity/user/db/usersTableSchema'
 
 type InitState = {

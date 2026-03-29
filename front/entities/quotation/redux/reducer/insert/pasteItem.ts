@@ -1,21 +1,14 @@
 import type { PastePos } from '@front/entities/copy/types'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { generateId } from '@front/shared/lib/nanoid'
-import type {
-  BlockItem,
-  Quotation,
-  RowBlock,
-} from '@back/entity/quotation/schema'
+import type { BlockItem, Quotation, RowBlock } from '@back/entity/quotation/schema'
 
 type SpliceSettings = {
   insertAtIndex: number
   deleteCount: number
 }
 
-const calculateSpliceSettings = (
-  baseIndex: number,
-  pastePos: PastePos,
-): SpliceSettings => {
+const calculateSpliceSettings = (baseIndex: number, pastePos: PastePos): SpliceSettings => {
   if (pastePos === 'top') {
     return {
       insertAtIndex: baseIndex,
@@ -37,10 +30,7 @@ const calculateSpliceSettings = (
   }
 }
 
-const prepareItemForPasting = (
-  item: BlockItem,
-  newItemId: string,
-): BlockItem => {
+const prepareItemForPasting = (item: BlockItem, newItemId: string): BlockItem => {
   const clonedItem: BlockItem = { ...structuredClone(item), id: newItemId }
 
   if (clonedItem.type === 'boq') {
@@ -70,11 +60,7 @@ const pasteBlock = (
   const hoveredItemIndex = state.blocks.findIndex((block) => block.id === id)
   const spliceSettings = calculateSpliceSettings(hoveredItemIndex, pastePos)
 
-  state.blocks.splice(
-    spliceSettings.insertAtIndex,
-    spliceSettings.deleteCount,
-    itemToPaste,
-  )
+  state.blocks.splice(spliceSettings.insertAtIndex, spliceSettings.deleteCount, itemToPaste)
 }
 
 const pasteRow = (
@@ -92,11 +78,7 @@ const pasteRow = (
     if (rowFound === true) {
       const spliceSettings = calculateSpliceSettings(rowIndex, pastePos)
 
-      block.boq.rows.splice(
-        spliceSettings.insertAtIndex,
-        spliceSettings.deleteCount,
-        itemToPaste,
-      )
+      block.boq.rows.splice(spliceSettings.insertAtIndex, spliceSettings.deleteCount, itemToPaste)
 
       return
     }
@@ -112,10 +94,7 @@ export const pasteItem = (
     item: BlockItem
   }>,
 ): void => {
-  const itemToPaste = prepareItemForPasting(
-    action.payload.item,
-    action.payload.newItemId,
-  )
+  const itemToPaste = prepareItemForPasting(action.payload.item, action.payload.newItemId)
 
   const isBlock = isBlockType(itemToPaste)
 

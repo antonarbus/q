@@ -15,9 +15,7 @@ import { toast } from 'sonner'
 export const useLoadQuotation = (): void => {
   const urlParams = useParams()
 
-  const shouldLoadQuotation = reduxHolder.useSelector(
-    (state) => state.app.shouldLoadQuotation,
-  )
+  const shouldLoadQuotation = reduxHolder.useSelector((state) => state.app.shouldLoadQuotation)
 
   const getQuotationMutation = useGetQuotationMutation()
 
@@ -72,15 +70,11 @@ export const useLoadQuotation = (): void => {
             }),
           )
 
-          reduxHolder.dispatch(
-            appSlice.actions.setBackgroundMessage({ message: '' }),
-          )
+          reduxHolder.dispatch(appSlice.actions.setBackgroundMessage({ message: '' }))
 
           reduxHolder.dispatch(navSlice.actions.removeUnderlineFromTopNav())
 
-          reduxHolder.dispatch(
-            navSlice.actions.hideNavItems({ navItemIds: [navItemId.back] }),
-          )
+          reduxHolder.dispatch(navSlice.actions.hideNavItems({ navItemIds: [navItemId.back] }))
 
           reduxHolder.dispatch(
             navSlice.actions.enableNavItems({
@@ -127,15 +121,11 @@ export const useLoadQuotation = (): void => {
             }),
           )
 
-          reduxHolder.dispatch(
-            appSlice.actions.setBackgroundMessage({ message: '' }),
-          )
+          reduxHolder.dispatch(appSlice.actions.setBackgroundMessage({ message: '' }))
 
           reduxHolder.dispatch(navSlice.actions.removeUnderlineFromTopNav())
 
-          reduxHolder.dispatch(
-            navSlice.actions.hideNavItems({ navItemIds: [navItemId.back] }),
-          )
+          reduxHolder.dispatch(navSlice.actions.hideNavItems({ navItemIds: [navItemId.back] }))
 
           reduxHolder.dispatch(
             navSlice.actions.enableNavItems({
@@ -163,9 +153,7 @@ export const useLoadQuotation = (): void => {
             reduxHolder.dispatch(appSlice.actions.hideLoadingOverlay())
           }, 1250)
 
-          reduxHolder.dispatch(
-            navSlice.actions.underlineNavItem({ navItemId: navItemId.new }),
-          )
+          reduxHolder.dispatch(navSlice.actions.underlineNavItem({ navItemId: navItemId.new }))
 
           reduxHolder.dispatch(
             appSlice.actions.setShouldLoadQuotation({
@@ -195,16 +183,12 @@ export const useLoadQuotation = (): void => {
             }),
           )
 
-          reduxHolder.dispatch(
-            appSlice.actions.setBackgroundMessage({ message: '' }),
-          )
+          reduxHolder.dispatch(appSlice.actions.setBackgroundMessage({ message: '' }))
 
           reduxHolder.dispatch(quotationSlice.actions.resetQuotation())
           reduxHolder.dispatch(navSlice.actions.removeUnderlineFromTopNav())
 
-          reduxHolder.dispatch(
-            navSlice.actions.hideNavItems({ navItemIds: [navItemId.back] }),
-          )
+          reduxHolder.dispatch(navSlice.actions.hideNavItems({ navItemIds: [navItemId.back] }))
 
           reduxHolder.dispatch(
             navSlice.actions.enableNavItems({
@@ -267,10 +251,7 @@ export const useLoadQuotation = (): void => {
 
   useUpdateEffect(() => {
     if (getQuotationMutation.isError === true) {
-      if (
-        getQuotationMutation.error.response?.data.errorCode ===
-        'QUOTATION_NOT_FOUND'
-      ) {
+      if (getQuotationMutation.error.response?.data.errorCode === 'QUOTATION_NOT_FOUND') {
         reduxHolder.dispatch(
           appSlice.actions.setBackgroundMessage({
             message: `Quotation ${urlParams.quotationId} not found`,
@@ -278,10 +259,7 @@ export const useLoadQuotation = (): void => {
         )
       }
 
-      if (
-        getQuotationMutation.error.response?.data.errorCode ===
-        'QUOTATION_STORAGE_NOT_FOUND'
-      ) {
+      if (getQuotationMutation.error.response?.data.errorCode === 'QUOTATION_STORAGE_NOT_FOUND') {
         reduxHolder.dispatch(
           appSlice.actions.setBackgroundMessage({
             message: `Quotation ${urlParams.quotationId} not found, probably deleted`,
@@ -289,14 +267,10 @@ export const useLoadQuotation = (): void => {
         )
       }
 
-      if (
-        getQuotationMutation.error.response?.data.errorCode === 'INTERNAL_ERROR'
-      ) {
+      if (getQuotationMutation.error.response?.data.errorCode === 'INTERNAL_ERROR') {
         toast.error('Internal error')
 
-        reduxHolder.dispatch(
-          appSlice.actions.setBackgroundMessage({ message: 'Internal error' }),
-        )
+        reduxHolder.dispatch(appSlice.actions.setBackgroundMessage({ message: 'Internal error' }))
       }
 
       setTimeout(() => {

@@ -1,10 +1,5 @@
 import { navItemId as navItemIdKey } from '@front/entities/nav/navItemId'
-import {
-  createSlice,
-  type PayloadAction,
-  type Reducer,
-  type WritableDraft,
-} from '@reduxjs/toolkit'
+import { createSlice, type PayloadAction, type Reducer, type WritableDraft } from '@reduxjs/toolkit'
 import { getNavStructure } from './navStructureHolder'
 import { getMenuItemPropValue } from './getMenuItemPropValue'
 import { setMenuItemPropValue } from './setMenuItemPropValue'
@@ -41,10 +36,7 @@ export const navSlice = createSlice({
   name: 'nav',
   initialState,
   reducers: {
-    setNavMode: (
-      state: WritableDraft<InitState>,
-      action: PayloadAction<{ mode: NavMode }>,
-    ) => {
+    setNavMode: (state: WritableDraft<InitState>, action: PayloadAction<{ mode: NavMode }>) => {
       state.navMode = action.payload.mode
     },
     addNavStructure: (
@@ -71,10 +63,7 @@ export const navSlice = createSlice({
       state: WritableDraft<InitState>,
       action: PayloadAction<{ navItemId: NavItemId }>,
     ) => {
-      state.idsToCurrentMenuItems = [
-        navItemIdKey.burger,
-        action.payload.navItemId,
-      ]
+      state.idsToCurrentMenuItems = [navItemIdKey.burger, action.payload.navItemId]
 
       state.currentMenuNavItemId = action.payload.navItemId
       state.nextMenuNavItemId = action.payload.navItemId
@@ -90,10 +79,7 @@ export const navSlice = createSlice({
       state: WritableDraft<InitState>,
       action: PayloadAction<{ navItemId: NavItemId }>,
     ) => {
-      state.idsToCurrentMenuItems = [
-        ...state.idsToCurrentMenuItems,
-        action.payload.navItemId,
-      ]
+      state.idsToCurrentMenuItems = [...state.idsToCurrentMenuItems, action.payload.navItemId]
 
       state.currentMenuNavItemId = action.payload.navItemId
     },
@@ -254,14 +240,10 @@ export const navSlice = createSlice({
         return
       }
 
-      const topNavItemsIds = (topLevelNavMenu.nestedItemList ?? []).map(
-        (navItem) => navItem.id,
-      )
+      const topNavItemsIds = (topLevelNavMenu.nestedItemList ?? []).map((navItem) => navItem.id)
 
       topNavItemsIds.forEach((id) => {
-        const didPressExcludedNavItem = (
-          action.payload?.exceptNavItemIds ?? []
-        ).includes(id)
+        const didPressExcludedNavItem = (action.payload?.exceptNavItemIds ?? []).includes(id)
 
         if (didPressExcludedNavItem === true) {
           return
@@ -290,14 +272,10 @@ export const navSlice = createSlice({
         return
       }
 
-      const topNavItemsIds = (topLevelNavMenu.nestedItemList ?? []).map(
-        (navItem) => navItem.id,
-      )
+      const topNavItemsIds = (topLevelNavMenu.nestedItemList ?? []).map((navItem) => navItem.id)
 
       topNavItemsIds.forEach((id) => {
-        const didPressExcludedNavItem = (
-          action.payload?.exceptNavItemIds ?? []
-        ).includes(id)
+        const didPressExcludedNavItem = (action.payload?.exceptNavItemIds ?? []).includes(id)
 
         if (didPressExcludedNavItem === true) {
           return
@@ -378,9 +356,7 @@ export const navSlice = createSlice({
         return
       }
 
-      const topNavItemsIds = (topLevelNavMenu.nestedItemList ?? []).map(
-        (navItem) => navItem.id,
-      )
+      const topNavItemsIds = (topLevelNavMenu.nestedItemList ?? []).map((navItem) => navItem.id)
 
       topNavItemsIds.forEach((navItemId) => {
         setMenuItemPropValue({

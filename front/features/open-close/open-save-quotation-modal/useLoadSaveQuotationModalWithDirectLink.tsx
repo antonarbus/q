@@ -15,8 +15,7 @@ export const useLoadSaveQuotationModalWithDirectLink = (props: Props): void => {
 
   useEffectOnce(() => {
     if (urlParams.quotationId !== undefined) {
-      const quotationIsAlreadyLoaded =
-        reduxHolder.getState().quotation.id === urlParams.quotationId
+      const quotationIsAlreadyLoaded = reduxHolder.getState().quotation.id === urlParams.quotationId
 
       if (quotationIsAlreadyLoaded === true) {
         return
@@ -37,16 +36,13 @@ export const useLoadSaveQuotationModalWithDirectLink = (props: Props): void => {
       }),
     )
 
-    props.saveQuotationFormValues.nameSignal.value =
-      getQuotationMutation.data.quotation.name
+    props.saveQuotationFormValues.nameSignal.value = getQuotationMutation.data.quotation.name
 
     props.saveQuotationFormValues.categorySignal.value =
       getQuotationMutation.data.quotation.category
 
-    props.saveQuotationFormValues.descSignal.value =
-      getQuotationMutation.data.quotation.desc
+    props.saveQuotationFormValues.descSignal.value = getQuotationMutation.data.quotation.desc
 
-    props.saveQuotationFormValues.infoSignal.value =
-      getQuotationMutation.data.quotation.info
+    props.saveQuotationFormValues.infoSignal.value = getQuotationMutation.data.quotation.info
   }, [getQuotationMutation.isSuccess])
 }

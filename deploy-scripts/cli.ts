@@ -30,10 +30,7 @@ program.name('deploy-cli').description('Deployment automation').version('1.0.0')
 program
   .command('show-deployment-info')
   .description('Show deployment info for a specific environment')
-  .requiredOption(
-    '--env <environment>',
-    'Environment name (dev, test, pilot, prod)',
-  )
+  .requiredOption('--env <environment>', 'Environment name (dev, test, pilot, prod)')
   .action(async (options: { env: string }) => {
     const validatedEnvironment = deployedEnvironmentSchema.parse(options.env)
     await showDeploymentInfo({ environment: validatedEnvironment })
@@ -63,10 +60,7 @@ program
 program
   .command('load-config')
   .description('Load config for specified environment and output as env vars')
-  .requiredOption(
-    '--env <environment>',
-    'Environment name (dev, test, pilot, prod)',
-  )
+  .requiredOption('--env <environment>', 'Environment name (dev, test, pilot, prod)')
   .action((options: { env: string }) => {
     const validatedEnvironment = deployedEnvironmentSchema.parse(options.env)
     loadConfig({ environment: validatedEnvironment })
@@ -75,10 +69,7 @@ program
 program
   .command('terraform-apply')
   .description('Apply Terraform configuration for environment')
-  .requiredOption(
-    '--env <environment>',
-    'Environment name (dev, test, pilot, prod)',
-  )
+  .requiredOption('--env <environment>', 'Environment name (dev, test, pilot, prod)')
   .action(async (options: { env: string }) => {
     const validatedEnvironment = deployedEnvironmentSchema.parse(options.env)
     await terraformApply({ environment: validatedEnvironment })
@@ -94,34 +85,23 @@ program
 program
   .command('terraform-unlock')
   .description('Remove Terraform state lock')
-  .requiredOption(
-    '--env <environment>',
-    'Environment name (dev, test, pilot, prod)',
-  )
-  .option(
-    '--lock-id <lockId>',
-    'Lock ID to remove (auto-detects if not provided)',
-  )
+  .requiredOption('--env <environment>', 'Environment name (dev, test, pilot, prod)')
+  .option('--lock-id <lockId>', 'Lock ID to remove (auto-detects if not provided)')
   .option('--force', 'Force unlock without prompting for confirmation')
-  .action(
-    async (options: { env: string; lockId?: string; force?: boolean }) => {
-      const validatedEnvironment = deployedEnvironmentSchema.parse(options.env)
+  .action(async (options: { env: string; lockId?: string; force?: boolean }) => {
+    const validatedEnvironment = deployedEnvironmentSchema.parse(options.env)
 
-      await terraformUnlock({
-        environment: validatedEnvironment,
-        lockId: options.lockId,
-        force: options.force,
-      })
-    },
-  )
+    await terraformUnlock({
+      environment: validatedEnvironment,
+      lockId: options.lockId,
+      force: options.force,
+    })
+  })
 
 program
   .command('deploy-cloudrun')
   .description('Deploy unified application to Cloud Run')
-  .requiredOption(
-    '--env <environment>',
-    'Environment name (dev, test, pilot, prod)',
-  )
+  .requiredOption('--env <environment>', 'Environment name (dev, test, pilot, prod)')
   .action(async (options: { env: string }) => {
     const validatedEnvironment = deployedEnvironmentSchema.parse(options.env)
 
@@ -133,14 +113,8 @@ program
 program
   .command('verify-deployment')
   .description('Verify Cloud Run deployment')
-  .requiredOption(
-    '--env <environment>',
-    'Environment name (dev, test, pilot, prod)',
-  )
-  .requiredOption(
-    '--previous-image-backend <image>',
-    'Previous backend image URL for rollback',
-  )
+  .requiredOption('--env <environment>', 'Environment name (dev, test, pilot, prod)')
+  .requiredOption('--previous-image-backend <image>', 'Previous backend image URL for rollback')
   .action(async (options: { env: string; previousImageBackend: string }) => {
     const validatedEnvironment = deployedEnvironmentSchema.parse(options.env)
 
@@ -156,13 +130,9 @@ program
   .requiredOption('--source-env <environment>', 'Source environment name')
   .requiredOption('--target-env <environment>', 'Target environment name')
   .action((options: { sourceEnv: string; targetEnv: string }) => {
-    const validatedSourceEnvironment = deployedEnvironmentSchema.parse(
-      options.sourceEnv,
-    )
+    const validatedSourceEnvironment = deployedEnvironmentSchema.parse(options.sourceEnv)
 
-    const validatedTargetEnv = deployedEnvironmentSchema.parse(
-      options.targetEnv,
-    )
+    const validatedTargetEnv = deployedEnvironmentSchema.parse(options.targetEnv)
 
     validatePromotion({
       sourceEnvironment: validatedSourceEnvironment,
@@ -176,13 +146,9 @@ program
   .requiredOption('--source-env <environment>', 'Source environment name')
   .requiredOption('--target-env <environment>', 'Target environment name')
   .action(async (options: { sourceEnv: string; targetEnv: string }) => {
-    const validatedSourceEnvironment = deployedEnvironmentSchema.parse(
-      options.sourceEnv,
-    )
+    const validatedSourceEnvironment = deployedEnvironmentSchema.parse(options.sourceEnv)
 
-    const validatedTargetEnvironment = deployedEnvironmentSchema.parse(
-      options.targetEnv,
-    )
+    const validatedTargetEnvironment = deployedEnvironmentSchema.parse(options.targetEnv)
 
     await promoteImage({
       sourceEnvironment: validatedSourceEnvironment,

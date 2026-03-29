@@ -1,7 +1,4 @@
-import {
-  onBlockDragEnd,
-  onBlockDragStart,
-} from '@front/features/blocks/drag-item/onBlockDrag'
+import { onBlockDragEnd, onBlockDragStart } from '@front/features/blocks/drag-item/onBlockDrag'
 import { DragDropContext, Droppable } from '@hello-pangea/dnd'
 
 type Props = {
@@ -10,10 +7,7 @@ type Props = {
 
 export const BlocksSortableContext = (props: Props): React.JSX.Element => {
   return (
-    <DragDropContext
-      onDragEnd={onBlockDragEnd()}
-      onDragStart={onBlockDragStart}
-    >
+    <DragDropContext onDragEnd={onBlockDragEnd()} onDragStart={onBlockDragStart}>
       <Droppable droppableId='blocks'>
         {(provided) => {
           return (

@@ -1,9 +1,6 @@
 import { updateSubTotalPriceWithValue } from '@front/entities/quotation/util/updateSubTotalPriceWithValue'
 import { reduxHolder } from '@front/shared/lib/redux'
-import {
-  editorRegistry,
-  getRegistryKey,
-} from '@front/shared/lib/tiptap/editorRegistry'
+import { editorRegistry, getRegistryKey } from '@front/shared/lib/tiptap/editorRegistry'
 import { roundTo } from 'round-to'
 
 type Props = {
@@ -19,10 +16,7 @@ export const recalculateSubTotalPrices = (props: Props): void => {
     }
 
     const subTotalPriceValue = roundTo(
-      block.boq.rows.reduce(
-        (accumulator, row) => accumulator + row.price.value,
-        0,
-      ),
+      block.boq.rows.reduce((accumulator, row) => accumulator + row.price.value, 0),
       2,
     )
 

@@ -21,9 +21,7 @@ export function confirmWithDialog(
   props: ConfirmationDialogOptions & { inputLabel: string },
 ): Promise<string | false>
 
-export function confirmWithDialog(
-  props?: ConfirmationDialogOptions,
-): Promise<boolean>
+export function confirmWithDialog(props?: ConfirmationDialogOptions): Promise<boolean>
 
 export async function confirmWithDialog(
   props: ConfirmationDialogOptions = {},
@@ -52,8 +50,7 @@ const resolveDialogReject = (): void => {
 }
 
 const resolveDialogConfirm = (inputValue?: string): void => {
-  const shouldResolveWithString =
-    isInputMode === true && inputValue !== undefined
+  const shouldResolveWithString = isInputMode === true && inputValue !== undefined
 
   if (shouldResolveWithString === true) {
     stringDeferred.resolve(inputValue)
@@ -84,9 +81,7 @@ export type ConfirmationDialogOptions =
 export const ConfirmationDialog = (): React.JSX.Element => {
   const DO_NOT_ASK_AGAIN_SESSION_VALUE = 'true'
 
-  const confirmationDialog = reduxHolder.useSelector(
-    (state) => state.app.confirmationDialog,
-  )
+  const confirmationDialog = reduxHolder.useSelector((state) => state.app.confirmationDialog)
 
   const [inputValue, setInputValue] = useState('')
 
@@ -96,9 +91,7 @@ export const ConfirmationDialog = (): React.JSX.Element => {
       confirmationDialog.shouldShowDoNotAskAgainCheckbox === true
 
     if (shouldAutoConfirm === true) {
-      const doNotAskAgainValue = sessionStorage.getItem(
-        confirmationDialog.doNotAskAgainSessionKey,
-      )
+      const doNotAskAgainValue = sessionStorage.getItem(confirmationDialog.doNotAskAgainSessionKey)
 
       if (doNotAskAgainValue === DO_NOT_ASK_AGAIN_SESSION_VALUE) {
         reduxHolder.dispatch(appSlice.actions.closeConfirmationDialog())
@@ -118,8 +111,7 @@ export const ConfirmationDialog = (): React.JSX.Element => {
   }
 
   const handleConfirm = (): void => {
-    const resolveArg =
-      confirmationDialog.inputLabel === undefined ? undefined : inputValue
+    const resolveArg = confirmationDialog.inputLabel === undefined ? undefined : inputValue
 
     setInputValue('')
 
@@ -185,9 +177,7 @@ export const ConfirmationDialog = (): React.JSX.Element => {
                   DO_NOT_ASK_AGAIN_SESSION_VALUE,
                 )
               } else {
-                sessionStorage.removeItem(
-                  confirmationDialog.doNotAskAgainSessionKey,
-                )
+                sessionStorage.removeItem(confirmationDialog.doNotAskAgainSessionKey)
               }
             }}
           />

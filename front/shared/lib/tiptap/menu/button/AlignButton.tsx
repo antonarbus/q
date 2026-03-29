@@ -29,8 +29,7 @@ export const AlignButton = (): React.JSX.Element => {
   const isActive = activeAlign === 'center' || activeAlign === 'right'
 
   const ActiveIcon =
-    ALIGNMENTS.find((alignment) => alignment.value === activeAlign)?.Icon ??
-    RiAlignCenter
+    ALIGNMENTS.find((alignment) => alignment.value === activeAlign)?.Icon ?? RiAlignCenter
 
   return (
     <MenuButtonWithDropdown
@@ -64,8 +63,7 @@ export const AlignButton = (): React.JSX.Element => {
                 height: 28,
                 border: 'none',
                 borderRadius: '4px',
-                backgroundColor:
-                  activeAlign === alignment.value ? '#efefef' : 'transparent',
+                backgroundColor: activeAlign === alignment.value ? '#efefef' : 'transparent',
                 cursor: 'pointer',
                 fontSize: 16,
                 ':hover': {

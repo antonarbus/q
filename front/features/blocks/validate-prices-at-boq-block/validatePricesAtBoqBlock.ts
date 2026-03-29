@@ -4,10 +4,7 @@ import { recalculateSubTotalPrices } from '@front/entities/quotation/util/recalc
 import { updateCellWithValue } from '@front/entities/quotation/util/updateCellWithValue'
 import { roundTo } from 'round-to'
 import { toast } from 'sonner'
-import {
-  editorRegistry,
-  getRegistryKey,
-} from '@front/shared/lib/tiptap/editorRegistry'
+import { editorRegistry, getRegistryKey } from '@front/shared/lib/tiptap/editorRegistry'
 
 type Props = {
   blockIndex: number
@@ -44,9 +41,7 @@ export const validatePricesAtBoqBlock = (props: Props): void => {
 
     if (isPriceValid === false) {
       if (didNotifyAboutInvalidPriceOnes === false) {
-        toast.info(
-          'Impossible to set exact price. Did it as close as possible.',
-        )
+        toast.info('Impossible to set exact price. Did it as close as possible.')
 
         didNotifyAboutInvalidPriceOnes = true
       }

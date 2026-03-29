@@ -25,8 +25,7 @@ export const useIsButtonDisabled = (props: Props): boolean => {
   }
 
   if (props.accessFormValuesSignal.value.level === 'custom') {
-    const forgotToAddPerson =
-      props.accessFormValuesSignal.value.userList.length === 0
+    const forgotToAddPerson = props.accessFormValuesSignal.value.userList.length === 0
 
     if (forgotToAddPerson === true) {
       return true
@@ -36,9 +35,7 @@ export const useIsButtonDisabled = (props: Props): boolean => {
   if (props.accessFormValuesSignal.value.level === 'custom') {
     const sharedUserList = state.quotation.access.userList.toSorted().toString()
 
-    const currentSharedUserList = props.accessFormValuesSignal.value.userList
-      .toSorted()
-      .toString()
+    const currentSharedUserList = props.accessFormValuesSignal.value.userList.toSorted().toString()
 
     const sharedUserListChanged = sharedUserList === currentSharedUserList
 

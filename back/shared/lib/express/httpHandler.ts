@@ -16,11 +16,7 @@ type HttpHandler = (
 export const httpHandler = (
   fn: HttpHandler,
 ): ((req: Request, res: Response, next: NextFunction) => void) => {
-  const fnWithErrorHandlingResolved = (
-    req: Request,
-    res: Response,
-    next: NextFunction,
-  ): void => {
+  const fnWithErrorHandlingResolved = (req: Request, res: Response, next: NextFunction): void => {
     Promise.resolve(fn(req, res, next))
       .then((response) => {
         if (response.type === 'json') {

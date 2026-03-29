@@ -8,9 +8,7 @@ type Props = {
 }
 
 /** Get current image of Cloud Run service */
-export const getCurrentCloudRunImage = async (
-  props: Props,
-): Promise<string | null> => {
+export const getCurrentCloudRunImage = async (props: Props): Promise<string | null> => {
   try {
     const format = 'value(spec.template.spec.containers[0].image)'
 

@@ -6,9 +6,7 @@ type Props = {
   accessFormValuesSignal: AccessFormValuesSignal
 }
 
-export const useLoadInitValuesIntoShareQuotationModal = (
-  props: Props,
-): void => {
+export const useLoadInitValuesIntoShareQuotationModal = (props: Props): void => {
   useEffectOnce(() => {
     const state = reduxHolder.getState()
     props.accessFormValuesSignal.value = state.quotation.access

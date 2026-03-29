@@ -10,10 +10,7 @@ import {
 import { db } from '@back/shared/lib/drizzle/db'
 import { and, asc, count, desc, ilike } from 'drizzle-orm'
 import type { ParamsDictionary } from 'express-serve-static-core'
-import {
-  type HttpResponse,
-  httpJsonResponse,
-} from '@back/shared/lib/express/httpResponse'
+import { type HttpResponse, httpJsonResponse } from '@back/shared/lib/express/httpResponse'
 import { z } from 'zod'
 
 type UrlParam = ParamsDictionary
@@ -69,9 +66,7 @@ export const getQuotationListAllHandler: RouterHandler = async (req) => {
     }),
   )
 
-  const sortModelParsed = sortModelSchema.safeParse(
-    JSON.parse(req.query.sortModel),
-  )
+  const sortModelParsed = sortModelSchema.safeParse(JSON.parse(req.query.sortModel))
 
   if (sortModelParsed.success === false) {
     throw new Error('Invalid sortModel format', sortModelParsed.error)
@@ -93,9 +88,7 @@ export const getQuotationListAllHandler: RouterHandler = async (req) => {
 
       return sortedColumn
     })
-    .filter((condition): condition is NonNullable<typeof condition> =>
-      Boolean(condition),
-    )
+    .filter((condition): condition is NonNullable<typeof condition> => Boolean(condition))
 
   const filterModelSchema = z.record(
     z.string(),
@@ -106,9 +99,7 @@ export const getQuotationListAllHandler: RouterHandler = async (req) => {
     }),
   )
 
-  const filterModelParsed = filterModelSchema.safeParse(
-    JSON.parse(req.query.filterModel),
-  )
+  const filterModelParsed = filterModelSchema.safeParse(JSON.parse(req.query.filterModel))
 
   if (filterModelParsed.success === false) {
     throw new Error('Invalid filterModel format', filterModelParsed.error)
@@ -130,22 +121,16 @@ export const getQuotationListAllHandler: RouterHandler = async (req) => {
 
       return filterCondition
     })
-    .filter((condition): condition is NonNullable<typeof condition> =>
-      Boolean(condition),
-    )
+    .filter((condition): condition is NonNullable<typeof condition> => Boolean(condition))
 
   // Query all files (no user filter)
   const baseQuery = db.select().from(quotationsTable)
 
   const queryWithFilters =
-    filterConditions.length > 0
-      ? baseQuery.where(and(...filterConditions))
-      : baseQuery
+    filterConditions.length > 0 ? baseQuery.where(and(...filterConditions)) : baseQuery
 
   const queryWithSort =
-    sortConditions.length > 0
-      ? queryWithFilters.orderBy(...sortConditions)
-      : queryWithFilters
+    sortConditions.length > 0 ? queryWithFilters.orderBy(...sortConditions) : queryWithFilters
 
   const quotationListPromise = queryWithSort
     .offset(Number(req.query.startRow))
@@ -154,19 +139,16 @@ export const getQuotationListAllHandler: RouterHandler = async (req) => {
   const baseCountQuery = db.select({ count: count() }).from(quotationsTable)
 
   const countQueryWithFilters =
-    filterConditions.length > 0
-      ? baseCountQuery.where(and(...filterConditions))
-      : baseCountQuery
+    filterConditions.length > 0 ? baseCountQuery.where(and(...filterConditions)) : baseCountQuery
 
   const quotationListTotalCountPromise = countQueryWithFilters.then(
     (result) => result[0]?.count ?? 0,
   )
 
-  const [quotationListResponse, quotationListTotalCountResponse] =
-    await Promise.allSettled([
-      quotationListPromise,
-      quotationListTotalCountPromise,
-    ])
+  const [quotationListResponse, quotationListTotalCountResponse] = await Promise.allSettled([
+    quotationListPromise,
+    quotationListTotalCountPromise,
+  ])
 
   const fulfilled =
     quotationListResponse.status === 'fulfilled' &&
@@ -182,13 +164,9 @@ export const getQuotationListAllHandler: RouterHandler = async (req) => {
     })
   }
 
-  messageList.push(
-    `Found ${quotationListTotalCountResponse.value} total quotations`,
-  )
+  messageList.push(`Found ${quotationListTotalCountResponse.value} total quotations`)
 
-  messageList.push(
-    `Returned ${quotationListResponse.value.length} quotations for current page`,
-  )
+  messageList.push(`Returned ${quotationListResponse.value.length} quotations for current page`)
 
   return httpJsonResponse({
     statusCode: httpStatusCode.success200,

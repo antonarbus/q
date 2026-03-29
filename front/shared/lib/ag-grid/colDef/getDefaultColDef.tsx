@@ -1,9 +1,6 @@
 import type { ColDef } from 'ag-grid-community'
 
-type Props<TData extends Record<string, unknown>, TValue = unknown> = ColDef<
-  TData,
-  TValue
->
+type Props<TData extends Record<string, unknown>, TValue = unknown> = ColDef<TData, TValue>
 
 /** Column default settings. */
 export const getDefaultColDef = <TData extends Record<string, unknown>, TValue>(

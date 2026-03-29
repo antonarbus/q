@@ -1,7 +1,4 @@
-import {
-  usersTable,
-  type SelectUser,
-} from '@back/entity/user/db/usersTableSchema'
+import { usersTable, type SelectUser } from '@back/entity/user/db/usersTableSchema'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import type { NextFunction, Request, Response } from 'express'
 import { db } from '@back/shared/lib/drizzle/db'
@@ -10,20 +7,14 @@ import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
-import {
-  type HttpResponse,
-  httpJsonResponse,
-} from '@back/shared/lib/express/httpResponse'
+import { type HttpResponse, httpJsonResponse } from '@back/shared/lib/express/httpResponse'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entity/user/getUserFromAccessTokenOrThrowUnauthorized'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
 type ReqBody = undefined
 
-type UserPicked = Pick<
-  SelectUser,
-  'email' | 'isActivated' | 'loggedAt' | 'registeredAt'
->
+type UserPicked = Pick<SelectUser, 'email' | 'isActivated' | 'loggedAt' | 'registeredAt'>
 
 export type ResBody = {
   userList: UserPicked[]

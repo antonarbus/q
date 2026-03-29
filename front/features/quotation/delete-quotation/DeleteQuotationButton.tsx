@@ -19,10 +19,7 @@ export const DeleteQuotationButton = (props: Payload): React.ReactNode => {
 
   useUpdateEffect(() => {
     if (deleteQuotationMutation.isError === true) {
-      if (
-        deleteQuotationMutation.error.response?.data.errorCode ===
-        'INTERNAL_ERROR'
-      ) {
+      if (deleteQuotationMutation.error.response?.data.errorCode === 'INTERNAL_ERROR') {
         toast.error('Failed to delete')
       }
 
@@ -31,12 +28,7 @@ export const DeleteQuotationButton = (props: Payload): React.ReactNode => {
   }, [deleteQuotationMutation.isError])
 
   return (
-    <Tooltip
-      enterDelay={500}
-      enterNextDelay={500}
-      placement='bottom'
-      title='Delete'
-    >
+    <Tooltip enterDelay={500} enterNextDelay={500} placement='bottom' title='Delete'>
       <IconButton
         onClick={async () => {
           const areYouSure = await confirmWithDialog()
@@ -47,11 +39,7 @@ export const DeleteQuotationButton = (props: Payload): React.ReactNode => {
         }}
         size='small'
       >
-        {deleteQuotationMutation.isPending === true ? (
-          <RotatingLoaderIcon />
-        ) : (
-          <MdDeleteOutline />
-        )}
+        {deleteQuotationMutation.isPending === true ? <RotatingLoaderIcon /> : <MdDeleteOutline />}
       </IconButton>
     </Tooltip>
   )

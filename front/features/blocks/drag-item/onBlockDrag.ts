@@ -30,9 +30,7 @@ export const onBlockDragEnd =
       newIndex,
     )
 
-    reduxHolder.dispatch(
-      quotationSlice.actions.reOrderBlocks({ reOrderedItems }),
-    )
+    reduxHolder.dispatch(quotationSlice.actions.reOrderBlocks({ reOrderedItems }))
 
     // Deferred so React re-renders first. The editor registry is keyed by blockIndex —
     // reordering blocks changes the price block's index, and its editor stays registered

@@ -6,9 +6,7 @@ import { PiGlobe, PiGlobeX } from 'react-icons/pi'
 import { Link } from 'react-router-dom'
 
 export const OpenShareQuotationIcon = (): React.JSX.Element => {
-  const isCopyModalVisible = reduxHolder.useSelector(
-    (state) => state.copy.isVisible,
-  )
+  const isCopyModalVisible = reduxHolder.useSelector((state) => state.copy.isVisible)
 
   const access = reduxHolder.useSelector((state) => state.quotation.access)
 

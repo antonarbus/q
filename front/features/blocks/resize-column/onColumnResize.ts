@@ -66,9 +66,7 @@ export const onColumnResizeStop = (props: Props): void => {
     }),
   )
 
-  const itemWidth = props.headerColumnElement.closest(
-    `.${cls.paper}`,
-  )?.clientWidth
+  const itemWidth = props.headerColumnElement.closest(`.${cls.paper}`)?.clientWidth
 
   reduxHolder.dispatch(
     quotationSlice.actions.updateBlockWidth({

@@ -61,8 +61,7 @@ export const FloatingLineMenu = (): React.ReactNode => {
 
         const node = editor.state.selection.$from.node()
 
-        const isEmptyParagraph =
-          node.type.name === 'paragraph' && node.content.size === 0
+        const isEmptyParagraph = node.type.name === 'paragraph' && node.content.size === 0
 
         if (isEmptyParagraph === false) {
           hideMenu()
@@ -78,8 +77,7 @@ export const FloatingLineMenu = (): React.ReactNode => {
             ? editor.view.dom.closest(`.${cls.paper}`)
             : editor.view.dom.closest(`.${cls.block}`)
 
-        const blockElementRect =
-          elementNearWhichToShowMenu?.getBoundingClientRect()
+        const blockElementRect = elementNearWhichToShowMenu?.getBoundingClientRect()
 
         if (blockElementRect === undefined) {
           hideMenu()
@@ -137,8 +135,7 @@ export const FloatingLineMenu = (): React.ReactNode => {
     const handleOutsideClick = (event: MouseEvent): void => {
       const target = event.target instanceof Node ? event.target : null
 
-      const isInsideMenu =
-        target !== null && menuRef.current?.contains(target) === true
+      const isInsideMenu = target !== null && menuRef.current?.contains(target) === true
 
       if (isInsideMenu === false) {
         setIsOpen(false)

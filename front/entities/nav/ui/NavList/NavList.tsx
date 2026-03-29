@@ -3,9 +3,7 @@ import { reduxHolder } from '@front/shared/lib/redux'
 import { NavItem } from './NavItem'
 
 export const NavList = (): React.JSX.Element => {
-  const navStructure = reduxHolder.useSelector(
-    (state) => state.nav.navStructure,
-  )
+  const navStructure = reduxHolder.useSelector((state) => state.nav.navStructure)
 
   const navMode = reduxHolder.useSelector((state) => state.nav.navMode)
 
@@ -13,9 +11,7 @@ export const NavList = (): React.JSX.Element => {
     navMode === 'hamburger' ? navStructure : navStructure[0]?.nestedItemList
 
   const nonHiddenNavItems = navStructureToLoad
-    ?.filter(
-      (navItem) => navItem.isHidden === false || navItem.id === navItemId.back,
-    )
+    ?.filter((navItem) => navItem.isHidden === false || navItem.id === navItemId.back)
     .map((navItem) => (
       <NavItem
         key={navItem.id}

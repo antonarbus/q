@@ -20,9 +20,7 @@ export const verifyDeployment = async (props: Props): Promise<void> => {
 
     logger.emptyLine()
 
-    logger.info(
-      '=== Verifying Unified Application (Backend serves Frontend) ===',
-    )
+    logger.info('=== Verifying Unified Application (Backend serves Frontend) ===')
 
     // Get backend URL (now serves both frontend and API)
     const appUrl = await getCloudRunServiceUrl({
@@ -43,9 +41,7 @@ export const verifyDeployment = async (props: Props): Promise<void> => {
     })
 
     if (frontendResponse.status === 200) {
-      logger.success(
-        `  Frontend is live and responding (HTTP ${frontendResponse.status})`,
-      )
+      logger.success(`  Frontend is live and responding (HTTP ${frontendResponse.status})`)
 
       // Check for HTML content
       logger.info('  Checking for HTML content...')
@@ -68,9 +64,7 @@ export const verifyDeployment = async (props: Props): Promise<void> => {
       if (responseSize > 100) {
         logger.success(`     Response size: ${responseSize} bytes`)
       } else {
-        logger.error(
-          `     Response too small: ${responseSize} bytes (expected > 100)`,
-        )
+        logger.error(`     Response too small: ${responseSize} bytes (expected > 100)`)
 
         totalFailures = totalFailures + 1
       }
@@ -90,13 +84,9 @@ export const verifyDeployment = async (props: Props): Promise<void> => {
     })
 
     if (healthCheckResponse.status === 200) {
-      logger.success(
-        `  API is live and responding (HTTP ${healthCheckResponse.status})`,
-      )
+      logger.success(`  API is live and responding (HTTP ${healthCheckResponse.status})`)
     } else {
-      logger.error(
-        `API health check returned HTTP ${healthCheckResponse.status}`,
-      )
+      logger.error(`API health check returned HTTP ${healthCheckResponse.status}`)
 
       totalFailures = totalFailures + 1
     }
@@ -118,15 +108,13 @@ export const verifyDeployment = async (props: Props): Promise<void> => {
       logger.emptyLine()
 
       // Rollback if needed
-      const shouldRollback =
-        totalFailures > 0 && Boolean(props.previousImageBackend)
+      const shouldRollback = totalFailures > 0 && Boolean(props.previousImageBackend)
 
       if (shouldRollback === true) {
         logger.info('Rolling back application...')
 
         await rollbackCloudRunService({
-          cloudRunServiceName:
-            infraConfig[props.environment].cloudRunServiceName,
+          cloudRunServiceName: infraConfig[props.environment].cloudRunServiceName,
           previousImage: props.previousImageBackend,
           region: infraConfig[props.environment].region,
           projectId: infraConfig[props.environment].projectId,

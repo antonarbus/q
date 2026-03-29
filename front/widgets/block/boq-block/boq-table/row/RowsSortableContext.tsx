@@ -1,9 +1,6 @@
 import { DragDropContext, Droppable } from '@hello-pangea/dnd'
 import { useBlock } from '@front/entities/quotation/provider/BlockProvider'
-import {
-  onRowDragEnd,
-  onRowDragStart,
-} from '@front/features/blocks/drag-item/onRowDrag'
+import { onRowDragEnd, onRowDragStart } from '@front/features/blocks/drag-item/onRowDrag'
 
 type Props = {
   children: React.ReactNode

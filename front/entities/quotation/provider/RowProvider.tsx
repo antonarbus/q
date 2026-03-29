@@ -21,11 +21,7 @@ export const RowProvider = (props: Props): React.JSX.Element => {
     return context
   }, [props.index, props.item])
 
-  return (
-    <RowContext.Provider value={rowContextData}>
-      {props.children}
-    </RowContext.Provider>
-  )
+  return <RowContext.Provider value={rowContextData}>{props.children}</RowContext.Provider>
 }
 
 export const useRow = (): Res => {

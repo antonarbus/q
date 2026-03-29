@@ -31,12 +31,7 @@ export const DeleteUserButton = (props: UrlParam): React.ReactNode => {
   }, [deleteUserMutation.isError])
 
   return (
-    <Tooltip
-      enterDelay={500}
-      enterNextDelay={500}
-      placement='bottom'
-      title='Delete'
-    >
+    <Tooltip enterDelay={500} enterNextDelay={500} placement='bottom' title='Delete'>
       <IconButton
         onClick={async () => {
           const confirmed = await confirmWithDialog({
@@ -70,11 +65,7 @@ export const DeleteUserButton = (props: UrlParam): React.ReactNode => {
         }}
         size='small'
       >
-        {deleteUserMutation.isPending === true ? (
-          <RotatingLoaderIcon />
-        ) : (
-          <MdDeleteOutline />
-        )}
+        {deleteUserMutation.isPending === true ? <RotatingLoaderIcon /> : <MdDeleteOutline />}
       </IconButton>
     </Tooltip>
   )

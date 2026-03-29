@@ -49,5 +49,4 @@ export const httpStatusCode = {
   - 422 - request is well-formed but semantically incorrect, good for validation errors
   - 500 - generic error indicating that something went wrong on the server-side
 */
-export type HttpStatusCode =
-  (typeof httpStatusCode)[keyof typeof httpStatusCode]
+export type HttpStatusCode = (typeof httpStatusCode)[keyof typeof httpStatusCode]

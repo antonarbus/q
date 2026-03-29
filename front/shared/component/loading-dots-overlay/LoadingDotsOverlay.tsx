@@ -7,13 +7,9 @@ type Props = {
 }
 
 export const LoadingDotsOverlay = (props: Props): React.JSX.Element | null => {
-  const loadingOverlay = reduxHolder.useSelector(
-    (state) => state.app.loadingOverlay,
-  )
+  const loadingOverlay = reduxHolder.useSelector((state) => state.app.loadingOverlay)
 
-  const notLoading =
-    loadingOverlay.shouldShowLoader === false &&
-    props.shouldShowLoader === false
+  const notLoading = loadingOverlay.shouldShowLoader === false && props.shouldShowLoader === false
 
   if (notLoading === true) {
     return null

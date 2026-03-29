@@ -11,7 +11,5 @@ export const openQuotationPageAndLoadPrev = (): void => {
     }),
   )
 
-  void routerHolder.router.navigate(
-    `/${backToQuotationRef.current?.id ?? 'new'}`,
-  )
+  void routerHolder.router.navigate(`/${backToQuotationRef.current?.id ?? 'new'}`)
 }

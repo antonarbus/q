@@ -3,12 +3,7 @@ import type { EditorView } from '@tiptap/pm/view'
 import { useTiptapCtx } from '../provider/TiptapProvider'
 import { editorRegistry } from '../editorRegistry'
 
-type OnDrop = (
-  _view: EditorView,
-  event: DragEvent,
-  _slice: Slice,
-  moved: boolean,
-) => boolean
+type OnDrop = (_view: EditorView, event: DragEvent, _slice: Slice, moved: boolean) => boolean
 
 export const useDropFile = (): OnDrop => {
   const tiptapCtx = useTiptapCtx()

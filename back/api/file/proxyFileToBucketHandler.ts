@@ -1,7 +1,4 @@
-import {
-  filesTable,
-  type SelectFile,
-} from '@back/entity/file/db/filesTableSchema'
+import { filesTable, type SelectFile } from '@back/entity/file/db/filesTableSchema'
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
@@ -11,10 +8,7 @@ import { runtimeConfig } from '@root/config/runtime'
 import { eq } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
 import type { ParsedQs } from 'qs'
-import {
-  httpRedirect,
-  type HttpResponse,
-} from '@back/shared/lib/express/httpResponse'
+import { httpRedirect, type HttpResponse } from '@back/shared/lib/express/httpResponse'
 
 type SearchQuery = ParsedQs
 
@@ -46,16 +40,12 @@ export const proxyFileToBucketHandler: RouterHandler = async (req, res) => {
 
   const cached = signedUrlCache.get(req.params.id)
 
-  const cacheIsNotExpired =
-    cached !== undefined && cached.expiresAt > Date.now()
+  const cacheIsNotExpired = cached !== undefined && cached.expiresAt > Date.now()
 
   if (cacheIsNotExpired === true) {
     messageList.push('Serving cached signed URL')
 
-    res.set(
-      'Cache-Control',
-      `public, max-age=${CLIENT_CACHE_MAX_AGE}, immutable`,
-    )
+    res.set('Cache-Control', `public, max-age=${CLIENT_CACHE_MAX_AGE}, immutable`)
 
     return httpRedirect({
       statusCode: httpStatusCode.reDirect302,
@@ -63,10 +53,7 @@ export const proxyFileToBucketHandler: RouterHandler = async (req, res) => {
     })
   }
 
-  const [fileSelected] = await db
-    .select()
-    .from(filesTable)
-    .where(eq(filesTable.id, req.params.id))
+  const [fileSelected] = await db.select().from(filesTable).where(eq(filesTable.id, req.params.id))
 
   if (fileSelected === undefined) {
     messageList.push('File not found in database')
@@ -109,10 +96,7 @@ export const proxyFileToBucketHandler: RouterHandler = async (req, res) => {
 
     messageList.push('Generated new signed URL and cached it')
 
-    res.set(
-      'Cache-Control',
-      `public, max-age=${CLIENT_CACHE_MAX_AGE}, immutable`,
-    )
+    res.set('Cache-Control', `public, max-age=${CLIENT_CACHE_MAX_AGE}, immutable`)
 
     return httpRedirect({
       statusCode: httpStatusCode.reDirect302,
