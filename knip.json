@@ -25,5 +25,5 @@
     "@emotion/babel-plugin",
     "@feature-sliced/steiger-plugin"
   ],
-  "ignoreBinaries": ["gcloud", "terraform", "open", "vite-bundle-visualizer"]
+  "ignoreBinaries": ["gcloud", "terraform", "open", "vite-bundle-visualizer", "back/build/index.js"]
 }
