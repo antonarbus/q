@@ -53,7 +53,7 @@ export const saveBookmarkHandler: RouterHandler = async (req) => {
   if (bookmarkValidationResult.success === false) {
     messageList.push('Invalid bookmark structure in request')
     const treeifiedError = z.treeifyError(bookmarkValidationResult.error)
-    console.error('Validation failed:', treeifiedError)
+
     messageList.push(`Zod error: ${JSON.stringify(treeifiedError)}`)
 
     throw new HttpError<ErrorResBody['errorCode']>({

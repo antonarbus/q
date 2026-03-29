@@ -123,7 +123,6 @@ export const runInteractiveMode = async (): Promise<void> => {
 
   const command = commands.find((cmd) => cmd.name === selectedCommand)
 
-  // eslint-disable-next-line @typescript-eslint/init-declarations
   let environment: DeployedEnvironment | undefined
 
   if (command?.requiresEnv === true) {

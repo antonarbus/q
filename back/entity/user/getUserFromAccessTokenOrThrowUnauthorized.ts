@@ -6,7 +6,7 @@ import type { Request } from 'express'
 import type { SelectUser } from './db/usersTableSchema'
 
 type Props = {
-  req: Request<any, any, any, any>
+  req: Request<unknown>
 }
 
 type Res = {

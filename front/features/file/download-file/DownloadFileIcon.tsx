@@ -27,6 +27,7 @@ export const DownloadFileIcon = (props: Props): React.JSX.Element => {
           },
         }}
         onClick={() => {
+          // oxlint-disable-next-line no-alert
           alert('Not implemented')
         }}
       />

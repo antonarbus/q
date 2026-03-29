@@ -63,7 +63,7 @@ export const useBookmarkCopyPreviewCapturer = (
       return await imageLoadedDeferred.promise
     })
 
-    void Promise.all(imageLoadedPromiseList).then(() => {
+    Promise.all(imageLoadedPromiseList).then(() => {
       reduxHolder.dispatch(
         copySlice.actions.addItem({
           item: bookmarkBlock,

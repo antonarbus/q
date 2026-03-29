@@ -34,7 +34,7 @@ export const ResetPasswordModal = (): React.ReactNode => {
   })
 
   const navigateUp = (): void => {
-    void routerHolder.router.navigate('..')
+    routerHolder.router.navigate('..')
   }
 
   return (

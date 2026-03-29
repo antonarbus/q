@@ -57,7 +57,7 @@ export const generateTfvars = async (): Promise<void> => {
 
     const content = generateTfvarsContent({ environment: env, config })
 
-    // eslint-disable-next-line no-await-in-loop
+     no-await-in-loop
     await write(TFVARS_FILE_PATH, content)
     logger.success(`Generated ${env}.tfvars`)
   }

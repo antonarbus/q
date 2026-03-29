@@ -75,7 +75,7 @@ export const getQuotationListAllHandler: RouterHandler = async (req) => {
 
   const sortConditions = sortModelParsed.data
     .map((item) => {
-      // eslint-disable-next-line
+      
       const column = quotationsTable[item.colId as keyof typeof quotationsTable]
 
       // Check if it's a valid column (has columnType property)
@@ -108,7 +108,7 @@ export const getQuotationListAllHandler: RouterHandler = async (req) => {
 
   const filterConditions = Object.entries(filterModelParsed.data)
     .map(([field, filterDef]) => {
-      // eslint-disable-next-line
+      
       const column = quotationsTable[field as keyof typeof quotationsTable]
 
       // Check if it's a valid column (has columnType property)

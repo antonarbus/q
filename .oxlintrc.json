@@ -20,7 +20,8 @@
     "oxc/no-optional-chaining": "off",
     "oxc/no-async-await": "off",
     "oxc/no-rest-spread-properties": "off",
-    "no-undefined": "warn",
-    "no-array-for-each": "off"
+    "no-array-for-each": "off",
+    "no-array-reduce": "off",
+    "no-undefined": "warn"
   }
 }

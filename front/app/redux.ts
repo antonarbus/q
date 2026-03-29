@@ -26,7 +26,6 @@ const store = configureStore({
 // Augment the Register interface in shared so that shared/lib/redux/redux.ts
 // derives RootState, AppDispatch etc. from the concrete store — without shared importing app.
 declare module '@front/shared/lib/redux/register' {
-  // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
   interface Register {
     state: ReturnType<typeof store.getState>
     dispatch: typeof store.dispatch
@@ -36,5 +35,4 @@ declare module '@front/shared/lib/redux/register' {
 
 export { store }
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 reduxHolder.store = store

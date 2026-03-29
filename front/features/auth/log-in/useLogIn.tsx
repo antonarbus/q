@@ -70,13 +70,13 @@ export const useLogIn = (props: Props): Res => {
       const isQuotationListPage = location.pathname.includes(route.quotationList)
 
       if (isQuotationListPage === true) {
-        void getQuotationListQuery.refetch()
+        getQuotationListQuery.refetch()
       }
 
       const isBookmarkListPage = location.pathname.includes(route.bookmarkList)
 
       if (isBookmarkListPage === true) {
-        void getBookmarkListQuery.refetch()
+        getBookmarkListQuery.refetch()
       }
 
       if (reduxHolder.getState().quotation.permissionLevel === 'FORBIDDEN') {
@@ -104,7 +104,7 @@ export const useLogIn = (props: Props): Res => {
         await navigate('..')
       }
 
-      void slideOutAndChangeUrl()
+      slideOutAndChangeUrl()
     }
   }, [logInUserMutation.isSuccess])
 

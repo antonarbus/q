@@ -32,7 +32,6 @@ class ReduxHolder {
   }
 
   public get getState(): () => RootState {
-    // eslint-disable-next-line @typescript-eslint/unbound-method
     return this.store.getState as () => RootState
   }
 }

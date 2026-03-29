@@ -5,7 +5,7 @@ self.addEventListener(
   async (messageEvent: MessageEvent<WorkerRequestMessage>): Promise<void> => {
     const jspdfModule = await import('jspdf')
 
-    // eslint-disable-next-line new-cap
+     new-cap
     const pdf = new jspdfModule.jsPDF({
       orientation: messageEvent.data.width > messageEvent.data.height ? 'landscape' : 'portrait',
       unit: 'px',

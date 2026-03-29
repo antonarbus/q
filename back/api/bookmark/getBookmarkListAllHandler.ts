@@ -72,7 +72,6 @@ export const getBookmarkListAllHandler: RouterHandler = async (req) => {
 
   const sortConditions = sortModelParsed.data
     .map((item) => {
-      // eslint-disable-next-line
       const column = bookmarksTable[item.colId as keyof typeof bookmarksTable]
 
       // Check if it's a valid column (has columnType property)
@@ -105,7 +104,6 @@ export const getBookmarkListAllHandler: RouterHandler = async (req) => {
 
   const filterConditions = Object.entries(filterModelParsed.data)
     .map(([field, filterDef]) => {
-      // eslint-disable-next-line
       const column = bookmarksTable[field as keyof typeof bookmarksTable]
 
       // Check if it's a valid column (has columnType property)

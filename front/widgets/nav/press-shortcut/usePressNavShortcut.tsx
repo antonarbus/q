@@ -35,7 +35,6 @@ const searchForShortcutsInNavStructure = (props: Props): void => {
             ? null
             : (event?: MouseEventLike): void => {
                 // Safe: func only uses clientX/clientY properties
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
                 func(event as React.MouseEvent | undefined)
               },
         link: navItem.link ?? null,

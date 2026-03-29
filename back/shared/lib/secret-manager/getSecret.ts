@@ -36,7 +36,7 @@ export const getSecret = async (secretName: SecretName): Promise<string> => {
   })
 
   if (
-    // eslint-disable-next-line no-restricted-syntax
+     no-restricted-syntax
     accessResponse.payload?.data === undefined ||
     accessResponse.payload.data === null
   ) {
@@ -45,7 +45,7 @@ export const getSecret = async (secretName: SecretName): Promise<string> => {
 
   const secreteValue = accessResponse.payload.data.toString('utf8')
 
-  // eslint-disable-next-line require-atomic-updates
+   require-atomic-updates
   cachedSecrets[secretName] = secreteValue
 
   return secreteValue

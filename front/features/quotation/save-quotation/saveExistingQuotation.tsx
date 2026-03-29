@@ -70,7 +70,6 @@ export const saveExistingQuotation = async (): Promise<void> => {
       reduxHolder.dispatch(navSlice.actions.removeUnderlineFromTopNav())
     }
   } catch (error) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
     toast.error((error as AxiosError<ErrorResBody>).response?.data.message)
     loadingIconActor.send({ type: 'show error icon' })
   }
