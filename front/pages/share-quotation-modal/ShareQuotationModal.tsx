@@ -26,7 +26,7 @@ export const ShareQuotationModal = (): React.JSX.Element => {
   })
 
   const navigateUp = (): void => {
-    void routerHolder.router.navigate('..')
+    routerHolder.router.navigate('..')
   }
 
   return (

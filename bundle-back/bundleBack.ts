@@ -3,6 +3,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import url from 'node:url'
 import { pathAliasPlugin } from './pathAliasPlugin'
+import { logger } from '@root/deploy-scripts/lib/output/logger'
 
 const thisDirPathAbsolute = path.dirname(url.fileURLToPath(import.meta.url))
 const rootPathAbsolute = path.resolve(thisDirPathAbsolute, '..')
@@ -11,13 +12,13 @@ const outDirPath = path.join(rootPathAbsolute, 'back', 'build')
 const nodeModulesDirPath = path.join(rootPathAbsolute, 'back', 'node_modules')
 const indexDistFilePath = path.join(outDirPath, 'index.js')
 
-console.info('\n🧹 Cleaning build directory...')
+logger.info('\n🧹 Cleaning build directory...')
 
 fs.rmSync(outDirPath, { recursive: true, force: true })
 
-console.info('\n✅ Cleaned!')
+logger.info('\n✅ Cleaned!')
 
-console.info('\n🗣️  Bundling backend...')
+logger.info('\n🗣️  Bundling backend...')
 
 // https://esbuild.github.io/api
 await esbuild.build({

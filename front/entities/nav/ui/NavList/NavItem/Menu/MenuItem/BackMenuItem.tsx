@@ -19,7 +19,7 @@ export const BackMenuItem = (): React.JSX.Element => {
       isHovered={isHovered}
       onClick={(event: React.MouseEvent): void => {
         event.preventDefault()
-        void menuNavigation.goUp()
+        menuNavigation.goUp()
       }}
       onMouseEnter={(): void => {
         reduxHolder.dispatch(navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }))

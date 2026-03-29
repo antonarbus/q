@@ -25,7 +25,7 @@ export const functionRegistry = {
     if (reduxHolder.getState().quotation.id === 'new') {
       openSaveQuotationModal()
     } else {
-      void saveExistingQuotation()
+      saveExistingQuotation()
     }
   },
   openShareQuotationModal,

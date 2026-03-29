@@ -1,4 +1,5 @@
 import { useDeleteFileMutation } from '@front/entities/file/api/useDeleteFileMutation'
+import { confirmWithDialog } from '@front/shared/component/ConfirmationDialog'
 import { instance } from '@front/shared/instance'
 import { queryKey } from '@front/shared/lib/tanstack-query/queryKey'
 import { useCallback } from 'react'
@@ -20,7 +21,7 @@ export const useDeleteFile = (props: Props): Res => {
 
   useUpdateEffect(() => {
     if (deleteFileMutation.isSuccess === true) {
-      void instance.queryClient.invalidateQueries({
+      instance.queryClient.invalidateQueries({
         queryKey: [queryKey.getFileListStats],
       })
     }
@@ -32,11 +33,14 @@ export const useDeleteFile = (props: Props): Res => {
     }
   }, [deleteFileMutation.isError])
 
-  const handleClick = useCallback((event: React.MouseEvent): void => {
+  const handleClick = useCallback(async (event: React.MouseEvent): Promise<void> => {
     event.preventDefault()
     event.stopPropagation()
 
-    const shouldDeleteFile = confirm('Delete file?')
+    const shouldDeleteFile = await confirmWithDialog({
+      title: 'Confirm',
+      description: 'Delete file?',
+    })
 
     if (shouldDeleteFile === false) {
       return

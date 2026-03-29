@@ -8,6 +8,7 @@ import { terraformFormat } from '../commands/terraform-format'
 import { terraformPlan } from '../commands/terraform-plan'
 import { terraformUnlock } from '../commands/terraform-unlock'
 import type { DeployedEnvironment } from '@root/config/environment'
+import { logger } from './output/logger'
 
 type Command = {
   name: string
@@ -106,8 +107,8 @@ export const runInteractiveMode = async (): Promise<void> => {
       description: chalk.gray('Exit'),
       requiresEnv: false,
       action: (): never => {
-        console.info('Goodbye!')
-        process.exit(0)
+        logger.info('Goodbye!')
+        throw new Error('Exit')
       },
     },
   ]

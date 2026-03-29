@@ -23,7 +23,7 @@ export const useAnimatedCopyModalElement = (): Res => {
     }, 70)
 
     if (isFirstMount === true) {
-      void animate(
+      animate(
         scope.current,
         {
           width: 'auto',
@@ -36,7 +36,7 @@ export const useAnimatedCopyModalElement = (): Res => {
       )
     }
 
-    void animate(
+    animate(
       scope.current,
       {
         height: newHeight,

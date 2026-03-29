@@ -32,7 +32,7 @@ export const BookmarkModal = (): React.JSX.Element => {
   })
 
   const navigateUp = (): void => {
-    void routerHolder.router.navigate('..')
+    routerHolder.router.navigate('..')
   }
 
   const getBookmarkCategoryListQuery = useGetBookmarkCategoryListQuery()

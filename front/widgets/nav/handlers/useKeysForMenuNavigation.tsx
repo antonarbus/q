@@ -78,7 +78,7 @@ export const useKeysForMenuNavigation = (): void => {
       if (shouldGoBack === true) {
         reduxHolder.dispatch(navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }))
 
-        void menuNavigation.goUp()
+        menuNavigation.goUp()
 
         return
       }
@@ -103,7 +103,7 @@ export const useKeysForMenuNavigation = (): void => {
         if (isBackMenuItem === true) {
           reduxHolder.dispatch(navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }))
 
-          void menuNavigation.goUp()
+          menuNavigation.goUp()
 
           return
         }
@@ -158,7 +158,7 @@ export const useKeysForMenuNavigation = (): void => {
         reduxHolder.dispatch(navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }))
 
         if (isNestedMenuAvailable === true) {
-          void menuNavigation.goDown({ navItemId: navItemIdHovered })
+          menuNavigation.goDown({ navItemId: navItemIdHovered })
 
           return
         }

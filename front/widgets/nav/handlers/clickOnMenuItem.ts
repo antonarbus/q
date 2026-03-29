@@ -50,6 +50,6 @@ export const clickOnMenuItem = (
   }
 
   if (isNestedMenuAvailable === true) {
-    void menuNavigation.goDown({ navItemId })
+    menuNavigation.goDown({ navItemId })
   }
 }

@@ -4,12 +4,17 @@ import { chdir } from 'node:process'
 import { infraConfig } from '@back/config/infrastructure'
 import { logger } from '../lib/output/logger'
 import type { DeployedEnvironment } from '@root/config/environment'
+import url from 'node:url'
+import path from 'node:path'
 
 type Props = {
   environment: DeployedEnvironment
   lockId: string | undefined
   force: boolean | undefined
 }
+
+const __filename = url.fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 const detectLockId = async (tfvarsFilePath: string): Promise<string | undefined> => {
   try {

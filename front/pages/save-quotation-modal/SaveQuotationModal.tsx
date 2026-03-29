@@ -30,7 +30,7 @@ export const SaveQuotationModal = (): React.JSX.Element => {
   })
 
   const navigateUp = (): void => {
-    void routerHolder.router.navigate('..')
+    routerHolder.router.navigate('..')
   }
 
   const getQuotationCategoryListQuery = useGetQuotationCategoryListQuery()

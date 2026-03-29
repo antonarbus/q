@@ -1,3 +1,4 @@
+// oxlint-disable typescript/no-explicit-any
 import { activateHandler } from '@back/api/user/activateHandler'
 import { getAccessTokenHandler } from '@back/api/user/getAccessTokenHandler'
 import { logInHandler } from '@back/api/user/logInHandler'

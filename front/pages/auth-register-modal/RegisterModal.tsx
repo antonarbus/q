@@ -38,7 +38,7 @@ export const RegisterModal = (): React.JSX.Element => {
   })
 
   const navigateUp = (): void => {
-    void routerHolder.router.navigate('..')
+    routerHolder.router.navigate('..')
   }
 
   return (

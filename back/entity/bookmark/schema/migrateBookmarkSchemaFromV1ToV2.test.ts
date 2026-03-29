@@ -1,3 +1,4 @@
+// oxlint-disable typescript/no-explicit-any
 import { expect, test, describe, vi } from 'vitest'
 import { migrateBookmarkSchemaFromV1ToV2 } from './migrateBookmarkSchemaFromV1ToV2'
 import { z } from 'zod'

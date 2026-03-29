@@ -28,7 +28,7 @@ export const LoginModal = (): React.JSX.Element => {
     isEmailOkSignal.value === false || passwordSignal.value === '' || logIn.isPending
 
   const navigateUp = (): void => {
-    void routerHolder.router.navigate('..')
+    routerHolder.router.navigate('..')
   }
 
   return (

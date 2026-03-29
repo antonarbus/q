@@ -1,3 +1,4 @@
+// oxlint-disable typescript/no-explicit-any
 import { expect, test, describe, vi } from 'vitest'
 import { migrateQuotationSchemaFromV1ToV2 } from './migrateQuotationSchemaFromV1ToV2'
 import { z } from 'zod'

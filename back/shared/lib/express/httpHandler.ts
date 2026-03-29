@@ -1,3 +1,4 @@
+// oxlint-disable typescript/no-explicit-any
 import type { NextFunction, Request, Response } from 'express'
 import type { HttpResponse } from './httpResponse'
 

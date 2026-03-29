@@ -2,11 +2,16 @@ import { resolve } from 'node:path'
 import { infraConfig } from '@back/config/infrastructure'
 import { logger } from '../lib/output/logger'
 import { write } from 'bun'
+import url from 'node:url'
+import path from 'node:path'
 
 type Props = {
   environment: string
   config: Record<string, number | string | readonly string[]>
 }
+
+const __filename = url.fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 /**
  *  Convert camelCase to snake_case

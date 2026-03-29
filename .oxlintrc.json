@@ -22,6 +22,7 @@
     "oxc/no-rest-spread-properties": "off",
     "no-array-for-each": "off",
     "no-array-reduce": "off",
+    "complexity": "off",
     "no-undefined": "warn"
   }
 }

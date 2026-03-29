@@ -1,6 +1,7 @@
 import { useTiptap } from '@tiptap/react'
 import { MenuButton } from './shared/MenuButton'
 import { RiYoutubeLine } from 'react-icons/ri'
+import { confirmWithDialog } from '@front/shared/component/ConfirmationDialog'
 
 export const YouTubeButton = (): React.JSX.Element => {
   const { editor } = useTiptap()
@@ -9,14 +10,24 @@ export const YouTubeButton = (): React.JSX.Element => {
     <MenuButton
       isActive={false}
       title='YouTube video'
-      onClick={() => {
-        const src = window.prompt('YouTube URL')
+      onClick={async () => {
+        const href = await confirmWithDialog({
+          title: 'YouTube URL',
+          inputLabel: 'Url',
+          description: '',
+          confirmButtonText: 'Add',
+          rejectButtonText: 'Cancel',
+        })
 
-        if (src === null || src.trim() === '') {
+        if (href === false) {
           return
         }
 
-        editor.commands.setYoutubeVideo({ src })
+        if (href === null || href.trim() === '') {
+          return
+        }
+
+        editor.commands.setYoutubeVideo({ src: href })
       }}
     >
       <RiYoutubeLine />
