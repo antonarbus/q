@@ -137,18 +137,13 @@ export const getBookmarkListAllHandler: RouterHandler = async (req) => {
   const countQueryWithFilters =
     filterConditions.length > 0 ? baseCountQuery.where(and(...filterConditions)) : baseCountQuery
 
-  const bookmarkListTotalCountPromise = countQueryWithFilters.then(
-    (result) => result[0]?.count ?? 0,
-  )
-
-  const [bookmarkListResponse, bookmarkListTotalCountResponse] = await Promise.allSettled([
+  const [bookmarkListResponse, countQueryResponse] = await Promise.allSettled([
     bookmarkListPromise,
-    bookmarkListTotalCountPromise,
+    countQueryWithFilters,
   ])
 
   const fulfilled =
-    bookmarkListResponse.status === 'fulfilled' &&
-    bookmarkListTotalCountResponse.status === 'fulfilled'
+    bookmarkListResponse.status === 'fulfilled' && countQueryResponse.status === 'fulfilled'
 
   if (fulfilled === false) {
     messageList.push('Failed to fetch bookmarks from database')
@@ -160,7 +155,9 @@ export const getBookmarkListAllHandler: RouterHandler = async (req) => {
     })
   }
 
-  messageList.push(`Found ${bookmarkListTotalCountResponse.value} total bookmarks`)
+  const bookmarkListTotalCount = countQueryResponse.value[0]?.count ?? 0
+
+  messageList.push(`Found ${bookmarkListTotalCount} total bookmarks`)
 
   messageList.push(`Returned ${bookmarkListResponse.value.length} bookmarks for current page`)
 
@@ -168,7 +165,7 @@ export const getBookmarkListAllHandler: RouterHandler = async (req) => {
     statusCode: httpStatusCode.success200,
     body: {
       bookmarkList: bookmarkListResponse.value,
-      bookmarkListTotalCount: bookmarkListTotalCountResponse.value,
+      bookmarkListTotalCount,
       message: messageList.join(' | '),
     },
   })

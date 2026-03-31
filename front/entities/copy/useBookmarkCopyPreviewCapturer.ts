@@ -22,55 +22,48 @@ export const useBookmarkCopyPreviewCapturer = (
   )
 
   useEffect(() => {
-    if (bookmarkBlock === undefined) {
-      return
-    }
+    const waitImagesToLoadAndShowItemInCopyContainer = async (): Promise<void> => {
+      if (bookmarkBlock === undefined) {
+        return
+      }
 
-    if (containerRef.current === null) {
-      return
-    }
+      if (containerRef.current === null) {
+        return
+      }
 
-    const paperElement = containerRef.current.querySelector(`.${cls.paper}`)
+      const paperElement = containerRef.current.querySelector(`.${cls.paper}`)
 
-    if (paperElement instanceof HTMLElement === false) {
-      return
-    }
+      if (paperElement instanceof HTMLElement === false) {
+        return
+      }
 
-    const paperHtml = getCleanPaperHtml({ paperElement })
+      const paperHtml = getCleanPaperHtml({ paperElement })
+      const div = document.createElement('div')
+      div.innerHTML = paperHtml
+      const imageSrcList = [...div.querySelectorAll('img')].map((img) => img.src).filter(Boolean)
 
-    const div = document.createElement('div')
-    div.innerHTML = paperHtml
+      const imageLoadedPromiseList = imageSrcList.map(async (src) => {
+        const imageLoadedDeferred = Promise.withResolvers()
 
-    const imageSrcList = [...div.querySelectorAll('img')].map((img) => img.src).filter(Boolean)
+        const image = new Image()
 
-    const imageLoadedPromiseList = imageSrcList.map(async (src) => {
-      const imageLoadedDeferred = Promise.withResolvers()
+        image.addEventListener('load', () => {
+          imageLoadedDeferred.resolve()
+        })
 
-      const image = new Image()
+        image.addEventListener('error', () => {
+          imageLoadedDeferred.resolve()
+        })
 
-      image.addEventListener('load', () => {
-        imageLoadedDeferred.resolve()
+        image.src = src
+
+        return await imageLoadedDeferred.promise
       })
 
-      image.addEventListener('error', () => {
-        imageLoadedDeferred.resolve()
-      })
+      await Promise.all(imageLoadedPromiseList)
 
-      image.src = src
-
-      return await imageLoadedDeferred.promise
-    })
-
-    Promise.all(imageLoadedPromiseList).then(() => {
-      reduxHolder.dispatch(
-        copySlice.actions.addItem({
-          item: bookmarkBlock,
-          preview: paperHtml,
-        }),
-      )
-
+      reduxHolder.dispatch(copySlice.actions.addItem({ item: bookmarkBlock, preview: paperHtml }))
       reduxHolder.dispatch(copySlice.actions.allowToPaste())
-
       reduxHolder.dispatch(copySlice.actions.stopPreviewPreparing())
 
       if (reduxHolder.getState().copy.isVisible === false) {
@@ -78,8 +71,9 @@ export const useBookmarkCopyPreviewCapturer = (
       }
 
       reduxHolder.dispatch(quotationSlice.actions.removeBlockFromPosThousand())
-
       previewPreparingDeferred.resolve()
-    })
+    }
+
+    waitImagesToLoadAndShowItemInCopyContainer()
   }, [bookmarkBlock])
 }

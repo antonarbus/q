@@ -137,15 +137,13 @@ export const getFileListAllHandler: RouterHandler = async (req) => {
   const countQueryWithFilters =
     filterConditions.length > 0 ? baseCountQuery.where(and(...filterConditions)) : baseCountQuery
 
-  const fileListTotalCountPromise = countQueryWithFilters.then((result) => result[0]?.count ?? 0)
-
-  const [fileListResponse, fileListTotalCountResponse] = await Promise.allSettled([
+  const [fileListResponse, countQueryResponse] = await Promise.allSettled([
     fileListPromise,
-    fileListTotalCountPromise,
+    countQueryWithFilters,
   ])
 
   const fulfilled =
-    fileListResponse.status === 'fulfilled' && fileListTotalCountResponse.status === 'fulfilled'
+    fileListResponse.status === 'fulfilled' && countQueryResponse.status === 'fulfilled'
 
   if (fulfilled === false) {
     messageList.push('Failed to fetch files from database')
@@ -157,7 +155,9 @@ export const getFileListAllHandler: RouterHandler = async (req) => {
     })
   }
 
-  messageList.push(`Found ${fileListTotalCountResponse.value} total files`)
+  const fileListTotalCount = countQueryResponse.value[0]?.count ?? 0
+
+  messageList.push(`Found ${fileListTotalCount} total files`)
 
   messageList.push(`Returned ${fileListResponse.value.length} files for current page`)
 
@@ -165,7 +165,7 @@ export const getFileListAllHandler: RouterHandler = async (req) => {
     statusCode: httpStatusCode.success200,
     body: {
       fileList: fileListResponse.value,
-      fileListTotalCount: fileListTotalCountResponse.value,
+      fileListTotalCount,
       message: messageList.join(' | '),
     },
   })

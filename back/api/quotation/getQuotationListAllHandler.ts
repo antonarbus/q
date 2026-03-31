@@ -140,18 +140,13 @@ export const getQuotationListAllHandler: RouterHandler = async (req) => {
   const countQueryWithFilters =
     filterConditions.length > 0 ? baseCountQuery.where(and(...filterConditions)) : baseCountQuery
 
-  const quotationListTotalCountPromise = countQueryWithFilters.then(
-    (result) => result[0]?.count ?? 0,
-  )
-
-  const [quotationListResponse, quotationListTotalCountResponse] = await Promise.allSettled([
+  const [quotationListResponse, countQueryResponse] = await Promise.allSettled([
     quotationListPromise,
-    quotationListTotalCountPromise,
+    countQueryWithFilters,
   ])
 
   const fulfilled =
-    quotationListResponse.status === 'fulfilled' &&
-    quotationListTotalCountResponse.status === 'fulfilled'
+    quotationListResponse.status === 'fulfilled' && countQueryResponse.status === 'fulfilled'
 
   if (fulfilled === false) {
     messageList.push('Failed to fetch quotations from database')
@@ -163,7 +158,9 @@ export const getQuotationListAllHandler: RouterHandler = async (req) => {
     })
   }
 
-  messageList.push(`Found ${quotationListTotalCountResponse.value} total quotations`)
+  const quotationListTotalCount = countQueryResponse.value[0]?.count ?? 0
+
+  messageList.push(`Found ${quotationListTotalCount} total quotations`)
 
   messageList.push(`Returned ${quotationListResponse.value.length} quotations for current page`)
 
@@ -171,7 +168,7 @@ export const getQuotationListAllHandler: RouterHandler = async (req) => {
     statusCode: httpStatusCode.success200,
     body: {
       quotationList: quotationListResponse.value,
-      quotationListTotalCount: quotationListTotalCountResponse.value,
+      quotationListTotalCount,
       message: messageList.join(' | '),
     },
   })
