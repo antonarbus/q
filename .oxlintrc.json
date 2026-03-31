@@ -1,5 +1,6 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
+  // https://oxc.rs/docs/guide/usage/linter/plugins.html
   "plugins": [
     "eslint",
     "oxc",
@@ -28,6 +29,7 @@
     "restriction": "error",
     "style": "error"
   },
+  // https://oxc.rs/docs/guide/usage/linter/rules.html
   "rules": {
     "eslint/arrow-body-style": "off",
     "eslint/capitalized-comments": "off",
