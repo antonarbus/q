@@ -21,59 +21,56 @@ axiosWithAuth.interceptors.request.use(async (config) => {
 
 type ExtendedAxiosRequestConfig = AxiosRequestConfig & { isRetry?: boolean }
 
-axiosWithAuth.interceptors.response.use(
-  (config) => {
-    return config
-  },
-  async (error: AxiosError) => {
-    // remember original request to use it when we refresh user's access token
-    const originalRequestConfig: ExtendedAxiosRequestConfig | undefined = error.config
+const responseErrorInterceptor = async (error: AxiosError): Promise<unknown> => {
+  // remember original request to use it when we refresh user's access token
+  const originalRequestConfig: ExtendedAxiosRequestConfig | undefined = error.config
 
-    const isRetry = originalRequestConfig?.isRetry
+  const isRetry = originalRequestConfig?.isRetry
 
-    // most likely access token was expired
-    const isUnauthorizedAfterCheckingAccessToken =
-      error instanceof AxiosError &&
-      error.response?.status === 401 &&
-      (isRetry === false || isRetry === undefined)
+  // most likely access token was expired
+  const isUnauthorizedAfterCheckingAccessToken =
+    error instanceof AxiosError &&
+    error.response?.status === 401 &&
+    (isRetry === false || isRetry === undefined)
 
-    const shouldRetry =
-      isUnauthorizedAfterCheckingAccessToken === true && originalRequestConfig !== undefined
+  const shouldRetry =
+    isUnauthorizedAfterCheckingAccessToken === true && originalRequestConfig !== undefined
 
-    if (shouldRetry === true) {
-      originalRequestConfig.isRetry = true
+  if (shouldRetry === true) {
+    originalRequestConfig.isRetry = true
 
-      try {
-        // refresh expired or invalid access token & extend refresh token if it is about to expire
-        const res = await axios[route.getAccessToken.method]<ResBody>(route.getAccessToken.url, {
-          withCredentials: true,
-        })
+    try {
+      // refresh expired or invalid access token & extend refresh token if it is about to expire
+      const res = await axios[route.getAccessToken.method]<ResBody>(route.getAccessToken.url, {
+        withCredentials: true,
+      })
 
-        if (res.data.accessJwtToken !== undefined) {
-          reduxHolder.dispatch(
-            userSlice.actions.setAccessToken({
-              accessToken: res.data.accessJwtToken,
-            }),
-          )
-        }
+      if (res.data.accessJwtToken !== undefined) {
+        reduxHolder.dispatch(
+          userSlice.actions.setAccessToken({
+            accessToken: res.data.accessJwtToken,
+          }),
+        )
+      }
 
-        // make original request
-        return await axiosWithAuth.request(originalRequestConfig)
-      } catch (axiosError: unknown) {
-        const isUnauthorized =
-          axiosError instanceof AxiosError && axiosError.response?.status === 401
+      // make original request
+      return await axiosWithAuth.request(originalRequestConfig)
+    } catch (refreshError: unknown) {
+      const isUnauthorized =
+        refreshError instanceof AxiosError && refreshError.response?.status === 401
 
-        if (isUnauthorized === true) {
-          // still unauthorized after attempt to refresh the access token
-          reduxHolder.dispatch(userSlice.actions.setAccessToken({ accessToken: null }))
+      if (isUnauthorized === true) {
+        // still unauthorized after attempt to refresh the access token
+        reduxHolder.dispatch(userSlice.actions.setAccessToken({ accessToken: null }))
 
-          log.warn('not authorized')
-        }
+        log.warn('not authorized')
       }
     }
+  }
 
-    throw error
-  },
-)
+  throw error
+}
+
+axiosWithAuth.interceptors.response.use(undefined, responseErrorInterceptor)
 
 instantiateAxiosWithAuth(axiosWithAuth)
