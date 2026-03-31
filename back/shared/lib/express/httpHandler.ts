@@ -16,20 +16,26 @@ type HttpHandler = (
 export const httpHandler = (
   fn: HttpHandler,
 ): ((req: Request, res: Response, next: NextFunction) => void) => {
-  const fnWithErrorHandlingResolved = (req: Request, res: Response, next: NextFunction): void => {
-    Promise.resolve(fn(req, res, next))
-      .then((response) => {
-        if (response.type === 'json') {
-          res.status(response.statusCode).json(response.body)
+  const fnWithErrorHandlingResolved = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> => {
+    try {
+      const response = await fn(req, res, next)
 
-          return
-        }
+      if (response.type === 'json') {
+        res.status(response.statusCode).json(response.body)
 
-        if (response.type === 'redirect') {
-          res.redirect(response.statusCode, response.redirectUrl)
-        }
-      })
-      .catch(next)
+        return
+      }
+
+      if (response.type === 'redirect') {
+        res.redirect(response.statusCode, response.redirectUrl)
+      }
+    } catch (error) {
+      next(error)
+    }
   }
 
   return fnWithErrorHandlingResolved
