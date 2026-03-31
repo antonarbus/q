@@ -27,7 +27,7 @@ export const upload: OnUpload = async (props) => {
 
     const reader = new FileReader()
 
-    reader.addEventListener('load', (event): void => {
+    reader.addEventListener('load', async (event): Promise<void> => {
       const fileAsBase64String = event.target?.result
 
       if (props.editor === null) {
@@ -39,18 +39,18 @@ export const upload: OnUpload = async (props) => {
       }
 
       if (props.type === 'image') {
-        getImageDimensions(fileAsBase64String).then((imageDimensions) => {
-          props.editor
-            ?.chain()
-            .focus()
-            .setImage({
-              src: fileAsBase64String,
-              alt: file.name,
-              width: imageDimensions.width > 0 ? imageDimensions.width : undefined,
-              height: imageDimensions.height > 0 ? imageDimensions.height : undefined,
-            })
-            .run()
-        })
+        const imageDimensions = await getImageDimensions(fileAsBase64String)
+
+        props.editor
+          ?.chain()
+          .focus()
+          .setImage({
+            src: fileAsBase64String,
+            alt: file.name,
+            width: imageDimensions.width > 0 ? imageDimensions.width : undefined,
+            height: imageDimensions.height > 0 ? imageDimensions.height : undefined,
+          })
+          .run()
       }
 
       if (props.type === 'file') {

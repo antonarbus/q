@@ -21,27 +21,29 @@ export const updateNumberAtHtmlIncrementally = (props: Props): void => {
   const stepValue = valueDifference / steps
   const decimalPlaces = Math.min(getDecimalPlaces(props.newNumber), 2)
 
-  const incrementValues = async (): Promise<void> => {
-    await new Promise((resolve) => {
-      for (let index = 1; index <= steps; index = index + 1) {
-        const incrementedValue = roundTo(props.oldNumber + index * stepValue, decimalPlaces)
+  const incrementValues = async (): Promise<unknown> => {
+    const defer = Promise.withResolvers()
 
-        const updatedHtml = getStringWithNewFormattedNumber({
-          string: props.html,
-          newNumber: incrementedValue,
+    for (let index = 1; index <= steps; index = index + 1) {
+      const incrementedValue = roundTo(props.oldNumber + index * stepValue, decimalPlaces)
+
+      const updatedHtml = getStringWithNewFormattedNumber({
+        string: props.html,
+        newNumber: incrementedValue,
+      })
+
+      setTimeout(() => {
+        props.totalPriceValueEditor.commands.setContent(updatedHtml, {
+          emitUpdate: false,
         })
 
-        setTimeout(() => {
-          props.totalPriceValueEditor.commands.setContent(updatedHtml, {
-            emitUpdate: false,
-          })
+        if (index === steps) {
+          defer.resolve()
+        }
+      }, 5 * index)
+    }
 
-          if (index === steps) {
-            resolve('done')
-          }
-        }, 5 * index)
-      }
-    })
+    return await defer.promise
   }
 
   const setHtml = async (): Promise<void> => {
