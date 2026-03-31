@@ -9,6 +9,7 @@ import { reduxHolder } from '@front/shared/lib/redux'
 import { jwtDecode } from 'jwt-decode'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
 import { createActor } from 'xstate'
+import { getAccessTokenDeferred } from './getAccessTokenDeferred'
 
 if (typeof Promise.withResolvers !== 'function') {
   const element = document.querySelector('.wait-for-init-files-to-load')
@@ -19,8 +20,6 @@ if (typeof Promise.withResolvers !== 'function') {
 
   throw new Error('old browser, please update')
 }
-
-export const getAccessTokenDeferred = Promise.withResolvers<'fetched' | 'failed'>()
 
 const loadingMenuIconMachine = createLoadingMenuIconMachine({
   navItemId: navItemId.login,

@@ -1,3 +1,5 @@
+import { nanoid } from 'nanoid'
+
 type Props = {
   text: string
   subString: string
@@ -13,11 +15,11 @@ export const getTextWithBoldSubStringAsJsx = (props: Props): React.ReactNode => 
 
   return (
     <>
-      {parts.map((part, index) => {
+      {parts.map((part) => {
         const isMatch = part.toLowerCase() === props.subString.toLowerCase()
 
         return (
-          <span key={`substring-${String(index)}`}>
+          <span key={`substring-${nanoid(5)}`}>
             {isMatch === true ? <b style={{ fontWeight: 600 }}>{part}</b> : part}
           </span>
         )

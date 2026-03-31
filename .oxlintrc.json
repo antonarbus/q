@@ -6,13 +6,13 @@
     "oxc",
     "typescript",
     "unicorn",
-    "promise"
+    "promise",
+    "react"
     // "import",
     // "jsdoc",
     // "jsx-a11y",
     // "node",
     // "react-perf",
-    // "react",
     // "vitest",
     // "jest"
   ],
@@ -67,6 +67,9 @@
     "unicorn/no-array-reduce": "off",
     "unicorn/no-null": "off",
     "unicorn/prefer-global-this": "off",
-    "unicorn/require-post-message-target-origin": "off"
+    "unicorn/require-post-message-target-origin": "off",
+    "react/no-unknown-property": ["error", { "ignore": ["css"] }],
+    "react/exhaustive-deps": "off",
+    "react/jsx-props-no-spreading": "off"
   }
 }
