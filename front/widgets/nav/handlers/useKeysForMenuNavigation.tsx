@@ -1,5 +1,5 @@
 import { navSlice } from '@front/entities/nav/navSlice'
-import { useMenuNavigation } from '@front/entities/nav/provider/MenuNavigationProvider'
+import { useMenuNavigation } from '@front/entities/nav/provider/useMenuNavigation'
 import { getNavItem } from '@front/entities/nav/ui/NavList/NavItem/Menu/functions/getNavItem'
 import { reduxHolder } from '@front/shared/lib/redux'
 import { functionRegistry } from '@front/widgets/nav/functionRegistry'

@@ -1,9 +1,10 @@
 import { type NavItemId, navItemId } from '@front/entities/nav/navItemId'
 import { useMenuAnimation } from '@front/entities/nav/ui/NavList/NavItem/Menu/functions/useMenuAnimation'
 import { reduxHolder } from '@front/shared/lib/redux'
-import { createContext, useContext, useRef, useMemo } from 'react'
+import { useRef, useMemo } from 'react'
+import { MenuNavigationContext } from './MenuNavigationContext'
 
-type MenuNavigation = {
+export type MenuNavigation = {
   goUp: () => Promise<void>
   goDown: (args: { navItemId: NavItemId }) => Promise<void>
   menuContainerRef: React.RefObject<React.ComponentRef<'div'> | null>
@@ -19,9 +20,6 @@ type MenuNavigation = {
 type Props = {
   children: React.ReactNode
 }
-
-const MenuNavigationContext: React.Context<MenuNavigation | null> =
-  createContext<MenuNavigation | null>(null)
 
 export const MenuNavigationProvider = (props: Props): React.JSX.Element => {
   const menuContainerRef = useRef<React.ComponentRef<'div'> | null>(null)
@@ -73,14 +71,4 @@ export const MenuNavigationProvider = (props: Props): React.JSX.Element => {
       {props.children}
     </MenuNavigationContext.Provider>
   )
-}
-
-export const useMenuNavigation = (): MenuNavigation => {
-  const context = useContext(MenuNavigationContext)
-
-  if (context === null) {
-    throw new Error('useMenuNavigation must be used within a MenuNavigationProvider')
-  }
-
-  return context
 }

@@ -1,7 +1,4 @@
-import {
-  MenuNavigationProvider,
-  useMenuNavigation,
-} from '@front/entities/nav/provider/MenuNavigationProvider'
+import { MenuNavigationProvider } from '@front/entities/nav/provider/MenuNavigationProvider'
 import { Box } from '@mui/material'
 import { reduxHolder } from '@front/shared/lib/redux'
 import { useKeysForMenuNavigation } from '@front/widgets/nav/handlers/useKeysForMenuNavigation'
@@ -11,6 +8,7 @@ import { useCloseMenuOnClickOutside } from './functions/useCloseMenuOnClickOutsi
 import { MenuLayout } from './MenuLayout'
 import { SlidableMenuItemsContainer } from './SlidableMenuItemsContainer'
 import { TopMenuItemsContainer } from './TopMenuItemsContainer'
+import { useMenuNavigation } from '@front/entities/nav/provider/useMenuNavigation'
 
 type Props = {
   navItemRef?: { current: HTMLElement | null }

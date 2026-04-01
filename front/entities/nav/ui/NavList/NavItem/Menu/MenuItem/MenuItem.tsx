@@ -1,4 +1,3 @@
-import { useMenuNavigation } from '@front/entities/nav/provider/MenuNavigationProvider'
 import { reduxHolder } from '@front/shared/lib/redux'
 import { clickOnMenuItem } from '@front/widgets/nav/handlers/clickOnMenuItem'
 import { iconRegistry } from '@front/widgets/nav/iconRegistry'
@@ -14,6 +13,7 @@ import { SuccessIcon } from '../../SuccessIcon'
 import { MenuItemLayout } from './MenuItemStyled'
 import { Shortcut } from './Shortcut'
 import { TextInMenu } from './TextInMenu'
+import { useMenuNavigation } from '@front/entities/nav/provider/useMenuNavigation'
 
 type Props = {
   navItem: NavItem

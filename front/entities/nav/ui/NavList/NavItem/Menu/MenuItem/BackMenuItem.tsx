@@ -1,4 +1,3 @@
-import { useMenuNavigation } from '@front/entities/nav/provider/MenuNavigationProvider'
 import { reduxHolder } from '@front/shared/lib/redux'
 import { theme } from '@front/shared/theme'
 import { FaChevronLeft } from 'react-icons/fa'
@@ -6,6 +5,7 @@ import { navSlice } from '../../../../../navSlice'
 import { Icon } from '../../Icon'
 import { MenuItemLayout } from './MenuItemStyled'
 import { TextInMenu } from './TextInMenu'
+import { useMenuNavigation } from '@front/entities/nav/provider/useMenuNavigation'
 
 export const BackMenuItem = (): React.JSX.Element => {
   const menuNavigation = useMenuNavigation()
