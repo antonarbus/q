@@ -34,24 +34,24 @@ export const MenuButton = (props: Props): React.JSX.Element => {
       }}
       onClick={handleClick}
       title={props.title}
-    sx={{
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      minWidth: '28px',
-      height: '28px',
-      padding: '4px 8px',
-      border: 'none',
-      borderRadius: '4px',
-      cursor: props.disabled === true ? 'default' : 'pointer',
-      pointerEvents: props.disabled === true ? 'none' : 'auto',
-      fontSize: 14,
-      opacity: props.disabled === true ? 0.5 : 1,
-      backgroundColor: props.isActive === true ? '#d8d8d87d' : 'transparent',
-      ':hover': {
-        backgroundColor: props.isActive === true ? '#d8d8d87d' : '#eaeaea',
-      },
-    }}
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minWidth: '28px',
+        height: '28px',
+        padding: '4px 8px',
+        border: 'none',
+        borderRadius: '4px',
+        cursor: props.disabled === true ? 'default' : 'pointer',
+        pointerEvents: props.disabled === true ? 'none' : 'auto',
+        fontSize: 14,
+        opacity: props.disabled === true ? 0.5 : 1,
+        backgroundColor: props.isActive === true ? '#d8d8d87d' : 'transparent',
+        ':hover': {
+          backgroundColor: props.isActive === true ? '#d8d8d87d' : '#eaeaea',
+        },
+      }}
     >
       {props.children}
     </Box>
