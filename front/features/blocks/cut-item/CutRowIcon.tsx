@@ -1,6 +1,6 @@
 import { copySlice } from '@front/entities/copy/copySlice'
-import { useBlock } from '@front/entities/quotation/provider/BlockProvider'
-import { useRow } from '@front/entities/quotation/provider/useRow'
+import { useBlock } from '@front/entities/quotation/provider/block/useBlock'
+import { useRow } from '@front/entities/quotation/provider/row/useRow'
 import { getRowFromStoreByIndex } from '@front/entities/quotation/redux/getter/getRowFromStoreByIndex'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { selectIsLastRow } from '@front/entities/quotation/redux/selector/selectIsLastRow'

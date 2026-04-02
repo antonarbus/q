@@ -1,4 +1,4 @@
-import { BlockProvider } from '@front/entities/quotation/provider/BlockProvider'
+import { BlockProvider } from '@front/entities/quotation/provider/block/BlockProvider'
 import type { BlockItem } from '@back/entity/quotation/schema'
 import { BookmarkedRowBlock } from './bookmarked-row-block'
 import { BoqBlock } from './boq-block'

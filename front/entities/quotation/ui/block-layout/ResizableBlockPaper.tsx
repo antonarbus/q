@@ -7,7 +7,7 @@ import type {
 import { reduxHolder } from '@front/shared/lib/redux'
 import { Resizable, type ResizableProps } from 're-resizable'
 
-import { useBlock } from '../../provider/BlockProvider'
+import { useBlock } from '../../provider/block/useBlock'
 
 type Props = {
   children: React.ReactNode

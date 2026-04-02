@@ -1,5 +1,5 @@
 import { columnMinWidth } from '@front/entities/quotation/ui/columnMinWidth'
-import { useBlock } from '@front/entities/quotation/provider/BlockProvider'
+import { useBlock } from '@front/entities/quotation/provider/block/useBlock'
 import { getHtmlOfBoqColumnFromStoreByIndex } from '@front/entities/quotation/redux/getter/getHtmlOfBoqColumnFromStoreByIndex'
 import { columnHeaderStyle } from '@front/entities/quotation/style/columnHeaderStyle'
 import { ResizableColumn } from '../ResizableColumn'

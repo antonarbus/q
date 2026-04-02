@@ -1,4 +1,4 @@
-import { useBlock } from '@front/entities/quotation/provider/BlockProvider'
+import { useBlock } from '@front/entities/quotation/provider/block/useBlock'
 import { getHtmlOfTextBlockFromStoreByIndex } from '@front/entities/quotation/redux/getter/getHtmlOfTextBlockFromStoreByIndex'
 import { textItemCellStyle } from '@front/entities/quotation/style/textItemCellStyle'
 import { BlockComp } from '@front/entities/quotation/ui/BlockComp'

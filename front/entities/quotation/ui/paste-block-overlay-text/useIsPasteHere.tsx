@@ -1,5 +1,5 @@
 import { reduxHolder } from '@front/shared/lib/redux'
-import { useBlock } from '../../provider/BlockProvider'
+import { useBlock } from '../../provider/block/useBlock'
 
 export const useIsPasteHere = (): boolean => {
   const block = useBlock()

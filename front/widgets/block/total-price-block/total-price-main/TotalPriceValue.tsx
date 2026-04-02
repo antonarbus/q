@@ -1,4 +1,4 @@
-import { useBlock } from '@front/entities/quotation/provider/BlockProvider'
+import { useBlock } from '@front/entities/quotation/provider/block/useBlock'
 import { getHtmlOfPriceFromStoreByIndex } from '@front/entities/quotation/redux/getter/getHtmlOfPriceFromStoreByIndex'
 import { TextEditor } from '@front/shared/component/TextEditor'
 import { correctTotalPriceAtPriceBlock } from '@front/features/blocks/correct-total-price-at-price-block/correctTotalPriceAtPriceBlock'

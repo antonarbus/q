@@ -1,5 +1,5 @@
-import { useBlock } from '@front/entities/quotation/provider/BlockProvider'
-import { RowProvider } from '@front/entities/quotation/provider/RowProvider'
+import { useBlock } from '@front/entities/quotation/provider/block/useBlock'
+import { RowProvider } from '@front/entities/quotation/provider/row/RowProvider'
 import { selectRows } from '@front/entities/quotation/redux/selector/selectRows'
 import { reduxHolder } from '@front/shared/lib/redux'
 import { arrayShapesEqualityFn } from '@front/entities/quotation/util/arrayShapesEqualityFn'

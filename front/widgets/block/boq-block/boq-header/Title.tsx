@@ -1,4 +1,4 @@
-import { useBlock } from '@front/entities/quotation/provider/BlockProvider'
+import { useBlock } from '@front/entities/quotation/provider/block/useBlock'
 import { getHtmlOfBoqHeaderFromStoreByIndex } from '@front/entities/quotation/redux/getter/getHtmlOfBoqHeaderFromStoreByIndex'
 import { titleCellStyle } from '@front/entities/quotation/style/titleCellStyle'
 import type { HeaderKey } from '@back/entity/quotation/schema'

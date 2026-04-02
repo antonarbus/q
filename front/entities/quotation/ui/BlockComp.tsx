@@ -8,7 +8,7 @@ import { DragHandleContext } from '@front/shared/lib/hello-pangea-dnd/DragHandle
 import { useIsLastBlock } from '../hook/useIsLastBlock'
 import type { ResizableProps } from 're-resizable'
 
-import { useBlock } from '../provider/BlockProvider'
+import { useBlock } from '../provider/block/useBlock'
 import { BlockAnimate } from './block-layout'
 import { PasteBlockTextOverlay } from './paste-block-overlay-text'
 import { reduxHolder } from '@front/shared/lib/redux'

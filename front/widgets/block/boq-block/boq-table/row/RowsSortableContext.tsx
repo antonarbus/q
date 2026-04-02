@@ -1,5 +1,5 @@
 import { DragDropContext, Droppable } from '@hello-pangea/dnd'
-import { useBlock } from '@front/entities/quotation/provider/BlockProvider'
+import { useBlock } from '@front/entities/quotation/provider/block/useBlock'
 import { onRowDragEnd, onRowDragStart } from '@front/features/blocks/drag-item/onRowDrag'
 
 type Props = {

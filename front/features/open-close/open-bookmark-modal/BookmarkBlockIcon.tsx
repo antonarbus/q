@@ -1,4 +1,4 @@
-import { useBlock } from '@front/entities/quotation/provider/BlockProvider'
+import { useBlock } from '@front/entities/quotation/provider/block/useBlock'
 import { getBlockFromStoreByIndex } from '@front/entities/quotation/redux/getter/getBlockFromStoreByIndex'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { Tooltip } from '@mui/material'

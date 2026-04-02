@@ -40,14 +40,15 @@ export const routerHolder = new RouterHolder()
 export const instance = new Instance() // queryClient, navStructure, etc.
 
 // app/ — creates and injects (import order matters)
-import './router'      // creates router, sets routerHolder.router
-import './redux'       // creates store, sets reduxHolder.store
+import './router' // creates router, sets routerHolder.router
+import './redux' // creates store, sets reduxHolder.store
 import './axiosConfig' // creates axios instance
 ```
 
 Redux types (`RootState`, `AppDispatch`) flow from `app/` to `shared/` via module augmentation on an empty `Register` interface in `shared/lib/redux/register.ts` — `shared/` never imports `app/`.
 
 **Usage from any layer:**
+
 ```ts
 import { reduxHolder }  from '@front/shared/lib/redux'
 import { routerHolder } from '@front/shared/lib/react-router-dom/router'

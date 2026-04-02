@@ -1,4 +1,4 @@
-import { useBlock } from '@front/entities/quotation/provider/BlockProvider'
+import { useBlock } from '@front/entities/quotation/provider/block/useBlock'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { recalculateTotalPrices } from '@front/entities/quotation/util/recalculateTotalPrices'
 import { selectIsLastBlock } from '@front/entities/quotation/redux/selector/selectIsLastBlock'

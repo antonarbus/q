@@ -1,5 +1,5 @@
 import { Draggable } from '@hello-pangea/dnd'
-import { useRow } from '@front/entities/quotation/provider/useRow'
+import { useRow } from '@front/entities/quotation/provider/row/useRow'
 import { useIsRowsSortDisabled } from '@front/entities/quotation/hook/useIsRowsSortDisabled'
 import { DragHandleContext } from '@front/shared/lib/hello-pangea-dnd/DragHandleContext'
 

@@ -1,4 +1,4 @@
-import { useBlock } from '@front/entities/quotation/provider/BlockProvider'
+import { useBlock } from '@front/entities/quotation/provider/block/useBlock'
 import { TextEditor } from '@front/shared/component/TextEditor'
 import { updatePriceTitleAtPriceBlock } from '@front/features/blocks/update-price-title-at-price-block/updatePriceTitleAtPriceBlock'
 import { getRegistryKey } from '@front/shared/lib/tiptap/editorRegistry'
