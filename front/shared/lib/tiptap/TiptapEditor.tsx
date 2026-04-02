@@ -59,8 +59,12 @@ export const TiptapEditor = (): React.ReactNode => {
   return (
     <Box
       className={`${tiptapCtx.className} ${tiptapCtx.onUpload === undefined ? '' : cls.droppable}`}
-      onClick={tiptapCtx.onWrapperClick}
-      onFocus={tiptapCtx.onWrapperFocus}
+      onClick={(event) => {
+        tiptapCtx.onWrapperClick?.(event)
+      }}
+      onFocus={(event) => {
+        tiptapCtx.onWrapperFocus?.(event)
+      }}
       sx={{ position: 'relative', ...tiptapStyles, ...tiptapCtx.sx }}
     >
       <Tiptap editor={editor}>
