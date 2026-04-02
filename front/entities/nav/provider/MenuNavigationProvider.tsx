@@ -1,21 +1,9 @@
-import { type NavItemId, navItemId } from '@front/entities/nav/navItemId'
+import { navItemId } from '@front/entities/nav/navItemId'
 import { useMenuAnimation } from '@front/entities/nav/ui/NavList/NavItem/Menu/functions/useMenuAnimation'
 import { reduxHolder } from '@front/shared/lib/redux'
 import { useRef, useMemo } from 'react'
 import { MenuNavigationContext } from './MenuNavigationContext'
-
-export type MenuNavigation = {
-  goUp: () => Promise<void>
-  goDown: (args: { navItemId: NavItemId }) => Promise<void>
-  menuContainerRef: React.RefObject<React.ComponentRef<'div'> | null>
-  currentMenuRef: React.RefObject<React.ComponentRef<'div'> | null>
-  nextMenuRef: React.RefObject<React.ComponentRef<'div'> | null>
-  fakeMenuRef: React.RefObject<React.ComponentRef<'div'> | null>
-  currentMenuNavItemId: NavItemId | null
-  nextMenuNavItemId: NavItemId | null
-  idsToCurrentMenuItems: NavItemId[]
-  isProfileMenu: boolean
-}
+import type { MenuNavigation } from './types'
 
 type Props = {
   children: React.ReactNode

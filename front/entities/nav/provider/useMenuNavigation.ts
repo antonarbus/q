@@ -1,6 +1,6 @@
 import { useContext } from 'react'
-import type { MenuNavigation } from './MenuNavigationProvider'
 import { MenuNavigationContext } from './MenuNavigationContext'
+import type { MenuNavigation } from './types'
 
 export const useMenuNavigation = (): MenuNavigation => {
   const context = useContext(MenuNavigationContext)
