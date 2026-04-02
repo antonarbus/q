@@ -14,52 +14,49 @@ type Props = {
 
 export const SearchOption = (props: Props): React.JSX.Element => {
   return (
-    <li>
-      <button
-        type='button'
-        onClick={props.onClick}
-        css={{
-          position: 'relative',
-          cursor: 'pointer',
-          display: 'block',
-          borderRadius: '6px',
-          padding: '5px !important',
-          margin: '2px 4px',
-          fontSize: '14px',
-          border: '1px solid #ccc',
-          ':hover': {
-            background: 'rgba(0, 0, 0, 0.05)',
+    <li
+      onClick={props.onClick}
+      css={{
+        position: 'relative',
+        cursor: 'pointer',
+        display: 'block',
+        borderRadius: '6px',
+        padding: '5px !important',
+        margin: '2px 4px',
+        fontSize: '14px',
+        border: '1px solid #ccc',
+        ':hover': {
+          background: 'rgba(0, 0, 0, 0.05)',
+        },
+        ...(props.isLoading === false && {
+          ':hover::after': {
+            content: '"Click to copy"',
+            position: 'absolute',
+            fontSize: '10px',
+            top: '2px',
+            right: '5px',
           },
-          ...(props.isLoading === false && {
-            ':hover::after': {
-              content: '"Click to copy"',
-              position: 'absolute',
-              fontSize: '10px',
-              top: '2px',
-              right: '5px',
-            },
-          }),
-        }}
-      >
-        <OptionItemName inputValue={props.inputValue} option={props.option} />
-        <OptionItemCategory inputValue={props.inputValue} option={props.option} />
-        <OptionItemDescription inputValue={props.inputValue} option={props.option} />
-        {props.isLoading === true ? (
-          <Box
-            sx={{
-              position: 'absolute',
-              inset: 0,
-              background: 'rgba(0, 0, 0, 0.05)',
-              backdropFilter: 'blur(3px)',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <RotatingLoaderIcon />
-          </Box>
-        ) : null}
-      </button>
+        }),
+      }}
+    >
+      <OptionItemName inputValue={props.inputValue} option={props.option} />
+      <OptionItemCategory inputValue={props.inputValue} option={props.option} />
+      <OptionItemDescription inputValue={props.inputValue} option={props.option} />
+      {props.isLoading === true ? (
+        <Box
+          sx={{
+            position: 'absolute',
+            inset: 0,
+            background: 'rgba(0, 0, 0, 0.05)',
+            backdropFilter: 'blur(3px)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <RotatingLoaderIcon />
+        </Box>
+      ) : null}
     </li>
   )
 }
