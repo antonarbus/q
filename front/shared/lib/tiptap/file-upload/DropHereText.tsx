@@ -1,5 +1,5 @@
 import { cls } from '@front/shared/cls'
-import { useTiptapCtx } from '../provider/TiptapProvider'
+import { useTiptapCtx } from '../provider/useTiptapCtx'
 
 export const DropHereText = (): React.ReactNode => {
   const tiptapCtx = useTiptapCtx()

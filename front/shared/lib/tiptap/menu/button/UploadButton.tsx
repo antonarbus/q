@@ -1,7 +1,7 @@
 import { Box, Tooltip } from '@mui/material'
 import { useRef } from 'react'
 import { useTiptap } from '@tiptap/react'
-import { useTiptapCtx } from '../../provider/TiptapProvider'
+import { useTiptapCtx } from '../../provider/useTiptapCtx'
 import { cls } from '@front/shared/cls'
 import { TbUpload } from 'react-icons/tb'
 

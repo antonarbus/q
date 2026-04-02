@@ -8,7 +8,7 @@ import { useExtensions } from './extension/useExtensions'
 import { cls } from '@front/shared/cls'
 import { useDropFile } from './file-upload/useDropFile'
 import { usePasteFile } from './file-upload/usePasteFile'
-import { useTiptapCtx } from './provider/TiptapProvider'
+import { useTiptapCtx } from './provider/useTiptapCtx'
 import { UploadButton } from './menu/button/UploadButton'
 import { editorRegistry } from './editorRegistry'
 

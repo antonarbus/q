@@ -1,6 +1,6 @@
 import type { Slice } from '@tiptap/pm/model'
 import type { EditorView } from '@tiptap/pm/view'
-import { useTiptapCtx } from '../provider/TiptapProvider'
+import { useTiptapCtx } from '../provider/useTiptapCtx'
 import { editorRegistry } from '../editorRegistry'
 
 type OnDrop = (_view: EditorView, event: DragEvent, _slice: Slice, moved: boolean) => boolean

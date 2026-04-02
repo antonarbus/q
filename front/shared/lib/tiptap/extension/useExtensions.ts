@@ -30,7 +30,7 @@ import { Dropcursor, Gapcursor, Placeholder, UndoRedo, TrailingNode } from '@tip
 import { TableCell, TableHeader, TableKit } from '@tiptap/extension-table'
 import Youtube from '@tiptap/extension-youtube'
 import { ResizableImage } from './image/ResizableImage'
-import { useTiptapCtx } from '../provider/TiptapProvider'
+import { useTiptapCtx } from '../provider/useTiptapCtx'
 import { cls } from '@front/shared/cls'
 
 const tableCellTextAlignAttribute = {

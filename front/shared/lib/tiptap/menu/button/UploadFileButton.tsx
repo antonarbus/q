@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { useTiptap } from '@tiptap/react'
 import { MenuButton } from './shared/MenuButton'
 import { TbUpload } from 'react-icons/tb'
-import { useTiptapCtx } from '../../provider/TiptapProvider'
+import { useTiptapCtx } from '../../provider/useTiptapCtx'
 
 export const UploadFileButton = (): React.JSX.Element | null => {
   const { editor } = useTiptap()

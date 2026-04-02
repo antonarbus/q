@@ -1,5 +1,5 @@
 import type { EditorView } from '@tiptap/pm/view'
-import { useTiptapCtx } from '../provider/TiptapProvider'
+import { useTiptapCtx } from '../provider/useTiptapCtx'
 import { editorRegistry } from '../editorRegistry'
 
 type OnPaste = (_view: EditorView, event: ClipboardEvent) => boolean
