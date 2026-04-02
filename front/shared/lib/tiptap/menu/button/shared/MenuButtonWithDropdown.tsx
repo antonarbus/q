@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react'
 import { Box, Popover } from '@mui/material'
 import { RiArrowDropDownLine } from 'react-icons/ri'
+import { useTiptap } from '@tiptap/react'
 
 type Props = {
   onClick?: () => void
@@ -12,6 +13,7 @@ type Props = {
 }
 
 export const MenuButtonWithDropdown = (props: Props): React.JSX.Element => {
+  const { editor } = useTiptap()
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 
   const handleArrowClick = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
@@ -21,7 +23,16 @@ export const MenuButtonWithDropdown = (props: Props): React.JSX.Element => {
 
   const handleClose = useCallback(() => {
     setAnchorEl(null)
-  }, [])
+    // If editor lost focus while the popover was open (e.g. user clicked elsewhere),
+    // collapse the selection so the BubbleMenu re-evaluates shouldShow and hides.
+    requestAnimationFrame(() => {
+      if (editor.isDestroyed === true || editor.isFocused === true) {
+        return
+      }
+
+      editor.commands.setTextSelection(editor.state.selection.to)
+    })
+  }, [editor])
 
   const baseButtonSx = {
     display: 'flex',

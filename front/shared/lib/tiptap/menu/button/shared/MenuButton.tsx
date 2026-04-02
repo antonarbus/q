@@ -1,4 +1,6 @@
 import { Box } from '@mui/material'
+import { useCallback } from 'react'
+import { useTiptap } from '@tiptap/react'
 
 type Props = {
   onClick: () => void
@@ -8,16 +10,30 @@ type Props = {
   children: React.ReactNode
 }
 
-export const MenuButton = (props: Props): React.JSX.Element => (
-  <Box
-    component='button'
-    type='button'
-    disabled={props.disabled}
-    onMouseDown={(event: React.MouseEvent) => {
-      event.preventDefault()
-    }}
-    onClick={props.onClick}
-    title={props.title}
+export const MenuButton = (props: Props): React.JSX.Element => {
+  const { editor } = useTiptap()
+
+  const handleClick = useCallback(() => {
+    props.onClick()
+    // Consume the BubbleMenu plugin's preventHide flag via a synchronous blur→focus cycle.
+    // Without this, preventHide stays true after the click (event.preventDefault() on
+    // mousedown prevents the editor from blurring, so the flag is never consumed).
+    // blur+focus happen in the same synchronous task, so there is no browser repaint
+    // and no visible selection flash.
+    editor.view.dom.blur()
+    editor.view.dom.focus()
+  }, [editor, props])
+
+  return (
+    <Box
+      component='button'
+      type='button'
+      disabled={props.disabled}
+      onMouseDown={(event: React.MouseEvent) => {
+        event.preventDefault()
+      }}
+      onClick={handleClick}
+      title={props.title}
     sx={{
       display: 'flex',
       alignItems: 'center',
@@ -36,7 +52,8 @@ export const MenuButton = (props: Props): React.JSX.Element => (
         backgroundColor: props.isActive === true ? '#d8d8d87d' : '#eaeaea',
       },
     }}
-  >
-    {props.children}
-  </Box>
-)
+    >
+      {props.children}
+    </Box>
+  )
+}

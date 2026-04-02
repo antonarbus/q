@@ -12,7 +12,7 @@ import { terraformFormat } from './commands/terraformFormat'
 import { terraformUnlock } from './commands/terraformUnlock'
 import { validatePromotion } from './commands/validatePromotion'
 import { verifyDeployment } from './commands/verifyDeployment'
-import { runInteractiveMode } from './lib/interactive'
+import { runInteractiveMode } from './interactive'
 import { deployedEnvironmentSchema } from '@root/config/environment'
 
 const noArgumentsProvided = process.argv.length === 2

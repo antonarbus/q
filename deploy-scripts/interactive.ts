@@ -1,14 +1,14 @@
 import { input, select } from '@inquirer/prompts'
 import chalk from 'chalk'
-import { generateTfvars } from '../commands/generateTfvars'
-import { listGcloudServices } from '../commands/listGcloudServices'
-import { showDeploymentInfo } from '../commands/showDeploymentInfo'
-import { terraformApply } from '../commands/terraformApply'
-import { terraformFormat } from '../commands/terraformFormat'
-import { terraformPlan } from '../commands/terraformPlan'
-import { terraformUnlock } from '../commands/terraformUnlock'
+import { generateTfvars } from './commands/generateTfvars'
+import { listGcloudServices } from './commands/listGcloudServices'
+import { showDeploymentInfo } from './commands/showDeploymentInfo'
+import { terraformApply } from './commands/terraformApply'
+import { terraformFormat } from './commands/terraformFormat'
+import { terraformPlan } from './commands/terraformPlan'
+import { terraformUnlock } from './commands/terraformUnlock'
 import type { DeployedEnvironment } from '@root/config/environment'
-import { logger } from './output/logger'
+import { logger } from './lib/output/logger'
 
 type Command = {
   name: string
