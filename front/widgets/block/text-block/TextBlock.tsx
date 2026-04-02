@@ -11,8 +11,13 @@ import {
 } from '@front/features/blocks/resize-text-block/onTextBlockResize'
 import { updateTextBlock } from '@front/features/blocks/update-text-block/updateTextBlock'
 import { getRegistryKey } from '@front/shared/lib/tiptap/editorRegistry'
-import { RightBlockActionButtons } from './RightBlockActionButtons'
-import { LeftBlockActionButtons } from './LeftBlockActionButtons'
+import { ItemActionButtonsLayout } from '@front/shared/layout/ItemActionButtonsLayout'
+import { CopyBlockIcon } from '@front/features/blocks/copy-item/CopyBlockIcon'
+import { CutBlockIcon } from '@front/features/blocks/cut-item/CutBlockIcon'
+import { DragBlockIcon } from '@front/features/blocks/drag-item/DragBlockIcon'
+import { DeleteBlockIcon } from '@front/features/blocks/delete-item/DeleteBlockIcon'
+import { BookmarkBlockIcon } from '@front/features/open-close/open-bookmark-modal'
+import { OpenInfoBlockModalIcon } from '@front/features/open-close/open-info-modal'
 
 export const TextBlock = (): React.JSX.Element => {
   const block = useBlock()
@@ -20,10 +25,22 @@ export const TextBlock = (): React.JSX.Element => {
   return (
     <BlockComp
       className={cls.textBlock}
-      leftBlockActionButtons={<LeftBlockActionButtons />}
+      leftBlockActionButtons={
+        <ItemActionButtonsLayout>
+          <DragBlockIcon />
+          <CopyBlockIcon />
+          <CutBlockIcon />
+        </ItemActionButtonsLayout>
+      }
       onBlockResizeStart={onTextBlockResizeStart}
       onBlockResizeStop={onTextBlockResizeStop}
-      rightBlockActionButtons={<RightBlockActionButtons />}
+      rightBlockActionButtons={
+        <ItemActionButtonsLayout>
+          <BookmarkBlockIcon />
+          <OpenInfoBlockModalIcon />
+          <DeleteBlockIcon />
+        </ItemActionButtonsLayout>
+      }
     >
       <TextEditor
         registryKey={getRegistryKey({
