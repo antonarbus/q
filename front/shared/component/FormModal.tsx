@@ -3,7 +3,7 @@ import { cls } from '@front/shared/cls'
 import { theme } from '@front/shared/theme'
 import type { AnimationScope } from 'motion'
 import { AnimatePresence, motion } from 'motion/react'
-import { Children } from 'react'
+
 import { IoClose } from 'react-icons/io5'
 import { BackdropWithSlidableModal } from './BackdropWithSlidableModal'
 import { ButtonCustom } from './ButtonCustom'
@@ -129,34 +129,39 @@ export const FormModal = (props: Props): React.JSX.Element => {
           onSubmit={props.onSubmit}
         >
           <AnimatePresence initial={false}>
-            {Children.map(props.children, (child, index) => {
-              if (child === null) {
-                return null
-              }
+            {(Array.isArray(props.children) ? props.children : [props.children]).map(
+              // oxlint-disable-next-line no-array-index-key -- children never reorder, only appear/disappear
+              (child, index) => {
+                if (child === null || child === undefined || child === false) {
+                  return null
+                }
 
-              return (
-                <motion.div
-                  animate={{
-                    height: 'auto',
-                    marginTop: '25px',
-                    opacity: 1,
-                  }}
-                  exit={{
-                    height: 0,
-                    marginTop: 0,
-                    opacity: 0,
-                  }}
-                  initial={{
-                    height: 0,
-                    marginTop: 0,
-                    opacity: 0,
-                  }}
-                  key={`form-child-${String(index)}`}
-                >
-                  {child}
-                </motion.div>
-              )
-            })}
+                const childKey = `form-child-${String(index)}`
+
+                return (
+                  <motion.div
+                    animate={{
+                      height: 'auto',
+                      marginTop: '25px',
+                      opacity: 1,
+                    }}
+                    exit={{
+                      height: 0,
+                      marginTop: 0,
+                      opacity: 0,
+                    }}
+                    initial={{
+                      height: 0,
+                      marginTop: 0,
+                      opacity: 0,
+                    }}
+                    key={childKey}
+                  >
+                    {child}
+                  </motion.div>
+                )
+              },
+            )}
           </AnimatePresence>
         </Box>
         {props.buttonText !== undefined && (
