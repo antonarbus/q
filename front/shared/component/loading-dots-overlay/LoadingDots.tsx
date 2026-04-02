@@ -24,20 +24,23 @@ export const LoadingDots = (props: Props): React.JSX.Element => (
   >
     {Array.from({ length: props.dots ?? 3 })
       .fill('')
-      .map((_dot, index) => (
-        <span
-          css={{
-            width: props.size ?? '1.5rem',
-            height: props.size ?? '1.5rem',
-            margin: `0 ${props.margin ?? '1rem'}`,
-            background: props.background ?? '#fff',
-            borderRadius: '50%',
-            animation: `${props.duration ?? '0.8s'} ${bounceLoading} infinite alternate`,
-            '&:nth-of-type(2n + 0)': { animationDelay: '0.3s' },
-            '&:nth-of-type(3n + 0)': { animationDelay: '0.6s' },
-          }}
-          key={`dot-${String(index)}`}
-        />
-      ))}
+      .map((_dot, index) => {
+        return (
+          <span
+            // oxlint-disable-next-line no-array-index-key -- dots are identical and never reorder
+            key={`dot-${String(index)}`}
+            css={{
+              width: props.size ?? '1.5rem',
+              height: props.size ?? '1.5rem',
+              margin: `0 ${props.margin ?? '1rem'}`,
+              background: props.background ?? '#fff',
+              borderRadius: '50%',
+              animation: `${props.duration ?? '0.8s'} ${bounceLoading} infinite alternate`,
+              '&:nth-of-type(2n + 0)': { animationDelay: '0.3s' },
+              '&:nth-of-type(3n + 0)': { animationDelay: '0.6s' },
+            }}
+          />
+        )
+      })}
   </div>
 )
