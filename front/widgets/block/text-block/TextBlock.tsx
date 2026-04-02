@@ -3,21 +3,16 @@ import { getHtmlOfTextBlockFromStoreByIndex } from '@front/entities/quotation/re
 import { textItemCellStyle } from '@front/entities/quotation/style/textItemCellStyle'
 import { BlockComp } from '@front/entities/quotation/ui/BlockComp'
 import { upload } from '@front/features/file/upload-file'
-import { BookmarkBlockIcon } from '@front/features/open-close/open-bookmark-modal'
-import { OpenInfoBlockModalIcon } from '@front/features/open-close/open-info-modal'
 import { TextEditor } from '@front/shared/component/TextEditor'
 import { cls } from '@front/shared/cls'
-import { ItemActionButtonsLayout } from '@front/shared/layout/ItemActionButtonsLayout'
-import { CopyBlockIcon } from '@front/features/blocks/copy-item/CopyBlockIcon'
-import { CutBlockIcon } from '@front/features/blocks/cut-item/CutBlockIcon'
-import { DeleteBlockIcon } from '@front/features/blocks/delete-item/DeleteBlockIcon'
-import { DragBlockIcon } from '@front/features/blocks/drag-item/DragBlockIcon'
 import {
   onTextBlockResizeStart,
   onTextBlockResizeStop,
 } from '@front/features/blocks/resize-text-block/onTextBlockResize'
 import { updateTextBlock } from '@front/features/blocks/update-text-block/updateTextBlock'
 import { getRegistryKey } from '@front/shared/lib/tiptap/editorRegistry'
+import { RightBlockActionButtons } from './RightBlockActionButtons'
+import { LeftBlockActionButtons } from './LeftBlockActionButtons'
 
 export const TextBlock = (): React.JSX.Element => {
   const block = useBlock()
@@ -25,22 +20,10 @@ export const TextBlock = (): React.JSX.Element => {
   return (
     <BlockComp
       className={cls.textBlock}
-      leftBlockActionButtons={
-        <ItemActionButtonsLayout>
-          <DragBlockIcon />
-          <CopyBlockIcon />
-          <CutBlockIcon />
-        </ItemActionButtonsLayout>
-      }
+      leftBlockActionButtons={<LeftBlockActionButtons />}
       onBlockResizeStart={onTextBlockResizeStart}
       onBlockResizeStop={onTextBlockResizeStop}
-      rightBlockActionButtons={
-        <ItemActionButtonsLayout>
-          <BookmarkBlockIcon />
-          <OpenInfoBlockModalIcon />
-          <DeleteBlockIcon />
-        </ItemActionButtonsLayout>
-      }
+      rightBlockActionButtons={<RightBlockActionButtons />}
     >
       <TextEditor
         registryKey={getRegistryKey({

@@ -7,12 +7,12 @@
     "typescript",
     "unicorn",
     "promise",
-    "react"
+    "react",
+    "react-perf"
     // "import",
     // "jsdoc",
     // "jsx-a11y",
     // "node",
-    // "react-perf",
     // "vitest",
     // "jest"
   ],
@@ -70,6 +70,10 @@
     "unicorn/require-post-message-target-origin": "off",
     "react/no-unknown-property": ["error", { "ignore": ["css"] }],
     "react/exhaustive-deps": "off",
-    "react/jsx-props-no-spreading": "off"
+    "react/jsx-props-no-spreading": "off",
+    "react-perf/jsx-no-jsx-as-prop": "warn", // todo: add "use memo" directive from react compiler
+    "react-perf/jsx-no-new-function-as-prop": "warn", // todo: add "use memo" directive from react compiler
+    "react-perf/jsx-no-new-object-as-prop": "warn", // todo: add "use memo" directive from react compiler
+    "react-perf/jsx-no-new-array-as-prop": "warn" // todo: add "use memo" directive from react compiler
   }
 }
