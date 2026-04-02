@@ -2,12 +2,12 @@ import type { UrlParam } from '@back/api/user/deleteUserHandler'
 import { useDeleteUserMutation } from '@front/entities/user/api/useDeleteUserMutation'
 import { IconButton, Tooltip } from '@mui/material'
 import { RotatingLoaderIcon } from '@front/shared/component/RotatingLoaderIcon'
-import { confirmWithDialog } from '@front/shared/component/ConfirmationDialog'
 import { instance } from '@front/shared/instance'
 import { queryKey } from '@front/shared/lib/tanstack-query/queryKey'
 import { MdDeleteOutline } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
+import { confirmWithDialog } from '@front/shared/component/confirmation-dialog/confirmWithDialog'
 
 export const DeleteUserButton = (props: UrlParam): React.ReactNode => {
   const deleteUserMutation = useDeleteUserMutation()

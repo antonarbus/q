@@ -2,11 +2,11 @@ import type { UrlParam } from '@back/api/bookmark/deleteBookmarkHandler'
 import { useDeleteBookmarkMutation } from '@front/entities/bookmark/api/useDeleteBookmarkMutation'
 import { deleteFromBookmarkListCache } from '@front/entities/bookmark/cache-updater/deleteFromBookmarkListCache'
 import { IconButton, Tooltip } from '@mui/material'
-import { confirmWithDialog } from '@front/shared/component/ConfirmationDialog'
 import { RotatingLoaderIcon } from '@front/shared/component/RotatingLoaderIcon'
 import { MdDeleteOutline } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
+import { confirmWithDialog } from '@front/shared/component/confirmation-dialog/confirmWithDialog'
 
 export const DeleteBookmarkButton = (props: UrlParam): React.JSX.Element => {
   const deleteBookmarkMutation = useDeleteBookmarkMutation()

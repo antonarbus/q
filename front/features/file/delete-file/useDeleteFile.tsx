@@ -1,5 +1,5 @@
 import { useDeleteFileMutation } from '@front/entities/file/api/useDeleteFileMutation'
-import { confirmWithDialog } from '@front/shared/component/ConfirmationDialog'
+import { confirmWithDialog } from '@front/shared/component/confirmation-dialog/confirmWithDialog'
 import { instance } from '@front/shared/instance'
 import { queryKey } from '@front/shared/lib/tanstack-query/queryKey'
 import { useCallback } from 'react'

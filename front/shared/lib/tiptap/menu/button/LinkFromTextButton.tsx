@@ -2,7 +2,7 @@ import { useTiptap, useTiptapState } from '@tiptap/react'
 import { TextSelection } from '@tiptap/pm/state'
 import { MenuButton } from './shared/MenuButton'
 import { RiLink } from 'react-icons/ri'
-import { confirmWithDialog } from '@front/shared/component/ConfirmationDialog'
+import { confirmWithDialog } from '@front/shared/component/confirmation-dialog/confirmWithDialog'
 
 export const LinkFromTextButton = (): React.JSX.Element => {
   const { editor } = useTiptap()

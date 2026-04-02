@@ -12,72 +12,7 @@ import {
 import { useLayoutEffect, useState } from 'react'
 import { reduxHolder } from '@front/shared/lib/redux'
 import { appSlice } from '@front/shared/appSlice'
-
-let boolDeferred = Promise.withResolvers<boolean>()
-let stringDeferred = Promise.withResolvers<string | false>()
-let isInputMode = false
-
-export function confirmWithDialog(
-  props: ConfirmationDialogOptions & { inputLabel: string },
-): Promise<string | false>
-
-export function confirmWithDialog(props?: ConfirmationDialogOptions): Promise<boolean>
-
-export async function confirmWithDialog(
-  props: ConfirmationDialogOptions = {},
-): Promise<string | boolean> {
-  isInputMode = 'inputLabel' in props
-
-  if (isInputMode === true) {
-    stringDeferred = Promise.withResolvers<string | false>()
-    reduxHolder.dispatch(appSlice.actions.openConfirmationDialog(props))
-
-    return stringDeferred.promise
-  }
-
-  boolDeferred = Promise.withResolvers<boolean>()
-  reduxHolder.dispatch(appSlice.actions.openConfirmationDialog(props))
-
-  return await boolDeferred.promise
-}
-
-const resolveDialogReject = (): void => {
-  if (isInputMode === true) {
-    stringDeferred.resolve(false)
-  } else {
-    boolDeferred.resolve(false)
-  }
-}
-
-const resolveDialogConfirm = (inputValue?: string): void => {
-  const shouldResolveWithString = isInputMode === true && inputValue !== undefined
-
-  if (shouldResolveWithString === true) {
-    stringDeferred.resolve(inputValue)
-  } else {
-    boolDeferred.resolve(true)
-  }
-}
-
-type ConfirmationDialogBase = {
-  title?: string
-  description?: string
-  confirmButtonText?: string
-  rejectButtonText?: string
-  disableCloseButton?: true
-  inputLabel?: string
-  initialValue?: string
-}
-
-export type ConfirmationDialogOptions =
-  | (ConfirmationDialogBase & {
-      shouldShowDoNotAskAgainCheckbox?: never
-      doNotAskAgainSessionKey?: never
-    })
-  | (ConfirmationDialogBase & {
-      shouldShowDoNotAskAgainCheckbox: true
-      doNotAskAgainSessionKey: string
-    })
+import { resolveDialogConfirm, resolveDialogReject } from './confirmWithDialog'
 
 export const ConfirmationDialog = (): React.JSX.Element => {
   const DO_NOT_ASK_AGAIN_SESSION_VALUE = 'true'

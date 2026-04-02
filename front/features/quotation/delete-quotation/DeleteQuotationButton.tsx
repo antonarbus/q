@@ -2,7 +2,7 @@ import type { UrlParam as Payload } from '@back/api/quotation/deleteQuotationHan
 import { useDeleteQuotationMutation } from '@front/entities/quotation/api/useDeleteQuotationMutation'
 import { deleteFromQuotationListCache } from '@front/entities/quotation/cache-updater/deleteFromQuotationListCache'
 import { IconButton, Tooltip } from '@mui/material'
-import { confirmWithDialog } from '@front/shared/component/ConfirmationDialog'
+import { confirmWithDialog } from '@front/shared/component/confirmation-dialog/confirmWithDialog'
 import { RotatingLoaderIcon } from '@front/shared/component/RotatingLoaderIcon'
 import { MdDeleteOutline } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'

@@ -27,7 +27,7 @@ import { createBrowserRouter } from 'react-router-dom'
 import type { RouteObject } from 'react-router-dom'
 import { Toaster } from 'sonner'
 import { OnInitLoad } from './OnInitLoad'
-import { ConfirmationDialog } from '@front/shared/component/ConfirmationDialog'
+import { ConfirmationDialog } from '@front/shared/component/confirmation-dialog/ConfirmationDialog'
 
 const QuotationPageLazy = lazy(async () => {
   const module = await import('@front/pages/quotation-page')

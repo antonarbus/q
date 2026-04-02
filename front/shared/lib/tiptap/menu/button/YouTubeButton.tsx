@@ -1,7 +1,7 @@
 import { useTiptap } from '@tiptap/react'
 import { MenuButton } from './shared/MenuButton'
 import { RiYoutubeLine } from 'react-icons/ri'
-import { confirmWithDialog } from '@front/shared/component/ConfirmationDialog'
+import { confirmWithDialog } from '@front/shared/component/confirmation-dialog/confirmWithDialog'
 
 export const YouTubeButton = (): React.JSX.Element => {
   const { editor } = useTiptap()
