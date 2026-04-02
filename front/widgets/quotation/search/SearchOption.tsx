@@ -14,7 +14,9 @@ type Props = {
 
 export const SearchOption = (props: Props): React.JSX.Element => {
   return (
-    <li
+    <li>
+      <button
+      type="button"
       onClick={props.onClick}
       css={{
         position: 'relative',
@@ -57,6 +59,7 @@ export const SearchOption = (props: Props): React.JSX.Element => {
           <RotatingLoaderIcon />
         </Box>
       ) : null}
+      </button>
     </li>
   )
 }
