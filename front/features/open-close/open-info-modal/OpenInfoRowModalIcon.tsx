@@ -1,5 +1,5 @@
 import { useBlock } from '@front/entities/quotation/provider/BlockProvider'
-import { useRow } from '@front/entities/quotation/provider/RowProvider'
+import { useRow } from '@front/entities/quotation/provider/useRow'
 import { getRowFromStoreByIndex } from '@front/entities/quotation/redux/getter/getRowFromStoreByIndex'
 import { Tooltip } from '@mui/material'
 import { cls } from '@front/shared/cls'

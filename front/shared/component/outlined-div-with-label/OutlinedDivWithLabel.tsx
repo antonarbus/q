@@ -1,24 +1,5 @@
 import { type CSSObject, TextField } from '@mui/material'
-
-type InputComponentProps = Record<string, unknown> & {
-  ref: React.RefObject<HTMLDivElement>
-}
-
-const InputComponent = (props: InputComponentProps): React.JSX.Element => {
-  const { ownerState: _ownerState, ref, ...rest } = props
-
-  return (
-    <div
-      {...rest}
-      css={{
-        overflow: 'hidden',
-        backgroundColor: 'white',
-        width: '100%',
-      }}
-      ref={ref}
-    />
-  )
-}
+import { InputComponent } from './InputComponent'
 
 type Props = {
   children: React.ReactNode

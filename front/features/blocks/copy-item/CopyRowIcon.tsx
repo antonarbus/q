@@ -1,6 +1,6 @@
 import { copySlice } from '@front/entities/copy/copySlice'
 import { useBlock } from '@front/entities/quotation/provider/BlockProvider'
-import { useRow } from '@front/entities/quotation/provider/RowProvider'
+import { useRow } from '@front/entities/quotation/provider/useRow'
 import { getRowFromStoreByIndex } from '@front/entities/quotation/redux/getter/getRowFromStoreByIndex'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { Tooltip } from '@mui/material'

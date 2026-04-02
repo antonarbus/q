@@ -1,6 +1,6 @@
 import type { CellKey } from '@back/entity/quotation/schema'
 import { useBlock } from '@front/entities/quotation/provider/BlockProvider'
-import { useRow } from '@front/entities/quotation/provider/RowProvider'
+import { useRow } from '@front/entities/quotation/provider/useRow'
 import { selectCellPin } from '@front/entities/quotation/redux/selector/selectCellPin'
 import { Box } from '@mui/material'
 import { cls } from '@front/shared/cls'

@@ -1,4 +1,4 @@
-import { useRow } from '@front/entities/quotation/provider/RowProvider'
+import { useRow } from '@front/entities/quotation/provider/useRow'
 import { Box } from '@mui/material'
 import { cls } from '@front/shared/cls'
 import { PasteRowTextOverlay } from './paste-here-row'

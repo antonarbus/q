@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import { OutlinedDivWithLabel } from '@front/shared/component/OutlinedDivWithLabel'
+import { OutlinedDivWithLabel } from '@front/shared/component/outlined-div-with-label/OutlinedDivWithLabel'
 import { AnimatePresence } from 'motion/react'
 
 type Props = {

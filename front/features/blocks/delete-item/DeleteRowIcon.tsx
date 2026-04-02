@@ -1,5 +1,5 @@
 import { useBlock } from '@front/entities/quotation/provider/BlockProvider'
-import { useRow } from '@front/entities/quotation/provider/RowProvider'
+import { useRow } from '@front/entities/quotation/provider/useRow'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { selectIsLastRow } from '@front/entities/quotation/redux/selector/selectIsLastRow'
 import { recalculateSubTotalPrices } from '@front/entities/quotation/util/recalculateSubTotalPrices'

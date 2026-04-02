@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import { cls } from '@front/shared/cls'
-import { OutlinedDivWithLabel } from '@front/shared/component/OutlinedDivWithLabel'
+import { OutlinedDivWithLabel } from '@front/shared/component/outlined-div-with-label/OutlinedDivWithLabel'
 import { reduxHolder } from '@front/shared/lib/redux'
 
 type Props = {
