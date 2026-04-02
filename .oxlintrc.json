@@ -8,10 +8,10 @@
     "unicorn",
     "promise",
     "react",
-    "react-perf"
+    "react-perf",
+    "jsx-a11y"
     // "import",
     // "jsdoc",
-    // "jsx-a11y",
     // "node",
     // "vitest",
     // "jest"
@@ -71,9 +71,9 @@
     "react/no-unknown-property": ["error", { "ignore": ["css"] }],
     "react/exhaustive-deps": "off",
     "react/jsx-props-no-spreading": "off",
-    "react-perf/jsx-no-jsx-as-prop": "warn", // todo: add "use memo" directive from react compiler
-    "react-perf/jsx-no-new-function-as-prop": "warn", // todo: add "use memo" directive from react compiler
-    "react-perf/jsx-no-new-object-as-prop": "warn", // todo: add "use memo" directive from react compiler
-    "react-perf/jsx-no-new-array-as-prop": "warn" // todo: add "use memo" directive from react compiler
+    "react-perf/jsx-no-jsx-as-prop": "off", // react compiler takes care of memoization
+    "react-perf/jsx-no-new-function-as-prop": "off", // react compiler takes care of memoization
+    "react-perf/jsx-no-new-object-as-prop": "off", // react compiler takes care of memoization
+    "react-perf/jsx-no-new-array-as-prop": "off" // react compiler takes care of memoization
   }
 }

@@ -49,6 +49,15 @@ export default {
     babel({
       plugins: [
         [
+          // opt-in memoization via "use memo" directive
+          // opt-out memoization via "use no memo" directive
+          'babel-plugin-react-compiler',
+          {
+            // 'infer' | 'syntax' | 'annotation' | 'all'
+            compilationMode: 'infer',
+          },
+        ],
+        [
           // readable class names in styled components
           '@emotion/babel-plugin',
           // https://github.com/styled-components/babel-plugin-styled-components/issues/350#issuecomment-979873241
