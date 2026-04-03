@@ -13,8 +13,8 @@
     "node",
     "jsdoc",
     "jest",
-    "vitest"
-    // "import"
+    "vitest",
+    "import"
   ],
   "env": {
     "browser": true,
@@ -48,6 +48,8 @@
     "eslint/sort-imports": "off",
     "eslint/sort-keys": "off",
     "import/exports-last": "off",
+    "import/group-exports": "off",
+    "import/no-named-as-default-member": "off",
     "import/max-dependencies": "off",
     "import/no-anonymous-default-export": "off",
     "import/no-default-export": "off",
