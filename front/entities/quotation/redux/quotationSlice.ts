@@ -42,6 +42,7 @@ import { updatePrice } from './reducer/update/updatePrice'
 import { updatePriceTitle } from './reducer/update/updatePriceTitle'
 import { updateQuotationInfo } from './reducer/update/updateQuotationInfo'
 import { updateSubTotalPrice } from './reducer/update/updateSubTotalPrice'
+console.log('🚀 ~ location.pathname:', location.pathname)
 
 const initialState: Quotation = {
   id: '',
@@ -56,7 +57,10 @@ const initialState: Quotation = {
   openedAt: null,
   viewedAt: null,
   email: 'unknown@gmail.com',
-  permissionLevel: 'UNKNOWN',
+  permissionLevel:
+    location.pathname.toUpperCase().includes('NEW') || location.pathname === '/'
+      ? 'NEW'
+      : 'UNKNOWN',
   access: {
     level: 'nobody',
     userList: [],
