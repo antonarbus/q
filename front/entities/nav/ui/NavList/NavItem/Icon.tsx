@@ -9,7 +9,7 @@ type Props = {
 
 /**
  * Component returns grey circle with an icon inside
- * @descriptions
+ * @description
  * - we may pass icon prop as a component or a string
  * - if sting is passed it becomes bold
  */

@@ -6,7 +6,7 @@ type Props = {
 
 /**
  * Component for name in menu item
- * @descriptions
+ * @description
  * - if we have nested menu some space should be reserved for 'go inside' icon
  * - if name is long it will be trimmed ellipsis (... dots)
  */

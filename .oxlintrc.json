@@ -10,9 +10,9 @@
     "react",
     "react-perf",
     "jsx-a11y",
-    "node"
+    "node",
+    "jsdoc"
     // "import"
-    // "jsdoc"
     // "vitest"
     // "jest"
   ],
@@ -75,6 +75,8 @@
     "react-perf/jsx-no-new-function-as-prop": "off", // react compiler takes care of memoization
     "react-perf/jsx-no-new-object-as-prop": "off", // react compiler takes care of memoization
     "react-perf/jsx-no-new-array-as-prop": "off", // react compiler takes care of memoization
-    "jsx-a11y/no-autofocus": "off"
+    "jsx-a11y/no-autofocus": "off",
+    "jsdoc/require-param": "off", // not useful with TS
+    "jsdoc/require-returns": "off" // not useful with TS
   }
 }

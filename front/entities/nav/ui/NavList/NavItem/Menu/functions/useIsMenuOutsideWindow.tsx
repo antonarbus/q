@@ -3,7 +3,7 @@ import { theme } from '@front/shared/theme'
 
 /**
  * check if menu width is more than distance to the left side of the window
- * @descriptions
+ * @description
  * - on NavItem click we store its 'right' position
  * - menu is absolute positioned below <li> and has same 'right' position
  * - if window is narrow, then menu can go over the screen's left side
