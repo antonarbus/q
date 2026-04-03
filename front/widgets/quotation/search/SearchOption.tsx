@@ -15,7 +15,15 @@ type Props = {
 export const SearchOption = (props: Props): React.JSX.Element => {
   return (
     <li
+      role='option'
+      aria-selected={false}
+      tabIndex={0}
       onClick={props.onClick}
+      onKeyDown={(event): void => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          props.onClick(event as unknown as React.MouseEvent)
+        }
+      }}
       css={{
         position: 'relative',
         cursor: 'pointer',
