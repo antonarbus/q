@@ -12,6 +12,7 @@ import { useBlock } from '../provider/block/useBlock'
 import { BlockAnimate } from './block-layout'
 import { PasteBlockTextOverlay } from './paste-block-overlay-text'
 import { reduxHolder } from '@front/shared/lib/redux'
+import { useIsFullAppView } from '../util/useIsFullAppView'
 
 type Props = {
   children: React.ReactNode
@@ -29,24 +30,23 @@ type Props = {
 export const BlockComp = (props: Props): React.JSX.Element => {
   const block = useBlock()
   const isLastBlock = useIsLastBlock()
-
   const isCopyModalVisible = reduxHolder.useSelector((state) => state.copy.isVisible)
-
   const isDragDisabled = isLastBlock || isCopyModalVisible
+  const isFullAppView = useIsFullAppView()
 
   const blockContent = (
     <DragHandleContext.Provider value={null}>
       <BlockAnimate
-        autoWidth={props.autoWidth}
-        blockHeight={block.item.height}
-        className={props.className}
         id={block.item.id}
-        leftItemActionButtons={props.leftBlockActionButtons}
+        className={props.className}
+        autoWidth={props.autoWidth}
         minWidth={props.minWidth}
+        blockHeight={block.item.height}
+        leftItemActionButtons={isFullAppView && props.leftBlockActionButtons}
+        rightItemActionButtons={isFullAppView && props.rightBlockActionButtons}
         onItemResize={props.onBlockResize}
         onItemResizeStart={props.onBlockResizeStart}
         onItemResizeStop={props.onBlockResizeStop}
-        rightItemActionButtons={props.rightBlockActionButtons}
       >
         <PasteBlockTextOverlay>{props.children}</PasteBlockTextOverlay>
       </BlockAnimate>
@@ -72,16 +72,16 @@ export const BlockComp = (props: Props): React.JSX.Element => {
           >
             <DragHandleContext.Provider value={provided.dragHandleProps}>
               <BlockAnimate
-                autoWidth={props.autoWidth}
-                blockHeight={block.item.height}
-                className={props.className}
                 id={block.item.id}
-                leftItemActionButtons={props.leftBlockActionButtons}
+                className={props.className}
+                autoWidth={props.autoWidth}
                 minWidth={props.minWidth}
+                blockHeight={block.item.height}
+                leftItemActionButtons={isFullAppView && props.leftBlockActionButtons}
+                rightItemActionButtons={isFullAppView && props.rightBlockActionButtons}
                 onItemResize={props.onBlockResize}
                 onItemResizeStart={props.onBlockResizeStart}
                 onItemResizeStop={props.onBlockResizeStop}
-                rightItemActionButtons={props.rightBlockActionButtons}
               >
                 <PasteBlockTextOverlay>{props.children}</PasteBlockTextOverlay>
               </BlockAnimate>

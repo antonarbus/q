@@ -11,6 +11,7 @@ import { UploadFileButton } from './button/UploadFileButton'
 import { TiptapMenuLayout } from '../style/TiptapMenuLayout'
 import { ButtonsGroupLayout } from '../style/ButtonsGroupLayout'
 import { IoIosAddCircleOutline } from 'react-icons/io'
+import { useIsFullAppView } from '@front/entities/quotation/util/useIsFullAppView'
 
 export const FloatingLineMenu = (): React.ReactNode => {
   const { editor } = useTiptap()
@@ -18,6 +19,7 @@ export const FloatingLineMenu = (): React.ReactNode => {
   const [isOpen, setIsOpen] = useState(false)
   const preventHideRef = useRef(false)
   const menuRef = useRef<HTMLDivElement>(null)
+  const isFullAppView = useIsFullAppView()
 
   const hideMenu = useCallback((): void => {
     setPos(null)
@@ -202,7 +204,7 @@ export const FloatingLineMenu = (): React.ReactNode => {
             <YouTubeButton />
             <HorizontalRuleButton />
             <InsertLinkButton />
-            <UploadFileButton />
+            {isFullAppView && <UploadFileButton />}
           </ButtonsGroupLayout>
         </TiptapMenuLayout>
       )}

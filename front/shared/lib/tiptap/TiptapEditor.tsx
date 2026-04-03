@@ -11,12 +11,14 @@ import { usePasteFile } from './file-upload/usePasteFile'
 import { useTiptapCtx } from './provider/useTiptapCtx'
 import { UploadButton } from './menu/button/UploadButton'
 import { editorRegistry } from './editorRegistry'
+import { useIsFullAppView } from '@front/entities/quotation/util/useIsFullAppView'
 
 export const TiptapEditor = (): React.ReactNode => {
   const tiptapCtx = useTiptapCtx()
   const extensions = useExtensions()
   const dropFile = useDropFile()
   const pasteFile = usePasteFile()
+  const isFullAppView = useIsFullAppView()
 
   // https://tiptap.dev/docs/guides/react-composable-api
   const editor = useEditor(
@@ -69,7 +71,7 @@ export const TiptapEditor = (): React.ReactNode => {
     >
       <Tiptap editor={editor}>
         <TiptapMenu />
-        <UploadButton />
+        {isFullAppView && <UploadButton />}
         <Tiptap.Content className={cls.tiptapContent} style={{ flexGrow: 1 }} />
       </Tiptap>
       <DropHereText />
