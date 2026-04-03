@@ -9,10 +9,6 @@ import { getPreviewPreparingPromise } from '@front/entities/copy/useBookmarkCopy
 
 type Params = {
   bookmarkId: string
-  cursorPos: {
-    x: number
-    y: number
-  }
 }
 
 type Res = {
@@ -43,13 +39,6 @@ export const useCopyBookmarkAtSearch = (): Res => {
       )
 
       reduxHolder.dispatch(copySlice.actions.startPreviewPreparing())
-
-      reduxHolder.dispatch(
-        copySlice.actions.setInitCursorPos({
-          x: params.cursorPos.x,
-          y: params.cursorPos.y,
-        }),
-      )
 
       await getPreviewPreparingPromise()
     },
