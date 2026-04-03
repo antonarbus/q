@@ -87,7 +87,7 @@ export const useExtensions = (): AnyExtension[] => {
       ResizableImage.configure({
         allowBase64: true,
         resize: {
-          enabled: true,
+          enabled: tiptapCtx.isFullAppView,
           directions: ['top-left', 'top-right', 'bottom-left', 'bottom-right'],
           alwaysPreserveAspectRatio: true,
         },

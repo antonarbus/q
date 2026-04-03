@@ -8,6 +8,7 @@ import { reduxHolder } from '@front/shared/lib/redux'
 import { Resizable, type ResizableProps } from 're-resizable'
 
 import { useBlock } from '../../provider/block/useBlock'
+import { useIsFullAppView } from '../../util/useIsFullAppView'
 
 type Props = {
   children: React.ReactNode
@@ -19,12 +20,10 @@ type Props = {
 }
 
 export const ResizableBlockPaper = (props: Props): React.JSX.Element => {
+  const isFullAppView = useIsFullAppView()
   const block = useBlock()
-
   const width = reduxHolder.useSelector((state) => state.quotation.blocks[block.index]?.width)
-
   const isWidthSetManually = width !== undefined
-
   const isAutoWidth = isWidthSetManually === false || (props.autoWidth ?? false)
 
   return (
@@ -36,8 +35,8 @@ export const ResizableBlockPaper = (props: Props): React.JSX.Element => {
         height: 'auto',
       }}
       enable={{
-        right: true,
-        left: true,
+        right: isFullAppView,
+        left: isFullAppView,
       }}
       handleClasses={{
         left: 'left-resize-handle',

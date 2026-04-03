@@ -1,6 +1,7 @@
 import type { BoqColumnKey } from '@back/entity/quotation/schema'
 import { useBlock } from '@front/entities/quotation/provider/block/useBlock'
 import { selectColumnWidth } from '@front/entities/quotation/redux/selector/selectColumnWidth'
+import { useIsFullAppView } from '@front/entities/quotation/util/useIsFullAppView'
 import {
   onColumnResize,
   onColumnResizeStart,
@@ -17,6 +18,7 @@ type Props = {
 }
 
 export const ResizableColumn = (props: Props): React.JSX.Element => {
+  const isFullAppView = useIsFullAppView()
   const block = useBlock()
 
   const colWidth = reduxHolder.useSelector(
@@ -41,6 +43,8 @@ export const ResizableColumn = (props: Props): React.JSX.Element => {
           borderRadius: '3px',
           right: '0px',
           width: '3px',
+          pointerEvents: isFullAppView ? 'auto' : 'none',
+          cursor: isFullAppView ? 'col-resize' : 'default',
         },
       }}
       minWidth={props.minWidth}

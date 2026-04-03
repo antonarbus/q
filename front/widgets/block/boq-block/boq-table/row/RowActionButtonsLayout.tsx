@@ -1,12 +1,19 @@
 import { Box } from '@mui/material'
 import { cls } from '@front/shared/cls'
+import { useIsFullAppView } from '@front/entities/quotation/util/useIsFullAppView'
 
 type Props = {
   children: React.ReactNode
   style?: React.CSSProperties
 }
 
-export const RowActionButtonsLayout = (props: Props): React.JSX.Element => {
+export const RowActionButtonsLayout = (props: Props): React.ReactNode => {
+  const isFullAppView = useIsFullAppView()
+
+  if (isFullAppView === false) {
+    return null
+  }
+
   return (
     <Box
       className={cls.actionsContainer}
