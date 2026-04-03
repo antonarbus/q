@@ -1,4 +1,4 @@
-import { Box } from '@mui/material'
+import { Box, Tooltip } from '@mui/material'
 import { reduxHolder } from '@front/shared/lib/redux'
 
 export const InfoLeft = (): React.ReactNode => {
@@ -15,16 +15,17 @@ export const InfoLeft = (): React.ReactNode => {
         height: '18px',
       }}
     >
-      <Box
-        sx={{
-          fontWeight: 500,
-          fontSize: '10px',
-          color: 'grey',
-          userSelect: 'none',
-        }}
-      >
-        {permissionLevel === 'NEW' ? '' : permissionLevel}
-      </Box>
+      <Tooltip title='Permission level'>
+        <Box
+          sx={{
+            fontWeight: 500,
+            color: 'grey',
+            userSelect: 'none',
+          }}
+        >
+          {permissionLevel === 'NEW' ? '' : permissionLevel}
+        </Box>
+      </Tooltip>
     </Box>
   )
 }

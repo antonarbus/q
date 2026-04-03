@@ -2,12 +2,15 @@ import { OpenInfoQuotationIcon } from '@front/features/open-close/open-info-moda
 import { OpenShareQuotationIcon } from '@front/features/open-close/open-share-quotation-modal'
 import { Layout } from './Layout'
 import { QuotationId } from './QuotationId'
+import { useIsStranger } from '@front/entities/quotation/useIsStranger'
 
 export const InfoRight = (): React.ReactNode => {
+  const isStranger = useIsStranger()
+
   return (
     <Layout>
-      <OpenInfoQuotationIcon />
-      <OpenShareQuotationIcon />
+      {isStranger === false && <OpenInfoQuotationIcon />}
+      {isStranger === false && <OpenShareQuotationIcon />}
       <QuotationId />
     </Layout>
   )

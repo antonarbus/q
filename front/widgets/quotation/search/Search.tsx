@@ -9,7 +9,7 @@ import { SearchOption } from './SearchOption'
 import { renderInput } from './renderInput'
 import { useCopyBookmarkAtSearch } from '@front/features/bookmark/copy-bookmark/useCopyBookmarkAtSearch'
 
-export const Search = (): React.JSX.Element => {
+export const Search = (): React.ReactNode => {
   const getBookmarkListQuery = useGetBookmarkListQuery()
   const options = getBookmarkListQuery.data?.bookmarkList ?? []
   const [inputValue, setInputValue] = useState('')
