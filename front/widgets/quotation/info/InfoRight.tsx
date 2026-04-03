@@ -9,8 +9,8 @@ export const InfoRight = (): React.ReactNode => {
 
   return (
     <Layout>
-      {isFullAppView === false && <OpenInfoQuotationIcon />}
-      {isFullAppView === false && <OpenShareQuotationIcon />}
+      {isFullAppView && <OpenInfoQuotationIcon />}
+      {isFullAppView && <OpenShareQuotationIcon />}
       <QuotationId />
     </Layout>
   )

@@ -42,7 +42,6 @@ import { updatePrice } from './reducer/update/updatePrice'
 import { updatePriceTitle } from './reducer/update/updatePriceTitle'
 import { updateQuotationInfo } from './reducer/update/updateQuotationInfo'
 import { updateSubTotalPrice } from './reducer/update/updateSubTotalPrice'
-console.log('🚀 ~ location.pathname:', location.pathname)
 
 const initialState: Quotation = {
   id: '',
