@@ -22,6 +22,7 @@ export const TiptapEditor = (): React.ReactNode => {
   const editor = useEditor(
     {
       extensions,
+      editable: tiptapCtx.isFullAppView,
       content: tiptapCtx.contentGetter(),
       onCreate: tiptapCtx.onCreate,
       onUpdate: tiptapCtx.onChange,
