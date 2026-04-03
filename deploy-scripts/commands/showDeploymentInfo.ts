@@ -1,6 +1,6 @@
 import { $ } from 'bun'
 import { infraConfig } from '@back/config/infrastructure'
-import { logger } from '../lib/output/logger'
+import { logger } from '@root/deploy-scripts/lib/output/logger'
 import type { DeployedEnvironment } from '@root/config/environment'
 
 type ShowServiceInfoProps = {

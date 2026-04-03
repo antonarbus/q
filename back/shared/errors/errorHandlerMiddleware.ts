@@ -1,6 +1,6 @@
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { NextFunction, Request, Response } from 'express'
-import { httpStatusCode } from '../const/httpStatusCode'
+import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { errorCode } from '@back/shared/const/errorCode'
 
 type ErrorResBody = {

@@ -1,5 +1,5 @@
 import { $ } from 'bun'
-import { logger } from '../output/logger'
+import { logger } from '@root/deploy-scripts/lib/output/logger'
 
 type Props = {
   cloudRunServiceName: string

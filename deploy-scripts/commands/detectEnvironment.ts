@@ -1,8 +1,8 @@
 import { exit } from 'node:process'
 import { MASTER_DEPLOYS_TO_ENVIRONMENT } from '@back/config/infrastructure'
-import { getCurrentGitBranchName } from '../lib/git/getCurrentGitBranchName'
-import { logToGithubOutput } from '../lib/output/logToGithubOutput'
-import { logger } from '../lib/output/logger'
+import { getCurrentGitBranchName } from '@root/deploy-scripts/lib/git/getCurrentGitBranchName'
+import { logToGithubOutput } from '@root/deploy-scripts/lib/output/logToGithubOutput'
+import { logger } from '@root/deploy-scripts/lib/output/logger'
 import type { DeployedEnvironment } from '@root/config/environment'
 
 export const detectEnvironment = async (): Promise<DeployedEnvironment> => {

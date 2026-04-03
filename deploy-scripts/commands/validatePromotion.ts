@@ -2,7 +2,7 @@ import { exit } from 'node:process'
 import { allowedPromotionPath, allowedPromotionPathSchema } from '@back/config/infrastructure'
 import type { AllowedPromotionPath } from '@back/config/infrastructure'
 import type { DeployedEnvironment } from '@root/config/environment'
-import { logger } from '../lib/output/logger'
+import { logger } from '@root/deploy-scripts/lib/output/logger'
 
 type Props = {
   sourceEnvironment: DeployedEnvironment

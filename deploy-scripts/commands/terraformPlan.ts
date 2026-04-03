@@ -2,7 +2,7 @@ import { $ } from 'bun'
 import path, { resolve } from 'node:path'
 import { chdir } from 'node:process'
 import { infraConfig } from '@back/config/infrastructure'
-import { logger } from '../lib/output/logger'
+import { logger } from '@root/deploy-scripts/lib/output/logger'
 import type { DeployedEnvironment } from '@root/config/environment'
 import url from 'node:url'
 

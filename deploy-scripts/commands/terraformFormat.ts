@@ -1,6 +1,6 @@
 import { $ } from 'bun'
 import path, { resolve } from 'node:path'
-import { logger } from '../lib/output/logger'
+import { logger } from '@root/deploy-scripts/lib/output/logger'
 import url from 'node:url'
 
 const __filename = url.fileURLToPath(import.meta.url)

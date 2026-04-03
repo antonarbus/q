@@ -1,6 +1,6 @@
 import type { RootState } from '@front/shared/lib/redux/reduxHolder'
 import type { RowBlock } from '@back/entity/quotation/schema'
-import { getRowsFromStoreByIndex } from '../getter/getRowsFromStoreByIndex'
+import { getRowsFromStoreByIndex } from '@front/entities/quotation/redux/getter/getRowsFromStoreByIndex'
 
 type Props = {
   blockIndex: number

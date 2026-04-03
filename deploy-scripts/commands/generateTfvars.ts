@@ -1,6 +1,6 @@
 import path, { resolve } from 'node:path'
 import { infraConfig } from '@back/config/infrastructure'
-import { logger } from '../lib/output/logger'
+import { logger } from '@root/deploy-scripts/lib/output/logger'
 import { write } from 'bun'
 import url from 'node:url'
 

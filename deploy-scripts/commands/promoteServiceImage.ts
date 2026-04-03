@@ -1,8 +1,8 @@
 import { $ } from 'bun'
 import { exit } from 'node:process'
 import { sharedInfraConfig } from '@back/config/infrastructure'
-import { logToGithubOutput } from '../lib/output/logToGithubOutput'
-import { logger } from '../lib/output/logger'
+import { logToGithubOutput } from '@root/deploy-scripts/lib/output/logToGithubOutput'
+import { logger } from '@root/deploy-scripts/lib/output/logger'
 import type { DeployedEnvironment } from '@root/config/environment'
 
 type PromoteServiceImageProps = {

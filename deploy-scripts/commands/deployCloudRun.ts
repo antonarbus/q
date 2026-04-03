@@ -1,9 +1,9 @@
 import type { DeployedEnvironment } from '@root/config/environment'
 import { infraConfig } from '@back/config/infrastructure'
-import { getCurrentCloudRunImage } from '../lib/gcloud/getCurrentCloudRunImage'
-import { updateCloudRunService } from '../lib/gcloud/updateCloudRunService'
-import { logToGithubOutput } from '../lib/output/logToGithubOutput'
-import { logger } from '../lib/output/logger'
+import { getCurrentCloudRunImage } from '@root/deploy-scripts/lib/gcloud/getCurrentCloudRunImage'
+import { updateCloudRunService } from '@root/deploy-scripts/lib/gcloud/updateCloudRunService'
+import { logToGithubOutput } from '@root/deploy-scripts/lib/output/logToGithubOutput'
+import { logger } from '@root/deploy-scripts/lib/output/logger'
 
 type Props = {
   environment: DeployedEnvironment

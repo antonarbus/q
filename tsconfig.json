@@ -53,6 +53,7 @@
     "paths": {
       "@front/*": ["./front/*"],
       "@back/*": ["./back/*"],
+      "@tests/*": ["./tests/*"],
       "@root/*": ["./*"]
     }
   }

@@ -3,7 +3,7 @@ import { request, test } from '@playwright/test'
 import { userFilePath } from './userFilePath'
 import { runtimeConfig } from '@root/config/runtime'
 import { route } from '@back/api/route'
-import { log } from '../shared/utils/log'
+import { log } from '@tests/shared/utils/log'
 
 test.describe('authenticate for all further tests', () => {
   test.use({ baseURL: runtimeConfig.front.baseUrl })
