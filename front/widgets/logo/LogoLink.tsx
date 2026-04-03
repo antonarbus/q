@@ -11,7 +11,6 @@ export const LogoLink = (): React.JSX.Element => {
         event.preventDefault()
         openQuotationPageAndLoadNew()
       }}
-      className='logo-container'
       css={{
         display: 'flex',
         alignItems: 'center',
