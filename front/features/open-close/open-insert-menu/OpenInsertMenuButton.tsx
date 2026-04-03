@@ -4,8 +4,15 @@ import { Box, IconButton } from '@mui/material'
 import { cls } from '@front/shared/cls'
 import { reduxHolder } from '@front/shared/lib/redux'
 import { FaPlus } from 'react-icons/fa6'
+import { useIsStranger } from '@front/entities/quotation/useIsStranger'
 
 export const OpenInsertMenuButton = (): React.ReactNode => {
+  const isStranger = useIsStranger()
+
+  if (isStranger === true) {
+    return null
+  }
+
   return (
     <Box
       sx={{

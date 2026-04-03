@@ -11,7 +11,6 @@ import { LogoLink } from '@front/widgets/logo/LogoLink'
 
 export const QuotationPage = (): React.JSX.Element => {
   const blocks = reduxHolder.useSelector((state) => state.quotation.blocks, arrayShapesEqualityFn)
-
   const isStranger = useIsStranger()
 
   return (

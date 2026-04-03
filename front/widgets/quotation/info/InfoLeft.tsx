@@ -21,6 +21,10 @@ export const InfoLeft = (): React.ReactNode => {
             fontWeight: 500,
             color: 'grey',
             userSelect: 'none',
+            textTransform: 'lowercase',
+            '&::first-letter': {
+              textTransform: 'uppercase',
+            },
           }}
         >
           {permissionLevel === 'NEW' ? '' : permissionLevel}

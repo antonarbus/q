@@ -1,9 +1,11 @@
 import { Box } from '@mui/material'
 import logoSrc from './logo.png'
+import { Link } from 'react-router-dom'
 
 export const LogoLink = (): React.JSX.Element => {
   return (
-    <div
+    <Link
+      to='/'
       className='logo-container'
       css={{
         display: 'flex',
@@ -11,7 +13,6 @@ export const LogoLink = (): React.JSX.Element => {
         justifyContent: 'center',
         flexShrink: 0,
         padding: '3px 10px',
-        overflow: 'auto',
       }}
     >
       <Box className='logo'>
@@ -30,6 +31,6 @@ export const LogoLink = (): React.JSX.Element => {
           }}
         />
       </Box>
-    </div>
+    </Link>
   )
 }
