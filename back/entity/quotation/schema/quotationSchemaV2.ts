@@ -114,6 +114,7 @@ export const quotationSchema = z.object({
   info: z.string(),
   blocks: z.array(blockItemSchema),
   permissionLevel: z.enum([
+    'UNKNOWN',
     'NEW',
     'OWNER',
     'PUBLIC',

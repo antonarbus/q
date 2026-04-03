@@ -56,7 +56,7 @@ const initialState: Quotation = {
   openedAt: null,
   viewedAt: null,
   email: 'unknown@gmail.com',
-  permissionLevel: 'NEW',
+  permissionLevel: 'UNKNOWN',
   access: {
     level: 'nobody',
     userList: [],

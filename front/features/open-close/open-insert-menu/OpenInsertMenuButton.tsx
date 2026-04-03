@@ -4,12 +4,12 @@ import { Box, IconButton } from '@mui/material'
 import { cls } from '@front/shared/cls'
 import { reduxHolder } from '@front/shared/lib/redux'
 import { FaPlus } from 'react-icons/fa6'
-import { useIsStranger } from '@front/entities/quotation/useIsStranger'
+import { useIsFullAppView } from '@front/entities/quotation/util/useIsFullAppView'
 
 export const OpenInsertMenuButton = (): React.ReactNode => {
-  const isStranger = useIsStranger()
+  const isFullAppView = useIsFullAppView()
 
-  if (isStranger === true) {
+  if (isFullAppView === false) {
     return null
   }
 

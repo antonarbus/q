@@ -1,11 +1,16 @@
 import { Box } from '@mui/material'
 import logoSrc from './logo.png'
 import { Link } from 'react-router-dom'
+import { openQuotationPageAndLoadNew } from '@front/features/open-close/open-quotation-page'
 
 export const LogoLink = (): React.JSX.Element => {
   return (
     <Link
-      to='/'
+      to='/new'
+      onClick={(event) => {
+        event.preventDefault()
+        openQuotationPageAndLoadNew()
+      }}
       className='logo-container'
       css={{
         display: 'flex',

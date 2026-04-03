@@ -27,7 +27,7 @@ export const InfoLeft = (): React.ReactNode => {
             },
           }}
         >
-          {permissionLevel === 'NEW' ? '' : permissionLevel}
+          {permissionLevel}
         </Box>
       </Tooltip>
     </Box>

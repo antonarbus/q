@@ -1,9 +1,11 @@
 import { reduxHolder } from '@front/shared/lib/redux'
 
-export const useIsStranger = (): boolean => {
+export const useIsFullAppView = (): boolean => {
   const permissionLevel = reduxHolder.useSelector((state) => state.quotation.permissionLevel)
 
-  if (['FORBIDDEN', 'PUBLIC', 'SHARED'].includes(permissionLevel)) {
+  if (
+    ['NEW', 'OWNER', 'SUPER_ADMIN', 'SUPER_ADMIN_ON_BEHALF_OF_A_USER'].includes(permissionLevel)
+  ) {
     return true
   }
 
