@@ -1,10 +1,13 @@
+// Instantiates routerHolder
 import './router'
+import { routerHolder } from '@front/shared/lib/react-router-dom/routerHolder'
+// Instantiates reduxHolder
+import './redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
+// Instantiates axiosHolder
 import './axiosConfig'
-import { store } from './redux'
 import { queryClient } from '@front/shared/lib/tanstack-query/queryClient'
 import { QueryDevtoolsProductionHidden } from '@front/shared/lib/tanstack-query/QueryDevtoolsProductionHidden'
-import { routerHolder } from '@front/shared/lib/react-router-dom/routerHolder'
-
 import { themeClient } from '@front/shared/theme'
 import { ThemeProvider } from '@mui/material/styles'
 import { LocalizationProvider } from '@mui/x-date-pickers'
@@ -18,7 +21,7 @@ import { GlobalStyles } from './GlobalStyles'
 
 export const App = (): React.JSX.Element => {
   return (
-    <Provider store={store}>
+    <Provider store={reduxHolder.store}>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider theme={themeClient}>
           <GlobalStyles />

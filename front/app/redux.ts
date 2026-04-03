@@ -30,6 +30,6 @@ declare module '@front/shared/lib/redux/register' {
   }
 }
 
-export { store }
+// export { store }
 
 reduxHolder.store = store
