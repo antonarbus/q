@@ -101,6 +101,7 @@ export const BackdropWithSlidableModal = (props: Props): React.JSX.Element => {
   return (
     <div
       onMouseDown={unmountOnClickAway}
+      role='presentation'
       style={{
         position: 'fixed',
         inset: 0,
