@@ -2,10 +2,8 @@ import { z } from 'zod'
 //* V1
 import { quotationSchema as quotationSchemaV1 } from './quotationSchemaV1'
 //* V2
-import {
-  quotationSchema as quotationSchemaV2,
-  type Quotation as QuotationV2,
-} from './quotationSchemaV2'
+import { quotationSchema as quotationSchemaV2 } from './quotationSchemaV2'
+import type { Quotation as QuotationV2 } from './quotationSchemaV2'
 
 const MIGRATE_FROM = 1
 const MIGRATE_TO = 2

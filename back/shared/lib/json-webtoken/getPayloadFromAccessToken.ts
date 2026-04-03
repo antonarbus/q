@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken'
-import { isJwtPayloadExtended, type JwtPayloadExtended } from './types'
+import { isJwtPayloadExtended } from './types'
+import type { JwtPayloadExtended } from './types'
 import { getSecret } from '../secret-manager/getSecret'
 
 export const getPayloadFromAccessToken = async (

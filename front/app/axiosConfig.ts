@@ -6,7 +6,8 @@ import { getAccessTokenDeferred } from '@front/features/auth/try-to-log-in-witho
 import { instantiateAxiosWithAuth } from '@front/shared/lib/axios/axiosWithAuth'
 import { reduxHolder } from '@front/shared/lib/redux'
 import { log } from '@front/shared/util/log'
-import axios, { AxiosError, type AxiosRequestConfig } from 'axios'
+import axios, { AxiosError } from 'axios'
+import type { AxiosRequestConfig } from 'axios'
 
 const axiosWithAuth = axios.create({ withCredentials: true })
 

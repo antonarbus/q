@@ -1,7 +1,8 @@
 import { css } from '@emotion/react'
 import { theme } from '@front/shared/theme'
 
-import { Link, type LinkProps } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import type { LinkProps } from 'react-router-dom'
 
 type Props = {
   children: React.ReactNode

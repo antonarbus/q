@@ -1,5 +1,6 @@
 import { getUserFromAccessTokenOrNull } from '@back/entity/user/getUserFromAccessTokenOrNull'
-import { type SelectVisitors, visitorsTable } from '@back/entity/visitor/db/visitorsTableSchema'
+import { visitorsTable } from '@back/entity/visitor/db/visitorsTableSchema'
+import type { SelectVisitors } from '@back/entity/visitor/db/visitorsTableSchema'
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
@@ -7,7 +8,8 @@ import { db } from '@back/shared/lib/drizzle/db'
 import { and, asc, gte, lte } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
 import type { ParamsDictionary } from 'express-serve-static-core'
-import { type HttpResponse, httpJsonResponse } from '@back/shared/lib/express/httpResponse'
+import { httpJsonResponse } from '@back/shared/lib/express/httpResponse'
+import type { HttpResponse } from '@back/shared/lib/express/httpResponse'
 
 type UrlParam = ParamsDictionary
 

@@ -12,12 +12,8 @@ import { useRefetchDataOnEmailChange } from '@front/shared/lib/ag-grid/hooks/use
 import { useShowLoadingJumpingDots } from '@front/shared/lib/ag-grid/hooks/useShowLoadingJumpingDots'
 import { AgGridStyles } from '@front/shared/lib/ag-grid/styles/AgGridStyles'
 import { reduxHolder } from '@front/shared/lib/redux'
-import {
-  AllCommunityModule,
-  type FilterChangedEvent,
-  ModuleRegistry,
-  themeQuartz,
-} from 'ag-grid-community'
+import { AllCommunityModule, ModuleRegistry, themeQuartz } from 'ag-grid-community'
+import type { FilterChangedEvent } from 'ag-grid-community'
 import { AgGridReact } from 'ag-grid-react'
 import { useRef } from 'react'
 import { columnDefs } from './columnDef'

@@ -1,4 +1,5 @@
-import { Storage, type Bucket } from '@google-cloud/storage'
+import { Storage } from '@google-cloud/storage'
+import type { Bucket } from '@google-cloud/storage'
 import { sharedInfraConfig } from '@back/config/infrastructure'
 import { storageConfig } from '@back/config/storage'
 import { getSecret } from '../secret-manager/getSecret'

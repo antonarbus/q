@@ -5,7 +5,8 @@ import type {
   OnBlockResizeStop,
 } from '@front/shared/lib/re-resizable/resizablePaper'
 import { reduxHolder } from '@front/shared/lib/redux'
-import { Resizable, type ResizableProps } from 're-resizable'
+import { Resizable } from 're-resizable'
+import type { ResizableProps } from 're-resizable'
 
 import { useBlock } from '../../provider/block/useBlock'
 import { useIsFullAppView } from '../../util/useIsFullAppView'

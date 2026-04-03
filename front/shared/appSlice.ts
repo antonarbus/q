@@ -1,4 +1,5 @@
-import { createSlice, type PayloadAction, type Reducer, type WritableDraft } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
+import type { PayloadAction, Reducer, WritableDraft } from '@reduxjs/toolkit'
 import type { ConfirmationDialogOptions } from './component/confirmation-dialog/types'
 
 type InitState = {

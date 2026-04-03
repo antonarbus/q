@@ -53,6 +53,7 @@
     "import/no-named-export": "off",
     "import/no-nodejs-modules": "off",
     "import/no-unassigned-import": "off",
+    "import/exports-last": "off",
     "import/prefer-default-export": "off",
     "jest/require-hook": "off",
     "oxc/no-async-await": "off",

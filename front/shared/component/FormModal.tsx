@@ -1,4 +1,5 @@
-import { Avatar, Box, IconButton, type CSSObject, Typography } from '@mui/material'
+import { Avatar, Box, IconButton, Typography } from '@mui/material'
+import type { CSSObject } from '@mui/material'
 import { cls } from '@front/shared/cls'
 import { theme } from '@front/shared/theme'
 import type { AnimationScope } from 'motion'

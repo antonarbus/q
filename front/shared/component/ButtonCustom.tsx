@@ -1,4 +1,5 @@
-import { Button, type ButtonProps } from '@mui/material'
+import { Button } from '@mui/material'
+import type { ButtonProps } from '@mui/material'
 import { useSignal } from '@preact/signals-react'
 import { useEffect } from 'react'
 import { FaCircleCheck } from 'react-icons/fa6'

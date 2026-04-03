@@ -4,7 +4,8 @@ import { z } from 'zod'
 import { bookmarkSchema as bookmarkSchemaV1 } from './bookmarkSchemaV1'
 
 //* V2
-import { bookmarkSchema as bookmarkSchemaV2, type Bookmark as BookmarkV2 } from './bookmarkSchemaV2'
+import { bookmarkSchema as bookmarkSchemaV2 } from './bookmarkSchemaV2'
+import type { Bookmark as BookmarkV2 } from './bookmarkSchemaV2'
 
 const MIGRATE_FROM = 1
 const MIGRATE_TO = 2

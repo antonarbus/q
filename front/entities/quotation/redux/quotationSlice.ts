@@ -1,4 +1,5 @@
-import { createSlice, type Reducer } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
+import type { Reducer } from '@reduxjs/toolkit'
 import type { Quotation } from '@back/entity/quotation/schema'
 
 // Delete operations

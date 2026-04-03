@@ -1,4 +1,5 @@
-import { Box, type CSSObject, Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
+import type { CSSObject } from '@mui/material'
 
 type Props = {
   children?: React.ReactNode

@@ -1,4 +1,5 @@
-import { type AnimationScope, motion } from 'motion/react'
+import { motion } from 'motion/react'
+import type { AnimationScope } from 'motion/react'
 
 import { cls } from '@front/shared/cls'
 

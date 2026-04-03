@@ -2,7 +2,8 @@ import { route } from '@back/api/route'
 import type { ErrorResBody, UrlParam as Payload, ResBody } from '@back/api/file/deleteFileHandler'
 import { axiosWithAuth } from '@front/shared/lib/axios'
 import { queryKey } from '@front/shared/lib/tanstack-query/queryKey'
-import { type UseMutationResult, useMutation } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
+import type { UseMutationResult } from '@tanstack/react-query'
 import type { AxiosError } from 'axios'
 
 type Res = UseMutationResult<ResBody, AxiosError<ErrorResBody>, Payload>

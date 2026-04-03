@@ -6,14 +6,16 @@ import { generateId } from '@back/shared/lib/nanoid'
 import bcrypt from 'bcryptjs'
 import type { NextFunction, Request, Response } from 'express'
 import { runtimeConfig } from '@root/config/runtime'
-import { usersTable, type InsertUser, type SelectUser } from '@back/entity/user/db/usersTableSchema'
+import { usersTable } from '@back/entity/user/db/usersTableSchema'
+import type { InsertUser, SelectUser } from '@back/entity/user/db/usersTableSchema'
 import { db } from '@back/shared/lib/drizzle/db'
 import { and, eq } from 'drizzle-orm'
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
-import { type HttpResponse, httpJsonResponse } from '@back/shared/lib/express/httpResponse'
+import { httpJsonResponse } from '@back/shared/lib/express/httpResponse'
+import type { HttpResponse } from '@back/shared/lib/express/httpResponse'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary

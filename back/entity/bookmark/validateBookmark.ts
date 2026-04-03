@@ -1,5 +1,6 @@
 import { migrateBookmarkSchemaFromV1ToV2 } from './schema/migrateBookmarkSchemaFromV1ToV2'
-import { type Bookmark, bookmarkSchema } from './schema'
+import { bookmarkSchema } from './schema'
+import type { Bookmark } from './schema'
 import { log } from '@back/shared/util/log'
 
 const migrateBookmarkSchemaList = [

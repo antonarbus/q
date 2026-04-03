@@ -1,6 +1,7 @@
 import type { NavItemId } from '@front/entities/nav/navItemId'
 import type { NavItem } from '@front/entities/nav/type'
-import { reduxHolder, type RootState } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux'
+import type { RootState } from '@front/shared/lib/redux'
 
 type Props = {
   navItemId: NavItemId | null

@@ -1,4 +1,5 @@
-import { type CSSObject, TextField } from '@mui/material'
+import { TextField } from '@mui/material'
+import type { CSSObject } from '@mui/material'
 import { InputComponent } from './InputComponent'
 
 type Props = {

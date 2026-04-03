@@ -1,4 +1,5 @@
-import { usersTable, type SelectUser } from '@back/entity/user/db/usersTableSchema'
+import { usersTable } from '@back/entity/user/db/usersTableSchema'
+import type { SelectUser } from '@back/entity/user/db/usersTableSchema'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { sendEmail } from '@back/shared/lib/mailersend'
 import { generateId } from '@back/shared/lib/nanoid'
@@ -10,7 +11,8 @@ import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
-import { type HttpResponse, httpJsonResponse } from '@back/shared/lib/express/httpResponse'
+import { httpJsonResponse } from '@back/shared/lib/express/httpResponse'
+import type { HttpResponse } from '@back/shared/lib/express/httpResponse'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary

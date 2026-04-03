@@ -1,4 +1,5 @@
-import { type AutocompleteRenderInputParams, InputAdornment, TextField } from '@mui/material'
+import { InputAdornment, TextField } from '@mui/material'
+import type { AutocompleteRenderInputParams } from '@mui/material'
 import { GoSearch } from 'react-icons/go'
 
 export const renderInput = (params: AutocompleteRenderInputParams): React.JSX.Element => {

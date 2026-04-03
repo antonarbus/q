@@ -1,8 +1,10 @@
 import { route } from '@back/api/route'
 import type { ErrorResBody, ResBody } from '@back/api/user/getAccessTokenHandler'
 import { queryKey } from '@front/shared/lib/tanstack-query/queryKey'
-import { type UseQueryResult, useQuery } from '@tanstack/react-query'
-import axios, { type AxiosError, type AxiosResponse } from 'axios'
+import { useQuery } from '@tanstack/react-query'
+import type { UseQueryResult } from '@tanstack/react-query'
+import axios from 'axios'
+import type { AxiosError, AxiosResponse } from 'axios'
 
 type Res = UseQueryResult<ResBody, AxiosError<ErrorResBody>>
 

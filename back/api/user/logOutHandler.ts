@@ -4,7 +4,8 @@ import type { NextFunction, Request, Response } from 'express'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
-import { type HttpResponse, httpJsonResponse } from '@back/shared/lib/express/httpResponse'
+import { httpJsonResponse } from '@back/shared/lib/express/httpResponse'
+import type { HttpResponse } from '@back/shared/lib/express/httpResponse'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary

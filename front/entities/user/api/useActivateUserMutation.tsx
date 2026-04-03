@@ -1,8 +1,10 @@
 import { route } from '@back/api/route'
 import type { ErrorResBody, ReqBody as Payload, ResBody } from '@back/api/user/activateHandler'
 import { queryKey } from '@front/shared/lib/tanstack-query/queryKey'
-import { type UseMutationResult, useMutation } from '@tanstack/react-query'
-import axios, { type AxiosError } from 'axios'
+import { useMutation } from '@tanstack/react-query'
+import type { UseMutationResult } from '@tanstack/react-query'
+import axios from 'axios'
+import type { AxiosError } from 'axios'
 
 type Res = UseMutationResult<ResBody, AxiosError<ErrorResBody>, Payload>
 

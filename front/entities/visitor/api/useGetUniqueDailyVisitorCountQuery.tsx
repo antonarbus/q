@@ -6,7 +6,8 @@ import type {
 } from '@back/api/visitors/getUniqueDailyVisitorsHandler'
 import { axiosWithAuth } from '@front/shared/lib/axios'
 import { queryKey } from '@front/shared/lib/tanstack-query/queryKey'
-import { type UseQueryResult, useQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
+import type { UseQueryResult } from '@tanstack/react-query'
 import type { AxiosError } from 'axios'
 
 type Res = UseQueryResult<ResBody, AxiosError<ErrorResBody>>

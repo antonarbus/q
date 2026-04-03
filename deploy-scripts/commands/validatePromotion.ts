@@ -1,9 +1,6 @@
 import { exit } from 'node:process'
-import {
-  type AllowedPromotionPath,
-  allowedPromotionPath,
-  allowedPromotionPathSchema,
-} from '@back/config/infrastructure'
+import { allowedPromotionPath, allowedPromotionPathSchema } from '@back/config/infrastructure'
+import type { AllowedPromotionPath } from '@back/config/infrastructure'
 import type { DeployedEnvironment } from '@root/config/environment'
 import { logger } from '../lib/output/logger'
 

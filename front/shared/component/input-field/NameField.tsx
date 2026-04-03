@@ -1,4 +1,5 @@
-import { InputAdornment, TextField, type TextFieldProps } from '@mui/material'
+import { InputAdornment, TextField } from '@mui/material'
+import type { TextFieldProps } from '@mui/material'
 import type { Signal } from '@preact/signals-react'
 import { PiBooks } from 'react-icons/pi'
 

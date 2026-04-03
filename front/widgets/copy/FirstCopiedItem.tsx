@@ -1,6 +1,7 @@
 import { reduxHolder } from '@front/shared/lib/redux'
 import { theme } from '@front/shared/theme'
-import { AnimatePresence, motion, type Variants } from 'motion/react'
+import { AnimatePresence, motion } from 'motion/react'
+import type { Variants } from 'motion/react'
 import { containerPadding, containerWidth, itemMarginBottom } from './const'
 import { ScaledCopyItem } from './ScaledCopyItem'
 

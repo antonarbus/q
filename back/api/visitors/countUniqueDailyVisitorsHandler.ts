@@ -7,7 +7,8 @@ import type { ErrorCode } from '@back/shared/const/errorCode'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
 import { headerName } from '@back/shared/headers'
-import { type HttpResponse, httpJsonResponse } from '@back/shared/lib/express/httpResponse'
+import { httpJsonResponse } from '@back/shared/lib/express/httpResponse'
+import type { HttpResponse } from '@back/shared/lib/express/httpResponse'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary

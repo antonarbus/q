@@ -1,5 +1,6 @@
 import { navItemId as navItemIdKey } from '@front/entities/nav/navItemId'
-import { createSlice, type PayloadAction, type Reducer, type WritableDraft } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
+import type { PayloadAction, Reducer, WritableDraft } from '@reduxjs/toolkit'
 import { getNavStructure } from './navStructureHolder'
 import { getMenuItemPropValue } from './getMenuItemPropValue'
 import { setMenuItemPropValue } from './setMenuItemPropValue'
