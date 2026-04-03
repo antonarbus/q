@@ -1,8 +1,12 @@
 import { Box, Tooltip } from '@mui/material'
 import { reduxHolder } from '@front/shared/lib/redux'
 
-export const QuotationId = (): React.JSX.Element => {
+export const QuotationId = (): React.ReactNode => {
   const quotationId = reduxHolder.useSelector((state) => state.quotation.id)
+
+  if (quotationId === 'new') {
+    return null
+  }
 
   return (
     <Tooltip title='Quotation ID'>
