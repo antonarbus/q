@@ -8,8 +8,11 @@ import { updatePriceCellAtBookmarkBlock } from '@front/features/blocks/update-pr
 import { Box } from '@mui/material'
 import { TextEditor } from '@front/shared/component/TextEditor'
 import { getRegistryKey } from '@front/shared/lib/tiptap/editorRegistry'
+import { useIsFullAppView } from '@front/entities/quotation/util/useIsFullAppView'
 
 export const PriceCell = (): React.JSX.Element => {
+  const isFullAppView = useIsFullAppView()
+
   const stylesForResizableCell = useStylesForResizableCell({
     blockIndex: BOOKMARK_POS_AT_BLOCKS,
     boqColumnKey: 'price',
@@ -24,6 +27,7 @@ export const PriceCell = (): React.JSX.Element => {
           blockIndex: BOOKMARK_POS_AT_BLOCKS,
           rowIndex: 0,
         })}
+        isFullAppView={isFullAppView}
         className='td price'
         placeholder='Price...'
         contentGetter={() => getHtmlOfBookmarkedRowCellFromStoreByIndex({ cellKey: 'price' })}

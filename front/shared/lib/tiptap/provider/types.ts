@@ -6,6 +6,7 @@ import type { RegistryKey } from '../editorRegistry'
 
 export type Props = {
   registryKey: RegistryKey
+  isFullAppView: boolean
   placeholder: string
   contentGetter: () => string
   className: string

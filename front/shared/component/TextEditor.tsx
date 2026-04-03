@@ -8,6 +8,7 @@ import { TiptapEditor } from '../lib/tiptap/TiptapEditor'
 
 type Props = {
   registryKey: RegistryKey
+  isFullAppView: boolean
   placeholder: string
   className: string
   sx: CSSObject

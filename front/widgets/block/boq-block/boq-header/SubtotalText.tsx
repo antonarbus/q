@@ -5,9 +5,11 @@ import type { HeaderKey } from '@back/entity/quotation/schema'
 import { TextEditor } from '@front/shared/component/TextEditor'
 import { updateSubtotalTextAtBoqBlock } from '@front/features/blocks/update-subtotal-text-at-boq-block/updateSubtotalTextAtBoqBlock'
 import { getRegistryKey } from '@front/shared/lib/tiptap/editorRegistry'
+import { useIsFullAppView } from '@front/entities/quotation/util/useIsFullAppView'
 const boqHeaderKey: HeaderKey = 'subtotalText'
 
 export const SubtotalText = (): React.JSX.Element => {
+  const isFullAppView = useIsFullAppView()
   const block = useBlock()
 
   return (
@@ -17,6 +19,7 @@ export const SubtotalText = (): React.JSX.Element => {
         blockIndex: block.index,
         rowIndex: null,
       })}
+      isFullAppView={isFullAppView}
       className='sub-total-text'
       placeholder='Subtotal...'
       contentGetter={() =>

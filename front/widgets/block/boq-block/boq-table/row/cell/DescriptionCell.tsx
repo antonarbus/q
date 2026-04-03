@@ -9,8 +9,10 @@ import { focusItemPriceCellAtBoqBlock } from '@front/features/blocks/focus-item-
 import { upload } from '@front/features/file/upload-file'
 import { TextEditor } from '@front/shared/component/TextEditor'
 import { getRegistryKey } from '@front/shared/lib/tiptap/editorRegistry'
+import { useIsFullAppView } from '@front/entities/quotation/util/useIsFullAppView'
 
 export const DescriptionCell = (): React.JSX.Element => {
+  const isFullAppView = useIsFullAppView()
   const block = useBlock()
   const row = useRow()
 
@@ -27,6 +29,7 @@ export const DescriptionCell = (): React.JSX.Element => {
         blockIndex: block.index,
         rowIndex: row.index,
       })}
+      isFullAppView={isFullAppView}
       className='td description'
       placeholder='Description...'
       contentGetter={() =>

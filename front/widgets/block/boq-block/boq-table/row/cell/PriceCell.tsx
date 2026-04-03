@@ -16,8 +16,10 @@ import { updatePriceCellAtBoqBlock } from '@front/features/blocks/update-price-c
 import { formatPriceCellAtBoqBlock } from '@front/features/blocks/format-price-cell-at-boq-block/formatPriceCellAtBoqBlock'
 import { validateAndCorrectPriceCellAtBoqBlock } from '@front/features/blocks/validate-and-correct-price-cell-at-boq-block/validateAndCorrectPriceCellAtBoqBlock'
 import { getRegistryKey } from '@front/shared/lib/tiptap/editorRegistry'
+import { useIsFullAppView } from '@front/entities/quotation/util/useIsFullAppView'
 
 export const PriceCell = (): React.JSX.Element => {
+  const isFullAppView = useIsFullAppView()
   const block = useBlock()
   const row = useRow()
 
@@ -35,6 +37,7 @@ export const PriceCell = (): React.JSX.Element => {
           blockIndex: block.index,
           rowIndex: row.index,
         })}
+        isFullAppView={isFullAppView}
         className='td price'
         placeholder='Price...'
         contentGetter={() =>

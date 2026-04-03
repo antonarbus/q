@@ -18,8 +18,10 @@ import { DragBlockIcon } from '@front/features/blocks/drag-item/DragBlockIcon'
 import { DeleteBlockIcon } from '@front/features/blocks/delete-item/DeleteBlockIcon'
 import { BookmarkBlockIcon } from '@front/features/open-close/open-bookmark-modal'
 import { OpenInfoBlockModalIcon } from '@front/features/open-close/open-info-modal'
+import { useIsFullAppView } from '@front/entities/quotation/util/useIsFullAppView'
 
 export const TextBlock = (): React.JSX.Element => {
+  const isFullAppView = useIsFullAppView()
   const block = useBlock()
 
   return (
@@ -48,6 +50,7 @@ export const TextBlock = (): React.JSX.Element => {
           blockIndex: block.index,
           rowIndex: null,
         })}
+        isFullAppView={isFullAppView}
         className='text'
         placeholder='Add text, tables, drop images, files, links, select to format...'
         contentGetter={() => getHtmlOfTextBlockFromStoreByIndex({ blockIndex: block.index })}
