@@ -1,3 +1,4 @@
+// oxlint-disable node/no-process-env
 import { z } from 'zod'
 import { runtimeEnvironmentSchema } from './environment'
 
