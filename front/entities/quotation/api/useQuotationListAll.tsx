@@ -1,6 +1,6 @@
 import { route } from '@back/api/route'
 import type { ResBody } from '@back/api/quotation/getQuotationListAllHandler'
-import { axiosWithAuth } from '@front/shared/lib/axios'
+import { axiosHolder } from '@front/shared/lib/axios'
 import type { IDatasource } from 'ag-grid-community'
 import type { AxiosResponse } from 'axios'
 import { useMemo, useState } from 'react'
@@ -33,7 +33,7 @@ export const useQuotationListAll = (): Res => {
             setIsFetching(true)
           }
 
-          const response = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
+          const response = await axiosHolder.axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
             url: route.getQuotationListAll.url,
             method: route.getQuotationListAll.method,
             params: {

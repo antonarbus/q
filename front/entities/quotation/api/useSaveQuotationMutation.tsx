@@ -4,14 +4,14 @@ import type {
   ReqBody as Payload,
   ResBody,
 } from '@back/api/quotation/saveQuotationHandler'
-import { axiosWithAuth } from '@front/shared/lib/axios'
+import { axiosHolder } from '@front/shared/lib/axios'
 import { queryKey } from '@front/shared/lib/tanstack-query/queryKey'
 import { useMutation } from '@tanstack/react-query'
 import type { UseMutationResult } from '@tanstack/react-query'
 import type { AxiosError, AxiosResponse } from 'axios'
 
 export const saveQuotationMutationFn = async (payload: Payload): Promise<ResBody> => {
-  const response = await axiosWithAuth<ResBody, AxiosResponse<ResBody>, Payload>({
+  const response = await axiosHolder.axiosWithAuth<ResBody, AxiosResponse<ResBody>, Payload>({
     url: route.saveQuotation.url,
     method: route.saveQuotation.method,
     data: {

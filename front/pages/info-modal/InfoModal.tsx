@@ -6,7 +6,7 @@ import { CategoryField } from '@front/shared/component/input-field/CategoryField
 import { DescriptionField } from '@front/shared/component/input-field/DescriptionField'
 import { InfoField } from '@front/shared/component/input-field/InfoField'
 import { NameField } from '@front/shared/component/input-field/NameField'
-import { routerHolder } from '@front/shared/lib/react-router-dom/router'
+import { routerHolder } from '@front/shared/lib/react-router-dom/routerHolder'
 import { useRef } from 'react'
 import { BsInfo } from 'react-icons/bs'
 import { useParams } from 'react-router-dom'

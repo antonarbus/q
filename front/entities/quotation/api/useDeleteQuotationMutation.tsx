@@ -4,7 +4,7 @@ import type {
   UrlParam as Payload,
   ResBody,
 } from '@back/api/quotation/deleteQuotationHandler'
-import { axiosWithAuth } from '@front/shared/lib/axios'
+import { axiosHolder } from '@front/shared/lib/axios'
 import { queryKey } from '@front/shared/lib/tanstack-query/queryKey'
 import { useMutation } from '@tanstack/react-query'
 import type { UseMutationResult } from '@tanstack/react-query'
@@ -16,7 +16,7 @@ export const useDeleteQuotationMutation = (): Res => {
   const mutation = useMutation<ResBody, AxiosError<ErrorResBody>, Payload>({
     mutationKey: [queryKey.deleteQuotation],
     mutationFn: async (payload: Payload) => {
-      const response = await axiosWithAuth<ResBody>({
+      const response = await axiosHolder.axiosWithAuth<ResBody>({
         url: route.deleteQuotation.url(payload.id),
         method: route.deleteQuotation.method,
       })

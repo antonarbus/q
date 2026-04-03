@@ -6,7 +6,7 @@ import { ConfirmPasswordField } from '@front/shared/component/ConfirmPasswordFie
 import { FormModal } from '@front/shared/component/FormModal'
 import { EmailField } from '@front/shared/component/input-field/EmailField'
 import { PasswordField } from '@front/shared/component/input-field/PasswordField'
-import { routerHolder } from '@front/shared/lib/react-router-dom/router'
+import { routerHolder } from '@front/shared/lib/react-router-dom/routerHolder'
 import { useLocation } from 'react-router-dom'
 import type { Location } from 'react-router-dom'
 import { useAnimatedElement } from '@front/shared/util/useAnimatedElement'

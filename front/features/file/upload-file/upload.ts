@@ -5,7 +5,7 @@ import type {
   ReqBody as Payload,
   ResBody as ResBodyMakeFilePublic,
 } from '@back/api/file/saveFileInfoHandler'
-import { axiosWithAuth } from '@front/shared/lib/axios'
+import { axiosHolder } from '@front/shared/lib/axios'
 import { reduxHolder } from '@front/shared/lib/redux'
 import { asyncDelay } from '@front/shared/util/asyncDelay'
 import { getFileSizeInMb } from '@front/shared/util/getFileSizeInMb'
@@ -97,7 +97,7 @@ export const upload: OnUpload = async (props) => {
 
   const toastId = toast.loading(`Uploading 0%...`)
 
-  const signUrlResponse = await axiosWithAuth<ResBodyGetSignedUrl>({
+  const signUrlResponse = await axiosHolder.axiosWithAuth<ResBodyGetSignedUrl>({
     url: route.fileUploadSignedUrl.url,
     method: route.fileUploadSignedUrl.method,
   })
@@ -180,7 +180,7 @@ export const upload: OnUpload = async (props) => {
     return
   }
 
-  const saveFileInfoResponse = await axiosWithAuth<
+  const saveFileInfoResponse = await axiosHolder.axiosWithAuth<
     ResBodyMakeFilePublic,
     AxiosError<ResBodyMakeFilePublic>,
     Payload

@@ -3,7 +3,7 @@ import type { ResBody } from '@back/api/user/getAccessTokenHandler'
 import { headerName } from '@back/shared/headers'
 import { userSlice } from '@front/entities/user/redux/userSlice'
 import { getAccessTokenDeferred } from '@front/features/auth/try-to-log-in-without-prompt/getAccessTokenDeferred'
-import { instantiateAxiosWithAuth } from '@front/shared/lib/axios/axiosWithAuth'
+import { axiosHolder } from '@front/shared/lib/axios/axiosHolder'
 import { reduxHolder } from '@front/shared/lib/redux'
 import { log } from '@front/shared/util/log'
 import axios, { AxiosError } from 'axios'
@@ -74,4 +74,4 @@ const responseErrorInterceptor = async (error: AxiosError): Promise<unknown> => 
 
 axiosWithAuth.interceptors.response.use(undefined, responseErrorInterceptor)
 
-instantiateAxiosWithAuth(axiosWithAuth)
+axiosHolder.axiosWithAuth = axiosWithAuth

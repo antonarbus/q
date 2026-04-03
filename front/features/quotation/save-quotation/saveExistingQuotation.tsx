@@ -6,7 +6,7 @@ import { saveQuotationMutationFn } from '@front/entities/quotation/api/useSaveQu
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import type { Quotation } from '@back/entity/quotation/schema'
 import { route } from '@front/shared/lib/react-router-dom/route'
-import { routerHolder } from '@front/shared/lib/react-router-dom/router'
+import { routerHolder } from '@front/shared/lib/react-router-dom/routerHolder'
 import { reduxHolder } from '@front/shared/lib/redux'
 import type { AxiosError } from 'axios'
 import { toast } from 'sonner'

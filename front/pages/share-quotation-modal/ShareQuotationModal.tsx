@@ -4,7 +4,7 @@ import {
 } from '@front/features/open-close/open-share-quotation-modal'
 import { useShareQuotation } from '@front/features/quotation/share-quotation/useShareQuotation'
 import { FormModal } from '@front/shared/component/FormModal'
-import { routerHolder } from '@front/shared/lib/react-router-dom/router'
+import { routerHolder } from '@front/shared/lib/react-router-dom/routerHolder'
 import { reduxHolder } from '@front/shared/lib/redux'
 import { useAnimatedElement } from '@front/shared/util/useAnimatedElement'
 import { ImLink } from 'react-icons/im'

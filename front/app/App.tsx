@@ -1,12 +1,11 @@
 import './router'
-import '@front/shared/lib/tanstack-query/queryClient'
 import './axiosConfig'
 import { store } from './redux'
 import { ThemeProvider } from '@mui/material/styles'
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
-import { instance } from '@front/shared/instance'
-import { routerHolder } from '@front/shared/lib/react-router-dom/router'
+import { queryClient } from '@front/shared/lib/tanstack-query/queryClient'
+import { routerHolder } from '@front/shared/lib/react-router-dom/routerHolder'
 import { themeClient } from '@front/shared/theme'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
@@ -19,7 +18,7 @@ import { QueryDevtoolsProductionHidden } from '@front/shared/lib/tanstack-query/
 export const App = (): React.JSX.Element => {
   return (
     <Provider store={store}>
-      <QueryClientProvider client={instance.queryClient}>
+      <QueryClientProvider client={queryClient}>
         <ThemeProvider theme={themeClient}>
           <GlobalStyles />
           <LocalizationProvider adapterLocale={enGB} dateAdapter={AdapterDateFns}>

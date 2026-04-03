@@ -1,6 +1,6 @@
 import { route } from '@back/api/route'
 import type { ErrorResBody, ResBody } from '@back/api/file/getFileListHandler'
-import { axiosWithAuth } from '@front/shared/lib/axios'
+import { axiosHolder } from '@front/shared/lib/axios'
 import { queryKey } from '@front/shared/lib/tanstack-query/queryKey'
 import { useQuery } from '@tanstack/react-query'
 import type { UseQueryResult } from '@tanstack/react-query'
@@ -18,7 +18,7 @@ export const useGetFileListStatsQuery = (): Res => {
     retry: 0,
     enabled: true,
     queryFn: async () => {
-      const response = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
+      const response = await axiosHolder.axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
         url: route.getFileList.url,
         method: route.getFileList.method,
         withCredentials: true,

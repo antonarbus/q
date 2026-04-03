@@ -6,7 +6,7 @@ import { userReducer } from '@front/entities/user/redux/userSlice'
 import { configureStore } from '@reduxjs/toolkit'
 import { appReducer } from '@front/shared/appSlice'
 import { agGridReducer } from '@front/shared/lib/ag-grid/agGridSlice'
-import { reduxHolder } from '@front/shared/lib/redux/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 
 const store = configureStore({
   reducer: {

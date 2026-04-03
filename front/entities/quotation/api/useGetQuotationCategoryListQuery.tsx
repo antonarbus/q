@@ -1,6 +1,6 @@
 import { route } from '@back/api/route'
 import type { ErrorResBody, ResBody } from '@back/api/quotation/getQuotationCategoriesHandler'
-import { axiosWithAuth } from '@front/shared/lib/axios'
+import { axiosHolder } from '@front/shared/lib/axios'
 import { queryKey } from '@front/shared/lib/tanstack-query/queryKey'
 import { useQuery } from '@tanstack/react-query'
 import type { UseQueryResult } from '@tanstack/react-query'
@@ -17,7 +17,7 @@ export const useGetQuotationCategoryListQuery = (): Res => {
     staleTime: 0,
     retry: 0,
     queryFn: async () => {
-      const response = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
+      const response = await axiosHolder.axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
         url: route.getUniqueQuotationCategoryList.url,
         method: route.getUniqueQuotationCategoryList.method,
       })

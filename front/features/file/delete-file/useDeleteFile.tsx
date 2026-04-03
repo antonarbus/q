@@ -1,6 +1,6 @@
 import { useDeleteFileMutation } from '@front/entities/file/api/useDeleteFileMutation'
 import { confirmWithDialog } from '@front/shared/component/confirmation-dialog/confirmWithDialog'
-import { instance } from '@front/shared/instance'
+import { queryClient } from '@front/shared/lib/tanstack-query/queryClient'
 import { queryKey } from '@front/shared/lib/tanstack-query/queryKey'
 import { useCallback } from 'react'
 import { useUpdateEffect } from 'react-use'
@@ -21,7 +21,7 @@ export const useDeleteFile = (props: Props): Res => {
 
   useUpdateEffect(() => {
     if (deleteFileMutation.isSuccess === true) {
-      instance.queryClient.invalidateQueries({
+      queryClient.invalidateQueries({
         queryKey: [queryKey.getFileListStats],
       })
     }

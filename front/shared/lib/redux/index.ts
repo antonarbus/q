@@ -1,1 +1,1 @@
-export { reduxHolder, type RootState } from './redux'
+export { reduxHolder, type RootState } from './reduxHolder'

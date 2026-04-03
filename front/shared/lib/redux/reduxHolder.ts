@@ -3,6 +3,7 @@ import { useSelector as useSelectorNotTyped } from 'react-redux'
 import type { TypedUseSelectorHook } from 'react-redux'
 
 export type RootState = Register extends { state: infer StateType } ? StateType : never
+
 type AppDispatch = Register extends { dispatch: infer DispatchFunction } ? DispatchFunction : never
 type Store = Register extends { store: infer StoreType } ? StoreType : never
 type UseSelector = TypedUseSelectorHook<RootState>

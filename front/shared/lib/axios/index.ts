@@ -1,1 +1,1 @@
-export { axiosWithAuth } from './axiosWithAuth'
+export { axiosHolder } from './axiosHolder'

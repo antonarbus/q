@@ -2,7 +2,7 @@ import type { UrlParam } from '@back/api/user/deleteUserHandler'
 import { useDeleteUserMutation } from '@front/entities/user/api/useDeleteUserMutation'
 import { IconButton, Tooltip } from '@mui/material'
 import { RotatingLoaderIcon } from '@front/shared/component/RotatingLoaderIcon'
-import { instance } from '@front/shared/instance'
+import { queryClient } from '@front/shared/lib/tanstack-query/queryClient'
 import { queryKey } from '@front/shared/lib/tanstack-query/queryKey'
 import { MdDeleteOutline } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
@@ -14,7 +14,7 @@ export const DeleteUserButton = (props: UrlParam): React.ReactNode => {
 
   useUpdateEffect(() => {
     if (deleteUserMutation.isSuccess === true) {
-      instance.queryClient.invalidateQueries({
+      queryClient.invalidateQueries({
         queryKey: [queryKey.getUserList],
       })
     }
@@ -24,7 +24,7 @@ export const DeleteUserButton = (props: UrlParam): React.ReactNode => {
     if (deleteUserMutation.isError === true) {
       toast.error(deleteUserMutation.error.response?.data.message)
 
-      instance.queryClient.invalidateQueries({
+      queryClient.invalidateQueries({
         queryKey: [queryKey.getUserList],
       })
     }

@@ -10,7 +10,7 @@ import { DescriptionField } from '@front/shared/component/input-field/Descriptio
 import { InfoField } from '@front/shared/component/input-field/InfoField'
 import { NameField } from '@front/shared/component/input-field/NameField'
 import { route } from '@front/shared/lib/react-router-dom/route'
-import { routerHolder } from '@front/shared/lib/react-router-dom/router'
+import { routerHolder } from '@front/shared/lib/react-router-dom/routerHolder'
 import { useAnimatedElement } from '@front/shared/util/useAnimatedElement'
 import { MdSaveAlt } from 'react-icons/md'
 import { useLocation } from 'react-router-dom'

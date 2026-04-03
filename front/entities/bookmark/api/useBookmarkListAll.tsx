@@ -1,6 +1,6 @@
 import { route } from '@back/api/route'
 import type { ResBody } from '@back/api/bookmark/getBookmarkListAllHandler'
-import { axiosWithAuth } from '@front/shared/lib/axios'
+import { axiosHolder } from '@front/shared/lib/axios'
 import type { IDatasource } from 'ag-grid-community'
 import type { AxiosResponse } from 'axios'
 import { useMemo, useState } from 'react'
@@ -33,7 +33,7 @@ export const useBookmarkListAll = (): Res => {
             setIsFetching(true)
           }
 
-          const response = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
+          const response = await axiosHolder.axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
             url: route.getBookmarkListAll.url,
             method: route.getBookmarkListAll.method,
             params: {
