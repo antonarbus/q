@@ -25,7 +25,7 @@ export const DeleteFileIcon = (props: Props): React.JSX.Element => {
           color: 'grey',
           cursor: 'pointer',
           '&:hover': {
-            color: theme.colors.red,
+            color: theme.color.red,
           },
         }}
         onClick={deleteFile.handleClick}

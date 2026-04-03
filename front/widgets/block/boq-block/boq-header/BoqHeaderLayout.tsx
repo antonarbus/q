@@ -30,7 +30,7 @@ export const BoqHeaderLayout = (props: Props): React.JSX.Element => {
           gap: '10px',
           background: '#343434e6',
           padding: '10px 15px',
-          color: theme.colors.greyFont,
+          color: theme.color.greyFont,
           borderTopLeftRadius: 6,
           borderTopRightRadius: 6,
         }}

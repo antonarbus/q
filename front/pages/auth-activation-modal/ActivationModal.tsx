@@ -24,7 +24,7 @@ export const ActivationModal = (): React.JSX.Element => {
     >
       <CardCustom
         logo={
-          <Avatar sx={{ margin: 1, bgcolor: theme.colors.darkBackground }}>
+          <Avatar sx={{ margin: 1, bgcolor: theme.color.darkBackground }}>
             <GrValidate />
           </Avatar>
         }

@@ -24,7 +24,7 @@ export const PriceHeaderLayout = (props: Props): React.JSX.Element => {
         style={{
           background: '#343434e6',
           padding: '15px 15px',
-          color: theme.colors.greyFont,
+          color: theme.color.greyFont,
           borderTopLeftRadius: 6,
           borderTopRightRadius: 6,
           minHeight: '50px',

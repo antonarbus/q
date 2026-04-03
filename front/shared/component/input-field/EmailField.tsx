@@ -80,7 +80,7 @@ export const EmailField = (props: Props): React.JSX.Element => {
         }}
         sx={{
           '& .MuiInputLabel-shrink': {
-            color: emailLabelSignal.value === initEmailLabel ? '' : theme.colors.red,
+            color: emailLabelSignal.value === initEmailLabel ? '' : theme.color.red,
           },
           '.MuiInputBase-root': {
             background: 'white',
@@ -96,20 +96,28 @@ export const EmailField = (props: Props): React.JSX.Element => {
             bottom: '-17px',
             right: '5px',
             fontSize: '12px',
-            color: theme.colors.red,
+            color: theme.color.red,
           }}
         >
           Did you mean?{' '}
-          <a
-            onClick={(event): void => {
-              event.preventDefault()
+          <button
+            type='button'
+            style={{
+              textDecoration: 'underline',
+              background: 'none',
+              border: 'none',
+              padding: 0,
+              cursor: 'pointer',
+              font: 'inherit',
+              color: theme.color.blue,
+            }}
+            onClick={(): void => {
               props.emailSignal.value = emailSuggestionSignal.value
               suggestEmail(emailSuggestionSignal.value)
             }}
-            style={{ textDecoration: 'underline' }}
           >
             {emailSuggestionSignal.value}
-          </a>
+          </button>
         </div>
       )}
     </div>

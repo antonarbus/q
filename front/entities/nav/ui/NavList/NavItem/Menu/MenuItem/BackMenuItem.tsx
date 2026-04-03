@@ -12,7 +12,7 @@ export const BackMenuItem = (): React.JSX.Element => {
 
   const isHovered = reduxHolder.useSelector((state) => state.nav.hoverIndex === 0)
 
-  const color = theme.colors.topMenuItem
+  const color = theme.color.topMenuItem
 
   return (
     <MenuItemLayout

@@ -14,7 +14,7 @@ const muiTheme: ThemeOptions = {
 }
 
 const customTheme = {
-  colors: {
+  color: {
     grey: '#5a5a5a',
     red: '#ee6666',
     topMenuItem: '#858383',

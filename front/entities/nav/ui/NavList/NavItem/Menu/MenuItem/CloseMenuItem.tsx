@@ -10,7 +10,7 @@ import { TextInMenu } from './TextInMenu'
 const closeIcon = createElement(CloseIcon, {})
 
 export const CloseMenuItem = (): React.JSX.Element => {
-  const color = theme.colors.topMenuItem
+  const color = theme.color.topMenuItem
 
   const isHovered = reduxHolder.useSelector((state) => state.nav.hoverIndex === 0)
 

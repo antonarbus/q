@@ -10,7 +10,7 @@ export const Burger = (): React.JSX.Element => {
 
   return (
     <BurgerIcon
-      color={theme.colors.greyFont}
+      color={theme.color.greyFont}
       data-testid='hamburger icon'
       label='Show menu'
       onToggle={(): void => {

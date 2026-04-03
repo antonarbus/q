@@ -14,7 +14,7 @@ export const EmailIcon = (): React.JSX.Element => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          color: theme.colors.grey,
+          color: theme.color.grey,
         }}
       >
         <MdAlternateEmail

@@ -80,7 +80,7 @@ export const FormModal = (props: Props): React.JSX.Element => {
             position: 'relative',
           }}
         >
-          <Avatar sx={{ bgcolor: theme.colors.darkBackground }}>{props.headerIcon}</Avatar>
+          <Avatar sx={{ bgcolor: theme.color.darkBackground }}>{props.headerIcon}</Avatar>
           <Typography component='h1' variant='h6'>
             {props.headerText}
           </Typography>

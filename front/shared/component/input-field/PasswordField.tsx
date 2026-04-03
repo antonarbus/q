@@ -50,7 +50,7 @@ export const PasswordField = (props: Props): React.JSX.Element => {
       }}
       sx={{
         '& .MuiInputLabel-shrink': {
-          color: props.isLabelRed === true ? theme.colors.red : '',
+          color: props.isLabelRed === true ? theme.color.red : '',
         },
         '.MuiInputBase-root': {
           background: 'white',

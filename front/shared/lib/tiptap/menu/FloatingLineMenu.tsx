@@ -164,7 +164,6 @@ export const FloatingLineMenu = (): React.ReactNode => {
       }}
       style={{
         position: 'fixed',
-        background: 'red',
         top: pos.top,
         left: pos.left,
         // keep right edge flush to paper; content expands leftward via row-reverse
