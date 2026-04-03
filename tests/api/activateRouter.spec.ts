@@ -1,3 +1,4 @@
+import assert from 'node:assert'
 import { route } from '@back/api/route'
 import { usersTable } from '@back/entity/user/db/usersTableSchema'
 import { db } from '@back/shared/lib/drizzle/db'
@@ -33,9 +34,9 @@ test.describe('#activateRouter', () => {
       })
       .returning()
 
-    if (userInserted === undefined) {
-      throw new Error('Failed to create test user')
-    }
+    expect(userInserted).toBeDefined()
+    // Type narrowing
+    assert.ok(userInserted !== undefined)
 
     // Act: Attempt to activate again
     const res = await request[route.activate.method](route.activate.url, {

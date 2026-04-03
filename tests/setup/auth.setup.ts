@@ -1,3 +1,4 @@
+// oxlint-disable jest/no-conditional-in-test
 import { request, test } from '@playwright/test'
 import { userFilePath } from './userFilePath'
 import { runtimeConfig } from '@root/config/runtime'
@@ -20,15 +21,11 @@ test.describe('authenticate for all further tests', () => {
       },
     })
 
-    const isResponseOk = response.ok()
-
-    if (isResponseOk === true) {
+    if (response.ok()) {
       await context.storageState({ path: userFilePath.authenticated })
       log.info('🫡 authenticated before all tests')
     } else {
-      // Get the response body as text
       const responseBody = await response.text()
-
       throw new Error(`Failed to authenticate: ${response.status()} - ${responseBody}`)
     }
   })

@@ -27,7 +27,7 @@ test.describe('#authTokenRefresh', () => {
       accessToken = loginData.accessJwtToken
 
       // Verify refresh token cookie is set
-      const cookies = loginResponse.headers()['set-cookie'] ?? ''
+      const cookies = loginResponse.headers()['set-cookie'] as string
       expect(cookies).toContain('refresh-jwt-token')
 
       // Store the refresh token cookie for later use
