@@ -1,4 +1,4 @@
-import Image from '@tiptap/extension-image'
+import { Image } from '@tiptap/extension-image'
 import type { NodeView } from '@tiptap/pm/view'
 
 export const ResizableImage = Image.extend({

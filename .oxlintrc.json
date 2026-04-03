@@ -50,6 +50,7 @@
     "import/exports-last": "off",
     "import/group-exports": "off",
     "import/no-named-as-default-member": "off",
+    "import/no-relative-parent-imports": "off", // todo: <-- good rule, enable and fix
     "import/max-dependencies": "off",
     "import/no-anonymous-default-export": "off",
     "import/no-default-export": "off",
