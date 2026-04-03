@@ -1,9 +1,9 @@
-import { expect, test, describe } from 'vitest'
+import { expect, it, describe } from 'vitest'
 import { getQuotationPermissionLevel } from './getQuotationPermissionLevel'
 import { createMockUser } from '../user/createMockUser.test-helper'
 
 describe('#getQuotationPermissionLevel', () => {
-  test('returns OWNER when user email matches quotation email', () => {
+  it('returns OWNER when user email matches quotation email', () => {
     const result = getQuotationPermissionLevel({
       user: createMockUser({ email: 'owner@example.com' }),
       quotationEmail: 'owner@example.com',
@@ -17,7 +17,7 @@ describe('#getQuotationPermissionLevel', () => {
     expect(result).toBe('OWNER')
   })
 
-  test('returns SHARED when user email is in custom access userList', () => {
+  it('returns SHARED when user email is in custom access userList', () => {
     const result = getQuotationPermissionLevel({
       user: createMockUser({ email: 'shared@example.com' }),
       quotationEmail: 'owner@example.com',
@@ -31,7 +31,7 @@ describe('#getQuotationPermissionLevel', () => {
     expect(result).toBe('SHARED')
   })
 
-  test('returns PUBLIC when access level is everyone', () => {
+  it('returns PUBLIC when access level is everyone', () => {
     const result = getQuotationPermissionLevel({
       user: createMockUser({ email: 'random@example.com' }),
       quotationEmail: 'owner@example.com',
@@ -45,7 +45,7 @@ describe('#getQuotationPermissionLevel', () => {
     expect(result).toBe('PUBLIC')
   })
 
-  test('returns PUBLIC when access level is everyone and user is not logged in', () => {
+  it('returns PUBLIC when access level is everyone and user is not logged in', () => {
     const result = getQuotationPermissionLevel({
       user: null,
       quotationEmail: 'owner@example.com',
@@ -59,7 +59,7 @@ describe('#getQuotationPermissionLevel', () => {
     expect(result).toBe('PUBLIC')
   })
 
-  test('returns SUPER_ADMIN_ON_BEHALF_OF_A_USER when user is logged in and shouldTrace is false', () => {
+  it('returns SUPER_ADMIN_ON_BEHALF_OF_A_USER when user is logged in and shouldTrace is false', () => {
     const result = getQuotationPermissionLevel({
       user: createMockUser({ email: 'different@example.com' }),
       quotationEmail: 'owner@example.com',
@@ -73,7 +73,7 @@ describe('#getQuotationPermissionLevel', () => {
     expect(result).toBe('SUPER_ADMIN_ON_BEHALF_OF_A_USER')
   })
 
-  test('returns SUPER_ADMIN when user has super-admin role', () => {
+  it('returns SUPER_ADMIN when user has super-admin role', () => {
     const result = getQuotationPermissionLevel({
       user: createMockUser({
         email: 'admin@example.com',
@@ -90,7 +90,7 @@ describe('#getQuotationPermissionLevel', () => {
     expect(result).toBe('SUPER_ADMIN')
   })
 
-  test('returns FORBIDDEN when user is not logged in and quotation is private', () => {
+  it('returns FORBIDDEN when user is not logged in and quotation is private', () => {
     const result = getQuotationPermissionLevel({
       user: null,
       quotationEmail: 'owner@example.com',
@@ -104,7 +104,7 @@ describe('#getQuotationPermissionLevel', () => {
     expect(result).toBe('FORBIDDEN')
   })
 
-  test('returns FORBIDDEN when user is logged in but has no access', () => {
+  it('returns FORBIDDEN when user is logged in but has no access', () => {
     const result = getQuotationPermissionLevel({
       user: createMockUser({ email: 'different@example.com' }),
       quotationEmail: 'owner@example.com',
@@ -118,7 +118,7 @@ describe('#getQuotationPermissionLevel', () => {
     expect(result).toBe('FORBIDDEN')
   })
 
-  test('returns FORBIDDEN when user email is not in custom access userList', () => {
+  it('returns FORBIDDEN when user email is not in custom access userList', () => {
     const result = getQuotationPermissionLevel({
       user: createMockUser({ email: 'notinlist@example.com' }),
       quotationEmail: 'owner@example.com',
@@ -132,7 +132,7 @@ describe('#getQuotationPermissionLevel', () => {
     expect(result).toBe('FORBIDDEN')
   })
 
-  test('OWNER takes precedence over SUPER_ADMIN', () => {
+  it('oWNER takes precedence over SUPER_ADMIN', () => {
     const result = getQuotationPermissionLevel({
       user: createMockUser({
         email: 'admin@example.com',
@@ -149,7 +149,7 @@ describe('#getQuotationPermissionLevel', () => {
     expect(result).toBe('OWNER')
   })
 
-  test('OWNER takes precedence over SUPER_ADMIN_ON_BEHALF_OF_A_USER', () => {
+  it('oWNER takes precedence over SUPER_ADMIN_ON_BEHALF_OF_A_USER', () => {
     const result = getQuotationPermissionLevel({
       user: createMockUser({ email: 'owner@example.com' }),
       quotationEmail: 'owner@example.com',
@@ -163,7 +163,7 @@ describe('#getQuotationPermissionLevel', () => {
     expect(result).toBe('OWNER')
   })
 
-  test('SHARED takes precedence over PUBLIC', () => {
+  it('sHARED takes precedence over PUBLIC', () => {
     const result = getQuotationPermissionLevel({
       user: createMockUser({ email: 'shared@example.com' }),
       quotationEmail: 'owner@example.com',
@@ -179,7 +179,7 @@ describe('#getQuotationPermissionLevel', () => {
     expect(result).toBe('PUBLIC')
   })
 
-  test('returns SHARED only when access level is custom', () => {
+  it('returns SHARED only when access level is custom', () => {
     const result = getQuotationPermissionLevel({
       user: createMockUser({ email: 'shared@example.com' }),
       quotationEmail: 'owner@example.com',

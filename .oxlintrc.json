@@ -11,10 +11,10 @@
     "react-perf",
     "jsx-a11y",
     "node",
-    "jsdoc"
+    "jsdoc",
     // "import"
     // "vitest"
-    // "jest"
+    "jest"
   ],
   "env": {
     "browser": true,

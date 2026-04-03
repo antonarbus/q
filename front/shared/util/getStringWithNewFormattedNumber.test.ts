@@ -1,8 +1,8 @@
-import { describe, expect, test } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import { getStringWithNewFormattedNumber } from './getStringWithNewFormattedNumber'
 
 describe('#getStringWithNewFormattedNumber', () => {
-  test('replaces simple number in HTML', () => {
+  it('replaces simple number in HTML', () => {
     const result = getStringWithNewFormattedNumber({
       string: '<p>140 <span>USD</span></p>',
       newNumber: 1230,
@@ -11,7 +11,7 @@ describe('#getStringWithNewFormattedNumber', () => {
     expect(result).toBe('<p>1\u202F230 <span>USD</span></p>')
   })
 
-  test('replaces decimal number with comma', () => {
+  it('replaces decimal number with comma', () => {
     const result = getStringWithNewFormattedNumber({
       string: '<p>123,45 EUR</p>',
       newNumber: 678.9,
@@ -20,7 +20,7 @@ describe('#getStringWithNewFormattedNumber', () => {
     expect(result).toBe('<p>678,9 EUR</p>')
   })
 
-  test('replaces decimal number with period', () => {
+  it('replaces decimal number with period', () => {
     const result = getStringWithNewFormattedNumber({
       string: '<p>123.45 USD</p>',
       newNumber: 678.9,
@@ -29,7 +29,7 @@ describe('#getStringWithNewFormattedNumber', () => {
     expect(result).toBe('<p>678,9 USD</p>')
   })
 
-  test('handles number with spaces between digits', () => {
+  it('handles number with spaces between digits', () => {
     const result = getStringWithNewFormattedNumber({
       string: '<p>1 230 <span>USD</span></p>',
       newNumber: 5000,
@@ -38,7 +38,7 @@ describe('#getStringWithNewFormattedNumber', () => {
     expect(result).toBe('<p>5\u202F000 <span>USD</span></p>')
   })
 
-  test('replaces only first number', () => {
+  it('replaces only first number', () => {
     const result = getStringWithNewFormattedNumber({
       string: '<p>100 items cost 200 USD</p>',
       newNumber: 999,
@@ -47,7 +47,7 @@ describe('#getStringWithNewFormattedNumber', () => {
     expect(result).toBe('<p>999 items cost 200 USD</p>')
   })
 
-  test('handles integer replacement', () => {
+  it('handles integer replacement', () => {
     const result = getStringWithNewFormattedNumber({
       string: '<p style="text-align: center;">500</p>',
       newNumber: 1500,
@@ -56,7 +56,7 @@ describe('#getStringWithNewFormattedNumber', () => {
     expect(result).toBe('<p style="text-align: center;">1\u202F500</p>')
   })
 
-  test('formats large numbers with spaces', () => {
+  it('formats large numbers with spaces', () => {
     const result = getStringWithNewFormattedNumber({
       string: '<div>1000000</div>',
       newNumber: 1_000_000,
@@ -65,7 +65,7 @@ describe('#getStringWithNewFormattedNumber', () => {
     expect(result).toBe('<div>1\u202F000\u202F000</div>')
   })
 
-  test('handles decimal formatting', () => {
+  it('handles decimal formatting', () => {
     const result = getStringWithNewFormattedNumber({
       string: '<p>100</p>',
       newNumber: 123.456_789,
@@ -74,7 +74,7 @@ describe('#getStringWithNewFormattedNumber', () => {
     expect(result).toBe('<p>123,456789</p>')
   })
 
-  test('replaces number regardless of stored value mismatch', () => {
+  it('replaces number regardless of stored value mismatch', () => {
     const result = getStringWithNewFormattedNumber({
       string: '<p>140 <span>USD</span></p>',
       newNumber: 1230,
@@ -83,7 +83,7 @@ describe('#getStringWithNewFormattedNumber', () => {
     expect(result).toBe('<p>1\u202F230 <span>USD</span></p>')
   })
 
-  test('handles zero', () => {
+  it('handles zero', () => {
     const result = getStringWithNewFormattedNumber({
       string: '<p>500</p>',
       newNumber: 0,
@@ -92,7 +92,7 @@ describe('#getStringWithNewFormattedNumber', () => {
     expect(result).toBe('<p>0</p>')
   })
 
-  test('accepts string number as input', () => {
+  it('accepts string number as input', () => {
     const result = getStringWithNewFormattedNumber({
       string: '<p>100</p>',
       newNumber: '250',
@@ -101,7 +101,7 @@ describe('#getStringWithNewFormattedNumber', () => {
     expect(result).toBe('<p>250</p>')
   })
 
-  test('handles complex HTML structure', () => {
+  it('handles complex HTML structure', () => {
     const result = getStringWithNewFormattedNumber({
       string: '<div class="price"><strong>99.99</strong> <span class="currency">EUR</span></div>',
       newNumber: 150.5,
