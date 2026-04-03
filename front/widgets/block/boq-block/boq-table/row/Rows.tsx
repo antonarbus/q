@@ -1,7 +1,7 @@
 import { useBlock } from '@front/entities/quotation/provider/block/useBlock'
 import { RowProvider } from '@front/entities/quotation/provider/row/RowProvider'
 import { selectRows } from '@front/entities/quotation/redux/selector/selectRows'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { arrayShapesEqualityFn } from '@front/entities/quotation/util/arrayShapesEqualityFn'
 import { AnimatePresence } from 'motion/react'
 import { PasteRowTextOverlay } from './PasteRowTextOverlay'

@@ -1,5 +1,5 @@
 import type { BoqColumnKey } from '@back/entity/quotation/schema'
-import type { RootState } from '@front/shared/lib/redux'
+import type { RootState } from '@front/shared/lib/redux/reduxHolder'
 import { getBoqBlockFromStoreByIndex } from '../getter/getBoqBlockFromStoreByIndex'
 
 type Props = {

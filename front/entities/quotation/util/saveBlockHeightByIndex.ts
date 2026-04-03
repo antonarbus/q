@@ -1,5 +1,5 @@
 import { cls } from '@front/shared/cls'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { quotationSlice } from '../redux/quotationSlice'
 
 type Props = {

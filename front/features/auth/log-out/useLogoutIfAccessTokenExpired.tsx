@@ -1,5 +1,5 @@
 import { userSlice } from '@front/entities/user/redux/userSlice'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { useUpdateEffect } from 'react-use'
 
 export const useLogoutIfAccessTokenExpired = (): void => {

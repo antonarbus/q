@@ -1,5 +1,5 @@
 import type { BoqColumnKey, Column } from '@back/entity/quotation/schema'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 
 type Props = {
   blockIndex: number

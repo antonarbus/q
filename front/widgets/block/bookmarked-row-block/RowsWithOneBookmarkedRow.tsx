@@ -1,6 +1,6 @@
 import { BOOKMARK_POS_AT_BLOCKS } from '@front/entities/quotation/redux/bookmarkPosAtBlocks'
 import { RowProvider } from '@front/entities/quotation/provider/row/RowProvider'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { BookmarkedRow } from './BookmarkedRow'
 import { hidePinsOnRowBlur } from '@front/features/blocks/pin/hide-row-pins/hidePinsOnRowBlur'
 

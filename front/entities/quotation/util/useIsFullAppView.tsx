@@ -1,4 +1,4 @@
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 
 export const useIsFullAppView = (): boolean => {
   const permissionLevel = reduxHolder.useSelector((state) => state.quotation.permissionLevel)

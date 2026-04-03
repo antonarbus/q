@@ -1,6 +1,6 @@
 import { Tooltip } from '@mui/material'
 import { route } from '@front/shared/lib/react-router-dom/route'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { BsPersonFillLock } from 'react-icons/bs'
 import { PiGlobe, PiGlobeX } from 'react-icons/pi'
 import { Link } from 'react-router-dom'

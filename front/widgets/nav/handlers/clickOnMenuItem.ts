@@ -1,7 +1,7 @@
 import type { NavItemId } from '@front/entities/nav/navItemId'
 import { navSlice } from '@front/entities/nav/navSlice'
 import { getNavItem } from '@front/entities/nav/ui/NavList/NavItem/Menu/functions/getNavItem'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { functionRegistry } from '@front/widgets/nav/functionRegistry'
 
 type MenuNavigation = {

@@ -2,7 +2,7 @@ import type { BoqColumnKey } from '@back/entity/quotation/schema'
 import { getBoqColumnFromStoreByIndex } from '@front/entities/quotation/redux/getter/getBoqColumnFromStoreByIndex'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { cls } from '@front/shared/cls'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 
 type Props = {
   headerColumnElement: HTMLElement

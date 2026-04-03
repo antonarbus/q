@@ -5,7 +5,7 @@ import { newQuotationTemplate } from '@front/entities/quotation/newQuotationTemp
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { backToQuotationRef } from '@front/entities/quotation/ref/backToQuotationRef'
 import { appSlice } from '@front/shared/appSlice'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { asyncDelay } from '@front/shared/util/asyncDelay'
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'

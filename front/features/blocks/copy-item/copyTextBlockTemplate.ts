@@ -4,8 +4,8 @@ import { copySlice } from '@front/entities/copy/copySlice'
 import textBlockContentHtml from '@front/entities/quotation/templates/textBlockContent.html?raw'
 import textBlockPreviewHtml from '@front/entities/quotation/templates/textBlockPreview.html?raw'
 import type { TextBlock } from '@back/entity/quotation/schema'
-import { generateId } from '@front/shared/lib/nanoid'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { generateId } from '@front/shared/lib/nanoid/generateId'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 
 export const copyTextBlockTemplate = (event?: React.MouseEvent): void => {
   const textBlockTemplate: TextBlock = {

@@ -1,4 +1,4 @@
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 
 type Props = {
   blockIndex: number

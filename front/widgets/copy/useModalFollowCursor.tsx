@@ -1,4 +1,4 @@
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import throttle from 'lodash.throttle'
 import type { AnimationScope } from 'motion/react'
 import { useEffect } from 'react'

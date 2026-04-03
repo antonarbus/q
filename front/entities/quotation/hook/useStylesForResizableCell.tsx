@@ -1,4 +1,4 @@
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { selectColumnWidth } from '../redux/selector/selectColumnWidth'
 import type { BoqColumnKey } from '@back/entity/quotation/schema'
 import type { CSSObject } from '@mui/material'

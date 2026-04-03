@@ -1,5 +1,5 @@
 import type { CellKey } from '@back/entity/quotation/schema'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { getNumberFromString } from '@front/shared/util/getNumberFromString'
 import { getTextContentFromHtml } from '@front/shared/util/getTextContentFromHtml'
 import { getRowFromStoreByIndex } from '../getter/getRowFromStoreByIndex'

@@ -1,6 +1,6 @@
 import { route } from '@back/api/route'
 import type { ResBody } from '@back/api/file/getFileListAllHandler'
-import { axiosHolder } from '@front/shared/lib/axios'
+import { axiosHolder } from '@front/shared/lib/axios/axiosHolder'
 import type { IDatasource } from 'ag-grid-community'
 import type { AxiosResponse } from 'axios'
 import { useMemo, useState } from 'react'

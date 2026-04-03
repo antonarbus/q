@@ -6,7 +6,7 @@ import { recalculateSubTotalPrices } from '@front/entities/quotation/util/recalc
 import { recalculateTotalPrices } from '@front/entities/quotation/util/recalculateTotalPrices'
 import { Tooltip } from '@mui/material'
 import { cls } from '@front/shared/cls'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { GoTrash } from 'react-icons/go'
 
 export const DeleteRowIcon = (): React.JSX.Element => {

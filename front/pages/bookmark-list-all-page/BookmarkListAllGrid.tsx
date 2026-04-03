@@ -10,7 +10,7 @@ import { ProgressGridBar } from '@front/shared/lib/ag-grid/components/ProgressGr
 import { GridLayout } from '@front/shared/lib/ag-grid/GridLayout'
 import { useShowLoadingJumpingDots } from '@front/shared/lib/ag-grid/hooks/useShowLoadingJumpingDots'
 import { AgGridStyles } from '@front/shared/lib/ag-grid/styles/AgGridStyles'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { AllCommunityModule, ModuleRegistry, themeQuartz } from 'ag-grid-community'
 import type { FilterChangedEvent } from 'ag-grid-community'
 import { AgGridReact } from 'ag-grid-react'

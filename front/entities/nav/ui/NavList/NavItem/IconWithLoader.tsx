@@ -1,5 +1,5 @@
 import type { NavItem } from '@front/entities/nav/type'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { iconRegistry } from '@front/widgets/nav/iconRegistry'
 import { ErrorIcon } from './ErrorIcon'
 import { Icon } from './Icon'

@@ -1,7 +1,7 @@
 import { copySlice } from '@front/entities/copy/copySlice'
 import { BOOKMARK_POS_AT_BLOCKS } from '@front/entities/quotation/redux/bookmarkPosAtBlocks'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { useEffect } from 'react'
 import { getCleanPaperHtml } from '@front/shared/util/html-getter/getCleanPaperHtml'
 import { cls } from '@front/shared/cls'

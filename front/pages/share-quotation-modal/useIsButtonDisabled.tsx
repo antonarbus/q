@@ -1,5 +1,5 @@
 import type { AccessFormValuesSignal } from '@front/entities/quotation/form/types'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 
 type Props = {
   accessFormValuesSignal: AccessFormValuesSignal

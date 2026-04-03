@@ -1,7 +1,7 @@
 import { BOOKMARK_POS_AT_BLOCKS } from '@front/entities/quotation/redux/bookmarkPosAtBlocks'
 import { updateBookmarkedRowCellAtStore } from '@front/entities/quotation/redux/updater/updateBookmarkedRowCellAtStore'
 import { updateBookmarkedRowCellWithValue } from '@front/entities/quotation/util/updateBookmarkedRowCellWithValue'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { editorRegistry, getRegistryKey } from '@front/shared/lib/tiptap/editorRegistry'
 import { roundTo } from 'round-to'
 

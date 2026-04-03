@@ -4,7 +4,7 @@ import type {
   OnBlockResizeStart,
   OnBlockResizeStop,
 } from '@front/shared/lib/re-resizable/resizablePaper'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 
 export const onTextBlockResizeStart: OnBlockResizeStart = () => {
   // nothing yet

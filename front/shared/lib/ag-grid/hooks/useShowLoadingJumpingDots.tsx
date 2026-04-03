@@ -1,4 +1,4 @@
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { useUpdateEffect } from 'react-use'
 import { agGridSlice } from '../agGridSlice'
 

@@ -1,5 +1,5 @@
 import type { SaveQuotationFormValues } from '@front/entities/quotation/form/types'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { useEffectOnce } from 'react-use'
 
 type Props = {

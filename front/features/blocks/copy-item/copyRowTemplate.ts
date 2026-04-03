@@ -7,8 +7,8 @@ import rowPreviewHtml from '@front/entities/quotation/templates/rowPreview.html?
 import rowPriceHtml from '@front/entities/quotation/templates/rowPrice.html?raw'
 import rowQtyHtml from '@front/entities/quotation/templates/rowQty.html?raw'
 import type { RowBlock } from '@back/entity/quotation/schema'
-import { generateId } from '@front/shared/lib/nanoid'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { generateId } from '@front/shared/lib/nanoid/generateId'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 
 export const copyRowBlockTemplate = (event?: React.MouseEvent): void => {
   const rowTemplate: RowBlock = {

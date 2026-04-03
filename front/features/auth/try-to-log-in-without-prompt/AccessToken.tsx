@@ -5,7 +5,7 @@ import { createLoadingMenuIconMachine } from '@front/entities/nav/state-machine/
 import { useGetUserAccessTokenQuery } from '@front/entities/user/api/useGetUserAccessTokenQuery'
 import { userSlice } from '@front/entities/user/redux/userSlice'
 import { agGridSlice } from '@front/shared/lib/ag-grid/agGridSlice'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { jwtDecode } from 'jwt-decode'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
 import { createActor } from 'xstate'

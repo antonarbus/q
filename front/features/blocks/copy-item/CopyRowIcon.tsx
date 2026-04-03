@@ -5,7 +5,7 @@ import { getRowFromStoreByIndex } from '@front/entities/quotation/redux/getter/g
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { Tooltip } from '@mui/material'
 import { cls } from '@front/shared/cls'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { getClosestRowHtml } from '@front/shared/util/html-getter/getClosestRowHtml'
 import { MdCopyAll } from 'react-icons/md'
 

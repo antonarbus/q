@@ -1,4 +1,4 @@
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { clickOnMenuItem } from '@front/widgets/nav/handlers/clickOnMenuItem'
 import { iconRegistry } from '@front/widgets/nav/iconRegistry'
 import { FaChevronRight } from 'react-icons/fa'

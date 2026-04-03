@@ -2,7 +2,7 @@
 // oxlint-disable typescript/explicit-module-boundary-types
 import type { NavItemId } from '@front/entities/nav/navItemId'
 import { navSlice } from '@front/entities/nav/navSlice'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { setup } from 'xstate'
 
 type Props = {

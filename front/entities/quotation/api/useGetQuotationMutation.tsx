@@ -4,7 +4,7 @@ import type {
   UrlParam as Payload,
   ResBody,
 } from '@back/api/quotation/getQuotationHandler'
-import { axiosHolder } from '@front/shared/lib/axios'
+import { axiosHolder } from '@front/shared/lib/axios/axiosHolder'
 import { queryKey } from '@front/shared/lib/tanstack-query/queryKey'
 import { useMutation } from '@tanstack/react-query'
 import type { UseMutationResult } from '@tanstack/react-query'

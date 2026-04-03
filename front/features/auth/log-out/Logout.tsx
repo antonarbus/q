@@ -5,7 +5,7 @@ import { deleteQuotationListCache } from '@front/entities/quotation/cache-update
 import { useLogOutUserMutation } from '@front/entities/user/api/useLogOutUserMutation'
 import { userSlice } from '@front/entities/user/redux/userSlice'
 import { appSlice } from '@front/shared/appSlice'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { useNavigate } from 'react-router-dom'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'

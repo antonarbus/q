@@ -1,6 +1,6 @@
 import { route } from '@back/api/route'
 import type { ErrorResBody, ReqBody as Payload, ResBody } from '@back/api/user/logInHandler'
-import { axiosHolder } from '@front/shared/lib/axios'
+import { axiosHolder } from '@front/shared/lib/axios/axiosHolder'
 import { queryKey } from '@front/shared/lib/tanstack-query/queryKey'
 import { useMutation } from '@tanstack/react-query'
 import type { UseMutationResult } from '@tanstack/react-query'

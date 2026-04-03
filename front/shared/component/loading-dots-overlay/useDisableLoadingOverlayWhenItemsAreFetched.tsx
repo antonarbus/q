@@ -1,5 +1,5 @@
 import { appSlice } from '@front/shared/appSlice'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { useEffect } from 'react'
 
 type Props = {

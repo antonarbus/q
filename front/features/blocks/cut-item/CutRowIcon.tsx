@@ -8,7 +8,7 @@ import { recalculateSubTotalPrices } from '@front/entities/quotation/util/recalc
 import { recalculateTotalPrices } from '@front/entities/quotation/util/recalculateTotalPrices'
 import { Tooltip } from '@mui/material'
 import { cls } from '@front/shared/cls'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { theme } from '@front/shared/theme'
 import { getClosestRowHtml } from '@front/shared/util/html-getter/getClosestRowHtml'
 import { TbCut } from 'react-icons/tb'

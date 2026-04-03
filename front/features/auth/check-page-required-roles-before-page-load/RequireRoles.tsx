@@ -1,6 +1,6 @@
 import type { SelectUser } from '@back/entity/user/db/usersTableSchema'
 import { useGetUserAccessTokenQuery } from '@front/entities/user/api/useGetUserAccessTokenQuery'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 
 type Props = {
   requiredRoles: SelectUser['roles']

@@ -1,6 +1,6 @@
 import { getRowFromStoreByIndex } from '@front/entities/quotation/redux/getter/getRowFromStoreByIndex'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 
 type Props = {
   blockIndex: number

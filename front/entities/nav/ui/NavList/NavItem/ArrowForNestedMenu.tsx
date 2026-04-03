@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import type { NavItem } from '@front/entities/nav/type'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { TiArrowSortedDown } from 'react-icons/ti'
 
 type Props = {

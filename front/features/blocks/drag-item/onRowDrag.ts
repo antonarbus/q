@@ -1,7 +1,7 @@
 import type { DragStart, DropResult } from '@hello-pangea/dnd'
 import { getRowsFromStoreByIndex } from '@front/entities/quotation/redux/getter/getRowsFromStoreByIndex'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { arrayMoveImmutable } from 'array-move'
 
 export const onRowDragStart =

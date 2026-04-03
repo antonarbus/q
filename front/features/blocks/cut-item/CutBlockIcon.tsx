@@ -6,7 +6,7 @@ import { recalculateTotalPrices } from '@front/entities/quotation/util/recalcula
 import { saveBlockHeightByIndex } from '@front/entities/quotation/util/saveBlockHeightByIndex'
 import { Tooltip } from '@mui/material'
 import { cls } from '@front/shared/cls'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { theme } from '@front/shared/theme'
 import { fixElementDimensionStyle } from '@front/shared/util/fixElementDimensionStyle'
 import { TbCut } from 'react-icons/tb'

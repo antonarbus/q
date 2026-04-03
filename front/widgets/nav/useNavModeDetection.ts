@@ -1,5 +1,5 @@
 import { navSlice } from '@front/entities/nav/navSlice'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { useLayoutEffect, useRef } from 'react'
 import { useWindowSize } from 'react-use'
 

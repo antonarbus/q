@@ -1,5 +1,5 @@
 import { Box, Tooltip } from '@mui/material'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 
 export const QuotationId = (): React.ReactNode => {
   const quotationId = reduxHolder.useSelector((state) => state.quotation.id)

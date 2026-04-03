@@ -22,8 +22,8 @@ import rowTwoItemPriceHtml from '@front/entities/quotation/templates/rowTwoItemP
 import rowTwoPriceHtml from '@front/entities/quotation/templates/rowTwoPrice.html?raw'
 import rowTwoQtyHtml from '@front/entities/quotation/templates/rowTwoQty.html?raw'
 import type { BoqBlock } from '@back/entity/quotation/schema'
-import { generateId } from '@front/shared/lib/nanoid'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { generateId } from '@front/shared/lib/nanoid/generateId'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 
 export const copyBoqBlockTemplate = (event?: React.MouseEvent): void => {
   const boqBlockTemplate: BoqBlock = {

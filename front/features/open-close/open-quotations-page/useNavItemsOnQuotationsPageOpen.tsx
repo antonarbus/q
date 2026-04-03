@@ -1,6 +1,6 @@
 import { navItemId } from '@front/entities/nav/navItemId'
 import { navSlice } from '@front/entities/nav/navSlice'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { useEffectOnce, useUnmount } from 'react-use'
 
 export const useNavItemsOnQuotationsPageOpen = (): void => {

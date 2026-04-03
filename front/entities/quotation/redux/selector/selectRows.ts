@@ -1,4 +1,4 @@
-import type { RootState } from '@front/shared/lib/redux'
+import type { RootState } from '@front/shared/lib/redux/reduxHolder'
 import type { RowBlock } from '@back/entity/quotation/schema'
 import { getRowsFromStoreByIndex } from '../getter/getRowsFromStoreByIndex'
 

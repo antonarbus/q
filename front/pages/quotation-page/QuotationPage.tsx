@@ -1,5 +1,5 @@
 import { BackgroundMessage } from '@front/entities/quotation/ui/BackgroundMessage'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { arrayShapesEqualityFn } from '@front/entities/quotation/util/arrayShapesEqualityFn'
 import { BlockMany } from '@front/widgets/block'
 import { InfoLeft, InfoRight } from '@front/widgets/quotation/info'

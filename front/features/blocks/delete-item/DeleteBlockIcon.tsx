@@ -4,7 +4,7 @@ import { recalculateTotalPrices } from '@front/entities/quotation/util/recalcula
 import { selectIsLastBlock } from '@front/entities/quotation/redux/selector/selectIsLastBlock'
 import { Tooltip } from '@mui/material'
 import { cls } from '@front/shared/cls'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { fixElementDimensionStyle } from '@front/shared/util/fixElementDimensionStyle'
 import { GoTrash } from 'react-icons/go'
 

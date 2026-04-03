@@ -1,5 +1,5 @@
 import { Box, Tooltip } from '@mui/material'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 
 export const InfoLeft = (): React.ReactNode => {
   const permissionLevel = reduxHolder.useSelector((state) => state.quotation.permissionLevel)

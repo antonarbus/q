@@ -1,5 +1,5 @@
 import { CopyModal } from './CopyModal'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 
 export const Copy = (): React.JSX.Element | null => {
   const isCopyModalVisible = reduxHolder.useSelector((state) => state.copy.isVisible)

@@ -1,6 +1,6 @@
 import { appSlice } from '@front/shared/appSlice'
 import { route } from '@front/shared/lib/react-router-dom/route'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { Link, useNavigate } from 'react-router-dom'
 
 type Props = {

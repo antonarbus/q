@@ -6,7 +6,7 @@ import type {
   OnBlockResizeStart,
   OnBlockResizeStop,
 } from '@front/shared/lib/re-resizable/resizablePaper'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 
 // can be global var for different boqItems as we can change width of one item at a time
 let initNumberColumnWidth = 0

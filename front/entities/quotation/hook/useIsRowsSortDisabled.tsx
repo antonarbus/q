@@ -1,4 +1,4 @@
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { useBlock } from '../provider/block/useBlock'
 import { selectIsLastRow } from '../redux/selector/selectIsLastRow'
 

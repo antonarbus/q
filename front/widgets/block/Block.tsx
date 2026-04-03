@@ -4,7 +4,7 @@ import { BookmarkedRowBlock } from './bookmarked-row-block'
 import { BoqBlock } from './boq-block'
 import { PriceBlock } from './total-price-block'
 import { TextBlock } from './text-block'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { PasteItemBlock } from './paste-block'
 import { AnimatePresence } from 'motion/react'
 

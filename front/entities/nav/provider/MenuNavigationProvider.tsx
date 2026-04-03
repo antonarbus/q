@@ -1,6 +1,6 @@
 import { navItemId } from '@front/entities/nav/navItemId'
 import { useMenuAnimation } from '@front/entities/nav/ui/NavList/NavItem/Menu/functions/useMenuAnimation'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { useRef, useMemo } from 'react'
 import { MenuNavigationContext } from './MenuNavigationContext'
 import type { MenuNavigation } from './types'

@@ -6,7 +6,7 @@ import { BOOKMARK_POS_AT_BLOCKS } from '@front/entities/quotation/redux/bookmark
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 
 import { cls } from '@front/shared/cls'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { asyncDelay } from '@front/shared/util/asyncDelay'
 import type { UseMutationResult } from '@tanstack/react-query'
 import { useCallback } from 'react'

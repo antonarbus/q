@@ -1,7 +1,7 @@
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import type { InfoFormValues } from '@front/entities/quotation/form/types'
 import { useSignalEffect } from '@preact/signals-react'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 
 type Props = {
   id: string

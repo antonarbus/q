@@ -1,5 +1,5 @@
 import { updateSubTotalPriceWithValue } from '@front/entities/quotation/util/updateSubTotalPriceWithValue'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { editorRegistry, getRegistryKey } from '@front/shared/lib/tiptap/editorRegistry'
 import { roundTo } from 'round-to'
 

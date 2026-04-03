@@ -1,6 +1,6 @@
 import { getItemFromStoreById } from '@front/entities/quotation/redux/getter/getItemFromStoreById'
 import type { InfoFormValues } from '@front/entities/quotation/form/types'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { useParams } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 

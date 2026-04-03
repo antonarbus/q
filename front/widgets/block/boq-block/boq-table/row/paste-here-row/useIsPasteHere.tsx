@@ -1,5 +1,5 @@
 import { useRow } from '@front/entities/quotation/provider/row/useRow'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 
 export const useIsPasteHere = (): boolean => {
   const row = useRow()

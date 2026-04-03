@@ -1,5 +1,5 @@
 import { Box, Chip } from '@mui/material'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 
 export const DisplayedRowsCount = (): React.JSX.Element => {
   const displayedRowsCount = reduxHolder.useSelector((state) => state.agGrid.displayedRowsCount)

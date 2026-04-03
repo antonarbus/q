@@ -11,7 +11,7 @@ import type { ResizableProps } from 're-resizable'
 import { useBlock } from '../provider/block/useBlock'
 import { BlockAnimate } from './block-layout'
 import { PasteBlockTextOverlay } from './paste-block-overlay-text'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { useIsFullAppView } from '../util/useIsFullAppView'
 
 type Props = {

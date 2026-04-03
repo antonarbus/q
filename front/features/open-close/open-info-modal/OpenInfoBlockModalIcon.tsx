@@ -4,7 +4,7 @@ import { getBlockFromStoreByIndex } from '@front/entities/quotation/redux/getter
 import { Tooltip } from '@mui/material'
 import { cls } from '@front/shared/cls'
 import { route } from '@front/shared/lib/react-router-dom/route'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { HiOutlineInformationCircle } from 'react-icons/hi2'
 import { useNavigate } from 'react-router-dom'
 

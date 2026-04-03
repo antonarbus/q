@@ -1,4 +1,4 @@
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 
 export const EmailAtBottomOfMenu = (): React.ReactNode => {
   const email = reduxHolder.useSelector((state) => state.user.email)

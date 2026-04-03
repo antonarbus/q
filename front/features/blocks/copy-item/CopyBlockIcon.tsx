@@ -3,7 +3,7 @@ import { useBlock } from '@front/entities/quotation/provider/block/useBlock'
 import { saveBlockHeightByIndex } from '@front/entities/quotation/util/saveBlockHeightByIndex'
 import { Tooltip } from '@mui/material'
 import { cls } from '@front/shared/cls'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { MdCopyAll } from 'react-icons/md'
 import { getCleanPaperHtml } from '@front/shared/util/html-getter/getCleanPaperHtml'
 

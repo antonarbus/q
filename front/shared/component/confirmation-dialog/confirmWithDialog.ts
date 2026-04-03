@@ -1,4 +1,4 @@
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import type { ConfirmationDialogOptions } from './types'
 import { appSlice } from '@front/shared/appSlice'
 

@@ -10,7 +10,7 @@ import {
   TextField,
 } from '@mui/material'
 import { useLayoutEffect, useState } from 'react'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { appSlice } from '@front/shared/appSlice'
 import { resolveDialogConfirm, resolveDialogReject } from './confirmWithDialog'
 

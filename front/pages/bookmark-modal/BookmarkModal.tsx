@@ -10,7 +10,7 @@ import { DescriptionField } from '@front/shared/component/input-field/Descriptio
 import { InfoField } from '@front/shared/component/input-field/InfoField'
 import { NameField } from '@front/shared/component/input-field/NameField'
 import { routerHolder } from '@front/shared/lib/react-router-dom/routerHolder'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { useAnimatedElement } from '@front/shared/util/useAnimatedElement'
 import { FiEdit3 } from 'react-icons/fi'
 import { useUnmount } from 'react-use'

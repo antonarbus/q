@@ -5,8 +5,8 @@ import type {
   ReqBody as Payload,
   ResBody as ResBodyMakeFilePublic,
 } from '@back/api/file/saveFileInfoHandler'
-import { axiosHolder } from '@front/shared/lib/axios'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { axiosHolder } from '@front/shared/lib/axios/axiosHolder'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { asyncDelay } from '@front/shared/util/asyncDelay'
 import { getFileSizeInMb } from '@front/shared/util/getFileSizeInMb'
 import axios from 'axios'

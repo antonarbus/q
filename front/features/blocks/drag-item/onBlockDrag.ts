@@ -1,7 +1,7 @@
 import type { DragStart, DropResult } from '@hello-pangea/dnd'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { recalculateTotalPrices } from '@front/entities/quotation/util/recalculateTotalPrices'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { arrayMoveImmutable } from 'array-move'
 
 export const onBlockDragStart = (_event: DragStart): void => {

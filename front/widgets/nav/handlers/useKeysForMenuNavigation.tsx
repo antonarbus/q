@@ -1,7 +1,7 @@
 import { navSlice } from '@front/entities/nav/navSlice'
 import { useMenuNavigation } from '@front/entities/nav/provider/useMenuNavigation'
 import { getNavItem } from '@front/entities/nav/ui/NavList/NavItem/Menu/functions/getNavItem'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { functionRegistry } from '@front/widgets/nav/functionRegistry'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'

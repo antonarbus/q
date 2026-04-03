@@ -2,7 +2,7 @@ import { useIsLastBlock } from '@front/entities/quotation/hook/useIsLastBlock'
 import { Tooltip } from '@mui/material'
 import { cls } from '@front/shared/cls'
 import { useDragHandleProps } from '@front/shared/lib/hello-pangea-dnd/DragHandleContext'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { MdDragIndicator } from 'react-icons/md'
 
 export const DragBlockIcon = (): React.JSX.Element => {

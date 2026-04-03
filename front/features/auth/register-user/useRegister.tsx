@@ -4,7 +4,7 @@ import { useRegisterUserMutation } from '@front/entities/user/api/useRegisterUse
 import { userSlice } from '@front/entities/user/redux/userSlice'
 import type { Signal } from '@preact/signals-react'
 import { appSlice } from '@front/shared/appSlice'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { asyncDelay } from '@front/shared/util/asyncDelay'
 import type { UseMutationResult } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'

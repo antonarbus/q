@@ -1,7 +1,7 @@
 import type { Editor } from '@tiptap/react'
 import { updateNumberAtHtml } from '@front/shared/lib/tiptap/util/updateNumberAtHtml'
 import { updateNumberAtHtmlIncrementally } from '@front/shared/lib/tiptap/util/updateNumberAtHtmlIncrementally'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { getStringWithNewFormattedNumber } from '@front/shared/util/getStringWithNewFormattedNumber'
 import { getBoqBlockFromStoreByIndex } from '../redux/getter/getBoqBlockFromStoreByIndex'
 import { quotationSlice } from '../redux/quotationSlice'

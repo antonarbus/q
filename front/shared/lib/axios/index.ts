@@ -1,1 +1,0 @@
-export { axiosHolder } from './axiosHolder'

@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import { cls } from '@front/shared/cls'
 import { OutlinedDivWithLabel } from '@front/shared/component/outlined-div-with-label/OutlinedDivWithLabel'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 
 type Props = {
   children: React.ReactNode

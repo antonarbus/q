@@ -1,7 +1,7 @@
 import { useGetQuotationMutation } from '@front/entities/quotation/api/useGetQuotationMutation'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import type { SaveQuotationFormValues } from '@front/entities/quotation/form/types'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { useParams } from 'react-router-dom'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
 

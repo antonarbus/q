@@ -4,7 +4,7 @@ import { usersTable } from '@back/entity/user/db/usersTableSchema'
 import { db } from '@back/shared/lib/drizzle/db'
 import { expect, test } from '@playwright/test'
 import { runtimeConfig } from '@root/config/runtime'
-import { generateId } from '@front/shared/lib/nanoid'
+import { generateId } from '@front/shared/lib/nanoid/generateId'
 
 test.describe.configure({ mode: 'serial' })
 

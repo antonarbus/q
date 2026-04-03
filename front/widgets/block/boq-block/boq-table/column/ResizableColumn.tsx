@@ -7,7 +7,7 @@ import {
   onColumnResizeStart,
   onColumnResizeStop,
 } from '@front/features/blocks/resize-column/onColumnResize'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { Resizable } from 're-resizable'
 
 type Props = {

@@ -1,4 +1,4 @@
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { useRef } from 'react'
 import { useEffectOnce } from 'react-use'
 import { useAnimatedElement } from '../util/useAnimatedElement'

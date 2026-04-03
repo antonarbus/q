@@ -1,4 +1,4 @@
-import { generateId } from '@front/shared/lib/nanoid'
+import { generateId } from '@front/shared/lib/nanoid/generateId'
 
 // assets can be imported as strings using the ?raw suffix
 import boqHeaderDescriptionHtml from './templates/boqHeaderDescription.html?raw'

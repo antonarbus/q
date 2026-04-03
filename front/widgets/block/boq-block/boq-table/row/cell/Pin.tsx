@@ -4,7 +4,7 @@ import { useRow } from '@front/entities/quotation/provider/row/useRow'
 import { selectCellPin } from '@front/entities/quotation/redux/selector/selectCellPin'
 import { Box } from '@mui/material'
 import { cls } from '@front/shared/cls'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { VscPinned } from 'react-icons/vsc'
 
 type Props = {

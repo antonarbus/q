@@ -1,5 +1,5 @@
 import type { NavItem as NavItemType } from '@front/entities/nav/type'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { clickOnNavItem } from '@front/widgets/nav/handlers/clickOnNavItem'
 import { useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'

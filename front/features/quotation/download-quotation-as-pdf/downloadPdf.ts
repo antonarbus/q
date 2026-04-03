@@ -1,7 +1,7 @@
 import { navItemId } from '@front/entities/nav/navItemId'
 import { createLoadingMenuIconMachine } from '@front/entities/nav/state-machine/createLoadingMenuIconMachine'
 import { cls } from '@front/shared/cls'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { downloadBlobAsFile } from '@front/shared/util/downloadBlobAsFile'
 import { toast } from 'sonner'
 import { createActor } from 'xstate'

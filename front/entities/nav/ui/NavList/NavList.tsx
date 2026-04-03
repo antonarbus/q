@@ -1,5 +1,5 @@
 import { navItemId } from '@front/entities/nav/navItemId'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { NavItem } from './NavItem'
 
 export const NavList = (): React.JSX.Element => {

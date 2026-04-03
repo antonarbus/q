@@ -1,6 +1,6 @@
 import { getBoqBlockFromStoreByIndex } from '@front/entities/quotation/redux/getter/getBoqBlockFromStoreByIndex'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { editorRegistry, getRegistryKey } from '@front/shared/lib/tiptap/editorRegistry'
 import { getStringWithNewFormattedNumber } from '@front/shared/util/getStringWithNewFormattedNumber'
 import { roundTo } from 'round-to'

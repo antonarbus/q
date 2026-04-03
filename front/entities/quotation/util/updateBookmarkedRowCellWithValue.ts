@@ -1,6 +1,6 @@
 import type { Editor } from '@tiptap/react'
 import { updateNumberAtHtmlIncrementally } from '@front/shared/lib/tiptap/util/updateNumberAtHtmlIncrementally'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { getNumberFromString } from '@front/shared/util/getNumberFromString'
 import { getStringWithNewFormattedNumber } from '@front/shared/util/getStringWithNewFormattedNumber'
 import { getTextContentFromHtml } from '@front/shared/util/getTextContentFromHtml'

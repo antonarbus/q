@@ -3,7 +3,7 @@ import { getPastePlace } from '@front/entities/copy/getPastePlace'
 import type { CopyPlace } from '@front/entities/copy/types'
 import { cls } from '@front/shared/cls'
 import { route } from '@front/shared/lib/react-router-dom/route'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import isEqual from 'lodash.isequal'
 import { useEffect } from 'react'
 

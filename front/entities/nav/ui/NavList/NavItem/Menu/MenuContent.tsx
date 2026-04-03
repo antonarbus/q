@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { useKeysForMenuNavigation } from '@front/widgets/nav/handlers/useKeysForMenuNavigation'
 import { navSlice } from '../../../../navSlice'
 import { EmailAtBottomOfMenu } from './EmailAtBottomOfMenu'

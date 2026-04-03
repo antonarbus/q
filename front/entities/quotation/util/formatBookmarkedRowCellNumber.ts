@@ -1,4 +1,4 @@
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { getStringWithNewFormattedNumber } from '@front/shared/util/getStringWithNewFormattedNumber'
 import { roundTo } from 'round-to'
 import { BOOKMARK_POS_AT_BLOCKS } from '../redux/bookmarkPosAtBlocks'

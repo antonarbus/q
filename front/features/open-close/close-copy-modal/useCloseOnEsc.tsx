@@ -1,5 +1,5 @@
 import { copySlice } from '@front/entities/copy/copySlice'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { useEffectOnce } from 'react-use'
 
 export const useExitCopyOnEsc = (): void => {

@@ -5,8 +5,8 @@ import priceBlockPreviewHtml from '@front/entities/quotation/templates/priceBloc
 import priceBlockTitleHtml from '@front/entities/quotation/templates/priceBlockTitle.html?raw'
 import priceBlockValueHtml from '@front/entities/quotation/templates/priceBlockValue.html?raw'
 import type { PriceBlock } from '@back/entity/quotation/schema'
-import { generateId } from '@front/shared/lib/nanoid'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { generateId } from '@front/shared/lib/nanoid/generateId'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 
 export const copyPriceBlockTemplate = (event?: React.MouseEvent): void => {
   const priceBlockTemplate: PriceBlock = {

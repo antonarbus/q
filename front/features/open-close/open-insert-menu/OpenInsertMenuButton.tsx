@@ -2,7 +2,7 @@ import { navItemId } from '@front/entities/nav/navItemId'
 import { navSlice } from '@front/entities/nav/navSlice'
 import { Box, IconButton } from '@mui/material'
 import { cls } from '@front/shared/cls'
-import { reduxHolder } from '@front/shared/lib/redux'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { FaPlus } from 'react-icons/fa6'
 import { useIsFullAppView } from '@front/entities/quotation/util/useIsFullAppView'
 
