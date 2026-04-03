@@ -6,6 +6,7 @@ import { OptionItemDescription } from './OptionItemDescription'
 import { OptionItemName } from './OptionItemName'
 
 type Props = {
+  liProps: React.HTMLAttributes<HTMLLIElement>
   inputValue: string
   option: ResBody['bookmarkList'][number]
   onClick: (event: React.MouseEvent) => Promise<void>
@@ -13,21 +14,21 @@ type Props = {
 }
 
 export const SearchOption = (props: Props): React.JSX.Element => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLLIElement>): void => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      props.onClick(event as unknown as React.MouseEvent)
+    }
+  }
+
   return (
     <li
-      role='option'
-      aria-selected={false}
-      tabIndex={0}
+      {...props.liProps}
+      onKeyDown={handleKeyDown}
       onClick={props.onClick}
-      onKeyDown={(event): void => {
-        if (event.key === 'Enter' || event.key === ' ') {
-          props.onClick(event as unknown as React.MouseEvent)
-        }
-      }}
       css={{
         position: 'relative',
         cursor: 'pointer',
-        display: 'block',
+        display: 'block !important',
         borderRadius: '6px',
         padding: '5px !important',
         margin: '2px 4px',

@@ -3,7 +3,7 @@ import { useGetBookmarkListQuery } from '@front/entities/bookmark/api/useGetBook
 import { Autocomplete } from '@mui/material'
 import { cls } from '@front/shared/cls'
 import { reduxHolder } from '@front/shared/lib/redux'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { PaperComponent } from './PaperComponent'
 import { SearchOption } from './SearchOption'
 import { renderInput } from './renderInput'
@@ -22,6 +22,7 @@ export const Search = (): React.ReactNode => {
   }, [email])
 
   const [isAutocompleteOpen, setIsAutocompleteOpen] = useState(false)
+  const isProcessingRef = useRef(false)
 
   const isCopyModalVisible = reduxHolder.useSelector((state) => state.copy.isVisible)
 
@@ -38,6 +39,25 @@ export const Search = (): React.ReactNode => {
         setIsAutocompleteOpen(true)
       }}
       onClose={() => {
+        if (isProcessingRef.current === true) {
+          return
+        }
+
+        setIsAutocompleteOpen(false)
+      }}
+      onChange={async (_event, value) => {
+        if (value === null || typeof value === 'string') {
+          return
+        }
+
+        isProcessingRef.current = true
+
+        await copyBookmarkAtSearch.mutateAsync({
+          bookmarkId: value.id,
+          cursorPos: { x: window.innerWidth / 2, y: window.innerHeight / 2 },
+        })
+
+        isProcessingRef.current = false
         setIsAutocompleteOpen(false)
       }}
       className={cls.search}
@@ -65,12 +85,13 @@ export const Search = (): React.ReactNode => {
       popupIcon={null}
       renderInput={renderInput}
       renderOption={(
-        _props: React.HTMLAttributes<HTMLLIElement>,
+        liProps: React.HTMLAttributes<HTMLLIElement>,
         option: ResBody['bookmarkList'][number],
       ): React.JSX.Element => {
         return (
           <SearchOption
             key={option.id}
+            liProps={liProps}
             inputValue={inputValue}
             option={option}
             isLoading={isLoading === true && option.id === copyBookmarkAtSearch.bookmarkId}
