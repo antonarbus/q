@@ -12,9 +12,9 @@
     "jsx-a11y",
     "node",
     "jsdoc",
+    "jest",
+    "vitest"
     // "import"
-    // "vitest"
-    "jest"
   ],
   "env": {
     "browser": true,
@@ -77,6 +77,8 @@
     "react-perf/jsx-no-new-array-as-prop": "off", // react compiler takes care of memoization
     "jsx-a11y/no-autofocus": "off",
     "jsdoc/require-param": "off", // not useful with TS
-    "jsdoc/require-returns": "off" // not useful with TS
+    "jsdoc/require-returns": "off", // not useful with TS
+    "vitest/no-importing-vitest-globals": "off", // globals are not enabled, imports are required
+    "vitest/consistent-test-filename": ["error", { "pattern": ".*\\.(test|spec)\\.[tj]sx?$" }]
   }
 }
