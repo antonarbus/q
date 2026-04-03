@@ -8,24 +8,21 @@ type Props = {
 }
 
 export const deleteFromQuotationListCache = (props: Props): void => {
-  queryClient.setQueriesData<ResBody>(
-    { queryKey: [queryKey.getQuotationList] },
-    (cacheData) => {
-      const updatedCacheData = produce(cacheData, (draft) => {
-        if (draft?.quotationList === undefined) {
-          return
-        }
+  queryClient.setQueriesData<ResBody>({ queryKey: [queryKey.getQuotationList] }, (cacheData) => {
+    const updatedCacheData = produce(cacheData, (draft) => {
+      if (draft?.quotationList === undefined) {
+        return
+      }
 
-        const index = draft.quotationList.findIndex((quotation) => quotation.id === props.id)
+      const index = draft.quotationList.findIndex((quotation) => quotation.id === props.id)
 
-        const foundInCache = index !== -1
+      const foundInCache = index !== -1
 
-        if (foundInCache === true) {
-          draft.quotationList.splice(index, 1)
-        }
-      })
+      if (foundInCache === true) {
+        draft.quotationList.splice(index, 1)
+      }
+    })
 
-      return updatedCacheData
-    },
-  )
+    return updatedCacheData
+  })
 }

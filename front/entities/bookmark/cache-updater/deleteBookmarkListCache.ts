@@ -4,18 +4,15 @@ import { queryKey } from '@front/shared/lib/tanstack-query/queryKey'
 import { produce } from 'immer'
 
 export const deleteBookmarkListCache = (): void => {
-  queryClient.setQueriesData<ResBody>(
-    { queryKey: [queryKey.getBookmarkList] },
-    (cacheData) => {
-      const updatedCacheData = produce(cacheData, (draft) => {
-        if (draft?.bookmarkList === undefined) {
-          return
-        }
+  queryClient.setQueriesData<ResBody>({ queryKey: [queryKey.getBookmarkList] }, (cacheData) => {
+    const updatedCacheData = produce(cacheData, (draft) => {
+      if (draft?.bookmarkList === undefined) {
+        return
+      }
 
-        draft.bookmarkList = []
-      })
+      draft.bookmarkList = []
+    })
 
-      return updatedCacheData
-    },
-  )
+    return updatedCacheData
+  })
 }

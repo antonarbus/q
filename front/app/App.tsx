@@ -1,19 +1,20 @@
 import './router'
 import './axiosConfig'
 import { store } from './redux'
+import { queryClient } from '@front/shared/lib/tanstack-query/queryClient'
+import { QueryDevtoolsProductionHidden } from '@front/shared/lib/tanstack-query/QueryDevtoolsProductionHidden'
+import { routerHolder } from '@front/shared/lib/react-router-dom/routerHolder'
+
+import { themeClient } from '@front/shared/theme'
 import { ThemeProvider } from '@mui/material/styles'
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
-import { queryClient } from '@front/shared/lib/tanstack-query/queryClient'
-import { routerHolder } from '@front/shared/lib/react-router-dom/routerHolder'
-import { themeClient } from '@front/shared/theme'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { enGB } from 'date-fns/locale'
 import { Provider } from 'react-redux'
 import { RouterProvider } from 'react-router-dom'
 import { GlobalStyles } from './GlobalStyles'
-import { QueryDevtoolsProductionHidden } from '@front/shared/lib/tanstack-query/QueryDevtoolsProductionHidden'
 
 export const App = (): React.JSX.Element => {
   return (

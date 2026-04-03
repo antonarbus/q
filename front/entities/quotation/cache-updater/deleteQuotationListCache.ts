@@ -4,18 +4,15 @@ import { queryKey } from '@front/shared/lib/tanstack-query/queryKey'
 import { produce } from 'immer'
 
 export const deleteQuotationListCache = (): void => {
-  queryClient.setQueriesData<ResBody>(
-    { queryKey: [queryKey.getQuotationList] },
-    (cacheData) => {
-      const updatedCacheData = produce(cacheData, (draft) => {
-        if (draft?.quotationList === undefined) {
-          return
-        }
+  queryClient.setQueriesData<ResBody>({ queryKey: [queryKey.getQuotationList] }, (cacheData) => {
+    const updatedCacheData = produce(cacheData, (draft) => {
+      if (draft?.quotationList === undefined) {
+        return
+      }
 
-        draft.quotationList = []
-      })
+      draft.quotationList = []
+    })
 
-      return updatedCacheData
-    },
-  )
+    return updatedCacheData
+  })
 }
