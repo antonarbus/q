@@ -47,20 +47,30 @@
     "eslint/operator-assignment": "off",
     "eslint/sort-imports": "off",
     "eslint/sort-keys": "off",
+    "import/exports-last": "off",
     "import/max-dependencies": "off",
     "import/no-anonymous-default-export": "off",
     "import/no-default-export": "off",
     "import/no-named-export": "off",
     "import/no-nodejs-modules": "off",
     "import/no-unassigned-import": "off",
-    "import/exports-last": "off",
     "import/prefer-default-export": "off",
     "jest/require-hook": "off",
+    "jsdoc/require-param": "off", // not useful with TS
+    "jsdoc/require-returns": "off", // not useful with TS
+    "jsx-a11y/no-autofocus": "off",
     "oxc/no-async-await": "off",
     "oxc/no-optional-chaining": "off",
     "oxc/no-rest-spread-properties": "off",
+    "react-perf/jsx-no-jsx-as-prop": "off", // react compiler takes care of memoization
+    "react-perf/jsx-no-new-array-as-prop": "off", // react compiler takes care of memoization
+    "react-perf/jsx-no-new-function-as-prop": "off", // react compiler takes care of memoization
+    "react-perf/jsx-no-new-object-as-prop": "off", // react compiler takes care of memoization
+    "react/exhaustive-deps": "off",
     "react/jsx-filename-extension": ["error", { "extensions": ["jsx", "tsx"] }],
     "react/jsx-max-depth": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/no-unknown-property": ["error", { "ignore": ["css"] }],
     "react/react-in-jsx-scope": "off",
     "typescript/consistent-type-definitions": ["error", "type"],
     "unicorn/filename-case": ["error", { "cases": { "camelCase": true, "pascalCase": true } }],
@@ -69,17 +79,7 @@
     "unicorn/no-null": "off",
     "unicorn/prefer-global-this": "off",
     "unicorn/require-post-message-target-origin": "off",
-    "react/no-unknown-property": ["error", { "ignore": ["css"] }],
-    "react/exhaustive-deps": "off",
-    "react/jsx-props-no-spreading": "off",
-    "react-perf/jsx-no-jsx-as-prop": "off", // react compiler takes care of memoization
-    "react-perf/jsx-no-new-function-as-prop": "off", // react compiler takes care of memoization
-    "react-perf/jsx-no-new-object-as-prop": "off", // react compiler takes care of memoization
-    "react-perf/jsx-no-new-array-as-prop": "off", // react compiler takes care of memoization
-    "jsx-a11y/no-autofocus": "off",
-    "jsdoc/require-param": "off", // not useful with TS
-    "jsdoc/require-returns": "off", // not useful with TS
-    "vitest/no-importing-vitest-globals": "off", // globals are not enabled, imports are required
-    "vitest/consistent-test-filename": ["error", { "pattern": ".*\\.(test|spec)\\.[tj]sx?$" }]
+    "vitest/consistent-test-filename": ["error", { "pattern": ".*\\.(test|spec)\\.[tj]sx?$" }],
+    "vitest/no-importing-vitest-globals": "off" // globals are not enabled, imports are required
   }
 }
