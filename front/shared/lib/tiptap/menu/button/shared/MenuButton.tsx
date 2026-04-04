@@ -8,6 +8,7 @@ type Props = {
   disabled?: boolean
   title: string
   children: React.ReactNode
+  skipBlurFocus?: boolean
 }
 
 export const MenuButton = (props: Props): React.JSX.Element => {
@@ -15,13 +16,15 @@ export const MenuButton = (props: Props): React.JSX.Element => {
 
   const handleClick = useCallback(() => {
     props.onClick()
-    // Consume the BubbleMenu plugin's preventHide flag via a synchronous blur→focus cycle.
-    // Without this, preventHide stays true after the click (event.preventDefault() on
-    // mousedown prevents the editor from blurring, so the flag is never consumed).
-    // blur+focus happen in the same synchronous task, so there is no browser repaint
-    // and no visible selection flash.
-    editor.view.dom.blur()
-    editor.view.dom.focus()
+    if (props.skipBlurFocus !== true) {
+      // Consume the BubbleMenu plugin's preventHide flag via a synchronous blur→focus cycle.
+      // Without this, preventHide stays true after the click (event.preventDefault() on
+      // mousedown prevents the editor from blurring, so the flag is never consumed).
+      // blur+focus happen in the same synchronous task, so there is no browser repaint
+      // and no visible selection flash.
+      editor.view.dom.blur()
+      editor.view.dom.focus()
+    }
   }, [editor, props])
 
   return (
