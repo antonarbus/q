@@ -7,7 +7,7 @@ import { InsertTableButton } from './button/InsertTableButton'
 import { YouTubeButton } from './button/YouTubeButton'
 import { HorizontalRuleButton } from './button/HorizontalRuleButton'
 import { InsertLinkButton } from './button/InsertLinkButton'
-import { UploadFileButton } from './button/UploadFileButton'
+import { UploadButtonInFloatingMenu } from './button/UploadButtonInFloatingMenu'
 import { TiptapMenuLayout } from '../style/TiptapMenuLayout'
 import { ButtonsGroupLayout } from '../style/ButtonsGroupLayout'
 import { IoIosAddCircleOutline } from 'react-icons/io'
@@ -205,7 +205,7 @@ export const FloatingLineMenu = (): React.ReactNode => {
             <YouTubeButton />
             <HorizontalRuleButton />
             <InsertLinkButton />
-            {tiptapCtx.isFullAppView && <UploadFileButton />}
+            {tiptapCtx.isFullAppView && <UploadButtonInFloatingMenu />}
           </ButtonsGroupLayout>
         </TiptapMenuLayout>
       )}

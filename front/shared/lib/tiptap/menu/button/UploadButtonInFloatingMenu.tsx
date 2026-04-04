@@ -4,7 +4,7 @@ import { MenuButton } from './shared/MenuButton'
 import { TbUpload } from 'react-icons/tb'
 import { useTiptapCtx } from '../../provider/useTiptapCtx'
 
-export const UploadFileButton = (): React.JSX.Element | null => {
+export const UploadButtonInFloatingMenu = (): React.JSX.Element | null => {
   const { editor } = useTiptap()
   const tiptapCtx = useTiptapCtx()
   const fileInputRef = useRef<HTMLInputElement | null>(null)
