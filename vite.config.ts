@@ -86,8 +86,6 @@ export default {
       output: {
         // https://rollupjs.org/configuration-options/#output-manualchunks
         manualChunks: (pathAbsolute: string): string | undefined => {
-          // console.log('🚀 ~ pathAbsolute:', pathAbsolute)
-
           if (pathAbsolute.includes('/node_modules/.bun/ag-grid')) {
             return 'ag-grid'
           }
