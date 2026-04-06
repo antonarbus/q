@@ -28,6 +28,9 @@ export const queryKey = {
   // visitors
   countUniqueDailyVisitors: 'countUniqueDailyVisitors',
   getUniqueDailyVisitors: 'getUniqueDailyVisitors',
+  // stripe
+  stripeAccountStatus: 'stripeAccountStatus',
+  stripeCreatePaymentLink: 'stripeCreatePaymentLink',
   // dev
   healthCheck: 'healthCheck',
 } as const

@@ -1,16 +1,16 @@
 import { index, pgTable, timestamp, varchar } from 'drizzle-orm/pg-core'
-import { generateId } from '@back/shared/lib/nanoid'
+import { nanoid } from 'nanoid'
 
 export const bookmarksTable = pgTable(
   'bookmarks',
   {
     id: varchar({ length: 8 })
       .primaryKey()
-      .$defaultFn(() => generateId()),
+      .$defaultFn(() => nanoid(8)),
     email: varchar({ length: 320 }).notNull(),
     type: varchar({
       length: 128,
-      enum: ['boq', 'text', 'price', 'row', 'paste'],
+      enum: ['boq', 'text', 'price', 'row', 'paste', 'payment'],
     }).notNull(),
     name: varchar({ length: 255 }).notNull().default(''),
     category: varchar({ length: 100 }).notNull().default(''),

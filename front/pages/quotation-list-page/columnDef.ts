@@ -53,6 +53,10 @@ export const columnDefs: ColDef<ResBody['quotationList'][number]>[] = [
     field: 'viewedAt',
     headerName: 'viewed',
   }),
+  getDateColDef({
+    field: 'paidAt',
+    headerName: 'paid',
+  }),
   {
     field: 'access',
     headerName: 'shared with',

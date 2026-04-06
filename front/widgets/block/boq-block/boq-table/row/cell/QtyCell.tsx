@@ -14,10 +14,10 @@ import { focusPriceCellAtBoqBlock } from '@front/features/blocks/focus-price-cel
 import { updateQtyCellAtBoqBlock } from '@front/features/blocks/update-qty-cell-at-boq-block/updateQtyCellAtBoqBlock'
 import { formatQtyCellAtBoqBlock } from '@front/features/blocks/format-qty-cell-at-boq-block/formatQtyCellAtBoqBlock'
 import { getRegistryKey } from '@front/shared/lib/tiptap/editorRegistry'
-import { useIsFullAppView } from '@front/entities/quotation/util/useIsFullAppView'
+import { useIsEditorView } from '@front/entities/quotation/util/useIsEditorView'
 
 export const QtyCell = (): React.JSX.Element => {
-  const isFullAppView = useIsFullAppView()
+  const isEditorView = useIsEditorView()
   const block = useBlock()
   const row = useRow()
 
@@ -35,7 +35,7 @@ export const QtyCell = (): React.JSX.Element => {
           blockIndex: block.index,
           rowIndex: row.index,
         })}
-        isFullAppView={isFullAppView}
+        isEditorView={isEditorView}
         className='td qty'
         placeholder='Qty...'
         contentGetter={() =>

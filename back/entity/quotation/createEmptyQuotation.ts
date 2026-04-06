@@ -18,6 +18,7 @@ export const createEmptyQuotation = (overrides: Partial<Quotation>): Quotation =
   category: '',
   desc: '',
   info: '',
+  paidAt: null,
   blocks: [],
   permissionLevel: 'NEW',
   ...overrides,

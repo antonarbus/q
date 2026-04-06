@@ -22,6 +22,7 @@ export const createMockQuotationOfLatestVersion = <QuotationType = Quotation>(
   category: 'quotation category',
   desc: 'quotation description',
   info: 'quotation information',
+  paidAt: null,
   blocks: [
     {
       id: 'block-1',

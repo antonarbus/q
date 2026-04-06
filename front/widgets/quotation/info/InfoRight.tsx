@@ -2,15 +2,15 @@ import { OpenInfoQuotationIcon } from '@front/features/open-close/open-info-moda
 import { OpenShareQuotationIcon } from '@front/features/open-close/open-share-quotation-modal'
 import { Layout } from './Layout'
 import { QuotationId } from './QuotationId'
-import { useIsFullAppView } from '@front/entities/quotation/util/useIsFullAppView'
+import { useIsEditorView } from '@front/entities/quotation/util/useIsEditorView'
 
 export const InfoRight = (): React.ReactNode => {
-  const isFullAppView = useIsFullAppView()
+  const isEditorView = useIsEditorView()
 
   return (
     <Layout>
-      {isFullAppView && <OpenInfoQuotationIcon />}
-      {isFullAppView && <OpenShareQuotationIcon />}
+      {isEditorView && <OpenInfoQuotationIcon />}
+      {isEditorView && <OpenShareQuotationIcon />}
       <QuotationId />
     </Layout>
   )

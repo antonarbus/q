@@ -20,6 +20,7 @@ export const navItemId = {
   textItem: 'textItem',
   boqItem: 'boqItem',
   priceItem: 'priceItem',
+  paymentItem: 'paymentItem',
   row: 'row',
   back: 'back',
   admin: 'admin',

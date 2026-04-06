@@ -2,6 +2,7 @@ import { BlockProvider } from '@front/entities/quotation/provider/block/BlockPro
 import type { BlockItem } from '@back/entity/quotation/schema'
 import { BookmarkedRowBlock } from './bookmarked-row-block'
 import { BoqBlock } from './boq-block'
+import { PaymentBlock } from './payment-block/PaymentBlock'
 import { PriceBlock } from './total-price-block'
 import { TextBlock } from './text-block'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
@@ -33,6 +34,7 @@ export const Block = (props: Props): React.ReactNode => {
       {props.block.type === 'boq' && <BoqBlock />}
       {props.block.type === 'price' && <PriceBlock />}
       {props.block.type === 'row' && <BookmarkedRowBlock />}
+      {props.block.type === 'payment' && <PaymentBlock />}
       <AnimatePresence>
         {shouldShowPasteAfter === true && <PasteItemBlock key='paste-after' />}
       </AnimatePresence>

@@ -22,7 +22,7 @@ export const TiptapEditor = (): React.ReactNode => {
   const editor = useEditor(
     {
       extensions,
-      editable: tiptapCtx.isFullAppView,
+      editable: tiptapCtx.isEditorView,
       content: tiptapCtx.contentGetter(),
       onCreate: tiptapCtx.onCreate,
       onUpdate: tiptapCtx.onChange,
@@ -70,7 +70,7 @@ export const TiptapEditor = (): React.ReactNode => {
     >
       <Tiptap editor={editor}>
         <TiptapMenu />
-        {tiptapCtx.isFullAppView && <UploadButton />}
+        {tiptapCtx.isEditorView && <UploadButton />}
         <Tiptap.Content className={cls.tiptapContent} style={{ flexGrow: 1 }} />
       </Tiptap>
       <DropHereText />

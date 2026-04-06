@@ -193,6 +193,7 @@ export const getQuotationHandler: RouterHandler = async (req) => {
       quotationUpdated === undefined
         ? quotationValidationResult.data.openedAt
         : quotationUpdated.openedAt,
+    paidAt: quotationSelected.paidAt,
     permissionLevel: quotationPermissionLevel,
   }
 

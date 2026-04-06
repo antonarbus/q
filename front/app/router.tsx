@@ -12,6 +12,7 @@ import { ErrorPage } from '@front/pages/error-page/ErrorPage'
 import { InfoModal } from '@front/pages/info-modal/InfoModal'
 import { SaveQuotationModal } from '@front/pages/save-quotation-modal/SaveQuotationModal'
 import { SettingsModal } from '@front/pages/settings-modal/SettingsModal'
+import { StripeConnectModal } from '@front/pages/stripe-connect-modal/StripeConnectModal'
 import { ShareQuotationModal } from '@front/pages/share-quotation-modal/ShareQuotationModal'
 import { TestPage } from '@front/pages/test-page/TestPage'
 import { LoadingDotsOverlay } from '@front/shared/component/loading-dots-overlay'
@@ -107,6 +108,10 @@ const authRoutes: RouteObject[] = [
   {
     path: route.settings,
     element: <SettingsModal />,
+  },
+  {
+    path: route.stripeConnect,
+    element: <StripeConnectModal />,
   },
 ]
 

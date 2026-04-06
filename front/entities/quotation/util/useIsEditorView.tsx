@@ -1,6 +1,6 @@
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 
-export const useIsFullAppView = (): boolean => {
+export const useIsEditorView = (): boolean => {
   const permissionLevel = reduxHolder.useSelector((state) => state.quotation.permissionLevel)
 
   if (

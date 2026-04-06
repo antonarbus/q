@@ -1,6 +1,7 @@
 import { useGetFileListStatsQuery } from '@front/entities/file/api/useGetFileListStatsQuery'
+import { ConnectStripeButton } from '@front/features/user/connect-stripe/ConnectStripeButton'
 import { DeleteFileIcon } from '@front/features/file/delete-file/DeleteFileIcon'
-import { Avatar, Box, Collapse } from '@mui/material'
+import { Avatar, Box, Collapse, Divider } from '@mui/material'
 import { BackdropWithSlidableModal } from '@front/shared/component/BackdropWithSlidableModal'
 import { CardCustom } from '@front/shared/component/CardCustom'
 import { RotatingLoaderIcon } from '@front/shared/component/RotatingLoaderIcon'
@@ -62,14 +63,19 @@ export const SettingsModal = (): React.JSX.Element => {
             gap: '20px',
           }}
         >
-          {getFileListStatsQuery.isPending === true ? (
+          {getFileListStatsQuery.isPending === true && (
             <RotatingLoaderIcon
               style={{
                 height: '20px',
                 width: '20px',
               }}
             />
-          ) : null}
+          )}
+          <Divider sx={{ width: '100%' }} />
+          <Box sx={{ textAlign: 'center' }}>
+            <ConnectStripeButton />
+          </Box>
+          <Divider sx={{ width: '100%' }} />
           {getFileListStatsQuery.isSuccess === true ? (
             <>
               <Box

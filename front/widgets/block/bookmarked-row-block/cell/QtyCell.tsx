@@ -8,10 +8,10 @@ import { updateQtyCellAtBookmarkBlock } from '@front/features/blocks/update-qty-
 import { Box } from '@mui/material'
 import { TextEditor } from '@front/shared/component/TextEditor'
 import { getRegistryKey } from '@front/shared/lib/tiptap/editorRegistry'
-import { useIsFullAppView } from '@front/entities/quotation/util/useIsFullAppView'
+import { useIsEditorView } from '@front/entities/quotation/util/useIsEditorView'
 
 export const QtyCell = (): React.JSX.Element => {
-  const isFullAppView = useIsFullAppView()
+  const isEditorView = useIsEditorView()
 
   const stylesForResizableCell = useStylesForResizableCell({
     blockIndex: BOOKMARK_POS_AT_BLOCKS,
@@ -27,7 +27,7 @@ export const QtyCell = (): React.JSX.Element => {
           blockIndex: BOOKMARK_POS_AT_BLOCKS,
           rowIndex: 0,
         })}
-        isFullAppView={isFullAppView}
+        isEditorView={isEditorView}
         className='td qty'
         placeholder='Qty...'
         contentGetter={() => getHtmlOfBookmarkedRowCellFromStoreByIndex({ cellKey: 'qty' })}

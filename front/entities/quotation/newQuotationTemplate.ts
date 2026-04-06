@@ -44,6 +44,7 @@ export const newQuotationTemplate: Quotation = {
     level: 'nobody',
     userList: [],
   },
+  paidAt: null,
   blocks: [
     {
       id: generateId(),
@@ -281,6 +282,27 @@ export const newQuotationTemplate: Quotation = {
       price: {
         html: totalPriceValueHtml,
         value: 140,
+      },
+    },
+    {
+      id: generateId(),
+      bookmarkSchemaVersion: 2,
+      name: '',
+      category: '',
+      desc: '',
+      info: '',
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      type: 'payment',
+      email: 'unknown@gmail.com',
+      width: 400,
+      height: 200,
+      payment: {
+        amount: 0,
+        currency: 'usd',
+        description: '',
+        stripePaymentLinkId: null,
+        stripePaymentLinkUrl: null,
       },
     },
     {

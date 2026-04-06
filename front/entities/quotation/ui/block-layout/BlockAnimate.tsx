@@ -23,6 +23,7 @@ type Props = {
   onItemResize?: OnBlockResize
   onItemResizeStop?: OnBlockResizeStop
   className?: string
+  disableResize?: boolean
 }
 
 export const BlockAnimate = (props: Props): React.JSX.Element => {
@@ -74,6 +75,7 @@ export const BlockAnimate = (props: Props): React.JSX.Element => {
       )}
       <ResizableBlockPaper
         autoWidth={props.autoWidth}
+        disableResize={props.disableResize}
         minWidth={props.minWidth}
         onItemResize={props.onItemResize}
         onItemResizeStart={props.onItemResizeStart}

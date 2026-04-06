@@ -39,6 +39,7 @@ import { updateBoqColumnNameText } from './reducer/update/updateBoqColumnNameTex
 import { updateBoqHeaderText } from './reducer/update/updateBoqHeaderText'
 import { updateCell } from './reducer/update/updateCell'
 import { updateItemInfo } from './reducer/update/updateItemInfo'
+import { updatePayment } from './reducer/update/updatePayment'
 import { updatePrice } from './reducer/update/updatePrice'
 import { updatePriceTitle } from './reducer/update/updatePriceTitle'
 import { updateQuotationInfo } from './reducer/update/updateQuotationInfo'
@@ -65,6 +66,7 @@ const initialState: Quotation = {
     level: 'nobody',
     userList: [],
   },
+  paidAt: null,
   blocks: [],
 }
 
@@ -101,6 +103,7 @@ export const quotationSlice = createSlice({
     updateSubTotalPrice,
     updatePriceTitle,
     updatePrice,
+    updatePaymentBlock: updatePayment,
     updateQuotationInfo,
     updateItemInfo,
   },

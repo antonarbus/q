@@ -4,10 +4,10 @@ import { TextEditor } from '@front/shared/component/TextEditor'
 import { correctTotalPriceAtPriceBlock } from '@front/features/blocks/correct-total-price-at-price-block/correctTotalPriceAtPriceBlock'
 import { updatePriceValueAtPriceBlock } from '@front/features/blocks/update-price-value-at-price-block/updatePriceValueAtPriceBlock'
 import { getRegistryKey } from '@front/shared/lib/tiptap/editorRegistry'
-import { useIsFullAppView } from '@front/entities/quotation/util/useIsFullAppView'
+import { useIsEditorView } from '@front/entities/quotation/util/useIsEditorView'
 
 export const PriceValue = (): React.JSX.Element => {
-  const isFullAppView = useIsFullAppView()
+  const isEditorView = useIsEditorView()
   const block = useBlock()
 
   return (
@@ -17,7 +17,7 @@ export const PriceValue = (): React.JSX.Element => {
         blockIndex: block.index,
         rowIndex: null,
       })}
-      isFullAppView={isFullAppView}
+      isEditorView={isEditorView}
       className='price-value'
       placeholder='Total price...'
       contentGetter={() => getHtmlOfPriceFromStoreByIndex({ blockIndex: block.index })}

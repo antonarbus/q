@@ -205,7 +205,7 @@ export const FloatingLineMenu = (): React.ReactNode => {
             <YouTubeButton />
             <HorizontalRuleButton />
             <InsertLinkButton />
-            {tiptapCtx.isFullAppView && <UploadButtonInFloatingMenu />}
+            {tiptapCtx.isEditorView && <UploadButtonInFloatingMenu />}
           </ButtonsGroupLayout>
         </TiptapMenuLayout>
       )}

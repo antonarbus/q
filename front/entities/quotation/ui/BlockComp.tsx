@@ -12,7 +12,7 @@ import { useBlock } from '../provider/block/useBlock'
 import { BlockAnimate } from './block-layout'
 import { PasteBlockTextOverlay } from './paste-block-overlay-text'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
-import { useIsFullAppView } from '../util/useIsFullAppView'
+import { useIsEditorView } from '../util/useIsEditorView'
 
 type Props = {
   children: React.ReactNode
@@ -25,6 +25,7 @@ type Props = {
   rightBlockActionButtons?: React.ReactNode
   className?: string
   draggable?: boolean
+  disableResize?: boolean
 }
 
 export const BlockComp = (props: Props): React.JSX.Element => {
@@ -32,7 +33,7 @@ export const BlockComp = (props: Props): React.JSX.Element => {
   const isLastBlock = useIsLastBlock()
   const isCopyModalVisible = reduxHolder.useSelector((state) => state.copy.isVisible)
   const isDragDisabled = isLastBlock || isCopyModalVisible
-  const isFullAppView = useIsFullAppView()
+  const isEditorView = useIsEditorView()
 
   const blockContent = (
     <DragHandleContext.Provider value={null}>
@@ -42,8 +43,9 @@ export const BlockComp = (props: Props): React.JSX.Element => {
         autoWidth={props.autoWidth}
         minWidth={props.minWidth}
         blockHeight={block.item.height}
-        leftItemActionButtons={isFullAppView && props.leftBlockActionButtons}
-        rightItemActionButtons={isFullAppView && props.rightBlockActionButtons}
+        disableResize={props.disableResize}
+        leftItemActionButtons={isEditorView && props.leftBlockActionButtons}
+        rightItemActionButtons={isEditorView && props.rightBlockActionButtons}
         onItemResize={props.onBlockResize}
         onItemResizeStart={props.onBlockResizeStart}
         onItemResizeStop={props.onBlockResizeStop}
@@ -77,8 +79,9 @@ export const BlockComp = (props: Props): React.JSX.Element => {
                 autoWidth={props.autoWidth}
                 minWidth={props.minWidth}
                 blockHeight={block.item.height}
-                leftItemActionButtons={isFullAppView && props.leftBlockActionButtons}
-                rightItemActionButtons={isFullAppView && props.rightBlockActionButtons}
+                disableResize={props.disableResize}
+                leftItemActionButtons={isEditorView && props.leftBlockActionButtons}
+                rightItemActionButtons={isEditorView && props.rightBlockActionButtons}
                 onItemResize={props.onBlockResize}
                 onItemResizeStart={props.onBlockResizeStart}
                 onItemResizeStop={props.onBlockResizeStop}

@@ -6,7 +6,7 @@ export const TiptapProvider = (props: Props): React.JSX.Element => {
   const value = useMemo(() => {
     return {
       registryKey: props.registryKey,
-      isFullAppView: props.isFullAppView,
+      isEditorView: props.isEditorView,
       placeholder: props.placeholder,
       contentGetter: props.contentGetter,
       className: props.className,

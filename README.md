@@ -261,6 +261,117 @@ instance.queryClient.invalidateQueries({ queryKey: [...] })
 
 ---
 
+## Stripe Payments
+
+Clients can receive payments directly to their own Stripe accounts through the app. Each user connects their Stripe account once, then adds a **Payment Block** to any quotation. The external client opens the offer, clicks "Pay Now", and is taken to Stripe's hosted payment page. When payment completes, the quotation is automatically marked as paid.
+
+```
+User Settings → Connect Stripe Account (OAuth)
+      ↓
+Offer Editor → Add Payment Block → fill amount / currency / description → Generate Payment Link
+      ↓
+Share offer URL with client → client clicks "Pay Now" → Stripe hosted checkout
+      ↓
+Payment succeeds → Stripe webhook → quotation marked paid → "PAID" badge appears
+```
+
+### How it works
+
+- **Stripe Connect** (OAuth) — each user connects their own Stripe account. Payments go directly to that account; the platform is never in the money flow.
+- **Payment Links** — server-side generated Stripe Payment Links (no Stripe.js on the frontend). The link is stored in the quotation and rendered as a button for the client.
+- **Webhook** — Stripe posts `checkout.session.completed` to `/api/stripe/webhook`. The handler verifies the signature, reads `metadata.quotationId`, and sets `paidAt` in the database.
+
+### Required secrets
+
+Four secrets must be added to your secret manager (GCP Secret Manager in production, `.env` locally) before the feature is usable:
+
+| Secret                  | Where to get it                                                                                                                |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `STRIPE_SECRET_KEY`     | Stripe Dashboard → Developers → API keys → Secret key (`sk_live_…` or `sk_test_…`)                                             |
+| `STRIPE_CLIENT_ID`      | Stripe Dashboard → Settings → Connect → [Platform profile](https://dashboard.stripe.com/settings/connect) → Client ID (`ca_…`) |
+| `STRIPE_WEBHOOK_SECRET` | Stripe Dashboard → Developers → Webhooks → your endpoint → Signing secret (`whsec_…`)                                          |
+| `JWT_ACCESS_SECRET`     | already exists — used to sign the OAuth `state` parameter                                                                      |
+
+### Step-by-step setup
+
+#### 1. Create a Stripe account
+
+Go to [stripe.com](https://stripe.com) and register. You can stay in **test mode** throughout development.
+
+Stripe docs: [stripe.com/docs](https://stripe.com/docs)
+
+#### 2. Get your API key
+
+[Dashboard → Developers → API keys](https://dashboard.stripe.com/apikeys) — copy the **Secret key** (`sk_test_…`).
+
+#### 3. Enable Stripe Connect
+
+Go to [Dashboard → Settings → Connect](https://dashboard.stripe.com/settings/connect) and complete the **Platform profile**:
+
+- Business type: Platform
+- Integration type: OAuth
+
+Copy the **Client ID** (`ca_…`) from the Connect settings page.
+
+Add your OAuth redirect URI under **Connect → Settings → Redirects**:
+
+```
+https://<YOUR_DOMAIN>/api/stripe/connect-callback
+```
+
+For local development:
+
+```
+http://localhost:4000/api/stripe/connect-callback
+```
+
+#### 4. Register a webhook endpoint
+
+[Dashboard → Developers → Webhooks → Add endpoint](https://dashboard.stripe.com/webhooks):
+
+- Endpoint URL: `https://<YOUR_DOMAIN>/api/stripe/webhook`
+- Events to listen for: `checkout.session.completed`
+- Check **"Listen to events on Connected accounts"** (required for Connect)
+
+Copy the **Signing secret** (`whsec_…`).
+
+For local development use the [Stripe CLI](https://stripe.com/docs/stripe-cli):
+
+```bash
+stripe listen --forward-to localhost:4000/api/stripe/webhook
+# prints a whsec_… secret — use that as STRIPE_WEBHOOK_SECRET locally
+```
+
+#### 5. Add secrets to your environment
+
+**Local** — add to your `.env` (or equivalent):
+
+```
+STRIPE_SECRET_KEY=sk_test_…
+STRIPE_CLIENT_ID=ca_…
+STRIPE_WEBHOOK_SECRET=whsec_…
+```
+
+**Production** — add to GCP Secret Manager under the same names.
+
+#### 6. Push the DB migration
+
+The feature adds `stripe_account_id` to `users` and `paid_at` to `quotations`:
+
+```bash
+bunx drizzle-kit push
+```
+
+#### 7. Test the flow
+
+1. Log in → open Settings → click **Connect Stripe Account** → authorize with a Stripe test account.
+2. Open/create an offer → add a **Payment Block** → fill in amount, currency, description → click **Generate Payment Link**.
+3. Copy the offer URL and open it in an incognito window (simulates the client).
+4. Click **Pay Now** → use Stripe test card `4242 4242 4242 4242` (any future expiry, any CVC).
+5. Payment completes → webhook fires → quotation shows **PAID**.
+
+---
+
 ## Troubleshooting
 
 **409 Already Exists** — Import existing resource into Terraform state:

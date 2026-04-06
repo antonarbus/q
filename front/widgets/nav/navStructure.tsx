@@ -116,6 +116,13 @@ export const navStructure: NavItem[] = [
             shortcut: ['control', 'shift', 'p'],
             funcId: 'insertPriceBlock',
           },
+          {
+            id: navItemId.paymentItem,
+            name: 'Payment',
+            iconId: 'paymentItem',
+            isHidden: false,
+            funcId: 'insertPaymentBlock',
+          },
         ],
         tooltip: 'Insert block or row',
       },

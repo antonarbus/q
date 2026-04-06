@@ -5,11 +5,11 @@ import type { HeaderKey } from '@back/entity/quotation/schema'
 import { TextEditor } from '@front/shared/component/TextEditor'
 import { updateBoqTitle } from '@front/features/blocks/update-boq-title/updateBoqTitle'
 import { getRegistryKey } from '@front/shared/lib/tiptap/editorRegistry'
-import { useIsFullAppView } from '@front/entities/quotation/util/useIsFullAppView'
+import { useIsEditorView } from '@front/entities/quotation/util/useIsEditorView'
 const boqHeaderKey: HeaderKey = 'title'
 
 export const Title = (): React.JSX.Element => {
-  const isFullAppView = useIsFullAppView()
+  const isEditorView = useIsEditorView()
   const block = useBlock()
 
   return (
@@ -19,7 +19,7 @@ export const Title = (): React.JSX.Element => {
         blockIndex: block.index,
         rowIndex: null,
       })}
-      isFullAppView={isFullAppView}
+      isEditorView={isEditorView}
       className='title'
       placeholder='Title...'
       contentGetter={() =>

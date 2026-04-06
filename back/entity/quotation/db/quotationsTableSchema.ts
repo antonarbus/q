@@ -1,12 +1,12 @@
 import { index, jsonb, pgTable, timestamp, varchar } from 'drizzle-orm/pg-core'
-import { generateId } from '@back/shared/lib/nanoid'
+import { nanoid } from 'nanoid'
 
 export const quotationsTable = pgTable(
   'quotations',
   {
     id: varchar({ length: 8 })
       .primaryKey()
-      .$defaultFn(() => generateId()),
+      .$defaultFn(() => nanoid(8)),
     email: varchar({ length: 320 }).notNull(),
     name: varchar({ length: 255 }).notNull().default(''),
     category: varchar({ length: 100 }).notNull().default(''),
@@ -22,6 +22,7 @@ export const quotationsTable = pgTable(
         userList: string[]
       }>()
       .default({ level: 'nobody', userList: [] }),
+    paidAt: timestamp({ mode: 'string', withTimezone: true }),
   },
   (table) => [
     index('quotations_email_idx').on(table.email),

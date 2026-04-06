@@ -17,6 +17,7 @@ export const route = {
   fileListAll: 'file-list-all',
   info: 'info',
   settings: 'settings',
+  stripeConnect: 'stripe-connect',
   userList: 'user-list',
   visitorList: 'visitor-list',
 } as const

@@ -1,7 +1,8 @@
-import { copyBoqBlockTemplate } from '@front/features/blocks/copy-item/copyBoqBlockTemplate'
-import { copyPriceBlockTemplate } from '@front/features/blocks/copy-item/copyPriceBlockTemplate'
-import { copyRowBlockTemplate } from '@front/features/blocks/copy-item/copyRowTemplate'
-import { copyTextBlockTemplate } from '@front/features/blocks/copy-item/copyTextBlockTemplate'
+import { copyBoqBlockTemplate } from '@front/features/blocks/copy-template/copyBoqBlockTemplate'
+import { copyPaymentBlockTemplate } from '@front/features/blocks/copy-template/copyPaymentBlockTemplate'
+import { copyPriceBlockTemplate } from '@front/features/blocks/copy-template/copyPriceBlockTemplate'
+import { copyRowBlockTemplate } from '@front/features/blocks/copy-template/copyRowTemplate'
+import { copyTextBlockTemplate } from '@front/features/blocks/copy-template/copyTextBlockTemplate'
 import { openBookmarksPage } from '@front/features/open-close/open-bookmarks-page'
 import { openLoginModal } from '@front/features/open-close/open-login-modal'
 import {
@@ -35,6 +36,7 @@ export const functionRegistry = {
   insertRow: copyRowBlockTemplate,
   insertTextBlock: copyTextBlockTemplate,
   insertPriceBlock: copyPriceBlockTemplate,
+  insertPaymentBlock: copyPaymentBlockTemplate,
   openBookmarksPage,
   openQuotationsPage,
   openLoginModal,

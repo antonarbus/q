@@ -1,12 +1,12 @@
 import { index, integer, pgTable, timestamp, varchar } from 'drizzle-orm/pg-core'
-import { generateId } from '@back/shared/lib/nanoid'
+import { nanoid } from 'nanoid'
 
 export const filesTable = pgTable(
   'files',
   {
     id: varchar({ length: 8 })
       .primaryKey()
-      .$defaultFn(() => generateId()),
+      .$defaultFn(() => nanoid(8)),
     email: varchar({ length: 320 }).notNull(),
     uploadedAt: timestamp({ mode: 'string', withTimezone: true }).notNull().defaultNow(),
     name: varchar({ length: 255 }).notNull(),

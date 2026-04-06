@@ -9,7 +9,7 @@ import { Resizable } from 're-resizable'
 import type { ResizableProps } from 're-resizable'
 
 import { useBlock } from '../../provider/block/useBlock'
-import { useIsFullAppView } from '../../util/useIsFullAppView'
+import { useIsEditorView } from '../../util/useIsEditorView'
 
 type Props = {
   children: React.ReactNode
@@ -18,14 +18,16 @@ type Props = {
   onItemResizeStart?: OnBlockResizeStart
   onItemResize?: OnBlockResize
   onItemResizeStop?: OnBlockResizeStop
+  disableResize?: boolean
 }
 
 export const ResizableBlockPaper = (props: Props): React.JSX.Element => {
-  const isFullAppView = useIsFullAppView()
+  const isEditorView = useIsEditorView()
   const block = useBlock()
   const width = reduxHolder.useSelector((state) => state.quotation.blocks[block.index]?.width)
   const isWidthSetManually = width !== undefined
   const isAutoWidth = isWidthSetManually === false || (props.autoWidth ?? false)
+  const resizeEnabled = isEditorView && props.disableResize !== true
 
   return (
     <Resizable
@@ -36,12 +38,16 @@ export const ResizableBlockPaper = (props: Props): React.JSX.Element => {
         height: 'auto',
       }}
       enable={{
-        right: isFullAppView,
-        left: isFullAppView,
+        right: resizeEnabled,
+        left: resizeEnabled,
       }}
       handleClasses={{
         left: 'left-resize-handle',
         right: 'right-resize-handle',
+      }}
+      handleStyles={{
+        left: resizeEnabled === false ? { display: 'none' } : {},
+        right: resizeEnabled === false ? { display: 'none' } : {},
       }}
       maxWidth='100%'
       minWidth={props.minWidth ?? '150px'}

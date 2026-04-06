@@ -46,7 +46,9 @@ const isBlockType = (item: BlockItem): boolean => {
   const isBoq = item.type === 'boq'
   const isText = item.type === 'text'
   const isPrice = item.type === 'price'
-  const isBlock = isBoq || isText || isPrice
+  const isPayment = item.type === 'payment'
+
+  const isBlock = isBoq || isText || isPrice || isPayment
 
   return isBlock
 }

@@ -16,5 +16,6 @@ export {
   type BoqBlock,
   type TextBlock,
   type PriceBlock,
+  type PaymentBlock,
   type BlockItem,
 } from './quotationSchemaV2'

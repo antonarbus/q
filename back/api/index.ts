@@ -29,6 +29,11 @@ import { deleteUserHandler } from '@back/api/user/deleteUserHandler'
 import { getUserListHandler } from '@back/api/user/getUserListHandler'
 import { countUniqueDailyVisitorsHandler } from '@back/api/visitors/countUniqueDailyVisitorsHandler'
 import { getUniqueDailyVisitorsHandler } from '@back/api/visitors/getUniqueDailyVisitorsHandler'
+import { stripeAccountStatusHandler } from '@back/api/stripe/stripeAccountStatusHandler'
+import { stripeConnectUrlHandler } from '@back/api/stripe/stripeConnectUrlHandler'
+import { stripeConnectCallbackHandler } from '@back/api/stripe/stripeConnectCallbackHandler'
+import { createPaymentLinkHandler } from '@back/api/stripe/createPaymentLinkHandler'
+import { stripeWebhookHandler } from '@back/api/stripe/stripeWebhookHandler'
 import type { NextFunction, Request, Response } from 'express'
 import { getBookmarkListAllHandler } from './bookmark/getBookmarkListAllHandler'
 import { deleteFileHandler } from './file/deleteFileHandler'
@@ -191,6 +196,27 @@ export const api = {
   deleteFile: {
     ...route.deleteFile,
     handler: deleteFileHandler,
+  },
+  // stripe
+  stripeAccountStatus: {
+    ...route.stripeAccountStatus,
+    handler: stripeAccountStatusHandler,
+  },
+  stripeConnectUrl: {
+    ...route.stripeConnectUrl,
+    handler: stripeConnectUrlHandler,
+  },
+  stripeConnectCallback: {
+    ...route.stripeConnectCallback,
+    handler: stripeConnectCallbackHandler,
+  },
+  stripeCreatePaymentLink: {
+    ...route.stripeCreatePaymentLink,
+    handler: createPaymentLinkHandler,
+  },
+  stripeWebhook: {
+    ...route.stripeWebhook,
+    handler: stripeWebhookHandler,
   },
   // visitors
   countUniqueDailyVisitors: {

@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import { cls } from '@front/shared/cls'
-import { useIsFullAppView } from '@front/entities/quotation/util/useIsFullAppView'
+import { useIsEditorView } from '@front/entities/quotation/util/useIsEditorView'
 
 type Props = {
   children: React.ReactNode
@@ -8,9 +8,9 @@ type Props = {
 }
 
 export const RowActionButtonsLayout = (props: Props): React.ReactNode => {
-  const isFullAppView = useIsFullAppView()
+  const isEditorView = useIsEditorView()
 
-  if (isFullAppView === false) {
+  if (isEditorView === false) {
     return null
   }
 

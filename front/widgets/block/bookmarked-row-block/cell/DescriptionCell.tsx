@@ -7,10 +7,10 @@ import { updateDescriptionCellAtBookmarkBlock } from '@front/features/blocks/upd
 import { upload } from '@front/features/file/upload-file'
 import { TextEditor } from '@front/shared/component/TextEditor'
 import { getRegistryKey } from '@front/shared/lib/tiptap/editorRegistry'
-import { useIsFullAppView } from '@front/entities/quotation/util/useIsFullAppView'
+import { useIsEditorView } from '@front/entities/quotation/util/useIsEditorView'
 
 export const DescriptionCell = (): React.JSX.Element => {
-  const isFullAppView = useIsFullAppView()
+  const isEditorView = useIsEditorView()
 
   const stylesForResizableCell = useStylesForResizableCell({
     blockIndex: BOOKMARK_POS_AT_BLOCKS,
@@ -25,7 +25,7 @@ export const DescriptionCell = (): React.JSX.Element => {
         blockIndex: BOOKMARK_POS_AT_BLOCKS,
         rowIndex: 0,
       })}
-      isFullAppView={isFullAppView}
+      isEditorView={isEditorView}
       className='td description'
       placeholder='Description...'
       contentGetter={() => getHtmlOfBookmarkedRowCellFromStoreByIndex({ cellKey: 'description' })}

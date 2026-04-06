@@ -209,6 +209,37 @@ export const route = {
     method: 'delete',
     description: 'Delete file from storage and database',
   },
+  // stripe
+  stripeAccountStatus: {
+    path: '/api/stripe/account-status',
+    url: '/api/stripe/account-status',
+    method: 'get',
+    description: 'Get Stripe account status for current user',
+  },
+  stripeConnectUrl: {
+    path: '/api/stripe/connect-url',
+    url: '/api/stripe/connect-url',
+    method: 'get',
+    description: 'Get Stripe Connect OAuth URL',
+  },
+  stripeConnectCallback: {
+    path: '/api/stripe/connect-callback',
+    url: '/api/stripe/connect-callback',
+    method: 'get',
+    description: 'Stripe Connect OAuth callback',
+  },
+  stripeCreatePaymentLink: {
+    path: '/api/stripe/payment-link',
+    url: '/api/stripe/payment-link',
+    method: 'post',
+    description: 'Create Stripe payment link for a quotation',
+  },
+  stripeWebhook: {
+    path: '/api/stripe/webhook',
+    url: '/api/stripe/webhook',
+    method: 'post',
+    description: 'Stripe webhook endpoint',
+  },
   // visitors
   countUniqueDailyVisitors: {
     path: '/api/visitors/daily',

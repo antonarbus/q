@@ -15,6 +15,7 @@ export const usersTable = pgTable(
     refreshJwtToken: varchar({ length: 500 }).notNull().default('incorrect token'),
     registeredAt: timestamp({ mode: 'string', withTimezone: true }).notNull().defaultNow(),
     loggedAt: timestamp({ mode: 'string', withTimezone: true }).notNull().defaultNow(),
+    stripeAccountId: varchar({ length: 255 }),
   },
   (table) => [index('users_email_idx').on(table.email)],
 )

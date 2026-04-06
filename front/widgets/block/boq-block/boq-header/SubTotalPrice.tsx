@@ -10,11 +10,11 @@ import { redistributePricesAtBoqBlock } from '@front/features/blocks/redistribut
 import { formatSubtotalPriceAtBoqBlock } from '@front/features/blocks/format-subtotal-price-at-boq-block/formatSubtotalPriceAtBoqBlock'
 import { validatePricesAtBoqBlock } from '@front/features/blocks/validate-prices-at-boq-block/validatePricesAtBoqBlock'
 import { getRegistryKey } from '@front/shared/lib/tiptap/editorRegistry'
-import { useIsFullAppView } from '@front/entities/quotation/util/useIsFullAppView'
+import { useIsEditorView } from '@front/entities/quotation/util/useIsEditorView'
 const boqHeaderKey: HeaderKey = 'subTotalPrice'
 
 export const SubTotalPrice = (): React.JSX.Element => {
-  const isFullAppView = useIsFullAppView()
+  const isEditorView = useIsEditorView()
   const block = useBlock()
 
   const hidePinsClickHandlerRef = useRef<(event: globalThis.MouseEvent) => void>(() => {
@@ -30,7 +30,7 @@ export const SubTotalPrice = (): React.JSX.Element => {
         blockIndex: block.index,
         rowIndex: null,
       })}
-      isFullAppView={isFullAppView}
+      isEditorView={isEditorView}
       className='sub-total-price'
       placeholder='Price...'
       contentGetter={() =>

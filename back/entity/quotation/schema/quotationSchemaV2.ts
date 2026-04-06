@@ -87,12 +87,24 @@ const priceBlockSchema = blockCommonSchema.extend({
   }),
 })
 
+const paymentBlockSchema = blockCommonSchema.extend({
+  type: z.literal('payment'),
+  payment: z.object({
+    amount: z.number(),
+    currency: z.string(),
+    description: z.string(),
+    stripePaymentLinkId: z.string().nullable(),
+    stripePaymentLinkUrl: z.string().nullable(),
+  }),
+})
+
 // Same as bookmark
 const blockItemSchema = z.discriminatedUnion('type', [
   boqBlockSchema,
   textBlockSchema,
   priceBlockSchema,
   rowBlockSchema,
+  paymentBlockSchema,
 ])
 
 export const quotationSchema = z.object({
@@ -112,6 +124,7 @@ export const quotationSchema = z.object({
     userList: z.array(z.string()),
   }),
   info: z.string(),
+  paidAt: z.string().nullable().default(null),
   blocks: z.array(blockItemSchema),
   permissionLevel: z.enum([
     'UNKNOWN',
@@ -138,5 +151,6 @@ export type RowBlock = z.infer<typeof rowBlockSchema>
 export type BoqBlock = z.infer<typeof boqBlockSchema>
 export type TextBlock = z.infer<typeof textBlockSchema>
 export type PriceBlock = z.infer<typeof priceBlockSchema>
+export type PaymentBlock = z.infer<typeof paymentBlockSchema>
 export type BlockItem = z.infer<typeof blockItemSchema>
 export type Quotation = z.infer<typeof quotationSchema>

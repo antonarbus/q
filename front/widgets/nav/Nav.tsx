@@ -4,15 +4,14 @@ import { useLoadNavStructure } from '@front/widgets/nav/load-nav-structure'
 import { usePressNavShortcut } from '@front/widgets/nav/press-shortcut'
 import { NavLayout } from './NavLayout'
 import { navStructure } from './navStructure'
-import { useIsFullAppView } from '@front/entities/quotation/util/useIsFullAppView'
+import { useIsEditorView } from '@front/entities/quotation/util/useIsEditorView'
 
 export const Nav = (): React.ReactNode => {
+  const isEditorView = useIsEditorView()
   useLoadNavStructure({ navStructure })
   usePressNavShortcut({ navStructure })
 
-  const isFullAppView = useIsFullAppView()
-
-  if (isFullAppView === false) {
+  if (isEditorView === false) {
     return null
   }
 

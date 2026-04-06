@@ -6,10 +6,10 @@ import { ResizableColumn } from '../ResizableColumn'
 import { TextEditor } from '@front/shared/component/TextEditor'
 import { updateTableHeaderCellAtBoqBlock } from '@front/features/blocks/update-table-header-cell-at-boq-block/updateTableHeaderCellAtBoqBlock'
 import { getRegistryKey } from '@front/shared/lib/tiptap/editorRegistry'
-import { useIsFullAppView } from '@front/entities/quotation/util/useIsFullAppView'
+import { useIsEditorView } from '@front/entities/quotation/util/useIsEditorView'
 
 export const ItemPriceColumn = (): React.JSX.Element => {
-  const isFullAppView = useIsFullAppView()
+  const isEditorView = useIsEditorView()
   const block = useBlock()
 
   return (
@@ -24,7 +24,7 @@ export const ItemPriceColumn = (): React.JSX.Element => {
           blockIndex: block.index,
           rowIndex: null,
         })}
-        isFullAppView={isFullAppView}
+        isEditorView={isEditorView}
         className='column-item-price'
         placeholder='Item...'
         contentGetter={() =>

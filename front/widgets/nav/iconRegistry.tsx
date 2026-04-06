@@ -1,5 +1,5 @@
 import { Burger } from '@front/entities/nav/ui/NavList/NavItem/Burger'
-import { CiViewTable } from 'react-icons/ci'
+import { CiCreditCard1, CiViewTable } from 'react-icons/ci'
 import { FaRegFileImage, FaRegFilePdf, FaRegStar } from 'react-icons/fa'
 import { FaGripLines, FaRegRectangleList, FaRegShareFromSquare, FaUsersGear } from 'react-icons/fa6'
 import { FiDollarSign, FiLogIn, FiLogOut, FiSave } from 'react-icons/fi'
@@ -30,6 +30,7 @@ export const iconRegistry = {
   row: <FaGripLines />,
   textItem: <IoText />,
   priceItem: <FiDollarSign />,
+  paymentItem: <CiCreditCard1 />,
   bookmarkList: <FaRegStar data-testid='bookmarks icon' />,
   quotationList: <CiViewTable data-testid='quotations icon' />,
   blog: <HiOutlineBookOpen data-testid='blog icon' />,

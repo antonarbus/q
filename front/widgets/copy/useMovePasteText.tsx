@@ -187,7 +187,8 @@ export const useMovePasteText = (): void => {
   const isBlock =
     typeOfNextPasteItem === 'boq' ||
     typeOfNextPasteItem === 'text' ||
-    typeOfNextPasteItem === 'price'
+    typeOfNextPasteItem === 'price' ||
+    typeOfNextPasteItem === 'payment'
 
   const isRow = typeOfNextPasteItem === 'row'
 
