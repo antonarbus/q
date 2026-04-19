@@ -1,4 +1,5 @@
-import { Stripe } from 'stripe'
+// oxlint-disable-next-line import/no-named-as-default
+import Stripe from 'stripe'
 import { runtimeConfig } from '@root/config/runtime'
 import { getSecret } from '@back/shared/lib/secret-manager/getSecret'
 
