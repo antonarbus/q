@@ -11,9 +11,12 @@ type SecretName =
   | 'NEON_DATABASE_URL_PROD'
   | 'GOOGLE_CLOUD_PROJECT_PRIVATE_KEY_ID'
   | 'GOOGLE_CLOUD_PROJECT_PRIVATE_KEY'
-  | 'STRIPE_SECRET_KEY'
-  | 'STRIPE_WEBHOOK_SECRET'
-  | 'STRIPE_CLIENT_ID'
+  | 'STRIPE_TEST_SECRET_KEY'
+  | 'STRIPE_LIVE_SECRET_KEY'
+  | 'STRIPE_TEST_WEBHOOK_SECRET'
+  | 'STRIPE_LIVE_WEBHOOK_SECRET'
+  | 'STRIPE_TEST_CLIENT_ID'
+  | 'STRIPE_LIVE_CLIENT_ID'
 
 const cachedSecrets: Record<SecretName, string | null> = {
   JWT_ACCESS_SECRET: null,
@@ -25,9 +28,12 @@ const cachedSecrets: Record<SecretName, string | null> = {
   NEON_DATABASE_URL_PROD: null,
   GOOGLE_CLOUD_PROJECT_PRIVATE_KEY_ID: null,
   GOOGLE_CLOUD_PROJECT_PRIVATE_KEY: null,
-  STRIPE_SECRET_KEY: null,
-  STRIPE_WEBHOOK_SECRET: null,
-  STRIPE_CLIENT_ID: null,
+  STRIPE_TEST_SECRET_KEY: null,
+  STRIPE_LIVE_SECRET_KEY: null,
+  STRIPE_TEST_WEBHOOK_SECRET: null,
+  STRIPE_LIVE_WEBHOOK_SECRET: null,
+  STRIPE_TEST_CLIENT_ID: null,
+  STRIPE_LIVE_CLIENT_ID: null,
 }
 
 export const getSecret = async (secretName: SecretName): Promise<string> => {

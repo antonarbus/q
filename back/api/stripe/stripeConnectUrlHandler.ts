@@ -3,6 +3,7 @@ import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { httpJsonResponse } from '@back/shared/lib/express/httpResponse'
 import type { HttpResponse } from '@back/shared/lib/express/httpResponse'
 import { getSecret } from '@back/shared/lib/secret-manager/getSecret'
+import { getStripe } from '@back/shared/lib/stripe/getStripe'
 import { runtimeConfig } from '@root/config/runtime'
 import jwt from 'jsonwebtoken'
 import type { NextFunction, Request, Response } from 'express'
@@ -29,10 +30,7 @@ export const stripeConnectUrlHandler: RouterHandler = async (req) => {
 
   const messageList: string[] = []
 
-  const [clientId, jwtSecret] = await Promise.all([
-    getSecret('STRIPE_CLIENT_ID'),
-    getSecret('JWT_ACCESS_SECRET'),
-  ])
+  const [stripe, jwtSecret] = await Promise.all([getStripe(), getSecret('JWT_ACCESS_SECRET')])
 
   messageList.push('Secrets loaded')
 
@@ -44,7 +42,7 @@ export const stripeConnectUrlHandler: RouterHandler = async (req) => {
 
   const url = new URL('https://connect.stripe.com/oauth/authorize')
   url.searchParams.set('response_type', 'code')
-  url.searchParams.set('client_id', clientId)
+  url.searchParams.set('client_id', stripe.clientId)
   url.searchParams.set('scope', 'read_write')
   url.searchParams.set('redirect_uri', redirectUri)
   url.searchParams.set('state', state)

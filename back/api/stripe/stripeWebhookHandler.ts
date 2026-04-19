@@ -4,7 +4,6 @@ import { HttpError } from '@back/shared/errors/HttpError'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { httpJsonResponse } from '@back/shared/lib/express/httpResponse'
 import type { HttpResponse } from '@back/shared/lib/express/httpResponse'
-import { getSecret } from '@back/shared/lib/secret-manager/getSecret'
 import { getStripe } from '@back/shared/lib/stripe/getStripe'
 import { eq } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
@@ -42,16 +41,13 @@ export const stripeWebhookHandler: RouterHandler = async (req) => {
 
   messageList.push('Signature header present')
 
-  const [stripe, webhookSecret] = await Promise.all([
-    getStripe(),
-    getSecret('STRIPE_WEBHOOK_SECRET'),
-  ])
+  const stripe = await getStripe()
 
   // oxlint-disable-next-line init-declarations
   let event
 
   try {
-    event = stripe.webhooks.constructEvent(req.body, stripeSignature, webhookSecret)
+    event = stripe.instance.webhooks.constructEvent(req.body, stripeSignature, stripe.webhookSecret)
   } catch {
     messageList.push('Webhook signature verification failed')
 
