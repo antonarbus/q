@@ -9,6 +9,7 @@ import { eq } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
+import type { Stripe } from 'stripe'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
@@ -44,12 +45,12 @@ export const stripeWebhookHandler: RouterHandler = async (req) => {
   const stripe = await getStripe()
 
   // oxlint-disable-next-line init-declarations
-  let event
+  let event: Stripe.Event
 
   try {
     event = stripe.instance.webhooks.constructEvent(req.body, stripeSignature, stripe.webhookSecret)
   } catch {
-    messageList.push('Webhook signature verification failed')
+    messageList.push('Stripe webhook signature verification failed')
 
     throw new HttpError({
       errorCode: 'BAD_REQUEST',
@@ -58,7 +59,7 @@ export const stripeWebhookHandler: RouterHandler = async (req) => {
     })
   }
 
-  messageList.push(`Webhook event verified: ${event.type}`)
+  messageList.push(`Stripe webhook event verified: ${event.type}`)
 
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object
@@ -72,7 +73,7 @@ export const stripeWebhookHandler: RouterHandler = async (req) => {
           .set({ paidAt: new Date().toISOString() })
           .where(eq(quotationsTable.id, quotationId))
 
-        messageList.push(`Quotation marked as paid: ${quotationId}`)
+        messageList.push(`Quotation ${quotationId} marked as paid`)
       }
     }
   }

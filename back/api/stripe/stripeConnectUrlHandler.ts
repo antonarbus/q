@@ -9,6 +9,7 @@ import jwt from 'jsonwebtoken'
 import type { NextFunction, Request, Response } from 'express'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
+import { route } from '../route'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
@@ -34,18 +35,18 @@ export const stripeConnectUrlHandler: RouterHandler = async (req) => {
 
   messageList.push('Secrets loaded')
 
-  const state = jwt.sign({ email: user.email }, jwtSecret, { expiresIn: '10m' })
+  const jwtPayloadWithEmail = jwt.sign({ email: user.email }, jwtSecret, { expiresIn: '10m' })
 
   messageList.push('State JWT signed')
 
-  const redirectUri = `${runtimeConfig.back.baseUrl}/api/stripe/connect-callback`
+  const redirectUri = `${runtimeConfig.back.baseUrl}${route.stripeConnectCallback.path}`
 
   const url = new URL('https://connect.stripe.com/oauth/authorize')
   url.searchParams.set('response_type', 'code')
   url.searchParams.set('client_id', stripe.clientId)
   url.searchParams.set('scope', 'read_write')
   url.searchParams.set('redirect_uri', redirectUri)
-  url.searchParams.set('state', state)
+  url.searchParams.set('state', jwtPayloadWithEmail)
 
   messageList.push('Stripe Connect OAuth URL generated')
 

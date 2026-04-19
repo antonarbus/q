@@ -30,21 +30,23 @@ export const stripeAccountStatusHandler: RouterHandler = async (req) => {
 
   const messageList: string[] = []
 
-  const [userRecord] = await db
+  const [userSelected] = await db
     .select({ stripeAccountId: usersTable.stripeAccountId })
     .from(usersTable)
     .where(eq(usersTable.email, user.email))
 
-  const stripeAccountId = userRecord?.stripeAccountId ?? null
-  const connected = stripeAccountId !== null
+  const userStripeAccountId = userSelected?.stripeAccountId ?? null
+  const isStripeAccountConnected = userStripeAccountId !== null
 
-  messageList.push(connected ? 'Stripe account connected' : 'No Stripe account connected')
+  messageList.push(
+    isStripeAccountConnected ? 'Stripe account connected' : 'No Stripe account connected',
+  )
 
   return httpJsonResponse({
     statusCode: httpStatusCode.success200,
     body: {
-      connected,
-      stripeAccountId,
+      connected: isStripeAccountConnected,
+      stripeAccountId: userStripeAccountId,
       message: messageList.join(' | '),
     },
   })

@@ -13,11 +13,19 @@ import type { NextFunction, Request, Response } from 'express'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
 
-type SearchQuery = ParsedQs & {
-  code?: string
-  state?: string
-  error?: string
-}
+type SearchQuery = ParsedQs &
+  (
+    | {
+        // Stripe sets code
+        code?: string
+        // stripeConnectUrlHandler() adds parameter
+        state: string
+      }
+    | {
+        error: string
+      }
+  )
+
 type UrlParam = ParamsDictionary
 type ReqBody = undefined
 
@@ -28,22 +36,22 @@ type RouterHandler = (
 ) => Promise<HttpResponse<unknown>>
 
 export const stripeConnectCallbackHandler: RouterHandler = async (req) => {
-  const { code, state, error } = req.query
+  // const { code, state, error } = req.query
 
   const messageList: string[] = []
 
   const frontendSettingsUrl = `${runtimeConfig.front.baseUrl}/settings`
 
-  if (typeof error === 'string') {
-    messageList.push(`Stripe OAuth error: ${error}`)
+  if (typeof req.query.error === 'string') {
+    messageList.push(`Stripe OAuth error: ${req.query.error}`)
 
     return httpRedirect({
       statusCode: httpStatusCode.reDirect302,
-      redirectUrl: `${frontendSettingsUrl}?stripe_error=${encodeURIComponent(error)}`,
+      redirectUrl: `${frontendSettingsUrl}?stripe_error=${encodeURIComponent(req.query.error)}`,
     })
   }
 
-  if (typeof code !== 'string' || typeof state !== 'string') {
+  if (typeof req.query.code !== 'string' || typeof req.query.state !== 'string') {
     messageList.push('Missing code or state parameter')
 
     throw new HttpError({
@@ -55,13 +63,13 @@ export const stripeConnectCallbackHandler: RouterHandler = async (req) => {
 
   messageList.push('Code and state received')
 
-  const jwtSecret = await getSecret('JWT_ACCESS_SECRET')
+  const [jwtSecret, stripe] = await Promise.all([getSecret('JWT_ACCESS_SECRET'), getStripe()])
 
   // oxlint-disable-next-line init-declarations
   let email: string
 
   try {
-    const payload = jwt.verify(state, jwtSecret) as { email?: string }
+    const payload = jwt.verify(req.query.state, jwtSecret) as { email?: string }
 
     if (typeof payload.email !== 'string') {
       throw new TypeError('Invalid state payload')
@@ -80,11 +88,9 @@ export const stripeConnectCallbackHandler: RouterHandler = async (req) => {
 
   messageList.push(`State verified for email: ${email}`)
 
-  const stripe = await getStripe()
-
-  const tokenResponse = await stripe.oauth.token({
+  const tokenResponse = await stripe.instance.oauth.token({
     grant_type: 'authorization_code',
-    code,
+    code: req.query.code,
   })
 
   const stripeAccountId = tokenResponse.stripe_user_id

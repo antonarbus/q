@@ -41,12 +41,12 @@ export const createPaymentLinkHandler: RouterHandler = async (req) => {
 
   const { quotationId, amount, currency, description } = req.body
 
-  const [userRecord] = await db
+  const [userSelected] = await db
     .select({ stripeAccountId: usersTable.stripeAccountId })
     .from(usersTable)
     .where(eq(usersTable.email, user.email))
 
-  const stripeAccountId = userRecord?.stripeAccountId ?? null
+  const stripeAccountId = userSelected?.stripeAccountId ?? null
 
   if (stripeAccountId === null) {
     messageList.push('No Stripe account connected')
@@ -64,7 +64,7 @@ export const createPaymentLinkHandler: RouterHandler = async (req) => {
 
   const successUrl = `${runtimeConfig.front.baseUrl}/${quotationId}?payment=success`
 
-  const paymentLink = await stripe.paymentLinks.create(
+  const paymentLink = await stripe.instance.paymentLinks.create(
     {
       line_items: [
         {

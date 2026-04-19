@@ -275,25 +275,25 @@ Clients can receive payments directly to their own Stripe accounts through the a
 
 The app automatically selects test or live Stripe keys based on the environment: `pilot` and `prod` use live keys, everything else (`local`, `dev`, `test`) uses test keys. Both sets of secrets must exist in the secret manager before deploying.
 
-| Secret                       | Where to get it                                                                                                                |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| `STRIPE_TEST_SECRET_KEY`     | Stripe Dashboard (**Test mode**) → Developers → API keys → Secret key (`sk_test_…`)                                           |
-| `STRIPE_LIVE_SECRET_KEY`     | Stripe Dashboard (**Live mode**) → Developers → API keys → Secret key (`sk_live_…`)                                           |
+| Secret                       | Where to get it                                                                                                                                |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `STRIPE_TEST_SECRET_KEY`     | Stripe Dashboard (**Test mode**) → Developers → API keys → Secret key (`sk_test_…`)                                                            |
+| `STRIPE_LIVE_SECRET_KEY`     | Stripe Dashboard (**Live mode**) → Developers → API keys → Secret key (`sk_live_…`)                                                            |
 | `STRIPE_TEST_CLIENT_ID`      | Stripe Dashboard (**Test mode**) → Settings → Connect → [Platform profile](https://dashboard.stripe.com/settings/connect) → Client ID (`ca_…`) |
-| `STRIPE_LIVE_CLIENT_ID`      | Stripe Dashboard (**Live mode**) → Settings → Connect → Platform profile → Client ID (`ca_…`) — different value from test     |
-| `STRIPE_TEST_WEBHOOK_SECRET` | Stripe Dashboard (**Test mode**) → Developers → Webhooks → your endpoint → Signing secret (`whsec_…`)                        |
-| `STRIPE_LIVE_WEBHOOK_SECRET` | Stripe Dashboard (**Live mode**) → Developers → Webhooks → your endpoint → Signing secret (`whsec_…`)                        |
-| `JWT_ACCESS_SECRET`          | already exists — used to sign the OAuth `state` parameter                                                                     |
+| `STRIPE_LIVE_CLIENT_ID`      | Stripe Dashboard (**Live mode**) → Settings → Connect → Platform profile → Client ID (`ca_…`) — different value from test                      |
+| `STRIPE_TEST_WEBHOOK_SECRET` | Stripe Dashboard (**Test mode**) → Developers → Webhooks → your endpoint → Signing secret (`whsec_…`)                                          |
+| `STRIPE_LIVE_WEBHOOK_SECRET` | Stripe Dashboard (**Live mode**) → Developers → Webhooks → your endpoint → Signing secret (`whsec_…`)                                          |
+| `JWT_ACCESS_SECRET`          | already exists — used to sign the OAuth `state` parameter                                                                                      |
 
 ### Test mode vs live mode
 
 Stripe has two completely separate sets of keys — both coexist simultaneously, no dashboard toggle needed at runtime. The Dashboard **Test / Live toggle** only affects what you see in the UI when copying keys.
 
-| Environment     | Keys used                    |
-| --------------- | ---------------------------- |
-| `local`         | `STRIPE_TEST_*`              |
-| `dev` / `test`  | `STRIPE_TEST_*`              |
-| `pilot` / `prod`| `STRIPE_LIVE_*`              |
+| Environment      | Keys used       |
+| ---------------- | --------------- |
+| `local`          | `STRIPE_TEST_*` |
+| `dev` / `test`   | `STRIPE_TEST_*` |
+| `pilot` / `prod` | `STRIPE_LIVE_*` |
 
 **Rules:**
 
