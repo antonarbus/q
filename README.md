@@ -277,12 +277,12 @@ The app automatically selects test or live Stripe keys based on the environment:
 
 | Secret                       | Where to get it                                                                                                                                |
 | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `STRIPE_TEST_SECRET_KEY`     | Stripe Dashboard (**Test mode**) → Developers → API keys → Secret key (`sk_test_…`)                                                            |
-| `STRIPE_LIVE_SECRET_KEY`     | Stripe Dashboard (**Live mode**) → Developers → API keys → Secret key (`sk_live_…`)                                                            |
-| `STRIPE_TEST_CLIENT_ID`      | Stripe Dashboard (**Test mode**) → Settings → Connect → [Platform profile](https://dashboard.stripe.com/settings/connect) → Client ID (`ca_…`) |
-| `STRIPE_LIVE_CLIENT_ID`      | Stripe Dashboard (**Live mode**) → Settings → Connect → Platform profile → Client ID (`ca_…`) — different value from test                      |
-| `STRIPE_TEST_WEBHOOK_SECRET` | Stripe Dashboard (**Test mode**) → Developers → Webhooks → your endpoint → Signing secret (`whsec_…`)                                          |
-| `STRIPE_LIVE_WEBHOOK_SECRET` | Stripe Dashboard (**Live mode**) → Developers → Webhooks → your endpoint → Signing secret (`whsec_…`)                                          |
+| `STRIPE_TEST_SECRET_KEY`     | [API keys (test)](https://dashboard.stripe.com/test/apikeys) → Secret key (`sk_test_…`)                                                                           |
+| `STRIPE_LIVE_SECRET_KEY`     | [API keys (live)](https://dashboard.stripe.com/apikeys) → Secret key (`sk_live_…`)                                                                                |
+| `STRIPE_TEST_CLIENT_ID`      | [Connect → Onboarding options → OAuth (test)](https://dashboard.stripe.com/test/settings/connect/onboarding-options/oauth) → Test client ID (`ca_…`)              |
+| `STRIPE_LIVE_CLIENT_ID`      | [Connect → Onboarding options → OAuth (live)](https://dashboard.stripe.com/settings/connect/onboarding-options/oauth) → Live client ID (`ca_…`) — requires Stripe approval |
+| `STRIPE_TEST_WEBHOOK_SECRET` | [Webhooks (test)](https://dashboard.stripe.com/test/workbench/webhooks) → your endpoint → Signing secret (`whsec_…`)                                              |
+| `STRIPE_LIVE_WEBHOOK_SECRET` | [Webhooks (live)](https://dashboard.stripe.com/workbench/webhooks) → your endpoint → Signing secret (`whsec_…`)                                                   |
 | `JWT_ACCESS_SECRET`          | already exists — used to sign the OAuth `state` parameter                                                                                      |
 
 ### Test mode vs live mode
@@ -310,38 +310,36 @@ Stripe docs: [stripe.com/docs](https://stripe.com/docs)
 
 #### 2. Get your API key
 
-[Dashboard → Developers → API keys](https://dashboard.stripe.com/test/apikeys) (keep toggle on **Test**) — copy the **Secret key** (`sk_test_…`).
+[Dashboard → Developers → API keys](https://dashboard.stripe.com/test/apikeys) — copy the **Secret key** (`sk_test_…`). For live key: [API keys (live)](https://dashboard.stripe.com/apikeys).
 
 #### 3. Enable Stripe Connect
 
-Go to [Dashboard → Settings → Connect](https://dashboard.stripe.com/test/settings/connect) (**Test toggle ON**) and complete the **Platform profile**:
+Go to [Dashboard → Settings → Connect → Onboarding options → OAuth](https://dashboard.stripe.com/test/settings/connect/onboarding-options/oauth) and:
 
-- Business type: Platform
-- Integration type: OAuth
-
-Copy the **Client ID** (`ca_…`) from the Connect settings page — this is your test-mode Client ID.
-
-Add your OAuth redirect URI under **Connect → Settings → Redirects**:
-
-```
-https://<YOUR_DOMAIN>/api/stripe/connect-callback
-```
-
-For local development:
+1. Enable **OAuth for Stripe Dashboard accounts**
+2. Copy the **Test client ID** (`ca_…`) — this is `STRIPE_TEST_CLIENT_ID`
+3. Add all redirect URIs under **Redirects**:
 
 ```
 http://localhost:4000/api/stripe/connect-callback
+https://dev.sendmequotation.today/api/stripe/connect-callback
+https://test.sendmequotation.today/api/stripe/connect-callback
+https://pilot.sendmequotation.today/api/stripe/connect-callback
+https://sendmequotation.today/api/stripe/connect-callback
 ```
+
+The **Live client ID** is unavailable until Stripe approves your platform profile.
 
 #### 4. Register a webhook endpoint
 
-[Dashboard → Developers → Webhooks → Add endpoint](https://dashboard.stripe.com/webhooks):
+[Dashboard → Developers → Webhooks → Add endpoint](https://dashboard.stripe.com/test/workbench/webhooks) (test) / [live](https://dashboard.stripe.com/workbench/webhooks):
 
-- Endpoint URL: `https://<YOUR_DOMAIN>/api/stripe/webhook`
+- Events from: **Connected and v2 accounts**
+- API version: **2026-03-25.dahlia** (latest)
 - Events to listen for: `checkout.session.completed`
-- Check **"Listen to events on Connected accounts"** (required for Connect)
+- Endpoint URL: `https://test.sendmequotation.today/api/stripe/webhook` (test) / `https://sendmequotation.today/api/stripe/webhook` (live)
 
-Copy the **Signing secret** (`whsec_…`).
+Copy the **Signing secret** (`whsec_…`) after creation.
 
 For local development use the [Stripe CLI](https://stripe.com/docs/stripe-cli):
 
