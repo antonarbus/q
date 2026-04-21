@@ -15,12 +15,14 @@ export const ConnectStripeContent = (props: Props): React.JSX.Element => {
   const stripeStatusQuery = useStripeAccountStatusQuery()
   const stripeConnectUrlQuery = useStripeConnectUrlQuery()
 
+  const stripeError = searchParams.get('stripe_error')
+
   useEffect(() => {
-    if (searchParams.get('stripe_connected') === 'true') {
+    if (searchParams.get('stripe_connected') === 'true' || stripeError !== null) {
       stripeStatusQuery.refetch()
       setSearchParams({}, { replace: true })
     }
-  }, [searchParams, setSearchParams, stripeStatusQuery])
+  }, [searchParams, setSearchParams, stripeStatusQuery, stripeError])
 
   if (stripeStatusQuery.isPending === true) {
     return <RotatingLoaderIcon style={{ height: '20px', width: '20px' }} />
@@ -32,7 +34,14 @@ export const ConnectStripeContent = (props: Props): React.JSX.Element => {
         <Typography color='success.main' variant='body2'>
           Stripe account connected
         </Typography>
-        <Typography color='text.secondary' sx={{ fontSize: '12px' }}>
+        <Typography
+          component='a'
+          href={`https://dashboard.stripe.com/${stripeStatusQuery.data.stripeAccountId}`}
+          target='_blank'
+          rel='noopener noreferrer'
+          color='text.secondary'
+          sx={{ fontSize: '12px' }}
+        >
           {stripeStatusQuery.data.stripeAccountId}
         </Typography>
         <Button onClick={props.onDone} variant='contained'>
@@ -44,6 +53,11 @@ export const ConnectStripeContent = (props: Props): React.JSX.Element => {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '45px' }}>
+      {stripeError !== null && (
+        <Typography color='error' textAlign='center' variant='body2'>
+          Stripe connection failed: {stripeError}
+        </Typography>
+      )}
       <Typography color='text.secondary' textAlign='center' variant='body2'>
         Connect your Stripe account to accept payments from clients
       </Typography>

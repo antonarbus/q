@@ -59,7 +59,7 @@ Single `main` branch. `MASTER_DEPLOYS_TO_ENV` in `config/configVariables.ts` set
 
 ```bash
 bun install
-bun dev                      # Frontend (3000) + Backend (4000) concurrently
+bun dev                      # Frontend (3000) + Backend (8080) concurrently
 bun run test
 bun run playwright
 bun run cli                  # Interactive deployment CLI
@@ -321,7 +321,7 @@ Go to [Dashboard → Settings → Connect → Onboarding options → OAuth](http
 3. Add all redirect URIs under **Redirects**:
 
 ```
-http://localhost:4000/api/stripe/connect-callback
+http://localhost:8080/api/stripe/connect-callback
 https://dev.sendmequotation.today/api/stripe/connect-callback
 https://test.sendmequotation.today/api/stripe/connect-callback
 https://pilot.sendmequotation.today/api/stripe/connect-callback
@@ -344,7 +344,7 @@ Copy the **Signing secret** (`whsec_…`) after creation.
 For local development use the [Stripe CLI](https://stripe.com/docs/stripe-cli):
 
 ```bash
-stripe listen --forward-to localhost:4000/api/stripe/webhook
+stripe listen --forward-to localhost:8080/api/stripe/webhook
 # prints a whsec_… secret — use that as STRIPE_TEST_WEBHOOK_SECRET locally
 ```
 

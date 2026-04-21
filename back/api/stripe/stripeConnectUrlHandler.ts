@@ -35,7 +35,7 @@ export const stripeConnectUrlHandler: RouterHandler = async (req) => {
 
   messageList.push('Secrets loaded')
 
-  const jwtPayloadWithEmail = jwt.sign({ email: user.email }, jwtSecret, { expiresIn: '10m' })
+  const jwtPayloadWithEmail = jwt.sign({ email: user.email }, jwtSecret, { expiresIn: '1h' })
 
   messageList.push('State JWT signed')
 

@@ -14,7 +14,13 @@ export const ConnectStripeButton = (): React.JSX.Element => {
 
   if (stripeStatusQuery.data?.connected === true) {
     return (
-      <Box sx={{ fontSize: '13px', color: 'text.secondary' }}>
+      <Box
+        component='a'
+        href={`https://dashboard.stripe.com/${stripeStatusQuery.data.stripeAccountId}`}
+        target='_blank'
+        rel='noopener noreferrer'
+        sx={{ fontSize: '13px', color: 'text.secondary' }}
+      >
         Stripe connected ({stripeStatusQuery.data.stripeAccountId})
       </Box>
     )
