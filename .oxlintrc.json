@@ -16,10 +16,6 @@
     "vitest",
     "import"
   ],
-  "env": {
-    "browser": true,
-    "node": true
-  },
   "categories": {
     "correctness": "error",
     "nursery": "error",
@@ -28,6 +24,10 @@
     "perf": "error",
     "restriction": "error",
     "style": "error"
+  },
+  "env": {
+    "browser": true,
+    "node": true
   },
   // https://oxc.rs/docs/guide/usage/linter/rules.html
   "rules": {
