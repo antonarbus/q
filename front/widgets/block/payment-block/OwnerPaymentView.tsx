@@ -1,4 +1,14 @@
-import { Box, Chip, Divider, TextField, Typography } from '@mui/material'
+import {
+  Box,
+  Chip,
+  Divider,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+  Typography,
+} from '@mui/material'
 import { BlockComp } from '@front/entities/quotation/ui/BlockComp'
 import { DragBlockIcon } from '@front/features/blocks/drag-item/DragBlockIcon'
 import { CutBlockIcon } from '@front/features/blocks/cut-item/CutBlockIcon'
@@ -9,6 +19,23 @@ import { ItemActionButtonsLayout } from '@front/shared/layout/ItemActionButtonsL
 import { CiCreditCard1 } from 'react-icons/ci'
 import { useState } from 'react'
 import type { PaymentBlock } from '@back/entity/quotation/schema'
+
+const STRIPE_CURRENCIES = [
+  'USD', 'EUR', 'GBP', 'AUD', 'CAD', 'CHF', 'JPY', 'SGD', 'HKD', 'NZD',
+  'AED', 'AFN', 'ALL', 'AMD', 'ANG', 'AOA', 'ARS', 'AWG', 'AZN', 'BAM',
+  'BBD', 'BDT', 'BGN', 'BIF', 'BMD', 'BND', 'BOB', 'BRL', 'BSD', 'BWP',
+  'BYN', 'BZD', 'CDF', 'CLP', 'CNY', 'COP', 'CRC', 'CVE', 'CZK', 'DJF',
+  'DKK', 'DOP', 'DZD', 'EGP', 'ETB', 'FJD', 'FKP', 'GEL', 'GIP', 'GMD',
+  'GNF', 'GTQ', 'GYD', 'HNL', 'HRK', 'HTG', 'HUF', 'IDR', 'ILS', 'INR',
+  'ISK', 'JMD', 'KES', 'KGS', 'KHR', 'KMF', 'KRW', 'KYD', 'KZT', 'LAK',
+  'LBP', 'LKR', 'LRD', 'LSL', 'MAD', 'MDL', 'MGA', 'MKD', 'MMK', 'MNT',
+  'MOP', 'MUR', 'MVR', 'MWK', 'MXN', 'MYR', 'MZN', 'NAD', 'NGN', 'NIO',
+  'NOK', 'NPR', 'PAB', 'PEN', 'PGK', 'PHP', 'PKR', 'PLN', 'PYG', 'QAR',
+  'RON', 'RSD', 'RUB', 'RWF', 'SAR', 'SBD', 'SCR', 'SEK', 'SHP', 'SLE',
+  'SOS', 'SRD', 'STD', 'SZL', 'THB', 'TJS', 'TND', 'TOP', 'TRY', 'TTD',
+  'TWD', 'TZS', 'UAH', 'UGX', 'UYU', 'UZS', 'VND', 'VUV', 'WST', 'XAF',
+  'XCD', 'XOF', 'XPF', 'YER', 'ZAR', 'ZMW',
+] as const
 
 type Props = {
   blockIndex: number
@@ -53,13 +80,14 @@ export const OwnerPaymentView = (props: Props): React.JSX.Element => {
         <Box sx={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <CiCreditCard1 style={{ fontSize: '20px' }} />
           <Typography fontWeight={600} variant='subtitle2'>
-            Payment Block
+            Payment
           </Typography>
         </Box>
         <Divider />
         <TextField
           disabled={hasPaymentLink}
           label='Description'
+          focused
           placeholder='Invoice #123 for services rendered'
           size='small'
           value={description}
@@ -71,6 +99,7 @@ export const OwnerPaymentView = (props: Props): React.JSX.Element => {
           <TextField
             disabled={hasPaymentLink}
             label='Amount'
+            focused
             placeholder='100.00'
             size='small'
             slotProps={{ htmlInput: { min: 0.01, step: 0.01 } }}
@@ -81,17 +110,22 @@ export const OwnerPaymentView = (props: Props): React.JSX.Element => {
               setAmount(event.target.value)
             }}
           />
-          <TextField
-            disabled={hasPaymentLink}
-            label='Currency'
-            size='small'
-            slotProps={{ htmlInput: { maxLength: 3 } }}
-            sx={{ flex: 1 }}
-            value={currency.toUpperCase()}
-            onChange={(event) => {
-              setCurrency(event.target.value.toUpperCase())
-            }}
-          />
+          <FormControl disabled={hasPaymentLink} size='small' sx={{ flex: 1 }}>
+            <InputLabel>Currency</InputLabel>
+            <Select
+              label='Currency'
+              value={currency.toUpperCase()}
+              onChange={(event) => {
+                setCurrency(event.target.value)
+              }}
+            >
+              {STRIPE_CURRENCIES.map((code) => (
+                <MenuItem key={code} value={code}>
+                  {code}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </Box>
         {hasPaymentLink ? (
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
