@@ -269,7 +269,9 @@ Clients can receive payments directly to their own Stripe accounts. Each user co
 
 - **Stripe Connect** (OAuth) — each user connects their own Stripe account. Payments go directly to that account; the platform is never in the money flow.
 - **Payment Links** — server-side generated Stripe Payment Links (no Stripe.js on the frontend). The link is stored in the quotation and rendered as a button for the client.
-- **Webhook** — Stripe posts `checkout.session.completed` to `/api/stripe/webhook`. The handler verifies the signature, reads `metadata.quotationId`, and sets `paidAt` in the database.
+- **Webhook** — Stripe posts events to `/api/stripe/webhook`. The handler verifies the signature and processes:
+  - `checkout.session.completed` — reads `metadata.quotationId` and sets `paidAt` in the database.
+  - `account.application.deauthorized` — clears `stripeAccountId` from the user when they disconnect your platform from their Stripe account.
 
 ### Required secrets
 
@@ -291,13 +293,13 @@ API keys and Connect client IDs follow a binary test/live split. Webhook secrets
 
 Stripe has two completely separate sets of keys — both coexist simultaneously, no dashboard toggle needed at runtime. The Dashboard **Test / Live toggle** only affects what you see in the UI when copying keys.
 
-| Environment | Secret key              | Client ID              | Webhook secret                |
-| ----------- | ----------------------- | ---------------------- | ----------------------------- |
-| `local`     | `STRIPE_TEST_SECRET_KEY` | `STRIPE_TEST_CLIENT_ID` | `STRIPE_DEV_WEBHOOK_SECRET` (from `stripe listen`)  |
-| `dev`       | `STRIPE_TEST_SECRET_KEY` | `STRIPE_TEST_CLIENT_ID` | `STRIPE_DEV_WEBHOOK_SECRET`   |
-| `test`      | `STRIPE_TEST_SECRET_KEY` | `STRIPE_TEST_CLIENT_ID` | `STRIPE_TEST_WEBHOOK_SECRET`  |
-| `pilot`     | `STRIPE_LIVE_SECRET_KEY` | `STRIPE_LIVE_CLIENT_ID` | `STRIPE_PILOT_WEBHOOK_SECRET` |
-| `prod`      | `STRIPE_LIVE_SECRET_KEY` | `STRIPE_LIVE_CLIENT_ID` | `STRIPE_LIVE_WEBHOOK_SECRET`  |
+| Environment | Secret key               | Client ID               | Webhook secret                                     |
+| ----------- | ------------------------ | ----------------------- | -------------------------------------------------- |
+| `local`     | `STRIPE_TEST_SECRET_KEY` | `STRIPE_TEST_CLIENT_ID` | `STRIPE_DEV_WEBHOOK_SECRET` (from `stripe listen`) |
+| `dev`       | `STRIPE_TEST_SECRET_KEY` | `STRIPE_TEST_CLIENT_ID` | `STRIPE_DEV_WEBHOOK_SECRET`                        |
+| `test`      | `STRIPE_TEST_SECRET_KEY` | `STRIPE_TEST_CLIENT_ID` | `STRIPE_TEST_WEBHOOK_SECRET`                       |
+| `pilot`     | `STRIPE_LIVE_SECRET_KEY` | `STRIPE_LIVE_CLIENT_ID` | `STRIPE_PILOT_WEBHOOK_SECRET`                      |
+| `prod`      | `STRIPE_LIVE_SECRET_KEY` | `STRIPE_LIVE_CLIENT_ID` | `STRIPE_LIVE_WEBHOOK_SECRET`                       |
 
 **Rules:**
 
@@ -340,24 +342,31 @@ Register **four** endpoints — two in test mode, two in live mode. Each gets it
 
 **Test mode** — [Dashboard → Developers → Webhooks → Add endpoint](https://dashboard.stripe.com/test/workbench/webhooks):
 
-| URL | Secret name |
-| --- | ----------- |
-| `https://dev.sendmequotation.today/api/stripe/webhook` | `STRIPE_DEV_WEBHOOK_SECRET` |
+| URL                                                     | Secret name                  |
+| ------------------------------------------------------- | ---------------------------- |
+| `https://dev.sendmequotation.today/api/stripe/webhook`  | `STRIPE_DEV_WEBHOOK_SECRET`  |
 | `https://test.sendmequotation.today/api/stripe/webhook` | `STRIPE_TEST_WEBHOOK_SECRET` |
 
 **Live mode** — [Dashboard → Developers → Webhooks → Add endpoint](https://dashboard.stripe.com/workbench/webhooks):
 
-| URL | Secret name |
-| --- | ----------- |
+| URL                                                      | Secret name                   |
+| -------------------------------------------------------- | ----------------------------- |
 | `https://pilot.sendmequotation.today/api/stripe/webhook` | `STRIPE_PILOT_WEBHOOK_SECRET` |
-| `https://sendmequotation.today/api/stripe/webhook` | `STRIPE_LIVE_WEBHOOK_SECRET` |
+| `https://sendmequotation.today/api/stripe/webhook`       | `STRIPE_LIVE_WEBHOOK_SECRET`  |
 
 For each endpoint set:
+
 - Events from: **Connected and v2 accounts**
 - API version: **2026-03-25.dahlia** (latest)
-- Events to listen for: `checkout.session.completed`
+- Events to listen for: `checkout.session.completed`, `account.application.deauthorized`
 
 Copy the **Signing secret** (`whsec_…`) shown after creation — each endpoint has a different secret.
+
+**If the endpoints already exist** (e.g. `checkout.session.completed` was already registered), add `account.application.deauthorized` to each one:
+
+1. Go to [Webhooks (test)](https://dashboard.stripe.com/test/workbench/webhooks) → click the endpoint → **Add events** → search `account.application.deauthorized` → **Add events**.
+2. Repeat for the second test endpoint.
+3. Switch to live mode, go to [Webhooks (live)](https://dashboard.stripe.com/workbench/webhooks) and repeat for both live endpoints.
 
 For local development use the [Stripe CLI](https://stripe.com/docs/stripe-cli):
 

@@ -1,4 +1,5 @@
 import { quotationsTable } from '@back/entity/quotation/db/quotationsTableSchema'
+import { usersTable } from '@back/entity/user/db/usersTableSchema'
 import { db } from '@back/shared/lib/drizzle/db'
 import { HttpError } from '@back/shared/errors/HttpError'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
@@ -74,6 +75,19 @@ export const stripeWebhookHandler: RouterHandler = async (req) => {
 
         messageList.push(`Quotation ${quotationId} marked as paid`)
       }
+    }
+  }
+
+  if (event.type === 'account.application.deauthorized') {
+    const stripeAccountId = event.account
+
+    if (typeof stripeAccountId === 'string' && stripeAccountId.length > 0) {
+      await db
+        .update(usersTable)
+        .set({ stripeAccountId: null })
+        .where(eq(usersTable.stripeAccountId, stripeAccountId))
+
+      messageList.push(`Stripe account ${stripeAccountId} disconnected`)
     }
   }
 
