@@ -24,14 +24,18 @@ const app = express()
 
 // gzip compression for responses
 app.use(compression())
+
 // http logs in terminal
 app.use(morgan('dev'))
+
 // Stripe webhook needs raw body for signature verification — must be registered before express.json()
-// If Express's JSON middleware runs first, it parses the body into a JS
-// object and the original bytes are gone, making signature verification fail
+// If Express's JSON middleware runs first, it parses the body into a JS object
+// and the original bytes are gone, making signature verification fail
 app.use('/api/stripe/webhook', express.raw({ type: 'application/json' }))
+
 // parses JSON payload and adds it to req.body
 app.use(express.json({ limit: '50mb' }))
+
 // parses Cookie header and adds to req.cookies
 app.use(cookieParser())
 
@@ -67,6 +71,7 @@ if (runtimeConfig.nodeEnv === 'production') {
 
           // HTTP 1.0 compatibility
           res.setHeader('Pragma', 'no-cache')
+
           // Proxies
           res.setHeader('Expires', '0')
         }

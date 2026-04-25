@@ -325,12 +325,45 @@ resource "google_secret_manager_secret" "stripe_live_client_id" {
   depends_on = [google_project_service.required_services]
 }
 
+resource "google_secret_manager_secret" "stripe_dev_webhook_secret" {
+  secret_id = "STRIPE_DEV_WEBHOOK_SECRET"
+
+  labels = {
+    managed-by  = "terraform"
+    purpose     = "stripe"
+    environment = "dev"
+  }
+
+  replication {
+    auto {}
+  }
+
+  depends_on = [google_project_service.required_services]
+}
+
 resource "google_secret_manager_secret" "stripe_test_webhook_secret" {
   secret_id = "STRIPE_TEST_WEBHOOK_SECRET"
 
   labels = {
-    managed-by = "terraform"
-    purpose    = "stripe"
+    managed-by  = "terraform"
+    purpose     = "stripe"
+    environment = "test"
+  }
+
+  replication {
+    auto {}
+  }
+
+  depends_on = [google_project_service.required_services]
+}
+
+resource "google_secret_manager_secret" "stripe_pilot_webhook_secret" {
+  secret_id = "STRIPE_PILOT_WEBHOOK_SECRET"
+
+  labels = {
+    managed-by  = "terraform"
+    purpose     = "stripe"
+    environment = "pilot"
   }
 
   replication {
@@ -344,8 +377,9 @@ resource "google_secret_manager_secret" "stripe_live_webhook_secret" {
   secret_id = "STRIPE_LIVE_WEBHOOK_SECRET"
 
   labels = {
-    managed-by = "terraform"
-    purpose    = "stripe"
+    managed-by  = "terraform"
+    purpose     = "stripe"
+    environment = "prod"
   }
 
   replication {
@@ -379,8 +413,20 @@ resource "google_secret_manager_secret_iam_member" "stripe_live_client_id" {
   member    = "serviceAccount:${google_service_account.cloud_run_service.email}"
 }
 
+resource "google_secret_manager_secret_iam_member" "stripe_dev_webhook_secret" {
+  secret_id = google_secret_manager_secret.stripe_dev_webhook_secret.id
+  role      = "roles/secretmanager.secretAccessor"
+  member    = "serviceAccount:${google_service_account.cloud_run_service.email}"
+}
+
 resource "google_secret_manager_secret_iam_member" "stripe_test_webhook_secret" {
   secret_id = google_secret_manager_secret.stripe_test_webhook_secret.id
+  role      = "roles/secretmanager.secretAccessor"
+  member    = "serviceAccount:${google_service_account.cloud_run_service.email}"
+}
+
+resource "google_secret_manager_secret_iam_member" "stripe_pilot_webhook_secret" {
+  secret_id = google_secret_manager_secret.stripe_pilot_webhook_secret.id
   role      = "roles/secretmanager.secretAccessor"
   member    = "serviceAccount:${google_service_account.cloud_run_service.email}"
 }

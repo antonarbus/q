@@ -12,6 +12,7 @@
     "dev-front": "NODE_ENV=development ENVIRONMENT=local vite",
     "dev-back": "NODE_ENV=development ENVIRONMENT=local bun --watch back/index.ts",
     "stop-dev": "kill-port 3000 3666 8080",
+    "stripe-listen": "stripe listen --forward-to localhost:8080/api/stripe/webhook",
     "build-front": "NODE_ENV=production vite build",
     "build-back": "bun run bundle-back/bundleBack.ts",
     "build": "bun run build-front && bun run build-back",

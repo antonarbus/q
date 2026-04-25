@@ -1,7 +1,7 @@
 import { SecretManagerServiceClient } from '@google-cloud/secret-manager'
 import { sharedInfraConfig } from '@back/config/infrastructure'
 
-type SecretName =
+export type SecretName =
   | 'JWT_ACCESS_SECRET'
   | 'JWT_REFRESH_SECRET'
   | 'MAILERSEND_API_KEY'
@@ -13,7 +13,9 @@ type SecretName =
   | 'GOOGLE_CLOUD_PROJECT_PRIVATE_KEY'
   | 'STRIPE_TEST_SECRET_KEY'
   | 'STRIPE_LIVE_SECRET_KEY'
+  | 'STRIPE_DEV_WEBHOOK_SECRET'
   | 'STRIPE_TEST_WEBHOOK_SECRET'
+  | 'STRIPE_PILOT_WEBHOOK_SECRET'
   | 'STRIPE_LIVE_WEBHOOK_SECRET'
   | 'STRIPE_TEST_CLIENT_ID'
   | 'STRIPE_LIVE_CLIENT_ID'
@@ -30,7 +32,9 @@ const cachedSecrets: Record<SecretName, string | null> = {
   GOOGLE_CLOUD_PROJECT_PRIVATE_KEY: null,
   STRIPE_TEST_SECRET_KEY: null,
   STRIPE_LIVE_SECRET_KEY: null,
+  STRIPE_DEV_WEBHOOK_SECRET: null,
   STRIPE_TEST_WEBHOOK_SECRET: null,
+  STRIPE_PILOT_WEBHOOK_SECRET: null,
   STRIPE_LIVE_WEBHOOK_SECRET: null,
   STRIPE_TEST_CLIENT_ID: null,
   STRIPE_LIVE_CLIENT_ID: null,
@@ -39,6 +43,16 @@ const cachedSecrets: Record<SecretName, string | null> = {
 export const getSecret = async (secretName: SecretName): Promise<string> => {
   if (cachedSecrets[secretName] !== null) {
     return cachedSecrets[secretName]
+  }
+
+  // Secrete found in .env will be used (required for stripe local test)
+  // oxlint-disable-next-line node/no-process-env
+  const envValue = process.env[secretName]
+
+  if (envValue !== undefined) {
+    cachedSecrets[secretName] = envValue
+
+    return envValue
   }
 
   const client = new SecretManagerServiceClient()

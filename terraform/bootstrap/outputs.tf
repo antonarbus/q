@@ -67,7 +67,9 @@ output "secret_names" {
     stripe_live_secret_key       = google_secret_manager_secret.stripe_live_secret_key.secret_id
     stripe_test_client_id        = google_secret_manager_secret.stripe_test_client_id.secret_id
     stripe_live_client_id        = google_secret_manager_secret.stripe_live_client_id.secret_id
+    stripe_dev_webhook_secret    = google_secret_manager_secret.stripe_dev_webhook_secret.secret_id
     stripe_test_webhook_secret   = google_secret_manager_secret.stripe_test_webhook_secret.secret_id
+    stripe_pilot_webhook_secret  = google_secret_manager_secret.stripe_pilot_webhook_secret.secret_id
     stripe_live_webhook_secret   = google_secret_manager_secret.stripe_live_webhook_secret.secret_id
   }
 }

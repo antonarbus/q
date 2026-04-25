@@ -7,10 +7,23 @@ import { OwnerPaymentView } from './OwnerPaymentView'
 export const PaymentBlock = (): React.ReactNode => {
   const block = useBlock()
   const isEditorView = useIsEditorView()
+
   const paidAt = reduxHolder.useSelector((state) => state.quotation.paidAt)
   const quotationId = reduxHolder.useSelector((state) => state.quotation.id)
 
-  if (block.item.type !== 'payment') {
+  // Read payment directly from Redux so the component re-renders after updatePaymentBlock
+  // (the block context is intentionally stale due to arrayShapesEqualityFn in QuotationPage)
+  const payment = reduxHolder.useSelector((state) => {
+    const thisBlock = state.quotation.blocks[block.index]
+
+    if (thisBlock?.type === 'payment') {
+      return thisBlock.payment
+    }
+
+    return null
+  })
+
+  if (block.item.type !== 'payment' || payment === null) {
     return null
   }
 
@@ -18,11 +31,12 @@ export const PaymentBlock = (): React.ReactNode => {
     return (
       <OwnerPaymentView
         blockIndex={block.index}
-        payment={block.item.payment}
+        paidAt={paidAt}
+        payment={payment}
         quotationId={quotationId}
       />
     )
   }
 
-  return <ClientPaymentView isPaid={Boolean(paidAt)} payment={block.item.payment} />
+  return <ClientPaymentView isPaid={Boolean(paidAt)} payment={payment} />
 }

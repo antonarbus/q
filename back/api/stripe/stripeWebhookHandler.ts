@@ -44,20 +44,19 @@ export const stripeWebhookHandler: RouterHandler = async (req) => {
 
   const stripe = await getStripe()
 
-  // oxlint-disable-next-line init-declarations
-  let event: Stripe.Event
+  const event: Stripe.Event = await stripe.instance.webhooks
+    .constructEventAsync(req.body, stripeSignature, stripe.webhookSecret)
+    .catch((error) => {
+      // oxlint-disable-next-line no-console
+      console.error('Stripe webhook signature verification failed:', error)
+      messageList.push('Stripe webhook signature verification failed')
 
-  try {
-    event = stripe.instance.webhooks.constructEvent(req.body, stripeSignature, stripe.webhookSecret)
-  } catch {
-    messageList.push('Stripe webhook signature verification failed')
-
-    throw new HttpError({
-      errorCode: 'BAD_REQUEST',
-      statusCode: httpStatusCode.badRequest400,
-      message: messageList.join(' | '),
+      throw new HttpError({
+        errorCode: 'BAD_REQUEST',
+        statusCode: httpStatusCode.badRequest400,
+        message: messageList.join(' | '),
+      })
     })
-  }
 
   messageList.push(`Stripe webhook event verified: ${event.type}`)
 

@@ -3,10 +3,12 @@ import {
   Chip,
   Divider,
   FormControl,
+  IconButton,
   InputLabel,
   MenuItem,
   Select,
   TextField,
+  Tooltip,
   Typography,
 } from '@mui/material'
 import { BlockComp } from '@front/entities/quotation/ui/BlockComp'
@@ -17,28 +19,15 @@ import { GeneratePaymentLinkButton } from '@front/features/blocks/generate-payme
 import { OpenPaymentLinkButton } from '@front/features/blocks/open-payment-link/OpenPaymentLinkButton'
 import { ItemActionButtonsLayout } from '@front/shared/layout/ItemActionButtonsLayout'
 import { CiCreditCard1 } from 'react-icons/ci'
+import { MdContentCopy } from 'react-icons/md'
 import { useState } from 'react'
+import { toast } from 'sonner'
 import type { PaymentBlock } from '@back/entity/quotation/schema'
-
-const STRIPE_CURRENCIES = [
-  'USD', 'EUR', 'GBP', 'AUD', 'CAD', 'CHF', 'JPY', 'SGD', 'HKD', 'NZD',
-  'AED', 'AFN', 'ALL', 'AMD', 'ANG', 'AOA', 'ARS', 'AWG', 'AZN', 'BAM',
-  'BBD', 'BDT', 'BGN', 'BIF', 'BMD', 'BND', 'BOB', 'BRL', 'BSD', 'BWP',
-  'BYN', 'BZD', 'CDF', 'CLP', 'CNY', 'COP', 'CRC', 'CVE', 'CZK', 'DJF',
-  'DKK', 'DOP', 'DZD', 'EGP', 'ETB', 'FJD', 'FKP', 'GEL', 'GIP', 'GMD',
-  'GNF', 'GTQ', 'GYD', 'HNL', 'HRK', 'HTG', 'HUF', 'IDR', 'ILS', 'INR',
-  'ISK', 'JMD', 'KES', 'KGS', 'KHR', 'KMF', 'KRW', 'KYD', 'KZT', 'LAK',
-  'LBP', 'LKR', 'LRD', 'LSL', 'MAD', 'MDL', 'MGA', 'MKD', 'MMK', 'MNT',
-  'MOP', 'MUR', 'MVR', 'MWK', 'MXN', 'MYR', 'MZN', 'NAD', 'NGN', 'NIO',
-  'NOK', 'NPR', 'PAB', 'PEN', 'PGK', 'PHP', 'PKR', 'PLN', 'PYG', 'QAR',
-  'RON', 'RSD', 'RUB', 'RWF', 'SAR', 'SBD', 'SCR', 'SEK', 'SHP', 'SLE',
-  'SOS', 'SRD', 'STD', 'SZL', 'THB', 'TJS', 'TND', 'TOP', 'TRY', 'TTD',
-  'TWD', 'TZS', 'UAH', 'UGX', 'UYU', 'UZS', 'VND', 'VUV', 'WST', 'XAF',
-  'XCD', 'XOF', 'XPF', 'YER', 'ZAR', 'ZMW',
-] as const
+import { stripeCurrencies } from '@front/shared/lib/stripe/stripeCurrencies'
 
 type Props = {
   blockIndex: number
+  paidAt: string | null
   payment: PaymentBlock['payment']
   quotationId: string
 }
@@ -119,7 +108,7 @@ export const OwnerPaymentView = (props: Props): React.JSX.Element => {
                 setCurrency(event.target.value)
               }}
             >
-              {STRIPE_CURRENCIES.map((code) => (
+              {stripeCurrencies.map((code) => (
                 <MenuItem key={code} value={code}>
                   {code}
                 </MenuItem>
@@ -129,7 +118,11 @@ export const OwnerPaymentView = (props: Props): React.JSX.Element => {
         </Box>
         {hasPaymentLink ? (
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            <Chip color='success' label='Payment link active' size='small' variant='outlined' />
+            {props.paidAt === null ? (
+              <Chip color='success' label='Payment link active' size='small' variant='outlined' />
+            ) : (
+              <Chip color='success' label='Payment Received' size='small' />
+            )}
             <Box sx={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
               <Typography
                 sx={{
@@ -143,6 +136,19 @@ export const OwnerPaymentView = (props: Props): React.JSX.Element => {
               >
                 {props.payment.stripePaymentLinkUrl}
               </Typography>
+              <Tooltip title='Copy link'>
+                <IconButton
+                  size='small'
+                  onClick={async () => {
+                    await window.navigator.clipboard
+                      .writeText(props.payment.stripePaymentLinkUrl ?? '')
+                      .then(() => toast.success('Link copied'))
+                      .catch(() => toast.error('Failed to copy'))
+                  }}
+                >
+                  <MdContentCopy style={{ fontSize: '16px' }} />
+                </IconButton>
+              </Tooltip>
               <OpenPaymentLinkButton url={props.payment.stripePaymentLinkUrl ?? ''} />
             </Box>
           </Box>

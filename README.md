@@ -263,7 +263,7 @@ instance.queryClient.invalidateQueries({ queryKey: [...] })
 
 ## Stripe Payments
 
-Clients can receive payments directly to their own Stripe accounts through the app. Each user connects their Stripe account once, then adds a **Payment Block** to any quotation. The external client opens the offer, clicks "Pay Now", and is taken to Stripe's hosted payment page. When payment completes, the quotation is automatically marked as paid.
+Clients can receive payments directly to their own Stripe accounts. Each user connects their Stripe account once, then adds a **Payment Block** to any quotation. The external client opens the offer, clicks "Pay Now", and is taken to Stripe's hosted payment page. When payment completes, the quotation is automatically marked as paid.
 
 ### How it works
 
@@ -273,32 +273,36 @@ Clients can receive payments directly to their own Stripe accounts through the a
 
 ### Required secrets
 
-The app automatically selects test or live Stripe keys based on the environment: `pilot` and `prod` use live keys, everything else (`local`, `dev`, `test`) uses test keys. Both sets of secrets must exist in the secret manager before deploying.
+API keys and Connect client IDs follow a binary test/live split. Webhook secrets are per-environment because each registered endpoint gets its own signing secret from Stripe.
 
-| Secret                       | Where to get it                                                                                                                                |
-| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `STRIPE_TEST_SECRET_KEY`     | [API keys (test)](https://dashboard.stripe.com/test/apikeys) → Secret key (`sk_test_…`)                                                                           |
-| `STRIPE_LIVE_SECRET_KEY`     | [API keys (live)](https://dashboard.stripe.com/apikeys) → Secret key (`sk_live_…`)                                                                                |
-| `STRIPE_TEST_CLIENT_ID`      | [Connect → Onboarding options → OAuth (test)](https://dashboard.stripe.com/test/settings/connect/onboarding-options/oauth) → Test client ID (`ca_…`)              |
-| `STRIPE_LIVE_CLIENT_ID`      | [Connect → Onboarding options → OAuth (live)](https://dashboard.stripe.com/settings/connect/onboarding-options/oauth) → Live client ID (`ca_…`) — requires Stripe approval |
-| `STRIPE_TEST_WEBHOOK_SECRET` | [Webhooks (test)](https://dashboard.stripe.com/test/workbench/webhooks) → your endpoint → Signing secret (`whsec_…`)                                              |
-| `STRIPE_LIVE_WEBHOOK_SECRET` | [Webhooks (live)](https://dashboard.stripe.com/workbench/webhooks) → your endpoint → Signing secret (`whsec_…`)                                                   |
-| `JWT_ACCESS_SECRET`          | already exists — used to sign the OAuth `state` parameter                                                                                      |
+| Secret                        | Where to get it                                                                                                                                                            |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `STRIPE_TEST_SECRET_KEY`      | [API keys (test)](https://dashboard.stripe.com/test/apikeys) → Secret key (`sk_test_…`)                                                                                    |
+| `STRIPE_LIVE_SECRET_KEY`      | [API keys (live)](https://dashboard.stripe.com/apikeys) → Secret key (`sk_live_…`)                                                                                         |
+| `STRIPE_TEST_CLIENT_ID`       | [Connect → Onboarding options → OAuth (test)](https://dashboard.stripe.com/test/settings/connect/onboarding-options/oauth) → Test client ID (`ca_…`)                       |
+| `STRIPE_LIVE_CLIENT_ID`       | [Connect → Onboarding options → OAuth (live)](https://dashboard.stripe.com/settings/connect/onboarding-options/oauth) → Live client ID (`ca_…`) — requires Stripe approval |
+| `STRIPE_DEV_WEBHOOK_SECRET`   | [Webhooks (test)](https://dashboard.stripe.com/test/workbench/webhooks) → `dev.sendmequotation.today` endpoint → Signing secret (`whsec_…`)                                |
+| `STRIPE_TEST_WEBHOOK_SECRET`  | [Webhooks (test)](https://dashboard.stripe.com/test/workbench/webhooks) → `test.sendmequotation.today` endpoint → Signing secret (`whsec_…`)                               |
+| `STRIPE_PILOT_WEBHOOK_SECRET` | [Webhooks (live)](https://dashboard.stripe.com/workbench/webhooks) → `pilot.sendmequotation.today` endpoint → Signing secret (`whsec_…`)                                   |
+| `STRIPE_LIVE_WEBHOOK_SECRET`  | [Webhooks (live)](https://dashboard.stripe.com/workbench/webhooks) → `sendmequotation.today` endpoint → Signing secret (`whsec_…`)                                         |
+| `JWT_ACCESS_SECRET`           | already exists — used to sign the OAuth `state` parameter                                                                                                                  |
 
 ### Test mode vs live mode
 
 Stripe has two completely separate sets of keys — both coexist simultaneously, no dashboard toggle needed at runtime. The Dashboard **Test / Live toggle** only affects what you see in the UI when copying keys.
 
-| Environment      | Keys used       |
-| ---------------- | --------------- |
-| `local`          | `STRIPE_TEST_*` |
-| `dev` / `test`   | `STRIPE_TEST_*` |
-| `pilot` / `prod` | `STRIPE_LIVE_*` |
+| Environment | Secret key              | Client ID              | Webhook secret                |
+| ----------- | ----------------------- | ---------------------- | ----------------------------- |
+| `local`     | `STRIPE_TEST_SECRET_KEY` | `STRIPE_TEST_CLIENT_ID` | `STRIPE_DEV_WEBHOOK_SECRET` (from `stripe listen`)  |
+| `dev`       | `STRIPE_TEST_SECRET_KEY` | `STRIPE_TEST_CLIENT_ID` | `STRIPE_DEV_WEBHOOK_SECRET`   |
+| `test`      | `STRIPE_TEST_SECRET_KEY` | `STRIPE_TEST_CLIENT_ID` | `STRIPE_TEST_WEBHOOK_SECRET`  |
+| `pilot`     | `STRIPE_LIVE_SECRET_KEY` | `STRIPE_LIVE_CLIENT_ID` | `STRIPE_PILOT_WEBHOOK_SECRET` |
+| `prod`      | `STRIPE_LIVE_SECRET_KEY` | `STRIPE_LIVE_CLIENT_ID` | `STRIPE_LIVE_WEBHOOK_SECRET`  |
 
 **Rules:**
 
-- `sk_live_…` keys go **only** in GCP Secret Manager — never in `.env` or dev environments.
 - For local webhook testing, don't register an endpoint in the Dashboard — use `stripe listen` instead (see step 4).
+- Bun uses the Web Crypto API (async-only), so the webhook handler must use `constructEventAsync` instead of `constructEvent` — the synchronous version throws at runtime on Bun.
 
 ### Step-by-step setup
 
@@ -332,20 +336,34 @@ The **Live client ID** is unavailable until Stripe approves your platform profil
 
 #### 4. Register a webhook endpoint
 
-[Dashboard → Developers → Webhooks → Add endpoint](https://dashboard.stripe.com/test/workbench/webhooks) (test) / [live](https://dashboard.stripe.com/workbench/webhooks):
+Register **four** endpoints — two in test mode, two in live mode. Each gets its own signing secret.
 
+**Test mode** — [Dashboard → Developers → Webhooks → Add endpoint](https://dashboard.stripe.com/test/workbench/webhooks):
+
+| URL | Secret name |
+| --- | ----------- |
+| `https://dev.sendmequotation.today/api/stripe/webhook` | `STRIPE_DEV_WEBHOOK_SECRET` |
+| `https://test.sendmequotation.today/api/stripe/webhook` | `STRIPE_TEST_WEBHOOK_SECRET` |
+
+**Live mode** — [Dashboard → Developers → Webhooks → Add endpoint](https://dashboard.stripe.com/workbench/webhooks):
+
+| URL | Secret name |
+| --- | ----------- |
+| `https://pilot.sendmequotation.today/api/stripe/webhook` | `STRIPE_PILOT_WEBHOOK_SECRET` |
+| `https://sendmequotation.today/api/stripe/webhook` | `STRIPE_LIVE_WEBHOOK_SECRET` |
+
+For each endpoint set:
 - Events from: **Connected and v2 accounts**
 - API version: **2026-03-25.dahlia** (latest)
 - Events to listen for: `checkout.session.completed`
-- Endpoint URL: `https://test.sendmequotation.today/api/stripe/webhook` (test) / `https://sendmequotation.today/api/stripe/webhook` (live)
 
-Copy the **Signing secret** (`whsec_…`) after creation.
+Copy the **Signing secret** (`whsec_…`) shown after creation — each endpoint has a different secret.
 
 For local development use the [Stripe CLI](https://stripe.com/docs/stripe-cli):
 
 ```bash
 stripe listen --forward-to localhost:8080/api/stripe/webhook
-# prints a whsec_… secret — use that as STRIPE_TEST_WEBHOOK_SECRET locally
+# prints a whsec_… secret — use that as STRIPE_DEV_WEBHOOK_SECRET locally
 ```
 
 #### 5. Add secrets to your environment
@@ -355,10 +373,21 @@ stripe listen --forward-to localhost:8080/api/stripe/webhook
 ```
 STRIPE_TEST_SECRET_KEY=sk_test_…
 STRIPE_TEST_CLIENT_ID=ca_…
-STRIPE_TEST_WEBHOOK_SECRET=whsec_…   # from stripe listen, not Dashboard
+STRIPE_DEV_WEBHOOK_SECRET=whsec_…   # from stripe listen, not Dashboard
 ```
 
-**Production** — add all six Stripe secrets to GCP Secret Manager (`STRIPE_TEST_*` and `STRIPE_LIVE_*`).
+**Deployed environments** — add all eight Stripe secrets to GCP Secret Manager:
+
+```
+STRIPE_TEST_SECRET_KEY      # shared by local / dev / test
+STRIPE_LIVE_SECRET_KEY      # shared by pilot / prod
+STRIPE_TEST_CLIENT_ID       # shared by local / dev / test
+STRIPE_LIVE_CLIENT_ID       # shared by pilot / prod
+STRIPE_DEV_WEBHOOK_SECRET   # dev.sendmequotation.today endpoint
+STRIPE_TEST_WEBHOOK_SECRET  # test.sendmequotation.today endpoint
+STRIPE_PILOT_WEBHOOK_SECRET # pilot.sendmequotation.today endpoint
+STRIPE_LIVE_WEBHOOK_SECRET  # sendmequotation.today endpoint
+```
 
 #### 6. Push the DB migration
 

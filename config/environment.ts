@@ -34,4 +34,4 @@ const runtimeEnvironmentList = [
 ] as const
 
 export const runtimeEnvironmentSchema = z.enum(runtimeEnvironmentList)
-// export type RuntimeEnv = z.infer<typeof runtimeEnvSchema>
+export type RuntimeEnvironment = z.infer<typeof runtimeEnvironmentSchema>
