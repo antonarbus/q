@@ -27,9 +27,7 @@ export const useHandlePaymentSuccess = (): void => {
       try {
         const result = await getQuotationMutation.mutateAsync({ id: urlParams.quotationId })
 
-        reduxHolder.dispatch(
-          quotationSlice.actions.loadQuotation({ quotation: result.quotation }),
-        )
+        reduxHolder.dispatch(quotationSlice.actions.loadQuotation({ quotation: result.quotation }))
 
         if (result.quotation.paidAt === null) {
           toast.warning('Payment received but status is still updating — refresh in a moment.')

@@ -54,22 +54,22 @@ output "cloud_run_service_account_email" {
 output "secret_names" {
   description = "Names of all secrets in Secret Manager (for reference)"
   value = {
-    jwt_access             = google_secret_manager_secret.jwt_access.secret_id
-    jwt_refresh            = google_secret_manager_secret.jwt_refresh.secret_id
-    mailersend_api_key     = google_secret_manager_secret.mailersend_api_key.secret_id
-    neon_api_key           = google_secret_manager_secret.neon_api_key.secret_id
-    neon_database_url_dev  = google_secret_manager_secret.neon_database_url_dev.secret_id
-    neon_database_url_test = google_secret_manager_secret.neon_database_url_test.secret_id
-    neon_database_url_prod = google_secret_manager_secret.neon_database_url_prod.secret_id
-    gcp_private_key_id           = google_secret_manager_secret.gcp_private_key_id.secret_id
-    gcp_private_key              = google_secret_manager_secret.gcp_private_key.secret_id
-    stripe_test_secret_key       = google_secret_manager_secret.stripe_test_secret_key.secret_id
-    stripe_live_secret_key       = google_secret_manager_secret.stripe_live_secret_key.secret_id
-    stripe_test_client_id        = google_secret_manager_secret.stripe_test_client_id.secret_id
-    stripe_live_client_id        = google_secret_manager_secret.stripe_live_client_id.secret_id
-    stripe_dev_webhook_secret    = google_secret_manager_secret.stripe_dev_webhook_secret.secret_id
-    stripe_test_webhook_secret   = google_secret_manager_secret.stripe_test_webhook_secret.secret_id
-    stripe_pilot_webhook_secret  = google_secret_manager_secret.stripe_pilot_webhook_secret.secret_id
-    stripe_live_webhook_secret   = google_secret_manager_secret.stripe_live_webhook_secret.secret_id
+    jwt_access                  = google_secret_manager_secret.jwt_access.secret_id
+    jwt_refresh                 = google_secret_manager_secret.jwt_refresh.secret_id
+    mailersend_api_key          = google_secret_manager_secret.mailersend_api_key.secret_id
+    neon_api_key                = google_secret_manager_secret.neon_api_key.secret_id
+    neon_database_url_dev       = google_secret_manager_secret.neon_database_url_dev.secret_id
+    neon_database_url_test      = google_secret_manager_secret.neon_database_url_test.secret_id
+    neon_database_url_prod      = google_secret_manager_secret.neon_database_url_prod.secret_id
+    gcp_private_key_id          = google_secret_manager_secret.gcp_private_key_id.secret_id
+    gcp_private_key             = google_secret_manager_secret.gcp_private_key.secret_id
+    stripe_test_secret_key      = google_secret_manager_secret.stripe_test_secret_key.secret_id
+    stripe_live_secret_key      = google_secret_manager_secret.stripe_live_secret_key.secret_id
+    stripe_test_client_id       = google_secret_manager_secret.stripe_test_client_id.secret_id
+    stripe_live_client_id       = google_secret_manager_secret.stripe_live_client_id.secret_id
+    stripe_dev_webhook_secret   = google_secret_manager_secret.stripe_dev_webhook_secret.secret_id
+    stripe_test_webhook_secret  = google_secret_manager_secret.stripe_test_webhook_secret.secret_id
+    stripe_pilot_webhook_secret = google_secret_manager_secret.stripe_pilot_webhook_secret.secret_id
+    stripe_live_webhook_secret  = google_secret_manager_secret.stripe_live_webhook_secret.secret_id
   }
 }
