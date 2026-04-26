@@ -40,6 +40,8 @@ import { updateBoqHeaderText } from './reducer/update/updateBoqHeaderText'
 import { updateCell } from './reducer/update/updateCell'
 import { updateItemInfo } from './reducer/update/updateItemInfo'
 import { updatePayment } from './reducer/update/updatePayment'
+import { updatePaymentHeading } from './reducer/update/updatePaymentHeading'
+import { updatePaymentPayButtonLabel } from './reducer/update/updatePaymentPayButtonLabel'
 import { updatePrice } from './reducer/update/updatePrice'
 import { updatePriceTitle } from './reducer/update/updatePriceTitle'
 import { updateQuotationInfo } from './reducer/update/updateQuotationInfo'
@@ -104,6 +106,8 @@ export const quotationSlice = createSlice({
     updatePriceTitle,
     updatePrice,
     updatePaymentBlock: updatePayment,
+    updatePaymentHeading,
+    updatePaymentPayButtonLabel,
     updateQuotationInfo,
     updateItemInfo,
   },

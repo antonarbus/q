@@ -32,6 +32,7 @@
   // https://oxc.rs/docs/guide/usage/linter/rules.html
   "rules": {
     "eslint/arrow-body-style": "off",
+    "eslint/no-warning-comments": "warn",
     "eslint/capitalized-comments": "off",
     "eslint/complexity": "off",
     "eslint/id-length": ["error", { "exceptions": ["x", "y"] }],

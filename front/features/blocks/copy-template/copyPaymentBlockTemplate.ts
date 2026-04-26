@@ -3,6 +3,8 @@ import type { PaymentBlock } from '@back/entity/quotation/schema'
 import { generateId } from '@front/shared/lib/nanoid/generateId'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import paymentBlockPreviewHtml from '@front/entities/quotation/templates/paymentBlockPreview.html?raw'
+import paymentHeadingHtml from '@front/entities/quotation/templates/paymentHeading.html?raw'
+import payButtonLabelHtml from '@front/entities/quotation/templates/payButtonLabel.html?raw'
 
 export const copyPaymentBlockTemplate = (event?: React.MouseEvent): void => {
   const paymentBlockTemplate: PaymentBlock = {
@@ -21,7 +23,8 @@ export const copyPaymentBlockTemplate = (event?: React.MouseEvent): void => {
     payment: {
       amount: 0,
       currency: 'usd',
-      description: '',
+      heading: { html: paymentHeadingHtml },
+      payButtonLabel: { html: payButtonLabelHtml },
       stripePaymentLinkId: null,
       stripePaymentLinkUrl: null,
     },

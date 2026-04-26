@@ -24,6 +24,8 @@ import termsAndConditionsHtml from './templates/termsAndConditions.html?raw'
 import totalPriceTitleHtml from './templates/totalPriceTitle.html?raw'
 import totalPriceValueHtml from './templates/totalPriceValue.html?raw'
 import welcomeTextHtml from './templates/welcomeText.html?raw'
+import paymentHeadingHtml from './templates/paymentHeading.html?raw'
+import payButtonLabelHtml from './templates/payButtonLabel.html?raw'
 import type { Quotation } from '@back/entity/quotation/schema'
 
 export const newQuotationTemplate: Quotation = {
@@ -300,7 +302,12 @@ export const newQuotationTemplate: Quotation = {
       payment: {
         amount: 0,
         currency: 'usd',
-        description: '',
+        heading: {
+          html: paymentHeadingHtml,
+        },
+        payButtonLabel: {
+          html: payButtonLabelHtml,
+        },
         stripePaymentLinkId: null,
         stripePaymentLinkUrl: null,
       },
@@ -318,7 +325,6 @@ export const newQuotationTemplate: Quotation = {
       email: 'unknown@gmail.com',
       width: 600,
       height: 0,
-
       text: {
         html: termsAndConditionsHtml,
         value: null,

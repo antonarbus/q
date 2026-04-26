@@ -5,6 +5,7 @@ import { usePressNavShortcut } from '@front/widgets/nav/press-shortcut'
 import { NavLayout } from './NavLayout'
 import { navStructure } from './navStructure'
 import { useIsEditorView } from '@front/entities/quotation/util/useIsEditorView'
+import { NavRuntime } from './NavRuntime'
 
 export const Nav = (): React.ReactNode => {
   const isEditorView = useIsEditorView()
@@ -17,6 +18,7 @@ export const Nav = (): React.ReactNode => {
 
   return (
     <NavLayout>
+      <NavRuntime />
       <Logo />
       <NavList />
     </NavLayout>

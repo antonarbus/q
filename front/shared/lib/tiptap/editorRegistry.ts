@@ -15,6 +15,8 @@ type BlockEditorName =
   | 'boqBlockQtyCell'
   | 'priceBlockTitle'
   | 'priceBlockPrice'
+  | 'paymentBlockHeading'
+  | 'paymentBlockPayButtonLabel'
 
 type RegistryKeyProps = {
   editorName: BlockEditorName

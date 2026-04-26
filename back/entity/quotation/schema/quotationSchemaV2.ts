@@ -92,7 +92,12 @@ const paymentBlockSchema = blockCommonSchema.extend({
   payment: z.object({
     amount: z.number(),
     currency: z.string(),
-    description: z.string(),
+    heading: z.object({
+      html: z.string(),
+    }),
+    payButtonLabel: z.object({
+      html: z.string(),
+    }),
     stripePaymentLinkId: z.string().nullable(),
     stripePaymentLinkUrl: z.string().nullable(),
   }),

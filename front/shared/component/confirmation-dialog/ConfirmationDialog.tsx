@@ -120,12 +120,12 @@ export const ConfirmationDialog = (): React.JSX.Element => {
         )}
       </DialogContent>
       <DialogActions sx={{ px: 3, pb: 2, pt: 3, gap: 1 }}>
-        <Button variant='outlined' fullWidth onClick={handleReject}>
+        <Button fullWidth variant='outlined' onClick={handleReject}>
           {confirmationDialog.rejectButtonText ?? 'No'}
         </Button>
         <Button
-          variant='contained'
           fullWidth
+          variant='contained'
           autoFocus={confirmationDialog.inputLabel === undefined}
           onClick={handleConfirm}
         >

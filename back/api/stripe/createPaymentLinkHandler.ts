@@ -6,6 +6,7 @@ import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { httpJsonResponse } from '@back/shared/lib/express/httpResponse'
 import type { HttpResponse } from '@back/shared/lib/express/httpResponse'
 import { getStripe } from '@back/shared/lib/stripe/getStripe'
+import type { Stripe } from 'stripe'
 import { runtimeConfig } from '@root/config/runtime'
 import { eq } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
@@ -19,7 +20,6 @@ export type ReqBody = {
   quotationId: string
   amount: number
   currency: string
-  description: string
 }
 
 export type ResBody = {
@@ -38,8 +38,6 @@ export const createPaymentLinkHandler: RouterHandler = async (req) => {
   const user = await getUserFromAccessTokenOrThrowUnauthorized({ req })
 
   const messageList: string[] = []
-
-  const { quotationId, amount, currency, description } = req.body
 
   const [userSelected] = await db
     .select({ stripeAccountId: usersTable.stripeAccountId })
@@ -62,30 +60,44 @@ export const createPaymentLinkHandler: RouterHandler = async (req) => {
 
   const stripe = await getStripe()
 
-  const successUrl = `${runtimeConfig.front.baseUrl}/${quotationId}?payment=success`
+  const successUrl = `${runtimeConfig.front.baseUrl}/${req.body.quotationId}?payment=success`
 
-  const paymentLink = await stripe.instance.paymentLinks.create(
-    {
-      line_items: [
+  const paymentLink = await (async (): Promise<Stripe.PaymentLink> => {
+    try {
+      return await stripe.instance.paymentLinks.create(
         {
-          price_data: {
-            currency: currency.toLowerCase(),
-            unit_amount: amount,
-            product_data: {
-              name: description,
+          line_items: [
+            {
+              price_data: {
+                currency: req.body.currency.toLowerCase(),
+                unit_amount: req.body.amount,
+                product_data: {
+                  name: req.body.quotationId,
+                },
+              },
+              quantity: 1,
             },
+          ],
+          metadata: { quotationId: req.body.quotationId },
+          after_completion: {
+            type: 'redirect',
+            redirect: { url: successUrl },
           },
-          quantity: 1,
         },
-      ],
-      metadata: { quotationId },
-      after_completion: {
-        type: 'redirect',
-        redirect: { url: successUrl },
-      },
-    },
-    { stripeAccount: stripeAccountId },
-  )
+        { stripeAccount: stripeAccountId },
+      )
+    } catch (error) {
+      const stripeMessage = error instanceof Error ? error.message : String(error)
+
+      messageList.push(`Stripe error: ${stripeMessage}`)
+
+      throw new HttpError({
+        errorCode: 'BAD_REQUEST',
+        statusCode: httpStatusCode.badRequest400,
+        message: messageList.join(' | '),
+      })
+    }
+  })()
 
   messageList.push(`Payment link created: ${paymentLink.id}`)
 
