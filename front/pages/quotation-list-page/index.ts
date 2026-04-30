@@ -1,1 +1,1 @@
-export { QuotationListPage as default } from './QuotationListPage'
+export { QuotationListPage } from './QuotationListPage'

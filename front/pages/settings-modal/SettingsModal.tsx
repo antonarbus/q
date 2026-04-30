@@ -38,8 +38,8 @@ export const SettingsModal = (): React.JSX.Element => {
       onUnmount={(): void => {
         navigate('..')
       }}
-      shouldUnmountOnClickAway
-      shouldUnmountOnEsc
+      shouldUnmountOnClickAway={true}
+      shouldUnmountOnEsc={true}
     >
       <CardCustom
         logo={
@@ -109,7 +109,7 @@ export const SettingsModal = (): React.JSX.Element => {
                   width: '100%',
                 }}
                 timeout='auto'
-                unmountOnExit
+                unmountOnExit={true}
               >
                 {getFileListStatsQuery.data.fileList.map((item) => {
                   return (

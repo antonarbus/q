@@ -100,8 +100,8 @@ export const MenuButtonWithDropdown = (props: Props): React.JSX.Element => {
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={handleClose}
-        disableScrollLock
-        disableRestoreFocus
+        disableScrollLock={true}
+        disableRestoreFocus={true}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
         transformOrigin={{ vertical: 'top', horizontal: 'left' }}
         slotProps={{

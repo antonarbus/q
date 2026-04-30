@@ -10,8 +10,8 @@ export const StripeConnectModal = (): React.JSX.Element => {
 
   return (
     <BackdropWithSlidableModal
-      shouldUnmountOnClickAway
-      shouldUnmountOnEsc
+      shouldUnmountOnClickAway={true}
+      shouldUnmountOnEsc={true}
       onUnmount={(): void => {
         navigate('..')
       }}

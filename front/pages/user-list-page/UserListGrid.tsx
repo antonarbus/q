@@ -39,7 +39,7 @@ export const UserListGrid = (): React.JSX.Element => {
       <AgGridReact<ResBody['userList'][number]>
         columnDefs={columnDefs}
         defaultColDef={getDefaultColDef()}
-        enableCellTextSelection
+        enableCellTextSelection={true}
         getRowId={(params) => params.data.email}
         loadingOverlayComponent={LoadingTableOverlay}
         noRowsOverlayComponent={NoRowsTableOverlay}
@@ -49,8 +49,8 @@ export const UserListGrid = (): React.JSX.Element => {
         }}
         ref={usersAgGridRef}
         rowData={getUserListQuery.data?.userList}
-        suppressCellFocus
-        suppressColumnVirtualisation
+        suppressCellFocus={true}
+        suppressColumnVirtualisation={true}
         theme={themeQuartz}
       />
     </GridLayout>

@@ -51,17 +51,17 @@ export const ResetPasswordModal = (): React.ReactNode => {
       onSubmit={resetPassword.handleSubmit}
       onUnmount={navigateUp}
       paddingContent='50px 40px 10px 40px'
-      shouldUnmountOnClickAway
-      shouldUnmountOnEsc
+      shouldUnmountOnClickAway={true}
+      shouldUnmountOnEsc={true}
       width='350px'
     >
       <EmailField
-        disabled
+        disabled={true}
         emailSignal={emailSignal}
         inputRef={inputRef}
         isEmailOkSignal={isEmailOkSignal}
       />
-      <PasswordField autoFocus passwordSignal={passwordSignal} />
+      <PasswordField autoFocus={true} passwordSignal={passwordSignal} />
       <ConfirmPasswordField
         isConfirmPasswordOkSignal={isConfirmPasswordOkSignal}
         originalPasswordSignal={passwordSignal}

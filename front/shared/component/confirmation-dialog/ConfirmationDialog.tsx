@@ -86,8 +86,8 @@ export const ConfirmationDialog = (): React.JSX.Element => {
 
         {confirmationDialog.inputLabel !== undefined && (
           <TextField
-            autoFocus
-            focused
+            autoFocus={true}
+            focused={true}
             size='small'
             label={confirmationDialog.inputLabel}
             value={inputValue}
@@ -104,7 +104,7 @@ export const ConfirmationDialog = (): React.JSX.Element => {
 
         {confirmationDialog.shouldShowDoNotAskAgainCheckbox === true && (
           <FormControlLabel
-            control={<Checkbox disableTouchRipple />}
+            control={<Checkbox disableTouchRipple={true} />}
             label='Do not ask again'
             onChange={(_event, checked) => {
               if (checked === true) {
@@ -120,11 +120,11 @@ export const ConfirmationDialog = (): React.JSX.Element => {
         )}
       </DialogContent>
       <DialogActions sx={{ px: 3, pb: 2, pt: 3, gap: 1 }}>
-        <Button fullWidth variant='outlined' onClick={handleReject}>
+        <Button fullWidth={true} variant='outlined' onClick={handleReject}>
           {confirmationDialog.rejectButtonText ?? 'No'}
         </Button>
         <Button
-          fullWidth
+          fullWidth={true}
           variant='contained'
           autoFocus={confirmationDialog.inputLabel === undefined}
           onClick={handleConfirm}

@@ -14,9 +14,9 @@ export const InfoField = (props: Props): React.JSX.Element => {
     <div style={{ position: 'relative' }}>
       <TextField
         disabled={false}
-        fullWidth
+        fullWidth={true}
         label='Info'
-        multiline
+        multiline={true}
         name='info'
         placeholder='Internal info'
         rows={4}

@@ -50,8 +50,8 @@ export const SaveQuotationModal = (): React.JSX.Element => {
       onCloseClick={navigateUp}
       onSubmit={saveQuotation.handleSubmit}
       onUnmount={navigateUp}
-      shouldUnmountOnClickAway
-      shouldUnmountOnEsc
+      shouldUnmountOnClickAway={true}
+      shouldUnmountOnEsc={true}
       width='500px'
     >
       <NameField nameSignal={saveQuotationFormValues.nameSignal} />

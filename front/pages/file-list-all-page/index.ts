@@ -1,1 +1,1 @@
-export { FileListAllPage as default } from './FileListAllPage'
+export { FileListAllPage } from './FileListAllPage'

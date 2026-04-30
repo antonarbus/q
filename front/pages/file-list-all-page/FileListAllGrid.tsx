@@ -38,7 +38,7 @@ export const FileListAllGrid = (): React.JSX.Element => {
         columnDefs={columnDefs}
         datasource={fileListAll.datasource}
         defaultColDef={getDefaultColDef()}
-        enableCellTextSelection
+        enableCellTextSelection={true}
         getRowId={(params) => params.data.id}
         loadingOverlayComponent={LoadingTableOverlay}
         noRowsOverlayComponent={NoRowsTableOverlay}
@@ -52,8 +52,8 @@ export const FileListAllGrid = (): React.JSX.Element => {
         }}
         ref={fileListAllAgGridRef}
         rowModelType='infinite'
-        suppressCellFocus
-        suppressColumnVirtualisation
+        suppressCellFocus={true}
+        suppressColumnVirtualisation={true}
         theme={themeQuartz}
       />
     </GridLayout>

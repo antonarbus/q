@@ -42,8 +42,8 @@ export const ShareQuotationModal = (): React.JSX.Element => {
       onCloseClick={navigateUp}
       onSubmit={shareQuotation.handleSubmit}
       onUnmount={navigateUp}
-      shouldUnmountOnClickAway
-      shouldUnmountOnEsc
+      shouldUnmountOnClickAway={true}
+      shouldUnmountOnEsc={true}
       width='500px'
     >
       <ShareQuotationField accessFormValuesSignal={accessFormValuesSignal} />

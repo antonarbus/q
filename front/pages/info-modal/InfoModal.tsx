@@ -33,8 +33,8 @@ export const InfoModal = (): React.ReactNode => {
       onCloseClick={navigateUp}
       onUnmount={navigateUp}
       paddingContent='50px 40px'
-      shouldUnmountOnClickAway
-      shouldUnmountOnEsc
+      shouldUnmountOnClickAway={true}
+      shouldUnmountOnEsc={true}
       width='350px'
     >
       <NameField nameSignal={infoFormValues.nameSignal} />

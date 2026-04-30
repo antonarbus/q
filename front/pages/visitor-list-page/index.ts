@@ -1,1 +1,1 @@
-export { VisitorListPage as default } from './VisitorListPage'
+export { VisitorListPage } from './VisitorListPage'

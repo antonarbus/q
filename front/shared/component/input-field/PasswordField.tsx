@@ -20,7 +20,7 @@ export const PasswordField = (props: Props): React.JSX.Element => {
     <TextField
       autoComplete='current-password'
       autoFocus={props.autoFocus}
-      fullWidth
+      fullWidth={true}
       label={props.label ?? 'Password'}
       name='password'
       onBlur={props.onBlur}

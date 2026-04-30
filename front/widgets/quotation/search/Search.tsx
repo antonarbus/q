@@ -67,9 +67,9 @@ export const Search = (): React.ReactNode => {
           setIsAutocompleteOpen(false)
         }}
         className={cls.search}
-        clearOnBlur
-        clearOnEscape
-        disablePortal
+        clearOnBlur={true}
+        clearOnEscape={true}
+        disablePortal={true}
         disabled={isCopyModalVisible}
         // show MUI autocomplete even if no options
         freeSolo={options.length > 0}

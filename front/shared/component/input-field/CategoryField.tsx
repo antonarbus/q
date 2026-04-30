@@ -14,7 +14,7 @@ export const CategoryField = (props: Props): React.JSX.Element => {
   return (
     <div style={{ position: 'relative' }}>
       <Autocomplete
-        freeSolo
+        freeSolo={true}
         inputValue={categorySignal.value}
         onInputChange={(_event, newInputValue) => {
           categorySignal.value = newInputValue

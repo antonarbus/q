@@ -18,7 +18,7 @@ import {
 export const BoqBlock = (): React.JSX.Element => {
   return (
     <BlockComp
-      autoWidth
+      autoWidth={true}
       className={cls.boqBlock}
       leftBlockActionButtons={
         <ItemActionButtonsLayout>

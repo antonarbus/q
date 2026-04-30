@@ -40,7 +40,7 @@ export const BookmarkListGrid = (): React.JSX.Element => {
       <AgGridReact<ResBody['bookmarkList'][number]>
         columnDefs={columnDefs}
         defaultColDef={getDefaultColDef()}
-        enableCellTextSelection
+        enableCellTextSelection={true}
         getRowId={(params) => params.data.id}
         loadingOverlayComponent={LoadingTableOverlay}
         noRowsOverlayComponent={NoRowsTableOverlay}
@@ -54,8 +54,8 @@ export const BookmarkListGrid = (): React.JSX.Element => {
         }}
         ref={bookmarkListAgGridRef}
         rowData={getBookmarkListQuery.data?.bookmarkList}
-        suppressCellFocus
-        suppressColumnVirtualisation
+        suppressCellFocus={true}
+        suppressColumnVirtualisation={true}
         theme={themeQuartz}
       />
     </GridLayout>

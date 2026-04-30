@@ -1,1 +1,1 @@
-export { BookmarkListAllPage as default } from './BookmarkListAllPage'
+export { BookmarkListAllPage } from './BookmarkListAllPage'

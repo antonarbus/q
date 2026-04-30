@@ -8,27 +8,27 @@ import { toast } from 'sonner'
 import type { PaymentBlock } from '@back/entity/quotation/schema'
 import { routerHolder } from '@front/shared/lib/react-router-dom/routerHolder'
 import { route } from '@front/shared/lib/react-router-dom/route'
+import { confirmWithDialog } from '@front/shared/component/confirmation-dialog/confirmWithDialog'
+import type { AxiosError } from 'axios'
 
 type Props = {
   blockIndex: number
   quotationId: string
   amount: string
   currency: string
-  description: string
+  onInvalidAmount: () => void
 }
 
 export const GeneratePaymentLinkButton = (props: Props): React.JSX.Element => {
   const stripeStatusQuery = useStripeAccountStatusQuery()
   const createPaymentLinkMutation = useCreatePaymentLinkMutation()
+
   const isQuotationSaved = props.quotationId.length > 0 && props.quotationId !== 'new'
 
   return (
     <Button
-      disabled={!isQuotationSaved || createPaymentLinkMutation.isPending}
+      disabled={createPaymentLinkMutation.isPending}
       size='small'
-      title={
-        isQuotationSaved ? undefined : 'Save the quotation first before generating a payment link'
-      }
       variant='contained'
       onClick={async (): Promise<void> => {
         if (stripeStatusQuery.data?.connected !== true) {
@@ -40,29 +40,64 @@ export const GeneratePaymentLinkButton = (props: Props): React.JSX.Element => {
         const amountNum = Number.parseFloat(props.amount)
 
         if (Number.isNaN(amountNum) || amountNum <= 0) {
-          toast.error('Please enter a valid amount')
+          props.onInvalidAmount()
 
           return
         }
 
-        if (props.description.trim().length === 0) {
-          toast.error('Please enter a description')
+        const { blocks } = reduxHolder.getState().quotation
 
-          return
+        const quotationTotal = blocks.reduce((sum, block) => {
+          if (block.type === 'boq') {
+            return sum + block.boq.header.subTotalPrice.value
+          }
+
+          return sum
+        }, 0)
+
+        if (quotationTotal > 0 && Math.abs(quotationTotal - amountNum) > 0.01) {
+          const confirmed = await confirmWithDialog({
+            title: 'Amount mismatch',
+            description: `Payment amount (${amountNum.toFixed(2)}) doesn't match the quotation total (${quotationTotal.toFixed(2)}). Proceed anyway?`,
+            confirmButtonText: 'Proceed',
+          })
+
+          if (!confirmed) {
+            return
+          }
+        }
+
+        if (!isQuotationSaved) {
+          const confirmed = await confirmWithDialog({
+            title: 'Save quotation first',
+            description: 'The quotation needs to be saved before generating a payment link.',
+            confirmButtonText: 'Save & Generate',
+          })
+
+          if (!confirmed) {
+            return
+          }
+
+          await saveExistingQuotation()
         }
 
         try {
+          const savedId = reduxHolder.getState().quotation.id
+
           const result = await createPaymentLinkMutation.mutateAsync({
-            quotationId: props.quotationId,
+            quotationId: savedId,
             amount: Math.round(amountNum * 100),
             currency: props.currency.toLowerCase(),
-            description: props.description.trim(),
           })
 
+          const currentPayment = (
+            reduxHolder.getState().quotation.blocks[props.blockIndex] as PaymentBlock
+          ).payment
+
           const updatedPayment: PaymentBlock['payment'] = {
+            ...currentPayment,
             amount: Math.round(amountNum * 100),
             currency: props.currency.toLowerCase(),
-            description: props.description.trim(),
             stripePaymentLinkId: result.paymentLinkId,
             stripePaymentLinkUrl: result.paymentLinkUrl,
           }
@@ -77,8 +112,11 @@ export const GeneratePaymentLinkButton = (props: Props): React.JSX.Element => {
           await saveExistingQuotation()
 
           toast.success('Payment link generated and quotation saved')
-        } catch {
-          toast.error('Failed to generate payment link.')
+        } catch (error) {
+          const axiosError = error as AxiosError<{ message: string }>
+          const serverMessage = axiosError.response?.data?.message
+
+          toast.error(serverMessage ?? 'Failed to generate payment link.')
         }
       }}
     >

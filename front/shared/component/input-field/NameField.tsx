@@ -13,8 +13,8 @@ export const NameField = (props: Props): React.JSX.Element => {
   return (
     <div style={{ position: 'relative' }}>
       <TextField
-        autoFocus
-        fullWidth
+        autoFocus={true}
+        fullWidth={true}
         label='Name'
         name='name'
         placeholder='Name'

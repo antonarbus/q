@@ -16,8 +16,8 @@ export const SharedWithEmailInputField = (props: Props): React.ReactNode => {
 
   return (
     <TextField
-      autoFocus
-      focused
+      autoFocus={true}
+      focused={true}
       onChange={(event) => {
         props.emailSignal.value = event.target.value
       }}

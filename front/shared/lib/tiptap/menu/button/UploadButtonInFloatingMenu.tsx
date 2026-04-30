@@ -18,7 +18,7 @@ export const UploadButtonInFloatingMenu = (): React.JSX.Element | null => {
       <MenuButton
         isActive={false}
         title='Upload'
-        skipBlurFocus
+        skipBlurFocus={true}
         onClick={() => {
           fileInputRef.current?.click()
         }}

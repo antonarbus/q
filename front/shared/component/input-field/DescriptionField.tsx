@@ -14,9 +14,9 @@ export const DescriptionField = (props: Props): React.JSX.Element => {
     <div style={{ position: 'relative' }}>
       <TextField
         disabled={false}
-        fullWidth
+        fullWidth={true}
         label='Description'
-        multiline
+        multiline={true}
         name='description'
         placeholder='Short description'
         rows={2}

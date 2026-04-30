@@ -12,7 +12,7 @@ import {
 export const BookmarkedRowBlock = (): React.JSX.Element => {
   return (
     <BlockComp
-      autoWidth
+      autoWidth={true}
       className={cls.boqBlock}
       draggable={false}
       minWidth={560}

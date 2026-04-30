@@ -45,12 +45,12 @@ export const RequestPasswordResetModal = (): React.JSX.Element => {
       onSubmit={requestPasswordReset.handleSubmit}
       onUnmount={navigateUp}
       paddingContent='50px 40px 10px 40px'
-      shouldUnmountOnClickAway
-      shouldUnmountOnEsc
+      shouldUnmountOnClickAway={true}
+      shouldUnmountOnEsc={true}
       width='350px'
     >
       <EmailField
-        autoFocus
+        autoFocus={true}
         emailSignal={emailSignal}
         inputRef={inputRef}
         isEmailOkSignal={isEmailOkSignal}

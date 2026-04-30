@@ -57,7 +57,7 @@ export const EmailField = (props: Props): React.JSX.Element => {
         autoComplete='email'
         autoFocus={props.autoFocus}
         disabled={props.disabled}
-        fullWidth
+        fullWidth={true}
         inputRef={props.inputRef}
         label={emailLabelSignal.value}
         name='email'

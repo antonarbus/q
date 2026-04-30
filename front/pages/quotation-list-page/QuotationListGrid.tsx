@@ -40,7 +40,7 @@ export const QuotationListGrid = (): React.JSX.Element => {
       <AgGridReact<ResBody['quotationList'][number]>
         columnDefs={columnDefs}
         defaultColDef={getDefaultColDef()}
-        enableCellTextSelection
+        enableCellTextSelection={true}
         getRowId={(params) => params.data.id}
         loadingOverlayComponent={LoadingTableOverlay}
         noRowsOverlayComponent={NoRowsTableOverlay}
@@ -54,8 +54,8 @@ export const QuotationListGrid = (): React.JSX.Element => {
         }}
         ref={quotationListAgGridRef}
         rowData={getQuotationListQuery.data?.quotationList}
-        suppressCellFocus
-        suppressColumnVirtualisation
+        suppressCellFocus={true}
+        suppressColumnVirtualisation={true}
         theme={themeQuartz}
       />
     </GridLayout>

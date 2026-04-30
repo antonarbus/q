@@ -51,8 +51,8 @@ export const BookmarkModal = (): React.JSX.Element => {
       onCloseClick={navigateUp}
       onSubmit={saveBookmark.handleSubmit}
       onUnmount={navigateUp}
-      shouldUnmountOnClickAway
-      shouldUnmountOnEsc
+      shouldUnmountOnClickAway={true}
+      shouldUnmountOnEsc={true}
       width='500px'
     >
       <NameField nameSignal={bookmarkFormValues.nameSignal} />

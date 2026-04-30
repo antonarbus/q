@@ -12,8 +12,8 @@ export const OutlinedDivWithLabel = (props: Props): React.JSX.Element => {
   return (
     <TextField
       disabled={false}
-      focused
-      fullWidth
+      focused={true}
+      fullWidth={true}
       label={props.label}
       slotProps={{
         htmlInput: {

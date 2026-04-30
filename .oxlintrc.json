@@ -48,6 +48,7 @@
     "eslint/operator-assignment": "off",
     "eslint/sort-imports": "off",
     "eslint/sort-keys": "off",
+    "react/jsx-boolean-value": ["error", "always"],
     "import/exports-last": "off",
     "import/group-exports": "off",
     "import/no-named-as-default-member": "off",
