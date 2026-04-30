@@ -27,8 +27,6 @@ export const copyPaymentBlockTemplate = (event?: React.MouseEvent): void => {
       payButtonLabel: { html: payButtonLabelHtml },
       stripePaymentLinkId: null,
       stripePaymentLinkUrl: null,
-      amountInput: '',
-      amountError: false,
     },
   }
 

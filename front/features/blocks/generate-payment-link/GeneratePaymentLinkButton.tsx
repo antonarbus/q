@@ -12,7 +12,12 @@ import { route } from '@front/shared/lib/react-router-dom/route'
 import { confirmWithDialog } from '@front/shared/component/confirmation-dialog/confirmWithDialog'
 import type { AxiosError } from 'axios'
 
-export const GeneratePaymentLinkButton = (): React.JSX.Element | null => {
+type Props = {
+  amountInput: string
+  onInvalidAmount: () => void
+}
+
+export const GeneratePaymentLinkButton = (props: Props): React.JSX.Element | null => {
   const block = useBlock()
   const stripeStatusQuery = useStripeAccountStatusQuery()
   const createPaymentLinkMutation = useCreatePaymentLinkMutation()
@@ -20,36 +25,12 @@ export const GeneratePaymentLinkButton = (): React.JSX.Element | null => {
 
   const stripePaymentLinkUrl = reduxHolder.useSelector((state) => {
     const thisBlock = state.quotation.blocks[block.index]
-
-    if (thisBlock?.type === 'payment') {
-      return thisBlock.payment.stripePaymentLinkUrl
-    }
-
-    return null
-  })
-
-  const amountInput = reduxHolder.useSelector((state) => {
-    const thisBlock = state.quotation.blocks[block.index]
-
-    if (thisBlock?.type !== 'payment') {
-      return ''
-    }
-
-    if (thisBlock.payment.amountInput === '' && thisBlock.payment.amount > 0) {
-      return String(thisBlock.payment.amount / 100)
-    }
-
-    return thisBlock.payment.amountInput
+    return thisBlock?.type === 'payment' ? thisBlock.payment.stripePaymentLinkUrl : null
   })
 
   const currency = reduxHolder.useSelector((state) => {
     const thisBlock = state.quotation.blocks[block.index]
-
-    if (thisBlock?.type === 'payment') {
-      return thisBlock.payment.currency
-    }
-
-    return 'usd'
+    return thisBlock?.type === 'payment' ? thisBlock.payment.currency : 'usd'
   })
 
   const isQuotationSaved = quotationId.length > 0 && quotationId !== 'new'
@@ -70,12 +51,10 @@ export const GeneratePaymentLinkButton = (): React.JSX.Element | null => {
           return
         }
 
-        const amountNum = Number.parseFloat(amountInput)
+        const amountNum = Number.parseFloat(props.amountInput)
 
         if (Number.isNaN(amountNum) || amountNum <= 0) {
-          reduxHolder.dispatch(
-            quotationSlice.actions.setPaymentAmountError({ blockIndex: block.index }),
-          )
+          props.onInvalidAmount()
 
           return
         }

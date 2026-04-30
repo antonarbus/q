@@ -42,8 +42,6 @@ import { updateItemInfo } from './reducer/update/updateItemInfo'
 import { updatePayment } from './reducer/update/updatePayment'
 import { updatePaymentHeading } from './reducer/update/updatePaymentHeading'
 import { updatePaymentPayButtonLabel } from './reducer/update/updatePaymentPayButtonLabel'
-import { setPaymentAmountInput } from './reducer/update/setPaymentAmountInput'
-import { setPaymentAmountError } from './reducer/update/setPaymentAmountError'
 import { setPaymentCurrency } from './reducer/update/setPaymentCurrency'
 import { updatePrice } from './reducer/update/updatePrice'
 import { updatePriceTitle } from './reducer/update/updatePriceTitle'
@@ -113,8 +111,6 @@ export const quotationSlice = createSlice({
     updatePaymentPayButtonLabel,
     updateQuotationInfo,
     updateItemInfo,
-    setPaymentAmountInput,
-    setPaymentAmountError,
     setPaymentCurrency,
   },
 })

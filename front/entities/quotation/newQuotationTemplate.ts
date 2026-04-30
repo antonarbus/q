@@ -310,8 +310,6 @@ export const newQuotationTemplate: Quotation = {
         },
         stripePaymentLinkId: null,
         stripePaymentLinkUrl: null,
-        amountInput: '',
-        amountError: false,
       },
     },
     {

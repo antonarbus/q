@@ -1,37 +1,18 @@
-import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
-import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { useBlock } from '@front/entities/quotation/provider/block/useBlock'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { Box } from '@mui/material'
 import { useRef, useEffect } from 'react'
 import type { FC } from 'react'
 
-export const PaymentAmount: FC = () => {
-  const inputRef = useRef<HTMLInputElement>(null)
+type Props = {
+  amountInput: string
+  amountError: boolean
+  onChange: (value: string) => void
+}
+
+export const PaymentAmount: FC<Props> = (props) => {
   const block = useBlock()
-
-  const amountInput = reduxHolder.useSelector((state) => {
-    const thisBlock = state.quotation.blocks[block.index]
-
-    if (thisBlock?.type !== 'payment') {
-      return ''
-    }
-
-    if (thisBlock.payment.amountInput === '' && thisBlock.payment.amount > 0) {
-      return String(thisBlock.payment.amount / 100)
-    }
-
-    return thisBlock.payment.amountInput
-  })
-
-  const amountError = reduxHolder.useSelector((state) => {
-    const thisBlock = state.quotation.blocks[block.index]
-
-    if (thisBlock?.type === 'payment') {
-      return thisBlock.payment.amountError
-    }
-
-    return false
-  })
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const hasPaymentLink = reduxHolder.useSelector((state) => {
     const thisBlock = state.quotation.blocks[block.index]
@@ -44,28 +25,23 @@ export const PaymentAmount: FC = () => {
   })
 
   useEffect(() => {
-    if (amountError) {
+    if (props.amountError) {
       inputRef.current?.focus()
     }
-  }, [amountError])
+  }, [props.amountError])
 
   return (
     <Box
       ref={inputRef}
       component='input'
+      disabled={hasPaymentLink}
       min={0.5}
       step={0.01}
       placeholder='0.00'
-      disabled={hasPaymentLink}
       type='number'
-      value={amountInput}
+      value={props.amountInput}
       onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-        reduxHolder.dispatch(
-          quotationSlice.actions.setPaymentAmountInput({
-            blockIndex: block.index,
-            value: event.target.value,
-          }),
-        )
+        props.onChange(event.target.value)
       }}
       sx={{
         width: '100%',
@@ -82,7 +58,7 @@ export const PaymentAmount: FC = () => {
         '&::placeholder': { color: 'text.disabled', opacity: 1 },
         '&:focus': { borderColor: 'text.secondary' },
         '&:disabled': { background: '#f8f8f8', color: 'text.disabled', cursor: 'default' },
-        ...(amountError && {
+        ...(props.amountError && {
           borderColor: 'error.main',
           '&:focus': { borderColor: 'error.main' },
         }),
