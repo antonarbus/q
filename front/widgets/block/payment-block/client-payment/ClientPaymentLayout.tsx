@@ -33,7 +33,9 @@ export const ClientPaymentLayout: FC<Props> = (props) => {
       }}
     >
       <Box className='layout' sx={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
-        <Box className='layout'>{props.paymentLogo}</Box>
+        <Box className='layout' sx={{ display: 'flex', alignItems: 'center' }}>
+          {props.paymentLogo}
+        </Box>
         <Box className='layout' sx={{ flex: 1 }}>
           {props.paymentHeading}
         </Box>
