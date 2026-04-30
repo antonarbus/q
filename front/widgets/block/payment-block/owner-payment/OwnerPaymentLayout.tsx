@@ -1,3 +1,4 @@
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { Box } from '@mui/material'
 import type { FC, ReactNode } from 'react'
 
@@ -14,6 +15,8 @@ type Props = {
 }
 
 export const OwnerPaymentLayout: FC<Props> = (props) => {
+  const isPaid = reduxHolder.useSelector((state) => state.quotation.paidAt !== null)
+
   return (
     <Box
       className='layout'
@@ -22,6 +25,7 @@ export const OwnerPaymentLayout: FC<Props> = (props) => {
         display: 'flex',
         flexDirection: 'column',
         gap: '12px',
+        backgroundColor: isPaid ? 'rgba(76, 175, 80, 0.05)' : undefined,
         // red shadow for .layout boxes in dev mode
         '.layout': {
           boxShadow: props.devMode === true ? '0px 0px 1px 1px red inset' : 'initial',
@@ -37,16 +41,17 @@ export const OwnerPaymentLayout: FC<Props> = (props) => {
         className='layout'
         sx={{
           display: 'flex',
+          alignItems: 'center',
           gap: '8px',
         }}
       >
-        <Box className='layout' sx={{ display: 'flex', flexDirection: 'row', gap: '5px' }}>
-          <Box className='layout'>{props.paymentLogo}</Box>
-          <Box className='layout'>{props.paymentHeading}</Box>
+        <Box className='layout' sx={{ display: 'flex', alignItems: 'center' }}>
+          {props.paymentLogo}
         </Box>
-        <Box className='layout' sx={{ minWidth: '20px' }}>
-          {props.paymentStatusBadge}
+        <Box className='layout' sx={{ flex: 1 }}>
+          {props.paymentHeading}
         </Box>
+        <Box className='layout'>{props.paymentStatusBadge}</Box>
       </Box>
 
       {/* Amount + Currency row */}

@@ -13,7 +13,6 @@ import { PaymentLink } from './PaymentLink'
 
 export const OwnerPayment: FC = () => {
   const block = useBlock()
-
   const [amountInput, setAmountInput] = useState(
     block.item.type === 'payment' && block.item.payment.amount > 0
       ? String(block.item.payment.amount / 100)
