@@ -1,6 +1,5 @@
 import type { BookmarkFormValues } from '@front/entities/bookmark/form/types'
 import { BOOKMARK_POS_AT_BLOCKS } from '@front/entities/quotation/redux/bookmarkPosAtBlocks'
-
 import { useSignal } from '@preact/signals-react'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { useEffectOnce } from 'react-use'

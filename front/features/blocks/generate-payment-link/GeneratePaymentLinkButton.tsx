@@ -2,6 +2,7 @@ import { useCreatePaymentLinkMutation } from '@front/entities/stripe/api/useCrea
 import { useStripeAccountStatusQuery } from '@front/entities/stripe/api/useStripeAccountStatusQuery'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { saveExistingQuotation } from '@front/features/quotation/save-quotation/saveExistingQuotation'
+import { useBlock } from '@front/entities/quotation/provider/block/useBlock'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { Button } from '@mui/material'
 import { toast } from 'sonner'
@@ -11,19 +12,51 @@ import { route } from '@front/shared/lib/react-router-dom/route'
 import { confirmWithDialog } from '@front/shared/component/confirmation-dialog/confirmWithDialog'
 import type { AxiosError } from 'axios'
 
-type Props = {
-  blockIndex: number
-  quotationId: string
-  amount: string
-  currency: string
-  onInvalidAmount: () => void
-}
-
-export const GeneratePaymentLinkButton = (props: Props): React.JSX.Element => {
+export const GeneratePaymentLinkButton = (): React.JSX.Element | null => {
+  const block = useBlock()
   const stripeStatusQuery = useStripeAccountStatusQuery()
   const createPaymentLinkMutation = useCreatePaymentLinkMutation()
+  const quotationId = reduxHolder.useSelector((state) => state.quotation.id)
 
-  const isQuotationSaved = props.quotationId.length > 0 && props.quotationId !== 'new'
+  const stripePaymentLinkUrl = reduxHolder.useSelector((state) => {
+    const thisBlock = state.quotation.blocks[block.index]
+
+    if (thisBlock?.type === 'payment') {
+      return thisBlock.payment.stripePaymentLinkUrl
+    }
+
+    return null
+  })
+
+  const amountInput = reduxHolder.useSelector((state) => {
+    const thisBlock = state.quotation.blocks[block.index]
+
+    if (thisBlock?.type !== 'payment') {
+      return ''
+    }
+
+    if (thisBlock.payment.amountInput === '' && thisBlock.payment.amount > 0) {
+      return String(thisBlock.payment.amount / 100)
+    }
+
+    return thisBlock.payment.amountInput
+  })
+
+  const currency = reduxHolder.useSelector((state) => {
+    const thisBlock = state.quotation.blocks[block.index]
+
+    if (thisBlock?.type === 'payment') {
+      return thisBlock.payment.currency
+    }
+
+    return 'usd'
+  })
+
+  const isQuotationSaved = quotationId.length > 0 && quotationId !== 'new'
+
+  if (stripePaymentLinkUrl !== null) {
+    return null
+  }
 
   return (
     <Button
@@ -37,19 +70,21 @@ export const GeneratePaymentLinkButton = (props: Props): React.JSX.Element => {
           return
         }
 
-        const amountNum = Number.parseFloat(props.amount)
+        const amountNum = Number.parseFloat(amountInput)
 
         if (Number.isNaN(amountNum) || amountNum <= 0) {
-          props.onInvalidAmount()
+          reduxHolder.dispatch(
+            quotationSlice.actions.setPaymentAmountError({ blockIndex: block.index }),
+          )
 
           return
         }
 
         const { blocks } = reduxHolder.getState().quotation
 
-        const quotationTotal = blocks.reduce((sum, block) => {
-          if (block.type === 'boq') {
-            return sum + block.boq.header.subTotalPrice.value
+        const quotationTotal = blocks.reduce((sum, thisBlock) => {
+          if (thisBlock.type === 'boq') {
+            return sum + thisBlock.boq.header.subTotalPrice.value
           }
 
           return sum
@@ -87,24 +122,24 @@ export const GeneratePaymentLinkButton = (props: Props): React.JSX.Element => {
           const result = await createPaymentLinkMutation.mutateAsync({
             quotationId: savedId,
             amount: Math.round(amountNum * 100),
-            currency: props.currency.toLowerCase(),
+            currency: currency.toLowerCase(),
           })
 
           const currentPayment = (
-            reduxHolder.getState().quotation.blocks[props.blockIndex] as PaymentBlock
+            reduxHolder.getState().quotation.blocks[block.index] as PaymentBlock
           ).payment
 
           const updatedPayment: PaymentBlock['payment'] = {
             ...currentPayment,
             amount: Math.round(amountNum * 100),
-            currency: props.currency.toLowerCase(),
+            currency: currency.toLowerCase(),
             stripePaymentLinkId: result.paymentLinkId,
             stripePaymentLinkUrl: result.paymentLinkUrl,
           }
 
           reduxHolder.dispatch(
             quotationSlice.actions.updatePaymentBlock({
-              blockIndex: props.blockIndex,
+              blockIndex: block.index,
               payment: updatedPayment,
             }),
           )

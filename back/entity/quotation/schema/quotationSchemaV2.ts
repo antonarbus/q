@@ -100,6 +100,8 @@ const paymentBlockSchema = blockCommonSchema.extend({
     }),
     stripePaymentLinkId: z.string().nullable(),
     stripePaymentLinkUrl: z.string().nullable(),
+    amountInput: z.string().default(''),
+    amountError: z.boolean().default(false),
   }),
 })
 

@@ -8,8 +8,8 @@ type Props = {
   paymentAmount: ReactNode
   paymentCurrency: ReactNode
   paymentButtonLabel: ReactNode
-  paymentLinkGenerateButton: ReactNode
   paymentLink: ReactNode
+  paymentLinkGenerateButton: ReactNode
   devMode?: boolean
 }
 
@@ -106,8 +106,10 @@ export const OwnerPaymentLayout: FC<Props> = (props) => {
       </Box>
 
       {/* Payment link section */}
-      <Box className='layout'>{props.paymentLinkGenerateButton}</Box>
       <Box className='layout'>{props.paymentLink}</Box>
+      <Box className='layout' sx={{ textAlign: 'center' }}>
+        {props.paymentLinkGenerateButton}
+      </Box>
     </Box>
   )
 }

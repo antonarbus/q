@@ -1,4 +1,3 @@
-import { useBlock } from '@front/entities/quotation/provider/block/useBlock'
 import { useIsEditorView } from '@front/entities/quotation/util/useIsEditorView'
 import { BlockComp } from '@front/entities/quotation/ui/BlockComp'
 import { ItemActionButtonsLayout } from '@front/shared/layout/ItemActionButtonsLayout'
@@ -8,19 +7,13 @@ import { CutBlockIcon } from '@front/features/blocks/cut-item/CutBlockIcon'
 import { BookmarkBlockIcon } from '@front/features/open-close/open-bookmark-modal'
 import { OpenInfoBlockModalIcon } from '@front/features/open-close/open-info-modal'
 import { DeleteBlockIcon } from '@front/features/blocks/delete-item/DeleteBlockIcon'
-import { ClientPayment } from './client-payment/ClientPayment'
-import { OwnerPayment } from './owner-payment/OwnerPayment'
+import { ClientPayment } from './client-payment'
+import { OwnerPayment } from './owner-payment'
 import { onPaymentBlockResizeStop } from '@front/features/blocks/resize-payment-block/onPaymentBlockResize'
 import type { FC } from 'react'
 
 export const PaymentBlock: FC = () => {
-  const block = useBlock()
   const isEditorView = useIsEditorView()
-  const PaymentView = isEditorView ? OwnerPayment : ClientPayment
-
-  if (block.item.type !== 'payment') {
-    return null
-  }
 
   return (
     <BlockComp
@@ -41,7 +34,7 @@ export const PaymentBlock: FC = () => {
         </ItemActionButtonsLayout>
       }
     >
-      <PaymentView payment={block.item.payment} />
+      {isEditorView ? <OwnerPayment /> : <ClientPayment />}
     </BlockComp>
   )
 }
