@@ -17,7 +17,7 @@ export const Burger = (): React.JSX.Element => {
         // if (toggled) console.log('menu opened')
         // if (!toggled) reduxHolder.dispatch(closeMenu())
       }}
-      rounded
+      rounded={true}
       size={20}
       toggle={(): void => {
         reduxHolder.dispatch(navSlice.actions.toggleBurger())
