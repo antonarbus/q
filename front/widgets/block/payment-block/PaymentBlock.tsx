@@ -1,42 +1,47 @@
 import { useBlock } from '@front/entities/quotation/provider/block/useBlock'
 import { useIsEditorView } from '@front/entities/quotation/util/useIsEditorView'
-import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
-import { ClientPaymentView } from './ClientPaymentView'
-import { OwnerPaymentView } from './OwnerPaymentView'
+import { BlockComp } from '@front/entities/quotation/ui/BlockComp'
+import { ItemActionButtonsLayout } from '@front/shared/layout/ItemActionButtonsLayout'
+import { DragBlockIcon } from '@front/features/blocks/drag-item/DragBlockIcon'
+import { CopyBlockIcon } from '@front/features/blocks/copy-item/CopyBlockIcon'
+import { CutBlockIcon } from '@front/features/blocks/cut-item/CutBlockIcon'
+import { BookmarkBlockIcon } from '@front/features/open-close/open-bookmark-modal'
+import { OpenInfoBlockModalIcon } from '@front/features/open-close/open-info-modal'
+import { DeleteBlockIcon } from '@front/features/blocks/delete-item/DeleteBlockIcon'
+import { ClientPayment } from './client-payment/ClientPayment'
+import { OwnerPayment } from './owner-payment/OwnerPayment'
+import { onPaymentBlockResizeStop } from '@front/features/blocks/resize-payment-block/onPaymentBlockResize'
+import type { FC } from 'react'
 
-export const PaymentBlock = (): React.ReactNode => {
+export const PaymentBlock: FC = () => {
   const block = useBlock()
   const isEditorView = useIsEditorView()
+  const PaymentView = isEditorView ? OwnerPayment : ClientPayment
 
-  const paidAt = reduxHolder.useSelector((state) => state.quotation.paidAt)
-  const quotationId = reduxHolder.useSelector((state) => state.quotation.id)
-
-  // Read payment directly from Redux so the component re-renders after updatePaymentBlock
-  // (the block context is intentionally stale due to arrayShapesEqualityFn in QuotationPage)
-  const payment = reduxHolder.useSelector((state) => {
-    const thisBlock = state.quotation.blocks[block.index]
-
-    if (thisBlock?.type === 'payment') {
-      return thisBlock.payment
-    }
-
-    return null
-  })
-
-  if (block.item.type !== 'payment' || payment === null) {
+  if (block.item.type !== 'payment') {
     return null
   }
 
-  if (isEditorView) {
-    return (
-      <OwnerPaymentView
-        blockIndex={block.index}
-        paidAt={paidAt}
-        payment={payment}
-        quotationId={quotationId}
-      />
-    )
-  }
-
-  return <ClientPaymentView isPaid={Boolean(paidAt)} payment={payment} />
+  return (
+    <BlockComp
+      minWidth='340px'
+      onBlockResizeStop={onPaymentBlockResizeStop}
+      leftBlockActionButtons={
+        <ItemActionButtonsLayout>
+          <DragBlockIcon />
+          <CopyBlockIcon />
+          <CutBlockIcon />
+        </ItemActionButtonsLayout>
+      }
+      rightBlockActionButtons={
+        <ItemActionButtonsLayout>
+          <BookmarkBlockIcon />
+          <OpenInfoBlockModalIcon />
+          <DeleteBlockIcon />
+        </ItemActionButtonsLayout>
+      }
+    >
+      <PaymentView payment={block.item.payment} />
+    </BlockComp>
+  )
 }
