@@ -31,87 +31,43 @@ export const useKeysForMenuNavigation = (): void => {
 
       const isNestedMenu = state.nav.idsToCurrentMenuItems.length > 2
 
-      if (event.key === 'ArrowDown') {
+      const setHoverIndex = (menuItemHoverIndex: number): void => {
+        reduxHolder.dispatch(navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex }))
+      }
+
+      const handleArrowDown = (): void => {
         event.preventDefault()
         const isLastMenuItem = state.nav.hoverIndex === menuItemsQty
-
-        if (isLastMenuItem === true) {
-          reduxHolder.dispatch(navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }))
-
-          return
-        }
-
-        reduxHolder.dispatch(
-          navSlice.actions.setMenuItemHoverIndex({
-            menuItemHoverIndex: state.nav.hoverIndex + 1,
-          }),
-        )
-
-        return
+        setHoverIndex(isLastMenuItem === true ? 0 : state.nav.hoverIndex + 1)
       }
 
-      if (event.key === 'ArrowUp') {
+      const handleArrowUp = (): void => {
         event.preventDefault()
         const isTopMenuItem = state.nav.hoverIndex < 1
-
-        if (isTopMenuItem === true) {
-          reduxHolder.dispatch(
-            navSlice.actions.setMenuItemHoverIndex({
-              menuItemHoverIndex: menuItemsQty,
-            }),
-          )
-
-          return
-        }
-
-        reduxHolder.dispatch(
-          navSlice.actions.setMenuItemHoverIndex({
-            menuItemHoverIndex: state.nav.hoverIndex - 1,
-          }),
-        )
-
-        return
+        setHoverIndex(isTopMenuItem === true ? menuItemsQty : state.nav.hoverIndex - 1)
       }
 
-      const shouldGoBack = isNestedMenu && event.key === 'Backspace'
-
-      if (shouldGoBack === true) {
-        reduxHolder.dispatch(navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }))
-
-        menuNavigation.goUp()
-
-        return
-      }
-
-      const shouldClose = isNestedMenu === false && event.key === 'Backspace'
-
-      if (shouldClose === true) {
-        reduxHolder.dispatch(navSlice.actions.closeMenu())
-
-        return
-      }
-
-      if (event.key === 'Escape') {
-        reduxHolder.dispatch(navSlice.actions.closeMenu())
-
-        return
-      }
-
-      if (event.key === 'Enter') {
-        const isBackMenuItem = state.nav.hoverIndex === 0 && isNestedMenu
-
-        if (isBackMenuItem === true) {
-          reduxHolder.dispatch(navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }))
-
+      const handleBackspace = (): void => {
+        if (isNestedMenu === true) {
+          setHoverIndex(0)
           menuNavigation.goUp()
-
-          return
-        }
-
-        const isCloseMenuItem = state.nav.hoverIndex === 0 && isNestedMenu === false
-
-        if (isCloseMenuItem === true) {
+        } else {
           reduxHolder.dispatch(navSlice.actions.closeMenu())
+        }
+      }
+
+      const handleEscape = (): void => {
+        reduxHolder.dispatch(navSlice.actions.closeMenu())
+      }
+
+      const handleEnter = (): void => {
+        if (state.nav.hoverIndex === 0) {
+          if (isNestedMenu === true) {
+            setHoverIndex(0)
+            menuNavigation.goUp()
+          } else {
+            reduxHolder.dispatch(navSlice.actions.closeMenu())
+          }
 
           return
         }
@@ -143,7 +99,6 @@ export const useKeysForMenuNavigation = (): void => {
         }
 
         const funcId = navItemHovered.current?.funcId
-
         const func = funcId === undefined ? undefined : functionRegistry[funcId]
 
         if (func !== undefined) {
@@ -153,15 +108,62 @@ export const useKeysForMenuNavigation = (): void => {
           return
         }
 
-        const isNestedMenuAvailable = Boolean(navItemHovered.current?.nestedItemList)
+        setHoverIndex(0)
 
-        reduxHolder.dispatch(navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }))
+        const isNestedMenuAvailable = Boolean(navItemHovered.current?.nestedItemList)
 
         if (isNestedMenuAvailable === true) {
           menuNavigation.goDown({ navItemId: navItemIdHovered })
+        }
+      }
+
+      const handleLetter = (): void => {
+        const shouldJumpToClose = isNestedMenu === false && event.key === 'c'
+
+        if (shouldJumpToClose === true) {
+          setHoverIndex(0)
 
           return
         }
+
+        const shouldJumpToGoBack = isNestedMenu === true && event.key === 'b'
+
+        if (shouldJumpToGoBack === true) {
+          setHoverIndex(0)
+
+          return
+        }
+
+        // jump to item by letter, starting from below the current hover position
+        let indexToJump = navItems.findIndex(
+          (item, index) =>
+            item.name.toLowerCase().startsWith(event.key) && index + 2 > state.nav.hoverIndex,
+        )
+
+        // if not found below, wrap around from the top
+        if (indexToJump === -1) {
+          indexToJump = navItems.findIndex((item) => item.name.toLowerCase().startsWith(event.key))
+        }
+
+        if (indexToJump !== -1) {
+          setHoverIndex(indexToJump + 1)
+        }
+      }
+
+      const keyHandlers: Partial<Record<string, () => void>> = {
+        ArrowDown: handleArrowDown,
+        ArrowUp: handleArrowUp,
+        Backspace: handleBackspace,
+        Escape: handleEscape,
+        Enter: handleEnter,
+      }
+
+      const handler = keyHandlers[event.key]
+
+      if (handler !== undefined) {
+        handler()
+
+        return
       }
 
       const anyLetter = /\w/u
@@ -169,61 +171,7 @@ export const useKeysForMenuNavigation = (): void => {
 
       // jump to "Close" & "Back"
       if (anyLetterPressed !== null) {
-        const shouldJumpToClose = isNestedMenu === false && event.key === 'c'
-
-        if (shouldJumpToClose === true) {
-          reduxHolder.dispatch(navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }))
-
-          return
-        }
-
-        const shouldJumpToGoBack = isNestedMenu && event.key === 'b'
-
-        if (shouldJumpToGoBack === true) {
-          reduxHolder.dispatch(navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }))
-
-          return
-        }
-
-        // jump to item by letter
-        const indexToJump = navItems.findIndex((item, index) => {
-          const isiKeySameAsFirstItemLetter = item.name.toLowerCase().startsWith(event.key)
-
-          if (isiKeySameAsFirstItemLetter === false) {
-            return false
-          }
-
-          if (index + 2 > state.nav.hoverIndex) {
-            return true
-          }
-
-          return false
-        })
-
-        if (indexToJump !== -1) {
-          reduxHolder.dispatch(
-            navSlice.actions.setMenuItemHoverIndex({
-              menuItemHoverIndex: indexToJump + 1,
-            }),
-          )
-        }
-
-        // if no found below hovered item, do it again from the top
-        if (indexToJump === -1) {
-          const newIndex = navItems.findIndex((item) => {
-            const isiKeySameAsFirstItemLetter = item.name.toLowerCase().startsWith(event.key)
-
-            return isiKeySameAsFirstItemLetter
-          })
-
-          if (newIndex !== -1) {
-            reduxHolder.dispatch(
-              navSlice.actions.setMenuItemHoverIndex({
-                menuItemHoverIndex: newIndex + 1,
-              }),
-            )
-          }
-        }
+        handleLetter()
       }
     }
 

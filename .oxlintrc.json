@@ -31,11 +31,10 @@
   },
   // https://oxc.rs/docs/guide/usage/linter/rules.html
   "rules": {
-    "eslint/arrow-body-style": "off",
-    "eslint/no-warning-comments": "warn",
-    "eslint/capitalized-comments": "off",
-    "eslint/complexity": "off",
-    "eslint/id-length": ["error", { "exceptions": ["x", "y"] }],
+    "eslint/arrow-body-style": "off", // allow () => { ... } and () => expression
+    "eslint/no-warning-comments": "warn", // highlight @todo comments
+    "eslint/capitalized-comments": "off", // sometimes comments should start from lower case
+    "eslint/id-length": ["error", { "exceptions": ["x", "y"] }], // allow { x: event.clientX, y: event.clientY }
     "eslint/max-depth": "off",
     "eslint/max-lines-per-function": "off",
     "eslint/max-lines": "off",
@@ -48,7 +47,7 @@
     "eslint/operator-assignment": "off",
     "eslint/sort-imports": "off",
     "eslint/sort-keys": "off",
-    "react/jsx-boolean-value": ["error", "always"],
+    "react/jsx-boolean-value": ["error", "always"], // prop={false} and also prop={true} for consistency
     "import/exports-last": "off",
     "import/group-exports": "off",
     "import/no-named-as-default-member": "off",
