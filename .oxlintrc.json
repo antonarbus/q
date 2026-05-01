@@ -56,7 +56,7 @@
     "react/jsx-boolean-value": ["error", "always"], // prop={false} and also prop={true} for consistency
     "import/exports-last": "off", // types in api handlers are exported and used below
     "import/group-exports": "off", // nah
-    "import/no-relative-parent-imports": "off",
+    "import/no-relative-parent-imports": "off", // ../.. indicates the proximity, for architecture constrains we use @feature-sliced/steiger-plugin
     "import/max-dependencies": "off",
     "import/no-anonymous-default-export": "off",
     "import/no-default-export": "off",

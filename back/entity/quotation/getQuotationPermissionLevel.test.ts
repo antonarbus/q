@@ -1,6 +1,6 @@
 import { expect, it, describe } from 'vitest'
 import { getQuotationPermissionLevel } from './getQuotationPermissionLevel'
-import { createMockUser } from '../user/createMockUser.test-helper'
+import { createMockUser } from '@back/entity/user/createMockUser.test-helper'
 
 describe('#getQuotationPermissionLevel', () => {
   it('returns OWNER when user email matches quotation email', () => {

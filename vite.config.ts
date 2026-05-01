@@ -21,6 +21,7 @@ export default {
     alias: [
       { find: '@front/', replacement: `${path.resolve('front')}/` },
       { find: '@back/', replacement: `${path.resolve('back')}/` },
+      { find: '@tests/', replacement: `${path.resolve('tests')}/` },
       { find: '@root/', replacement: `${path.resolve('.')}/` },
     ],
   },
