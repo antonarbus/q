@@ -23,52 +23,20 @@ import { Copy } from '@front/widgets/copy'
 import { BookmarkCopyPreviewCapturer } from '@front/entities/copy/BookmarkCopyPreviewCapturer'
 import { Footer } from '@front/widgets/footer'
 import { Nav } from '@front/widgets/nav'
-import { lazy, Suspense } from 'react'
+import { BookmarkListAllPageLazy } from '@front/pages/bookmark-list-all-page'
+import { BookmarkListPageLazy } from '@front/pages/bookmark-list-page'
+import { FileListAllPageLazy } from '@front/pages/file-list-all-page'
+import { QuotationListAllPageLazy } from '@front/pages/quotation-list-all-page'
+import { QuotationListPageLazy } from '@front/pages/quotation-list-page'
+import { QuotationPageLazy } from '@front/pages/quotation-page'
+import { UserListPageLazy } from '@front/pages/user-list-page'
+import { VisitorListPageLazy } from '@front/pages/visitor-list-page'
+import { Suspense } from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 import type { RouteObject } from 'react-router-dom'
 import { Toaster } from 'sonner'
 import { OnInitLoad } from './OnInitLoad'
 import { ConfirmationDialog } from '@front/shared/component/confirmation-dialog/ConfirmationDialog'
-
-const QuotationPageLazy = lazy(async () => {
-  const module = await import('@front/pages/quotation-page')
-  return { default: module.QuotationPage }
-})
-
-const QuotationListPageLazy = lazy(async () => {
-  const module = await import('@front/pages/quotation-list-page')
-  return { default: module.QuotationListPage }
-})
-
-const BookmarkListPageLazy = lazy(async () => {
-  const module = await import('@front/pages/bookmark-list-page')
-  return { default: module.BookmarkListPage }
-})
-
-const QuotationListAllPageLazy = lazy(async () => {
-  const module = await import('@front/pages/quotation-list-all-page')
-  return { default: module.QuotationListAllPage }
-})
-
-const BookmarkListAllPageLazy = lazy(async () => {
-  const module = await import('@front/pages/bookmark-list-all-page')
-  return { default: module.BookmarkListAllPage }
-})
-
-const UserListPageLazy = lazy(async () => {
-  const module = await import('@front/pages/user-list-page')
-  return { default: module.UserListPage }
-})
-
-const VisitorListPageLazy = lazy(async () => {
-  const module = await import('@front/pages/visitor-list-page')
-  return { default: module.VisitorListPage }
-})
-
-const FileListAllPageLazy = lazy(async () => {
-  const module = await import('@front/pages/file-list-all-page')
-  return { default: module.FileListAllPage }
-})
 
 const authRoutes: RouteObject[] = [
   {
