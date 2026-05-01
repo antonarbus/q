@@ -1,9 +1,12 @@
 {
   "extends": "../tsconfig.json",
+  "include": ["**/*"],
   "compilerOptions": {
     "outDir": "./build",
+    "rootDir": ".",
     "noEmit": false,
     "incremental": true,
-    "tsBuildInfoFile": "../.tsbuildinfo-back"
+    "tsBuildInfoFile": "../.tsbuildinfo-back",
+    "lib": ["ESNext"] // backend runs in Bun/Node, no DOM globals
   }
 }

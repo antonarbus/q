@@ -1,8 +1,10 @@
 {
   "extends": "../tsconfig.json",
+  "include": ["**/*"],
   "compilerOptions": {
     "noEmit": true,
     "incremental": true,
-    "tsBuildInfoFile": "../.tsbuildinfo-front"
+    "tsBuildInfoFile": "../.tsbuildinfo-front",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"] // frontend runs in the browser
   }
 }
