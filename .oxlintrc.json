@@ -35,22 +35,27 @@
     "eslint/no-warning-comments": "warn", // highlight @todo comments
     "eslint/capitalized-comments": "off", // sometimes comments should start from lower case
     "eslint/id-length": ["error", { "exceptions": ["x", "y"] }], // allow { x: event.clientX, y: event.clientY }
-    // "eslint/max-depth": "off",
-    "eslint/max-lines-per-function": "off",
-    "eslint/max-lines": "off",
-    "eslint/max-params": "off",
-    "eslint/max-statements": "off",
-    "eslint/no-duplicate-imports": "off",
-    "eslint/no-magic-numbers": "off",
-    "eslint/no-ternary": "off",
-    "eslint/no-undefined": "off", // could re-write the undefined value on window object
-    "eslint/operator-assignment": "off",
-    "eslint/sort-imports": "off",
-    "eslint/sort-keys": "off",
+    "eslint/max-lines-per-function": "off", // sometimes long function is better than multiple small functions
+    "eslint/max-lines": "off", // inevitable
+    "eslint/max-params": "warn", // params of custom functions always put into object, functions from libs we can not control
+    "eslint/max-statements": "off", // too strict
+    "eslint/no-duplicate-imports": "off", // good rule, but not auto fixable which makes it annoying, check later if it auto-fixable, it is in the roadmap
+    "eslint/no-magic-numbers": [
+      "warn",
+      {
+        "ignore": [-1, 0, 1],
+        "ignoreArrayIndexes": true,
+        "ignoreDefaultValues": true
+      }
+    ], // incrementally fix all magic numbers and let the rule error
+    "eslint/no-ternary": "off", // simple ternary is ok, but nested is not
+    "eslint/no-undefined": "off", // we technically may re-define window.undefined='hi', but TS will not allow
+    "eslint/operator-assignment": ["error", "never"], // i=i+1 instead of i++
+    "eslint/sort-imports": "off", // not auto-fixable, annoying to sort manually
+    "eslint/sort-keys": "off", // not nice, quite often manual sort have mental idea behind
     "react/jsx-boolean-value": ["error", "always"], // prop={false} and also prop={true} for consistency
-    "import/exports-last": "off",
-    "import/group-exports": "off",
-    "import/no-named-as-default-member": "off",
+    "import/exports-last": "off", // types in api handlers are exported and used below
+    "import/group-exports": "off", // nah
     "import/no-relative-parent-imports": "off",
     "import/max-dependencies": "off",
     "import/no-anonymous-default-export": "off",

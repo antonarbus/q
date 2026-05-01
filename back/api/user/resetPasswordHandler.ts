@@ -3,7 +3,7 @@ import type { SelectUser } from '@back/entity/user/db/usersTableSchema'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { setRefreshTokenCookie } from '@back/shared/headers'
 import { generateAccessToken, generateRefreshToken } from '@back/shared/lib/json-webtoken'
-import bcrypt from 'bcryptjs'
+import { hash } from 'bcryptjs'
 import type { NextFunction, Request, Response } from 'express'
 import { db } from '@back/shared/lib/drizzle/db'
 import { and, eq } from 'drizzle-orm'
@@ -84,7 +84,7 @@ export const resetPasswordHandler: RouterHandler = async (req, res) => {
   messageList.push('Account activation verified')
 
   const saltRounds = 10
-  const passwordEncrypted = await bcrypt.hash(passwordFromInput, saltRounds)
+  const passwordEncrypted = await hash(passwordFromInput, saltRounds)
 
   messageList.push('Password encrypted')
 

@@ -3,7 +3,7 @@ import { setRefreshTokenCookie } from '@back/shared/headers'
 import { generateAccessToken, generateRefreshToken } from '@back/shared/lib/json-webtoken'
 import { sendEmail } from '@back/shared/lib/mailersend'
 import { generateId } from '@back/shared/lib/nanoid'
-import bcrypt from 'bcryptjs'
+import { hash } from 'bcryptjs'
 import type { NextFunction, Request, Response } from 'express'
 import { runtimeConfig } from '@root/config/runtime'
 import { usersTable } from '@back/entity/user/db/usersTableSchema'
@@ -68,7 +68,7 @@ export const registerUserHandler: RouterHandler = async (req, res) => {
   messageList.push('Email available for registration')
 
   const SALT_ROUNDS = 10
-  const passwordEncrypted = await bcrypt.hash(passwordFromInput, SALT_ROUNDS)
+  const passwordEncrypted = await hash(passwordFromInput, SALT_ROUNDS)
   const activationKey = generateId()
 
   const refreshToken = await generateRefreshToken({

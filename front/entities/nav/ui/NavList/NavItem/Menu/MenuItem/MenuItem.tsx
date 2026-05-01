@@ -154,7 +154,12 @@ export const MenuItem = (props: Props): React.JSX.Element => {
           return
         }
 
-        clickOnMenuItem(event, props.navItem.id, Boolean(props.navItem.disabled), menuNavigation)
+        clickOnMenuItem({
+          event,
+          navItemId: props.navItem.id,
+          disabled: Boolean(props.navItem.disabled),
+          menuNavigation,
+        })
       }}
       onMouseEnter={(): void => {
         reduxHolder.dispatch(

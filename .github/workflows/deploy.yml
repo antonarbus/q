@@ -103,7 +103,7 @@ jobs:
         run: bun run fmt
 
       - name: 'Run lint checks'
-        run: bun run lint-quiet
+        run: bun run lint
 
       - name: 'Unit tests'
         run: bun run test

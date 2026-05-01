@@ -26,7 +26,7 @@ export const getTotalPriceAbove = (props: Props): number => {
 
       if (boqItem?.type === 'boq') {
         const subTotalPrice = boqItem.boq.header.subTotalPrice.value
-        totalPriceAbove += subTotalPrice
+        totalPriceAbove = totalPriceAbove + subTotalPrice
       }
     }
   }

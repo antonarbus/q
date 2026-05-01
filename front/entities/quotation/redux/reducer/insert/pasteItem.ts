@@ -53,34 +53,46 @@ const isBlockType = (item: BlockItem): boolean => {
   return isBlock
 }
 
-const pasteBlock = (
-  state: Quotation,
-  id: string,
-  pastePos: PastePos,
-  itemToPaste: BlockItem,
-): void => {
-  const hoveredItemIndex = state.blocks.findIndex((block) => block.id === id)
-  const spliceSettings = calculateSpliceSettings(hoveredItemIndex, pastePos)
-
-  state.blocks.splice(spliceSettings.insertAtIndex, spliceSettings.deleteCount, itemToPaste)
+type PasteBlockProps = {
+  state: Quotation
+  id: string
+  pastePos: PastePos
+  itemToPaste: BlockItem
 }
 
-const pasteRow = (
-  state: Quotation,
-  id: string,
-  pastePos: PastePos,
-  itemToPaste: RowBlock,
-): void => {
-  const boqBlocks = state.blocks.filter((block) => block.type === 'boq')
+const pasteBlock = (props: PasteBlockProps): void => {
+  const hoveredItemIndex = props.state.blocks.findIndex((block) => block.id === props.id)
+  const spliceSettings = calculateSpliceSettings(hoveredItemIndex, props.pastePos)
+
+  props.state.blocks.splice(
+    spliceSettings.insertAtIndex,
+    spliceSettings.deleteCount,
+    props.itemToPaste,
+  )
+}
+
+type PasteRowProps = {
+  state: Quotation
+  id: string
+  pastePos: PastePos
+  itemToPaste: RowBlock
+}
+
+const pasteRow = (props: PasteRowProps): void => {
+  const boqBlocks = props.state.blocks.filter((block) => block.type === 'boq')
 
   for (const block of boqBlocks) {
-    const rowIndex = block.boq.rows.findIndex((row) => row.id === id)
+    const rowIndex = block.boq.rows.findIndex((row) => row.id === props.id)
     const rowFound = rowIndex !== -1
 
     if (rowFound === true) {
-      const spliceSettings = calculateSpliceSettings(rowIndex, pastePos)
+      const spliceSettings = calculateSpliceSettings(rowIndex, props.pastePos)
 
-      block.boq.rows.splice(spliceSettings.insertAtIndex, spliceSettings.deleteCount, itemToPaste)
+      block.boq.rows.splice(
+        spliceSettings.insertAtIndex,
+        spliceSettings.deleteCount,
+        props.itemToPaste,
+      )
 
       return
     }
@@ -101,7 +113,7 @@ export const pasteItem = (
   const isBlock = isBlockType(itemToPaste)
 
   if (isBlock === true) {
-    pasteBlock(state, action.payload.id, action.payload.pastePos, itemToPaste)
+    pasteBlock({ state, id: action.payload.id, pastePos: action.payload.pastePos, itemToPaste })
 
     return
   }
@@ -109,6 +121,6 @@ export const pasteItem = (
   const isRow = itemToPaste.type === 'row'
 
   if (isRow === true) {
-    pasteRow(state, action.payload.id, action.payload.pastePos, itemToPaste)
+    pasteRow({ state, id: action.payload.id, pastePos: action.payload.pastePos, itemToPaste })
   }
 }

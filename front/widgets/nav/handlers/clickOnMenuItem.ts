@@ -8,13 +8,15 @@ type MenuNavigation = {
   goDown: (args: { navItemId: NavItemId }) => Promise<void>
 }
 
-export const clickOnMenuItem = (
-  event: React.MouseEvent,
-  navItemId: NavItemId,
-  disabled: boolean,
-  menuNavigation: MenuNavigation,
-): void => {
-  const navItem = getNavItem({ navItemId })
+type Props = {
+  event: React.MouseEvent
+  navItemId: NavItemId
+  disabled: boolean
+  menuNavigation: MenuNavigation
+}
+
+export const clickOnMenuItem = (props: Props): void => {
+  const navItem = getNavItem({ navItemId: props.navItemId })
   const nextMenuItems = navItem.current?.nestedItemList ?? []
   const isNestedMenuAvailable = nextMenuItems.length > 0
 
@@ -23,33 +25,33 @@ export const clickOnMenuItem = (
   })
 
   const menuItems = menuNavItem.current?.nestedItemList ?? []
-  const menuItem = menuItems.find((item) => item.id === navItemId)
+  const menuItem = menuItems.find((item) => item.id === props.navItemId)
   const link = menuItem?.link
   const funcId = menuItem?.funcId
   const func = funcId === undefined ? undefined : functionRegistry[funcId]
 
-  if (disabled === true) {
+  if (props.disabled === true) {
     return
   }
 
   if (link !== undefined) {
     // follow the link natively and call the func
-    func?.(event)
+    func?.(props.event)
     reduxHolder.dispatch(navSlice.actions.closeMenu())
 
     return
   }
 
-  event.preventDefault()
+  props.event.preventDefault()
 
   if (func !== undefined) {
-    func(event)
+    func(props.event)
     reduxHolder.dispatch(navSlice.actions.closeMenu())
 
     return
   }
 
   if (isNestedMenuAvailable === true) {
-    menuNavigation.goDown({ navItemId })
+    props.menuNavigation.goDown({ navItemId: props.navItemId })
   }
 }

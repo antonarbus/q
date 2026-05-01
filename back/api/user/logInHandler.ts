@@ -8,7 +8,7 @@ import {
   getPayloadFromRefreshToken,
 } from '@back/shared/lib/json-webtoken'
 import { sendEmail } from '@back/shared/lib/mailersend'
-import bcrypt from 'bcryptjs'
+import { compare } from 'bcryptjs'
 import { runtimeConfig } from '@root/config/runtime'
 import { db } from '@back/shared/lib/drizzle/db'
 import { eq } from 'drizzle-orm'
@@ -153,7 +153,7 @@ export const logInHandler: RouterHandler = async (req, res) => {
     })
   }
 
-  const isPasswordValid = await bcrypt.compare(passwordFromInput, passwordFromDb)
+  const isPasswordValid = await compare(passwordFromInput, passwordFromDb)
 
   if (isPasswordValid === false) {
     messageList.push('Invalid password')
