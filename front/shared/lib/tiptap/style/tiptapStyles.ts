@@ -41,6 +41,8 @@ export const tiptapStyles: NestedCSSObject = {
 
   '& img': {
     borderRadius: '4px',
+    maxWidth: '100%',
+    height: 'auto',
   },
 
   // Image resize handles
