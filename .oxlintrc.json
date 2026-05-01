@@ -12,7 +12,7 @@
     "jsx-a11y",
     "node",
     "jsdoc",
-    // "jest",
+    "jest",
     "vitest",
     "import"
   ],
@@ -61,22 +61,23 @@
     "import/no-named-export": "off", // only named exports!!!
     "import/no-nodejs-modules": "off", // full stack app, use nodejs modules in back and tooling
     "import/no-unassigned-import": "off",
-    "import/prefer-default-export": "off",
+    "import/prefer-default-export": "off", // prefer named exports
     "jsdoc/require-param": "off", // not useful with TS
     "jsdoc/require-returns": "off", // not useful with TS
-    "jsx-a11y/no-autofocus": "off",
+    "jsx-a11y/no-autofocus": "off", // autofocus is intentional and good for ux
+    "jest/require-hook": "off", // no jest in use
     "oxc/no-async-await": "off",
-    "oxc/no-optional-chaining": "off",
-    "oxc/no-rest-spread-properties": "off",
+    "oxc/no-optional-chaining": "off", // not interested in compatibility with old browsers
+    "oxc/no-rest-spread-properties": "off", // not interested in compatibility with old browsers
     "react-perf/jsx-no-jsx-as-prop": "off", // react compiler takes care of memoization
     "react-perf/jsx-no-new-array-as-prop": "off", // react compiler takes care of memoization
     "react-perf/jsx-no-new-function-as-prop": "off", // react compiler takes care of memoization
     "react-perf/jsx-no-new-object-as-prop": "off", // react compiler takes care of memoization
-    "react/exhaustive-deps": "off",
-    "react/jsx-filename-extension": ["error", { "extensions": ["jsx", "tsx"] }],
-    "react/jsx-max-depth": "off",
+    "react/exhaustive-deps": "off", // react compiler handles memoization; rule produces noise for stable refs/dispatch
+    "react/jsx-filename-extension": ["error", { "extensions": ["jsx", "tsx"] }], // use .tsx if jsx is inside
+    "react/jsx-max-depth": "off", // too strict
     "react/jsx-props-no-spreading": "off",
-    "react/no-unknown-property": ["error", { "ignore": ["css"] }],
+    "react/no-unknown-property": ["error", { "ignore": ["css"] }], // emotion injects css prop support
     "react/react-in-jsx-scope": "off",
     "typescript/consistent-type-definitions": ["error", "type"],
     "unicorn/filename-case": ["error", { "cases": { "camelCase": true, "pascalCase": true } }],
