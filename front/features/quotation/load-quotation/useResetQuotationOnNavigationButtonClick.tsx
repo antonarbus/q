@@ -13,10 +13,10 @@ export const useResetQuotationOnNavigationButtonClick = (): void => {
       )
     }
 
-    window.addEventListener('popstate', resetQuotationOnPopState)
+    globalThis.addEventListener('popstate', resetQuotationOnPopState)
 
     return (): void => {
-      window.removeEventListener('popstate', resetQuotationOnPopState)
+      globalThis.removeEventListener('popstate', resetQuotationOnPopState)
     }
   })
 }

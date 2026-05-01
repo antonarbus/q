@@ -33,7 +33,7 @@ export const ConnectStripeButton = (): React.JSX.Element => {
         const result = await stripeConnectUrlQuery.refetch()
 
         if (result.data?.url !== undefined) {
-          window.location.href = result.data.url
+          globalThis.location.href = result.data.url
         }
       }}
       startIcon={<SiStripe />}

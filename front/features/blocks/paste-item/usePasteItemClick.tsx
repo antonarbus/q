@@ -11,13 +11,13 @@ import { recalculateSubTotalPrices } from '@front/entities/quotation/util/recalc
 import { recalculateTotalPrices } from '@front/entities/quotation/util/recalculateTotalPrices'
 
 const pasteItemOnClick = (): void => {
-  const isBookmarkListPage = window.location.pathname.includes(route.bookmarkList)
+  const isBookmarkListPage = globalThis.location.pathname.includes(route.bookmarkList)
 
   if (isBookmarkListPage === true) {
     return
   }
 
-  const isQuotationListPage = window.location.pathname.includes(route.quotationList)
+  const isQuotationListPage = globalThis.location.pathname.includes(route.quotationList)
 
   if (isQuotationListPage === true) {
     return

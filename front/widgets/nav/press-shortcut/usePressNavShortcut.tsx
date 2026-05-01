@@ -61,7 +61,7 @@ export const usePressNavShortcut = (props: Props): void => {
 
     let keysAreBeingPressed: string[] = []
 
-    window.addEventListener('keydown', (event) => {
+    globalThis.addEventListener('keydown', (event) => {
       // Only handle real keyboard events
       const isRealKeyboardEvent = typeof event.key === 'string' && event.key !== ''
 
@@ -103,7 +103,7 @@ export const usePressNavShortcut = (props: Props): void => {
       }
     })
 
-    window.addEventListener('keyup', (event) => {
+    globalThis.addEventListener('keyup', (event) => {
       // Only handle real keyboard events
       const isRealKeyboardEvent = typeof event.key === 'string' && event.key !== ''
 

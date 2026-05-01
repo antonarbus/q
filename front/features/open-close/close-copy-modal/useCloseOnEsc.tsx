@@ -14,11 +14,11 @@ export const useExitCopyOnEsc = (): void => {
   type Res = () => void
 
   const listenForEsc = (): Res => {
-    window.addEventListener('keydown', closeOnEsc)
+    globalThis.addEventListener('keydown', closeOnEsc)
 
     // Cleanup
     return (): void => {
-      window.removeEventListener('keydown', closeOnEsc)
+      globalThis.removeEventListener('keydown', closeOnEsc)
     }
   }
 

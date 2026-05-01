@@ -48,11 +48,11 @@ export const QueryDevtoolsProductionHidden = (): React.JSX.Element | null => {
   }
 
   useEffectOnce(() => {
-    window.addEventListener('keydown', activateQueryDevTools, {
+    globalThis.addEventListener('keydown', activateQueryDevTools, {
       signal: controller.signal,
     })
 
-    window.addEventListener('keyup', emptyKeysPressedArray, {
+    globalThis.addEventListener('keyup', emptyKeysPressedArray, {
       signal: controller.signal,
     })
 

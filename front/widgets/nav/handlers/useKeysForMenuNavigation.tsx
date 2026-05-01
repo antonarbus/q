@@ -175,7 +175,7 @@ export const useKeysForMenuNavigation = (): void => {
       }
     }
 
-    window.addEventListener('keydown', navKeyboardHandler, {
+    globalThis.addEventListener('keydown', navKeyboardHandler, {
       signal: controller.signal,
     })
 

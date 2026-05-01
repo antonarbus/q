@@ -23,7 +23,7 @@ export const useAnimatedElement = (): Res => {
 
     isAnimationPreventedRef.current = true
 
-    const screenHeight = window.window.innerHeight
+    const screenHeight = window.innerHeight
     const elementHeight = ref.current.offsetHeight
     const moreDistanceToMoveAwayCloseButton = 100
 
@@ -55,7 +55,7 @@ export const useAnimatedElement = (): Res => {
 
     isAnimationPreventedRef.current = true
 
-    const screenHeight = window.window.innerHeight
+    const screenHeight = window.innerHeight
     const elementHeight = ref.current.offsetHeight
     const offsetPosition = screenHeight / 2 + elementHeight / 2
 

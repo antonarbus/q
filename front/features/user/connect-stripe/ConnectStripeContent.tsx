@@ -69,7 +69,7 @@ export const ConnectStripeContent = (props: Props): React.JSX.Element => {
           const result = await stripeConnectUrlQuery.refetch()
 
           if (result.data?.url !== undefined) {
-            window.location.href = result.data.url
+            globalThis.location.href = result.data.url
           }
         }}
       >

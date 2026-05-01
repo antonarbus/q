@@ -46,7 +46,7 @@ export const PaymentLink: FC = () => {
         <IconButton
           size='small'
           onClick={async () => {
-            await window.navigator.clipboard
+            await globalThis.navigator.clipboard
               .writeText(stripePaymentLinkUrl ?? '')
               .then(() => toast.success('Link copied'))
               .catch(() => toast.error('Failed to copy'))

@@ -6,7 +6,7 @@ export const getImageDimensions = async (
     height: number
   }>()
 
-  const img = new window.Image()
+  const img = new globalThis.Image()
 
   img.addEventListener('load', () => {
     imgDimensionsDeferred.resolve({

@@ -31,10 +31,10 @@ export const FloatingLineMenu = (): React.ReactNode => {
 
     const updatePos = (): void => {
       if (animFrameId !== null) {
-        window.cancelAnimationFrame(animFrameId)
+        globalThis.cancelAnimationFrame(animFrameId)
       }
 
-      animFrameId = window.requestAnimationFrame(() => {
+      animFrameId = globalThis.requestAnimationFrame(() => {
         animFrameId = null
 
         const shouldHideEarly = editor.isDestroyed || editor.isFocused === false

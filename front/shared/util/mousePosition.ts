@@ -9,7 +9,7 @@ export const mousePosition = { x: 0, y: 0 }
  */
 export const useInitMousePositionTracking = (): void => {
   useEffectOnce(() => {
-    window.addEventListener('mousemove', (event: MouseEvent): void => {
+    globalThis.addEventListener('mousemove', (event: MouseEvent): void => {
       mousePosition.x = event.clientX
       mousePosition.y = event.clientY
     })

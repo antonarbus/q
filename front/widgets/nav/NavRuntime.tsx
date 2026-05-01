@@ -48,7 +48,7 @@ export const NavRuntime = (): null => {
     if (wasVisibleRef.current) {
       wasVisibleRef.current = false
 
-      const isBookmarkPage = window.location.pathname.includes(route.bookmarkList)
+      const isBookmarkPage = globalThis.location.pathname.includes(route.bookmarkList)
 
       if (isBookmarkPage) {
         reduxHolder.dispatch(
@@ -66,7 +66,7 @@ export const NavRuntime = (): null => {
         return
       }
 
-      const isQuotationListPage = window.location.pathname.includes(route.quotationList)
+      const isQuotationListPage = globalThis.location.pathname.includes(route.quotationList)
 
       if (isQuotationListPage) {
         reduxHolder.dispatch(
