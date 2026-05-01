@@ -33,21 +33,14 @@ const showServiceInfo = async (props: ShowServiceInfoProps): Promise<void> => {
       // Skip header
       const lines = tagListOutput.trim().split('\n').slice(1)
 
-      for (const line of lines) {
-        const parts = line.trim().split(/\s+/u)
+      const matchingParts = lines
+        .map((line) => line.trim().split(/\s+/u))
+        .find((parts) => {
+          const tag = parts[0]?.split('/tags/').pop() ?? null
+          return parts.length >= 3 && tag === envTag && parts[2] !== undefined
+        })
 
-        if (parts.length >= 3) {
-          const [tagPath, , tagDigest] = parts
-          const tag = tagPath?.split('/tags/').pop() ?? null
-
-          const isDigest = tag === envTag && tagDigest !== undefined
-
-          if (isDigest === true) {
-            digest = tagDigest
-            break
-          }
-        }
-      }
+      digest = matchingParts?.[2] ?? null
 
       if (digest === null) {
         logger.warn(`Could not find digest for tag: ${envTag}`)
@@ -70,25 +63,21 @@ const showServiceInfo = async (props: ShowServiceInfoProps): Promise<void> => {
       // Skip header
       const lines = tagListOutput.trim().split('\n').slice(1)
 
-      for (const line of lines) {
-        const parts = line.trim().split(/\s+/u)
+      // Column 3: DIGEST (0=TAG, 1=IMAGE, 2=DIGEST)
+      // Find tag pointing to same digest that looks like a git SHA (40 hex chars)
+      const matchingParts = lines
+        .map((line) => line.trim().split(/\s+/u))
+        .find((parts) => {
+          const tag = parts[0]?.split('/tags/').pop() ?? null
+          return (
+            parts.length >= 3 &&
+            parts[2] === digest &&
+            tag !== null &&
+            /^[0-9a-f]{40}$/u.exec(tag) !== null
+          )
+        })
 
-        if (parts.length >= 3) {
-          // Column 3: DIGEST (0=TAG, 1=IMAGE, 2=DIGEST)
-          const [tagPath, , tagDigest] = parts
-          const tag = tagPath?.split('/tags/').pop() ?? null
-
-          // If this tag points to same digest and looks like a git SHA (40 hex chars), use it
-
-          const isGitSha =
-            tagDigest === digest && tag !== null && /^[0-9a-f]{40}$/u.exec(tag) !== null
-
-          if (isGitSha === true) {
-            gitSha = tag
-            break
-          }
-        }
-      }
+      gitSha = matchingParts?.[0]?.split('/tags/').pop() ?? null
     } catch {
       logger.warn('Could not list repository tags')
     }

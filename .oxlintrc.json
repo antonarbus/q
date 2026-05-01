@@ -35,7 +35,7 @@
     "eslint/no-warning-comments": "warn", // highlight @todo comments
     "eslint/capitalized-comments": "off", // sometimes comments should start from lower case
     "eslint/id-length": ["error", { "exceptions": ["x", "y"] }], // allow { x: event.clientX, y: event.clientY }
-    "eslint/max-depth": "off",
+    // "eslint/max-depth": "off",
     "eslint/max-lines-per-function": "off",
     "eslint/max-lines": "off",
     "eslint/max-params": "off",
