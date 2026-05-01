@@ -12,7 +12,7 @@
     "jsx-a11y",
     "node",
     "jsdoc",
-    "jest",
+    // "jest",
     "vitest",
     "import"
   ],
@@ -62,7 +62,6 @@
     "import/no-nodejs-modules": "off", // full stack app, use nodejs modules in back and tooling
     "import/no-unassigned-import": "off",
     "import/prefer-default-export": "off",
-    "jest/require-hook": "off",
     "jsdoc/require-param": "off", // not useful with TS
     "jsdoc/require-returns": "off", // not useful with TS
     "jsx-a11y/no-autofocus": "off",
