@@ -1,4 +1,4 @@
-export type ConfirmationDialogBase = {
+type ConfirmationDialogBase = {
   title?: string
   description?: string
   confirmButtonText?: string
