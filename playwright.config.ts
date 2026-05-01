@@ -4,7 +4,7 @@ import { runtimeConfig } from '@root/config/runtime'
 import { userFilePath } from '@root/tests/setup/userFilePath'
 
 // https://playwright.dev/docs/test-configuration
-const playwrightCongig = defineConfig({
+const playwrightConfig = defineConfig({
   testDir: './tests',
   fullyParallel: true,
   // set at .github/workflows/deployment.yaml:9.
@@ -66,4 +66,4 @@ const playwrightCongig = defineConfig({
 })
 
 // oxlint-disable-next-line import/no-default-export
-export default playwrightCongig
+export default playwrightConfig
