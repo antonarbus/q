@@ -83,7 +83,7 @@
     "unicorn/filename-case": ["error", { "cases": { "camelCase": true, "pascalCase": true } }],
     "unicorn/no-array-for-each": "off",
     "unicorn/no-array-reduce": "off",
-    "unicorn/no-null": "off",
+    "unicorn/no-null": "off", // DB uses null, DOM APIs use null
     "unicorn/prefer-global-this": "off",
     "unicorn/require-post-message-target-origin": "off",
     "vitest/consistent-test-filename": ["error", { "pattern": ".*\\.(test|spec)\\.[tj]sx?$" }],
