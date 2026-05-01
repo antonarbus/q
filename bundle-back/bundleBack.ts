@@ -2,10 +2,9 @@
 import esbuild from 'esbuild'
 import fs from 'node:fs'
 import path from 'node:path'
-import url from 'node:url'
 import { pathAliasPlugin } from './pathAliasPlugin'
-const thisDirPathAbsolute = path.dirname(url.fileURLToPath(import.meta.url))
-const rootPathAbsolute = path.resolve(thisDirPathAbsolute, '..')
+
+const rootPathAbsolute = path.resolve(import.meta.dirname, '..')
 const indexSrcFilePath = path.join(rootPathAbsolute, 'back', 'index.ts')
 const outDirPath = path.join(rootPathAbsolute, 'back', 'build')
 const nodeModulesDirPath = path.join(rootPathAbsolute, 'back', 'node_modules')

@@ -1,10 +1,8 @@
 import type esbuild from 'esbuild'
 import fs from 'node:fs'
 import path from 'node:path'
-import url from 'node:url'
 
-const thisPathAbsolute = path.dirname(url.fileURLToPath(import.meta.url))
-const rootPathAbsolute = path.resolve(thisPathAbsolute, '..')
+const rootPathAbsolute = path.resolve(import.meta.dirname, '..')
 
 // Helper to resolve file with possible extensions
 const addExtensionToPath = (basePath: string): string | null => {

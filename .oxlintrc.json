@@ -39,21 +39,16 @@
     "eslint/max-lines": "off", // inevitable
     "eslint/max-params": "warn", // params of custom functions always put into object, functions from libs we can not control
     "eslint/max-statements": "off", // too strict
-    "eslint/no-duplicate-imports": "off", // good rule, but not auto fixable which makes it annoying, check later if it auto-fixable, it is in the roadmap
-    "eslint/no-magic-numbers": [
-      "warn",
-      {
-        "ignore": [-1, 0, 1],
-        "ignoreArrayIndexes": true,
-        "ignoreDefaultValues": true
-      }
-    ], // incrementally fix all magic numbers and let the rule error
+    "eslint/no-duplicate-imports": "off", // ? good rule, but not auto fixable which makes it annoying, check later if it auto-fixable, it is in the roadmap
+    "eslint/no-magic-numbers": "off", // ? good rule, but there is some issue in oxc now, try later
     "eslint/no-ternary": "off", // simple ternary is ok, but nested is not
+    "eslint/no-console": "off", // ? better to warn, but then vscode autofixes on save and removed the console log
     "eslint/no-undefined": "off", // we technically may re-define window.undefined='hi', but TS will not allow
     "eslint/operator-assignment": ["error", "never"], // i=i+1 instead of i++
-    "eslint/sort-imports": "off", // not auto-fixable, annoying to sort manually
+    "eslint/sort-imports": "off", // ? not auto-fixable, annoying to sort manually
     "eslint/sort-keys": "off", // not nice, quite often manual sort have mental idea behind
     "react/jsx-boolean-value": ["error", "always"], // prop={false} and also prop={true} for consistency
+    "react/forbid-component-props": "off", // it forbids 'style' and 'className' props
     "import/exports-last": "off", // types in api handlers are exported and used below
     "import/group-exports": "off", // nah
     "import/no-relative-parent-imports": "off", // ../.. indicates the proximity, for architecture constrains we use @feature-sliced/steiger-plugin
@@ -65,6 +60,7 @@
     "jsdoc/require-returns": "off", // not useful with TS
     "jsx-a11y/no-autofocus": "off", // autofocus is intentional and good for ux
     "jest/require-hook": "off", // no jest in use
+    "jest/prefer-expect-assertions": "off", // ? did not understand
     "oxc/no-async-await": "off", // not interested in compatibility with old browsers
     "oxc/no-optional-chaining": "off", // not interested in compatibility with old browsers
     "oxc/no-rest-spread-properties": "off", // not interested in compatibility with old browsers
@@ -86,6 +82,8 @@
     "unicorn/prefer-global-this": "off", // window gives typed DOM overloads; globalThis loses KeyboardEvent etc.
     "unicorn/require-post-message-target-origin": "off", // false positive: Worker.postMessage has no targetOrigin parameter
     "vitest/consistent-test-filename": ["error", { "pattern": ".*\\.(test|spec)\\.[tj]sx?$" }],
-    "vitest/no-importing-vitest-globals": "off" // imports are required
+    "vitest/no-importing-vitest-globals": "off", // imports are required
+    "vitest/prefer-importing-vitest-globals": "off", // oxc confuses vitest and playwright
+    "vitest/prefer-expect-assertions": "off" // ? did not understand
   }
 }

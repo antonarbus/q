@@ -3,7 +3,6 @@ import cookieParser from 'cookie-parser'
 import express from 'express'
 import morgan from 'morgan'
 import path from 'node:path'
-import url from 'node:url'
 import { runtimeConfig } from '@root/config/runtime'
 import { api } from '@back/api'
 import { errorHandlerMiddleware } from '@back/shared/errors/errorHandlerMiddleware'
@@ -11,14 +10,12 @@ import { httpHandler } from '@back/shared/lib/express/httpHandler'
 import blog404Html from './static/blog-404.html'
 import { log } from './shared/util/log'
 
-const thisDirPathAbsolute = path.dirname(url.fileURLToPath(import.meta.url))
-
 // In bundled production (back/build/), go up 2 levels to reach /app/
 // In development (back/), go up 1 level to reach project root
 const rootPathAbsolute =
   runtimeConfig.nodeEnv === 'production'
-    ? path.resolve(thisDirPathAbsolute, '..', '..')
-    : path.resolve(thisDirPathAbsolute, '..')
+    ? path.resolve(import.meta.dirname, '..', '..')
+    : path.resolve(import.meta.dirname, '..')
 
 const app = express()
 

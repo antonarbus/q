@@ -5,6 +5,7 @@ import { z } from 'zod'
 import { quotationSchema } from './quotationSchemaV2'
 
 describe('#migrateQuotationSchemaFromV1ToV2', () => {
+  // oxlint-disable-next-line jest/prefer-ending-with-an-expect
   it('migrates a valid V1 quotation to V2', async () => {
     const mockQuotationV1 = await import('../fixture/mockQuotationV1.json')
 
@@ -27,11 +28,12 @@ describe('#migrateQuotationSchemaFromV1ToV2', () => {
       .forEach((block) => {
         // Narrow the type
         assert(block.type === 'boq')
+
         block.boq.rows.forEach((row) => {
           expect(row.bookmarkSchemaVersion).toBe(2)
         })
       })
-  })
+  }, 1000)
 
   it('skips migration when document version is not for migration', async () => {
     const mockQuotationV2 = await import('../fixture/mockQuotationV2.json')
@@ -41,7 +43,7 @@ describe('#migrateQuotationSchemaFromV1ToV2', () => {
     })
 
     expect(result.status).toBe('SKIPPED')
-  })
+  }, 1000)
 
   it('fails migration when document has invalid structure', () => {
     const invalidQuotation = {}
@@ -51,7 +53,7 @@ describe('#migrateQuotationSchemaFromV1ToV2', () => {
     })
 
     expect(result.status).toBe('CORRUPTED')
-  })
+  }, 1000)
 
   it('returns error when migration happened, but it has a bug and produces invalid document', async () => {
     const mockQuotationV1 = await import('../fixture/mockQuotationV1.json')
@@ -74,7 +76,5 @@ describe('#migrateQuotationSchemaFromV1ToV2', () => {
     })
 
     expect(result.status).toBe('MIGRATION_BUG')
-
-    vi.restoreAllMocks()
-  })
+  }, 1000)
 })

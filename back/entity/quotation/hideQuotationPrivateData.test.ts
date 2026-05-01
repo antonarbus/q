@@ -9,5 +9,5 @@ describe('#hideQuotationPrivateData', () => {
 
     hideQuotationPrivateData({ quotation })
     expect(quotation.name).toBe('private')
-  })
+  }, 1000)
 })

@@ -13,14 +13,14 @@ describe('#migrateBookmarkSchemaFromV1ToV2', () => {
     // Narrow the type
     assert(result.status === 'MIGRATED')
     expect(result.data.bookmarkSchemaVersion).toBe(2)
-  })
+  }, 1000)
 
   it('skips migration when document version is not for migration', async () => {
     const mockBookmarkV2 = await import('../fixture/mockBookmarkV2.json')
     const result = migrateBookmarkSchemaFromV1ToV2({ document: mockBookmarkV2 })
 
     expect(result.status).toBe('SKIPPED')
-  })
+  }, 1000)
 
   it('fails migration when document has invalid structure', () => {
     const invalidBookmark = {}
@@ -30,7 +30,7 @@ describe('#migrateBookmarkSchemaFromV1ToV2', () => {
     })
 
     expect(result.status).toBe('CORRUPTED')
-  })
+  }, 1000)
 
   it('returns error when migration happened, but it has a bug and produces invalid document', async () => {
     const mockBookmarkV1 = await import('../fixture/mockBookmarkV1.json')
@@ -51,7 +51,5 @@ describe('#migrateBookmarkSchemaFromV1ToV2', () => {
     const result = migrateBookmarkSchemaFromV1ToV2({ document: mockBookmarkV1 })
 
     expect(result.status).toBe('MIGRATION_BUG')
-
-    vi.restoreAllMocks()
-  })
+  }, 1000)
 })

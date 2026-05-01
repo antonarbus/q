@@ -1,16 +1,12 @@
-import path, { resolve } from 'node:path'
+import { resolve } from 'node:path'
 import { infraConfig } from '@back/config/infrastructure'
 import { logger } from '@root/deploy-scripts/lib/output/logger'
 import { write } from 'bun'
-import url from 'node:url'
 
 type Props = {
   environment: string
   config: Record<string, number | string | readonly string[]>
 }
-
-const __filename = url.fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
 
 /**
  *  Convert camelCase to snake_case
@@ -56,7 +52,7 @@ export const generateTfvars = async (): Promise<void> => {
   logger.emptyLine()
 
   for (const [env, config] of Object.entries(infraConfig)) {
-    const CONFIG_DIR = resolve(__dirname, '../../config')
+    const CONFIG_DIR = resolve(import.meta.dirname, '../../config')
     const TFVARS_FILE_PATH = resolve(CONFIG_DIR, `${env}.tfvars`)
 
     const content = generateTfvarsContent({ environment: env, config })

@@ -1,19 +1,15 @@
 import { $ } from 'bun'
-import path, { resolve } from 'node:path'
+import { resolve } from 'node:path'
 import { chdir } from 'node:process'
 import { infraConfig } from '@back/config/infrastructure'
 import { logger } from '@root/deploy-scripts/lib/output/logger'
 import type { DeployedEnvironment } from '@root/config/environment'
-import url from 'node:url'
 
 type Props = {
   environment: DeployedEnvironment
   lockId: string | undefined
   force: boolean | undefined
 }
-
-const __filename = url.fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
 
 const detectLockId = async (tfvarsFilePath: string): Promise<string | undefined> => {
   try {
@@ -68,9 +64,8 @@ export const terraformUnlock = async (props: Props): Promise<void> => {
   logger.info(`Environment: ${props.environment}`)
   logger.emptyLine()
 
-  const TERRAFORM_DIR = resolve(__dirname, '../../terraform/infrastructure')
-
-  const TFVARS_FILE_PATH = resolve(__dirname, `../../config/${props.environment}.tfvars`)
+  const TERRAFORM_DIR = resolve(import.meta.dirname, '../../terraform/infrastructure')
+  const TFVARS_FILE_PATH = resolve(import.meta.dirname, `../../config/${props.environment}.tfvars`)
 
   logger.warn(`Removing Terraform state lock for environment: ${props.environment}`)
 

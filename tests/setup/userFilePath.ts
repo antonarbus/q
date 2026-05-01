@@ -1,11 +1,7 @@
-import { dirname, join } from 'node:path'
-import { fileURLToPath } from 'node:url'
+import { join } from 'node:path'
 
-const thisFilePath = fileURLToPath(import.meta.url)
-const thisDirPath = dirname(thisFilePath)
-
-const authUserFilePath = join(thisDirPath, 'authenticated_user.json')
-const guestUserFilePath = join(thisDirPath, 'guest_user.json')
+const authUserFilePath = join(import.meta.dirname, 'authenticated_user.json')
+const guestUserFilePath = join(import.meta.dirname, 'guest_user.json')
 
 export const userFilePath = {
   authenticated: authUserFilePath,
