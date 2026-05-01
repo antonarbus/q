@@ -5,7 +5,7 @@ import { getDbUrl } from '@back/config/getDbUrl'
 
 const dbUrl = await getDbUrl()
 
-export default defineConfig({
+const drizzleConfig = defineConfig({
   // schema file path
   schema: './back/shared/lib/drizzle/schema.ts',
   // migrations folder
@@ -15,3 +15,6 @@ export default defineConfig({
     url: dbUrl,
   },
 })
+
+// oxlint-disable-next-line import/no-default-export
+export default drizzleConfig

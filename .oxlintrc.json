@@ -57,11 +57,9 @@
     "import/exports-last": "off", // types in api handlers are exported and used below
     "import/group-exports": "off", // nah
     "import/no-relative-parent-imports": "off", // ../.. indicates the proximity, for architecture constrains we use @feature-sliced/steiger-plugin
-    "import/max-dependencies": "off",
-    "import/no-anonymous-default-export": "off",
-    "import/no-default-export": "off",
-    "import/no-named-export": "off",
-    "import/no-nodejs-modules": "off",
+    "import/max-dependencies": "off", // strange rule, how we may avoid dependencies
+    "import/no-named-export": "off", // only named exports!!!
+    "import/no-nodejs-modules": "off", // full stack app, use nodejs modules in back and tooling
     "import/no-unassigned-import": "off",
     "import/prefer-default-export": "off",
     "jest/require-hook": "off",

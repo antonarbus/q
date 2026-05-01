@@ -1,6 +1,7 @@
 // oxlint-disable no-console
 import { runtimeConfig } from '@root/config/runtime'
 
+// oxlint-disable-next-line import/no-default-export
 export default function globalSetup(): void {
   console.info('\n📝 Playwright test Environment Info:')
   console.info(`   NODE_ENV: ${runtimeConfig.nodeEnv}`)

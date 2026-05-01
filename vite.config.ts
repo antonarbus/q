@@ -15,7 +15,7 @@ import { runtimeConfig } from './config/runtime'
 
 // https://vitejs.dev/config/
 
-export default {
+const viteConfig = {
   publicDir: './front/public',
   resolve: {
     alias: [
@@ -133,3 +133,6 @@ export default {
     },
   },
 }
+
+// oxlint-disable-next-line import/no-default-export
+export default viteConfig
