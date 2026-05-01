@@ -30,6 +30,6 @@ declare module '@front/shared/lib/redux/register' {
   }
 }
 
-// export { store }
-
-reduxHolder.store = store
+export const initRedux = (): void => {
+  reduxHolder.store = store
+}

@@ -1,4 +1,4 @@
-import 'vite/client'
+import 'vite/client' // oxlint-disable-line import/no-unassigned-import -- type augmentation, cannot be assigned
 
 /*
   It re-exports Vite's built-in client type definitions, which provide TypeScript types for Vite-specific features like:

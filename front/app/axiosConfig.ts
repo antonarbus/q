@@ -74,4 +74,6 @@ const responseErrorInterceptor = async (error: AxiosError): Promise<unknown> => 
 
 axiosWithAuth.interceptors.response.use(undefined, responseErrorInterceptor)
 
-axiosHolder.axiosWithAuth = axiosWithAuth
+export const initAxios = (): void => {
+  axiosHolder.axiosWithAuth = axiosWithAuth
+}

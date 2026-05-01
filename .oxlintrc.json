@@ -60,13 +60,12 @@
     "import/max-dependencies": "off", // strange rule, how we may avoid dependencies
     "import/no-named-export": "off", // only named exports!!!
     "import/no-nodejs-modules": "off", // full stack app, use nodejs modules in back and tooling
-    "import/no-unassigned-import": "off",
     "import/prefer-default-export": "off", // prefer named exports
     "jsdoc/require-param": "off", // not useful with TS
     "jsdoc/require-returns": "off", // not useful with TS
     "jsx-a11y/no-autofocus": "off", // autofocus is intentional and good for ux
     "jest/require-hook": "off", // no jest in use
-    "oxc/no-async-await": "off",
+    "oxc/no-async-await": "off", // not interested in compatibility with old browsers
     "oxc/no-optional-chaining": "off", // not interested in compatibility with old browsers
     "oxc/no-rest-spread-properties": "off", // not interested in compatibility with old browsers
     "react-perf/jsx-no-jsx-as-prop": "off", // react compiler takes care of memoization
@@ -84,8 +83,9 @@
     "unicorn/no-array-for-each": "off", // for...of is faster, but forEach is readable
     "unicorn/no-array-reduce": "off", // for...of is faster, but reduce is readable
     "unicorn/no-null": "off", // DB uses null, DOM APIs use null
-    "unicorn/require-post-message-target-origin": "off",
+    "unicorn/prefer-global-this": "off", // window gives typed DOM overloads; globalThis loses KeyboardEvent etc.
+    "unicorn/require-post-message-target-origin": "off", // false positive: Worker.postMessage has no targetOrigin parameter
     "vitest/consistent-test-filename": ["error", { "pattern": ".*\\.(test|spec)\\.[tj]sx?$" }],
-    "vitest/no-importing-vitest-globals": "off" // globals are not enabled, imports are required
+    "vitest/no-importing-vitest-globals": "off" // imports are required
   }
 }

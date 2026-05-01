@@ -254,4 +254,6 @@ const router = createBrowserRouter([
   },
 ])
 
-routerHolder.router = router
+export const initRouter = (): void => {
+  routerHolder.router = router
+}

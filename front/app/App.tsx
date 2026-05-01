@@ -1,11 +1,8 @@
-// Instantiates routerHolder
-import './router'
+import { initRouter } from './router'
 import { routerHolder } from '@front/shared/lib/react-router-dom/routerHolder'
-// Instantiates reduxHolder
-import './redux'
+import { initRedux } from './redux'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
-// Instantiates axiosHolder
-import './axiosConfig'
+import { initAxios } from './axiosConfig'
 import { queryClient } from '@front/shared/lib/tanstack-query/queryClient'
 import { QueryDevtoolsProductionHidden } from '@front/shared/lib/tanstack-query/QueryDevtoolsProductionHidden'
 import { themeClient } from '@front/shared/theme'
@@ -18,6 +15,10 @@ import { enGB } from 'date-fns/locale'
 import { Provider } from 'react-redux'
 import { RouterProvider } from 'react-router-dom'
 import { GlobalStyles } from './GlobalStyles'
+
+initRedux()
+initRouter()
+initAxios()
 
 export const App = (): React.JSX.Element => {
   return (
