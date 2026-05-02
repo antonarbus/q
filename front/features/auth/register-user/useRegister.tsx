@@ -3,7 +3,7 @@ import { navSlice } from '@front/entities/nav/navSlice'
 import { useRegisterUserMutation } from '@front/entities/user/api/useRegisterUserMutation'
 import { userSlice } from '@front/entities/user/redux/userSlice'
 import type { Signal } from '@preact/signals-react'
-import { appSlice } from '@front/shared/appSlice'
+import { buildSearchParams, getSearchParam } from '@front/shared/lib/react-router-dom/searchParams'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { asyncDelay } from '@front/shared/util/asyncDelay'
 import type { UseMutationResult } from '@tanstack/react-query'
@@ -54,12 +54,10 @@ export const useRegister = (props: Props): Res => {
         await asyncDelay(1000)
         await props.slideOut()
 
-        const navigateTo = reduxHolder.getState().app.navigateState.to
+        const redirectTo = getSearchParam('redirect')
 
-        if (navigateTo !== undefined) {
-          await navigate(navigateTo)
-          reduxHolder.dispatch(appSlice.actions.resetNavigateState())
-
+        if (redirectTo !== null) {
+          await navigate(`../${redirectTo}${buildSearchParams({ shouldSlide: 'true' })}`)
           return
         }
 

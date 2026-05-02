@@ -6,6 +6,7 @@ import { useLogInUserMutation } from '@front/entities/user/api/useLogInUserMutat
 import { userSlice } from '@front/entities/user/redux/userSlice'
 import type { Signal } from '@preact/signals-react'
 import { appSlice } from '@front/shared/appSlice'
+import { buildSearchParams, getSearchParam } from '@front/shared/lib/react-router-dom/searchParams'
 import { route } from '@front/shared/lib/react-router-dom/route'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { asyncDelay } from '@front/shared/util/asyncDelay'
@@ -92,12 +93,10 @@ export const useLogIn = (props: Props): Res => {
         await asyncDelay(1000)
         await props.slideOut()
 
-        const navigateTo = reduxHolder.getState().app.navigateState.to
+        const redirectTo = getSearchParam('redirect')
 
-        if (navigateTo !== undefined) {
-          await navigate(navigateTo)
-          reduxHolder.dispatch(appSlice.actions.resetNavigateState())
-
+        if (redirectTo !== null) {
+          await navigate(`../${redirectTo}${buildSearchParams({ shouldSlide: 'true' })}`)
           return
         }
 

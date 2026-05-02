@@ -1,16 +1,13 @@
-import { appSlice } from '@front/shared/appSlice'
+import { buildSearchParams } from '@front/shared/lib/react-router-dom/searchParams'
 import { route } from '@front/shared/lib/react-router-dom/route'
 import { routerHolder } from '@front/shared/lib/react-router-dom/routerHolder'
-import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 
 type Props = {
   prefilledEmail: string
 }
 
 export const openRegisterModal = (props: Props): void => {
-  reduxHolder.dispatch(appSlice.actions.setNavigateState({ shouldSlide: true }))
-
-  routerHolder.router.navigate(`../${route.register}`, {
-    state: { prefilledEmail: props.prefilledEmail },
-  })
+  routerHolder.router.navigate(
+    `../${route.register}${buildSearchParams({ shouldSlide: 'true', prefilledEmail: props.prefilledEmail })}`,
+  )
 }

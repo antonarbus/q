@@ -2,9 +2,8 @@ import type { UrlParam } from '@back/api/bookmark/deleteBookmarkHandler'
 import { useGetQuotationMutation } from '@front/entities/quotation/api/useGetQuotationMutation'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { IconButton, Tooltip } from '@mui/material'
-import { appSlice } from '@front/shared/appSlice'
 import { RotatingLoaderIcon } from '@front/shared/component/RotatingLoaderIcon'
-import { route } from '@front/shared/lib/react-router-dom/route'
+import { buildSearchParams } from '@front/shared/lib/react-router-dom/searchParams'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { AiTwotoneEdit } from 'react-icons/ai'
 import { Link, useNavigate } from 'react-router-dom'
@@ -24,14 +23,7 @@ export const OpenSaveQuotationModalButton = (props: UrlParam): React.JSX.Element
         }),
       )
 
-      reduxHolder.dispatch(
-        appSlice.actions.setNavigateState({
-          to: `/${route.save}`,
-          shouldSlide: true,
-        }),
-      )
-
-      navigate(`./${props.id}`)
+      navigate(`./${props.id}${buildSearchParams({ shouldSlide: 'true' })}`)
     }
   }, [quotationMutation.isSuccess])
 
