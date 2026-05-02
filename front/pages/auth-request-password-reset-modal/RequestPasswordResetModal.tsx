@@ -4,9 +4,8 @@ import { Box } from '@mui/material'
 import { useSignal } from '@preact/signals-react'
 import { FormModal } from '@front/shared/component/FormModal'
 import { EmailField } from '@front/shared/component/input-field/EmailField'
+import { getSearchParam } from '@front/shared/lib/react-router-dom/searchParams'
 import { routerHolder } from '@front/shared/lib/react-router-dom/routerHolder'
-import { useLocation } from 'react-router-dom'
-import type { Location } from 'react-router-dom'
 import { useAnimatedElement } from '@front/shared/util/useAnimatedElement'
 import { useRef } from 'react'
 import { PiPassword } from 'react-icons/pi'
@@ -14,12 +13,8 @@ import { PiPassword } from 'react-icons/pi'
 export const RequestPasswordResetModal = (): React.JSX.Element => {
   const animatedElement = useAnimatedElement()
   const inputRef = useRef<HTMLDivElement>(null)
-
-  const location = useLocation() as Location<{
-    prefilledEmail: string
-  } | null>
-
-  const emailSignal = useSignal(location.state?.prefilledEmail ?? '')
+  const prefilledEmail = getSearchParam('prefilledEmail') ?? ''
+  const emailSignal = useSignal(prefilledEmail)
   const isEmailOkSignal = useSignal(false)
 
   const requestPasswordReset = useRequestPasswordReset({

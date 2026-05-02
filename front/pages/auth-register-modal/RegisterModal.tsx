@@ -6,9 +6,8 @@ import { ConfirmPasswordField } from '@front/shared/component/ConfirmPasswordFie
 import { FormModal } from '@front/shared/component/FormModal'
 import { EmailField } from '@front/shared/component/input-field/EmailField'
 import { PasswordField } from '@front/shared/component/input-field/PasswordField'
+import { getSearchParam } from '@front/shared/lib/react-router-dom/searchParams'
 import { routerHolder } from '@front/shared/lib/react-router-dom/routerHolder'
-import { useLocation } from 'react-router-dom'
-import type { Location } from 'react-router-dom'
 import { useAnimatedElement } from '@front/shared/util/useAnimatedElement'
 import { useRef } from 'react'
 import { MdLockOutline } from 'react-icons/md'
@@ -16,12 +15,8 @@ import { MdLockOutline } from 'react-icons/md'
 export const RegisterModal = (): React.JSX.Element => {
   const animatedElement = useAnimatedElement()
   const inputRef = useRef<HTMLDivElement>(null)
-
-  const location = useLocation() as Location<{
-    prefilledEmail: string
-  } | null>
-
-  const emailSignal = useSignal(location.state?.prefilledEmail ?? '')
+  const prefilledEmail = getSearchParam('prefilledEmail') ?? ''
+  const emailSignal = useSignal(prefilledEmail)
   const passwordSignal = useSignal('')
   const isEmailOkSignal = useSignal(false)
   const isConfirmPasswordOkSignal = useSignal(false)
