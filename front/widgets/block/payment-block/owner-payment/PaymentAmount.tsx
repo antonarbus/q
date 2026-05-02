@@ -1,3 +1,4 @@
+import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { useBlock } from '@front/entities/quotation/provider/block/useBlock'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { Box } from '@mui/material'
@@ -42,6 +43,16 @@ export const PaymentAmount: FC<Props> = (props) => {
       value={props.amountInput}
       onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
         props.onChange(event.target.value)
+      }}
+      onBlur={(event: React.FocusEvent<HTMLInputElement>) => {
+        const num = Number.parseFloat(event.target.value)
+
+        reduxHolder.dispatch(
+          quotationSlice.actions.setPaymentAmount({
+            blockIndex: block.index,
+            value: Number.isNaN(num) || num <= 0 ? 0 : Math.round(num * 100),
+          }),
+        )
       }}
       sx={{
         width: '100%',

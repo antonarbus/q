@@ -42,6 +42,7 @@ import { updateItemInfo } from './reducer/update/updateItemInfo'
 import { updatePayment } from './reducer/update/updatePayment'
 import { updatePaymentHeading } from './reducer/update/updatePaymentHeading'
 import { updatePaymentPayButtonLabel } from './reducer/update/updatePaymentPayButtonLabel'
+import { setPaymentAmount } from './reducer/update/setPaymentAmount'
 import { setPaymentCurrency } from './reducer/update/setPaymentCurrency'
 import { updatePrice } from './reducer/update/updatePrice'
 import { updatePriceTitle } from './reducer/update/updatePriceTitle'
@@ -106,11 +107,14 @@ export const quotationSlice = createSlice({
     updateSubTotalPrice,
     updatePriceTitle,
     updatePrice,
+    // todo: rename
     updatePaymentBlock: updatePayment,
     updatePaymentHeading,
     updatePaymentPayButtonLabel,
     updateQuotationInfo,
     updateItemInfo,
+    // todo: check all reducers, some setX, some updateX
+    setPaymentAmount,
     setPaymentCurrency,
   },
 })

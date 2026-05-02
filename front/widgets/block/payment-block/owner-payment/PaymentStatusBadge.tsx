@@ -1,12 +1,19 @@
+import { useBlock } from '@front/entities/quotation/provider/block/useBlock'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { Box } from '@mui/material'
 import type { FC } from 'react'
 
 export const PaymentStatusBadge: FC = () => {
-  const paidAt = reduxHolder.useSelector((state) => state.quotation.paidAt)
-  const isPaid = paidAt !== null
+  const block = useBlock()
 
-  if (isPaid === false) {
+  const hasPaymentLink = reduxHolder.useSelector((state) => {
+    const thisBlock = state.quotation.blocks[block.index]
+    return thisBlock?.type === 'payment' ? thisBlock.payment.stripePaymentLinkUrl !== null : false
+  })
+
+  const isPaid = reduxHolder.useSelector((state) => state.quotation.paidAt !== null)
+
+  if (!hasPaymentLink) {
     return null
   }
 
@@ -17,7 +24,7 @@ export const PaymentStatusBadge: FC = () => {
         alignItems: 'center',
         gap: '5px',
         fontSize: '11px',
-        color: 'success.main',
+        color: isPaid ? 'success.main' : 'warning.main',
         fontWeight: 500,
         flexShrink: 0,
       }}
@@ -27,10 +34,10 @@ export const PaymentStatusBadge: FC = () => {
           width: 7,
           height: 7,
           borderRadius: '50%',
-          bgcolor: isPaid ? 'success.main' : 'success.light',
+          bgcolor: isPaid ? 'success.main' : 'warning.main',
         }}
       />
-      {isPaid ? 'Paid' : 'Active'}
+      {isPaid ? 'Paid' : 'Awaiting'}
     </Box>
   )
 }

@@ -12,10 +12,6 @@ type InitState = {
     shouldShowLoader: boolean
     text: string | null
   }
-  navigateState: {
-    to?: string
-    shouldSlide?: boolean
-  }
   confirmationDialog: ConfirmationDialogOptions & { isOpen: boolean }
 }
 
@@ -28,10 +24,6 @@ const initialState: InitState = {
   loadingOverlay: {
     shouldShowLoader: false,
     text: null,
-  },
-  navigateState: {
-    to: undefined,
-    shouldSlide: undefined,
   },
   confirmationDialog: {
     isOpen: false,
@@ -68,22 +60,6 @@ export const appSlice = createSlice({
     hideLoadingOverlay: (state: WritableDraft<InitState>) => {
       state.loadingOverlay.shouldShowLoader = false
       state.loadingOverlay.text = null
-    },
-    setNavigateState: (
-      state: WritableDraft<InitState>,
-      action: PayloadAction<InitState['navigateState']>,
-    ) => {
-      if (action.payload.to !== undefined) {
-        state.navigateState.to = action.payload.to
-      }
-
-      if (action.payload.shouldSlide !== undefined) {
-        state.navigateState.shouldSlide = action.payload.shouldSlide
-      }
-    },
-    resetNavigateState: (state: WritableDraft<InitState>) => {
-      state.navigateState.to = undefined
-      state.navigateState.shouldSlide = undefined
     },
     openConfirmationDialog: (state, action: PayloadAction<ConfirmationDialogOptions>) => {
       state.confirmationDialog = { isOpen: true, ...action.payload }

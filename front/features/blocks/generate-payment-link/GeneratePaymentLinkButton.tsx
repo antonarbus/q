@@ -3,39 +3,36 @@ import { useStripeAccountStatusQuery } from '@front/entities/stripe/api/useStrip
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { saveExistingQuotation } from '@front/features/quotation/save-quotation/saveExistingQuotation'
 import { useBlock } from '@front/entities/quotation/provider/block/useBlock'
+import {
+  buildSearchParams,
+  searchParamValue,
+} from '@front/shared/lib/react-router-dom/searchParams'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
-import { Button } from '@mui/material'
-import { toast } from 'sonner'
-import type { PaymentBlock } from '@back/entity/quotation/schema'
 import { routerHolder } from '@front/shared/lib/react-router-dom/routerHolder'
 import { route } from '@front/shared/lib/react-router-dom/route'
+import { Button } from '@mui/material'
+import { toast } from 'sonner'
 import { confirmWithDialog } from '@front/shared/component/confirmation-dialog/confirmWithDialog'
 import type { AxiosError } from 'axios'
+import { selectPaymentBlockByBlockIndex } from '@front/entities/quotation/redux/selector/selectPaymentBlockByBlockIndex'
 
 type Props = {
   amountInput: string
   onInvalidAmount: () => void
 }
 
+// todo: lift to widget coz we combine 2 features here
 export const GeneratePaymentLinkButton = (props: Props): React.JSX.Element | null => {
   const block = useBlock()
   const stripeStatusQuery = useStripeAccountStatusQuery()
   const createPaymentLinkMutation = useCreatePaymentLinkMutation()
   const quotationId = reduxHolder.useSelector((state) => state.quotation.id)
 
-  const stripePaymentLinkUrl = reduxHolder.useSelector((state) => {
-    const thisBlock = state.quotation.blocks[block.index]
-    return thisBlock?.type === 'payment' ? thisBlock.payment.stripePaymentLinkUrl : null
-  })
+  const paymentBlock = reduxHolder.useSelector(
+    selectPaymentBlockByBlockIndex({ blockIndex: block.index }),
+  )
 
-  const currency = reduxHolder.useSelector((state) => {
-    const thisBlock = state.quotation.blocks[block.index]
-    return thisBlock?.type === 'payment' ? thisBlock.payment.currency : 'usd'
-  })
-
-  const isQuotationSaved = quotationId.length > 0 && quotationId !== 'new'
-
-  if (stripePaymentLinkUrl !== null) {
+  if (paymentBlock?.payment.stripePaymentLinkUrl !== null) {
     return null
   }
 
@@ -46,6 +43,17 @@ export const GeneratePaymentLinkButton = (props: Props): React.JSX.Element | nul
       variant='contained'
       onClick={async (): Promise<void> => {
         if (stripeStatusQuery.data?.connected !== true) {
+          if (reduxHolder.getState().user.email === null) {
+            routerHolder.router.navigate(
+              `./${route.login}${buildSearchParams({
+                redirect: `/${route.stripeConnect}`,
+                shouldSlide: searchParamValue.shouldSlide,
+              })}`,
+            )
+
+            return
+          }
+
           routerHolder.router.navigate(`./${route.stripeConnect}`)
 
           return
@@ -81,6 +89,8 @@ export const GeneratePaymentLinkButton = (props: Props): React.JSX.Element | nul
           }
         }
 
+        const isQuotationSaved = quotationId.length > 0 && quotationId !== 'new'
+
         if (!isQuotationSaved) {
           const confirmed = await confirmWithDialog({
             title: 'Save quotation first',
@@ -95,43 +105,43 @@ export const GeneratePaymentLinkButton = (props: Props): React.JSX.Element | nul
           await saveExistingQuotation()
         }
 
-        try {
-          const savedId = reduxHolder.getState().quotation.id
-
-          const result = await createPaymentLinkMutation.mutateAsync({
-            quotationId: savedId,
+        const result = await createPaymentLinkMutation
+          .mutateAsync({
+            quotationId: reduxHolder.getState().quotation.id,
             amount: Math.round(amountNum * 100),
-            currency: currency.toLowerCase(),
+            currency: paymentBlock.payment.currency.toLowerCase(),
+          })
+          .catch((error) => {
+            const axiosError = error as AxiosError<{ message: string }>
+            const serverMessage = axiosError.response?.data?.message
+            toast.error(serverMessage ?? 'Failed to generate payment link.')
           })
 
-          const currentPayment = (
-            reduxHolder.getState().quotation.blocks[block.index] as PaymentBlock
-          ).payment
-
-          const updatedPayment: PaymentBlock['payment'] = {
-            ...currentPayment,
-            amount: Math.round(amountNum * 100),
-            currency: currency.toLowerCase(),
-            stripePaymentLinkId: result.paymentLinkId,
-            stripePaymentLinkUrl: result.paymentLinkUrl,
-          }
-
-          reduxHolder.dispatch(
-            quotationSlice.actions.updatePaymentBlock({
-              blockIndex: block.index,
-              payment: updatedPayment,
-            }),
-          )
-
-          await saveExistingQuotation()
-
-          toast.success('Payment link generated and quotation saved')
-        } catch (error) {
-          const axiosError = error as AxiosError<{ message: string }>
-          const serverMessage = axiosError.response?.data?.message
-
-          toast.error(serverMessage ?? 'Failed to generate payment link.')
+        if (result === undefined) {
+          return
         }
+
+        const updatedPayment = {
+          ...paymentBlock.payment,
+          amount: Math.round(amountNum * 100),
+          currency: paymentBlock.payment.currency.toLowerCase(),
+          stripePaymentLinkId: result.paymentLinkId,
+          stripePaymentLinkUrl: result.paymentLinkUrl,
+        }
+
+        reduxHolder.dispatch(
+          quotationSlice.actions.updatePaymentBlock({
+            blockIndex: block.index,
+            payment: updatedPayment,
+          }),
+        )
+
+        // todo: another feature, to be combined on widget level
+        await saveExistingQuotation().catch(() => {
+          toast.error('Failed to save quotation')
+        })
+
+        toast.success('Payment link generated and quotation saved')
       }}
     >
       {createPaymentLinkMutation.isPending ? 'Generating...' : 'Generate Payment Link'}

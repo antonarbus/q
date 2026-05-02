@@ -31,6 +31,10 @@ export const PaymentLink: FC = () => {
       }}
     >
       <Box
+        component='a'
+        href={stripePaymentLinkUrl}
+        target='_blank'
+        rel='noopener noreferrer'
         sx={{
           fontSize: '12px',
           color: 'text.secondary',
@@ -38,6 +42,8 @@ export const PaymentLink: FC = () => {
           overflow: 'hidden',
           textOverflow: 'ellipsis',
           whiteSpace: 'nowrap',
+          textDecoration: 'none',
+          '&:hover': { textDecoration: 'underline' },
         }}
       >
         {stripePaymentLinkUrl}
