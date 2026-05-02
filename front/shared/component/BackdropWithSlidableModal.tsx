@@ -1,5 +1,5 @@
-import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { useRef } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { useEffectOnce } from 'react-use'
 import { useAnimatedElement } from '../util/useAnimatedElement'
 
@@ -13,11 +13,13 @@ type Props = {
 
 export const BackdropWithSlidableModal = (props: Props): React.JSX.Element => {
   const animatedElement = useAnimatedElement()
+  const [searchParams] = useSearchParams()
+  const shouldSlide = searchParams.get('shouldSlide') === 'true'
 
   const scrollTopPositionBeforeModalOpen = useRef(document.documentElement.scrollTop)
 
   useEffectOnce(() => {
-    if (reduxHolder.getState().app.navigateState.shouldSlide === true) {
+    if (shouldSlide) {
       const slideInAndSomeAction = async (): Promise<void> => {
         await animatedElement.slideIn()
         props.onMount?.()
@@ -34,7 +36,7 @@ export const BackdropWithSlidableModal = (props: Props): React.JSX.Element => {
       const shouldCloseModalOnEsc = props.shouldUnmountOnEsc === true && event.key === 'Escape'
 
       if (shouldCloseModalOnEsc === true) {
-        if (reduxHolder.getState().app.navigateState.shouldSlide === true) {
+        if (shouldSlide) {
           const slideOutAndSomeAction = async (): Promise<void> => {
             await animatedElement.slideOut()
             props.onUnmount?.()
@@ -85,7 +87,7 @@ export const BackdropWithSlidableModal = (props: Props): React.JSX.Element => {
 
   const unmountOnClickAway = (): void => {
     if (props.shouldUnmountOnClickAway === true) {
-      if (reduxHolder.getState().app.navigateState.shouldSlide === true) {
+      if (shouldSlide) {
         const slideOutAndSomeAction = async (): Promise<void> => {
           await animatedElement.slideOut()
           props.onUnmount?.()

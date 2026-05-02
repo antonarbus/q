@@ -1,6 +1,10 @@
 import { useStripeAccountStatusQuery } from '@front/entities/stripe/api/useStripeAccountStatusQuery'
 import { useStripeConnectUrlQuery } from '@front/entities/stripe/api/useStripeConnectUrlQuery'
 import { RotatingLoaderIcon } from '@front/shared/component/RotatingLoaderIcon'
+import { buildSearchParams } from '@front/shared/lib/react-router-dom/searchParams'
+import { route } from '@front/shared/lib/react-router-dom/route'
+import { routerHolder } from '@front/shared/lib/react-router-dom/routerHolder'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { Box, Button, Typography } from '@mui/material'
 import { useEffect } from 'react'
 import { SiStripe } from 'react-icons/si'
@@ -17,12 +21,29 @@ export const ConnectStripeContent = (props: Props): React.JSX.Element => {
 
   const stripeError = searchParams.get('stripe_error')
 
+  const email = reduxHolder.useSelector((state) => state.user.email)
+
   useEffect(() => {
     if (searchParams.get('stripe_connected') === 'true' || stripeError !== null) {
       stripeStatusQuery.refetch()
       setSearchParams({}, { replace: true })
     }
   }, [searchParams, setSearchParams, stripeStatusQuery, stripeError])
+
+  if (email === null) {
+    return (
+      <Button
+        variant='contained'
+        onClick={() => {
+          routerHolder.router.navigate(
+            `./${route.login}${buildSearchParams({ redirect: route.stripeConnect, shouldSlide: 'true' })}`,
+          )
+        }}
+      >
+        Log in to connect Stripe
+      </Button>
+    )
+  }
 
   if (stripeStatusQuery.isPending === true) {
     return <RotatingLoaderIcon style={{ height: '20px', width: '20px' }} />
@@ -69,7 +90,7 @@ export const ConnectStripeContent = (props: Props): React.JSX.Element => {
           const result = await stripeConnectUrlQuery.refetch()
 
           if (result.data?.url !== undefined) {
-            globalThis.location.href = result.data.url
+            window.location.href = result.data.url
           }
         }}
       >

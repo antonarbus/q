@@ -3,10 +3,7 @@ import { useStripeAccountStatusQuery } from '@front/entities/stripe/api/useStrip
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { saveExistingQuotation } from '@front/features/quotation/save-quotation/saveExistingQuotation'
 import { useBlock } from '@front/entities/quotation/provider/block/useBlock'
-import {
-  buildSearchParams,
-  searchParamValue,
-} from '@front/shared/lib/react-router-dom/searchParams'
+import { buildSearchParams } from '@front/shared/lib/react-router-dom/searchParams'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { routerHolder } from '@front/shared/lib/react-router-dom/routerHolder'
 import { route } from '@front/shared/lib/react-router-dom/route'
@@ -46,8 +43,8 @@ export const GeneratePaymentLinkButton = (props: Props): React.JSX.Element | nul
           if (reduxHolder.getState().user.email === null) {
             routerHolder.router.navigate(
               `./${route.login}${buildSearchParams({
-                redirect: `/${route.stripeConnect}`,
-                shouldSlide: searchParamValue.shouldSlide,
+                redirect: route.stripeConnect,
+                shouldSlide: 'true',
               })}`,
             )
 
