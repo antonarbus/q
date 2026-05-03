@@ -9,6 +9,7 @@ import { log } from '@front/shared/util/log'
 import axios, { AxiosError } from 'axios'
 import type { AxiosRequestConfig } from 'axios'
 
+// oxlint-disable-next-line import/no-named-as-default-member
 const axiosWithAuth = axios.create({ withCredentials: true })
 
 axiosWithAuth.interceptors.request.use(async (config) => {

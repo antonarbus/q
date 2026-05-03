@@ -75,11 +75,11 @@ export const ConnectStripeContent = (props: Props): React.JSX.Element => {
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '45px' }}>
       {stripeError !== null && (
-        <Typography color='error' textAlign='center' variant='body2'>
+        <Typography color='error' sx={{ textAlign: 'center' }} variant='body2'>
           Stripe connection failed: {stripeError}
         </Typography>
       )}
-      <Typography color='text.secondary' textAlign='center' variant='body2'>
+      <Typography color='text.secondary' sx={{ textAlign: 'center' }} variant='body2'>
         Connect your Stripe account to accept payments from clients
       </Typography>
       <Button

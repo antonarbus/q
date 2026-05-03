@@ -28,7 +28,7 @@ export const ClientPaymentAmount: FC = () => {
   }
 
   return (
-    <Typography fontWeight={700} textAlign='center' variant='h6'>
+    <Typography sx={{ fontWeight: 700, textAlign: 'center' }} variant='h6'>
       {formattedAmount}
     </Typography>
   )

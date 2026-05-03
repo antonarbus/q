@@ -71,8 +71,7 @@ export const Search = (): React.ReactNode => {
         clearOnEscape={true}
         disablePortal={true}
         disabled={isCopyModalVisible}
-        // show MUI autocomplete even if no options
-        freeSolo={options.length > 0}
+        freeSolo={true}
         loading={getBookmarkListQuery.isPending}
         loadingText={email === null ? 'Not logged in' : 'Loading...'}
         inputValue={inputValue}
@@ -91,7 +90,7 @@ export const Search = (): React.ReactNode => {
         popupIcon={null}
         renderInput={renderInput}
         renderOption={(
-          liProps: React.HTMLAttributes<HTMLLIElement>,
+          { key: _key, ...liProps }: React.HTMLAttributes<HTMLLIElement> & { key: React.Key },
           option: ResBody['bookmarkList'][number],
         ): React.JSX.Element => {
           return (
@@ -103,7 +102,6 @@ export const Search = (): React.ReactNode => {
               isLoading={isLoading === true && option.id === copyBookmarkAtSearch.bookmarkId}
               onClick={async (_event: React.MouseEvent): Promise<void> => {
                 await copyBookmarkAtSearch.mutateAsync({ bookmarkId: option.id })
-
                 setIsAutocompleteOpen(false)
               }}
             />

@@ -9,7 +9,7 @@ type Props = {
 } & TextFieldProps
 
 export const CategoryField = (props: Props): React.JSX.Element => {
-  const { categorySignal, options, ...rest } = props
+  const { categorySignal, options, ...restProps } = props
 
   return (
     <div style={{ position: 'relative' }}>
@@ -21,18 +21,17 @@ export const CategoryField = (props: Props): React.JSX.Element => {
         }}
         options={options}
         renderInput={(params) => {
-          const { InputProps, ...otherParams } = params
-
           return (
             <TextField
-              {...otherParams}
+              {...params}
               label='Category'
               name='category'
               placeholder='Category'
-              {...rest}
+              {...restProps}
               slotProps={{
+                ...params.slotProps,
                 input: {
-                  ...InputProps,
+                  ...params.slotProps.input,
                   startAdornment: (
                     <InputAdornment position='start'>
                       <BsTags
@@ -55,10 +54,11 @@ export const CategoryField = (props: Props): React.JSX.Element => {
             />
           )
         }}
-        renderOption={(params, option) => {
+        renderOption={({ key, ...liRestProps }, option) => {
           return (
             <li
-              {...params}
+              key={key}
+              {...liRestProps}
               css={{
                 borderRadius: '6px',
                 paddingBlock: '10px !important',
@@ -67,7 +67,6 @@ export const CategoryField = (props: Props): React.JSX.Element => {
                   background: '#dfdfdf !important',
                 },
               }}
-              key={option}
             >
               {option}
             </li>
