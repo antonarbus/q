@@ -2,18 +2,20 @@ import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { useBlock } from '@front/entities/quotation/provider/block/useBlock'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { Box } from '@mui/material'
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import type { FC } from 'react'
+import { useOwnerPayment } from './OwnerPaymentProvider'
 
-type Props = {
-  amountInput: string
-  amountError: boolean
-  onChange: (value: string) => void
-}
-
-export const PaymentAmount: FC<Props> = (props) => {
+export const PaymentAmount: FC = () => {
   const block = useBlock()
   const inputRef = useRef<HTMLInputElement>(null)
+  const { amountError, setAmountError } = useOwnerPayment()
+
+  const [value, setValue] = useState(
+    block.item.type === 'payment' && block.item.payment.amount > 0
+      ? String(block.item.payment.amount / 100)
+      : '',
+  )
 
   const hasPaymentLink = reduxHolder.useSelector((state) => {
     const thisBlock = state.quotation.blocks[block.index]
@@ -26,10 +28,10 @@ export const PaymentAmount: FC<Props> = (props) => {
   })
 
   useEffect(() => {
-    if (props.amountError) {
+    if (amountError) {
       inputRef.current?.focus()
     }
-  }, [props.amountError])
+  }, [amountError])
 
   return (
     <Box
@@ -40,9 +42,10 @@ export const PaymentAmount: FC<Props> = (props) => {
       step={0.01}
       placeholder='0.00'
       type='number'
-      value={props.amountInput}
+      value={value}
       onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-        props.onChange(event.target.value)
+        setValue(event.target.value)
+        setAmountError(false)
       }}
       onBlur={(event: React.FocusEvent<HTMLInputElement>) => {
         const num = Number.parseFloat(event.target.value)
@@ -69,7 +72,7 @@ export const PaymentAmount: FC<Props> = (props) => {
         '&::placeholder': { color: 'text.disabled', opacity: 1 },
         '&:focus': { borderColor: 'text.secondary' },
         '&:disabled': { background: '#f8f8f8', color: 'text.disabled', cursor: 'default' },
-        ...(props.amountError && {
+        ...(amountError && {
           borderColor: 'error.main',
           '&:focus': { borderColor: 'error.main' },
         }),

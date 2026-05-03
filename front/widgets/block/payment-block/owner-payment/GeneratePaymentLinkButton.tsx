@@ -12,15 +12,14 @@ import { toast } from 'sonner'
 import { confirmWithDialog } from '@front/shared/component/confirmation-dialog/confirmWithDialog'
 import type { AxiosError } from 'axios'
 import { selectPaymentBlockByBlockIndex } from '@front/entities/quotation/redux/selector/selectPaymentBlockByBlockIndex'
-
-type Props = {
-  amountInput: string
-  onInvalidAmount: () => void
-}
+import { useOwnerPayment } from './OwnerPaymentProvider'
+import type { FC } from 'react'
 
 // todo: lift to widget coz we combine 2 features here
-export const GeneratePaymentLinkButton = (props: Props): React.JSX.Element | null => {
+export const GeneratePaymentLinkButton: FC = () => {
   const block = useBlock()
+  const { setAmountError } = useOwnerPayment()
+
   const stripeStatusQuery = useStripeAccountStatusQuery()
   const createPaymentLinkMutation = useCreatePaymentLinkMutation()
   const quotationId = reduxHolder.useSelector((state) => state.quotation.id)
@@ -56,14 +55,13 @@ export const GeneratePaymentLinkButton = (props: Props): React.JSX.Element | nul
           return
         }
 
-        const amountNum = Number.parseFloat(props.amountInput)
-
-        if (Number.isNaN(amountNum) || amountNum <= 0) {
-          props.onInvalidAmount()
+        if (paymentBlock.payment.amount <= 0) {
+          setAmountError(true)
 
           return
         }
 
+        const amountNum = paymentBlock.payment.amount / 100
         const { blocks } = reduxHolder.getState().quotation
 
         const quotationTotal = blocks.reduce((sum, thisBlock) => {
@@ -105,7 +103,7 @@ export const GeneratePaymentLinkButton = (props: Props): React.JSX.Element | nul
         const result = await createPaymentLinkMutation
           .mutateAsync({
             quotationId: reduxHolder.getState().quotation.id,
-            amount: Math.round(amountNum * 100),
+            amount: paymentBlock.payment.amount,
             currency: paymentBlock.payment.currency.toLowerCase(),
           })
           .catch((error) => {
@@ -120,8 +118,6 @@ export const GeneratePaymentLinkButton = (props: Props): React.JSX.Element | nul
 
         const updatedPayment = {
           ...paymentBlock.payment,
-          amount: Math.round(amountNum * 100),
-          currency: paymentBlock.payment.currency.toLowerCase(),
           stripePaymentLinkId: result.paymentLinkId,
           stripePaymentLinkUrl: result.paymentLinkUrl,
         }
