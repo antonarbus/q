@@ -7,7 +7,7 @@ export const renderInput = (params: AutocompleteRenderInputParams): React.JSX.El
     <TextField
       {...params}
       name='category'
-      placeholder='Search in bookmarks'
+      placeholder='Insert from bookmarks...'
       slotProps={{
         ...params.slotProps,
         input: {

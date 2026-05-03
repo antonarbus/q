@@ -1,7 +1,5 @@
 # UI Improvement TODOs
 
-- [ ] **Remove "Search in bookmarks" from main content area** — it occupies prime real estate below the nav; move it under the Bookmarks nav item
-- [ ] **Fix Total Price block visual** — it looks like a floating tooltip/popup rather than a content block; make it as visually substantial as the other blocks
 - [ ] **Add document state indicator** — no feedback on whether the document is saved or shared; add a simple "Unsaved / Saved / Shared" label near Save/Share buttons
 - [ ] **Deduplicate "New" action** — appears in both the navbar and the top-right corner; pick one location
 - [ ] **Payment amount vs total mismatch** — Payment block shows 50 but Total Price is 10 USD; if partial payment is intentional, label it clearly, otherwise fix the default to match total
