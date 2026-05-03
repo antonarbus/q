@@ -52,7 +52,11 @@ export const Search = (): React.ReactNode => {
             return
           }
 
-          setIsAutocompleteOpen(false)
+          // MUI v9 calls onClose during its own render phase; defer to avoid "setState during render" warning
+          setTimeout(() => {
+            setIsAutocompleteOpen(false)
+            setInputValue('')
+          }, 0)
         }}
         onChange={async (_event, value) => {
           if (value === null || typeof value === 'string') {
@@ -67,7 +71,6 @@ export const Search = (): React.ReactNode => {
           setIsAutocompleteOpen(false)
         }}
         className={cls.search}
-        clearOnBlur={true}
         clearOnEscape={true}
         disablePortal={true}
         disabled={isCopyModalVisible}
