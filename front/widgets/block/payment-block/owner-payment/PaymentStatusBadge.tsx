@@ -37,7 +37,7 @@ export const PaymentStatusBadge: FC = () => {
           bgcolor: isPaid ? 'success.main' : 'warning.main',
         }}
       />
-      {isPaid ? 'Paid' : 'Payment link generated'}
+      {isPaid ? 'Paid' : 'Awaiting payment'}
     </Box>
   )
 }
