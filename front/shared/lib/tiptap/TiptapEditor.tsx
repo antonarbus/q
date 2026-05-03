@@ -11,6 +11,7 @@ import { usePasteFile } from './file-upload/usePasteFile'
 import { useTiptapCtx } from './provider/useTiptapCtx'
 import { UploadButton } from './menu/button/UploadButton'
 import { editorRegistry } from './editorRegistry'
+import { theme } from '@front/shared/theme'
 
 export const TiptapEditor = (): React.ReactNode => {
   const tiptapCtx = useTiptapCtx()
@@ -66,7 +67,18 @@ export const TiptapEditor = (): React.ReactNode => {
       onFocus={(event) => {
         tiptapCtx.onWrapperFocus?.(event)
       }}
-      sx={{ position: 'relative', ...tiptapStyles, ...tiptapCtx.sx }}
+      sx={{
+        position: 'relative',
+        ...tiptapStyles,
+        ...tiptapCtx.sx,
+        ...(tiptapCtx.isEditorView && {
+          transition: 'box-shadow 0.15s ease',
+          '&:focus-within': {
+            boxShadow: `0 0 0 2px ${theme.color.focusRing}`,
+            borderRadius: 1,
+          },
+        }),
+      }}
     >
       <Tiptap editor={editor}>
         <TiptapMenu />
