@@ -22,6 +22,7 @@ const customTheme = {
     darkBackground: 'rgb(52 52 52 / 95%)',
     greyFont: '#bcbcbc',
     blue: '#0083bf',
+    accent: '#6488cf',
     focusRing: 'rgba(59, 130, 246, 0.6)',
   },
   nav: {

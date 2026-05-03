@@ -86,6 +86,7 @@ export const useSaveQuotation = (props: Props): Res => {
           quotation: {
             ...reduxHolder.getState().quotation,
             ...saveQuotationMutation.data.quotation,
+            permissionLevel: 'OWNER',
           },
         }),
       )

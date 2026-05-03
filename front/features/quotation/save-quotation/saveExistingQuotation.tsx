@@ -58,13 +58,18 @@ export const saveExistingQuotation = async (): Promise<void> => {
         })
       }
 
-      routerHolder.router.navigate(`/${data.quotation.id}`)
-
       reduxHolder.dispatch(
         quotationSlice.actions.loadQuotation({
-          quotation: { ...reduxHolder.getState().quotation, ...data.quotation },
+          quotation: {
+            ...reduxHolder.getState().quotation,
+            id: data.quotation.id,
+            updatedAt: data.quotation.updatedAt,
+            permissionLevel: 'OWNER',
+          },
         }),
       )
+
+      routerHolder.router.navigate(`/${data.quotation.id}`)
 
       loadingIconActor.send({ type: 'show success icon' })
       reduxHolder.dispatch(navSlice.actions.removeUnderlineFromTopNav())

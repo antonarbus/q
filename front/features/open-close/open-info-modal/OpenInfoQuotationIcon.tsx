@@ -1,6 +1,8 @@
 import { Tooltip } from '@mui/material'
+import { darken } from '@mui/material/styles'
 import { route } from '@front/shared/lib/react-router-dom/route'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
+import { theme } from '@front/shared/theme'
 import { PiInfoBold } from 'react-icons/pi'
 import { Link } from 'react-router-dom'
 
@@ -17,10 +19,10 @@ export const OpenInfoQuotationIcon = (): React.JSX.Element => {
           css={{
             height: '100%',
             width: 'auto',
-            fill: isCopyModalVisible === true ? '#c6c6c6' : '#6488cf',
+            fill: isCopyModalVisible === true ? '#c6c6c6' : theme.color.accent,
             ...(isCopyModalVisible === false && {
               ':hover': {
-                fill: '#3c5588 !important',
+                fill: `${darken(theme.color.accent, 0.3)} !important`,
               },
             }),
           }}
