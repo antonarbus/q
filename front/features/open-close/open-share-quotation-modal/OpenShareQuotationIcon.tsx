@@ -4,11 +4,17 @@ import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { BsPersonFillLock } from 'react-icons/bs'
 import { PiGlobe, PiGlobeX } from 'react-icons/pi'
 import { Link } from 'react-router-dom'
+import { useIsEditorView } from '@front/entities/quotation/util/useIsEditorView'
+import type { FC } from 'react'
 
-export const OpenShareQuotationIcon = (): React.JSX.Element => {
+export const OpenShareQuotationIcon: FC = () => {
   const isCopyModalVisible = reduxHolder.useSelector((state) => state.copy.isVisible)
-
   const access = reduxHolder.useSelector((state) => state.quotation.access)
+  const isEditorView = useIsEditorView()
+
+  if (isEditorView) {
+    return null
+  }
 
   return (
     <Tooltip title='Share'>

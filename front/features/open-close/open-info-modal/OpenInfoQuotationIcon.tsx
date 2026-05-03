@@ -5,9 +5,16 @@ import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { theme } from '@front/shared/theme'
 import { PiInfoBold } from 'react-icons/pi'
 import { Link } from 'react-router-dom'
+import { useIsEditorView } from '@front/entities/quotation/util/useIsEditorView'
+import type { FC } from 'react'
 
-export const OpenInfoQuotationIcon = (): React.JSX.Element => {
+export const OpenInfoQuotationIcon: FC = () => {
   const isCopyModalVisible = reduxHolder.useSelector((state) => state.copy.isVisible)
+  const isEditorView = useIsEditorView()
+
+  if (isEditorView) {
+    return null
+  }
 
   return (
     <Tooltip title='Info'>
