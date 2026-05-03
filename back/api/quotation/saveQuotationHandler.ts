@@ -6,7 +6,6 @@ import { getBucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import { runtimeConfig } from '@root/config/runtime'
 import { generateId } from '@back/shared/lib/nanoid'
 import { quotationsTable } from '@back/entity/quotation/db/quotationsTableSchema'
-import type { SelectQuotation } from '@back/entity/quotation/db/quotationsTableSchema'
 import { quotationSchema } from '@back/entity/quotation/schema'
 import type { Quotation } from '@back/entity/quotation/schema'
 import type { NextFunction, Request, Response } from 'express'
@@ -29,7 +28,7 @@ export type ReqBody = {
 export type ResBody = {
   message: string
   status: 'SAVED' | 'UPDATED' | 'COPIED'
-  quotation: SelectQuotation
+  quotation: Quotation
 }
 
 export type ErrorResBody = {
@@ -150,6 +149,7 @@ export const saveQuotationHandler: RouterHandler = async (req) => {
       updatedAt: quotationInserted.updatedAt,
       createdAt: quotationInserted.createdAt,
       openedAt: quotationInserted.openedAt,
+      permissionLevel: 'OWNER',
     }
 
     const quotationJson = JSON.stringify(quotation, null, 2)
@@ -227,6 +227,7 @@ export const saveQuotationHandler: RouterHandler = async (req) => {
       ...quotationValidationResult.data,
       id: quotationUpdated.id,
       updatedAt: quotationUpdated.updatedAt,
+      permissionLevel: 'OWNER',
     }
 
     const quotationJson = JSON.stringify(quotation, null, 2)
@@ -306,6 +307,7 @@ export const saveQuotationHandler: RouterHandler = async (req) => {
       updatedAt: quotationInserted.updatedAt,
       createdAt: quotationInserted.createdAt,
       openedAt: quotationInserted.openedAt,
+      permissionLevel: 'OWNER',
     }
 
     const quotationJson = JSON.stringify(quotation, null, 2)

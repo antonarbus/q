@@ -62,9 +62,7 @@ export const saveExistingQuotation = async (): Promise<void> => {
         quotationSlice.actions.loadQuotation({
           quotation: {
             ...reduxHolder.getState().quotation,
-            id: data.quotation.id,
-            updatedAt: data.quotation.updatedAt,
-            permissionLevel: 'OWNER',
+            ...data.quotation,
           },
         }),
       )
