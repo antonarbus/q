@@ -19,7 +19,7 @@ export const useLoadQuotation = (): void => {
 
   const getQuotationMutation = useGetQuotationMutation()
 
-  const getFromWhereToLoadQuotation = (): 'server' | 'template' | 'memory' => {
+  const resolveQuotationSource = (): 'server' | 'template' | 'memory' => {
     if (shouldLoadQuotation.from === 'memory') {
       return 'memory'
     }
@@ -44,7 +44,7 @@ export const useLoadQuotation = (): void => {
 
   /** Decide which quotation to load on first mount  */
   useEffectOnce(() => {
-    const fromWhereToLoad = getFromWhereToLoadQuotation()
+    const fromWhereToLoad = resolveQuotationSource()
 
     reduxHolder.dispatch(
       appSlice.actions.setShouldLoadQuotation({
@@ -58,7 +58,7 @@ export const useLoadQuotation = (): void => {
   useEffect(() => {
     const loadQuotation = async (): Promise<void> => {
       if (shouldLoadQuotation.yesOrNo === 'yes') {
-        const fromWhereToLoad = getFromWhereToLoadQuotation()
+        const fromWhereToLoad = resolveQuotationSource()
         backToQuotationRef.current = null
 
         // Load previous quotation when user clicks on "< Back" button

@@ -44,7 +44,7 @@ export const useBookmarkListAll = (): Res => {
             },
           })
 
-          const getLastRow = (): number => {
+          const resolveLastRow = (): number => {
             const bookmarkListCount = response.data.bookmarkList.length
 
             const didReachEndOfTheList = bookmarkListCount >= params.endRow - params.startRow
@@ -61,7 +61,8 @@ export const useBookmarkListAll = (): Res => {
             return lastRow
           }
 
-          const lastRow = getLastRow()
+          const lastRow = resolveLastRow()
+
           params.successCallback(response.data.bookmarkList, lastRow)
         } catch {
           params.failCallback()

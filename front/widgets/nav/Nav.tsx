@@ -4,15 +4,15 @@ import { useLoadNavStructure } from '@front/widgets/nav/load-nav-structure'
 import { usePressNavShortcut } from '@front/widgets/nav/press-shortcut'
 import { NavLayout } from './NavLayout'
 import { navStructure } from './navStructure'
-import { useIsEditorView } from '@front/entities/quotation/util/useIsEditorView'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { NavRuntime } from './NavRuntime'
 
 export const Nav = (): React.ReactNode => {
-  const isEditorView = useIsEditorView()
+  const permissionLevel = reduxHolder.useSelector((state) => state.quotation.permissionLevel)
   useLoadNavStructure({ navStructure })
   usePressNavShortcut({ navStructure })
 
-  if (isEditorView === false) {
+  if (permissionLevel === 'PUBLIC' || permissionLevel === 'SHARED') {
     return null
   }
 

@@ -1,6 +1,5 @@
 import { BOOKMARK_POS_AT_BLOCKS } from '@front/entities/quotation/redux/bookmarkPosAtBlocks'
 import type { BlockItem } from '@back/entity/quotation/schema'
-import { OpenInsertMenuButton } from '@front/features/open-close/open-insert-menu'
 import { AnimatePresence } from 'motion/react'
 import { Block } from './Block'
 import { BlocksSortableContext } from './BlocksSortableContext'
@@ -29,7 +28,6 @@ export const BlockMany = (props: Props): React.ReactNode => {
             .map((block, bockIndex) => {
               return <Block block={block} blockIndex={bockIndex} key={block.id} />
             })}
-          <OpenInsertMenuButton />
         </AnimatePresence>
       </BlocksSortableContext>
     </FadeInOnInitLoad>

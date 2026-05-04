@@ -44,7 +44,7 @@ export const useQuotationListAll = (): Res => {
             },
           })
 
-          const getLastRow = (): number => {
+          const resolveLastRow = (): number => {
             const quotationListCount = response.data.quotationList.length
 
             const didReachEndOfTheList = quotationListCount >= params.endRow - params.startRow
@@ -61,7 +61,8 @@ export const useQuotationListAll = (): Res => {
             return lastRow
           }
 
-          const lastRow = getLastRow()
+          const lastRow = resolveLastRow()
+
           params.successCallback(response.data.quotationList, lastRow)
         } catch {
           params.failCallback()

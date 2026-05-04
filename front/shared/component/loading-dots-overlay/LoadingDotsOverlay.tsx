@@ -15,7 +15,7 @@ export const LoadingDotsOverlay = (props: Props): React.JSX.Element | null => {
     return null
   }
 
-  const getText = (): string => {
+  const resolveText = (): string => {
     if (loadingOverlay.text !== null) {
       return loadingOverlay.text
     }
@@ -27,9 +27,9 @@ export const LoadingDotsOverlay = (props: Props): React.JSX.Element | null => {
     return ''
   }
 
-  const text = getText()
+  const text = resolveText()
 
-  const getShouldShowLoader = (): boolean => {
+  const resolveShouldShowLoader = (): boolean => {
     if (loadingOverlay.shouldShowLoader === true) {
       return true
     }
@@ -41,7 +41,7 @@ export const LoadingDotsOverlay = (props: Props): React.JSX.Element | null => {
     return false
   }
 
-  const shouldShowLoader = getShouldShowLoader()
+  const shouldShowLoader = resolveShouldShowLoader()
 
   return (
     <div

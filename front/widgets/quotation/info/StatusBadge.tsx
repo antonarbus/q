@@ -1,16 +1,17 @@
 import { Box, Tooltip } from '@mui/material'
+import { openSaveQuotationModal } from '@front/features/open-close/open-save-quotation-modal'
 import { openShareQuotationModal } from '@front/features/open-close/open-share-quotation-modal'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { theme } from '@front/shared/theme'
+import { FiSave } from 'react-icons/fi'
 import { PiShare } from 'react-icons/pi'
+import type { FC } from 'react'
 
-type Badge = { color: string; label: string }
-
-export const StatusBadge = (): React.ReactNode => {
+export const StatusBadge: FC = () => {
   const permissionLevel = reduxHolder.useSelector((state) => state.quotation.permissionLevel)
   const accessLevel = reduxHolder.useSelector((state) => state.quotation.access.level)
 
-  const resolveSharedLabel = (): string => {
+  const resolveStatusLabel = (): 'Public' | 'Shared' => {
     if (permissionLevel === 'PUBLIC') {
       return 'Public'
     }
@@ -31,6 +32,11 @@ export const StatusBadge = (): React.ReactNode => {
     permissionLevel === 'PUBLIC' ||
     (permissionLevel === 'OWNER' && accessLevel !== 'nobody')
 
+  type Badge = {
+    color: string
+    label: string
+  }
+
   const resolveBadge = (): Badge | null => {
     if (permissionLevel === 'NEW') {
       return {
@@ -42,7 +48,7 @@ export const StatusBadge = (): React.ReactNode => {
     if (['OWNER', 'SHARED', 'PUBLIC'].includes(permissionLevel)) {
       return {
         color: isShared ? 'success.main' : theme.color.accent,
-        label: isShared ? resolveSharedLabel() : 'Saved',
+        label: isShared ? resolveStatusLabel() : 'Saved',
       }
     }
 
@@ -55,12 +61,38 @@ export const StatusBadge = (): React.ReactNode => {
     return null
   }
 
-  const isClickable = permissionLevel === 'OWNER'
+  type ClickConfig = {
+    onClick: () => void
+    icon: React.ReactNode
+    tooltip: string
+  }
+
+  const resolveClickConfig = (): ClickConfig | null => {
+    if (permissionLevel === 'NEW') {
+      return {
+        onClick: openSaveQuotationModal,
+        icon: <FiSave size={13} />,
+        tooltip: 'Save',
+      }
+    }
+
+    if (permissionLevel === 'OWNER') {
+      return {
+        onClick: openShareQuotationModal,
+        icon: <PiShare size={13} />,
+        tooltip: 'Share',
+      }
+    }
+
+    return null
+  }
+
+  const clickConfig = resolveClickConfig()
 
   return (
-    <Tooltip title={isClickable ? 'Share' : 'Document status'}>
+    <Tooltip title={clickConfig === null ? 'Document status' : clickConfig.tooltip}>
       <Box
-        onClick={isClickable ? openShareQuotationModal : undefined}
+        onClick={clickConfig?.onClick}
         sx={{
           display: 'flex',
           alignItems: 'center',
@@ -69,8 +101,10 @@ export const StatusBadge = (): React.ReactNode => {
           fontWeight: 500,
           color: badge.color,
           userSelect: 'none',
-          cursor: isClickable ? 'pointer' : 'default',
-          '&:hover .badge-share-icon': { opacity: 1 },
+          cursor: clickConfig === null ? 'default' : 'pointer',
+          '&:hover .badge-action-icon': {
+            opacity: 1,
+          },
         }}
       >
         <Box
@@ -83,9 +117,9 @@ export const StatusBadge = (): React.ReactNode => {
           }}
         />
         {badge.label}
-        {isClickable && (
+        {clickConfig !== null && (
           <Box
-            className='badge-share-icon'
+            className='badge-action-icon'
             sx={{
               opacity: 0,
               transition: 'opacity 0.15s',
@@ -94,7 +128,7 @@ export const StatusBadge = (): React.ReactNode => {
               alignItems: 'center',
             }}
           >
-            <PiShare size={13} />
+            {clickConfig.icon}
           </Box>
         )}
       </Box>

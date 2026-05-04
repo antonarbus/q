@@ -44,7 +44,7 @@ export const useFileListAll = (): Res => {
             },
           })
 
-          const getLastRow = (): number => {
+          const resolveLastRow = (): number => {
             const fileListCount = response.data.fileList.length
 
             const didReachEndOfTheList = fileListCount >= params.endRow - params.startRow
@@ -61,7 +61,8 @@ export const useFileListAll = (): Res => {
             return lastRow
           }
 
-          const lastRow = getLastRow()
+          const lastRow = resolveLastRow()
+
           params.successCallback(response.data.fileList, lastRow)
         } catch {
           params.failCallback()

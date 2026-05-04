@@ -465,3 +465,16 @@ gcloud storage rm gs://<BUCKET_NAME>/terraform/state/<env>.tflock
 ```
 
 **Domain not authorized** — Complete [Domain Verification](#5-domain-verification-one-time).
+
+## Naming convention
+
+### Function prefixes
+
+| Prefix | Mental model | When to use |
+|--------|-------------|-------------|
+| `get` | trivial access — just return a value | `getUser()`, `getName()` |
+| `fetch` | go somewhere external (network, DB) | `fetchUser()`, `fetchQuotes()` |
+| `resolve` | determine/derive through logic — input conditions → output decision | `resolveStatusLabel()`, `resolveBadge()` |
+| `compute` / `derive` | mathematical or data transformation | `computeTotal()`, `deriveStats()` |
+| `build` | construct a complex object | `buildPayload()`, `buildQuery()` |
+| `create` | instantiate and return a new entity/resource | `createUser()`, `createSession()` |
