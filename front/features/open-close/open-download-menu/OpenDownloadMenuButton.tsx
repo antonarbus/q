@@ -2,18 +2,18 @@ import { navItemId } from '@front/entities/nav/navItemId'
 import { navSlice } from '@front/entities/nav/navSlice'
 import { IconButton, Tooltip } from '@mui/material'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
-import { LuBetweenHorizontalStart } from 'react-icons/lu'
+import { FiDownload } from 'react-icons/fi'
 
-export const OpenInsertMenuButton = (): React.ReactNode => {
+export const OpenDownloadMenuButton = (): React.ReactNode => {
   return (
-    <Tooltip title='Insert'>
+    <Tooltip title='Download'>
       <IconButton
         size='small'
         onClick={(): void => {
-          reduxHolder.dispatch(navSlice.actions.openMenuWithId({ navItemId: navItemId.insert }))
+          reduxHolder.dispatch(navSlice.actions.openMenuWithId({ navItemId: navItemId.download }))
         }}
       >
-        <LuBetweenHorizontalStart />
+        <FiDownload />
       </IconButton>
     </Tooltip>
   )

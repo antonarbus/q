@@ -8,7 +8,7 @@ import { Outlet } from 'react-router-dom'
 import { InfoAndSearchLayout } from './InfoAndSearchLayout'
 import { useIsEditorView } from '@front/entities/quotation/util/useIsEditorView'
 import { LogoLink } from '@front/widgets/logo/LogoLink'
-import { DocumentFooterActions } from '@front/widgets/quotation/document-footer-actions/DocumentFooterActions'
+import { FooterActions } from '@front/widgets/quotation/footer-actions'
 
 export const QuotationPage = (): React.JSX.Element => {
   const blocks = reduxHolder.useSelector((state) => state.quotation.blocks, arrayShapesEqualityFn)
@@ -23,7 +23,7 @@ export const QuotationPage = (): React.JSX.Element => {
       </InfoAndSearchLayout>
       <BackgroundMessage />
       <BlockMany blocks={blocks} />
-      <DocumentFooterActions />
+      <FooterActions />
       <Outlet />
     </>
   )
