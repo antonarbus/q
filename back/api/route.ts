@@ -31,6 +31,12 @@ export const route = {
     method: 'get',
     description: 'Test playground for dev purpose',
   },
+  streamTest: {
+    path: '/api/dev/stream-test',
+    url: '/api/dev/stream-test',
+    method: 'get',
+    description: 'SSE streaming demo',
+  },
   getBucketCors: {
     path: '/api/dev/bucket-cors',
     url: '/api/dev/bucket-cors',

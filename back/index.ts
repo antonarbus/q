@@ -5,6 +5,8 @@ import morgan from 'morgan'
 import path from 'node:path'
 import { runtimeConfig } from '@root/config/runtime'
 import { api } from '@back/api'
+import { route } from '@back/api/route'
+import { streamTestHandler } from '@back/api/dev/streamTestHandler'
 import { errorHandlerMiddleware } from '@back/shared/errors/errorHandlerMiddleware'
 import { httpHandler } from '@back/shared/lib/express/httpHandler'
 import blog404Html from './static/blog-404.html'
@@ -76,6 +78,9 @@ if (runtimeConfig.nodeEnv === 'production') {
     }),
   )
 }
+
+// SSE streaming routes — cannot use httpHandler wrapper (they write directly to res)
+app.get(route.streamTest.path, streamTestHandler)
 
 const apiList = Object.entries(api)
 
