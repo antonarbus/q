@@ -8,7 +8,7 @@ import { createActor } from 'xstate'
 import type { WorkerRequestMessage, WorkerResponseMessage } from './types'
 
 const menuIconMachine = createLoadingMenuIconMachine({
-  navItemId: navItemId.share,
+  navItemId: navItemId.download,
 })
 
 const loadingIconActor = createActor(menuIconMachine).start()

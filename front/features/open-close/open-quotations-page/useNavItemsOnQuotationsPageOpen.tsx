@@ -12,6 +12,7 @@ export const useNavItemsOnQuotationsPageOpen = (): void => {
           navItemId.pdf,
           navItemId.excel,
           navItemId.share,
+          navItemId.download,
           navItemId.quotationList,
           navItemId.insert,
         ],

@@ -4,6 +4,7 @@ export const navItemId = {
   new: 'new',
   save: 'save',
   share: 'share',
+  download: 'download',
   pdf: 'pdf',
   link: 'link',
   excel: 'excel',

@@ -2,7 +2,7 @@ import { Burger } from '@front/entities/nav/ui/NavList/NavItem/Burger'
 import { CiCreditCard1, CiViewTable } from 'react-icons/ci'
 import { FaRegFileImage, FaRegFilePdf, FaRegStar } from 'react-icons/fa'
 import { FaGripLines, FaRegRectangleList, FaRegShareFromSquare, FaUsersGear } from 'react-icons/fa6'
-import { FiDollarSign, FiLogIn, FiLogOut, FiSave } from 'react-icons/fi'
+import { FiDollarSign, FiDownload, FiLogIn, FiLogOut, FiSave } from 'react-icons/fi'
 import { HiOutlineBookOpen } from 'react-icons/hi2'
 import { ImLink } from 'react-icons/im'
 import {
@@ -22,6 +22,7 @@ export const iconRegistry = {
   new: <VscNewFile data-testid='new icon' />,
   save: <FiSave data-testid='save icon' />,
   share: <FaRegShareFromSquare data-testid='share icon' />,
+  download: <FiDownload data-testid='download icon' />,
   link: <ImLink data-testid='link icon' />,
   pdf: <FaRegFilePdf data-testid='pdf icon' />,
   excel: <RiFileExcel2Line data-testid='excel icon' />,

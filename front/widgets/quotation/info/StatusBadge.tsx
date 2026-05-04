@@ -58,7 +58,7 @@ export const StatusBadge = (): React.ReactNode => {
   const isClickable = permissionLevel === 'OWNER'
 
   return (
-    <Tooltip title={isClickable ? 'Share / manage access' : 'Document status'}>
+    <Tooltip title={isClickable ? 'Share' : 'Document status'}>
       <Box
         onClick={isClickable ? openShareQuotationModal : undefined}
         sx={{

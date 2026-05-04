@@ -46,17 +46,17 @@ export const navStructure: NavItem[] = [
         isHidden: false,
         name: 'Share',
         disabled: false,
-        tooltip: 'Share quotation',
+        tooltip: 'Share / manage access',
+        funcId: 'openShareQuotationModal',
+      },
+      {
+        id: navItemId.download,
+        iconId: 'download',
+        isHidden: false,
+        name: 'Download',
+        disabled: false,
+        tooltip: 'Download quotation',
         nestedItemList: [
-          {
-            id: navItemId.link,
-            iconId: 'link',
-            name: 'Link',
-            isHidden: false,
-            disabled: false,
-            tooltip: 'Share link for quotation',
-            funcId: 'openShareQuotationModal',
-          },
           {
             id: navItemId.pdf,
             iconId: 'pdf',
