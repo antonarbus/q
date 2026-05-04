@@ -16,9 +16,9 @@ export const Layout: FC<Props> = (props) => {
         display: 'flex',
         justifyContent: justify,
         alignItems: 'center',
-        width: '100px',
-        maxWidth: '100px',
-        height: '18px',
+        width: '110px',
+        maxWidth: '110px',
+        height: '22px',
       }}
     >
       <Box

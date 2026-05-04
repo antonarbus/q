@@ -12,7 +12,7 @@ export const OpenShareQuotationIcon: FC = () => {
   const access = reduxHolder.useSelector((state) => state.quotation.access)
   const isEditorView = useIsEditorView()
 
-  if (isEditorView) {
+  if (isEditorView === false) {
     return null
   }
 

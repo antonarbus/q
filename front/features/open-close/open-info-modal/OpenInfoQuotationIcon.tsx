@@ -12,7 +12,7 @@ export const OpenInfoQuotationIcon: FC = () => {
   const isCopyModalVisible = reduxHolder.useSelector((state) => state.copy.isVisible)
   const isEditorView = useIsEditorView()
 
-  if (isEditorView) {
+  if (isEditorView === false) {
     return null
   }
 

@@ -1,6 +1,8 @@
 import { Box, Tooltip } from '@mui/material'
+import { openShareQuotationModal } from '@front/features/open-close/open-share-quotation-modal'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { theme } from '@front/shared/theme'
+import { PiShare } from 'react-icons/pi'
 
 type Badge = { color: string; label: string }
 
@@ -53,30 +55,48 @@ export const StatusBadge = (): React.ReactNode => {
     return null
   }
 
+  const isClickable = permissionLevel === 'OWNER'
+
   return (
-    <Tooltip title='Document status'>
+    <Tooltip title={isClickable ? 'Share / manage access' : 'Document status'}>
       <Box
+        onClick={isClickable ? openShareQuotationModal : undefined}
         sx={{
           display: 'flex',
           alignItems: 'center',
           gap: '5px',
-          fontSize: '11px',
+          fontSize: '13px',
           fontWeight: 500,
           color: badge.color,
           userSelect: 'none',
-          cursor: 'default',
+          cursor: isClickable ? 'pointer' : 'default',
+          '&:hover .badge-share-icon': { opacity: 1 },
         }}
       >
         <Box
           sx={{
-            width: 7,
-            height: 7,
+            width: 9,
+            height: 9,
             borderRadius: '50%',
             bgcolor: badge.color,
             flexShrink: 0,
           }}
         />
         {badge.label}
+        {isClickable && (
+          <Box
+            className='badge-share-icon'
+            sx={{
+              opacity: 0,
+              transition: 'opacity 0.15s',
+              lineHeight: 0,
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            <PiShare size={13} />
+          </Box>
+        )}
       </Box>
     </Tooltip>
   )
