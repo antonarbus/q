@@ -35,13 +35,6 @@ export const ShareQuotationModal = (): React.JSX.Element => {
 
   const quotationLink = `${globalThis.location.origin}/${quotationId}`
 
-  const handleCopyLink = (): void => {
-    globalThis.navigator.clipboard
-      .writeText(quotationLink)
-      .then(() => toast.success('Link copied'))
-      .catch(() => toast.error('Failed to copy'))
-  }
-
   return (
     <FormModal
       buttonText={isNewQuotation === true ? 'Save and share' : 'Update'}
@@ -61,7 +54,12 @@ export const ShareQuotationModal = (): React.JSX.Element => {
     >
       {isNewQuotation === false && (
         <Box
-          onClick={handleCopyLink}
+          onClick={async () => {
+            await window.navigator.clipboard
+              .writeText(quotationLink)
+              .then(() => toast.success('Link copied'))
+              .catch(() => toast.error('Failed to copy'))
+          }}
           sx={{
             display: 'flex',
             alignItems: 'center',
@@ -70,7 +68,9 @@ export const ShareQuotationModal = (): React.JSX.Element => {
             borderRadius: '8px',
             border: '1px solid rgba(0,0,0,0.12)',
             cursor: 'pointer',
-            '&:hover': { backgroundColor: 'rgba(0,0,0,0.04)' },
+            '&:hover': {
+              backgroundColor: 'rgba(0,0,0,0.04)',
+            },
           }}
         >
           <Typography noWrap={true} sx={{ flexGrow: 1, fontSize: '13px', color: 'text.secondary' }}>
