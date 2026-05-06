@@ -25,6 +25,63 @@ back/
   shared/    # Shared utils, error handling, constants
 ```
 
+## Handler Pattern
+
+Every route handler must follow this structure:
+
+**Backend** (`back/api/<domain>/<name>Handler.ts`):
+```ts
+import type { ErrorCode } from '@back/shared/const/errorCode'
+
+export type ReqBody = { ... }
+
+export type ResBody = {
+  ...
+  message: string        // always present
+}
+
+export type ErrorResBody = {
+  message: string
+  errorCode: ErrorCode | 'DOMAIN_SPECIFIC_ERROR_A' | 'DOMAIN_SPECIFIC_ERROR_B'
+}
+
+export const myHandler: RouterHandler = async (req) => {
+  const messageList: string[] = []
+
+  // push a message at each meaningful step
+  messageList.push('Thing succeeded')
+
+  // typed throws — use specific error codes, not generic 'BAD_REQUEST'
+  throw new HttpError<ErrorResBody['errorCode']>({
+    errorCode: 'DOMAIN_SPECIFIC_ERROR_A',
+    statusCode: httpStatusCode.badRequest400,
+    message: messageList.join(' | '),
+  })
+
+  return httpJsonResponse({
+    statusCode: httpStatusCode.success200,
+    body: { ...data, message: messageList.join(' | ') },
+  })
+}
+```
+
+**Frontend** (`front/entities/<domain>/api/use<Name>Mutation.tsx`):
+```ts
+import type { ErrorResBody, ReqBody as Payload, ResBody } from '@back/api/<domain>/<name>Handler'
+import type { AxiosError } from 'axios'
+
+type Res = UseMutationResult<ResBody, AxiosError<ErrorResBody>, Payload>
+
+// error.response?.data.errorCode is fully typed — switch on specific codes on the client
+```
+
+Key rules:
+- `ResBody` always exported and always has `message: string`
+- `ErrorResBody` always exported with `ErrorCode | 'SPECIFIC_CODE'` union — never bare `'BAD_REQUEST'`
+- All `HttpError` throws typed as `HttpError<ErrorResBody['errorCode']>`
+- `messageList` accumulates context through the handler — both success and error responses use `messageList.join(' | ')`
+- Frontend mutations use `AxiosError<ErrorResBody>`, no `AxiosResponse` wrapper on axios call
+
 ## FSD: Cross-Layer Singleton Pattern
 
 FSD forbids `shared/` from importing higher layers. But infrastructure singletons (router, Redux store, axios) are created in `app/` and need to be accessed from anywhere.

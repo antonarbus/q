@@ -3,6 +3,7 @@ import { usersTable } from '@back/entity/user/db/usersTableSchema'
 import { db } from '@back/shared/lib/drizzle/db'
 import { HttpError } from '@back/shared/errors/HttpError'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
+import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpJsonResponse } from '@back/shared/lib/express/httpResponse'
 import type { HttpResponse } from '@back/shared/lib/express/httpResponse'
 import { getStripe } from '@back/shared/lib/stripe/getStripe'
@@ -15,9 +16,14 @@ import type { Stripe } from 'stripe'
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
 
-type ResBody = {
+export type ResBody = {
   received: boolean
   message: string
+}
+
+export type ErrorResBody = {
+  message: string
+  errorCode: ErrorCode | 'STRIPE_WEBHOOK_MISSING_SIGNATURE' | 'STRIPE_WEBHOOK_VERIFICATION_FAILED'
 }
 
 type RouterHandler = (
@@ -34,8 +40,8 @@ export const stripeWebhookHandler: RouterHandler = async (req) => {
   if (typeof stripeSignature !== 'string') {
     messageList.push('Missing stripe-signature header')
 
-    throw new HttpError({
-      errorCode: 'BAD_REQUEST',
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'STRIPE_WEBHOOK_MISSING_SIGNATURE',
       statusCode: httpStatusCode.badRequest400,
       message: messageList.join(' | '),
     })
@@ -52,8 +58,8 @@ export const stripeWebhookHandler: RouterHandler = async (req) => {
       console.error('Stripe webhook signature verification failed:', error)
       messageList.push('Stripe webhook signature verification failed')
 
-      throw new HttpError({
-        errorCode: 'BAD_REQUEST',
+      throw new HttpError<ErrorResBody['errorCode']>({
+        errorCode: 'STRIPE_WEBHOOK_VERIFICATION_FAILED',
         statusCode: httpStatusCode.badRequest400,
         message: messageList.join(' | '),
       })

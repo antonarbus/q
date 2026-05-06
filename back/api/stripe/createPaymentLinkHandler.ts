@@ -3,6 +3,7 @@ import { usersTable } from '@back/entity/user/db/usersTableSchema'
 import { db } from '@back/shared/lib/drizzle/db'
 import { HttpError } from '@back/shared/errors/HttpError'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
+import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpJsonResponse } from '@back/shared/lib/express/httpResponse'
 import type { HttpResponse } from '@back/shared/lib/express/httpResponse'
 import { getStripe } from '@back/shared/lib/stripe/getStripe'
@@ -28,6 +29,11 @@ export type ResBody = {
   message: string
 }
 
+export type ErrorResBody = {
+  message: string
+  errorCode: ErrorCode | 'STRIPE_ACCOUNT_NOT_CONNECTED' | 'STRIPE_PAYMENT_LINK_FAILED'
+}
+
 type RouterHandler = (
   req: Request<UrlParam, ResBody, ReqBody, SearchQuery>,
   res: Response<ResBody>,
@@ -49,8 +55,8 @@ export const createPaymentLinkHandler: RouterHandler = async (req) => {
   if (stripeAccountId === null) {
     messageList.push('No Stripe account connected')
 
-    throw new HttpError({
-      errorCode: 'BAD_REQUEST',
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'STRIPE_ACCOUNT_NOT_CONNECTED',
       statusCode: httpStatusCode.badRequest400,
       message: messageList.join(' | '),
     })
@@ -91,8 +97,8 @@ export const createPaymentLinkHandler: RouterHandler = async (req) => {
 
       messageList.push(`Stripe error: ${stripeMessage}`)
 
-      throw new HttpError({
-        errorCode: 'BAD_REQUEST',
+      throw new HttpError<ErrorResBody['errorCode']>({
+        errorCode: 'STRIPE_PAYMENT_LINK_FAILED',
         statusCode: httpStatusCode.badRequest400,
         message: messageList.join(' | '),
       })

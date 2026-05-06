@@ -34,6 +34,7 @@ import { stripeConnectUrlHandler } from '@back/api/stripe/stripeConnectUrlHandle
 import { stripeConnectCallbackHandler } from '@back/api/stripe/stripeConnectCallbackHandler'
 import { createPaymentLinkHandler } from '@back/api/stripe/createPaymentLinkHandler'
 import { stripeWebhookHandler } from '@back/api/stripe/stripeWebhookHandler'
+import { suggestRowHandler } from '@back/api/ai/suggestRowHandler'
 import type { NextFunction, Request, Response } from 'express'
 import { getBookmarkListAllHandler } from './bookmark/getBookmarkListAllHandler'
 import { deleteFileHandler } from './file/deleteFileHandler'
@@ -217,6 +218,11 @@ export const api = {
   stripeWebhook: {
     ...route.stripeWebhook,
     handler: stripeWebhookHandler,
+  },
+  // ai
+  aiSuggestRow: {
+    ...route.aiSuggestRow,
+    handler: suggestRowHandler,
   },
   // visitors
   countUniqueDailyVisitors: {

@@ -6,10 +6,12 @@
   "dependencies": {
     "@google-cloud/secret-manager": "^6.1.2",
     "@google-cloud/storage": "^7.19.0",
+    "@google/generative-ai": "^0.24.0",
     "@neondatabase/serverless": "^1.1.0",
     "bcryptjs": "^3.0.3",
     "compression": "^1.8.1",
     "cookie-parser": "^1.4.7",
+    "dedent": "^1.7.2",
     "drizzle-orm": "^1.0.0-beta.20",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",

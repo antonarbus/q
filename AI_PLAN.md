@@ -140,3 +140,53 @@ front/widgets/block/boq-block/boq-table/row/Row.tsx       — add AiSuggestRowIc
 2. Click sparkle → modal opens → type "waterproof LED strip lights outdoor IP65" → click "Ask AI"
 3. Verify description, price, and supplier notes appear in the results card
 4. Click "Accept" → row description and item price cells update with AI content
+
+---
+
+## STATUS: Implementation complete — action required before testing
+
+All 13 files have been written and pass TypeScript checks (`@google/generative-ai@0.24.1` installed).
+One note: SDK v0.24 uses `googleSearchRetrieval` (not `googleSearch`) — already applied.
+
+### What you need to do before running locally
+
+**Step 1 — Get a Gemini API key**
+- Go to https://aistudio.google.com/app/apikey
+- Create a new key (free tier is fine for testing)
+
+**Step 2 — Add it to your local `.env`**
+- File: `back/.env`
+- Add this line:
+  ```
+  GEMINI_API_KEY=your_key_here
+  ```
+
+**Step 3 — Test it**
+```
+# In one terminal
+cd back && bun dev
+
+# In another terminal
+cd front && bun dev
+```
+Then open a quotation → hover a row → click the ✦ sparkle icon (right side, above the bookmark star).
+
+### What you need to do before deploying to cloud
+
+**Step 4 — Add secret to Google Secret Manager**
+```bash
+echo -n "your_key_here" | gcloud secrets create GEMINI_API_KEY --data-file=-
+# or if the secret already exists:
+echo -n "your_key_here" | gcloud secrets versions add GEMINI_API_KEY --data-file=-
+```
+The app will pick it up automatically on next deploy — no code changes needed.
+
+### Known limitation to watch during testing
+`responseMimeType: 'application/json'` + `googleSearchRetrieval` grounding may not always
+produce valid JSON on the first try (Gemini can occasionally wrap it in markdown).
+If you see "AI response parsing failed" errors, the fix is to strip markdown fences before
+`JSON.parse` in `suggestRowHandler.ts`:
+```ts
+const cleaned = text.replace(/^```json\s*/i, '').replace(/```\s*$/i, '').trim()
+const parsed = responseSchema.safeParse(JSON.parse(cleaned))
+```

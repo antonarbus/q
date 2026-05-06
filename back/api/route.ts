@@ -246,6 +246,13 @@ export const route = {
     method: 'post',
     description: 'Stripe webhook endpoint',
   },
+  // ai
+  aiSuggestRow: {
+    path: '/api/ai/suggest-row',
+    url: '/api/ai/suggest-row',
+    method: 'post',
+    description: 'Get AI-generated description, price, and supplier notes for a quotation row',
+  },
   // visitors
   countUniqueDailyVisitors: {
     path: '/api/visitors/daily',

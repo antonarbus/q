@@ -2,6 +2,7 @@ import { usersTable } from '@back/entity/user/db/usersTableSchema'
 import { db } from '@back/shared/lib/drizzle/db'
 import { HttpError } from '@back/shared/errors/HttpError'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
+import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpRedirect } from '@back/shared/lib/express/httpResponse'
 import type { HttpResponse } from '@back/shared/lib/express/httpResponse'
 import { getSecret } from '@back/shared/lib/secret-manager/getSecret'
@@ -29,6 +30,11 @@ type SearchQuery = ParsedQs &
 type UrlParam = ParamsDictionary
 type ReqBody = undefined
 
+export type ErrorResBody = {
+  message: string
+  errorCode: ErrorCode | 'STRIPE_CONNECT_MISSING_PARAMS' | 'STRIPE_CONNECT_INVALID_STATE' | 'STRIPE_CONNECT_NO_ACCOUNT_ID'
+}
+
 type RouterHandler = (
   req: Request<UrlParam, unknown, ReqBody, SearchQuery>,
   res: Response,
@@ -54,8 +60,8 @@ export const stripeConnectCallbackHandler: RouterHandler = async (req) => {
   if (typeof req.query.code !== 'string' || typeof req.query.state !== 'string') {
     messageList.push('Missing code or state parameter')
 
-    throw new HttpError({
-      errorCode: 'BAD_REQUEST',
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'STRIPE_CONNECT_MISSING_PARAMS',
       statusCode: httpStatusCode.badRequest400,
       message: messageList.join(' | '),
     })
@@ -79,8 +85,8 @@ export const stripeConnectCallbackHandler: RouterHandler = async (req) => {
   } catch {
     messageList.push('Invalid or expired state parameter')
 
-    throw new HttpError({
-      errorCode: 'BAD_REQUEST',
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'STRIPE_CONNECT_INVALID_STATE',
       statusCode: httpStatusCode.badRequest400,
       message: messageList.join(' | '),
     })
@@ -98,8 +104,8 @@ export const stripeConnectCallbackHandler: RouterHandler = async (req) => {
   if (typeof stripeAccountId !== 'string' || stripeAccountId.length === 0) {
     messageList.push('Stripe account ID not returned from OAuth')
 
-    throw new HttpError({
-      errorCode: 'INTERNAL_ERROR',
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'STRIPE_CONNECT_NO_ACCOUNT_ID',
       statusCode: httpStatusCode.serverError500,
       message: messageList.join(' | '),
     })

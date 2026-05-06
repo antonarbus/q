@@ -19,6 +19,7 @@ export type SecretName =
   | 'STRIPE_LIVE_WEBHOOK_SECRET'
   | 'STRIPE_TEST_CLIENT_ID'
   | 'STRIPE_LIVE_CLIENT_ID'
+  | 'GEMINI_API_KEY'
 
 const cachedSecrets: Record<SecretName, string | null> = {
   JWT_ACCESS_SECRET: null,
@@ -38,6 +39,7 @@ const cachedSecrets: Record<SecretName, string | null> = {
   STRIPE_LIVE_WEBHOOK_SECRET: null,
   STRIPE_TEST_CLIENT_ID: null,
   STRIPE_LIVE_CLIENT_ID: null,
+  GEMINI_API_KEY: null,
 }
 
 export const getSecret = async (secretName: SecretName): Promise<string> => {

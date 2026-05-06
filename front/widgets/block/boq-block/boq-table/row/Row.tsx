@@ -1,3 +1,4 @@
+import { OpenAiSuggestRowModalIcon } from '@front/features/blocks/open-ai-suggest-row-modal/OpenAiSuggestRowModalIcon'
 import { BookmarkRowIcon } from '@front/features/open-close/open-bookmark-modal'
 import { OpenInfoRowModalIcon } from '@front/features/open-close/open-info-modal'
 import { DescriptionCell } from './cell/DescriptionCell'
@@ -30,6 +31,7 @@ export const Row = (props: Props): React.JSX.Element => {
       <QtyCell />
       <PriceCell />
       <RowActionButtonsLayout style={{ right: '-33px' }}>
+        <OpenAiSuggestRowModalIcon />
         <BookmarkRowIcon />
         <OpenInfoRowModalIcon />
         <DeleteRowIcon />
