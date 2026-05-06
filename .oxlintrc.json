@@ -71,6 +71,7 @@
     "react/exhaustive-deps": "off", // react compiler handles memoization; rule produces noise for stable refs/dispatch
     "react/jsx-filename-extension": ["error", { "extensions": ["jsx", "tsx"] }], // use .tsx if jsx is inside
     "react/jsx-max-depth": "off", // too strict
+    "react/jsx-handler-names": "off", // not a good rule, it enforces handleClick, handleChange prop names
     "react/jsx-no-constructed-context-values": "off", // react compiler memoize values
     "react/jsx-props-no-spreading": "warn", // like the rule, better to explicitly name props, but in reality we have to spread sometimes
     "react/no-unknown-property": ["error", { "ignore": ["css"] }], // emotion injects css prop support
