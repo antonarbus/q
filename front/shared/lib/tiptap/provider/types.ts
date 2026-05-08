@@ -18,6 +18,7 @@ export type Props = {
   onWrapperClick?: (event: React.MouseEvent) => void
   onWrapperFocus?: (event: React.FocusEvent) => void
   onUpload?: OnUpload
+  extraActions?: React.ReactNode
   children: React.ReactNode
 }
 

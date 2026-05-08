@@ -1,18 +1,20 @@
-import { Button } from '@mui/material'
+import { ButtonCustom } from '@front/shared/component/ButtonCustom'
 import { useAiSuggestRow } from './AskAiToSuggestRowProvider'
 
 export const AskAiButton = (): React.JSX.Element => {
   const aiSuggestRow = useAiSuggestRow()
 
   return (
-    <Button
-      disabled={aiSuggestRow.mutation.isPending || aiSuggestRow.inputValue.trim() === ''}
+    <ButtonCustom
+      isButtonDisabled={aiSuggestRow.mutation.isPending || aiSuggestRow.inputValue.trim() === ''}
+      isButtonLoading={aiSuggestRow.mutation.isPending}
+      sx={{ width: '200px' }}
+      type='button'
       onClick={(): void => {
         aiSuggestRow.mutation.mutate({ userPrompt: aiSuggestRow.inputValue })
       }}
-      variant='outlined'
     >
-      {aiSuggestRow.mutation.isPending ? 'Asking...' : 'Ask AI'}
-    </Button>
+      Ask
+    </ButtonCustom>
   )
 }

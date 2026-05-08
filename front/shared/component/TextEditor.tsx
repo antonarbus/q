@@ -20,6 +20,7 @@ type Props = {
   onWrapperClick?: (event: React.MouseEvent) => void
   onWrapperFocus?: (event: React.FocusEvent) => void
   onUpload?: OnUpload
+  extraActions?: React.ReactNode
 }
 
 export const TextEditor = (props: Props): React.JSX.Element => {

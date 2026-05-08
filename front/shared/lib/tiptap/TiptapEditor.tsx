@@ -82,7 +82,23 @@ export const TiptapEditor = (): React.ReactNode => {
     >
       <Tiptap editor={editor}>
         <TiptapMenu />
-        {tiptapCtx.isEditorView && <UploadButton />}
+        {tiptapCtx.isEditorView &&
+          (tiptapCtx.onUpload !== undefined || tiptapCtx.extraActions !== undefined) && (
+            <Box
+              className={cls.tiptapInsertButton}
+              sx={{
+                alignItems: 'center',
+                display: 'flex',
+                position: 'absolute',
+                right: 4,
+                top: 4,
+                transition: 'opacity 0.2s ease-in-out',
+              }}
+            >
+              {tiptapCtx.extraActions}
+              <UploadButton />
+            </Box>
+          )}
         <Tiptap.Content className={cls.tiptapContent} style={{ flexGrow: 1 }} />
       </Tiptap>
       <DropHereText />

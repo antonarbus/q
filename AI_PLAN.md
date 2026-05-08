@@ -11,6 +11,7 @@ Quotation-level AI generation is deferred to a future phase.
 ## Technology Decisions
 
 **AI provider: Google Gemini 2.0 Flash**
+
 - Already on GCP; API key goes into Google Secret Manager alongside existing keys
 - Native "Google Search Grounding" searches the internet for real supplier/pricing data
 - `@google/generative-ai` SDK, same lightweight pattern as Stripe/MailerSend integrations
@@ -24,31 +25,39 @@ Quotation-level AI generation is deferred to a future phase.
 ## Backend
 
 ### 1. Add secret
+
 **`back/shared/lib/secret-manager/getSecret.ts`**
+
 - Add `'GEMINI_API_KEY'` to `SecretName` union (line 4) and `cachedSecrets` record (line 23)
 
 ### 2. Gemini client wrapper
+
 **New: `back/shared/lib/gemini/getGemini.ts`**
+
 - Module-level cached instance, same pattern as `getStripe.ts`
 - Calls `getSecret('GEMINI_API_KEY')` on first use, caches result
 - Exports `getGemini()` returning `{ client: GoogleGenerativeAI }`
 - Add `@google/generative-ai` to `back/package.json`
 
 ### 3. Prompt builder
+
 **New: `back/shared/lib/gemini/prompts/buildRowSuggestionPrompt.ts`**
+
 - Input: `{ userQuery: string }`
 - Returns a prompt instructing Gemini to search the internet and return strict JSON (no markdown fences):
   ```json
   {
     "description": "clear item description",
-    "itemPrice": 45.00,
+    "itemPrice": 45.0,
     "supplierNotes": "Supplier: X, Region: Y, typical lead time, etc."
   }
   ```
 - Numeric price (not string), concise sourcing notes
 
 ### 4. Route handler
+
 **New: `back/api/ai/suggestRowHandler.ts`**
+
 - Auth: `getUserFromAccessTokenOrThrowUnauthorized`
 - Zod body: `{ userQuery: string }`
 - Calls `getGemini()` → `gemini-2.0-flash` model with `googleSearch` tool (internet search grounding)
@@ -57,10 +66,13 @@ Quotation-level AI generation is deferred to a future phase.
 - Fits standard `HttpHandler` type
 
 ### 5. Route registration
+
 **`back/api/route.ts`** — add `aiSuggestRow` entry:
+
 ```ts
 aiSuggestRow: { path: '/api/ai/suggest-row', url: '/api/ai/suggest-row', method: 'post', description: '...' }
 ```
+
 **`back/api/index.ts`** — import and add `suggestRowHandler` to the `api` object (standard pattern)
 
 ---
@@ -68,12 +80,16 @@ aiSuggestRow: { path: '/api/ai/suggest-row', url: '/api/ai/suggest-row', method:
 ## Frontend
 
 ### 6. Entity API hook
+
 **New: `front/entities/ai/api/useAiSuggestRowMutation.tsx`**
+
 - `useMutation` with `axiosHolder.axiosWithAuth`, imports `ReqBody`/`ResBody` types from handler
 - Add `aiSuggestRow` key to `front/shared/lib/tanstack-query/queryKey.ts`
 
 ### 7. Feature hook
+
 **New: `front/features/blocks/ai-suggest-row/useAiSuggestRow.ts`**
+
 - Reads `blockIndex` from `useBlock()`, `rowIndex` from `useRow()` context hooks
 - Manages `isOpen` state for the modal
 - On accept: dispatches `quotationSlice.actions.updateCell` for `description` and `itemPrice`:
@@ -82,7 +98,9 @@ aiSuggestRow: { path: '/api/ai/suggest-row', url: '/api/ai/suggest-row', method:
 - After dispatch, syncs live TipTap editors via `editorRegistry.get(getRegistryKey(...))?.commands.setContent(html)`
 
 ### 8. Modal component
+
 **New: `front/features/blocks/ai-suggest-row/AiSuggestRowModal.tsx`**
+
 - MUI `Dialog` (not route-based — direct Dialog, not `BackdropWithSlidableModal`)
 - Input: multiline `TextField` for the user's item description
 - "Ask AI" button triggers the mutation
@@ -90,12 +108,16 @@ aiSuggestRow: { path: '/api/ai/suggest-row', url: '/api/ai/suggest-row', method:
 - Actions: "Accept" (fills row + closes) / "Cancel" (closes without changes)
 
 ### 9. Icon button
+
 **New: `front/features/blocks/ai-suggest-row/AiSuggestRowIcon.tsx`**
+
 - `Tooltip` + `span.actionIconContainer` + sparkle icon from `react-icons` (already installed)
 - Calls `openModal()` on click; renders `<AiSuggestRowModal />` inline when `isOpen`
 
 ### 10. Wire into Row
+
 **`front/widgets/block/boq-block/boq-table/row/Row.tsx`** (right `RowActionButtonsLayout`, line 32)
+
 - Add `<AiSuggestRowIcon />` above `<BookmarkRowIcon />`
 
 ---
@@ -103,6 +125,7 @@ aiSuggestRow: { path: '/api/ai/suggest-row', url: '/api/ai/suggest-row', method:
 ## Files Summary
 
 ### New (7)
+
 ```
 back/shared/lib/gemini/getGemini.ts
 back/shared/lib/gemini/prompts/buildRowSuggestionPrompt.ts
@@ -115,6 +138,7 @@ front/features/blocks/ai-suggest-row/AiSuggestRowModal.tsx
 ```
 
 ### Modified (6)
+
 ```
 back/package.json                                          — add @google/generative-ai
 back/shared/lib/secret-manager/getSecret.ts               — add GEMINI_API_KEY
@@ -151,10 +175,12 @@ One note: SDK v0.24 uses `googleSearchRetrieval` (not `googleSearch`) — alread
 ### What you need to do before running locally
 
 **Step 1 — Get a Gemini API key**
+
 - Go to https://aistudio.google.com/app/apikey
 - Create a new key (free tier is fine for testing)
 
 **Step 2 — Add it to your local `.env`**
+
 - File: `back/.env`
 - Add this line:
   ```
@@ -162,6 +188,7 @@ One note: SDK v0.24 uses `googleSearchRetrieval` (not `googleSearch`) — alread
   ```
 
 **Step 3 — Test it**
+
 ```
 # In one terminal
 cd back && bun dev
@@ -169,24 +196,32 @@ cd back && bun dev
 # In another terminal
 cd front && bun dev
 ```
+
 Then open a quotation → hover a row → click the ✦ sparkle icon (right side, above the bookmark star).
 
 ### What you need to do before deploying to cloud
 
 **Step 4 — Add secret to Google Secret Manager**
+
 ```bash
 echo -n "your_key_here" | gcloud secrets create GEMINI_API_KEY --data-file=-
 # or if the secret already exists:
 echo -n "your_key_here" | gcloud secrets versions add GEMINI_API_KEY --data-file=-
 ```
+
 The app will pick it up automatically on next deploy — no code changes needed.
 
 ### Known limitation to watch during testing
+
 `responseMimeType: 'application/json'` + `googleSearchRetrieval` grounding may not always
 produce valid JSON on the first try (Gemini can occasionally wrap it in markdown).
 If you see "AI response parsing failed" errors, the fix is to strip markdown fences before
 `JSON.parse` in `suggestRowHandler.ts`:
-```ts
-const cleaned = text.replace(/^```json\s*/i, '').replace(/```\s*$/i, '').trim()
+
+````ts
+const cleaned = text
+  .replace(/^```json\s*/i, '')
+  .replace(/```\s*$/i, '')
+  .trim()
 const parsed = responseSchema.safeParse(JSON.parse(cleaned))
-```
+````

@@ -2,7 +2,6 @@ import { Box, Tooltip } from '@mui/material'
 import { useRef } from 'react'
 import { useTiptap } from '@tiptap/react'
 import { useTiptapCtx } from '../../provider/useTiptapCtx'
-import { cls } from '@front/shared/cls'
 import { TbUpload } from 'react-icons/tb'
 
 export const UploadButton = (): React.ReactNode => {
@@ -17,15 +16,10 @@ export const UploadButton = (): React.ReactNode => {
   return (
     <>
       <Box
-        className={cls.tiptapInsertButton}
         onClick={() => {
           fileInputRef.current?.click()
         }}
         sx={{
-          position: 'absolute',
-          top: 4,
-          right: 4,
-          transition: 'opacity 0.2s ease-in-out',
           userSelect: 'none',
           cursor: 'pointer',
           color: '#aaa',

@@ -19,6 +19,7 @@ type Props = {
   onUnmount?: () => void
   onSubmit?: (event: React.SubmitEvent) => void
   onCloseClick?: (event: React.MouseEvent) => void
+  additionalButton?: React.ReactNode
   buttonText?: string
   isButtonDisabled?: boolean
   isButtonLoading?: boolean
@@ -165,11 +166,12 @@ export const FormModal = (props: Props): React.JSX.Element => {
             )}
           </AnimatePresence>
         </Box>
-        {props.buttonText !== undefined && (
+        {(props.buttonText !== undefined || props.additionalButton !== undefined) && (
           <Box
             className='card-footer'
             sx={{
               display: 'flex',
+              gap: '10px',
               padding: '15px',
               justifyContent: 'center',
               alignItems: 'center',
@@ -177,16 +179,19 @@ export const FormModal = (props: Props): React.JSX.Element => {
               backgroundColor: 'rgba(255, 255, 255, 0.1)',
             }}
           >
-            <ButtonCustom
-              form={FORM_ID}
-              isButtonDisabled={Boolean(props.isButtonDisabled) || Boolean(props.isButtonLoading)}
-              isButtonError={props.isButtonError}
-              isButtonLoading={props.isButtonLoading}
-              isButtonSuccess={props.isButtonSuccess}
-              sx={{ width: '200px' }}
-            >
-              {props.buttonText}
-            </ButtonCustom>
+            {props.additionalButton}
+            {props.buttonText !== undefined && (
+              <ButtonCustom
+                form={FORM_ID}
+                isButtonDisabled={Boolean(props.isButtonDisabled) || Boolean(props.isButtonLoading)}
+                isButtonError={props.isButtonError}
+                isButtonLoading={props.isButtonLoading}
+                isButtonSuccess={props.isButtonSuccess}
+                sx={{ width: '200px' }}
+              >
+                {props.buttonText}
+              </ButtonCustom>
+            )}
           </Box>
         )}
       </Box>

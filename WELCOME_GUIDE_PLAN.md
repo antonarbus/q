@@ -10,9 +10,10 @@ The app (SendMeQuotation.today) is not immediately self-explanatory to new users
 
 **Core:** A nav button opens a route-based modal (`/guide`) containing a multi-step slideshow. Always accessible, never forced.
 
-**Optional first-visit hint:** On the very first visit (localStorage flag), a Sonner toast appears saying *"First time? See how it works →"* with a link to `/guide`. It auto-dismisses after 6s. The badge disappears after the guide is viewed. No auto-modal popup.
+**Optional first-visit hint:** On the very first visit (localStorage flag), a Sonner toast appears saying _"First time? See how it works →"_ with a link to `/guide`. It auto-dismisses after 6s. The badge disappears after the guide is viewed. No auto-modal popup.
 
 **Step content:** 4 slides covering the app's key concepts:
+
 1. Create a quotation (the editor)
 2. Customize with blocks (text, products, prices)
 3. Share with clients (share link/PDF)
@@ -33,6 +34,7 @@ Add a new child route `guide` (same pattern as existing modal routes like `save`
 `front/features/welcome-guide/`
 
 Files:
+
 - `WelcomeGuideModal.tsx` — the modal component
 - `WelcomeGuideSlide.tsx` — a single slide (title + description + illustration placeholder)
 - `SLIDES.ts` — the slide content data (text, step labels)
@@ -57,12 +59,14 @@ Add a small `?` icon button or `"How it works"` link that navigates to `/guide`.
 File: `front/features/on-init-load/useFirstVisitGuideHint.tsx`
 
 On mount, check `localStorage.getItem('guideVisited')`. If null, call:
+
 ```ts
 toast('First time here? See how it works →', {
   action: { label: 'Show me', onClick: () => navigate('/guide') },
   duration: 6000,
 })
 ```
+
 Using **Sonner** (already installed). Sets `localStorage.setItem('guideVisited', '1')` when guide route is visited.
 
 ### 6. Mark guide as visited
@@ -73,22 +77,22 @@ In `WelcomeGuideModal` on close/mount, set `localStorage.setItem('guideVisited',
 
 ## Key files to modify
 
-| File | Change |
-|------|--------|
-| `front/app/router.tsx` | Add `guide` child route |
-| `front/widgets/Nav/` | Add "How it works" button with optional badge |
-| `front/features/on-init-load/OnInitLoad.tsx` | Mount the first-visit hint hook |
+| File                                         | Change                                        |
+| -------------------------------------------- | --------------------------------------------- |
+| `front/app/router.tsx`                       | Add `guide` child route                       |
+| `front/widgets/Nav/`                         | Add "How it works" button with optional badge |
+| `front/features/on-init-load/OnInitLoad.tsx` | Mount the first-visit hint hook               |
 
 ## New files to create
 
-| File | Purpose |
-|------|---------|
-| `front/features/welcome-guide/SLIDES.ts` | Slide content data array |
-| `front/features/welcome-guide/WelcomeGuideSlide.tsx` | Single slide UI |
-| `front/features/welcome-guide/WelcomeGuideModal.tsx` | Full modal with step navigation |
-| `front/features/welcome-guide/index.ts` | Barrel export |
-| `front/pages/GuidePage/index.tsx` | Route-level lazy wrapper (same pattern as other modal pages) |
-| `front/features/on-init-load/useFirstVisitGuideHint.tsx` | First-visit toast logic |
+| File                                                     | Purpose                                                      |
+| -------------------------------------------------------- | ------------------------------------------------------------ |
+| `front/features/welcome-guide/SLIDES.ts`                 | Slide content data array                                     |
+| `front/features/welcome-guide/WelcomeGuideSlide.tsx`     | Single slide UI                                              |
+| `front/features/welcome-guide/WelcomeGuideModal.tsx`     | Full modal with step navigation                              |
+| `front/features/welcome-guide/index.ts`                  | Barrel export                                                |
+| `front/pages/GuidePage/index.tsx`                        | Route-level lazy wrapper (same pattern as other modal pages) |
+| `front/features/on-init-load/useFirstVisitGuideHint.tsx` | First-visit toast logic                                      |
 
 ---
 

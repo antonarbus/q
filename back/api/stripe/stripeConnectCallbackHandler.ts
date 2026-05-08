@@ -32,7 +32,11 @@ type ReqBody = undefined
 
 export type ErrorResBody = {
   message: string
-  errorCode: ErrorCode | 'STRIPE_CONNECT_MISSING_PARAMS' | 'STRIPE_CONNECT_INVALID_STATE' | 'STRIPE_CONNECT_NO_ACCOUNT_ID'
+  errorCode:
+    | ErrorCode
+    | 'STRIPE_CONNECT_MISSING_PARAMS'
+    | 'STRIPE_CONNECT_INVALID_STATE'
+    | 'STRIPE_CONNECT_NO_ACCOUNT_ID'
 }
 
 type RouterHandler = (

@@ -18,6 +18,7 @@ export const TiptapProvider = (props: Props): React.JSX.Element => {
       onWrapperClick: props.onWrapperClick,
       onWrapperFocus: props.onWrapperFocus,
       onUpload: props.onUpload,
+      extraActions: props.extraActions,
     }
   }, [props])
 

@@ -30,6 +30,7 @@ back/
 Every route handler must follow this structure:
 
 **Backend** (`back/api/<domain>/<name>Handler.ts`):
+
 ```ts
 import type { ErrorCode } from '@back/shared/const/errorCode'
 
@@ -66,6 +67,7 @@ export const myHandler: RouterHandler = async (req) => {
 ```
 
 **Frontend** (`front/entities/<domain>/api/use<Name>Mutation.tsx`):
+
 ```ts
 import type { ErrorResBody, ReqBody as Payload, ResBody } from '@back/api/<domain>/<name>Handler'
 import type { AxiosError } from 'axios'
@@ -76,6 +78,7 @@ type Res = UseMutationResult<ResBody, AxiosError<ErrorResBody>, Payload>
 ```
 
 Key rules:
+
 - `ResBody` always exported and always has `message: string`
 - `ErrorResBody` always exported with `ErrorCode | 'SPECIFIC_CODE'` union — never bare `'BAD_REQUEST'`
 - All `HttpError` throws typed as `HttpError<ErrorResBody['errorCode']>`
