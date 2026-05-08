@@ -16,12 +16,12 @@ import type { Stripe } from 'stripe'
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
 
-export type ResBody = {
+type ResBody = {
   received: boolean
   message: string
 }
 
-export type ErrorResBody = {
+type ErrorResBody = {
   message: string
   errorCode: ErrorCode | 'STRIPE_WEBHOOK_MISSING_SIGNATURE' | 'STRIPE_WEBHOOK_VERIFICATION_FAILED'
 }

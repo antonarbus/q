@@ -30,7 +30,7 @@ type SearchQuery = ParsedQs &
 type UrlParam = ParamsDictionary
 type ReqBody = undefined
 
-export type ErrorResBody = {
+type ErrorResBody = {
   message: string
   errorCode:
     | ErrorCode
