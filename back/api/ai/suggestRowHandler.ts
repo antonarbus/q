@@ -44,17 +44,17 @@ export const suggestRowHandler: RouterHandler = async (req) => {
   const gemini = await getGemini()
 
   const geminiModel = gemini.client.getGenerativeModel({
-    model: 'gemini-2.0-flash',
-    tools: [{ googleSearchRetrieval: {} }],
-    generationConfig: {
-      responseMimeType: 'application/json',
-    },
+    model: 'gemini-2.5-flash',
+    // SDK v0.24 types only have googleSearchRetrieval; Gemini 2.5 requires googleSearch
+    tools: [{ googleSearch: {} }] as unknown as Parameters<
+      typeof gemini.client.getGenerativeModel
+    >[0]['tools'],
   })
 
   const prompt = dedent` 
     You are a procurement assistant. The user is looking for: "${req.body.userPrompt}"
 
-    Search the internet for real supplier and pricing information. Return ONLY strict JSON (no markdown fences, no explanation):
+    Search the internet for supplier and pricing information. Return ONLY strict JSON (no markdown fences, no explanation):
 
     {
       "description": "clear, concise item description",
@@ -63,12 +63,15 @@ export const suggestRowHandler: RouterHandler = async (req) => {
     }
 
     Rules:
-    - itemPrice must be a number (not a string), representing the unit price in USD
-    - supplierNotes should include supplier name, region, and relevant sourcing details
     - description should be professional and concise
+    - itemPrice must be a number (not a string), representing the unit price with currency
+    - supplierNotes should include supplier name, region, relevant sourcing details, link to the price source is mandatory
   `
 
-  const result = await geminiModel.generateContent(prompt).catch(() => {
+  const result = await geminiModel.generateContent(prompt).catch((error) => {
+    // oxlint-disable-next-line no-console
+    console.log('🚀 ~ error:', error)
+
     messageList.push('Gemini failed to generate response')
 
     throw new HttpError<ErrorResBody['errorCode']>({
@@ -78,7 +81,11 @@ export const suggestRowHandler: RouterHandler = async (req) => {
     })
   })
 
-  const text = result.response.text()
+  const text = result.response
+    .text()
+    .replace(/^```(?:json)?\s*/i, '')
+    .replace(/\s*```$/, '')
+    .trim()
 
   messageList.push(`Gemini response received`)
 
