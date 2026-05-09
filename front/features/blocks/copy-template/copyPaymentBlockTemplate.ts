@@ -1,4 +1,4 @@
-import { clipboardSlice } from '@front/entities/clipboard/clipboardSlice'
+import { clipboardSlice } from '@front/entities/quotation/redux/clipboardSlice'
 import type { PaymentBlock } from '@back/entity/quotation/schema'
 import { generateId } from '@front/shared/lib/nanoid/generateId'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'

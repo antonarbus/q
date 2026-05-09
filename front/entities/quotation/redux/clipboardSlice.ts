@@ -1,7 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction, Reducer, WritableDraft } from '@reduxjs/toolkit'
-import type { CopyPlace } from './types'
 import type { BlockItem } from '@back/entity/quotation/schema'
+
+export type PastePos = 'bottom' | 'middle' | 'top'
+
+export type CopyPlace = {
+  id: string
+  pastePos: PastePos
+}
 
 type InitState = {
   isVisible: boolean

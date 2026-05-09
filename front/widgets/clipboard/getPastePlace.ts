@@ -1,4 +1,4 @@
-import type { CopyPlace } from '@front/entities/clipboard/types'
+import type { CopyPlace } from '@front/entities/quotation/redux/clipboardSlice'
 
 type Props = {
   hoveredElement: Element

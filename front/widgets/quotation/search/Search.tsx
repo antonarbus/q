@@ -3,7 +3,7 @@ import { useGetBookmarkListQuery } from '@front/entities/bookmark/api/useGetBook
 import { Autocomplete } from '@mui/material'
 import { cls } from '@front/shared/cls'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
-import { clipboardSlice } from '@front/entities/clipboard/clipboardSlice'
+import { clipboardSlice } from '@front/entities/quotation/redux/clipboardSlice'
 import { useEffect, useRef, useState } from 'react'
 import { PaperComponent } from './PaperComponent'
 import { SearchOption } from './SearchOption'

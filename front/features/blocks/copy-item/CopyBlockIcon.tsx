@@ -1,4 +1,4 @@
-import { clipboardSlice } from '@front/entities/clipboard/clipboardSlice'
+import { clipboardSlice } from '@front/entities/quotation/redux/clipboardSlice'
 import { useBlock } from '@front/entities/quotation/provider/block/useBlock'
 import { saveBlockHeightByIndex } from '@front/entities/quotation/util/saveBlockHeightByIndex'
 import { Tooltip } from '@mui/material'

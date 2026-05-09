@@ -1,4 +1,4 @@
-import { clipboardSlice } from '@front/entities/clipboard/clipboardSlice'
+import { clipboardSlice } from '@front/entities/quotation/redux/clipboardSlice'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { theme } from '@front/shared/theme'
 import { useAnimate } from 'motion/react'

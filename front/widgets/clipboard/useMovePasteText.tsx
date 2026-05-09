@@ -1,6 +1,6 @@
-import { clipboardSlice } from '@front/entities/clipboard/clipboardSlice'
+import type { CopyPlace } from '@front/entities/quotation/redux/clipboardSlice'
+import { clipboardSlice } from '@front/entities/quotation/redux/clipboardSlice'
 import { getPastePlace } from './getPastePlace'
-import type { CopyPlace } from '@front/entities/clipboard/types'
 import { cls } from '@front/shared/cls'
 import { route } from '@front/shared/lib/react-router-dom/route'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'

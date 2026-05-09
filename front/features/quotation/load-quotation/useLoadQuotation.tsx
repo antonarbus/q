@@ -1,7 +1,7 @@
 import { navItemId } from '@front/entities/nav/navItemId'
 import { navSlice } from '@front/entities/nav/navSlice'
 import { useGetQuotationMutation } from '@front/entities/quotation/api/useGetQuotationMutation'
-import { newQuotationTemplate } from '@front/entities/quotation/newQuotationTemplate'
+import { newQuotationTemplate } from '@front/entities/quotation/templates/newQuotationTemplate'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { backToQuotationRef } from '@front/entities/quotation/ref/backToQuotationRef'
 import { appSlice } from '@front/shared/appSlice'

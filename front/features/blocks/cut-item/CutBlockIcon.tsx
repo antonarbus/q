@@ -1,4 +1,4 @@
-import { clipboardSlice } from '@front/entities/clipboard/clipboardSlice'
+import { clipboardSlice } from '@front/entities/quotation/redux/clipboardSlice'
 import { useBlock } from '@front/entities/quotation/provider/block/useBlock'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { selectIsLastBlock } from '@front/entities/quotation/redux/selector/selectIsLastBlock'

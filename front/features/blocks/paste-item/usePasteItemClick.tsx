@@ -1,4 +1,4 @@
-import { clipboardSlice } from '@front/entities/clipboard/clipboardSlice'
+import { clipboardSlice } from '@front/entities/quotation/redux/clipboardSlice'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { cls } from '@front/shared/cls'
 import { generateId } from '@front/shared/lib/nanoid/generateId'

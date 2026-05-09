@@ -1,4 +1,4 @@
-import { clipboardSlice } from '@front/entities/clipboard/clipboardSlice'
+import { clipboardSlice } from '@front/entities/quotation/redux/clipboardSlice'
 
 // assets can be imported as strings using the ?raw suffix
 import priceBlockPreviewHtml from '@front/entities/quotation/templates/priceBlockPreview.html?raw'
