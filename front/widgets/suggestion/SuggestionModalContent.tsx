@@ -93,7 +93,7 @@ export const SuggestionModalContent = (): React.JSX.Element => {
         </Box>
       )}
       {suggestion.mutation.isError && (
-        <Typography color='error'>Failed to get AI suggestion. Please try again.</Typography>
+        <Typography color='error'>Failed to get product suggestion. Please try again.</Typography>
       )}
     </FormModal>
   )

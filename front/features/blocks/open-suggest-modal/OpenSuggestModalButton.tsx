@@ -10,7 +10,7 @@ export const OpenSuggestModalButton = (): React.JSX.Element => {
   const row = useRow()
 
   return (
-    <Tooltip enterDelay={500} enterNextDelay={500} placement='top' title='AI suggestion'>
+    <Tooltip enterDelay={500} enterNextDelay={500} placement='top' title='Suggest product'>
       <Box
         onClick={() => {
           reduxHolder.dispatch(
