@@ -17,9 +17,10 @@ import { downloadExcel } from '@front/features/quotation/download-quotation-as-e
 import { downloadPdf } from '@front/features/quotation/download-quotation-as-pdf'
 import { saveExistingQuotation } from '@front/features/quotation/save-quotation/saveExistingQuotation'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
+import type { FunctionId } from '@front/shared/nav/FunctionId'
 
 /** Required to avoid storing non-serializable values in Redux store */
-export const functionRegistry = {
+export const functionRegistry: Record<FunctionId, unknown> = {
   openQuotationPageAndLoadPrev,
   openQuotationPageAndLoadNew,
   saveQuotation: (): void => {
@@ -41,6 +42,4 @@ export const functionRegistry = {
   openQuotationsPage,
   openLoginModal,
   openSettingsModal,
-} as const
-
-export type FunctionId = keyof typeof functionRegistry
+}

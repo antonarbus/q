@@ -1,4 +1,4 @@
-import type { NavItem as NavItemType } from '@front/shared/nav/type'
+import type { NavItem as NavItemType } from '@front/shared/nav/NavItem'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { clickOnNavItem } from '@front/widgets/nav/handlers/clickOnNavItem'
 import { useRef } from 'react'

@@ -1,5 +1,6 @@
+import type { NavItemId } from './navItemId'
 import { getNavStructure } from './navStructureHolder'
-import type { NavItem, NavItemId } from './type'
+import type { NavItem } from './NavItem'
 
 // https://www.typescriptlang.org/docs/handbook/2/generics.html
 // https://stackoverflow.com/a/49286056/7239778

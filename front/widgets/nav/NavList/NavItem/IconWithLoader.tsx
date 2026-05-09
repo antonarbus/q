@@ -1,4 +1,4 @@
-import type { NavItem } from '@front/shared/nav/type'
+import type { NavItem } from '@front/shared/nav/NavItem'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { iconRegistry } from '@front/widgets/nav/iconRegistry'
 import { ErrorIcon } from './ErrorIcon'

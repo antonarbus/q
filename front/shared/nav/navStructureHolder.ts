@@ -1,4 +1,4 @@
-import type { NavItem } from './type'
+import type { NavItem } from './NavItem'
 
 let navStructureInstance: NavItem[] | null = null
 

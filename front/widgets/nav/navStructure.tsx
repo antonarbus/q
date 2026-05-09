@@ -1,6 +1,6 @@
 import { navItemId } from '@front/shared/nav/navItemId'
 import { setNavStructure } from '@front/shared/nav/navStructureHolder'
-import type { NavItem } from '@front/shared/nav/type'
+import type { NavItem } from '@front/shared/nav/NavItem'
 import { route } from '@front/shared/lib/react-router-dom/route'
 
 export const navStructure: NavItem[] = [

@@ -1,5 +1,5 @@
 import { navSlice } from '@front/shared/nav/navSlice'
-import type { NavItem } from '@front/shared/nav/type'
+import type { NavItem } from '@front/shared/nav/NavItem'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { useEffectOnce } from 'react-use'
 

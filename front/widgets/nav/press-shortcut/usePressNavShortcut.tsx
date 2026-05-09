@@ -1,4 +1,4 @@
-import type { NavItem } from '@front/shared/nav/type'
+import type { NavItem } from '@front/shared/nav/NavItem'
 import { mousePosition } from '@front/shared/util/mousePosition'
 import { functionRegistry } from '@front/widgets/nav/functionRegistry'
 import { useNavigate } from 'react-router-dom'

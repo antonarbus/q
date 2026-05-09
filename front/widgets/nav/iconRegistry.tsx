@@ -1,3 +1,4 @@
+import type { IconId } from '@front/shared/nav/IconId'
 import { Burger } from '@front/widgets/nav/NavList/NavItem/Burger'
 import { CiCreditCard1, CiViewTable } from 'react-icons/ci'
 import { FaRegFileImage, FaRegFilePdf, FaRegStar } from 'react-icons/fa'
@@ -16,7 +17,7 @@ import { RiAdminLine, RiFileExcel2Line } from 'react-icons/ri'
 import { RxPerson } from 'react-icons/rx'
 import { VscNewFile } from 'react-icons/vsc'
 
-export const iconRegistry = {
+export const iconRegistry: Record<IconId, React.ReactElement> = {
   burger: <Burger />,
   back: <IoChevronBackOutline data-testid='back icon' style={{ color: '#3bc3ff' }} />,
   new: <VscNewFile data-testid='new icon' />,
@@ -43,6 +44,4 @@ export const iconRegistry = {
   userList: <FaUsersGear />,
   visitors: <IoStatsChartOutline />,
   logout: <FiLogOut />,
-} as const
-
-export type IconId = keyof typeof iconRegistry
+}

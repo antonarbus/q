@@ -1,10 +1,11 @@
+import type { NavItemId } from '@front/shared/nav/navItemId'
 import { navItemId as navItemIdKey } from '@front/shared/nav/navItemId'
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction, Reducer, WritableDraft } from '@reduxjs/toolkit'
 import { getNavStructure } from './navStructureHolder'
 import { getMenuItemPropValue } from './getMenuItemPropValue'
 import { setMenuItemPropValue } from './setMenuItemPropValue'
-import type { NavItem, NavItemId } from './type'
+import type { NavItem } from './NavItem'
 import { getNavItem } from './getNavItem'
 
 type NavMode = 'full' | 'text-only' | 'icons-only' | 'hamburger'
