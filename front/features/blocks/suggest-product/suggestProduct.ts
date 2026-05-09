@@ -21,7 +21,7 @@ const getCurrencyFromState = (): string => {
   const { blocks } = reduxHolder.getState().quotation
   const paymentBlock = blocks.find((block) => block.type === 'payment')
 
-  return paymentBlock?.type === 'payment' ? paymentBlock.payment.currency.toUpperCase() : 'USD'
+  return paymentBlock?.type === 'payment' ? paymentBlock.payment.currency.toUpperCase() : '$'
 }
 
 export const suggestProduct = async (props: Props): Promise<void> => {
