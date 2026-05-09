@@ -7,7 +7,7 @@ import { useEffect } from 'react'
 import { getCleanPaperHtml } from '@front/shared/util/html-getter/getCleanPaperHtml'
 import { cls } from '@front/shared/cls'
 
-export const useBookmarkCopyPreviewCapturer = (
+export const useBookmarkClipboardPreviewCapturer = (
   containerRef: React.RefObject<HTMLDivElement | null>,
 ): void => {
   const bookmarkBlock = reduxHolder.useSelector((state) =>

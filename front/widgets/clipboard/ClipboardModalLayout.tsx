@@ -8,7 +8,7 @@ type Props = {
   ref: AnimationScope<HTMLDivElement>
 }
 
-export const CopyModalLayout = (props: Props): React.JSX.Element => {
+export const ClipboardModalLayout = (props: Props): React.JSX.Element => {
   return (
     <motion.div
       ref={props.ref}

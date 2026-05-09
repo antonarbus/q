@@ -11,7 +11,7 @@ type Res = {
   ref: AnimationScope<HTMLDivElement>
 }
 
-export const useAnimatedCopyModalElement = (): Res => {
+export const useAnimatedClipboardModalElement = (): Res => {
   const [scope, animate] = useAnimate<HTMLDivElement>()
   const isFirstMount = useFirstMountState()
   const items = reduxHolder.useSelector((state) => state.copy.items)

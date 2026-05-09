@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from 'motion/react'
 import type { Variants } from 'motion/react'
 import { useEffect, useState } from 'react'
 import { containerPadding, containerWidth, itemMarginBottom } from './const'
-import { ScaledCopyItem } from './ScaledCopyItem'
+import { ScaledClipboardItem } from './ScaledClipboardItem'
 
 type Props = {
   isCopying: boolean
@@ -54,7 +54,7 @@ const variants: Variants = {
   },
 }
 
-export const RestOfCopiedItems = (): React.JSX.Element | null => {
+export const RestClipboardItems = (): React.JSX.Element | null => {
   const items = reduxHolder.useSelector((state) => state.copy.items)
   const isCopying = reduxHolder.useSelector((state) => state.copy.isCopying)
   const [prevFirstItemHeight, setPrevFirstItemHeight] = useState(0)
@@ -114,7 +114,7 @@ export const RestOfCopiedItems = (): React.JSX.Element | null => {
                 boxShadow: 'rgba(0, 0, 0, 0.2) 0px 0px 6px 2px',
               }}
             >
-              <ScaledCopyItem
+              <ScaledClipboardItem
                 html={preview ?? ''}
                 scaleFactor={String(scaleFactor)}
                 width={item.width}

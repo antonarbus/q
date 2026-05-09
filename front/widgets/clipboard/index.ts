@@ -1,1 +1,1 @@
-export { Copy } from './Copy'
+export { Clipboard } from './Clipboard'

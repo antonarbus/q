@@ -3,7 +3,7 @@ import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { Block } from '@front/widgets/block/Block'
 import { DragDropContext, Droppable } from '@hello-pangea/dnd'
 import { useRef } from 'react'
-import { useBookmarkCopyPreviewCapturer } from './useBookmarkCopyPreviewCapturer'
+import { useBookmarkClipboardPreviewCapturer } from './useBookmarkClipboardPreviewCapturer'
 
 /**
  * Always-mounted offscreen component that generates the copy preview HTML for
@@ -31,7 +31,7 @@ export const BookmarkCopyPreviewCapturer = (): React.ReactNode => {
 
   const isPreviewPreparing = reduxHolder.useSelector((state) => state.copy.isPreviewPreparing)
 
-  useBookmarkCopyPreviewCapturer(containerRef)
+  useBookmarkClipboardPreviewCapturer(containerRef)
 
   if (bookmarkBlock === undefined || isPreviewPreparing === false) {
     return null

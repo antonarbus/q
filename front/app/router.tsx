@@ -20,7 +20,7 @@ import { Main } from '@front/shared/layout/Main'
 import { route } from '@front/shared/lib/react-router-dom/route'
 import { routerHolder } from '@front/shared/lib/react-router-dom/routerHolder'
 import { Suggestion } from '@front/widgets/suggestion'
-import { Copy } from '@front/widgets/clipboard'
+import { Clipboard } from '@front/widgets/clipboard'
 import { BookmarkCopyPreviewCapturer } from '@front/widgets/clipboard/BookmarkCopyPreviewCapturer'
 import { Footer } from '@front/widgets/footer'
 import { Nav } from '@front/widgets/nav'
@@ -86,7 +86,7 @@ const router = createBrowserRouter([
         <LoadingDotsOverlay shouldShowLoader={false} text={null} />
         <Nav />
         <Suggestion />
-        <Copy />
+        <Clipboard />
         <BookmarkCopyPreviewCapturer />
         <ConfirmationDialog />
         <Main />

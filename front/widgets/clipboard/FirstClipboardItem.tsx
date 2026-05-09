@@ -3,7 +3,7 @@ import { theme } from '@front/shared/theme'
 import { AnimatePresence, motion } from 'motion/react'
 import type { Variants } from 'motion/react'
 import { containerPadding, containerWidth, itemMarginBottom } from './const'
-import { ScaledCopyItem } from './ScaledCopyItem'
+import { ScaledClipboardItem } from './ScaledClipboardItem'
 
 type Props = {
   isCopying: boolean
@@ -53,7 +53,7 @@ const variants: Variants = {
   },
 }
 
-export const FirstCopiedItem = (): React.JSX.Element | null => {
+export const FirstClipboardItem = (): React.JSX.Element | null => {
   const items = reduxHolder.useSelector((state) => state.copy.items)
   const isCopying = reduxHolder.useSelector((state) => state.copy.isCopying)
 
@@ -98,7 +98,7 @@ export const FirstCopiedItem = (): React.JSX.Element | null => {
         }}
         variants={variants}
       >
-        <ScaledCopyItem
+        <ScaledClipboardItem
           html={firstItemPreviewHtml}
           scaleFactor={String(scaleFactorForFirstItem)}
           width={firstItem.width}

@@ -6,7 +6,7 @@ type Props = {
   html: string
 }
 
-export const ScaledCopyItem = (props: Props): React.JSX.Element => {
+export const ScaledClipboardItem = (props: Props): React.JSX.Element => {
   const divRef = useRef<HTMLDivElement>(null)
 
   useLayoutEffect(() => {
