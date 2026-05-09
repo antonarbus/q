@@ -1,4 +1,4 @@
-import type { CopyPlace } from './types'
+import type { CopyPlace } from '@front/entities/clipboard/types'
 
 type Props = {
   hoveredElement: Element
