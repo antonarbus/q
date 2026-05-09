@@ -1,18 +1,11 @@
 import { copySlice } from '@front/entities/copy/copySlice'
+import { resolvePreviewPreparingPromise } from '@front/entities/copy/bookmarkPreviewDeferred'
 import { BOOKMARK_POS_AT_BLOCKS } from '@front/entities/quotation/redux/bookmarkPosAtBlocks'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { useEffect } from 'react'
 import { getCleanPaperHtml } from '@front/shared/util/html-getter/getCleanPaperHtml'
 import { cls } from '@front/shared/cls'
-
-let previewPreparingDeferred = Promise.withResolvers()
-
-export const getPreviewPreparingPromise = async (): Promise<unknown> => {
-  previewPreparingDeferred = Promise.withResolvers()
-
-  return await previewPreparingDeferred.promise
-}
 
 export const useBookmarkCopyPreviewCapturer = (
   containerRef: React.RefObject<HTMLDivElement | null>,
@@ -71,7 +64,7 @@ export const useBookmarkCopyPreviewCapturer = (
       }
 
       reduxHolder.dispatch(quotationSlice.actions.removeBlockFromPosThousand())
-      previewPreparingDeferred.resolve()
+      resolvePreviewPreparingPromise()
     }
 
     waitImagesToLoadAndShowItemInCopyContainer()
