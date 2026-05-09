@@ -20,7 +20,7 @@ import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import type { FunctionId } from '@front/shared/nav/FunctionId'
 
 /** Required to avoid storing non-serializable values in Redux store */
-export const functionRegistry: Record<FunctionId, unknown> = {
+export const functionRegistry = {
   openQuotationPageAndLoadPrev,
   openQuotationPageAndLoadNew,
   saveQuotation: (): void => {
@@ -42,4 +42,4 @@ export const functionRegistry: Record<FunctionId, unknown> = {
   openQuotationsPage,
   openLoginModal,
   openSettingsModal,
-}
+} satisfies Record<FunctionId, unknown>
