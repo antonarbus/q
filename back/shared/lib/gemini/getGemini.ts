@@ -1,8 +1,8 @@
-import { GoogleGenerativeAI } from '@google/generative-ai'
+import { GoogleGenAI } from '@google/genai'
 import { getSecret } from '@back/shared/lib/secret-manager/getSecret'
 
 type GeminiCached = {
-  client: GoogleGenerativeAI
+  client: GoogleGenAI
 }
 
 let geminiCached: GeminiCached | null = null
@@ -15,7 +15,7 @@ export const getGemini = async (): Promise<GeminiCached> => {
   const apiKey = await getSecret('GEMINI_API_KEY')
 
   geminiCached = {
-    client: new GoogleGenerativeAI(apiKey),
+    client: new GoogleGenAI({ apiKey }),
   }
 
   return geminiCached
