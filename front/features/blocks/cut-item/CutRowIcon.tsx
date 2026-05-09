@@ -82,7 +82,7 @@ export const CutRowIcon = (): React.JSX.Element => {
                 }),
               )
 
-              reduxHolder.dispatch(clipboardSlice.actions.showCopyModal())
+              reduxHolder.dispatch(clipboardSlice.actions.showClipboardModal())
             }
 
             reduxHolder.dispatch(

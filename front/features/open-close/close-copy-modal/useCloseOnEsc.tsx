@@ -8,7 +8,7 @@ export const useExitCopyOnEsc = (): void => {
       return
     }
 
-    reduxHolder.dispatch(clipboardSlice.actions.hideCopyModal())
+    reduxHolder.dispatch(clipboardSlice.actions.hideClipboardModal())
   }
 
   type Res = () => void

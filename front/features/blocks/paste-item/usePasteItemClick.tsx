@@ -83,7 +83,7 @@ const pasteItemOnClick = (): void => {
   const itemsInCopyModal = reduxHolder.getState().clipboard.items
 
   if (itemsInCopyModal.length === 0) {
-    reduxHolder.dispatch(clipboardSlice.actions.hideCopyModal())
+    reduxHolder.dispatch(clipboardSlice.actions.hideClipboardModal())
 
     setTimeout(
       () => {

@@ -76,7 +76,7 @@ export const CopyRowIcon = (): React.JSX.Element => {
                 }),
               )
 
-              reduxHolder.dispatch(clipboardSlice.actions.showCopyModal())
+              reduxHolder.dispatch(clipboardSlice.actions.showClipboardModal())
             }
           }}
           style={{

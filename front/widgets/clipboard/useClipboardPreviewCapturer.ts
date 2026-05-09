@@ -1,5 +1,5 @@
 import { clipboardSlice } from '@front/entities/clipboard/clipboardSlice'
-import { resolvePreviewPreparingPromise } from '@front/entities/clipboard/bookmarkPreviewDeferred'
+import { resolveClipboardPreviewPreparingPromise } from '@front/entities/clipboard/clipboardPreviewDeferred'
 import { BOOKMARK_POS_AT_BLOCKS } from '@front/entities/quotation/redux/bookmarkPosAtBlocks'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
@@ -62,11 +62,11 @@ export const useClipboardPreviewCapturer = (
       reduxHolder.dispatch(clipboardSlice.actions.stopPreviewPreparing())
 
       if (reduxHolder.getState().clipboard.isVisible === false) {
-        reduxHolder.dispatch(clipboardSlice.actions.showCopyModal())
+        reduxHolder.dispatch(clipboardSlice.actions.showClipboardModal())
       }
 
       reduxHolder.dispatch(quotationSlice.actions.removeBlockFromPosThousand())
-      resolvePreviewPreparingPromise()
+      resolveClipboardPreviewPreparingPromise()
     }
 
     waitImagesToLoadAndShowItemInClipboardContainer()

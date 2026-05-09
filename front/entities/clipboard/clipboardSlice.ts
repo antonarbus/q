@@ -47,7 +47,7 @@ export const clipboardSlice = createSlice({
     ) => {
       state.initCursorPos = action.payload
     },
-    showCopyModal: (state: WritableDraft<InitState>) => {
+    showClipboardModal: (state: WritableDraft<InitState>) => {
       state.isVisible = true
     },
     startPreviewPreparing: (state: WritableDraft<InitState>) => {
@@ -56,7 +56,7 @@ export const clipboardSlice = createSlice({
     stopPreviewPreparing: (state: WritableDraft<InitState>) => {
       state.isPreviewPreparing = false
     },
-    hideCopyModal: () => initialState,
+    hideClipboardModal: () => initialState,
     addItem: (
       state: WritableDraft<InitState>,
       action: PayloadAction<{

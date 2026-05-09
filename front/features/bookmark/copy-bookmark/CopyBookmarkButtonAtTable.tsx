@@ -5,7 +5,7 @@ import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { IconButton, Tooltip } from '@mui/material'
 import { RotatingLoaderIcon } from '@front/shared/component/RotatingLoaderIcon'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
-import { getPreviewPreparingPromise } from '@front/entities/clipboard/bookmarkPreviewDeferred'
+import { getClipboardPreviewPreparingPromise } from '@front/entities/clipboard/clipboardPreviewDeferred'
 import { useState } from 'react'
 import { MdCopyAll } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
@@ -48,7 +48,7 @@ export const CopyBookmarkButtonAtTable = (props: UrlParam): React.JSX.Element =>
             }),
           )
 
-          await getPreviewPreparingPromise()
+          await getClipboardPreviewPreparingPromise()
 
           setIsSpinner(false)
         }}

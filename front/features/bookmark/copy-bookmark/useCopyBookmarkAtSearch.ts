@@ -5,7 +5,7 @@ import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { useCallback } from 'react'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
-import { getPreviewPreparingPromise } from '@front/entities/clipboard/bookmarkPreviewDeferred'
+import { getClipboardPreviewPreparingPromise } from '@front/entities/clipboard/clipboardPreviewDeferred'
 
 type Params = {
   bookmarkId: string
@@ -40,7 +40,7 @@ export const useCopyBookmarkAtSearch = (): Res => {
 
       reduxHolder.dispatch(clipboardSlice.actions.startPreviewPreparing())
 
-      await getPreviewPreparingPromise()
+      await getClipboardPreviewPreparingPromise()
     },
     [getBookmarkMutation],
   )

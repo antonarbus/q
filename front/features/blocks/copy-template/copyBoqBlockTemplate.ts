@@ -239,6 +239,6 @@ export const copyBoqBlockTemplate = (event?: React.MouseEvent): void => {
       }),
     )
 
-    reduxHolder.dispatch(clipboardSlice.actions.showCopyModal())
+    reduxHolder.dispatch(clipboardSlice.actions.showClipboardModal())
   }
 }

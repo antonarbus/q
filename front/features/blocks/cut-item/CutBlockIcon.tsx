@@ -84,7 +84,7 @@ export const CutBlockIcon = (): React.JSX.Element => {
                 }),
               )
 
-              reduxHolder.dispatch(clipboardSlice.actions.showCopyModal())
+              reduxHolder.dispatch(clipboardSlice.actions.showClipboardModal())
             }
 
             setTimeout(
