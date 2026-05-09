@@ -54,11 +54,11 @@ const variants: Variants = {
 }
 
 export const FirstClipboardItem = (): React.JSX.Element | null => {
-  const items = reduxHolder.useSelector((state) => state.copy.items)
-  const isCopying = reduxHolder.useSelector((state) => state.copy.isCopying)
+  const items = reduxHolder.useSelector((state) => state.clipboard.items)
+  const isCopying = reduxHolder.useSelector((state) => state.clipboard.isCopying)
 
   const [firstItem] = items
-  const firstItemPreviewHtml = reduxHolder.getState().copy.previews.at(0) ?? ''
+  const firstItemPreviewHtml = reduxHolder.getState().clipboard.previews.at(0) ?? ''
 
   if (firstItem?.width === undefined) {
     return null

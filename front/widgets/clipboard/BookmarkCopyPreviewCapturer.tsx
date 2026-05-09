@@ -29,7 +29,7 @@ export const BookmarkCopyPreviewCapturer = (): React.ReactNode => {
     state.quotation.blocks.at(BOOKMARK_POS_AT_BLOCKS),
   )
 
-  const isPreviewPreparing = reduxHolder.useSelector((state) => state.copy.isPreviewPreparing)
+  const isPreviewPreparing = reduxHolder.useSelector((state) => state.clipboard.isPreviewPreparing)
 
   useBookmarkClipboardPreviewCapturer(containerRef)
 

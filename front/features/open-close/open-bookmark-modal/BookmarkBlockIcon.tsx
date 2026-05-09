@@ -13,7 +13,7 @@ export const BookmarkBlockIcon = (): React.ReactNode => {
   const navigate = useNavigate()
   const block = useBlock()
 
-  const isCopyModalVisible = reduxHolder.useSelector((state) => state.copy.isVisible)
+  const isCopyModalVisible = reduxHolder.useSelector((state) => state.clipboard.isVisible)
 
   const disabled = isCopyModalVisible
 

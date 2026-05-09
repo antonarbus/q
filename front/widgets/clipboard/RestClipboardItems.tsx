@@ -55,8 +55,8 @@ const variants: Variants = {
 }
 
 export const RestClipboardItems = (): React.JSX.Element | null => {
-  const items = reduxHolder.useSelector((state) => state.copy.items)
-  const isCopying = reduxHolder.useSelector((state) => state.copy.isCopying)
+  const items = reduxHolder.useSelector((state) => state.clipboard.items)
+  const isCopying = reduxHolder.useSelector((state) => state.clipboard.isCopying)
   const [prevFirstItemHeight, setPrevFirstItemHeight] = useState(0)
 
   const [firstItem] = items
@@ -96,7 +96,7 @@ export const RestClipboardItems = (): React.JSX.Element | null => {
         {items.map((item, index) => {
           const scaleFactor = (containerWidth - 2 * containerPadding) / item.width
 
-          const preview = reduxHolder.getState().copy.previews[index]
+          const preview = reduxHolder.getState().clipboard.previews[index]
 
           if (index === 0) {
             return null

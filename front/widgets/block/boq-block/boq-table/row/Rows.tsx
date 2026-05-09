@@ -14,9 +14,9 @@ import { hidePinsOnRowBlur } from '@front/features/blocks/pin/hide-row-pins/hide
 
 export const Rows = (): React.JSX.Element => {
   const block = useBlock()
-  const copyPlace = reduxHolder.useSelector((state) => state.copy.place)
+  const copyPlace = reduxHolder.useSelector((state) => state.clipboard.place)
 
-  const isPasteTextShown = reduxHolder.useSelector((state) => state.copy.isPasteTextShown)
+  const isPasteTextShown = reduxHolder.useSelector((state) => state.clipboard.isPasteTextShown)
 
   const rows = reduxHolder.useSelector(
     selectRows({ blockIndex: block.index }),

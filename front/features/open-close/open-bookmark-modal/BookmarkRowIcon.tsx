@@ -15,7 +15,7 @@ export const BookmarkRowIcon = (): React.ReactNode => {
   const block = useBlock()
   const row = useRow()
 
-  const isCopyModalVisible = reduxHolder.useSelector((state) => state.copy.isVisible)
+  const isCopyModalVisible = reduxHolder.useSelector((state) => state.clipboard.isVisible)
 
   const disabled = isCopyModalVisible
 

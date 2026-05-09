@@ -1,6 +1,6 @@
 // oxlint-disable typescript/consistent-type-definitions
 import { suggestionReducer } from '@front/entities/suggestion/suggestionSlice'
-import { copyReducer } from '@front/entities/clipboard/copySlice'
+import { clipboardReducer } from '@front/entities/clipboard/clipboardSlice'
 import { navReducer } from '@front/entities/nav/navSlice'
 import { quotationReducer } from '@front/entities/quotation/redux/quotationSlice'
 import { userReducer } from '@front/entities/user/redux/userSlice'
@@ -16,7 +16,7 @@ const store = configureStore({
     nav: navReducer,
     quotation: quotationReducer,
     suggestion: suggestionReducer,
-    copy: copyReducer,
+    clipboard: clipboardReducer,
     agGrid: agGridReducer,
   },
   devTools: import.meta.env.MODE !== 'production',

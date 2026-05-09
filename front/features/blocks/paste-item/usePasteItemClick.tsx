@@ -1,4 +1,4 @@
-import { copySlice } from '@front/entities/clipboard/copySlice'
+import { clipboardSlice } from '@front/entities/clipboard/clipboardSlice'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { cls } from '@front/shared/cls'
 import { generateId } from '@front/shared/lib/nanoid/generateId'
@@ -23,25 +23,25 @@ const pasteItemOnClick = (): void => {
     return
   }
 
-  if (reduxHolder.getState().copy.isPasteTextShown === false) {
+  if (reduxHolder.getState().clipboard.isPasteTextShown === false) {
     return
   }
 
-  reduxHolder.dispatch(copySlice.actions.hidePasteText())
+  reduxHolder.dispatch(clipboardSlice.actions.hidePasteText())
 
-  if (reduxHolder.getState().copy.isPastable === false) {
+  if (reduxHolder.getState().clipboard.isPastable === false) {
     return
   }
 
   const state = reduxHolder.getState()
-  const [topItemInCopyModal] = state.copy.items
+  const [topItemInCopyModal] = state.clipboard.items
 
   if (topItemInCopyModal === undefined) {
     return
   }
 
-  if (state.copy.place.pastePos === 'middle') {
-    const elementToBeReplaced = document.querySelector(`#${state.copy.place.id}`)
+  if (state.clipboard.place.pastePos === 'middle') {
+    const elementToBeReplaced = document.querySelector(`#${state.clipboard.place.id}`)
 
     if (elementToBeReplaced !== null) {
       const paperElement = elementToBeReplaced.querySelector(`.${cls.paper}`)
@@ -58,9 +58,9 @@ const pasteItemOnClick = (): void => {
   reduxHolder.dispatch(
     quotationSlice.actions.pasteItem({
       item: topItemInCopyModal,
-      id: state.copy.place.id,
+      id: state.clipboard.place.id,
       newItemId,
-      pastePos: state.copy.place.pastePos,
+      pastePos: state.clipboard.place.pastePos,
     }),
   )
 
@@ -73,21 +73,21 @@ const pasteItemOnClick = (): void => {
     recalculateTotalPrices()
   }, 0)
 
-  reduxHolder.dispatch(copySlice.actions.removeItem())
-  reduxHolder.dispatch(copySlice.actions.forbidAllActions())
+  reduxHolder.dispatch(clipboardSlice.actions.removeItem())
+  reduxHolder.dispatch(clipboardSlice.actions.forbidAllActions())
 
   setTimeout(() => {
-    reduxHolder.dispatch(copySlice.actions.allowAllActions())
+    reduxHolder.dispatch(clipboardSlice.actions.allowAllActions())
   }, 1000 * theme.block.animationDuration)
 
-  const itemsInCopyModal = reduxHolder.getState().copy.items
+  const itemsInCopyModal = reduxHolder.getState().clipboard.items
 
   if (itemsInCopyModal.length === 0) {
-    reduxHolder.dispatch(copySlice.actions.hideCopyModal())
+    reduxHolder.dispatch(clipboardSlice.actions.hideCopyModal())
 
     setTimeout(
       () => {
-        reduxHolder.dispatch(copySlice.actions.allowAllActions())
+        reduxHolder.dispatch(clipboardSlice.actions.allowAllActions())
       },
       1000 * theme.block.animationDuration + 500,
     )

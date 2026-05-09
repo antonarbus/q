@@ -9,7 +9,7 @@ import { useIsEditorView } from '@front/entities/quotation/util/useIsEditorView'
 import type { FC } from 'react'
 
 export const OpenInfoQuotationIcon: FC = () => {
-  const isCopyModalVisible = reduxHolder.useSelector((state) => state.copy.isVisible)
+  const isCopyModalVisible = reduxHolder.useSelector((state) => state.clipboard.isVisible)
   const isEditorView = useIsEditorView()
 
   if (isEditorView === false) {

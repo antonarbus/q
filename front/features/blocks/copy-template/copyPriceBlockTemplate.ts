@@ -1,4 +1,4 @@
-import { copySlice } from '@front/entities/clipboard/copySlice'
+import { clipboardSlice } from '@front/entities/clipboard/clipboardSlice'
 
 // assets can be imported as strings using the ?raw suffix
 import priceBlockPreviewHtml from '@front/entities/quotation/templates/priceBlockPreview.html?raw'
@@ -33,22 +33,22 @@ export const copyPriceBlockTemplate = (event?: React.MouseEvent): void => {
   }
 
   reduxHolder.dispatch(
-    copySlice.actions.addItem({
+    clipboardSlice.actions.addItem({
       item: priceBlockTemplate,
       preview: priceBlockPreviewHtml,
     }),
   )
 
-  const isCopyModalVisible = reduxHolder.getState().copy.isVisible
+  const isClipboardModalVisible = reduxHolder.getState().clipboard.isVisible
 
-  if (isCopyModalVisible === false && event !== undefined) {
+  if (isClipboardModalVisible === false && event !== undefined) {
     reduxHolder.dispatch(
-      copySlice.actions.setInitCursorPos({
+      clipboardSlice.actions.setInitCursorPos({
         x: event.clientX,
         y: event.clientY,
       }),
     )
 
-    reduxHolder.dispatch(copySlice.actions.showCopyModal())
+    reduxHolder.dispatch(clipboardSlice.actions.showCopyModal())
   }
 }

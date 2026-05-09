@@ -3,7 +3,7 @@ import { useGetBookmarkListQuery } from '@front/entities/bookmark/api/useGetBook
 import { Autocomplete } from '@mui/material'
 import { cls } from '@front/shared/cls'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
-import { copySlice } from '@front/entities/clipboard/copySlice'
+import { clipboardSlice } from '@front/entities/clipboard/clipboardSlice'
 import { useEffect, useRef, useState } from 'react'
 import { PaperComponent } from './PaperComponent'
 import { SearchOption } from './SearchOption'
@@ -25,11 +25,11 @@ export const Search = (): React.ReactNode => {
   const [isAutocompleteOpen, setIsAutocompleteOpen] = useState(false)
   const isProcessingRef = useRef(false)
 
-  const isCopyModalVisible = reduxHolder.useSelector((state) => state.copy.isVisible)
+  const isCopyModalVisible = reduxHolder.useSelector((state) => state.clipboard.isVisible)
 
   const copyBookmarkAtSearch = useCopyBookmarkAtSearch()
 
-  const isPreviewPreparing = reduxHolder.useSelector((state) => state.copy.isPreviewPreparing)
+  const isPreviewPreparing = reduxHolder.useSelector((state) => state.clipboard.isPreviewPreparing)
 
   const isLoading = copyBookmarkAtSearch.isPending === true || isPreviewPreparing === true
 
@@ -38,7 +38,7 @@ export const Search = (): React.ReactNode => {
       role='presentation'
       onMouseDown={(event): void => {
         reduxHolder.dispatch(
-          copySlice.actions.setInitCursorPos({ x: event.clientX, y: event.clientY }),
+          clipboardSlice.actions.setInitCursorPos({ x: event.clientX, y: event.clientY }),
         )
       }}
     >

@@ -1,4 +1,4 @@
-import { copySlice } from '@front/entities/clipboard/copySlice'
+import { clipboardSlice } from '@front/entities/clipboard/clipboardSlice'
 import { resolvePreviewPreparingPromise } from '@front/entities/clipboard/bookmarkPreviewDeferred'
 import { BOOKMARK_POS_AT_BLOCKS } from '@front/entities/quotation/redux/bookmarkPosAtBlocks'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
@@ -55,12 +55,14 @@ export const useBookmarkClipboardPreviewCapturer = (
 
       await Promise.all(imageLoadedPromiseList)
 
-      reduxHolder.dispatch(copySlice.actions.addItem({ item: bookmarkBlock, preview: paperHtml }))
-      reduxHolder.dispatch(copySlice.actions.allowToPaste())
-      reduxHolder.dispatch(copySlice.actions.stopPreviewPreparing())
+      reduxHolder.dispatch(
+        clipboardSlice.actions.addItem({ item: bookmarkBlock, preview: paperHtml }),
+      )
+      reduxHolder.dispatch(clipboardSlice.actions.allowToPaste())
+      reduxHolder.dispatch(clipboardSlice.actions.stopPreviewPreparing())
 
-      if (reduxHolder.getState().copy.isVisible === false) {
-        reduxHolder.dispatch(copySlice.actions.showCopyModal())
+      if (reduxHolder.getState().clipboard.isVisible === false) {
+        reduxHolder.dispatch(clipboardSlice.actions.showCopyModal())
       }
 
       reduxHolder.dispatch(quotationSlice.actions.removeBlockFromPosThousand())

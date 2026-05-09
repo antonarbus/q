@@ -1,4 +1,4 @@
-import { copySlice } from '@front/entities/clipboard/copySlice'
+import { clipboardSlice } from '@front/entities/clipboard/clipboardSlice'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { theme } from '@front/shared/theme'
 import { useAnimate } from 'motion/react'
@@ -14,7 +14,7 @@ type Res = {
 export const useAnimatedClipboardModalElement = (): Res => {
   const [scope, animate] = useAnimate<HTMLDivElement>()
   const isFirstMount = useFirstMountState()
-  const items = reduxHolder.useSelector((state) => state.copy.items)
+  const items = reduxHolder.useSelector((state) => state.clipboard.items)
 
   useEffect(() => {
     const newHeight = items.reduce((accumulator, item) => {
@@ -49,10 +49,10 @@ export const useAnimatedClipboardModalElement = (): Res => {
       },
     )
 
-    reduxHolder.dispatch(copySlice.actions.forbidAllActions())
+    reduxHolder.dispatch(clipboardSlice.actions.forbidAllActions())
 
     setTimeout(() => {
-      reduxHolder.dispatch(copySlice.actions.allowAllActions())
+      reduxHolder.dispatch(clipboardSlice.actions.allowAllActions())
     }, 1000 * theme.block.animationDuration)
   }, [items.length])
 

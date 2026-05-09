@@ -1,6 +1,6 @@
 import type { UrlParam } from '@back/api/bookmark/getBookmarkHandler'
 import { useGetBookmarkMutation } from '@front/entities/bookmark/api/useGetBookmarkMutation'
-import { copySlice } from '@front/entities/clipboard/copySlice'
+import { clipboardSlice } from '@front/entities/clipboard/clipboardSlice'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { IconButton, Tooltip } from '@mui/material'
 import { RotatingLoaderIcon } from '@front/shared/component/RotatingLoaderIcon'
@@ -39,10 +39,10 @@ export const CopyBookmarkButtonAtTable = (props: UrlParam): React.JSX.Element =>
             }),
           )
 
-          reduxHolder.dispatch(copySlice.actions.startPreviewPreparing())
+          reduxHolder.dispatch(clipboardSlice.actions.startPreviewPreparing())
 
           reduxHolder.dispatch(
-            copySlice.actions.setInitCursorPos({
+            clipboardSlice.actions.setInitCursorPos({
               x: event.clientX,
               y: event.clientY,
             }),

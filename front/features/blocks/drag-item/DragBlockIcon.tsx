@@ -8,7 +8,7 @@ import { MdDragIndicator } from 'react-icons/md'
 export const DragBlockIcon = (): React.JSX.Element => {
   const isLastBlock = useIsLastBlock()
 
-  const isCopyModalVisible = reduxHolder.useSelector((state) => state.copy.isVisible)
+  const isCopyModalVisible = reduxHolder.useSelector((state) => state.clipboard.isVisible)
 
   const disabled = isLastBlock || isCopyModalVisible
   const dragHandleProps = useDragHandleProps()

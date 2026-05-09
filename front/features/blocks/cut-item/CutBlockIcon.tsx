@@ -1,4 +1,4 @@
-import { copySlice } from '@front/entities/clipboard/copySlice'
+import { clipboardSlice } from '@front/entities/clipboard/clipboardSlice'
 import { useBlock } from '@front/entities/quotation/provider/block/useBlock'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { selectIsLastBlock } from '@front/entities/quotation/redux/selector/selectIsLastBlock'
@@ -15,7 +15,7 @@ import { getCleanPaperHtml } from '@front/shared/util/html-getter/getCleanPaperH
 export const CutBlockIcon = (): React.JSX.Element => {
   const block = useBlock()
   const isBlockAlone = reduxHolder.useSelector(selectIsLastBlock)
-  const isCuttable = reduxHolder.useSelector((state) => state.copy.isCuttable)
+  const isCuttable = reduxHolder.useSelector((state) => state.clipboard.isCuttable)
   const disabled = isBlockAlone || isCuttable === false
 
   return (
@@ -59,7 +59,9 @@ export const CutBlockIcon = (): React.JSX.Element => {
 
             const html = getCleanPaperHtml({ paperElement })
 
-            reduxHolder.dispatch(copySlice.actions.addItem({ item: blockToCut, preview: html }))
+            reduxHolder.dispatch(
+              clipboardSlice.actions.addItem({ item: blockToCut, preview: html }),
+            )
 
             reduxHolder.dispatch(quotationSlice.actions.deleteBlock({ id: blockToCut.id }))
 
@@ -70,24 +72,24 @@ export const CutBlockIcon = (): React.JSX.Element => {
               recalculateTotalPrices()
             }, 0)
 
-            reduxHolder.dispatch(copySlice.actions.forbidAllActions())
+            reduxHolder.dispatch(clipboardSlice.actions.forbidAllActions())
 
-            const isCopyModalVisible = reduxHolder.getState().copy.isVisible
+            const isClipboardModalVisible = reduxHolder.getState().clipboard.isVisible
 
-            if (isCopyModalVisible === false) {
+            if (isClipboardModalVisible === false) {
               reduxHolder.dispatch(
-                copySlice.actions.setInitCursorPos({
+                clipboardSlice.actions.setInitCursorPos({
                   x: event.clientX,
                   y: event.clientY,
                 }),
               )
 
-              reduxHolder.dispatch(copySlice.actions.showCopyModal())
+              reduxHolder.dispatch(clipboardSlice.actions.showCopyModal())
             }
 
             setTimeout(
               () => {
-                reduxHolder.dispatch(copySlice.actions.allowAllActions())
+                reduxHolder.dispatch(clipboardSlice.actions.allowAllActions())
               },
               1000 * theme.block.animationDuration + 500,
             )

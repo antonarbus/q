@@ -1,5 +1,5 @@
 import { useGetBookmarkMutation } from '@front/entities/bookmark/api/useGetBookmarkMutation'
-import { copySlice } from '@front/entities/clipboard/copySlice'
+import { clipboardSlice } from '@front/entities/clipboard/clipboardSlice'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { useCallback } from 'react'
@@ -38,7 +38,7 @@ export const useCopyBookmarkAtSearch = (): Res => {
         }),
       )
 
-      reduxHolder.dispatch(copySlice.actions.startPreviewPreparing())
+      reduxHolder.dispatch(clipboardSlice.actions.startPreviewPreparing())
 
       await getPreviewPreparingPromise()
     },

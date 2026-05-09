@@ -1,4 +1,4 @@
-import { copySlice } from '@front/entities/clipboard/copySlice'
+import { clipboardSlice } from '@front/entities/clipboard/clipboardSlice'
 import type { PaymentBlock } from '@back/entity/quotation/schema'
 import { generateId } from '@front/shared/lib/nanoid/generateId'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
@@ -31,22 +31,22 @@ export const copyPaymentBlockTemplate = (event?: React.MouseEvent): void => {
   }
 
   reduxHolder.dispatch(
-    copySlice.actions.addItem({
+    clipboardSlice.actions.addItem({
       item: paymentBlockTemplate,
       preview: paymentBlockPreviewHtml,
     }),
   )
 
-  const isCopyModalVisible = reduxHolder.getState().copy.isVisible
+  const isClipboardModalVisible = reduxHolder.getState().clipboard.isVisible
 
-  if (isCopyModalVisible === false && event !== undefined) {
+  if (isClipboardModalVisible === false && event !== undefined) {
     reduxHolder.dispatch(
-      copySlice.actions.setInitCursorPos({
+      clipboardSlice.actions.setInitCursorPos({
         x: event.clientX,
         y: event.clientY,
       }),
     )
 
-    reduxHolder.dispatch(copySlice.actions.showCopyModal())
+    reduxHolder.dispatch(clipboardSlice.actions.showCopyModal())
   }
 }

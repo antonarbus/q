@@ -31,7 +31,7 @@ type Props = {
 export const BlockComp = (props: Props): React.JSX.Element => {
   const block = useBlock()
   const isLastBlock = useIsLastBlock()
-  const isCopyModalVisible = reduxHolder.useSelector((state) => state.copy.isVisible)
+  const isCopyModalVisible = reduxHolder.useSelector((state) => state.clipboard.isVisible)
   const isDragDisabled = isLastBlock || isCopyModalVisible
   const isEditorView = useIsEditorView()
 

@@ -19,9 +19,9 @@ export const useClipboardModalFollowCursor = (props: Props): void => {
     const state = reduxHolder.getState()
 
     // Initialize position from Redux
-    if (state.copy.initCursorPos !== null) {
-      container.style.left = `${state.copy.initCursorPos.x + 30}px`
-      container.style.top = `${state.copy.initCursorPos.y + 30}px`
+    if (state.clipboard.initCursorPos !== null) {
+      container.style.left = `${state.clipboard.initCursorPos.x + 30}px`
+      container.style.top = `${state.clipboard.initCursorPos.y + 30}px`
     }
 
     const WAIT_MS = 20

@@ -1,4 +1,4 @@
-import { copySlice } from '@front/entities/clipboard/copySlice'
+import { clipboardSlice } from '@front/entities/clipboard/clipboardSlice'
 import { useBlock } from '@front/entities/quotation/provider/block/useBlock'
 import { saveBlockHeightByIndex } from '@front/entities/quotation/util/saveBlockHeightByIndex'
 import { Tooltip } from '@mui/material'
@@ -9,7 +9,7 @@ import { getCleanPaperHtml } from '@front/shared/util/html-getter/getCleanPaperH
 
 export const CopyBlockIcon = (): React.JSX.Element => {
   const block = useBlock()
-  const isCopyable = reduxHolder.useSelector((state) => state.copy.isCopyable)
+  const isCopyable = reduxHolder.useSelector((state) => state.clipboard.isCopyable)
   const disabled = isCopyable === false
 
   return (
@@ -50,21 +50,23 @@ export const CopyBlockIcon = (): React.JSX.Element => {
 
             const html = getCleanPaperHtml({ paperElement })
 
-            reduxHolder.dispatch(copySlice.actions.addItem({ item: blockToCopy, preview: html }))
+            reduxHolder.dispatch(
+              clipboardSlice.actions.addItem({ item: blockToCopy, preview: html }),
+            )
 
-            reduxHolder.dispatch(copySlice.actions.allowToPaste())
+            reduxHolder.dispatch(clipboardSlice.actions.allowToPaste())
 
-            const isCopyModalVisible = reduxHolder.getState().copy.isVisible
+            const isClipboardModalVisible = reduxHolder.getState().clipboard.isVisible
 
-            if (isCopyModalVisible === false) {
+            if (isClipboardModalVisible === false) {
               reduxHolder.dispatch(
-                copySlice.actions.setInitCursorPos({
+                clipboardSlice.actions.setInitCursorPos({
                   x: event.clientX,
                   y: event.clientY,
                 }),
               )
 
-              reduxHolder.dispatch(copySlice.actions.showCopyModal())
+              reduxHolder.dispatch(clipboardSlice.actions.showCopyModal())
             }
           }}
           style={{

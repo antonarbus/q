@@ -37,7 +37,7 @@ const initialState: InitState = {
   isPreviewPreparing: false,
 }
 
-export const copySlice = createSlice({
+export const clipboardSlice = createSlice({
   name: 'copy',
   initialState,
   reducers: {
@@ -102,4 +102,4 @@ export const copySlice = createSlice({
   },
 })
 
-export const copyReducer: Reducer<InitState> = copySlice.reducer
+export const clipboardReducer: Reducer<InitState> = clipboardSlice.reducer

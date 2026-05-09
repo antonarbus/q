@@ -12,7 +12,7 @@ export const DeleteBlockIcon = (): React.JSX.Element => {
   const block = useBlock()
 
   const isBlockAlone = reduxHolder.useSelector(selectIsLastBlock)
-  const isDeletable = reduxHolder.useSelector((state) => state.copy.isDeletable)
+  const isDeletable = reduxHolder.useSelector((state) => state.clipboard.isDeletable)
   const disabled = isBlockAlone || isDeletable === false
 
   return (

@@ -1,4 +1,4 @@
-import { copySlice } from '@front/entities/clipboard/copySlice'
+import { clipboardSlice } from '@front/entities/clipboard/clipboardSlice'
 import { useBlock } from '@front/entities/quotation/provider/block/useBlock'
 import { useRow } from '@front/entities/quotation/provider/row/useRow'
 import { getRowFromStoreByIndex } from '@front/entities/quotation/redux/getter/getRowFromStoreByIndex'
@@ -16,11 +16,11 @@ import { TbCut } from 'react-icons/tb'
 export const CutRowIcon = (): React.JSX.Element => {
   const block = useBlock()
   const row = useRow()
-  const isCopyable = reduxHolder.useSelector((state) => state.copy.isCopyable)
+  const isCopyable = reduxHolder.useSelector((state) => state.clipboard.isCopyable)
 
   const isLastRow = reduxHolder.useSelector(selectIsLastRow({ blockIndex: block.index }))
 
-  const isDeletable = reduxHolder.useSelector((state) => state.copy.isDeletable)
+  const isDeletable = reduxHolder.useSelector((state) => state.clipboard.isDeletable)
   const disabled = isLastRow || isDeletable === false || isCopyable === false
 
   return (
@@ -66,23 +66,23 @@ export const CutRowIcon = (): React.JSX.Element => {
             const html = getClosestRowHtml(event)
 
             reduxHolder.dispatch(
-              copySlice.actions.addItem({
+              clipboardSlice.actions.addItem({
                 item: rowFromStore,
                 preview: html,
               }),
             )
 
-            const isCopyModalVisible = reduxHolder.getState().copy.isVisible
+            const isClipboardModalVisible = reduxHolder.getState().clipboard.isVisible
 
-            if (isCopyModalVisible === false) {
+            if (isClipboardModalVisible === false) {
               reduxHolder.dispatch(
-                copySlice.actions.setInitCursorPos({
+                clipboardSlice.actions.setInitCursorPos({
                   x: event.clientX,
                   y: event.clientY,
                 }),
               )
 
-              reduxHolder.dispatch(copySlice.actions.showCopyModal())
+              reduxHolder.dispatch(clipboardSlice.actions.showCopyModal())
             }
 
             reduxHolder.dispatch(
@@ -95,10 +95,10 @@ export const CutRowIcon = (): React.JSX.Element => {
             recalculateSubTotalPrices({ incrementally: true })
             recalculateTotalPrices()
 
-            reduxHolder.dispatch(copySlice.actions.forbidAllActions())
+            reduxHolder.dispatch(clipboardSlice.actions.forbidAllActions())
 
             setTimeout(() => {
-              reduxHolder.dispatch(copySlice.actions.allowAllActions())
+              reduxHolder.dispatch(clipboardSlice.actions.allowAllActions())
             }, 1000 * theme.block.animationDuration)
           }}
           style={{

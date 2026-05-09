@@ -1,4 +1,4 @@
-import { copySlice } from '@front/entities/clipboard/copySlice'
+import { clipboardSlice } from '@front/entities/clipboard/clipboardSlice'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { useEffectOnce } from 'react-use'
 
@@ -8,7 +8,7 @@ export const useExitCopyOnEsc = (): void => {
       return
     }
 
-    reduxHolder.dispatch(copySlice.actions.hideCopyModal())
+    reduxHolder.dispatch(clipboardSlice.actions.hideCopyModal())
   }
 
   type Res = () => void

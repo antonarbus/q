@@ -3,7 +3,7 @@ import { useBlock } from '../provider/block/useBlock'
 import { selectIsLastRow } from '../redux/selector/selectIsLastRow'
 
 export const useIsRowsSortDisabled = (): boolean => {
-  const isCopyModalVisible = reduxHolder.useSelector((state) => state.copy.isVisible)
+  const isCopyModalVisible = reduxHolder.useSelector((state) => state.clipboard.isVisible)
 
   const block = useBlock()
 

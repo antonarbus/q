@@ -13,7 +13,7 @@ export const OpenInfoRowModalIcon = (): React.ReactNode => {
   const block = useBlock()
   const row = useRow()
 
-  const isCopyModalVisible = reduxHolder.useSelector((state) => state.copy.isVisible)
+  const isCopyModalVisible = reduxHolder.useSelector((state) => state.clipboard.isVisible)
 
   return (
     <Tooltip enterDelay={500} enterNextDelay={500} placement='right' title='Info'>

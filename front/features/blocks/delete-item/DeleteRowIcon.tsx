@@ -15,7 +15,7 @@ export const DeleteRowIcon = (): React.JSX.Element => {
 
   const isLastRow = reduxHolder.useSelector(selectIsLastRow({ blockIndex: block.index }))
 
-  const isDeletable = reduxHolder.useSelector((state) => state.copy.isDeletable)
+  const isDeletable = reduxHolder.useSelector((state) => state.clipboard.isDeletable)
   const disabled = isLastRow || isDeletable === false
 
   return (

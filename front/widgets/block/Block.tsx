@@ -15,9 +15,9 @@ type Props = {
 }
 
 export const Block = (props: Props): React.ReactNode => {
-  const copyPlace = reduxHolder.useSelector((state) => state.copy.place)
+  const copyPlace = reduxHolder.useSelector((state) => state.clipboard.place)
 
-  const isPasteTextShown = reduxHolder.useSelector((state) => state.copy.isPasteTextShown)
+  const isPasteTextShown = reduxHolder.useSelector((state) => state.clipboard.isPasteTextShown)
 
   const shouldShowPasteBefore =
     isPasteTextShown && copyPlace.id === props.block.id && copyPlace.pastePos === 'top'
