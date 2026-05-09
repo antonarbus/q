@@ -262,6 +262,31 @@ resource "google_secret_manager_secret_iam_member" "gcp_private_key" {
 }
 
 # ==============================================================================
+# AI / GEMINI
+# ==============================================================================
+
+resource "google_secret_manager_secret" "gemini_api_key" {
+  secret_id = "GEMINI_API_KEY"
+
+  labels = {
+    managed-by = "terraform"
+    purpose    = "ai"
+  }
+
+  replication {
+    auto {}
+  }
+
+  depends_on = [google_project_service.required_services]
+}
+
+resource "google_secret_manager_secret_iam_member" "gemini_api_key" {
+  secret_id = google_secret_manager_secret.gemini_api_key.id
+  role      = "roles/secretmanager.secretAccessor"
+  member    = "serviceAccount:${google_service_account.cloud_run_service.email}"
+}
+
+# ==============================================================================
 # STRIPE
 # ==============================================================================
 
