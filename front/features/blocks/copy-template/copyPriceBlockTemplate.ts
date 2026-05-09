@@ -1,4 +1,4 @@
-import { copySlice } from '@front/entities/copy/copySlice'
+import { copySlice } from '@front/entities/clipboard/copySlice'
 
 // assets can be imported as strings using the ?raw suffix
 import priceBlockPreviewHtml from '@front/entities/quotation/templates/priceBlockPreview.html?raw'

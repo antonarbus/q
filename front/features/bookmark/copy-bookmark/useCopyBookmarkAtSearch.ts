@@ -1,11 +1,11 @@
 import { useGetBookmarkMutation } from '@front/entities/bookmark/api/useGetBookmarkMutation'
-import { copySlice } from '@front/entities/copy/copySlice'
+import { copySlice } from '@front/entities/clipboard/copySlice'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { useCallback } from 'react'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
-import { getPreviewPreparingPromise } from '@front/entities/copy/bookmarkPreviewDeferred'
+import { getPreviewPreparingPromise } from '@front/entities/clipboard/bookmarkPreviewDeferred'
 
 type Params = {
   bookmarkId: string

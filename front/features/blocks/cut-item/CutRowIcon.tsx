@@ -1,4 +1,4 @@
-import { copySlice } from '@front/entities/copy/copySlice'
+import { copySlice } from '@front/entities/clipboard/copySlice'
 import { useBlock } from '@front/entities/quotation/provider/block/useBlock'
 import { useRow } from '@front/entities/quotation/provider/row/useRow'
 import { getRowFromStoreByIndex } from '@front/entities/quotation/redux/getter/getRowFromStoreByIndex'

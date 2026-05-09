@@ -1,6 +1,6 @@
 // oxlint-disable typescript/consistent-type-definitions
 import { suggestionReducer } from '@front/entities/suggestion/suggestionSlice'
-import { copyReducer } from '@front/entities/copy/copySlice'
+import { copyReducer } from '@front/entities/clipboard/copySlice'
 import { navReducer } from '@front/entities/nav/navSlice'
 import { quotationReducer } from '@front/entities/quotation/redux/quotationSlice'
 import { userReducer } from '@front/entities/user/redux/userSlice'

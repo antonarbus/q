@@ -1,5 +1,5 @@
-import { copySlice } from '@front/entities/copy/copySlice'
-import { resolvePreviewPreparingPromise } from '@front/entities/copy/bookmarkPreviewDeferred'
+import { copySlice } from '@front/entities/clipboard/copySlice'
+import { resolvePreviewPreparingPromise } from '@front/entities/clipboard/bookmarkPreviewDeferred'
 import { BOOKMARK_POS_AT_BLOCKS } from '@front/entities/quotation/redux/bookmarkPosAtBlocks'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'

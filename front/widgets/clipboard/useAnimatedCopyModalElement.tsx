@@ -1,4 +1,4 @@
-import { copySlice } from '@front/entities/copy/copySlice'
+import { copySlice } from '@front/entities/clipboard/copySlice'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { theme } from '@front/shared/theme'
 import { useAnimate } from 'motion/react'

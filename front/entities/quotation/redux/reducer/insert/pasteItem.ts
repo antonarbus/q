@@ -1,4 +1,4 @@
-import type { PastePos } from '@front/entities/copy/types'
+import type { PastePos } from '@front/entities/clipboard/types'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { generateId } from '@front/shared/lib/nanoid/generateId'
 import type { BlockItem, Quotation, RowBlock } from '@back/entity/quotation/schema'

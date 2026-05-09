@@ -1,4 +1,4 @@
-import { copySlice } from '@front/entities/copy/copySlice'
+import { copySlice } from '@front/entities/clipboard/copySlice'
 import type { PaymentBlock } from '@back/entity/quotation/schema'
 import { generateId } from '@front/shared/lib/nanoid/generateId'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
