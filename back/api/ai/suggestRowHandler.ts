@@ -52,13 +52,13 @@ export const suggestRowHandler: RouterHandler = async (req) => {
     {
       "description": "clear, concise item description",
       "itemPrice": 45.00,
-      "supplierNotes": "Supplier: X, Region: Y, typical lead time, etc."
+      "supplierNotes": "Supplier: X, Region: Y, lead time: Z days. Source: https://supplier.com/product-page"
     }
 
     Rules:
     - description should be professional and concise
-    - itemPrice must be a number (not a string), representing the unit price with currency
-    - supplierNotes should include supplier name, region, relevant sourcing details, link to the price source is mandatory
+    - itemPrice must be a number (not a string), representing the unit price in USD
+    - supplierNotes must include: supplier name, region, lead time, and MUST end with the direct URL to the product page where the price was found (format: "Source: https://...")
   `
 
   const result = await gemini.client.models

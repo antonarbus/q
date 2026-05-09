@@ -1,11 +1,9 @@
 import type { ReactNode } from 'react'
 import { createContext, useContext, useState } from 'react'
-import { useSuggestionMutation } from '../api/useSuggestionMutation'
 
 type ContextValue = {
   inputValue: string
   setInputValue: (value: string) => void
-  mutation: ReturnType<typeof useSuggestionMutation>
 }
 
 const SuggestionContext = createContext<ContextValue | null>(null)
@@ -16,10 +14,9 @@ type Props = {
 
 export const SuggestionProvider = (props: Props): React.JSX.Element => {
   const [inputValue, setInputValue] = useState('')
-  const mutation = useSuggestionMutation()
 
   return (
-    <SuggestionContext.Provider value={{ inputValue, setInputValue, mutation }}>
+    <SuggestionContext.Provider value={{ inputValue, setInputValue }}>
       {props.children}
     </SuggestionContext.Provider>
   )
