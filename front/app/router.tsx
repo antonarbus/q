@@ -20,8 +20,7 @@ import { Main } from '@front/shared/layout/Main'
 import { route } from '@front/shared/lib/react-router-dom/route'
 import { routerHolder } from '@front/shared/lib/react-router-dom/routerHolder'
 import { Suggestion } from '@front/widgets/suggestion'
-import { Clipboard } from '@front/widgets/clipboard'
-import { BookmarkCopyPreviewCapturer } from '@front/widgets/clipboard/BookmarkCopyPreviewCapturer'
+import { Clipboard, ClipboardPreviewCapturer } from '@front/widgets/clipboard'
 import { Footer } from '@front/widgets/footer'
 import { Nav } from '@front/widgets/nav'
 import { BookmarkListAllPageLazy } from '@front/pages/bookmark-list-all-page'
@@ -87,7 +86,7 @@ const router = createBrowserRouter([
         <Nav />
         <Suggestion />
         <Clipboard />
-        <BookmarkCopyPreviewCapturer />
+        <ClipboardPreviewCapturer />
         <ConfirmationDialog />
         <Main />
         <Footer />

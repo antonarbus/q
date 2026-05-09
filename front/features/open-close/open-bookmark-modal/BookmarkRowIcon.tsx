@@ -15,9 +15,9 @@ export const BookmarkRowIcon = (): React.ReactNode => {
   const block = useBlock()
   const row = useRow()
 
-  const isCopyModalVisible = reduxHolder.useSelector((state) => state.clipboard.isVisible)
+  const isClipboardModalVisible = reduxHolder.useSelector((state) => state.clipboard.isVisible)
 
-  const disabled = isCopyModalVisible
+  const disabled = isClipboardModalVisible
 
   return (
     <Tooltip enterDelay={500} enterNextDelay={500} placement='right' title='Add to bookmarks'>

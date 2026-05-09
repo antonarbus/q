@@ -13,7 +13,7 @@ export const OpenInfoRowModalIcon = (): React.ReactNode => {
   const block = useBlock()
   const row = useRow()
 
-  const isCopyModalVisible = reduxHolder.useSelector((state) => state.clipboard.isVisible)
+  const isClipboardModalVisible = reduxHolder.useSelector((state) => state.clipboard.isVisible)
 
   return (
     <Tooltip enterDelay={500} enterNextDelay={500} placement='right' title='Info'>
@@ -23,7 +23,7 @@ export const OpenInfoRowModalIcon = (): React.ReactNode => {
           aria-hidden={false}
           className={cls.actionIcon}
           onClick={(): void => {
-            if (isCopyModalVisible === true) {
+            if (isClipboardModalVisible === true) {
               return
             }
 
@@ -39,7 +39,7 @@ export const OpenInfoRowModalIcon = (): React.ReactNode => {
             navigate(`./${route.info}/${rowFromStore.id}`)
           }}
           style={{
-            color: isCopyModalVisible === true ? '#acacac' : '#000',
+            color: isClipboardModalVisible === true ? '#acacac' : '#000',
             cursor: 'pointer',
             touchAction: 'none',
           }}

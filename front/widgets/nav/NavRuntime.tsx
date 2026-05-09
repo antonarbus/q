@@ -23,11 +23,11 @@ export const NavRuntime = (): null => {
   }, [hasPaymentBlock])
 
   // --- Copy modal: disable top nav while open, restore on close ---
-  const isCopyModalVisible = reduxHolder.useSelector((state) => state.clipboard.isVisible)
+  const isClipboardModalVisible = reduxHolder.useSelector((state) => state.clipboard.isVisible)
   const wasVisibleRef = useRef(false)
 
   useEffect(() => {
-    if (isCopyModalVisible) {
+    if (isClipboardModalVisible) {
       wasVisibleRef.current = true
 
       reduxHolder.dispatch(
@@ -86,7 +86,7 @@ export const NavRuntime = (): null => {
 
       reduxHolder.dispatch(navSlice.actions.enableTopNavItems())
     }
-  }, [isCopyModalVisible])
+  }, [isClipboardModalVisible])
 
   return null
 }

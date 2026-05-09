@@ -12,9 +12,9 @@ export const OpenInfoBlockModalIcon = (): React.ReactNode => {
   const navigate = useNavigate()
   const block = useBlock()
 
-  const isCopyModalVisible = reduxHolder.useSelector((state) => state.clipboard.isVisible)
+  const isClipboardModalVisible = reduxHolder.useSelector((state) => state.clipboard.isVisible)
 
-  const disabled = isCopyModalVisible
+  const disabled = isClipboardModalVisible
 
   return (
     <Tooltip enterDelay={500} enterNextDelay={500} placement='right' title='Info'>

@@ -9,7 +9,7 @@ import { useIsEditorView } from '@front/entities/quotation/util/useIsEditorView'
 import type { FC } from 'react'
 
 export const OpenInfoQuotationIcon: FC = () => {
-  const isCopyModalVisible = reduxHolder.useSelector((state) => state.clipboard.isVisible)
+  const isClipboardModalVisible = reduxHolder.useSelector((state) => state.clipboard.isVisible)
   const isEditorView = useIsEditorView()
 
   if (isEditorView === false) {
@@ -20,14 +20,14 @@ export const OpenInfoQuotationIcon: FC = () => {
     <Tooltip title='Info'>
       <Link
         style={{ lineHeight: 0.1, height: '100%' }}
-        to={isCopyModalVisible === true ? '' : `./${route.info}`}
+        to={isClipboardModalVisible === true ? '' : `./${route.info}`}
       >
         <PiInfoBold
           css={{
             height: '100%',
             width: 'auto',
-            fill: isCopyModalVisible === true ? '#c6c6c6' : theme.color.accent,
-            ...(isCopyModalVisible === false && {
+            fill: isClipboardModalVisible === true ? '#c6c6c6' : theme.color.accent,
+            ...(isClipboardModalVisible === false && {
               ':hover': {
                 fill: `${darken(theme.color.accent, 0.3)} !important`,
               },

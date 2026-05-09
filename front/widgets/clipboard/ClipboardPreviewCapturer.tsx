@@ -3,7 +3,7 @@ import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { Block } from '@front/widgets/block/Block'
 import { DragDropContext, Droppable } from '@hello-pangea/dnd'
 import { useRef } from 'react'
-import { useBookmarkClipboardPreviewCapturer } from './useBookmarkClipboardPreviewCapturer'
+import { useClipboardPreviewCapturer } from './useClipboardPreviewCapturer'
 
 /**
  * Always-mounted offscreen component that generates the copy preview HTML for
@@ -20,7 +20,7 @@ import { useBookmarkClipboardPreviewCapturer } from './useBookmarkClipboardPrevi
  *      → showCopyModal (matching the order used by CopyBlockIcon).
  *   4. removeBlockFromPosThousandReducer → component returns null.
  */
-export const BookmarkCopyPreviewCapturer = (): React.ReactNode => {
+export const ClipboardPreviewCapturer = (): React.ReactNode => {
   const containerRef = useRef<HTMLDivElement>(null)
 
   // Hack! Set bookmark item at pos 1000 not to interfere with main block items
@@ -31,7 +31,7 @@ export const BookmarkCopyPreviewCapturer = (): React.ReactNode => {
 
   const isPreviewPreparing = reduxHolder.useSelector((state) => state.clipboard.isPreviewPreparing)
 
-  useBookmarkClipboardPreviewCapturer(containerRef)
+  useClipboardPreviewCapturer(containerRef)
 
   if (bookmarkBlock === undefined || isPreviewPreparing === false) {
     return null

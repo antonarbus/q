@@ -7,7 +7,7 @@ import { useEffect } from 'react'
 import { getCleanPaperHtml } from '@front/shared/util/html-getter/getCleanPaperHtml'
 import { cls } from '@front/shared/cls'
 
-export const useBookmarkClipboardPreviewCapturer = (
+export const useClipboardPreviewCapturer = (
   containerRef: React.RefObject<HTMLDivElement | null>,
 ): void => {
   const bookmarkBlock = reduxHolder.useSelector((state) =>
@@ -15,7 +15,7 @@ export const useBookmarkClipboardPreviewCapturer = (
   )
 
   useEffect(() => {
-    const waitImagesToLoadAndShowItemInCopyContainer = async (): Promise<void> => {
+    const waitImagesToLoadAndShowItemInClipboardContainer = async (): Promise<void> => {
       if (bookmarkBlock === undefined) {
         return
       }
@@ -69,6 +69,6 @@ export const useBookmarkClipboardPreviewCapturer = (
       resolvePreviewPreparingPromise()
     }
 
-    waitImagesToLoadAndShowItemInCopyContainer()
+    waitImagesToLoadAndShowItemInClipboardContainer()
   }, [bookmarkBlock])
 }

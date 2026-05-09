@@ -25,7 +25,7 @@ export const Search = (): React.ReactNode => {
   const [isAutocompleteOpen, setIsAutocompleteOpen] = useState(false)
   const isProcessingRef = useRef(false)
 
-  const isCopyModalVisible = reduxHolder.useSelector((state) => state.clipboard.isVisible)
+  const isClipboardModalVisible = reduxHolder.useSelector((state) => state.clipboard.isVisible)
 
   const copyBookmarkAtSearch = useCopyBookmarkAtSearch()
 
@@ -73,7 +73,7 @@ export const Search = (): React.ReactNode => {
         className={cls.search}
         clearOnEscape={true}
         disablePortal={true}
-        disabled={isCopyModalVisible}
+        disabled={isClipboardModalVisible}
         freeSolo={true}
         loading={getBookmarkListQuery.isPending}
         loadingText={email === null ? 'Not logged in' : 'Loading...'}
