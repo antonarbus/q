@@ -1,4 +1,4 @@
-import { useStripeAccountStatusQuery } from '@front/entities/stripe/api/useStripeAccountStatusQuery'
+import { useStripeAccountStatusQuery } from '@front/entities/payment/api/useStripeAccountStatusQuery'
 import { selectPaymentBlockByBlockIndex } from '@front/entities/quotation/redux/selector/selectPaymentBlockByBlockIndex'
 import { confirmWithDialog } from '@front/shared/component/confirmation-dialog/confirmWithDialog'
 import { buildSearchParams } from '@front/shared/lib/react-router-dom/searchParams'

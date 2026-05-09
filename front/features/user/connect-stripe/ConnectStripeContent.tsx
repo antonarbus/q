@@ -1,5 +1,5 @@
-import { useStripeAccountStatusQuery } from '@front/entities/stripe/api/useStripeAccountStatusQuery'
-import { useStripeConnectUrlQuery } from '@front/entities/stripe/api/useStripeConnectUrlQuery'
+import { useStripeAccountStatusQuery } from '@front/entities/payment/api/useStripeAccountStatusQuery'
+import { useStripeConnectUrlQuery } from '@front/entities/payment/api/useStripeConnectUrlQuery'
 import { RotatingLoaderIcon } from '@front/shared/component/RotatingLoaderIcon'
 import { buildSearchParams } from '@front/shared/lib/react-router-dom/searchParams'
 import { route } from '@front/shared/lib/react-router-dom/route'

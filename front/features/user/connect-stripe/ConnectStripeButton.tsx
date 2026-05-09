@@ -1,5 +1,5 @@
-import { useStripeAccountStatusQuery } from '@front/entities/stripe/api/useStripeAccountStatusQuery'
-import { useStripeConnectUrlQuery } from '@front/entities/stripe/api/useStripeConnectUrlQuery'
+import { useStripeAccountStatusQuery } from '@front/entities/payment/api/useStripeAccountStatusQuery'
+import { useStripeConnectUrlQuery } from '@front/entities/payment/api/useStripeConnectUrlQuery'
 import { RotatingLoaderIcon } from '@front/shared/component/RotatingLoaderIcon'
 import { Box, Button } from '@mui/material'
 import { SiStripe } from 'react-icons/si'

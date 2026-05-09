@@ -1,4 +1,4 @@
-import { useCreatePaymentLinkMutation } from '@front/entities/stripe/api/useCreatePaymentLinkMutation'
+import { useCreatePaymentLinkMutation } from '@front/entities/payment/api/useCreatePaymentLinkMutation'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { selectPaymentBlockByBlockIndex } from '@front/entities/quotation/redux/selector/selectPaymentBlockByBlockIndex'
 import { saveExistingQuotation } from '@front/features/quotation/save-quotation/saveExistingQuotation'
