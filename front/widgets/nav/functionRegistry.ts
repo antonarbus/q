@@ -42,4 +42,4 @@ export const functionRegistry = {
   openQuotationsPage,
   openLoginModal,
   openSettingsModal,
-} satisfies Record<FunctionId, unknown>
+} as const satisfies Record<FunctionId, unknown>
