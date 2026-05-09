@@ -1,0 +1,26 @@
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
+
+export const EmailAtBottomOfMenu = (): React.ReactNode => {
+  const email = reduxHolder.useSelector((state) => state.user.email)
+
+  if (email === null) {
+    return null
+  }
+
+  return (
+    <span
+      style={{
+        position: 'absolute',
+        bottom: 0,
+        right: 0,
+        color: 'grey',
+        fontSize: '10px',
+        paddingRight: '10px',
+        paddingBottom: '5px',
+        zIndex: 10,
+      }}
+    >
+      {email}
+    </span>
+  )
+}
