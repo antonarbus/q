@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
-import { navSlice } from '@front/entities/nav/navSlice'
-import { navItemId } from '@front/entities/nav/navItemId'
+import { navSlice } from '@front/shared/nav/navSlice'
+import { navItemId } from '@front/shared/nav/navItemId'
 import { route } from '@front/shared/lib/react-router-dom/route'
 
 // NavRuntime syncs Redux state into nav item state (disabled, hidden, etc.).

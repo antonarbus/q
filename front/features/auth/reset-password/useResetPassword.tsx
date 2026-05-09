@@ -1,5 +1,5 @@
-import { navItemId } from '@front/entities/nav/navItemId'
-import { navSlice } from '@front/entities/nav/navSlice'
+import { navItemId } from '@front/shared/nav/navItemId'
+import { navSlice } from '@front/shared/nav/navSlice'
 import { useResetUserPasswordMutation } from '@front/entities/user/api/useResetUserPasswordMutation'
 import { userSlice } from '@front/entities/user/redux/userSlice'
 import type { Signal } from '@preact/signals-react'

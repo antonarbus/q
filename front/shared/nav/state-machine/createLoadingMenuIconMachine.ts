@@ -1,7 +1,7 @@
 // oxlint-disable typescript/explicit-function-return-type
 // oxlint-disable typescript/explicit-module-boundary-types
-import type { NavItemId } from '@front/entities/nav/navItemId'
-import { navSlice } from '@front/entities/nav/navSlice'
+import type { NavItemId } from '@front/shared/nav/navItemId'
+import { navSlice } from '@front/shared/nav/navSlice'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { setup } from 'xstate'
 

@@ -1,5 +1,5 @@
-import { navItemId } from '@front/entities/nav/navItemId'
-import { createLoadingMenuIconMachine } from '@front/entities/nav/state-machine/createLoadingMenuIconMachine'
+import { navItemId } from '@front/shared/nav/navItemId'
+import { createLoadingMenuIconMachine } from '@front/shared/nav/state-machine/createLoadingMenuIconMachine'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { downloadBlobAsFile } from '@front/shared/util/downloadBlobAsFile'
 import { toast } from 'sonner'

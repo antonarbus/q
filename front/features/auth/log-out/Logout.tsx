@@ -1,6 +1,6 @@
 import { deleteBookmarkListCache } from '@front/entities/bookmark/cache-updater/deleteBookmarkListCache'
-import { navItemId } from '@front/entities/nav/navItemId'
-import { navSlice } from '@front/entities/nav/navSlice'
+import { navItemId } from '@front/shared/nav/navItemId'
+import { navSlice } from '@front/shared/nav/navSlice'
 import { deleteQuotationListCache } from '@front/entities/quotation/cache-updater/deleteQuotationListCache'
 import { useLogOutUserMutation } from '@front/entities/user/api/useLogOutUserMutation'
 import { userSlice } from '@front/entities/user/redux/userSlice'

@@ -1,5 +1,5 @@
-import type { NavItemId } from '@front/entities/nav/navItemId'
-import type { NavItem } from '@front/entities/nav/type'
+import type { NavItemId } from './navItemId'
+import type { NavItem } from './type'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import type { RootState } from '@front/shared/lib/redux/reduxHolder'
 

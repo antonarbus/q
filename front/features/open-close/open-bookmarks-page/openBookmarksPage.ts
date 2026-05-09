@@ -1,5 +1,5 @@
-import { navItemId } from '@front/entities/nav/navItemId'
-import { navSlice } from '@front/entities/nav/navSlice'
+import { navItemId } from '@front/shared/nav/navItemId'
+import { navSlice } from '@front/shared/nav/navSlice'
 import { backToQuotationRef } from '@front/entities/quotation/ref/backToQuotationRef'
 import { route } from '@front/shared/lib/react-router-dom/route'
 import { routerHolder } from '@front/shared/lib/react-router-dom/routerHolder'

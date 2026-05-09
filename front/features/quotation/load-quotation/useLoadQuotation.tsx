@@ -1,5 +1,5 @@
-import { navItemId } from '@front/entities/nav/navItemId'
-import { navSlice } from '@front/entities/nav/navSlice'
+import { navItemId } from '@front/shared/nav/navItemId'
+import { navSlice } from '@front/shared/nav/navSlice'
 import { useGetQuotationMutation } from '@front/entities/quotation/api/useGetQuotationMutation'
 import { newQuotationTemplate } from '@front/entities/quotation/templates/newQuotationTemplate'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'

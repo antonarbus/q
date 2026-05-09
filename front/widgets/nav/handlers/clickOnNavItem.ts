@@ -1,6 +1,6 @@
-import { navItemId } from '@front/entities/nav/navItemId'
-import { navSlice } from '@front/entities/nav/navSlice'
-import type { NavItem } from '@front/entities/nav/type'
+import { navItemId } from '@front/shared/nav/navItemId'
+import { navSlice } from '@front/shared/nav/navSlice'
+import type { NavItem } from '@front/shared/nav/type'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { functionRegistry } from '@front/widgets/nav/functionRegistry'
 

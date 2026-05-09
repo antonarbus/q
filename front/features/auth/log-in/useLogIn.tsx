@@ -1,6 +1,6 @@
 import { useGetBookmarkListQuery } from '@front/entities/bookmark/api/useGetBookmarkListQuery'
-import { navItemId } from '@front/entities/nav/navItemId'
-import { navSlice } from '@front/entities/nav/navSlice'
+import { navItemId } from '@front/shared/nav/navItemId'
+import { navSlice } from '@front/shared/nav/navSlice'
 import { useGetQuotationListQuery } from '@front/entities/quotation/api/useGetQuotationListQuery'
 import { useLogInUserMutation } from '@front/entities/user/api/useLogInUserMutation'
 import { userSlice } from '@front/entities/user/redux/userSlice'

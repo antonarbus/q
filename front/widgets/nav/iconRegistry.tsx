@@ -1,4 +1,4 @@
-import { Burger } from '@front/entities/nav/ui/NavList/NavItem/Burger'
+import { Burger } from '@front/widgets/nav/NavList/NavItem/Burger'
 import { CiCreditCard1, CiViewTable } from 'react-icons/ci'
 import { FaRegFileImage, FaRegFilePdf, FaRegStar } from 'react-icons/fa'
 import { FaGripLines, FaRegRectangleList, FaRegShareFromSquare, FaUsersGear } from 'react-icons/fa6'

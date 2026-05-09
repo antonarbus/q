@@ -1,5 +1,5 @@
-import { navItemId } from '@front/entities/nav/navItemId'
-import { navSlice } from '@front/entities/nav/navSlice'
+import { navItemId } from '@front/shared/nav/navItemId'
+import { navSlice } from '@front/shared/nav/navSlice'
 import { useActivateUserMutation } from '@front/entities/user/api/useActivateUserMutation'
 import { userSlice } from '@front/entities/user/redux/userSlice'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'

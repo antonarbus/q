@@ -1,5 +1,5 @@
-import { Logo } from '@front/entities/nav/ui/Logo'
-import { NavList } from '@front/entities/nav/ui/NavList'
+import { Logo } from '@front/widgets/nav/Logo'
+import { NavList } from '@front/widgets/nav/NavList'
 import { useLoadNavStructure } from '@front/widgets/nav/load-nav-structure'
 import { usePressNavShortcut } from '@front/widgets/nav/press-shortcut'
 import { NavLayout } from './NavLayout'

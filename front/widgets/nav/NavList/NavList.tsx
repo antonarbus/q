@@ -1,4 +1,4 @@
-import { navItemId } from '@front/entities/nav/navItemId'
+import { navItemId } from '@front/shared/nav/navItemId'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { NavItem } from './NavItem'
 

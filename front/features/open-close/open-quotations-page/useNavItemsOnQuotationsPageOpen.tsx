@@ -1,5 +1,5 @@
-import { navItemId } from '@front/entities/nav/navItemId'
-import { navSlice } from '@front/entities/nav/navSlice'
+import { navItemId } from '@front/shared/nav/navItemId'
+import { navSlice } from '@front/shared/nav/navSlice'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { useEffectOnce, useUnmount } from 'react-use'
 
