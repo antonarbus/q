@@ -1,0 +1,12 @@
+import 'vite/client' // oxlint-disable-line import/no-unassigned-import -- type augmentation, cannot be assigned
+
+/*
+  It re-exports Vite's built-in client type definitions, which provide TypeScript types for Vite-specific features like:
+
+  import.meta.env (environment variables like VITE_*)
+  import.meta.hot (HMR API)
+  Asset imports (e.g., import logo from './logo.svg' returning a string)
+
+  same as
+  /// <reference types="vite/client" />
+*/
