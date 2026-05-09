@@ -6,7 +6,7 @@ import { getHtmlOfCellFromStoreByIndex } from '@front/entities/quotation/redux/g
 import { cellStyle } from '@front/entities/quotation/style/cellStyle'
 import { updateDescriptionCellAtBoqBlock } from '@front/features/blocks/update-description-cell-at-boq-block/updateDescriptionCellAtBoqBlock'
 import { focusItemPriceCellAtBoqBlock } from '@front/features/blocks/focus-item-price-cell-at-boq-block/focusItemPriceCellAtBoqBlock'
-import { OpenSuggestProductModalButton } from '@front/features/blocks/open-suggest-product-modal/OpenSuggestProductModalButton'
+import { OpenSuggestModalButton } from '@front/features/blocks/open-suggest-modal/OpenSuggestModalButton'
 import { upload } from '@front/features/file/upload-file'
 import { TextEditor } from '@front/shared/component/TextEditor'
 import { getRegistryKey } from '@front/shared/lib/tiptap/editorRegistry'
@@ -63,7 +63,7 @@ export const DescriptionCell = (): React.JSX.Element => {
         return true
       }}
       onUpload={upload}
-      extraActions={<OpenSuggestProductModalButton />}
+      extraActions={<OpenSuggestModalButton />}
       sx={{
         ...stylesForResizableCell,
         ...cellStyle,

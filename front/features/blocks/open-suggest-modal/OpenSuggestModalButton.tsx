@@ -1,11 +1,11 @@
-import { productSuggestionSlice } from '@front/entities/ai/productSuggestionSlice'
+import { suggestionSlice } from '@front/entities/suggestion/suggestionSlice'
 import { useBlock } from '@front/entities/quotation/provider/block/useBlock'
 import { useRow } from '@front/entities/quotation/provider/row/useRow'
 import { Box, Tooltip } from '@mui/material'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { LuSparkles } from 'react-icons/lu'
 
-export const OpenSuggestProductModalButton = (): React.JSX.Element => {
+export const OpenSuggestModalButton = (): React.JSX.Element => {
   const block = useBlock()
   const row = useRow()
 
@@ -14,7 +14,7 @@ export const OpenSuggestProductModalButton = (): React.JSX.Element => {
       <Box
         onClick={() => {
           reduxHolder.dispatch(
-            productSuggestionSlice.actions.open({ blockIndex: block.index, rowIndex: row.index }),
+            suggestionSlice.actions.open({ blockIndex: block.index, rowIndex: row.index }),
           )
         }}
         sx={{

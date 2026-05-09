@@ -247,9 +247,9 @@ export const route = {
     description: 'Stripe webhook endpoint',
   },
   // ai
-  suggestProduct: {
-    path: '/api/ai/suggest-product',
-    url: '/api/ai/suggest-product',
+  suggest: {
+    path: '/api/ai/suggest',
+    url: '/api/ai/suggest',
     method: 'post',
     description: 'Get AI-generated description, price, and supplier notes for a quotation row',
   },

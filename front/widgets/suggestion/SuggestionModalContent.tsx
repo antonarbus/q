@@ -1,9 +1,9 @@
-import { productSuggestionSlice } from '@front/entities/ai/productSuggestionSlice'
+import { suggestionSlice } from '@front/entities/suggestion/suggestionSlice'
 import { updateCellAtStore } from '@front/entities/quotation/redux/updater/updateCellAtStore'
 import { updateCellWithValue } from '@front/entities/quotation/util/updateCellWithValue'
 import { SuggestProductButton } from '@front/features/blocks/suggest-product/SuggestProductButton'
-import { useProductSuggestion } from '@front/entities/ai/provider/ProductSuggestionProvider'
-import { closeSuggestProductModal } from '@front/features/blocks/close-suggest-product-modal/closeSuggestProductModal'
+import { useSuggestion } from '@front/entities/suggestion/provider/SuggestionProvider'
+import { closeSuggestModal } from '@front/features/blocks/close-suggest-modal/closeSuggestModal'
 import { FormModal } from '@front/shared/component/FormModal'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { editorRegistry, getRegistryKey } from '@front/shared/lib/tiptap/editorRegistry'
@@ -11,18 +11,18 @@ import { useAnimatedElement } from '@front/shared/util/useAnimatedElement'
 import { Box, TextField, Typography } from '@mui/material'
 import { MdAutoAwesome } from 'react-icons/md'
 
-export const ProductSuggestionModalContent = (): React.JSX.Element => {
-  const productSuggestion = useProductSuggestion()
+export const SuggestionModalContent = (): React.JSX.Element => {
+  const suggestion = useSuggestion()
   const animatedElement = useAnimatedElement()
 
   const handleSubmit = (event: React.SubmitEvent): void => {
     event.preventDefault()
 
-    if (productSuggestion.mutation.data === undefined) {
+    if (suggestion.mutation.data === undefined) {
       return
     }
 
-    const { blockIndex, rowIndex } = reduxHolder.getState().productSuggestion
+    const { blockIndex, rowIndex } = reduxHolder.getState().suggestion
 
     const descriptionEditor =
       editorRegistry.get(
@@ -30,7 +30,7 @@ export const ProductSuggestionModalContent = (): React.JSX.Element => {
       ) ?? null
 
     if (descriptionEditor !== null) {
-      const html = `<p>${productSuggestion.mutation.data.description}</p>`
+      const html = `<p>${suggestion.mutation.data.description}</p>`
       descriptionEditor.commands.setContent(html, { emitUpdate: false })
       updateCellAtStore({ blockIndex, rowIndex, cellKey: 'description', html })
     }
@@ -45,22 +45,22 @@ export const ProductSuggestionModalContent = (): React.JSX.Element => {
       rowIndex,
       cellKey: 'itemPrice',
       editor: priceEditor,
-      value: productSuggestion.mutation.data.itemPrice,
+      value: suggestion.mutation.data.itemPrice,
     })
 
-    reduxHolder.dispatch(productSuggestionSlice.actions.close())
+    reduxHolder.dispatch(suggestionSlice.actions.close())
   }
 
   return (
     <FormModal
       additionalButton={<SuggestProductButton />}
-      buttonText={productSuggestion.mutation.data === undefined ? undefined : 'Accept'}
+      buttonText={suggestion.mutation.data === undefined ? undefined : 'Accept'}
       headerIcon={<MdAutoAwesome />}
-      headerText='Product uggestion'
+      headerText='Product suggestion'
       modalRef={animatedElement.ref}
-      onCloseClick={closeSuggestProductModal}
+      onCloseClick={closeSuggestModal}
       onSubmit={handleSubmit}
-      onUnmount={closeSuggestProductModal}
+      onUnmount={closeSuggestModal}
       shouldUnmountOnClickAway={true}
       shouldUnmountOnEsc={true}
     >
@@ -73,26 +73,26 @@ export const ProductSuggestionModalContent = (): React.JSX.Element => {
         multiline={true}
         rows={3}
         sx={{ '.MuiInputBase-root': { background: 'white' } }}
-        value={productSuggestion.inputValue}
+        value={suggestion.inputValue}
         onChange={(event) => {
-          productSuggestion.setInputValue(event.target.value)
+          suggestion.setInputValue(event.target.value)
         }}
       />
-      {productSuggestion.mutation.data !== undefined && (
+      {suggestion.mutation.data !== undefined && (
         <Box sx={{ bgcolor: 'grey.50', borderRadius: 1, padding: 2 }}>
           <Typography variant='subtitle2'>Description</Typography>
-          <Typography variant='body2'>{productSuggestion.mutation.data.description}</Typography>
+          <Typography variant='body2'>{suggestion.mutation.data.description}</Typography>
           <Typography sx={{ mt: 1 }} variant='subtitle2'>
             Price
           </Typography>
-          <Typography variant='body2'>{productSuggestion.mutation.data.itemPrice}</Typography>
+          <Typography variant='body2'>{suggestion.mutation.data.itemPrice}</Typography>
           <Typography sx={{ mt: 1 }} variant='subtitle2'>
             Supplier Notes
           </Typography>
-          <Typography variant='body2'>{productSuggestion.mutation.data.supplierNotes}</Typography>
+          <Typography variant='body2'>{suggestion.mutation.data.supplierNotes}</Typography>
         </Box>
       )}
-      {productSuggestion.mutation.isError && (
+      {suggestion.mutation.isError && (
         <Typography color='error'>Failed to get AI suggestion. Please try again.</Typography>
       )}
     </FormModal>

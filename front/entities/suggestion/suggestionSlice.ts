@@ -13,8 +13,8 @@ const initialState: InitState = {
   rowIndex: 0,
 }
 
-export const productSuggestionSlice = createSlice({
-  name: 'productSuggestion',
+export const suggestionSlice = createSlice({
+  name: 'suggestion',
   initialState,
   reducers: {
     open: (
@@ -29,4 +29,4 @@ export const productSuggestionSlice = createSlice({
   },
 })
 
-export const productSuggestionReducer: Reducer<InitState> = productSuggestionSlice.reducer
+export const suggestionReducer: Reducer<InitState> = suggestionSlice.reducer

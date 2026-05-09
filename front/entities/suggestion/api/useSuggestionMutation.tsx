@@ -8,13 +8,13 @@ import type { AxiosError } from 'axios'
 
 type Res = UseMutationResult<ResBody, AxiosError<ErrorResBody>, Payload>
 
-export const useProductSuggestionMutation = (): Res => {
+export const useSuggestionMutation = (): Res => {
   const mutation = useMutation<ResBody, AxiosError<ErrorResBody>, Payload>({
-    mutationKey: [queryKey.productSuggestion],
+    mutationKey: [queryKey.suggestion],
     mutationFn: async (payload: Payload) => {
       const response = await axiosHolder.axiosWithAuth<ResBody>({
-        url: route.suggestProduct.url,
-        method: route.suggestProduct.method,
+        url: route.suggest.url,
+        method: route.suggest.method,
         data: payload,
       })
 

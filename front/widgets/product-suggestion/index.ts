@@ -1,1 +1,0 @@
-export { ProductSuggestion } from './ProductSuggestion'

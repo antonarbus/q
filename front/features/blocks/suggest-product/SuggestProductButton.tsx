@@ -1,8 +1,8 @@
-import { useProductSuggestion } from '@front/entities/ai/provider/ProductSuggestionProvider'
+import { useSuggestion } from '@front/entities/suggestion/provider/SuggestionProvider'
 import { ButtonCustom } from '@front/shared/component/ButtonCustom'
 
 export const SuggestProductButton = (): React.JSX.Element => {
-  const productSuggestion = useProductSuggestion()
+  const productSuggestion = useSuggestion()
 
   return (
     <ButtonCustom

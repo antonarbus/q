@@ -222,7 +222,7 @@ export const api = {
   },
   // ai
   suggestProduct: {
-    ...route.suggestProduct,
+    ...route.suggest,
     handler: suggestRowHandler,
   },
   // visitors

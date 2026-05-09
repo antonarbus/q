@@ -32,7 +32,7 @@ export const queryKey = {
   stripeAccountStatus: 'stripe-account-status',
   stripeCreatePaymentLink: 'stripe-create-payment-link',
   // ai
-  productSuggestion: 'product-suggestion',
+  suggestion: 'suggestion',
   // dev
   healthCheck: 'health-check',
 } as const

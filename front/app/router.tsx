@@ -19,7 +19,7 @@ import { LoadingDotsOverlay } from '@front/shared/component/loading-dots-overlay
 import { Main } from '@front/shared/layout/Main'
 import { route } from '@front/shared/lib/react-router-dom/route'
 import { routerHolder } from '@front/shared/lib/react-router-dom/routerHolder'
-import { ProductSuggestion } from '@front/widgets/product-suggestion'
+import { Suggestion } from '@front/widgets/suggestion'
 import { Copy } from '@front/widgets/copy'
 import { BookmarkCopyPreviewCapturer } from '@front/entities/copy/BookmarkCopyPreviewCapturer'
 import { Footer } from '@front/widgets/footer'
@@ -85,7 +85,7 @@ const router = createBrowserRouter([
         <Toaster expand={true} position='bottom-center' richColors={true} />
         <LoadingDotsOverlay shouldShowLoader={false} text={null} />
         <Nav />
-        <ProductSuggestion />
+        <Suggestion />
         <Copy />
         <BookmarkCopyPreviewCapturer />
         <ConfirmationDialog />
