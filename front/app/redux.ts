@@ -1,5 +1,5 @@
 // oxlint-disable typescript/consistent-type-definitions
-import { aiSuggestRowReducer } from '@front/entities/ai/aiSuggestRowSlice'
+import { productSuggestionReducer } from '@front/entities/ai/productSuggestionSlice'
 import { copyReducer } from '@front/entities/copy/copySlice'
 import { navReducer } from '@front/entities/nav/navSlice'
 import { quotationReducer } from '@front/entities/quotation/redux/quotationSlice'
@@ -15,7 +15,7 @@ const store = configureStore({
     user: userReducer,
     nav: navReducer,
     quotation: quotationReducer,
-    aiSuggestRow: aiSuggestRowReducer,
+    productSuggestion: productSuggestionReducer,
     copy: copyReducer,
     agGrid: agGridReducer,
   },

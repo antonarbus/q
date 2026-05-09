@@ -1,3 +1,4 @@
+// oxlint-disable oxc/no-rest-spread-properties
 // oxlint-disable typescript/no-explicit-any
 import { activateHandler } from '@back/api/user/activateHandler'
 import { getAccessTokenHandler } from '@back/api/user/getAccessTokenHandler'
@@ -220,8 +221,8 @@ export const api = {
     handler: stripeWebhookHandler,
   },
   // ai
-  aiSuggestRow: {
-    ...route.aiSuggestRow,
+  suggestProduct: {
+    ...route.suggestProduct,
     handler: suggestRowHandler,
   },
   // visitors

@@ -1,38 +1,38 @@
 export const queryKey = {
   // auth
-  logIn: 'logIn',
-  logOut: 'logOut',
+  logIn: 'log-in',
+  logOut: 'log-out',
   activate: 'activate',
   register: 'register',
-  requestPasswordReset: 'requestPasswordReset',
-  resetPassword: 'resetPassword',
-  getAccessToken: 'getAccessToken',
+  requestPasswordReset: 'request-password-reset',
+  resetPassword: 'reset-password',
+  getAccessToken: 'get-access-token',
   // users
-  deleteUser: 'deleteUser',
-  getUserList: 'getUserList',
+  deleteUser: 'delete-user',
+  getUserList: 'get-user-list',
   // quotation
-  getQuotation: 'getQuotation',
-  saveQuotation: 'saveQuotation',
-  deleteQuotation: 'deleteQuotation',
-  getQuotationList: 'getQuotationList',
-  getQuotationCategoryList: 'getQuotationCategoryList',
+  getQuotation: 'get-quotation',
+  saveQuotation: 'save-quotation',
+  deleteQuotation: 'delete-quotation',
+  getQuotationList: 'get-quotation-list',
+  getQuotationCategoryList: 'get-quotation-category-list',
   // file
-  deleteFile: 'deleteFile',
-  getFileListStats: 'getFileListStats',
+  deleteFile: 'delete-file',
+  getFileListStats: 'get-file-list-stats',
   // bookmark
-  getBookmark: 'getBookmark',
-  saveBookmark: 'saveBookmark',
-  deleteBookmark: 'deleteBookmark',
-  getBookmarkList: 'getBookmarkList',
-  getBookmarkCategoryList: 'getBookmarkCategoryList',
+  getBookmark: 'get-bookmark',
+  saveBookmark: 'save-bookmark',
+  deleteBookmark: 'delete-bookmark',
+  getBookmarkList: 'get-bookmark-list',
+  getBookmarkCategoryList: 'get-bookmark-category-list',
   // visitors
-  countUniqueDailyVisitors: 'countUniqueDailyVisitors',
-  getUniqueDailyVisitors: 'getUniqueDailyVisitors',
+  countUniqueDailyVisitors: 'count-unique-daily-visitors',
+  getUniqueDailyVisitors: 'get-unique-daily-visitors',
   // stripe
-  stripeAccountStatus: 'stripeAccountStatus',
-  stripeCreatePaymentLink: 'stripeCreatePaymentLink',
+  stripeAccountStatus: 'stripe-account-status',
+  stripeCreatePaymentLink: 'stripe-create-payment-link',
   // ai
-  aiSuggestRow: 'aiSuggestRow',
+  productSuggestion: 'product-suggestion',
   // dev
-  healthCheck: 'healthCheck',
+  healthCheck: 'health-check',
 } as const

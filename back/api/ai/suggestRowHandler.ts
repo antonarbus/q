@@ -1,3 +1,4 @@
+// oxlint-disable no-console
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entity/user/getUserFromAccessTokenOrThrowUnauthorized'
 import { HttpError } from '@back/shared/errors/HttpError'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
@@ -43,15 +44,7 @@ export const suggestRowHandler: RouterHandler = async (req) => {
 
   const gemini = await getGemini()
 
-  const geminiModel = gemini.client.getGenerativeModel({
-    model: 'gemini-2.5-flash',
-    // SDK v0.24 types only have googleSearchRetrieval; Gemini 2.5 requires googleSearch
-    tools: [{ googleSearch: {} }] as unknown as Parameters<
-      typeof gemini.client.getGenerativeModel
-    >[0]['tools'],
-  })
-
-  const prompt = dedent` 
+  const prompt = dedent`
     You are a procurement assistant. The user is looking for: "${req.body.userPrompt}"
 
     Search the internet for supplier and pricing information. Return ONLY strict JSON (no markdown fences, no explanation):
@@ -68,21 +61,32 @@ export const suggestRowHandler: RouterHandler = async (req) => {
     - supplierNotes should include supplier name, region, relevant sourcing details, link to the price source is mandatory
   `
 
-  const result = await geminiModel.generateContent(prompt).catch((error) => {
-    // oxlint-disable-next-line no-console
-    console.log('🚀 ~ error:', error)
-
-    messageList.push('Gemini failed to generate response')
-
-    throw new HttpError<ErrorResBody['errorCode']>({
-      errorCode: 'GEMINI_GENERATION_FAILED',
-      statusCode: httpStatusCode.serverError500,
-      message: messageList.join(' | '),
+  const result = await gemini.client.models
+    .generateContent({
+      model: 'gemini-2.5-flash',
+      contents: prompt,
+      config: {
+        tools: [{ googleSearch: {} }],
+      },
     })
-  })
+    .catch((error) => {
+      // oxlint-disable-next-line no-console
+      console.log('🚀 ~ error:', error)
 
-  const text = result.response
-    .text()
+      messageList.push('Gemini failed to generate response')
+
+      throw new HttpError<ErrorResBody['errorCode']>({
+        errorCode: 'GEMINI_GENERATION_FAILED',
+        statusCode: httpStatusCode.serverError500,
+        message: messageList.join(' | '),
+      })
+    })
+  // oxlint-disable-next-line no-console
+  console.log('🚀 ~ result:', result)
+
+  console.log('🚀 ~ result.text:', result.text)
+  console.log('🚀 ~ result.data:', result.data)
+  const text = (result.text ?? '')
     .replace(/^```(?:json)?\s*/i, '')
     .replace(/\s*```$/, '')
     .trim()

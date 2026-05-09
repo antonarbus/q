@@ -1,9 +1,9 @@
-import { aiSuggestRowSlice } from '@front/entities/ai/aiSuggestRowSlice'
+import { productSuggestionSlice } from '@front/entities/ai/productSuggestionSlice'
 import { updateCellAtStore } from '@front/entities/quotation/redux/updater/updateCellAtStore'
 import { updateCellWithValue } from '@front/entities/quotation/util/updateCellWithValue'
-import { AskAiButton } from '@front/features/blocks/ask-ai-to-suggest-row/AskAiButton'
-import { useAiSuggestRow } from '@front/features/blocks/ask-ai-to-suggest-row/AskAiToSuggestRowProvider'
-import { closeAiSuggestRowModal } from '@front/features/blocks/close-ai-suggest-row-modal/closeAiSuggestRowModal'
+import { SuggestProductButton } from '@front/features/blocks/suggest-product/SuggestProductButton'
+import { useProductSuggestion } from '@front/entities/ai/provider/ProductSuggestionProvider'
+import { closeSuggestProductModal } from '@front/features/blocks/close-suggest-product-modal/closeSuggestProductModal'
 import { FormModal } from '@front/shared/component/FormModal'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { editorRegistry, getRegistryKey } from '@front/shared/lib/tiptap/editorRegistry'
@@ -11,18 +11,18 @@ import { useAnimatedElement } from '@front/shared/util/useAnimatedElement'
 import { Box, TextField, Typography } from '@mui/material'
 import { MdAutoAwesome } from 'react-icons/md'
 
-export const AiSuggestRowModalContent = (): React.JSX.Element => {
-  const aiSuggestRow = useAiSuggestRow()
+export const ProductSuggestionModalContent = (): React.JSX.Element => {
+  const productSuggestion = useProductSuggestion()
   const animatedElement = useAnimatedElement()
 
   const handleSubmit = (event: React.SubmitEvent): void => {
     event.preventDefault()
 
-    if (aiSuggestRow.mutation.data === undefined) {
+    if (productSuggestion.mutation.data === undefined) {
       return
     }
 
-    const { blockIndex, rowIndex } = reduxHolder.getState().aiSuggestRow
+    const { blockIndex, rowIndex } = reduxHolder.getState().productSuggestion
 
     const descriptionEditor =
       editorRegistry.get(
@@ -30,7 +30,7 @@ export const AiSuggestRowModalContent = (): React.JSX.Element => {
       ) ?? null
 
     if (descriptionEditor !== null) {
-      const html = `<p>${aiSuggestRow.mutation.data.description}</p>`
+      const html = `<p>${productSuggestion.mutation.data.description}</p>`
       descriptionEditor.commands.setContent(html, { emitUpdate: false })
       updateCellAtStore({ blockIndex, rowIndex, cellKey: 'description', html })
     }
@@ -45,54 +45,54 @@ export const AiSuggestRowModalContent = (): React.JSX.Element => {
       rowIndex,
       cellKey: 'itemPrice',
       editor: priceEditor,
-      value: aiSuggestRow.mutation.data.itemPrice,
+      value: productSuggestion.mutation.data.itemPrice,
     })
 
-    reduxHolder.dispatch(aiSuggestRowSlice.actions.close())
+    reduxHolder.dispatch(productSuggestionSlice.actions.close())
   }
 
   return (
     <FormModal
-      additionalButton={<AskAiButton />}
-      buttonText={aiSuggestRow.mutation.data === undefined ? undefined : 'Accept'}
+      additionalButton={<SuggestProductButton />}
+      buttonText={productSuggestion.mutation.data === undefined ? undefined : 'Accept'}
       headerIcon={<MdAutoAwesome />}
-      headerText='AI Row Suggestion'
+      headerText='Product uggestion'
       modalRef={animatedElement.ref}
-      onCloseClick={closeAiSuggestRowModal}
+      onCloseClick={closeSuggestProductModal}
       onSubmit={handleSubmit}
-      onUnmount={closeAiSuggestRowModal}
+      onUnmount={closeSuggestProductModal}
       shouldUnmountOnClickAway={true}
       shouldUnmountOnEsc={true}
     >
       <TextField
         autoFocus={true}
         fullWidth={true}
-        label='Describe the item you need'
+        label='Describe the product you need'
         focused={true}
-        placeholder='Item description...'
+        placeholder='Description...'
         multiline={true}
         rows={3}
         sx={{ '.MuiInputBase-root': { background: 'white' } }}
-        value={aiSuggestRow.inputValue}
+        value={productSuggestion.inputValue}
         onChange={(event) => {
-          aiSuggestRow.setInputValue(event.target.value)
+          productSuggestion.setInputValue(event.target.value)
         }}
       />
-      {aiSuggestRow.mutation.data !== undefined && (
+      {productSuggestion.mutation.data !== undefined && (
         <Box sx={{ bgcolor: 'grey.50', borderRadius: 1, padding: 2 }}>
           <Typography variant='subtitle2'>Description</Typography>
-          <Typography variant='body2'>{aiSuggestRow.mutation.data.description}</Typography>
+          <Typography variant='body2'>{productSuggestion.mutation.data.description}</Typography>
           <Typography sx={{ mt: 1 }} variant='subtitle2'>
             Price
           </Typography>
-          <Typography variant='body2'>{aiSuggestRow.mutation.data.itemPrice}</Typography>
+          <Typography variant='body2'>{productSuggestion.mutation.data.itemPrice}</Typography>
           <Typography sx={{ mt: 1 }} variant='subtitle2'>
             Supplier Notes
           </Typography>
-          <Typography variant='body2'>{aiSuggestRow.mutation.data.supplierNotes}</Typography>
+          <Typography variant='body2'>{productSuggestion.mutation.data.supplierNotes}</Typography>
         </Box>
       )}
-      {aiSuggestRow.mutation.isError && (
+      {productSuggestion.mutation.isError && (
         <Typography color='error'>Failed to get AI suggestion. Please try again.</Typography>
       )}
     </FormModal>
