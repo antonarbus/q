@@ -5,7 +5,7 @@ import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { useCallback } from 'react'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
-import { getClipboardPreviewPreparingPromise } from '@front/entities/quotation/clipboardPreviewDeferred'
+import { getClipboardPreviewPreparingPromise } from '@front/entities/quotation/util/clipboardPreviewDeferred'
 
 type Params = {
   bookmarkId: string
