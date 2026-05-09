@@ -17,13 +17,6 @@ type Props = {
   mutateAsync: (payload: ReqBody) => Promise<ResBody>
 }
 
-const getCurrencyFromState = (): string => {
-  const { blocks } = reduxHolder.getState().quotation
-  const paymentBlock = blocks.find((block) => block.type === 'payment')
-
-  return paymentBlock?.type === 'payment' ? paymentBlock.payment.currency.toUpperCase() : '$'
-}
-
 export const suggestProduct = async (props: Props): Promise<void> => {
   const { blockIndex, rowIndex, userPrompt, mutateAsync } = props
 
@@ -38,11 +31,13 @@ export const suggestProduct = async (props: Props): Promise<void> => {
     return
   }
 
-  let dotCount = 1
   descriptionEditor.commands.setContent('<p>Searching.</p>', { emitUpdate: false })
+
+  let dotCount = 1
 
   const interval = setInterval(() => {
     dotCount = dotCount === 3 ? 1 : dotCount + 1
+
     descriptionEditor.commands.setContent(`<p>Searching${'.'.repeat(dotCount)}</p>`, {
       emitUpdate: false,
     })
@@ -57,6 +52,13 @@ export const suggestProduct = async (props: Props): Promise<void> => {
     descriptionEditor.commands.setContent(descriptionHtml, { emitUpdate: false })
     updateCellAtStore({ blockIndex, rowIndex, cellKey: 'description', html: descriptionHtml })
 
+    const getCurrencyFromState = (): string => {
+      const { blocks } = reduxHolder.getState().quotation
+      const paymentBlock = blocks.find((block) => block.type === 'payment')
+
+      return paymentBlock?.type === 'payment' ? paymentBlock.payment.currency.toUpperCase() : '$'
+    }
+
     const currency = getCurrencyFromState()
     const markedUpPrice = roundTo(itemPrice * 1.3, 2)
 
@@ -69,6 +71,7 @@ export const suggestProduct = async (props: Props): Promise<void> => {
       itemPriceEditor.commands.setContent(`<p>${markedUpPrice} ${currency}</p>`, {
         emitUpdate: false,
       })
+
       updateItemPriceCellAtBoqBlock({ blockIndex, rowIndex })
       recalculateSubTotalPrices({ incrementally: true })
       recalculateTotalPrices()
