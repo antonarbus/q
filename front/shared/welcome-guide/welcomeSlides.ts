@@ -1,4 +1,4 @@
-export type Slide = {
+type Slide = {
   step: string
   title: string
   description: string

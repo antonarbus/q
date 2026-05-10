@@ -7,7 +7,7 @@ import { createContext, useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { welcomeSlides } from './welcomeSlides'
 
-export type Props = {
+type Props = {
   currentSlide: number
   direction: 'next' | 'prev'
   totalSlides: number
@@ -17,7 +17,7 @@ export type Props = {
   close: () => void
 }
 
-export const WelcomeGuideContext = createContext<Props | null>(null)
+const WelcomeGuideContext = createContext<Props | null>(null)
 
 export const WelcomeGuideProvider = ({
   children,

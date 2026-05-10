@@ -8,7 +8,7 @@ import { getRowFromStoreByIndex } from '@front/entities/quotation/redux/getter/g
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { editorRegistry, getRegistryKey } from '@front/shared/lib/tiptap/editorRegistry'
 import { roundTo } from 'round-to'
-import type { ResBody, ReqBody } from '@back/api/ai/suggestRowHandler'
+import type { ResBody, ReqBody } from '@back/api/ai/suggestProductHandler'
 
 type Props = {
   blockIndex: number
