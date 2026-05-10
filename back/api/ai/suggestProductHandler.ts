@@ -37,7 +37,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<HttpResponse<ResBody>>
 
-export const suggestRowHandler: RouterHandler = async (req) => {
+export const suggestProductHandler: RouterHandler = async (req) => {
   await getUserFromAccessTokenOrThrowUnauthorized({ req })
 
   const messageList: string[] = []
