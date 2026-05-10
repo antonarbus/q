@@ -88,14 +88,12 @@ export const FormModal = (props: Props): React.JSX.Element => {
           </Typography>
           <IconButton
             onClick={props.onCloseClick}
+            size='small'
             sx={{
               position: 'absolute',
-              top: '-35px',
-              right: '-35px',
-              backgroundColor: 'transparent',
-              '&:hover': {
-                backgroundColor: 'rgba(0, 0, 0, 0.1)',
-              },
+              top: 12,
+              right: 12,
+              color: 'text.secondary',
             }}
           >
             <IoClose
