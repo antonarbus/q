@@ -2,20 +2,26 @@ import type { IconId } from '@front/shared/nav/IconId'
 import { Burger } from '@front/widgets/nav/NavList/NavItem/Burger'
 import { CiCreditCard1, CiViewTable } from 'react-icons/ci'
 import { FaRegFileImage, FaRegFilePdf, FaRegStar } from 'react-icons/fa'
-import { FaGripLines, FaRegRectangleList, FaRegShareFromSquare, FaUsersGear } from 'react-icons/fa6'
 import { FiDollarSign, FiDownload, FiLogIn, FiLogOut, FiSave } from 'react-icons/fi'
 import { HiOutlineBookOpen } from 'react-icons/hi2'
 import { ImLink } from 'react-icons/im'
+import { LuBetweenHorizontalStart } from 'react-icons/lu'
+import { RiAdminLine, RiFileExcel2Line } from 'react-icons/ri'
+import { RxPerson } from 'react-icons/rx'
+import { VscNewFile } from 'react-icons/vsc'
+import {
+  FaGripLines,
+  FaRegRectangleList,
+  FaRegShareFromSquare,
+  FaUsersGear,
+  FaQuestion,
+} from 'react-icons/fa6'
 import {
   IoChevronBackOutline,
   IoSettingsOutline,
   IoStatsChartOutline,
   IoText,
 } from 'react-icons/io5'
-import { LuBetweenHorizontalStart } from 'react-icons/lu'
-import { RiAdminLine, RiFileExcel2Line } from 'react-icons/ri'
-import { RxPerson } from 'react-icons/rx'
-import { VscNewFile } from 'react-icons/vsc'
 
 export const iconRegistry: Record<IconId, React.ReactElement> = {
   burger: <Burger />,
@@ -44,4 +50,5 @@ export const iconRegistry: Record<IconId, React.ReactElement> = {
   userList: <FaUsersGear />,
   visitors: <IoStatsChartOutline />,
   logout: <FiLogOut />,
+  welcomeGuide: <FaQuestion data-testid='guide icon' />,
 }

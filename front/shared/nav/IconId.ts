@@ -25,3 +25,4 @@ export type IconId =
   | 'textItem'
   | 'userList'
   | 'visitors'
+  | 'welcomeGuide'

@@ -20,4 +20,5 @@ export const route = {
   stripeConnect: 'stripe-connect',
   userList: 'user-list',
   visitorList: 'visitor-list',
+  welcomeGuide: 'welcome-guide',
 } as const

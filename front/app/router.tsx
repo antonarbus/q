@@ -14,6 +14,7 @@ import { SaveQuotationModal } from '@front/pages/save-quotation-modal/SaveQuotat
 import { SettingsModal } from '@front/pages/settings-modal/SettingsModal'
 import { StripeConnectModal } from '@front/pages/stripe-connect-modal/StripeConnectModal'
 import { ShareQuotationModal } from '@front/pages/share-quotation-modal/ShareQuotationModal'
+import { WelcomeGuideModal } from '@front/pages/welcome-guide-modal/WelcomeGuideModal'
 import { TestPage } from '@front/pages/test-page/TestPage'
 import { LoadingDotsOverlay } from '@front/shared/component/loading-dots-overlay'
 import { Main } from '@front/shared/layout/Main'
@@ -72,6 +73,10 @@ const authRoutes: RouteObject[] = [
   {
     path: route.stripeConnect,
     element: <StripeConnectModal />,
+  },
+  {
+    path: route.welcomeGuide,
+    element: <WelcomeGuideModal />,
   },
 ]
 
