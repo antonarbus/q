@@ -42,6 +42,7 @@
     "eslint/no-duplicate-imports": "off", // ? good rule, but not auto-fixable which makes it annoying, check later if it auto-fixable, it is in the roadmap
     "eslint/no-magic-numbers": "off", // good rule, but there is some issue in oxc now, try follow it and explain number where needed
     "eslint/no-ternary": "off", // simple ternary is ok, but nested is not
+    "eslint/no-inline-comments": "off", // inline comments are sometimes better
     // "eslint/no-console": "off", // ? better to warn, but then vscode autofixes on save and removes the console.log()
     "eslint/no-undefined": "off", // we technically may re-define window.undefined='hi', but TS will not allow
     "eslint/operator-assignment": ["error", "never"], // i=i+1 instead of i++

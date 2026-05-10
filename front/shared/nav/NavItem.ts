@@ -5,8 +5,7 @@ import type { NavItemId } from './navItemId'
 export type NavItem = {
   id: NavItemId
   name: string
-  /** Save --> Saving... */
-  maxName?: string
+  maxName?: string // Save --> Saving...
   iconId?: IconId
   link?: string
   externalLink?: string
@@ -20,4 +19,5 @@ export type NavItem = {
   isError?: boolean
   isActive?: boolean
   tooltip?: string
+  badge?: boolean
 }

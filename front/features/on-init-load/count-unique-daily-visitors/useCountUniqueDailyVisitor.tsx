@@ -1,4 +1,5 @@
 import { useCountUniqueDailyVisitorsMutation } from '@front/entities/visitor/api/useCountUniqueDailyVisitorsMutation'
+import { localStorageKeys } from '@front/shared/lib/local-storage/localStorageKeys'
 import { format } from 'date-fns'
 import { useEffectOnce } from 'react-use'
 
@@ -7,9 +8,7 @@ export const useCountUniqueDailyVisitor = (): void => {
 
   useEffectOnce(() => {
     const countVisitor = async (): Promise<void> => {
-      const NAME_AT_LOCAL_STORAGE = 'lastVisitDate'
-
-      const lastVisitDate = localStorage.getItem(NAME_AT_LOCAL_STORAGE)
+      const lastVisitDate = localStorage.getItem(localStorageKeys.lastVisitDate)
       const today = format(new Date(), 'yyyy-MM-dd')
 
       if (lastVisitDate === today) {
@@ -20,7 +19,7 @@ export const useCountUniqueDailyVisitor = (): void => {
         isNew: lastVisitDate === null,
       })
 
-      localStorage.setItem(NAME_AT_LOCAL_STORAGE, today)
+      localStorage.setItem(localStorageKeys.lastVisitDate, today)
     }
 
     countVisitor()

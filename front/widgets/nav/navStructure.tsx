@@ -2,6 +2,7 @@ import { navItemId } from '@front/shared/nav/navItemId'
 import { setNavStructure } from '@front/shared/nav/navStructureHolder'
 import type { NavItem } from '@front/shared/nav/NavItem'
 import { route } from '@front/shared/lib/react-router-dom/route'
+import { localStorageKeys } from '@front/shared/lib/local-storage/localStorageKeys'
 
 export const navStructure: NavItem[] = [
   {
@@ -173,6 +174,15 @@ export const navStructure: NavItem[] = [
             tooltip: 'Essential legal terms',
           },
         ],
+      },
+      {
+        id: navItemId.welcomeGuide,
+        iconId: 'welcomeGuide',
+        isHidden: false,
+        name: 'Guide',
+        link: `./${route.welcomeGuide}`,
+        tooltip: 'How it works — app guide',
+        badge: localStorage.getItem(localStorageKeys.guideVisited) === null,
       },
       {
         id: navItemId.login,
