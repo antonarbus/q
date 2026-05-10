@@ -1,5 +1,5 @@
 import type { NavItem } from '@front/shared/nav/NavItem'
-import { mousePosition } from '@front/shared/util/mousePosition'
+import { mousePosition } from '@front/features/on-init-load/track-mouse-position/useTrackMousePosition'
 import { functionRegistry } from '@front/widgets/nav/functionRegistry'
 import { useNavigate } from 'react-router-dom'
 import { useEffectOnce } from 'react-use'

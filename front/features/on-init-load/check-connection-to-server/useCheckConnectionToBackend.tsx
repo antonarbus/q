@@ -2,7 +2,7 @@ import { useHealthCheckQuery } from './api/useHealthCheckQuery'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
 
-export const useConnectionToBackendCheck = (): void => {
+export const useCheckConnectionToBackend = (): void => {
   const healthCheckQuery = useHealthCheckQuery()
 
   useUpdateEffect(() => {

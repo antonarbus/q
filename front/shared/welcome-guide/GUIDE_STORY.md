@@ -42,27 +42,28 @@ Thank you for reaching out. Here's what I'll deliver for your apartment renovati
 I specialise in residential electrical work with over 12 years of experience. Every installation is done to code, fully documented, and backed by a 2-year workmanship guarantee.
 
 **What's included:**
+
 - Full replacement of the existing distribution box
 - Installation of modern circuit breakers (16A, 25A, 40A)
 - Labelling of all circuits
 - Safety inspection and sign-off document
 
-*Photo: completed installation in a similar apartment (85 m², 2022)*
+_Photo: completed installation in a similar apartment (85 m², 2022)_
 [insert photo here]
 
 ---
 
 #### Scope of supply table (to add as table block):
 
-| # | Item | Qty | Unit | Unit Price | Total |
-|---|------|-----|------|------------|-------|
-| 1 | Distribution box Hager VD112T | 1 | pcs | $120 | $120 |
-| 2 | Circuit breaker 16A | 6 | pcs | $18 | $108 |
-| 3 | Circuit breaker 25A | 2 | pcs | $22 | $44 |
-| 4 | Circuit breaker 40A | 1 | pcs | $28 | $28 |
-| 5 | Installation work | 4 | hrs | $75 | $300 |
-| 6 | Safety inspection & documentation | 1 | pcs | $50 | $50 |
-| | | | | **Total** | **$650** |
+| #   | Item                              | Qty | Unit | Unit Price | Total    |
+| --- | --------------------------------- | --- | ---- | ---------- | -------- |
+| 1   | Distribution box Hager VD112T     | 1   | pcs  | $120       | $120     |
+| 2   | Circuit breaker 16A               | 6   | pcs  | $18        | $108     |
+| 3   | Circuit breaker 25A               | 2   | pcs  | $22        | $44      |
+| 4   | Circuit breaker 40A               | 1   | pcs  | $28        | $28      |
+| 5   | Installation work                 | 4   | hrs  | $75        | $300     |
+| 6   | Safety inspection & documentation | 1   | pcs  | $50        | $50      |
+|     |                                   |     |      | **Total**  | **$650** |
 
 ---
 
@@ -81,17 +82,18 @@ I specialise in residential electrical work with over 12 years of experience. Ev
 **Terms & Conditions**
 
 **Payment:**
+
 - 50% deposit required to confirm the booking
 - Remaining 50% due on completion
 
 **Timeline:**
 
-| Phase | Description | Duration |
-|-------|-------------|----------|
-| Day 1 | Materials procurement | 1 day |
-| Day 2 | Distribution box removal & installation | 4 hours |
-| Day 2 | Testing & circuit labelling | 1 hour |
-| Day 3 | Safety inspection & document handover | 1 hour |
+| Phase | Description                             | Duration |
+| ----- | --------------------------------------- | -------- |
+| Day 1 | Materials procurement                   | 1 day    |
+| Day 2 | Distribution box removal & installation | 4 hours  |
+| Day 2 | Testing & circuit labelling             | 1 hour   |
+| Day 3 | Safety inspection & document handover   | 1 hour   |
 
 **Warranty:** 2 years on all workmanship. Manufacturer warranty applies to parts.
 
@@ -100,6 +102,7 @@ I specialise in residential electrical work with over 12 years of experience. Ev
 ---
 
 #### Payment block:
+
 - Label: "Confirm your booking — pay 50% deposit"
 - Amount: $325
 
