@@ -34,7 +34,7 @@
     "eslint/arrow-body-style": "off", // allow () => { ... } and () => expression
     "eslint/no-warning-comments": "warn", // highlight @todo comments
     "eslint/capitalized-comments": "off", // sometimes comments should start from lower case
-    "eslint/id-length": ["error", { "exceptions": ["x", "y"] }], // allow { x: event.clientX, y: event.clientY }
+    "eslint/id-length": ["error", { "exceptions": ["x", "y", "_"] }], // allow { x: event.clientX, y: event.clientY }
     "eslint/max-lines-per-function": "off", // sometimes long function is better than multiple small functions
     "eslint/max-lines": "off", // inevitable
     "eslint/max-params": "warn", // params of custom functions always put into object, functions from libs we can not control
