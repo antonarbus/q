@@ -1,0 +1,62 @@
+import { useWelcomeGuide } from '@front/shared/welcome-guide/WelcomeGuideProvider'
+import { Box, Typography } from '@mui/material'
+import { AnimatePresence, motion } from 'motion/react'
+import { welcomeSlides } from '@front/shared/welcome-guide/welcomeSlides'
+
+export const WelcomeGuideSlide = (): React.JSX.Element => {
+  const welcomeGuide = useWelcomeGuide()
+  const slide = welcomeSlides?.[welcomeGuide.currentSlide]
+  const directionAsNumber = welcomeGuide.direction === 'next' ? 1 : -1
+
+  return (
+    <Box sx={{ flex: 1, overflow: 'hidden', minHeight: 0 }}>
+      <AnimatePresence initial={false} mode='wait'>
+        <motion.div
+          key={welcomeGuide.currentSlide}
+          animate={{ x: 0, opacity: 1 }}
+          exit={{ x: -directionAsNumber * 40, opacity: 0 }}
+          initial={{ x: directionAsNumber * 40, opacity: 0 }}
+          style={{ height: '100%' }}
+          transition={{ duration: 0.2, ease: 'easeInOut' }}
+        >
+          <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+            <Box
+              sx={{
+                flex: 1,
+                borderRadius: '8px',
+                background: '#f5f5f5',
+                border: '1px dashed #d0d0d0',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: '20px',
+              }}
+            >
+              <Typography sx={{ color: '#bbb', fontStyle: 'italic', fontSize: '13px' }}>
+                {slide?.mockLabel ?? ''}
+              </Typography>
+            </Box>
+            <Typography
+              color='primary'
+              sx={{
+                fontSize: '11px',
+                fontWeight: 600,
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                marginBottom: '6px',
+              }}
+            >
+              {slide?.step ?? ''}
+            </Typography>
+            <Typography sx={{ fontWeight: 600, marginBottom: '8px' }} variant='h6'>
+              {slide?.title ?? ''}
+            </Typography>
+            <Typography color='text.secondary' variant='body2'>
+              {slide?.description ?? ''}
+            </Typography>
+          </Box>
+        </motion.div>
+      </AnimatePresence>
+    </Box>
+  )
+}
