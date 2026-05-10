@@ -1,5 +1,6 @@
 import { localStorageKeys } from '@front/shared/lib/local-storage/localStorageKeys'
 import { route } from '@front/shared/lib/react-router-dom/route'
+import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { useNavigate } from 'react-router-dom'
 import { useEffectOnce } from 'react-use'
 import { toast } from 'sonner'
@@ -8,6 +9,12 @@ export const useProposeWelcomeGuide = (): void => {
   const navigate = useNavigate()
 
   useEffectOnce(() => {
+    const { permissionLevel } = reduxHolder.getState().quotation
+
+    if (permissionLevel === 'PUBLIC' || permissionLevel === 'SHARED') {
+      return
+    }
+
     if (localStorage.getItem(localStorageKeys.guideVisited) !== null) {
       return
     }
