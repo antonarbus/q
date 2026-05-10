@@ -5,7 +5,7 @@ import { navItemId } from '@front/shared/nav/navItemId'
 import { navSlice } from '@front/shared/nav/navSlice'
 import { createContext, useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { SLIDES } from './SLIDES'
+import { welcomeSlides } from './welcomeSlides'
 
 export type Props = {
   currentSlide: number
@@ -40,10 +40,10 @@ export const WelcomeGuideProvider = ({
   const value: Props = {
     currentSlide,
     direction,
-    totalSlides: SLIDES.length,
+    totalSlides: welcomeSlides.length,
     close,
     goNext: () => {
-      if (currentSlide < SLIDES.length - 1) {
+      if (currentSlide < welcomeSlides.length - 1) {
         setDirection('next')
         setCurrentSlide(currentSlide + 1)
       } else {
