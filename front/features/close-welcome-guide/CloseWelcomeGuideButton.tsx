@@ -1,4 +1,4 @@
-import { useWelcomeGuide } from '@front/shared/welcomeGuide/welcomeGuideContext'
+import { useWelcomeGuide } from '@front/shared/welcome-guide/WelcomeGuideProvider'
 import { IconButton } from '@mui/material'
 import { MdClose } from 'react-icons/md'
 

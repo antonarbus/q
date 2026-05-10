@@ -1,4 +1,4 @@
-import { useWelcomeGuide } from '@front/shared/welcomeGuide/welcomeGuideContext'
+import { useWelcomeGuide } from '@front/shared/welcome-guide/WelcomeGuideProvider'
 import { Button } from '@mui/material'
 
 export const GoToPrevWelcomeGuideSlide = (): React.JSX.Element => {
