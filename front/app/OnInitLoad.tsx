@@ -4,9 +4,10 @@ import { useConnectionToBackendCheck } from '@front/features/on-init-load/check-
 import { useCountUniqueDailyVisitor } from '@front/features/on-init-load/count-unique-daily-visitors/useCountUniqueDailyVisitor'
 import { useHideInitHtmlElements } from '@front/features/on-init-load/hide-loading-text/useHideInitHtmlElements'
 import { useRemoveThirdPartyCookies } from '@front/features/on-init-load/remove-third-party-cookies/useRemoveThirdPartyCookies'
-import { useFirstVisitGuideHint } from '@front/features/on-init-load/useFirstVisitGuideHint'
+import { useProposeWelcomeGuide } from '@front/features/propose-welcome-guide/useProposeWelcomeGuide'
 import { useInitMousePositionTracking } from '@front/shared/util/mousePosition'
 
+// todo: more feature action names
 export const OnInitLoad = (): React.ReactNode => {
   useInitMousePositionTracking()
   useLogoutIfAccessTokenExpired()
@@ -15,7 +16,7 @@ export const OnInitLoad = (): React.ReactNode => {
   useRemoveThirdPartyCookies()
   useCountUniqueDailyVisitor()
   useConnectionToBackendCheck()
-  useFirstVisitGuideHint()
+  useProposeWelcomeGuide()
 
   return null
 }

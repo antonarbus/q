@@ -398,6 +398,17 @@ export const navSlice = createSlice({
         value: 'profile',
       })
     },
+    hideBadge: (
+      state: WritableDraft<InitState>,
+      action: PayloadAction<{ navItemId: NavItemId }>,
+    ) => {
+      setMenuItemPropValue({
+        menu: state.navStructure,
+        navItemId: action.payload.navItemId,
+        prop: 'badge',
+        value: false,
+      })
+    },
   },
 })
 

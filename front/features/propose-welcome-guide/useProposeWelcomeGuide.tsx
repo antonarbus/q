@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useEffectOnce } from 'react-use'
 import { toast } from 'sonner'
 
-export const useFirstVisitGuideHint = (): void => {
+export const useProposeWelcomeGuide = (): void => {
   const navigate = useNavigate()
 
   useEffectOnce(() => {
@@ -13,9 +13,10 @@ export const useFirstVisitGuideHint = (): void => {
     }
 
     const timeoutId = setTimeout(() => {
-      toast('New here? Want to see how it works?', {
+      toast('New here?', {
+        style: { width: '200px', left: 0, right: 0, marginInline: 'auto' },
         action: {
-          label: 'Show',
+          label: 'Show guide',
           onClick: () => {
             navigate(`./${route.welcomeGuide}`)
           },

@@ -43,5 +43,25 @@ export const IconWithLoader = (props: Props): React.ReactNode => {
     return <ErrorIcon />
   }
 
+  if (props.navItem.badge === true) {
+    return (
+      <span style={{ position: 'relative', display: 'inline-flex' }}>
+        <Icon disabled={disabled} icon={icon} tooltipText={tooltipText} />
+        <span
+          style={{
+            position: 'absolute',
+            top: 4,
+            right: 4,
+            width: 7,
+            height: 7,
+            borderRadius: '50%',
+            background: '#2196f3',
+            pointerEvents: 'none',
+          }}
+        />
+      </span>
+    )
+  }
+
   return <Icon disabled={disabled} icon={icon} tooltipText={tooltipText} />
 }
