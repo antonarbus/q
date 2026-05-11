@@ -89,7 +89,7 @@ export const WelcomeGuideSlide = (): React.JSX.Element => {
             >
               {slide?.title ?? ''}
             </Typography>
-            <Typography color='text.secondary' variant='body2'>
+            <Typography color='text.secondary' variant='body1'>
               {slide?.description ?? ''}
             </Typography>
           </Box>

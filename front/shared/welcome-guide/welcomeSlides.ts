@@ -9,9 +9,9 @@ type Slide = {
 export const welcomeSlides: Slide[] = [
   {
     step: 'Step 1 of 4',
-    title: 'A client needs a quote. Fast.',
+    title: 'A client needs a quote.',
     description:
-      'Anna is renovating her apartment and needs a new electricity distribution box installed. She messages John. He needs to send a professional quote today — not a PDF cobbled together in Word.',
+      'Anna is renovating her apartment and needs a new electricity distribution box installed. She messages John. He needs to send a professional quote.',
     mockLabel: '[ editor view ]',
     image: '/welcome-guide/slide01.jpeg',
   },
