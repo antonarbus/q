@@ -3,15 +3,17 @@ type Slide = {
   title: string
   description: string
   mockLabel: string
+  image?: string
 }
 
 export const welcomeSlides: Slide[] = [
   {
     step: 'Step 1 of 4',
-    title: 'Create a Quotation',
+    title: 'A client needs a quote. Fast.',
     description:
-      'Start with a blank editor. Add your company name, client details, and a quotation title.',
+      'Anna is renovating her apartment and needs a new electricity distribution box installed. She messages John. He needs to send a professional quote today — not a PDF cobbled together in Word.',
     mockLabel: '[ editor view ]',
+    image: '/welcome-guide/slide01.jpeg',
   },
   {
     step: 'Step 2 of 4',

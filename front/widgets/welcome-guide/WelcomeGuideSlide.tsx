@@ -9,7 +9,13 @@ export const WelcomeGuideSlide = (): React.JSX.Element => {
   const directionAsNumber = welcomeGuide.direction === 'next' ? 1 : -1
 
   return (
-    <Box sx={{ flex: 1, overflow: 'hidden', minHeight: 0 }}>
+    <Box
+      sx={{
+        flex: 1,
+        overflow: 'hidden',
+        minHeight: 0,
+      }}
+    >
       <AnimatePresence initial={false} mode='wait'>
         <motion.div
           key={welcomeGuide.currentSlide}
@@ -19,22 +25,48 @@ export const WelcomeGuideSlide = (): React.JSX.Element => {
           style={{ height: '100%' }}
           transition={{ duration: 0.2, ease: 'easeInOut' }}
         >
-          <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              height: '100%',
+            }}
+          >
             <Box
               sx={{
                 flex: 1,
                 borderRadius: '8px',
-                background: '#f5f5f5',
                 border: '1px dashed #d0d0d0',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 marginBottom: '20px',
+                overflow: 'hidden',
+                background: 'white',
               }}
             >
-              <Typography sx={{ color: '#bbb', fontStyle: 'italic', fontSize: '13px' }}>
-                {slide?.mockLabel ?? ''}
-              </Typography>
+              {slide?.image === undefined ? (
+                <Typography
+                  sx={{
+                    color: '#bbb',
+                    fontStyle: 'italic',
+                    fontSize: '13px',
+                  }}
+                >
+                  {slide?.mockLabel ?? ''}
+                </Typography>
+              ) : (
+                <Box
+                  alt={slide.title}
+                  component='img'
+                  src={slide.image}
+                  sx={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'contain',
+                  }}
+                />
+              )}
             </Box>
             <Typography
               color='primary'
@@ -48,7 +80,13 @@ export const WelcomeGuideSlide = (): React.JSX.Element => {
             >
               {slide?.step ?? ''}
             </Typography>
-            <Typography sx={{ fontWeight: 600, marginBottom: '8px' }} variant='h6'>
+            <Typography
+              variant='h6'
+              sx={{
+                fontWeight: 600,
+                marginBottom: '8px',
+              }}
+            >
               {slide?.title ?? ''}
             </Typography>
             <Typography color='text.secondary' variant='body2'>

@@ -24,7 +24,7 @@ export const CardCustom = (props: Props): React.JSX.Element => (
       width: '400px',
       margin: '32px',
       padding: '40px',
-      background: 'rgba(255, 255, 255, 0.7)',
+      background: 'rgba(255, 255, 255, 0.9)',
       zIndex: 1001,
       color: 'rgba(0, 0, 0, 0.87)',
       borderRadius: '12px',
