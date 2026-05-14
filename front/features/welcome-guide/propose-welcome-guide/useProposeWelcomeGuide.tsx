@@ -1,3 +1,4 @@
+import { useIsEditorView } from '@front/entities/quotation/util/useIsEditorView'
 import { localStorageKeys } from '@front/shared/lib/local-storage/localStorageKeys'
 import { route } from '@front/shared/lib/react-router-dom/route'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
@@ -7,8 +8,13 @@ import { toast } from 'sonner'
 
 export const useProposeWelcomeGuide = (): void => {
   const navigate = useNavigate()
+  const isEditorView = useIsEditorView()
 
   useEffectOnce(() => {
+    if (isEditorView === false) {
+      return
+    }
+
     const { permissionLevel } = reduxHolder.getState().quotation
 
     if (permissionLevel === 'PUBLIC' || permissionLevel === 'SHARED') {

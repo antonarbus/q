@@ -4,13 +4,14 @@ import { Autocomplete } from '@mui/material'
 import { cls } from '@front/shared/cls'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { clipboardSlice } from '@front/entities/quotation/redux/clipboardSlice'
+import type { ReactNode } from 'react'
 import { useEffect, useRef, useState } from 'react'
 import { PaperComponent } from './PaperComponent'
 import { SearchOption } from './SearchOption'
 import { renderInput } from './renderInput'
 import { useCopyBookmarkAtSearch } from '@front/features/bookmark/copy-bookmark/useCopyBookmarkAtSearch'
 
-export const Search = (): React.ReactNode => {
+export const Search = (): ReactNode => {
   const getBookmarkListQuery = useGetBookmarkListQuery()
   const options = getBookmarkListQuery.data?.bookmarkList ?? []
   const [inputValue, setInputValue] = useState('')

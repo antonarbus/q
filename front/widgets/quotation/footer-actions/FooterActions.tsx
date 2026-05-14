@@ -1,5 +1,4 @@
 import { useIsEditorView } from '@front/entities/quotation/util/useIsEditorView'
-import { OpenShareQuotationModalButton } from '@front/features/open-close/open-share-quotation-modal'
 import { OpenInsertMenuButton } from '@front/features/open-close/open-insert-menu'
 import { SaveQuotationButton } from './SaveQuotationButton'
 import { FooterActionsLayout } from './FooterActionsLayout'
@@ -9,11 +8,14 @@ import type { FC } from 'react'
 export const FooterActions: FC = () => {
   const isEditorView = useIsEditorView()
 
+  if (isEditorView === false) {
+    return null
+  }
+
   return (
     <FooterActionsLayout>
-      {isEditorView === true && <OpenInsertMenuButton />}
-      {isEditorView === true && <SaveQuotationButton />}
-      {isEditorView === true && <OpenShareQuotationModalButton />}
+      <OpenInsertMenuButton />
+      <SaveQuotationButton />
       <DownloadAsPdfButton />
     </FooterActionsLayout>
   )

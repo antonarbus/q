@@ -2,8 +2,9 @@ import { Box } from '@mui/material'
 import logoSrc from './logo.png'
 import { Link } from 'react-router-dom'
 import { openQuotationPageAndLoadNew } from '@front/features/open-close/open-quotation-page'
+import type { ReactNode } from 'react'
 
-export const LogoLink = (): React.JSX.Element => {
+export const LogoLink = (): ReactNode => {
   return (
     <Link
       to='/new'

@@ -4,6 +4,11 @@ import type { FC } from 'react'
 
 export const QuotationId: FC = () => {
   const quotationId = reduxHolder.useSelector((state) => state.quotation.id)
+  const permissionLevel = reduxHolder.useSelector((state) => state.quotation.permissionLevel)
+
+  if (permissionLevel === 'FORBIDDEN' || permissionLevel === 'UNKNOWN') {
+    return null
+  }
 
   if (quotationId === 'new') {
     return null
