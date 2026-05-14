@@ -31,6 +31,7 @@ export const ResizableBlockPaper = (props: Props): React.JSX.Element => {
 
   return (
     <Resizable
+      key={block.item.id}
       bounds='window'
       className={cls.paper}
       defaultSize={{

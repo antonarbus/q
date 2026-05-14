@@ -42,7 +42,7 @@ import type { Quotation } from '@back/entity/quotation/schema'
 
 const boqColumns = {
   number: { html: '', width: 30 },
-  description: { html: boqHeaderDescriptionHtml, width: 240 },
+  description: { html: boqHeaderDescriptionHtml, width: 300 },
   itemPrice: { html: boqHeaderItemPriceHtml, width: 100 },
   qty: { html: boqHeaderQtyHtml, width: 100 },
   price: { html: boqHeaderPriceHtml, width: 100 },
@@ -94,7 +94,7 @@ export const newQuotationTemplate: Quotation = {
       ...blockDefaults,
       id: generateId(),
       type: 'text',
-      width: 600,
+      width: 660,
       height: 0,
       text: { html: welcomeTextHtml, value: null },
     },
@@ -102,7 +102,7 @@ export const newQuotationTemplate: Quotation = {
       ...blockDefaults,
       id: generateId(),
       type: 'boq',
-      width: 650,
+      width: 0,
       height: 0,
       boq: {
         header: {
@@ -183,7 +183,7 @@ export const newQuotationTemplate: Quotation = {
       ...blockDefaults,
       id: generateId(),
       type: 'boq',
-      width: 650,
+      width: 0,
       height: 0,
       boq: {
         header: {
