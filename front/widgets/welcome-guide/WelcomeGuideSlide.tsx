@@ -36,13 +36,13 @@ export const WelcomeGuideSlide = (): React.JSX.Element => {
               sx={{
                 flex: 1,
                 borderRadius: '8px',
-                border: slide?.image !== undefined ? 'none' : '1px dashed #d0d0d0',
+                border: slide?.image === undefined ? '1px dashed #d0d0d0' : 'none',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 marginBottom: '20px',
                 overflow: 'hidden',
-                background: slide?.image !== undefined ? 'transparent' : 'white',
+                background: slide?.image === undefined ? 'white' : 'transparent',
               }}
             >
               {slide?.image === undefined ? (
