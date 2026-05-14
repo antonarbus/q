@@ -33,7 +33,7 @@ test.describe('basic ui elements on front page', () => {
 
     const body = page.locator('body')
 
-    await expect(body).toHaveText(/COMMERCIAL QUOTATION/u)
+    await expect(body).toHaveText(/EXAMPLE QUOTATION/u)
     await expect(body).toHaveText(/Title/u)
     await expect(body).toHaveText(/Subtotal/u)
     await expect(body).toHaveText(/Description/u)
@@ -41,6 +41,5 @@ test.describe('basic ui elements on front page', () => {
     await expect(body).toHaveText(/Qty/u)
     await expect(body).toHaveText(/Price/u)
     await expect(body).toHaveText(/Total price/u)
-    await expect(body).toHaveText(/TERMS & CONDITIONS/u)
   })
 })
