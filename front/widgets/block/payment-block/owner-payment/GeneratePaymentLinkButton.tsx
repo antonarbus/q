@@ -28,7 +28,7 @@ export const GeneratePaymentLinkButton: FC = () => {
   return (
     <Button
       disabled={createPaymentLink.isPending}
-      size='small'
+      size='large'
       variant='contained'
       onClick={async (): Promise<void> => {
         const isValid = await validatePaymentAmount()
