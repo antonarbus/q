@@ -25,7 +25,7 @@ export const SuggestionModalContent = (): React.JSX.Element => {
         autoFocus={true}
         focused={true}
         fullWidth={true}
-        label='Describe the product you need'
+        label='What product do you need?'
         multiline={true}
         placeholder='Description...'
         rows={3}

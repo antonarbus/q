@@ -13,7 +13,7 @@ export const welcomeSlides: Slide[] = [
     description:
       'Anna is renovating her apartment and needs a new electricity distribution box installed. She messages John. He needs to send a professional quote.',
     mockLabel: '[ editor view ]',
-    image: '/welcome-guide/slide01.jpeg',
+    image: '/welcome-guide/welcome-slide-01.jpeg',
   },
   {
     step: 'Step 2 of 4',
