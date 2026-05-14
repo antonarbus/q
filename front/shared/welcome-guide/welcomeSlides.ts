@@ -17,17 +17,19 @@ export const welcomeSlides: Slide[] = [
   },
   {
     step: 'Step 2 of 4',
-    title: 'Build with Blocks',
+    title: 'Write a pitch that wins the job.',
     description:
-      'Insert product rows with quantities and prices. Add text blocks for notes and a price summary — totals calculate automatically.',
+      'John adds a cover letter — rich text, photos, portfolio link. Everything the client needs to say yes.',
     mockLabel: '[ block editor ]',
+    image: '/welcome-guide/welcome-slide-02.png',
   },
   {
     step: 'Step 3 of 4',
-    title: 'Share with Clients',
+    title: 'Break down the price. Build the trust.',
     description:
-      'Generate a read-only share link or download a PDF. Clients can view the quotation without creating an account.',
-    mockLabel: '[ share modal ]',
+      'John adds a scope of supply — every item, quantity, and unit price listed clearly. No surprises for the client, no disputes after the job.',
+    mockLabel: '[ scope of supply ]',
+    image: '/welcome-guide/welcome-slide-03.png',
   },
   {
     step: 'Step 4 of 4',
