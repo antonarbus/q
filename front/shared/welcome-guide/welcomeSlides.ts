@@ -35,7 +35,7 @@ export const welcomeSlides: Slide[] = [
     step: 'Step 4 of 4',
     title: 'Add payment. Send the link. Job booked.',
     description:
-      'John adds a payment and shares the quotation. Anna gets a link over WhatsApp, opens the quote and pays the deposit in one click. Done.',
+      'John adds a payment and shares the quotation. Anna gets a link, opens the quote and pays the deposit in one click. Done.',
     mockLabel: '[ payment + share ]',
     image: '/welcome-guide/welcome-slide-04.png',
   },
