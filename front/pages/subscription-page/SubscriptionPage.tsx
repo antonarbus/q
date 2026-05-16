@@ -24,7 +24,7 @@ export const SubscriptionPage = (): React.JSX.Element => {
       width='350px'
     >
       <Typography sx={{ mb: 3 }}>
-        You&apos;ve used all 200 free quotations. Get unlimited access.
+        You&apos;ve used all 100 free quotations. Get unlimited access.
       </Typography>
       <SubscribeButtons />
     </FormModal>

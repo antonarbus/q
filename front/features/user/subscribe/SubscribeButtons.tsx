@@ -40,7 +40,7 @@ export const SubscribeButtons = ({ mode = 'buy', size }: Props): React.JSX.Eleme
           handleCheckout('annual')
         }}
       >
-        {isExtend ? 'Extend 1 year — $100' : '1 year — $100'}
+        {isExtend ? 'Extend 1 year — $60' : '1 year — $60'}
       </Button>
     </Box>
   )

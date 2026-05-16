@@ -467,6 +467,97 @@ bunx drizzle-kit push
 
 ---
 
+## Platform Subscription
+
+Users get 100 free quotations. Once they hit the limit, they must buy a platform subscription to create more. Subscriptions are one-time payments ($12 for 30 days, $60 for 365 days) — not recurring. Multiple purchases stack: buying while a subscription is still active extends the expiry from the current end date rather than from today.
+
+### How it works
+
+- **Quota check** — `saveQuotationHandler` reads the user's quotation count and `subscriptionExpiresAt` before every create. If the count is at or above `FREE_QUOTATION_LIMIT` (100) and no valid subscription exists, it returns `402 SUBSCRIPTION_REQUIRED`.
+- **Checkout** — the frontend calls `POST /api/stripe/subscription-checkout` with `period: 'monthly' | 'annual'`. The backend creates a Stripe Checkout Session (`mode: 'payment'`) using the matching Price ID from Secret Manager, embedding `userEmail` and `period` in the session metadata.
+- **Webhook** — when payment completes, Stripe posts `checkout.session.completed` to `/api/stripe/webhook`. The handler reads `metadata.period` and `metadata.userEmail`, calculates the new expiry (stacking on top of any existing active subscription), and writes it to `users.subscriptionExpiresAt`.
+- **Frontend** — on `SUBSCRIPTION_REQUIRED` error, the user is navigated to `/subscription` (a dedicated page with checkout buttons). The Settings modal always shows current quota status.
+- **Price amounts** — the backend only passes the Price ID to Stripe. The dollar amounts shown in the UI buttons (`$12`, `$60`) are labels only — what Stripe actually charges is determined by the price configured in the Stripe dashboard.
+
+### Required secrets
+
+Four Price ID secrets are needed — one per period per mode. Price IDs are created in the Stripe dashboard when you set up the product.
+
+| Secret                                      | What it is                               |
+| ------------------------------------------- | ---------------------------------------- |
+| `STRIPE_TEST_SUBSCRIPTION_PRICE_ID_MONTHLY` | Price ID for $12 one-time (test account) |
+| `STRIPE_TEST_SUBSCRIPTION_PRICE_ID_ANNUAL`  | Price ID for $60 one-time (test account) |
+| `STRIPE_LIVE_SUBSCRIPTION_PRICE_ID_MONTHLY` | Price ID for $12 one-time (live account) |
+| `STRIPE_LIVE_SUBSCRIPTION_PRICE_ID_ANNUAL`  | Price ID for $60 one-time (live account) |
+
+These are loaded alongside the other Stripe secrets in `getStripe.ts` and cached on first use.
+
+### Test mode vs live mode
+
+| Environment              | Price IDs used                        |
+| ------------------------ | ------------------------------------- |
+| `local` / `dev` / `test` | `STRIPE_TEST_SUBSCRIPTION_PRICE_ID_*` |
+| `pilot` / `prod`         | `STRIPE_LIVE_SUBSCRIPTION_PRICE_ID_*` |
+
+### Step-by-step setup
+
+#### 1. Create the product and prices in Stripe Test mode
+
+1. Open [dashboard.stripe.com](https://dashboard.stripe.com) — confirm **Test mode** is on (header turns orange).
+2. Left sidebar → **Product catalog** → **+ Add product**.
+3. Name: `Platform Subscription`. Leave everything else default.
+4. Under **Pricing** → **Add a price**:
+   - Pricing model: `Standard pricing`
+   - Amount: `12.00` USD
+   - Billing period: **One time** (not recurring)
+   - Save
+5. **Add another price**: same settings, amount `60.00` USD → Save.
+6. **Save product**.
+7. On the product page, copy both Price IDs (`price_…`) — note which is $12 and which is $60.
+
+#### 2. Add test Price IDs to Secret Manager
+
+```
+STRIPE_TEST_SUBSCRIPTION_PRICE_ID_MONTHLY   # price_… for $12
+STRIPE_TEST_SUBSCRIPTION_PRICE_ID_ANNUAL    # price_… for $60
+```
+
+**Locally**, add them to `.env` instead:
+
+```
+STRIPE_TEST_SUBSCRIPTION_PRICE_ID_MONTHLY=price_…
+STRIPE_TEST_SUBSCRIPTION_PRICE_ID_ANNUAL=price_…
+```
+
+#### 3. Test the flow locally
+
+1. Run `bun stripe-listen` in a separate terminal (forwards webhook events to `localhost:8080/api/stripe/webhook`).
+2. Start the app (`bun dev`).
+3. Log in with an account that has 100+ quotations, or temporarily lower `FREE_QUOTATION_LIMIT` to 0.
+4. Try saving a quotation — you should be redirected to `/subscription`.
+5. Click a subscription button — Stripe Checkout opens.
+6. Use test card `4242 4242 4242 4242` (any future expiry, any CVC).
+7. After payment, verify `subscriptionExpiresAt` is set on your user row via `bun db-studio`.
+
+#### 4. Verify the webhook covers `checkout.session.completed`
+
+The existing webhook endpoint was registered for the Stripe Connect payment flow and should already include `checkout.session.completed`. To confirm:
+
+1. [Webhooks (test)](https://dashboard.stripe.com/test/workbench/webhooks) → click the endpoint → check **Events to send**.
+2. If `checkout.session.completed` is missing, click **Edit endpoint** → add it.
+3. Repeat for all four endpoints (dev, test, pilot, prod).
+
+#### 5. Repeat for Live mode
+
+Same as steps 1–2 but with **Live mode** on in the dashboard:
+
+```
+STRIPE_LIVE_SUBSCRIPTION_PRICE_ID_MONTHLY   # price_… for $12
+STRIPE_LIVE_SUBSCRIPTION_PRICE_ID_ANNUAL    # price_… for $60
+```
+
+---
+
 ## Competitors
 
 - PandaDoc — most feature-complete, expensive, enterprise-focused
