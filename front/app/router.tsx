@@ -13,6 +13,7 @@ import { InfoModal } from '@front/pages/info-modal/InfoModal'
 import { SaveQuotationModal } from '@front/pages/save-quotation-modal/SaveQuotationModal'
 import { SettingsModal } from '@front/pages/settings-modal/SettingsModal'
 import { StripeConnectModal } from '@front/pages/stripe-connect-modal/StripeConnectModal'
+import { SubscriptionPage } from '@front/pages/subscription-page/SubscriptionPage'
 import { ShareQuotationModal } from '@front/pages/share-quotation-modal/ShareQuotationModal'
 import { WelcomeGuideModal } from '@front/pages/welcome-guide-modal/WelcomeGuideModal'
 import { TestPage } from '@front/pages/test-page/TestPage'
@@ -214,6 +215,10 @@ const router = createBrowserRouter([
             </RequireRoles>
           </Suspense>
         ),
+      },
+      {
+        path: route.subscription,
+        element: <SubscriptionPage />,
       },
       {
         path: 'test',
