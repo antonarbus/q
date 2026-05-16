@@ -18,6 +18,7 @@ export const route = {
   info: 'info',
   settings: 'settings',
   stripeConnect: 'stripe-connect',
+  subscription: 'subscription',
   userList: 'user-list',
   visitorList: 'visitor-list',
   welcomeGuide: 'welcome-guide',
