@@ -158,6 +158,57 @@ bun run fmt-fix               # Formatting
 bun run check                 # All checks (tsc, lint, format, tests, build)
 ```
 
+## Database Migrations
+
+Schema changes go through Drizzle Kit migrations. The `drizzle/` folder is the source of truth — every change to `back/entity/*/db/*TableSchema.ts` must be followed by a generated migration before it reaches the database.
+
+### How it works
+
+`db-generate-migration` reads the latest `snapshot.json` in `drizzle/` (which represents the schema state after the last migration), compares it against the current TypeScript schema files, and writes a new `.sql` file containing only the diff — `ALTER TABLE`, `ADD COLUMN`, `CREATE TABLE`, etc. The entire `drizzle/` folder (`.sql` files, `snapshot.json` files) must be committed — without the snapshots, Drizzle has no baseline to diff against.
+
+### Workflow
+
+```bash
+# 1. Edit a schema file in back/entity/*/db/*TableSchema.ts
+# 2. Generate the migration — produces a new .sql + snapshot.json
+bun db-generate-migration
+
+# 3. Review the generated SQL in drizzle/<timestamp>_<name>/migration.sql
+# 4. Apply to the target DB
+bun db-migrate-dev      # dev / local  → NEON_DATABASE_URL_DEV
+bun db-migrate-test     # test         → NEON_DATABASE_URL_TEST
+bun db-migrate-prod     # prod + pilot → NEON_DATABASE_URL_PROD
+
+# 5. Commit drizzle/ together with the schema change
+```
+
+### Available commands
+
+| Command                     | What it does                                                             |
+| --------------------------- | ------------------------------------------------------------------------ |
+| `bun db-generate-migration` | Diffs schema files against last snapshot → writes a new migration `.sql` |
+| `bun db-migrate-dev`        | Applies pending migrations to the dev DB                                 |
+| `bun db-migrate-test`       | Applies pending migrations to the test DB                                |
+| `bun db-migrate-prod`       | Applies pending migrations to the prod DB (pilot shares prod)            |
+| `bun db-push-dev`           | Pushes schema directly to dev DB (no migration file, no audit trail)     |
+| `bun db-push-test`          | Pushes schema directly to test DB                                        |
+| `bun db-push-prod`          | Pushes schema directly to prod DB                                        |
+| `bun db-pull`               | Introspects the live DB and updates local schema (rarely needed)         |
+| `bun db-check`              | Checks for migration consistency issues without applying anything        |
+| `bun db-studio`             | Opens Drizzle Studio — a browser UI for browsing/editing the DB          |
+
+### Rules
+
+- **Never edit a migration file after it has been applied** to any shared environment. Generate a new one instead.
+- **`db-push` skips the migration file** — useful during local development but bypasses the audit trail. Use `db-migrate` for anything that touches a shared DB.
+- The first migration (`20260516134228_happy_doctor_octopus`) is the baseline. It uses `IF NOT EXISTS` guards so it is safe to run against both a fresh DB and the pre-existing production DB.
+
+### Fresh database setup
+
+On a completely empty database, run `db-migrate` — the baseline migration creates all tables, indexes, and columns from scratch.
+
+---
+
 ## FSD: Cross-Layer Singleton Pattern
 
 FSD forbids `shared/` from importing higher layers (`entities`, `features`, `app`). This creates a tension: infrastructure singletons like the router, Redux store, and axios instance are _created_ in `app/` (where all dependencies are available), but need to be _accessed_ from anywhere (`shared/`, `entities/`, `features/`).
