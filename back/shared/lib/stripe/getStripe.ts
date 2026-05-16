@@ -9,6 +9,7 @@ type StripeCached = {
   instance: Stripe
   clientId: string
   webhookSecret: string
+  subscriptionPriceId: { monthly: string; annual: string }
 }
 
 let stripeCached: StripeCached | null = null
@@ -29,16 +30,31 @@ export const getStripe = async (): Promise<StripeCached> => {
     prod: 'STRIPE_LIVE_WEBHOOK_SECRET',
   }
 
-  const [stripeSecretKey, stripeClientId, stripeWebhookSecret] = await Promise.all([
-    getSecret(isLive ? 'STRIPE_LIVE_SECRET_KEY' : 'STRIPE_TEST_SECRET_KEY'),
-    getSecret(isLive ? 'STRIPE_LIVE_CLIENT_ID' : 'STRIPE_TEST_CLIENT_ID'),
-    getSecret(webhookSecretName[runtimeConfig.environment]),
-  ])
+  const [stripeSecretKey, stripeClientId, stripeWebhookSecret, priceIdMonthly, priceIdAnnual] =
+    await Promise.all([
+      getSecret(isLive ? 'STRIPE_LIVE_SECRET_KEY' : 'STRIPE_TEST_SECRET_KEY'),
+      getSecret(isLive ? 'STRIPE_LIVE_CLIENT_ID' : 'STRIPE_TEST_CLIENT_ID'),
+      getSecret(webhookSecretName[runtimeConfig.environment]),
+      getSecret(
+        isLive
+          ? 'STRIPE_LIVE_SUBSCRIPTION_PRICE_ID_MONTHLY'
+          : 'STRIPE_TEST_SUBSCRIPTION_PRICE_ID_MONTHLY',
+      ),
+      getSecret(
+        isLive
+          ? 'STRIPE_LIVE_SUBSCRIPTION_PRICE_ID_ANNUAL'
+          : 'STRIPE_TEST_SUBSCRIPTION_PRICE_ID_ANNUAL',
+      ),
+    ])
 
   stripeCached = {
     instance: new Stripe(stripeSecretKey),
     clientId: stripeClientId,
     webhookSecret: stripeWebhookSecret,
+    subscriptionPriceId: {
+      monthly: priceIdMonthly,
+      annual: priceIdAnnual,
+    },
   }
 
   return stripeCached

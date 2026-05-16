@@ -1,3 +1,4 @@
+// oxlint-disable complexity
 import { quotationsTable } from '@back/entity/quotation/db/quotationsTableSchema'
 import { usersTable } from '@back/entity/user/db/usersTableSchema'
 import { db } from '@back/shared/lib/drizzle/db'
@@ -67,10 +68,14 @@ export const stripeWebhookHandler: RouterHandler = async (req) => {
 
   messageList.push(`Stripe webhook event verified: ${event.type}`)
 
+  // Single Stripe endpoint receives all event types.
+  // checkout.session.completed fires for two independent payment flows —
+  // each identified by its own metadata keys, only one will match per event.
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object
 
     if (session.payment_status === 'paid') {
+      // Flow 1: visitor paid for a quoted service (Stripe Connect)
       const quotationId = session.metadata?.quotationId
 
       if (typeof quotationId === 'string' && quotationId.length > 0) {
@@ -81,9 +86,47 @@ export const stripeWebhookHandler: RouterHandler = async (req) => {
 
         messageList.push(`Quotation ${quotationId} marked as paid`)
       }
+
+      // Flow 2: user bought a platform subscription (monthly/annual)
+      const period = session.metadata?.period
+      const userEmailFromSession = session.metadata?.userEmail
+
+      if (
+        (period === 'monthly' || period === 'annual') &&
+        typeof userEmailFromSession === 'string' &&
+        userEmailFromSession.length > 0
+      ) {
+        const daysToAdd = period === 'annual' ? 365 : 30
+
+        const [userSelected] = await db
+          .select({ subscriptionExpiresAt: usersTable.subscriptionExpiresAt })
+          .from(usersTable)
+          .where(eq(usersTable.email, userEmailFromSession))
+
+        // Stack on top of existing expiry if still active, otherwise start from today
+        const currentExpiry = userSelected?.subscriptionExpiresAt ?? null
+
+        const base =
+          currentExpiry !== null && new Date(currentExpiry) > new Date()
+            ? new Date(currentExpiry)
+            : new Date()
+
+        const newExpiry = new Date(base)
+        newExpiry.setDate(newExpiry.getDate() + daysToAdd)
+
+        await db
+          .update(usersTable)
+          .set({ subscriptionExpiresAt: newExpiry.toISOString() })
+          .where(eq(usersTable.email, userEmailFromSession))
+
+        messageList.push(
+          `Subscription granted to ${userEmailFromSession} until ${newExpiry.toISOString()}`,
+        )
+      }
     }
   }
 
+  // Flow 3: quotation owner disconnected their Stripe account from the platform
   if (event.type === 'account.application.deauthorized') {
     const stripeAccountId = event.account
 
