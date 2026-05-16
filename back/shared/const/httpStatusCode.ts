@@ -5,6 +5,7 @@
   - 302 - redirect
   - 400 - malformed syntax or invalid parameters from the client
   - 401 - requires user authentication
+  - 402 - payment required to access the resource
   - 403 - no permission to access the resource
   - 404 - requested URL is not available on the server
   - 409 - conflict with current state, often used when update fails due to concurrent modification
@@ -22,6 +23,8 @@ export const httpStatusCode = {
   reDirect302: 302,
   /** 400 - malformed syntax or invalid parameters from the client */
   badRequest400: 400,
+  /** 402 - payment required to access the resource */
+  paymentRequired402: 402,
   /** 401 - requires user authentication */
   unauthorized401: 401,
   /** 403 - no permission to access the resource */

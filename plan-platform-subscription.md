@@ -12,17 +12,17 @@ This plan is about **platform-level billing**: charging users for using the app 
 
 ## Decisions
 
-| # | Decision |
-|---|---|
-| Default quota | 200 quotations |
-| Paid quota | Unlimited |
-| Warning threshold | 180 quotations (20 before the limit) |
+| #                    | Decision                                                                                   |
+| -------------------- | ------------------------------------------------------------------------------------------ |
+| Default quota        | 200 quotations                                                                             |
+| Paid quota           | Unlimited                                                                                  |
+| Warning threshold    | 180 quotations (20 before the limit)                                                       |
 | Over-limit behaviour | Every `saveQuotation` call checks count + access; blocked if over limit and access expired |
-| Monthly price | $12 — grants unlimited quota until `now + 30 days` |
-| Annual price | $100 — grants unlimited quota until `now + 365 days` |
-| Plan naming | None — UI speaks in quota terms only, never tier names |
-| Tiers | One flat option |
-| Auto-renewal | None — user pays manually when access expires |
+| Monthly price        | $12 — grants unlimited quota until `now + 30 days`                                         |
+| Annual price         | $100 — grants unlimited quota until `now + 365 days`                                       |
+| Plan naming          | None — UI speaks in quota terms only, never tier names                                     |
+| Tiers                | One flat option                                                                            |
+| Auto-renewal         | None — user pays manually when access expires                                              |
 
 ---
 
@@ -37,22 +37,22 @@ This plan is about **platform-level billing**: charging users for using the app 
 
 Price IDs follow the same test/live split as the existing API keys.
 
-| Secret | Where to get it |
-| --- | --- |
+| Secret                      | Where to get it                                                                                                     |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | `STRIPE_TEST_PRICE_MONTHLY` | [Products (test)](https://dashboard.stripe.com/test/products) → Q App Access → Monthly price → Price ID (`price_…`) |
-| `STRIPE_TEST_PRICE_ANNUAL` | [Products (test)](https://dashboard.stripe.com/test/products) → Q App Access → Annual price → Price ID (`price_…`) |
-| `STRIPE_LIVE_PRICE_MONTHLY` | [Products (live)](https://dashboard.stripe.com/products) → Q App Access → Monthly price → Price ID (`price_…`) |
-| `STRIPE_LIVE_PRICE_ANNUAL` | [Products (live)](https://dashboard.stripe.com/products) → Q App Access → Annual price → Price ID (`price_…`) |
+| `STRIPE_TEST_PRICE_ANNUAL`  | [Products (test)](https://dashboard.stripe.com/test/products) → Q App Access → Annual price → Price ID (`price_…`)  |
+| `STRIPE_LIVE_PRICE_MONTHLY` | [Products (live)](https://dashboard.stripe.com/products) → Q App Access → Monthly price → Price ID (`price_…`)      |
+| `STRIPE_LIVE_PRICE_ANNUAL`  | [Products (live)](https://dashboard.stripe.com/products) → Q App Access → Annual price → Price ID (`price_…`)       |
 
 ### Which price ID is used per environment
 
-| Environment | Monthly secret | Annual secret |
-| --- | --- | --- |
-| `local` | `STRIPE_TEST_PRICE_MONTHLY` | `STRIPE_TEST_PRICE_ANNUAL` |
-| `dev` | `STRIPE_TEST_PRICE_MONTHLY` | `STRIPE_TEST_PRICE_ANNUAL` |
-| `test` | `STRIPE_TEST_PRICE_MONTHLY` | `STRIPE_TEST_PRICE_ANNUAL` |
-| `pilot` | `STRIPE_LIVE_PRICE_MONTHLY` | `STRIPE_LIVE_PRICE_ANNUAL` |
-| `prod` | `STRIPE_LIVE_PRICE_MONTHLY` | `STRIPE_LIVE_PRICE_ANNUAL` |
+| Environment | Monthly secret              | Annual secret              |
+| ----------- | --------------------------- | -------------------------- |
+| `local`     | `STRIPE_TEST_PRICE_MONTHLY` | `STRIPE_TEST_PRICE_ANNUAL` |
+| `dev`       | `STRIPE_TEST_PRICE_MONTHLY` | `STRIPE_TEST_PRICE_ANNUAL` |
+| `test`      | `STRIPE_TEST_PRICE_MONTHLY` | `STRIPE_TEST_PRICE_ANNUAL` |
+| `pilot`     | `STRIPE_LIVE_PRICE_MONTHLY` | `STRIPE_LIVE_PRICE_ANNUAL` |
+| `prod`      | `STRIPE_LIVE_PRICE_MONTHLY` | `STRIPE_LIVE_PRICE_ANNUAL` |
 
 ### Step-by-step setup
 
@@ -105,7 +105,7 @@ STRIPE_LIVE_PRICE_ANNUAL    # shared by pilot / prod
 3. Click **1 month — $12** → redirected to Stripe Checkout.
 4. Use test card `4242 4242 4242 4242` (any future expiry, any CVC).
 5. Payment completes → webhook fires → `unlimitedQuotaExpiresAt` set to `now + 30 days`.
-6. Quotation creation works again, Settings shows *"Quota: Unlimited (until …)"*.
+6. Quotation creation works again, Settings shows _"Quota: Unlimited (until …)"_.
 
 ---
 
@@ -131,8 +131,8 @@ That's it. No `stripeCustomerId`, no subscription status fields. Access is time-
 ### New routes in `route.ts`
 
 ```ts
-stripeAccessCheckout: POST /api/stripe/access-checkout
-stripeAccessStatus:   GET  /api/stripe/access-status
+stripeAccessCheckout: POST / api / stripe / access - checkout
+stripeAccessStatus: GET / api / stripe / access - status
 ```
 
 ### `accessCheckoutHandler.ts`
@@ -207,7 +207,7 @@ Stacking: if a user pays again before expiry, the new period is added on top of 
 `front/features/user/access-paywall/AccessPaywall.tsx`
 
 - Triggered when `saveQuotation` returns error code `ACCESS_REQUIRED`.
-- Copy: *"You've used all 200 free quotations. Get unlimited access."*
+- Copy: _"You've used all 200 free quotations. Get unlimited access."_
 - Two buttons: **1 month — $12** and **1 year — $100**.
 - On click → `POST /api/stripe/access-checkout` → `window.location.href = checkoutUrl`.
 
@@ -216,15 +216,15 @@ Stacking: if a user pays again before expiry, the new period is added on top of 
 `front/features/user/access-warning/AccessWarningBanner.tsx`
 
 - Shown in the quotation list when `quotationCount >= 180` and no active access.
-- Copy: *"180 / 200 quotations used. Get unlimited access before you hit the limit."*
+- Copy: _"180 / 200 quotations used. Get unlimited access before you hit the limit."_
 - Disappears once access is active.
 
 ### Settings page — Quota section
 
-- Free, under limit: *"Quota: X / 200"*
-- Free, at limit: *"Quota: 200 / 200 — get unlimited access"* + two pricing buttons.
-- Paid, active: *"Quota: Unlimited (until Jan 15, 2027)"* + optional Extend buttons.
-- Paid, lapsed: *"Quota: 200 (unlimited access expired on X)"* + two pricing buttons.
+- Free, under limit: _"Quota: X / 200"_
+- Free, at limit: _"Quota: 200 / 200 — get unlimited access"_ + two pricing buttons.
+- Paid, active: _"Quota: Unlimited (until Jan 15, 2027)"_ + optional Extend buttons.
+- Paid, lapsed: _"Quota: 200 (unlimited access expired on X)"_ + two pricing buttons.
 
 ---
 

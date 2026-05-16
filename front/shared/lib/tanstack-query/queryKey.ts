@@ -31,6 +31,8 @@ export const queryKey = {
   // stripe
   stripeAccountStatus: 'stripe-account-status',
   stripeCreatePaymentLink: 'stripe-create-payment-link',
+  stripeSubscriptionStatus: 'stripe-subscription-status',
+  stripeSubscriptionCheckout: 'stripe-subscription-checkout',
   // ai
   suggestion: 'suggestion',
   // dev

@@ -16,6 +16,7 @@ export const usersTable = pgTable(
     registeredAt: timestamp({ mode: 'string', withTimezone: true }).notNull().defaultNow(),
     loggedAt: timestamp({ mode: 'string', withTimezone: true }).notNull().defaultNow(),
     stripeAccountId: varchar({ length: 255 }),
+    subscriptionExpiresAt: timestamp({ mode: 'string', withTimezone: true }),
   },
   (table) => [index('users_email_idx').on(table.email)],
 )

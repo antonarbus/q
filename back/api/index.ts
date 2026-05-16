@@ -35,6 +35,8 @@ import { stripeConnectUrlHandler } from '@back/api/stripe/stripeConnectUrlHandle
 import { stripeConnectCallbackHandler } from '@back/api/stripe/stripeConnectCallbackHandler'
 import { createPaymentLinkHandler } from '@back/api/stripe/createPaymentLinkHandler'
 import { stripeWebhookHandler } from '@back/api/stripe/stripeWebhookHandler'
+import { subscriptionCheckoutHandler } from '@back/api/stripe/subscriptionCheckoutHandler'
+import { subscriptionStatusHandler } from '@back/api/stripe/subscriptionStatusHandler'
 import { suggestProductHandler } from '@back/api/ai/suggestProductHandler'
 import type { NextFunction, Request, Response } from 'express'
 import { getBookmarkListAllHandler } from './bookmark/getBookmarkListAllHandler'
@@ -219,6 +221,14 @@ export const api = {
   stripeWebhook: {
     ...route.stripeWebhook,
     handler: stripeWebhookHandler,
+  },
+  stripeSubscriptionCheckout: {
+    ...route.stripeSubscriptionCheckout,
+    handler: subscriptionCheckoutHandler,
+  },
+  stripeSubscriptionStatus: {
+    ...route.stripeSubscriptionStatus,
+    handler: subscriptionStatusHandler,
   },
   // ai
   suggestProduct: {

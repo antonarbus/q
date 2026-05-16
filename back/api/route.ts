@@ -246,6 +246,18 @@ export const route = {
     method: 'post',
     description: 'Stripe webhook endpoint',
   },
+  stripeSubscriptionCheckout: {
+    path: '/api/stripe/subscription-checkout',
+    url: '/api/stripe/subscription-checkout',
+    method: 'post',
+    description: 'Create Stripe checkout session for platform subscription',
+  },
+  stripeSubscriptionStatus: {
+    path: '/api/stripe/subscription-status',
+    url: '/api/stripe/subscription-status',
+    method: 'get',
+    description: 'Get platform subscription status for current user',
+  },
   // ai
   suggest: {
     path: '/api/ai/suggest',
