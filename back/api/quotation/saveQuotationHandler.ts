@@ -1,7 +1,9 @@
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entity/user/getUserFromAccessTokenOrThrowUnauthorized'
+import { usersTable } from '@back/entity/user/db/usersTableSchema'
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
+import { FREE_QUOTATION_LIMIT } from '@back/shared/const/subscription'
 import { getBucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
 import { runtimeConfig } from '@root/config/runtime'
 import { generateId } from '@back/shared/lib/nanoid'
@@ -10,7 +12,7 @@ import { quotationSchema } from '@back/entity/quotation/schema'
 import type { Quotation } from '@back/entity/quotation/schema'
 import type { NextFunction, Request, Response } from 'express'
 import { db } from '@back/shared/lib/drizzle/db'
-import { and, eq } from 'drizzle-orm'
+import { and, count, eq } from 'drizzle-orm'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
 import { httpJsonResponse } from '@back/shared/lib/express/httpResponse'
@@ -39,6 +41,7 @@ export type ErrorResBody = {
     | 'QUOTATION_ID_NOT_PROVIDED'
     | 'QUOTATION_UNHANDLED_CASE'
     | 'QUOTATION_INVALID_STRUCTURE'
+    | 'SUBSCRIPTION_REQUIRED'
 }
 
 type RouterHandler = (
@@ -102,10 +105,54 @@ export const saveQuotationHandler: RouterHandler = async (req) => {
     }
 
     // FoundQuotation.email !== email
-    return 'foreign existing'
+    return 'foreign existing' // When save someone's quotation
   }
 
   const quotationOwnership = await getQuotationOwnership()
+
+  if (quotationOwnership === 'your new' || quotationOwnership === 'foreign existing') {
+    const [[userSelected], [quotationsSelected]] = await Promise.all([
+      db
+        .select({ subscriptionExpiresAt: usersTable.subscriptionExpiresAt })
+        .from(usersTable)
+        .where(eq(usersTable.email, userFromAccessToken.email)),
+      db
+        .select({ count: count() })
+        .from(quotationsTable)
+        .where(eq(quotationsTable.email, userFromAccessToken.email)),
+    ])
+
+    const quotationCount = quotationsSelected?.count ?? 0
+    const subscriptionExpiresAt = userSelected?.subscriptionExpiresAt ?? null
+
+    const resolveIsAllowedToCreate = (): boolean => {
+      if (quotationCount < FREE_QUOTATION_LIMIT) {
+        return true
+      }
+
+      if (subscriptionExpiresAt === null) {
+        return false
+      }
+
+      if (new Date(subscriptionExpiresAt) > new Date()) {
+        return true
+      }
+
+      return false
+    }
+
+    const isAllowedToCreate = resolveIsAllowedToCreate()
+
+    if (isAllowedToCreate === false) {
+      messageList.push(`Quota limit reached: ${quotationCount} / ${FREE_QUOTATION_LIMIT}`)
+
+      throw new HttpError<ErrorResBody['errorCode']>({
+        errorCode: 'SUBSCRIPTION_REQUIRED',
+        statusCode: httpStatusCode.paymentRequired402,
+        message: messageList.join(' | '),
+      })
+    }
+  }
 
   if (quotationOwnership === 'your new') {
     messageList.push('Creating new quotation')
