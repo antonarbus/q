@@ -41,7 +41,6 @@ export const useSaveQuotation = (props: Props): Res => {
   const saveQuotationMutation = useSaveQuotationMutation()
   const getQuotationCategoryListQuery = useGetQuotationCategoryListQuery()
   const getQuotationListQuery = useGetQuotationListQuery()
-
   useUpdateEffect(() => {
     if (saveQuotationMutation.isPending === true) {
       loadingIconActor.send({ type: 'show loading icon' })
@@ -106,7 +105,12 @@ export const useSaveQuotation = (props: Props): Res => {
 
   useUpdateEffect(() => {
     if (saveQuotationMutation.isError === true) {
-      toast.error(saveQuotationMutation.error.response?.data.message)
+      if (saveQuotationMutation.error.response?.data.errorCode === 'SUBSCRIPTION_REQUIRED') {
+        navigate(`/${route.subscription}`)
+      } else {
+        toast.error(saveQuotationMutation.error.response?.data.message)
+      }
+
       loadingIconActor.send({ type: 'show error icon' })
       saveQuotationMutation.reset()
     }
