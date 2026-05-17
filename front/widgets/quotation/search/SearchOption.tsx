@@ -1,3 +1,4 @@
+// oxlint-disable jsx-a11y/no-noninteractive-element-interactions
 import type { ResBody } from '@back/api/bookmark/getBookmarkListHandler'
 import { Box } from '@mui/material'
 import { RotatingLoaderIcon } from '@front/shared/component/RotatingLoaderIcon'

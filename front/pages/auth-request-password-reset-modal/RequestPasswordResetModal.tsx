@@ -22,10 +22,6 @@ export const RequestPasswordResetModal = (): React.JSX.Element => {
     slideOut: animatedElement.slideOut,
   })
 
-  const navigateUp = (): void => {
-    routerHolder.router.navigate('..')
-  }
-
   return (
     <FormModal
       buttonText='RESET'
@@ -36,9 +32,13 @@ export const RequestPasswordResetModal = (): React.JSX.Element => {
       isButtonLoading={requestPasswordReset.isPending}
       isButtonSuccess={requestPasswordReset.isSuccess}
       modalRef={animatedElement.ref}
-      onCloseClick={navigateUp}
+      onCloseClick={(): void => {
+        routerHolder.router.navigate('..')
+      }}
       onSubmit={requestPasswordReset.handleSubmit}
-      onUnmount={navigateUp}
+      onUnmount={(): void => {
+        routerHolder.router.navigate('..')
+      }}
       paddingContent='50px 40px 10px 40px'
       shouldUnmountOnClickAway={true}
       shouldUnmountOnEsc={true}

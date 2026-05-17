@@ -21,17 +21,17 @@ export const InfoModal = (): React.ReactNode => {
   useUpdateItemInfo({ id, infoFormValues })
   const distinctCategories = useDistinctCategories()
 
-  const navigateUp = (): void => {
-    routerHolder.router.navigate('..')
-  }
-
   return (
     <FormModal
       headerIcon={<BsInfo />}
       headerText='Info'
       modalRef={modalRef}
-      onCloseClick={navigateUp}
-      onUnmount={navigateUp}
+      onCloseClick={(): void => {
+        routerHolder.router.navigate('..')
+      }}
+      onUnmount={(): void => {
+        routerHolder.router.navigate('..')
+      }}
       paddingContent='50px 40px'
       shouldUnmountOnClickAway={true}
       shouldUnmountOnEsc={true}

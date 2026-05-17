@@ -1,3 +1,4 @@
+// oxlint-disable jsx-a11y/control-has-associated-label
 import { useRef } from 'react'
 import { useTiptap } from '@tiptap/react'
 import { MenuButton } from './shared/MenuButton'

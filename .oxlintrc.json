@@ -48,6 +48,7 @@
     "eslint/operator-assignment": ["error", "never"], // i=i+1 instead of i++
     "eslint/sort-imports": "off", // ? not auto-fixable, annoying to sort manually
     "eslint/sort-keys": "off", // not nice, quite often manual sort have mental idea behind
+    "eslint/require-unicode-regexp": "off", // do not care about emoji
     "react/jsx-boolean-value": ["error", "always"], // prop={false} and also prop={true} for consistency
     "react/forbid-component-props": "off", // it forbids 'style' and 'className' props
     "import/exports-last": "off", // types in api handlers are exported and used below
@@ -87,6 +88,7 @@
     "vitest/consistent-test-filename": ["error", { "pattern": ".*\\.(test|spec)\\.[tj]sx?$" }],
     "vitest/no-importing-vitest-globals": "off", // imports are required
     "vitest/prefer-importing-vitest-globals": "off", // oxc confuses vitest and playwright
-    "vitest/prefer-expect-assertions": "off" // tests have assertions without special directives, too excessive rule
+    "vitest/prefer-expect-assertions": "off", // tests have assertions without special directives, too excessive rule
+    "vitest/require-hook": "off" // false positive for non-test files
   }
 }

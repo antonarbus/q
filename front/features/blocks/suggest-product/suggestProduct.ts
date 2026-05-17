@@ -52,6 +52,7 @@ export const suggestProduct = async (props: Props): Promise<void> => {
     descriptionEditor.commands.setContent(descriptionHtml, { emitUpdate: false })
     updateCellAtStore({ blockIndex, rowIndex, cellKey: 'description', html: descriptionHtml })
 
+    // oxlint-disable-next-line unicorn/consistent-function-scoping
     const getCurrencyFromState = (): string => {
       const { blocks } = reduxHolder.getState().quotation
       const paymentBlock = blocks.find((block) => block.type === 'payment')

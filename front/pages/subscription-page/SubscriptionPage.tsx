@@ -8,17 +8,17 @@ import { useRef } from 'react'
 export const SubscriptionPage = (): React.JSX.Element => {
   const modalRef = useRef<HTMLDivElement>(null)
 
-  const navigateUp = (): void => {
-    routerHolder.router.navigate('..')
-  }
-
   return (
     <FormModal
       headerIcon={<MdLockOutline />}
       headerText='Quota limit reached'
       modalRef={modalRef}
-      onCloseClick={navigateUp}
-      onUnmount={navigateUp}
+      onCloseClick={(): void => {
+        routerHolder.router.navigate('..')
+      }}
+      onUnmount={(): void => {
+        routerHolder.router.navigate('..')
+      }}
       shouldUnmountOnClickAway={true}
       shouldUnmountOnEsc={true}
       width='350px'

@@ -33,10 +33,6 @@ export const RegisterModal = (): React.JSX.Element => {
       (isEmailOkSignal.value && isConfirmPasswordOkSignal.value) === false
   })
 
-  const navigateUp = (): void => {
-    routerHolder.router.navigate('..')
-  }
-
   return (
     <FormModal
       buttonText='REGISTER'
@@ -47,9 +43,13 @@ export const RegisterModal = (): React.JSX.Element => {
       isButtonLoading={register.isPending}
       isButtonSuccess={register.isSuccess}
       modalRef={animatedElement.ref}
-      onCloseClick={navigateUp}
+      onCloseClick={(): void => {
+        routerHolder.router.navigate('..')
+      }}
       onSubmit={register.handleSubmit}
-      onUnmount={navigateUp}
+      onUnmount={(): void => {
+        routerHolder.router.navigate('..')
+      }}
       paddingContent='50px 40px 10px 40px'
       shouldUnmountOnClickAway={true}
       shouldUnmountOnEsc={true}

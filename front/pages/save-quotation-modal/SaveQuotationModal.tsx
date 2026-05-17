@@ -29,10 +29,6 @@ export const SaveQuotationModal = (): React.JSX.Element => {
     slideOut: animatedElement.slideOut,
   })
 
-  const navigateUp = (): void => {
-    routerHolder.router.navigate('..')
-  }
-
   const getQuotationCategoryListQuery = useGetQuotationCategoryListQuery()
 
   const distinctCategoryList =
@@ -47,9 +43,13 @@ export const SaveQuotationModal = (): React.JSX.Element => {
       isButtonLoading={saveQuotation.isPending}
       isButtonSuccess={saveQuotation.isSuccess}
       modalRef={animatedElement.ref}
-      onCloseClick={navigateUp}
+      onCloseClick={(): void => {
+        routerHolder.router.navigate('..')
+      }}
       onSubmit={saveQuotation.handleSubmit}
-      onUnmount={navigateUp}
+      onUnmount={(): void => {
+        routerHolder.router.navigate('..')
+      }}
       shouldUnmountOnClickAway={true}
       shouldUnmountOnEsc={true}
       width='500px'

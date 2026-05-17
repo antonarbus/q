@@ -1,3 +1,4 @@
+// oxlint-disable jsx-a11y/control-has-associated-label
 import { useGetUniqueDailyVisitorCountQuery } from '@front/entities/visitor/api/useGetUniqueDailyVisitorCountQuery'
 import { Box } from '@mui/material'
 import { DatePicker } from '@mui/x-date-pickers'

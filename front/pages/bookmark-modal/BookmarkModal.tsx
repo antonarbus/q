@@ -31,10 +31,6 @@ export const BookmarkModal = (): React.JSX.Element => {
     reduxHolder.dispatch(quotationSlice.actions.removeBlockFromPosThousand())
   })
 
-  const navigateUp = (): void => {
-    routerHolder.router.navigate('..')
-  }
-
   const getBookmarkCategoryListQuery = useGetBookmarkCategoryListQuery()
 
   const distinctCategoryList = getBookmarkCategoryListQuery.data?.distinctCategoryList ?? []
@@ -48,9 +44,13 @@ export const BookmarkModal = (): React.JSX.Element => {
       isButtonLoading={saveBookmark.isPending}
       isButtonSuccess={saveBookmark.isSuccess}
       modalRef={animatedElement.ref}
-      onCloseClick={navigateUp}
+      onCloseClick={(): void => {
+        routerHolder.router.navigate('..')
+      }}
       onSubmit={saveBookmark.handleSubmit}
-      onUnmount={navigateUp}
+      onUnmount={(): void => {
+        routerHolder.router.navigate('..')
+      }}
       shouldUnmountOnClickAway={true}
       shouldUnmountOnEsc={true}
       width='500px'

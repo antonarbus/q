@@ -1,3 +1,4 @@
+// oxlint-disable unicorn/consistent-function-scoping
 import type { CopyPlace } from '@front/entities/quotation/redux/clipboardSlice'
 import { clipboardSlice } from '@front/entities/quotation/redux/clipboardSlice'
 import { getPastePlace } from './getPastePlace'

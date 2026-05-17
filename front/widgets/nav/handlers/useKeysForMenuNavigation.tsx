@@ -31,6 +31,7 @@ export const useKeysForMenuNavigation = (): void => {
 
       const isNestedMenu = state.nav.idsToCurrentMenuItems.length > 2
 
+      // oxlint-disable-next-line unicorn/consistent-function-scoping
       const setHoverIndex = (menuItemHoverIndex: number): void => {
         reduxHolder.dispatch(navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex }))
       }
@@ -54,10 +55,6 @@ export const useKeysForMenuNavigation = (): void => {
         } else {
           reduxHolder.dispatch(navSlice.actions.closeMenu())
         }
-      }
-
-      const handleEscape = (): void => {
-        reduxHolder.dispatch(navSlice.actions.closeMenu())
       }
 
       const handleEnter = (): void => {
@@ -154,7 +151,9 @@ export const useKeysForMenuNavigation = (): void => {
         ArrowDown: handleArrowDown,
         ArrowUp: handleArrowUp,
         Backspace: handleBackspace,
-        Escape: handleEscape,
+        Escape: (): void => {
+          reduxHolder.dispatch(navSlice.actions.closeMenu())
+        },
         Enter: handleEnter,
       }
 

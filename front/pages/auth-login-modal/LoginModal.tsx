@@ -27,10 +27,6 @@ export const LoginModal = (): React.JSX.Element => {
   const isButtonDisabled =
     isEmailOkSignal.value === false || passwordSignal.value === '' || logIn.isPending
 
-  const navigateUp = (): void => {
-    routerHolder.router.navigate('..')
-  }
-
   return (
     <FormModal
       buttonText='LOG IN'
@@ -41,9 +37,13 @@ export const LoginModal = (): React.JSX.Element => {
       isButtonLoading={logIn.isPending}
       isButtonSuccess={logIn.isSuccess}
       modalRef={animatedElement.ref}
-      onCloseClick={navigateUp}
+      onCloseClick={(): void => {
+        routerHolder.router.navigate('..')
+      }}
       onSubmit={logIn.handleSubmit}
-      onUnmount={navigateUp}
+      onUnmount={(): void => {
+        routerHolder.router.navigate('..')
+      }}
       paddingContent='50px 40px 10px 40px'
       shouldUnmountOnClickAway={true}
       shouldUnmountOnEsc={true}

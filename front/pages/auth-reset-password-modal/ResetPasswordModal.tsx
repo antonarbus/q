@@ -33,10 +33,6 @@ export const ResetPasswordModal = (): React.ReactNode => {
     isButtonDisabledSignal.value = isConfirmPasswordOkSignal.value === false
   })
 
-  const navigateUp = (): void => {
-    routerHolder.router.navigate('..')
-  }
-
   return (
     <FormModal
       buttonText='RESET'
@@ -47,9 +43,13 @@ export const ResetPasswordModal = (): React.ReactNode => {
       isButtonLoading={resetPassword.isPending}
       isButtonSuccess={resetPassword.isSuccess}
       modalRef={animatedElement.ref}
-      onCloseClick={navigateUp}
+      onCloseClick={(): void => {
+        routerHolder.router.navigate('..')
+      }}
       onSubmit={resetPassword.handleSubmit}
-      onUnmount={navigateUp}
+      onUnmount={(): void => {
+        routerHolder.router.navigate('..')
+      }}
       paddingContent='50px 40px 10px 40px'
       shouldUnmountOnClickAway={true}
       shouldUnmountOnEsc={true}

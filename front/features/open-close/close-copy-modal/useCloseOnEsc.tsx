@@ -3,6 +3,7 @@ import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { useEffectOnce } from 'react-use'
 
 export const useExitCopyOnEsc = (): void => {
+  // oxlint-disable-next-line unicorn/consistent-function-scoping
   const closeOnEsc = (event: KeyboardEvent): void => {
     if (event.key !== 'Escape') {
       return

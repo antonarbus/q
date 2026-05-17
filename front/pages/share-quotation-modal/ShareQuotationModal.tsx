@@ -29,10 +29,6 @@ export const ShareQuotationModal = (): React.JSX.Element => {
     slideOut: animatedElement.slideOut,
   })
 
-  const navigateUp = (): void => {
-    routerHolder.router.navigate('..')
-  }
-
   const quotationLink = `${globalThis.location.origin}/${quotationId}`
 
   return (
@@ -45,9 +41,13 @@ export const ShareQuotationModal = (): React.JSX.Element => {
       isButtonLoading={shareQuotation.isPending}
       isButtonSuccess={shareQuotation.isSuccess}
       modalRef={animatedElement.ref}
-      onCloseClick={navigateUp}
+      onCloseClick={(): void => {
+        routerHolder.router.navigate('..')
+      }}
       onSubmit={shareQuotation.handleSubmit}
-      onUnmount={navigateUp}
+      onUnmount={(): void => {
+        routerHolder.router.navigate('..')
+      }}
       shouldUnmountOnClickAway={true}
       shouldUnmountOnEsc={true}
       width='500px'

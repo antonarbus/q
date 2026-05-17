@@ -1,3 +1,4 @@
+// oxlint-disable jsx-a11y/interactive-supports-focus
 import { useTiptap } from '@tiptap/react'
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { createPortal } from 'react-dom'
