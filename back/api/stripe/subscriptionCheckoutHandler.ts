@@ -13,9 +13,7 @@ import type { ParsedQs } from 'qs'
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
 
-export type ReqBody = {
-  period: 'monthly' | 'annual'
-}
+export type ReqBody = undefined
 
 export type ResBody = {
   checkoutUrl: string
@@ -24,7 +22,7 @@ export type ResBody = {
 
 export type ErrorResBody = {
   message: string
-  errorCode: ErrorCode | 'SUBSCRIPTION_CHECKOUT_INVALID_PERIOD' | 'SUBSCRIPTION_CHECKOUT_FAILED'
+  errorCode: ErrorCode | 'SUBSCRIPTION_CHECKOUT_FAILED'
 }
 
 type RouterHandler = (
@@ -45,13 +43,12 @@ export const subscriptionCheckoutHandler: RouterHandler = async (req) => {
       mode: 'payment',
       line_items: [
         {
-          price: stripe.subscriptionPriceId[req.body.period],
+          price: stripe.subscriptionPriceId,
           quantity: 1,
         },
       ],
       metadata: {
         userEmail: user.email,
-        period: req.body.period,
       },
       success_url: `${runtimeConfig.front.baseUrl}/settings?subscription=success`,
       cancel_url: `${runtimeConfig.front.baseUrl}/settings?subscription=canceled`,
