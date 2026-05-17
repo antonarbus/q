@@ -317,7 +317,7 @@ instance.queryClient.invalidateQueries({ queryKey: [...] })
 The platform uses Stripe for two independent payment flows sharing a single webhook endpoint:
 
 - **Quotation payments** (Stripe Connect) — clients pay service providers directly. Each user connects their own Stripe account; the platform is never in the money flow.
-- **Platform subscriptions** — users pay the platform to unlock more than 100 quotations. One-time payments ($12 for 30 days, $60 for 365 days), not recurring. Multiple purchases stack on top of an existing active subscription.
+- **Platform subscriptions** — users pay the platform to unlock more than 100 quotations. One-time payment ($99 for 365 days). Multiple purchases stack: buying while a subscription is still active extends from the current expiry date.
 
 ### How it works
 
@@ -331,10 +331,10 @@ The platform uses Stripe for two independent payment flows sharing a single webh
 **Platform subscriptions**
 
 - `saveQuotationHandler` checks the user's quotation count and `subscriptionExpiresAt` before every create. If count ≥ `FREE_QUOTATION_LIMIT` (100) and no active subscription exists, it returns `402 SUBSCRIPTION_REQUIRED`.
-- The frontend calls `POST /api/stripe/subscription-checkout` with `period: 'monthly' | 'annual'`. The backend creates a Stripe Checkout Session (`mode: 'payment'`) using the matching Price ID, embedding `userEmail` and `period` in session metadata.
-- Webhook: `checkout.session.completed` with `metadata.period` + `metadata.userEmail` → calculates new expiry (stacking on active subscription if any) and writes to `users.subscriptionExpiresAt`.
+- The frontend calls `POST /api/stripe/subscription-checkout`. The backend creates a Stripe Checkout Session (`mode: 'payment'`) using the Price ID from Secret Manager, embedding `userEmail` in session metadata.
+- Webhook: `checkout.session.completed` with `metadata.userEmail` → adds 365 days (stacking on active subscription if any) and writes to `users.subscriptionExpiresAt`.
 - On `SUBSCRIPTION_REQUIRED`, the user is navigated to `/subscription` (a dedicated checkout page). The Settings modal always shows current quota status.
-- The dollar amounts in the UI (`$12`, `$60`) are labels only — what Stripe charges is determined by the price configured in the Stripe dashboard.
+- The `$99` label in the UI is cosmetic — what Stripe actually charges is determined by the price configured in the Stripe dashboard.
 
 **Webhook handler**
 
@@ -375,26 +375,24 @@ All secrets are stored in GCP Secret Manager (registered via Terraform bootstrap
 
 > For local dev, `stripe listen` covers all events with a single secret. Both `STRIPE_DEV_WEBHOOK_SECRET` and `STRIPE_DEV_WEBHOOK_ACCOUNT_SECRET` should be set to the same `whsec_…` value from `stripe listen`.
 
-**Subscription Price IDs** — binary test/live split. Created in the Stripe dashboard when setting up the product:
+**Subscription Price ID** — binary test/live split. Created in the Stripe dashboard when setting up the product:
 
-| Secret                                      | What it is                               |
-| ------------------------------------------- | ---------------------------------------- |
-| `STRIPE_TEST_SUBSCRIPTION_PRICE_ID_MONTHLY` | Price ID for $12 one-time (test account) |
-| `STRIPE_TEST_SUBSCRIPTION_PRICE_ID_ANNUAL`  | Price ID for $60 one-time (test account) |
-| `STRIPE_LIVE_SUBSCRIPTION_PRICE_ID_MONTHLY` | Price ID for $12 one-time (live account) |
-| `STRIPE_LIVE_SUBSCRIPTION_PRICE_ID_ANNUAL`  | Price ID for $60 one-time (live account) |
+| Secret                                     | What it is                            |
+| ------------------------------------------ | ------------------------------------- |
+| `STRIPE_TEST_SUBSCRIPTION_PRICE_ID_ANNUAL` | Price ID for $99 one-time (test mode) |
+| `STRIPE_LIVE_SUBSCRIPTION_PRICE_ID_ANNUAL` | Price ID for $99 one-time (live mode) |
 
 ### Test mode vs live mode
 
 Stripe has two completely separate sets of keys — both coexist simultaneously, no dashboard toggle needed at runtime. The Dashboard **Test / Live toggle** only affects what you see in the UI when copying keys.
 
-| Environment | Secret key               | Client ID               | Webhook secrets                                                       | Price IDs                    |
-| ----------- | ------------------------ | ----------------------- | --------------------------------------------------------------------- | ---------------------------- |
-| `local`     | `STRIPE_TEST_SECRET_KEY` | `STRIPE_TEST_CLIENT_ID` | `STRIPE_DEV_WEBHOOK_SECRET` (both scopes, from `stripe listen`)       | `STRIPE_TEST_SUBSCRIPTION_…` |
-| `dev`       | `STRIPE_TEST_SECRET_KEY` | `STRIPE_TEST_CLIENT_ID` | `STRIPE_DEV_WEBHOOK_SECRET` + `STRIPE_DEV_WEBHOOK_ACCOUNT_SECRET`     | `STRIPE_TEST_SUBSCRIPTION_…` |
-| `test`      | `STRIPE_TEST_SECRET_KEY` | `STRIPE_TEST_CLIENT_ID` | `STRIPE_TEST_WEBHOOK_SECRET` + `STRIPE_TEST_WEBHOOK_ACCOUNT_SECRET`   | `STRIPE_TEST_SUBSCRIPTION_…` |
-| `pilot`     | `STRIPE_LIVE_SECRET_KEY` | `STRIPE_LIVE_CLIENT_ID` | `STRIPE_PILOT_WEBHOOK_SECRET` + `STRIPE_PILOT_WEBHOOK_ACCOUNT_SECRET` | `STRIPE_LIVE_SUBSCRIPTION_…` |
-| `prod`      | `STRIPE_LIVE_SECRET_KEY` | `STRIPE_LIVE_CLIENT_ID` | `STRIPE_LIVE_WEBHOOK_SECRET` + `STRIPE_LIVE_WEBHOOK_ACCOUNT_SECRET`   | `STRIPE_LIVE_SUBSCRIPTION_…` |
+| Environment | Secret key               | Client ID               | Webhook secrets                                                       | Price IDs                                  |
+| ----------- | ------------------------ | ----------------------- | --------------------------------------------------------------------- | ------------------------------------------ |
+| `local`     | `STRIPE_TEST_SECRET_KEY` | `STRIPE_TEST_CLIENT_ID` | `STRIPE_DEV_WEBHOOK_SECRET` (both scopes, from `stripe listen`)       | `STRIPE_TEST_SUBSCRIPTION_PRICE_ID_ANNUAL` |
+| `dev`       | `STRIPE_TEST_SECRET_KEY` | `STRIPE_TEST_CLIENT_ID` | `STRIPE_DEV_WEBHOOK_SECRET` + `STRIPE_DEV_WEBHOOK_ACCOUNT_SECRET`     | `STRIPE_TEST_SUBSCRIPTION_PRICE_ID_ANNUAL` |
+| `test`      | `STRIPE_TEST_SECRET_KEY` | `STRIPE_TEST_CLIENT_ID` | `STRIPE_TEST_WEBHOOK_SECRET` + `STRIPE_TEST_WEBHOOK_ACCOUNT_SECRET`   | `STRIPE_TEST_SUBSCRIPTION_PRICE_ID_ANNUAL` |
+| `pilot`     | `STRIPE_LIVE_SECRET_KEY` | `STRIPE_LIVE_CLIENT_ID` | `STRIPE_PILOT_WEBHOOK_SECRET` + `STRIPE_PILOT_WEBHOOK_ACCOUNT_SECRET` | `STRIPE_LIVE_SUBSCRIPTION_PRICE_ID_ANNUAL` |
+| `prod`      | `STRIPE_LIVE_SECRET_KEY` | `STRIPE_LIVE_CLIENT_ID` | `STRIPE_LIVE_WEBHOOK_SECRET` + `STRIPE_LIVE_WEBHOOK_ACCOUNT_SECRET`   | `STRIPE_LIVE_SUBSCRIPTION_PRICE_ID_ANNUAL` |
 
 ### Step-by-step setup
 
@@ -429,10 +427,9 @@ The **Live client ID** is unavailable until Stripe approves your platform profil
 1. Open the dashboard — confirm **Test mode** is on (header turns orange).
 2. Left sidebar → **Product catalog** → **+ Add product**.
 3. Name: `Platform Subscription`.
-4. Under **Pricing** → **Add a price**: `Standard pricing`, `12.00` USD, **One time** (not recurring) → Save.
-5. **Add another price**: same settings, `60.00` USD → Save.
-6. **Save product**.
-7. Copy both Price IDs (`price_…`) — note which is $12 (monthly) and which is $60 (annual).
+4. Under **Pricing** → **Add a price**: `Standard pricing`, `99.00` USD, **One time** (not recurring) → Save.
+5. **Save product**.
+6. Copy the Price ID (`price_…`) — this is `STRIPE_TEST_SUBSCRIPTION_PRICE_ID_ANNUAL`.
 
 #### 5. Register webhook destinations
 
@@ -477,7 +474,7 @@ STRIPE_DEV_WEBHOOK_ACCOUNT_SECRET=whsec_…            # same value as above
 
 Values in `.env` always take priority over Secret Manager, so you can also override any secret locally if needed.
 
-**GCP Secret Manager** — add all 16 secrets from the Required secrets tables above. The containers are already registered via Terraform bootstrap.
+**GCP Secret Manager** — add all 14 secrets from the Required secrets tables above. The containers are already registered via Terraform bootstrap.
 
 #### 7. Push the DB migration
 
