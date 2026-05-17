@@ -12,8 +12,7 @@ import type { ParsedQs } from 'qs'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
-
-export type ReqBody = undefined
+type ReqBody = undefined
 
 export type ResBody = {
   checkoutUrl: string
