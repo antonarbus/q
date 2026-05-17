@@ -312,58 +312,95 @@ instance.queryClient.invalidateQueries({ queryKey: [...] })
 
 ---
 
-## Stripe Payments
+## Stripe
 
-Clients can receive payments directly to their own Stripe accounts. Each user connects their Stripe account once, then adds a **Payment Block** to any quotation. The external client opens the offer, clicks "Pay Now", and is taken to Stripe's hosted payment page. When payment completes, the quotation is automatically marked as paid.
+The platform uses Stripe for two independent payment flows sharing a single webhook endpoint:
+
+- **Quotation payments** (Stripe Connect) — clients pay service providers directly. Each user connects their own Stripe account; the platform is never in the money flow.
+- **Platform subscriptions** — users pay the platform to unlock more than 100 quotations. One-time payments ($12 for 30 days, $60 for 365 days), not recurring. Multiple purchases stack on top of an existing active subscription.
 
 ### How it works
 
-- **Stripe Connect** (OAuth) — each user connects their own Stripe account. Payments go directly to that account; the platform is never in the money flow.
-- **Payment Links** — server-side generated Stripe Payment Links (no Stripe.js on the frontend). The link is stored in the quotation and rendered as a button for the client.
-- **Webhook** — Stripe posts events to `/api/stripe/webhook`. The handler verifies the signature and processes:
-  - `checkout.session.completed` — reads `metadata.quotationId` and sets `paidAt` in the database.
-  - `account.application.deauthorized` — clears `stripeAccountId` from the user when they disconnect your platform from their Stripe account.
+**Quotation payments (Connect)**
+
+- Each user connects their Stripe account via OAuth. Payments go directly to that account.
+- Server-side Stripe Payment Links are generated (no Stripe.js on the frontend), stored in the quotation, and rendered as a "Pay Now" button for the client.
+- Webhook: `checkout.session.completed` with `metadata.quotationId` → sets `paidAt` in the database.
+- Webhook: `account.application.deauthorized` → clears `stripeAccountId` when a user disconnects the platform from their Stripe account.
+
+**Platform subscriptions**
+
+- `saveQuotationHandler` checks the user's quotation count and `subscriptionExpiresAt` before every create. If count ≥ `FREE_QUOTATION_LIMIT` (100) and no active subscription exists, it returns `402 SUBSCRIPTION_REQUIRED`.
+- The frontend calls `POST /api/stripe/subscription-checkout` with `period: 'monthly' | 'annual'`. The backend creates a Stripe Checkout Session (`mode: 'payment'`) using the matching Price ID, embedding `userEmail` and `period` in session metadata.
+- Webhook: `checkout.session.completed` with `metadata.period` + `metadata.userEmail` → calculates new expiry (stacking on active subscription if any) and writes to `users.subscriptionExpiresAt`.
+- On `SUBSCRIPTION_REQUIRED`, the user is navigated to `/subscription` (a dedicated checkout page). The Settings modal always shows current quota status.
+- The dollar amounts in the UI (`$12`, `$60`) are labels only — what Stripe charges is determined by the price configured in the Stripe dashboard.
+
+**Webhook handler**
+
+Both flows post to the same URL (`/api/stripe/webhook`). Stripe does not allow a single destination to cover both scopes, so each URL has **two destinations** — one per scope. Each has its own signing secret; the handler tries "Your account" first, then "Connected accounts" — whichever verifies the signature wins.
+
+| Scope                  | Events                                                                                                                       |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| **Your account**       | `checkout.session.completed` — platform subscription payments originate here                                                 |
+| **Connected accounts** | `checkout.session.completed`, `account.application.deauthorized` — quotation payments and Connect disconnects originate here |
+
+> Scope cannot be changed after a destination is created — add a new destination at the same URL if needed. Bun requires `constructEventAsync` (not `constructEvent`) due to its async-only Web Crypto API.
 
 ### Required secrets
 
-API keys and Connect client IDs follow a binary test/live split. Webhook secrets are per-environment because each registered endpoint gets its own signing secret from Stripe.
+All secrets are stored in GCP Secret Manager (registered via Terraform bootstrap) and loaded by `getStripe.ts` on first request.
 
-| Secret                        | Where to get it                                                                                                                                                            |
-| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `STRIPE_TEST_SECRET_KEY`      | [API keys (test)](https://dashboard.stripe.com/test/apikeys) → Secret key (`sk_test_…`)                                                                                    |
-| `STRIPE_LIVE_SECRET_KEY`      | [API keys (live)](https://dashboard.stripe.com/apikeys) → Secret key (`sk_live_…`)                                                                                         |
-| `STRIPE_TEST_CLIENT_ID`       | [Connect → Onboarding options → OAuth (test)](https://dashboard.stripe.com/test/settings/connect/onboarding-options/oauth) → Test client ID (`ca_…`)                       |
-| `STRIPE_LIVE_CLIENT_ID`       | [Connect → Onboarding options → OAuth (live)](https://dashboard.stripe.com/settings/connect/onboarding-options/oauth) → Live client ID (`ca_…`) — requires Stripe approval |
-| `STRIPE_DEV_WEBHOOK_SECRET`   | [Webhooks (test)](https://dashboard.stripe.com/test/workbench/webhooks) → `dev.sendmequotation.today` endpoint → Signing secret (`whsec_…`)                                |
-| `STRIPE_TEST_WEBHOOK_SECRET`  | [Webhooks (test)](https://dashboard.stripe.com/test/workbench/webhooks) → `test.sendmequotation.today` endpoint → Signing secret (`whsec_…`)                               |
-| `STRIPE_PILOT_WEBHOOK_SECRET` | [Webhooks (live)](https://dashboard.stripe.com/workbench/webhooks) → `pilot.sendmequotation.today` endpoint → Signing secret (`whsec_…`)                                   |
-| `STRIPE_LIVE_WEBHOOK_SECRET`  | [Webhooks (live)](https://dashboard.stripe.com/workbench/webhooks) → `sendmequotation.today` endpoint → Signing secret (`whsec_…`)                                         |
-| `JWT_ACCESS_SECRET`           | already exists — used to sign the OAuth `state` parameter                                                                                                                  |
+**API keys and Connect client IDs** — binary test/live split:
+
+| Secret                   | Where to get it                                                                                                                                                            |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `STRIPE_TEST_SECRET_KEY` | [API keys (test)](https://dashboard.stripe.com/test/apikeys) → Secret key (`sk_test_…`)                                                                                    |
+| `STRIPE_LIVE_SECRET_KEY` | [API keys (live)](https://dashboard.stripe.com/apikeys) → Secret key (`sk_live_…`)                                                                                         |
+| `STRIPE_TEST_CLIENT_ID`  | [Connect → Onboarding options → OAuth (test)](https://dashboard.stripe.com/test/settings/connect/onboarding-options/oauth) → Test client ID (`ca_…`)                       |
+| `STRIPE_LIVE_CLIENT_ID`  | [Connect → Onboarding options → OAuth (live)](https://dashboard.stripe.com/settings/connect/onboarding-options/oauth) → Live client ID (`ca_…`) — requires Stripe approval |
+
+**Webhook secrets** — per-environment, per-scope. Each destination in the Stripe dashboard has its own signing secret:
+
+| Secret                                | Scope              | Environment |
+| ------------------------------------- | ------------------ | ----------- |
+| `STRIPE_DEV_WEBHOOK_SECRET`           | Connected accounts | `dev`       |
+| `STRIPE_DEV_WEBHOOK_ACCOUNT_SECRET`   | Your account       | `dev`       |
+| `STRIPE_TEST_WEBHOOK_SECRET`          | Connected accounts | `test`      |
+| `STRIPE_TEST_WEBHOOK_ACCOUNT_SECRET`  | Your account       | `test`      |
+| `STRIPE_PILOT_WEBHOOK_SECRET`         | Connected accounts | `pilot`     |
+| `STRIPE_PILOT_WEBHOOK_ACCOUNT_SECRET` | Your account       | `pilot`     |
+| `STRIPE_LIVE_WEBHOOK_SECRET`          | Connected accounts | `prod`      |
+| `STRIPE_LIVE_WEBHOOK_ACCOUNT_SECRET`  | Your account       | `prod`      |
+
+> For local dev, `stripe listen` covers all events with a single secret. Both `STRIPE_DEV_WEBHOOK_SECRET` and `STRIPE_DEV_WEBHOOK_ACCOUNT_SECRET` should be set to the same `whsec_…` value from `stripe listen`.
+
+**Subscription Price IDs** — binary test/live split. Created in the Stripe dashboard when setting up the product:
+
+| Secret                                      | What it is                               |
+| ------------------------------------------- | ---------------------------------------- |
+| `STRIPE_TEST_SUBSCRIPTION_PRICE_ID_MONTHLY` | Price ID for $12 one-time (test account) |
+| `STRIPE_TEST_SUBSCRIPTION_PRICE_ID_ANNUAL`  | Price ID for $60 one-time (test account) |
+| `STRIPE_LIVE_SUBSCRIPTION_PRICE_ID_MONTHLY` | Price ID for $12 one-time (live account) |
+| `STRIPE_LIVE_SUBSCRIPTION_PRICE_ID_ANNUAL`  | Price ID for $60 one-time (live account) |
 
 ### Test mode vs live mode
 
 Stripe has two completely separate sets of keys — both coexist simultaneously, no dashboard toggle needed at runtime. The Dashboard **Test / Live toggle** only affects what you see in the UI when copying keys.
 
-| Environment | Secret key               | Client ID               | Webhook secret                                     |
-| ----------- | ------------------------ | ----------------------- | -------------------------------------------------- |
-| `local`     | `STRIPE_TEST_SECRET_KEY` | `STRIPE_TEST_CLIENT_ID` | `STRIPE_DEV_WEBHOOK_SECRET` (from `stripe listen`) |
-| `dev`       | `STRIPE_TEST_SECRET_KEY` | `STRIPE_TEST_CLIENT_ID` | `STRIPE_DEV_WEBHOOK_SECRET`                        |
-| `test`      | `STRIPE_TEST_SECRET_KEY` | `STRIPE_TEST_CLIENT_ID` | `STRIPE_TEST_WEBHOOK_SECRET`                       |
-| `pilot`     | `STRIPE_LIVE_SECRET_KEY` | `STRIPE_LIVE_CLIENT_ID` | `STRIPE_PILOT_WEBHOOK_SECRET`                      |
-| `prod`      | `STRIPE_LIVE_SECRET_KEY` | `STRIPE_LIVE_CLIENT_ID` | `STRIPE_LIVE_WEBHOOK_SECRET`                       |
-
-**Rules:**
-
-- For local webhook testing, don't register an endpoint in the Dashboard — use `stripe listen` instead (see step 4).
-- Bun uses the Web Crypto API (async-only), so the webhook handler must use `constructEventAsync` instead of `constructEvent` — the synchronous version throws at runtime on Bun.
+| Environment | Secret key               | Client ID               | Webhook secrets                                                       | Price IDs                    |
+| ----------- | ------------------------ | ----------------------- | --------------------------------------------------------------------- | ---------------------------- |
+| `local`     | `STRIPE_TEST_SECRET_KEY` | `STRIPE_TEST_CLIENT_ID` | `STRIPE_DEV_WEBHOOK_SECRET` (both scopes, from `stripe listen`)       | `STRIPE_TEST_SUBSCRIPTION_…` |
+| `dev`       | `STRIPE_TEST_SECRET_KEY` | `STRIPE_TEST_CLIENT_ID` | `STRIPE_DEV_WEBHOOK_SECRET` + `STRIPE_DEV_WEBHOOK_ACCOUNT_SECRET`     | `STRIPE_TEST_SUBSCRIPTION_…` |
+| `test`      | `STRIPE_TEST_SECRET_KEY` | `STRIPE_TEST_CLIENT_ID` | `STRIPE_TEST_WEBHOOK_SECRET` + `STRIPE_TEST_WEBHOOK_ACCOUNT_SECRET`   | `STRIPE_TEST_SUBSCRIPTION_…` |
+| `pilot`     | `STRIPE_LIVE_SECRET_KEY` | `STRIPE_LIVE_CLIENT_ID` | `STRIPE_PILOT_WEBHOOK_SECRET` + `STRIPE_PILOT_WEBHOOK_ACCOUNT_SECRET` | `STRIPE_LIVE_SUBSCRIPTION_…` |
+| `prod`      | `STRIPE_LIVE_SECRET_KEY` | `STRIPE_LIVE_CLIENT_ID` | `STRIPE_LIVE_WEBHOOK_SECRET` + `STRIPE_LIVE_WEBHOOK_ACCOUNT_SECRET`   | `STRIPE_LIVE_SUBSCRIPTION_…` |
 
 ### Step-by-step setup
 
 #### 1. Create a Stripe account
 
 Go to [stripe.com](https://stripe.com) and register. The Dashboard starts in **test mode** by default — you can complete the entire setup and test the full payment flow without going live.
-
-Stripe docs: [stripe.com/docs](https://stripe.com/docs)
 
 #### 2. Get your API key
 
@@ -387,77 +424,68 @@ https://sendmequotation.today/api/stripe/connect-callback
 
 The **Live client ID** is unavailable until Stripe approves your platform profile.
 
-#### 4. Register a webhook endpoint
+#### 4. Create the subscription product and prices
 
-Register **four** endpoints — two in test mode, two in live mode. Each gets its own signing secret.
+1. Open the dashboard — confirm **Test mode** is on (header turns orange).
+2. Left sidebar → **Product catalog** → **+ Add product**.
+3. Name: `Platform Subscription`.
+4. Under **Pricing** → **Add a price**: `Standard pricing`, `12.00` USD, **One time** (not recurring) → Save.
+5. **Add another price**: same settings, `60.00` USD → Save.
+6. **Save product**.
+7. Copy both Price IDs (`price_…`) — note which is $12 (monthly) and which is $60 (annual).
 
-**Test mode** — [Dashboard → Developers → Webhooks → Add endpoint](https://dashboard.stripe.com/test/workbench/webhooks):
+#### 5. Register webhook destinations
 
-| URL                                                     | Secret name                  |
-| ------------------------------------------------------- | ---------------------------- |
-| `https://dev.sendmequotation.today/api/stripe/webhook`  | `STRIPE_DEV_WEBHOOK_SECRET`  |
-| `https://test.sendmequotation.today/api/stripe/webhook` | `STRIPE_TEST_WEBHOOK_SECRET` |
+Each URL needs **two destinations** — one per scope. Create them in [Webhooks (test)](https://dashboard.stripe.com/test/workbench/webhooks) and [Webhooks (live)](https://dashboard.stripe.com/workbench/webhooks).
 
-**Live mode** — [Dashboard → Developers → Webhooks → Add endpoint](https://dashboard.stripe.com/workbench/webhooks):
+**Test mode** (two destinations per URL, four destinations total):
 
-| URL                                                      | Secret name                   |
-| -------------------------------------------------------- | ----------------------------- |
-| `https://pilot.sendmequotation.today/api/stripe/webhook` | `STRIPE_PILOT_WEBHOOK_SECRET` |
-| `https://sendmequotation.today/api/stripe/webhook`       | `STRIPE_LIVE_WEBHOOK_SECRET`  |
+| URL                                                     | Scope              | Events                                                           | Secret name                          |
+| ------------------------------------------------------- | ------------------ | ---------------------------------------------------------------- | ------------------------------------ |
+| `https://dev.sendmequotation.today/api/stripe/webhook`  | Connected accounts | `checkout.session.completed`, `account.application.deauthorized` | `STRIPE_DEV_WEBHOOK_SECRET`          |
+| `https://dev.sendmequotation.today/api/stripe/webhook`  | Your account       | `checkout.session.completed`                                     | `STRIPE_DEV_WEBHOOK_ACCOUNT_SECRET`  |
+| `https://test.sendmequotation.today/api/stripe/webhook` | Connected accounts | `checkout.session.completed`, `account.application.deauthorized` | `STRIPE_TEST_WEBHOOK_SECRET`         |
+| `https://test.sendmequotation.today/api/stripe/webhook` | Your account       | `checkout.session.completed`                                     | `STRIPE_TEST_WEBHOOK_ACCOUNT_SECRET` |
 
-For each endpoint set:
+**Live mode** (two destinations per URL, four destinations total):
 
-- Events from: **Connected and v2 accounts**
+| URL                                                      | Scope              | Events                                                           | Secret name                           |
+| -------------------------------------------------------- | ------------------ | ---------------------------------------------------------------- | ------------------------------------- |
+| `https://pilot.sendmequotation.today/api/stripe/webhook` | Connected accounts | `checkout.session.completed`, `account.application.deauthorized` | `STRIPE_PILOT_WEBHOOK_SECRET`         |
+| `https://pilot.sendmequotation.today/api/stripe/webhook` | Your account       | `checkout.session.completed`                                     | `STRIPE_PILOT_WEBHOOK_ACCOUNT_SECRET` |
+| `https://sendmequotation.today/api/stripe/webhook`       | Connected accounts | `checkout.session.completed`, `account.application.deauthorized` | `STRIPE_LIVE_WEBHOOK_SECRET`          |
+| `https://sendmequotation.today/api/stripe/webhook`       | Your account       | `checkout.session.completed`                                     | `STRIPE_LIVE_WEBHOOK_ACCOUNT_SECRET`  |
+
 - API version: **2026-03-25.dahlia** (latest)
-- Events to listen for: `checkout.session.completed`, `account.application.deauthorized`
+- Copy the **Signing secret** (`whsec_…`) shown after each destination is created — each has a different secret.
 
-Copy the **Signing secret** (`whsec_…`) shown after creation — each endpoint has a different secret.
-
-**If the endpoints already exist** (e.g. `checkout.session.completed` was already registered), add `account.application.deauthorized` to each one:
-
-1. Go to [Webhooks (test)](https://dashboard.stripe.com/test/workbench/webhooks) → click the endpoint → **Add events** → search `account.application.deauthorized` → **Add events**.
-2. Repeat for the second test endpoint.
-3. Switch to live mode, go to [Webhooks (live)](https://dashboard.stripe.com/workbench/webhooks) and repeat for both live endpoints.
-
-For local development use the [Stripe CLI](https://stripe.com/docs/stripe-cli):
+For local development, use the [Stripe CLI](https://stripe.com/docs/stripe-cli):
 
 ```bash
 stripe listen --forward-to localhost:8080/api/stripe/webhook
-# prints a whsec_… secret — use that as STRIPE_DEV_WEBHOOK_SECRET locally
+# prints a whsec_… secret — use it as both STRIPE_DEV_WEBHOOK_SECRET and STRIPE_DEV_WEBHOOK_ACCOUNT_SECRET locally
 ```
 
-#### 5. Add secrets to your environment
+#### 6. Add secrets to your environment
 
-**Local** — add to your `.env` (or equivalent). Only test keys are needed locally:
-
-```
-STRIPE_TEST_SECRET_KEY=sk_test_…
-STRIPE_TEST_CLIENT_ID=ca_…
-STRIPE_DEV_WEBHOOK_SECRET=whsec_…   # from stripe listen, not Dashboard
-```
-
-**Deployed environments** — add all eight Stripe secrets to GCP Secret Manager:
+**Local** — the local environment reads from the same GCP Secret Manager as `dev`, so most secrets don't need to be in `.env`. The exceptions are the webhook secret (generated by `stripe listen`, not stored in Secret Manager) and any secrets you haven't added to Secret Manager yet:
 
 ```
-STRIPE_TEST_SECRET_KEY      # shared by local / dev / test
-STRIPE_LIVE_SECRET_KEY      # shared by pilot / prod
-STRIPE_TEST_CLIENT_ID       # shared by local / dev / test
-STRIPE_LIVE_CLIENT_ID       # shared by pilot / prod
-STRIPE_DEV_WEBHOOK_SECRET   # dev.sendmequotation.today endpoint
-STRIPE_TEST_WEBHOOK_SECRET  # test.sendmequotation.today endpoint
-STRIPE_PILOT_WEBHOOK_SECRET # pilot.sendmequotation.today endpoint
-STRIPE_LIVE_WEBHOOK_SECRET  # sendmequotation.today endpoint
+STRIPE_DEV_WEBHOOK_SECRET=whsec_…                    # from stripe listen
+STRIPE_DEV_WEBHOOK_ACCOUNT_SECRET=whsec_…            # same value as above
 ```
 
-#### 6. Push the DB migration
+Values in `.env` always take priority over Secret Manager, so you can also override any secret locally if needed.
 
-The feature adds `stripe_account_id` to `users` and `paid_at` to `quotations`:
+**GCP Secret Manager** — add all 16 secrets from the Required secrets tables above. The containers are already registered via Terraform bootstrap.
 
-```bash
-bunx drizzle-kit push
-```
+#### 7. Push the DB migration
 
-#### 7. Test the flow
+The feature needs `stripe_account_id` on `users` and `paid_at` on `quotations`.
+
+#### 8. Test the flows
+
+**Quotation payments:**
 
 1. Log in → open Settings → click **Connect Stripe Account** → authorize with a Stripe test account.
 2. Open/create an offer → add a **Payment Block** → fill in amount, currency, description → click **Generate Payment Link**.
@@ -465,96 +493,13 @@ bunx drizzle-kit push
 4. Click **Pay Now** → use Stripe test card `4242 4242 4242 4242` (any future expiry, any CVC).
 5. Payment completes → webhook fires → quotation shows **PAID**.
 
----
+**Platform subscription:**
 
-## Platform Subscription
-
-Users get 100 free quotations. Once they hit the limit, they must buy a platform subscription to create more. Subscriptions are one-time payments ($12 for 30 days, $60 for 365 days) — not recurring. Multiple purchases stack: buying while a subscription is still active extends the expiry from the current end date rather than from today.
-
-### How it works
-
-- **Quota check** — `saveQuotationHandler` reads the user's quotation count and `subscriptionExpiresAt` before every create. If the count is at or above `FREE_QUOTATION_LIMIT` (100) and no valid subscription exists, it returns `402 SUBSCRIPTION_REQUIRED`.
-- **Checkout** — the frontend calls `POST /api/stripe/subscription-checkout` with `period: 'monthly' | 'annual'`. The backend creates a Stripe Checkout Session (`mode: 'payment'`) using the matching Price ID from Secret Manager, embedding `userEmail` and `period` in the session metadata.
-- **Webhook** — when payment completes, Stripe posts `checkout.session.completed` to `/api/stripe/webhook`. The handler reads `metadata.period` and `metadata.userEmail`, calculates the new expiry (stacking on top of any existing active subscription), and writes it to `users.subscriptionExpiresAt`.
-- **Frontend** — on `SUBSCRIPTION_REQUIRED` error, the user is navigated to `/subscription` (a dedicated page with checkout buttons). The Settings modal always shows current quota status.
-- **Price amounts** — the backend only passes the Price ID to Stripe. The dollar amounts shown in the UI buttons (`$12`, `$60`) are labels only — what Stripe actually charges is determined by the price configured in the Stripe dashboard.
-
-### Required secrets
-
-Four Price ID secrets are needed — one per period per mode. Price IDs are created in the Stripe dashboard when you set up the product.
-
-| Secret                                      | What it is                               |
-| ------------------------------------------- | ---------------------------------------- |
-| `STRIPE_TEST_SUBSCRIPTION_PRICE_ID_MONTHLY` | Price ID for $12 one-time (test account) |
-| `STRIPE_TEST_SUBSCRIPTION_PRICE_ID_ANNUAL`  | Price ID for $60 one-time (test account) |
-| `STRIPE_LIVE_SUBSCRIPTION_PRICE_ID_MONTHLY` | Price ID for $12 one-time (live account) |
-| `STRIPE_LIVE_SUBSCRIPTION_PRICE_ID_ANNUAL`  | Price ID for $60 one-time (live account) |
-
-These are loaded alongside the other Stripe secrets in `getStripe.ts` and cached on first use.
-
-### Test mode vs live mode
-
-| Environment              | Price IDs used                        |
-| ------------------------ | ------------------------------------- |
-| `local` / `dev` / `test` | `STRIPE_TEST_SUBSCRIPTION_PRICE_ID_*` |
-| `pilot` / `prod`         | `STRIPE_LIVE_SUBSCRIPTION_PRICE_ID_*` |
-
-### Step-by-step setup
-
-#### 1. Create the product and prices in Stripe Test mode
-
-1. Open [dashboard.stripe.com](https://dashboard.stripe.com) — confirm **Test mode** is on (header turns orange).
-2. Left sidebar → **Product catalog** → **+ Add product**.
-3. Name: `Platform Subscription`. Leave everything else default.
-4. Under **Pricing** → **Add a price**:
-   - Pricing model: `Standard pricing`
-   - Amount: `12.00` USD
-   - Billing period: **One time** (not recurring)
-   - Save
-5. **Add another price**: same settings, amount `60.00` USD → Save.
-6. **Save product**.
-7. On the product page, copy both Price IDs (`price_…`) — note which is $12 and which is $60.
-
-#### 2. Add test Price IDs to Secret Manager
-
-```
-STRIPE_TEST_SUBSCRIPTION_PRICE_ID_MONTHLY   # price_… for $12
-STRIPE_TEST_SUBSCRIPTION_PRICE_ID_ANNUAL    # price_… for $60
-```
-
-**Locally**, add them to `.env` instead:
-
-```
-STRIPE_TEST_SUBSCRIPTION_PRICE_ID_MONTHLY=price_…
-STRIPE_TEST_SUBSCRIPTION_PRICE_ID_ANNUAL=price_…
-```
-
-#### 3. Test the flow locally
-
-1. Run `bun stripe-listen` in a separate terminal (forwards webhook events to `localhost:8080/api/stripe/webhook`).
-2. Start the app (`bun dev`).
-3. Log in with an account that has 100+ quotations, or temporarily lower `FREE_QUOTATION_LIMIT` to 0.
-4. Try saving a quotation — you should be redirected to `/subscription`.
-5. Click a subscription button — Stripe Checkout opens.
-6. Use test card `4242 4242 4242 4242` (any future expiry, any CVC).
-7. After payment, verify `subscriptionExpiresAt` is set on your user row via `bun db-studio`.
-
-#### 4. Verify the webhook covers `checkout.session.completed`
-
-The existing webhook endpoint was registered for the Stripe Connect payment flow and should already include `checkout.session.completed`. To confirm:
-
-1. [Webhooks (test)](https://dashboard.stripe.com/test/workbench/webhooks) → click the endpoint → check **Events to send**.
-2. If `checkout.session.completed` is missing, click **Edit endpoint** → add it.
-3. Repeat for all four endpoints (dev, test, pilot, prod).
-
-#### 5. Repeat for Live mode
-
-Same as steps 1–2 but with **Live mode** on in the dashboard:
-
-```
-STRIPE_LIVE_SUBSCRIPTION_PRICE_ID_MONTHLY   # price_… for $12
-STRIPE_LIVE_SUBSCRIPTION_PRICE_ID_ANNUAL    # price_… for $60
-```
+1. Run `bun stripe-listen` in a separate terminal.
+2. Log in with an account that has 100+ quotations, or temporarily lower `FREE_QUOTATION_LIMIT` to 0.
+3. Try saving a quotation — you are redirected to `/subscription`.
+4. Click a subscription button → Stripe Checkout opens → use test card `4242 4242 4242 4242`.
+5. After payment, verify `subscriptionExpiresAt` is set on your user row via `bun db-studio`.
 
 ---
 
