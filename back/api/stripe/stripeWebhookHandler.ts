@@ -54,8 +54,12 @@ export const stripeWebhookHandler: RouterHandler = async (req) => {
   // Two destinations post to the same URL with different signing secrets.
   // Try account secret first (subscription payments), fall back to connected (quotation payments).
   const event =
-    (await stripe.instance.webhooks.constructEventAsync(req.body, stripeSignature, stripe.webhookSecret.account).catch(() => null)) ??
-    (await stripe.instance.webhooks.constructEventAsync(req.body, stripeSignature, stripe.webhookSecret.connected).catch(() => null))
+    (await stripe.instance.webhooks
+      .constructEventAsync(req.body, stripeSignature, stripe.webhookSecret.account)
+      .catch(() => null)) ??
+    (await stripe.instance.webhooks
+      .constructEventAsync(req.body, stripeSignature, stripe.webhookSecret.connected)
+      .catch(() => null))
 
   if (event === null) {
     // oxlint-disable-next-line no-console
@@ -90,17 +94,10 @@ export const stripeWebhookHandler: RouterHandler = async (req) => {
         messageList.push(`Quotation ${quotationId} marked as paid`)
       }
 
-      // Flow 2: user bought a platform subscription (monthly/annual)
-      const period = session.metadata?.period
+      // Flow 2: user bought a platform subscription
       const userEmailFromSession = session.metadata?.userEmail
 
-      if (
-        (period === 'monthly' || period === 'annual') &&
-        typeof userEmailFromSession === 'string' &&
-        userEmailFromSession.length > 0
-      ) {
-        const daysToAdd = period === 'annual' ? 365 : 30
-
+      if (typeof userEmailFromSession === 'string' && userEmailFromSession.length > 0) {
         const [userSelected] = await db
           .select({ subscriptionExpiresAt: usersTable.subscriptionExpiresAt })
           .from(usersTable)
@@ -115,7 +112,7 @@ export const stripeWebhookHandler: RouterHandler = async (req) => {
             : new Date()
 
         const newExpiry = new Date(base)
-        newExpiry.setDate(newExpiry.getDate() + daysToAdd)
+        newExpiry.setDate(newExpiry.getDate() + 365)
 
         await db
           .update(usersTable)
