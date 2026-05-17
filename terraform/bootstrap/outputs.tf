@@ -67,10 +67,18 @@ output "secret_names" {
     stripe_live_secret_key      = google_secret_manager_secret.stripe_live_secret_key.secret_id
     stripe_test_client_id       = google_secret_manager_secret.stripe_test_client_id.secret_id
     stripe_live_client_id       = google_secret_manager_secret.stripe_live_client_id.secret_id
-    stripe_dev_webhook_secret   = google_secret_manager_secret.stripe_dev_webhook_secret.secret_id
-    stripe_test_webhook_secret  = google_secret_manager_secret.stripe_test_webhook_secret.secret_id
-    stripe_pilot_webhook_secret = google_secret_manager_secret.stripe_pilot_webhook_secret.secret_id
-    stripe_live_webhook_secret  = google_secret_manager_secret.stripe_live_webhook_secret.secret_id
-    gemini_api_key              = google_secret_manager_secret.gemini_api_key.secret_id
+    stripe_dev_webhook_secret            = google_secret_manager_secret.stripe_dev_webhook_secret.secret_id
+    stripe_dev_webhook_account_secret    = google_secret_manager_secret.stripe_dev_webhook_account_secret.secret_id
+    stripe_test_webhook_secret           = google_secret_manager_secret.stripe_test_webhook_secret.secret_id
+    stripe_test_webhook_account_secret   = google_secret_manager_secret.stripe_test_webhook_account_secret.secret_id
+    stripe_pilot_webhook_secret          = google_secret_manager_secret.stripe_pilot_webhook_secret.secret_id
+    stripe_pilot_webhook_account_secret  = google_secret_manager_secret.stripe_pilot_webhook_account_secret.secret_id
+    stripe_live_webhook_secret           = google_secret_manager_secret.stripe_live_webhook_secret.secret_id
+    stripe_live_webhook_account_secret   = google_secret_manager_secret.stripe_live_webhook_account_secret.secret_id
+    stripe_test_subscription_price_id_monthly = google_secret_manager_secret.stripe_test_subscription_price_id_monthly.secret_id
+    stripe_test_subscription_price_id_annual  = google_secret_manager_secret.stripe_test_subscription_price_id_annual.secret_id
+    stripe_live_subscription_price_id_monthly = google_secret_manager_secret.stripe_live_subscription_price_id_monthly.secret_id
+    stripe_live_subscription_price_id_annual  = google_secret_manager_secret.stripe_live_subscription_price_id_annual.secret_id
+    gemini_api_key                       = google_secret_manager_secret.gemini_api_key.secret_id
   }
 }
