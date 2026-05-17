@@ -12,7 +12,6 @@ import { eq } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
-import type { Stripe } from 'stripe'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
@@ -52,19 +51,23 @@ export const stripeWebhookHandler: RouterHandler = async (req) => {
 
   const stripe = await getStripe()
 
-  const event: Stripe.Event = await stripe.instance.webhooks
-    .constructEventAsync(req.body, stripeSignature, stripe.webhookSecret)
-    .catch((error) => {
-      // oxlint-disable-next-line no-console
-      console.error('Stripe webhook signature verification failed:', error)
-      messageList.push('Stripe webhook signature verification failed')
+  // Two destinations post to the same URL with different signing secrets.
+  // Try account secret first (subscription payments), fall back to connected (quotation payments).
+  const event =
+    (await stripe.instance.webhooks.constructEventAsync(req.body, stripeSignature, stripe.webhookSecret.account).catch(() => null)) ??
+    (await stripe.instance.webhooks.constructEventAsync(req.body, stripeSignature, stripe.webhookSecret.connected).catch(() => null))
 
-      throw new HttpError<ErrorResBody['errorCode']>({
-        errorCode: 'STRIPE_WEBHOOK_VERIFICATION_FAILED',
-        statusCode: httpStatusCode.badRequest400,
-        message: messageList.join(' | '),
-      })
+  if (event === null) {
+    // oxlint-disable-next-line no-console
+    console.error('Stripe webhook signature verification failed for both secrets')
+    messageList.push('Stripe webhook signature verification failed')
+
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'STRIPE_WEBHOOK_VERIFICATION_FAILED',
+      statusCode: httpStatusCode.badRequest400,
+      message: messageList.join(' | '),
     })
+  }
 
   messageList.push(`Stripe webhook event verified: ${event.type}`)
 
