@@ -554,38 +554,8 @@ resource "google_secret_manager_secret_iam_member" "stripe_live_webhook_account_
   member    = "serviceAccount:${google_service_account.cloud_run_service.email}"
 }
 
-resource "google_secret_manager_secret" "stripe_test_subscription_price_id_monthly" {
-  secret_id = "STRIPE_TEST_SUBSCRIPTION_PRICE_ID_MONTHLY"
-
-  labels = {
-    managed-by = "terraform"
-    purpose    = "stripe"
-  }
-
-  replication {
-    auto {}
-  }
-
-  depends_on = [google_project_service.required_services]
-}
-
 resource "google_secret_manager_secret" "stripe_test_subscription_price_id_annual" {
   secret_id = "STRIPE_TEST_SUBSCRIPTION_PRICE_ID_ANNUAL"
-
-  labels = {
-    managed-by = "terraform"
-    purpose    = "stripe"
-  }
-
-  replication {
-    auto {}
-  }
-
-  depends_on = [google_project_service.required_services]
-}
-
-resource "google_secret_manager_secret" "stripe_live_subscription_price_id_monthly" {
-  secret_id = "STRIPE_LIVE_SUBSCRIPTION_PRICE_ID_MONTHLY"
 
   labels = {
     managed-by = "terraform"
@@ -614,20 +584,8 @@ resource "google_secret_manager_secret" "stripe_live_subscription_price_id_annua
   depends_on = [google_project_service.required_services]
 }
 
-resource "google_secret_manager_secret_iam_member" "stripe_test_subscription_price_id_monthly" {
-  secret_id = google_secret_manager_secret.stripe_test_subscription_price_id_monthly.id
-  role      = "roles/secretmanager.secretAccessor"
-  member    = "serviceAccount:${google_service_account.cloud_run_service.email}"
-}
-
 resource "google_secret_manager_secret_iam_member" "stripe_test_subscription_price_id_annual" {
   secret_id = google_secret_manager_secret.stripe_test_subscription_price_id_annual.id
-  role      = "roles/secretmanager.secretAccessor"
-  member    = "serviceAccount:${google_service_account.cloud_run_service.email}"
-}
-
-resource "google_secret_manager_secret_iam_member" "stripe_live_subscription_price_id_monthly" {
-  secret_id = google_secret_manager_secret.stripe_live_subscription_price_id_monthly.id
   role      = "roles/secretmanager.secretAccessor"
   member    = "serviceAccount:${google_service_account.cloud_run_service.email}"
 }
