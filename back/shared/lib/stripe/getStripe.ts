@@ -14,7 +14,7 @@ type StripeCached = {
     account: string // "Your account" scope — platform subscription payments
     connected: string // "Connected accounts" scope — quotation payments, Connect disconnects
   }
-  subscriptionPriceId: { monthly: string; annual: string }
+  subscriptionPriceId: string
 }
 
 let stripeCached: StripeCached | null = null
@@ -45,29 +45,18 @@ export const getStripe = async (): Promise<StripeCached> => {
     prod: 'STRIPE_LIVE_WEBHOOK_ACCOUNT_SECRET',
   }
 
-  const [
-    stripeSecretKey,
-    stripeClientId,
-    webhookSecretConnected,
-    webhookSecretAccount,
-    priceIdMonthly,
-    priceIdAnnual,
-  ] = await Promise.all([
-    getSecret(isLive ? 'STRIPE_LIVE_SECRET_KEY' : 'STRIPE_TEST_SECRET_KEY'),
-    getSecret(isLive ? 'STRIPE_LIVE_CLIENT_ID' : 'STRIPE_TEST_CLIENT_ID'),
-    getSecret(webhookSecretNameConnected[runtimeConfig.environment]),
-    getSecret(webhookSecretNameAccount[runtimeConfig.environment]),
-    getSecret(
-      isLive
-        ? 'STRIPE_LIVE_SUBSCRIPTION_PRICE_ID_MONTHLY'
-        : 'STRIPE_TEST_SUBSCRIPTION_PRICE_ID_MONTHLY',
-    ),
-    getSecret(
-      isLive
-        ? 'STRIPE_LIVE_SUBSCRIPTION_PRICE_ID_ANNUAL'
-        : 'STRIPE_TEST_SUBSCRIPTION_PRICE_ID_ANNUAL',
-    ),
-  ])
+  const [stripeSecretKey, stripeClientId, webhookSecretConnected, webhookSecretAccount, priceId] =
+    await Promise.all([
+      getSecret(isLive ? 'STRIPE_LIVE_SECRET_KEY' : 'STRIPE_TEST_SECRET_KEY'),
+      getSecret(isLive ? 'STRIPE_LIVE_CLIENT_ID' : 'STRIPE_TEST_CLIENT_ID'),
+      getSecret(webhookSecretNameConnected[runtimeConfig.environment]),
+      getSecret(webhookSecretNameAccount[runtimeConfig.environment]),
+      getSecret(
+        isLive
+          ? 'STRIPE_LIVE_SUBSCRIPTION_PRICE_ID_ANNUAL'
+          : 'STRIPE_TEST_SUBSCRIPTION_PRICE_ID_ANNUAL',
+      ),
+    ])
 
   stripeCached = {
     instance: new Stripe(stripeSecretKey),
@@ -76,10 +65,7 @@ export const getStripe = async (): Promise<StripeCached> => {
       account: webhookSecretAccount,
       connected: webhookSecretConnected,
     },
-    subscriptionPriceId: {
-      monthly: priceIdMonthly,
-      annual: priceIdAnnual,
-    },
+    subscriptionPriceId: priceId,
   }
 
   return stripeCached
