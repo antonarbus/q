@@ -364,16 +364,16 @@ All secrets are stored in GCP Secret Manager (registered via Terraform bootstrap
 
 | Secret                                | Scope              | Environment |
 | ------------------------------------- | ------------------ | ----------- |
-| `STRIPE_WEBHOOK_SECRET_DEV`           | Connected accounts | `dev`       |
-| `STRIPE_WEBHOOK_ACCOUNT_SECRET_DEV`   | Your account       | `dev`       |
-| `STRIPE_WEBHOOK_SECRET_TEST`          | Connected accounts | `test`      |
-| `STRIPE_WEBHOOK_ACCOUNT_SECRET_TEST`  | Your account       | `test`      |
-| `STRIPE_WEBHOOK_SECRET_PILOT`         | Connected accounts | `pilot`     |
-| `STRIPE_WEBHOOK_ACCOUNT_SECRET_PILOT` | Your account       | `pilot`     |
-| `STRIPE_WEBHOOK_SECRET_LIVE`          | Connected accounts | `prod`      |
-| `STRIPE_WEBHOOK_ACCOUNT_SECRET_LIVE`  | Your account       | `prod`      |
+| `STRIPE_WEBHOOK_CONNECTED_ACCOUNTS_SECRET_DEV`           | Connected accounts | `dev`       |
+| `STRIPE_WEBHOOK_YOUR_ACCOUNT_SECRET_DEV`   | Your account       | `dev`       |
+| `STRIPE_WEBHOOK_CONNECTED_ACCOUNTS_SECRET_TEST`          | Connected accounts | `test`      |
+| `STRIPE_WEBHOOK_YOUR_ACCOUNT_SECRET_TEST`  | Your account       | `test`      |
+| `STRIPE_WEBHOOK_CONNECTED_ACCOUNTS_SECRET_PILOT`         | Connected accounts | `pilot`     |
+| `STRIPE_WEBHOOK_YOUR_ACCOUNT_SECRET_PILOT` | Your account       | `pilot`     |
+| `STRIPE_WEBHOOK_CONNECTED_ACCOUNTS_SECRET_LIVE`          | Connected accounts | `prod`      |
+| `STRIPE_WEBHOOK_YOUR_ACCOUNT_SECRET_LIVE`  | Your account       | `prod`      |
 
-> For local dev, `stripe listen` covers all events with a single secret. Both `STRIPE_WEBHOOK_SECRET_DEV` and `STRIPE_WEBHOOK_ACCOUNT_SECRET_DEV` should be set to the same `whsec_…` value from `stripe listen`.
+> For local dev, `stripe listen` covers all events with a single secret. Both `STRIPE_WEBHOOK_CONNECTED_ACCOUNTS_SECRET_DEV` and `STRIPE_WEBHOOK_YOUR_ACCOUNT_SECRET_DEV` should be set to the same `whsec_…` value from `stripe listen`.
 
 **Subscription Price ID** — binary test/live split. Created in the Stripe dashboard when setting up the product:
 
@@ -388,11 +388,11 @@ Stripe has two completely separate sets of keys — both coexist simultaneously,
 
 | Environment | Secret key               | Client ID               | Webhook secrets                                                       | Price IDs                                  |
 | ----------- | ------------------------ | ----------------------- | --------------------------------------------------------------------- | ------------------------------------------ |
-| `local`     | `STRIPE_SECRET_KEY_TEST` | `STRIPE_CLIENT_ID_TEST` | `STRIPE_WEBHOOK_SECRET_DEV` (both scopes, from `stripe listen`)       | `STRIPE_SUBSCRIPTION_PRICE_ID_ANNUAL_TEST` |
-| `dev`       | `STRIPE_SECRET_KEY_TEST` | `STRIPE_CLIENT_ID_TEST` | `STRIPE_WEBHOOK_SECRET_DEV` + `STRIPE_WEBHOOK_ACCOUNT_SECRET_DEV`     | `STRIPE_SUBSCRIPTION_PRICE_ID_ANNUAL_TEST` |
-| `test`      | `STRIPE_SECRET_KEY_TEST` | `STRIPE_CLIENT_ID_TEST` | `STRIPE_WEBHOOK_SECRET_TEST` + `STRIPE_WEBHOOK_ACCOUNT_SECRET_TEST`   | `STRIPE_SUBSCRIPTION_PRICE_ID_ANNUAL_TEST` |
-| `pilot`     | `STRIPE_SECRET_KEY_LIVE` | `STRIPE_CLIENT_ID_LIVE` | `STRIPE_WEBHOOK_SECRET_PILOT` + `STRIPE_WEBHOOK_ACCOUNT_SECRET_PILOT` | `STRIPE_SUBSCRIPTION_PRICE_ID_ANNUAL_LIVE` |
-| `prod`      | `STRIPE_SECRET_KEY_LIVE` | `STRIPE_CLIENT_ID_LIVE` | `STRIPE_WEBHOOK_SECRET_LIVE` + `STRIPE_WEBHOOK_ACCOUNT_SECRET_LIVE`   | `STRIPE_SUBSCRIPTION_PRICE_ID_ANNUAL_LIVE` |
+| `local`     | `STRIPE_SECRET_KEY_TEST` | `STRIPE_CLIENT_ID_TEST` | `STRIPE_WEBHOOK_CONNECTED_ACCOUNTS_SECRET_DEV` (both scopes, from `stripe listen`)       | `STRIPE_SUBSCRIPTION_PRICE_ID_ANNUAL_TEST` |
+| `dev`       | `STRIPE_SECRET_KEY_TEST` | `STRIPE_CLIENT_ID_TEST` | `STRIPE_WEBHOOK_CONNECTED_ACCOUNTS_SECRET_DEV` + `STRIPE_WEBHOOK_YOUR_ACCOUNT_SECRET_DEV`     | `STRIPE_SUBSCRIPTION_PRICE_ID_ANNUAL_TEST` |
+| `test`      | `STRIPE_SECRET_KEY_TEST` | `STRIPE_CLIENT_ID_TEST` | `STRIPE_WEBHOOK_CONNECTED_ACCOUNTS_SECRET_TEST` + `STRIPE_WEBHOOK_YOUR_ACCOUNT_SECRET_TEST`   | `STRIPE_SUBSCRIPTION_PRICE_ID_ANNUAL_TEST` |
+| `pilot`     | `STRIPE_SECRET_KEY_LIVE` | `STRIPE_CLIENT_ID_LIVE` | `STRIPE_WEBHOOK_CONNECTED_ACCOUNTS_SECRET_PILOT` + `STRIPE_WEBHOOK_YOUR_ACCOUNT_SECRET_PILOT` | `STRIPE_SUBSCRIPTION_PRICE_ID_ANNUAL_LIVE` |
+| `prod`      | `STRIPE_SECRET_KEY_LIVE` | `STRIPE_CLIENT_ID_LIVE` | `STRIPE_WEBHOOK_CONNECTED_ACCOUNTS_SECRET_LIVE` + `STRIPE_WEBHOOK_YOUR_ACCOUNT_SECRET_LIVE`   | `STRIPE_SUBSCRIPTION_PRICE_ID_ANNUAL_LIVE` |
 
 ### Step-by-step setup
 
@@ -406,10 +406,10 @@ Go to [stripe.com](https://stripe.com) and register. The Dashboard starts in **t
 
 #### 3. Enable Stripe Connect
 
-Go to [Dashboard → Settings → Connect → Onboarding options → OAuth](https://dashboard.stripe.com/test/settings/connect/onboarding-options/oauth) and:
+Go to [Dashboard → Settings → Connect → Onboarding options → OAuth](https://dashboard.stripe.com/test/settings/connect/onboarding-options/oauth)
 
 1. Enable **OAuth for Stripe Dashboard accounts**
-2. Copy the **Test client ID** (`ca_…`) — this is `STRIPE_CLIENT_ID_TEST`
+2. Copy the **Test client ID** (`ca_…`) — this is `STRIPE_CLIENT_ID_TEST` and `STRIPE_CLIENT_ID_LIVe`
 3. Add all redirect URIs under **Redirects**:
 
 ```
@@ -429,7 +429,7 @@ The **Live client ID** is unavailable until Stripe approves your platform profil
 3. Name: `Platform Subscription`.
 4. Under **Pricing** → **Add a price**: `Standard pricing`, `99.00` USD, **One time** (not recurring) → Save.
 5. **Save product**.
-6. Copy the Price ID (`price_…`) — this is `STRIPE_SUBSCRIPTION_PRICE_ID_ANNUAL_TEST`.
+6. Copy the Price ID (`price_…`) — this is `STRIPE_SUBSCRIPTION_PRICE_ID_ANNUAL_TEST` and `STRIPE_SUBSCRIPTION_PRICE_ID_ANNUAL_LIVE`.
 
 #### 5. Register webhook destinations
 
@@ -439,19 +439,19 @@ Each URL needs **two destinations** — one per scope. Create them in [Webhooks 
 
 | URL                                                     | Scope              | Events                                                           | Secret name                          |
 | ------------------------------------------------------- | ------------------ | ---------------------------------------------------------------- | ------------------------------------ |
-| `https://dev.sendmequotation.today/api/stripe/webhook`  | Connected accounts | `checkout.session.completed`, `account.application.deauthorized` | `STRIPE_WEBHOOK_SECRET_DEV`          |
-| `https://dev.sendmequotation.today/api/stripe/webhook`  | Your account       | `checkout.session.completed`                                     | `STRIPE_WEBHOOK_ACCOUNT_SECRET_DEV`  |
-| `https://test.sendmequotation.today/api/stripe/webhook` | Connected accounts | `checkout.session.completed`, `account.application.deauthorized` | `STRIPE_WEBHOOK_SECRET_TEST`         |
-| `https://test.sendmequotation.today/api/stripe/webhook` | Your account       | `checkout.session.completed`                                     | `STRIPE_WEBHOOK_ACCOUNT_SECRET_TEST` |
+| `https://dev.sendmequotation.today/api/stripe/webhook`  | Connected accounts | `checkout.session.completed`, `account.application.deauthorized` | `STRIPE_WEBHOOK_CONNECTED_ACCOUNTS_SECRET_DEV`          |
+| `https://dev.sendmequotation.today/api/stripe/webhook`  | Your account       | `checkout.session.completed`                                     | `STRIPE_WEBHOOK_YOUR_ACCOUNT_SECRET_DEV`  |
+| `https://test.sendmequotation.today/api/stripe/webhook` | Connected accounts | `checkout.session.completed`, `account.application.deauthorized` | `STRIPE_WEBHOOK_CONNECTED_ACCOUNTS_SECRET_TEST`         |
+| `https://test.sendmequotation.today/api/stripe/webhook` | Your account       | `checkout.session.completed`                                     | `STRIPE_WEBHOOK_YOUR_ACCOUNT_SECRET_TEST` |
 
 **Live mode** (two destinations per URL, four destinations total):
 
 | URL                                                      | Scope              | Events                                                           | Secret name                           |
 | -------------------------------------------------------- | ------------------ | ---------------------------------------------------------------- | ------------------------------------- |
-| `https://pilot.sendmequotation.today/api/stripe/webhook` | Connected accounts | `checkout.session.completed`, `account.application.deauthorized` | `STRIPE_WEBHOOK_SECRET_PILOT`         |
-| `https://pilot.sendmequotation.today/api/stripe/webhook` | Your account       | `checkout.session.completed`                                     | `STRIPE_WEBHOOK_ACCOUNT_SECRET_PILOT` |
-| `https://sendmequotation.today/api/stripe/webhook`       | Connected accounts | `checkout.session.completed`, `account.application.deauthorized` | `STRIPE_WEBHOOK_SECRET_LIVE`          |
-| `https://sendmequotation.today/api/stripe/webhook`       | Your account       | `checkout.session.completed`                                     | `STRIPE_WEBHOOK_ACCOUNT_SECRET_LIVE`  |
+| `https://pilot.sendmequotation.today/api/stripe/webhook` | Connected accounts | `checkout.session.completed`, `account.application.deauthorized` | `STRIPE_WEBHOOK_CONNECTED_ACCOUNTS_SECRET_PILOT`         |
+| `https://pilot.sendmequotation.today/api/stripe/webhook` | Your account       | `checkout.session.completed`                                     | `STRIPE_WEBHOOK_YOUR_ACCOUNT_SECRET_PILOT` |
+| `https://sendmequotation.today/api/stripe/webhook`       | Connected accounts | `checkout.session.completed`, `account.application.deauthorized` | `STRIPE_WEBHOOK_CONNECTED_ACCOUNTS_SECRET_LIVE`          |
+| `https://sendmequotation.today/api/stripe/webhook`       | Your account       | `checkout.session.completed`                                     | `STRIPE_WEBHOOK_YOUR_ACCOUNT_SECRET_LIVE`  |
 
 - API version: **2026-03-25.dahlia** (latest)
 - Copy the **Signing secret** (`whsec_…`) shown after each destination is created — each has a different secret.
@@ -460,7 +460,7 @@ For local development, use the [Stripe CLI](https://stripe.com/docs/stripe-cli):
 
 ```bash
 stripe listen --forward-to localhost:8080/api/stripe/webhook
-# prints a whsec_… secret — use it as both STRIPE_WEBHOOK_SECRET_DEV and STRIPE_WEBHOOK_ACCOUNT_SECRET_DEV locally
+# prints a whsec_… secret — use it as both STRIPE_WEBHOOK_CONNECTED_ACCOUNTS_SECRET_DEV and STRIPE_WEBHOOK_YOUR_ACCOUNT_SECRET_DEV locally
 ```
 
 #### 6. Add secrets to your environment
@@ -468,8 +468,8 @@ stripe listen --forward-to localhost:8080/api/stripe/webhook
 **Local** — the local environment reads from the same GCP Secret Manager as `dev`, so most secrets don't need to be in `.env`. The exceptions are the webhook secret (generated by `stripe listen`, not stored in Secret Manager) and any secrets you haven't added to Secret Manager yet:
 
 ```
-STRIPE_WEBHOOK_SECRET_DEV=whsec_…                    # from stripe listen
-STRIPE_WEBHOOK_ACCOUNT_SECRET_DEV=whsec_…            # same value as above
+STRIPE_WEBHOOK_CONNECTED_ACCOUNTS_SECRET_DEV=whsec_…                    # from stripe listen
+STRIPE_WEBHOOK_YOUR_ACCOUNT_SECRET_DEV=whsec_…            # same value as above
 ```
 
 Values in `.env` always take priority over Secret Manager, so you can also override any secret locally if needed.

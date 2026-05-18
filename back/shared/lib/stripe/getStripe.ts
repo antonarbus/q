@@ -27,22 +27,22 @@ export const getStripe = async (): Promise<StripeCached> => {
   const isLive = runtimeConfig.environment === 'pilot' || runtimeConfig.environment === 'prod'
 
   const webhookSecretNameConnected: Record<RuntimeEnvironment, SecretName> = {
-    unknown: 'STRIPE_WEBHOOK_SECRET_DEV',
-    local: 'STRIPE_WEBHOOK_SECRET_DEV',
-    dev: 'STRIPE_WEBHOOK_SECRET_DEV',
-    test: 'STRIPE_WEBHOOK_SECRET_TEST',
-    pilot: 'STRIPE_WEBHOOK_SECRET_PILOT',
-    prod: 'STRIPE_WEBHOOK_SECRET_LIVE',
+    unknown: 'STRIPE_WEBHOOK_CONNECTED_ACCOUNTS_SECRET_DEV',
+    local: 'STRIPE_WEBHOOK_CONNECTED_ACCOUNTS_SECRET_DEV',
+    dev: 'STRIPE_WEBHOOK_CONNECTED_ACCOUNTS_SECRET_DEV',
+    test: 'STRIPE_WEBHOOK_CONNECTED_ACCOUNTS_SECRET_TEST',
+    pilot: 'STRIPE_WEBHOOK_CONNECTED_ACCOUNTS_SECRET_PILOT',
+    prod: 'STRIPE_WEBHOOK_CONNECTED_ACCOUNTS_SECRET_LIVE',
   }
 
   // For local dev, stripe listen gives one secret that covers all events
   const webhookSecretNameAccount: Record<RuntimeEnvironment, SecretName> = {
-    unknown: 'STRIPE_WEBHOOK_SECRET_DEV',
-    local: 'STRIPE_WEBHOOK_SECRET_DEV',
-    dev: 'STRIPE_WEBHOOK_ACCOUNT_SECRET_DEV',
-    test: 'STRIPE_WEBHOOK_ACCOUNT_SECRET_TEST',
-    pilot: 'STRIPE_WEBHOOK_ACCOUNT_SECRET_PILOT',
-    prod: 'STRIPE_WEBHOOK_ACCOUNT_SECRET_LIVE',
+    unknown: 'STRIPE_WEBHOOK_CONNECTED_ACCOUNTS_SECRET_DEV',
+    local: 'STRIPE_WEBHOOK_CONNECTED_ACCOUNTS_SECRET_DEV',
+    dev: 'STRIPE_WEBHOOK_YOUR_ACCOUNT_SECRET_DEV',
+    test: 'STRIPE_WEBHOOK_YOUR_ACCOUNT_SECRET_TEST',
+    pilot: 'STRIPE_WEBHOOK_YOUR_ACCOUNT_SECRET_PILOT',
+    prod: 'STRIPE_WEBHOOK_YOUR_ACCOUNT_SECRET_LIVE',
   }
 
   const [stripeSecretKey, stripeClientId, webhookSecretConnected, webhookSecretAccount, priceId] =

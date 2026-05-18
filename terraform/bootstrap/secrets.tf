@@ -350,7 +350,7 @@ resource "google_secret_manager_secret" "stripe_client_id_live" {
   depends_on = [google_project_service.required_services]
 }
 
-resource "google_secret_manager_secret" "stripe_webhook_secret_dev" {
+resource "google_secret_manager_secret" "stripe_webhook_connected_accounts_secret_dev" {
   secret_id = "STRIPE_WEBHOOK_SECRET_DEV"
 
   labels = {
@@ -366,7 +366,7 @@ resource "google_secret_manager_secret" "stripe_webhook_secret_dev" {
   depends_on = [google_project_service.required_services]
 }
 
-resource "google_secret_manager_secret" "stripe_webhook_secret_test" {
+resource "google_secret_manager_secret" "stripe_webhook_connected_accounts_secret_test" {
   secret_id = "STRIPE_WEBHOOK_SECRET_TEST"
 
   labels = {
@@ -382,7 +382,7 @@ resource "google_secret_manager_secret" "stripe_webhook_secret_test" {
   depends_on = [google_project_service.required_services]
 }
 
-resource "google_secret_manager_secret" "stripe_webhook_secret_pilot" {
+resource "google_secret_manager_secret" "stripe_webhook_connected_accounts_secret_pilot" {
   secret_id = "STRIPE_WEBHOOK_SECRET_PILOT"
 
   labels = {
@@ -398,7 +398,7 @@ resource "google_secret_manager_secret" "stripe_webhook_secret_pilot" {
   depends_on = [google_project_service.required_services]
 }
 
-resource "google_secret_manager_secret" "stripe_webhook_secret_live" {
+resource "google_secret_manager_secret" "stripe_webhook_connected_accounts_secret_live" {
   secret_id = "STRIPE_WEBHOOK_SECRET_LIVE"
 
   labels = {
@@ -438,26 +438,26 @@ resource "google_secret_manager_secret_iam_member" "stripe_client_id_live" {
   member    = "serviceAccount:${google_service_account.cloud_run_service.email}"
 }
 
-resource "google_secret_manager_secret_iam_member" "stripe_webhook_secret_dev" {
-  secret_id = google_secret_manager_secret.stripe_webhook_secret_dev.id
+resource "google_secret_manager_secret_iam_member" "stripe_webhook_connected_accounts_secret_dev" {
+  secret_id = google_secret_manager_secret.stripe_webhook_connected_accounts_secret_dev.id
   role      = "roles/secretmanager.secretAccessor"
   member    = "serviceAccount:${google_service_account.cloud_run_service.email}"
 }
 
-resource "google_secret_manager_secret_iam_member" "stripe_webhook_secret_test" {
-  secret_id = google_secret_manager_secret.stripe_webhook_secret_test.id
+resource "google_secret_manager_secret_iam_member" "stripe_webhook_connected_accounts_secret_test" {
+  secret_id = google_secret_manager_secret.stripe_webhook_connected_accounts_secret_test.id
   role      = "roles/secretmanager.secretAccessor"
   member    = "serviceAccount:${google_service_account.cloud_run_service.email}"
 }
 
-resource "google_secret_manager_secret_iam_member" "stripe_webhook_secret_pilot" {
-  secret_id = google_secret_manager_secret.stripe_webhook_secret_pilot.id
+resource "google_secret_manager_secret_iam_member" "stripe_webhook_connected_accounts_secret_pilot" {
+  secret_id = google_secret_manager_secret.stripe_webhook_connected_accounts_secret_pilot.id
   role      = "roles/secretmanager.secretAccessor"
   member    = "serviceAccount:${google_service_account.cloud_run_service.email}"
 }
 
-resource "google_secret_manager_secret_iam_member" "stripe_webhook_secret_live" {
-  secret_id = google_secret_manager_secret.stripe_webhook_secret_live.id
+resource "google_secret_manager_secret_iam_member" "stripe_webhook_connected_accounts_secret_live" {
+  secret_id = google_secret_manager_secret.stripe_webhook_connected_accounts_secret_live.id
   role      = "roles/secretmanager.secretAccessor"
   member    = "serviceAccount:${google_service_account.cloud_run_service.email}"
 }
@@ -466,7 +466,7 @@ resource "google_secret_manager_secret_iam_member" "stripe_webhook_secret_live" 
 # Stripe does not allow a single endpoint to cover both scopes, so each URL has two destinations.
 # dev uses the same secret as the connected-account destination (stripe listen covers all events locally).
 
-resource "google_secret_manager_secret" "stripe_webhook_account_secret_dev" {
+resource "google_secret_manager_secret" "stripe_webhook_your_account_secret_dev" {
   secret_id = "STRIPE_WEBHOOK_ACCOUNT_SECRET_DEV"
 
   labels = {
@@ -482,7 +482,7 @@ resource "google_secret_manager_secret" "stripe_webhook_account_secret_dev" {
   depends_on = [google_project_service.required_services]
 }
 
-resource "google_secret_manager_secret" "stripe_webhook_account_secret_test" {
+resource "google_secret_manager_secret" "stripe_webhook_your_account_secret_test" {
   secret_id = "STRIPE_WEBHOOK_ACCOUNT_SECRET_TEST"
 
   labels = {
@@ -498,7 +498,7 @@ resource "google_secret_manager_secret" "stripe_webhook_account_secret_test" {
   depends_on = [google_project_service.required_services]
 }
 
-resource "google_secret_manager_secret" "stripe_webhook_account_secret_pilot" {
+resource "google_secret_manager_secret" "stripe_webhook_your_account_secret_pilot" {
   secret_id = "STRIPE_WEBHOOK_ACCOUNT_SECRET_PILOT"
 
   labels = {
@@ -514,7 +514,7 @@ resource "google_secret_manager_secret" "stripe_webhook_account_secret_pilot" {
   depends_on = [google_project_service.required_services]
 }
 
-resource "google_secret_manager_secret" "stripe_webhook_account_secret_live" {
+resource "google_secret_manager_secret" "stripe_webhook_your_account_secret_live" {
   secret_id = "STRIPE_WEBHOOK_ACCOUNT_SECRET_LIVE"
 
   labels = {
@@ -530,26 +530,26 @@ resource "google_secret_manager_secret" "stripe_webhook_account_secret_live" {
   depends_on = [google_project_service.required_services]
 }
 
-resource "google_secret_manager_secret_iam_member" "stripe_webhook_account_secret_dev" {
-  secret_id = google_secret_manager_secret.stripe_webhook_account_secret_dev.id
+resource "google_secret_manager_secret_iam_member" "stripe_webhook_your_account_secret_dev" {
+  secret_id = google_secret_manager_secret.stripe_webhook_your_account_secret_dev.id
   role      = "roles/secretmanager.secretAccessor"
   member    = "serviceAccount:${google_service_account.cloud_run_service.email}"
 }
 
-resource "google_secret_manager_secret_iam_member" "stripe_webhook_account_secret_test" {
-  secret_id = google_secret_manager_secret.stripe_webhook_account_secret_test.id
+resource "google_secret_manager_secret_iam_member" "stripe_webhook_your_account_secret_test" {
+  secret_id = google_secret_manager_secret.stripe_webhook_your_account_secret_test.id
   role      = "roles/secretmanager.secretAccessor"
   member    = "serviceAccount:${google_service_account.cloud_run_service.email}"
 }
 
-resource "google_secret_manager_secret_iam_member" "stripe_webhook_account_secret_pilot" {
-  secret_id = google_secret_manager_secret.stripe_webhook_account_secret_pilot.id
+resource "google_secret_manager_secret_iam_member" "stripe_webhook_your_account_secret_pilot" {
+  secret_id = google_secret_manager_secret.stripe_webhook_your_account_secret_pilot.id
   role      = "roles/secretmanager.secretAccessor"
   member    = "serviceAccount:${google_service_account.cloud_run_service.email}"
 }
 
-resource "google_secret_manager_secret_iam_member" "stripe_webhook_account_secret_live" {
-  secret_id = google_secret_manager_secret.stripe_webhook_account_secret_live.id
+resource "google_secret_manager_secret_iam_member" "stripe_webhook_your_account_secret_live" {
+  secret_id = google_secret_manager_secret.stripe_webhook_your_account_secret_live.id
   role      = "roles/secretmanager.secretAccessor"
   member    = "serviceAccount:${google_service_account.cloud_run_service.email}"
 }
