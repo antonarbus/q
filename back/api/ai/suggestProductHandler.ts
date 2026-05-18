@@ -1,4 +1,3 @@
-// oxlint-disable no-console
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entity/user/getUserFromAccessTokenOrThrowUnauthorized'
 import { HttpError } from '@back/shared/errors/HttpError'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
@@ -81,11 +80,7 @@ export const suggestProductHandler: RouterHandler = async (req) => {
         message: messageList.join(' | '),
       })
     })
-  // oxlint-disable-next-line no-console
-  console.log('🚀 ~ result:', result)
 
-  console.log('🚀 ~ result.text:', result.text)
-  console.log('🚀 ~ result.data:', result.data)
   const text = (result.text ?? '')
     .replace(/^```(?:json)?\s*/i, '')
     .replace(/\s*```$/, '')
