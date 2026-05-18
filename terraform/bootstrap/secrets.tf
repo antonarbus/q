@@ -351,7 +351,7 @@ resource "google_secret_manager_secret" "stripe_client_id_live" {
 }
 
 resource "google_secret_manager_secret" "stripe_webhook_connected_accounts_secret_dev" {
-  secret_id = "STRIPE_WEBHOOK_SECRET_DEV"
+  secret_id = "STRIPE_WEBHOOK_CONNECTED_ACCOUNTS_SECRET_DEV"
 
   labels = {
     managed-by  = "terraform"
@@ -367,7 +367,7 @@ resource "google_secret_manager_secret" "stripe_webhook_connected_accounts_secre
 }
 
 resource "google_secret_manager_secret" "stripe_webhook_connected_accounts_secret_test" {
-  secret_id = "STRIPE_WEBHOOK_SECRET_TEST"
+  secret_id = "STRIPE_WEBHOOK_CONNECTED_ACCOUNTS_SECRET_TEST"
 
   labels = {
     managed-by  = "terraform"
@@ -383,7 +383,7 @@ resource "google_secret_manager_secret" "stripe_webhook_connected_accounts_secre
 }
 
 resource "google_secret_manager_secret" "stripe_webhook_connected_accounts_secret_pilot" {
-  secret_id = "STRIPE_WEBHOOK_SECRET_PILOT"
+  secret_id = "STRIPE_WEBHOOK_CONNECTED_ACCOUNTS_SECRET_PILOT"
 
   labels = {
     managed-by  = "terraform"
@@ -399,7 +399,7 @@ resource "google_secret_manager_secret" "stripe_webhook_connected_accounts_secre
 }
 
 resource "google_secret_manager_secret" "stripe_webhook_connected_accounts_secret_live" {
-  secret_id = "STRIPE_WEBHOOK_SECRET_LIVE"
+  secret_id = "STRIPE_WEBHOOK_CONNECTED_ACCOUNTS_SECRET_LIVE"
 
   labels = {
     managed-by  = "terraform"
@@ -467,7 +467,7 @@ resource "google_secret_manager_secret_iam_member" "stripe_webhook_connected_acc
 # dev uses the same secret as the connected-account destination (stripe listen covers all events locally).
 
 resource "google_secret_manager_secret" "stripe_webhook_your_account_secret_dev" {
-  secret_id = "STRIPE_WEBHOOK_ACCOUNT_SECRET_DEV"
+  secret_id = "STRIPE_WEBHOOK_YOUR_ACCOUNT_SECRET_DEV"
 
   labels = {
     managed-by  = "terraform"
@@ -483,7 +483,7 @@ resource "google_secret_manager_secret" "stripe_webhook_your_account_secret_dev"
 }
 
 resource "google_secret_manager_secret" "stripe_webhook_your_account_secret_test" {
-  secret_id = "STRIPE_WEBHOOK_ACCOUNT_SECRET_TEST"
+  secret_id = "STRIPE_WEBHOOK_YOUR_ACCOUNT_SECRET_TEST"
 
   labels = {
     managed-by  = "terraform"
@@ -499,7 +499,7 @@ resource "google_secret_manager_secret" "stripe_webhook_your_account_secret_test
 }
 
 resource "google_secret_manager_secret" "stripe_webhook_your_account_secret_pilot" {
-  secret_id = "STRIPE_WEBHOOK_ACCOUNT_SECRET_PILOT"
+  secret_id = "STRIPE_WEBHOOK_YOUR_ACCOUNT_SECRET_PILOT"
 
   labels = {
     managed-by  = "terraform"
@@ -515,7 +515,7 @@ resource "google_secret_manager_secret" "stripe_webhook_your_account_secret_pilo
 }
 
 resource "google_secret_manager_secret" "stripe_webhook_your_account_secret_live" {
-  secret_id = "STRIPE_WEBHOOK_ACCOUNT_SECRET_LIVE"
+  secret_id = "STRIPE_WEBHOOK_YOUR_ACCOUNT_SECRET_LIVE"
 
   labels = {
     managed-by  = "terraform"
