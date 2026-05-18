@@ -27,34 +27,34 @@ export const getStripe = async (): Promise<StripeCached> => {
   const isLive = runtimeConfig.environment === 'pilot' || runtimeConfig.environment === 'prod'
 
   const webhookSecretNameConnected: Record<RuntimeEnvironment, SecretName> = {
-    unknown: 'STRIPE_DEV_WEBHOOK_SECRET',
-    local: 'STRIPE_DEV_WEBHOOK_SECRET',
-    dev: 'STRIPE_DEV_WEBHOOK_SECRET',
-    test: 'STRIPE_TEST_WEBHOOK_SECRET',
-    pilot: 'STRIPE_PILOT_WEBHOOK_SECRET',
-    prod: 'STRIPE_LIVE_WEBHOOK_SECRET',
+    unknown: 'STRIPE_WEBHOOK_SECRET_DEV',
+    local: 'STRIPE_WEBHOOK_SECRET_DEV',
+    dev: 'STRIPE_WEBHOOK_SECRET_DEV',
+    test: 'STRIPE_WEBHOOK_SECRET_TEST',
+    pilot: 'STRIPE_WEBHOOK_SECRET_PILOT',
+    prod: 'STRIPE_WEBHOOK_SECRET_LIVE',
   }
 
   // For local dev, stripe listen gives one secret that covers all events
   const webhookSecretNameAccount: Record<RuntimeEnvironment, SecretName> = {
-    unknown: 'STRIPE_DEV_WEBHOOK_SECRET',
-    local: 'STRIPE_DEV_WEBHOOK_SECRET',
-    dev: 'STRIPE_DEV_WEBHOOK_ACCOUNT_SECRET',
-    test: 'STRIPE_TEST_WEBHOOK_ACCOUNT_SECRET',
-    pilot: 'STRIPE_PILOT_WEBHOOK_ACCOUNT_SECRET',
-    prod: 'STRIPE_LIVE_WEBHOOK_ACCOUNT_SECRET',
+    unknown: 'STRIPE_WEBHOOK_SECRET_DEV',
+    local: 'STRIPE_WEBHOOK_SECRET_DEV',
+    dev: 'STRIPE_WEBHOOK_ACCOUNT_SECRET_DEV',
+    test: 'STRIPE_WEBHOOK_ACCOUNT_SECRET_TEST',
+    pilot: 'STRIPE_WEBHOOK_ACCOUNT_SECRET_PILOT',
+    prod: 'STRIPE_WEBHOOK_ACCOUNT_SECRET_LIVE',
   }
 
   const [stripeSecretKey, stripeClientId, webhookSecretConnected, webhookSecretAccount, priceId] =
     await Promise.all([
-      getSecret(isLive ? 'STRIPE_LIVE_SECRET_KEY' : 'STRIPE_TEST_SECRET_KEY'),
-      getSecret(isLive ? 'STRIPE_LIVE_CLIENT_ID' : 'STRIPE_TEST_CLIENT_ID'),
+      getSecret(isLive ? 'STRIPE_SECRET_KEY_LIVE' : 'STRIPE_SECRET_KEY_TEST'),
+      getSecret(isLive ? 'STRIPE_CLIENT_ID_LIVE' : 'STRIPE_CLIENT_ID_TEST'),
       getSecret(webhookSecretNameConnected[runtimeConfig.environment]),
       getSecret(webhookSecretNameAccount[runtimeConfig.environment]),
       getSecret(
         isLive
-          ? 'STRIPE_LIVE_SUBSCRIPTION_PRICE_ID_ANNUAL'
-          : 'STRIPE_TEST_SUBSCRIPTION_PRICE_ID_ANNUAL',
+          ? 'STRIPE_SUBSCRIPTION_PRICE_ID_ANNUAL_LIVE'
+          : 'STRIPE_SUBSCRIPTION_PRICE_ID_ANNUAL_TEST',
       ),
     ])
 

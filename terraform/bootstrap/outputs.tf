@@ -63,20 +63,20 @@ output "secret_names" {
     neon_database_url_prod                   = google_secret_manager_secret.neon_database_url_prod.secret_id
     gcp_private_key_id                       = google_secret_manager_secret.gcp_private_key_id.secret_id
     gcp_private_key                          = google_secret_manager_secret.gcp_private_key.secret_id
-    stripe_test_secret_key                   = google_secret_manager_secret.stripe_test_secret_key.secret_id
-    stripe_live_secret_key                   = google_secret_manager_secret.stripe_live_secret_key.secret_id
-    stripe_test_client_id                    = google_secret_manager_secret.stripe_test_client_id.secret_id
-    stripe_live_client_id                    = google_secret_manager_secret.stripe_live_client_id.secret_id
-    stripe_dev_webhook_secret                = google_secret_manager_secret.stripe_dev_webhook_secret.secret_id
-    stripe_dev_webhook_account_secret        = google_secret_manager_secret.stripe_dev_webhook_account_secret.secret_id
-    stripe_test_webhook_secret               = google_secret_manager_secret.stripe_test_webhook_secret.secret_id
-    stripe_test_webhook_account_secret       = google_secret_manager_secret.stripe_test_webhook_account_secret.secret_id
-    stripe_pilot_webhook_secret              = google_secret_manager_secret.stripe_pilot_webhook_secret.secret_id
-    stripe_pilot_webhook_account_secret      = google_secret_manager_secret.stripe_pilot_webhook_account_secret.secret_id
-    stripe_live_webhook_secret               = google_secret_manager_secret.stripe_live_webhook_secret.secret_id
-    stripe_live_webhook_account_secret       = google_secret_manager_secret.stripe_live_webhook_account_secret.secret_id
-    stripe_test_subscription_price_id_annual = google_secret_manager_secret.stripe_test_subscription_price_id_annual.secret_id
-    stripe_live_subscription_price_id_annual = google_secret_manager_secret.stripe_live_subscription_price_id_annual.secret_id
+    stripe_secret_key_test                   = google_secret_manager_secret.stripe_secret_key_test.secret_id
+    stripe_secret_key_live                   = google_secret_manager_secret.stripe_secret_key_live.secret_id
+    stripe_client_id_test                    = google_secret_manager_secret.stripe_client_id_test.secret_id
+    stripe_client_id_live                    = google_secret_manager_secret.stripe_client_id_live.secret_id
+    stripe_webhook_secret_dev                = google_secret_manager_secret.stripe_webhook_secret_dev.secret_id
+    stripe_webhook_account_secret_dev        = google_secret_manager_secret.stripe_webhook_account_secret_dev.secret_id
+    stripe_webhook_secret_test               = google_secret_manager_secret.stripe_webhook_secret_test.secret_id
+    stripe_webhook_account_secret_test       = google_secret_manager_secret.stripe_webhook_account_secret_test.secret_id
+    stripe_webhook_secret_pilot              = google_secret_manager_secret.stripe_webhook_secret_pilot.secret_id
+    stripe_webhook_account_secret_pilot      = google_secret_manager_secret.stripe_webhook_account_secret_pilot.secret_id
+    stripe_webhook_secret_live               = google_secret_manager_secret.stripe_webhook_secret_live.secret_id
+    stripe_webhook_account_secret_live       = google_secret_manager_secret.stripe_webhook_account_secret_live.secret_id
+    stripe_subscription_price_id_annual_test = google_secret_manager_secret.stripe_subscription_price_id_annual_test.secret_id
+    stripe_subscription_price_id_annual_live = google_secret_manager_secret.stripe_subscription_price_id_annual_live.secret_id
     gemini_api_key                           = google_secret_manager_secret.gemini_api_key.secret_id
   }
 }
