@@ -37,6 +37,10 @@ export const TiptapMenu = (): React.ReactNode => {
       return false
     }
 
+    if (ctx.editor.isFocused === false) {
+      return false
+    }
+
     if (ctx.editor.isActive('table')) {
       return true
     }
