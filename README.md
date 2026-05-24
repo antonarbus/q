@@ -527,6 +527,22 @@ freelancers and small businesses who want fewer steps.
 Honest take: the market exists and people pay for these tools. The challenge isn't differentiation — it's
 discoverability. That's the actual moat the big players have.
 
+## Package Notes
+
+### ag-grid-community / ag-grid-react
+
+**Do not upgrade past 35.2.1 without testing in Chrome dev mode.**
+
+AG Grid 35.3.0 introduced a regression where all grid pages render as a blank white page in Chrome under Vite's dev server. Firefox and the production build are unaffected. The DOM and row data are both present (visible in DevTools), but the grid's internal viewport collapses to 0×0, clipping all content. Resizing the browser window triggers AG Grid's ResizeObserver and makes the grid appear.
+
+Root cause (unconfirmed): 35.3.0 changed initialization timing — `runWhenReadyAsync()` now returns `true` for React 19, firing the "ready" event asynchronously via `window.setTimeout`, and `ready.current` is reset to `false` during cleanup. In Chrome's rendering pipeline this creates a race where the ResizeObserver callback fires before the grid has re-initialized after its first async ready cycle, leaving the viewport at zero height permanently.
+
+Workarounds tried that did NOT fix it: `renderingMode='legacy'`, clearing Vite cache, making the grid container a flex column, adding `display: flex` to `GridPageLayout`.
+
+Pinned to: `35.2.1` (exact, no `^`).
+
+---
+
 ## Troubleshooting
 
 **409 Already Exists** — Import existing resource into Terraform state:
