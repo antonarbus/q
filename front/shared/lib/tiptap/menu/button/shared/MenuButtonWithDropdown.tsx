@@ -58,6 +58,7 @@ export const MenuButtonWithDropdown = (props: Props): React.JSX.Element => {
         <Box
           component='button'
           type='button'
+          tabIndex={-1}
           title={props.title}
           onMouseDown={(event: React.MouseEvent) => {
             event.preventDefault()
@@ -78,6 +79,7 @@ export const MenuButtonWithDropdown = (props: Props): React.JSX.Element => {
         <Box
           component='button'
           type='button'
+          tabIndex={-1}
           title={`${props.title} colors`}
           onMouseDown={(event: React.MouseEvent) => {
             event.preventDefault()

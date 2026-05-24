@@ -32,6 +32,7 @@ export const MenuButton = (props: Props): React.JSX.Element => {
       component='button'
       type='button'
       disabled={props.disabled}
+      tabIndex={-1}
       onMouseDown={(event: React.MouseEvent) => {
         event.preventDefault()
       }}
