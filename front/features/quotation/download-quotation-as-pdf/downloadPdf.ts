@@ -42,39 +42,9 @@ export const downloadPdf = async (): Promise<void> => {
 
   const modernScreenshotModule = await import('modern-screenshot')
 
-  // Calculate height after button removal by temporarily cloning and measuring
-  const tempClone = blocksContainerElement.cloneNode(true)
-
-  if (tempClone instanceof HTMLElement === false) {
-    return
-  }
-
-  tempClone.style.position = 'absolute'
-  tempClone.style.left = '-9999px'
-  tempClone.style.visibility = 'hidden'
-  tempClone.style.width = `${maxPaperWidth}px`
-  document.body.append(tempClone)
-
-  // Remove button from temp clone to get correct height
-  const tempOpenInsertMenuButton = tempClone.querySelector(`.${cls.openInsertMenuButton}`)
-
-  if (tempOpenInsertMenuButton !== null) {
-    tempOpenInsertMenuButton.remove()
-  }
-
-  // Also remove action buttons from temp clone
-  const tempActionElements = tempClone.querySelectorAll(`.${cls.actionsContainer}`)
-
-  tempActionElements.forEach((element) => {
-    element.remove()
-  })
-
-  tempClone.style.display = 'inline-flex'
-  tempClone.style.justifyContent = 'flex-start'
-
-  const correctedHeight = tempClone.clientHeight
-
-  tempClone.remove()
+  // scrollHeight captures the full content height of the live element — modern-screenshot
+  // uses this to size the SVG foreignObject, so passing anything smaller crops the bottom blocks
+  const correctedHeight = blocksContainerElement.scrollHeight
 
   const quotationScreenshot = await modernScreenshotModule.domToJpeg(blocksContainerElement, {
     width: maxPaperWidth,
