@@ -8,7 +8,6 @@ type Props = {
 export const TiptapMenuLayout = (props: Props): React.JSX.Element => {
   return (
     <Box
-      tabIndex={-1}
       sx={{
         display: 'flex',
         flexDirection: 'column',

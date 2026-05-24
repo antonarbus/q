@@ -52,6 +52,14 @@ export const TiptapMenu = (): React.ReactNode => {
     return true
   }, [])
 
+  // BubbleMenuPlugin sets tabIndex=0 on its container element so it can receive
+  // focus programmatically. Override after mount so Tab never lands on the menu.
+  useEffect(() => {
+    if (menuRef.current !== null) {
+      menuRef.current.tabIndex = -1
+    }
+  }, [])
+
   // When switching from TableMenu to TextMenu inside a cell, the BubbleMenu
   // repositions synchronously (updateDelay=0) before the browser has painted
   // the selection bounds — tippy can't flip above yet. Force a recalculation
