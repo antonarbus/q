@@ -8,12 +8,13 @@ import { InfoAndSearchLayout } from './InfoAndSearchLayout'
 import { FooterActions } from '@front/widgets/quotation/footer-actions'
 import { ShareQuotationAtBottomButton } from '@front/features/quotation/share-quotation-from-bottom/ShareQuotationAtBottomButton'
 import { SearchOrLogoOrNothing } from './SearchOrLogoOrNothing'
+import { FadeInOnInitLoad } from './FadeInOnInitLoad'
 
 export const QuotationPage = (): React.JSX.Element => {
   const blocks = reduxHolder.useSelector((state) => state.quotation.blocks, arrayShapesEqualityFn)
 
   return (
-    <>
+    <FadeInOnInitLoad>
       <InfoAndSearchLayout>
         <InfoLeft />
         <SearchOrLogoOrNothing />
@@ -24,6 +25,6 @@ export const QuotationPage = (): React.JSX.Element => {
       <ShareQuotationAtBottomButton />
       <FooterActions />
       <Outlet />
-    </>
+    </FadeInOnInitLoad>
   )
 }

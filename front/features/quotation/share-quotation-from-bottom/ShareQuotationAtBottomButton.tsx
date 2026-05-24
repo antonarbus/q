@@ -2,13 +2,14 @@
 import { useSaveQuotationMutation } from '@front/entities/quotation/api/useSaveQuotationMutation'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { useIsEditorView } from '@front/entities/quotation/util/useIsEditorView'
+import { RotatingLoaderIcon } from '@front/shared/component/RotatingLoaderIcon'
 import { generateId } from '@front/shared/lib/nanoid/generateId'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
-import { Button } from '@mui/material'
-import { FaRegShareFromSquare } from 'react-icons/fa6'
+import { IconButton, Tooltip } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
+import { PiShareFatBold } from 'react-icons/pi'
 
 export const ShareQuotationAtBottomButton = (): React.JSX.Element | null => {
   const navigate = useNavigate()
@@ -55,36 +56,42 @@ export const ShareQuotationAtBottomButton = (): React.JSX.Element | null => {
   }
 
   return (
-    <Button
-      size='large'
-      startIcon={saveQuotationMutation.isPending ? undefined : <FaRegShareFromSquare />}
-      variant='contained'
-      disabled={saveQuotationMutation.isPending}
-      loading={saveQuotationMutation.isPending}
-      onClick={(): void => {
-        if (reduxHolder.getState().user.email === null) {
-          toast.warning('Please log in to share')
-          return
-        }
+    <Tooltip title='Share'>
+      <IconButton
+        size='medium'
+        disabled={saveQuotationMutation.isPending}
+        sx={{
+          marginBottom: '20px',
+          color: 'white',
+          bgcolor: 'rgb(117, 117, 117)',
+          alignSelf: 'center',
+          '&:hover': {
+            bgcolor: 'rgb(81, 81, 81)',
+          },
+          '&.Mui-disabled': {
+            bgcolor: 'rgba(0,0,0,0.04)',
+          },
+        }}
+        onClick={(): void => {
+          if (reduxHolder.getState().user.email === null) {
+            toast.warning('Please log in to share')
+            return
+          }
 
-        const existingId = reduxHolder.getState().quotation.id
-        const id = existingId === 'new' ? generateId() : existingId
+          const existingId = reduxHolder.getState().quotation.id
+          const id = existingId === 'new' ? generateId() : existingId
 
-        const quotation = {
-          ...reduxHolder.getState().quotation,
-          id,
-          access: { level: 'everyone' as const, userList: [] },
-        }
+          const quotation = {
+            ...reduxHolder.getState().quotation,
+            id,
+            access: { level: 'everyone' as const, userList: [] },
+          }
 
-        saveQuotationMutation.mutate({ quotation })
-      }}
-      sx={{
-        width: '200px',
-        alignSelf: 'center',
-        margin: '10px 10px 20px 10px',
-      }}
-    >
-      {saveQuotationMutation.isPending ? 'Sharing...' : 'Share quotation'}
-    </Button>
+          saveQuotationMutation.mutate({ quotation })
+        }}
+      >
+        {saveQuotationMutation.isPending ? <RotatingLoaderIcon /> : <PiShareFatBold />}
+      </IconButton>
+    </Tooltip>
   )
 }
