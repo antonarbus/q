@@ -6,6 +6,7 @@ import { TextEditor } from '@front/shared/component/TextEditor'
 import { updateBoqTitle } from '@front/features/blocks/update-boq-title/updateBoqTitle'
 import { getRegistryKey } from '@front/shared/lib/tiptap/editorRegistry'
 import { useIsEditorView } from '@front/entities/quotation/util/useIsEditorView'
+
 const boqHeaderKey: HeaderKey = 'title'
 
 export const Title = (): React.JSX.Element => {

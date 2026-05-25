@@ -11,6 +11,7 @@ import { formatSubtotalPriceAtBoqBlock } from '@front/features/blocks/format-sub
 import { validatePricesAtBoqBlock } from '@front/features/blocks/validate-prices-at-boq-block/validatePricesAtBoqBlock'
 import { getRegistryKey } from '@front/shared/lib/tiptap/editorRegistry'
 import { useIsEditorView } from '@front/entities/quotation/util/useIsEditorView'
+
 const boqHeaderKey: HeaderKey = 'subTotalPrice'
 
 export const SubTotalPrice = (): React.JSX.Element => {

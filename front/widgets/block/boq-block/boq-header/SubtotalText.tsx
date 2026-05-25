@@ -6,6 +6,7 @@ import { TextEditor } from '@front/shared/component/TextEditor'
 import { updateSubtotalTextAtBoqBlock } from '@front/features/blocks/update-subtotal-text-at-boq-block/updateSubtotalTextAtBoqBlock'
 import { getRegistryKey } from '@front/shared/lib/tiptap/editorRegistry'
 import { useIsEditorView } from '@front/entities/quotation/util/useIsEditorView'
+
 const boqHeaderKey: HeaderKey = 'subtotalText'
 
 export const SubtotalText = (): React.JSX.Element => {
