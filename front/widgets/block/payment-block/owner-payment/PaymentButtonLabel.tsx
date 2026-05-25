@@ -23,8 +23,7 @@ export const PaymentButtonLabel: FC = () => {
       }
       onChange={() => updatePaymentPayButtonLabelAtPaymentBlock({ blockIndex: block.index })}
       sx={{
-        '& p': { margin: 0 },
-        '& .tiptap': { padding: '0' },
+        width: '100%',
       }}
     />
   )

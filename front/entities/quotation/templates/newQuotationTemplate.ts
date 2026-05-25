@@ -244,7 +244,7 @@ export const newQuotationTemplate: Quotation = {
       width: 400,
       height: 200,
       payment: {
-        amount: 32_500,
+        amount: 65_000,
         currency: 'usd',
         heading: { html: paymentHeadingHtml },
         payButtonLabel: { html: payButtonLabelHtml },
