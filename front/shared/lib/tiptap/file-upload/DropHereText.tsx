@@ -4,6 +4,10 @@ import { useTiptapCtx } from '../provider/useTiptapCtx'
 export const DropHereText = (): React.ReactNode => {
   const tiptapCtx = useTiptapCtx()
 
+  if (tiptapCtx.isEditorView === false) {
+    return null
+  }
+
   if (tiptapCtx.onUpload === undefined) {
     return null
   }
@@ -24,7 +28,6 @@ export const DropHereText = (): React.ReactNode => {
         border: '2px dashed grey',
         borderRadius: '4px',
         pointerEvents: 'none',
-        // display: 'grid', // set with JS
         placeItems: 'center',
         display: 'none',
       }}
