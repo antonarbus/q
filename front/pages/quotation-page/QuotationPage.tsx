@@ -6,7 +6,7 @@ import { InfoLeft, InfoRight } from '@front/widgets/quotation/info'
 import { Outlet } from 'react-router-dom'
 import { InfoAndSearchLayout } from './InfoAndSearchLayout'
 import { FooterActions } from '@front/widgets/quotation/footer-actions'
-import { ShareQuotationAtBottomButton } from '@front/features/quotation/share-quotation-from-bottom/ShareQuotationAtBottomButton'
+import { ShareQuotationAtBottomButton } from '@front/features/quotation/share-quotation/ShareQuotationAtBottomButton'
 import { SearchOrLogoOrNothing } from './SearchOrLogoOrNothing'
 import { FadeInOnInitLoad } from './FadeInOnInitLoad'
 

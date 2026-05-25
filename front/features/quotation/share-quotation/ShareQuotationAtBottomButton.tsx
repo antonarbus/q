@@ -3,6 +3,7 @@ import { useSaveQuotationMutation } from '@front/entities/quotation/api/useSaveQ
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { useIsEditorView } from '@front/entities/quotation/util/useIsEditorView'
 import { RotatingLoaderIcon } from '@front/shared/component/RotatingLoaderIcon'
+import { confirmWithDialog } from '@front/shared/component/confirmation-dialog/confirmWithDialog'
 import { generateId } from '@front/shared/lib/nanoid/generateId'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { IconButton, Tooltip } from '@mui/material'
@@ -72,10 +73,34 @@ export const ShareQuotationAtBottomButton = (): React.JSX.Element | null => {
             bgcolor: 'rgba(0,0,0,0.04)',
           },
         }}
-        onClick={(): void => {
+        onClick={async (): Promise<void> => {
           if (reduxHolder.getState().user.email === null) {
             toast.warning('Please log in to share')
             return
+          }
+
+          const unpaidPaymentBlocks = reduxHolder
+            .getState()
+            .quotation.blocks.filter(
+              (block) => block.type === 'payment' && block.payment.stripePaymentLinkUrl === null,
+            )
+
+          if (unpaidPaymentBlocks.length > 0) {
+            const confirmed = await confirmWithDialog({
+              title: 'Payment link not generated',
+              description:
+                'This quotation contains a payment block without a generated payment link. The payment block will be removed before sharing. Do you want to proceed?',
+              confirmButtonText: 'Share anyway',
+              rejectButtonText: 'Cancel',
+            })
+
+            if (confirmed === false) {
+              return
+            }
+
+            for (const block of unpaidPaymentBlocks) {
+              reduxHolder.dispatch(quotationSlice.actions.deleteBlock({ id: block.id }))
+            }
           }
 
           const existingId = reduxHolder.getState().quotation.id

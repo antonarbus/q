@@ -1,3 +1,4 @@
+import { confirmWithDialog } from '@front/shared/component/confirmation-dialog/confirmWithDialog'
 import { navItemId } from '@front/shared/nav/navItemId'
 import { navSlice } from '@front/shared/nav/navSlice'
 import { createLoadingMenuIconMachine } from '@front/shared/nav/state-machine/createLoadingMenuIconMachine'
@@ -22,7 +23,7 @@ type Props = {
 }
 
 type Res = {
-  handleSubmit: (event: React.SubmitEvent) => void
+  handleSubmit: (event: React.SubmitEvent) => Promise<void>
   isPending: UseMutationResult['isPending']
   isSuccess: UseMutationResult['isSuccess']
   isError: UseMutationResult['isError']
@@ -106,7 +107,7 @@ export const useShareQuotation = (props: Props): Res => {
     }
   }, [saveQuotationMutation.isError])
 
-  const handleSubmit = (event: React.SubmitEvent): void => {
+  const handleSubmit = async (event: React.SubmitEvent): Promise<void> => {
     event.preventDefault()
 
     if (reduxHolder.getState().user.email === null) {
@@ -115,14 +116,42 @@ export const useShareQuotation = (props: Props): Res => {
       return
     }
 
+    const accessLevel = props.accessFormValuesSignal.value.level
+
+    if (accessLevel !== 'nobody') {
+      const unpaidPaymentBlocks = reduxHolder
+        .getState()
+        .quotation.blocks.filter(
+          (block) => block.type === 'payment' && block.payment.stripePaymentLinkUrl === null,
+        )
+
+      if (unpaidPaymentBlocks.length > 0) {
+        const confirmed = await confirmWithDialog({
+          title: 'Payment link not generated',
+          description:
+            'This quotation contains a payment block without a generated payment link. The payment block will be removed before sharing. Do you want to proceed?',
+          confirmButtonText: 'Share anyway',
+          rejectButtonText: 'Cancel',
+        })
+
+        if (confirmed === false) {
+          return
+        }
+
+        for (const block of unpaidPaymentBlocks) {
+          reduxHolder.dispatch(quotationSlice.actions.deleteBlock({ id: block.id }))
+        }
+      }
+    }
+
     const existingId = reduxHolder.getState().quotation.id
     const id = existingId === 'new' ? generateId() : existingId
 
-    if (props.accessFormValuesSignal.value.level === 'everyone') {
+    if (accessLevel === 'everyone') {
       props.accessFormValuesSignal.value.userList = []
     }
 
-    if (props.accessFormValuesSignal.value.level === 'nobody') {
+    if (accessLevel === 'nobody') {
       props.accessFormValuesSignal.value.userList = []
     }
 
