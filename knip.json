@@ -20,11 +20,7 @@
     "front/shared/lib/ag-grid/colDef/getNumberColDef.tsx",
     "steiger.config.ts"
   ],
-  "ignoreDependencies": [
-    "@preact/signals-react-transform",
-    "@emotion/babel-plugin",
-    "@feature-sliced/steiger-plugin"
-  ],
+  "ignoreDependencies": ["@feature-sliced/steiger-plugin"],
   "ignoreBinaries": [
     "gcloud",
     "stripe",
