@@ -1,4 +1,4 @@
-import { StripeSection } from '@front/widgets/stripe-section/StripeSection'
+import { StripeConnection } from '@front/widgets/stripe-connection/StripeConnection'
 import { FileStorage } from '@front/widgets/file-storage/FileStorage'
 import { SubscriptionStatus } from '@front/widgets/subscription-status/SubscriptionStatus'
 import { Avatar, Box, Divider } from '@mui/material'
@@ -46,7 +46,7 @@ export const SettingsModal = (): React.JSX.Element => {
         >
           <Divider sx={{ width: '100%' }} />
           <Box sx={{ textAlign: 'center' }}>
-            <StripeSection />
+            <StripeConnection />
           </Box>
           <Divider sx={{ width: '100%' }} />
           <SubscriptionStatus />
