@@ -59,6 +59,7 @@ export const useLoadQuotation = (): void => {
     const loadQuotation = async (): Promise<void> => {
       if (shouldLoadQuotation.yesOrNo === 'yes') {
         const fromWhereToLoad = resolveQuotationSource()
+        const savedBackToQuotation = backToQuotationRef.current
         backToQuotationRef.current = null
 
         // Load previous quotation when user clicks on "< Back" button
@@ -89,24 +90,24 @@ export const useLoadQuotation = (): void => {
             }),
           )
 
-          if (backToQuotationRef.current !== null) {
+          if (savedBackToQuotation !== null) {
             reduxHolder.dispatch(quotationSlice.actions.resetQuotation())
 
             await asyncDelay(0)
 
             reduxHolder.dispatch(
               quotationSlice.actions.loadQuotation({
-                quotation: backToQuotationRef.current,
-              }),
-            )
-
-            reduxHolder.dispatch(
-              appSlice.actions.setShouldLoadQuotation({
-                yesOrNo: 'no',
-                from: undefined,
+                quotation: savedBackToQuotation,
               }),
             )
           }
+
+          reduxHolder.dispatch(
+            appSlice.actions.setShouldLoadQuotation({
+              yesOrNo: 'no',
+              from: undefined,
+            }),
+          )
 
           setTimeout(() => {
             reduxHolder.dispatch(appSlice.actions.hideLoadingOverlay())
