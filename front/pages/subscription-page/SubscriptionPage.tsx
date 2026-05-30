@@ -1,6 +1,7 @@
 import { SubscribeButtons } from '@front/features/user/subscribe/SubscribeButtons'
+import { openQuotationPageAndLoadPrev } from '@front/features/open-close/open-quotation-page/openQuotationPageAndLoadPrev'
 import { FormModal } from '@front/shared/component/FormModal'
-import { routerHolder } from '@front/shared/lib/react-router-dom/routerHolder'
+import { backToQuotationRef } from '@front/entities/quotation/ref/backToQuotationRef'
 import { Box, Typography } from '@mui/material'
 import { MdLockOutline } from 'react-icons/md'
 import { useRef } from 'react'
@@ -14,10 +15,14 @@ export const SubscriptionPage = (): React.JSX.Element => {
       headerText=''
       modalRef={modalRef}
       onCloseClick={(): void => {
-        routerHolder.router.navigate('..')
+        if (backToQuotationRef.current !== null) {
+          openQuotationPageAndLoadPrev()
+        }
       }}
       onUnmount={(): void => {
-        routerHolder.router.navigate('..')
+        if (backToQuotationRef.current !== null) {
+          openQuotationPageAndLoadPrev()
+        }
       }}
       shouldUnmountOnClickAway={true}
       shouldUnmountOnEsc={true}
