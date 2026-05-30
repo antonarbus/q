@@ -75,7 +75,6 @@ export const Search = (): ReactNode => {
         clearOnEscape={true}
         disablePortal={true}
         disabled={isClipboardModalVisible}
-        freeSolo={true}
         loading={getBookmarkListQuery.isPending}
         loadingText={email === null ? 'Not logged in' : 'Loading...'}
         inputValue={inputValue}
