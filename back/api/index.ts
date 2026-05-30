@@ -34,6 +34,7 @@ import { stripeAccountStatusHandler } from '@back/api/stripe/stripeAccountStatus
 import { stripeConnectUrlHandler } from '@back/api/stripe/stripeConnectUrlHandler'
 import { stripeConnectCallbackHandler } from '@back/api/stripe/stripeConnectCallbackHandler'
 import { createPaymentLinkHandler } from '@back/api/stripe/createPaymentLinkHandler'
+import { stripeDisconnectHandler } from '@back/api/stripe/stripeDisconnectHandler'
 import { stripeWebhookHandler } from '@back/api/stripe/stripeWebhookHandler'
 import { subscriptionCheckoutHandler } from '@back/api/stripe/subscriptionCheckoutHandler'
 import { subscriptionStatusHandler } from '@back/api/stripe/subscriptionStatusHandler'
@@ -217,6 +218,10 @@ export const api = {
   stripeCreatePaymentLink: {
     ...route.stripeCreatePaymentLink,
     handler: createPaymentLinkHandler,
+  },
+  stripeDisconnect: {
+    ...route.stripeDisconnect,
+    handler: stripeDisconnectHandler,
   },
   stripeWebhook: {
     ...route.stripeWebhook,

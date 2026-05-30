@@ -241,7 +241,7 @@ export const newQuotationTemplate: Quotation = {
       ...blockDefaults,
       id: generateId(),
       type: 'payment',
-      width: 400,
+      width: 320,
       height: 200,
       payment: {
         amount: 65_000,

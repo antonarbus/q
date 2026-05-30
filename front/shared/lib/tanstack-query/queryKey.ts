@@ -30,6 +30,7 @@ export const queryKey = {
   getUniqueDailyVisitors: 'get-unique-daily-visitors',
   // stripe
   stripeAccountStatus: 'stripe-account-status',
+  stripeDisconnect: 'stripe-disconnect',
   stripeCreatePaymentLink: 'stripe-create-payment-link',
   stripeSubscriptionStatus: 'stripe-subscription-status',
   stripeSubscriptionCheckout: 'stripe-subscription-checkout',

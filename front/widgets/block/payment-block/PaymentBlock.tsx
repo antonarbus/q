@@ -17,7 +17,7 @@ export const PaymentBlock: FC = () => {
 
   return (
     <BlockComp
-      minWidth='340px'
+      minWidth='250px'
       onBlockResizeStop={onPaymentBlockResizeStop}
       leftBlockActionButtons={
         <ItemActionButtonsLayout>

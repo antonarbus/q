@@ -240,6 +240,12 @@ export const route = {
     method: 'post',
     description: 'Create Stripe payment link for a quotation',
   },
+  stripeDisconnect: {
+    path: '/api/stripe/connect',
+    url: '/api/stripe/connect',
+    method: 'delete',
+    description: 'Disconnect (deauthorize) Stripe Connect account',
+  },
   stripeWebhook: {
     path: '/api/stripe/webhook',
     url: '/api/stripe/webhook',

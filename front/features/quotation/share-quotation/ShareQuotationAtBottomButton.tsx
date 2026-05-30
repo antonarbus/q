@@ -89,7 +89,7 @@ export const ShareQuotationAtBottomButton = (): React.JSX.Element | null => {
             const confirmed = await confirmWithDialog({
               title: 'Payment link not generated',
               description:
-                'This quotation contains a payment block without a generated payment link. The payment block will be removed before sharing. Do you want to proceed?',
+                'Payment link is not configured and will be removed. Do you want to proceed?',
               confirmButtonText: 'Share anyway',
               rejectButtonText: 'Cancel',
             })

@@ -20,7 +20,7 @@ export const SubscriptionStatus: FC = () => {
       {hasAccess && (
         <>
           <Typography variant='body2'>
-            Quota: Unlimited (until {new Date(subscriptionExpiresAt).toLocaleDateString()})
+            Quota: unlimited (until {new Date(subscriptionExpiresAt).toLocaleDateString()})
           </Typography>
           <Box sx={{ mt: 1 }}>
             <SubscribeButtons mode='extend' size='small' />
