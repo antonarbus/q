@@ -34,11 +34,7 @@ export const StripeConnectModal = (): React.JSX.Element => {
             minWidth: '280px',
           }}
         >
-          <ConnectStripeContent
-            onDone={(): void => {
-              navigate('..')
-            }}
-          />
+          <ConnectStripeContent />
         </Box>
       </CardCustom>
     </BackdropWithSlidableModal>

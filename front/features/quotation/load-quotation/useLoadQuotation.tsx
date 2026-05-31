@@ -3,7 +3,7 @@ import { navSlice } from '@front/shared/nav/navSlice'
 import { useGetQuotationMutation } from '@front/entities/quotation/api/useGetQuotationMutation'
 import { newQuotationTemplate } from '@front/entities/quotation/templates/newQuotationTemplate'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
-import { backToQuotationRef } from '@front/entities/quotation/ref/backToQuotationRef'
+import { backQuotationStorage } from '@front/entities/quotation/storage/backQuotationStorage'
 import { appSlice } from '@front/shared/appSlice'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { asyncDelay } from '@front/shared/util/asyncDelay'
@@ -59,11 +59,11 @@ export const useLoadQuotation = (): void => {
     const loadQuotation = async (): Promise<void> => {
       if (shouldLoadQuotation.yesOrNo === 'yes') {
         const fromWhereToLoad = resolveQuotationSource()
-        const savedBackToQuotation = backToQuotationRef.current
-        backToQuotationRef.current = null
 
         // Load previous quotation when user clicks on "< Back" button
         if (fromWhereToLoad === 'memory') {
+          const savedBackToQuotation = backQuotationStorage.load()
+          backQuotationStorage.clear()
           reduxHolder.dispatch(
             appSlice.actions.showLoadingOverlay({
               shouldShowLoader: true,

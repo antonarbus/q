@@ -1,13 +1,14 @@
 import { useSubscriptionCheckoutMutation } from '@front/entities/user/api/useSubscriptionCheckoutMutation'
 import { Button } from '@mui/material'
 import type { ButtonProps } from '@mui/material'
+import type { FC } from 'react'
 
 type Props = {
   mode?: 'buy' | 'extend'
   size?: ButtonProps['size']
 }
 
-export const SubscribeButtons = (props: Props): React.JSX.Element => {
+export const SubscribeButton: FC<Props> = (props) => {
   const checkoutMutation = useSubscriptionCheckoutMutation()
 
   return (

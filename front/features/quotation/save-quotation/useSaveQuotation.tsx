@@ -5,7 +5,7 @@ import { useGetQuotationCategoryListQuery } from '@front/entities/quotation/api/
 import { useGetQuotationListQuery } from '@front/entities/quotation/api/useGetQuotationListQuery'
 import { useSaveQuotationMutation } from '@front/entities/quotation/api/useSaveQuotationMutation'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
-import { backToQuotationRef } from '@front/entities/quotation/ref/backToQuotationRef'
+import { backQuotationStorage } from '@front/entities/quotation/storage/backQuotationStorage'
 import type { Quotation } from '@back/entity/quotation/schema'
 import type { SaveQuotationFormValues } from '@front/entities/quotation/form/types'
 import { route } from '@front/shared/lib/react-router-dom/route'
@@ -107,7 +107,7 @@ export const useSaveQuotation = (props: Props): Res => {
   useUpdateEffect(() => {
     if (saveQuotationMutation.isError === true) {
       if (saveQuotationMutation.error.response?.data.errorCode === 'SUBSCRIPTION_REQUIRED') {
-        backToQuotationRef.current = reduxHolder.getState().quotation
+        backQuotationStorage.save(reduxHolder.getState().quotation)
         reduxHolder.dispatch(navSlice.actions.showNavItems({ navItemIds: [navItemId.back] }))
         navigate(`/${route.subscription}`)
       } else {

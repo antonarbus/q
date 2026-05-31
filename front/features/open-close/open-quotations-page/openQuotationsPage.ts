@@ -1,6 +1,6 @@
 import { navItemId } from '@front/shared/nav/navItemId'
 import { navSlice } from '@front/shared/nav/navSlice'
-import { backToQuotationRef } from '@front/entities/quotation/ref/backToQuotationRef'
+import { backQuotationStorage } from '@front/entities/quotation/storage/backQuotationStorage'
 import { route } from '@front/shared/lib/react-router-dom/route'
 import { routerHolder } from '@front/shared/lib/react-router-dom/routerHolder'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
@@ -9,7 +9,7 @@ export const openQuotationsPage = (): void => {
   const currentQuotation = reduxHolder.getState().quotation
 
   if (Boolean(currentQuotation.id) === true) {
-    backToQuotationRef.current = currentQuotation
+    backQuotationStorage.save(currentQuotation)
 
     reduxHolder.dispatch(navSlice.actions.showNavItems({ navItemIds: [navItemId.back] }))
   }
