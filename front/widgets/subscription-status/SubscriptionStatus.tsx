@@ -1,5 +1,5 @@
 import { useSubscriptionStatusQuery } from '@front/entities/user/api/useSubscriptionStatusQuery'
-import { SubscribeButtons } from '@front/features/user/subscribe/SubscribeButtons'
+import { SubscribeButton } from '@front/features/user/subscribe/SubscribeButton'
 import { Box } from '@mui/material'
 import type { FC } from 'react'
 
@@ -21,7 +21,7 @@ export const SubscriptionStatus: FC = () => {
       <Box sx={{ textAlign: 'center', width: '100%' }}>
         <span>Quota: unlimited (until {new Date(subscriptionExpiresAt).toLocaleDateString()})</span>
         <Box sx={{ mt: 1 }}>
-          <SubscribeButtons mode='extend' size='small' />
+          <SubscribeButton mode='extend' size='small' />
         </Box>
       </Box>
     )
@@ -35,7 +35,7 @@ export const SubscriptionStatus: FC = () => {
           {new Date(subscriptionExpiresAt).toLocaleDateString()})
         </span>
         <Box sx={{ mt: 1 }}>
-          <SubscribeButtons size='small' />
+          <SubscribeButton size='small' />
         </Box>
       </Box>
     )
@@ -48,7 +48,7 @@ export const SubscriptionStatus: FC = () => {
           Quota: {quotationCount} / {freeLimit} — get unlimited access
         </span>
         <Box sx={{ mt: 1 }}>
-          <SubscribeButtons size='small' />
+          <SubscribeButton size='small' />
         </Box>
       </Box>
     )
