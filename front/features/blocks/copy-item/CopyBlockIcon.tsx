@@ -51,7 +51,14 @@ export const CopyBlockIcon = (): React.JSX.Element => {
             const html = getCleanPaperHtml({ paperElement })
 
             reduxHolder.dispatch(
-              clipboardSlice.actions.addItem({ item: blockToCopy, preview: html }),
+              clipboardSlice.actions.addItem({
+                item: {
+                  ...blockToCopy,
+                  width: paperElement.clientWidth,
+                  height: paperElement.clientHeight,
+                },
+                preview: html,
+              }),
             )
 
             reduxHolder.dispatch(clipboardSlice.actions.allowToPaste())

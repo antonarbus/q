@@ -10,6 +10,7 @@ import type { FC } from 'react'
 export const StatusBadge: FC = () => {
   const permissionLevel = reduxHolder.useSelector((state) => state.quotation.permissionLevel)
   const accessLevel = reduxHolder.useSelector((state) => state.quotation.access.level)
+  const isModified = reduxHolder.useSelector((state) => state.app.isModified)
 
   const resolveStatusLabel = (): 'Public' | 'Shared' => {
     if (permissionLevel === 'PUBLIC') {
@@ -39,6 +40,10 @@ export const StatusBadge: FC = () => {
 
   const resolveBadge = (): Badge | null => {
     if (permissionLevel === 'NEW') {
+      if (isModified) {
+        return { color: 'warning.main', label: 'Edited' }
+      }
+
       return {
         color: 'text.disabled',
         label: 'New',
@@ -46,6 +51,10 @@ export const StatusBadge: FC = () => {
     }
 
     if (['OWNER', 'SHARED', 'PUBLIC'].includes(permissionLevel)) {
+      if (isModified) {
+        return { color: 'warning.main', label: 'Edited' }
+      }
+
       return {
         color: isShared ? 'success.main' : theme.color.accent,
         label: isShared ? resolveStatusLabel() : 'Saved',
@@ -73,6 +82,14 @@ export const StatusBadge: FC = () => {
         onClick: openSaveQuotationModal,
         icon: <FiSave size={13} />,
         tooltip: 'Save',
+      }
+    }
+
+    if (permissionLevel === 'OWNER' && isModified) {
+      return {
+        onClick: openSaveQuotationModal,
+        icon: <FiSave size={13} />,
+        tooltip: 'Save changes',
       }
     }
 

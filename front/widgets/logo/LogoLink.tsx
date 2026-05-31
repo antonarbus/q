@@ -7,7 +7,7 @@ import type { ReactNode } from 'react'
 export const LogoLink = (): ReactNode => {
   return (
     <Link
-      to='/new'
+      to='/'
       onClick={(event) => {
         event.preventDefault()
         openQuotationPageAndLoadNew()

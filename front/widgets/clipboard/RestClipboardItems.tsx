@@ -1,3 +1,4 @@
+import type { BlockItem } from '@back/entity/quotation/schema'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { theme } from '@front/shared/theme'
 import { AnimatePresence, motion } from 'motion/react'
@@ -54,8 +55,44 @@ const variants: Variants = {
   },
 }
 
+const RestClipboardItem = ({
+  item,
+  preview,
+}: {
+  item: BlockItem
+  preview: string
+}): React.JSX.Element => {
+  const scaleFactor = (containerWidth - 2 * containerPadding) / item.width
+  const [containerHeight, setContainerHeight] = useState(item.height * scaleFactor)
+
+  return (
+    <div
+      key={item.id}
+      style={{
+        height: containerHeight,
+        marginBottom: itemMarginBottom,
+        width: item.width * scaleFactor,
+        overflow: 'hidden',
+        borderRadius: '6px',
+        boxShadow: 'rgba(0, 0, 0, 0.2) 0px 0px 6px 2px',
+      }}
+    >
+      <ScaledClipboardItem
+        html={preview}
+        scaleFactor={String(scaleFactor)}
+        width={item.width}
+        onHeightChange={(height) => {
+          setContainerHeight(height * scaleFactor)
+        }}
+      />
+    </div>
+  )
+}
+
+// oxlint-disable-next-line react/no-multi-comp
 export const RestClipboardItems = (): React.JSX.Element | null => {
   const items = reduxHolder.useSelector((state) => state.clipboard.items)
+  const previews = reduxHolder.useSelector((state) => state.clipboard.previews)
   const isCopying = reduxHolder.useSelector((state) => state.clipboard.isCopying)
   const [prevFirstItemHeight, setPrevFirstItemHeight] = useState(0)
 
@@ -94,33 +131,13 @@ export const RestClipboardItems = (): React.JSX.Element | null => {
         variants={variants}
       >
         {items.map((item, index) => {
-          const scaleFactor = (containerWidth - 2 * containerPadding) / item.width
-
-          const preview = reduxHolder.getState().clipboard.previews[index]
+          const preview = previews[index]
 
           if (index === 0) {
             return null
           }
 
-          return (
-            <div
-              key={item.id}
-              style={{
-                height: item.height * scaleFactor,
-                marginBottom: itemMarginBottom,
-                width: item.width * scaleFactor,
-                overflow: 'hidden',
-                borderRadius: '6px',
-                boxShadow: 'rgba(0, 0, 0, 0.2) 0px 0px 6px 2px',
-              }}
-            >
-              <ScaledClipboardItem
-                html={preview ?? ''}
-                scaleFactor={String(scaleFactor)}
-                width={item.width}
-              />
-            </div>
-          )
+          return <RestClipboardItem key={item.id} item={item} preview={preview ?? ''} />
         })}
       </motion.div>
     </AnimatePresence>

@@ -45,9 +45,7 @@ export const SettingsModal = (): React.JSX.Element => {
           }}
         >
           <Divider sx={{ width: '100%' }} />
-          <Box sx={{ textAlign: 'center' }}>
-            <StripeConnection />
-          </Box>
+          <StripeConnection />
           <Divider sx={{ width: '100%' }} />
           <SubscriptionStatus />
           <Divider sx={{ width: '100%' }} />

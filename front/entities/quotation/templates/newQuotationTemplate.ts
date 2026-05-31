@@ -102,7 +102,7 @@ export const newQuotationTemplate: Quotation = {
       ...blockDefaults,
       id: generateId(),
       type: 'boq',
-      width: 0,
+      width: 660,
       height: 0,
       boq: {
         header: {
@@ -183,7 +183,7 @@ export const newQuotationTemplate: Quotation = {
       ...blockDefaults,
       id: generateId(),
       type: 'boq',
-      width: 0,
+      width: 660,
       height: 0,
       boq: {
         header: {

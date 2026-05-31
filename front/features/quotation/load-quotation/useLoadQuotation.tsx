@@ -3,7 +3,7 @@ import { navSlice } from '@front/shared/nav/navSlice'
 import { useGetQuotationMutation } from '@front/entities/quotation/api/useGetQuotationMutation'
 import { newQuotationTemplate } from '@front/entities/quotation/templates/newQuotationTemplate'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
-import { backQuotationStorage } from '@front/entities/quotation/storage/backQuotationStorage'
+import { draftQuotationStorage } from '@front/entities/quotation/storage/draftQuotationStorage'
 import { appSlice } from '@front/shared/appSlice'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { asyncDelay } from '@front/shared/util/asyncDelay'
@@ -11,6 +11,10 @@ import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
+
+// True only on the very first mount after a page load/reload. Resets to true on each
+// full page reload (module re-evaluates), stays false across SPA navigations.
+let isPageLoad = true
 
 export const useLoadQuotation = (): void => {
   const urlParams = useParams()
@@ -20,11 +24,11 @@ export const useLoadQuotation = (): void => {
   const getQuotationMutation = useGetQuotationMutation()
 
   const resolveQuotationSource = (): 'server' | 'template' | 'memory' => {
-    if (shouldLoadQuotation.from === 'memory') {
+    if (shouldLoadQuotation.from === 'memory' || shouldLoadQuotation.from === 'draft') {
       return 'memory'
     }
 
-    if (shouldLoadQuotation.from === 'template') {
+    if (shouldLoadQuotation.from === 'template' || shouldLoadQuotation.from === 'restore') {
       return 'template'
     }
 
@@ -32,11 +36,12 @@ export const useLoadQuotation = (): void => {
       return 'server'
     }
 
-    const shouldAutoDetectFromWhereToLoadQuotation =
-      urlParams.quotationId === undefined || urlParams.quotationId === 'new'
-
-    if (shouldAutoDetectFromWhereToLoadQuotation === true) {
+    if (urlParams.quotationId === undefined) {
       return 'template'
+    }
+
+    if (isPageLoad && draftQuotationStorage.load()?.id === urlParams.quotationId) {
+      return 'memory'
     }
 
     return 'server'
@@ -45,11 +50,23 @@ export const useLoadQuotation = (): void => {
   /** Decide which quotation to load on first mount  */
   useEffectOnce(() => {
     const fromWhereToLoad = resolveQuotationSource()
+    isPageLoad = false
+
+    const fromToDispatch = ((): 'server' | 'restore' | 'draft' => {
+      if (fromWhereToLoad === 'template') {
+        return 'restore'
+      }
+      if (fromWhereToLoad === 'memory') {
+        return 'draft'
+      }
+
+      return fromWhereToLoad
+    })()
 
     reduxHolder.dispatch(
       appSlice.actions.setShouldLoadQuotation({
         yesOrNo: 'yes',
-        from: fromWhereToLoad,
+        from: fromToDispatch,
       }),
     )
   })
@@ -62,12 +79,16 @@ export const useLoadQuotation = (): void => {
 
         // Load previous quotation when user clicks on "< Back" button
         if (fromWhereToLoad === 'memory') {
-          const savedBackToQuotation = backQuotationStorage.load()
-          backQuotationStorage.clear()
+          const savedBackToQuotation = draftQuotationStorage.load()
+          const loadingText =
+            shouldLoadQuotation.from === 'draft'
+              ? `Loading modified ${urlParams.quotationId}...`
+              : 'Going back...'
+
           reduxHolder.dispatch(
             appSlice.actions.showLoadingOverlay({
               shouldShowLoader: true,
-              text: 'Going back...',
+              text: loadingText,
             }),
           )
 
@@ -100,6 +121,10 @@ export const useLoadQuotation = (): void => {
                 quotation: savedBackToQuotation,
               }),
             )
+
+            if (shouldLoadQuotation.from === 'draft' || shouldLoadQuotation.from === 'memory') {
+              reduxHolder.dispatch(appSlice.actions.setQuotationModified())
+            }
           }
 
           reduxHolder.dispatch(
@@ -116,10 +141,13 @@ export const useLoadQuotation = (): void => {
 
         // Load new quotation template
         if (fromWhereToLoad === 'template') {
+          const draft = shouldLoadQuotation.from === 'restore' ? draftQuotationStorage.load() : null
+          const quotationToLoad = draft?.id === 'new' ? draft : newQuotationTemplate
+
           reduxHolder.dispatch(
             appSlice.actions.showLoadingOverlay({
               shouldShowLoader: true,
-              text: 'Loading template...',
+              text: draft === null ? 'Loading template...' : 'Loading draft...',
             }),
           )
 
@@ -148,9 +176,13 @@ export const useLoadQuotation = (): void => {
 
           reduxHolder.dispatch(
             quotationSlice.actions.loadQuotation({
-              quotation: newQuotationTemplate,
+              quotation: quotationToLoad,
             }),
           )
+
+          if (draft !== null) {
+            reduxHolder.dispatch(appSlice.actions.setQuotationModified())
+          }
 
           setTimeout(() => {
             reduxHolder.dispatch(appSlice.actions.hideLoadingOverlay())

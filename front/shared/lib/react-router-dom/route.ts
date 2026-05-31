@@ -6,7 +6,6 @@ export const route = {
   requestPasswordReset: 'request-password-reset',
   resetPassword: 'reset-password',
   activate: 'activate',
-  new: 'new',
   quotationList: 'quotation-list',
   quotationListAll: 'quotation-list-all',
   save: 'save',

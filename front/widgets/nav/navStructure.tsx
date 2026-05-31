@@ -25,7 +25,7 @@ export const navStructure: NavItem[] = [
         iconId: 'new',
         isHidden: false,
         name: 'New',
-        link: route.new,
+        link: route.root,
         funcId: 'openQuotationPageAndLoadNew',
         isActive: true,
         tooltip: 'New quotation',

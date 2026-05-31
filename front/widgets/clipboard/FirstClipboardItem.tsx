@@ -2,6 +2,7 @@ import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { theme } from '@front/shared/theme'
 import { AnimatePresence, motion } from 'motion/react'
 import type { Variants } from 'motion/react'
+import { useState } from 'react'
 import { containerPadding, containerWidth, itemMarginBottom } from './const'
 import { ScaledClipboardItem } from './ScaledClipboardItem'
 
@@ -57,8 +58,19 @@ export const FirstClipboardItem = (): React.JSX.Element | null => {
   const items = reduxHolder.useSelector((state) => state.clipboard.items)
   const isCopying = reduxHolder.useSelector((state) => state.clipboard.isCopying)
 
+  const firstItemPreviewHtml = reduxHolder.useSelector(
+    (state) => state.clipboard.previews.at(0) ?? '',
+  )
+
   const [firstItem] = items
-  const firstItemPreviewHtml = reduxHolder.getState().clipboard.previews.at(0) ?? ''
+
+  const scaleFactorForFirstItem = firstItem?.width
+    ? (containerWidth - 2 * containerPadding) / firstItem.width
+    : 1
+
+  const [containerHeight, setContainerHeight] = useState(
+    (firstItem?.height ?? 0) * scaleFactorForFirstItem,
+  )
 
   if (firstItem?.width === undefined) {
     return null
@@ -68,9 +80,7 @@ export const FirstClipboardItem = (): React.JSX.Element | null => {
     return null
   }
 
-  const scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / firstItem.width
-
-  const height = firstItem.height * scaleFactorForFirstItem
+  const height = containerHeight
   const width = firstItem.width * scaleFactorForFirstItem
 
   const animationProps: Props = {
@@ -102,6 +112,9 @@ export const FirstClipboardItem = (): React.JSX.Element | null => {
           html={firstItemPreviewHtml}
           scaleFactor={String(scaleFactorForFirstItem)}
           width={firstItem.width}
+          onHeightChange={(height2) => {
+            setContainerHeight(height2 * scaleFactorForFirstItem)
+          }}
         />
       </motion.div>
     </AnimatePresence>

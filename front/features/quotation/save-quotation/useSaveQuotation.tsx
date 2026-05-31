@@ -5,7 +5,7 @@ import { useGetQuotationCategoryListQuery } from '@front/entities/quotation/api/
 import { useGetQuotationListQuery } from '@front/entities/quotation/api/useGetQuotationListQuery'
 import { useSaveQuotationMutation } from '@front/entities/quotation/api/useSaveQuotationMutation'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
-import { backQuotationStorage } from '@front/entities/quotation/storage/backQuotationStorage'
+import { draftQuotationStorage } from '@front/entities/quotation/storage/draftQuotationStorage'
 import type { Quotation } from '@back/entity/quotation/schema'
 import type { SaveQuotationFormValues } from '@front/entities/quotation/form/types'
 import { route } from '@front/shared/lib/react-router-dom/route'
@@ -78,6 +78,7 @@ export const useSaveQuotation = (props: Props): Res => {
       getQuotationCategoryListQuery.refetch()
       getQuotationListQuery.refetch()
 
+      draftQuotationStorage.clear()
       loadingIconActor.send({ type: 'show success icon' })
       reduxHolder.dispatch(navSlice.actions.removeUnderlineFromTopNav())
 
@@ -94,6 +95,10 @@ export const useSaveQuotation = (props: Props): Res => {
         await asyncDelay(1000)
         await props.slideOut()
 
+        // The 1s delay above is long enough for the auto-save debounce to fire and
+        // re-write the draft with the saved ID. Clear it again before navigating.
+        draftQuotationStorage.clear()
+
         const navigateTo =
           isQuotationsPage === true ? '..' : `/${saveQuotationMutation.data.quotation.id}`
 
@@ -107,7 +112,6 @@ export const useSaveQuotation = (props: Props): Res => {
   useUpdateEffect(() => {
     if (saveQuotationMutation.isError === true) {
       if (saveQuotationMutation.error.response?.data.errorCode === 'SUBSCRIPTION_REQUIRED') {
-        backQuotationStorage.save(reduxHolder.getState().quotation)
         reduxHolder.dispatch(navSlice.actions.showNavItems({ navItemIds: [navItemId.back] }))
         navigate(`/${route.subscription}`)
       } else {

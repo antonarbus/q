@@ -1,5 +1,7 @@
 import { useStripeAccountStatusQuery } from '@front/entities/payment/api/useStripeAccountStatusQuery'
 import { useStripeConnectUrlQuery } from '@front/entities/payment/api/useStripeConnectUrlQuery'
+import { DisconnectStripeButton } from '@front/features/user/disconnect-stripe/DisconnectStripeButton'
+import { OpenStripeButton } from '@front/features/user/open-stripe/OpenStripeButton'
 import { RotatingLoaderIcon } from '@front/shared/component/RotatingLoaderIcon'
 import { buildSearchParams } from '@front/shared/lib/react-router-dom/searchParams'
 import { route } from '@front/shared/lib/react-router-dom/route'
@@ -8,14 +10,12 @@ import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { Box, Button, Typography } from '@mui/material'
 import { useEffect } from 'react'
 import { SiStripe } from 'react-icons/si'
-import { useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
-type Props = {
-  onDone: () => void
-}
-
-export const ConnectStripeContent = (props: Props): React.JSX.Element => {
+export const ConnectStripeContent = (): React.JSX.Element => {
   const [searchParams, setSearchParams] = useSearchParams()
+  const navigate = useNavigate()
+
   const stripeStatusQuery = useStripeAccountStatusQuery()
   const stripeConnectUrlQuery = useStripeConnectUrlQuery()
 
@@ -50,24 +50,34 @@ export const ConnectStripeContent = (props: Props): React.JSX.Element => {
   }
 
   if (stripeStatusQuery.data?.connected === true) {
+    const { stripeAccountId } = stripeStatusQuery.data
+
+    if (stripeAccountId === null) {
+      return <RotatingLoaderIcon style={{ height: '20px', width: '20px' }} />
+    }
+
     return (
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+        <SiStripe size={28} color='#635bff' />
         <Typography color='success.main' variant='body2'>
           Stripe account connected
         </Typography>
-        <Typography
-          component='a'
-          href={`https://dashboard.stripe.com/${stripeStatusQuery.data.stripeAccountId}`}
-          target='_blank'
-          rel='noopener noreferrer'
-          color='text.secondary'
-          sx={{ fontSize: '12px' }}
-        >
-          {stripeStatusQuery.data.stripeAccountId}
+        <Typography color='text.secondary' sx={{ fontSize: '12px' }}>
+          {stripeAccountId}
         </Typography>
-        <Button onClick={props.onDone} variant='contained'>
-          Done
-        </Button>
+        <Box sx={{ display: 'flex', gap: '8px', mt: 1 }}>
+          <OpenStripeButton stripeAccountId={stripeAccountId} />
+          <Button
+            onClick={() => {
+              navigate('..')
+            }}
+            variant='contained'
+            size='small'
+          >
+            Done
+          </Button>
+        </Box>
+        <DisconnectStripeButton stripeAccountId={stripeAccountId} sx={{ mt: 1 }} variant='text' />
       </Box>
     )
   }
