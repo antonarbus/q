@@ -41,7 +41,9 @@ const pasteItemOnClick = (): void => {
   }
 
   if (state.clipboard.place.pastePos === 'middle') {
-    const elementToBeReplaced = document.querySelector(`#${state.clipboard.place.id}`)
+    // querySelector(`#${id}`) throws SyntaxError when id starts with a digit (invalid CSS identifier)
+    // oxlint-disable-next-line unicorn/prefer-query-selector
+    const elementToBeReplaced = document.getElementById(state.clipboard.place.id)
 
     if (elementToBeReplaced !== null) {
       const paperElement = elementToBeReplaced.querySelector(`.${cls.paper}`)
