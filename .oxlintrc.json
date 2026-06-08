@@ -1,5 +1,8 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "options": {
+    "typeAware": true
+  },
   // https://oxc.rs/docs/guide/usage/linter/plugins.html
   "plugins": [
     "eslint",
@@ -88,6 +91,8 @@
     "vitest/no-importing-vitest-globals": "off", // imports are required
     "vitest/prefer-importing-vitest-globals": "off", // oxc confuses vitest and playwright
     "vitest/prefer-expect-assertions": "off", // tests have assertions without special directives, too excessive rule
-    "vitest/require-hook": "off" // false positive for non-test files
+    "vitest/require-hook": "off", // false positive for non-test files
+    "typescript/prefer-readonly-parameter-types": "off", // that is fine to be not a readonly
+    "typescript/no-unnecessary-boolean-literal-compare": "off" // imho this is better if(someCondition === true) than if(someCondition)
   }
 }

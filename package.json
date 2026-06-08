@@ -101,6 +101,7 @@
     "madge": "^8.0.0",
     "oxfmt": "^0.51.0",
     "oxlint": "^1.66.0",
+    "oxlint-tsgolint": "^0.23.0",
     "steiger": "^0.5.12",
     "typescript": "^6.0.3",
     "vite": "^8.0.14",
