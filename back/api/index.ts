@@ -57,7 +57,7 @@ type Api = {
     req: Request<any, any, any, any>,
     res: Response,
     next: NextFunction,
-  ) => HttpResponse<unknown> | Promise<HttpResponse<unknown>>
+  ) => HttpResponse | Promise<HttpResponse>
 }
 
 //* Routes metadata is kept separately at apiRoutes for proper code splitting,

@@ -87,7 +87,7 @@ export const terraformUnlock = async (props: Props): Promise<void> => {
     logger.info('Detecting lock ID...')
     lockIdToUse = await detectLockId(TFVARS_FILE_PATH)
 
-    if (lockIdToUse === null) {
+    if (lockIdToUse === undefined) {
       logger.warn('No lock detected on the state.')
       logger.emptyLine()
 

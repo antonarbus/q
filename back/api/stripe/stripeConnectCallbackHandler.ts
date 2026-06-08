@@ -43,7 +43,7 @@ type RouterHandler = (
   req: Request<UrlParam, unknown, ReqBody, SearchQuery>,
   res: Response,
   next: NextFunction,
-) => Promise<HttpResponse<unknown>>
+) => Promise<HttpResponse>
 
 export const stripeConnectCallbackHandler: RouterHandler = async (req) => {
   // const { code, state, error } = req.query

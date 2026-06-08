@@ -54,7 +54,7 @@ export const LogInAsUserButton = (props: UrlParam): React.ReactNode => {
       const isQuotationListPage = location.pathname.includes(route.quotationList)
 
       if (isQuotationListPage === true) {
-        getQuotationListQuery.refetch()
+        void getQuotationListQuery.refetch()
       }
 
       const isBookmarkListPage = location.pathname.includes(route.bookmarkList)

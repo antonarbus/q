@@ -26,7 +26,7 @@ type RouterHandler = (
   req: Request<UrlParam, ResBody, ReqBody, SearchQuery>,
   res: Response<ResBody>,
   next: NextFunction,
-) => Promise<HttpResponse<ResBody>>
+) => Promise<HttpResponse>
 
 export const testHandler: RouterHandler = async (req) => {
   const userFromRefreshToken = await getUserFromRefreshTokenOrUnknownPerson({

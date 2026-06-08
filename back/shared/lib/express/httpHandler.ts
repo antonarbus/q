@@ -6,7 +6,7 @@ type HttpHandler = (
   req: Request<any, any, any, any>,
   res: Response,
   next: NextFunction,
-) => Promise<HttpResponse<unknown>> | HttpResponse<unknown>
+) => Promise<HttpResponse> | HttpResponse
 
 /**
  * - Gets sync or async http handler and returns async version, passing error to the next middleware

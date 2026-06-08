@@ -47,7 +47,7 @@ export const proxyFileToBucketHandler: RouterHandler = async (req, res) => {
 
   const cacheIsNotExpired = cached !== undefined && cached.expiresAt > Date.now()
 
-  if (cacheIsNotExpired === true) {
+  if (cacheIsNotExpired) {
     messageList.push('Serving cached signed URL')
 
     res.set('Cache-Control', `public, max-age=${CLIENT_CACHE_MAX_AGE}, immutable`)
