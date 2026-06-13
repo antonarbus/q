@@ -27,10 +27,10 @@ export const InfoModal = (): React.ReactNode => {
       headerText='Info'
       modalRef={modalRef}
       onCloseClick={(): void => {
-        routerHolder.router.navigate('..')
+        void routerHolder.router.navigate('..')
       }}
       onUnmount={(): void => {
-        routerHolder.router.navigate('..')
+        void routerHolder.router.navigate('..')
       }}
       paddingContent='50px 40px'
       shouldUnmountOnClickAway={true}

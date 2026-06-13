@@ -22,55 +22,57 @@ export const useQuotationListAll = (): Res => {
   const datasource = useMemo(() => {
     const ds: IDatasource = {
       rowCount: undefined,
-      getRows: async (params) => {
-        try {
-          if (isFirstMount === true) {
-            setIsLoading(true)
-            setIsFetching(true)
-          }
+      getRows: (params) => {
+        void (async (): Promise<void> => {
+          try {
+            if (isFirstMount === true) {
+              setIsLoading(true)
+              setIsFetching(true)
+            }
 
-          if (isFirstMount === false) {
-            setIsFetching(true)
-          }
+            if (isFirstMount === false) {
+              setIsFetching(true)
+            }
 
-          const response = await axiosHolder.axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
-            url: route.getQuotationListAll.url,
-            method: route.getQuotationListAll.method,
-            params: {
-              startRow: params.startRow,
-              endRow: params.endRow,
-              sortModel: JSON.stringify(params.sortModel),
-              filterModel: JSON.stringify(params.filterModel),
-            },
-          })
+            const response = await axiosHolder.axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
+              url: route.getQuotationListAll.url,
+              method: route.getQuotationListAll.method,
+              params: {
+                startRow: params.startRow,
+                endRow: params.endRow,
+                sortModel: JSON.stringify(params.sortModel),
+                filterModel: JSON.stringify(params.filterModel),
+              },
+            })
 
-          const resolveLastRow = (): number => {
-            const quotationListCount = response.data.quotationList.length
+            const resolveLastRow = (): number => {
+              const quotationListCount = response.data.quotationList.length
 
-            const didReachEndOfTheList = quotationListCount >= params.endRow - params.startRow
+              const didReachEndOfTheList = quotationListCount >= params.endRow - params.startRow
 
-            if (didReachEndOfTheList === false) {
-              const lastRow = params.startRow + quotationListCount
+              if (didReachEndOfTheList === false) {
+                const lastRow = params.startRow + quotationListCount
+
+                return lastRow
+              }
+
+              // reached the end of the list
+              const lastRow = response.data.quotationListTotalCount
 
               return lastRow
             }
 
-            // reached the end of the list
-            const lastRow = response.data.quotationListTotalCount
+            const lastRow = resolveLastRow()
 
-            return lastRow
+            params.successCallback(response.data.quotationList, lastRow)
+          } catch {
+            params.failCallback()
+          } finally {
+            setIsLoading(false)
+            setIsFetching(false)
+            setIsFetched(true)
           }
-
-          const lastRow = resolveLastRow()
-
-          params.successCallback(response.data.quotationList, lastRow)
-        } catch {
-          params.failCallback()
-        } finally {
-          setIsLoading(false)
-          setIsFetching(false)
-          setIsFetched(true)
-        }
+        })()
       },
     }
 

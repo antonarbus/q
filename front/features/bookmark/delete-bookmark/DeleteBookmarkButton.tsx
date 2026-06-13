@@ -27,13 +27,15 @@ export const DeleteBookmarkButton = (props: UrlParam): React.JSX.Element => {
   return (
     <Tooltip enterDelay={500} enterNextDelay={500} placement='bottom' title='Delete'>
       <IconButton
-        onClick={async (): Promise<void> => {
-          const areYouSure = await confirmWithDialog()
+        onClick={() =>
+          void (async (): Promise<void> => {
+            const areYouSure = await confirmWithDialog()
 
-          if (areYouSure === true) {
-            deleteBookmarkMutation.mutate({ id: props.id })
-          }
-        }}
+            if (areYouSure === true) {
+              deleteBookmarkMutation.mutate({ id: props.id })
+            }
+          })()
+        }
         size='small'
       >
         {deleteBookmarkMutation.isPending === true ? <RotatingLoaderIcon /> : <MdDeleteOutline />}

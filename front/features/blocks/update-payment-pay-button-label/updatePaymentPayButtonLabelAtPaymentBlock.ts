@@ -26,7 +26,7 @@ export const updatePaymentPayButtonLabelAtPaymentBlock = (props: Props): void =>
 
   const html = editor.getHTML()
 
-  if ((block.payment.payButtonLabel?.html ?? '') === html) {
+  if (block.payment.payButtonLabel.html === html) {
     return
   }
 

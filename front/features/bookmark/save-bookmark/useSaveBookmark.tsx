@@ -40,16 +40,16 @@ export const useSaveBookmark = (props: Props): Res => {
         toast.info('Updated')
       }
 
-      getBookmarkCategoryListQuery.refetch()
-      getBookmarkListQuery.refetch()
+      void getBookmarkCategoryListQuery.refetch()
+      void getBookmarkListQuery.refetch()
 
       const slideOutAndChangeUrl = async (): Promise<void> => {
         await asyncDelay(1000)
         await props.slideOut()
-        navigate('..')
+        void navigate('..')
       }
 
-      slideOutAndChangeUrl()
+      void slideOutAndChangeUrl()
     }
   }, [saveBookmarkMutation.isSuccess])
 

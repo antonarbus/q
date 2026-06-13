@@ -9,7 +9,7 @@ export const getBlockFromStoreByIndex = (props: Props): BlockItem | undefined =>
   const block = reduxHolder.getState().quotation.blocks[props.blockIndex]
 
   if (block === undefined) {
-    return
+    return undefined
   }
 
   return block

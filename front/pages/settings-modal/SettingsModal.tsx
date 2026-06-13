@@ -17,7 +17,7 @@ export const SettingsModal = (): React.JSX.Element => {
   return (
     <BackdropWithSlidableModal
       onUnmount={(): void => {
-        navigate('..')
+        void navigate('..')
       }}
       shouldUnmountOnClickAway={true}
       shouldUnmountOnEsc={true}

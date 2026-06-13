@@ -43,6 +43,8 @@ export const updateNumberAtHtmlIncrementally = (props: Props): void => {
       }, 5 * index)
     }
 
+    // trivial passthrough wrapper: async+await / no-await / non-async each violate one of return-await, require-await, promise-function-async — no shape satisfies all three
+    // oxlint-disable-next-line typescript/return-await
     return await defer.promise
   }
 
@@ -60,6 +62,6 @@ export const updateNumberAtHtmlIncrementally = (props: Props): void => {
   }
 
   setTimeout(() => {
-    setHtml()
+    void setHtml()
   })
 }

@@ -22,6 +22,6 @@ export const useCountUniqueDailyVisitor = (): void => {
       localStorage.setItem(localStorageKeys.lastVisitDate, today)
     }
 
-    countVisitor()
+    void countVisitor()
   })
 }

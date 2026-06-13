@@ -1,7 +1,9 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
   "options": {
-    "typeAware": true
+    // https://github.com/oxc-project/tsgolint is not stable and throws errors
+    // Message: Error running tsgolint: "tsgolint process exited with status: exit status: 2
+    "typeAware": false // maybe disable for now
   },
   // https://oxc.rs/docs/guide/usage/linter/plugins.html
   "plugins": [
@@ -35,7 +37,9 @@
   // https://oxc.rs/docs/guide/usage/linter/rules.html
   "rules": {
     "eslint/arrow-body-style": "off", // allow () => { ... } and () => expression
+    "eslint/no-void": "off", // we use `void expr` to explicitly mark ignored promises (no-floating-promises convention); oxlint lacks ESLint's `allowAsStatement` to permit just that
     "eslint/no-warning-comments": "warn", // highlight @todo comments
+    "unicorn/no-useless-undefined": "off", // conflicts with typescript/consistent-return: `return undefined` is required before `return <cleanupFn>` in useEffect early-exits and in mixed-return getters
     "eslint/capitalized-comments": "off", // sometimes comments should start from lower case
     "eslint/id-length": ["error", { "exceptions": ["x", "y", "_"] }], // allow { x: event.clientX, y: event.clientY }
     "eslint/max-lines-per-function": "off", // sometimes long function is better than multiple small functions

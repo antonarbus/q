@@ -44,11 +44,11 @@ export const ResetPasswordModal = (): React.ReactNode => {
       isButtonSuccess={resetPassword.isSuccess}
       modalRef={animatedElement.ref}
       onCloseClick={(): void => {
-        routerHolder.router.navigate('..')
+        void routerHolder.router.navigate('..')
       }}
       onSubmit={resetPassword.handleSubmit}
       onUnmount={(): void => {
-        routerHolder.router.navigate('..')
+        void routerHolder.router.navigate('..')
       }}
       paddingContent='50px 40px 10px 40px'
       shouldUnmountOnClickAway={true}

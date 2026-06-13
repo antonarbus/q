@@ -30,31 +30,33 @@ export const GeneratePaymentLinkButton: FC = () => {
       disabled={createPaymentLink.isPending}
       size='large'
       variant='contained'
-      onClick={async (): Promise<void> => {
-        const isValid = await validatePaymentAmount()
+      onClick={() =>
+        void (async (): Promise<void> => {
+          const isValid = await validatePaymentAmount()
 
-        if (!isValid) {
-          return
-        }
-
-        const isQuotationSaved = quotationId.length > 0 && quotationId !== 'new'
-
-        if (!isQuotationSaved) {
-          const confirmed = await confirmWithDialog({
-            title: 'Save quotation first',
-            description: 'The quotation needs to be saved before generating a payment link.',
-            confirmButtonText: 'Save & Generate',
-          })
-
-          if (!confirmed) {
+          if (!isValid) {
             return
           }
 
-          await saveExistingQuotation()
-        }
+          const isQuotationSaved = quotationId.length > 0 && quotationId !== 'new'
 
-        await createPaymentLink.refetch()
-      }}
+          if (!isQuotationSaved) {
+            const confirmed = await confirmWithDialog({
+              title: 'Save quotation first',
+              description: 'The quotation needs to be saved before generating a payment link.',
+              confirmButtonText: 'Save & Generate',
+            })
+
+            if (!confirmed) {
+              return
+            }
+
+            await saveExistingQuotation()
+          }
+
+          await createPaymentLink.refetch()
+        })()
+      }
     >
       {createPaymentLink.isPending ? 'Generating...' : 'Generate Payment Link'}
     </Button>

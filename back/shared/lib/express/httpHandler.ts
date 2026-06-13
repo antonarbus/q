@@ -15,7 +15,7 @@ type HttpHandler = (
  */
 export const httpHandler = (
   fn: HttpHandler,
-): ((req: Request, res: Response, next: NextFunction) => void) => {
+): ((req: Request, res: Response, next: NextFunction) => Promise<void>) => {
   const fnWithErrorHandlingResolved = async (
     req: Request,
     res: Response,

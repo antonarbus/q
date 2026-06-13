@@ -30,10 +30,10 @@ export const useRequestPasswordReset = (props: Props): Res => {
       const slideOutAndChangeUrl = async (): Promise<void> => {
         await asyncDelay(1000)
         await props.slideOut()
-        navigate('..')
+        void navigate('..')
       }
 
-      slideOutAndChangeUrl()
+      void slideOutAndChangeUrl()
     }
   }, [requestUserPasswordResetMutation.isSuccess])
 

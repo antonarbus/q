@@ -68,7 +68,7 @@ export const suggestProductHandler: RouterHandler = async (req) => {
         tools: [{ googleSearch: {} }],
       },
     })
-    .catch((error) => {
+    .catch((error: unknown) => {
       // oxlint-disable-next-line no-console
       console.log('🚀 ~ error:', error)
 

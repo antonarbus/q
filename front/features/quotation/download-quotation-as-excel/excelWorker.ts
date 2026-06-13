@@ -2,9 +2,8 @@ import { stripHtmlWithBreaksPreserve } from '@front/shared/util/stripHtmlWithBre
 import striptags from 'striptags'
 import type { WorkerRequestMessage, WorkerResponseMessage } from './types'
 
-self.addEventListener(
-  'message',
-  async (messageEvent: MessageEvent<WorkerRequestMessage>): Promise<void> => {
+self.addEventListener('message', (messageEvent: MessageEvent<WorkerRequestMessage>) => {
+  void (async (): Promise<void> => {
     // www.npmjs.com/package/exceljs#contents
     const ExcelJS = await import('exceljs')
     const workbook = new ExcelJS.Workbook()
@@ -85,5 +84,5 @@ self.addEventListener(
     const workerResponseMessage: WorkerResponseMessage = { excelBlob }
 
     self.postMessage(workerResponseMessage)
-  },
-)
+  })()
+})

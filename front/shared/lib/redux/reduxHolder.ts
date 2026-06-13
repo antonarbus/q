@@ -34,7 +34,7 @@ class ReduxHolder {
   }
 
   public get getState(): () => RootState {
-    return this.store.getState as () => RootState
+    return (): RootState => this.store.getState()
   }
 }
 

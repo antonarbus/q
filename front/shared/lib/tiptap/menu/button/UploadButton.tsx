@@ -58,7 +58,7 @@ export const UploadButton = (): React.ReactNode => {
 
             const hasImage = fileArray.some((file) => file.type.startsWith('image/'))
 
-            onUpload({
+            void onUpload({
               editor,
               type: hasImage === true ? 'image' : 'file',
               files: fileArray,

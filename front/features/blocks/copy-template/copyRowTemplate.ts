@@ -1,4 +1,5 @@
 import { clipboardSlice } from '@front/entities/quotation/redux/clipboardSlice'
+import type { MouseEventLike } from '@front/shared/util/MouseEventLike'
 
 // assets can be imported as strings using the ?raw suffix
 import rowDescriptionHtml from '@front/entities/quotation/templates/rowDescription.html?raw'
@@ -10,7 +11,7 @@ import type { RowBlock } from '@back/entity/quotation/schema'
 import { generateId } from '@front/shared/lib/nanoid/generateId'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 
-export const copyRowBlockTemplate = (event?: React.MouseEvent): void => {
+export const copyRowBlockTemplate = (event?: MouseEventLike): void => {
   const rowTemplate: RowBlock = {
     id: generateId(),
     bookmarkSchemaVersion: 2,

@@ -1,10 +1,9 @@
 import type { NavItem } from '@front/shared/nav/NavItem'
 import { mousePosition } from '@front/features/on-init-load/track-mouse-position/useTrackMousePosition'
 import { functionRegistry } from '@front/widgets/nav/functionRegistry'
+import type { MouseEventLike } from '@front/shared/util/MouseEventLike'
 import { useNavigate } from 'react-router-dom'
 import { useEffectOnce } from 'react-use'
-
-type MouseEventLike = Pick<React.MouseEvent, 'clientX' | 'clientY'>
 
 type Shortcuts = {
   name: string
@@ -34,8 +33,7 @@ const searchForShortcutsInNavStructure = (props: Props): void => {
           func === null
             ? null
             : (event?: MouseEventLike): void => {
-                // Safe: func only uses clientX/clientY properties
-                func(event as React.MouseEvent | undefined)
+                func(event)
               },
         link: navItem.link ?? null,
       })
@@ -98,7 +96,7 @@ export const usePressNavShortcut = (props: Props): void => {
         }
 
         if (matchedNavItemByShortcut.link !== null) {
-          navigate(matchedNavItemByShortcut.link)
+          void navigate(matchedNavItemByShortcut.link)
         }
       }
     })

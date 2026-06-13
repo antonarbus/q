@@ -25,51 +25,53 @@ export const LinkFromTextButton = (): React.JSX.Element => {
       isActive={isActive}
       disabled={isDisabled}
       title='Link'
-      onClick={async () => {
-        const { from, to } = editor.state.selection
-        const attrs = editor.getAttributes('link')
-        const existing = typeof attrs.href === 'string' ? attrs.href : ''
+      onClick={() =>
+        void (async (): Promise<void> => {
+          const { from, to } = editor.state.selection
+          const attrs = editor.getAttributes('link')
+          const existing = typeof attrs.href === 'string' ? attrs.href : ''
 
-        const href = await confirmWithDialog({
-          inputLabel: 'Url',
-          title: 'Link',
-          initialValue: existing ? attrs.href : '',
-          description: '',
-          confirmButtonText: 'Add',
-          rejectButtonText: 'Cancel',
-        })
+          const href = await confirmWithDialog({
+            inputLabel: 'Url',
+            title: 'Link',
+            initialValue: existing,
+            description: '',
+            confirmButtonText: 'Add',
+            rejectButtonText: 'Cancel',
+          })
 
-        if (href === false) {
-          return
-        }
+          if (href === false) {
+            return
+          }
 
-        const isCancelled = href === null || href.trim() === ''
+          const isCancelled = href.trim() === ''
 
-        if (isCancelled === true) {
-          return
-        }
+          if (isCancelled === true) {
+            return
+          }
 
-        const normalizedHref =
-          href.trim().startsWith('http://') ||
-          href.trim().startsWith('https://') ||
-          href.trim().startsWith('mailto:')
-            ? href.trim()
-            : `https://${href.trim()}`
+          const normalizedHref =
+            href.trim().startsWith('http://') ||
+            href.trim().startsWith('https://') ||
+            href.trim().startsWith('mailto:')
+              ? href.trim()
+              : `https://${href.trim()}`
 
-        const linkMark = editor.schema.marks.link
+          const linkMark = editor.schema.marks.link
 
-        if (linkMark === undefined) {
-          return
-        }
+          if (linkMark === undefined) {
+            return
+          }
 
-        editor.view.focus()
+          editor.view.focus()
 
-        const tr = editor.state.tr
-          .setSelection(TextSelection.create(editor.state.doc, from, to))
-          .addMark(from, to, linkMark.create({ href: normalizedHref }))
+          const tr = editor.state.tr
+            .setSelection(TextSelection.create(editor.state.doc, from, to))
+            .addMark(from, to, linkMark.create({ href: normalizedHref }))
 
-        editor.view.dispatch(tr)
-      }}
+          editor.view.dispatch(tr)
+        })()
+      }
     >
       <RiLink />
     </MenuButton>

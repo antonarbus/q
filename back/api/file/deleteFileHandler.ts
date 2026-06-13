@@ -88,6 +88,7 @@ export const deleteFileHandler: RouterHandler = async (req) => {
     })
   }
 
+  // oxlint-disable-next-line typescript/no-unnecessary-condition -- defensive exhaustiveness check, see "Unhandled case" fallback below
   if (fileOwnerShip === 'owner') {
     messageList.push('File ownership verified')
 

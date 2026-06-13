@@ -52,6 +52,6 @@ export const clickOnMenuItem = (props: Props): void => {
   }
 
   if (isNestedMenuAvailable === true) {
-    props.menuNavigation.goDown({ navItemId: props.navItemId })
+    void props.menuNavigation.goDown({ navItemId: props.navItemId })
   }
 }

@@ -42,11 +42,11 @@ export const ShareQuotationModal = (): React.JSX.Element => {
       isButtonSuccess={shareQuotation.isSuccess}
       modalRef={animatedElement.ref}
       onCloseClick={(): void => {
-        routerHolder.router.navigate('..')
+        void routerHolder.router.navigate('..')
       }}
-      onSubmit={shareQuotation.handleSubmit}
+      onSubmit={(event) => void shareQuotation.handleSubmit(event)}
       onUnmount={(): void => {
-        routerHolder.router.navigate('..')
+        void routerHolder.router.navigate('..')
       }}
       shouldUnmountOnClickAway={true}
       shouldUnmountOnEsc={true}
@@ -54,11 +54,15 @@ export const ShareQuotationModal = (): React.JSX.Element => {
     >
       {isNewQuotation === false && (
         <Box
-          onClick={async () => {
-            await window.navigator.clipboard
-              .writeText(quotationLink)
-              .then(() => toast.success('Link copied'))
-              .catch(() => toast.error('Failed to copy'))
+          onClick={() => {
+            void (async (): Promise<void> => {
+              try {
+                await window.navigator.clipboard.writeText(quotationLink)
+                toast.success('Link copied')
+              } catch {
+                toast.error('Failed to copy')
+              }
+            })()
           }}
           sx={{
             display: 'flex',

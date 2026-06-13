@@ -10,7 +10,7 @@ export const getBoqColumnFromStoreByIndex = (props: Props): Column | undefined =
   const block = reduxHolder.getState().quotation.blocks[props.blockIndex]
 
   if (block?.type !== 'boq') {
-    return
+    return undefined
   }
 
   const column = block.boq.column[props.boqColumnKey]

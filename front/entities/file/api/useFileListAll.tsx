@@ -22,55 +22,57 @@ export const useFileListAll = (): Res => {
   const datasource = useMemo(() => {
     const ds: IDatasource = {
       rowCount: undefined,
-      getRows: async (params) => {
-        try {
-          if (isFirstMount === true) {
-            setIsLoading(true)
-            setIsFetching(true)
-          }
+      getRows: (params) => {
+        void (async (): Promise<void> => {
+          try {
+            if (isFirstMount === true) {
+              setIsLoading(true)
+              setIsFetching(true)
+            }
 
-          if (isFirstMount === false) {
-            setIsFetching(true)
-          }
+            if (isFirstMount === false) {
+              setIsFetching(true)
+            }
 
-          const response = await axiosHolder.axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
-            url: route.getFileListAll.url,
-            method: route.getFileListAll.method,
-            params: {
-              startRow: params.startRow,
-              endRow: params.endRow,
-              sortModel: JSON.stringify(params.sortModel),
-              filterModel: JSON.stringify(params.filterModel),
-            },
-          })
+            const response = await axiosHolder.axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
+              url: route.getFileListAll.url,
+              method: route.getFileListAll.method,
+              params: {
+                startRow: params.startRow,
+                endRow: params.endRow,
+                sortModel: JSON.stringify(params.sortModel),
+                filterModel: JSON.stringify(params.filterModel),
+              },
+            })
 
-          const resolveLastRow = (): number => {
-            const fileListCount = response.data.fileList.length
+            const resolveLastRow = (): number => {
+              const fileListCount = response.data.fileList.length
 
-            const didReachEndOfTheList = fileListCount >= params.endRow - params.startRow
+              const didReachEndOfTheList = fileListCount >= params.endRow - params.startRow
 
-            if (didReachEndOfTheList === false) {
-              const lastRow = params.startRow + fileListCount
+              if (didReachEndOfTheList === false) {
+                const lastRow = params.startRow + fileListCount
+
+                return lastRow
+              }
+
+              // reached the end of the list
+              const lastRow = response.data.fileListTotalCount
 
               return lastRow
             }
 
-            // reached the end of the list
-            const lastRow = response.data.fileListTotalCount
+            const lastRow = resolveLastRow()
 
-            return lastRow
+            params.successCallback(response.data.fileList, lastRow)
+          } catch {
+            params.failCallback()
+          } finally {
+            setIsLoading(false)
+            setIsFetching(false)
+            setIsFetched(true)
           }
-
-          const lastRow = resolveLastRow()
-
-          params.successCallback(response.data.fileList, lastRow)
-        } catch {
-          params.failCallback()
-        } finally {
-          setIsLoading(false)
-          setIsFetching(false)
-          setIsFetched(true)
-        }
+        })()
       },
     }
 

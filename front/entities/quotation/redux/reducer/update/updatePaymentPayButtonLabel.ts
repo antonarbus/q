@@ -11,9 +11,5 @@ export const updatePaymentPayButtonLabel = (
     return
   }
 
-  if (block.payment.payButtonLabel === undefined) {
-    block.payment.payButtonLabel = { html: '' }
-  }
-
   block.payment.payButtonLabel.html = action.payload.html
 }

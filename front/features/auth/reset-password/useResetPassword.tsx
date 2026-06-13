@@ -38,10 +38,6 @@ export const useResetPassword = (props: Props): Res => {
         return
       }
 
-      if (resetUserPasswordMutation.data.email === undefined) {
-        return
-      }
-
       reduxHolder.dispatch(
         userSlice.actions.setAccessToken({
           accessToken: resetUserPasswordMutation.data.accessJwtToken,
@@ -51,7 +47,7 @@ export const useResetPassword = (props: Props): Res => {
       reduxHolder.dispatch(
         userSlice.actions.rememberLoggedUser({
           email: resetUserPasswordMutation.data.email,
-          roles: resetUserPasswordMutation.data.roles ?? ['user'],
+          roles: resetUserPasswordMutation.data.roles,
         }),
       )
 
@@ -66,10 +62,10 @@ export const useResetPassword = (props: Props): Res => {
       const slideOutAndChangeUrl = async (): Promise<void> => {
         await asyncDelay(1000)
         await props.slideOut()
-        navigate('..')
+        void navigate('..')
       }
 
-      slideOutAndChangeUrl()
+      void slideOutAndChangeUrl()
     }
   }, [resetUserPasswordMutation.isSuccess])
 

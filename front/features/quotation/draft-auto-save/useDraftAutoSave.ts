@@ -19,7 +19,7 @@ export const useDraftAutoSave = (): void => {
 
   useEffect(() => {
     if (quotation.id === '' || !isModified) {
-      return
+      return undefined
     }
 
     const timer = setTimeout(() => {

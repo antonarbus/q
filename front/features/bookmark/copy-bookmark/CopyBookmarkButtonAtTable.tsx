@@ -25,33 +25,35 @@ export const CopyBookmarkButtonAtTable = (props: UrlParam): React.JSX.Element =>
   return (
     <Tooltip enterDelay={500} enterNextDelay={500} placement='bottom' title='Copy'>
       <IconButton
-        onClick={async (event: React.MouseEvent): Promise<void> => {
-          setIsSpinner(true)
+        onClick={(event: React.MouseEvent) =>
+          void (async (): Promise<void> => {
+            setIsSpinner(true)
 
-          const data = await getBookmarkMutation.mutateAsync({ id: props.id })
+            const data = await getBookmarkMutation.mutateAsync({ id: props.id })
 
-          // Load block into redux at pos 1000 synchronously so it is available
-          // when CopyBookmarkCapture renders and its sub-components read from
-          // getState().quotation.blocks[BOOKMARK_POS_AT_BLOCKS].
-          reduxHolder.dispatch(
-            quotationSlice.actions.loadBlockAtPosThousand({
-              block: data.bookmark,
-            }),
-          )
+            // Load block into redux at pos 1000 synchronously so it is available
+            // when CopyBookmarkCapture renders and its sub-components read from
+            // getState().quotation.blocks[BOOKMARK_POS_AT_BLOCKS].
+            reduxHolder.dispatch(
+              quotationSlice.actions.loadBlockAtPosThousand({
+                block: data.bookmark,
+              }),
+            )
 
-          reduxHolder.dispatch(clipboardSlice.actions.startPreviewPreparing())
+            reduxHolder.dispatch(clipboardSlice.actions.startPreviewPreparing())
 
-          reduxHolder.dispatch(
-            clipboardSlice.actions.setInitCursorPos({
-              x: event.clientX,
-              y: event.clientY,
-            }),
-          )
+            reduxHolder.dispatch(
+              clipboardSlice.actions.setInitCursorPos({
+                x: event.clientX,
+                y: event.clientY,
+              }),
+            )
 
-          await getClipboardPreviewPreparingPromise()
+            await getClipboardPreviewPreparingPromise()
 
-          setIsSpinner(false)
-        }}
+            setIsSpinner(false)
+          })()
+        }
         size='small'
         sx={{
           translate: '0px 1px',

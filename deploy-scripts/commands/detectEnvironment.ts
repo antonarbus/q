@@ -29,5 +29,5 @@ export const detectEnvironment = async (): Promise<DeployedEnvironment> => {
 
   logger.error('Use the Promote Release workflow at GitHub to deploy to other environments')
 
-  exit(1)
+  return exit(1)
 }

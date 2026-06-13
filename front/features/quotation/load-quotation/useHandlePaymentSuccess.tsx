@@ -19,24 +19,28 @@ export const useHandlePaymentSuccess = (): void => {
     toast.info('Payment submitted — confirming...')
 
     // Refetch after 3s to let the Stripe webhook update paidAt in the DB before we read it
-    setTimeout(async () => {
-      if (urlParams.quotationId === undefined) {
-        return
-      }
-
-      try {
-        const result = await getQuotationMutation.mutateAsync({ id: urlParams.quotationId })
-
-        reduxHolder.dispatch(quotationSlice.actions.loadQuotation({ quotation: result.quotation }))
-
-        if (result.quotation.paidAt === null) {
-          toast.warning('Payment received but status is still updating — refresh in a moment.')
-        } else {
-          toast.success('Payment confirmed!')
+    setTimeout(() => {
+      void (async (): Promise<void> => {
+        if (urlParams.quotationId === undefined) {
+          return
         }
-      } catch {
-        // silent — quotation is already displayed from the initial page load
-      }
+
+        try {
+          const result = await getQuotationMutation.mutateAsync({ id: urlParams.quotationId })
+
+          reduxHolder.dispatch(
+            quotationSlice.actions.loadQuotation({ quotation: result.quotation }),
+          )
+
+          if (result.quotation.paidAt === null) {
+            toast.warning('Payment received but status is still updating — refresh in a moment.')
+          } else {
+            toast.success('Payment confirmed!')
+          }
+        } catch {
+          // silent — quotation is already displayed from the initial page load
+        }
+      })()
     }, 3000)
   })
 }

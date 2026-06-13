@@ -33,7 +33,7 @@ export const AccessToken = (): React.ReactNode => {
   // get initial access token on app load
   useEffectOnce(() => {
     if (reduxHolder.getState().user.accessToken === null) {
-      getUserAccessTokenQuery.refetch()
+      void getUserAccessTokenQuery.refetch()
     }
   })
 

@@ -13,7 +13,7 @@ export const StripeConnectModal = (): React.JSX.Element => {
       shouldUnmountOnClickAway={true}
       shouldUnmountOnEsc={true}
       onUnmount={(): void => {
-        navigate('..')
+        void navigate('..')
       }}
     >
       <CardCustom

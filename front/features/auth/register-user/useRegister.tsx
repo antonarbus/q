@@ -61,10 +61,10 @@ export const useRegister = (props: Props): Res => {
           return
         }
 
-        navigate('..')
+        void navigate('..')
       }
 
-      slideOutAndChangeUrl()
+      void slideOutAndChangeUrl()
     }
   }, [registerUserMutation.isSuccess])
 

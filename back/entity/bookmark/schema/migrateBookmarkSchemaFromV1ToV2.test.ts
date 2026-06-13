@@ -38,6 +38,8 @@ describe('#migrateBookmarkSchemaFromV1ToV2', () => {
     // Mock the V2 schema validation to fail (simulating a migration bug)
     vi.spyOn(bookmarkSchema, 'safeParse').mockReturnValue({
       success: false,
+      // ZodError's constructor type is a `$constructor`, not a generic class — it can't take <T> directly, so we cast the constructed instance to the schema's expected error type for the mock
+      // oxlint-disable-next-line typescript/no-unsafe-type-assertion
       error: new z.ZodError([
         {
           code: 'invalid_type',
@@ -45,8 +47,8 @@ describe('#migrateBookmarkSchemaFromV1ToV2', () => {
           path: ['someRequiredField'],
           message: 'Required field missing after migration',
         },
-      ]),
-    } as any)
+      ]) as z.ZodError<z.infer<typeof bookmarkSchema>>,
+    })
 
     const result = migrateBookmarkSchemaFromV1ToV2({ document: mockBookmarkV1 })
 

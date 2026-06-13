@@ -10,14 +10,14 @@ type Props = {
   liProps: React.HTMLAttributes<HTMLLIElement>
   inputValue: string
   option: ResBody['bookmarkList'][number]
-  onClick: (event: React.MouseEvent) => Promise<void>
+  onClick: (event: React.SyntheticEvent) => Promise<void>
   isLoading: boolean
 }
 
 export const SearchOption = (props: Props): React.JSX.Element => {
   const handleKeyDown = (event: React.KeyboardEvent<HTMLLIElement>): void => {
     if (event.key === 'Enter' || event.key === ' ') {
-      props.onClick(event as unknown as React.MouseEvent)
+      void props.onClick(event)
     }
   }
 
@@ -25,7 +25,7 @@ export const SearchOption = (props: Props): React.JSX.Element => {
     <li
       {...props.liProps}
       onKeyDown={handleKeyDown}
-      onClick={props.onClick}
+      onClick={(event) => void props.onClick(event)}
       css={{
         position: 'relative',
         cursor: 'pointer',

@@ -71,7 +71,7 @@ export const useShareQuotation = (props: Props): Res => {
         })
       }
 
-      getQuotationListQuery.refetch()
+      void getQuotationListQuery.refetch()
 
       reduxHolder.dispatch(
         quotationSlice.actions.loadQuotation({
@@ -92,10 +92,10 @@ export const useShareQuotation = (props: Props): Res => {
         const navigateTo =
           isQuotationsPage === true ? '..' : `/${saveQuotationMutation.data.quotation.id}`
 
-        navigate(navigateTo, { replace: true })
+        void navigate(navigateTo, { replace: true })
       }
 
-      slideOutAndChangeUrl()
+      void slideOutAndChangeUrl()
     }
   }, [saveQuotationMutation.isSuccess])
 

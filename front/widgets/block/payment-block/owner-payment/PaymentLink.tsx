@@ -51,11 +51,15 @@ export const PaymentLink: FC = () => {
       <Tooltip title='Copy link'>
         <IconButton
           size='small'
-          onClick={async () => {
-            await globalThis.navigator.clipboard
-              .writeText(stripePaymentLinkUrl ?? '')
-              .then(() => toast.success('Link copied'))
-              .catch(() => toast.error('Failed to copy'))
+          onClick={() => {
+            void (async (): Promise<void> => {
+              try {
+                await globalThis.navigator.clipboard.writeText(stripePaymentLinkUrl)
+                toast.success('Link copied')
+              } catch {
+                toast.error('Failed to copy')
+              }
+            })()
           }}
         >
           <MdContentCopy style={{ fontSize: '16px' }} />

@@ -3,6 +3,7 @@ import { bookmarksTable } from '@back/entity/bookmark/db/bookmarksTableSchema'
 import type { SelectBookmark } from '@back/entity/bookmark/db/bookmarksTableSchema'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entity/user/getUserFromAccessTokenOrThrowUnauthorized'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
+import { isKeyInObject } from '@back/shared/util/isKeyInObject'
 import { db } from '@back/shared/lib/drizzle/db'
 import { and, asc, count, desc, ilike } from 'drizzle-orm'
 import type { NextFunction, Request, Response } from 'express'
@@ -74,7 +75,11 @@ export const getBookmarkListAllHandler: RouterHandler = async (req) => {
 
   const sortConditions = sortModelParsed.data
     .map((item) => {
-      const column = bookmarksTable[item.colId as keyof typeof bookmarksTable]
+      if (isKeyInObject(bookmarksTable, item.colId) === false) {
+        return null
+      }
+
+      const column = bookmarksTable[item.colId]
 
       // Check if it's a valid column (has columnType property)
       const isValidColumn = typeof column === 'object' && 'columnType' in column
@@ -106,7 +111,11 @@ export const getBookmarkListAllHandler: RouterHandler = async (req) => {
 
   const filterConditions = Object.entries(filterModelParsed.data)
     .map(([field, filterDef]) => {
-      const column = bookmarksTable[field as keyof typeof bookmarksTable]
+      if (!isKeyInObject(bookmarksTable, field)) {
+        return null
+      }
+
+      const column = bookmarksTable[field]
 
       // Check if it's a valid column (has columnType property)
       const isValidColumn = typeof column === 'object' && 'columnType' in column

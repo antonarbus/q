@@ -17,11 +17,13 @@ export const openQuotationPageAndLoadPrev = (): void => {
   reduxHolder.dispatch(
     appSlice.actions.setShouldLoadQuotation({
       yesOrNo: 'yes',
-      from: draftId === null ? 'server' : 'memory',
+      from: draftId === undefined ? 'server' : 'memory',
     }),
   )
 
   const targetId = draftId ?? backId
 
-  routerHolder.router.navigate(targetId && targetId !== 'new' ? `/${targetId}` : route.root)
+  const hasTargetId = targetId !== null && targetId !== '' && targetId !== 'new'
+
+  void routerHolder.router.navigate(hasTargetId ? `/${targetId}` : route.root)
 }

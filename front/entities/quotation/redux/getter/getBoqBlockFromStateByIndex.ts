@@ -9,7 +9,7 @@ export const getBoqBlockFromStateByIndex = (props: Props): BoqBlock | undefined 
   const block = props.state.blocks[props.blockIndex]
 
   if (block?.type !== 'boq') {
-    return
+    return undefined
   }
 
   return block

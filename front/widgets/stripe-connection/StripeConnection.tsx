@@ -14,7 +14,7 @@ export const StripeConnection = (): React.JSX.Element => {
 
   if (
     stripeStatusQuery.data?.connected === undefined ||
-    stripeStatusQuery.data?.connected === false
+    stripeStatusQuery.data.connected === false
   ) {
     return <ConnectStripeButton />
   }

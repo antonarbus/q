@@ -10,8 +10,8 @@ type Props = {
 export const Layout = (props: Props): React.JSX.Element => {
   const maxBlockWidth = reduxHolder.useSelector((state) => {
     const maxWidth = state.quotation.blocks.reduce((accumulator, block) => {
-      if ((block.width ?? 0) > accumulator) {
-        return block.width ?? 0
+      if (block.width > accumulator) {
+        return block.width
       }
 
       return accumulator

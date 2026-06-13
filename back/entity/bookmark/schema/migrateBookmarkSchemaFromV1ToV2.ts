@@ -76,6 +76,8 @@ export const migrateBookmarkSchemaFromV1ToV2 = (props: Props): Res => {
   //* For failing validation use catch() e.g. z.string().catch('foo')
 
   //! hack! cast QuotationV2 type for actual QuotationV1 to let us set new values
+  // intentional: document doesn't conform to V2 shape until the migration steps below run; validated against bookmarkSchemaV2 after
+  // oxlint-disable-next-line typescript/no-unsafe-type-assertion
   const newDocument = structuredClone(oldDocumentValidationResult.data) as unknown as BookmarkV2
 
   //* TO BE IN EVERY MIGRATION FUNCTION

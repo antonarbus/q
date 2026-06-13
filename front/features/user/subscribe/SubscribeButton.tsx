@@ -16,13 +16,15 @@ export const SubscribeButton: FC<Props> = (props) => {
       disabled={checkoutMutation.isPending}
       size={props.size}
       variant={props.mode === 'extend' ? 'outlined' : 'contained'}
-      onClick={async (): Promise<void> => {
-        const result = await checkoutMutation.mutateAsync()
+      onClick={() =>
+        void (async (): Promise<void> => {
+          const result = await checkoutMutation.mutateAsync()
 
-        if (result.checkoutUrl) {
-          window.location.href = result.checkoutUrl
-        }
-      }}
+          if (result.checkoutUrl) {
+            window.location.href = result.checkoutUrl
+          }
+        })()
+      }
     >
       {props.mode === 'extend' ? 'Extend 1 year — $99' : 'Subscribe — $99 / year'}
     </Button>

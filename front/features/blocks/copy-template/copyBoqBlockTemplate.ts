@@ -1,4 +1,5 @@
 import { clipboardSlice } from '@front/entities/quotation/redux/clipboardSlice'
+import type { MouseEventLike } from '@front/shared/util/MouseEventLike'
 
 // assets can be imported as strings using the ?raw suffix
 import boqBlockPreviewHtml from '@front/entities/quotation/templates/boqBlockPreview.html?raw'
@@ -25,7 +26,7 @@ import type { BoqBlock } from '@back/entity/quotation/schema'
 import { generateId } from '@front/shared/lib/nanoid/generateId'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 
-export const copyBoqBlockTemplate = (event?: React.MouseEvent): void => {
+export const copyBoqBlockTemplate = (event?: MouseEventLike): void => {
   const boqBlockTemplate: BoqBlock = {
     id: generateId(),
     bookmarkSchemaVersion: 2,

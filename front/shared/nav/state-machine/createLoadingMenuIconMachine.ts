@@ -15,6 +15,8 @@ type Props = {
 export const createLoadingMenuIconMachine = (props: Props) =>
   setup({
     types: {
+      // xstate's documented pattern for declaring event types without typegen: `events: {} as EventUnion`
+      // oxlint-disable-next-line typescript/no-unsafe-type-assertion
       events: {} as
         | { type: 'show loading icon' }
         | { type: 'show error icon' }

@@ -17,10 +17,10 @@ export const OpenLoginModalLink = (props: Props): React.JSX.Element => {
         const slideAndNavigate = async (): Promise<void> => {
           await props.slideOut()
 
-          navigate(`../${route.login}${buildSearchParams({ shouldSlide: 'true' })}`)
+          void navigate(`../${route.login}${buildSearchParams({ shouldSlide: 'true' })}`)
         }
 
-        slideAndNavigate()
+        void slideAndNavigate()
       }}
       to={`../${route.login}`}
     >

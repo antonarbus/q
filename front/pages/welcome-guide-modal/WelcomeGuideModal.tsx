@@ -15,7 +15,7 @@ export const WelcomeGuideModal = (): React.JSX.Element => {
     <WelcomeGuideProvider>
       <BackdropWithSlidableModal
         onUnmount={(): void => {
-          navigate('..')
+          void navigate('..')
         }}
         shouldUnmountOnClickAway={true}
         shouldUnmountOnEsc={true}

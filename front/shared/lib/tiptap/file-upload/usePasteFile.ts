@@ -28,7 +28,7 @@ export const usePasteFile = (): OnPaste => {
       return false
     }
 
-    tiptapCtx.onUpload?.({
+    void tiptapCtx.onUpload?.({
       editor: editorInstance,
       files: [...pastedFiles],
       type: file.type.startsWith('image/') ? 'image' : 'file',

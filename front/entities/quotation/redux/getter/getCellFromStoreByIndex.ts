@@ -14,7 +14,7 @@ export const getCellFromStoreByIndex = (props: Props): Cell | undefined => {
   })
 
   if (row === undefined) {
-    return
+    return undefined
   }
 
   const cell = row[props.cellKey]

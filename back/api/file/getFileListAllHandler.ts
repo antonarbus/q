@@ -5,6 +5,7 @@ import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entity/user/get
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
+import { isKeyInObject } from '@back/shared/util/isKeyInObject'
 import { db } from '@back/shared/lib/drizzle/db'
 import { httpJsonResponse } from '@back/shared/lib/express/httpResponse'
 import type { HttpResponse } from '@back/shared/lib/express/httpResponse'
@@ -74,7 +75,11 @@ export const getFileListAllHandler: RouterHandler = async (req) => {
 
   const sortConditions = sortModelParsed.data
     .map((item) => {
-      const column = filesTable[item.colId as keyof typeof filesTable]
+      if (!isKeyInObject(filesTable, item.colId)) {
+        return null
+      }
+
+      const column = filesTable[item.colId]
 
       // Check if it's a valid column (has columnType property)
       const isValidColumn = typeof column === 'object' && 'columnType' in column
@@ -106,7 +111,11 @@ export const getFileListAllHandler: RouterHandler = async (req) => {
 
   const filterConditions = Object.entries(filterModelParsed.data)
     .map(([field, filterDef]) => {
-      const column = filesTable[field as keyof typeof filesTable]
+      if (!isKeyInObject(filesTable, field)) {
+        return null
+      }
+
+      const column = filesTable[field]
 
       // Check if it's a valid column (has columnType property)
       const isValidColumn = typeof column === 'object' && 'columnType' in column

@@ -36,7 +36,7 @@ export const OpenInfoRowModalIcon = (): React.ReactNode => {
               return
             }
 
-            navigate(`./${route.info}/${rowFromStore.id}`)
+            void navigate(`./${route.info}/${rowFromStore.id}`)
           }}
           style={{
             color: isClipboardModalVisible === true ? '#acacac' : '#000',

@@ -11,9 +11,5 @@ export const updatePaymentHeading = (
     return
   }
 
-  if (block.payment.heading === undefined) {
-    block.payment.heading = { html: '' }
-  }
-
   block.payment.heading.html = action.payload.html
 }

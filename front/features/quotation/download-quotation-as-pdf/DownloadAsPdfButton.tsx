@@ -5,7 +5,7 @@ import { downloadPdf } from './downloadPdf'
 export const DownloadAsPdfButton = (): React.ReactNode => {
   return (
     <Tooltip title='Download'>
-      <IconButton size='small' onClick={downloadPdf}>
+      <IconButton size='small' onClick={() => void downloadPdf()}>
         <FiDownload />
       </IconButton>
     </Tooltip>

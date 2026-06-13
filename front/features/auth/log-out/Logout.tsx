@@ -49,7 +49,7 @@ export const Logout = (): React.ReactNode => {
 
       setTimeout(() => {
         reduxHolder.dispatch(appSlice.actions.hideLoadingOverlay())
-        navigate('..')
+        void navigate('..')
       }, 1000)
     }
   }, [logOutUserMutation.isSuccess])
@@ -60,7 +60,7 @@ export const Logout = (): React.ReactNode => {
 
       setTimeout(() => {
         reduxHolder.dispatch(appSlice.actions.hideLoadingOverlay())
-        navigate('..')
+        void navigate('..')
       }, 1000)
     }
   }, [logOutUserMutation.isError])

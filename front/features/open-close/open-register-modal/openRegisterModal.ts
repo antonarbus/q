@@ -7,7 +7,7 @@ type Props = {
 }
 
 export const openRegisterModal = (props: Props): void => {
-  routerHolder.router.navigate(
+  void routerHolder.router.navigate(
     `../${route.register}${buildSearchParams({ shouldSlide: 'true', prefilledEmail: props.prefilledEmail })}`,
   )
 }

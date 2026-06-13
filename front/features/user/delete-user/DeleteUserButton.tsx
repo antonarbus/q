@@ -14,7 +14,7 @@ export const DeleteUserButton = (props: UrlParam): React.ReactNode => {
 
   useUpdateEffect(() => {
     if (deleteUserMutation.isSuccess === true) {
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: [queryKey.getUserList],
       })
     }
@@ -24,7 +24,7 @@ export const DeleteUserButton = (props: UrlParam): React.ReactNode => {
     if (deleteUserMutation.isError === true) {
       toast.error(deleteUserMutation.error.response?.data.message)
 
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: [queryKey.getUserList],
       })
     }
@@ -33,36 +33,38 @@ export const DeleteUserButton = (props: UrlParam): React.ReactNode => {
   return (
     <Tooltip enterDelay={500} enterNextDelay={500} placement='bottom' title='Delete'>
       <IconButton
-        onClick={async () => {
-          const confirmed = await confirmWithDialog({
-            description: 'Are you sure?',
-          })
+        onClick={() =>
+          void (async (): Promise<void> => {
+            const confirmed = await confirmWithDialog({
+              description: 'Are you sure?',
+            })
 
-          if (confirmed === false) {
-            return
-          }
+            if (confirmed === false) {
+              return
+            }
 
-          const answer = await confirmWithDialog({
-            description: 'What is 2 + 3?',
-            inputLabel: 'Answer',
-            confirmButtonText: 'Check',
-          })
+            const answer = await confirmWithDialog({
+              description: 'What is 2 + 3?',
+              inputLabel: 'Answer',
+              confirmButtonText: 'Check',
+            })
 
-          if (answer !== '5') {
-            return
-          }
+            if (answer !== '5') {
+              return
+            }
 
-          const finalConfirmed = await confirmWithDialog({
-            description: 'This action is irrecoverable, are you really sure?',
-            confirmButtonText: 'Yes, delete',
-          })
+            const finalConfirmed = await confirmWithDialog({
+              description: 'This action is irrecoverable, are you really sure?',
+              confirmButtonText: 'Yes, delete',
+            })
 
-          if (finalConfirmed === false) {
-            return
-          }
+            if (finalConfirmed === false) {
+              return
+            }
 
-          deleteUserMutation.mutate({ id: props.id })
-        }}
+            deleteUserMutation.mutate({ id: props.id })
+          })()
+        }
         size='small'
       >
         {deleteUserMutation.isPending === true ? <RotatingLoaderIcon /> : <MdDeleteOutline />}

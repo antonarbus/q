@@ -64,11 +64,9 @@ export const validateBookmark = (props: Props): Res => {
       }
     }
 
-    if (migrationResult.status === 'SKIPPED' || migrationResult.status === 'MIGRATED') {
-      // Assign migrated document to the currentDocument and go to next migration
-      currentDocument = migrationResult.data
-      messageList.push(migrationResult.message)
-    }
+    // status here is always 'SKIPPED' | 'MIGRATED' since other statuses returned early above
+    currentDocument = migrationResult.data
+    messageList.push(migrationResult.message)
   }
 
   // Validate as the latest version after migration

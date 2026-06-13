@@ -45,11 +45,11 @@ export const BookmarkModal = (): React.JSX.Element => {
       isButtonSuccess={saveBookmark.isSuccess}
       modalRef={animatedElement.ref}
       onCloseClick={(): void => {
-        routerHolder.router.navigate('..')
+        void routerHolder.router.navigate('..')
       }}
       onSubmit={saveBookmark.handleSubmit}
       onUnmount={(): void => {
-        routerHolder.router.navigate('..')
+        void routerHolder.router.navigate('..')
       }}
       shouldUnmountOnClickAway={true}
       shouldUnmountOnEsc={true}

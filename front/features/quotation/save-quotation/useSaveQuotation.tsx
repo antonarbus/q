@@ -72,11 +72,11 @@ export const useSaveQuotation = (props: Props): Res => {
           },
         )
 
-        navigate(`/${saveQuotationMutation.data.quotation.id}`)
+        void navigate(`/${saveQuotationMutation.data.quotation.id}`)
       }
 
-      getQuotationCategoryListQuery.refetch()
-      getQuotationListQuery.refetch()
+      void getQuotationCategoryListQuery.refetch()
+      void getQuotationListQuery.refetch()
 
       draftQuotationStorage.clear()
       loadingIconActor.send({ type: 'show success icon' })
@@ -102,10 +102,10 @@ export const useSaveQuotation = (props: Props): Res => {
         const navigateTo =
           isQuotationsPage === true ? '..' : `/${saveQuotationMutation.data.quotation.id}`
 
-        navigate(navigateTo, { replace: true })
+        void navigate(navigateTo, { replace: true })
       }
 
-      slideOutAndChangeUrl()
+      void slideOutAndChangeUrl()
     }
   }, [saveQuotationMutation.isSuccess])
 
@@ -113,7 +113,7 @@ export const useSaveQuotation = (props: Props): Res => {
     if (saveQuotationMutation.isError === true) {
       if (saveQuotationMutation.error.response?.data.errorCode === 'SUBSCRIPTION_REQUIRED') {
         reduxHolder.dispatch(navSlice.actions.showNavItems({ navItemIds: [navItemId.back] }))
-        navigate(`/${route.subscription}`)
+        void navigate(`/${route.subscription}`)
       } else {
         toast.error(saveQuotationMutation.error.response?.data.message)
       }

@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction, Reducer, WritableDraft } from '@reduxjs/toolkit'
+import type { PayloadAction, Reducer, UnknownAction, WritableDraft } from '@reduxjs/toolkit'
 import type { ConfirmationDialogOptions } from './component/confirmation-dialog/types'
 
 type InitState = {
@@ -90,14 +90,15 @@ export const appSlice = createSlice({
   extraReducers: (builder) => {
     // Any quotation load/reset clears the modified flag
     builder.addMatcher(
-      (action) => QUOTATION_LOAD_ACTIONS.has(action.type),
+      (action: UnknownAction) => QUOTATION_LOAD_ACTIONS.has(action.type),
       (state) => {
         state.isModified = false
       },
     )
     // Any other quotation action is a user edit — mark as modified
     builder.addMatcher(
-      (action) => action.type.startsWith('quotation/') && !QUOTATION_LOAD_ACTIONS.has(action.type),
+      (action: UnknownAction) =>
+        action.type.startsWith('quotation/') && !QUOTATION_LOAD_ACTIONS.has(action.type),
       (state) => {
         state.isModified = true
       },

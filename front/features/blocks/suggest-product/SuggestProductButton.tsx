@@ -15,14 +15,16 @@ export const SuggestProductButton = (): React.JSX.Element => {
       isButtonLoading={mutation.isPending}
       sx={{ width: '200px' }}
       type='button'
-      onClick={async (): Promise<void> => {
-        await suggestProduct({
-          blockIndex,
-          rowIndex,
-          userPrompt: inputValue,
-          mutateAsync: mutation.mutateAsync,
-        })
-      }}
+      onClick={() =>
+        void (async (): Promise<void> => {
+          await suggestProduct({
+            blockIndex,
+            rowIndex,
+            userPrompt: inputValue,
+            mutateAsync: mutation.mutateAsync,
+          })
+        })()
+      }
     >
       Suggest
     </ButtonCustom>

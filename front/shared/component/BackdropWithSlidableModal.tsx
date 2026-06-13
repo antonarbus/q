@@ -25,7 +25,7 @@ export const BackdropWithSlidableModal = (props: Props): React.JSX.Element => {
         props.onMount?.()
       }
 
-      slideInAndSomeAction()
+      void slideInAndSomeAction()
     } else {
       props.onMount?.()
     }
@@ -42,7 +42,7 @@ export const BackdropWithSlidableModal = (props: Props): React.JSX.Element => {
             props.onUnmount?.()
           }
 
-          slideOutAndSomeAction()
+          void slideOutAndSomeAction()
         } else {
           props.onUnmount?.()
         }
@@ -93,7 +93,7 @@ export const BackdropWithSlidableModal = (props: Props): React.JSX.Element => {
           props.onUnmount?.()
         }
 
-        slideOutAndSomeAction()
+        void slideOutAndSomeAction()
       } else {
         props.onUnmount?.()
       }

@@ -31,8 +31,6 @@ export const useNavModeDetection = (): React.RefObject<HTMLElement | null> => {
         reduxHolder.dispatch(navSlice.actions.setNavMode({ mode: 'text-only' }))
       } else if (navMode === 'text-only') {
         reduxHolder.dispatch(navSlice.actions.setNavMode({ mode: 'icons-only' }))
-      } else if (navMode === 'icons-only') {
-        reduxHolder.dispatch(navSlice.actions.setNavMode({ mode: 'hamburger' }))
       } else {
         reduxHolder.dispatch(navSlice.actions.setNavMode({ mode: 'hamburger' }))
       }

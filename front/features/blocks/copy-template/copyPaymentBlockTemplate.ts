@@ -1,4 +1,5 @@
 import { clipboardSlice } from '@front/entities/quotation/redux/clipboardSlice'
+import type { MouseEventLike } from '@front/shared/util/MouseEventLike'
 import type { PaymentBlock } from '@back/entity/quotation/schema'
 import { generateId } from '@front/shared/lib/nanoid/generateId'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
@@ -6,7 +7,7 @@ import paymentBlockPreviewHtml from '@front/entities/quotation/templates/payment
 import paymentHeadingHtml from '@front/entities/quotation/templates/paymentHeading.html?raw'
 import payButtonLabelHtml from '@front/entities/quotation/templates/payButtonLabel.html?raw'
 
-export const copyPaymentBlockTemplate = (event?: React.MouseEvent): void => {
+export const copyPaymentBlockTemplate = (event?: MouseEventLike): void => {
   const paymentBlockTemplate: PaymentBlock = {
     id: generateId(),
     bookmarkSchemaVersion: 2,

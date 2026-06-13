@@ -51,7 +51,7 @@ export const useKeysForMenuNavigation = (): void => {
       const handleBackspace = (): void => {
         if (isNestedMenu === true) {
           setHoverIndex(0)
-          menuNavigation.goUp()
+          void menuNavigation.goUp()
         } else {
           reduxHolder.dispatch(navSlice.actions.closeMenu())
         }
@@ -61,7 +61,7 @@ export const useKeysForMenuNavigation = (): void => {
         if (state.nav.hoverIndex === 0) {
           if (isNestedMenu === true) {
             setHoverIndex(0)
-            menuNavigation.goUp()
+            void menuNavigation.goUp()
           } else {
             reduxHolder.dispatch(navSlice.actions.closeMenu())
           }
@@ -89,7 +89,7 @@ export const useKeysForMenuNavigation = (): void => {
         const link = navItemHovered.current?.link
 
         if (link !== undefined) {
-          navigate(link)
+          void navigate(link)
           reduxHolder.dispatch(navSlice.actions.closeMenu())
 
           return
@@ -110,7 +110,7 @@ export const useKeysForMenuNavigation = (): void => {
         const isNestedMenuAvailable = Boolean(navItemHovered.current?.nestedItemList)
 
         if (isNestedMenuAvailable === true) {
-          menuNavigation.goDown({ navItemId: navItemIdHovered })
+          void menuNavigation.goDown({ navItemId: navItemIdHovered })
         }
       }
 

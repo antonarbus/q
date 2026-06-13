@@ -3,6 +3,7 @@ import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entity/user/get
 import { HttpError } from '@back/shared/errors/HttpError'
 import type { ErrorCode } from '@back/shared/const/errorCode'
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
+import { isKeyInObject } from '@back/shared/util/isKeyInObject'
 import type { NextFunction, Request, Response } from 'express'
 import { quotationsTable } from '@back/entity/quotation/db/quotationsTableSchema'
 import type { SelectQuotation } from '@back/entity/quotation/db/quotationsTableSchema'
@@ -74,7 +75,11 @@ export const getQuotationListAllHandler: RouterHandler = async (req) => {
 
   const sortConditions = sortModelParsed.data
     .map((item) => {
-      const column = quotationsTable[item.colId as keyof typeof quotationsTable]
+      if (!isKeyInObject(quotationsTable, item.colId)) {
+        return null
+      }
+
+      const column = quotationsTable[item.colId]
 
       // Check if it's a valid column (has columnType property)
       const isValidColumn = typeof column === 'object' && 'columnType' in column
@@ -106,7 +111,11 @@ export const getQuotationListAllHandler: RouterHandler = async (req) => {
 
   const filterConditions = Object.entries(filterModelParsed.data)
     .map(([field, filterDef]) => {
-      const column = quotationsTable[field as keyof typeof quotationsTable]
+      if (!isKeyInObject(quotationsTable, field)) {
+        return null
+      }
+
+      const column = quotationsTable[field]
 
       // Check if it's a valid column (has columnType property)
       const isValidColumn = typeof column === 'object' && 'columnType' in column

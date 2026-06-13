@@ -23,7 +23,7 @@ export const OpenSaveQuotationModalButton = (props: UrlParam): React.JSX.Element
         }),
       )
 
-      navigate(`./${props.id}${buildSearchParams({ shouldSlide: 'true' })}`)
+      void navigate(`./${props.id}${buildSearchParams({ shouldSlide: 'true' })}`)
     }
   }, [quotationMutation.isSuccess])
 

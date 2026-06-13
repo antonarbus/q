@@ -24,7 +24,7 @@ export const useValidatePaymentAmount = (props: Props): Res => {
   const validate = async (): Promise<boolean> => {
     if (stripeStatusQuery.data?.connected !== true) {
       if (reduxHolder.getState().user.email === null) {
-        routerHolder.router.navigate(
+        void routerHolder.router.navigate(
           `./${route.login}${buildSearchParams({
             redirect: route.stripeConnect,
             shouldSlide: 'true',
@@ -34,7 +34,7 @@ export const useValidatePaymentAmount = (props: Props): Res => {
         return false
       }
 
-      routerHolder.router.navigate(`./${route.stripeConnect}`)
+      void routerHolder.router.navigate(`./${route.stripeConnect}`)
 
       return false
     }

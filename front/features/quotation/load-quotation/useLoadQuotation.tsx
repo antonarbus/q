@@ -241,7 +241,7 @@ export const useLoadQuotation = (): void => {
       }
     }
 
-    loadQuotation()
+    void loadQuotation()
   }, [shouldLoadQuotation.yesOrNo])
 
   // Above we triggered quotation loading, now we handle the response

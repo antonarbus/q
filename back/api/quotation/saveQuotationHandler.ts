@@ -312,6 +312,7 @@ export const saveQuotationHandler: RouterHandler = async (req) => {
     })
   }
 
+  // oxlint-disable-next-line typescript/no-unnecessary-condition -- defensive exhaustiveness check, see "Unhandled case" fallback below
   if (quotationOwnership === 'foreign existing') {
     messageList.push('Copying foreign quotation as new')
 

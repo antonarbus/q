@@ -19,7 +19,7 @@ export const Search = (): ReactNode => {
 
   useEffect(() => {
     if (email !== null) {
-      getBookmarkListQuery.refetch()
+      void getBookmarkListQuery.refetch()
     }
   }, [email])
 
@@ -59,18 +59,20 @@ export const Search = (): ReactNode => {
             setInputValue('')
           }, 0)
         }}
-        onChange={async (_event, value) => {
-          if (value === null || typeof value === 'string') {
-            return
-          }
+        onChange={(_event, value) =>
+          void (async (): Promise<void> => {
+            if (value === null || typeof value === 'string') {
+              return
+            }
 
-          isProcessingRef.current = true
+            isProcessingRef.current = true
 
-          await copyBookmarkAtSearch.mutateAsync({ bookmarkId: value.id })
+            await copyBookmarkAtSearch.mutateAsync({ bookmarkId: value.id })
 
-          isProcessingRef.current = false
-          setIsAutocompleteOpen(false)
-        }}
+            isProcessingRef.current = false
+            setIsAutocompleteOpen(false)
+          })()
+        }
         className={cls.search}
         clearOnEscape={true}
         disablePortal={true}
@@ -103,7 +105,7 @@ export const Search = (): ReactNode => {
               inputValue={inputValue}
               option={option}
               isLoading={isLoading === true && option.id === copyBookmarkAtSearch.bookmarkId}
-              onClick={async (_event: React.MouseEvent): Promise<void> => {
+              onClick={async (_event: React.SyntheticEvent): Promise<void> => {
                 await copyBookmarkAtSearch.mutateAsync({ bookmarkId: option.id })
                 setIsAutocompleteOpen(false)
               }}

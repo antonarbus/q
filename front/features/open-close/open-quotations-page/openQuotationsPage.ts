@@ -13,5 +13,5 @@ export const openQuotationsPage = (): void => {
     reduxHolder.dispatch(navSlice.actions.showNavItems({ navItemIds: [navItemId.back] }))
   }
 
-  routerHolder.router.navigate(`/${route.quotationList}`)
+  void routerHolder.router.navigate(`/${route.quotationList}`)
 }

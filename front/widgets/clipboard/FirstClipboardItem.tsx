@@ -64,19 +64,16 @@ export const FirstClipboardItem = (): React.JSX.Element | null => {
 
   const [firstItem] = items
 
-  const scaleFactorForFirstItem = firstItem?.width
-    ? (containerWidth - 2 * containerPadding) / firstItem.width
-    : 1
+  const scaleFactorForFirstItem =
+    firstItem !== undefined && firstItem.width > 0
+      ? (containerWidth - 2 * containerPadding) / firstItem.width
+      : 1
 
   const [containerHeight, setContainerHeight] = useState(
     (firstItem?.height ?? 0) * scaleFactorForFirstItem,
   )
 
   if (firstItem?.width === undefined) {
-    return null
-  }
-
-  if (firstItem.height === undefined) {
     return null
   }
 

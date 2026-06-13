@@ -13,7 +13,7 @@ export const getRowsFromStateByIndex = (props: Props): RowBlock[] | undefined =>
   })
 
   if (boqBlock === undefined) {
-    return
+    return undefined
   }
 
   return boqBlock.boq.rows

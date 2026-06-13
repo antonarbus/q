@@ -13,7 +13,7 @@ export const useClipboardModalFollowCursor = (props: Props): void => {
     const container = props.copyModalRef.current
 
     if (container === null) {
-      return
+      return undefined
     }
 
     const state = reduxHolder.getState()

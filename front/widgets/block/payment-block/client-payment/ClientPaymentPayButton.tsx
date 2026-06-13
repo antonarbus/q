@@ -22,7 +22,7 @@ export const ClientPaymentPayButton: FC = () => {
     const thisBlock = state.quotation.blocks[block.index]
 
     if (thisBlock?.type === 'payment') {
-      return thisBlock.payment.payButtonLabel?.html ?? ''
+      return thisBlock.payment.payButtonLabel.html
     }
 
     return ''

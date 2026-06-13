@@ -25,7 +25,7 @@ export const ConnectStripeContent = (): React.JSX.Element => {
 
   useEffect(() => {
     if (searchParams.get('stripe_connected') === 'true' || stripeError !== null) {
-      stripeStatusQuery.refetch()
+      void stripeStatusQuery.refetch()
       setSearchParams({}, { replace: true })
     }
   }, [searchParams, setSearchParams, stripeStatusQuery, stripeError])
@@ -35,7 +35,7 @@ export const ConnectStripeContent = (): React.JSX.Element => {
       <Button
         variant='contained'
         onClick={() => {
-          routerHolder.router.navigate(
+          void routerHolder.router.navigate(
             `./${route.login}${buildSearchParams({ redirect: route.stripeConnect, shouldSlide: 'true' })}`,
           )
         }}
@@ -69,7 +69,7 @@ export const ConnectStripeContent = (): React.JSX.Element => {
           <OpenStripeButton stripeAccountId={stripeAccountId} />
           <Button
             onClick={() => {
-              navigate('..')
+              void navigate('..')
             }}
             variant='contained'
             size='small'
@@ -96,13 +96,15 @@ export const ConnectStripeContent = (): React.JSX.Element => {
         disabled={stripeConnectUrlQuery.isFetching}
         startIcon={<SiStripe />}
         variant='contained'
-        onClick={async (): Promise<void> => {
-          const result = await stripeConnectUrlQuery.refetch()
+        onClick={() =>
+          void (async (): Promise<void> => {
+            const result = await stripeConnectUrlQuery.refetch()
 
-          if (result.data?.url !== undefined) {
-            window.location.href = result.data.url
-          }
-        }}
+            if (result.data?.url !== undefined) {
+              window.location.href = result.data.url
+            }
+          })()
+        }
       >
         {stripeConnectUrlQuery.isFetching === true ? 'Loading...' : 'Connect'}
       </Button>

@@ -10,25 +10,27 @@ export const YouTubeButton = (): React.JSX.Element => {
     <MenuButton
       isActive={false}
       title='YouTube video'
-      onClick={async () => {
-        const href = await confirmWithDialog({
-          title: 'YouTube URL',
-          inputLabel: 'Url',
-          description: '',
-          confirmButtonText: 'Add',
-          rejectButtonText: 'Cancel',
-        })
+      onClick={() =>
+        void (async (): Promise<void> => {
+          const href = await confirmWithDialog({
+            title: 'YouTube URL',
+            inputLabel: 'Url',
+            description: '',
+            confirmButtonText: 'Add',
+            rejectButtonText: 'Cancel',
+          })
 
-        if (href === false) {
-          return
-        }
+          if (href === false) {
+            return
+          }
 
-        if (href === null || href.trim() === '') {
-          return
-        }
+          if (href.trim() === '') {
+            return
+          }
 
-        editor.commands.setYoutubeVideo({ src: href })
-      }}
+          editor.commands.setYoutubeVideo({ src: href })
+        })()
+      }
     >
       <RiYoutubeLine />
     </MenuButton>

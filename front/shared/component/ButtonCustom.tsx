@@ -16,6 +16,14 @@ type Props = ButtonProps & {
 export const ButtonCustom = (props: Props): React.JSX.Element => {
   const { isButtonDisabled, isButtonLoading, isButtonSuccess, isButtonError, ...restProps } = props
 
+  type SxArrayItem = Extract<NonNullable<ButtonProps['sx']>, readonly unknown[]>[number]
+
+  let sxArray: readonly SxArrayItem[] = []
+
+  if (restProps.sx !== undefined) {
+    sxArray = Array.isArray(restProps.sx) ? restProps.sx : [restProps.sx]
+  }
+
   const showSuccessIcon = useSignal(false)
   const showErrorIcon = useSignal(false)
 
@@ -44,15 +52,17 @@ export const ButtonCustom = (props: Props): React.JSX.Element => {
       type='submit'
       variant='contained'
       {...restProps}
-      sx={{
-        alignSelf: 'center',
-        padding: '10px',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minHeight: '50px',
-        ...restProps.sx,
-      }}
+      sx={[
+        {
+          alignSelf: 'center',
+          padding: '10px',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: '50px',
+        },
+        ...sxArray,
+      ]}
     >
       {showSuccessIcon.value === false && showErrorIcon.value === false && restProps.children}
       {isButtonLoading === true && (

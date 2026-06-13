@@ -14,7 +14,7 @@ export const selectCellPin =
     const row = getRowFromStoreByIndex({ blockIndex, rowIndex })
 
     if (row === undefined) {
-      return
+      return undefined
     }
 
     const cellPin = row[cellKey].pin

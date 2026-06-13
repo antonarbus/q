@@ -5,12 +5,12 @@ import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 
 export const openSaveQuotationModal = (): void => {
   if (reduxHolder.getState().user.email === null) {
-    routerHolder.router.navigate(
+    void routerHolder.router.navigate(
       `./${route.login}${buildSearchParams({ redirect: route.save, shouldSlide: 'true' })}`,
     )
 
     return
   }
 
-  routerHolder.router.navigate(`./${route.save}`)
+  void routerHolder.router.navigate(`./${route.save}`)
 }

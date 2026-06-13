@@ -21,7 +21,9 @@ export const PaymentButtonLabel: FC = () => {
       contentGetter={() =>
         getHtmlOfPaymentPayButtonLabelFromStoreByIndex({ blockIndex: block.index })
       }
-      onChange={() => updatePaymentPayButtonLabelAtPaymentBlock({ blockIndex: block.index })}
+      onChange={() => {
+        updatePaymentPayButtonLabelAtPaymentBlock({ blockIndex: block.index })
+      }}
       sx={{
         width: '100%',
       }}

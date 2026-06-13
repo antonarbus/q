@@ -26,7 +26,7 @@ export const updatePaymentHeadingAtPaymentBlock = (props: Props): void => {
 
   const html = editor.getHTML()
 
-  if ((block.payment.heading?.html ?? '') === html) {
+  if (block.payment.heading.html === html) {
     return
   }
 

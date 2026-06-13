@@ -23,19 +23,15 @@ export const getTextColDef = <
       filterPlaceholder: 'Search...',
     },
     cellRenderer: (params: ICellRendererParams<TData, TValue>): React.ReactNode => {
-      type FilterModel = Partial<
-        Record<
-          ColDefField<TData, TValue>,
-          {
-            filter: string
-            filterType: string
-            type: string
-          }
-        >
-      >
-      const filterModel = params.api.getFilterModel() as FilterModel
+      const filterEntry: unknown = params.api.getFilterModel()[props.field]
 
-      const filterValue = filterModel[props.field]?.filter ?? ''
+      const filterValue =
+        typeof filterEntry === 'object' &&
+        filterEntry !== null &&
+        'filter' in filterEntry &&
+        typeof filterEntry.filter === 'string'
+          ? filterEntry.filter
+          : ''
 
       const text = getTextWithBoldSubStringAsJsx({
         text: params.value ?? '',

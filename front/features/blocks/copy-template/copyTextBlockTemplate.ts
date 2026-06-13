@@ -1,4 +1,5 @@
 import { clipboardSlice } from '@front/entities/quotation/redux/clipboardSlice'
+import type { MouseEventLike } from '@front/shared/util/MouseEventLike'
 
 // assets can be imported as strings using the ?raw suffix
 import textBlockContentHtml from '@front/entities/quotation/templates/textBlockContent.html?raw'
@@ -7,7 +8,7 @@ import type { TextBlock } from '@back/entity/quotation/schema'
 import { generateId } from '@front/shared/lib/nanoid/generateId'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 
-export const copyTextBlockTemplate = (event?: React.MouseEvent): void => {
+export const copyTextBlockTemplate = (event?: MouseEventLike): void => {
   const textBlockTemplate: TextBlock = {
     id: generateId(),
     bookmarkSchemaVersion: 2,

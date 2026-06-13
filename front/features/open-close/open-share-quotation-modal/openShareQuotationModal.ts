@@ -5,12 +5,12 @@ import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 
 export const openShareQuotationModal = (): void => {
   if (reduxHolder.getState().user.email === null) {
-    routerHolder.router.navigate(
+    void routerHolder.router.navigate(
       `./${route.login}${buildSearchParams({ redirect: route.share, shouldSlide: 'true' })}`,
     )
 
     return
   }
 
-  routerHolder.router.navigate(`./${route.share}`)
+  void routerHolder.router.navigate(`./${route.share}`)
 }

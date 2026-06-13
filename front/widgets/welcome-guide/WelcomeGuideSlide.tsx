@@ -5,7 +5,7 @@ import { welcomeSlides } from '@front/shared/welcome-guide/welcomeSlides'
 
 export const WelcomeGuideSlide = (): React.JSX.Element => {
   const welcomeGuide = useWelcomeGuide()
-  const slide = welcomeSlides?.[welcomeGuide.currentSlide]
+  const slide = welcomeSlides[welcomeGuide.currentSlide]
   const directionAsNumber = welcomeGuide.direction === 'next' ? 1 : -1
 
   return (

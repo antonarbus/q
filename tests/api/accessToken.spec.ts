@@ -5,6 +5,29 @@ import { runtimeConfig } from '@root/config/runtime'
 
 test.describe.configure({ mode: 'serial' })
 
+const isAccessJwtTokenResponse = (data: unknown): data is { accessJwtToken: string } =>
+  typeof data === 'object' &&
+  data !== null &&
+  'accessJwtToken' in data &&
+  typeof data.accessJwtToken === 'string'
+
+const assertIsAccessJwtTokenResponse: (
+  data: unknown,
+) => asserts data is { accessJwtToken: string } = (data) => {
+  if (!isAccessJwtTokenResponse(data)) {
+    throw new Error('Unexpected response shape: missing accessJwtToken')
+  }
+}
+
+const assertIsDefined: <Value>(
+  value: Value,
+  message: string,
+) => asserts value is NonNullable<Value> = (value, message) => {
+  if (value === undefined || value === null) {
+    throw new Error(message)
+  }
+}
+
 test.describe('#authTokenRefresh', () => {
   test.use({ baseURL: runtimeConfig.back.baseUrl })
 
@@ -21,13 +44,17 @@ test.describe('#authTokenRefresh', () => {
       })
 
       expect(loginResponse.ok()).toBeTruthy()
-      const loginData = await loginResponse.json()
+      const loginData: unknown = await loginResponse.json()
+      assertIsAccessJwtTokenResponse(loginData)
+
       expect(loginData.accessJwtToken).toBeTruthy()
 
       accessToken = loginData.accessJwtToken
 
       // Verify refresh token cookie is set
-      const cookies = loginResponse.headers()['set-cookie'] as string
+      const cookies = loginResponse.headers()['set-cookie']
+      assertIsDefined(cookies, 'Expected set-cookie header to be present')
+
       expect(cookies).toContain('refresh-jwt-token')
 
       // Store the refresh token cookie for later use
@@ -71,7 +98,9 @@ test.describe('#authTokenRefresh', () => {
       )
 
       expect(accessTokenResponse.ok()).toBeTruthy()
-      const accessTokenData = await accessTokenResponse.json()
+      const accessTokenData: unknown = await accessTokenResponse.json()
+      assertIsAccessJwtTokenResponse(accessTokenData)
+
       expect(accessTokenData.accessJwtToken).toBeTruthy()
 
       refreshedAccessToken = accessTokenData.accessJwtToken

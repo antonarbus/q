@@ -68,7 +68,7 @@ export const TiptapMenu = (): React.ReactNode => {
     const shouldForceUpdate = isInTable === true && hasTextSelection === true
 
     if (shouldForceUpdate !== true) {
-      return
+      return undefined
     }
 
     const id = requestAnimationFrame(() => {

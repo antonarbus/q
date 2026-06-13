@@ -38,11 +38,11 @@ export const LoginModal = (): React.JSX.Element => {
       isButtonSuccess={logIn.isSuccess}
       modalRef={animatedElement.ref}
       onCloseClick={(): void => {
-        routerHolder.router.navigate('..')
+        void routerHolder.router.navigate('..')
       }}
       onSubmit={logIn.handleSubmit}
       onUnmount={(): void => {
-        routerHolder.router.navigate('..')
+        void routerHolder.router.navigate('..')
       }}
       paddingContent='50px 40px 10px 40px'
       shouldUnmountOnClickAway={true}

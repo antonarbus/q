@@ -1,3 +1,4 @@
+import { quotationSchema } from '@back/entity/quotation/schema'
 import type { Quotation } from '@back/entity/quotation/schema'
 
 const KEY = 'draftQuotation'
@@ -21,7 +22,9 @@ export const draftQuotationStorage = {
     }
 
     try {
-      return JSON.parse(stored) as Quotation
+      const parsed = quotationSchema.safeParse(JSON.parse(stored))
+
+      return parsed.success ? parsed.data : null
     } catch {
       return null
     }

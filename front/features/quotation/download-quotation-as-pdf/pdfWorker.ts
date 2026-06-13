@@ -1,8 +1,7 @@
 import type { WorkerRequestMessage, WorkerResponseMessage } from './types'
 
-self.addEventListener(
-  'message',
-  async (messageEvent: MessageEvent<WorkerRequestMessage>): Promise<void> => {
+self.addEventListener('message', (messageEvent: MessageEvent<WorkerRequestMessage>) => {
+  void (async (): Promise<void> => {
     const jspdfModule = await import('jspdf')
 
     // oxlint-disable-next-line new-cap
@@ -40,5 +39,5 @@ self.addEventListener(
     const workerResponseMessage: WorkerResponseMessage = { pdfBlob }
 
     self.postMessage(workerResponseMessage)
-  },
-)
+  })()
+})

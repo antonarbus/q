@@ -14,10 +14,10 @@ export const SubscriptionPage = (): React.JSX.Element => {
       headerText='Subscription'
       modalRef={modalRef}
       onCloseClick={(): void => {
-        navigate('..')
+        void navigate('..')
       }}
       onUnmount={(): void => {
-        navigate('..')
+        void navigate('..')
       }}
       shouldUnmountOnClickAway={true}
       shouldUnmountOnEsc={true}

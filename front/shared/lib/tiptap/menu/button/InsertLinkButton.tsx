@@ -10,46 +10,48 @@ export const InsertLinkButton = (): React.JSX.Element => {
     <MenuButton
       isActive={false}
       title='Insert link'
-      onClick={async () => {
-        const href = await confirmWithDialog({
-          inputLabel: 'Url',
-          title: 'Link',
-          description: '',
-          confirmButtonText: 'Add',
-          rejectButtonText: 'Cancel',
-        })
+      onClick={() =>
+        void (async (): Promise<void> => {
+          const href = await confirmWithDialog({
+            inputLabel: 'Url',
+            title: 'Link',
+            description: '',
+            confirmButtonText: 'Add',
+            rejectButtonText: 'Cancel',
+          })
 
-        if (href === false) {
-          return
-        }
+          if (href === false) {
+            return
+          }
 
-        if (href === null || href.trim() === '') {
-          return
-        }
+          if (href.trim() === '') {
+            return
+          }
 
-        const normalizedHref =
-          href.trim().startsWith('http://') ||
-          href.trim().startsWith('https://') ||
-          href.trim().startsWith('mailto:')
-            ? href.trim()
-            : `https://${href.trim()}`
+          const normalizedHref =
+            href.trim().startsWith('http://') ||
+            href.trim().startsWith('https://') ||
+            href.trim().startsWith('mailto:')
+              ? href.trim()
+              : `https://${href.trim()}`
 
-        const linkMark = editor.schema.marks.link
+          const linkMark = editor.schema.marks.link
 
-        if (linkMark === undefined) {
-          return
-        }
+          if (linkMark === undefined) {
+            return
+          }
 
-        const { from } = editor.state.selection
+          const { from } = editor.state.selection
 
-        editor.view.focus()
+          editor.view.focus()
 
-        const tr = editor.state.tr
-          .insertText(normalizedHref, from)
-          .addMark(from, from + normalizedHref.length, linkMark.create({ href: normalizedHref }))
+          const tr = editor.state.tr
+            .insertText(normalizedHref, from)
+            .addMark(from, from + normalizedHref.length, linkMark.create({ href: normalizedHref }))
 
-        editor.view.dispatch(tr)
-      }}
+          editor.view.dispatch(tr)
+        })()
+      }
     >
       <MdAddLink />
     </MenuButton>

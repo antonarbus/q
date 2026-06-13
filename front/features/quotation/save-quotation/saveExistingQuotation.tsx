@@ -8,7 +8,7 @@ import type { Quotation } from '@back/entity/quotation/schema'
 import { route } from '@front/shared/lib/react-router-dom/route'
 import { routerHolder } from '@front/shared/lib/react-router-dom/routerHolder'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
-import type { AxiosError } from 'axios'
+import { isAxiosError } from 'axios'
 import { toast } from 'sonner'
 import { createActor } from 'xstate'
 
@@ -37,7 +37,7 @@ export const saveExistingQuotation = async (): Promise<void> => {
     reduxHolder.getState().quotation.permissionLevel === 'SHARED'
 
   if (isAbleToSave === true) {
-    routerHolder.router.navigate(`./${route.save}`)
+    void routerHolder.router.navigate(`./${route.save}`)
 
     return
   }
@@ -47,33 +47,34 @@ export const saveExistingQuotation = async (): Promise<void> => {
   try {
     const data = await saveQuotationMutationFn({ quotation })
 
-    if (data.quotation !== undefined) {
-      if (data.status === 'UPDATED') {
-        toast.info('Updated')
-      }
-
-      if (data.status === 'COPIED') {
-        toast.success(`Shared quotation was copied and saved under id ${data.quotation.id}`, {
-          duration: 5000,
-        })
-      }
-
-      reduxHolder.dispatch(
-        quotationSlice.actions.loadQuotation({
-          quotation: {
-            ...reduxHolder.getState().quotation,
-            ...data.quotation,
-          },
-        }),
-      )
-
-      routerHolder.router.navigate(`/${data.quotation.id}`)
-
-      loadingIconActor.send({ type: 'show success icon' })
-      reduxHolder.dispatch(navSlice.actions.removeUnderlineFromTopNav())
+    if (data.status === 'UPDATED') {
+      toast.info('Updated')
     }
+
+    if (data.status === 'COPIED') {
+      toast.success(`Shared quotation was copied and saved under id ${data.quotation.id}`, {
+        duration: 5000,
+      })
+    }
+
+    reduxHolder.dispatch(
+      quotationSlice.actions.loadQuotation({
+        quotation: {
+          ...reduxHolder.getState().quotation,
+          ...data.quotation,
+        },
+      }),
+    )
+
+    void routerHolder.router.navigate(`/${data.quotation.id}`)
+
+    loadingIconActor.send({ type: 'show success icon' })
+    reduxHolder.dispatch(navSlice.actions.removeUnderlineFromTopNav())
   } catch (error) {
-    toast.error((error as AxiosError<ErrorResBody>).response?.data.message)
+    if (isAxiosError<ErrorResBody>(error)) {
+      toast.error(error.response?.data.message)
+    }
+
     loadingIconActor.send({ type: 'show error icon' })
   }
 }

@@ -8,13 +8,15 @@ export const ConnectStripeButton = (): React.JSX.Element => {
   return (
     <Button
       disabled={stripeConnectUrlQuery.isFetching}
-      onClick={async (): Promise<void> => {
-        const result = await stripeConnectUrlQuery.refetch()
+      onClick={() =>
+        void (async (): Promise<void> => {
+          const result = await stripeConnectUrlQuery.refetch()
 
-        if (result.data?.url !== undefined) {
-          globalThis.location.href = result.data.url
-        }
-      }}
+          if (result.data?.url !== undefined) {
+            globalThis.location.href = result.data.url
+          }
+        })()
+      }
       startIcon={<SiStripe />}
       sx={{ minWidth: '155px' }}
       variant='contained'

@@ -33,11 +33,11 @@ export const RequestPasswordResetModal = (): React.JSX.Element => {
       isButtonSuccess={requestPasswordReset.isSuccess}
       modalRef={animatedElement.ref}
       onCloseClick={(): void => {
-        routerHolder.router.navigate('..')
+        void routerHolder.router.navigate('..')
       }}
       onSubmit={requestPasswordReset.handleSubmit}
       onUnmount={(): void => {
-        routerHolder.router.navigate('..')
+        void routerHolder.router.navigate('..')
       }}
       paddingContent='50px 40px 10px 40px'
       shouldUnmountOnClickAway={true}

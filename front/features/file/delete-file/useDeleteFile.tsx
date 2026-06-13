@@ -21,7 +21,7 @@ export const useDeleteFile = (props: Props): Res => {
 
   useUpdateEffect(() => {
     if (deleteFileMutation.isSuccess === true) {
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: [queryKey.getFileListStats],
       })
     }
@@ -33,20 +33,22 @@ export const useDeleteFile = (props: Props): Res => {
     }
   }, [deleteFileMutation.isError])
 
-  const handleClick = useCallback(async (event: React.MouseEvent): Promise<void> => {
+  const handleClick = useCallback((event: React.MouseEvent) => {
     event.preventDefault()
     event.stopPropagation()
 
-    const shouldDeleteFile = await confirmWithDialog({
-      title: 'Confirm',
-      description: 'Delete file?',
-    })
+    void (async (): Promise<void> => {
+      const shouldDeleteFile = await confirmWithDialog({
+        title: 'Confirm',
+        description: 'Delete file?',
+      })
 
-    if (shouldDeleteFile === false) {
-      return
-    }
+      if (shouldDeleteFile === false) {
+        return
+      }
 
-    deleteFileMutation.mutate({ id: props.fileId })
+      deleteFileMutation.mutate({ id: props.fileId })
+    })()
   }, [])
 
   return {

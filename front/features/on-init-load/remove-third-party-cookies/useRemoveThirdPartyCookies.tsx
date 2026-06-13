@@ -3,10 +3,10 @@ import { useEffectOnce } from 'react-use'
 
 export const useRemoveThirdPartyCookies = (): void => {
   useEffectOnce(() => {
-    removeCookie({ name: 'cmapi_gtm_bl' })
-    removeCookie({ name: 'euconsent-v2' })
-    removeCookie({ name: 'notice_gdpr_prefs' })
-    removeCookie({ name: 'notice_preferences' })
-    removeCookie({ name: 'pvisitor' })
+    void removeCookie({ name: 'cmapi_gtm_bl' })
+    void removeCookie({ name: 'euconsent-v2' })
+    void removeCookie({ name: 'notice_gdpr_prefs' })
+    void removeCookie({ name: 'notice_preferences' })
+    void removeCookie({ name: 'pvisitor' })
   })
 }

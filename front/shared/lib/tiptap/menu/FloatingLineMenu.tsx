@@ -132,7 +132,7 @@ export const FloatingLineMenu = (): React.ReactNode => {
   // Close expanded menu on click away
   useEffect(() => {
     if (isOpen === false) {
-      return
+      return undefined
     }
 
     const handleOutsideClick = (event: MouseEvent): void => {

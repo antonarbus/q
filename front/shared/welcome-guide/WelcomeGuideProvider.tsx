@@ -34,7 +34,7 @@ export const WelcomeGuideProvider = ({
   }, [])
 
   const close = (): void => {
-    navigate('..')
+    void navigate('..')
   }
 
   const value: Props = {

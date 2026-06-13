@@ -60,7 +60,7 @@ export const LogInAsUserButton = (props: UrlParam): React.ReactNode => {
       const isBookmarkListPage = location.pathname.includes(route.bookmarkList)
 
       if (isBookmarkListPage === true) {
-        getBookmarkListQuery.refetch()
+        void getBookmarkListQuery.refetch()
       }
     }
   }, [logInUserMutation.isSuccess])

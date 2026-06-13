@@ -14,7 +14,7 @@ export const SaveQuotationButton: FC = () => {
           if (reduxHolder.getState().quotation.id === 'new') {
             openSaveQuotationModal()
           } else {
-            saveExistingQuotation()
+            void saveExistingQuotation()
           }
         }}
       >

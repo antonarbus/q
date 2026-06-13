@@ -47,13 +47,11 @@ const responseErrorInterceptor = async (error: AxiosError): Promise<unknown> => 
         withCredentials: true,
       })
 
-      if (res.data.accessJwtToken !== undefined) {
-        reduxHolder.dispatch(
-          userSlice.actions.setAccessToken({
-            accessToken: res.data.accessJwtToken,
-          }),
-        )
-      }
+      reduxHolder.dispatch(
+        userSlice.actions.setAccessToken({
+          accessToken: res.data.accessJwtToken,
+        }),
+      )
 
       // make original request
       return await axiosWithAuth.request(originalRequestConfig)

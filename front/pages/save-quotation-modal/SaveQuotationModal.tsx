@@ -44,11 +44,11 @@ export const SaveQuotationModal = (): React.JSX.Element => {
       isButtonSuccess={saveQuotation.isSuccess}
       modalRef={animatedElement.ref}
       onCloseClick={(): void => {
-        routerHolder.router.navigate('..')
+        void routerHolder.router.navigate('..')
       }}
       onSubmit={saveQuotation.handleSubmit}
       onUnmount={(): void => {
-        routerHolder.router.navigate('..')
+        void routerHolder.router.navigate('..')
       }}
       shouldUnmountOnClickAway={true}
       shouldUnmountOnEsc={true}

@@ -10,7 +10,7 @@ export const getBoqHeaderFromStoreByIndex = (props: Props): HeaderValue | undefi
   const block = reduxHolder.getState().quotation.blocks[props.blockIndex]
 
   if (block?.type !== 'boq') {
-    return
+    return undefined
   }
 
   return block.boq.header[props.boqHeaderKey]

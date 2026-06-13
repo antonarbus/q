@@ -41,7 +41,7 @@ export const SubscriptionStatus: FC = () => {
     )
   }
 
-  if (!hasAccess && !isLapsed && isAtLimit) {
+  if (isAtLimit) {
     return (
       <Box sx={{ textAlign: 'center', width: '100%' }}>
         <span>

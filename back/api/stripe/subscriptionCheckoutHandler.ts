@@ -52,7 +52,7 @@ export const subscriptionCheckoutHandler: RouterHandler = async (req) => {
       success_url: `${runtimeConfig.front.baseUrl}/settings?subscription=success`,
       cancel_url: `${runtimeConfig.front.baseUrl}/settings?subscription=canceled`,
     })
-    .catch((error) => {
+    .catch((error: unknown) => {
       const stripeMessage = error instanceof Error ? error.message : String(error)
 
       messageList.push(`Stripe error: ${stripeMessage}`)

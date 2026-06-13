@@ -79,9 +79,14 @@ export const stripeConnectCallbackHandler: RouterHandler = async (req) => {
   let email: string
 
   try {
-    const payload = jwt.verify(req.query.state, jwtSecret) as { email?: string }
+    const payload: unknown = jwt.verify(req.query.state, jwtSecret)
 
-    if (typeof payload.email !== 'string') {
+    if (
+      typeof payload !== 'object' ||
+      payload === null ||
+      !('email' in payload) ||
+      typeof payload.email !== 'string'
+    ) {
       throw new TypeError('Invalid state payload')
     }
 

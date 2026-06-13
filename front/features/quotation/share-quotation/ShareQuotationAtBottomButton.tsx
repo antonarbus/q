@@ -40,7 +40,7 @@ export const ShareQuotationAtBottomButton = (): React.JSX.Element | null => {
       }),
     )
 
-    navigate(`/${id}`, { replace: true })
+    void navigate(`/${id}`, { replace: true })
   }, [saveQuotationMutation.isSuccess])
 
   useUpdateEffect(() => {
@@ -73,47 +73,49 @@ export const ShareQuotationAtBottomButton = (): React.JSX.Element | null => {
             bgcolor: 'rgba(0,0,0,0.04)',
           },
         }}
-        onClick={async (): Promise<void> => {
-          if (reduxHolder.getState().user.email === null) {
-            toast.warning('Please log in to share')
-            return
-          }
-
-          const unpaidPaymentBlocks = reduxHolder
-            .getState()
-            .quotation.blocks.filter(
-              (block) => block.type === 'payment' && block.payment.stripePaymentLinkUrl === null,
-            )
-
-          if (unpaidPaymentBlocks.length > 0) {
-            const confirmed = await confirmWithDialog({
-              title: 'Payment link not generated',
-              description:
-                'Payment link is not configured and will be removed. Do you want to proceed?',
-              confirmButtonText: 'Share anyway',
-              rejectButtonText: 'Cancel',
-            })
-
-            if (confirmed === false) {
+        onClick={() =>
+          void (async (): Promise<void> => {
+            if (reduxHolder.getState().user.email === null) {
+              toast.warning('Please log in to share')
               return
             }
 
-            for (const block of unpaidPaymentBlocks) {
-              reduxHolder.dispatch(quotationSlice.actions.deleteBlock({ id: block.id }))
+            const unpaidPaymentBlocks = reduxHolder
+              .getState()
+              .quotation.blocks.filter(
+                (block) => block.type === 'payment' && block.payment.stripePaymentLinkUrl === null,
+              )
+
+            if (unpaidPaymentBlocks.length > 0) {
+              const confirmed = await confirmWithDialog({
+                title: 'Payment link not generated',
+                description:
+                  'Payment link is not configured and will be removed. Do you want to proceed?',
+                confirmButtonText: 'Share anyway',
+                rejectButtonText: 'Cancel',
+              })
+
+              if (confirmed === false) {
+                return
+              }
+
+              for (const block of unpaidPaymentBlocks) {
+                reduxHolder.dispatch(quotationSlice.actions.deleteBlock({ id: block.id }))
+              }
             }
-          }
 
-          const existingId = reduxHolder.getState().quotation.id
-          const id = existingId === 'new' ? generateId() : existingId
+            const existingId = reduxHolder.getState().quotation.id
+            const id = existingId === 'new' ? generateId() : existingId
 
-          const quotation = {
-            ...reduxHolder.getState().quotation,
-            id,
-            access: { level: 'everyone' as const, userList: [] },
-          }
+            const quotation = {
+              ...reduxHolder.getState().quotation,
+              id,
+              access: { level: 'everyone' as const, userList: [] },
+            }
 
-          saveQuotationMutation.mutate({ quotation })
-        }}
+            saveQuotationMutation.mutate({ quotation })
+          })()
+        }
       >
         {saveQuotationMutation.isPending ? <RotatingLoaderIcon /> : <PiShareFatBold />}
       </IconButton>

@@ -44,11 +44,11 @@ export const RegisterModal = (): React.JSX.Element => {
       isButtonSuccess={register.isSuccess}
       modalRef={animatedElement.ref}
       onCloseClick={(): void => {
-        routerHolder.router.navigate('..')
+        void routerHolder.router.navigate('..')
       }}
       onSubmit={register.handleSubmit}
       onUnmount={(): void => {
-        routerHolder.router.navigate('..')
+        void routerHolder.router.navigate('..')
       }}
       paddingContent='50px 40px 10px 40px'
       shouldUnmountOnClickAway={true}

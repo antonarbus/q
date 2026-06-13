@@ -2,6 +2,8 @@ import { defineConfig } from 'steiger'
 import fsd from '@feature-sliced/steiger-plugin'
 
 const fsdLintConfig = defineConfig([
+  // @feature-sliced/steiger-plugin ships a `.d.ts` referencing the unpublished `@steiger/toolkit` package, which TS resolves to an error type
+  // oxlint-disable-next-line typescript/no-unsafe-assignment
   ...fsd.configs.recommended,
   {
     rules: {

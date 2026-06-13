@@ -18,7 +18,7 @@ export const OpenRegisterModalLink = (props: Props): React.JSX.Element => {
           openRegisterModal({ prefilledEmail: props.prefilledEmail })
         }
 
-        slideAndNavigate()
+        void slideAndNavigate()
       }}
       style={{ textAlign: 'right' }}
       to={`../${route.register}`}

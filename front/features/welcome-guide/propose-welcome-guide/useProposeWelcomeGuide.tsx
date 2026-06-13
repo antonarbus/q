@@ -12,17 +12,17 @@ export const useProposeWelcomeGuide = (): void => {
 
   useEffectOnce(() => {
     if (isEditorView === false) {
-      return
+      return undefined
     }
 
     const { permissionLevel } = reduxHolder.getState().quotation
 
     if (permissionLevel === 'PUBLIC' || permissionLevel === 'SHARED') {
-      return
+      return undefined
     }
 
     if (localStorage.getItem(localStorageKeys.guideVisited) !== null) {
-      return
+      return undefined
     }
 
     const timeoutId = setTimeout(() => {
@@ -31,7 +31,7 @@ export const useProposeWelcomeGuide = (): void => {
         action: {
           label: 'Show guide',
           onClick: () => {
-            navigate(`./${route.welcomeGuide}`)
+            void navigate(`./${route.welcomeGuide}`)
           },
         },
         duration: 10_000,

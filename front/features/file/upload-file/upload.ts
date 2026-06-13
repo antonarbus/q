@@ -28,50 +28,52 @@ export const upload: OnUpload = async (props) => {
 
     const reader = new FileReader()
 
-    reader.addEventListener('load', async (event): Promise<void> => {
-      const fileAsBase64String = event.target?.result
+    reader.addEventListener('load', (event) => {
+      void (async (): Promise<void> => {
+        const fileAsBase64String = event.target?.result
 
-      if (props.editor === null) {
-        return
-      }
+        if (props.editor === null) {
+          return
+        }
 
-      if (typeof fileAsBase64String !== 'string') {
-        return
-      }
+        if (typeof fileAsBase64String !== 'string') {
+          return
+        }
 
-      if (props.type === 'image') {
-        const imageDimensions = await getImageDimensions(fileAsBase64String)
+        if (props.type === 'image') {
+          const imageDimensions = await getImageDimensions(fileAsBase64String)
 
-        props.editor
-          ?.chain()
-          .focus()
-          .setImage({
-            src: fileAsBase64String,
-            alt: file.name,
-            width: imageDimensions.width > 0 ? imageDimensions.width : undefined,
-            height: imageDimensions.height > 0 ? imageDimensions.height : undefined,
-          })
-          .run()
-      }
+          props.editor
+            .chain()
+            .focus()
+            .setImage({
+              src: fileAsBase64String,
+              alt: file.name,
+              width: imageDimensions.width > 0 ? imageDimensions.width : undefined,
+              height: imageDimensions.height > 0 ? imageDimensions.height : undefined,
+            })
+            .run()
+        }
 
-      if (props.type === 'file') {
-        props.editor
-          .chain()
-          .focus()
-          .insertContent({
-            type: 'text',
-            text: file.name,
-            marks: [
-              {
-                type: 'link',
-                attrs: {
-                  href: fileAsBase64String,
+        if (props.type === 'file') {
+          props.editor
+            .chain()
+            .focus()
+            .insertContent({
+              type: 'text',
+              text: file.name,
+              marks: [
+                {
+                  type: 'link',
+                  attrs: {
+                    href: fileAsBase64String,
+                  },
                 },
-              },
-            ],
-          })
-          .run()
-      }
+              ],
+            })
+            .run()
+        }
+      })()
     })
 
     reader.readAsDataURL(file)
@@ -170,7 +172,7 @@ export const upload: OnUpload = async (props) => {
         }
       }
 
-      showProgress()
+      void showProgress()
     },
   })
 
