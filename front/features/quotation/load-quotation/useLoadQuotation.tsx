@@ -40,7 +40,7 @@ export const useLoadQuotation = (): void => {
       return 'template'
     }
 
-    if (isPageLoad && draftQuotationStorage.load()?.id === urlParams.quotationId) {
+    if (isPageLoad === true && draftQuotationStorage.load()?.id === urlParams.quotationId) {
       return 'memory'
     }
 
