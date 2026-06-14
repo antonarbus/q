@@ -6,7 +6,7 @@
     <title>FAQ - SendMeQuotation.today | Frequently Asked Questions</title>
     <meta
       name="description"
-      content="Frequently asked questions about SendMeQuotation.today. Learn how to create quotations, manage your account, share quotes with clients, and more."
+      content="Frequently asked questions about SendMeQuotation.today. Learn about pricing, sharing quotations, PDF export, Stripe payments, bookmarks, and more."
     />
     <link rel="canonical" href="https://sendmequotation.today/blog/faq.html" />
     <link rel="stylesheet" href="/blog/blog.css" />
@@ -21,7 +21,7 @@
     <meta property="og:url" content="https://sendmequotation.today/blog/faq.html" />
     <meta property="og:image" content="https://sendmequotation.today/blog/images/macbook.jpg" />
 
-    <!-- Structured data — FAQPage schema makes answers appear directly in Google results -->
+    <!-- FAQPage schema — Google can show individual Q&As directly in search results -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -32,15 +32,15 @@
             "name": "Is SendMeQuotation.today free to use?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes, you can create and manage quotations for free. Premium features are available on paid plans."
+              "text": "Yes. The first 100 quotations are completely free with no credit card required. After that, a one-time payment of $99 unlocks 365 days of unlimited quotations. No recurring subscription — you only pay again when you want to extend."
             }
           },
           {
             "@type": "Question",
-            "name": "Can I share quotations with clients?",
+            "name": "Do my clients need to create an account to view a quotation?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes. Every quotation gets a shareable link your client can open in any browser — no account required on their side."
+              "text": "No. Every quotation gets a unique shareable link. Your client opens it in any browser — no sign-up or login required on their side."
             }
           },
           {
@@ -48,7 +48,47 @@
             "name": "Can I export quotations to PDF?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes, quotations can be downloaded as a PDF with one click."
+              "text": "Yes. Any quotation can be downloaded as a PDF with one click."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can clients pay directly from the quotation?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. If you connect your Stripe account, you can add a Payment Block to any quotation. This embeds a Stripe payment link so the client can pay without leaving the page. The payment goes directly to your Stripe account — the platform is never in the money flow."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What are Bookmarks?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Bookmarks let you save frequently used items, blocks, or full sections and insert them into any quotation in one click. Useful for standard line items, terms and conditions paragraphs, or any content you reuse often."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What types of blocks can I add to a quotation?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You can add text blocks (rich text sections), BOQ tables (bill of quantities with description, quantity, unit price, and totals), price summary blocks, and payment blocks with a Stripe payment link."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do I need to install anything?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. SendMeQuotation.today is a web app — it runs in your browser. No installation or download required."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is there a mobile app?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Not currently. The quotation editor is designed for desktop use — the interface is too complex to use comfortably on a small screen. A desktop or laptop is recommended."
             }
           }
         ]
@@ -85,33 +125,78 @@
           "
         />
 
-        <!-- TODO: Replace placeholder Q&As below with real content.
-             Also update the JSON-LD structured data above to match. -->
+        <!-- TODO: Add or remove Q&As as the product evolves.
+             Keep the JSON-LD above in sync — Google reads that for rich results. -->
 
         <h2>Is SendMeQuotation.today free to use?</h2>
         <p>
-          Yes, you can create and manage quotations for free. Premium features are available on paid
-          plans.
+          The first 100 quotations are completely free with no credit card required. After that, a
+          one-time payment of <strong>$99</strong> unlocks 365 days of unlimited quotations. No
+          recurring subscription — you only pay again when you want to extend. Multiple purchases
+          stack: buying while your access is still active extends it from the current expiry date.
         </p>
 
-        <h2>Can I share quotations with clients?</h2>
+        <h2>Do my clients need to create an account to view a quotation?</h2>
         <p>
-          Yes. Every quotation gets a shareable link your client can open in any browser — no account
-          required on their side.
+          No. Every quotation gets a unique shareable link. Your client opens it in any browser — no
+          sign-up or login required on their side.
         </p>
 
         <h2>Can I export quotations to PDF?</h2>
-        <p>Yes, quotations can be downloaded as a PDF with one click.</p>
+        <p>Yes. Any quotation can be downloaded as a PDF with one click.</p>
 
-        <!-- TODO: Add more Q&As here -->
+        <h2>Can clients pay directly from the quotation?</h2>
+        <p>
+          Yes. If you connect your Stripe account, you can add a <strong>Payment Block</strong> to
+          any quotation. This embeds a Stripe payment link so the client can pay without leaving the
+          page. The payment goes directly to your Stripe account — the platform is never in the
+          money flow.
+        </p>
+
+        <h2>What are Bookmarks?</h2>
+        <p>
+          Bookmarks let you save frequently used items, blocks, or full sections and insert them
+          into any quotation in one click. Useful for standard line items, terms and conditions
+          paragraphs, or any content you reuse often.
+        </p>
+
+        <h2>What types of blocks can I add to a quotation?</h2>
+        <ul>
+          <li>
+            <strong>Text block</strong> — rich text section for descriptions, cover letters, terms
+          </li>
+          <li>
+            <strong>BOQ table</strong> — bill of quantities with description, quantity, unit price,
+            and automatic totals
+          </li>
+          <li><strong>Price summary block</strong> — displays subtotals and grand total</li>
+          <li>
+            <strong>Payment block</strong> — embeds a Stripe payment link so clients can pay
+            directly
+          </li>
+        </ul>
+
+        <h2>Do I need to install anything?</h2>
+        <p>
+          No. SendMeQuotation.today is a web app — it runs in your browser. No installation or
+          download required.
+        </p>
+
+        <h2>Is there a mobile app?</h2>
+        <p>
+          Not currently. The quotation editor is designed for desktop use — the interface is too
+          complex to use comfortably on a small screen. A desktop or laptop is recommended.
+        </p>
+
+        <!-- TODO: Add more Q&As here as users ask questions -->
 
         <a href="/" class="cta">Start Creating Quotations →</a>
       </article>
 
       <footer>
         <p>
-          © 2026 <a href="/">SendMeQuotation.today</a> |
-          <a href="/blog/about.html">About</a> | Professional Quotation Management Software
+          © 2026 <a href="/">SendMeQuotation.today</a> | <a href="/blog/about.html">About</a> |
+          Professional Quotation Management Software
         </p>
       </footer>
     </div>
