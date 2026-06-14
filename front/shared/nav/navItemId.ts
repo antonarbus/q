@@ -28,9 +28,8 @@ export const navItemId = {
   userList: 'user-list',
   visitors: 'visitors',
   blog: 'blog',
-  blogHowToCreate: 'blog-how-to-create',
-  blogFreeTemplate: 'blog-free-template',
-  blogTermsAndConditions: 'blog-terms-and-conditions',
+  blogAbout: 'blog-about',
+  blogFaq: 'blog-faq',
   welcomeGuide: 'welcome-guide',
 } as const
 
