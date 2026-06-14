@@ -34,7 +34,9 @@ export const useValidatePaymentAmount = (props: Props): Res => {
         return false
       }
 
-      void routerHolder.router.navigate(`./${route.stripeConnect}`)
+      void routerHolder.router.navigate(
+        `./${route.stripeConnect}${buildSearchParams({ returnUrl: window.location.pathname })}`,
+      )
 
       return false
     }

@@ -4,8 +4,8 @@ import type { ButtonProps } from '@mui/material'
 import type { FC } from 'react'
 
 type Props = {
-  mode?: 'buy' | 'extend'
-  size?: ButtonProps['size']
+  mode: 'buy' | 'extend'
+  size: ButtonProps['size']
 }
 
 export const SubscribeButton: FC<Props> = (props) => {
@@ -19,10 +19,7 @@ export const SubscribeButton: FC<Props> = (props) => {
       onClick={() =>
         void (async (): Promise<void> => {
           const result = await checkoutMutation.mutateAsync()
-
-          if (result.checkoutUrl) {
-            window.location.href = result.checkoutUrl
-          }
+          window.location.href = result.checkoutUrl
         })()
       }
     >

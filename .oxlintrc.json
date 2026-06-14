@@ -36,10 +36,10 @@
   },
   // https://oxc.rs/docs/guide/usage/linter/rules.html
   "rules": {
+    "eslint/prefer-destructuring": "off", // direct member access is fine: email = payload.email
     "eslint/arrow-body-style": "off", // allow () => { ... } and () => expression
     "eslint/no-void": "off", // we use `void expr` to explicitly mark ignored promises (no-floating-promises convention); oxlint lacks ESLint's `allowAsStatement` to permit just that
     "eslint/no-warning-comments": "warn", // highlight @todo comments
-    "unicorn/no-useless-undefined": "off", // conflicts with typescript/consistent-return: `return undefined` is required before `return <cleanupFn>` in useEffect early-exits and in mixed-return getters
     "eslint/capitalized-comments": "off", // sometimes comments should start from lower case
     "eslint/id-length": ["error", { "exceptions": ["x", "y", "_"] }], // allow { x: event.clientX, y: event.clientY }
     "eslint/max-lines-per-function": "off", // sometimes long function is better than multiple small functions
@@ -55,8 +55,6 @@
     "eslint/sort-imports": "off", // ? not auto-fixable, annoying to sort manually
     "eslint/sort-keys": "off", // not nice, quite often manual sort have mental idea behind
     "eslint/require-unicode-regexp": "off", // do not care about emoji
-    "react/jsx-boolean-value": ["error", "always"], // prop={false} and also prop={true} for consistency
-    "react/forbid-component-props": "off", // it forbids 'style' and 'className' props
     "import/exports-last": "off", // types in api handlers are exported and used below
     "import/group-exports": "off", // nah
     "import/no-relative-parent-imports": "off", // ../.. indicates the proximity, for architecture constrains we use @feature-sliced/steiger-plugin
@@ -78,17 +76,19 @@
     "react-perf/jsx-no-new-object-as-prop": "off", // react compiler takes care of memoization
     "react/exhaustive-deps": "off", // react compiler handles memoization; rule produces noise for stable refs/dispatch
     "react/jsx-filename-extension": ["error", { "extensions": ["jsx", "tsx"] }], // use .tsx if jsx is inside
+    "react/jsx-boolean-value": ["error", "always"], // prop={false} and also prop={true} for consistency
     "react/jsx-max-depth": "off", // too strict
     "react/jsx-handler-names": "off", // not a good rule, it enforces handleClick, handleChange prop names
     "react/jsx-no-constructed-context-values": "off", // react compiler memoize values
     "react/jsx-props-no-spreading": "warn", // like the rule, better to explicitly name props, but in reality we have to spread sometimes
+    "react/forbid-component-props": "off", // it forbids 'style' and 'className' props
     "react/no-unknown-property": ["error", { "ignore": ["css"] }], // emotion injects css prop support
     "react/react-in-jsx-scope": "off", // not necessary on React 17+
-    "typescript/consistent-type-definitions": ["error", "type"], // declare types with 'type' keyword
     "unicorn/filename-case": ["error", { "cases": { "camelCase": true, "pascalCase": true } }],
     "unicorn/no-array-for-each": "off", // for...of is faster, but forEach is readable
     "unicorn/no-array-reduce": "off", // for...of is faster, but reduce is readable
     "unicorn/no-null": "off", // DB uses null, DOM APIs use null
+    "unicorn/no-useless-undefined": "off", // conflicts with typescript/consistent-return: `return undefined` is required before `return <cleanupFn>` in useEffect early-exits and in mixed-return getters
     "unicorn/prefer-global-this": "off", // window gives typed DOM overloads; globalThis loses KeyboardEvent etc.
     "unicorn/require-post-message-target-origin": "off", // false positive: Worker.postMessage has no targetOrigin parameter
     "vitest/consistent-test-filename": ["error", { "pattern": ".*\\.(test|spec)\\.[tj]sx?$" }],
@@ -97,6 +97,8 @@
     "vitest/prefer-expect-assertions": "off", // tests have assertions without special directives, too excessive rule
     "vitest/require-hook": "off", // false positive for non-test files
     "typescript/prefer-readonly-parameter-types": "off", // that is fine to be not a readonly
-    "typescript/no-unnecessary-boolean-literal-compare": "off" // imho this is better if(someCondition === true) than if(someCondition)
+    "typescript/no-unnecessary-boolean-literal-compare": "off", // imho this is better if(someCondition === true) than if(someCondition)
+    "typescript/no-inferrable-types": "off", // explicit type annotations are fine even when inferrable
+    "typescript/consistent-type-definitions": ["error", "type"] // declare types with 'type' keyword
   }
 }

@@ -35,7 +35,7 @@ export const SubscriptionStatus: FC = () => {
           {new Date(subscriptionExpiresAt).toLocaleDateString()})
         </span>
         <Box sx={{ mt: 1 }}>
-          <SubscribeButton size='small' />
+          <SubscribeButton mode='buy' size='small' />
         </Box>
       </Box>
     )
@@ -48,7 +48,7 @@ export const SubscriptionStatus: FC = () => {
           Quota: {quotationCount} / {freeLimit} — get unlimited access
         </span>
         <Box sx={{ mt: 1 }}>
-          <SubscribeButton size='small' />
+          <SubscribeButton mode='buy' size='small' />
         </Box>
       </Box>
     )

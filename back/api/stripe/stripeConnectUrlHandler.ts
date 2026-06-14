@@ -13,7 +13,10 @@ import { route } from '../route'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
-type ReqBody = undefined
+
+type ReqBody = {
+  returnUrl: string | null
+}
 
 export type ResBody = {
   url: string
@@ -35,7 +38,16 @@ export const stripeConnectUrlHandler: RouterHandler = async (req) => {
 
   messageList.push('Secrets loaded')
 
-  const jwtPayloadWithEmail = jwt.sign({ email: user.email }, jwtSecret, { expiresIn: '1h' })
+  const jwtPayloadWithEmail = jwt.sign(
+    {
+      email: user.email,
+      returnUrl: req.body?.returnUrl ?? '/',
+    },
+    jwtSecret,
+    {
+      expiresIn: '1h',
+    },
+  )
 
   messageList.push('State JWT signed')
 

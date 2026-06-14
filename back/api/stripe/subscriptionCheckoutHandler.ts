@@ -12,6 +12,7 @@ import type { ParsedQs } from 'qs'
 
 type SearchQuery = ParsedQs
 type UrlParam = ParamsDictionary
+
 type ReqBody = undefined
 
 export type ResBody = {
@@ -32,9 +33,7 @@ type RouterHandler = (
 
 export const subscriptionCheckoutHandler: RouterHandler = async (req) => {
   const user = await getUserFromAccessTokenOrThrowUnauthorized({ req })
-
   const messageList: string[] = []
-
   const stripe = await getStripe()
 
   const session = await stripe.instance.checkout.sessions
@@ -49,8 +48,8 @@ export const subscriptionCheckoutHandler: RouterHandler = async (req) => {
       metadata: {
         userEmail: user.email,
       },
-      success_url: `${runtimeConfig.front.baseUrl}/settings?subscription=success`,
-      cancel_url: `${runtimeConfig.front.baseUrl}/settings?subscription=canceled`,
+      success_url: `${runtimeConfig.front.baseUrl}/?subscription=success`,
+      cancel_url: `${runtimeConfig.front.baseUrl}/`,
     })
     .catch((error: unknown) => {
       const stripeMessage = error instanceof Error ? error.message : String(error)
@@ -66,10 +65,18 @@ export const subscriptionCheckoutHandler: RouterHandler = async (req) => {
 
   messageList.push(`Checkout session created: ${session.id}`)
 
+  if (session.url === null) {
+    throw new HttpError<ErrorResBody['errorCode']>({
+      errorCode: 'SUBSCRIPTION_CHECKOUT_FAILED',
+      statusCode: httpStatusCode.badRequest400,
+      message: messageList.join(' | '),
+    })
+  }
+
   return httpJsonResponse({
     statusCode: httpStatusCode.success200,
     body: {
-      checkoutUrl: session.url ?? '',
+      checkoutUrl: session.url,
       message: messageList.join(' | '),
     },
   })

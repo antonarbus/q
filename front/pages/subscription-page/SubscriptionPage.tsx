@@ -25,7 +25,7 @@ export const SubscriptionPage = (): React.JSX.Element => {
     >
       <p style={{ textAlign: 'center' }}>Quota limit reached</p>
       <p style={{ textAlign: 'center' }}>
-        <SubscribeButton />
+        <SubscribeButton mode='buy' size='medium' />
       </p>
     </FormModal>
   )

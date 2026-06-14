@@ -1,34 +1,26 @@
 import { useStripeAccountStatusQuery } from '@front/entities/payment/api/useStripeAccountStatusQuery'
-import { useStripeConnectUrlQuery } from '@front/entities/payment/api/useStripeConnectUrlQuery'
+import { useStripeConnectUrlMutation } from '@front/entities/payment/api/useStripeConnectUrlQuery'
 import { DisconnectStripeButton } from '@front/features/user/disconnect-stripe/DisconnectStripeButton'
 import { OpenStripeButton } from '@front/features/user/open-stripe/OpenStripeButton'
 import { RotatingLoaderIcon } from '@front/shared/component/RotatingLoaderIcon'
-import { buildSearchParams } from '@front/shared/lib/react-router-dom/searchParams'
+import { buildSearchParams, getSearchParam } from '@front/shared/lib/react-router-dom/searchParams'
 import { route } from '@front/shared/lib/react-router-dom/route'
 import { routerHolder } from '@front/shared/lib/react-router-dom/routerHolder'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { Box, Button, Typography } from '@mui/material'
-import { useEffect } from 'react'
 import { SiStripe } from 'react-icons/si'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
 export const ConnectStripeContent = (): React.JSX.Element => {
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams] = useSearchParams()
   const navigate = useNavigate()
 
   const stripeStatusQuery = useStripeAccountStatusQuery()
-  const stripeConnectUrlQuery = useStripeConnectUrlQuery()
+  const stripeConnectUrlMutation = useStripeConnectUrlMutation()
 
   const stripeError = searchParams.get('stripe_error')
 
   const email = reduxHolder.useSelector((state) => state.user.email)
-
-  useEffect(() => {
-    if (searchParams.get('stripe_connected') === 'true' || stripeError !== null) {
-      void stripeStatusQuery.refetch()
-      setSearchParams({}, { replace: true })
-    }
-  }, [searchParams, setSearchParams, stripeStatusQuery, stripeError])
 
   if (email === null) {
     return (
@@ -93,20 +85,18 @@ export const ConnectStripeContent = (): React.JSX.Element => {
         Connect your Stripe account to accept payments from clients
       </Typography>
       <Button
-        disabled={stripeConnectUrlQuery.isFetching}
+        disabled={stripeConnectUrlMutation.isPending}
         startIcon={<SiStripe />}
         variant='contained'
         onClick={() =>
           void (async (): Promise<void> => {
-            const result = await stripeConnectUrlQuery.refetch()
-
-            if (result.data?.url !== undefined) {
-              window.location.href = result.data.url
-            }
+            const returnUrl = getSearchParam('returnUrl')
+            const result = await stripeConnectUrlMutation.mutateAsync({ returnUrl })
+            window.location.href = result.url
           })()
         }
       >
-        {stripeConnectUrlQuery.isFetching === true ? 'Loading...' : 'Connect'}
+        {stripeConnectUrlMutation.isPending === true ? 'Loading...' : 'Connect'}
       </Button>
     </Box>
   )

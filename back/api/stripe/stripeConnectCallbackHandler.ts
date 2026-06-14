@@ -46,18 +46,14 @@ type RouterHandler = (
 ) => Promise<HttpResponse>
 
 export const stripeConnectCallbackHandler: RouterHandler = async (req) => {
-  // const { code, state, error } = req.query
-
   const messageList: string[] = []
-
-  const frontendSettingsUrl = `${runtimeConfig.front.baseUrl}/settings`
 
   if (typeof req.query.error === 'string') {
     messageList.push(`Stripe OAuth error: ${req.query.error}`)
 
     return httpRedirect({
       statusCode: httpStatusCode.reDirect302,
-      redirectUrl: `${frontendSettingsUrl}?stripe_error=${encodeURIComponent(req.query.error)}`,
+      redirectUrl: `${runtimeConfig.front.baseUrl}/settings?stripe_error=${encodeURIComponent(req.query.error)}`,
     })
   }
 
@@ -77,6 +73,7 @@ export const stripeConnectCallbackHandler: RouterHandler = async (req) => {
 
   // oxlint-disable-next-line init-declarations
   let email: string
+  let returnUrl: string = '/'
 
   try {
     const payload: unknown = jwt.verify(req.query.state, jwtSecret)
@@ -84,13 +81,17 @@ export const stripeConnectCallbackHandler: RouterHandler = async (req) => {
     if (
       typeof payload !== 'object' ||
       payload === null ||
-      !('email' in payload) ||
+      'email' in payload === false ||
       typeof payload.email !== 'string'
     ) {
       throw new TypeError('Invalid state payload')
     }
 
-    ;({ email } = payload)
+    email = payload.email
+
+    if ('returnUrl' in payload === true && typeof payload.returnUrl === 'string') {
+      returnUrl = payload.returnUrl
+    }
   } catch {
     messageList.push('Invalid or expired state parameter')
 
@@ -128,6 +129,6 @@ export const stripeConnectCallbackHandler: RouterHandler = async (req) => {
 
   return httpRedirect({
     statusCode: httpStatusCode.reDirect302,
-    redirectUrl: `${frontendSettingsUrl}?stripe_connected=true`,
+    redirectUrl: `${runtimeConfig.front.baseUrl}${returnUrl}?stripe_connected=true`,
   })
 }

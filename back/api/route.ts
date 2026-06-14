@@ -225,7 +225,7 @@ export const route = {
   stripeConnectUrl: {
     path: '/api/stripe/connect-url',
     url: '/api/stripe/connect-url',
-    method: 'get',
+    method: 'post',
     description: 'Get Stripe Connect OAuth URL',
   },
   stripeConnectCallback: {

@@ -12,7 +12,7 @@ import { route } from '@front/shared/lib/react-router-dom/route'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { asyncDelay } from '@front/shared/util/asyncDelay'
 import type { UseMutationResult } from '@tanstack/react-query'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
 import { createActor } from 'xstate'
@@ -42,6 +42,7 @@ export const useSaveQuotation = (props: Props): Res => {
   const saveQuotationMutation = useSaveQuotationMutation()
   const getQuotationCategoryListQuery = useGetQuotationCategoryListQuery()
   const getQuotationListQuery = useGetQuotationListQuery()
+
   useUpdateEffect(() => {
     if (saveQuotationMutation.isPending === true) {
       loadingIconActor.send({ type: 'show loading icon' })

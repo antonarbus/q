@@ -4,6 +4,7 @@ type SearchParamsInput = {
   shouldSlide?: 'true'
   redirect?: typeof route.save | typeof route.share | typeof route.stripeConnect
   prefilledEmail?: string
+  returnUrl?: string
 }
 
 type SearchParamsKeys = keyof SearchParamsInput
@@ -24,6 +25,10 @@ export const buildSearchParams = (params: SearchParamsInput): '' | `?${string}` 
 
   if (params.prefilledEmail !== undefined) {
     searchParams.set('prefilledEmail', params.prefilledEmail)
+  }
+
+  if (params.returnUrl !== undefined) {
+    searchParams.set('returnUrl', params.returnUrl)
   }
 
   const result = searchParams.toString()
