@@ -38,6 +38,14 @@ app.use(express.json({ limit: '50mb' }))
 // parses Cookie header and adds to req.cookies
 app.use(cookieParser())
 
+// Block crawlers on non-prod environments
+if (runtimeConfig.environment !== 'prod') {
+  app.use((_req, res, next) => {
+    res.setHeader('X-Robots-Tag', 'noindex, nofollow')
+    next()
+  })
+}
+
 // Serve bundled React static files in production (JS, CSS, images, etc.)
 if (runtimeConfig.nodeEnv === 'production') {
   const frontendBuildPath = path.join(rootPathAbsolute, 'front', 'build')
