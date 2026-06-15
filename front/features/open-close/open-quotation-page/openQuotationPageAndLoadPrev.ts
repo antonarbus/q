@@ -14,16 +14,29 @@ export const openQuotationPageAndLoadPrev = (): void => {
 
   clearBackQuotationId()
 
+  const targetId = draftId ?? backId
+  const hasTargetId = targetId !== null && targetId !== '' && targetId !== 'new'
+
+  const resolveFrom = (): 'memory' | 'server' | 'template' => {
+    if (draftId !== undefined) {
+      return 'memory'
+    }
+
+    if (hasTargetId) {
+      return 'server'
+    }
+
+    return 'template'
+  }
+
+  const from = resolveFrom()
+
   reduxHolder.dispatch(
     appSlice.actions.setShouldLoadQuotation({
       yesOrNo: 'yes',
-      from: draftId === undefined ? 'server' : 'memory',
+      from,
     }),
   )
-
-  const targetId = draftId ?? backId
-
-  const hasTargetId = targetId !== null && targetId !== '' && targetId !== 'new'
 
   void routerHolder.router.navigate(hasTargetId ? `/${targetId}` : route.root)
 }
