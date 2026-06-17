@@ -7,13 +7,13 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://sendmequotation.today/blog/about.html</loc>
+    <loc>https://sendmequotation.today/blog/about</loc>
     <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://sendmequotation.today/blog/faq.html</loc>
+    <loc>https://sendmequotation.today/blog/faq</loc>
     <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

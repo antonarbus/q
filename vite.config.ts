@@ -1,7 +1,9 @@
 import babel from '@rolldown/plugin-babel'
 import basicSsl from '@vitejs/plugin-basic-ssl'
 import react from '@vitejs/plugin-react'
+import fs from 'node:fs'
 import path from 'node:path'
+import type { Plugin } from 'vite'
 
 // relative imports, otherwise some scripts break
 import { runtimeConfig } from './config/runtime'
@@ -12,6 +14,26 @@ import { runtimeConfig } from './config/runtime'
  * - back/api/api.ts contains handlers for backend use only
  * - Frontend and deploy scripts import from api-routes.ts for proper tree-shaking
  */
+
+// Mirrors the production express.static `extensions: ['html']` behavior (see back/index.ts)
+// so /blog/<page> resolves to /blog/<page>.html in dev too, instead of falling through to the SPA
+const blogExtensionlessHtmlPlugin = (): Plugin => ({
+  name: 'blog-extensionless-html',
+  // oxlint-disable-next-line typescript/explicit-function-return-type
+  configureServer(server) {
+    server.middlewares.use((req, _res, next) => {
+      const match = req.url?.match(/^\/blog\/([^/?]+)$/u)
+      const page = match?.[1]
+      const htmlPath = page !== undefined && path.resolve('front/public/blog', `${page}.html`)
+
+      if (typeof htmlPath === 'string' && fs.existsSync(htmlPath)) {
+        req.url = `/blog/${page}.html`
+      }
+
+      next()
+    })
+  },
+})
 
 // https://vitejs.dev/config/
 
@@ -75,6 +97,7 @@ const viteConfig = {
       jsxImportSource: '@emotion/react',
     }),
     basicSsl(),
+    blogExtensionlessHtmlPlugin(),
   ],
   test: {
     include: ['front/**/*.test.{ts,tsx,js,jsx}', 'back/**/*.test.{ts,tsx,js,jsx}'],

@@ -54,6 +54,8 @@ if (runtimeConfig.nodeEnv === 'production') {
     express.static(frontendBuildPath, {
       // Serve index.html for root '/' path
       index: 'index.html',
+      // Allows blog URLs like /blog/about to resolve to /blog/about.html
+      extensions: ['html'],
       // Cache hashed assets (JS, CSS, images) for 1 year
       maxAge: '1y',
       setHeaders: (res, filepath) => {
@@ -109,6 +111,11 @@ if (runtimeConfig.nodeEnv === 'production') {
   // Redirect /blog to /blog/ for consistent URLs, otherwise React tries to render it
   app.get('/blog', (_req, res) => {
     res.redirect(301, '/blog/')
+  })
+
+  // Redirect /blog/<page>.html to /blog/<page> so the clean URL is canonical
+  app.get(/^\/blog\/(?<page>.+)\.html$/u, (req, res) => {
+    res.redirect(301, `/blog/${req.params.page}`)
   })
 
   // Any /blog/* route that wasn't served by express.static should return 404
