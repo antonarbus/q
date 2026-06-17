@@ -29,12 +29,12 @@ export const openQuotationPageAndLoadPrev = (): void => {
     return 'template'
   }
 
-  const from = resolveFrom()
+  const fromResolved = resolveFrom()
 
   reduxHolder.dispatch(
     appSlice.actions.setShouldLoadQuotation({
       yesOrNo: 'yes',
-      from,
+      from: fromResolved,
     }),
   )
 

@@ -100,7 +100,6 @@ article ol {
 article li {
   margin-bottom: 10px;
   font-size: 1.05rem;
-  border-bottom: 2px solid #c4c4c4;
 }
 
 article ul {
@@ -113,20 +112,21 @@ article ol {
 
 /* Call to Action */
 .cta {
-  display: inline-block;
-  background: #0083bf;
+  display: block;
+  width: fit-content;
+  margin: 30px auto;
+  background: #444;
   color: white !important;
-  padding: 15px 35px;
+  padding: 10px 24px;
   text-decoration: none !important;
-  margin: 30px 0;
   border-radius: 5px;
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: 1rem;
   transition: background 0.3s ease;
 }
 
 .cta:hover {
-  background: #006ba3;
+  background: #333;
 }
 
 /* Blockquote */
