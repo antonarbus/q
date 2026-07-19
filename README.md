@@ -578,3 +578,8 @@ gcloud storage rm gs://<BUCKET_NAME>/terraform/state/<env>.tflock
 | `compute` / `derive` | mathematical or data transformation                                 | `computeTotal()`, `deriveStats()`        |
 | `build`              | construct a complex object                                          | `buildPayload()`, `buildQuery()`         |
 | `create`             | instantiate and return a new entity/resource                        | `createUser()`, `createSession()`        |
+
+## Agent skills
+
+https://github.com/mattpocock/skills/tree/main
+https://www.youtube.com/watch?v=M6mYodf0dJM
