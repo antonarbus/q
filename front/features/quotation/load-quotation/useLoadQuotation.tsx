@@ -1,6 +1,10 @@
 import { navItemId } from '@front/shared/nav/navItemId'
 import { navSlice } from '@front/shared/nav/navSlice'
 import { useGetQuotationMutation } from '@front/entities/quotation/api/useGetQuotationMutation'
+import {
+  buildQuotationLoadingText,
+  resolveQuotationLoadSourceFromUrl,
+} from '@front/entities/quotation/resolveQuotationLoadSource'
 import { newQuotationTemplate } from '@front/entities/quotation/templates/newQuotationTemplate'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { draftQuotationStorage } from '@front/entities/quotation/storage/draftQuotationStorage'
@@ -12,237 +16,197 @@ import { useParams } from 'react-router-dom'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
 
-// True only on the very first mount after a page load/reload. Resets to true on each
-// full page reload (module re-evaluates), stays false across SPA navigations.
-let isPageLoad = true
-
 export const useLoadQuotation = (): void => {
   const urlParams = useParams()
 
-  const shouldLoadQuotation = reduxHolder.useSelector((state) => state.app.shouldLoadQuotation)
+  const quotationLoadRequest = reduxHolder.useSelector((state) => state.app.quotationLoadRequest)
 
   const getQuotationMutation = useGetQuotationMutation()
 
-  const resolveQuotationSource = (): 'server' | 'template' | 'memory' => {
-    if (shouldLoadQuotation.from === 'memory' || shouldLoadQuotation.from === 'draft') {
-      return 'memory'
-    }
-
-    if (shouldLoadQuotation.from === 'template' || shouldLoadQuotation.from === 'restore') {
-      return 'template'
-    }
-
-    if (shouldLoadQuotation.from === 'server') {
-      return 'server'
-    }
-
-    if (urlParams.quotationId === undefined) {
-      return 'template'
-    }
-
-    if (isPageLoad === true && draftQuotationStorage.load()?.id === urlParams.quotationId) {
-      return 'memory'
-    }
-
-    return 'server'
-  }
-
-  /** Decide which quotation to load on first mount  */
+  /**
+   * Resolve the load source on first mount and trigger the load — but only if nothing
+   * else already has. LoadQuotation unmounts when navigating to a sibling route (e.g. the
+   * quotation list) and remounts on the way back; Redux state persists across that, so if
+   * the "Back" button (or "New", or login) already dispatched an explicit resolution before
+   * this remount, re-resolving from the URL here would clobber it with a stale guess.
+   */
   useEffectOnce(() => {
-    const fromWhereToLoad = resolveQuotationSource()
-    isPageLoad = false
+    if (quotationLoadRequest.status === 'idle') {
+      const quotationLoadSourceFromUrl = resolveQuotationLoadSourceFromUrl({
+        urlQuotationId: urlParams.quotationId,
+      })
 
-    const fromToDispatch = ((): 'server' | 'restore' | 'draft' => {
-      if (fromWhereToLoad === 'template') {
-        return 'restore'
-      }
-      if (fromWhereToLoad === 'memory') {
-        return 'draft'
-      }
-
-      return fromWhereToLoad
-    })()
-
-    reduxHolder.dispatch(
-      appSlice.actions.setShouldLoadQuotation({
-        yesOrNo: 'yes',
-        from: fromToDispatch,
-      }),
-    )
+      reduxHolder.dispatch(
+        appSlice.actions.setQuotationLoadRequest({
+          status: 'pending',
+          source: quotationLoadSourceFromUrl.source,
+          isModifiedDraft: quotationLoadSourceFromUrl.isModifiedDraft,
+        }),
+      )
+    }
   })
 
-  // Quotation loading
+  // Quotation loading — a pure consumer of an already-resolved instruction.
   useEffect(() => {
     const loadQuotation = async (): Promise<void> => {
-      if (shouldLoadQuotation.yesOrNo === 'yes') {
-        const fromWhereToLoad = resolveQuotationSource()
+      if (quotationLoadRequest.status === 'idle') {
+        return
+      }
 
-        // Load previous quotation when user clicks on "< Back" button
-        if (fromWhereToLoad === 'memory') {
-          const savedBackToQuotation = draftQuotationStorage.load()
-          const loadingText =
-            shouldLoadQuotation.from === 'draft'
-              ? `Loading modified ${urlParams.quotationId}...`
-              : 'Going back...'
+      const { source, isModifiedDraft } = quotationLoadRequest
 
-          reduxHolder.dispatch(
-            appSlice.actions.showLoadingOverlay({
-              shouldShowLoader: true,
-              text: loadingText,
-            }),
-          )
+      const loadingText = buildQuotationLoadingText({
+        source,
+        isModifiedDraft,
+        quotationId: urlParams.quotationId,
+      })
 
-          reduxHolder.dispatch(appSlice.actions.setBackgroundMessage({ message: '' }))
+      // Load previous quotation when user clicks on "< Back" button
+      if (source === 'memory') {
+        const savedBackToQuotation = draftQuotationStorage.load()
 
-          reduxHolder.dispatch(navSlice.actions.removeUnderlineFromTopNav())
+        reduxHolder.dispatch(
+          appSlice.actions.showLoadingOverlay({
+            shouldShowLoader: true,
+            text: loadingText,
+          }),
+        )
 
-          reduxHolder.dispatch(navSlice.actions.hideNavItems({ navItemIds: [navItemId.back] }))
+        reduxHolder.dispatch(appSlice.actions.setBackgroundMessage({ message: '' }))
 
-          reduxHolder.dispatch(
-            navSlice.actions.enableNavItems({
-              navItemIds: [
-                navItemId.save,
-                navItemId.pdf,
-                navItemId.excel,
-                navItemId.share,
-                navItemId.download,
-                navItemId.insert,
-              ],
-            }),
-          )
+        reduxHolder.dispatch(navSlice.actions.removeUnderlineFromTopNav())
 
-          if (savedBackToQuotation !== null) {
-            reduxHolder.dispatch(quotationSlice.actions.resetQuotation())
+        reduxHolder.dispatch(navSlice.actions.hideNavItems({ navItemIds: [navItemId.back] }))
 
-            await asyncDelay(0)
+        reduxHolder.dispatch(
+          navSlice.actions.enableNavItems({
+            navItemIds: [
+              navItemId.save,
+              navItemId.pdf,
+              navItemId.excel,
+              navItemId.share,
+              navItemId.download,
+              navItemId.insert,
+            ],
+          }),
+        )
 
-            reduxHolder.dispatch(
-              quotationSlice.actions.loadQuotation({
-                quotation: savedBackToQuotation,
-              }),
-            )
-
-            if (shouldLoadQuotation.from === 'draft' || shouldLoadQuotation.from === 'memory') {
-              reduxHolder.dispatch(appSlice.actions.setQuotationModified())
-            }
-          }
-
-          reduxHolder.dispatch(
-            appSlice.actions.setShouldLoadQuotation({
-              yesOrNo: 'no',
-              from: undefined,
-            }),
-          )
-
-          setTimeout(() => {
-            reduxHolder.dispatch(appSlice.actions.hideLoadingOverlay())
-          }, 1250)
-        }
-
-        // Load new quotation template
-        if (fromWhereToLoad === 'template') {
-          const draft = shouldLoadQuotation.from === 'restore' ? draftQuotationStorage.load() : null
-          const quotationToLoad = draft?.id === 'new' ? draft : newQuotationTemplate
-
-          reduxHolder.dispatch(
-            appSlice.actions.showLoadingOverlay({
-              shouldShowLoader: true,
-              text: draft === null ? 'Loading template...' : 'Loading draft...',
-            }),
-          )
-
-          reduxHolder.dispatch(appSlice.actions.setBackgroundMessage({ message: '' }))
-
-          reduxHolder.dispatch(navSlice.actions.removeUnderlineFromTopNav())
-
-          reduxHolder.dispatch(navSlice.actions.hideNavItems({ navItemIds: [navItemId.back] }))
-
-          reduxHolder.dispatch(
-            navSlice.actions.enableNavItems({
-              navItemIds: [
-                navItemId.save,
-                navItemId.pdf,
-                navItemId.excel,
-                navItemId.share,
-                navItemId.download,
-                navItemId.insert,
-              ],
-            }),
-          )
-
+        if (savedBackToQuotation !== null) {
           reduxHolder.dispatch(quotationSlice.actions.resetQuotation())
 
           await asyncDelay(0)
 
           reduxHolder.dispatch(
             quotationSlice.actions.loadQuotation({
-              quotation: quotationToLoad,
+              quotation: savedBackToQuotation,
             }),
           )
 
-          if (draft !== null) {
+          if (isModifiedDraft === true) {
             reduxHolder.dispatch(appSlice.actions.setQuotationModified())
           }
-
-          setTimeout(() => {
-            reduxHolder.dispatch(appSlice.actions.hideLoadingOverlay())
-          }, 1250)
-
-          reduxHolder.dispatch(navSlice.actions.underlineNavItem({ navItemId: navItemId.new }))
-
-          reduxHolder.dispatch(
-            appSlice.actions.setShouldLoadQuotation({
-              yesOrNo: 'no',
-              from: undefined,
-            }),
-          )
         }
 
-        // Load quotation from server
-        if (fromWhereToLoad === 'server') {
-          reduxHolder.dispatch(
-            appSlice.actions.showLoadingOverlay({
-              shouldShowLoader: true,
-              text: `Loading ${urlParams.quotationId}...`,
-            }),
-          )
+        reduxHolder.dispatch(appSlice.actions.setQuotationLoadRequest({ status: 'idle' }))
 
-          if (urlParams.quotationId !== undefined) {
-            getQuotationMutation.mutate({ id: urlParams.quotationId })
-          }
+        setTimeout(() => {
+          reduxHolder.dispatch(appSlice.actions.hideLoadingOverlay())
+        }, 1250)
+      }
 
-          reduxHolder.dispatch(
-            appSlice.actions.setShouldLoadQuotation({
-              yesOrNo: 'no',
-              from: undefined,
-            }),
-          )
+      // Load new quotation template
+      if (source === 'template') {
+        const draft = isModifiedDraft === true ? draftQuotationStorage.load() : null
+        const quotationToLoad = draft ?? newQuotationTemplate
 
-          reduxHolder.dispatch(appSlice.actions.setBackgroundMessage({ message: '' }))
+        reduxHolder.dispatch(
+          appSlice.actions.showLoadingOverlay({
+            shouldShowLoader: true,
+            text: loadingText,
+          }),
+        )
 
-          reduxHolder.dispatch(quotationSlice.actions.resetQuotation())
-          reduxHolder.dispatch(navSlice.actions.removeUnderlineFromTopNav())
+        reduxHolder.dispatch(appSlice.actions.setBackgroundMessage({ message: '' }))
 
-          reduxHolder.dispatch(navSlice.actions.hideNavItems({ navItemIds: [navItemId.back] }))
+        reduxHolder.dispatch(navSlice.actions.removeUnderlineFromTopNav())
 
-          reduxHolder.dispatch(
-            navSlice.actions.enableNavItems({
-              navItemIds: [
-                navItemId.save,
-                navItemId.pdf,
-                navItemId.excel,
-                navItemId.share,
-                navItemId.download,
-                navItemId.insert,
-              ],
-            }),
-          )
+        reduxHolder.dispatch(navSlice.actions.hideNavItems({ navItemIds: [navItemId.back] }))
+
+        reduxHolder.dispatch(
+          navSlice.actions.enableNavItems({
+            navItemIds: [
+              navItemId.save,
+              navItemId.pdf,
+              navItemId.excel,
+              navItemId.share,
+              navItemId.download,
+              navItemId.insert,
+            ],
+          }),
+        )
+
+        reduxHolder.dispatch(quotationSlice.actions.resetQuotation())
+
+        await asyncDelay(0)
+
+        reduxHolder.dispatch(
+          quotationSlice.actions.loadQuotation({
+            quotation: quotationToLoad,
+          }),
+        )
+
+        if (isModifiedDraft === true) {
+          reduxHolder.dispatch(appSlice.actions.setQuotationModified())
         }
+
+        setTimeout(() => {
+          reduxHolder.dispatch(appSlice.actions.hideLoadingOverlay())
+        }, 1250)
+
+        reduxHolder.dispatch(navSlice.actions.underlineNavItem({ navItemId: navItemId.new }))
+
+        reduxHolder.dispatch(appSlice.actions.setQuotationLoadRequest({ status: 'idle' }))
+      }
+
+      // Load quotation from server
+      if (source === 'server') {
+        reduxHolder.dispatch(
+          appSlice.actions.showLoadingOverlay({
+            shouldShowLoader: true,
+            text: loadingText,
+          }),
+        )
+
+        if (urlParams.quotationId !== undefined) {
+          getQuotationMutation.mutate({ id: urlParams.quotationId })
+        }
+
+        reduxHolder.dispatch(appSlice.actions.setQuotationLoadRequest({ status: 'idle' }))
+
+        reduxHolder.dispatch(appSlice.actions.setBackgroundMessage({ message: '' }))
+
+        reduxHolder.dispatch(quotationSlice.actions.resetQuotation())
+        reduxHolder.dispatch(navSlice.actions.removeUnderlineFromTopNav())
+
+        reduxHolder.dispatch(navSlice.actions.hideNavItems({ navItemIds: [navItemId.back] }))
+
+        reduxHolder.dispatch(
+          navSlice.actions.enableNavItems({
+            navItemIds: [
+              navItemId.save,
+              navItemId.pdf,
+              navItemId.excel,
+              navItemId.share,
+              navItemId.download,
+              navItemId.insert,
+            ],
+          }),
+        )
       }
     }
 
     void loadQuotation()
-  }, [shouldLoadQuotation.yesOrNo])
+  }, [quotationLoadRequest])
 
   // Above we triggered quotation loading, now we handle the response
   useUpdateEffect(() => {

@@ -4,10 +4,12 @@ import { routerHolder } from '@front/shared/lib/react-router-dom/routerHolder'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 
 export const openQuotationPageAndLoadNew = (): void => {
+  // Explicit "New" always forces a blank template, ignoring any saved draft.
   reduxHolder.dispatch(
-    appSlice.actions.setShouldLoadQuotation({
-      yesOrNo: 'yes',
-      from: 'template',
+    appSlice.actions.setQuotationLoadRequest({
+      status: 'pending',
+      source: 'template',
+      isModifiedDraft: false,
     }),
   )
 

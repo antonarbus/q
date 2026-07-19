@@ -2,11 +2,14 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction, Reducer, UnknownAction, WritableDraft } from '@reduxjs/toolkit'
 import type { ConfirmationDialogOptions } from './component/confirmation-dialog/types'
 
+export type QuotationLoadSource = 'server' | 'template' | 'memory'
+
+type QuotationLoadRequest =
+  | { status: 'idle' }
+  | { status: 'pending'; source: QuotationLoadSource; isModifiedDraft: boolean }
+
 type InitState = {
-  shouldLoadQuotation: {
-    yesOrNo: 'yes' | 'no'
-    from: 'server' | 'template' | 'restore' | 'memory' | 'draft' | undefined
-  }
+  quotationLoadRequest: QuotationLoadRequest
   isModified: boolean
   backgroundMessage: string
   loadingOverlay: {
@@ -17,10 +20,7 @@ type InitState = {
 }
 
 const initialState: InitState = {
-  shouldLoadQuotation: {
-    yesOrNo: 'no',
-    from: undefined,
-  },
+  quotationLoadRequest: { status: 'idle' },
   isModified: false,
   backgroundMessage: '',
   loadingOverlay: {
@@ -45,15 +45,11 @@ export const appSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
-    setShouldLoadQuotation: (
+    setQuotationLoadRequest: (
       state: WritableDraft<InitState>,
-      action: PayloadAction<{
-        yesOrNo: InitState['shouldLoadQuotation']['yesOrNo']
-        from: InitState['shouldLoadQuotation']['from']
-      }>,
+      action: PayloadAction<QuotationLoadRequest>,
     ) => {
-      state.shouldLoadQuotation.yesOrNo = action.payload.yesOrNo
-      state.shouldLoadQuotation.from = action.payload.from
+      state.quotationLoadRequest = action.payload
     },
     // Explicitly mark the quotation as modified — used when restoring from draft/memory,
     // since loadQuotation resets isModified to false and we need to flip it back.

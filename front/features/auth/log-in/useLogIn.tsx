@@ -82,9 +82,10 @@ export const useLogIn = (props: Props): Res => {
 
       if (reduxHolder.getState().quotation.permissionLevel === 'FORBIDDEN') {
         reduxHolder.dispatch(
-          appSlice.actions.setShouldLoadQuotation({
-            yesOrNo: 'yes',
-            from: 'server',
+          appSlice.actions.setQuotationLoadRequest({
+            status: 'pending',
+            source: 'server',
+            isModifiedDraft: false,
           }),
         )
       }
