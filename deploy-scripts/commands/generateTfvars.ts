@@ -1,4 +1,4 @@
-import { resolve } from 'node:path'
+import path from 'node:path'
 import { infraConfig } from '@back/config/infrastructure'
 import { logger } from '@root/deploy-scripts/lib/output/logger'
 import { write } from 'bun'
@@ -52,8 +52,8 @@ export const generateTfvars = async (): Promise<void> => {
   logger.emptyLine()
 
   for (const [env, config] of Object.entries(infraConfig)) {
-    const CONFIG_DIR = resolve(import.meta.dirname, '../../config')
-    const TFVARS_FILE_PATH = resolve(CONFIG_DIR, `${env}.tfvars`)
+    const CONFIG_DIR = path.resolve(import.meta.dirname, '../../config')
+    const TFVARS_FILE_PATH = path.resolve(CONFIG_DIR, `${env}.tfvars`)
 
     const content = generateTfvarsContent({ environment: env, config })
 

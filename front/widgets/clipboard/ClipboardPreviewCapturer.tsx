@@ -1,9 +1,14 @@
 import { BOOKMARK_POS_AT_BLOCKS } from '@front/entities/quotation/redux/bookmarkPosAtBlocks'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
-import { Block } from '@front/widgets/block/Block'
+import type { BlockItem } from '@back/entity/quotation/schema'
 import { DragDropContext, Droppable } from '@hello-pangea/dnd'
 import { useRef } from 'react'
 import { useClipboardPreviewCapturer } from './useClipboardPreviewCapturer'
+
+type Props = {
+  // injected by the app layer to avoid this widget depending on the block widget directly
+  renderBlock: (props: { block: BlockItem; blockIndex: number }) => React.ReactNode
+}
 
 /**
  * Always-mounted offscreen component that generates the copy preview HTML for
@@ -20,7 +25,7 @@ import { useClipboardPreviewCapturer } from './useClipboardPreviewCapturer'
  *      → showCopyModal (matching the order used by CopyBlockIcon).
  *   4. removeBlockFromPosThousandReducer → component returns null.
  */
-export const ClipboardPreviewCapturer = (): React.ReactNode => {
+export const ClipboardPreviewCapturer = (props: Props): React.ReactNode => {
   const containerRef = useRef<HTMLDivElement>(null)
 
   // Hack! Set bookmark item at pos 1000 not to interfere with main block items
@@ -56,7 +61,7 @@ export const ClipboardPreviewCapturer = (): React.ReactNode => {
         <Droppable droppableId='capture-block'>
           {(provided) => (
             <div ref={provided.innerRef} {...provided.droppableProps}>
-              <Block block={bookmarkBlock} blockIndex={BOOKMARK_POS_AT_BLOCKS} />
+              {props.renderBlock({ block: bookmarkBlock, blockIndex: BOOKMARK_POS_AT_BLOCKS })}
               {provided.placeholder}
             </div>
           )}

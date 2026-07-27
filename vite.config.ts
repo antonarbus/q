@@ -22,8 +22,8 @@ const blogExtensionlessHtmlPlugin = (): Plugin => ({
   // oxlint-disable-next-line typescript/explicit-function-return-type
   configureServer(server) {
     server.middlewares.use((req, _res, next) => {
-      const match = req.url?.match(/^\/blog\/([^/?]+)$/u)
-      const page = match?.[1]
+      const match = req.url?.match(/^\/blog\/(?<page>[^/?]+)$/u)
+      const page = match?.groups?.page
       const htmlPath = page !== undefined && path.resolve('front/public/blog', `${page}.html`)
 
       if (typeof htmlPath === 'string' && fs.existsSync(htmlPath)) {

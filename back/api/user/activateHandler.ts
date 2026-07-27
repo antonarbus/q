@@ -1,5 +1,5 @@
 import { setRefreshTokenCookie } from '@back/shared/headers'
-import { generateAccessToken, generateRefreshToken } from '@back/shared/lib/json-webtoken'
+import { generateAccessToken, generateRefreshToken } from '@back/entity/user/lib/json-webtoken'
 import { usersTable } from '@back/entity/user/db/usersTableSchema'
 import type { SelectUser } from '@back/entity/user/db/usersTableSchema'
 import { db } from '@back/shared/lib/drizzle/db'

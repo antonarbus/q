@@ -1,12 +1,12 @@
 import { usersTable } from '@back/entity/user/db/usersTableSchema'
 import type { SelectUser } from '@back/entity/user/db/usersTableSchema'
 import { setNoTraceMode, setRefreshTokenCookie } from '@back/shared/headers'
+import { getJwtExpirationInDays } from '@back/shared/lib/json-webtoken'
 import {
   generateAccessToken,
   generateRefreshToken,
-  getJwtExpirationInDays,
   getPayloadFromRefreshToken,
-} from '@back/shared/lib/json-webtoken'
+} from '@back/entity/user/lib/json-webtoken'
 import { sendEmail } from '@back/shared/lib/mailersend'
 import { compare } from 'bcryptjs'
 import { runtimeConfig } from '@root/config/runtime'

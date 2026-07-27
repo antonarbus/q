@@ -41,7 +41,7 @@ export const stripeConnectUrlHandler: RouterHandler = async (req) => {
   const jwtPayloadWithEmail = jwt.sign(
     {
       email: user.email,
-      returnUrl: req.body?.returnUrl ?? '/',
+      returnUrl: req.body.returnUrl ?? '/',
     },
     jwtSecret,
     {

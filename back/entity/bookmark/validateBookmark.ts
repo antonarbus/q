@@ -54,8 +54,7 @@ export const validateBookmark = (props: Props): Res => {
     const migrationResult = migrate({ document: currentDocument })
 
     if (migrationResult.status === 'MIGRATION_BUG' || migrationResult.status === 'CORRUPTED') {
-      messageList.push('Migration logic problem')
-      messageList.push(migrationResult.message)
+      messageList.push('Migration logic problem', migrationResult.message)
 
       return {
         status: 'ERROR',

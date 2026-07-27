@@ -120,3 +120,13 @@ reduxHolder.useSelector(selectSomething)
 routerHolder.router.navigate('/path')
 instance.queryClient.invalidateQueries({ queryKey: [...] })
 ```
+
+## Agent skills
+
+### Issue tracker
+
+Issues are tracked as local markdown files under `.scratch/`. See `docs/agents/issue-tracker.md`.
+
+### Domain docs
+
+Single-context layout — `CONTEXT.md` + `docs/adr/` at the repo root. See `docs/agents/domain.md`.

@@ -1,4 +1,4 @@
-import type { JwtPayloadExtended } from '@back/shared/lib/json-webtoken'
+import type { JwtPayloadExtended } from '@back/entity/user/lib/json-webtoken'
 import { navItemId } from '@front/shared/nav/navItemId'
 import { navSlice } from '@front/shared/nav/navSlice'
 import { createLoadingMenuIconMachine } from '@front/shared/nav/state-machine/createLoadingMenuIconMachine'

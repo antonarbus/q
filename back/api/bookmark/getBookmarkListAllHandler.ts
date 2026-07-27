@@ -168,9 +168,10 @@ export const getBookmarkListAllHandler: RouterHandler = async (req) => {
 
   const bookmarkListTotalCount = countQueryResponse.value[0]?.count ?? 0
 
-  messageList.push(`Found ${bookmarkListTotalCount} total bookmarks`)
-
-  messageList.push(`Returned ${bookmarkListResponse.value.length} bookmarks for current page`)
+  messageList.push(
+    `Found ${bookmarkListTotalCount} total bookmarks`,
+    `Returned ${bookmarkListResponse.value.length} bookmarks for current page`,
+  )
 
   return httpJsonResponse({
     statusCode: httpStatusCode.success200,

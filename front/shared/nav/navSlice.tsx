@@ -25,7 +25,7 @@ type InitState = {
 
 const initialState: InitState = {
   navStructure: [] as NavItem[],
-  navMode: 'full' as NavMode,
+  navMode: 'full',
   burger: { isOpen: false },
   idsToCurrentMenuItems: [navItemIdKey.burger] as NavItemId[],
   currentMenuNavItemId: null as NavItemId | null,

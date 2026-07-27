@@ -26,7 +26,9 @@ vi.mock(import('./backQuotationId'), () => ({
   clearBackQuotationId: vi.fn<() => void>(() => undefined),
 }))
 
-const mockDraft = (id: string): Quotation => ({ id }) as Quotation
+// intentional: only `id` is needed by the resolver under test
+// oxlint-disable-next-line typescript/no-unsafe-type-assertion
+const mockDraft = (id: string): Quotation => ({ id }) as unknown as Quotation
 
 const freshModule = (): Promise<ResolverModule> => {
   vi.resetModules()

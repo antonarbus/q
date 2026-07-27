@@ -168,9 +168,10 @@ export const getQuotationListAllHandler: RouterHandler = async (req) => {
 
   const quotationListTotalCount = countQueryResponse.value[0]?.count ?? 0
 
-  messageList.push(`Found ${quotationListTotalCount} total quotations`)
-
-  messageList.push(`Returned ${quotationListResponse.value.length} quotations for current page`)
+  messageList.push(
+    `Found ${quotationListTotalCount} total quotations`,
+    `Returned ${quotationListResponse.value.length} quotations for current page`,
+  )
 
   return httpJsonResponse({
     statusCode: httpStatusCode.success200,

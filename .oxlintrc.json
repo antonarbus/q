@@ -3,7 +3,7 @@
   "options": {
     // https://github.com/oxc-project/tsgolint is not stable and throws errors
     // Message: Error running tsgolint: "tsgolint process exited with status: exit status: 2
-    "typeAware": false // maybe disable for now
+    "typeAware": true // maybe disable for now
   },
   // https://oxc.rs/docs/guide/usage/linter/plugins.html
   "plugins": [
@@ -57,7 +57,7 @@
     "eslint/require-unicode-regexp": "off", // do not care about emoji
     "import/exports-last": "off", // types in api handlers are exported and used below
     "import/group-exports": "off", // nah
-    "import/no-relative-parent-imports": "off", // ../.. indicates the proximity, for architecture constrains we use @feature-sliced/steiger-plugin
+    "import/no-relative-parent-imports": "off", // ../.. indicates the proximity, for architecture constrains we use dependency-cruiser
     "import/max-dependencies": "off", // strange rule, how we may avoid dependencies
     "import/no-named-export": "off", // only named exports!!!
     "import/no-nodejs-modules": "off", // full stack app, use nodejs modules in back and tooling
@@ -78,14 +78,23 @@
     "react/jsx-filename-extension": ["error", { "extensions": ["jsx", "tsx"] }], // use .tsx if jsx is inside
     "react/jsx-boolean-value": ["error", "always"], // prop={false} and also prop={true} for consistency
     "react/jsx-max-depth": "off", // too strict
+    "react/function-component-definition": [
+      "error",
+      { "namedComponents": ["function-expression", "arrow-function"] }
+    ], // function expression
     "react/jsx-handler-names": "off", // not a good rule, it enforces handleClick, handleChange prop names
     "react/jsx-no-constructed-context-values": "off", // react compiler memoize values
+    "react/jsx-no-literals": "off", // no i18n library in this repo, nothing to wrap literals into
     "react/jsx-props-no-spreading": "warn", // like the rule, better to explicitly name props, but in reality we have to spread sometimes
     "react/forbid-component-props": "off", // it forbids 'style' and 'className' props
     "react/no-unknown-property": ["error", { "ignore": ["css"] }], // emotion injects css prop support
+    "react/react-compiler": "off", // oxc's reimplementation false-positives heavily on our conventions: refs forwarded via named props (not literally `ref`) get flagged as "accessed during render" even though `.current` is never read, and @preact/signals-react `.value =` assignments get flagged as prop/hook-return mutation; babel-plugin-react-compiler itself still bails out safely at build time on anything it truly can't compile
     "react/react-in-jsx-scope": "off", // not necessary on React 17+
+    "node/no-top-level-await": "off", // Bun/ESM-only, `require(esm)` compatibility is not a concern here
     "unicorn/filename-case": ["error", { "cases": { "camelCase": true, "pascalCase": true } }],
+    "unicorn/max-nested-calls": "off", // false positives on zod schema and drizzle query builder chains, which are idiomatic fluent nesting
     "unicorn/no-array-for-each": "off", // for...of is faster, but forEach is readable
+    "unicorn/prefer-number-coercion": "off", // Number() lacks parseInt/parseFloat's lenient trailing-character behavior, which we rely on for CSS px values (e.g. "500px") and loosely formatted number strings
     "unicorn/no-array-reduce": "off", // for...of is faster, but reduce is readable
     "unicorn/no-null": "off", // DB uses null, DOM APIs use null
     "unicorn/no-useless-undefined": "off", // conflicts with typescript/consistent-return: `return undefined` is required before `return <cleanupFn>` in useEffect early-exits and in mixed-return getters
@@ -99,6 +108,24 @@
     "typescript/prefer-readonly-parameter-types": "off", // that is fine to be not a readonly
     "typescript/no-unnecessary-boolean-literal-compare": "off", // imho this is better if(someCondition === true) than if(someCondition)
     "typescript/no-inferrable-types": "off", // explicit type annotations are fine even when inferrable
+    "typescript/promise-function-async": "off", // conflicts with eslint/require-await + typescript/return-await for pass-through functions that just return a promise directly (no await needed, none allowed outside try/catch) — structurally impossible to satisfy all three at once
     "typescript/consistent-type-definitions": ["error", "type"] // declare types with 'type' keyword
-  }
+  },
+  "overrides": [
+    {
+      // build tooling runs once as a CLI/build step, not in a request-handling process, so sync fs calls are fine
+      "files": ["bundle-back/**", "vite.config.ts"],
+      "rules": {
+        "node/no-sync": "off"
+      }
+    },
+    {
+      // dependency-cruiser only supports CommonJS config files
+      "files": [".dependency-cruiser.cjs"],
+      "rules": {
+        "import/no-commonjs": "off",
+        "import/unambiguous": "off"
+      }
+    }
+  ]
 }

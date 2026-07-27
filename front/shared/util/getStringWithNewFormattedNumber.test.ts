@@ -68,7 +68,7 @@ describe('#getStringWithNewFormattedNumber', () => {
   it('handles decimal formatting', () => {
     const result = getStringWithNewFormattedNumber({
       string: '<p>100</p>',
-      newNumber: 123.456_789,
+      newNumber: 123.456789,
     })
 
     expect(result).toBe('<p>123,456789</p>')

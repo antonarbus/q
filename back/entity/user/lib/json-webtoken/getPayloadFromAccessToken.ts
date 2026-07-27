@@ -1,19 +1,19 @@
 import jwt from 'jsonwebtoken'
 import { isJwtPayloadExtended } from './types'
 import type { JwtPayloadExtended } from './types'
-import { getSecret } from '../secret-manager/getSecret'
+import { getSecret } from '@back/shared/lib/secret-manager/getSecret'
 
-export const getPayloadFromRefreshToken = async (
-  refreshJwtToken: unknown,
+export const getPayloadFromAccessToken = async (
+  accessJwtToken: unknown,
 ): Promise<JwtPayloadExtended | undefined> => {
-  const JWT_REFRESH_SECRET = await getSecret('JWT_REFRESH_SECRET')
+  const JWT_ACCESS_SECRET = await getSecret('JWT_ACCESS_SECRET')
 
   try {
-    if (typeof refreshJwtToken !== 'string') {
+    if (typeof accessJwtToken !== 'string') {
       throw new TypeError('JWT is not a string')
     }
 
-    const jwtPayload = jwt.verify(refreshJwtToken, JWT_REFRESH_SECRET)
+    const jwtPayload = jwt.verify(accessJwtToken, JWT_ACCESS_SECRET)
 
     if (typeof jwtPayload === 'string') {
       return undefined

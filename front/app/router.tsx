@@ -1,7 +1,7 @@
 import { RequireRoles } from '@front/features/auth/check-page-required-roles-before-page-load/RequireRoles'
 import { AccessToken } from '@front/features/auth/try-to-log-in-without-prompt/AccessToken'
 import { Logout } from '@front/features/auth/log-out/Logout'
-import { LoadQuotation } from '@front/features/quotation/load-quotation'
+import { LoadQuotation } from './LoadQuotation'
 import { ActivationModal } from '@front/pages/auth-activation-modal/ActivationModal'
 import { LoginModal } from '@front/pages/auth-login-modal/LoginModal'
 import { RegisterModal } from '@front/pages/auth-register-modal/RegisterModal'
@@ -23,6 +23,7 @@ import { route } from '@front/shared/lib/react-router-dom/route'
 import { routerHolder } from '@front/shared/lib/react-router-dom/routerHolder'
 import { Suggestion } from '@front/widgets/suggestion'
 import { Clipboard, ClipboardPreviewCapturer } from '@front/widgets/clipboard'
+import { Block } from '@front/widgets/block/Block'
 import { Footer } from '@front/widgets/footer'
 import { Nav } from '@front/widgets/nav'
 import { BookmarkListAllPageLazy } from '@front/pages/bookmark-list-all-page'
@@ -92,7 +93,7 @@ const router = createBrowserRouter([
         <Nav />
         <Suggestion />
         <Clipboard />
-        <ClipboardPreviewCapturer />
+        <ClipboardPreviewCapturer renderBlock={Block} />
         <ConfirmationDialog />
         <Main />
         <Footer />

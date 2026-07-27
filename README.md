@@ -519,7 +519,7 @@ Most of the above are $30–100/month per seat, aimed at sales teams, and have h
 simpler and the UX looks cleaner from what I've seen of the codebase.
 
 The Stripe payment link built directly into the quotation is actually not standard — most competitors require a  
- separate invoicing step after the quote is accepted. Quote → pay in one link is a genuine differentiator for
+separate invoicing step after the quote is accepted. Quote → pay in one link is a genuine differentiator for
 freelancers and small businesses who want fewer steps.
 
 ---

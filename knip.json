@@ -17,10 +17,8 @@
   },
   "ignore": [
     "back/shared/lib/drizzle/schema.ts",
-    "front/shared/lib/ag-grid/colDef/getNumberColDef.tsx",
-    "steiger.config.ts"
+    "front/shared/lib/ag-grid/colDef/getNumberColDef.tsx"
   ],
-  "ignoreDependencies": ["@feature-sliced/steiger-plugin"],
   "ignoreBinaries": [
     "gcloud",
     "stripe",

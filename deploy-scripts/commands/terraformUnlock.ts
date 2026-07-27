@@ -1,5 +1,5 @@
 import { $ } from 'bun'
-import { resolve } from 'node:path'
+import path from 'node:path'
 import { chdir } from 'node:process'
 import { infraConfig } from '@back/config/infrastructure'
 import { logger } from '@root/deploy-scripts/lib/output/logger'
@@ -64,8 +64,11 @@ export const terraformUnlock = async (props: Props): Promise<void> => {
   logger.info(`Environment: ${props.environment}`)
   logger.emptyLine()
 
-  const TERRAFORM_DIR = resolve(import.meta.dirname, '../../terraform/infrastructure')
-  const TFVARS_FILE_PATH = resolve(import.meta.dirname, `../../config/${props.environment}.tfvars`)
+  const TERRAFORM_DIR = path.resolve(import.meta.dirname, '../../terraform/infrastructure')
+  const TFVARS_FILE_PATH = path.resolve(
+    import.meta.dirname,
+    `../../config/${props.environment}.tfvars`,
+  )
 
   logger.warn(`Removing Terraform state lock for environment: ${props.environment}`)
 

@@ -35,6 +35,10 @@ export const httpHandler = (
       }
     } catch (error) {
       next(error)
+
+      // intentional: guards against future code being appended after next(error) and running unexpectedly
+      // oxlint-disable-next-line eslint/no-useless-return
+      return
     }
   }
 

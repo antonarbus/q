@@ -63,5 +63,5 @@ export const updateNumberAtHtmlIncrementally = (props: Props): void => {
 
   setTimeout(() => {
     void setHtml()
-  })
+  }, 0)
 }

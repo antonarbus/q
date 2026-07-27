@@ -1,4 +1,4 @@
-import { ConnectStripeContent } from '@front/features/user/connect-stripe/ConnectStripeContent'
+import { ConnectStripeContent } from '@front/widgets/stripe-connect-content/ConnectStripeContent'
 import { BackdropWithSlidableModal } from '@front/shared/component/BackdropWithSlidableModal'
 import { CardCustom } from '@front/shared/component/CardCustom'
 import { Avatar, Box } from '@mui/material'

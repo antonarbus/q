@@ -1,5 +1,5 @@
 import { $ } from 'bun'
-import { resolve } from 'node:path'
+import path from 'node:path'
 import { chdir } from 'node:process'
 import { infraConfig } from '@back/config/infrastructure'
 import { logger } from '@root/deploy-scripts/lib/output/logger'
@@ -12,8 +12,11 @@ type Props = {
 export const terraformPlan = async (props: Props): Promise<void> => {
   logger.info(`Environment: ${props.environment}`)
 
-  const TERRAFORM_DIR = resolve(import.meta.dirname, '../../terraform/infrastructure')
-  const TFVARS_FILE_PATH = resolve(import.meta.dirname, `../../config/${props.environment}.tfvars`)
+  const TERRAFORM_DIR = path.resolve(import.meta.dirname, '../../terraform/infrastructure')
+  const TFVARS_FILE_PATH = path.resolve(
+    import.meta.dirname,
+    `../../config/${props.environment}.tfvars`,
+  )
 
   logger.info(`Config: ${TFVARS_FILE_PATH}`)
   logger.emptyLine()

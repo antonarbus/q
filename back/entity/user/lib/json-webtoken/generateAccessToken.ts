@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 import { FIFTEEN_MIN_IN_SEC } from './const'
 import type { JwtPayloadExtended } from './types'
-import { getSecret } from '../secret-manager/getSecret'
+import { getSecret } from '@back/shared/lib/secret-manager/getSecret'
 
 type Res = {
   value: string

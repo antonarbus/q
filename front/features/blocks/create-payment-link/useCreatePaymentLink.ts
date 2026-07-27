@@ -1,14 +1,14 @@
 import { useCreatePaymentLinkMutation } from '@front/entities/payment/api/useCreatePaymentLinkMutation'
 import { quotationSlice } from '@front/entities/quotation/redux/quotationSlice'
 import { selectPaymentBlockByBlockIndex } from '@front/entities/quotation/redux/selector/selectPaymentBlockByBlockIndex'
-import { saveExistingQuotation } from '@front/features/quotation/save-quotation/saveExistingQuotation'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { isAxiosError } from 'axios'
 import { toast } from 'sonner'
 import { useBlock } from '@front/entities/quotation/provider/block/useBlock'
 
 type Res = {
-  refetch: () => Promise<void>
+  // resolves true once the link is created and the redux store is updated, false if it failed
+  refetch: () => Promise<boolean>
   isPending: boolean
 }
 
@@ -20,9 +20,9 @@ export const useCreatePaymentLink = (): Res => {
     selectPaymentBlockByBlockIndex({ blockIndex: block.index }),
   )
 
-  const createPaymentLink = async (): Promise<void> => {
+  const createPaymentLink = async (): Promise<boolean> => {
     if (!paymentBlock) {
-      return
+      return false
     }
 
     const result = await createPaymentLinkMutation
@@ -39,7 +39,7 @@ export const useCreatePaymentLink = (): Res => {
       })
 
     if (result === undefined) {
-      return
+      return false
     }
 
     reduxHolder.dispatch(
@@ -53,11 +53,7 @@ export const useCreatePaymentLink = (): Res => {
       }),
     )
 
-    await saveExistingQuotation().catch(() => {
-      toast.error('Failed to save quotation')
-    })
-
-    toast.success('Payment link generated and quotation saved')
+    return true
   }
 
   return {

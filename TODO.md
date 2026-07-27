@@ -114,7 +114,7 @@
 ## Cool Things Already Done Well (Worth Knowing About)
 
 - [ ] **`Promise.withResolvers()`** — the deferred pattern for `getAccessTokenDeferred` is elegant and modern. Good use of the new built-in.
-- [ ] **FSD + Steiger enforcement** — enforcing Feature-Sliced Design with a linter (`steiger`) is rare and excellent. Keeps imports disciplined.
+- [ ] **FSD enforcement with dependency-cruiser** — enforcing Feature-Sliced Design layer/slice boundaries with `dependency-cruiser` is rare and excellent. Keeps imports disciplined.
 - [ ] **Holder + module augmentation pattern** — the `reduxHolder` / `routerHolder` with `Register` interface augmentation is a clever solution to the FSD singleton problem.
 - [ ] **Route metadata shared between front and back** — `@back/api/route` imported by the frontend is a great way to keep URL strings in one place and share HTTP method info.
 - [ ] **XState for UI state machines** — using XState for loading icon state (show spinner → success/error → back to idle) is the right tool for sequential async UI states.

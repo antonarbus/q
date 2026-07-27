@@ -11,7 +11,7 @@ type UseSelector = TypedUseSelectorHook<RootState>
 class ReduxHolder {
   #store: Store | null = null
 
-  public readonly useSelector: UseSelector = useSelectorNotTyped as UseSelector
+  public readonly useSelector: UseSelector = useSelectorNotTyped
 
   public set store(instance: Store) {
     if (this.#store !== null) {

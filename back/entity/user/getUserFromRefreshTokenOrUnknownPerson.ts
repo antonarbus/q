@@ -1,5 +1,5 @@
 import { getRefreshTokenFromCookie } from '@back/shared/headers/token/getRefreshTokenFromCookie'
-import { getPayloadFromRefreshToken } from '@back/shared/lib/json-webtoken'
+import { getPayloadFromRefreshToken } from '@back/entity/user/lib/json-webtoken'
 import type { Request } from 'express'
 import type { SelectUser } from './db/usersTableSchema'
 

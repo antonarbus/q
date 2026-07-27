@@ -1,5 +1,5 @@
 import { getShouldTrace, removeRefreshTokenCookie } from '@back/shared/headers'
-import { generateAccessToken } from '@back/shared/lib/json-webtoken'
+import { generateAccessToken } from '@back/entity/user/lib/json-webtoken'
 import type { NextFunction, Request, Response } from 'express'
 import { usersTable } from '@back/entity/user/db/usersTableSchema'
 import type { SelectUser } from '@back/entity/user/db/usersTableSchema'

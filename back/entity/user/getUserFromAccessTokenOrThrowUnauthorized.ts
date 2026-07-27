@@ -1,7 +1,7 @@
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { HttpError } from '@back/shared/errors/HttpError'
 import { headerName } from '@back/shared/headers'
-import { getPayloadFromAccessToken } from '@back/shared/lib/json-webtoken'
+import { getPayloadFromAccessToken } from '@back/entity/user/lib/json-webtoken'
 import type { Request } from 'express'
 import type { SelectUser } from './db/usersTableSchema'
 

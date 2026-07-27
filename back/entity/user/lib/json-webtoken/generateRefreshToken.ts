@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken'
 import { THREE_MONTHS_IN_SEC } from './const'
-import { getJwtExpirationInDays } from './getJwtExpirationInDays'
+import { getJwtExpirationInDays } from '@back/shared/lib/json-webtoken/getJwtExpirationInDays'
 import type { JwtPayloadExtended } from './types'
-import { getSecret } from '../secret-manager/getSecret'
+import { getSecret } from '@back/shared/lib/secret-manager/getSecret'
 
 type Res = {
   value: string

@@ -6,6 +6,7 @@ import { useValidatePaymentAmount } from '@front/features/blocks/validate-paymen
 import { confirmWithDialog } from '@front/shared/component/confirmation-dialog/confirmWithDialog'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
 import { Button } from '@mui/material'
+import { toast } from 'sonner'
 import { useOwnerPayment } from './OwnerPaymentProvider'
 import type { FC } from 'react'
 
@@ -54,7 +55,17 @@ export const GeneratePaymentLinkButton: FC = () => {
             await saveExistingQuotation()
           }
 
-          await createPaymentLink.refetch()
+          const didCreatePaymentLink = await createPaymentLink.refetch()
+
+          if (!didCreatePaymentLink) {
+            return
+          }
+
+          await saveExistingQuotation().catch(() => {
+            toast.error('Failed to save quotation')
+          })
+
+          toast.success('Payment link generated and quotation saved')
         })()
       }
     >

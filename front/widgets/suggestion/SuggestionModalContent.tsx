@@ -1,5 +1,5 @@
 import { useSuggestion } from '@front/entities/suggestion/provider/SuggestionProvider'
-import { SuggestProductButton } from '@front/features/blocks/suggest-product/SuggestProductButton'
+import { SuggestProductButton } from './SuggestProductButton'
 import { closeSuggestModal } from '@front/features/blocks/close-suggest-modal/closeSuggestModal'
 import { FormModal } from '@front/shared/component/FormModal'
 import { useAnimatedElement } from '@front/shared/util/useAnimatedElement'

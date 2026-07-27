@@ -168,9 +168,10 @@ export const getFileListAllHandler: RouterHandler = async (req) => {
 
   const fileListTotalCount = countQueryResponse.value[0]?.count ?? 0
 
-  messageList.push(`Found ${fileListTotalCount} total files`)
-
-  messageList.push(`Returned ${fileListResponse.value.length} files for current page`)
+  messageList.push(
+    `Found ${fileListTotalCount} total files`,
+    `Returned ${fileListResponse.value.length} files for current page`,
+  )
 
   return httpJsonResponse({
     statusCode: httpStatusCode.success200,

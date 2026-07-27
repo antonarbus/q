@@ -1,6 +1,6 @@
 import { httpStatusCode } from '@back/shared/const/httpStatusCode'
 import { setRefreshTokenCookie } from '@back/shared/headers'
-import { generateAccessToken, generateRefreshToken } from '@back/shared/lib/json-webtoken'
+import { generateAccessToken, generateRefreshToken } from '@back/entity/user/lib/json-webtoken'
 import { sendEmail } from '@back/shared/lib/mailersend'
 import { generateId } from '@back/shared/lib/nanoid'
 import { hash } from 'bcryptjs'

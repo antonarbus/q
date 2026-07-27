@@ -2,6 +2,7 @@ import { resolveQuotationLoadSourceFromUrl } from '@front/entities/quotation/res
 import { appSlice } from '@front/shared/appSlice'
 import { routerHolder } from '@front/shared/lib/react-router-dom/routerHolder'
 import { reduxHolder } from '@front/shared/lib/redux/reduxHolder'
+import { NavigationType } from 'react-router-dom'
 import { useEffectOnce } from 'react-use'
 
 export const useResetQuotationOnNavigationButtonClick = (): void => {
@@ -10,7 +11,7 @@ export const useResetQuotationOnNavigationButtonClick = (): void => {
     // state.matches already resolved by the router at notification time — unlike
     // useParams(), which can lag this event by a render, this can't race.
     const unsubscribe = routerHolder.router.subscribe((state) => {
-      if (state.historyAction !== 'POP') {
+      if (state.historyAction !== NavigationType.Pop) {
         return
       }
 
